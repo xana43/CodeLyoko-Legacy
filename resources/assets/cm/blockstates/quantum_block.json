@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "cm:quantum_block" }
+    }
+}

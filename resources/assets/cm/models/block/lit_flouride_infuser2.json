@@ -1,0 +1,14 @@
+{
+   "parent": "block/orientable",
+   "textures": {
+       "particle": "cm:blocks/lit_flouride_infuser_front_off",
+       "up":"cm:blocks/lit_flouride_infuser_front_off",
+       "down":"com:blocks/lit_flouride_infuser_front_off",
+       "north":"com:blocks/lit_flouride_infuser_front_on",
+       "south":"com:blocks/lit_flouride_infuser_front_1",
+       "east":"com:blocks/lit_flouride_infuser_front_2",
+       "west":"com:blocks/lit_flouride_infuser_front_3",
+       
+       
+   }
+}
