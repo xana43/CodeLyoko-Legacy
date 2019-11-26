@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "cm:scanner_base" }
+    }
+}

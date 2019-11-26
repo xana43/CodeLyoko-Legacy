@@ -1,0 +1,22 @@
+{ 
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients": 
+    [
+
+    {
+      "item": "modid:object"
+    },
+
+    {
+      "item": "modid:object"
+    }
+    
+    ],
+
+    "result": 
+    {
+        "item": "modid:object",
+        "count": 1
+    }
+}

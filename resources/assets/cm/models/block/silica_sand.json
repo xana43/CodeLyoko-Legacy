@@ -1,6 +1,0 @@
-{
-   "parent": "block/cube_all",
-   "textures": {
-       "all": "cm:blocks/silica_sand"
-   }
-}

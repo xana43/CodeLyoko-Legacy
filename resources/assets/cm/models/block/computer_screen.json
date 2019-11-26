@@ -1,7 +1,0 @@
-{
-    "ambientocclusion" : "true",
-   "parent": "block/cube_all",
-   "textures": {
-       "all": "cm:blocks/computer_screen"
-   }
-}
