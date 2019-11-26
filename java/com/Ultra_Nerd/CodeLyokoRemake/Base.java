@@ -11,6 +11,8 @@ import com.Ultra_Nerd.CodeLyokoRemake.init.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModRes;
 import com.Ultra_Nerd.CodeLyokoRemake.proxy.Common;
 import com.Ultra_Nerd.CodeLyokoRemake.world.ModGen;
+import com.Ultra_Nerd.CodeLyokoRemake.world.StructGen;
+import com.Ultra_Nerd.CodeLyokoRemake.world.WorldGenTower;
 
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -43,6 +45,7 @@ public class Base {
 		ModDimensions.registerDims();
 		Oredick.registerOres();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Base.instance, new guihandle());
+		GameRegistry.registerWorldGenerator(new WorldGenTower(), 0);
 	}
 	
 	@EventHandler
@@ -51,6 +54,8 @@ public class Base {
 		ModRes.ini();
 		
 		TEH.regte();
+		
+		
 	}
 	
 	@EventHandler

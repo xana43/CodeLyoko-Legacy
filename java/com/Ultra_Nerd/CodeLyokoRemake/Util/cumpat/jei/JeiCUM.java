@@ -12,7 +12,7 @@ import net.minecraft.util.text.translation.I18n;
 public class JeiCUM implements IModPlugin{
 
 	
-	@Override
+	/*@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {
 		// TODO Auto-generated method stub
 		IModPlugin.super.registerCategories(registry);
@@ -41,4 +41,5 @@ public class JeiCUM implements IModPlugin{
 			return "Format error: " + s;
 		}
 	}
+	*/
 }

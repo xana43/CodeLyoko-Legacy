@@ -15,6 +15,7 @@ public class Oredick {
 		OreDictionary.registerOre("ingotUranium", ModItems.URANIUM_ISOTOPE235U);
 		OreDictionary.registerOre("ingotUranium", ModItems.URANIUM_ISOTOPE238);
 		OreDictionary.registerOre("ingotUranium", ModItems.URANIUM_ISOTOPE23S5);
+		OreDictionary.registerOre("dustUranium", ModItems.URANIUM_SILACATE);
 	}
 
 }
