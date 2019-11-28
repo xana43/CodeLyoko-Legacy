@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake.init;
 import com.Ultra_Nerd.CodeLyokoRemake.Base;
 import com.Ultra_Nerd.CodeLyokoRemake.Entity.Entityblok;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
+import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -12,7 +13,7 @@ public class ModEntities {
 
 	public static void registerenit()
 	{
-		regen("blok", Entityblok.class, ref.ENTITY_BLOK, 50,16777102 , 4802816 );
+		regen("blok", Entityblok.class, Conf.ENTITY_BLOK, 50,16777102 , 4802816 );
 	}
 	
 	private static void regen(String name, Class<? extends Entity> entity, int id, int range, int c1, int c2)

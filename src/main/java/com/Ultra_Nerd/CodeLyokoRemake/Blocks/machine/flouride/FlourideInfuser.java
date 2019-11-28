@@ -7,6 +7,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Blocks.blockBase;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.ComputerReactor;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.TileEntityInfusingChamber;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
+import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
 import net.minecraft.block.Block;
@@ -65,7 +66,7 @@ public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(!worldIn.isRemote)
 		{
-			playerIn.openGui(Base.instance, ref.INFUSING, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(Base.instance, Conf.INFUSING, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}

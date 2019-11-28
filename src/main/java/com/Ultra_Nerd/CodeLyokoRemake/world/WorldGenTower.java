@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
+import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 import com.Ultra_Nerd.CodeLyokoRemake.world.biome.LyokoFS;
 
@@ -38,7 +39,7 @@ public class WorldGenTower implements IWorldGenerator
 		{
 		
 		}
-		else if(world.provider.getDimension() == ref.Dim)
+		else if(world.provider.getDimension() == Conf.Dim)
 		{
 			//generateStructure(TOWER, world, random, chunkX, chunkZ, 25, Modblocks.DIGITAL_BLOCK , LyokoFS.class);
 		}

@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake.init;
 
+import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
 import com.Ultra_Nerd.CodeLyokoRemake.world.biome.LyokoFS;
 
 import net.minecraft.world.biome.Biome;
@@ -24,9 +25,12 @@ public class ModBiome {
 		biome.setRegistryName(name);
 		ForgeRegistries.BIOMES.register(biome);
 		BiomeDictionary.addTypes(biome, types);
-		
-		//BiomeManager.addSpawnBiome(biome);		
-		
+		BiomeManager.addBiome(biometype, new BiomeEntry(biome, 10));
+				
+		if(Conf.spawnLyokoOverWorld)
+		{
+			BiomeManager.addSpawnBiome(biome);
+		}
 		return biome;
 	}
 	

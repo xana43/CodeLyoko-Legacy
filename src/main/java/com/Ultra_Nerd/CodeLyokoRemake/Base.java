@@ -2,8 +2,11 @@ package com.Ultra_Nerd.CodeLyokoRemake;
 
 
 
+import java.io.File;
+
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.cumpat.Oredick;
+import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.EntRend;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Souinds;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.TEH;
@@ -42,14 +45,14 @@ public class Base {
 	
 	@SidedProxy(clientSide = ref.CLIENT_PROXY_CLASS, serverSide = ref.COMMON_PROXY_CLASS)
 	public static Common proxy; 
-	
+	public static File conf;
 	@EventHandler
 	public static void PreInit(FMLPreInitializationEvent event)
 	{
-		
+		Conf.RegisCon(event);
 		GameRegistry.registerWorldGenerator(new ModGen(), 3);
 		ModBiome.registerBiomes();
-		ModDimensions.registerDims();
+		
 		Oredick.registerOres();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Base.instance, new guihandle());
 		GameRegistry.registerWorldGenerator(new WorldGenTower(), 0);
@@ -72,7 +75,7 @@ public class Base {
 	@EventHandler
 	public static void Postinit(FMLPostInitializationEvent event)
 	{
-		
+		ModDimensions.registerDims();
 	}
 	@EventHandler
 	public static void servertinit(FMLServerStartingEvent event)

@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Base;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.ComputerCoreTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.ComputerReactor;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
+import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -29,7 +30,7 @@ public class UraniumReactor extends blockBase{
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(!worldIn.isRemote)
 		{
-			playerIn.openGui(Base.instance, ref.URANIUM, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(Base.instance, Conf.URANIUM, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}
