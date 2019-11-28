@@ -1,19 +1,25 @@
 package com.Ultra_Nerd.CodeLyokoRemake;
 
 
+
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.cumpat.Oredick;
+import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.EntRend;
+import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Souinds;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.TEH;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.guihandle;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.registry;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModBiome;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoRemake.init.ModEntities;
+import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModRes;
 import com.Ultra_Nerd.CodeLyokoRemake.proxy.Common;
 import com.Ultra_Nerd.CodeLyokoRemake.world.ModGen;
 import com.Ultra_Nerd.CodeLyokoRemake.world.StructGen;
 import com.Ultra_Nerd.CodeLyokoRemake.world.WorldGenTower;
 
+import net.minecraft.item.ItemRecord;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -40,12 +46,17 @@ public class Base {
 	@EventHandler
 	public static void PreInit(FMLPreInitializationEvent event)
 	{
+		
 		GameRegistry.registerWorldGenerator(new ModGen(), 3);
 		ModBiome.registerBiomes();
 		ModDimensions.registerDims();
 		Oredick.registerOres();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Base.instance, new guihandle());
 		GameRegistry.registerWorldGenerator(new WorldGenTower(), 0);
+		ModEntities.registerenit();
+		Souinds.Regso();
+		ModItems.initRecords();
+		ModItems.reg();
 	}
 	
 	@EventHandler

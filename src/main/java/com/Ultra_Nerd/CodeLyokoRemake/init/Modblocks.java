@@ -17,6 +17,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerBase;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerBlockBlue;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerBlockWhite;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.UraniniteOre;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.UraniumReactor;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.Virutalization;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tt;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride.FlourideInfuser;
@@ -41,6 +42,7 @@ public class Modblocks
   public static final Block TT = new tt("tt");
   public static final Block TOWER_WHITE = new TowerBlockWhite("tower_white",Material.CIRCUITS);
   public static final Block TOWER_BLUE = new TowerBlockBlue("tower_blue",Material.CIRCUITS);
+  public static final Block URANUM_REACTOR = new UraniumReactor("computer_reactor", Material.CIRCUITS);
   //public static final Block CARNOTITE_ORE
   //public static final Block TYUTAMUNITE_ORE
   //public static final Block TORBERNITE_ORE
@@ -51,7 +53,6 @@ public class Modblocks
   //public static final Block URANOPHANE_ORE
   //public static final Block SKLODOWSKITE_ORE
   public static final Block SILICA_SAND = new SilicaSand("silica_sand", Material.SAND);
- // public static final Block TEST_CORE = new TileBlockBase("computer_test");
   public static final Block DIGITAL_BLOCK = new DigialGrass("digital_block", Material.GROUND);
   
 }

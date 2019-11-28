@@ -36,6 +36,15 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 repositories {
+jcenter()
+	maven {
+		url "http://maven.shadowfacts.net/"
+	}
+	  
+	  maven { name = "CoFH Maven" 
+		url = "http://maven.covers1624.net" }
+ 
+
   maven {
     // location of the maven that hosts JEI files
     name = "Progwml6 maven"
@@ -49,6 +58,9 @@ repositories {
   ivy {url = "./libs"} 
 }
 dependencies {
+
+ deobfCompile "cofh:RedstoneFlux:1.12-2.0.0.1:universal" 
+ compile group: "net.shadowfacts", name: "Forgelin", version: "1.8.4"
      // compile against the JEI API but do not include it at runtime
   deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
   // at runtime, use the full JEI jar

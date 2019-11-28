@@ -40,7 +40,7 @@ public class WorldGenTower implements IWorldGenerator
 		}
 		else if(world.provider.getDimension() == ref.Dim)
 		{
-			generateStructure(TOWER, world, random, chunkX, chunkZ, 25, Modblocks.DIGITAL_BLOCK , LyokoFS.class);
+			//generateStructure(TOWER, world, random, chunkX, chunkZ, 25, Modblocks.DIGITAL_BLOCK , LyokoFS.class);
 		}
 		
 		

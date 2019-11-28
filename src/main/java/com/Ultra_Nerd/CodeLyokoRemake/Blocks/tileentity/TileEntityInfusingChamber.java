@@ -1,5 +1,7 @@
-package com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride;
+package com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity;
 
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride.FlourideInfuser;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride.FlourideRes;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
@@ -30,7 +32,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityInfusingChamber extends TileEntity implements ITickable
 {
-	private ItemStackHandler handler = new ItemStackHandler(4);
+	public ItemStackHandler handler = new ItemStackHandler(4);
 	private String customName;
 	private ItemStack smelting = ItemStack.EMPTY;
 	
@@ -206,12 +208,12 @@ public class TileEntityInfusingChamber extends TileEntity implements ITickable
 				Block block = Block.getBlockFromItem(item);
 
 				
-				if (block == Modblocks.FLOURITE_BLOCK) return 16000;
+				if (block == Modblocks.FLOURITE_BLOCK) return 40000;
 			}
 
 			
 			
-			if(item == ModItems.FLOURIDE) return 4000;
+			if(item == ModItems.FLOURIDE) return 40000;
 		
 
 			return GameRegistry.getFuelValue(fuel);

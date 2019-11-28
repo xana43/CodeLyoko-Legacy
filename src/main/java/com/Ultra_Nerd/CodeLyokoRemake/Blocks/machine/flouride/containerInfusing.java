@@ -2,6 +2,8 @@ package com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride;
 
 
 
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.TileEntityInfusingChamber;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -24,10 +26,10 @@ public class containerInfusing extends Container
 		this.tileentity = tileentity;
 		IItemHandler handler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		
-		this.addSlotToContainer(new SlotItemHandler(handler, 0, 26, 11));
-		this.addSlotToContainer(new SlotItemHandler(handler, 1, 26, 59));
-		this.addSlotToContainer(new SlotItemHandler(handler, 2, 7, 35));
-		this.addSlotToContainer(new SlotItemHandler(handler, 3, 81, 36));
+		this.addSlotToContainer(new SlotItemHandler(handler, 0, 25, 15));
+		this.addSlotToContainer(new SlotItemHandler(handler, 1, 57, 14));
+		this.addSlotToContainer(new SlotItemHandler(handler, 2, 59, 60));
+		this.addSlotToContainer(new SlotItemHandler(handler, 3, 120, 30));
 		
 		for(int y = 0; y < 3; y++)
 		{
@@ -143,4 +145,5 @@ public class containerInfusing extends Container
 		}
 		return stack;
 	}
+	
 }

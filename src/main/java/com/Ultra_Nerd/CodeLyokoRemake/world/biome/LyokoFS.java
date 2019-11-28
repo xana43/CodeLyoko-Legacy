@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake.world.biome;
 
+import com.Ultra_Nerd.CodeLyokoRemake.Entity.Entityblok;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
 import net.minecraft.world.biome.Biome;
@@ -16,6 +17,8 @@ public class LyokoFS extends Biome {
 		this.spawnableCreatureList.clear();
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
+		
+	
 		
 		// TODO Auto-generated constructor stub
 	}

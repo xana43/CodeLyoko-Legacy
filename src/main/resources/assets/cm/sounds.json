@@ -1,0 +1,29 @@
+{
+    "entity.blok.ambient":
+    
+    {
+        "category":"entity",
+        "subtitle": "entity.blok.ambient",
+        "sounds":[{"name":"cm:entity/blok/ambient", "stream":"true"}]
+    },
+    
+     "entity.blok.hurt":
+    
+    {
+        "category":"entity",
+        "subtitle": "entity.blok.hurt",
+        "sounds":[{"name":"cm:entity/blok/hurt", "stream":"true"}]
+    },
+     "entity.blok.death":
+    
+    {
+        "category":"entity",
+        "subtitle": "entity.blok.death",
+        "sounds":[{"name":"cm:entity/blok/death", "stream":"true"}]
+    },
+    "lyoko":
+    {
+        "category":"record",
+        "sounds":[{"name":"cm:records/lyoko", "stream":"true"}]
+    }
+}

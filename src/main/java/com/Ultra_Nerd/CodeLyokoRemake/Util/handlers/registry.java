@@ -9,7 +9,9 @@ import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemRecord;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -27,13 +29,22 @@ public class registry
 	public static void serverRegistries(FMLServerStartingEvent event)
 	{
 		event.registerServerCommand(new ComTel());
+	
 	}
+	
+	
+	
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event)
 	{
 		event.getRegistry().registerAll(ModItems.Items.toArray(new Item[0]));
 		
+		
 	}
+	 
+	
+	
+  
 	
 	
 	
@@ -49,6 +60,7 @@ public class registry
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent event)
 	{
+		EntRend.registerEntityRenderers();
 		
 		for(Item item : ModItems.Items)
 		{
@@ -57,6 +69,8 @@ public class registry
 				((IHasModel)item).registerModels();
 			}
 		}
+		
+		
 		
 		
 		for(Block block : Modblocks.BLOCKS)

@@ -1,6 +1,7 @@
 {
    "parent": "block/cube_all",
    "textures": {
+    "particle":"cm:blocks/digital_blocktop",
        "up": "cm:blocks/digital_blocktop",
        "down":"cm:blocks/dd",
        "north":"cm:blocks/dgs",

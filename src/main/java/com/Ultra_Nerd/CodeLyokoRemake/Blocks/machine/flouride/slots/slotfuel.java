@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride.slots;
 
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride.TileEntityInfusingChamber;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.TileEntityInfusingChamber;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

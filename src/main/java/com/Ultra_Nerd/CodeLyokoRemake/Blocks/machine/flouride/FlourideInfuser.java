@@ -4,6 +4,8 @@ import java.util.Random;
 
 import com.Ultra_Nerd.CodeLyokoRemake.Base;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.blockBase;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.ComputerReactor;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.TileEntityInfusingChamber;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
@@ -18,6 +20,7 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
@@ -32,7 +35,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class FlourideInfuser extends blockBase implements ITileEntityProvider{
+public class FlourideInfuser extends blockBase{
 
 	public FlourideInfuser(String name, Material material) {
 		super(name, material);
@@ -43,11 +46,7 @@ public class FlourideInfuser extends blockBase implements ITileEntityProvider{
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	public static final PropertyBool INFUSING = PropertyBool.create("infusing");
 	
-	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
@@ -110,7 +109,11 @@ public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
 		// TODO Auto-generated method stub
 		return new TileEntityInfusingChamber();
 	}
-	 
+	 @Override
+	public boolean hasTileEntity(IBlockState state) {
+		// TODO Auto-generated method stub
+		return true;
+	}
 	 @Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
@@ -126,13 +129,6 @@ public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
 		worldIn.setBlockState(pos, this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()),2);
 	}
 	 
-	 @Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		// TODO Auto-generated method stub
-		TileEntityInfusingChamber tileentity = (TileEntityInfusingChamber)worldIn.getTileEntity(pos);
-		InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tileentity);
-		super.breakBlock(worldIn, pos, state);
-	}
 	 
 	 @Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
@@ -171,4 +167,14 @@ public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
 		// TODO Auto-generated method stub
 		return ((EnumFacing)state.getValue(FACING)).getIndex();
 	}
+	 @Override
+		public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+			TileEntityInfusingChamber tileentity = (TileEntityInfusingChamber)worldIn.getTileEntity(pos);
+			worldIn.spawnEntity(new EntityItem(worldIn,pos.getX(),pos.getY(),pos.getZ(), tileentity.handler.getStackInSlot(0)));
+			worldIn.spawnEntity(new EntityItem(worldIn,pos.getX(),pos.getY(),pos.getZ(), tileentity.handler.getStackInSlot(1)));
+			worldIn.spawnEntity(new EntityItem(worldIn,pos.getX(),pos.getY(),pos.getZ(), tileentity.handler.getStackInSlot(2)));
+			worldIn.spawnEntity(new EntityItem(worldIn,pos.getX(),pos.getY(),pos.getZ(), tileentity.handler.getStackInSlot(3)));
+			super.breakBlock(worldIn, pos, state);
+		}
+		
 }

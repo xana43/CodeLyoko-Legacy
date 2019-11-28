@@ -30,7 +30,9 @@ public class FlourideRes
 	public void addSinteringRecipe(ItemStack input1, ItemStack input2, ItemStack result, float experience) 
 	{
 		if(getInfusingResult(input1, input2) != ItemStack.EMPTY) return;
+		if(getInfusingResult(input2, input1) != ItemStack.EMPTY) return;
 		this.smeltingList.put(input1, input2, result);
+		this.smeltingList.put(input2, input1, result);
 		this.experienceList.put(result, Float.valueOf(experience));
 	}
 	
