@@ -16,7 +16,7 @@ public class Zweihander extends ItemSword implements IHasModel{
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(CreativeTabs.MATERIALS);
+		setCreativeTab(CreativeTabs.COMBAT);
 		this.attackDamage = 3.0F + material.getAttackDamage();
 		ModItems.Items.add(this);
 	}

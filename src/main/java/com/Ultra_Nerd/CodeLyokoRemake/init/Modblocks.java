@@ -3,19 +3,25 @@ package com.Ultra_Nerd.CodeLyokoRemake.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.AutuniteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.CableBlock;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.CarontiteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.CoffiniteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.CompFrame;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.CompScreen;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.DigialGrass;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.FlouriteBlock;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.FlouriteOre;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.GummiteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.QuantumBlock;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.QuantumCore;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.SaleeiteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.SilicaSand;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TorberniteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerBase;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerBlockBlue;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerBlockWhite;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TyuyamuniteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.UraniniteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.UraniumReactor;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.Virutalization;
@@ -23,6 +29,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tt;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride.FlourideInfuser;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSandStone;
 import net.minecraft.block.material.Material;
 public class Modblocks 
 {
@@ -43,12 +50,12 @@ public class Modblocks
   public static final Block TOWER_WHITE = new TowerBlockWhite("tower_white",Material.CIRCUITS);
   public static final Block TOWER_BLUE = new TowerBlockBlue("tower_blue",Material.CIRCUITS);
   public static final Block URANUM_REACTOR = new UraniumReactor("computer_reactor", Material.CIRCUITS);
-  //public static final Block CARNOTITE_ORE
-  //public static final Block TYUTAMUNITE_ORE
-  //public static final Block TORBERNITE_ORE
-  //public static final Block AUTUNITE_ORE
-  //public static final Block GUMMITE_ORE
-  //public static final Block SALEEITE_ORE
+  public static final Block CARNOTITE_ORE = new CarontiteOre("carnotite_ore", Material.ROCK);
+  public static final Block TYUYAMUNITE_ORE = new TyuyamuniteOre("tyuyamunite_ore", Material.ROCK);
+  public static final Block TORBERNITE_ORE = new TorberniteOre("torbernite_ore", Material.ROCK);
+  public static final Block AUTUNITE_ORE = new AutuniteOre("autunite_ore", Material.ROCK);
+  public static final Block GUMMITE_ORE = new GummiteOre("gummite_ore", Material.ROCK);
+  public static final Block SALEEITE_ORE = new SaleeiteOre("saleeite_ore", Material.ROCK);
   public static final Block COFFINITE_ORE = new CoffiniteOre("coffinite_ore", Material.ROCK);
   //public static final Block URANOPHANE_ORE
   //public static final Block SKLODOWSKITE_ORE

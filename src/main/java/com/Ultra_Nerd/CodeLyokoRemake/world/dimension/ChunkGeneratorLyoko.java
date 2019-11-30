@@ -105,13 +105,13 @@ public class ChunkGeneratorLyoko implements IChunkGenerator
     /*
      * These values are explained here: https://minecraft.gamepedia.com/Customized#Customization
      */
-    private boolean useRavines = true;
-    private boolean useMineShafts = true;
-    private boolean useVillages = true;
-    private boolean useStrongholds = true;
-    private boolean useTemples = true;
-    private boolean useMonuments = true;
-    private boolean useCaves = true;
+    private boolean useRavines = false;
+    private boolean useMineShafts = false;
+    private boolean useVillages = false;
+    private boolean useStrongholds = false;
+    private boolean useTemples = false;
+    private boolean useMonuments = false;
+    private boolean useCaves = false;
     private boolean useWaterLakes = false;
     private boolean useLavaLakes = false;
     private boolean useDungeons = false;

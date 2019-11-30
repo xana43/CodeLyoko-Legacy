@@ -5,8 +5,12 @@ import java.util.Random;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeDesert;
+import net.minecraft.world.biome.BiomeProvider;
+import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
@@ -22,6 +26,7 @@ public class ModGen implements IWorldGenerator {
 			generateOverworld(rand, chunkX, chunkZ, world, chunkgen, chunkprov);
 		}
 		
+		
 	}
 	
 	private void generateOverworld(Random rand, int chunkX, int chunkZ, World world, IChunkGenerator chunkgen, IChunkProvider chunkprov)
@@ -29,6 +34,7 @@ public class ModGen implements IWorldGenerator {
 		generateOre(Modblocks.COFFINITE_ORE.getDefaultState(), world, rand, chunkX * 16, chunkZ * 16, 1,30,rand.nextInt(5) + 4, 8);
 		generateOre(Modblocks.URANINITE_ORE.getDefaultState(), world, rand, chunkX * 16, chunkZ * 16, 1,40,rand.nextInt(5) + 4, 10);
 		generateOre(Modblocks.SILICA_SAND.getDefaultState(), world, rand, chunkX * 16, chunkZ * 16, 63,64,rand.nextInt(8) + 8, 14);
+		
 	}
 	
 	private void generateOre(IBlockState ore, World world, Random rand, int x, int z, int minY, int maxY, int size, int chance)
@@ -42,5 +48,7 @@ public class ModGen implements IWorldGenerator {
 		}
 		
 	}
+	
+	
 
 }

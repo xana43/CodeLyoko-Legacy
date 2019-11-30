@@ -25,5 +25,16 @@
     {
         "category":"record",
         "sounds":[{"name":"cm:records/lyoko", "stream":"true"}]
+    },
+    "laser":
+    {
+        "category":"neutral",
+        "sounds": [{"name":"cm:items/laser","stream":"true"}]
+    },
+    "forestsector":
+    {
+        "cetegory":"ambient",
+        "sounds":[{"name":"cm:music/forest/forestsector", "stream":"true"}]
     }
+    
 }

@@ -9,6 +9,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Souinds;
 import com.Ultra_Nerd.CodeLyokoRemake.items.ItemBase;
 import com.Ultra_Nerd.CodeLyokoRemake.items.armor.ArmorBase;
+import com.Ultra_Nerd.CodeLyokoRemake.items.tools.LaserArrowShooter;
 import com.Ultra_Nerd.CodeLyokoRemake.items.tools.QuantSpade;
 import com.Ultra_Nerd.CodeLyokoRemake.items.tools.QuantSword;
 import com.Ultra_Nerd.CodeLyokoRemake.items.tools.Zweihander;
@@ -18,6 +19,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemSword;
@@ -43,7 +45,7 @@ public class ModItems
  public static final ArmorMaterial ARMOR_MATERIAL_BITS = EnumHelper.addArmorMaterial("armor_material_bits", ref.MOD_ID + ":bits", 30, new int[] {16, 16, 16, 16}, 20, SoundEvents.ITEM_ARMOR_EQIIP_ELYTRA, 0.0f);
  //Items
  public static final Item SOLID_QUANTUM = new ItemBase("solid_quantum");
- public static ItemRecord LYOKO; 
+
  public static final Item SILICON_WAFER = new ItemBase("silicon_wafer");
  public static final Item URANIUM_SILACATE = new ItemBase("uranium_silacate");
  public static final Item URANIUM_DIOXIDE = new ItemBase("uranium_dioxide");
@@ -66,10 +68,12 @@ public class ModItems
  public static final Item PETABYTE = new ItemBase("PetaByte");
  public static final Item QUBIT = new ItemBase("qubit");
  public static final Item QUBYTE = new ItemBase("QuByte");
+
  //tools
  public static final ItemSword ZWEIHANDER = new Zweihander("zweihander", MATERIAL_WARRIOR);
  public static final ItemSword QUANTUM_SABER = new QuantSword("quantum_saber", MATERIAL_QUANTUM);
  public static final ItemSpade DIGITAL_SAMPLER = new QuantSpade("digital_sampler", MATERIAL_QUANTUM);
+ public static final Item LASER_ARROWSHOOTER = new LaserArrowShooter("laser_arrowshooter"); 
  //armor
  public static final Item DIGITAL_ENVELOPE_CAP = new ArmorBase("digital_envelope_cap", ARMOR_MATERIAL_BITS, 1 , EntityEquipmentSlot.HEAD);
  public static final Item AELITA_CHESTPLATE = new ArmorBase("aelita_chestplate", ARMOR_MATERIAL_AELITA, 1 , EntityEquipmentSlot.CHEST);
@@ -87,6 +91,7 @@ public class ModItems
  public static final Item WILLIAM_CHESTPLATE = new ArmorBase("william_chestplate", ARMOR_MATERIAL_WILLIAM, 1 , EntityEquipmentSlot.CHEST);
  public static final Item WILLIAM_LEGGINGS = new ArmorBase("william_leggings", ARMOR_MATERIAL_WILLIAM, 2 , EntityEquipmentSlot.LEGS);
  public static final Item WILLIAM_BOOTS = new ArmorBase("william_boots", ARMOR_MATERIAL_WILLIAM, 1 , EntityEquipmentSlot.FEET);
+ public static ItemRecord LYOKO; 
  public static void initRecords()
  {
 	 LYOKO = new RecordBase("lyoko", Souinds.THEME);

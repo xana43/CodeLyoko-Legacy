@@ -25,7 +25,7 @@ public class Conf {
 		String cat;
 		cat = "IDs";
 		conf.addCustomCategoryComment(cat, "These are the available mod IDs for GUIs, Entities, and Dimensions");
-		Dim = conf.getInt("Forest Sector ID", cat, DimensionManager.getNextFreeDimId(), 3, 1000000000, "this is the dimension ID");
+		Dim = conf.getInt("Forest Sector ID", cat, Dim , 3, 1000000000, "this is the dimension ID");
 		INFUSING = conf.getInt("this is the GUI ID for the Flouride Infuser", cat, 2, 0, 1000000000, "");
 		URANIUM = conf.getInt("this is the ID for the Uranium Integrated reactor", cat, 190, 0, 1000000000, "");
 		ENTITY_BLOK = conf.getInt("this is the ID for the BLOK mob", cat, 5102, 0, 1000000000, "");

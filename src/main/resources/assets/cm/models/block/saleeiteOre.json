@@ -1,6 +1,6 @@
 {
    "parent": "block/cube_all",
    "textures": {
-       "all": "cm:blocks/scanner_base"
+       "all": "cm:blocks/coffinite_ore"
    }
 }
