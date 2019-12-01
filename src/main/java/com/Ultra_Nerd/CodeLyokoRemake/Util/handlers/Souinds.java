@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class Souinds 
 {
-	public static SoundEvent ENTITY_BLOK_AMBIENT,ENTITY_BLOK_HURT,ENTITY_BLOK_DEATH,THEME,SHOOT,FOREST;
+	public static SoundEvent ENTITY_BLOK_AMBIENT,ENTITY_BLOK_HURT,ENTITY_BLOK_DEATH,THEME,SHOOT,FOREST,ICE;
 	
 	public static void Regso()
 	{	
@@ -22,6 +22,7 @@ public class Souinds
 		THEME = ReEs("lyoko");
 		SHOOT = ReEs("laser");
 		FOREST = ReEs("forestsector");
+		ICE = ReEs("icesector");
 		
 	}
 	private static SoundEvent ReEs(String name)

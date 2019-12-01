@@ -34,8 +34,8 @@ public class music
 	@SubscribeEvent
 	public static void InDim(TickEvent.PlayerTickEvent tcik)
 	{
-		int tick = 4224;
-		tick--;
+		int tick = 0;
+		
 		EntityPlayer play = (EntityPlayer)tcik.player;
 		if(!Playing)
 		{
@@ -43,22 +43,52 @@ public class music
 			
 			if(play.dimension == Conf.Dim)
 			{
-				
+				tick = 4224;
 				MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_GAME));
 				MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_CREATIVE));
 				MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_NETHER));
+				MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_MENU));
 				MC.playDelayedSound(PositionedSoundRecord.getMusicRecord(Souinds.FOREST), 10);
+				Playing = true;
+			}
+			else if(play.dimension == Conf.Dim2)
+			{
+				tick = 2944;
+				MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_GAME));
+				MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_CREATIVE));
+				MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_NETHER));
+				MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_MENU));
+				
+				MC.playDelayedSound(PositionedSoundRecord.getMusicRecord(Souinds.ICE), 10);
 				Playing = true;
 			}
 			
 			
 			
 		}
+		if(Playing)
+		{
+			tick--;
+		}
 		if(MC.isSoundPlaying(PositionedSoundRecord.getMusicRecord(Souinds.FOREST)) && tick == 0)
 		{
-			
+			MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_GAME));
+			MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_CREATIVE));
+			MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_NETHER));
+			MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_MENU));
 			MC.stopSound(PositionedSoundRecord.getMusicRecord(Souinds.FOREST));
 			tick = 4224;
+			Playing = false;
+			
+		}
+		else if(MC.isSoundPlaying(PositionedSoundRecord.getMusicRecord(Souinds.ICE)) && tick == 0)
+		{
+			MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_GAME));
+			MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_CREATIVE));
+			MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_NETHER));
+			MC.stopSound(PositionedSoundRecord.getMusicRecord(SoundEvents.MUSIC_MENU));
+			MC.stopSound(PositionedSoundRecord.getMusicRecord(Souinds.ICE));
+			tick = 2940;
 			Playing = false;
 			
 		}

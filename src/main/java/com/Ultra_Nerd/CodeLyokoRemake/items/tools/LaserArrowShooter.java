@@ -7,6 +7,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake.items.ItemBase;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityFireball;
@@ -42,11 +43,16 @@ public class LaserArrowShooter extends ItemBase{
 		ItemStack item = playerIn.getHeldItem(handIn);
 		Vec3d aim = playerIn.getLookVec();
 		worldIn.playSound(playerIn,playerIn.posX, playerIn.posY, playerIn.posZ, Souinds.SHOOT, SoundCategory.NEUTRAL, 1f, 1f);
-		EntityFireball fire = new EntityFireball(worldIn, playerIn, 1, 1, 1) {
+		EntityTNTPrimed tnt = new EntityTNTPrimed(worldIn);
+				
 			
+				
+		EntityFireball fire = new EntityFireball(worldIn, playerIn, 1, 1, 1) {
+		
 			@Override
 			protected void onImpact(RayTraceResult result) {
-				// TODO Auto-generated method stub
+				worldIn.spawnEntity(tnt);
+				
 				
 			}
 		};

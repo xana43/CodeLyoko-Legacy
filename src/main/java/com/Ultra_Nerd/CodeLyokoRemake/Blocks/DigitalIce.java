@@ -15,12 +15,12 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class DigialGrass extends blockBase {
+public class DigitalIce extends blockBase {
 	
-	public DigialGrass(String name, Material material)
+	public DigitalIce(String name, Material material)
 	{
 		super(name, material);
-		setSoundType(SoundType.GROUND);
+		setSoundType(SoundType.GLASS);
 		setHardness(20);
 		setResistance(10);
 		setHarvestLevel("spade", 20);

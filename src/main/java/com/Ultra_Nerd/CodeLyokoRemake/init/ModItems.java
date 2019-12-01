@@ -34,7 +34,7 @@ public class ModItems
  
 
  //materials
- public static final ToolMaterial MATERIAL_QUANTUM = EnumHelper.addToolMaterial("material_quantum", 20, 250, 6.0f, 3.0f, 900);
+ public static final ToolMaterial MATERIAL_QUANTUM = EnumHelper.addToolMaterial("material_quantum", 20, 250, 7.0f, 3.0f, 900);
  public static final ToolMaterial MATERIAL_WARRIOR = EnumHelper.addToolMaterial("material_warrior", 4, 4000, 20, 30, 9000);
  public static final ToolMaterial MATERIAL_FELINE = EnumHelper.addToolMaterial("material_feline", 4, 2000, 900, 6, 90);
  public static final ArmorMaterial ARMOR_MATERIAL_ODD = EnumHelper.addArmorMaterial("armor_material_odd", ref.MOD_ID + ":odd", 30, new int[] {6, 12, 16, 6}, 20, SoundEvents.ITEM_ARMOR_EQIIP_ELYTRA, 0.0f);

@@ -24,17 +24,25 @@
     "lyoko":
     {
         "category":"record",
+        "subtitle":"play.CodeLyokoTheme",
         "sounds":[{"name":"cm:records/lyoko", "stream":"true"}]
     },
     "laser":
     {
         "category":"neutral",
+        "subtitle":"laser fire",
         "sounds": [{"name":"cm:items/laser","stream":"true"}]
     },
     "forestsector":
     {
         "cetegory":"ambient",
+        "subtitle":"forest sector ambiance",
         "sounds":[{"name":"cm:music/forest/forestsector", "stream":"true"}]
+    },
+    "icesector":
+    {
+        "cetegory":"ambient",
+        "subtitle":"ice sector ambiance",
+        "sounds":[{"name":"cm:music/ice/icesector", "stream":"true"}]
     }
-    
 }

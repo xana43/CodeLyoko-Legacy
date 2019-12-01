@@ -10,6 +10,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Blocks.CoffiniteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.CompFrame;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.CompScreen;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.DigialGrass;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.DigitalIce;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.FlouriteBlock;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.FlouriteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.GummiteOre;
@@ -47,6 +48,7 @@ public class Modblocks
   public static final Block FLOURITE_BLOCK = new FlouriteBlock("flourite_block", Material.ROCK);
   public static final Block TOWER_BASE = new TowerBase("tower_base", Material.DRAGON_EGG);
   public static final Block TT = new tt("tt");
+  public static final Block DIGITAL_ICE = new DigitalIce("digital_ice", Material.PACKED_ICE);
   public static final Block TOWER_WHITE = new TowerBlockWhite("tower_white",Material.CIRCUITS);
   public static final Block TOWER_BLUE = new TowerBlockBlue("tower_blue",Material.CIRCUITS);
   public static final Block URANUM_REACTOR = new UraniumReactor("computer_reactor", Material.CIRCUITS);

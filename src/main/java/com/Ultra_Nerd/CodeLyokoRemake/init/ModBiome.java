@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
 import com.Ultra_Nerd.CodeLyokoRemake.world.biome.LyokoFS;
+import com.Ultra_Nerd.CodeLyokoRemake.world.biome.LyokoICE;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
@@ -13,10 +14,13 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 public class ModBiome {
 	
 	public static final Biome LYOKO_FS = new LyokoFS();
+	public static final Biome LYOKO_ICE = new LyokoICE();
 	
 	public static void registerBiomes()
 	{
 		initBiome(LYOKO_FS, "Lyoko_FS", BiomeType.WARM, Type.FOREST);
+		
+		initBiome(LYOKO_ICE, "Lyoko_ICE", BiomeType.ICY, Type.COLD);
 	}
 	
 
