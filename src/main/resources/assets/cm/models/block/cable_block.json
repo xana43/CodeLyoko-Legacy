@@ -3,7 +3,7 @@
     "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
     "textures": {
         "pen": "cm:blocks/cable_sheath",
-        "particle": "blocks/cable_sheath"
+        "particle": "cm:blocks/cable_sheath"
     },
     "display": {
         "gui": {

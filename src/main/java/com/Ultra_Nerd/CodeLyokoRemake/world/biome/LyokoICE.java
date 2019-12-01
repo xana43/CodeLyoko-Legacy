@@ -25,7 +25,6 @@ public class LyokoICE extends Biome {
 		super(new BiomeProperties("Lyoko Ice Sector").setBaseHeight(0).setHeightVariation(0.5f).setRainDisabled().setWaterColor(159).setTemperature(0));
 		
 		
-		getSkyColorByTemp(0);
 	
 		topBlock = Modblocks.DIGITAL_ICE.getDefaultState();
 		fillerBlock = Modblocks.URANINITE_ORE.getDefaultState();

@@ -23,6 +23,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @EventBusSubscriber
 public class music 
@@ -32,6 +34,7 @@ public class music
 	private static SoundHandler MC = Minecraft.getMinecraft().getSoundHandler();
 	private static boolean Playing = false;
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public static void InDim(TickEvent.PlayerTickEvent tcik)
 	{
 		int tick = 0;

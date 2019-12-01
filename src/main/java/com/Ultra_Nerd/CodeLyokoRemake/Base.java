@@ -55,7 +55,7 @@ public class Base {
 		ModBiome.registerBiomes();
 		
 		Oredick.registerOres();
-		NetworkRegistry.INSTANCE.registerGuiHandler(Base.instance, new guihandle());
+		
 		GameRegistry.registerWorldGenerator(new WorldGenTower(), 0);
 		ModEntities.registerenit();
 		Souinds.Regso();
@@ -68,7 +68,7 @@ public class Base {
 		ModRes.ini();
 		
 		TEH.regte();
-		
+		NetworkRegistry.INSTANCE.registerGuiHandler(Base.instance, new guihandle());
 		
 	}
 	

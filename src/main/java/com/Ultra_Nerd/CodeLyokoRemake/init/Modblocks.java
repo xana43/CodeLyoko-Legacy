@@ -22,6 +22,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TorberniteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerBase;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerBlockBlue;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerBlockWhite;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerInterface;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TyuyamuniteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.UraniniteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.UraniumReactor;
@@ -42,6 +43,7 @@ public class Modblocks
   public static final Block COMPUTER_SCREEN = new CompScreen("computer_screen", Material.GLASS);
   public static final Block URANINITE_ORE = new UraniniteOre("uraninite_ore", Material.ROCK);
   public static final Block CABLE_BLOCK = new CableBlock("cable_block");
+  public static final Block TOWER_INTERFACE = new TowerInterface("tower_interface", Material.DRAGON_EGG);
   public static final Block SCANNER_BASE = new Virutalization("scanner_base", Material.CIRCUITS);
   public static final Block FLOURIDE_INFUSER = new FlourideInfuser("flouride_infuser", Material.IRON);
   public static final Block FLOURITE_ORE = new FlouriteOre("flourite_ore", Material.ROCK);
