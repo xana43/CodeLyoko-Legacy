@@ -1,11 +1,11 @@
-package com.Ultra_Nerd.CodeLyokoRemake.Util.cumpat;
+package com.Ultra_Nerd.CodeLyokoRemake.Util.compat;
 
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
 import net.minecraftforge.oredict.OreDictionary;
 
-public class Oredick {
+public class Oredict {
 	public static void registerOres()
 	{
 		OreDictionary.registerOre("oreUranium", Modblocks.URANINITE_ORE);

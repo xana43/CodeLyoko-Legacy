@@ -5,7 +5,7 @@ package com.Ultra_Nerd.CodeLyokoRemake;
 import java.io.File;
 
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
-import com.Ultra_Nerd.CodeLyokoRemake.Util.cumpat.Oredick;
+import com.Ultra_Nerd.CodeLyokoRemake.Util.compat.Oredict;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Souinds;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.TEH;
@@ -54,7 +54,7 @@ public class Base {
 		GameRegistry.registerWorldGenerator(new ModGen(), 3);
 		ModBiome.registerBiomes();
 		
-		Oredick.registerOres();
+		Oredict.registerOres();
 		
 		GameRegistry.registerWorldGenerator(new WorldGenTower(), 0);
 		ModEntities.registerenit();

@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake.Util.cumpat.jei;
+package com.Ultra_Nerd.CodeLyokoRemake.Util.compat.jei;
 
 import java.util.IllegalFormatException;
 
@@ -9,7 +9,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.util.text.translation.I18n;
 
 @JEIPlugin
-public class JeiCUM implements IModPlugin{
+public class Jeicompat implements IModPlugin{
 
 	
 	/*@Override
