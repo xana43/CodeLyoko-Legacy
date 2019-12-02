@@ -8,6 +8,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.ReactorContainer;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.ReactorGUI;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.TileEntityInfusingChamber;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.TowerContainer;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.TowerGUI;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,7 +30,7 @@ public class guihandle implements IGuiHandler {
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		if(ID == Conf.INFUSING) return new gui(player.inventory, (TileEntityInfusingChamber)world.getTileEntity(new BlockPos(x, y, z)));
 		if(ID == Conf.URANIUM) return new ReactorGUI(player.inventory, (ComputerReactor)world.getTileEntity(new BlockPos(x, y, z)));
-		if(ID == Conf.INTERFACE) return new TowerContainer(player.inventory, (Interface)world.getTileEntity(new BlockPos(x, y, z)));
+		if(ID == Conf.INTERFACE) return new TowerGUI(player.inventory, (Interface)world.getTileEntity(new BlockPos(x, y, z)));
 		return null;
 	}
 
