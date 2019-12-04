@@ -63,6 +63,8 @@ public class Modblocks
   public static final Block SALEEITE_ORE = new SaleeiteOre("saleeite_ore", Material.ROCK);
   public static final Block COFFINITE_ORE = new CoffiniteOre("coffinite_ore", Material.ROCK);
   public static final Block TOWER_ENTER = new TowerBlockNonSolid("tower_enter", Material.CIRCUITS);
+  public static final Block MARABUNTA = new Marabunta("marabunta",Material.DRAGON_EGG);
+  public static final Block Titanium = new Titanium("titanium",Material.IRON);
   //public static final Block URANOPHANE_ORE
   //public static final Block SKLODOWSKITE_ORE
   public static final Block SILICA_SAND = new SilicaSand("silica_sand", Material.SAND);
