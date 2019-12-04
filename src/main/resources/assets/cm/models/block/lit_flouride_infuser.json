@@ -1,7 +1,7 @@
 {
-   "parent": "block/orientable",
+   "parent":"block/orientable",
    "textures": {
-       "particle": "cm:blocks/flouride_infuser_side",
+       "particle":"cm:blocks/flouride_infuser_side",
        "north":"cm:blocks/flouride_infuser_side",
        "down":"cm:blocks/flouride_infuser_side",
        "up":"cm:blocks/lit_flouride_infuser_front_on",

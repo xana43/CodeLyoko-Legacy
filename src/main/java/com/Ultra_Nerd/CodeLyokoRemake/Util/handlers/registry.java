@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake.Util.handlers;
 
 
 import com.Ultra_Nerd.CodeLyokoRemake.Util.IHasModel;
+import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.commands.ComTel;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 
@@ -15,6 +16,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -60,6 +62,7 @@ public class registry
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent event)
 	{
+		OBJLoader.INSTANCE.addDomain(ref.MOD_ID);
 		EntRend.registerEntityRenderers();
 		
 		for(Item item : ModItems.Items)

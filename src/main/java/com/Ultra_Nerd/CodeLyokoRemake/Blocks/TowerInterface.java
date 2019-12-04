@@ -14,6 +14,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,6 +42,7 @@ public class TowerInterface extends blockBase {
 		setResistance(-1);
 		setHarvestLevel("pickaxe", -1);
 		setLightLevel(0.5f);
+		setCreativeTab(null);
 	}
 	
 	@Override
