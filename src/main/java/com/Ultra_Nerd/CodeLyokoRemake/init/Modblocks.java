@@ -14,6 +14,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Blocks.DigitalIce;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.FlouriteBlock;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.FlouriteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.GummiteOre;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.Marabunta;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.QuantumBlock;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.QuantumCore;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.SaleeiteOre;
@@ -64,7 +65,7 @@ public class Modblocks
   public static final Block COFFINITE_ORE = new CoffiniteOre("coffinite_ore", Material.ROCK);
   public static final Block TOWER_ENTER = new TowerBlockNonSolid("tower_enter", Material.CIRCUITS);
   public static final Block MARABUNTA = new Marabunta("marabunta",Material.DRAGON_EGG);
-  public static final Block Titanium = new Titanium("titanium",Material.IRON);
+ // public static final Block Titanium = new Titanium("titanium",Material.IRON);
   //public static final Block URANOPHANE_ORE
   //public static final Block SKLODOWSKITE_ORE
   public static final Block SILICA_SAND = new SilicaSand("silica_sand", Material.SAND);

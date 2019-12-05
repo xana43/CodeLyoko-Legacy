@@ -38,15 +38,15 @@ public class ModItems
  public static final ToolMaterial MATERIAL_WARRIOR = EnumHelper.addToolMaterial("material_warrior", 4, 4000, 20, 30, 9000);
  public static final ToolMaterial MATERIAL_FELINE = EnumHelper.addToolMaterial("material_feline", 4, 2000, 900, 6, 90);
  public static final ToolMaterial MATERIAL_NINJA = EnumHelper.addToolMaterial("material_ninja", 4, 2000, 9000, 6, 90);
- public static final ToolMaterial MATERIAL_SAMURAI = EnumHelper.addToolMaterial("material_samurai" , 4 1000, 10, 25, 80);
- public static final ToolMaterial MATERIAL_GUARDIAN = EnumHelper.addToolMaterial("material_guardian, 4, 4000, 40, 60, 100);
+ public static final ToolMaterial MATERIAL_SAMURAI = EnumHelper.addToolMaterial("material_samurai" , 4 ,1000, 10, 25, 80);
+ public static final ToolMaterial MATERIAL_GUARDIAN = EnumHelper.addToolMaterial("material_guardian", 4, 4000, 40, 60, 100);
  public static final ArmorMaterial ARMOR_MATERIAL_ODD = EnumHelper.addArmorMaterial("armor_material_odd", ref.MOD_ID + ":odd", 30, new int[] {6, 12, 16, 6}, 20, SoundEvents.ITEM_ARMOR_EQIIP_ELYTRA, 0.0f);
  public static final ArmorMaterial ARMOR_MATERIAL_YUMI = EnumHelper.addArmorMaterial("armor_material_yumi", ref.MOD_ID + ":yumi", 30, new int[] {6, 12, 16, 6}, 20, SoundEvents.ITEM_ARMOR_EQIIP_ELYTRA, 0.0f);
  public static final ArmorMaterial ARMOR_MATERIAL_AELITA = EnumHelper.addArmorMaterial("armor_material_aelita", ref.MOD_ID + ":aelita", 30, new int[] {6, 12, 16, 6}, 20, SoundEvents.ITEM_ARMOR_EQIIP_ELYTRA, 0.0f);
  public static final ArmorMaterial ARMOR_MATERIAL_ULRICH = EnumHelper.addArmorMaterial("armor_material_ulrich", ref.MOD_ID + ":ulrich", 30, new int[] {4, 16, 12, 9}, 20, SoundEvents.ITEM_ARMOR_EQIIP_ELYTRA, 0.0f);
  public static final ArmorMaterial ARMOR_MATERIAL_WILLIAM = EnumHelper.addArmorMaterial("armor_material_william", ref.MOD_ID + ":william", 30, new int[] {24, 24, 24, 24}, 20, SoundEvents.ITEM_ARMOR_EQIIP_ELYTRA, 0.0f);
  public static final ArmorMaterial ARMOR_MATERIAL_BITS = EnumHelper.addArmorMaterial("armor_material_bits", ref.MOD_ID + ":bits", 30, new int[] {16, 16, 16, 16}, 20, SoundEvents.ITEM_ARMOR_EQIIP_ELYTRA, 0.0f);
- public static final ArmorMaterial AROMOR_MATERIAL_JEREMY = EnumHelper.addArmorMaterial("armor_material_jeremy", ref.MOD_ID + ":jeremy", 30, new int[]{3,3,3,3}, 20, SoundEvents.ITEM_ARMROR_EQIIP_ELYTRA, 0.0f);
+ public static final ArmorMaterial AROMOR_MATERIAL_JEREMY = EnumHelper.addArmorMaterial("armor_material_jeremy", ref.MOD_ID + ":jeremy", 30, new int[]{3,3,3,3}, 20, SoundEvents.ITEM_ARMOR_EQIIP_ELYTRA, 0.0f);
  //Items
  public static final Item SOLID_QUANTUM = new ItemBase("solid_quantum");
 
