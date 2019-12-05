@@ -28,7 +28,7 @@ public class desert extends WorldProvider {
 	@Override
 	public IChunkGenerator createChunkGenerator() {
 		// TODO Auto-generated method stub
-		return new ChunkGeneratorLyoko(world);
+		return new ChunkGeneratorLyokoICE(world);
 	}
 	
 	@Override
