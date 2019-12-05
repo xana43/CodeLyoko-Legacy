@@ -42,11 +42,11 @@ public class WorldGenTower implements IWorldGenerator
 		}
 		else if(world.provider.getDimension() == Conf.Dim)
 		{
-			generateStructure(TOWER, world, random, chunkX, chunkZ, 2, Modblocks.DIGITAL_BLOCK , LyokoFS.class);
+			generateStructure(TOWER, world, random, chunkX, chunkZ, 90, Modblocks.DIGITAL_BLOCK , LyokoFS.class);
 		}
 		else if(world.provider.getDimension() == Conf.Dim2)
 		{
-			generateStructure(TOWER, world, random, chunkX, chunkZ, 2, Modblocks.DIGITAL_ICE , LyokoICE.class);
+			generateStructure(TOWER, world, random, chunkX, chunkZ, 90, Modblocks.DIGITAL_ICE , LyokoICE.class);
 		}
 		
 	}
