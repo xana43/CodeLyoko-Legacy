@@ -46,6 +46,9 @@ public class Modblocks
   //public static final Block SKLODOWSKITE_ORE
   public static final Block SILICA_SAND = new SilicaSand("silica_sand", Material.SAND);
   public static final Block DIGITAL_BLOCK = new DigialGrass("digital_block", Material.GROUND);
-
+  public static final Block DIGITAL_ROCK = new DigitalRock("digital_rock", Material.ROCK);
+  public static final Block FOREST_TREE = new tree("digital_rock", Material.WOOD);
+  public static final Block MOUNTAIN_TREE = new MTree("mountain_tree", Material.WOOD);
+  public static final Block DIGITAL_OCEAN = new DIO("digital_ocean", Material.WATER);
   
 }
