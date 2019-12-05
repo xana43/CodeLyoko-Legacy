@@ -71,10 +71,7 @@ public class ModItems
  public static final Item QUBIT = new ItemBase("qubit");
  public static final Item QUBYTE = new ItemBase("QuByte");
  public static final Item TITANIUM = new ItemBase("titanium");
-<<<<<<< HEAD
-=======
- 
->>>>>>> origin/master
+
  //tools
  public static final ItemSword ZWEIHANDER = new Zweihander("zweihander", MATERIAL_WARRIOR);
  public static final ItemSword QUANTUM_SABER = new QuantSword("quantum_saber", MATERIAL_QUANTUM);

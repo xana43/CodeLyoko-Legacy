@@ -3,41 +3,10 @@ package com.Ultra_Nerd.CodeLyokoRemake.init;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.*;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride.*;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.*;
 
-=======
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.AutuniteOre;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.CableBlock;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.CarontiteOre;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.CoffiniteOre;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.CompFrame;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.CompScreen;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.DigialGrass;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.DigitalIce;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.FlouriteBlock;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.FlouriteOre;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.GummiteOre;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.Marabunta;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.QuantumBlock;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.QuantumCore;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.SaleeiteOre;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.SilicaSand;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TorberniteOre;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerBase;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerBlockBlue;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerBlockNonSolid;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerBlockWhite;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TowerInterface;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.TyuyamuniteOre;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.UraniniteOre;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.UraniumReactor;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.Virutalization;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tt;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride.FlourideInfuser;
->>>>>>> origin/master
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -71,14 +40,12 @@ public class Modblocks
   public static final Block COFFINITE_ORE = new CoffiniteOre("coffinite_ore", Material.ROCK);
   public static final Block TOWER_ENTER = new TowerBlockNonSolid("tower_enter", Material.CIRCUITS);
   public static final Block MARABUNTA = new Marabunta("marabunta",Material.DRAGON_EGG);
-<<<<<<< HEAD
-  public static final Block Titanium = new Titanium("titanium",Material.IRON);
-=======
- // public static final Block Titanium = new Titanium("titanium",Material.IRON);
->>>>>>> origin/master
+  public static final Block TITANIUM = new Titanium("titanium",Material.IRON);
+  public static final Block DIGITA_SAND = new Dsand("digital_sand", Material.SAND);
   //public static final Block URANOPHANE_ORE
   //public static final Block SKLODOWSKITE_ORE
   public static final Block SILICA_SAND = new SilicaSand("silica_sand", Material.SAND);
   public static final Block DIGITAL_BLOCK = new DigialGrass("digital_block", Material.GROUND);
+
   
 }

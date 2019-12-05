@@ -12,10 +12,12 @@ public class ModDimensions {
 
 	
 	public static final DimensionType LYOKO = DimensionType.register("Lyoko", "_lyoko", Conf.Dim, Lyoko.class, false);
-	public static final DimensionType LYOKOICE = DimensionType.register("Lyoko Ice Sector", "_lyokoICE", Conf.Dim2, Ice.class, false);
+    public static final DimensionType LYOKODESERT = DimensionType.register("Lyoko Desert Sector","_lyokoDES", Conf.Dim3, desert.class, false);
+    public static final DimensionType LYOKOICE = DimensionType.register("Lyoko Ice Sector", "_lyokoICE", Conf.Dim2, Ice.class, false);
 	public static void registerDims()
 	{
 		DimensionManager.registerDimension(Conf.Dim, LYOKO);
-		DimensionManager.registerDimension(Conf.Dim2, LYOKOICE);
+        DimensionManager.registerDimension(Conf.Dim2, LYOKOICE);
+        DimensionManager.registerDimension(Conf.Dim3, LYOKODESERT);
 	}
 }
