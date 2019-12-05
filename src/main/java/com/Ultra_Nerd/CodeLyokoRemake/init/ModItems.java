@@ -70,7 +70,7 @@ public class ModItems
  public static final Item PETABYTE = new ItemBase("PetaByte");
  public static final Item QUBIT = new ItemBase("qubit");
  public static final Item QUBYTE = new ItemBase("QuByte");
- public static final Item TITANIUM = new ItemBase("titanium");
+ public static final Item TITANIUM = new ItemBase("titanium_ingot");
 
  //tools
  public static final ItemSword ZWEIHANDER = new Zweihander("zweihander", MATERIAL_WARRIOR);

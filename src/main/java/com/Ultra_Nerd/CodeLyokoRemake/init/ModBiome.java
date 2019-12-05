@@ -14,13 +14,13 @@ public class ModBiome {
 	
 	public static final Biome LYOKO_FS = new LyokoFS();
 	public static final Biome LYOKO_ICE = new LyokoICE();
-	public static final Biome LYOKO_DESERT = new LyokoDES()
+	public static final Biome LYOKO_DESERT = new LyokoDES();
 	public static void registerBiomes()
 	{
 		initBiome(LYOKO_FS, "Lyoko_FS", BiomeType.WARM, Type.FOREST);
 		
         initBiome(LYOKO_ICE, "Lyoko_ICE", BiomeType.ICY, Type.COLD);
-        initBiome(LYOKO_DESERT, "Lyoko_DESERT", BiomeType.DRY, Type.HOT);
+        initBiome(LYOKO_DESERT, "Lyoko_DESERT", BiomeType.DESERT, Type.HOT);
 	}
 	
 

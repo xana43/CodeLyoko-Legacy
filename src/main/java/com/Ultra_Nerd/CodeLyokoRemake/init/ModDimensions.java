@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
 import com.Ultra_Nerd.CodeLyokoRemake.world.dimension.Ice;
 import com.Ultra_Nerd.CodeLyokoRemake.world.dimension.Lyoko;
+import com.Ultra_Nerd.CodeLyokoRemake.world.dimension.desert;
 
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;

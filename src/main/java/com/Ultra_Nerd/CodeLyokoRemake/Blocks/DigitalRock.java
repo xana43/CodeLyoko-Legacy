@@ -11,7 +11,7 @@ public class DigitalRock extends blockBase
 		{
 			super(name, material);
 			
-			setSoundType(SoundType.ROCK);
+			setSoundType(SoundType.GROUND);
 			setHardness(4.0f);
 			setResistance(20);
 			setHarvestLevel("pickaxe", 20);

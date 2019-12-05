@@ -2,12 +2,19 @@ package com.Ultra_Nerd.CodeLyokoRemake.Blocks;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
-public class tree extends blockBase 
+public class DIO extends blockBase 
 {
 
 	
-		public tree(String name, Material material)
+		public DIO(String name, Material material)
 		{
 			super(name, material);
 			

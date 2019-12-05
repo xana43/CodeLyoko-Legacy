@@ -57,15 +57,8 @@ public class Marabunta extends blockBase {
     {
         if (!worldIn.isRemote)
         {
-            if (!worldIn.isAreaLoaded(pos, 3)) return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
-            if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2)
-            {
-                worldIn.setBlockState(pos, Modblocks.MARABUNTA.getDefaultState());
-            }
-            else
-            {
-                if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
-                {
+           
+               
                     for (int i = 0; i < 90; ++i)
                     {
                         BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
@@ -78,15 +71,21 @@ public class Marabunta extends blockBase {
                         IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
                         IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-                        if (iblockstate1.getBlock() == Modblocks.DIGITAL_BLOCK || iblockstate1.getBlock() == Modblocks.DIGITAL_ICE)
+                        if (iblockstate1.getBlock() == Blocks.GRASS || iblockstate1.getBlock() == Blocks.DIRT || iblockstate1.getBlock() == Blocks.WATER   ||    iblockstate1.getBlock() == Modblocks.DIGITAL_BLOCK || iblockstate1.getBlock() == Modblocks.DIGITAL_ICE)
                         {
                             worldIn.setBlockState(blockpos, Modblocks.MARABUNTA.getDefaultState());
                         }
                     }
-                }
-            }
         }
+            
+        
     }
+	
+	@Override
+	public boolean canEntitySpawn(IBlockState state, Entity entityIn) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	
 }
