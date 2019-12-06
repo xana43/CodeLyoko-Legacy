@@ -18,7 +18,7 @@ public class DIO extends blockBase
 		{
 			super(name, material);
 			
-			setSoundType(SoundType.WOOD);
+	
 			setHardness(-1);
 			setResistance(-1);
 			setHarvestLevel("axe", -1);
