@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
 import com.Ultra_Nerd.CodeLyokoRemake.world.dimension.Ice;
 import com.Ultra_Nerd.CodeLyokoRemake.world.dimension.Lyoko;
 import com.Ultra_Nerd.CodeLyokoRemake.world.dimension.desert;
+import com.Ultra_Nerd.CodeLyokoRemake.world.dimension.ocean;
 
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
@@ -15,7 +16,7 @@ public class ModDimensions {
 	public static final DimensionType LYOKO = DimensionType.register("Lyoko", "_lyoko", Conf.Dim, Lyoko.class, false);
     public static final DimensionType LYOKODESERT = DimensionType.register("Lyoko Desert Sector","_lyokoDES", Conf.Dim3, desert.class, false);
     public static final DimensionType LYOKOICE = DimensionType.register("Lyoko Ice Sector", "_lyokoICE", Conf.Dim2, Ice.class, false);
-    public static final DimensionType LYOKOOCEAN = DimenstionType.register("Digital Sea", "_lyokoOCEAN", Conf.Dim4, ocean.class, false);
+    public static final DimensionType LYOKOOCEAN = DimensionType.register("Digital Sea", "_lyokoOCEAN", Conf.Dim4, ocean.class, false);
 	public static void registerDims()
 	{
 		DimensionManager.registerDimension(Conf.Dim, LYOKO);

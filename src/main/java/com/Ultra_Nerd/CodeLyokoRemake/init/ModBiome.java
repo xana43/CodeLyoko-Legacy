@@ -19,7 +19,7 @@ public class ModBiome {
 	public static void registerBiomes()
 	{
 		initBiome(LYOKO_FS, "Lyoko_FS", BiomeType.WARM, Type.FOREST);
-		initBiome(LYOKO_OCEAN, "Lyoko_OCEAN", BiomeType.OCEAN, Type.WET)
+		initBiome(LYOKO_OCEAN, "Lyoko_OCEAN", BiomeType.COOL, Type.OCEAN);
         initBiome(LYOKO_ICE, "Lyoko_ICE", BiomeType.ICY, Type.COLD);
         initBiome(LYOKO_DESERT, "Lyoko_DESERT", BiomeType.DESERT, Type.HOT);
 	}

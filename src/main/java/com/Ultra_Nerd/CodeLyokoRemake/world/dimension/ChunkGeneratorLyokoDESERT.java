@@ -57,7 +57,7 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 // TODO: Auto-generated Javadoc
-public class ChunkGeneratorLYOKOOCEAN implements IChunkGenerator
+public class ChunkGeneratorLyokoDESERT implements IChunkGenerator
 {
     protected  World world;
     
@@ -71,8 +71,8 @@ public class ChunkGeneratorLYOKOOCEAN implements IChunkGenerator
     
     protected  WorldType terrainType;
     protected Biome biome = ModBiome.LYOKO_ICE;
-    protected IBlockState baseBlock = Modblocks.DIGITAL_OCEAN.getDefaultState();
-    protected IBlockState oceanBlock = Modblocks.DIGITAL_OCEAN.getDefaultState();
+    protected IBlockState baseBlock = Modblocks.DIGITA_SAND.getDefaultState();
+    protected IBlockState oceanBlock = Blocks.WATER.getDefaultState();
     
     protected NoiseGeneratorOctaves minLimitPerlinNoise;
     protected NoiseGeneratorOctaves maxLimitPerlinNoise;
@@ -119,10 +119,10 @@ public class ChunkGeneratorLYOKOOCEAN implements IChunkGenerator
     private double depthNoiseScaleZ = 2000D;
     private double depthNoiseScaleExponent = 0.5D;
     private int coordScale = 1;
-    private int mainNoiseScaleX = 5000;
-    private int mainNoiseScaleY = 1000;
-    private int mainNoiseScaleZ = 5000;
-    private int heightScale = 8;
+    private int mainNoiseScaleX = 1;
+    private int mainNoiseScaleY = 1;
+    private int mainNoiseScaleZ = 1;
+    private int heightScale = 6000;
     private int biomeDepthOffSet = 1;
     private int biomeScaleOffset = 1;
     private double heightStretch = 50;
@@ -141,7 +141,7 @@ public class ChunkGeneratorLYOKOOCEAN implements IChunkGenerator
      * @param worldIn the world in
      */
     
-    public ChunkGeneratorLYOKOOCEAN(World worldIn)
+    public ChunkGeneratorLyokoDESERT(World worldIn)
     {
         // DEBUG
         System.out.println("Constructing ChunkGeneratorCloud");
@@ -150,7 +150,7 @@ public class ChunkGeneratorLYOKOOCEAN implements IChunkGenerator
         rand = new Random(world.getSeed());               
         terrainType = world.getWorldInfo().getTerrainType();
         mapFeaturesEnabled = world.getWorldInfo().isMapFeaturesEnabled();
-        world.setSeaLevel(255);
+        world.setSeaLevel(1);
         
         //MapGenVillage.VILLAGE_SPAWN_BIOMES.add(ModBiomes.cloud);
 
