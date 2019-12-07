@@ -4,7 +4,6 @@ package com.Ultra_Nerd.CodeLyokoRemake.Util.handlers;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.IHasModel;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.commands.ComTel;
-import com.Ultra_Nerd.CodeLyokoRemake.init.ModFluids;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
@@ -20,6 +19,8 @@ import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.BlockFluidClassic;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
@@ -53,10 +54,12 @@ public class registry
 	public static void onBlockRegister(RegistryEvent.Register<Block> event)
 	{
 		event.getRegistry().registerAll(Modblocks.BLOCKS.toArray(new Block[0]));
-		event.getRegistry().registerAll(ModFluids.BLOCKSFLUID.toArray(new BlockFluidClassic[0]));
+		
 		
 	}
 	
+	
+
 
 	
 	@SubscribeEvent

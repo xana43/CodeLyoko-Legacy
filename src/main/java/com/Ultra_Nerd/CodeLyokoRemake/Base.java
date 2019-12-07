@@ -55,7 +55,6 @@ public class Base {
 		ModBiome.registerBiomes();
 		
 		Oredict.registerOres();
-		
 		GameRegistry.registerWorldGenerator(new WorldGenTower(), 0);
 		ModEntities.registerenit();
 		Souinds.Regso();
