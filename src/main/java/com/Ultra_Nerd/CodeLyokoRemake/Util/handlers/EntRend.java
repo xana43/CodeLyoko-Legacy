@@ -1,8 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoRemake.Util.handlers;
 
 
+import com.Ultra_Nerd.CodeLyokoRemake.Entity.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoRemake.Entity.Entityblok;
 import com.Ultra_Nerd.CodeLyokoRemake.Entity.rend.RendBlok;
+import com.Ultra_Nerd.CodeLyokoRemake.Entity.rend.Rendskid;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
@@ -34,7 +36,14 @@ public class EntRend
 						return new RendBlok(manager);
 					}
 					});
-		
+		RenderingRegistry.registerEntityRenderingHandler(EntitySkid.class, new IRenderFactory<EntitySkid>() {
+			
+			@Override
+			public Render<? super EntitySkid> createRenderFor(RenderManager manager) {
+				// TODO Auto-generated method stub
+				return new Rendskid(manager);
+			}
+		});
 		
 	}
 	

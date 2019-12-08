@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake.Base;
+import com.Ultra_Nerd.CodeLyokoRemake.Entity.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoRemake.Entity.Entityblok;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
@@ -14,6 +15,7 @@ public class ModEntities {
 	public static void registerenit()
 	{
 		regen("blok", Entityblok.class, Conf.ENTITY_BLOK, 50,16777102 , 4802816 );
+		regen("ski", EntitySkid.class, Conf.SKID, 209, 893790, 983402);
 	}
 	
 	private static void regen(String name, Class<? extends Entity> entity, int id, int range, int c1, int c2)

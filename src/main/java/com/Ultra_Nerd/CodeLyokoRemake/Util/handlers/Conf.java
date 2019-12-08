@@ -10,8 +10,10 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class Conf {
-	public static Configuration conf;
+	
 
+	public static Configuration conf;
+	public static int SKID = 5678546;
 	public static int Dim = DimensionManager.getNextFreeDimId();
     public static int Dim2 = DimensionManager.getNextFreeDimId();
     public static int Dim3 = DimensionManager.getNextFreeDimId();
