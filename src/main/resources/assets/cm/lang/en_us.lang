@@ -58,3 +58,5 @@ tile.titanium.name=Titanium Block
 item.titanium.name=Titanium Ingot
 tile.tower_enter.name=Tower Wall
 tile.tower_interface.name=Tower Interface
+fluid.digital_sea=DataFlow
+death.attack.tile.digital_ocean=%s was de-virtualized, broken down,  and swept away by the digital current

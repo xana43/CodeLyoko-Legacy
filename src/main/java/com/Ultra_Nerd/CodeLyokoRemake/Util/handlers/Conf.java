@@ -39,7 +39,7 @@ public class Conf {
 		INTERFACE = conf.getInt("this is the ID for the Tower Interface", cat, 3245, 0, 1000000000, "Make sure this isn't conflicting with another mod");
 		cat = "Biome";
 		conf.addCustomCategoryComment(cat, "this allows for control over biome spawning");
-		spawnLyokoOverWorld = conf.getBoolean("SpawnForestSectorInOverWorld", cat, false, "this allows you to spawn the forest sector in the overworld");
+		spawnLyokoOverWorld = conf.getBoolean("Spawnall the sectors in the overworld", cat, false, "this allows you to spawn the forest sector in the overworld");
 		conf.save();
 	}
 	

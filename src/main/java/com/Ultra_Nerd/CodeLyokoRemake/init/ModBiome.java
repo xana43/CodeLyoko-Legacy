@@ -22,6 +22,7 @@ public class ModBiome {
 		initBiome(LYOKO_OCEAN, "Lyoko_OCEAN", BiomeType.COOL, Type.OCEAN);
         initBiome(LYOKO_ICE, "Lyoko_ICE", BiomeType.ICY, Type.COLD);
         initBiome(LYOKO_DESERT, "Lyoko_DESERT", BiomeType.DESERT, Type.HOT);
+       
 	}
 	
 
@@ -30,10 +31,11 @@ public class ModBiome {
 		biome.setRegistryName(name);
 		ForgeRegistries.BIOMES.register(biome);
 		BiomeDictionary.addTypes(biome, types);
-		BiomeManager.addBiome(biometype, new BiomeEntry(biome, 10));
+		
 				
 		if(Conf.spawnLyokoOverWorld)
 		{
+			BiomeManager.addBiome(biometype, new BiomeEntry(biome, 10));
 			BiomeManager.addSpawnBiome(biome);
 		}
 		return biome;

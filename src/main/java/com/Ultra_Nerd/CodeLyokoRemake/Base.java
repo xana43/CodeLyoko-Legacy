@@ -7,6 +7,7 @@ import java.io.File;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.compat.Oredict;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
+import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.EntRend;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Souinds;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.TEH;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.guihandle;
@@ -15,6 +16,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.registry;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModBiome;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModEntities;
+import com.Ultra_Nerd.CodeLyokoRemake.init.ModFluids;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModRes;
 import com.Ultra_Nerd.CodeLyokoRemake.proxy.Common;
@@ -23,6 +25,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.world.WorldGenTower;
 
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -47,13 +50,17 @@ public class Base {
 	@SidedProxy(clientSide = ref.CLIENT_PROXY_CLASS, serverSide = ref.COMMON_PROXY_CLASS)
 	public static Common proxy; 
 	public static File conf;
+	
+	static {FluidRegistry.enableUniversalBucket();}
+	
 	@EventHandler
 	public static void PreInit(FMLPreInitializationEvent event)
 	{
+		ModFluids.REGFLU();
 		
 		GameRegistry.registerWorldGenerator(new ModGen(), 3);
 		ModBiome.registerBiomes();
-		
+		EntRend.RegisterCustomMeshesAndStates();
 		Oredict.registerOres();
 		GameRegistry.registerWorldGenerator(new WorldGenTower(), 0);
 		ModEntities.registerenit();

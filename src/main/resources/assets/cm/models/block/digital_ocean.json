@@ -1,8 +1,0 @@
-{
-   "parent": "block/cube_all",
-   "textures": {
-    "particle":"cm:blocks/digital_ocean",
-      "all":"cm:blocks/digital_ocean"
-       
-   }
-}
