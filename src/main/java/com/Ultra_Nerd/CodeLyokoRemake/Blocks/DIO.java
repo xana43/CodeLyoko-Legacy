@@ -22,7 +22,8 @@ public class DIO extends BlockFluidClassic {
 		super(fluid, material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+		setCreativeTab(null);
+		setDensity(4);
 		Modblocks.BLOCKS.add(this);
 		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
@@ -40,4 +41,6 @@ public class DIO extends BlockFluidClassic {
         entityIn.attackEntityFrom(new DamageSource(this.getUnlocalizedName()), RANDOM.nextInt(90));
     }
 	
+	
+
 }
