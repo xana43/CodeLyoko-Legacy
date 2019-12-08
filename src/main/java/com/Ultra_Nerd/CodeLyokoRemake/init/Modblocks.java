@@ -22,6 +22,7 @@ public class Modblocks
   public static final Block CABLE_BLOCK = new CableBlock("cable_block");
   public static final Block TOWER_INTERFACE = new TowerInterface("tower_interface", Material.DRAGON_EGG);
   public static final Block SCANNER_BASE = new Virutalization("scanner_base", Material.CIRCUITS);
+  public static final Block ELECTRICFLOURIDE_INFUSER = new ElectricFlourideInfuser("electric_flouride_infuser", Material.IRON);
   public static final Block FLOURIDE_INFUSER = new FlourideInfuser("flouride_infuser", Material.IRON);
   public static final Block FLOURITE_ORE = new FlouriteOre("flourite_ore", Material.ROCK);
   public static final Block FLOURITE_BLOCK = new FlouriteBlock("flourite_block", Material.ROCK);

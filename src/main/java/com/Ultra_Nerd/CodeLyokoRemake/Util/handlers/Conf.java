@@ -20,6 +20,7 @@ public class Conf {
 	public static int URANIUM = 190;
 	public static int ENTITY_BLOK = 5102;
 	public static int INTERFACE = 3245;
+	public static int ELEINFUSING = 124879;
 	public static boolean spawnLyokoOverWorld = false;
 	
 	public static void fil(File file)
