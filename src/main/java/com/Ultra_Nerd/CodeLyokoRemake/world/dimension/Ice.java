@@ -55,7 +55,7 @@ public Vec3d getSkyColor(Entity cameraEntity, float partialTicks) {
 }
 public float calculateCelestialAngle(long par1, float par3)
 {
-    return 0.65f;
+    return 0.55f;
 }
 
 
