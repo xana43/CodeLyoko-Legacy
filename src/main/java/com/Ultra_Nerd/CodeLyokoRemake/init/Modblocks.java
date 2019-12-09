@@ -43,7 +43,7 @@ public class Modblocks
   public static final Block MARABUNTA = new Marabunta("marabunta",Material.DRAGON_EGG);
   public static final Block TITANIUM = new Titanium("titanium",Material.IRON);
   public static final Block DIGITA_SAND = new Dsand("digital_sand", Material.SAND);
-  public static final Block ANTI_MARABUNTA = new Abunta("anto_marabunta", Material.DRAGON_EGG);
+  public static final Block ANTI_MARABUNTA = new Abunta("anti_marabunta", Material.DRAGON_EGG);
   //public static final Block URANOPHANE_ORE
   //public static final Block SKLODOWSKITE_ORE
   public static final Block SILICA_SAND = new SilicaSand("silica_sand", Material.SAND);
