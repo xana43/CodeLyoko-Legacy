@@ -53,4 +53,5 @@ public class Modblocks
   public static final Block MOUNTAIN_TREE = new MTree("mountain_tree", Material.WOOD);
   public static final Block DIGITAL_OCEAN = new DIO("digital_ocean", ModFluids.DIGITAL_SEA, Material.WATER);
   public static final Block WASTE = new RAD("waste", ModFluids.RADIO_WASTE, Material.LAVA);
+  public static final Block test = new test("test", Material.DRAGON_EGG);
 }

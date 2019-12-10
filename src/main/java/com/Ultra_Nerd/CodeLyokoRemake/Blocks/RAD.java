@@ -41,7 +41,7 @@ public class RAD extends BlockFluidClassic {
 		setRegistryName(name);
 		setCreativeTab(null);
         setDensity(1000);
-        setViscosity(1000);
+        
 		
 		Modblocks.BLOCKS.add(this);
 		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
@@ -69,7 +69,8 @@ public class RAD extends BlockFluidClassic {
    
 		 
     
-    }
+    
+
 	
 	
 	
