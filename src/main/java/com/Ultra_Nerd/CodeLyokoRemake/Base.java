@@ -61,7 +61,7 @@ public class Base {
 		GameRegistry.registerWorldGenerator(new ModGen(), 3);
 		ModBiome.registerBiomes();
 		EntRend.RegisterCustomMeshesAndStates();
-		Oredict.registerOres();
+		
 		GameRegistry.registerWorldGenerator(new WorldGenTower(), 0);
 		ModEntities.registerenit();
 		Souinds.Regso();
@@ -75,7 +75,7 @@ public class Base {
 		
 		TEH.regte();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Base.instance, new guihandle());
-		
+		Oredict.registerOres();
 	}
 	
 	@EventHandler

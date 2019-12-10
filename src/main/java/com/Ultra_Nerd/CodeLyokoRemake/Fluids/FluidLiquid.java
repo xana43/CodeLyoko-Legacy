@@ -12,6 +12,7 @@ public class FluidLiquid extends Fluid {
 	public FluidLiquid(String fluidName, ResourceLocation still, ResourceLocation flowing) {
 		super(fluidName, still, flowing);
 		this.setUnlocalizedName(fluidName);
+
 	}
 	
 	

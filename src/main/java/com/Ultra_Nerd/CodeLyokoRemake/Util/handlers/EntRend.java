@@ -66,6 +66,24 @@ public class EntRend
 				return new ModelResourceLocation(ref.MOD_ID + ":digital_ocean", "fluid");
 			}
 		});
+		
+		ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(Modblocks.CBLOCK), new ItemMeshDefinition() {
+			
+			@Override
+			public ModelResourceLocation getModelLocation(ItemStack stack) {
+				// TODO Auto-generated method stub
+				return new ModelResourceLocation(ref.MOD_ID + ":coolantblock", "fluid");
+			}
+		});
+		
+		ModelLoader.setCustomStateMapper(Modblocks.CBLOCK, new StateMapperBase() {
+			
+			@Override
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+				// TODO Auto-generated method stub
+				return new ModelResourceLocation(ref.MOD_ID + ":coolantblock", "fluid");
+			}
+		});
 	}
 }
 

@@ -31,7 +31,7 @@ import net.minecraftforge.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@EventBusSubscriber
+
 public class DIO extends BlockFluidClassic {
 
 	
@@ -40,7 +40,8 @@ public class DIO extends BlockFluidClassic {
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(null);
-		setDensity(10);
+		//setDensity(10);
+		this.getFluid().setDensity(40);
 		
 		Modblocks.BLOCKS.add(this);
 		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
