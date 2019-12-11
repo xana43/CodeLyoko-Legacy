@@ -60,12 +60,13 @@ public class Base {
 		
 		GameRegistry.registerWorldGenerator(new ModGen(), 3);
 		ModBiome.registerBiomes();
-		EntRend.RegisterCustomMeshesAndStates();
+		
 		
 		GameRegistry.registerWorldGenerator(new WorldGenTower(), 0);
 		ModEntities.registerenit();
 		Souinds.Regso();
 		Conf.RegisCon(event);
+		EntRend.RegisterCustomMeshesAndStates();
 	}
 	
 	@EventHandler

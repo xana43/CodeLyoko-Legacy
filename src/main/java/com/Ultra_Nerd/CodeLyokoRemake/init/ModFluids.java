@@ -10,13 +10,11 @@ import net.minecraftforge.fluids.FluidRegistry;
 public class ModFluids {
 
 	public static final Fluid DIGITAL_SEA = new FluidLiquid("digital_sea", new ResourceLocation(ref.MOD_ID + ":blocks/digital_still"), new ResourceLocation(ref.MOD_ID + ":blocks/digital_flowing"));
-	public static final Fluid COOLANT = new FluidLiquid("coolant_fluid", new ResourceLocation(ref.MOD_ID + ":blocks/digital2_still"), new ResourceLocation(ref.MOD_ID + ":blocks/digital2_flowing"));
-	public static final Fluid RADIO_WASTE = new FluidLiquid("radio_waste", new ResourceLocation(ref.MOD_ID + ":blocks/waste_still"), new ResourceLocation(ref.MOD_ID + ":blocks/waste_flowing"));
+	
 	public static void REGFLU()
 	{
     REGAASSWSS(DIGITAL_SEA);
-    REGAASSWSS(RADIO_WASTE);	
-    REGAASSWSS(COOLANT);
+    
 	}
 	
 	
