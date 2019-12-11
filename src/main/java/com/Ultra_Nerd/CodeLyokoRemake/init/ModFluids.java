@@ -1,5 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake.init;
 
+import java.util.ArrayList;
+
 import com.Ultra_Nerd.CodeLyokoRemake.Fluids.FluidLiquid;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 
@@ -9,11 +11,16 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class ModFluids {
 
-	public static final Fluid DIGITAL_SEA = new FluidLiquid("digital_sea", new ResourceLocation(ref.MOD_ID + ":blocks/digital_still"), new ResourceLocation(ref.MOD_ID + ":blocks/digital_flowing"));
 	
+	public static final ArrayList<Fluid> FLUIDS = new ArrayList<Fluid>(); 
+	public static final Fluid DIGITAL_SEA = new FluidLiquid("digital_sea", new ResourceLocation(ref.MOD_ID + ":blocks/digital_still"), new ResourceLocation(ref.MOD_ID + ":blocks/digital_flowing"));
+	public static final Fluid COOLANT_FLUID = new FluidLiquid("coolant_fluid", new ResourceLocation(ref.MOD_ID + ":blocks/coolc"), new ResourceLocation(ref.MOD_ID + ":blocks/coolf"));
 	public static void REGFLU()
 	{
-    REGAASSWSS(DIGITAL_SEA);
+   for(Fluid fluid : FLUIDS)
+   {
+	   REGAASSWSS(fluid);
+   }
     
 	}
 	

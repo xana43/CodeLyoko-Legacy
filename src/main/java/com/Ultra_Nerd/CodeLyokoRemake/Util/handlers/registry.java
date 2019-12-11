@@ -49,7 +49,6 @@ public class registry
 	
 	
 	
-	
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event)
 	{

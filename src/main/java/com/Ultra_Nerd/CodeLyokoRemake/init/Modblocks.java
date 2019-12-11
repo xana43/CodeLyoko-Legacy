@@ -52,6 +52,6 @@ public class Modblocks
   public static final Block FOREST_TREE = new tree("digital_tree", Material.WOOD);
   public static final Block MOUNTAIN_TREE = new MTree("mountain_tree", Material.WOOD);
   public static final Block DIGITAL_OCEAN = new DIO("digital_ocean", ModFluids.DIGITAL_SEA, Material.WATER);
-
+  public static final Block COOLANT_BLOCK = new COOL("coolant_block", ModFluids.COOLANT_FLUID, Material.WATER);
 
 }
