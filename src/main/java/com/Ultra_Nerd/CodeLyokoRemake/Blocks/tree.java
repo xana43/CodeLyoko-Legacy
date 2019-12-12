@@ -12,9 +12,9 @@ public class tree extends blockBase
 			super(name, material);
 			
 			setSoundType(SoundType.WOOD);
-			setHardness(4.0f);
-			setResistance(20);
-			setHarvestLevel("axe", 20);
+			setHardness(-1);
+			setResistance(-1);
+	
 			
 			
 			

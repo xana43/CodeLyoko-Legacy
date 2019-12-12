@@ -29,7 +29,7 @@ public class ModItems
 {
  
  public static final List<Item> Items = new ArrayList<Item>();
- 
+ public static final List<Item> Records = new ArrayList<Item>();
 
  //materials
  public static final ToolMaterial MATERIAL_QUANTUM = EnumHelper.addToolMaterial("material_quantum", 20, 250, 7.0f, 3.0f, 900);
@@ -106,6 +106,16 @@ public class ModItems
 	 ForgeRegistries.ITEMS.register(item);
  }
  
- public static void reg() {register(LYOKO);} 
+ public static void reg() {
+	 
+	 for(Item records : ModItems.Records)
+	 {
+		 register(records); 
+	 }
+	 
+	
+	 
+	 
+	 } 
  
 }

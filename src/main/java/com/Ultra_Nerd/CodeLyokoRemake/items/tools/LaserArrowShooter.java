@@ -1,28 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoRemake.items.tools;
 
-import com.Ultra_Nerd.CodeLyokoRemake.Base;
-import com.Ultra_Nerd.CodeLyokoRemake.Util.IHasModel;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Souinds;
-import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake.items.ItemBase;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.sound.PlaySoundEvent;
 
 
 

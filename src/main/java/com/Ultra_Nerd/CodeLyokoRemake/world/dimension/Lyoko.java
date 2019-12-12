@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake.world.dimension;
 
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModBiome;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoRemake.world.biome.Bepis;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.DimensionType;
@@ -17,6 +18,12 @@ public class Lyoko extends WorldProvider {
 	}
 	
 	@Override
+	protected void init() {
+		// TODO Auto-generated method stub
+		this.biomeProvider = new Bepis(this.world.getSeed());
+	}
+	
+	@Override
 	public DimensionType getDimensionType() {
 		// TODO Auto-generated method stub
 		return ModDimensions.LYOKO;
@@ -25,7 +32,7 @@ public class Lyoko extends WorldProvider {
 	@Override
 	public IChunkGenerator createChunkGenerator() {
 		// TODO Auto-generated method stub
-		return new ChunkGeneratorLyoko(world);
+		return new ChunkGeneratorLyoko(this.world,true, this.world.getSeed(), this.world.getSpawnPoint());
 	}
 	
 	@Override
@@ -40,5 +47,15 @@ public class Lyoko extends WorldProvider {
 		return false;
 	}
 
-	
+	@Override
+	protected void generateLightBrightnessTable() {
+		// TODO Auto-generated method stub
+		float f = 0.0F;
+
+	    for (int i = 0; i <= 15; ++i)
+	    {
+	        float f1 = 1.0F - (float)i / 15.0F;
+	        this.lightBrightnessTable[i] = 2f;
+	    }
+	}
 }

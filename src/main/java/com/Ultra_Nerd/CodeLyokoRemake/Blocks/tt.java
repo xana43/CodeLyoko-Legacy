@@ -1,6 +1,4 @@
 package com.Ultra_Nerd.CodeLyokoRemake.Blocks;
-import com.Ultra_Nerd.CodeLyokoRemake.Base;
-import com.Ultra_Nerd.CodeLyokoRemake.Util.IHasModel;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
@@ -13,7 +11,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -22,7 +19,8 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class tt extends BlockHorizontal implements IHasModel {
+
+public class tt extends BlockHorizontal {
 
 public tt(String name) {
     super(Material.CIRCUITS);
@@ -44,11 +42,7 @@ protected BlockStateContainer createBlockState() {
 }
 
 
-@Override
-public void registerModels() {
-	Base.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0 , "inventory");
-	
-}
+
 
 @Override
 public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {

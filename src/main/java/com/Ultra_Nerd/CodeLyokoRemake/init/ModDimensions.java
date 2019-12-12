@@ -14,9 +14,9 @@ public class ModDimensions {
 
 	
 	public static final DimensionType LYOKO = DimensionType.register("Lyoko", "_lyoko", Conf.Dim, Lyoko.class, false);
-    public static final DimensionType LYOKODESERT = DimensionType.register("Lyoko Desert Sector","_lyokoDES", Conf.Dim3, desert.class, false);
-    public static final DimensionType LYOKOICE = DimensionType.register("Lyoko Ice Sector", "_lyokoICE", Conf.Dim2, Ice.class, false);
-    public static final DimensionType LYOKOOCEAN = DimensionType.register("Digital Sea", "_lyokoOCEAN", Conf.Dim4, ocean.class, false);
+    public static final DimensionType LYOKODESERT = DimensionType.register("Lyoko Desert Sector","_lyokodes", Conf.Dim3, desert.class, false);
+    public static final DimensionType LYOKOICE = DimensionType.register("Lyoko Ice Sector", "_lyokoice", Conf.Dim2, Ice.class, false);
+    public static final DimensionType LYOKOOCEAN = DimensionType.register("Digital Sea", "_lyokoocean", Conf.Dim4, ocean.class, false);
 	public static void registerDims()
 	{
 		DimensionManager.registerDimension(Conf.Dim, LYOKO);

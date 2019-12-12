@@ -2,9 +2,9 @@
     "forge_marker": 1,
     "variants":{
         "fluid":{
-            "model":"forge:fluid_cool",
+            "model":"forge:fluid",
             "custom":{
-                "fluid":"cooland_fluid"
+                "fluid":"coolant_fluid"
             }
         }
     }
