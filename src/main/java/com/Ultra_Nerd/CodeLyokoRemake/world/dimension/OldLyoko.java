@@ -57,7 +57,7 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 // TODO: Auto-generated Javadoc
-public class ChunkGeneratorLyoko implements IChunkGenerator
+public class OldLyoko implements IChunkGenerator
 {
     protected  World world;
     
@@ -72,7 +72,7 @@ public class ChunkGeneratorLyoko implements IChunkGenerator
     protected  WorldType terrainType;
     protected Biome biome = ModBiome.LYOKO_FS;
     protected IBlockState baseBlock = Modblocks.DIGITAL_BLOCK.getDefaultState();
-    protected IBlockState oceanBlock = Blocks.WATER.getDefaultState();
+    protected IBlockState oceanBlock = Modblocks.DIGITAL_OCEAN.getDefaultState();
     
     protected NoiseGeneratorOctaves minLimitPerlinNoise;
     protected NoiseGeneratorOctaves maxLimitPerlinNoise;
@@ -140,7 +140,7 @@ public class ChunkGeneratorLyoko implements IChunkGenerator
      *
      * @param worldIn the world in
      */
-    public ChunkGeneratorLyoko(World worldIn)
+    public OldLyoko(World worldIn)
     {
         // DEBUG
         System.out.println("Constructing ChunkGeneratorCloud");
