@@ -39,4 +39,6 @@ public class EntityLaser extends EntityArrow {
 		
 	}
 
+	
+	
 }

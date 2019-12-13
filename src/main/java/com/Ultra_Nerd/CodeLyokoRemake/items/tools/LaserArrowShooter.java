@@ -39,7 +39,7 @@ public class LaserArrowShooter extends Item{
 		worldIn.playSound(null,playerIn.posX, playerIn.posY, playerIn.posZ, Souinds.SHOOT, SoundCategory.NEUTRAL, 1f, 1f);
 		EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 		
-		las.setPosition(playerIn.posX + aim.x * 1.5D, playerIn.chasingPosY + aim.y * 1.5D, playerIn.posZ + aim.z * 1.5D);
+		las.setPosition(playerIn.posX + aim.x * 1.5D, playerIn.chasingPosY + aim.y * 1.68D, playerIn.posZ + aim.z * 1.5D);
 		las.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0f, 1.5f, 0.5f);		
 		if(!worldIn.isRemote)
 		{
