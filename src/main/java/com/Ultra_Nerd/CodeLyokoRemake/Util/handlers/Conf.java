@@ -23,6 +23,7 @@ public class Conf {
 	public static int ENTITY_BLOK = 5102;
 	public static int INTERFACE = 3245;
 	public static int ELEINFUSING = 124879;
+	public static int ENTITY_LARROW = 3406743;
 	public static boolean spawnLyokoOverWorld = false;
 	
 	public static void fil(File file)
@@ -39,6 +40,7 @@ public class Conf {
 		URANIUM = conf.getInt("this is the ID for the Uranium Integrated reactor", cat, 190, 0, 1000000000, "Make sure this isn't conflicting with another mod");
 		ENTITY_BLOK = conf.getInt("this is the ID for the BLOK mob", cat, 5102, 0, 1000000000, "Make sure this isn't conflicting with another mod");
 		INTERFACE = conf.getInt("this is the ID for the Tower Interface", cat, 3245, 0, 1000000000, "Make sure this isn't conflicting with another mod");
+		ENTITY_LARROW = conf.getInt("this is the ID for the laser arrow", cat, 3406743, 0, 1000000000, "Make sure this isn't conflicting with another mod");
 		cat = "Biome";
 		conf.addCustomCategoryComment(cat, "this allows for control over biome spawning");
 		spawnLyokoOverWorld = conf.getBoolean("Spawnall the sectors in the overworld", cat, false, "this allows you to spawn the forest sector in the overworld");

@@ -13,9 +13,9 @@ import net.minecraft.world.gen.IChunkGenerator;
 public class Lyoko extends WorldProvider {
 	
 	
-	public Lyoko() {
+	/*public Lyoko() {
 		this.biomeProvider = new BiomeProviderSingle(ModBiome.LYOKO_FS);
-	}
+	}*/
 	
 	@Override
 	protected void init() {

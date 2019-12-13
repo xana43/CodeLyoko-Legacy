@@ -9,6 +9,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Util.*;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.*;
 import com.Ultra_Nerd.CodeLyokoRemake.items.*;
 import com.Ultra_Nerd.CodeLyokoRemake.items.armor.*;
+import com.Ultra_Nerd.CodeLyokoRemake.items.cust.LaserArrow;
 import com.Ultra_Nerd.CodeLyokoRemake.items.tools.*;
 
 
@@ -95,6 +96,7 @@ public class ModItems
  public static final Item WILLIAM_CHESTPLATE = new ArmorBase("william_chestplate", ARMOR_MATERIAL_WILLIAM, 1 , EntityEquipmentSlot.CHEST);
  public static final Item WILLIAM_LEGGINGS = new ArmorBase("william_leggings", ARMOR_MATERIAL_WILLIAM, 2 , EntityEquipmentSlot.LEGS);
  public static final Item WILLIAM_BOOTS = new ArmorBase("william_boots", ARMOR_MATERIAL_WILLIAM, 1 , EntityEquipmentSlot.FEET);
+ public static final Item LASERARROW = new LaserArrow("laser_arrow");
  public static ItemRecord LYOKO;
  public static void initRecords()
  {

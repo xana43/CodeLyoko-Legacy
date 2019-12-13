@@ -1,28 +1,31 @@
 package com.Ultra_Nerd.CodeLyokoRemake.items.tools;
 
+import com.Ultra_Nerd.CodeLyokoRemake.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Souinds;
-import com.Ultra_Nerd.CodeLyokoRemake.items.ItemBase;
+import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 
-import net.minecraft.entity.item.EntityTNTPrimed;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityFireball;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
 
-public class LaserArrowShooter extends ItemBase{
+public class LaserArrowShooter extends Item{
 
 	public LaserArrowShooter(String name)
 	{
-		super(name);
+		setUnlocalizedName(name);
+		setRegistryName(name);
 		
+		setCreativeTab(CreativeTabs.COMBAT);
+		ModItems.Items.add(this);
 		//this.attackDamage = 3.0F + material.getAttackDamage();
 		
 	}
@@ -33,25 +36,16 @@ public class LaserArrowShooter extends ItemBase{
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ItemStack item = playerIn.getHeldItem(handIn);
 		Vec3d aim = playerIn.getLookVec();
-		worldIn.playSound(playerIn,playerIn.posX, playerIn.posY, playerIn.posZ, Souinds.SHOOT, SoundCategory.NEUTRAL, 1f, 1f);
-		EntityTNTPrimed tnt = new EntityTNTPrimed(worldIn);
-				
-			
-				
-		EntityFireball fire = new EntityFireball(worldIn, playerIn, 1, 1, 1) {
+		worldIn.playSound(null,playerIn.posX, playerIn.posY, playerIn.posZ, Souinds.SHOOT, SoundCategory.NEUTRAL, 1f, 1f);
+		EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 		
-			@Override
-			protected void onImpact(RayTraceResult result) {
-				worldIn.spawnEntity(tnt);
-				
-				
-			}
-		};
-			fire.setPosition(playerIn.posX + aim.x * 1.5D, playerIn.posY + aim.y * 1.5D, playerIn.posZ + aim.z * 1.5D);
-			fire.accelerationX = aim.x * 1;
-			fire.accelerationY = aim.y * 1;
-			fire.accelerationZ = aim.z * 1;
-		worldIn.spawnEntity(fire);
+		las.setPosition(playerIn.posX + aim.x * 1.5D, playerIn.chasingPosY + aim.y * 1.5D, playerIn.posZ + aim.z * 1.5D);
+		las.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0f, 1.5f, 0.5f);		
+		if(!worldIn.isRemote)
+		{
+			worldIn.spawnEntity(las);
+		}
+		
 		item.damageItem(1, playerIn);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
