@@ -17,11 +17,13 @@ public class ModDimensions {
     public static final DimensionType LYOKODESERT = DimensionType.register("Lyoko Desert Sector","_lyokodes", Conf.Dim3, desert.class, false);
     public static final DimensionType LYOKOICE = DimensionType.register("Lyoko Ice Sector", "_lyokoice", Conf.Dim2, Ice.class, false);
     public static final DimensionType LYOKOOCEAN = DimensionType.register("Digital Sea", "_lyokoocean", Conf.Dim4, ocean.class, false);
+    public static final DimensionType LYOKOMOUNTAIN = DimensionType.register("Lyoko Mountain Sector", "_lyokomountaij", Conf.Dim5,LyokoM.class, false);
 	public static void registerDims()
 	{
 		DimensionManager.registerDimension(Conf.Dim, LYOKO);
         DimensionManager.registerDimension(Conf.Dim2, LYOKOICE);
         DimensionManager.registerDimension(Conf.Dim3, LYOKODESERT);
         DimensionManager.registerDimension(Conf.Dim4, LYOKOOCEAN);
+        DimensionManager.registerDimension(Conf.Dim5, LYOKOMOUNTAIN);
 	}
 }
