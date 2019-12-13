@@ -57,7 +57,7 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 // TODO: Auto-generated Javadoc
-public class ChunkGeneratorLyokoDESERT implements IChunkGenerator
+public class ChunkGeneratorLyokoM implements IChunkGenerator
 {
     protected  World world;
     

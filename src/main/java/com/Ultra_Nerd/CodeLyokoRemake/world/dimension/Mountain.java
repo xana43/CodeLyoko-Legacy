@@ -10,10 +10,10 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.gen.IChunkGenerator;
 
-public class LyokoM extends WorldProvider {
+public class Mountain extends WorldProvider {
 	
 	
-	public LyokoM() {
+	public Mountain() {
 		this.biomeProvider = new BiomeProviderSingle(ModBiome.LYOKO_M);
 	}
 	
@@ -28,7 +28,7 @@ public class LyokoM extends WorldProvider {
 	@Override
 	public IChunkGenerator createChunkGenerator() {
 		// TODO Auto-generated method stub
-		return new ChunkGeneratorLyokoM();
+		return new ChunkGeneratorLyokoM(world);
 	}
 	
 	@Override
