@@ -27,12 +27,25 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @EventBusSubscriber
-public class music 
+public class music extends MusicTicker
 {
 	
+	public music(Minecraft mcIn) {
+		super(mcIn);
+		// TODO Auto-generated constructor stub
+	}
 	private static int TimeTilLopp;
 	private static SoundHandler MC = Minecraft.getMinecraft().getSoundHandler();
 	private static boolean Playing = false;
+	
+	
+	
+	@Override
+	public void playMusic(MusicType requestedMusicType) {
+		// TODO Auto-generated method stub
+		super.playMusic(requestedMusicType);
+	}
+	
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public static void InDim(TickEvent.PlayerTickEvent tcik)

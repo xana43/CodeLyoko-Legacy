@@ -55,7 +55,22 @@ public class TowerBlockNonSolid extends blockBase {
 	
 	@Override
 	public Boolean isEntityInsideMaterial(IBlockAccess world, BlockPos blockpos, IBlockState iblockstate, Entity entity,double yToTest, Material materialIn, boolean testingHead) {
-		Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.getMusicRecord(Souinds.SHOOT));
+		boolean entin = false;
+		
+		if(entity != null && entin)
+		{
+			Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.getMusicRecord(Souinds.SHOOT));
+			entin = true;
+		}
+		else
+		{
+			entin = false;
+		}
+		
+		
+		
+		
+		
 		return true;
 	}
 	@Override
