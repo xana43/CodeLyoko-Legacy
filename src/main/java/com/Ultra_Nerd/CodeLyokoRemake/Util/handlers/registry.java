@@ -53,7 +53,7 @@ public class registry
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent event)
 	{
-		OBJLoader.INSTANCE.addDomain(ref.MOD_ID);
+		
 		EntRend.registerEntityRenderers();
 		
 		for(Item item : ModItems.Items)

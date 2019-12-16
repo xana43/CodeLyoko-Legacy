@@ -44,6 +44,9 @@ public class Modblocks
   public static final Block TITANIUM = new Titanium("titanium",Material.IRON);
   public static final Block DIGITA_SAND = new Dsand("digital_sand", Material.SAND);
   public static final Block ANTI_MARABUNTA = new Abunta("anti_marabunta", Material.DRAGON_EGG);
+  public static final Block HOLO = new Holo("holo", Material.DRAGON_EGG);
+  public static final Block HOLOPROJECTOR = new HoloPro("holoprojector", Material.IRON);
+  public static final Block Storage = new UniversalEnergyBlock("universal", Material.IRON);
   //public static final Block URANOPHANE_ORE
   //public static final Block SKLODOWSKITE_ORE
   public static final Block SILICA_SAND = new SilicaSand("silica_sand", Material.SAND);

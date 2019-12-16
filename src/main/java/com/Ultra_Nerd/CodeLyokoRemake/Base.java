@@ -23,14 +23,13 @@ import com.Ultra_Nerd.CodeLyokoRemake.proxy.Common;
 import com.Ultra_Nerd.CodeLyokoRemake.world.ModGen;
 import com.Ultra_Nerd.CodeLyokoRemake.world.WorldGenTower;
 
-import net.minecraft.client.audio.SoundHandler;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -38,7 +37,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = ref.MOD_ID, name = ref.NAME, version = ref.VERSION)
 
@@ -56,6 +54,9 @@ public class Base {
 	@EventHandler
 	public static void PreInit(FMLPreInitializationEvent event)
 	{
+		OBJLoader.INSTANCE.addDomain(ref.MOD_ID);
+		
+		
 		ModFluids.REGFLU();
 		
 		GameRegistry.registerWorldGenerator(new ModGen(), 3);
