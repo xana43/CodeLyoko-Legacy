@@ -86,7 +86,7 @@ public class ProjectorTE extends TileEntity implements ITickable{
 		if(y == 0 && x != 0 ^ z != 0)
 		{
 			TileEntity te = world.getTileEntity(new BlockPos(this.pos.getX() + x, this.pos.getY() + y, this.pos.getZ() + z));
-			TileEntity te2 = world.getTileEntity(new BlockPos(this.pos.getX() + x, this.pos.getY() + y, this.pos.getZ() + z));
+			//TileEntity te2 = world.getTileEntity(new BlockPos(this.pos.getX() + x, this.pos.getY() + y, this.pos.getZ() + z));
 			if(te instanceof ITickable)
 			{
 				POWER++;
