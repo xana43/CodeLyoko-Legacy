@@ -56,7 +56,7 @@ public class Abunta extends blockBase {
            
                if(worldIn.provider.getDimension() == 0)
                {
-                    for (int i = 0; i < 90; ++i)
+                    for (int i = 0; i < 900; ++i)
                     {
                         BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 
