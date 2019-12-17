@@ -14,9 +14,11 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelBlock;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import scala.reflect.internal.Trees.This;
 
 public class HoloPro extends BlockContainer {
 	
@@ -33,6 +35,7 @@ public class HoloPro extends BlockContainer {
 		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	public static final PropertyBool VALID = PropertyBool.create("valid");
+	public static boolean trans = false;
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		// TODO Auto-generated method stub
@@ -55,6 +58,72 @@ public class HoloPro extends BlockContainer {
 			 tileentity.validate();
 			 worldIn.setTileEntity(pos, tileentity);
 		 }
+	}
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		// TODO Auto-generated method stub
+		if(state == VALID)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
+	}
+	
+	@Override
+	public boolean isTranslucent(IBlockState state) {
+		if(state == VALID)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		if(state == VALID)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+		
+	}
+	
+	@Override
+	public boolean isFullBlock(IBlockState state) {
+		// TODO Auto-generated method stub
+		if(state == VALID)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	@Override
+	public BlockRenderLayer getBlockLayer() {
+		// TODO Auto-generated method stub
+		if(trans)
+		{
+			return BlockRenderLayer.TRANSLUCENT;
+		}
+		else
+		{
+			return BlockRenderLayer.SOLID;
+		}	
+		
 	}
 	
 @Override

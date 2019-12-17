@@ -34,11 +34,16 @@ public class ProjectorTE extends TileEntity implements ITickable{
 				if(valid)
 					{
 					HoloPro.SetModel(true, world, pos);
+					Block blockState = world.getBlockState(new BlockPos(this.pos.getX() + x, this.pos.getY() + y, this.pos.getZ() + z)).getBlock();
+					HoloPro.trans = true;
+					
+					
 					//useUran();
 			
 					}
 				else
 				{
+					HoloPro.trans = false;
 					HoloPro.SetModel(false, world, pos);
 				}
 		}
