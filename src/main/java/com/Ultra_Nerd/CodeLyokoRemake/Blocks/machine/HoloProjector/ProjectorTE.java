@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Blocks.HoloPro;
 import com.Ultra_Nerd.CodeLyokoRemake.RF.EG;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.compat.Oredict;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
 import cofh.redstoneflux.api.IEnergyReceiver;
 import net.minecraft.block.Block;
@@ -34,7 +35,15 @@ public class ProjectorTE extends TileEntity implements ITickable{
 				if(valid)
 					{
 					HoloPro.SetModel(true, world, pos);
-					Block blockState = world.getBlockState(new BlockPos(this.pos.getX() + x, this.pos.getY() + y, this.pos.getZ() + z)).getBlock();
+                    Block blockState = world.getBlockState(new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ())).getBlock();
+                    if(blockState == Blocks.GLASS)
+                    {
+                        //setblockstate to transparent state
+                    }
+                    else
+                    {
+                        //set it back to glass
+                    }
 					HoloPro.trans = true;
 					
 					
@@ -70,7 +79,7 @@ public class ProjectorTE extends TileEntity implements ITickable{
 				if(z > 1)
 				{
 					z = -1;
-					valid = !OOOF && (POWER == 1 || POWER == 2);
+					valid = !OOOF && (POWER == 1 || POWER == 2 || POWER == 3 || POWER == 4);
 					OOOF = false;
 					POWER = 0;
 					System.out.println("Valid" + valid);
@@ -102,7 +111,7 @@ public class ProjectorTE extends TileEntity implements ITickable{
 				POWER++;
 				powers = (ITickable)te;
 			}
-			else if(block != Blocks.IRON_BLOCK)
+			else if(block != Modblocks.QUANTUM_STEEL)
 			{
 				OOOF = true;
 			}
@@ -117,7 +126,7 @@ public class ProjectorTE extends TileEntity implements ITickable{
 				OOOF = true;
 			}*/
 		}
-		else if(block != Blocks.IRON_BLOCK)
+		else if(block != Modblocks.QUANTUM_STEEL)
 		{
 			OOOF = true;
 		}
