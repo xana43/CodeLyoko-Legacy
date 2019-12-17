@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.HoloProjector;
 
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.HoloPro;
 import com.Ultra_Nerd.CodeLyokoRemake.RF.EG;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.compat.Oredict;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
@@ -32,10 +33,14 @@ public class ProjectorTE extends TileEntity implements ITickable{
 		checkstruct();
 				if(valid)
 					{
-					
+					HoloPro.SetModel(true, world, pos);
 					//useUran();
 			
 					}
+				else
+				{
+					HoloPro.SetModel(false, world, pos);
+				}
 		}
 	}
 	

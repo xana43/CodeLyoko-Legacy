@@ -42,7 +42,7 @@ public TileEntity createTileEntity(World world, IBlockState state) {
   @Override
 public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 		EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-	playerIn.sendMessage(new TextComponentString(Integer.toString(Text.getall(0)) + "/" + Integer.toString(Text.getStoreMax())) );
+	playerIn.sendMessage(new TextComponentString(Integer.toString(Text.getall(0)) + "RF" + "/" + Integer.toString(Text.getStoreMax()) + "RF") );
 	return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 }
 

@@ -15,12 +15,16 @@ import net.minecraftforge.energy.CapabilityEnergy;
 public class UniversalStore extends TileEntity implements ITickable {
 
 	
-	private EG store = new EG(9000000);
+	private EG store = new EG(90000);
 	public  int UNIRF = store.getEnergyStored();
 	private String name;
 	@Override
 	public void update() {
-		if(world.isBlockPowered(pos)) UNIRF += 100;
+		if(world.isBlockPowered(this.pos))
+		{
+			//System.out.println(Integer.toString(UNIRF));
+			 UNIRF += 100;
+		}
 		
 	}
 	@Override
