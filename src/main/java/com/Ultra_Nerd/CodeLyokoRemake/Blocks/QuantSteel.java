@@ -89,11 +89,11 @@ public class QuantSteel extends blockBase
 			// TODO Auto-generated method stub
 			if(state == FORMED)
 			{
-				return true;
+				return false;
 			}
 			else
 			{
-				return false;
+				return true;
 			}
 			
 		}
@@ -139,7 +139,7 @@ public class QuantSteel extends blockBase
 		@Override
 		public BlockRenderLayer getBlockLayer() {
 			// TODO Auto-generated method stub
-			if(trans2)
+			if(FORMED)
 			{
 				return BlockRenderLayer.TRANSLUCENT;
 			}
@@ -175,8 +175,15 @@ public class QuantSteel extends blockBase
 		}
 		@Override
 			public EnumBlockRenderType getRenderType(IBlockState state) {
-				// TODO Auto-generated method stub
-				return EnumBlockRenderType.MODEL;
+                // TODO Auto-generated method stub
+                if(FORMED)
+                {
+                return EnumBlockRenderType.MODEL;
+                }
+                else
+                {
+                    return EnumBlockRenderType.TRANSLUCENt;
+                }
 			}
 		@Override
 		public int getMetaFromState(IBlockState state) { return 0; }
