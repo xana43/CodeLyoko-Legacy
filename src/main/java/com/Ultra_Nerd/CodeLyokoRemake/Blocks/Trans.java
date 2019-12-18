@@ -17,11 +17,13 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import scala.reflect.internal.Trees.This;
 
-public class Trans extends blockBase {
+public class Trans extends blockBase  {
 	
 	public Trans(String name, Material material)
 	{
@@ -30,13 +32,23 @@ public class Trans extends blockBase {
 		setLightLevel(2);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-				
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		setLightOpacity(0);
+		//Modblocks.BLOCKS.add(this);
+		//ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
-	
+	@Override
+	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
+			EnumFacing side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
+	@Override
+	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	@Override
 	public boolean isFullBlock(IBlockState state) {
@@ -60,6 +72,18 @@ public class Trans extends blockBase {
 	public BlockRenderLayer getBlockLayer() {
 		// TODO Auto-generated method stub
 		return BlockRenderLayer.CUTOUT;
+	}
+	
+	@Override
+	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public boolean isTranslucent(IBlockState state) {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 @Override

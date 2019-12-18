@@ -51,6 +51,7 @@ public class HoloPro extends BlockContainer {
 	{
 		 IBlockState state = worldIn.getBlockState(pos);
 		 TileEntity tileentity = worldIn.getTileEntity(pos);
+		 
 		 if(act) worldIn.setBlockState(pos, Modblocks.HOLOPROJECTOR.getDefaultState().withProperty(VALID, true), 3);
 		 else worldIn.setBlockState(pos, Modblocks.HOLOPROJECTOR.getDefaultState().withProperty(VALID, false), 3);
 		 if(tileentity != null)
@@ -58,6 +59,8 @@ public class HoloPro extends BlockContainer {
 			 tileentity.validate();
 			 worldIn.setTileEntity(pos, tileentity);
 		 }
+		 
+		
 	}
 	
 	@Override

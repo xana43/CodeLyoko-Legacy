@@ -47,7 +47,7 @@ public class Modblocks
   public static final Block HOLO = new Holo("holo", Material.DRAGON_EGG);
   public static final Block HOLOPROJECTOR = new HoloPro("holoprojector", Material.IRON);
   public static final Block Storage = new UniversalEnergyBlock("universal", Material.IRON);
-  public static final Block TRANSPARENT = new blockBase("transparent", Material.IRON);
+  public static final Block TRANSPARENT = new blockBase("transparent", Material.STRUCTURE_VOID);
   public static final Block QUANTUM_STEEL = new QuantSteel("quantum_steel", Material.IRON);
   //public static final Block URANOPHANE_ORE
   //public static final Block SKLODOWSKITE_ORE

@@ -1,52 +1,90 @@
 package com.Ultra_Nerd.CodeLyokoRemake.Blocks;
 
+import java.util.Random;
+
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.HoloProjector.ProjectorTE;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class QuantSteel extends blockBase 
 {
-	public static final PropertyBool VALID2 = PropertyBool.create("valids");
+	public static final PropertyBool FORMED = PropertyBool.create("formed");
 	public static final PropertyBool AIR = PropertyBool.create("air");
+	
 	public static boolean trans2;
 		public QuantSteel(String name, Material material)
 		{
 			super(name, material);
 			
-			setSoundType(SoundType.GLASS);
+			setSoundType(SoundType.METAL);
 			setHardness(6.0f);
 			setResistance(20);
 			setHarvestLevel("pickaxe", 3);
-			setLightLevel(0);
-			this.setDefaultState(this.blockState.getBaseState().withProperty(VALID2, true).withProperty(AIR, true));
 			
+			this.setDefaultState(this.blockState.getBaseState().withProperty(FORMED, false).withProperty(AIR, false));
+			
+		}
+		
+		
+		
+		
+		
+		
+		/*@Override
+		public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+				EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+			if(ProjectorTE.valid)
+			{
+				SetModel2(true, worldIn, pos);
+			}
+			else
+			{
+				SetModel2(false, worldIn, pos);
+			}
+			return true;
+		}*/
+		
+		@Override
+		public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+			// TODO Auto-generated method stub
+			if(ProjectorTE.valid)
+			{
+				SetModel2(true, worldIn, pos);
+			}
+			else
+			{
+				SetModel2(false, worldIn, pos);
+			}
 		}
 		
 		public static void SetModel2(boolean act, World worldIn, BlockPos pos) 
 		{
+			
 			 IBlockState state = worldIn.getBlockState(pos);
-			 TileEntity tileentity = worldIn.getTileEntity(pos);
-			 if(act) worldIn.setBlockState(pos, Modblocks.QUANTUM_STEEL.getDefaultState().withProperty(VALID2, true).withProperty(AIR, true), 3);
-			 else worldIn.setBlockState(pos, Modblocks.QUANTUM_STEEL.getDefaultState().withProperty(VALID2, false).withProperty(AIR, false), 3);
-			 if(tileentity != null)
-			 {
-				 tileentity.validate();
-				 worldIn.setTileEntity(pos, tileentity);
-			 }
+			 //TileEntity tileentity = worldIn.getTileEntity(pos);
+			 if(act) worldIn.setBlockState(pos, Modblocks.QUANTUM_STEEL.getDefaultState().withProperty(FORMED, true).withProperty(AIR, true), 3);
+			 else worldIn.setBlockState(pos, Modblocks.QUANTUM_STEEL.getDefaultState().withProperty(FORMED, false).withProperty(AIR, false), 3);
+			 
 		}
 		
 		
-		@Override
+		/*@Override
 		public boolean isOpaqueCube(IBlockState state) {
 			// TODO Auto-generated method stub
 			if(state == VALID2)
@@ -128,12 +166,12 @@ public class QuantSteel extends blockBase
 		
 		}
 		
-	
+	*/
 		
 		@Override
 		protected BlockStateContainer createBlockState() {
 			// TODO Auto-generated method stub
-			return new BlockStateContainer(this, new IProperty[] {VALID2,AIR});
+			return new BlockStateContainer(this, new IProperty[] {FORMED,AIR});
 		}
 		@Override
 			public EnumBlockRenderType getRenderType(IBlockState state) {
