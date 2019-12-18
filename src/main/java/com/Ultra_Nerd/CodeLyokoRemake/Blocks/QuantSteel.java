@@ -84,10 +84,10 @@ public class QuantSteel extends blockBase
 		}
 		
 		
-		/*@Override
+		@Override
 		public boolean isOpaqueCube(IBlockState state) {
 			// TODO Auto-generated method stub
-			if(state == VALID2)
+			if(state == FORMED)
 			{
 				return true;
 			}
@@ -100,7 +100,7 @@ public class QuantSteel extends blockBase
 		
 		@Override
 		public boolean isTranslucent(IBlockState state) {
-			if(state == VALID2)
+			if(state == FORMED)
 			{
 				return true;
 			}
@@ -112,7 +112,7 @@ public class QuantSteel extends blockBase
 		
 		@Override
 		public boolean isFullCube(IBlockState state) {
-			if(state == VALID2)
+			if(state == FORMED)
 			{
 				return false;
 			}
@@ -126,7 +126,7 @@ public class QuantSteel extends blockBase
 		@Override
 		public boolean isFullBlock(IBlockState state) {
 			// TODO Auto-generated method stub
-			if(state == VALID2)
+			if(state == FORMED)
 			{
 				return false;
 			}
@@ -141,7 +141,7 @@ public class QuantSteel extends blockBase
 			// TODO Auto-generated method stub
 			if(trans2)
 			{
-				return BlockRenderLayer.CUTOUT;
+				return BlockRenderLayer.TRANSLUCENT;
 			}
 			else
 			{
@@ -166,7 +166,7 @@ public class QuantSteel extends blockBase
 		
 		}
 		
-	*/
+	
 		
 		@Override
 		protected BlockStateContainer createBlockState() {

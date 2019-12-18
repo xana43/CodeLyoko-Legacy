@@ -69,9 +69,15 @@ public class Trans extends blockBase  {
 	}
 	
 	@Override
+	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	
+	@Override
 	public BlockRenderLayer getBlockLayer() {
 		// TODO Auto-generated method stub
-		return BlockRenderLayer.CUTOUT;
+		return BlockRenderLayer.TRANSLUCENT;
 	}
 	
 	@Override
