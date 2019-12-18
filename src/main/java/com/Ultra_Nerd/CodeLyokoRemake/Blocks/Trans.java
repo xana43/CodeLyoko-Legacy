@@ -11,9 +11,11 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.block.model.ModelBlock;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -54,7 +56,11 @@ public class Trans extends blockBase {
 		return false;
 	}
 	
-	
+	@Override
+	public BlockRenderLayer getBlockLayer() {
+		// TODO Auto-generated method stub
+		return BlockRenderLayer.CUTOUT;
+	}
 
 @Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {

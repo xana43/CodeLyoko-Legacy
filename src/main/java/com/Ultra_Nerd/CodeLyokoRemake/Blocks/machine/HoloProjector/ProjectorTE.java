@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.HoloProjector;
 
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.HoloPro;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.QuantSteel;
 import com.Ultra_Nerd.CodeLyokoRemake.RF.EG;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.compat.Oredict;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
@@ -29,35 +30,53 @@ public class ProjectorTE extends TileEntity implements ITickable{
 	private int x,y,z;
 	@Override
 	public void update() {
+		
+		boolean once = false;
+		boolean onceback = false;
 		if(!world.isRemote)
 		{
 		checkstruct();
+		once = false;
 				if(valid)
 					{
 					HoloPro.SetModel(true, world, pos);
                     Block blockState = world.getBlockState(new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ())).getBlock();
-                    if(blockState == Blocks.GLASS)
-                    {
-                        //setblockstate to transparent state
-                    }
-                    else
-                    {
-                        //set it back to glass
-                    }
+                    onceback = true;
+                    QuantSteel.SetModel2(true, world, pos);
+                    QuantSteel.trans2 = true;
 					HoloPro.trans = true;
+                    if(blockState == Blocks.GLASS && !once)
+                    {
+                        world.setBlockState(this.pos.add(0, 1, 0), Modblocks.TRANSPARENT.getDefaultState());
+                       
+                        once = true;
+                    }
+                    
+                    
+                        
+                    
 					
 					
 					//useUran();
 			
 					}
-				else
+				else 
 				{
+					QuantSteel.trans2 = false;
+					QuantSteel.SetModel2(false, world, pos);
 					HoloPro.trans = false;
 					HoloPro.SetModel(false, world, pos);
+					if(world.getBlockState(this.pos.add(0, 1, 0)).getBlock().getDefaultState() != Blocks.GLASS.getDefaultState() && onceback)
+					{
+						world.setBlockState(this.pos.add(0, 1, 0), Blocks.GLASS.getDefaultState());
+						onceback = false;
+					}
+					
 				}
+				
+				
 		}
 	}
-	
 	
 	
 	
@@ -98,7 +117,10 @@ public class ProjectorTE extends TileEntity implements ITickable{
 		
 		if (Focus != Blocks.GLASS)
 		{
+			if(Focus != Modblocks.TRANSPARENT)
+			{
 			OOOF = true;
+			}
 		}
 		
 		

@@ -1,0 +1,7 @@
+{
+    "variants":
+    {
+     "air=true,valids=true":{"model": "cm:transparent"},
+     "air=false,valids=false":{"model": "cm:quantum_steel"}
+    }
+}

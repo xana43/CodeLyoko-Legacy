@@ -3,7 +3,6 @@
     "variants": 
     {
         "valid=false":{"model": "sand"},
-        "air=true,valid=true":{"model": "cm:transparent"},
         "valid=true":{"model":"cm:holo.obj"}
     }
 }
