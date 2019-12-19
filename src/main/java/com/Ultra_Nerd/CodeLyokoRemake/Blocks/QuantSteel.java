@@ -2,10 +2,13 @@ package com.Ultra_Nerd.CodeLyokoRemake.Blocks;
 
 import java.util.Random;
 
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.HoloProjector.InvisRend;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.HoloProjector.ProjectorTE;
+import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -13,6 +16,9 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
@@ -22,7 +28,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class QuantSteel extends blockBase 
+public class QuantSteel extends BlockContainer 
 {
 	public static final PropertyBool FORMED = PropertyBool.create("formed");
 	public static final PropertyBool AIR = PropertyBool.create("air");
@@ -30,19 +36,28 @@ public class QuantSteel extends blockBase
 	public static boolean trans2;
 		public QuantSteel(String name, Material material)
 		{
-			super(name, material);
+			super(material);
 			
 			setSoundType(SoundType.METAL);
 			setHardness(6.0f);
 			setResistance(20);
 			setHarvestLevel("pickaxe", 3);
-			
+			setUnlocalizedName(name);
+			setRegistryName(name);
+			Modblocks.BLOCKS.add(this);
+			ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 			this.setDefaultState(this.blockState.getBaseState().withProperty(FORMED, false).withProperty(AIR, false));
 			
 		}
 		
 		
 		
+		
+		@Override
+		public boolean hasTileEntity() {
+			// TODO Auto-generated method stub
+			return true;
+		}
 		
 		
 		
@@ -58,7 +73,7 @@ public class QuantSteel extends blockBase
 				SetModel2(false, worldIn, pos);
 			}
 			return true;
-		}*/
+		}
 		
 		@Override
 		public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
@@ -71,7 +86,7 @@ public class QuantSteel extends blockBase
 			{
 				SetModel2(false, worldIn, pos);
 			}
-		}
+		}*/
 		
 		public static void SetModel2(boolean act, World worldIn, BlockPos pos) 
 		{
@@ -82,6 +97,7 @@ public class QuantSteel extends blockBase
 			 else worldIn.setBlockState(pos, Modblocks.QUANTUM_STEEL.getDefaultState().withProperty(FORMED, false).withProperty(AIR, false), 3);
 			 
 		}
+		
 		
 		
 		@Override
@@ -139,9 +155,9 @@ public class QuantSteel extends blockBase
 		@Override
 		public BlockRenderLayer getBlockLayer() {
 			// TODO Auto-generated method stub
-			if(FORMED)
+			if(trans2)
 			{
-				return BlockRenderLayer.TRANSLUCENT;
+				return BlockRenderLayer.CUTOUT_MIPPED;
 			}
 			else
 			{
@@ -166,7 +182,17 @@ public class QuantSteel extends blockBase
 		
 		}
 		
-	
+	/*@Override
+	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+		if(state == FORMED)
+		{
+		return super.canRenderInLayer((IBlockState) FORMED, layer.CUTOUT_MIPPED);
+		}
+		else
+		{
+			return super.canRenderInLayer(getDefaultState(), layer.SOLID);
+		}
+	}*/
 		
 		@Override
 		protected BlockStateContainer createBlockState() {
@@ -176,13 +202,13 @@ public class QuantSteel extends blockBase
 		@Override
 			public EnumBlockRenderType getRenderType(IBlockState state) {
                 // TODO Auto-generated method stub
-                if(FORMED)
+                if(state == FORMED)
                 {
-                return EnumBlockRenderType.MODEL;
+                return EnumBlockRenderType.INVISIBLE;
                 }
                 else
                 {
-                    return EnumBlockRenderType.TRANSLUCENt;
+                    return EnumBlockRenderType.MODEL;
                 }
 			}
 		@Override
@@ -190,6 +216,17 @@ public class QuantSteel extends blockBase
 
 		@Override
 		public IBlockState getStateFromMeta(int meta) { return this.getDefaultState(); }
+
+
+
+
+
+
+		@Override
+		public TileEntity createNewTileEntity(World worldIn, int meta) {
+			// TODO Auto-generated method stub
+			return new InvisRend();
+		}
 
 		
 }

@@ -33,6 +33,7 @@ public class Trans extends blockBase  {
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setLightOpacity(0);
+		setCreativeTab(null);
 		//Modblocks.BLOCKS.add(this);
 		//ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
@@ -77,7 +78,7 @@ public class Trans extends blockBase  {
 	@Override
 	public BlockRenderLayer getBlockLayer() {
 		// TODO Auto-generated method stub
-		return BlockRenderLayer.TRANSLUCENT;
+		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 	
 	@Override
