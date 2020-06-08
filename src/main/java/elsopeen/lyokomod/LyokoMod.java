@@ -1,7 +1,7 @@
 package elsopeen.lyokomod;
 
-import elsopeen.lyokomod.Blocks.ModBlocks;
-import elsopeen.lyokomod.Items.ModItems;
+import elsopeen.lyokomod.init.ModBlocks;
+import elsopeen.lyokomod.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -39,10 +39,10 @@ public class LyokoMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         // Register items
-        ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        //ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         // Register Blocks
-        ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        //ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

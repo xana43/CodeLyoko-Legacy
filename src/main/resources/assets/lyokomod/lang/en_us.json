@@ -3,5 +3,7 @@
   "block.lyokomod.forest_grass": "Forest Grass",
   "block.lyokomod.forest_log": "Forest Log",
   "block.lyokomod.desert_sand": "Desert Sand",
-  "block.lyokomod.banquise_ice": "Banquise Ice"
+  "block.lyokomod.banquise_ice": "Banquise Ice",
+  "block.lyokomod.interface": "Interface",
+  "itemGroup.code_lyoko_blocks": "Code Lyoko Blocks"
 }
