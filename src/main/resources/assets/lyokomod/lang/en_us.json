@@ -1,4 +1,7 @@
 {
   "block.lyokomod.mountain_rock": "Mountain Rock",
-  "item.lyokomod.mountain_rock_item": "Mountain Rock item"
+  "block.lyokomod.forest_grass": "Forest Grass",
+  "block.lyokomod.forest_log": "Forest Log",
+  "block.lyokomod.desert_sand": "Desert Sand",
+  "block.lyokomod.banquise_ice": "Banquise Ice"
 }
