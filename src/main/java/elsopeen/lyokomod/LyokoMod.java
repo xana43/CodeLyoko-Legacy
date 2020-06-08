@@ -43,7 +43,6 @@ public class LyokoMod {
 
         // Register Blocks
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        //ModBlocks.MOUNTAIN_BLOCK.get();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
