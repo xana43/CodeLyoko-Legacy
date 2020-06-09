@@ -3,10 +3,16 @@ package elsopeen.lyokomod.blocks;
 import elsopeen.lyokomod.client.gui.InterfaceScreen;
 import elsopeen.lyokomod.init.ModTileEntityTypes;
 import elsopeen.lyokomod.tileentity.InterfaceTileEntity;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.pathfinding.PathType;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BambooLeaves;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -14,6 +20,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -21,6 +30,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 
 public class InterfaceBlock extends HorizontalBlock {
+    protected static final VoxelShape SHAPE_NORMAL = Block.makeCuboidShape(0.0D, 2.0D, 8.0D, 16.0D, 14.0D, 9.0D);
+    protected static final VoxelShape SHAPE_COLLISION = Block.makeCuboidShape(0.0D, 2.0D, 8.D, 16.D, 14.0D, 8.D);
 
     public InterfaceBlock(Properties properties) {
         super(properties);
@@ -36,6 +47,38 @@ public class InterfaceBlock extends HorizontalBlock {
     public TileEntity createTileEntity(final BlockState state, final IBlockReader world) {
         return ModTileEntityTypes.INTERFACE.get().create();
     }*/
+
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing());
+    }
+
+    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(HORIZONTAL_FACING);
+    }
+
+    public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        VoxelShape voxelshape = SHAPE_NORMAL;
+        Vec3d vec3d = state.getOffset(worldIn, pos);
+        return voxelshape.withOffset(vec3d.x, vec3d.y, vec3d.z);
+    }
+
+    @Override
+    public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+        return true;
+    }
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        Vec3d vec3d = state.getOffset(worldIn, pos);
+        return SHAPE_COLLISION.withOffset(vec3d.x, vec3d.y, vec3d.z);
+    }
 
     /**
      * Called when a player right clicks our block.

@@ -39,16 +39,16 @@
     "elements": [
         {
             "name": "Interface",
-            "from": [ 0, 1, 4 ], 
-            "to": [ 16, 13, 5 ], 
+            "from": [ 0, 2, 8 ], 
+            "to": [ 16, 14, 8 ], 
             "rotation": { "origin": [ 8, 8, 8 ], "axis": "x", "angle": -22.5 },
             "faces": {
                 "north": { "texture": "#interface", "uv": [ 0, 2, 16, 14 ] },
-                "east": { "texture": "#interface", "uv": [ 0, 2, 0, 14 ] },
+                "east": { "texture": "#interface", "uv": [ 7, 1, 8, 15 ], "rotation": 90 },
                 "south": { "texture": "#interface", "uv": [ 0, 2, 16, 14 ] },
                 "west": { "texture": "#interface", "uv": [ 0, 2, 0, 14 ] },
-                "up": { "texture": "#interface", "uv": [ 0, 0, 16, 1 ] },
-                "down": { "texture": "#interface", "uv": [ 0, 0, 16, 1 ] }
+                "up": { "texture": "#interface", "uv": [ 0, 0, 16, 0 ] },
+                "down": { "texture": "#interface", "uv": [ 0, 0, 16, 0 ] }
             }
         }
     ]
