@@ -13,7 +13,7 @@ public class InterfaceScreen extends Screen {
     private final InterfaceTileEntity tileEntity;
 
     public InterfaceScreen(final InterfaceTileEntity iteIN) {
-        super(ModBlocks.INTERFACE.getNameTextComponent());
+        super(ModBlocks.INTERFACE.get().getNameTextComponent());
         this.tileEntity = iteIN;
     }
 

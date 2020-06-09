@@ -22,7 +22,7 @@ public class InterfaceTileEntity extends TileEntity {
     }
 
     public InterfaceTileEntity(){
-        super(ModTileEntityTypes.INTERFACE);
+        super(ModTileEntityTypes.INTERFACE.get());
     }
 
     // @OnlyIn(Dist.CLIENT) Makes it so this method will be removed from the class on the PHYSICAL SERVER

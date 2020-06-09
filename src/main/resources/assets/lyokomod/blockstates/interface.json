@@ -1,9 +1,19 @@
 {
   "variants": {
-    "": [
-      {
-        "model": "lyokomod:block/interface"
-      }
-    ]
+    "facing=north": {
+      "model": "lyokomod:block/interface"
+    },
+    "facing=south": {
+      "model": "lyokomod:block/interface",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "lyokomod:block/interface",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "lyokomod:block/interface",
+      "y": 90
+    }
   }
 }

@@ -3,13 +3,15 @@ package elsopeen.lyokomod.blocks;
 import elsopeen.lyokomod.client.gui.InterfaceScreen;
 import elsopeen.lyokomod.init.ModTileEntityTypes;
 import elsopeen.lyokomod.tileentity.InterfaceTileEntity;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
@@ -18,21 +20,22 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 
-public class InterfaceBlock extends Block {
+public class InterfaceBlock extends HorizontalBlock {
 
     public InterfaceBlock(Properties properties) {
         super(properties);
+        this.setDefaultState(this.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH));
     }
 
-    @Override
+    /*@Override
     public boolean hasTileEntity(final BlockState state) {
         return true;
     }
 
     @Override
     public TileEntity createTileEntity(final BlockState state, final IBlockReader world) {
-        return ModTileEntityTypes.INTERFACE.create();
-    }
+        return ModTileEntityTypes.INTERFACE.get().create();
+    }*/
 
     /**
      * Called when a player right clicks our block.
@@ -48,7 +51,10 @@ public class InterfaceBlock extends Block {
         return ActionResultType.SUCCESS;
     }
 
-
+    @Override
+    public BlockState rotate(BlockState state, Rotation rot) {
+        return state.with(HORIZONTAL_FACING, rot.rotate(state.get(HORIZONTAL_FACING)));
+    }
 
     // @OnlyIn(Dist.CLIENT) Makes it so this method will be removed from the class on the PHYSICAL SERVER
     // This is because we only want to handle opening the GUI on the physical client.
