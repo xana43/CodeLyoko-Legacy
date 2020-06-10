@@ -5,6 +5,7 @@ import elsopeen.lyokomod.init.ModTileEntityTypes;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -27,7 +28,7 @@ public class InterfaceTileEntity extends TileEntity {
 
     // @OnlyIn(Dist.CLIENT) Makes it so this method will be removed from the class on the PHYSICAL SERVER
     // This is because we only want the MiniModel on the physical client - its rendering only.
-    /*@OnlyIn(Dist.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void onLoad() {
         super.onLoad();
@@ -35,7 +36,7 @@ public class InterfaceTileEntity extends TileEntity {
         if (world == null || !world.isRemote)
             return; // Return if the world is null or if we are on the logical server
         anInterface = Interface.forTileEntity(this);
-    }*/
+    }
 
     @Override
     public AxisAlignedBB getRenderBoundingBox() {

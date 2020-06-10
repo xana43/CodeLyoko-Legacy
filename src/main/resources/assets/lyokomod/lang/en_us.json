@@ -5,5 +5,7 @@
   "block.lyokomod.desert_sand": "Desert Sand",
   "block.lyokomod.banquise_ice": "Banquise Ice",
   "block.lyokomod.interface": "Interface",
-  "itemGroup.code_lyoko_blocks": "Code Lyoko Blocks"
+  "itemGroup.code_lyoko_blocks": "Code Lyoko Blocks",
+  "gui.lyokomod.interface": "Interface",
+  "gui.lyokomod.interface_input": "Code ?"
 }

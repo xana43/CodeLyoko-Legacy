@@ -71,7 +71,8 @@ public class InterfaceBlock extends HorizontalBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        VoxelShape voxelshape = state.get(HORIZONTAL_FACING)==Direction.NORTH ? SHAPE_NORMAL_Z : SHAPE_NORMAL_X;
+        VoxelShape voxelshape = (state.get(HORIZONTAL_FACING)==Direction.NORTH || state.get(HORIZONTAL_FACING)==Direction.SOUTH) ?
+                SHAPE_NORMAL_Z : SHAPE_NORMAL_X;
         Vec3d vec3d = state.getOffset(worldIn, pos);
         return voxelshape.withOffset(vec3d.x, vec3d.y, vec3d.z);
     }
@@ -94,11 +95,11 @@ public class InterfaceBlock extends HorizontalBlock {
      * @deprecated Call via {@link BlockState#onBlockActivated(World, PlayerEntity, Hand, BlockRayTraceResult)} whenever possible.
      * Implementing/overriding is fine.
      */
-    //@Override
-    public boolean onBlockActivated(final BlockState state, final World worldIn, final BlockPos pos, final PlayerEntity player, final Hand handIn, final BlockRayTraceResult hit) {
-        // Only open the gui on the physical client
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> openGui(worldIn, pos));
-        return true;
+
+    @Override
+    public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> openGui(world, pos));
+        return ActionResultType.SUCCESS;
     }
 
     // @OnlyIn(Dist.CLIENT) Makes it so this method will be removed from the class on the PHYSICAL SERVER
