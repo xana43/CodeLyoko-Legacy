@@ -5,6 +5,7 @@ import elsopeen.lyokomod.init.ModTileEntityTypes;
 import elsopeen.lyokomod.tileentity.InterfaceTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.DirectionalBlock;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,7 +31,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 
 public class InterfaceBlock extends HorizontalBlock {
-    protected static final VoxelShape SHAPE_NORMAL = Block.makeCuboidShape(0.0D, 2.0D, 8.0D, 16.0D, 14.0D, 9.0D);
+    protected static final VoxelShape SHAPE_NORMAL_Z = Block.makeCuboidShape(0.0D, 2.0D, 8.0D, 16.0D, 14.0D, 9.0D);
+    protected static final VoxelShape SHAPE_NORMAL_X = Block.makeCuboidShape(8.0D, 2.0D, 0.0D, 9.0D, 14.0D, 16.0D);
     protected static final VoxelShape SHAPE_COLLISION = Block.makeCuboidShape(0.0D, 2.0D, 8.D, 16.D, 14.0D, 8.D);
 
     public InterfaceBlock(Properties properties) {
@@ -38,7 +40,7 @@ public class InterfaceBlock extends HorizontalBlock {
         this.setDefaultState(this.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH));
     }
 
-    /*@Override
+    @Override
     public boolean hasTileEntity(final BlockState state) {
         return true;
     }
@@ -46,11 +48,16 @@ public class InterfaceBlock extends HorizontalBlock {
     @Override
     public TileEntity createTileEntity(final BlockState state, final IBlockReader world) {
         return ModTileEntityTypes.INTERFACE.get().create();
-    }*/
+    }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing());
+    }
+
+    @Override
+    public BlockState rotate(BlockState state, Rotation rot) {
+        return state.with(HORIZONTAL_FACING, rot.rotate(state.get(HORIZONTAL_FACING)));
     }
 
     @Override
@@ -64,7 +71,7 @@ public class InterfaceBlock extends HorizontalBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        VoxelShape voxelshape = SHAPE_NORMAL;
+        VoxelShape voxelshape = state.get(HORIZONTAL_FACING)==Direction.NORTH ? SHAPE_NORMAL_Z : SHAPE_NORMAL_X;
         Vec3d vec3d = state.getOffset(worldIn, pos);
         return voxelshape.withOffset(vec3d.x, vec3d.y, vec3d.z);
     }
@@ -88,15 +95,10 @@ public class InterfaceBlock extends HorizontalBlock {
      * Implementing/overriding is fine.
      */
     //@Override
-    public ActionResultType onBlockActivated(final BlockState state, final World worldIn, final BlockPos pos, final PlayerEntity player, final Hand handIn, final BlockRayTraceResult hit) {
+    public boolean onBlockActivated(final BlockState state, final World worldIn, final BlockPos pos, final PlayerEntity player, final Hand handIn, final BlockRayTraceResult hit) {
         // Only open the gui on the physical client
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> openGui(worldIn, pos));
-        return ActionResultType.SUCCESS;
-    }
-
-    @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(HORIZONTAL_FACING, rot.rotate(state.get(HORIZONTAL_FACING)));
+        return true;
     }
 
     // @OnlyIn(Dist.CLIENT) Makes it so this method will be removed from the class on the PHYSICAL SERVER
