@@ -5,15 +5,13 @@ import elsopeen.lyokomod.init.ModTileEntityTypes;
 import elsopeen.lyokomod.tileentity.InterfaceTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.DirectionalBlock;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.pathfinding.PathType;
-import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BambooLeaves;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -29,6 +27,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.network.NetworkHooks;
+
 
 /**
  * Interface Block for tower or 5th territory interfaces
@@ -166,9 +166,15 @@ public class InterfaceBlock extends HorizontalBlock {
      */
     @Override
     public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> openGui(world, pos));
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> openGui(player, world, pos));
         return ActionResultType.SUCCESS;
     }
+
+    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> () -> openGui(player, worldIn, pos));
+        return true;
+    }
+
 
     /**
      * @OnlyIn(Dist.CLIENT) Makes it so this method will be removed from the class on the PHYSICAL SERVER
@@ -179,12 +185,12 @@ public class InterfaceBlock extends HorizontalBlock {
      * @param pos
      */
     @OnlyIn(Dist.CLIENT)
-    private void openGui(final World worldIn, final BlockPos pos) {
+    private void openGui(final PlayerEntity player, final World worldIn, final BlockPos pos) {
         // Only handle opening the Gui screen on the logical client
         if (worldIn.isRemote) {
             final TileEntity tileEntity = worldIn.getTileEntity(pos);
             if (tileEntity instanceof InterfaceTileEntity) {
-                Minecraft.getInstance().displayGuiScreen(new InterfaceScreen(((InterfaceTileEntity) tileEntity)));
+                NetworkHooks.openGui((ServerPlayerEntity) player, (InterfaceTileEntity) tileEntity, pos);
             }
         }
     }
