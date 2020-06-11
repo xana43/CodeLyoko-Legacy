@@ -17,7 +17,9 @@ public class ModTileEntityTypes {
 
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, LyokoMod.MOD_ID);
 
-    public static final RegistryObject<TileEntityType<InterfaceTileEntity>> INTERFACE = TILE_ENTITY_TYPES.register("interface", () ->
-            TileEntityType.Builder.create(InterfaceTileEntity::new, ModBlocks.INTERFACE.get())
+    public static final RegistryObject<TileEntityType<InterfaceTileEntity>> INTERFACE =
+            TILE_ENTITY_TYPES.register("interface", () ->
+            TileEntityType.Builder.create(InterfaceTileEntity::new,
+                    ModBlocks.INTERFACE.get())
             .build(null));
 }

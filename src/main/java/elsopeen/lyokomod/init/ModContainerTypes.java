@@ -19,7 +19,9 @@ public final class ModContainerTypes {
 
     public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = new DeferredRegister<>(ForgeRegistries.CONTAINERS, LyokoMod.MOD_ID);
 
-    public static final RegistryObject<ContainerType<InterfaceContainer>> INTERFACE_CONTAINER = CONTAINER_TYPES.register("interface_container", () -> IForgeContainerType.create(InterfaceContainer::new));
+    public static final RegistryObject<ContainerType<InterfaceContainer>> INTERFACE_CONTAINER =
+            CONTAINER_TYPES.register("interface_container",
+            () -> IForgeContainerType.create(InterfaceContainer::new));
 
 
 }

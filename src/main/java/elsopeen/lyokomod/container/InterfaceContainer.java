@@ -21,9 +21,9 @@ public class InterfaceContainer extends Container {
 
     /**
      * Useful constructor in outside classes
-     * @param windowId
-     * @param playerInventory
-     * @param data
+     * @param windowId the id of the container
+     * @param playerInventory the playerInv of the player using this container
+     * @param data the data sent when this container is used.
      */
     public InterfaceContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
         this(windowId, playerInventory, getTileEntity(playerInventory, data));
@@ -31,9 +31,9 @@ public class InterfaceContainer extends Container {
 
     /**
      * Constructor that uses super
-     * @param windowId
-     * @param playerInventory
-     * @param tileEntity
+     * @param windowId the id of the container
+     * @param playerInventory the playerInv of the player using this container
+     * @param tileEntity the tileEntity of this container
      */
     public InterfaceContainer(final int windowId, final PlayerInventory playerInventory, final InterfaceTileEntity tileEntity) {
         super(ModContainerTypes.INTERFACE_CONTAINER.get(), windowId);
@@ -42,9 +42,9 @@ public class InterfaceContainer extends Container {
 
     /**
      * Get tileEntity from playerInv and packet
-     * @param playerInventory
-     * @param data
-     * @return
+     * @param playerInventory playerInv from which to get the world
+     * @param data Data from which to get the pos
+     * @return the tileEntity linked to the block used
      */
     private static InterfaceTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
         Objects.requireNonNull(playerInventory, "playerInventory cannot be null!");
