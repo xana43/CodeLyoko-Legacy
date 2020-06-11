@@ -8,6 +8,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
 
+/**
+ * Registering class for items
+ * as explained by Cadiboo's tutorial
+ */
 @ObjectHolder(LyokoMod.MOD_ID)
 public class ModItems {
 

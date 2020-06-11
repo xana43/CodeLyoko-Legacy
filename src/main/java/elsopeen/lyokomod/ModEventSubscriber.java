@@ -16,6 +16,9 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Registering Items only, the others with the Mod[Type].java class and main class
+ */
 @Mod.EventBusSubscriber(modid = LyokoMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventSubscriber {
     private static final Logger logger = LogManager.getLogger(LyokoMod.MOD_ID + "Mod Event Subscriber");
@@ -38,6 +41,10 @@ public class ModEventSubscriber {
         );
     }*/
 
+    /**
+     * Registering items
+     * @param event
+     */
     @SubscribeEvent
     public static void onRegisterItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(
@@ -61,10 +68,24 @@ public class ModEventSubscriber {
                         "interface"));
     }
 
+    /**
+     * Function to register the passed parameters
+     * @param entry
+     * @param name
+     * @param <T>
+     * @return
+     */
     public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final String name) {
         return setup(entry, new ResourceLocation(LyokoMod.MOD_ID, name));
     }
 
+    /**
+     * Function to register the passed parameters
+     * @param entry
+     * @param registryName
+     * @param <T>
+     * @return
+     */
     public static <T extends IForgeRegistryEntry<T>> T setup(final T entry, final ResourceLocation registryName) {
         entry.setRegistryName(registryName);
         return entry;

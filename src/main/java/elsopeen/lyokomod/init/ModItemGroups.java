@@ -5,6 +5,10 @@ import net.minecraft.item.ItemStack;
 
 import java.util.function.Supplier;
 
+/**
+ * Registering class for ItemGroups
+ * as explained in Forge Docs 1.15.2
+ */
 public class ModItemGroups {
     public static class ModItemGroup extends ItemGroup {
         private final Supplier<ItemStack> iconSupplier;

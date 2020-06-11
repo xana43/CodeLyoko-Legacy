@@ -9,7 +9,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
 
-//@ObjectHolder(LyokoMod.MOD_ID)
+/**
+ * Registering class for TileEntities
+ * as explained in Forge Docs 1.15.2
+ */
 public class ModTileEntityTypes {
 
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, LyokoMod.MOD_ID);

@@ -11,10 +11,16 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
+/**
+ * TileEntity for interface block
+ */
 public class InterfaceTileEntity extends TileEntity {
+    /**
+     *
+     * @OnlyIn(Dist.CLIENT) Makes it so this field will be removed from the class on the PHYSICAL SERVER
+     * This is because we only want the MiniModel on the physical client - its rendering only.
+     */
     @Nullable // May be accessed before onLoad
-    // @OnlyIn(Dist.CLIENT) Makes it so this field will be removed from the class on the PHYSICAL SERVER
-    // This is because we only want the MiniModel on the physical client - its rendering only.
     @OnlyIn(Dist.CLIENT)
     public Interface anInterface;
 
@@ -27,7 +33,7 @@ public class InterfaceTileEntity extends TileEntity {
     }
 
     // @OnlyIn(Dist.CLIENT) Makes it so this method will be removed from the class on the PHYSICAL SERVER
-    // This is because we only want the MiniModel on the physical client - its rendering only.
+    // This is because we only want the Interface on the physical client - its rendering only.
     @OnlyIn(Dist.CLIENT)
     @Override
     public void onLoad() {

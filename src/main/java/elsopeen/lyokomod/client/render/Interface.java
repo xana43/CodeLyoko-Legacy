@@ -8,6 +8,8 @@ import net.minecraft.tileentity.TileEntity;
  * TODO: Make this work on 1.15
  *
  * @author Cadiboo
+ * Modified by Elsopeen to match the needed type
+ * still doesn't work
  */
 public class Interface {
     //	// We only create one of these per cache, we reset it each time we rebuild

@@ -11,6 +11,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.gui.widget.ExtendedButton;
 
+/**
+ * As Minecraft Screen, so GUI for the Interface block
+ */
 public class InterfaceScreen extends Screen {
 
     public static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation("lyokomod:gui/interface");
@@ -18,18 +21,31 @@ public class InterfaceScreen extends Screen {
 
     private final InterfaceTileEntity tileEntity;
 
+    /**
+     * Constructor
+     * @param iteIN
+     */
     public InterfaceScreen(final InterfaceTileEntity iteIN) {
         super(ModBlocks.INTERFACE.get().getNameTextComponent());
         this.tileEntity = iteIN;
 
     }
 
+    /**
+     * Function to show the GUI
+     * @param mouseX
+     * @param mouseY
+     * @param partialTicks
+     */
     @Override
     public void render(final int mouseX, final int mouseY, final float partialTicks) {
         this.renderBackground();
         super.render(mouseX, mouseY, partialTicks);
     }
 
+    /**
+     * Function to initialise GUI's elements
+     */
     protected void init() {
         this.initTextField();
         final int halfW = this.width / 2;
@@ -48,6 +64,10 @@ public class InterfaceScreen extends Screen {
         super.init();
     }
 
+    /**
+     * Function to add a textField in the GUI
+     * Broken for now
+     */
     protected void initTextField() {
         int i = (this.width - 147) / 2;
         int j = (this.height - 166) / 2;
