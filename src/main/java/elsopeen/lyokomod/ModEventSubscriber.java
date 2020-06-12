@@ -65,7 +65,10 @@ public class ModEventSubscriber {
                         "banquise_ice"),
                 setup(new BlockItem(ModBlocks.INTERFACE.get(),
                         new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)),
-                        "interface"));
+                        "interface"),
+                setup(new BlockItem(ModBlocks.TOWER_BASE.get(),
+                        new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)),
+                        "tower_base"));
     }
 
     /**

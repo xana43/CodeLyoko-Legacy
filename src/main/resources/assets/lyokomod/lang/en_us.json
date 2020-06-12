@@ -7,5 +7,6 @@
   "block.lyokomod.interface": "Interface",
   "itemGroup.code_lyoko_blocks": "Code Lyoko Blocks",
   "gui.lyokomod.interface": "Interface",
-  "gui.lyokomod.interface_input": "Code ?"
+  "gui.lyokomod.interface_input": "Code ?",
+  "block.lyokomod.tower_base": "Tower Base"
 }
