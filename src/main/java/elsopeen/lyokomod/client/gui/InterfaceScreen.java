@@ -60,7 +60,7 @@ public class InterfaceScreen extends ContainerScreen<InterfaceContainer> {
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation("lyokomod:textures/interface.png"));
+        Minecraft.getInstance().getTextureManager().bindTexture(BACKGROUND_TEXTURE);
         this.blit(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
     }
 

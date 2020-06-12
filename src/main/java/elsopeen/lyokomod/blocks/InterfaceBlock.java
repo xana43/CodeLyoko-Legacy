@@ -40,7 +40,7 @@ public class InterfaceBlock extends HorizontalBlock {
 
     /**
      * Constructor with default orientation (NORTH)
-     * @param properties
+     * @param properties default properties passed to super
      */
     public InterfaceBlock(Properties properties) {
         super(properties);
@@ -49,7 +49,7 @@ public class InterfaceBlock extends HorizontalBlock {
 
     /**
      * Checks if the block has/is a tile entity
-     * @param state
+     * @param state BlockState when update
      * @return boolean
      */
     @Override
@@ -59,8 +59,8 @@ public class InterfaceBlock extends HorizontalBlock {
 
     /**
      * Create and returns an interface tile entity
-     * @param state
-     * @param world
+     * @param state BlockState when block update
+     * @param world world in which the block is
      * @return TileEntity (InterfaceTileEntity)
      */
     @Override
@@ -70,7 +70,7 @@ public class InterfaceBlock extends HorizontalBlock {
 
     /**
      * Function used to "rotate" block on placement
-     * @param context
+     * @param context Context of placement
      * @return BlockState
      */
     @Override
@@ -80,8 +80,8 @@ public class InterfaceBlock extends HorizontalBlock {
 
     /**
      * Function used to "rotate" block on command setblock
-     * @param state
-     * @param rot
+     * @param state BlockState on block update
+     * @param rot Current orientation of block
      * @return
      */
     @Override
@@ -91,7 +91,7 @@ public class InterfaceBlock extends HorizontalBlock {
 
     /**
      * Function to add parameters to the blockState
-     * @param builder
+     * @param builder add the HORIZONTAL_FACING BlockState.Property to our block
      */
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
@@ -100,10 +100,10 @@ public class InterfaceBlock extends HorizontalBlock {
 
     /**
      * Function to tell if block is transparent of not
-     * @param state
+     * @param state blockState on block update
      * @param reader
      * @param pos
-     * @return
+     * @return that light can go through
      */
     public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
         return true;
@@ -115,7 +115,7 @@ public class InterfaceBlock extends HorizontalBlock {
      * @param worldIn
      * @param pos
      * @param context
-     * @return
+     * @return a hitbox depending on orientation
      */
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -132,7 +132,7 @@ public class InterfaceBlock extends HorizontalBlock {
      * @param worldIn
      * @param pos
      * @param type
-     * @return
+     * @return that the block allows movement
      */
     @Override
     public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
@@ -145,7 +145,7 @@ public class InterfaceBlock extends HorizontalBlock {
      * @param worldIn
      * @param pos
      * @param context
-     * @return
+     * @return a thin hitbox so people can go through
      */
     @Override
     public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -166,7 +166,12 @@ public class InterfaceBlock extends HorizontalBlock {
      */
     @Override
     public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> openGui(player, world, pos));
+        if (!world.isRemote) {
+            final TileEntity tileEntity = world.getTileEntity(pos);
+            if (tileEntity instanceof InterfaceTileEntity) {
+                NetworkHooks.openGui((ServerPlayerEntity) player, (InterfaceTileEntity) tileEntity, pos);
+            }
+        }
         return ActionResultType.SUCCESS;
     }
 
@@ -184,7 +189,6 @@ public class InterfaceBlock extends HorizontalBlock {
      * @param worldIn
      * @param pos
      */
-    @OnlyIn(Dist.CLIENT)
     private void openGui(final PlayerEntity player, final World worldIn, final BlockPos pos) {
         // Only handle opening the Gui screen on the logical client
         if (worldIn.isRemote) {

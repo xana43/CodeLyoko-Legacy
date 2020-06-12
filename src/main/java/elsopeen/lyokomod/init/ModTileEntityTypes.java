@@ -2,12 +2,10 @@ package elsopeen.lyokomod.init;
 
 import elsopeen.lyokomod.LyokoMod;
 import elsopeen.lyokomod.tileentity.InterfaceTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ObjectHolder;
 
 /**
  * Registering class for TileEntities

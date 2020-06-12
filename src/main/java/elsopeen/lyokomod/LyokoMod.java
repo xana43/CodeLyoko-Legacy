@@ -1,6 +1,7 @@
 package elsopeen.lyokomod;
 
 import elsopeen.lyokomod.init.ModBlocks;
+import elsopeen.lyokomod.init.ModContainerTypes;
 import elsopeen.lyokomod.init.ModItems;
 import elsopeen.lyokomod.init.ModTileEntityTypes;
 import net.minecraft.block.Block;
@@ -55,6 +56,9 @@ public class LyokoMod {
 
         // Register TileEntity
         ModTileEntityTypes.TILE_ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+        // Register Containers
+        ModContainerTypes.CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
