@@ -8,5 +8,11 @@
   "itemGroup.code_lyoko_blocks": "Code Lyoko Blocks",
   "gui.lyokomod.interface": "Interface",
   "gui.lyokomod.interface_input": "Code ?",
-  "block.lyokomod.tower_base": "Tower Base"
+  "block.lyokomod.tower_base": "Tower Base",
+  "block.lyokomod.tower_body": "Tower Body",
+  "block.lyokomod.tower_platform_access": "Tower Platform Access",
+  "block.lyokomod.tower_platform_corner": "Tower Platform Corner",
+  "block.lyokomod.tower_platform_straight": "Tower Platform Straight",
+  "block.lyokomod.tower_platform_tshape": "Tower Platform T Shape",
+  "block.lyokomod.tower_platform_center": "Tower Platform Center"
 }

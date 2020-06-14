@@ -23,6 +23,11 @@ public class ModItems {
     public static final RegistryObject<Item> BANQUISE_ICE = ITEMS.register("banquise_ice", () -> new BlockItem(ModBlocks.BANQUISE_ICE.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> INTERFACE = ITEMS.register("interface", () -> new BlockItem(ModBlocks.INTERFACE.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> TOWER_BASE = ITEMS.register("tower_base", () -> new BlockItem(ModBlocks.TOWER_BASE.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
-    public static final RegistryObject<Item> TOWER_BODY = ITEMS.register("tower_body", ()-> new BlockItem(ModBlocks.TOWER_BODY.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
+    public static final RegistryObject<Item> TOWER_BODY = ITEMS.register("tower_body", () -> new BlockItem(ModBlocks.TOWER_BODY.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
+    public static final RegistryObject<Item> TOWER_PLATFORM_ACCESS = ITEMS.register("tower_platform_access", () -> new BlockItem(ModBlocks.TOWER_PLATFORM_ACCESS.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
+    public static final RegistryObject<Item> TOWER_PLATFORM_CORNER = ITEMS.register("tower_platform_corner", () -> new BlockItem(ModBlocks.TOWER_PLATFORM_CORNER.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
+    public static final RegistryObject<Item> TOWER_PLATFORM_STRAIGHT = ITEMS.register("tower_platform_straight", () -> new BlockItem(ModBlocks.TOWER_PLATFORM_STRAIGHT.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
+    public static final RegistryObject<Item> TOWER_PLATFORM_TSHAPE = ITEMS.register("tower_platform_tshape", ()-> new BlockItem(ModBlocks.TOWER_PLATFORM_TSHAPE.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
+    public static final RegistryObject<Item> TOWER_PLATFORM_CENTER = ITEMS.register("tower_platform_center", ()->new BlockItem(ModBlocks.TOWER_PLATFORM_CENTER.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
 
 }
