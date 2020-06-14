@@ -92,12 +92,12 @@ public class InterfaceScreen extends ContainerScreen<InterfaceContainer> {
      * Broken for now
      */
     protected void initTextField() {
-        //int i = (this.width - 147) / 2;
-        //int j = (this.height - 166) / 2;
+        int i = (this.width - 134) / 2;
+        int j = (this.height - 33) / 2;
         String s = this.textField != null ? this.textField.getText() : "";
-        this.textField = new TextFieldWidget(this.getMinecraft().fontRenderer, this.guiLeft+24, this.guiTop+48, this.guiLeft+134, this.guiTop+33, I18n.format("gui.lyokomod.interface_input"));
+        this.textField = new TextFieldWidget(this.getMinecraft().fontRenderer, i+6, j-10, 134, 33, I18n.format("gui.lyokomod.interface_input"));
         this.textField.setMaxStringLength(50);
-        this.textField.setEnableBackgroundDrawing(true);
+        this.textField.setEnableBackgroundDrawing(false);
         this.textField.setVisible(true);
         this.textField.setTextColor(16777215);
         this.textField.setFocused2(true);
@@ -107,7 +107,7 @@ public class InterfaceScreen extends ContainerScreen<InterfaceContainer> {
     @Override
     public boolean keyPressed(int charID, int p_keyPressed_2_, int p_keyPressed_3_) {
         this.textField.keyPressed(charID, p_keyPressed_2_, p_keyPressed_3_);
-        if(!( p_keyPressed_2_ == 69  &&  this.textField.isFocused())) return super.keyPressed(charID, p_keyPressed_2_, p_keyPressed_3_);
+        if(!(this.minecraft.gameSettings.keyBindInventory.matchesKey(charID, p_keyPressed_2_) && this.textField.isFocused())) return super.keyPressed(charID, p_keyPressed_2_, p_keyPressed_3_);
         return true;
     }
 
