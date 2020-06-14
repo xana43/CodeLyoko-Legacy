@@ -49,7 +49,7 @@ public class LyokoMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         // Register items
-        //ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         // Register Blocks
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());

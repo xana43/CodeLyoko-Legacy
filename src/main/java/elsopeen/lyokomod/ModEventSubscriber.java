@@ -44,32 +44,17 @@ public class ModEventSubscriber {
     /**
      * Registering items
      * @param event
-     */
+     *
     @SubscribeEvent
     public static void onRegisterItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().registerAll(
-                setup(new BlockItem(ModBlocks.MOUNTAIN_ROCK.get(),
-                        new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)),
-                        "mountain_rock"),
-                setup(new BlockItem(ModBlocks.FOREST_GRASS.get(),
-                        new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)),
-                        "forest_grass"),
-                setup(new BlockItem(ModBlocks.FOREST_LOG.get(),
-                        new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)),
-                        "forest_log"),
-                setup(new BlockItem(ModBlocks.DESERT_SAND.get(),
-                        new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)),
-                        "desert_sand"),
-                setup(new BlockItem(ModBlocks.BANQUISE_ICE.get(),
-                        new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)),
-                        "banquise_ice"),
-                setup(new BlockItem(ModBlocks.INTERFACE.get(),
-                        new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)),
-                        "interface"),
+
                 setup(new BlockItem(ModBlocks.TOWER_BASE.get(),
                         new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)),
-                        "tower_base"));
-    }
+                        "tower_base"),
+                setup(new BlockItem(ModBlocks.TOWER_BODY.get(),
+                        new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)),
+                        "tower_body"));
+    }*/
 
     /**
      * Function to register the passed parameters

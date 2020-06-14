@@ -2,7 +2,6 @@ package elsopeen.lyokomod.init;
 
 import elsopeen.lyokomod.LyokoMod;
 import elsopeen.lyokomod.tileentity.InterfaceTileEntity;
-import elsopeen.lyokomod.tileentity.TowerBaseTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -22,9 +21,4 @@ public class ModTileEntityTypes {
                     ModBlocks.INTERFACE.get())
             .build(null));
 
-    public static final RegistryObject<TileEntityType<TowerBaseTileEntity>> TOWER_BASE =
-            TILE_ENTITY_TYPES.register("tower_base", ()->
-                    TileEntityType.Builder.create(TowerBaseTileEntity::new,
-                            ModBlocks.TOWER_BASE.get())
-            .build(null));
 }

@@ -1,13 +1,11 @@
 package elsopeen.lyokomod.blocks;
 
-import elsopeen.lyokomod.init.ModTileEntityTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -15,21 +13,22 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.block.RedstoneLampBlock;
 
 /**
- * Tower base block for all towers on LYOKO
+ * Tower body block for all towers on LYOKO
  */
-public class TowerBaseBlock extends HorizontalBlock {
+public class TowerBodyBlock extends HorizontalBlock {
 
     private static final VoxelShape VISUAL_SHAPE = Block.makeCuboidShape(0.0,0.0,0.0,16.0,16.0,16.0);
 
-    private static final VoxelShape COLLISION_SHAPE = Block.makeCuboidShape(0.0,0.0,0.0,16.0,16.0,0.0);
+    private static final VoxelShape COLLISION_SHAPE = Block.makeCuboidShape(0.0,0.0,0.0,16.0,16.0,16.0);
 
     /**
      * Constructor with default orientation (NORTH)
      * @param builder default properties passed to super
      */
-    public TowerBaseBlock(Properties builder) {
+    public TowerBodyBlock(Properties builder) {
         super(builder);
         this.setDefaultState(this.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH));
     }
@@ -98,21 +97,20 @@ public class TowerBaseBlock extends HorizontalBlock {
      */
     @Override
     public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
-        return true;
+        return false;
     }
 
     /**
-     * Returns collision hitbox, defined as 0 depth so you can walk through
+     * Returns collision hitbox
      * @param state
      * @param worldIn
      * @param pos
      * @param context
-     * @return a thin hitbox so people can go through
+     * @return a hitbox
      */
     @Override
     public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         Vec3d vec3d = state.getOffset(worldIn, pos);
         return COLLISION_SHAPE.withOffset(vec3d.x, vec3d.y, vec3d.z);
     }
-
 }
