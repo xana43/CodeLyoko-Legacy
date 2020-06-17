@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "lyokomod:block/tower_bottom_reset"
+    }
+  }
+}

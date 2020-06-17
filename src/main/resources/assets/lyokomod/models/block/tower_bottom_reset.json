@@ -1,9 +1,8 @@
 {
   "parent": "block/orientable",
   "textures": {
-    "ext": "lyokomod:block/tower_base",
-    "int": "lyokomod:block/tower_wall",
-    "particle": "lyokomod:block/tower_base"
+    "ext": "lyokomod:block/tower_wall",
+    "particle": "lyokomod:block/tower_wall"
   },
   "display": {
     "gui": {
@@ -39,15 +38,15 @@
   },
   "elements": [
     {
-      "name": "tower_base",
+      "name": "tower_bottom_reset",
       "from": [ 0, 0, 0 ],
       "to": [ 16, 16, 16 ],
       "rotation": {"origin": [8,8,8],"axis": "y", "angle": 0.0},
       "shade": false,
       "faces": {
         "north": { "texture": "#ext", "uv": [ 0, 0, 16, 16 ] },
-        "east": { "texture": "#int", "uv": [ 0, 0, 16, 16 ] },
-        "south": { "texture": "#int", "uv": [ 0, 0, 16, 16 ] },
+        "east": { "texture": "#ext", "uv": [ 0, 0, 16, 16 ] },
+        "south": { "texture": "#ext", "uv": [ 0, 0, 16, 16 ] },
         "west": { "texture": "#ext", "uv": [ 0, 0, 16, 16 ] },
         "up": { "texture": "#ext", "uv": [ 0, 0, 16, 16 ] },
         "down": { "texture": "#ext", "uv": [ 0, 0, 16, 16 ] }

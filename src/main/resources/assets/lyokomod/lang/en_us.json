@@ -14,5 +14,6 @@
   "block.lyokomod.tower_platform_corner": "Tower Platform Corner",
   "block.lyokomod.tower_platform_straight": "Tower Platform Straight",
   "block.lyokomod.tower_platform_tshape": "Tower Platform T Shape",
-  "block.lyokomod.tower_platform_center": "Tower Platform Center"
+  "block.lyokomod.tower_platform_center": "Tower Platform Center",
+  "block.lyokomod.tower_bottom_reset": "Tower Default Bottom"
 }

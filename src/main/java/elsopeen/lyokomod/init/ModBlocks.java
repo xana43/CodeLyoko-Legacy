@@ -30,6 +30,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> TOWER_PLATFORM_CORNER = BLOCKS.register("tower_platform_corner", () -> new TowerPlatformCornerBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f)));
     public static final RegistryObject<Block> TOWER_PLATFORM_STRAIGHT = BLOCKS.register("tower_platform_straight", () -> new TowerPlatformStraightBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f)));
     public static final RegistryObject<Block> TOWER_PLATFORM_TSHAPE = BLOCKS.register("tower_platform_tshape", () -> new TowerPlatformTShapeBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f)));
-    public static final RegistryObject<Block> TOWER_PLATFORM_CENTER = BLOCKS.register("tower_platform_center", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f)));
+    public static final RegistryObject<Block> TOWER_PLATFORM_CENTER = BLOCKS.register("tower_platform_center", () -> new TowerPlatformCenterBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f)));
+    public static final RegistryObject<Block> TOWER_BOTTOM_RESET = BLOCKS.register("tower_bottom_reset", ()->new TowerBottomResetBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(-1.f)));
 
 }
