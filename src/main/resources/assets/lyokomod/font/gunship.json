@@ -1,0 +1,11 @@
+{
+  "providers": [
+    {
+      "type": "ttf",
+      "file": "lyokomod:gunship.ttf",
+      "shift": [0, 0],
+      "size": 20,
+      "oversample": 2.0
+    }
+  ]
+}

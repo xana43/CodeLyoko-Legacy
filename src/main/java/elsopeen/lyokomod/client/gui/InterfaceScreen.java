@@ -8,6 +8,8 @@ import elsopeen.lyokomod.init.ModContainerTypes;
 import elsopeen.lyokomod.tileentity.InterfaceTileEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MinecraftGame;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.fonts.Font;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
@@ -28,9 +30,9 @@ public class InterfaceScreen extends ContainerScreen<InterfaceContainer> {
 
     /**
      * Base constructor
-     * @param interfaceContainer
-     * @param playerInventory
-     * @param title
+     * @param interfaceContainer container in order to have a custom gui
+     * @param playerInventory inv of player opening the gui
+     * @param title title of gui
      */
     public InterfaceScreen(final InterfaceContainer interfaceContainer, final PlayerInventory playerInventory, final ITextComponent title) {
         super(interfaceContainer, playerInventory, title);
@@ -38,9 +40,9 @@ public class InterfaceScreen extends ContainerScreen<InterfaceContainer> {
 
     /**
      * Function to show the GUI
-     * @param mouseX
-     * @param mouseY
-     * @param partialTicks
+     * @param mouseX pos_x of mouse
+     * @param mouseY pos_y of mouse
+     * @param partialTicks Ticks
      */
     @Override
     public void render(final int mouseX, final int mouseY, final float partialTicks) {
@@ -54,9 +56,9 @@ public class InterfaceScreen extends ContainerScreen<InterfaceContainer> {
 
     /**
      * Draw the background
-     * @param partialTicks
-     * @param mouseX
-     * @param mouseY
+     * @param mouseX pos_x of mouse
+     * @param mouseY pos_y of mouse
+     * @param partialTicks Ticks
      */
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
@@ -95,7 +97,9 @@ public class InterfaceScreen extends ContainerScreen<InterfaceContainer> {
         int i = (this.width - 134) / 2;
         int j = (this.height - 33) / 2;
         String s = this.textField != null ? this.textField.getText() : "";
-        this.textField = new TextFieldWidget(this.getMinecraft().fontRenderer, i+6, j-10, 134, 33, I18n.format("gui.lyokomod.interface_input"));
+        FontRenderer gunship_font = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation("lyokomod:gunship"));
+        assert gunship_font != null;
+        this.textField = new TextFieldWidget(gunship_font, i+6, j-10, 134, 33, I18n.format("gui.lyokomod.interface_input"));
         this.textField.setMaxStringLength(50);
         this.textField.setEnableBackgroundDrawing(false);
         this.textField.setVisible(true);
@@ -107,7 +111,7 @@ public class InterfaceScreen extends ContainerScreen<InterfaceContainer> {
     @Override
     public boolean keyPressed(int charID, int p_keyPressed_2_, int p_keyPressed_3_) {
         this.textField.keyPressed(charID, p_keyPressed_2_, p_keyPressed_3_);
-        if(!(this.minecraft.gameSettings.keyBindInventory.matchesKey(charID, p_keyPressed_2_) && this.textField.isFocused())) return super.keyPressed(charID, p_keyPressed_2_, p_keyPressed_3_);
+        if(!(this.getMinecraft().gameSettings.keyBindInventory.matchesKey(charID, p_keyPressed_2_) && this.textField.isFocused())) return super.keyPressed(charID, p_keyPressed_2_, p_keyPressed_3_);
         return true;
     }
 
