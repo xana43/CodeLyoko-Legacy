@@ -32,5 +32,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> TOWER_PLATFORM_TSHAPE = BLOCKS.register("tower_platform_tshape", () -> new TowerPlatformTShapeBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f)));
     public static final RegistryObject<Block> TOWER_PLATFORM_CENTER = BLOCKS.register("tower_platform_center", () -> new TowerPlatformCenterBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f)));
     public static final RegistryObject<Block> TOWER_BOTTOM_RESET = BLOCKS.register("tower_bottom_reset", ()->new TowerBottomResetBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(-1.f)));
-
+    public static final RegistryObject<Block> TOWER_TOP = BLOCKS.register("tower_top", ()->new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f).lightValue(15)));
+    public static final RegistryObject<Block> TOWER_MUSH = BLOCKS.register("tower_mush", ()->new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f).lightValue(15)));
 }

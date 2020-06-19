@@ -2,8 +2,8 @@
   "parent": "block/orientable",
   "textures": {
     "ext": "lyokomod:block/tower_body",
-    "particle": "lyokomod:block/tower_body",
-    "int": "lyokomod:block/tower_wall"
+    "int": "lyokomod:block/tower_wall",
+    "particle": "lyokomod:block/tower_body"
   },
   "display": {
     "gui": {
@@ -44,6 +44,7 @@
       "to": [ 16, 16, 16 ],
       "rotation": {"origin": [8,8,8],"axis": "y", "angle": 0.0},
       "shade": false,
+      "particle": {"texture": "#particle"},
       "faces": {
         "north": { "texture": "#ext", "uv": [ 0, 0, 16, 16 ] },
         "east": { "texture": "#int", "uv": [ 0, 0, 16, 16 ] },

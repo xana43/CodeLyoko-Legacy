@@ -30,5 +30,7 @@ public class ModItems {
     public static final RegistryObject<Item> TOWER_PLATFORM_TSHAPE = ITEMS.register("tower_platform_tshape", ()-> new BlockItem(ModBlocks.TOWER_PLATFORM_TSHAPE.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> TOWER_PLATFORM_CENTER = ITEMS.register("tower_platform_center", ()->new BlockItem(ModBlocks.TOWER_PLATFORM_CENTER.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> TOWER_BOTTOM_RESET = ITEMS.register("tower_bottom_reset", ()->new BlockItem(ModBlocks.TOWER_BOTTOM_RESET.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
+    public static final RegistryObject<Item> TOWER_TOP = ITEMS.register("tower_top", ()->new BlockItem(ModBlocks.TOWER_TOP.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
+    public static final RegistryObject<Item> TOWER_MUSH = ITEMS.register("tower_mush", ()->new BlockItem(ModBlocks.TOWER_MUSH.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
 
 }
