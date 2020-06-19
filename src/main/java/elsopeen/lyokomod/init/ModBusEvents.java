@@ -17,9 +17,9 @@ public class ModBusEvents {
     public static void registerFeatures(RegistryEvent.Register<Feature<?>> args) {
         ModStructurePieceTypes.TOWER_PIECE = Registry.register(Registry.STRUCTURE_PIECE,
                 ModStructurePieceTypes.TOWER_LOC,
-                TowerPiece.Piece::new,
+                TowerPiece.Piece::new);
                 args.getRegistry().register(new Tower(NoFeatureConfig::deserialize)
-                        .setRegistryName(ModStructurePieceTypes.TOWER_LOC)));
+                        .setRegistryName(ModStructurePieceTypes.TOWER_LOC));
     }
 
 }

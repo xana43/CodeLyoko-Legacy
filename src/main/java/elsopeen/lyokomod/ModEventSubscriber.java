@@ -17,7 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Registering Items only, the others with the Mod[Type].java class and main class
+ * Registering nothing yet
  */
 @Mod.EventBusSubscriber(modid = LyokoMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventSubscriber {

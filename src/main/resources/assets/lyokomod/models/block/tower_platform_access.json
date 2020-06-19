@@ -3,6 +3,7 @@
   "textures": {
     "top": "lyokomod:block/tower_platform_access",
     "other": "lyokomod:block/tower_platform_blue",
+    "out": "lyokomod:block/tower_base",
     "particle": "lyokomod:block/tower_platform_blue"
   },
   "display": {
@@ -47,7 +48,7 @@
       "faces": {
         "north": { "texture": "#other", "uv": [ 0, 0, 16, 16 ] },
         "east": { "texture": "#other", "uv": [ 0, 0, 16, 16 ] },
-        "south": { "texture": "#other", "uv": [ 0, 0, 16, 16 ] },
+        "south": { "texture": "#out", "uv": [ 0, 0, 16, 16 ] },
         "west": { "texture": "#other", "uv": [ 0, 0, 16, 16 ] },
         "up": { "texture": "#top", "uv": [ 0, 0, 16, 16 ] },
         "down": { "texture": "#other", "uv": [ 0, 0, 16, 16 ] }

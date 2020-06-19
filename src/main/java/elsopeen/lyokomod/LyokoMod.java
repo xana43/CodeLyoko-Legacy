@@ -1,14 +1,19 @@
 package elsopeen.lyokomod;
 
-import elsopeen.lyokomod.init.ModBlocks;
-import elsopeen.lyokomod.init.ModContainerTypes;
-import elsopeen.lyokomod.init.ModItems;
-import elsopeen.lyokomod.init.ModTileEntityTypes;
+import elsopeen.lyokomod.init.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.placement.IPlacementConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.extensions.IForgeBlock;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -17,9 +22,11 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Iterator;
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -60,6 +67,9 @@ public class LyokoMod {
         // Register Containers
         ModContainerTypes.CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
+        // Register Structures
+        ModStructures.FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -67,7 +77,16 @@ public class LyokoMod {
     private void setup(final FMLCommonSetupEvent event) {
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+        LOGGER.info("INTERFACE >> {}", ModBlocks.INTERFACE.get().getRegistryName());
+        DeferredWorkQueue.runLater(() -> {
+            Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
+            biomes.forEachRemaining((biome) -> {
+                biome.func_226711_a_(ModStructures.TOWER.get().func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
+                biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES,
+                        ModStructures.TOWER.get().func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG)
+                                .func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+            });
+        });
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
@@ -91,7 +110,7 @@ public class LyokoMod {
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
         // do something when the server starts
-        LOGGER.info("HELLO from server starting");
+        LOGGER.info("LyokoMod says XANA WILL DESTROY YOU");
     }
 
 }
