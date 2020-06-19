@@ -8,9 +8,9 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.obj.OBJModel;
 
-public class Rendskid extends Render<EntitySkid>{
+public class RendSkid extends Render<EntitySkid>{
 
-	public Rendskid(RenderManager renderManagerIn) {
+	public RendSkid(RenderManager renderManagerIn) {
 		super(renderManagerIn);
 	// TODO Auto-generated constructor stub
 	}

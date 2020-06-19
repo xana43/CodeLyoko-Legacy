@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake.Util.handlers;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.HoloProjector.InvisRend;
+//import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.HoloProjector.InvisRend;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.HoloProjector.ProjectorTE;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.UniversalStorage.UniversalStore;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.ComputerReactor;
@@ -24,7 +24,7 @@ public class TEH {
 			GameRegistry.registerTileEntity(TileEntityElectricInfusingChamber.class,"electric_flouride_infuser");
 			GameRegistry.registerTileEntity(ProjectorTE.class, "projector");
 			GameRegistry.registerTileEntity(UniversalStore.class, "universal_storage");
-			GameRegistry.registerTileEntity(InvisRend.class, "invis");
+			//GameRegistry.registerTileEntity(InvisRend.class, "invis");
 		}
 	
 }

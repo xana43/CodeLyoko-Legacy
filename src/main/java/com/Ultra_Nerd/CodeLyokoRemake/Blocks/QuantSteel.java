@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake.Blocks;
 
 import java.util.Random;
 
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.HoloProjector.InvisRend;
+
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.HoloProjector.ProjectorTE;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
@@ -28,7 +28,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class QuantSteel extends BlockContainer 
+public class QuantSteel extends Block 
 {
 	public static final PropertyBool FORMED = PropertyBool.create("formed");
 	public static final PropertyBool AIR = PropertyBool.create("air");
@@ -53,11 +53,7 @@ public class QuantSteel extends BlockContainer
 		
 		
 		
-		@Override
-		public boolean hasTileEntity() {
-			// TODO Auto-generated method stub
-			return true;
-		}
+		
 		
 		
 		
@@ -222,12 +218,7 @@ public class QuantSteel extends BlockContainer
 
 
 
-		@Override
-		public TileEntity createNewTileEntity(World worldIn, int meta) {
-			// TODO Auto-generated method stub
-			return new InvisRend();
-		}
-
+		
 		
 }
 

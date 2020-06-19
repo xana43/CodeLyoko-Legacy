@@ -35,19 +35,22 @@ public class ProjectorTE extends TileEntity implements ITickable{
 		boolean onceback = false;
 		if(!world.isRemote)
 		{
+			
 		checkstruct();
 		once = false;
 				if(valid)
 					{
 					HoloPro.SetModel(true, this.world, this.pos);
                     Block blockState = world.getBlockState(new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ())).getBlock();
-         
-                    onceback = true;
+                    
+                    
                     
 					HoloPro.trans = true;
 					
+					
                     if(blockState == Blocks.GLASS && !once)
                     {
+                    	
                         world.setBlockState(this.pos.add(0, 1, 0), Modblocks.TRANSPARENT.getDefaultState());
                        
                         once = true;
@@ -63,7 +66,8 @@ public class ProjectorTE extends TileEntity implements ITickable{
 					}
 				else 
 				{
-					
+					QuantSteel.SetModel2(false, world, pos);
+                	QuantSteel.trans2 = false;
 					HoloPro.trans = false;
 					HoloPro.SetModel(false, this.world, this.pos);
 					if(world.getBlockState(this.pos.add(0, 1, 0)).getBlock().getDefaultState() != Blocks.GLASS.getDefaultState() && onceback)

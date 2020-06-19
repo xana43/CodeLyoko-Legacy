@@ -19,7 +19,7 @@ public class Modblocks
   public static final Block COMPUTER_FRAME = new CompFrame("computer_frame", Material.REDSTONE_LIGHT);
   public static final Block COMPUTER_SCREEN = new CompScreen("computer_screen", Material.GLASS);
   public static final Block URANINITE_ORE = new UraniniteOre("uraninite_ore", Material.ROCK);
-  public static final Block CABLE_BLOCK = new CableBlock("cable_block");
+  public static final Block CABLE_BLOCK = new CableBlock("cable_block", Material.CIRCUITS);
   public static final Block TOWER_INTERFACE = new TowerInterface("tower_interface", Material.DRAGON_EGG);
   public static final Block SCANNER_BASE = new Virutalization("scanner_base", Material.CIRCUITS);
   public static final Block ELECTRICFLOURIDE_INFUSER = new ElectricFlourideInfuser("electric_flouride_infuser", Material.IRON);

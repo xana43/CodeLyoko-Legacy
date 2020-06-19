@@ -7,7 +7,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Entity.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoRemake.Entity.Entityblok;
 import com.Ultra_Nerd.CodeLyokoRemake.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoRemake.Entity.rend.RendLaser;
-import com.Ultra_Nerd.CodeLyokoRemake.Entity.rend.Rendskid;
+import com.Ultra_Nerd.CodeLyokoRemake.Entity.rend.RendSkid;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
@@ -64,7 +64,7 @@ public class EntRend
 			@Override
 			public Render<? super EntitySkid> createRenderFor(RenderManager manager) {
 				// TODO Auto-generated method stub
-				return new Rendskid(manager);
+				return new RendSkid(manager);
 			}
 		});
 		
