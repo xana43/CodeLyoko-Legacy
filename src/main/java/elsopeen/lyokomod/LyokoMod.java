@@ -3,13 +3,16 @@ package elsopeen.lyokomod;
 import elsopeen.lyokomod.init.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.common.extensions.IForgeBlock;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,8 +32,6 @@ import org.apache.logging.log4j.Logger;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 
-// The value here should match an entry in the META-INF/mods.toml file
-
 /**
  * Main mod class
  */
@@ -40,6 +41,10 @@ public class LyokoMod {
 
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
+
+    public static Logger getLOGGER() {
+        return LOGGER;
+    }
 
     /**
      * Constructor
@@ -70,6 +75,12 @@ public class LyokoMod {
         // Register Structures
         ModStructures.FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
+        // Register Biomes
+        ModBiomes.BIOMES.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+        // Register Dimensions
+        ModDimensions.DIMENSIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -78,10 +89,14 @@ public class LyokoMod {
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("INTERFACE >> {}", ModBlocks.INTERFACE.get().getRegistryName());
+        LOGGER.info("tour >> {}", ModStructures.TOWER.get().getRegistryName());
         DeferredWorkQueue.runLater(() -> {
+            LOGGER.info("Starting Tower adding");
             Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
             biomes.forEachRemaining((biome) -> {
+                LOGGER.info("Adding tower in {}", biome.getRegistryName());
                 biome.func_226711_a_(ModStructures.TOWER.get().func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
+
                 biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES,
                         ModStructures.TOWER.get().func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG)
                                 .func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));

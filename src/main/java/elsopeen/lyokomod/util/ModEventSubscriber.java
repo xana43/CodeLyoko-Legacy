@@ -1,5 +1,6 @@
-package elsopeen.lyokomod;
+package elsopeen.lyokomod.util;
 
+import elsopeen.lyokomod.LyokoMod;
 import elsopeen.lyokomod.init.ModBlocks;
 import elsopeen.lyokomod.init.ModItemGroups;
 import elsopeen.lyokomod.tileentity.InterfaceTileEntity;

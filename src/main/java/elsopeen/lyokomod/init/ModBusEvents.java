@@ -3,6 +3,7 @@ package elsopeen.lyokomod.init;
 import elsopeen.lyokomod.LyokoMod;
 import elsopeen.lyokomod.structures.Tower;
 import elsopeen.lyokomod.structures.pieces.TowerPiece;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -18,8 +19,8 @@ public class ModBusEvents {
         ModStructurePieceTypes.TOWER_PIECE = Registry.register(Registry.STRUCTURE_PIECE,
                 ModStructurePieceTypes.TOWER_LOC,
                 TowerPiece.Piece::new);
-                args.getRegistry().register(new Tower(NoFeatureConfig::deserialize)
-                        .setRegistryName(ModStructurePieceTypes.TOWER_LOC));
+                //args.getRegistry().register(new Tower(NoFeatureConfig::deserialize)
+                //        .setRegistryName(ModStructurePieceTypes.TOWER_LOC));
     }
 
 }

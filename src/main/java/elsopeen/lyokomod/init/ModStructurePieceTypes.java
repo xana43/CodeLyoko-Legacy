@@ -9,7 +9,7 @@ import net.minecraftforge.registries.ObjectHolder;
 
 public class ModStructurePieceTypes {
 
-    public static final ResourceLocation TOWER_LOC = new ResourceLocation("lyokomod:tower_piece");
+    public static final ResourceLocation TOWER_LOC = new ResourceLocation("lyokomod:structures/tower");
 
     public static IStructurePieceType TOWER_PIECE = null;
 }

@@ -2,30 +2,42 @@ package elsopeen.lyokomod.structures;
 
 import com.mojang.datafixers.Dynamic;
 import elsopeen.lyokomod.init.ModStructurePieceTypes;
+import elsopeen.lyokomod.init.ModStructures;
 import elsopeen.lyokomod.structures.pieces.TowerPiece;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.structure.ScatteredStructure;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.function.Function;
 
-public class Tower extends Structure<NoFeatureConfig> {
+public class Tower extends ScatteredStructure<NoFeatureConfig> {
 
     public Tower(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
         super(configFactoryIn);
     }
 
     @Override
-    public boolean func_225558_a_(BiomeManager p_225558_1_, ChunkGenerator<?> p_225558_2_, Random p_225558_3_, int p_225558_4_, int p_225558_5_, Biome p_225558_6_) {
-        return false;
+    protected int getSeedModifier() {
+        return 165745296;
+    }
+
+    @Nullable
+    @Override
+    public BlockPos findNearest(World worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, BlockPos pos, int radius, boolean p_211405_5_) {
+        return super.findNearest(worldIn, chunkGenerator, pos, radius, p_211405_5_);
     }
 
     @Override
@@ -35,7 +47,7 @@ public class Tower extends Structure<NoFeatureConfig> {
 
     @Override
     public String getStructureName() {
-        return ModStructurePieceTypes.TOWER_LOC.getNamespace();
+        return ModStructures.TOWER.getId().getNamespace();
     }
 
     @Override
