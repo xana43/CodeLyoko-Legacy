@@ -48,7 +48,7 @@ public class BanquiseDim extends Dimension {
 
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
-        return null;
+        return new Vec3d(0x06,0x28,0x6b);
     }
 
     @Override

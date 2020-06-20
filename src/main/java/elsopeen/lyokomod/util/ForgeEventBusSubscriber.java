@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, modid = LyokoMod.MOD_ID)
 public class ForgeEventBusSubscriber {
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void onDimensionRegister(final RegisterDimensionsEvent event){
         LyokoMod.getLOGGER().info("Starting Dimension registering");
         if(DimensionType.byName(ModDimensions.LYOKO_FOREST.getId())==null) {
@@ -39,5 +39,5 @@ public class ForgeEventBusSubscriber {
         }
         LyokoMod.getLOGGER().info("Dimension Banquise Registered");
 
-    }
+    }*/
 }

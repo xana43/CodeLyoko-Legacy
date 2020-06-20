@@ -13,8 +13,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModBiomes {
     public static final DeferredRegister<Biome> BIOMES = new DeferredRegister<>(ForgeRegistries.BIOMES, LyokoMod.MOD_ID);
 
-    public static final RegistryObject<Biome> FOREST = BIOMES.register("forest", ()-> new LyokoForestBiome(new Biome.Builder()));
-    public static final RegistryObject<Biome> MOUNTAIN = BIOMES.register("mountain", ()-> new LyokoMountainBiome(new Biome.Builder()));
-    public static final RegistryObject<Biome> DESERT = BIOMES.register("desert", ()-> new LyokoDesertBiome(new Biome.Builder()));
-    public static final RegistryObject<Biome> BANQUISE = BIOMES.register("banquise", ()-> new LyokoBanquiseBiome(new Biome.Builder()));
+    public static final RegistryObject<Biome> FOREST = BIOMES.register("forest_biome", ()-> new LyokoForestBiome(new Biome.Builder()));
+    public static final RegistryObject<Biome> MOUNTAIN = BIOMES.register("mountain_biome", ()-> new LyokoMountainBiome(new Biome.Builder()));
+    public static final RegistryObject<Biome> DESERT = BIOMES.register("desert_biome", ()-> new LyokoDesertBiome(new Biome.Builder()));
+    public static final RegistryObject<Biome> BANQUISE = BIOMES.register("banquise_biome", ()-> new LyokoBanquiseBiome(new Biome.Builder()));
 }

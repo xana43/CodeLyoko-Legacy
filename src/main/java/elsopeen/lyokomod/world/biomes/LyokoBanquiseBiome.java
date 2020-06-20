@@ -7,7 +7,8 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 public class LyokoBanquiseBiome extends Biome {
     public LyokoBanquiseBiome(Builder biomeBuilder) {
-        super(biomeBuilder.surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(ModBlocks.BANQUISE_ICE.get().getDefaultState(),
+        super(biomeBuilder.surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(
+                ModBlocks.BANQUISE_ICE.get().getDefaultState(),
                 ModBlocks.BANQUISE_ICE.get().getDefaultState(),
                 ModBlocks.BANQUISE_ICE.get().getDefaultState()))
                 .category(Category.ICY)
@@ -16,8 +17,8 @@ public class LyokoBanquiseBiome extends Biome {
                 .scale(1.5f)
                 .temperature(0.5f)
                 .downfall(0.5f)
-                .waterColor(16724639)
-                .waterFogColor(16762304)
+                .waterColor(0x447ff2)
+                .waterFogColor(0x749ff2)
                 .parent(null));
     }
 }
