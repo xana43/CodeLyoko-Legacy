@@ -11,14 +11,13 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelBlock;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import scala.reflect.internal.Trees.This;
 
 public class HoloPro extends BlockContainer {
 	
@@ -30,11 +29,11 @@ public class HoloPro extends BlockContainer {
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, false));
-		
+		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 		Modblocks.BLOCKS.add(this);
 		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
-	public static final PropertyBool VALID = PropertyBool.create("valid");
+	public static PropertyBool VALID = PropertyBool.create("valid");
 	public static boolean trans = false;
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
@@ -66,7 +65,7 @@ public class HoloPro extends BlockContainer {
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		// TODO Auto-generated method stub
-		if(state == VALID)
+		if(state == VALID || trans)
 		{
 			return true;
 		}
@@ -79,7 +78,7 @@ public class HoloPro extends BlockContainer {
 	
 	@Override
 	public boolean isTranslucent(IBlockState state) {
-		if(state == VALID)
+		if(state == VALID || trans)
 		{
 			return true;
 		}
@@ -91,7 +90,7 @@ public class HoloPro extends BlockContainer {
 	
 	@Override
 	public boolean isFullCube(IBlockState state) {
-		if(state == VALID)
+		if(state == VALID || trans)
 		{
 			return false;
 		}
@@ -105,7 +104,7 @@ public class HoloPro extends BlockContainer {
 	@Override
 	public boolean isFullBlock(IBlockState state) {
 		// TODO Auto-generated method stub
-		if(state == VALID)
+		if(state == VALID || trans)
 		{
 			return false;
 		}

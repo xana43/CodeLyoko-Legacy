@@ -1,7 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake.Util;
 
-import net.minecraftforge.common.DimensionManager;
-
 public class ref {
 
 	public static final String MOD_ID = "cm";

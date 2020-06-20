@@ -27,8 +27,8 @@ public class COOL extends BlockFluidClassic{
 		//setDensity(10);
 		this.getFluid().setDensity(40);
 		
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		//Modblocks.BLOCKS.add(this);
+		//ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 
 	

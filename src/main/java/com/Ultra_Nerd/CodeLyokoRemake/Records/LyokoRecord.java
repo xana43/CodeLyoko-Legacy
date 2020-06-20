@@ -12,15 +12,15 @@ import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class RecordBase extends ItemRecord 
+public class LyokoRecord extends ItemRecord 
 {
 
 
 
 	private final SoundEvent sound;
-	private static final Map<SoundEvent, ItemRecord> RECORDS = Maps.<SoundEvent, ItemRecord>newHashMap();
+	private static final Map<SoundEvent, ItemRecord> RECORDSCUST = Maps.<SoundEvent, ItemRecord>newHashMap();
 
- public RecordBase(String recordName, SoundEvent sound)
+ public LyokoRecord(String recordName, SoundEvent sound)
  {
  super(recordName, sound);
 this.sound = sound;
@@ -28,16 +28,19 @@ this.setUnlocalizedName(recordName);
 this.setRegistryName(recordName);
 this.maxStackSize = 1;
 ModItems.Records.add(this);
-RECORDS.put(sound, this);
- 
+RECORDSCUST.put(sound, this);
+ModItems.Items.add(this);
 
  
  }
+ 
+ 
+ 
  @Nullable
  @SideOnly(Side.CLIENT)
  public static ItemRecord getBySound(SoundEvent soundIn)
  {
-     return RECORDS.get(soundIn);
+     return RECORDSCUST.get(soundIn);
  }
 @Override
  @SideOnly(Side.CLIENT)

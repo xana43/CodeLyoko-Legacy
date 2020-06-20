@@ -33,8 +33,7 @@ public class ProjectorTE extends TileEntity implements ITickable{
 		
 		boolean once = false;
 		boolean onceback = false;
-		if(!world.isRemote)
-		{
+		
 			
 		checkstruct();
 		once = false;
@@ -44,7 +43,8 @@ public class ProjectorTE extends TileEntity implements ITickable{
                     Block blockState = world.getBlockState(new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ())).getBlock();
                     
                     
-                    
+                    QuantSteel.SetModel2(true, world, pos);
+                	QuantSteel.trans2 = true;
 					HoloPro.trans = true;
 					
 					
@@ -79,7 +79,7 @@ public class ProjectorTE extends TileEntity implements ITickable{
 				}
 				
 				
-		}
+		
 	}
 	
 	
@@ -89,10 +89,13 @@ public class ProjectorTE extends TileEntity implements ITickable{
 	private void checkstruct()
 	{
 		
+			
+		
 		
 		x++;
 		if(x > 1)
 		{
+			System.out.println("notworking");
 			x = -1;
 			y++;
 			if(y > 0)

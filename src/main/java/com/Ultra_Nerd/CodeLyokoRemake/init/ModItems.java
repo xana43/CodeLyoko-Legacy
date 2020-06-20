@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake.init;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import com.Ultra_Nerd.CodeLyokoRemake.Base;
 import com.Ultra_Nerd.CodeLyokoRemake.Records.*;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.*;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.*;
@@ -100,7 +100,7 @@ public class ModItems
  public static ItemRecord LYOKO;
  public static void initRecords()
  {
-	 LYOKO = new RecordBase("lyoko", Souinds.THEME);
+	 LYOKO = new LyokoRecord("lyokoDisc", Souinds.THEME);
  }
  
  public static void register(Item item)
@@ -113,6 +113,9 @@ public class ModItems
 	 for(Item records : ModItems.Records)
 	 {
 		 register(records); 
+		 
+		Base.proxy.registerItemRenderer(records, 0,"inventory");
+			
 	 }
 	 
 	

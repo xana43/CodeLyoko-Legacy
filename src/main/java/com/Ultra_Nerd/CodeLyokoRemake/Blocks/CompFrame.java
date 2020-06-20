@@ -10,7 +10,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.world.IBlockAccess;
 
 public class CompFrame extends Block 

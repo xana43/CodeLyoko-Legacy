@@ -68,14 +68,16 @@ public class Base {
 		Souinds.Regso();
 		Conf.RegisCon(event);
 		EntRend.RegisterCustomMeshesAndStates();
+		TEH.regte();
 	}
 	
 	@EventHandler
 	public static void init(FMLInitializationEvent event)
 	{
 		ModRes.ini();
+		ModItems.initRecords();
+		ModItems.reg();
 		
-		TEH.regte();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Base.instance, new guihandle());
 		Oredict.registerOres();
 	}
@@ -92,8 +94,7 @@ public class Base {
 	public static void Postinit(FMLPostInitializationEvent event)
 	{
 		ModDimensions.registerDims();
-		ModItems.initRecords();
-		ModItems.reg();
+		
 	}
 	@EventHandler
 	public static void servertinit(FMLServerStartingEvent event)
