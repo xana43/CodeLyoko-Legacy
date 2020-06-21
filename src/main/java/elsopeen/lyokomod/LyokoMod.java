@@ -2,6 +2,7 @@ package elsopeen.lyokomod;
 
 import elsopeen.lyokomod.init.*;
 import elsopeen.lyokomod.world.WorldGen;
+import elsopeen.lyokomod.world.template.LyokoPlacement;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
@@ -83,6 +84,8 @@ public class LyokoMod {
 
         // Register Dimensions
         ModDimensions.DIMENSIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+        LyokoPlacement.TOWER_MIN22.getRegistryName();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

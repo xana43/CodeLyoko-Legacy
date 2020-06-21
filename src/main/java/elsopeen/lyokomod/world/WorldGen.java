@@ -2,14 +2,13 @@ package elsopeen.lyokomod.world;
 
 import elsopeen.lyokomod.init.ModBiomes;
 import elsopeen.lyokomod.init.ModStructures;
+import elsopeen.lyokomod.world.template.LyokoPlacement;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.placement.ChanceConfig;
-import net.minecraft.world.gen.placement.IPlacementConfig;
-import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.placement.*;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public class WorldGen {
      */
     private static void addSurfaceStructure(Biome biome, Structure<NoFeatureConfig> structure) {
         biome.func_226711_a_(structure.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
-        biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, structure.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+        biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, structure.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(LyokoPlacement.TOWER_MIN22.func_227446_a_(new FrequencyConfig(5))));
         structures.add(structure);
     }
 

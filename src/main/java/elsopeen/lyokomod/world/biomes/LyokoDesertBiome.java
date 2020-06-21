@@ -16,8 +16,8 @@ public class LyokoDesertBiome extends Biome {
                 .scale(1.5f)
                 .temperature(1.5f)
                 .downfall(0.5f)
-                .waterColor(16724639)
-                .waterFogColor(16762304)
+                .waterColor(0x0d186b)
+                .waterFogColor(0x0d186b)
                 .parent(null));
     }
 }

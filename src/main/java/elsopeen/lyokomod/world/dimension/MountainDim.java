@@ -51,7 +51,7 @@ public class MountainDim extends Dimension {
 
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
-        return Vec3d.ZERO;
+        return new Vec3d(0xdb,0xc2,0xff);
     }
 
     @Override

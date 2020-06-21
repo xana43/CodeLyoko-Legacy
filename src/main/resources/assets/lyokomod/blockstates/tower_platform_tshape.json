@@ -1,8 +1,8 @@
 {
   "variants": {
-    "facing=south": { "model": "lyokomod:block/tower_platform_tshape", "y": 270 },
+    "facing=south": { "model": "lyokomod:block/tower_platform_tshape", "y": 90 },
     "facing=east": { "model": "lyokomod:block/tower_platform_tshape", "y": 0 },
-    "facing=north": { "model": "lyokomod:block/tower_platform_tshape", "y": 90 },
+    "facing=north": { "model": "lyokomod:block/tower_platform_tshape", "y": 270 },
     "facing=west": { "model": "lyokomod:block/tower_platform_tshape", "y": 180 }
   }
 }

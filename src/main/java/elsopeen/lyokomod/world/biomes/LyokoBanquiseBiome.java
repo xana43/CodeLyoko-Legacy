@@ -17,8 +17,8 @@ public class LyokoBanquiseBiome extends Biome {
                 .scale(1.5f)
                 .temperature(0.5f)
                 .downfall(0.5f)
-                .waterColor(0x447ff2)
-                .waterFogColor(0x749ff2)
+                .waterColor(0x0d186b)
+                .waterFogColor(0x0d186b)
                 .parent(null));
     }
 }

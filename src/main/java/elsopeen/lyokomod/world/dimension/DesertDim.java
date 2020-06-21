@@ -51,7 +51,7 @@ public class DesertDim extends Dimension {
 
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
-        return Vec3d.ZERO;
+        return new Vec3d(0xff,0xea,0x8c);
     }
 
     @Override

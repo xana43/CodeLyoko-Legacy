@@ -55,7 +55,7 @@ public class ForestDim extends Dimension {
 
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
-        return Vec3d.ZERO;
+        return new Vec3d(0xe5,0xff,0xde);
     }
 
     @Override
