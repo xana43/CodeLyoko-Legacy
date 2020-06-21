@@ -1,6 +1,7 @@
 package elsopeen.lyokomod;
 
 import elsopeen.lyokomod.init.*;
+import elsopeen.lyokomod.world.WorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
@@ -18,6 +19,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -29,6 +31,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 
@@ -91,16 +94,9 @@ public class LyokoMod {
         LOGGER.info("INTERFACE >> {}", ModBlocks.INTERFACE.get().getRegistryName());
         LOGGER.info("tour >> {}", ModStructures.TOWER.get().getRegistryName());
         DeferredWorkQueue.runLater(() -> {
-            LOGGER.info("Starting Tower adding");
-            Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
-            biomes.forEachRemaining((biome) -> {
-                LOGGER.info("Adding tower in {}", biome.getRegistryName());
-                biome.func_226711_a_(ModStructures.TOWER.get().func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
 
-                biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES,
-                        ModStructures.TOWER.get().func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG)
-                                .func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
-            });
+            ModStructurePieceTypes.registerPieces();
+            WorldGen.setupWorldGen();
         });
     }
 

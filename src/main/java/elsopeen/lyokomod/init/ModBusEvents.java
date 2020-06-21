@@ -1,8 +1,8 @@
 package elsopeen.lyokomod.init;
 
 import elsopeen.lyokomod.LyokoMod;
-import elsopeen.lyokomod.structures.Tower;
-import elsopeen.lyokomod.structures.pieces.TowerPiece;
+import elsopeen.lyokomod.world.structures.Tower;
+import elsopeen.lyokomod.world.structures.pieces.TowerPiece;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.Feature;

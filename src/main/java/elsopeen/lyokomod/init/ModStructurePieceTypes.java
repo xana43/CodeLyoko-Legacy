@@ -1,15 +1,17 @@
 package elsopeen.lyokomod.init;
 
-import elsopeen.lyokomod.structures.pieces.TowerPiece;
+import elsopeen.lyokomod.world.structures.pieces.TowerPiece;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraftforge.registries.ObjectHolder;
 
 public class ModStructurePieceTypes {
 
-    public static final ResourceLocation TOWER_LOC = new ResourceLocation("lyokomod:structures/tower");
+    public static final ResourceLocation TOWER_LOC = new ResourceLocation("lyokomod:tower");
 
-    public static IStructurePieceType TOWER_PIECE = null;
+    public static IStructurePieceType TOWER_PIECE = TowerPiece.Piece::new;
+
+    public static void registerPieces() {
+        Registry.register(Registry.STRUCTURE_PIECE, TOWER_LOC, TOWER_PIECE);
+    }
 }

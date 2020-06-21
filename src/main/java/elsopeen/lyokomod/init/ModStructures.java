@@ -1,11 +1,10 @@
 package elsopeen.lyokomod.init;
 
 import elsopeen.lyokomod.LyokoMod;
-import elsopeen.lyokomod.structures.Tower;
+import elsopeen.lyokomod.world.structures.Tower;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.ScatteredStructure;
-import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
