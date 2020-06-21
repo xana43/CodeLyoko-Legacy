@@ -15,7 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  */
 public class ModBlocks {
 
-    public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, LyokoMod.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, LyokoMod.MOD_ID);
 
     //Register the tutorial block with "tutorial_block" as registry name and default ROCK properties
     public static final RegistryObject<Block> MOUNTAIN_ROCK = BLOCKS.register("mountain_rock", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f)));

@@ -1,5 +1,6 @@
 package elsopeen.lyokomod.world.dimension;
 
+import elsopeen.lyokomod.init.ModBlocks;
 import elsopeen.lyokomod.world.dimension.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -19,9 +20,11 @@ public class BanquiseDim extends Dimension {
 
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
+        LyokoGenSettings lyokoGenSettings = new LyokoGenSettings();
+        lyokoGenSettings.setDefaultBlock(ModBlocks.BANQUISE_ICE.get().getDefaultState());
         return new LyokoChunkGenerator(world,
                 new LyokoBanquiseBiomeProvider(new LyokoBiomeProviderSettings(this.world.getWorldInfo())),
-                new LyokoGenSettings());
+                lyokoGenSettings);
     }
 
     @Nullable

@@ -33,11 +33,16 @@ import java.util.Random;
 public class TowerPiece {
 
     public static void register() {
-        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(LyokoMod.MOD_ID, "towers"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new LyokoSingleJigsawPiece(LyokoMod.MOD_ID + ":tower"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
+        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(LyokoMod.MOD_ID, "towers"),
+                new ResourceLocation("lyokomod:tower"),
+                ImmutableList.of(Pair.of(new LyokoSingleJigsawPiece(LyokoMod.MOD_ID + ":tower"), 1)),
+                JigsawPattern.PlacementBehaviour.RIGID));
     }
 
-    public static void generate(ChunkGenerator<?> generator, TemplateManager templateManager, BlockPos position, List<StructurePiece> pieces, SharedSeedRandom random) {
-        JigsawManager.func_214889_a(new ResourceLocation(LyokoMod.MOD_ID, "towers"), 7, Piece::new, generator, templateManager, position, pieces, random);
+    public static void generate(ChunkGenerator<?> generator, TemplateManager templateManager, BlockPos position,
+                                List<StructurePiece> pieces, SharedSeedRandom random) {
+        JigsawManager.func_214889_a(new ResourceLocation(LyokoMod.MOD_ID, "towers"),
+                7, Piece::new, generator, templateManager, position, pieces, random);
     }
 
     public static class Piece extends AbstractVillagePiece {

@@ -10,7 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModStructures {
-    public static final DeferredRegister<Feature<?>> FEATURES = new DeferredRegister<>(ForgeRegistries.FEATURES, LyokoMod.MOD_ID);
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, LyokoMod.MOD_ID);
 
     public static final RegistryObject<ScatteredStructure<NoFeatureConfig>> TOWER = FEATURES.register("tower", () -> new Tower(NoFeatureConfig::deserialize));
 }

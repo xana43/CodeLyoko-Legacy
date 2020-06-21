@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  */
 public class ModItems {
 
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, LyokoMod.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, LyokoMod.MOD_ID);
 
     //Register the tutorial dust with "tutorial_dust" as registry name and default properties
     public static final RegistryObject<Item> MOUNTAIN_ROCK = ITEMS.register("mountain_rock", () -> new BlockItem(ModBlocks.MOUNTAIN_ROCK.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));

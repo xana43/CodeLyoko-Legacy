@@ -17,7 +17,7 @@ public final class ModContainerTypes {
 
     private static final Logger LOGGER = LogManager.getLogger(LyokoMod.MOD_ID + " Mod Container Types register");
 
-    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = new DeferredRegister<>(ForgeRegistries.CONTAINERS, LyokoMod.MOD_ID);
+    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, LyokoMod.MOD_ID);
 
     public static final RegistryObject<ContainerType<InterfaceContainer>> INTERFACE_CONTAINER =
             CONTAINER_TYPES.register("interface_container",

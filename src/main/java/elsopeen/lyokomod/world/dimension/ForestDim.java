@@ -1,6 +1,7 @@
 package elsopeen.lyokomod.world.dimension;
 
 
+import elsopeen.lyokomod.init.ModBlocks;
 import elsopeen.lyokomod.world.dimension.util.LyokoForestBiomeProvider;
 import elsopeen.lyokomod.world.dimension.util.LyokoBiomeProviderSettings;
 import elsopeen.lyokomod.world.dimension.util.LyokoChunkGenerator;
@@ -23,9 +24,11 @@ public class ForestDim extends Dimension {
 
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
+        LyokoGenSettings lyokoGenSettings = new LyokoGenSettings();
+        lyokoGenSettings.setDefaultBlock(ModBlocks.FOREST_GRASS.get().getDefaultState());
         return new LyokoChunkGenerator(world,
                 new LyokoForestBiomeProvider(new LyokoBiomeProviderSettings(this.world.getWorldInfo())),
-                new LyokoGenSettings());
+                lyokoGenSettings);
     }
 
     @Nullable

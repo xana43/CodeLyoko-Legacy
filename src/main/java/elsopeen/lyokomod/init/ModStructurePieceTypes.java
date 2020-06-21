@@ -12,6 +12,7 @@ public class ModStructurePieceTypes {
     public static IStructurePieceType TOWER_PIECE = TowerPiece.Piece::new;
 
     public static void registerPieces() {
+        TowerPiece.register();
         Registry.register(Registry.STRUCTURE_PIECE, TOWER_LOC, TOWER_PIECE);
     }
 }

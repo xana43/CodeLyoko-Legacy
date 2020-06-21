@@ -11,7 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModDimensions {
-    public static final DeferredRegister<ModDimension> DIMENSIONS = new DeferredRegister<>(ForgeRegistries.MOD_DIMENSIONS, LyokoMod.MOD_ID);
+    public static final DeferredRegister<ModDimension> DIMENSIONS = DeferredRegister.create(ForgeRegistries.MOD_DIMENSIONS, LyokoMod.MOD_ID);
 
     public static final RegistryObject<ModDimension> LYOKO_FOREST = DIMENSIONS.register("forest", ForestModDim::new);
     public static final RegistryObject<ModDimension> LYOKO_MOUNTAIN = DIMENSIONS.register("mountain", MountainModDim::new);
