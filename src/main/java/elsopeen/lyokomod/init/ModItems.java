@@ -2,7 +2,9 @@ package elsopeen.lyokomod.init;
 
 import elsopeen.lyokomod.LyokoMod;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -32,5 +34,5 @@ public class ModItems {
     public static final RegistryObject<Item> TOWER_BOTTOM_RESET = ITEMS.register("tower_bottom_reset", ()->new BlockItem(ModBlocks.TOWER_BOTTOM_RESET.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> TOWER_TOP = ITEMS.register("tower_top", ()->new BlockItem(ModBlocks.TOWER_TOP.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> TOWER_MUSH = ITEMS.register("tower_mush", ()->new BlockItem(ModBlocks.TOWER_MUSH.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
-
+    public static final RegistryObject<Item> NUMERIC_SEA_BUCKET = ITEMS.register("numeric_sea_bucket", ()->new BucketItem(ModFluids.NUMERIC_SEA::get, (new Item.Properties()).containerItem(Items.BUCKET).maxStackSize(1).group(ModItemGroups.CODE_LYOKO_ITEMS)));
 }

@@ -22,6 +22,7 @@ public class MountainDim extends Dimension {
     public ChunkGenerator<?> createChunkGenerator() {
         LyokoGenSettings lyokoGenSettings = new LyokoGenSettings();
         lyokoGenSettings.setDefaultBlock(ModBlocks.MOUNTAIN_ROCK.get().getDefaultState());
+        lyokoGenSettings.setDefaultFluid(ModBlocks.NUMERIC_SEA_FLUID_BLOCK.get().getDefaultState());
         return new LyokoChunkGenerator(world,
                 new LyokoMountainBiomeProvider(new LyokoBiomeProviderSettings(this.world.getWorldInfo())),
                 lyokoGenSettings);

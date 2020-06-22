@@ -26,6 +26,7 @@ public class ForestDim extends Dimension {
     public ChunkGenerator<?> createChunkGenerator() {
         LyokoGenSettings lyokoGenSettings = new LyokoGenSettings();
         lyokoGenSettings.setDefaultBlock(ModBlocks.FOREST_GRASS.get().getDefaultState());
+        lyokoGenSettings.setDefaultFluid(ModBlocks.NUMERIC_SEA_FLUID_BLOCK.get().getDefaultState());
         return new LyokoChunkGenerator(world,
                 new LyokoForestBiomeProvider(new LyokoBiomeProviderSettings(this.world.getWorldInfo())),
                 lyokoGenSettings);

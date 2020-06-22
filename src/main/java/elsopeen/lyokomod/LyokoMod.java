@@ -85,6 +85,9 @@ public class LyokoMod {
         // Register Dimensions
         ModDimensions.DIMENSIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
+        // Register Fluids
+        ModFluids.FLUIDS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
         LyokoPlacement.TOWER_MIN22.getRegistryName();
 
         // Register ourselves for server and other game events we are interested in

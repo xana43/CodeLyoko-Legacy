@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.lwjgl.system.CallbackI;
 
 /**
  * Registering class for blocks
@@ -34,4 +35,5 @@ public class ModBlocks {
     public static final RegistryObject<Block> TOWER_BOTTOM_RESET = BLOCKS.register("tower_bottom_reset", ()->new TowerBottomResetBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(-1.f)));
     public static final RegistryObject<Block> TOWER_TOP = BLOCKS.register("tower_top", ()->new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f).lightValue(15)));
     public static final RegistryObject<Block> TOWER_MUSH = BLOCKS.register("tower_mush", ()->new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f).lightValue(15)));
+    public static final RegistryObject<Block> NUMERIC_SEA_FLUID_BLOCK = BLOCKS.register("numeric_sea_block", ()->new NumericSeaFluidBlock(ModFluids.NUMERIC_SEA::get, Block.Properties.create(Material.WATER).hardnessAndResistance(-1.f).doesNotBlockMovement().noDrops()));
 }

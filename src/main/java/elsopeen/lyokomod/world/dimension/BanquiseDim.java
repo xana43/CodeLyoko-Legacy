@@ -22,6 +22,7 @@ public class BanquiseDim extends Dimension {
     public ChunkGenerator<?> createChunkGenerator() {
         LyokoGenSettings lyokoGenSettings = new LyokoGenSettings();
         lyokoGenSettings.setDefaultBlock(ModBlocks.BANQUISE_ICE.get().getDefaultState());
+        lyokoGenSettings.setDefaultFluid(ModBlocks.NUMERIC_SEA_FLUID_BLOCK.get().getDefaultState());
         return new LyokoChunkGenerator(world,
                 new LyokoBanquiseBiomeProvider(new LyokoBiomeProviderSettings(this.world.getWorldInfo())),
                 lyokoGenSettings);

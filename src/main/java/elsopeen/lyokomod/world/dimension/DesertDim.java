@@ -22,6 +22,7 @@ public class DesertDim extends Dimension {
     public ChunkGenerator<?> createChunkGenerator() {
         LyokoGenSettings lyokoGenSettings = new LyokoGenSettings();
         lyokoGenSettings.setDefaultBlock(ModBlocks.DESERT_SAND.get().getDefaultState());
+        lyokoGenSettings.setDefaultFluid(ModBlocks.NUMERIC_SEA_FLUID_BLOCK.get().getDefaultState());
         return new LyokoChunkGenerator(world,
                 new LyokoDesertBiomeProvider(new LyokoBiomeProviderSettings(this.world.getWorldInfo())),
                 lyokoGenSettings);

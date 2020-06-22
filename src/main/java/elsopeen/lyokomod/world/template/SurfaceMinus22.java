@@ -27,7 +27,7 @@ public class SurfaceMinus22 extends Placement<FrequencyConfig> {
         return IntStream.range(0, configIn.count).mapToObj((p_227441_3_) -> {
             int i = random.nextInt(16) + pos.getX();
             int j = random.nextInt(16) + pos.getZ();
-            int k = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE_WG, i, j) - 22;
+            int k = worldIn.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, i, j) - 22;
             return k <= 22 ? null : new BlockPos(i, random.nextInt(k), j);
         }).filter(Objects::nonNull);
     }

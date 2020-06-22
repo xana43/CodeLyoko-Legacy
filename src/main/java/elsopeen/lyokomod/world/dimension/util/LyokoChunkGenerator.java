@@ -8,7 +8,7 @@ import net.minecraft.world.gen.EndGenerationSettings;
 public class LyokoChunkGenerator extends NoiseChunkGenerator<LyokoGenSettings> {
 
     public LyokoChunkGenerator(IWorld worldIn, BiomeProvider provider, LyokoGenSettings settingsIn) {
-        super(worldIn, provider, 8, 4, 96, settingsIn, true);
+        super(worldIn, provider, 8, 4, 64, settingsIn, true);
         this.randomSeed.skip(2620);
     }
 
@@ -23,7 +23,7 @@ public class LyokoChunkGenerator extends NoiseChunkGenerator<LyokoGenSettings> {
         this.func_222546_a(noiseColumn, noiseX, noiseZ,
                 1368.824D, 684.412D,
                 17.110300000000002D, 4.277575000000001D,
-                64, -300);
+                64, -200);
     }
 
 

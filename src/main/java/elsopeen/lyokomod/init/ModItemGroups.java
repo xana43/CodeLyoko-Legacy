@@ -25,5 +25,6 @@ public class ModItemGroups {
     }
 
     public static final ItemGroup CODE_LYOKO_BLOCKS = new ModItemGroup("code_lyoko_blocks", () -> new ItemStack(ModItems.INTERFACE.get()));
+    public static final ItemGroup CODE_LYOKO_ITEMS = new ModItemGroup("code_lyoko_items", ()-> new ItemStack(ModItems.NUMERIC_SEA_BUCKET.get()));
 
 }

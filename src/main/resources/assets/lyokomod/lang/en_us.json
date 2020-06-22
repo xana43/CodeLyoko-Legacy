@@ -6,6 +6,7 @@
   "block.lyokomod.banquise_ice": "Banquise Ice",
   "block.lyokomod.interface": "Interface",
   "itemGroup.code_lyoko_blocks": "Code Lyoko Blocks",
+  "itemGroup.code_lyoko_items": "Code Lyoko Items",
   "gui.lyokomod.interface": "Interface",
   "gui.lyokomod.interface_input": "Code ?",
   "block.lyokomod.tower_base": "Tower Base",
@@ -17,5 +18,9 @@
   "block.lyokomod.tower_platform_center": "Tower Platform Center",
   "block.lyokomod.tower_bottom_reset": "Tower Default Bottom",
   "block.lyokomod.tower_top": "Tower Top",
-  "block.lyokomod.tower_mush": "Tower Mush"
+  "block.lyokomod.tower_mush": "Tower Mush",
+  "fluid.lyokomod.numeric_sea": "Numeric Sea",
+  "fluid.lyokomod.flowing_numeric_sea": "Flowing Numeric Sea",
+  "item.lyokomod.numeric_sea_bucket": "Numeric Sea Bucket",
+  "block.lyokomod.numeric_sea_block": "Numeric Sea Fluid Blocks"
 }
