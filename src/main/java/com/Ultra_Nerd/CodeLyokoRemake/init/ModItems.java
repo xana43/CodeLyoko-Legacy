@@ -4,30 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.Ultra_Nerd.CodeLyokoRemake.Base;
-import com.Ultra_Nerd.CodeLyokoRemake.Records.*;
-import com.Ultra_Nerd.CodeLyokoRemake.Util.*;
-import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.*;
-import com.Ultra_Nerd.CodeLyokoRemake.items.*;
-import com.Ultra_Nerd.CodeLyokoRemake.items.armor.*;
+import com.Ultra_Nerd.CodeLyokoRemake.Records.LyokoRecord;
+import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
+import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Souinds;
+import com.Ultra_Nerd.CodeLyokoRemake.items.ItemBase;
+import com.Ultra_Nerd.CodeLyokoRemake.items.armor.ArmorBase;
 import com.Ultra_Nerd.CodeLyokoRemake.items.cust.LaserArrow;
-import com.Ultra_Nerd.CodeLyokoRemake.items.tools.*;
+import com.Ultra_Nerd.CodeLyokoRemake.items.tools.LaserArrowShooter;
+import com.Ultra_Nerd.CodeLyokoRemake.items.tools.QuantSpade;
+import com.Ultra_Nerd.CodeLyokoRemake.items.tools.QuantSword;
+import com.Ultra_Nerd.CodeLyokoRemake.items.tools.Zweihander;
 
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.registries.ForgeRegistry;
 
 public class ModItems 
 {

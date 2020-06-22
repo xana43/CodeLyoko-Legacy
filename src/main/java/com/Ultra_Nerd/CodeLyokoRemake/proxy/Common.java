@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoRemake.proxy;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.util.text.translation.I18n;
 
 public class Common {
 	

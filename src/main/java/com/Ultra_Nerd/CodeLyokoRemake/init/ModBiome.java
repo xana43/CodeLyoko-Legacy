@@ -1,15 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoRemake.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
-import com.Ultra_Nerd.CodeLyokoRemake.world.biome.*;
+import com.Ultra_Nerd.CodeLyokoRemake.world.biome.LyokoDES;
+import com.Ultra_Nerd.CodeLyokoRemake.world.biome.LyokoFS;
+import com.Ultra_Nerd.CodeLyokoRemake.world.biome.LyokoICE;
+import com.Ultra_Nerd.CodeLyokoRemake.world.biome.LyokoM;
+import com.Ultra_Nerd.CodeLyokoRemake.world.biome.LyokoOC;
 
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.BiomeDictionary.Type;
 public class ModBiome {
 	
 	public static final Biome LYOKO_FS = new LyokoFS();

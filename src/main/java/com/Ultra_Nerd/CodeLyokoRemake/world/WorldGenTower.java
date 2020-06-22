@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 import com.Ultra_Nerd.CodeLyokoRemake.world.biome.LyokoFS;

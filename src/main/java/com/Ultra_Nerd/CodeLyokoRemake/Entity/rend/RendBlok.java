@@ -4,7 +4,6 @@ import com.Ultra_Nerd.CodeLyokoRemake.Entity.Entityblok;
 import com.Ultra_Nerd.CodeLyokoRemake.Entity.model.ModelBlok;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 
-
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

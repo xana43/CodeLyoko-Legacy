@@ -3,18 +3,13 @@ package com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride;
 import java.util.Random;
 
 import com.Ultra_Nerd.CodeLyokoRemake.Base;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.blockBase;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.ComputerReactor;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.TileEntityElectricInfusingChamber;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.TileEntityInfusingChamber;
-import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -26,8 +21,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

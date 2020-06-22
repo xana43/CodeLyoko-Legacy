@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake.Entity.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
 
 /**
  * ModelCreeper - Either Mojang or a mod author

@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride;
 
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.TileEntityElectricInfusingChamber;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity.TileEntityInfusingChamber;
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 
 import net.minecraft.client.gui.inventory.GuiContainer;

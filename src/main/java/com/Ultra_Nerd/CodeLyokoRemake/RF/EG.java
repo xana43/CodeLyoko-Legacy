@@ -1,7 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake.RF;
 
-import javax.swing.border.CompoundBorder;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.energy.EnergyStorage;
 

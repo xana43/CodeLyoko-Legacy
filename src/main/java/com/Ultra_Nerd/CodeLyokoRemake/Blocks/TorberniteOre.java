@@ -3,17 +3,26 @@ package com.Ultra_Nerd.CodeLyokoRemake.Blocks;
 import java.util.Random;
 
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 
-public class TorberniteOre extends blockBase {
+public class TorberniteOre extends Block {
 	
 	public TorberniteOre(String name, Material material)
 	{
-		super(name, material);
+		super(material);
+		setUnlocalizedName(name);
+		setRegistryName(name);
+		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+		Modblocks.BLOCKS.add(this);
+		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		setSoundType(SoundType.STONE);
 		setHardness(6.0f);
 		setResistance(10);

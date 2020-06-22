@@ -2,9 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake.world.dimension;
 
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModBiome;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModDimensions;
-import com.Ultra_Nerd.CodeLyokoRemake.world.biome.Bepis;
 
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;

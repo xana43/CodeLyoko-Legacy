@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoRemake.Util.handlers;
 
 
 import com.Ultra_Nerd.CodeLyokoRemake.Base;
-import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake.commands.ComTel;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
@@ -10,7 +9,6 @@ import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;

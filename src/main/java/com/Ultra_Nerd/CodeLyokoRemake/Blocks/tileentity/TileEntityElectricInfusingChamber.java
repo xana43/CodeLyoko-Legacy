@@ -1,35 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride.ElectricFlourideInfuser;
-import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride.FlourideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride.FlourideRes;
 import com.Ultra_Nerd.CodeLyokoRemake.RF.EG;
-import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 

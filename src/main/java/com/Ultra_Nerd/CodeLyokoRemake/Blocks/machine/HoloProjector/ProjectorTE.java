@@ -2,22 +2,13 @@ package com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.HoloProjector;
 
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.HoloPro;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.QuantSteel;
-import com.Ultra_Nerd.CodeLyokoRemake.RF.EG;
-import com.Ultra_Nerd.CodeLyokoRemake.Util.compat.Oredict;
-import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 
-import cofh.redstoneflux.api.IEnergyReceiver;
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 
 public class ProjectorTE extends TileEntity implements ITickable{
 

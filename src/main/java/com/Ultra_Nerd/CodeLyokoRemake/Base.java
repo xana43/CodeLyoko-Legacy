@@ -23,7 +23,6 @@ import com.Ultra_Nerd.CodeLyokoRemake.proxy.Common;
 import com.Ultra_Nerd.CodeLyokoRemake.world.ModGen;
 import com.Ultra_Nerd.CodeLyokoRemake.world.WorldGenTower;
 
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;

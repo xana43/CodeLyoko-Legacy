@@ -1,11 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake.Util.handlers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 
-import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
