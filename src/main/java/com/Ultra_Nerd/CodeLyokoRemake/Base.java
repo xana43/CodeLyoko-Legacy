@@ -57,6 +57,7 @@ public class Base {
 		OBJLoader.INSTANCE.addDomain(ref.MOD_ID);
 		
 		
+		
 		ModFluids.REGFLU();
 		
 		GameRegistry.registerWorldGenerator(new ModGen(), 3);
@@ -66,6 +67,8 @@ public class Base {
 		GameRegistry.registerWorldGenerator(new WorldGenTower(), 0);
 		ModEntities.registerenit();
 		Souinds.Regso();
+		ModItems.initRecords();
+		ModItems.reg();
 		Conf.RegisCon(event);
 		EntRend.RegisterCustomMeshesAndStates();
 		TEH.regte();
@@ -75,8 +78,7 @@ public class Base {
 	public static void init(FMLInitializationEvent event)
 	{
 		ModRes.ini();
-		ModItems.initRecords();
-		ModItems.reg();
+		
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(Base.instance, new guihandle());
 		Oredict.registerOres();

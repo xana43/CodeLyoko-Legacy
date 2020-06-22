@@ -57,12 +57,6 @@ public class registry
 		EntRend.registerEntityRenderers();
 		
 
-		 for(Item records : ModItems.Records)
-		 {
-			 
-			Base.proxy.registerItemRenderer(records, 0,"inventory");
-				
-		 }
 		
 		for(Item item : ModItems.Items)
 		{

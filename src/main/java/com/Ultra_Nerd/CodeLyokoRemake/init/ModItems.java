@@ -12,7 +12,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.items.armor.*;
 import com.Ultra_Nerd.CodeLyokoRemake.items.cust.LaserArrow;
 import com.Ultra_Nerd.CodeLyokoRemake.items.tools.*;
 
-
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -22,9 +22,12 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.ForgeRegistry;
 
 public class ModItems 
 {
@@ -106,6 +109,7 @@ public class ModItems
  public static void register(Item item)
  {
 	 ForgeRegistries.ITEMS.register(item);
+	 
  }
  
  public static void reg() {
@@ -115,6 +119,7 @@ public class ModItems
 		 register(records); 
 		 
 		Base.proxy.registerItemRenderer(records, 0,"inventory");
+		
 			
 	 }
 	 
