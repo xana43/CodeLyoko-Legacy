@@ -9,7 +9,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
@@ -25,7 +24,7 @@ public class tt extends BlockHorizontal {
 public tt(String name) {
     super(Material.CIRCUITS);
     setSoundType(SoundType.GLASS);
-    setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+    setCreativeTab(null);
     setUnlocalizedName(name);
     setRegistryName(name);
     setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
