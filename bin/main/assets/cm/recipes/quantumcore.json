@@ -1,0 +1,33 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "GDG",
+        "DQD",
+        "GDG"
+    ],
+    
+    "key":
+    {
+        "Q":
+        {
+            "item": "cm:quantum_block"
+        },
+        "G":
+        {
+            "item": "minecraft:glowstone"
+        },
+        "D":
+        {
+            "item": "minecraft:diamond"
+        }
+        
+    },
+    
+    "result":
+    {
+        "item": "cm:quantum_core",
+        "count": 4
+    }
+}

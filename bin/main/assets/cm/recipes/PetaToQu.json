@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "MMM",
+        "MBM",
+        "MMM"
+    ],
+    
+    "key":
+    {
+        "B":
+        {
+            "item": "cm:PetaByte"
+        },
+        
+        "M":
+        {
+            "item": "cm:qubit"
+        }
+        
+    },
+    
+    "result":
+    {
+        "item": "cm:QuByte",
+        "count": 4
+    }
+}

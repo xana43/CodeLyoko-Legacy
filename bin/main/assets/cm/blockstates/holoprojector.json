@@ -1,0 +1,8 @@
+{
+    "forge_marker": 1,
+    "variants": 
+    {
+        "valid=false":{"model": "holoprojector"},
+        "valid=true":{"model":"cm:holo.obj"}
+    }
+}

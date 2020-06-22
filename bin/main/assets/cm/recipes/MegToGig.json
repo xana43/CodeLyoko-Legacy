@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "GGG",
+        "GBG",
+        "GGG"
+    ],
+    
+    "key":
+    {
+        "B":
+        {
+            "item": "cm:Megabyte"
+        },
+        
+        "G":
+        {
+            "item": "cm:gigabit"
+        }
+        
+    },
+    
+    "result":
+    {
+        "item": "cm:GigaByte",
+        "count": 4
+    }
+}

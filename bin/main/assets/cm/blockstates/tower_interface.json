@@ -1,0 +1,10 @@
+{
+"variants":
+  {
+  "facing=north":{"model":"cm:tower_interface"},
+  "facing=east":{"model":"cm:tower_interface", "y": 90},
+  "facing=south":{"model":"cm:tower_interface", "y": 180},
+  "facing=west":{"model":"cm:tower_interface", "y" : 270}
+ 
+  }
+}

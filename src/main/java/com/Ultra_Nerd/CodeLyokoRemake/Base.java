@@ -24,6 +24,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.world.ModGen;
 import com.Ultra_Nerd.CodeLyokoRemake.world.WorldGenTower;
 
 import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -32,12 +33,11 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.network.NetworkRegistry;
 
-@Mod(modid = ref.MOD_ID, name = ref.NAME, version = ref.VERSION)
+@Mod(ref.MOD_ID)
 
 public class Base {
 

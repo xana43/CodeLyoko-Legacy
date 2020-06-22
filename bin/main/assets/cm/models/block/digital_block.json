@@ -1,0 +1,13 @@
+{
+   "parent": "block/cube_all",
+   "textures": {
+    "particle":"cm:blocks/digital_blocktop",
+       "up": "cm:blocks/digital_blocktop",
+       "down":"cm:blocks/dd",
+       "north":"cm:blocks/dgs",
+       "south":"cm:blocks/dgs",
+       "east":"cm:blocks/dgs",
+       "west":"cm:blocks/dgs"
+       
+   }
+}
