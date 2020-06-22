@@ -29,6 +29,21 @@ public class EntityLaser extends EntityArrow {
 	}
 	
 	@Override
+	protected boolean makeFlySound() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+ 
+	
+	@Override
+	public void setDamage(double damageIn) {
+		// TODO Auto-generated method stub
+		super.setDamage(10);
+	}
+	
+	@Override
 	protected void arrowHit(EntityLivingBase live) {
 		if(!this.world.isRemote)
 		{

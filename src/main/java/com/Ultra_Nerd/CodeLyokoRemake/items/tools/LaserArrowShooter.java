@@ -6,7 +6,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 
 
-public class LaserArrowShooter extends Item{
+public class LaserArrowShooter extends ItemBow{
 
 	public LaserArrowShooter(String name)
 	{
@@ -30,17 +30,28 @@ public class LaserArrowShooter extends Item{
 		
 	}
 	
-	
+	 
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ItemStack item = playerIn.getHeldItem(handIn);
+		ItemStack arrow = null;
+		for(int i = 0; i < playerIn.inventory.getSizeInventory();i++)
+		{
+			arrow = playerIn.inventory.getStackInSlot(i);
+		}
+		
+		if(arrow.getItem() == ModItems.LASERARROW)
+		{
+			arrow.setCount(arrow.getCount() - 1);
+		}
+		
 		Vec3d aim = playerIn.getLookVec();
 		worldIn.playSound(null,playerIn.posX, playerIn.posY, playerIn.posZ, Souinds.SHOOT, SoundCategory.NEUTRAL, 1f, 1f);
 		EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 		
-		las.setPosition(playerIn.posX + aim.x * 1.5D, playerIn.chasingPosY + aim.y * 1.68D, playerIn.posZ + aim.z * 1.5D);
-		las.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0f, 1.5f, 0.5f);		
+		las.setPosition(playerIn.posX + aim.x * 1.5D, playerIn.posY + aim.y * 1.9D, playerIn.posZ + aim.z * 1.5D);
+		las.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0f, 10f, 0f);		
 		if(!worldIn.isRemote)
 		{
 			worldIn.spawnEntity(las);

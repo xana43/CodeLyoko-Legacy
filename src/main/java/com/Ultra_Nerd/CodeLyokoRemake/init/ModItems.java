@@ -20,6 +20,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemSword;
@@ -77,7 +78,7 @@ public class ModItems
  public static final ItemSword ZWEIHANDER = new Zweihander("zweihander", MATERIAL_WARRIOR);
  public static final ItemSword QUANTUM_SABER = new QuantSword("quantum_saber", MATERIAL_QUANTUM);
  public static final ItemSpade DIGITAL_SAMPLER = new QuantSpade("digital_sampler", MATERIAL_QUANTUM);
- public static final Item LASER_ARROWSHOOTER = new LaserArrowShooter("laser_arrowshooter");
+ public static final ItemBow LASER_ARROWSHOOTER = new LaserArrowShooter("laser_arrowshooter");
  public static final ItemSword DIGITAL_SABER = new QuantSword("digital_saber", MATERIAL_SAMURAI);  
  //armor
  public static final Item DIGITAL_ENVELOPE_CAP = new ArmorBase("digital_envelope_cap", ARMOR_MATERIAL_BITS, 1 , EntityEquipmentSlot.HEAD);
