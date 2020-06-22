@@ -28,13 +28,23 @@ public class ComputerReactor extends TileEntity implements ITickable
 	public void update() {
 		if(!handle.getStackInSlot(0).isEmpty() && isItemFuel(handle.getStackInSlot(0)));
 		{
-			Fission++;
-			if(Fission == 40)
+			if(handle.getStackInSlot(0).getItem() == ModItems.URANIUM_ISOTOPE238 || handle.getStackInSlot(0).getItem() == ModItems.URANIUM_ISOTOPE235)
 			{
-				energy += getFuelValue(handle.getStackInSlot(0));
-				handle.getStackInSlot(0).shrink(1);
+				Fission++;
+					if(Fission == 40)
+					{
+			
+					
+						energy += getFuelValue(handle.getStackInSlot(0));
+						handle.getStackInSlot(0).shrink(1);
+						Fission = 0;
+					}
+			}
+			else
+			{
 				Fission = 0;
 			}
+				
 		}
 		
 	}
@@ -45,8 +55,18 @@ public class ComputerReactor extends TileEntity implements ITickable
 	}
 
 	private int getFuelValue(ItemStack stackInSlot) {
-		if(stackInSlot.getItem() == ModItems.URANIUM_ISOTOPE23S5) return 20000;
-		else return 0;
+			if(stackInSlot.getItem() == ModItems.URANIUM_ISOTOPE235)
+			{
+			return 20000;
+			}
+			else if(stackInSlot.getItem() == ModItems.URANIUM_ISOTOPE238)
+			{
+			return 10000;
+			}
+			else 
+			{
+			return 0;
+			}
 		
 			
 		
@@ -54,16 +74,28 @@ public class ComputerReactor extends TileEntity implements ITickable
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if(capability == CapabilityEnergy.ENERGY) return(T)this.store;
-		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return (T)this.handle;
+		if(capability == CapabilityEnergy.ENERGY)
+			{
+			return (T)this.store;
+			}
+		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+			{
+			return (T)this.handle;
+			}
 		return super.getCapability(capability, facing);
 	}
 	
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		
-		if(capability == CapabilityEnergy.ENERGY) return true;
-		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return true;
+		if(capability == CapabilityEnergy.ENERGY) 
+		{
+			return true;
+		}
+		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+			{
+			return true;
+			}
 		return super.hasCapability(capability, facing);
 	}
 	

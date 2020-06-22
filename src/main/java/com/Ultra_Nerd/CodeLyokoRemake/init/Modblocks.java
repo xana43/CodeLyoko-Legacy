@@ -42,6 +42,7 @@ import com.Ultra_Nerd.CodeLyokoRemake.Blocks.UraniniteOre;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.UraniumBlock;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.UraniumReactor;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.Virutalization;
+import com.Ultra_Nerd.CodeLyokoRemake.Blocks.sector5block;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tree;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.tt;
 import com.Ultra_Nerd.CodeLyokoRemake.Blocks.machine.flouride.ElectricFlourideInfuser;
@@ -89,6 +90,7 @@ public class Modblocks
   public static final Block TRANSPARENT = new Trans("transparent", Material.STRUCTURE_VOID);
   public static final Block QUANTUM_STEEL = new QuantSteel("quantum_steel", Material.IRON);
   public static final Block URANIUM_BLOCK = new UraniumBlock("uranium_block", Material.IRON);
+  public static final Block SECTOR_5 = new sector5block("sector5ground", Material.BARRIER);
   //public static final Block URANOPHANE_ORE
   //public static final Block SKLODOWSKITE_ORE
   public static final Block SILICA_SAND = new SilicaSand("silica_sand", Material.SAND);

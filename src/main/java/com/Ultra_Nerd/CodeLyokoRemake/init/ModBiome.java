@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Conf;
+import com.Ultra_Nerd.CodeLyokoRemake.world.biome.Lyoko5;
 import com.Ultra_Nerd.CodeLyokoRemake.world.biome.LyokoDES;
 import com.Ultra_Nerd.CodeLyokoRemake.world.biome.LyokoFS;
 import com.Ultra_Nerd.CodeLyokoRemake.world.biome.LyokoICE;
@@ -21,6 +22,7 @@ public class ModBiome {
     public static final Biome LYOKO_DESERT = new LyokoDES();
     public static final Biome LYOKO_OCEAN = new LyokoOC();
     public static final Biome LYOKO_M = new LyokoM();
+    public static final Biome SECTOR_5 = new Lyoko5();
 	public static void registerBiomes()
 	{
         initBiome(LYOKO_M, "Lyoko_M", BiomeType.WARM, Type.MOUNTAIN);
@@ -28,6 +30,7 @@ public class ModBiome {
 		initBiome(LYOKO_OCEAN, "Lyoko_OCEAN", BiomeType.COOL, Type.OCEAN);
         initBiome(LYOKO_ICE, "Lyoko_ICE", BiomeType.ICY, Type.COLD);
         initBiome(LYOKO_DESERT, "Lyoko_DESERT", BiomeType.DESERT, Type.HOT);
+        initBiome(SECTOR_5,"sector5",BiomeType.ICY,Type.DEAD);
        
 	}
 	

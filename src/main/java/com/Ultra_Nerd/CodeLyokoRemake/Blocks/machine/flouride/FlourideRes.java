@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoRemake.init.Modblocks;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
@@ -23,11 +24,12 @@ public class FlourideRes
 	
 	private FlourideRes() 
 	{
-		addSinteringRecipe(new ItemStack(ModItems.URANIUM_DIOXIDE), new ItemStack(ModItems.FLOURIDE), new ItemStack(ModItems.URANIUM_ISOTOPE23S5), 5.0F);
+		addRefiningRecipe(new ItemStack(ModItems.URANIUM_DIOXIDE), new ItemStack(ModItems.FLOURIDE), new ItemStack(ModItems.URANIUM_ISOTOPE238), 5.0F);
+		addRefiningRecipe(new ItemStack(ModItems.URANIUM_MELT), new ItemStack(Modblocks.FLOURITE_BLOCK), new ItemStack(ModItems.URANIUM_ISOTOPE238), 1f);
 	}
 
 	
-	public void addSinteringRecipe(ItemStack input1, ItemStack input2, ItemStack result, float experience) 
+	public void addRefiningRecipe(ItemStack input1, ItemStack input2, ItemStack result, float experience) 
 	{
 		if(getInfusingResult(input1, input2) != ItemStack.EMPTY) return;
 		if(getInfusingResult(input2, input1) != ItemStack.EMPTY) return;

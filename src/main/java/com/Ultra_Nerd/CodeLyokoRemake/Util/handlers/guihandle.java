@@ -33,7 +33,7 @@ public class guihandle implements IGuiHandler {
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		if(ID == Conf.INFUSING) return new gui(player.inventory, (TileEntityInfusingChamber)world.getTileEntity(new BlockPos(x, y, z)));
 		if(ID == Conf.URANIUM) return new ReactorGUI(player.inventory, (ComputerReactor)world.getTileEntity(new BlockPos(x, y, z)));
-		if(ID == Conf.INTERFACE) return new TowerGUI(player.inventory, (Interface)world.getTileEntity(new BlockPos(x, y, z)));
+		if(ID == Conf.INTERFACE) return new TowerGUI((Interface)world.getTileEntity(new BlockPos(x, y, z)));
 		if(ID == Conf.ELEINFUSING) return new electricgui(player.inventory, (TileEntityElectricInfusingChamber)world.getTileEntity(new BlockPos(x, y, z)));
 		return null;
 	}

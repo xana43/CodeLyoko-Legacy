@@ -1,46 +1,60 @@
 package com.Ultra_Nerd.CodeLyokoRemake.Blocks.tileentity;
 
 
+import org.lwjgl.opengl.GL11;
+
 import com.Ultra_Nerd.CodeLyokoRemake.Util.ref;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
 
-public class TowerGUI extends GuiContainer
+public class TowerGUI extends GuiScreen
 {
 	private static final ResourceLocation TEXTURES = new ResourceLocation(ref.MOD_ID + ":textures/gui/tower.png");
-	private final InventoryPlayer player;
-	private final Interface tileentity;
 	
-	public TowerGUI(InventoryPlayer player, Interface tileentity) 
+	private Interface tileentity;
+	private final int sizeX = 512, sizeY = 256;
+	int posX,posY;
+	
+	public TowerGUI(Interface tileentity) 
 	{
-		super(new TowerContainer(player,tileentity));
-		this.player = player;
+		
+	
 		this.tileentity = tileentity;
 	}
 	
-	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) 
+	public void initGui() 
 	{
-		String tileName = this.tileentity.getDisplayName().getUnformattedText();
-		this.fontRenderer.drawString(tileName, (this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2) -5, 6, 4210752);
-		this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 7, this.ySize - 96 + 2, 4210752);
+		// TODO Auto-generated method stub
+		this.buttonList.clear();
+		posX = (this.width - sizeX) / 2;
+		posY = (this.height - sizeY)/ 2;
+		this.buttonList.add(new GuiButton(0,posX + 4, posY + 4, 20,20, "test"));
+		
+	}
+	
+	public void actionPerformced(GuiButton button)
+	{
+		switch(button.id)
+		{
+		case 0:
+			break;
+		}
 		
 	}
 	
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-	{
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-		this.mc.getTextureManager().bindTexture(TEXTURES);
-		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
-		
-		
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		// TODO Auto-generated method stub
+		drawDefaultBackground();
+		GL11.glColor4f(0, 0, 255, 1);
+		this.mc.renderEngine.bindTexture(TEXTURES);
+		int posX = (this.width - sizeX)  / 2;
+		int posY = (this.height - sizeY) / 2;
+		drawTexturedModalRect(posX,posY, 0, 0, sizeX,sizeY);
+		this.drawString(fontRenderer, "test", posX + 20, posY + 32,4210752);
 	}
-	
-	
 	
 	
 }

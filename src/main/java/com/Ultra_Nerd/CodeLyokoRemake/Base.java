@@ -60,7 +60,7 @@ public class Base {
 		ModFluids.REGFLU();
 		
 		GameRegistry.registerWorldGenerator(new ModGen(), 3);
-		ModBiome.registerBiomes();
+		
 		
 		
 		GameRegistry.registerWorldGenerator(new WorldGenTower(), 0);
@@ -78,7 +78,7 @@ public class Base {
 	{
 		ModRes.ini();
 		
-		
+		ModBiome.registerBiomes();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Base.instance, new guihandle());
 		Oredict.registerOres();
 	}

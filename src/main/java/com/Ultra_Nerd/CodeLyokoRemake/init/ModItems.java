@@ -55,8 +55,7 @@ public class ModItems
  public static final Item URANIUM_DIOXIDE = new ItemBase("uranium_dioxide");
  public static final Item URANIUM_MELT = new ItemBase("uranium_melt");
  public static final Item URANIUM_ISOTOPE238 = new ItemBase("uranium238");
- public static final Item URANIUM_ISOTOPE23S5 = new ItemBase("uranium23/5");
- public static final Item URANIUM_ISOTOPE235U = new ItemBase("uranium235");
+ public static final Item URANIUM_ISOTOPE235 = new ItemBase("uranium235");
  public static final Item RAW_SILICADUST = new ItemBase("raw_silicadust");
  public static final Item TRIURANIUM_OCTAOXIDE = new ItemBase("triuranium_octaoxide");
  public static final Item FLOURIDE = new ItemBase("flouride");

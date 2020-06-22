@@ -69,7 +69,7 @@ public void setSkyRenderer(IRenderHandler skyRenderer) {
 @Override
 protected void generateLightBrightnessTable() {
 	// TODO Auto-generated method stub
-	float f = 0.0F;
+	//float f = 0.0F;
 
     for (int i = 0; i <= 15; ++i)
     {
@@ -81,7 +81,7 @@ protected void generateLightBrightnessTable() {
 @Override
 public boolean canBlockFreeze(BlockPos pos, boolean byWater) {
 	// TODO Auto-generated method stub
-	return false;
+	return true;
 }
 
 

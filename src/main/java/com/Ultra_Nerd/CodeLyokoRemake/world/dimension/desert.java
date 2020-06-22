@@ -69,11 +69,11 @@ public void setSkyRenderer(IRenderHandler skyRenderer) {
 @Override
 protected void generateLightBrightnessTable() {
 	// TODO Auto-generated method stub
-	float f = 0.0F;
+	//float f = 0.0F;
 
     for (int i = 0; i <= 15; ++i)
     {
-        float f1 = 1.0F - (float)i / 15.0F;
+       // float f1 = 1.0F - (float)i / 15.0F;
         this.lightBrightnessTable[i] = 2f;
     }
 }

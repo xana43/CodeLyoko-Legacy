@@ -12,10 +12,13 @@ public class Oredict {
 		OreDictionary.registerOre("oreUranium", Modblocks.COFFINITE_ORE);
 		OreDictionary.registerOre("dustUranium", ModItems.URANIUM_DIOXIDE);
 		OreDictionary.registerOre("oreUranium", ModItems.URANIUM_MELT);
-		OreDictionary.registerOre("ingotUranium", ModItems.URANIUM_ISOTOPE235U);
-		OreDictionary.registerOre("ingotUranium", ModItems.URANIUM_ISOTOPE238);
-		OreDictionary.registerOre("ingotUranium", ModItems.URANIUM_ISOTOPE23S5);
+		OreDictionary.registerOre("ingotUranium", ModItems.URANIUM_ISOTOPE235);
 		OreDictionary.registerOre("dustUranium", ModItems.URANIUM_SILACATE);
+		OreDictionary.registerOre("ingotTitanium", ModItems.TITANIUM);
+		OreDictionary.registerOre("oreUranium", Modblocks.CARNOTITE_ORE);
+		OreDictionary.registerOre("oreUranium", Modblocks.AUTUNITE_ORE);
+		OreDictionary.registerOre("oreUranium", Modblocks.GUMMITE_ORE);
+		OreDictionary.registerOre("oreUranium", Modblocks.SALEEITE_ORE);
 	}
 
 }
