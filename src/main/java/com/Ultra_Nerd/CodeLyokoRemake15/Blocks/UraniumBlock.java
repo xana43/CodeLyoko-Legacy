@@ -6,13 +6,8 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class UraniumBlock extends Block {
 
@@ -32,17 +27,7 @@ public class UraniumBlock extends Block {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-		// TODO Auto-generated method stub
-		 entityIn.attackEntityFrom(new DamageSource(this.getUnlocalizedName()), RANDOM.nextInt(1));
-	}
 	
-	@Override
-	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-		// TODO Auto-generated method stub
-		entityIn.attackEntityFrom(new DamageSource(this.getUnlocalizedName()), RANDOM.nextInt(1));
-	}
 	
 	
 	 

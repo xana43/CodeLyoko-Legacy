@@ -2,37 +2,38 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 
 import javax.annotation.Nullable;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 
 public class TowerBlockNonSolid extends Block {
 	
 	
 	
-	public TowerBlockNonSolid(String name, Material material)
+	public TowerBlockNonSolid()
 	{
-		super(material);
-		setSoundType(SoundType.GLASS);
-		setHardness(20);
-		setResistance(20);
-		setHarvestLevel("spade", 20);
-		setLightLevel(4);
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		super(Block.Properties.create(Material.IRON)
+				
+				.hardnessAndResistance(20, 20)
+				.sound(SoundType.GLASS)
+				.lightValue(0)
+				.harvestLevel(20)
+				.harvestTool(ToolType.SHOVEL)
+					
+					
+					
+					
+			);
+		
 		
 	}
 	
@@ -41,27 +42,37 @@ public class TowerBlockNonSolid extends Block {
 		return null;
 	}
 	
+	
+	
+	
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos,
+			ISelectionContext context) {
 		// TODO Auto-generated method stub
-		return null;
+	return null;
 	}
 
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-	
-	
-	public AxisAlignedBB GetCollisionBoxesEvent()
-	{
-		return null;
-		
-	}
 	
 	@Override
-	public boolean isOpaqueCube(IBlockState state) {
+	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public boolean isTransparent(BlockState state) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+  @Override
+public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	// TODO Auto-generated method stub
+	return false;
+}	
+	
+  
+	
+
 	
 }

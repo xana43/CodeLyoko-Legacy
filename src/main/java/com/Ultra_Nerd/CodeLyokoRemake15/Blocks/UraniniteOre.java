@@ -1,29 +1,28 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
+import net.minecraftforge.common.ToolType;
 
 public class UraniniteOre extends Block {
 	
-	public UraniniteOre(String name, Material material)
+	public UraniniteOre()
 	{
-		super(material);
-		setSoundType(SoundType.STONE);
-		setHardness(6.0f);
-		setResistance(10);
-		setHarvestLevel("pickaxe", 1);
-		setLightLevel(0.01f);
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+super(Block.Properties.create(Material.IRON)
+				
+				.hardnessAndResistance(6, 10)
+				.sound(SoundType.STONE)
+				.lightValue(1)
+				.harvestLevel(1)
+				.harvestTool(ToolType.PICKAXE)
+				
+					
+					
+					
+					
+			);
+		
 		
 	}
 	

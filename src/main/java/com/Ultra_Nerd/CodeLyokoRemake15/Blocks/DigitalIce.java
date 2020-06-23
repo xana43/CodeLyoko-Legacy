@@ -1,29 +1,25 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
 
 public class DigitalIce extends Block {
 	
-	public DigitalIce(String name, Material material)
+	public DigitalIce()
 	{
-		super(material);
-		setSoundType(SoundType.GLASS);
-		setHardness(20);
-		setResistance(10);
-		setHarvestLevel("spade", 20);
-		setLightLevel(0.0f);
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		super(Block.Properties.create(Material.ICE)
+				
+				.hardnessAndResistance(40, 10)
+				.sound(SoundType.GLASS)
+				.lightValue(0)
+				.harvestLevel(3)
+				
+					
+					
+					
+					
+			);
 	}
 	
 	
