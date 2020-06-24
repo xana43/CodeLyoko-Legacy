@@ -51,6 +51,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.items.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityType;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -76,7 +77,10 @@ public class registry
 	public static final DeferredRegister<TileEntityType<?>> Tiles = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, Base.MOD_ID);
 	public static final DeferredRegister<ContainerType<?>> Containers = new DeferredRegister<>(ForgeRegistries.CONTAINERS, Base.MOD_ID);
 	public static final DeferredRegister<EntityType<?>> Entities = new DeferredRegister<>(ForgeRegistries.ENTITIES, Base.MOD_ID);
+    public static final DeferredRegister<Fluid> WATER = new DeferredRegister<>(ForgeRegistries.FLUIDS, Base.MOD_ID);
     
+    //for fluids
+    public static final RegistryObject<Fluid> DIGITAL_OCEAN = WATER.register("digital_ocean", DIO::new);
 	//for items
 	 public static final RegistryObject<Item> SOLID_QUANTUM = ITEMS.register("solid_quantum", ItemBase::new);
 
@@ -136,7 +140,7 @@ public class registry
 	 public static final RegistryObject<Block> DIGITAL_BLOCK = BLOCKS.register("digital_block",DigialGrass::new);
 	 public static final RegistryObject<Block> DIGITAL_ROCK = BLOCKS.register("digital_rock", DigitalRock::new);
 	 public static final RegistryObject<Block> DIGITAL_ICE = BLOCKS.register("digital_ice", DigitalIce::new);
-	 public static final RegistryObject<Block> DIGITAL_OCEAN = new DIO("digital_ocean", ModFluids.DIGITAL_SEA, Material.WATER);
+	 //public static final RegistryObject<Block> DIGITAL_OCEAN = new DIO("digital_ocean", ModFluids.DIGITAL_SEA, Material.WATER);
 	 public static final RegistryObject<Block> DIGITAL_SAND = BLOCKS.register("digital_sand",Dsand::new);
 	 public static final RegistryObject<Block> ELECTRICFLOURIDE_INFUSER = BLOCKS.register("electric_flouride_infuser",ElectricFlourideInfuser::new);
 	 public static final RegistryObject<Block> FLOURIDE_INFUSER = BLOCKS.register("floride_infuser",FlourideInfuser::new);
@@ -150,26 +154,26 @@ public class registry
 	 public static final RegistryObject<Block> MOUNTAIN_TREE = BLOCKS.register("mountain_tree",MTree::new);
 	 public static final RegistryObject<Block> QUANTUM_BLOCK = BLOCKS.register("quantum_block",QuantumBlock::new);
 	 public static final RegistryObject<Block> QUANTUM_CORE = BLOCKS.register("quantum_core",QuantumCore::new);
-	 public static final RegistryObject<Block> QUANTUM_STEEL = new QuantSteel("quantum_steel", Material.IRON);
-	 public static final RegistryObject<Block> SALEEITE_ORE = new SaleeiteOre("saleeite_ore", Material.ROCK);
-	 public static final RegistryObject<Block> SECTOR_5 = new sector5block("sector5ground", Material.BARRIER);
+	 public static final RegistryObject<Block> QUANTUM_STEEL = BLOCKS.register("quantum_steel",QuantSteel::new);
+	 public static final RegistryObject<Block> SALEEITE_ORE = BLOCKS.register("saleeite_ore", SaleeiteOre::new);
+	 public static final RegistryObject<Block> SECTOR_5 = BLOCKS.register("sector5ground",sector5block::new);
 	 public static final RegistryObject<Block> SCANNER_BASE = BLOCKS.register("scanner_base", Virutalization::new);
-	 public static final RegistryObject<Block> Storage = new UniversalEnergyBlock("universal", Material.IRON);
+	 public static final RegistryObject<Block> Storage = BLOCKS.register("universal", UniversalEnergyBlock::new);
 	//public static final RegistryObject<Block> SKLODOWSKITE_ORE
-	 public static final RegistryObject<Block> SILICA_SAND = new SilicaSand("silica_sand", Material.SAND);
+	 public static final RegistryObject<Block> SILICA_SAND = BLOCKS.register("silica_sand",SilicaSand::new);
 	 public static final RegistryObject<Block> TOWER_WHITE = BLOCKS.register("tower_white", TowerBlockWhite::new);
 	 public static final RegistryObject<Block> TOWER_INTERFACE = BLOCKS.register("tower_interface",TowerInterface::new);
 	 public static final RegistryObject<Block> TOWER_BASE = BLOCKS.register("tower_base", TowerBase::new);
-	 public static final RegistryObject<Block> TT = new tt("tt");
+	 public static final RegistryObject<Block> TT = BLOCKS.register("tt",tt::new);
 	 public static final RegistryObject<Block> TOWER_BLUE = BLOCKS.register("tower_blue", TowerBlockBlue::new);
-	 public static final RegistryObject<Block> TYUYAMUNITE_ORE = new TyuyamuniteOre("tyuyamunite_ore", Material.ROCK);
-	 public static final RegistryObject<Block> TORBERNITE_ORE = new TorberniteOre("torbernite_ore", Material.ROCK);
+	 public static final RegistryObject<Block> TYUYAMUNITE_ORE = BLOCKS.register("tyuyamunite_ore",TyuyamuniteOre::new);
+	 public static final RegistryObject<Block> TORBERNITE_ORE = BLOCKS.register("torbernite_ore",TorberniteOre::new);
 	 public static final RegistryObject<Block> TOWER_ENTER = BLOCKS.register("tower_enter", TowerBlockNonSolid::new);
 	 public static final RegistryObject<Block> TITANIUM = BLOCKS.register("titanium",Titanium::new);
-	 public static final RegistryObject<Block> TRANSPARENT = new Trans("transparent", Material.STRUCTURE_VOID);
-	 public static final RegistryObject<Block> URANUM_REACTOR = new UraniumReactor("computer_reactor", Material.CIRCUITS);
+	 public static final RegistryObject<Block> TRANSPARENT = BLOCKS.register("transparent",Trans::new);
+	 public static final RegistryObject<Block> URANUM_REACTOR = BLOCKS.register("computer_reactor",UraniumReactor::new);
 	 public static final RegistryObject<Block> URANINITE_ORE = BLOCKS.register("uraninite_ore",UraniniteOre::new);
-	 public static final RegistryObject<Block> URANIUM_BLOCK = new UraniumBlock("uranium_block", Material.IRON);
+	 public static final RegistryObject<Block> URANIUM_BLOCK = BLOCKS.register("uranium_block",UraniumBlock::new);
 	//public static final RegistryObject<Block> URANOPHANE_ORE =  Blocks.register("uranophane_ore", UranophaneOre::new);
 	  
 	  

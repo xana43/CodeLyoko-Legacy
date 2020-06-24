@@ -14,7 +14,6 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class ModBiome {
 	
 	public static final Biome LYOKO_FS = new LyokoFS();
@@ -38,7 +37,7 @@ public class ModBiome {
 	private static Biome initBiome(Biome biome, String name, BiomeType biometype, Type... types)
 	{
 		biome.setRegistryName(name);
-		ForgeRegistries.BIOMES.register(biome);
+		net.minecraftforge.registries.ForgeRegistries.BIOMES.register(biome);
 		BiomeDictionary.addTypes(biome, types);
 		
 				

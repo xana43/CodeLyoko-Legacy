@@ -5,25 +5,22 @@ import java.util.Random;
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.tileentity.TileEntityElectricInfusingChamber;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.IProperty;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -32,18 +29,22 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 
 public class ElectricFlourideInfuser extends Block{
 
-	public ElectricFlourideInfuser(String name, Material material) {
-		super(material);
-		setSoundType(SoundType.METAL);
+	public ElectricFlourideInfuser() {
+super(Block.Properties.create(Material.IRON)
+				
+				.hardnessAndResistance(6, 10)
+				.sound(SoundType.METAL)
+				.lightValue(1)
+				.harvestLevel(1)
+				.harvestTool(ToolType.PICKAXE)
+				);
+		
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(INFUSING, false));
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		
 		// TODO Auto-generated constructor stub
 	}
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;

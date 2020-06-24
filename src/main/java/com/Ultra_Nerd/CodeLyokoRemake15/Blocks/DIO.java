@@ -1,37 +1,47 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.fluid.IFluidState;
+import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Direction;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.BlockFluidClassic;
-import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.common.ToolType;
 
 
-public class DIO extends BlockFluidClassic {
+public class DIO extends net.minecraft.fluid.Fluid {
 
 	
-	public DIO(String name, Fluid fluid, Material material) {
-		super(fluid, material);
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(null);
+	public DIO() {
+		super(Block.Properties.create(Material.WATER)
+				
+				.hardnessAndResistance(6, 10)
+				.sound(SoundType.STONE)
+				.lightValue(1)
+				.harvestLevel(2)
+				.harvestTool(ToolType.PICKAXE)
+			);
+		
+	
 		//setDensity(10);
 		this.getFluid().setDensity(40);
 		
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		
 	}
 	
 	@Override
@@ -79,6 +89,73 @@ public class DIO extends BlockFluidClassic {
 	public boolean canSpawnInBlock() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Item getFilledBucket() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected boolean canDisplace(IFluidState p_215665_1_, IBlockReader p_215665_2_, BlockPos p_215665_3_,
+			net.minecraft.fluid.Fluid p_215665_4_, Direction p_215665_5_) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected Vec3d getFlow(IBlockReader p_215663_1_, BlockPos p_215663_2_, IFluidState p_215663_3_) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getTickRate(IWorldReader p_205569_1_) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected float getExplosionResistance() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getActualHeight(IFluidState p_215662_1_, IBlockReader p_215662_2_, BlockPos p_215662_3_) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getHeight(IFluidState p_223407_1_) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected BlockState getBlockState(IFluidState state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isSource(IFluidState state) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int getLevel(IFluidState p_207192_1_) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public VoxelShape func_215664_b(IFluidState p_215664_1_, IBlockReader p_215664_2_, BlockPos p_215664_3_) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

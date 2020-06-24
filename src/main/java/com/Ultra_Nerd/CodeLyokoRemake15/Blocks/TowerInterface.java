@@ -3,21 +3,17 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.tileentity.Interface;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.state.IProperty;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -34,19 +30,17 @@ public class TowerInterface extends Block {
 	
 	public TowerInterface(String name, Material mats)
 	{
-		super(mats);
-		setSoundType(SoundType.METAL);
-		setHardness(-1);
-		setResistance(-1);
-		setHarvestLevel("pickaxe", -1);
-		setLightLevel(0.5f);
-		setCreativeTab(null);
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+super(Block.Properties.create(Material.IRON)
+				
+				.hardnessAndResistance(-1, -1)
+				.sound(SoundType.METAL)
+				.lightValue(1)
+				
+			);
+		
 	}
+		
+	
 	
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
