@@ -1,11 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake.Entity;
 
-import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -33,11 +30,7 @@ public class EntityLaser extends EntityArrow {
 	
 
 	
-	@Override
-	protected ItemStack getArrowStack() {
-		// TODO Auto-generated method stub
-		return new ItemStack(ModItems.LASERARROW);
-	}
+	
 	
 	@Override
 	protected boolean makeFlySound() {
