@@ -45,12 +45,14 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.tree;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.tt;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.machine.flouride.ElectricFlourideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.machine.flouride.FlourideInfuser;
+import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.tileentity.Interface;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.ItemBase;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityType;
+import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
@@ -80,7 +82,8 @@ public class registry
     public static final DeferredRegister<Fluid> WATER = new DeferredRegister<>(ForgeRegistries.FLUIDS, Base.MOD_ID);
     
     //for fluids
-    public static final RegistryObject<Fluid> DIGITAL_OCEAN = WATER.register("digital_ocean", DIO::new);
+    public static final RegistryObject<FlowingFluid> FLOWING_DIGITAL_OCEAN = WATER.register("flowing_digital_ocean",DIO::new);
+    public static final RegistryObject<FlowingFluid> DIGITAL_OCEAN = WATER.register("digital_ocean",DIO::new);
 	//for items
 	 public static final RegistryObject<Item> SOLID_QUANTUM = ITEMS.register("solid_quantum", ItemBase::new);
 
@@ -177,7 +180,8 @@ public class registry
 	//public static final RegistryObject<Block> URANOPHANE_ORE =  Blocks.register("uranophane_ore", UranophaneOre::new);
 	  
 	  
-	 
+	//for tileentities
+	    public static final RegistryObject<TileEntityType<Interface>> TOWERINTERFACE = Tiles.register("tower_interface", () -> TileEntityType.Builder.create(Interface::new, TOWER_INTERFACE.get()).build(null));
 	 
 	  
 	  

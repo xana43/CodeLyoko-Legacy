@@ -1,32 +1,38 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import javax.annotation.Nonnull;
+
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.tileentity.Interface;
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.EasyCore;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.state.IProperty;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.pathfinding.PathType;
+import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 
-public class TowerInterface extends Block {
+public class TowerInterface extends HorizontalBlock {
 	
-	public static final AxisAlignedBB INTER = new AxisAlignedBB(0.3125D, 0, 0.3125D, 0.8125D, 1.25D, 0.8125D);
+	protected static final VoxelShape SHAPE_NORMAL_Z = Block.makeCuboidShape(0.0D, 2.0D, 8.0D, 16.0D, 14.0D, 9.0D);
+    protected static final VoxelShape SHAPE_NORMAL_X = Block.makeCuboidShape(8.0D, 2.0D, 0.0D, 9.0D, 14.0D, 16.0D);
+    protected static final VoxelShape SHAPE_COLLISION = Block.makeCuboidShape(0.0D, 2.0D, 8.D, 16.D, 14.0D, 8.D);
 	
 	public TowerInterface(String name, Material mats)
 	{
@@ -37,113 +43,167 @@ super(Block.Properties.create(Material.IRON)
 				.lightValue(1)
 				
 			);
+this.setDefaultState(this.getDefaultState().with(HORIZONTAL_FACING, EasyCore.DIRECTON[0]));
 		
 	}
 		
 	
 	
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if(!worldIn.isRemote)
-		{
-			playerIn.openGui(Base.instance, Conf.INTERFACE, worldIn, pos.getX(), pos.getY(), pos.getZ());
-		}
-		return true;
-	}
-	
-	@Override
-	public boolean isOpaqueCube(IBlockState state) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	@Override
-	public boolean isFullCube(IBlockState state) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		// TODO Auto-generated method stub
-		return INTER;
-	}
-	@Override
-	public boolean hasTileEntity(IBlockState state) {
-		// TODO Auto-generated method stub
-		return true;
-	}
 
-	
-	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
-		// TODO Auto-generated method stub
-		return new Interface();
-	}
-	
-	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		Interface tileentity = (Interface)worldIn.getTileEntity(pos);
-		
-		super.breakBlock(worldIn, pos, state);
-	}
-	
-	public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    /**
+     * Checks if the block has/is a tile entity
+     * @param state BlockState when update
+     * @return boolean
+     */
+    @Override
+    public boolean hasTileEntity(final BlockState state) {
+        return true;
+    }
 
-	@Override
-	protected BlockStateContainer createBlockState() {
-	    return new BlockStateContainer(this, new IProperty[] { FACING });
-	}
-	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-		if(!worldIn.isRemote)
-		{
-			IBlockState north = worldIn.getBlockState(pos.north());
-			IBlockState south = worldIn.getBlockState(pos.south());
-			IBlockState east = worldIn.getBlockState(pos.east());
-			IBlockState west = worldIn.getBlockState(pos.west());
-			EnumFacing face = (EnumFacing)state.getValue(FACING);
-			
-			if(face == EnumFacing.NORTH && north.isFullBlock() && !south.isFullBlock()) face = EnumFacing.SOUTH;
-			else if(face == EnumFacing.SOUTH && south.isFullBlock() && !north.isFullBlock()) face = EnumFacing.NORTH;
-			else if(face == EnumFacing.EAST && east.isFullBlock() && !west.isFullBlock()) face = EnumFacing.EAST;
-			else if(face == EnumFacing.WEST && west.isFullBlock() && !east.isFullBlock()) face = EnumFacing.WEST;
-			worldIn.setBlockState(pos, state.withProperty(FACING, face), 2);
-			
-			
-		}
-		
-	}
-	@Override
-		public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-				float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-			// TODO Auto-generated method stub
-			return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-			
-		}
-	public IBlockState withRotation(IBlockState state, Rotation rot) {
-		// TODO Auto-generated method stub
-		return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
-	}
-	 
-	 @Override
-	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
-		// TODO Auto-generated method stub
-		return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
-	}
-	 
-	 @Override
-		public IBlockState getStateFromMeta(int meta) {
-			// TODO Auto-generated method stub
-			EnumFacing facing = EnumFacing.getFront(meta);
-			if(facing.getAxis() == EnumFacing.Axis.Y) facing = EnumFacing.NORTH;
-			return this.getDefaultState().withProperty(FACING, facing);
-		}
+    /**
+     * Create and returns an interface tile entity
+     * @param state BlockState when block update
+     * @param world world in which the block is
+     * @return TileEntity (InterfaceTileEntity)
+     */
+    @Override
+    public TileEntity createTileEntity(final BlockState state, final IBlockReader world) {
+        return ModTileEntityTypes.INTERFACE.get().create();
+    }
 
-		 @Override
-		public int getMetaFromState(IBlockState state) {
-			// TODO Auto-generated method stub
-			return ((EnumFacing)state.getValue(FACING)).getIndex();
-		}
+    /**
+     * Function used to "rotate" block on placement
+     * @param context Context of placement
+     * @return BlockState
+     */
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing());
+    }
+
+    /*
+     * Function used to "rotate" block on command setblock
+     * @param state BlockState on block update
+     * @param rot Current orientation of block
+     * @return new rotated block state
+     *
+    @Nonnull
+    @Override
+    public BlockState rotate(BlockState state, Rotation rot) {
+        return state.with(HORIZONTAL_FACING, rot.rotate(state.get(HORIZONTAL_FACING)));
+    }*/
+
+    /**
+     * Function to add parameters to the blockState
+     * @param builder add the HORIZONTAL_FACING BlockState.Property to our block
+     */
+    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(HORIZONTAL_FACING);
+    }
+
+    /**
+     * Function to tell if block is transparent of not
+     * @param state blockState on block update
+     * @param reader block reader
+     * @param pos pos of current block
+     * @return that light can go through
+     */
+    public boolean propagatesSkylightDown(@Nonnull BlockState state, @Nonnull IBlockReader reader, @Nonnull BlockPos pos) {
+        return true;
+    }
+
+    /**
+     * Visual hitbox (rotate depending on interface orientation)
+     * @param state state of current block
+     * @param worldIn world in which the block is
+     * @param pos pos of current block
+     * @param context how was the block selected
+     * @return a hitbox depending on orientation
+     */
+    @Nonnull
+    @Override
+    public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
+        VoxelShape voxelshape = (state.get(HORIZONTAL_FACING)==Direction.NORTH || state.get(HORIZONTAL_FACING)==Direction.SOUTH) ?
+                SHAPE_NORMAL_Z : SHAPE_NORMAL_X;
+        Vec3d vec3d = state.getOffset(worldIn, pos);
+        return voxelshape.withOffset(vec3d.x, vec3d.y, vec3d.z);
+    }
+
+    /**
+     * Don't know what that thing does
+     * Kinda hoped its name was true, but no
+     * @param state Current block state
+     * @param worldIn world in which the block is
+     * @param pos position of current block
+     * @param type type of path
+     * @return that the block allows movement
+     */
+    @Override
+    public boolean allowsMovement(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull PathType type) {
+        return true;
+    }
+
+    /**
+     * Returns collision hitbox, defined as 0 depth so you can walk through
+     * @param state current state of block
+     * @param worldIn world in which the block is
+     * @param pos position of current block
+     * @param context context of how the block is used
+     * @return a thin hitbox so people can go through
+     */
+    @Nonnull
+    @Override
+    public VoxelShape getCollisionShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
+        Vec3d vec3d = state.getOffset(worldIn, pos);
+        return SHAPE_COLLISION.withOffset(vec3d.x, vec3d.y, vec3d.z);
+    }
+
+
+    /**
+     * Called when a player right clicks our block.
+     * We use this method to open our gui.
+     * @param state current state of block
+     * @param world world in which the block is
+     * @param pos position of current block
+     * @param player player using the interface
+     * @param hand hand using the interface
+     * @param hit what kind of hit it was
+     * @return returns the kind of action triggered
+     */
+    @Nonnull
+    @Override
+    public ActionResultType onBlockActivated(@Nonnull BlockState state, World world, @Nonnull BlockPos pos, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull BlockRayTraceResult hit) {
+        if (!world.isRemote) {
+            final TileEntity tileEntity = world.getTileEntity(pos);
+            if (tileEntity instanceof Interface) {
+                NetworkHooks.openGui((ServerPlayerEntity) player, (Interface) tileEntity, pos);
+            }
+        }
+        return ActionResultType.SUCCESS;
+    }
+
+    /*public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> () -> openGui(player, worldIn, pos));
+        return true;
+    }*/
+
+
+    /*
+     * @OnlyIn(Dist.CLIENT) Makes it so this method will be removed from the class on the PHYSICAL SERVER
+     * This is because we only want to handle opening the GUI on the physical client.
+     *
+     * Opens GUI for client
+     * @param worldIn world in which the block is
+     * @param pos position of current block
+     *
+    private void openGui(final PlayerEntity player, final World worldIn, final BlockPos pos) {
+        // Only handle opening the Gui screen on the logical client
+        if (worldIn.isRemote) {
+            final TileEntity tileEntity = worldIn.getTileEntity(pos);
+            if (tileEntity instanceof InterfaceTileEntity) {
+                NetworkHooks.openGui((ServerPlayerEntity) player, (InterfaceTileEntity) tileEntity, pos);
+            }
+        }
+    }*/
 }
