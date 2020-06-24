@@ -39,14 +39,14 @@ public class LyokoSingleJigsawPiece extends SingleJigsawPiece {
 
 
     @Override
-    public boolean func_225575_a_(TemplateManager templateManager, @Nonnull IWorld world, ChunkGenerator<?> generator, @Nonnull BlockPos position, @Nonnull Rotation rotation, @Nonnull MutableBoundingBox bounds, @Nonnull Random random) {
+    public boolean place(TemplateManager templateManager, @Nonnull IWorld world, @Nonnull ChunkGenerator<?> generator, @Nonnull BlockPos position, @Nonnull Rotation rotation, @Nonnull MutableBoundingBox bounds, @Nonnull Random random) {
         Template template = templateManager.getTemplateDefaulted(this.location);
         PlacementSettings placementSettings = createPlacementSettings(rotation, bounds);
         if (!template.addBlocksToWorld(world, position, placementSettings, 18)) {
             return false;
         } else {
-            for(Template.BlockInfo blockInfo : Template.processBlockInfos(template, world, position, placementSettings, func_214857_a(templateManager, position, rotation, false))) {
-                this.func_214846_a(world, blockInfo, position, rotation, random, bounds);
+            for(Template.BlockInfo blockInfo : Template.processBlockInfos(template, world, position, placementSettings, getDataMarkers(templateManager, position, rotation, false))) {
+                this.handleDataMarker(world, blockInfo, position, rotation, random, bounds);
             }
 
             return true;

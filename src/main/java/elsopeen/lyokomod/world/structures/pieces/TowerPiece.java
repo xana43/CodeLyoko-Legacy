@@ -41,7 +41,7 @@ public class TowerPiece {
 
     public static void generate(ChunkGenerator<?> generator, TemplateManager templateManager, BlockPos position,
                                 List<StructurePiece> pieces, SharedSeedRandom random) {
-        JigsawManager.func_214889_a(new ResourceLocation(LyokoMod.MOD_ID, "towers"),
+        JigsawManager.addPieces(new ResourceLocation(LyokoMod.MOD_ID, "towers"),
                 7, Piece::new, generator, templateManager, position, pieces, random);
     }
 

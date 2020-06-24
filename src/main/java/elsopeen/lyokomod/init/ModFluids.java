@@ -11,6 +11,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModFluids {
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, LyokoMod.MOD_ID);
 
-    public static final RegistryObject<FlowingFluid> FLOWING_NUMERIC_SEA = FLUIDS.register("flowing_numeric_sea", () -> new NumericSeaFluid.Flowing());
-    public static final RegistryObject<FlowingFluid> NUMERIC_SEA = FLUIDS.register("numeric_sea", ()-> new NumericSeaFluid.Source());
+    public static final RegistryObject<FlowingFluid> FLOWING_NUMERIC_SEA = FLUIDS.register("flowing_numeric_sea", NumericSeaFluid.Flowing::new);
+    public static final RegistryObject<FlowingFluid> NUMERIC_SEA = FLUIDS.register("numeric_sea", NumericSeaFluid.Source::new);
 }

@@ -1,6 +1,5 @@
 package elsopeen.lyokomod.world.dimension;
 
-
 import elsopeen.lyokomod.init.ModBlocks;
 import elsopeen.lyokomod.world.dimension.util.LyokoForestBiomeProvider;
 import elsopeen.lyokomod.world.dimension.util.LyokoBiomeProviderSettings;
@@ -14,6 +13,7 @@ import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ForestDim extends Dimension {
@@ -22,6 +22,7 @@ public class ForestDim extends Dimension {
         super(world, dimensionType, 0.0f);
     }
 
+    @Nonnull
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
         LyokoGenSettings lyokoGenSettings = new LyokoGenSettings();
@@ -34,7 +35,7 @@ public class ForestDim extends Dimension {
 
     @Nullable
     @Override
-    public BlockPos findSpawn(ChunkPos chunkPosIn, boolean checkValid) {
+    public BlockPos findSpawn(@Nonnull ChunkPos chunkPosIn, boolean checkValid) {
         return null;
     }
 
@@ -54,6 +55,7 @@ public class ForestDim extends Dimension {
         return false;
     }
 
+    @Nonnull
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
         return new Vec3d(0xe5,0xff,0xde);

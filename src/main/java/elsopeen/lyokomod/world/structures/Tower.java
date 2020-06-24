@@ -1,35 +1,23 @@
 package elsopeen.lyokomod.world.structures;
 
-import com.google.common.math.StatsAccumulator;
 import com.mojang.datafixers.Dynamic;
-import elsopeen.lyokomod.init.ModStructurePieceTypes;
 import elsopeen.lyokomod.init.ModStructures;
 import elsopeen.lyokomod.world.structures.pieces.TowerPiece;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.ScatteredStructure;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
-import net.minecraft.world.gen.feature.template.PlacementSettings;
-import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import net.minecraft.world.server.ServerWorld;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Random;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Function;
 
 public class Tower extends ScatteredStructure<NoFeatureConfig> {
@@ -45,15 +33,17 @@ public class Tower extends ScatteredStructure<NoFeatureConfig> {
 
     @Nullable
     @Override
-    public BlockPos findNearest(World worldIn, ChunkGenerator<? extends GenerationSettings> chunkGenerator, BlockPos pos, int radius, boolean p_211405_5_) {
+    public BlockPos findNearest(@Nonnull World worldIn, @Nonnull ChunkGenerator<? extends GenerationSettings> chunkGenerator, @Nonnull BlockPos pos, int radius, boolean p_211405_5_) {
         return super.findNearest(worldIn, chunkGenerator, pos, radius, p_211405_5_);
     }
 
+    @Nonnull
     @Override
     public IStartFactory getStartFactory() {
         return Start::new;
     }
 
+    @Nonnull
     @Override
     public String getStructureName() {
         return ModStructures.TOWER.getId().getNamespace();
@@ -71,7 +61,8 @@ public class Tower extends ScatteredStructure<NoFeatureConfig> {
         }
 
         @Override
-        public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
+        public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManagerIn,
+                         int chunkX, int chunkZ, @Nonnull Biome biomeIn) {
             int worldX = chunkX * 16;
             int worldZ = chunkZ * 16;
             BlockPos blockpos = new BlockPos(worldX, 0, worldZ);

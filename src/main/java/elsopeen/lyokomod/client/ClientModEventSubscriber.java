@@ -39,7 +39,6 @@ public final class ClientModEventSubscriber {
 			ScreenManager.registerFactory(ModContainerTypes.INTERFACE_CONTAINER.get(), InterfaceScreen::new);
 			LOGGER.debug("Registered ContainerType Screens");
 		});
-
 	}
 
 }

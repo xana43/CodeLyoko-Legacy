@@ -44,8 +44,8 @@ public class WorldGen {
      * @param structure The structure to add.
      */
     private static void addSurfaceStructure(Biome biome, Structure<NoFeatureConfig> structure) {
-        biome.func_226711_a_(structure.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
-        biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, structure.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(LyokoPlacement.TOWER_MIN22.func_227446_a_(new FrequencyConfig(5))));
+        biome.addStructure(structure.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
+        biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, structure.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(LyokoPlacement.TOWER_MIN22.configure(new FrequencyConfig(5))));
         structures.add(structure);
     }
 
@@ -55,8 +55,8 @@ public class WorldGen {
      * @param structure The structure to add.
      */
     private static void addUndergroundStructure(Biome biome, Structure<NoFeatureConfig> structure) {
-        biome.func_226711_a_(structure.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG));
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, structure.func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(LyokoPlacement.TOWER_MIN22.func_227446_a_(new FrequencyConfig(8))));
+        biome.addStructure(structure.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
+        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, structure.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(LyokoPlacement.TOWER_MIN22.configure(new FrequencyConfig(8))));
         structures.add(structure);
     }
 }

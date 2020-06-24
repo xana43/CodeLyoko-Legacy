@@ -2,9 +2,11 @@ package elsopeen.lyokomod.world.dimension.util;
 
 import com.google.common.collect.ImmutableSet;
 import elsopeen.lyokomod.init.ModBiomes;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
 
+import javax.annotation.Nonnull;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -32,9 +34,10 @@ public class LyokoBanquiseBiomeProvider extends BiomeProvider {
         return biomeList.get(biomeList.size() - 1);
     }
 
+    @Nonnull
     @Override
-    public Biome func_225526_b_(int x, int y, int z) {
-        return getBiome(new LinkedList<Biome>(biomeList),
+    public Biome getNoiseBiome(int x, int y, int z) {
+        return getBiome(new LinkedList<>(biomeList),
                 biomeNoise.getValue((double) x / biomeSize, (double) y / biomeSize, (double) z / biomeSize));
     }
 }

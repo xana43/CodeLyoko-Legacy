@@ -1,13 +1,11 @@
 package elsopeen.lyokomod.blocks;
 
-import elsopeen.lyokomod.init.ModTileEntityTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +13,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+
+import javax.annotation.Nonnull;
 
 /**
  * Tower base block for all towers on LYOKO
@@ -57,60 +57,65 @@ public class TowerBaseBlock extends HorizontalBlock {
      * Function used to "rotate" block on command setblock
      * @param state BlockState on block update
      * @param rot Current orientation of block
-     * @return
+     * @return new rotated block state
      */
+    @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.with(HORIZONTAL_FACING, rot.rotate(state.get(HORIZONTAL_FACING)));
     }
 
     @Override
-    public int getLightValue(BlockState state) {
+    public int getLightValue(@Nonnull BlockState state) {
         return 15;
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        VoxelShape voxelshape = VISUAL_SHAPE;
+    public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos,
+                               @Nonnull ISelectionContext context) {
         Vec3d vec3d = state.getOffset(worldIn, pos);
-        return voxelshape.withOffset(vec3d.x, vec3d.y, vec3d.z);
+        return VISUAL_SHAPE.withOffset(vec3d.x, vec3d.y, vec3d.z);
     }
 
     /**
      * Function to tell if block is transparent of not
      * @param state blockState on block update
-     * @param reader
-     * @param pos
+     * @param reader block reader
+     * @param pos position of current block
      * @return that light can go through
      */
-    public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
+    public boolean propagatesSkylightDown(@Nonnull BlockState state, @Nonnull IBlockReader reader, @Nonnull BlockPos pos) {
         return true;
     }
 
     /**
      * Don't know what that thing does
      * Kinda hoped its name was true, but no
-     * @param state
-     * @param worldIn
-     * @param pos
-     * @param type
+     * @param state current state of block
+     * @param worldIn world in which the block is
+     * @param pos position of block
+     * @param type type of path
      * @return that the block allows movement
      */
     @Override
-    public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+    public boolean allowsMovement(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos,
+                                  @Nonnull PathType type) {
         return true;
     }
 
     /**
      * Returns collision hitbox, defined as 0 depth so you can walk through
-     * @param state
-     * @param worldIn
-     * @param pos
-     * @param context
+     * @param state current state of block
+     * @param worldIn world in which the block is
+     * @param pos current position of block
+     * @param context context of usage
      * @return a thin hitbox so people can go through
      */
+    @Nonnull
     @Override
-    public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getCollisionShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos,
+                                        @Nonnull ISelectionContext context) {
         Vec3d vec3d = state.getOffset(worldIn, pos);
         return COLLISION_SHAPE.withOffset(vec3d.x, vec3d.y, vec3d.z);
     }
