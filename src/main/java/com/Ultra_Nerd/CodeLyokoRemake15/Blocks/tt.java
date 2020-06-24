@@ -1,17 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.state.IProperty;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
@@ -23,15 +19,17 @@ import net.minecraft.world.World;
 public class tt extends BlockHorizontal {
 
 public tt(String name) {
-    super(Material.CIRCUITS);
-    setSoundType(SoundType.GLASS);
-    setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-    setUnlocalizedName(name);
-    setRegistryName(name);
-    setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-
-    Modblocks.BLOCKS.add(this);
-    ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+	super(Block.Properties.create(Material.MISCELLANEOUS)
+			
+			.hardnessAndResistance(-1, -1)
+			.sound(SoundType.GLASS)
+			.lightValue(4)
+				
+				
+				
+				
+		);
+    
 }
 
 public static final PropertyDirection FACING = BlockHorizontal.FACING;
@@ -64,6 +62,9 @@ public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
 	}
 	
 }
+
+
+
 @Override
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {

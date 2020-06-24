@@ -50,9 +50,11 @@ import com.Ultra_Nerd.CodeLyokoRemake15.items.ItemBase;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityType;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -66,9 +68,15 @@ public class registry
 	{
 		ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        Tiles.register(FMLJavaModLoadingContext.get().getModEventBus());
+        Entities.register(FMLJavaModLoadingContext.get().getModEventBus());
+        Containers.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 	public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Base.MOD_ID);
-	
+	public static final DeferredRegister<TileEntityType<?>> Tiles = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, Base.MOD_ID);
+	public static final DeferredRegister<ContainerType<?>> Containers = new DeferredRegister<>(ForgeRegistries.CONTAINERS, Base.MOD_ID);
+	public static final DeferredRegister<EntityType<?>> Entities = new DeferredRegister<>(ForgeRegistries.ENTITIES, Base.MOD_ID);
+    
 	//for items
 	 public static final RegistryObject<Item> SOLID_QUANTUM = ITEMS.register("solid_quantum", ItemBase::new);
 
@@ -117,29 +125,29 @@ public class registry
 	 public static final RegistryObject<Item>  TITANIUMI = ITEMS.register("titanium", ItemBase::new);
 
 	//for blocks
-	 public static final RegistryObject<Block> ANTI_MARABUNTA = new Abunta("anti_marabunta", Material.DRAGON_EGG);
-	 public static final RegistryObject<Block> AUTUNITE_ORE = new AutuniteOre("autunite_ore", Material.ROCK);
+	 public static final RegistryObject<Block> ANTI_MARABUNTA = BLOCKS.register("anti_marabunta", Abunta::new);
+	 public static final RegistryObject<Block> AUTUNITE_ORE = BLOCKS.register("autunite_ore",AutuniteOre::new);
 	 public static final RegistryObject<Block> COMPUTER_FRAME = BLOCKS.register("computer_frame",CompFrame::new);
 	 public static final RegistryObject<Block> COMPUTER_SCREEN = BLOCKS.register("computer_screen",CompScreen::new);
-	 public static final RegistryObject<Block> COFFINITE_ORE = new CoffiniteOre("coffinite_ore", Material.ROCK);
+	 public static final RegistryObject<Block> COFFINITE_ORE = BLOCKS.register("coffinite_ore", CoffiniteOre::new) ;
 	 public static final RegistryObject<Block> COOLANT_BLOCK = new COOL("coolant_block", ModFluids.COOLANT_FLUID, Material.WATER);
-	 public static final RegistryObject<Block> CARNOTITE_ORE = new CarontiteOre("carnotite_ore", Material.ROCK);
+	 public static final RegistryObject<Block> CARNOTITE_ORE = BLOCKS.register("carnotite_ore",CarontiteOre::new);
 	 public static final RegistryObject<Block> CABLE_BLOCK = BLOCKS.register("cable_block",CableBlock::new);
 	 public static final RegistryObject<Block> DIGITAL_BLOCK = BLOCKS.register("digital_block",DigialGrass::new);
 	 public static final RegistryObject<Block> DIGITAL_ROCK = BLOCKS.register("digital_rock", DigitalRock::new);
 	 public static final RegistryObject<Block> DIGITAL_ICE = BLOCKS.register("digital_ice", DigitalIce::new);
 	 public static final RegistryObject<Block> DIGITAL_OCEAN = new DIO("digital_ocean", ModFluids.DIGITAL_SEA, Material.WATER);
-	 public static final RegistryObject<Block> DIGITAL_SAND = new Dsand("digital_sand", Material.SAND);
+	 public static final RegistryObject<Block> DIGITAL_SAND = BLOCKS.register("digital_sand",Dsand::new);
 	 public static final RegistryObject<Block> ELECTRICFLOURIDE_INFUSER = BLOCKS.register("electric_flouride_infuser",ElectricFlourideInfuser::new);
 	 public static final RegistryObject<Block> FLOURIDE_INFUSER = BLOCKS.register("floride_infuser",FlourideInfuser::new);
-	 public static final RegistryObject<Block> FLOURITE_ORE = new FlouriteOre("flourite_ore", Material.ROCK);
-	 public static final RegistryObject<Block> FLOURITE_BLOCK = new FlouriteBlock("flourite_block", Material.ROCK);
-	 public static final RegistryObject<Block> FOREST_TREE = new tree("digital_tree", Material.WOOD);
-	 public static final RegistryObject<Block> GUMMITE_ORE = new GummiteOre("gummite_ore", Material.ROCK);
+	 public static final RegistryObject<Block> FLOURITE_ORE = BLOCKS.register("flourite_ore",FlouriteOre::new);
+	 public static final RegistryObject<Block> FLOURITE_BLOCK = BLOCKS.register("flourite_block",FlouriteBlock::new);
+	 public static final RegistryObject<Block> FOREST_TREE = BLOCKS.register("digital_tree",tree::new);
+	 public static final RegistryObject<Block> GUMMITE_ORE = BLOCKS.register("gummite_ore",GummiteOre::new);
 	 public static final RegistryObject<Block> HOLO = new Holo("holo", Material.DRAGON_EGG);
 	 public static final RegistryObject<Block> HOLOPROJECTOR = new HoloPro("holoprojector", Material.IRON);
-	 public static final RegistryObject<Block> MARABUNTA = new Marabunta("marabunta",Material.DRAGON_EGG);
-	 public static final RegistryObject<Block> MOUNTAIN_TREE = new MTree("mountain_tree", Material.WOOD);
+	 public static final RegistryObject<Block> MARABUNTA = BLOCKS.register("marabunta",Marabunta::new);
+	 public static final RegistryObject<Block> MOUNTAIN_TREE = BLOCKS.register("mountain_tree",MTree::new);
 	 public static final RegistryObject<Block> QUANTUM_BLOCK = BLOCKS.register("quantum_block",QuantumBlock::new);
 	 public static final RegistryObject<Block> QUANTUM_CORE = BLOCKS.register("quantum_core",QuantumCore::new);
 	 public static final RegistryObject<Block> QUANTUM_STEEL = new QuantSteel("quantum_steel", Material.IRON);
@@ -170,11 +178,12 @@ public class registry
 	  
 	  
 	 //for block Items
-	 public static final RegistryObject<Item> DIGITAL_BLOCK_ITEM = ITEMS.register("digital_block",() -> new BlockItem(DIGITAL_BLOCK.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
-	 public static final RegistryObject<Item> DIGITAL_ICE_ITEM = ITEMS.register("digital_ice",() -> new BlockItem(DIGITAL_ICE.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
-	 public static final RegistryObject<Item> TOWER_BASE_ITEM = ITEMS.register("tower_base", () -> new BlockItem(TOWER_BASE.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
-	 public static final RegistryObject<Item> TOWER_ENTER_ITEM = ITEMS.register("tower_enter",() -> new BlockItem(TOWER_ENTER.get(),new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
-	 public static final RegistryObject<Item> TOWER_WHITE_ITEM = ITEMS.register("town_white", () -> new BlockItem(TOWER_WHITE.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
+	 public static final RegistryObject<Item> ANTI_MARABUNTA_ITEM = ITEMS.register("anti_marabunta", () -> new BlockItem(ANTI_MARABUNTA.get(), new Item.Properties().group(Base.Lyoko)));
+	 public static final RegistryObject<Item> DIGITAL_BLOCK_ITEM = ITEMS.register("digital_block",() -> new BlockItem(DIGITAL_BLOCK.get(), new Item.Properties().group(Base.Lyoko)));
+	 public static final RegistryObject<Item> DIGITAL_ICE_ITEM = ITEMS.register("digital_ice",() -> new BlockItem(DIGITAL_ICE.get(), new Item.Properties().group(Base.Lyoko)));
+	 public static final RegistryObject<Item> TOWER_BASE_ITEM = ITEMS.register("tower_base", () -> new BlockItem(TOWER_BASE.get(), new Item.Properties().group(Base.Lyoko)));
+	 public static final RegistryObject<Item> TOWER_ENTER_ITEM = ITEMS.register("tower_enter",() -> new BlockItem(TOWER_ENTER.get(),new Item.Properties().group(Base.Lyoko)));
+	 public static final RegistryObject<Item> TOWER_WHITE_ITEM = ITEMS.register("town_white", () -> new BlockItem(TOWER_WHITE.get(), new Item.Properties().group(Base.Lyoko)));
 }
 
 

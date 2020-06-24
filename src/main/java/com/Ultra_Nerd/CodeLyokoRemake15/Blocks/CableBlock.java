@@ -1,35 +1,29 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.ToolType;
 
 public class CableBlock extends Block {
 	
 	public static final AxisAlignedBB CABLEAABB = new AxisAlignedBB(0.3125D, 0, 0.3125D, 0.8125D, 1.25D, 0.8125D);
 	
-	public CableBlock(String name,Material material)
+	public CableBlock()
 	{
-		super(material);
-		setSoundType(SoundType.STONE);
-		setHardness(-1);
-		setResistance(10);
-		setHarvestLevel("pickaxe", 2);
-		setLightLevel(0.0f);
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+super(Block.Properties.create(Material.ROCK)
+				
+				.hardnessAndResistance(-1, 10)
+				.sound(SoundType.METAL)
+				.lightValue(0)
+				.harvestLevel(2)
+				.harvestTool(ToolType.PICKAXE)
+				);
+		
 	}
 	
 	@Override

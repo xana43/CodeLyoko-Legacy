@@ -4,11 +4,11 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.google.common.collect.Maps;
 
 import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;

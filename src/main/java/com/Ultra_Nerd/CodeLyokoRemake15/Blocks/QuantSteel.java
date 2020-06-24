@@ -1,21 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.state.IProperty;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 
 public class QuantSteel extends Block 
 {
@@ -25,18 +23,21 @@ public class QuantSteel extends Block
 	public static boolean trans2;
 		public QuantSteel(String name, Material material)
 		{
-			super(material);
+			super(Block.Properties.create(Material.IRON)
+					
+					.hardnessAndResistance(6, 20)
+					.sound(SoundType.METAL)
+					.lightValue(0)
+					.harvestLevel(3)
+					.harvestTool(ToolType.PICKAXE)
+					
+						
+						
+						
+						
+				);
 			
-			setSoundType(SoundType.METAL);
-			setHardness(6.0f);
-			setResistance(20);
-			setHarvestLevel("pickaxe", 3);
-			setUnlocalizedName(name);
-			setRegistryName(name);
-			setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-			Modblocks.BLOCKS.add(this);
-			ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-			this.setDefaultState(this.blockState.getBaseState().withProperty(FORMED, false).withProperty(AIR, false));
+			
 			
 		}
 		

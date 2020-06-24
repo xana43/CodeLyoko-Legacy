@@ -1,107 +1,71 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
+import java.util.function.Predicate;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
 
 public class Trans extends Block  {
 	
 	public Trans(String name, Material material)
 	{
-		super(material);
-		setSoundType(SoundType.STONE);
-		setLightLevel(2);
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setLightOpacity(0);
-		setCreativeTab(null);
-		setBlockUnbreakable();
+super(Block.Properties.create(Material.STRUCTURE_VOID)
+				
+				.hardnessAndResistance(-1, -1)
+				.sound(SoundType.STONE)
+				.harvestLevel(-1)
+			
+					
+					
+					
+					
+			);
 		
-		//Modblocks.BLOCKS.add(this);
-		//ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
 	@Override
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
-			EnumFacing side) {
+	public BlockRenderType getRenderType(BlockState state) {
 		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isBed(IBlockState state, IBlockAccess world, BlockPos pos, Entity player) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-
-	
-	@Override
-	public boolean canBeReplacedByLeaves(IBlockState state, IBlockAccess world, BlockPos pos) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	
-	
-	@Override
-	public boolean isBlockNormalCube(IBlockState state) {
-		// TODO Auto-generated method stub
-		return false;
+		return BlockRenderType.INVISIBLE;
 	}
 	
 	@Override
-	public boolean isOpaqueCube(IBlockState state) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	@Override
-	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+	public boolean isTransparent(BlockState state) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 	
 	@Override
-	public BlockRenderLayer getBlockLayer() {
-		// TODO Auto-generated method stub
-		return BlockRenderLayer.CUTOUT;
-	}
-	
-	@Override
-	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+	public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 	
 	@Override
-	public boolean isTranslucent(IBlockState state) {
+	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public boolean isReplaceableOreGen(BlockState state, IWorldReader world, BlockPos pos,
+			Predicate<BlockState> target) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side) {
 		// TODO Auto-generated method stub
 		return true;
-	}
-
-@Override
-	public EnumBlockRenderType getRenderType(IBlockState state) {
-		// TODO Auto-generated method stub
-		return EnumBlockRenderType.INVISIBLE;
 	}
 
 

@@ -3,31 +3,32 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 import java.util.Random;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraftforge.common.ToolType;
 
 public class GummiteOre extends Block {
 	
-	public GummiteOre(String name, Material material)
+	public GummiteOre()
 	{
-		super(material);
-		setSoundType(SoundType.STONE);
-		setHardness(3.0f);
-		setResistance(10);
-		setHarvestLevel("pickaxe", 3);
-		setLightLevel(0.2f);
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+super(Block.Properties.create(Material.ROCK)
+				
+				.hardnessAndResistance(3, 10)
+				.sound(SoundType.STONE)
+				.lightValue(1)
+				.harvestLevel(3)
+				.harvestTool(ToolType.PICKAXE)
+		
+					
+					
+					
+					
+			);
+		
 	}
 	
 	@Override

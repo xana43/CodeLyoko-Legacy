@@ -2,18 +2,19 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class EntityLaser extends EntityArrow {
+public class EntityLaser extends ArrowEntity {
 
-	public EntityLaser(World worldIn) {
-		super(worldIn);
+	public EntityLaser(final EntityType<? extends EntityLaser> entityType,World world) {
+		super(entityType,world);
 		// TODO Auto-generated constructor stub
 	}
-	public EntityLaser(World worldIn, EntityLivingBase throwerIn) {
+	public EntityLaser(World worldIn,LivingEntity throwerIn) {
 		super(worldIn, throwerIn);
 		// TODO Auto-generated constructor stub
 	}
@@ -44,7 +45,7 @@ public class EntityLaser extends EntityArrow {
 	}
 	
 	@Override
-	protected void arrowHit(EntityLivingBase live) {
+	protected void arrowHit(LivingEntity live) {
 		if(!this.world.isRemote)
 		{
 			super.arrowHit(live);

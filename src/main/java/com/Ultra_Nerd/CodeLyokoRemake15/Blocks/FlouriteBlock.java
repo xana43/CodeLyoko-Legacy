@@ -1,29 +1,28 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
+import net.minecraftforge.common.ToolType;
 
 public class FlouriteBlock extends Block {
 	
-	public FlouriteBlock(String name, Material material)
+	public FlouriteBlock()
 	{
-		super(material);
-		setSoundType(SoundType.STONE);
-		setHardness(-1);
-		setResistance(10);
-		setHarvestLevel("pickaxe", 2);
-		setLightLevel(0.0f);
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+super(Block.Properties.create(Material.SAND)
+				
+				.hardnessAndResistance(-1, 10)
+				.sound(SoundType.SAND)
+				.lightValue(0)
+				.harvestLevel(2)
+				.harvestTool(ToolType.PICKAXE)
+				
+					
+					
+					
+					
+			);
+		
 	}
 	
 	

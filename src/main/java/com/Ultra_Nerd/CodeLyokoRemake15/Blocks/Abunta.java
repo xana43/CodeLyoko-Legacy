@@ -5,27 +5,36 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 import java.util.Random;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 
 public class Abunta extends Block {
 	 protected static final AxisAlignedBB SOUL_SAND_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
-	public Abunta(String name, final Properties properties)
+	public Abunta()
 	{
-		super(properties);
-		
-		setRegistryName(name);
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+super(Block.Properties.create(Material.DRAGON_EGG)
+				
+				.hardnessAndResistance(6, 10)
+				.sound(SoundType.STONE)
+				.lightValue(0)
+				.harvestLevel(2)
+				.harvestTool(ToolType.PICKAXE)
+				.tickRandomly()
+					
+					
+					
+					
+			);
 	}
 	
 	@Override
