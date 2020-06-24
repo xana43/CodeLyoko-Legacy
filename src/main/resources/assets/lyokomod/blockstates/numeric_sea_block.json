@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "block/numeric_sea_block" }
+        "": { "model": "lyokomod:block/numeric_sea_block" }
     }
 }

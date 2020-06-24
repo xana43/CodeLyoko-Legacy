@@ -22,5 +22,7 @@
   "fluid.lyokomod.numeric_sea": "Numeric Sea",
   "fluid.lyokomod.flowing_numeric_sea": "Flowing Numeric Sea",
   "item.lyokomod.numeric_sea_bucket": "Numeric Sea Bucket",
-  "block.lyokomod.numeric_sea_block": "Numeric Sea Fluid Blocks"
+  "block.lyokomod.numeric_sea_block": "Numeric Sea Fluid Blocks",
+  "block.lyokomod.saleeite_ore": "Uranium Silicate Ore",
+  "item.lyokomod.uranium_silicate": "Uranium Silicate"
 }
