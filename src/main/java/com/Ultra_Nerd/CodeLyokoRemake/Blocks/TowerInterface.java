@@ -14,7 +14,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -36,14 +35,12 @@ public class TowerInterface extends Block {
 	{
 		super(mats);
 		setSoundType(SoundType.METAL);
-		setHardness(-1);
-		setResistance(-1);
-		setHarvestLevel("pickaxe", -1);
+		setBlockUnbreakable();
 		setLightLevel(0.5f);
 		setCreativeTab(null);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+		setCreativeTab(null);
 		Modblocks.BLOCKS.add(this);
 		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
