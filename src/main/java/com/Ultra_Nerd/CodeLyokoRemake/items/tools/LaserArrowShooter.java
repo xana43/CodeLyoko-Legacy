@@ -5,7 +5,9 @@ import com.Ultra_Nerd.CodeLyokoRemake.Util.handlers.Souinds;
 import com.Ultra_Nerd.CodeLyokoRemake.init.ModItems;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -18,34 +20,50 @@ import net.minecraft.world.World;
 
 
 public class LaserArrowShooter extends ItemBow{
-
+	private int timer = 100;
 	public LaserArrowShooter(String name)
 	{
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		
 		setCreativeTab(CreativeTabs.COMBAT);
 		ModItems.Items.add(this);
 		//this.attackDamage = 3.0F + material.getAttackDamage();
 		
 	}
 	
+	 @Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		
+		 
+		 
+		 timer = timer - 1;
+		 
+		
+		 if(timer == 0)
+		 {
+		  
+		  stack.setItemDamage(stack.getItemDamage() - 1);
+		  timer = 100;
+		 }
+		
+	}
+	
+	 @Override
+	public EnumAction getItemUseAction(ItemStack stack) {
+		// TODO Auto-generated method stub
+		return EnumAction.NONE;
+	}
+	 
 	 
 	
+	 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+	    timer = 100;
 		ItemStack item = playerIn.getHeldItem(handIn);
-		ItemStack arrow = null;
-		for(int i = 0; i < playerIn.inventory.getSizeInventory();i++)
+		//System.out.println(item.getItemDamage());
+		if(item.getItem().isDamaged(item) == false || item.getItemDamage() <= item.getMaxDamage() - 1)
 		{
-			arrow = playerIn.inventory.getStackInSlot(i);
-		}
-		
-		if(arrow.getItem() == ModItems.LASERARROW)
-		{
-			arrow.setCount(arrow.getCount() - 1);
-		}
-		
 		Vec3d aim = playerIn.getLookVec();
 		worldIn.playSound(null,playerIn.posX, playerIn.posY, playerIn.posZ, Souinds.SHOOT, SoundCategory.NEUTRAL, 1f, 1f);
 		EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
@@ -59,6 +77,12 @@ public class LaserArrowShooter extends ItemBow{
 		
 		item.damageItem(1, playerIn);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
+		}
+		else 
+		{
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
+		}
+		
 	}
 
 
