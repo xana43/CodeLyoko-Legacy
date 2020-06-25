@@ -1,39 +1,34 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items.tools;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Souinds;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBow;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
 
-public class LaserArrowShooter extends ItemBow{
+public class LaserArrowShooter extends BowItem{
 
-	public LaserArrowShooter(String name)
-	{
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		
-		setCreativeTab(CreativeTabs.COMBAT);
-		ModItems.Items.add(this);
-		//this.attackDamage = 3.0F + material.getAttackDamage();
-		
-	}
+	
 	
 	 
 	
+	public LaserArrowShooter(Properties builder) {
+		super(builder);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack item = playerIn.getHeldItem(handIn);
 		ItemStack arrow = null;
 		for(int i = 0; i < playerIn.inventory.getSizeInventory();i++)
@@ -47,18 +42,18 @@ public class LaserArrowShooter extends ItemBow{
 		}
 		
 		Vec3d aim = playerIn.getLookVec();
-		worldIn.playSound(null,playerIn.posX, playerIn.posY, playerIn.posZ, Souinds.SHOOT, SoundCategory.NEUTRAL, 1f, 1f);
+		worldIn.playSound(null,playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), registry.LASERARROW.get(), SoundCategory.NEUTRAL, 1f, 1f);
 		EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 		
-		las.setPosition(playerIn.posX + aim.x * 1.5D, playerIn.posY + aim.y * 1.9D, playerIn.posZ + aim.z * 1.5D);
+		las.setPosition(playerIn.getPosX() + aim.x * 1.5D, playerIn.getPosY() + aim.y * 1.9D, playerIn.getPosZ() + aim.z * 1.5D);
 		las.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0f, 10f, 0f);		
 		if(!worldIn.isRemote)
 		{
-			worldIn.spawnEntity(las);
+			worldIn.addEntity(las);
 		}
 		
-		item.damageItem(1, playerIn);
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
+		item.damageItem(1, playerIn, null);
+		return new ActionResult<ItemStack>(ActionResultType.SUCCESS, item);
 	}
 
 

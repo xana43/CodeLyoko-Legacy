@@ -46,10 +46,14 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.tt;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.machine.flouride.ElectricFlourideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.machine.flouride.FlourideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.tileentity.Interface;
+import com.Ultra_Nerd.CodeLyokoRemake15.Records.LyokoRecords;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.LyokoTiers;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.ItemBase;
+import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.LaserArrowShooter;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.FlowingFluid;
@@ -57,7 +61,15 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Rarity;
+import net.minecraft.item.ShovelItem;
+import net.minecraft.item.SwordItem;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraftforge.common.util.Lazy;
+import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -67,9 +79,13 @@ public class registry
 {
 	public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Base.MOD_ID);
 	
+	
+	
 	public static void init()
 	{
+		SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		LIQUIDS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         Tiles.register(FMLJavaModLoadingContext.get().getModEventBus());
         Entities.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -79,11 +95,24 @@ public class registry
 	public static final DeferredRegister<TileEntityType<?>> Tiles = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, Base.MOD_ID);
 	public static final DeferredRegister<ContainerType<?>> Containers = new DeferredRegister<>(ForgeRegistries.CONTAINERS, Base.MOD_ID);
 	public static final DeferredRegister<EntityType<?>> Entities = new DeferredRegister<>(ForgeRegistries.ENTITIES, Base.MOD_ID);
-    public static final DeferredRegister<Fluid> WATER = new DeferredRegister<>(ForgeRegistries.FLUIDS, Base.MOD_ID);
-    
+    public static final DeferredRegister<Fluid> LIQUIDS = new DeferredRegister<>(ForgeRegistries.FLUIDS, Base.MOD_ID);
+    public static final DeferredRegister<SoundEvent> SOUNDS = new DeferredRegister<>(ForgeRegistries.SOUND_EVENTS, Base.MOD_ID);
     //for fluids
-    public static final RegistryObject<FlowingFluid> FLOWING_DIGITAL_OCEAN = WATER.register("flowing_digital_ocean",DIO::new);
-    public static final RegistryObject<FlowingFluid> DIGITAL_OCEAN = WATER.register("digital_ocean",DIO::new);
+    
+    //fluid resource locations
+    public static final ResourceLocation FLOWING_DIGITAL_OCEAN_RL = new ResourceLocation(Base.MOD_ID,"blocks/digital_flowing");
+	public static final ResourceLocation DIGITAL_OCEAN_RL = new ResourceLocation(Base.MOD_ID,"blocks/digital_still");
+	//fluid declarations
+    public static final RegistryObject<FlowingFluid> FLOWING_DIGITAL_OCEAN = LIQUIDS.register("flowing_digital_ocean", () -> new ForgeFlowingFluid.Flowing(registry.DIGITAL_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> DIGITAL_OCEAN = LIQUIDS.register("digital_ocean",() -> new ForgeFlowingFluid.Source(registry.DIGITAL_PROPERTIES));
+    //fluid properties
+    public static final ForgeFlowingFluid.Properties DIGITAL_PROPERTIES = new ForgeFlowingFluid.Properties(() -> DIGITAL_OCEAN.get(), () -> FLOWING_DIGITAL_OCEAN.get(), 
+    		FluidAttributes.builder(DIGITAL_OCEAN_RL, FLOWING_DIGITAL_OCEAN_RL)
+    		.temperature(100).luminosity(10).overlay(DIGITAL_OCEAN_RL)).block(() -> registry.DIO.get());
+    //fluid blocks
+    public static final RegistryObject<FlowingFluidBlock> DIO = BLOCKS.register("digital_ocean", () -> 
+	 new DIO(() -> DIGITAL_OCEAN.get(), 
+			 Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100).noDrops()));
 	//for items
 	 public static final RegistryObject<Item> SOLID_QUANTUM = ITEMS.register("solid_quantum", ItemBase::new);
 
@@ -130,7 +159,8 @@ public class registry
 	 public static final RegistryObject<Item>  QUBYTE = ITEMS.register("QuByte", ItemBase::new);
 
 	 public static final RegistryObject<Item>  TITANIUMI = ITEMS.register("titanium", ItemBase::new);
-
+     
+	 public static final RegistryObject<Item> LASER_ARROWSHOOTER = ITEMS.register("laser_arrowshooter", () -> new LaserArrowShooter(new Item.Properties().group(Base.Lyoko)));
 	//for blocks
 	 public static final RegistryObject<Block> ANTI_MARABUNTA = BLOCKS.register("anti_marabunta", Abunta::new);
 	 public static final RegistryObject<Block> AUTUNITE_ORE = BLOCKS.register("autunite_ore",AutuniteOre::new);
@@ -143,7 +173,7 @@ public class registry
 	 public static final RegistryObject<Block> DIGITAL_BLOCK = BLOCKS.register("digital_block",DigialGrass::new);
 	 public static final RegistryObject<Block> DIGITAL_ROCK = BLOCKS.register("digital_rock", DigitalRock::new);
 	 public static final RegistryObject<Block> DIGITAL_ICE = BLOCKS.register("digital_ice", DigitalIce::new);
-	 //public static final RegistryObject<Block> DIGITAL_OCEAN = new DIO("digital_ocean", ModFluids.DIGITAL_SEA, Material.WATER);
+	
 	 public static final RegistryObject<Block> DIGITAL_SAND = BLOCKS.register("digital_sand",Dsand::new);
 	 public static final RegistryObject<Block> ELECTRICFLOURIDE_INFUSER = BLOCKS.register("electric_flouride_infuser",ElectricFlourideInfuser::new);
 	 public static final RegistryObject<Block> FLOURIDE_INFUSER = BLOCKS.register("floride_infuser",FlourideInfuser::new);
@@ -181,10 +211,18 @@ public class registry
 	  
 	  
 	//for tileentities
-	    public static final RegistryObject<TileEntityType<Interface>> TOWERINTERFACE = Tiles.register("tower_interface", () -> TileEntityType.Builder.create(Interface::new, TOWER_INTERFACE.get()).build(null));
-	 
-	  
-	  
+	 public static final RegistryObject<TileEntityType<Interface>> TOWERINTERFACE = Tiles.register("tower_interface", () -> TileEntityType.Builder.create(Interface::new, TOWER_INTERFACE.get()).build(null));
+	//for objects that load last
+		 public static final Lazy<SoundEvent> LAZY_THEME = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"lyoko")));
+	 //for music discs
+	 public static final RegistryObject<Item> LYOKO_DISC = ITEMS.register("lyokoDisc", () -> new LyokoRecords(10, LAZY_THEME.get(), new Item.Properties().group(Base.Lyoko).maxStackSize(1).rarity(Rarity.RARE)));
+	 //for sound events
+	 public static final RegistryObject<SoundEvent> BLOKAMBIENT = SOUNDS.register("entity.blok.ambient", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"entity.blok.ambient")));
+	 public static final RegistryObject<SoundEvent> BLOKHURT = SOUNDS.register("entity.blok.hurt", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"entity.blok.hurt")));
+	 public static final RegistryObject<SoundEvent> THEME = SOUNDS.register("lyoko", LAZY_THEME);
+     public static final RegistryObject<SoundEvent> LASERARROW = SOUNDS.register("laser", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"laser")));
+     public static final RegistryObject<SoundEvent> FOREST = SOUNDS.register("forestsector", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"forestsector")));
+     public static final RegistryObject<SoundEvent> ICE = SOUNDS.register("icesector", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"icesector")));
 	 //for block Items
 	 public static final RegistryObject<Item> ANTI_MARABUNTA_ITEM = ITEMS.register("anti_marabunta", () -> new BlockItem(ANTI_MARABUNTA.get(), new Item.Properties().group(Base.Lyoko)));
 	 public static final RegistryObject<Item> DIGITAL_BLOCK_ITEM = ITEMS.register("digital_block",() -> new BlockItem(DIGITAL_BLOCK.get(), new Item.Properties().group(Base.Lyoko)));
@@ -192,6 +230,13 @@ public class registry
 	 public static final RegistryObject<Item> TOWER_BASE_ITEM = ITEMS.register("tower_base", () -> new BlockItem(TOWER_BASE.get(), new Item.Properties().group(Base.Lyoko)));
 	 public static final RegistryObject<Item> TOWER_ENTER_ITEM = ITEMS.register("tower_enter",() -> new BlockItem(TOWER_ENTER.get(),new Item.Properties().group(Base.Lyoko)));
 	 public static final RegistryObject<Item> TOWER_WHITE_ITEM = ITEMS.register("town_white", () -> new BlockItem(TOWER_WHITE.get(), new Item.Properties().group(Base.Lyoko)));
+	 //for tools
+	 public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().group(Base.Lyoko)));
+	 public static final RegistryObject<Item> DIGITAL_SABER = ITEMS.register("digital_saber", () -> new SwordItem(LyokoTiers.LyokoSamurai,25,10 , new Item.Properties().group(Base.Lyoko)));
+	 public static final RegistryObject<Item> QUANTUM_SABER = ITEMS.register("quantum_saber", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().group(Base.Lyoko)));
+	 public static final RegistryObject<Item> ZWEIHANDER = ITEMS.register("zweihander", () -> new SwordItem(LyokoTiers.LyokoWarrior,30,4, new Item.Properties().group(Base.Lyoko)));	
+	 
+	
 }
 
 
