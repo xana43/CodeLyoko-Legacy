@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.DigitalSeaBlock;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
@@ -28,7 +29,7 @@ public class ModFluids {
     		FluidAttributes.builder(DIGITAL_OCEAN_RL, FLOWING_DIGITAL_OCEAN_RL)
     		.temperature(100).luminosity(10).overlay(DIGITAL_OCEAN_RL)).block(() -> ModFluids.DIO.get());
     //fluid blocks
-    public static final RegistryObject<FlowingFluidBlock> DIO = ModBlocks.BLOCKS.register("digital_ocean", () -> new com.Ultra_Nerd.CodeLyokoRemake15.Blocks.DIO(() -> DIGITAL_OCEAN.get()));
+    public static final RegistryObject<FlowingFluidBlock> DIO = ModBlocks.BLOCKS.register("digital_ocean", () -> new DigitalSeaBlock(() -> DIGITAL_OCEAN.get()));
 	
 	
 	

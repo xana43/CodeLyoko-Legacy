@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.tileentity.Interface;
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity.Interface;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.LyokoTiers;
 
 import net.minecraft.inventory.container.ContainerType;
