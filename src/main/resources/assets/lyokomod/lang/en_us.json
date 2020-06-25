@@ -1,14 +1,11 @@
 {
+  "_comment": "Blocks",
   "block.lyokomod.mountain_rock": "Mountain Rock",
   "block.lyokomod.forest_grass": "Forest Grass",
   "block.lyokomod.forest_log": "Forest Log",
   "block.lyokomod.desert_sand": "Desert Sand",
   "block.lyokomod.banquise_ice": "Banquise Ice",
   "block.lyokomod.interface": "Interface",
-  "itemGroup.code_lyoko_blocks": "Code Lyoko Blocks",
-  "itemGroup.code_lyoko_items": "Code Lyoko Items",
-  "gui.lyokomod.interface": "Interface",
-  "gui.lyokomod.interface_input": "Code ?",
   "block.lyokomod.tower_base": "Tower Base",
   "block.lyokomod.tower_body": "Tower Body",
   "block.lyokomod.tower_platform_access": "Tower Platform Access",
@@ -19,10 +16,23 @@
   "block.lyokomod.tower_bottom_reset": "Tower Default Bottom",
   "block.lyokomod.tower_top": "Tower Top",
   "block.lyokomod.tower_mush": "Tower Mush",
+  "block.lyokomod.autunite_ore": "Autunite Ore",
+  "block.lyokomod.saleeite_ore": "Uranium Silicate Ore",
+  "block.lyokomod.numeric_sea_block": "Numeric Sea Fluid Blocks",
+
+  "_comment": "Fluids",
   "fluid.lyokomod.numeric_sea": "Numeric Sea",
   "fluid.lyokomod.flowing_numeric_sea": "Flowing Numeric Sea",
+
+  "_comment": "Items",
   "item.lyokomod.numeric_sea_bucket": "Numeric Sea Bucket",
-  "block.lyokomod.numeric_sea_block": "Numeric Sea Fluid Blocks",
-  "block.lyokomod.saleeite_ore": "Uranium Silicate Ore",
-  "item.lyokomod.uranium_silicate": "Uranium Silicate"
+  "item.lyokomod.uranium_silicate": "Uranium Silicate",
+
+  "_comment": "Item Groups",
+  "itemGroup.code_lyoko_blocks": "Code Lyoko Blocks",
+  "itemGroup.code_lyoko_items": "Code Lyoko Items",
+
+  "_comment": "GUIs",
+  "gui.lyokomod.interface": "Interface",
+  "gui.lyokomod.interface_input": "Code ?"
 }
