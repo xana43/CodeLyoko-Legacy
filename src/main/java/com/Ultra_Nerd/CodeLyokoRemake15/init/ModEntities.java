@@ -1,19 +1,22 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.Entityblok;
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.ref;
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModEntities {
 
-	public static void registerenit()
+	public static final DeferredRegister<EntityType<?>> Entities = new DeferredRegister<>(ForgeRegistries.ENTITIES, Base.MOD_ID);
+	public static final RegistryObject<EntityType<Entityblok>> BLOK = Entities.register("blok", () -> 
+	EntityType.Builder.<Entityblok>create(Entityblok::new, EntityClassification.MONSTER).size(2f,2f)
+	.build(new ResourceLocation(Base.MOD_ID,"blok").toString()));
+	/*public static void registerenit()
 	{
 		regen("blok", Entityblok.class, Conf.ENTITY_BLOK, 50,16777102 , 4802816 );
 		regen("ski", EntitySkid.class, Conf.SKID, 209, 893790, 983402);
@@ -29,5 +32,5 @@ public class ModEntities {
 	private static void regare(String name, Class<? extends Entity> ent, int id)
 	{
 		EntityRegistry.registerModEntity(new ResourceLocation(ref.MOD_ID + ":" + name), ent, name, id, Base.instance, 64, 30, true);
-	}
+	}*/
 }

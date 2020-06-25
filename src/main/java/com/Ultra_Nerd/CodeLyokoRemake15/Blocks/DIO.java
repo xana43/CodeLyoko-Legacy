@@ -2,8 +2,10 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 
 import java.util.function.Supplier;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.util.DamageSource;
@@ -14,10 +16,9 @@ import net.minecraft.world.World;
 public class DIO extends FlowingFluidBlock {
 
 	
-	public DIO(Supplier<? extends FlowingFluid> supplier, Properties properties) {
-		super(supplier, properties);
-		
-		
+	public DIO(Supplier<? extends FlowingFluid> supplier) {
+		super(supplier, Block.Properties.create(Material.WATER).doesNotBlockMovement().noDrops().notSolid().hardnessAndResistance(100));
+	   		
 	}
 	
 	

@@ -1,33 +1,72 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.Records.LyokoRecord;
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Souinds;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.ArmorBase;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.cust.LaserArrow;
+import com.Ultra_Nerd.CodeLyokoRemake15.items.ItemBase;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.LaserArrowShooter;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.QuantSpade;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.QuantSword;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.Zweihander;
 
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemRecord;
-import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemSword;
-import net.minecraft.util.SoundEvents;
-import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModItems 
 {
- 
+	
+	
+	
+	
+	
+	public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Base.MOD_ID);
+	
+		//for items
+		 public static final RegistryObject<Item> SOLID_QUANTUM = ITEMS.register("solid_quantum", ItemBase::new);
+
+		 public static final RegistryObject<Item>  SILICON_WAFER = ITEMS.register("silicon_wafer", ItemBase::new);
+
+		 public static final RegistryObject<Item>  URANIUM_SILACATE = ITEMS.register("uranium_silicate", ItemBase::new);
+
+		 public static final RegistryObject<Item>  URANIUM_DIOXIDE = ITEMS.register("uranium_dioxide", ItemBase::new);
+
+		 public static final RegistryObject<Item>  URANIUM_MELT = ITEMS.register("uranium_melt", ItemBase::new);
+
+		 public static final RegistryObject<Item>  URANIUM_ISOTOPE238 = ITEMS.register("uranium_isotope238", ItemBase::new);
+
+		 public static final RegistryObject<Item>  URANIUM_ISOTOPE235 = ITEMS.register("uranium_isotope235", ItemBase::new);
+
+		 public static final RegistryObject<Item>  RAW_SILICADUST = ITEMS.register("raw_silicadust", ItemBase::new);
+
+		 public static final RegistryObject<Item>  TRIURANIUM_OCTAOXIDE = ITEMS.register("triuranium_octaoxide", ItemBase::new);
+
+		 public static final RegistryObject<Item>  FLOURIDE = ITEMS.register("flouride", ItemBase::new);
+
+		 public static final RegistryObject<Item>  BIT = ITEMS.register("bit", ItemBase::new);
+
+		 public static final RegistryObject<Item>  BYTE = ITEMS.register("byte", ItemBase::new);
+
+		 public static final RegistryObject<Item>  MEGABIT = ITEMS.register("megabit", ItemBase::new);
+
+		 public static final RegistryObject<Item>  MEGABYTE = ITEMS.register("MegaByte", ItemBase::new);
+
+		 public static final RegistryObject<Item>  GIGABIT = ITEMS.register("gigabit", ItemBase::new);
+
+		 public static final RegistryObject<Item>  GIGABYTE = ITEMS.register("GigaByte", ItemBase::new);
+
+		 public static final RegistryObject<Item>  TERABIT = ITEMS.register("terabit", ItemBase::new);
+
+		 public static final RegistryObject<Item>  TERABYTE = ITEMS.register("TeraByte", ItemBase::new);
+
+		 public static final RegistryObject<Item>  PETABIT = ITEMS.register("petabit", ItemBase::new);
+
+		 public static final RegistryObject<Item>  PETABYTE = ITEMS.register("PetaByte", ItemBase::new);
+
+		 public static final RegistryObject<Item>  QUBIT = ITEMS.register("qubit", ItemBase::new);
+
+		 public static final RegistryObject<Item>  QUBYTE = ITEMS.register("QuByte", ItemBase::new);
+
+		 public static final RegistryObject<Item>  TITANIUMI = ITEMS.register("titanium", ItemBase::new);
+	     
+		 public static final RegistryObject<Item> LASER_ARROWSHOOTER = ITEMS.register("laser_arrowshooter", () -> new LaserArrowShooter(new Item.Properties().group(Base.Lyoko)));
+/* 
  public static final List<Item> Items = new ArrayList<Item>();
  public static final List<Item> Records = new ArrayList<Item>();
 
@@ -98,6 +137,6 @@ public class ModItems
 	
 	 
 	 
-	 } 
+	 } */
  
 }
