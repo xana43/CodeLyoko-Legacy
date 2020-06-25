@@ -1,7 +1,16 @@
 package io.github.elsopeen.lyokomod.init;
 
 import io.github.elsopeen.lyokomod.LyokoMod;
-import io.github.elsopeen.lyokomod.blocks.*;
+import io.github.elsopeen.lyokomod.blocks.InterfaceBlock;
+import io.github.elsopeen.lyokomod.blocks.NumericSeaFluidBlock;
+import io.github.elsopeen.lyokomod.blocks.TowerBaseBlock;
+import io.github.elsopeen.lyokomod.blocks.TowerBodyBlock;
+import io.github.elsopeen.lyokomod.blocks.TowerBottomResetBlock;
+import io.github.elsopeen.lyokomod.blocks.TowerPlatformAccessBlock;
+import io.github.elsopeen.lyokomod.blocks.TowerPlatformCenterBlock;
+import io.github.elsopeen.lyokomod.blocks.TowerPlatformCornerBlock;
+import io.github.elsopeen.lyokomod.blocks.TowerPlatformStraightBlock;
+import io.github.elsopeen.lyokomod.blocks.TowerPlatformTShapeBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -24,7 +33,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> FOREST_LOG = BLOCKS.register("forest_log", () -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(-1.f)));
     public static final RegistryObject<Block> DESERT_SAND = BLOCKS.register("desert_sand", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f)));
     public static final RegistryObject<Block> BANQUISE_ICE = BLOCKS.register("banquise_ice", () -> new Block(Block.Properties.create(Material.ICE).hardnessAndResistance(-1.f).slipperiness(0.99f)));
-
+    public static final RegistryObject<Block> SECTOR_5 = BLOCKS.register("sector5ground",() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1, -1).sound(SoundType.GLASS).lightValue(4)));
     // Tower blocks
     public static final RegistryObject<Block> INTERFACE = BLOCKS.register("interface", () -> new InterfaceBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(-1.f)));
     public static final RegistryObject<Block> TOWER_BASE = BLOCKS.register("tower_base", () -> new TowerBaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.f)));
@@ -45,6 +54,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> SALEEITE_ORE = BLOCKS.register("saleeite_ore", ()->new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6.f, 10).harvestLevel(2).harvestTool(ToolType.PICKAXE).lightValue(2)));
     public static final RegistryObject<Block> AUTUNITE_ORE = BLOCKS.register("autunite_ore", ()->new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.f,2.f).sound(SoundType.STONE).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> COFFINITE_ORE = BLOCKS.register("coffinite_ore", ()->new Block(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(6.f,10.f).harvestTool(ToolType.PICKAXE).harvestLevel(2).lightValue(1)));
-
+	public static final RegistryObject<Block> TYUYAMUNITE_ORE = BLOCKS.register("tyuyamunite_ore",() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(0).harvestLevel(1).harvestTool(ToolType.PICKAXE)));
+	public static final RegistryObject<Block> TORBERNITE_ORE = BLOCKS.register("torbernite_ore",() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
 }
 

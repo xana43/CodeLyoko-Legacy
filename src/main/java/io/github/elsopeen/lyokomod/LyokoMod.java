@@ -1,12 +1,31 @@
 package io.github.elsopeen.lyokomod;
 
-import io.github.elsopeen.lyokomod.init.*;
+import java.util.stream.Collectors;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import io.github.elsopeen.lyokomod.init.ModBiomes;
+import io.github.elsopeen.lyokomod.init.ModBlocks;
+import io.github.elsopeen.lyokomod.init.ModContainerTypes;
+import io.github.elsopeen.lyokomod.init.ModDimensions;
+import io.github.elsopeen.lyokomod.init.ModFluids;
+import io.github.elsopeen.lyokomod.init.ModItemGroups;
+import io.github.elsopeen.lyokomod.init.ModItems;
+import io.github.elsopeen.lyokomod.init.ModStructurePieceTypes;
+import io.github.elsopeen.lyokomod.init.ModStructures;
+import io.github.elsopeen.lyokomod.init.ModTileEntityTypes;
 import io.github.elsopeen.lyokomod.world.WorldGen;
 import io.github.elsopeen.lyokomod.world.template.LyokoPlacement;
+import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -14,10 +33,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.stream.Collectors;
+import net.minecraftforge.registries.IForgeRegistry;
 
 /**
  * Main mod class
@@ -89,6 +105,22 @@ public class LyokoMod {
         });
     }
 
+   
+	private void OnItemInit(final RegistryEvent.Register<Item> Items)
+	{
+		final IForgeRegistry<Item> registry = Items.getRegistry();
+		
+		ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof FlowingFluidBlock))
+		.map(RegistryObject::get).forEach(block->
+		{
+			final Item.Properties itemsettings = new Item.Properties().group(ModItemGroups.CODE_LYOKO_ITEMS);
+			final BlockItem Itemblocks = new BlockItem(block,itemsettings);
+			Itemblocks.setRegistryName(block.getRegistryName());
+			registry.register(Itemblocks);
+		});
+		LOGGER.debug("Inventory blocks registered");
+	}
+    
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
@@ -112,5 +144,7 @@ public class LyokoMod {
         // do something when the server starts
         LOGGER.info("LyokoMod says XANA WILL DESTROY YOU");
     }
+    
+
 
 }

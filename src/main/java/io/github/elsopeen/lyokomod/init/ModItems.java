@@ -8,7 +8,6 @@ import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.lwjgl.system.CallbackI;
 
 /**
  * Registering class for items
@@ -26,6 +25,7 @@ public class ModItems {
     public static final RegistryObject<Item> BANQUISE_ICE = ITEMS.register("banquise_ice", () -> new BlockItem(ModBlocks.BANQUISE_ICE.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
 
     // Tower
+    /*
     public static final RegistryObject<Item> INTERFACE = ITEMS.register("interface", () -> new BlockItem(ModBlocks.INTERFACE.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> TOWER_BASE = ITEMS.register("tower_base", () -> new BlockItem(ModBlocks.TOWER_BASE.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> TOWER_BODY = ITEMS.register("tower_body", () -> new BlockItem(ModBlocks.TOWER_BODY.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
@@ -37,15 +37,16 @@ public class ModItems {
     public static final RegistryObject<Item> TOWER_BOTTOM_RESET = ITEMS.register("tower_bottom_reset", ()->new BlockItem(ModBlocks.TOWER_BOTTOM_RESET.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> TOWER_TOP = ITEMS.register("tower_top", ()->new BlockItem(ModBlocks.TOWER_TOP.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> TOWER_MUSH = ITEMS.register("tower_mush", ()->new BlockItem(ModBlocks.TOWER_MUSH.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
-
+    */
     // Numeric Sea
     public static final RegistryObject<Item> NUMERIC_SEA_BUCKET = ITEMS.register("numeric_sea_bucket", ()->new BucketItem(ModFluids.NUMERIC_SEA, (new Item.Properties()).containerItem(Items.BUCKET).maxStackSize(1).group(ModItemGroups.CODE_LYOKO_ITEMS)));
 
     // Ores
+    /*
     public static final RegistryObject<Item> SALEEITE_ORE = ITEMS.register("saleeite_ore", ()->new BlockItem(ModBlocks.SALEEITE_ORE.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> AUTUNITE_ORE = ITEMS.register("autunite_ore", ()->new BlockItem(ModBlocks.AUTUNITE_ORE.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> COFFINITE_ORE = ITEMS.register("coffinite_ore",()->new BlockItem(ModBlocks.COFFINITE_ORE.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
-
+    */
     // Ore drops
     public static final RegistryObject<Item> URANIUM_SILICATE = ITEMS.register("uranium_silicate", () -> new Item(new Item.Properties().group(ModItemGroups.CODE_LYOKO_ITEMS)));
 

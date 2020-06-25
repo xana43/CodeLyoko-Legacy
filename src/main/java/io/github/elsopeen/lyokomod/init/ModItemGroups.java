@@ -1,10 +1,11 @@
 package io.github.elsopeen.lyokomod.init;
 
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
-import java.util.function.Supplier;
+
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 
 /**
  * Registering class for ItemGroups
@@ -26,7 +27,7 @@ public class ModItemGroups {
         }
     }
 
-    public static final ItemGroup CODE_LYOKO_BLOCKS = new ModItemGroup("code_lyoko_blocks", () -> new ItemStack(ModItems.INTERFACE.get()));
+    public static final ItemGroup CODE_LYOKO_BLOCKS = new ModItemGroup("code_lyoko_blocks", () -> new ItemStack(ModBlocks.INTERFACE.get()));
     public static final ItemGroup CODE_LYOKO_ITEMS = new ModItemGroup("code_lyoko_items", ()-> new ItemStack(ModItems.NUMERIC_SEA_BUCKET.get()));
 
 }
