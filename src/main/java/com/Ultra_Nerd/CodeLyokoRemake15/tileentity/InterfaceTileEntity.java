@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity;
+package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import javax.annotation.Nullable;
 
@@ -18,18 +18,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class Interface extends TileEntity implements INamedContainerProvider
+public class InterfaceTileEntity extends TileEntity implements INamedContainerProvider
 {
 	
 	 @Nullable // May be accessed before onLoad
 	    @OnlyIn(Dist.CLIENT)
 	    public Interface anInterface;
 
-	    public Interface(TileEntityType<?> tileEntityTypeIn) {
+	    public InterfaceTileEntity(TileEntityType<?> tileEntityTypeIn) {
 	        super(tileEntityTypeIn);
 	    }
 
-	    public Interface(){
+	    public InterfaceTileEntity(){
 	        super(ModTileEntityTypes.INTERFACE.get());
 	    }
 
@@ -42,7 +42,7 @@ public class Interface extends TileEntity implements INamedContainerProvider
 	        World world = getWorld();
 	        if (world == null || !world.isRemote)
 	            return; // Return if the world is null or if we are on the logical server
-	        anInterface = Interface.forTileEntity(this);
+	        anInterface = InterfaceTileEntity.forTileEntity(this);
 	    }
 
 	    @Override

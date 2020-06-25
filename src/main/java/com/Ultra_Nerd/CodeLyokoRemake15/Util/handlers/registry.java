@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity.Interface;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InterfaceTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.LyokoTiers;
 
 import net.minecraft.inventory.container.ContainerType;
@@ -41,7 +41,7 @@ public class registry
 	  
 	  
 	//for tileentities
-	 public static final RegistryObject<TileEntityType<Interface>> TOWERINTERFACE = Tiles.register("tower_interface", () -> TileEntityType.Builder.create(Interface::new, TOWER_INTERFACE.get()).build(null));
+	 public static final RegistryObject<TileEntityType<InterfaceTileEntity>> TOWERINTERFACE = Tiles.register("tower_interface", () -> TileEntityType.Builder.create(InterfaceTileEntity::new, TOWER_INTERFACE.get()).build(null));
 	
 	
 	 

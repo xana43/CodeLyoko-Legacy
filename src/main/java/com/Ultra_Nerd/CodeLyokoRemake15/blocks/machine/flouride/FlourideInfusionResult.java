@@ -3,29 +3,31 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 
 import net.minecraft.item.ItemStack;
 
-public class FlourideRes 
+public class FlourideInfusionResult
 {	
-	private static final FlourideRes INSTANCE = new FlourideRes();
+	private static final FlourideInfusionResult INSTANCE = new FlourideInfusionResult();
 	private final Table<ItemStack, ItemStack, ItemStack> smeltingList = HashBasedTable.<ItemStack, ItemStack, ItemStack>create();
 	private final Map<ItemStack, Float> experienceList = Maps.<ItemStack, Float>newHashMap();
 	
-	public static FlourideRes getInstance()
+	public static FlourideInfusionResult getInstance()
 	{
 		return INSTANCE;
 	}
 	
-	private FlourideRes() 
+	private FlourideInfusionResult()
 	{
-		addRefiningRecipe(new ItemStack(ModItems.URANIUM_DIOXIDE), new ItemStack(ModItems.FLOURIDE), new ItemStack(ModItems.URANIUM_ISOTOPE238), 5.0F);
-		addRefiningRecipe(new ItemStack(ModItems.URANIUM_MELT), new ItemStack(Modblocks.FLOURITE_BLOCK), new ItemStack(ModItems.URANIUM_ISOTOPE238), 1f);
+		addRefiningRecipe(new ItemStack(ModItems.URANIUM_DIOXIDE.get()), new ItemStack(ModItems.FLOURIDE.get()),
+				new ItemStack(ModItems.URANIUM_ISOTOPE238.get()), 5.0F);
+		addRefiningRecipe(new ItemStack(ModItems.URANIUM_MELT.get()), new ItemStack(ModBlocks.FLOURITE_BLOCK.get()),
+				new ItemStack(ModItems.URANIUM_ISOTOPE238.get()), 1f);
 	}
 
 	
@@ -42,13 +44,13 @@ public class FlourideRes
 	{
 		for(Entry<ItemStack, Map<ItemStack, ItemStack>> entry : this.smeltingList.columnMap().entrySet()) 
 		{
-			if(this.compareItemStacks(input1, (ItemStack)entry.getKey())) 
+			if(this.compareItemStacks(input1, entry.getKey()))
 			{
 				for(Entry<ItemStack, ItemStack> ent : entry.getValue().entrySet()) 
 				{
-					if(this.compareItemStacks(input2, (ItemStack)ent.getKey())) 
+					if(this.compareItemStacks(input2, ent.getKey()))
 					{
-						return (ItemStack)ent.getValue();
+						return ent.getValue();
 					}
 				}
 			}
@@ -58,7 +60,8 @@ public class FlourideRes
 	
 	private boolean compareItemStacks(ItemStack stack1, ItemStack stack2)
 	{
-		return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
+		return stack2.equals(stack1, false);
+		//return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
 	}
 	
 	public Table<ItemStack, ItemStack, ItemStack> getDualSmeltingList() 
@@ -70,9 +73,9 @@ public class FlourideRes
 	{
 		for (Entry<ItemStack, Float> entry : this.experienceList.entrySet()) 
 		{
-			if(this.compareItemStacks(stack, (ItemStack)entry.getKey())) 
+			if(this.compareItemStacks(stack, entry.getKey()))
 			{
-				return ((Float)entry.getValue()).floatValue();
+				return entry.getValue();
 			}
 		}
 		return 0.0F;

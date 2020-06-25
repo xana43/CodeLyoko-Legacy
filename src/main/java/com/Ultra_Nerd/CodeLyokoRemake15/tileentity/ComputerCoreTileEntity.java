@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity;
+package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
 

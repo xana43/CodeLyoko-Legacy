@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity.ComputerReactor;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerReactorTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
@@ -51,12 +51,12 @@ public class UraniumReactor extends Block{
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		// TODO Auto-generated method stub
-		return new ComputerReactor();
+		return new ComputerReactorTileEntity();
 	}
 	
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		ComputerReactor tileentity = (ComputerReactor)worldIn.getTileEntity(pos);
+		ComputerReactorTileEntity tileentity = (ComputerReactorTileEntity)worldIn.getTileEntity(pos);
 		worldIn.spawnEntity(new EntityItem(worldIn,pos.getX(),pos.getY(),pos.getZ(), tileentity.handle.getStackInSlot(0)));
 		super.breakBlock(worldIn, pos, state);
 	}

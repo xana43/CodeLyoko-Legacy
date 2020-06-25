@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.universal_storage.UniversalStore;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.UniversalEnergyStorageTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 
@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 
 public class UniversalEnergyBlock extends Block {
 
-	private UniversalStore Text = new UniversalStore();
+	private UniversalEnergyStorageTileEntity Text = new UniversalEnergyStorageTileEntity();
 	public UniversalEnergyBlock(String name, Material material) {
 		super(material);
 		//setRegistryName(name);
@@ -45,7 +45,7 @@ public boolean hasTileEntity(IBlockState state) {
   @Override
 public TileEntity createTileEntity(World world, IBlockState state) {
 	// TODO Auto-generated method stub
-	return new UniversalStore();
+	return new UniversalEnergyStorageTileEntity();
 }
   
   @Override

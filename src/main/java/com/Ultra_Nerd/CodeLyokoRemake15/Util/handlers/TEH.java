@@ -1,12 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.holo_projector.ProjectorTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.universal_storage.UniversalStore;
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity.ComputerReactor;
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity.Interface;
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity.TileEntityElectricInfusingChamber;
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity.TileEntityInfusingChamber;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ProjectorTileEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.UniversalEnergyStorageTileEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerReactorTileEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InterfaceTileEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -14,15 +14,15 @@ public class TEH {
 
 		
 
-		public static void regte()
+		/*public static void regte()
 		{
-			GameRegistry.registerTileEntity(TileEntityInfusingChamber.class, "flouride_infuser");
-			GameRegistry.registerTileEntity(ComputerReactor.class, "reactor");
-			GameRegistry.registerTileEntity(Interface.class, "tower_interface");
-			GameRegistry.registerTileEntity(TileEntityElectricInfusingChamber.class,"electric_flouride_infuser");
+			GameRegistry.registerTileEntity(InfusingChamberTileEntity.class, "flouride_infuser");
+			GameRegistry.registerTileEntity(ComputerReactorTileEntity.class, "reactor");
+			GameRegistry.registerTileEntity(InterfaceTileEntity.class, "tower_interface");
+			GameRegistry.registerTileEntity(ElectricInfusingChamberTileEntity.class,"electric_flouride_infuser");
 			GameRegistry.registerTileEntity(ProjectorTileEntity.class, "projector");
-			GameRegistry.registerTileEntity(UniversalStore.class, "universal_storage");
+			GameRegistry.registerTileEntity(UniversalEnergyStorageTileEntity.class, "universal_storage");
 			//GameRegistry.registerTileEntity(InvisRend.class, "invis");
-		}
+		}*/
 	
 }

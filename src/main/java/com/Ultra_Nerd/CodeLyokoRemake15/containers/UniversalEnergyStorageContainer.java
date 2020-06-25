@@ -1,15 +1,16 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.universal_storage;
+package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.UniversalEnergyStorageTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 
-public class Containerstore extends Container {
+public class UniversalEnergyStorageContainer extends Container {
 
-	private final UniversalStore TE;
+	private final UniversalEnergyStorageTileEntity TE;
 	private int ener;
-	public Containerstore(InventoryPlayer player, UniversalStore store)
+	public UniversalEnergyStorageContainer(InventoryPlayer player, UniversalEnergyStorageTileEntity store)
 	{
 		this.TE = store;
 	}

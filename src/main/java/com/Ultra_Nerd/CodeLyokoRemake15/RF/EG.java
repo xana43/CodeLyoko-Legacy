@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.RF;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.energy.EnergyStorage;
 
 public class EG extends EnergyStorage{
@@ -51,18 +51,18 @@ public class EG extends EnergyStorage{
     	// TODO Auto-generated method stub
     	return super.canReceive();
     }
-    public void RFNBT(NBTTagCompound compunt)
+    public void RFNBT(CompoundNBT compunt)
     {
-    	this.energy = compunt.getInteger("Energy");
-    	this.capacity = compunt.getInteger("Capacity");
-    	this.maxExtract = compunt.getInteger("MaxExtract");
-    	this.maxReceive = compunt.getInteger("MaxRecive");
+    	this.energy = compunt.getInt("Energy");
+    	this.capacity = compunt.getInt("Capacity");
+    	this.maxExtract = compunt.getInt("MaxExtract");
+    	this.maxReceive = compunt.getInt("MaxRecive");
     }
-    public void WRTNBT(NBTTagCompound comd)
+    public void WRTNBT(CompoundNBT comd)
     {
-    	comd.setInteger("Energy", this.energy);
-    	comd.setInteger("Capacity", this.capacity);
-    	comd.setInteger("MaxRecieve", this.maxReceive);
-    	comd.setInteger("MaxExtract", this.maxExtract);
+    	comd.putInt("Energy", this.energy);
+    	comd.putInt("Capacity", this.capacity);
+    	comd.putInt("MaxRecieve", this.maxReceive);
+    	comd.putInt("MaxExtract", this.maxExtract);
     }
 }

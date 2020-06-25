@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.holo_projector;
+package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramProjectorBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.QuantSteelBlock;

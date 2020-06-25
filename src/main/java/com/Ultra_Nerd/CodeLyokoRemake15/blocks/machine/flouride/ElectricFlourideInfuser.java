@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride;
 import java.util.Random;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity.TileEntityElectricInfusingChamber;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 
@@ -111,7 +111,7 @@ public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
 	 @Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		// TODO Auto-generated method stub
-		return new TileEntityElectricInfusingChamber();
+		return new ElectricInfusingChamberTileEntity();
 	}
 	 @Override
 	public boolean hasTileEntity(IBlockState state) {
@@ -173,7 +173,7 @@ public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
 	}
 	 @Override
 		public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-			TileEntityElectricInfusingChamber tileentity = (TileEntityElectricInfusingChamber)worldIn.getTileEntity(pos);
+			ElectricInfusingChamberTileEntity tileentity = (ElectricInfusingChamberTileEntity)worldIn.getTileEntity(pos);
 			worldIn.spawnEntity(new EntityItem(worldIn,pos.getX(),pos.getY(),pos.getZ(), tileentity.handler.getStackInSlot(0)));
 			worldIn.spawnEntity(new EntityItem(worldIn,pos.getX(),pos.getY(),pos.getZ(), tileentity.handler.getStackInSlot(1)));
 			worldIn.spawnEntity(new EntityItem(worldIn,pos.getX(),pos.getY(),pos.getZ(), tileentity.handler.getStackInSlot(2)));

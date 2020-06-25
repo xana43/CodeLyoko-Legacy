@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity;
+package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
@@ -16,7 +16,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class ComputerReactor extends TileEntity implements ITickable
+public class ComputerReactorTileEntity extends TileEntity implements ITickable
 {
 	public ItemStackHandler handle = new ItemStackHandler(1);
 	private EG store = new EG(1000000000);

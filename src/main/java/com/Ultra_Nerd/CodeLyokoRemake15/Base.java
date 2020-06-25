@@ -1,16 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoRemake15;
  
+import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBiome;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.item.BlockItem;
@@ -51,6 +46,8 @@ public class Base
 		ModBlocks.BLOCKS.register(ModBus);
 		ModEntities.Entities.register(ModBus);
 		ModBiome.BIOMES.register(ModBus);
+		ModContainerTypes.CONTAINER_TYPES.register(ModBus);
+		ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
 		instance = this;
 		MinecraftForge.EVENT_BUS.register(this);
 		

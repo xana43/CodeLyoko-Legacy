@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.universal_storage;
+package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
 
@@ -12,7 +12,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 
-public class UniversalStore extends TileEntity implements ITickable {
+public class UniversalEnergyStorageTileEntity extends TileEntity implements ITickable {
 
 	
 	private EG store = new EG(90000);

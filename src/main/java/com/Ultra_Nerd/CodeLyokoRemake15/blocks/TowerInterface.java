@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import javax.annotation.Nonnull;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity.Interface;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InterfaceTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.EasyCore;
 
 import net.minecraft.block.Block;
@@ -176,8 +176,8 @@ this.setDefaultState(this.getDefaultState().with(HORIZONTAL_FACING, EasyCore.DIR
     public ActionResultType onBlockActivated(@Nonnull BlockState state, World world, @Nonnull BlockPos pos, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull BlockRayTraceResult hit) {
         if (!world.isRemote) {
             final TileEntity tileEntity = world.getTileEntity(pos);
-            if (tileEntity instanceof Interface) {
-                NetworkHooks.openGui((ServerPlayerEntity) player, (Interface) tileEntity, pos);
+            if (tileEntity instanceof InterfaceTileEntity) {
+                NetworkHooks.openGui((ServerPlayerEntity) player, (InterfaceTileEntity) tileEntity, pos);
             }
         }
         return ActionResultType.SUCCESS;

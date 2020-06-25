@@ -1,6 +1,7 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity;
+package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InterfaceTileEntity;
 import org.lwjgl.opengl.GL11;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.ref;
@@ -13,11 +14,11 @@ public class TowerGUI extends GuiScreen
 {
 	private static final ResourceLocation TEXTURES = new ResourceLocation(ref.MOD_ID + ":textures/gui/tower.png");
 	
-	private Interface tileentity;
+	private InterfaceTileEntity tileentity;
 	private final int sizeX = 512, sizeY = 256;
 	int posX,posY;
 	
-	public TowerGUI(Interface tileentity) 
+	public TowerGUI(InterfaceTileEntity tileentity)
 	{
 		
 	

@@ -1,6 +1,7 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tileentity;
+package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
 
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerReactorTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -13,10 +14,10 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class ReactorContainer extends Container
 {
-	private final ComputerReactor tileentity;
+	private final ComputerReactorTileEntity tileentity;
 	private int energy, Fission;
 	
-	public ReactorContainer(InventoryPlayer player, ComputerReactor tileentity) 
+	public ReactorContainer(InventoryPlayer player, ComputerReactorTileEntity tileentity)
 	{
 		this.tileentity = tileentity;
 		IItemHandler handler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
