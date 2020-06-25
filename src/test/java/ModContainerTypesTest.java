@@ -1,5 +1,5 @@
-import elsopeen.lyokomod.LyokoMod;
-import elsopeen.lyokomod.init.ModContainerTypes;
+import io.github.elsopeen.lyokomod.LyokoMod;
+import io.github.elsopeen.lyokomod.init.ModContainerTypes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
