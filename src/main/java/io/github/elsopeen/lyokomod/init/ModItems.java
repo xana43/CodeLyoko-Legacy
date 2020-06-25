@@ -15,15 +15,16 @@ import net.minecraftforge.registries.ForgeRegistries;
  */
 public class ModItems {
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, LyokoMod.MOD_ID);
-
+    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, LyokoMod.MOD_ID);
+    
     // Territory blocks
+    /*
     public static final RegistryObject<Item> MOUNTAIN_ROCK = ITEMS.register("mountain_rock", () -> new BlockItem(ModBlocks.MOUNTAIN_ROCK.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> FOREST_GRASS = ITEMS.register("forest_grass", () -> new BlockItem(ModBlocks.FOREST_GRASS.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> FOREST_LOG = ITEMS.register("forest_log", () -> new BlockItem(ModBlocks.FOREST_LOG.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> DESERT_SAND = ITEMS.register("desert_sand", () -> new BlockItem(ModBlocks.DESERT_SAND.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
     public static final RegistryObject<Item> BANQUISE_ICE = ITEMS.register("banquise_ice", () -> new BlockItem(ModBlocks.BANQUISE_ICE.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
-
+    */
     // Tower
     /*
     public static final RegistryObject<Item> INTERFACE = ITEMS.register("interface", () -> new BlockItem(ModBlocks.INTERFACE.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_BLOCKS)));
