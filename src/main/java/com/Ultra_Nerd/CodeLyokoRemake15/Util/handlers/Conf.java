@@ -1,13 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers;
 
-import java.io.File;
-
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.ref;
-
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+
+import java.io.File;
 
 public class Conf {
 	

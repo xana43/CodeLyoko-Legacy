@@ -1,10 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.UniversalEnergyStorageTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.UniversalEnergyStorageTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ArrowEntity;

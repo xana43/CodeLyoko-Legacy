@@ -1,10 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.commands;
 
-import java.util.ArrayList;
-
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.ref;
 import com.google.common.collect.Lists;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -13,7 +10,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 
-public class ComTel extends CommandBase {
+import java.util.ArrayList;
+
+public class Modteleportcommand extends CommandBase {
 
 	
 	private final ArrayList<String> coms = Lists.newArrayList(ref.MOD_ID, "tp", "tpdim","tpdimension","teleporteddimension", "teleport");
@@ -35,7 +34,7 @@ public class ComTel extends CommandBase {
 		
 		if(arg1 instanceof EntityPlayer)
 		{
-			tele.teleportToDim((EntityPlayer)arg1, dimensionID, arg1.getPosition().getX(),  arg1.getPosition().getY() + 5, arg1.getPosition().getZ());
+			TeleportToDimension.teleportToDim((EntityPlayer)arg1, dimensionID, arg1.getPosition().getX(),  arg1.getPosition().getY() + 5, arg1.getPosition().getZ());
 		}
 		
 		

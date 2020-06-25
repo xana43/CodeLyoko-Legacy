@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.Lyoko5;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;

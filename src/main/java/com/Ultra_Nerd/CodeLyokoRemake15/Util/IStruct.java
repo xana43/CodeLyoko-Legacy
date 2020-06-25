@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
-
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.world.WorldSettings;

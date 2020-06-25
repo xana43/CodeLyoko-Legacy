@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import java.util.function.Supplier;
-
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.FlowingFluid;
+
+import java.util.function.Supplier;
 
 public class CoolantBlock extends FlowingFluidBlock{
 

@@ -1,18 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerElectricInfusing;
+import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
+import com.Ultra_Nerd.CodeLyokoRemake15.containers.ReactorContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.ElectricInfusingChamberScreen;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.InfusingChamberScreen;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerReactorTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InterfaceTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.containers.ReactorContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.ReactorGUI;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.TowerGUI;
-
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

@@ -1,14 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBiome;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -30,6 +24,10 @@ import net.minecraftforge.event.terraingen.ChunkGeneratorEvent.InitNoiseField;
 import net.minecraftforge.event.terraingen.InitNoiseGensEvent.ContextEnd;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.eventhandler.Event;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class ChunkGeneratorLyoko implements IChunkGenerator
 {

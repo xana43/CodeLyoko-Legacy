@@ -9,7 +9,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendLaser;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendSkid;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.ref;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

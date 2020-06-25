@@ -1,10 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world;
 
-import java.util.Random;
-
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.IStruct;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.ref;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
@@ -13,6 +10,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
+
+import java.util.Random;
 
 public class StructGen extends WorldGenerator implements IStruct{
 

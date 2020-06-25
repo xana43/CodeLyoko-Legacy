@@ -1,10 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
-import com.Ultra_Nerd.CodeLyokoRemake15.commands.tele;
+import com.Ultra_Nerd.CodeLyokoRemake15.commands.TeleportToDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -36,7 +35,7 @@ public class Virutalization extends Block {
 		if(!worldin.isRemote)// TODO Auto-generated method stub
 		{
 			
-			tele.teleportToDim(playerin, Conf.Dim, playerin.getPosition().getX(), playerin.getPosition().getY() + 5, playerin.getPosition().getZ());
+			TeleportToDimension.teleportToDim(playerin, Conf.Dim, playerin.getPosition().getX(), playerin.getPosition().getY() + 5, playerin.getPosition().getZ());
 			return true;
 			
 		}

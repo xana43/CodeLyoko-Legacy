@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBiome;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;

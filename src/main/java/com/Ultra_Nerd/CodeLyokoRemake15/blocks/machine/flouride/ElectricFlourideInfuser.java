@@ -1,12 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride;
 
-import java.util.Random;
-
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -22,14 +19,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.IProperty;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
+
+import java.util.Random;
 
 public class ElectricFlourideInfuser extends Block{
 

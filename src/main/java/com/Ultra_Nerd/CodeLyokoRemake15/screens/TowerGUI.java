@@ -1,14 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InterfaceTileEntity;
-import org.lwjgl.opengl.GL11;
-
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.ref;
-
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InterfaceTileEntity;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class TowerGUI extends GuiScreen
 {

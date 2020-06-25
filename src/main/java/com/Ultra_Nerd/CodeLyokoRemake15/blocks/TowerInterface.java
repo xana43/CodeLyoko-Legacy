@@ -1,10 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import javax.annotation.Nonnull;
-
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InterfaceTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.EasyCore;
-
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InterfaceTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
@@ -27,6 +24,8 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+
+import javax.annotation.Nonnull;
 
 public class TowerInterface extends HorizontalBlock {
 	

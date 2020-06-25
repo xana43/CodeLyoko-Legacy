@@ -1,7 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import java.util.function.Supplier;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
@@ -11,6 +9,8 @@ import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.function.Supplier;
 
 
 public class DigitalSeaBlock extends FlowingFluidBlock {

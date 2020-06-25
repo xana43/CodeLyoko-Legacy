@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.biome;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBiome;
-
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;

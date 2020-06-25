@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.items.tools;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;

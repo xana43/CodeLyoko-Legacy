@@ -1,13 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Ice;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Lyoko;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Mountain;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Sector5;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.desert;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ocean;
-
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.*;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 

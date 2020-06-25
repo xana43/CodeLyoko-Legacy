@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.DigitalSeaBlock;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.FlowingFluid;

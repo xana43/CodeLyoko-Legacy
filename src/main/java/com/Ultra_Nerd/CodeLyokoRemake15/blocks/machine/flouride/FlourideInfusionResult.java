@@ -1,15 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
-
 import net.minecraft.item.ItemStack;
+
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class FlourideInfusionResult
 {	
