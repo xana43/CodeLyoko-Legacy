@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ToolType;
 
 import java.util.Random;
@@ -43,61 +43,67 @@ super(Block.Properties.create(Material.DRAGON_EGG)
         return SOUL_SAND_AABB;
     }
 
+    @Override
+    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+        if (!worldIn.isRemote)
+        {
+
+
+            for (int i = 0; i < 9000; ++i)
+            {
+                BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
+
+                if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isBlockLoaded(blockpos))
+                {
+                    return;
+                }
+
+                BlockState iblockstate = worldIn.getBlockState(blockpos.up());
+                BlockState iblockstate1 = worldIn.getBlockState(blockpos);
+
+                if (iblockstate1.getBlock() == ModBlocks.MARABUNTA.get())
+                {
+                    worldIn.setBlockState(blockpos, ModBlocks.ANTI_MARABUNTA.get().getDefaultState());
+                }
+
+
+            }
+
+            for (int i = 0; i < 1; ++i)
+            {
+                BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
+
+                if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isBlockLoaded(blockpos))
+                {
+                    return;
+                }
+
+                BlockState iblockstate = worldIn.getBlockState(blockpos.up());
+                BlockState iblockstate1 = worldIn.getBlockState(blockpos);
+
+                if (iblockstate1.getBlock() == ModBlocks.ANTI_MARABUNTA.get())
+                {
+                    worldIn.setBlockState(blockpos, Blocks.DIRT.getDefaultState());
+                }
+
+
+            }
+
+
+        }
+    }
+
     /**
      * Called When an Entity Collided with the Block
      */
-	
-	public void updateTick(World worldIn, BlockPos pos, BlockState state, Random rand)
-    {
-        if (!worldIn.isRemote)
-        {
-           
 
-                    for (int i = 0; i < 900; ++i)
-                    {
-                        BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 
-                        if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isBlockLoaded(blockpos))
-                        {
-                            return;
-                        }
 
-                        BlockState iblockstate = worldIn.getBlockState(blockpos.up());
-                        BlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-                        if (iblockstate1.getBlock() == ModBlocks.MARABUNTA.get())
-                        {
-                            worldIn.setBlockState(blockpos, ModBlocks.ANTI_MARABUNTA.get().getDefaultState());
-                        }
-                        
-                        
-                    }
-                    
-                    for (int i = 0; i < 1; ++i)
-                    {
-                        BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 
-                        if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isBlockLoaded(blockpos))
-                        {
-                            return;
-                        }
 
-                        BlockState iblockstate = worldIn.getBlockState(blockpos.up());
-                        BlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-                        if (iblockstate1.getBlock() == ModBlocks.ANTI_MARABUNTA.get())
-                        {
-                            worldIn.setBlockState(blockpos, Blocks.DIRT.getDefaultState());
-                        }
-                        
-                        
-                    }
 
-                    
-        }
-            
-        
-    }
 	
 
 
