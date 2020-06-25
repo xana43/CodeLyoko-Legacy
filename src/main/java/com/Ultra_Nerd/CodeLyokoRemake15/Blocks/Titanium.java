@@ -7,7 +7,7 @@ import net.minecraftforge.common.ToolType;
 
 public class Titanium extends Block {
 	
-	public Titanium(String name, Material material)
+	public Titanium()
 	{
 super(Block.Properties.create(Material.IRON)
 				

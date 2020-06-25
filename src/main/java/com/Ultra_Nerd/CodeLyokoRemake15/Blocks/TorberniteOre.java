@@ -7,7 +7,7 @@ import net.minecraftforge.common.ToolType;
 
 public class TorberniteOre extends Block {
 	
-	public TorberniteOre(String name, Material material)
+	public TorberniteOre()
 	{
 super(Block.Properties.create(Material.ROCK)
 				

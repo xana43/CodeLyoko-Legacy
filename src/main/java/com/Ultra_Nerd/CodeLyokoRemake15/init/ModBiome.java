@@ -1,22 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
+import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.Lyoko5;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.LyokoDES;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.LyokoFS;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.LyokoICE;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.LyokoM;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.LyokoOC;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.Category;
+import net.minecraft.world.biome.Biome.RainType;
+import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
+import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.BiomeManager.BiomeEntry;
-import net.minecraftforge.common.BiomeManager.BiomeType;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 public class ModBiome {
 	
-	public static final Biome LYOKO_FS = new LyokoFS();
+	/*public static final Biome LYOKO_FS = new LyokoFS();
 	public static final Biome LYOKO_ICE = new LyokoICE();
     public static final Biome LYOKO_DESERT = new LyokoDES();
     public static final Biome LYOKO_OCEAN = new LyokoOC();
@@ -31,22 +32,29 @@ public class ModBiome {
         initBiome(LYOKO_DESERT, "Lyoko_DESERT", BiomeType.DESERT, Type.HOT);
         initBiome(SECTOR_5,"sector5",BiomeType.ICY,Type.DEAD);
        
-	}
+	}*/
 	
-
-	private static Biome initBiome(Biome biome, String name, BiomeType biometype, Type... types)
+	public static final DeferredRegister<Biome> BIOMES = new DeferredRegister<>(ForgeRegistries.BIOMES, Base.MOD_ID);
+	
+	public static final RegistryObject<Biome> SECTOR5 = BIOMES.register("sector5", () -> new Lyoko5(new Biome.Builder()
+			 .precipitation(RainType.NONE)
+			 .waterColor(3099807)
+			 .waterFogColor(3099807)
+			 .surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(registry.SECTOR_5.get()
+			 .getDefaultState(),Blocks.AIR.getDefaultState(),Blocks.AIR.getDefaultState()))
+			 .category(Category.TAIGA)
+			 .downfall(0)
+			 .parent(null)));
+	
+	public static void regbio()
 	{
-		biome.setRegistryName(name);
-		net.minecraftforge.registries.ForgeRegistries.BIOMES.register(biome);
+		initBiome(SECTOR5.get(),Type.DENSE,Type.END);
+	}
+
+	private static void initBiome(Biome biome,Type... types)
+	{
 		BiomeDictionary.addTypes(biome, types);
-		
-				
-		if(Conf.spawnLyokoOverWorld)
-		{
-			BiomeManager.addBiome(biometype, new BiomeEntry(biome, 10));
-			BiomeManager.addSpawnBiome(biome);
-		}
-		return biome;
+		net.minecraftforge.common.BiomeManager.addSpawnBiome(biome);
 	}
 	
 	

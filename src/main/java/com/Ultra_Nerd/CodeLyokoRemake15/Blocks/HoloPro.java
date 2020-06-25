@@ -1,54 +1,68 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Blocks;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.machine.HoloProjector.ProjectorTE;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ContainerBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.state.IProperty;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 
-public class HoloPro extends BlockContainer {
+public class HoloPro extends ContainerBlock {
 	
-	public HoloPro(String name, Material material)
+	public HoloPro()
 	{
-		super(material);
-		setSoundType(SoundType.STONE);
-		setLightLevel(2);
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, false));
-		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+super(Block.Properties.create(Material.IRON)
+				
+				.hardnessAndResistance(6, 10)
+				.sound(SoundType.METAL)
+				.lightValue(2)
+				.harvestLevel(0)
+				.harvestTool(ToolType.PICKAXE)
+				
+					
+					
+					
+					
+			);
+		
 	}
 	public static PropertyBool VALID = PropertyBool.create("valid");
 	public static boolean trans = false;
+	
 	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
+	public TileEntity createNewTileEntity(IBlockReader worldIn) {
 		// TODO Auto-generated method stub
 		return new ProjectorTE();
 	}
+	
 	@Override
-	public boolean hasTileEntity(IBlockState state) {
+	public boolean hasTileEntity() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	
+	@Override
+	public boolean hasTileEntity(BlockState state) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
 	public static void SetModel(boolean act, World worldIn, BlockPos pos) 
 	{
-		 IBlockState state = worldIn.getBlockState(pos);
+		 BlockState state = worldIn.getBlockState(pos);
 		 TileEntity tileentity = worldIn.getTileEntity(pos);
 		 
 		 if(act) worldIn.setBlockState(pos, Modblocks.HOLOPROJECTOR.getDefaultState().withProperty(VALID, true), 3);

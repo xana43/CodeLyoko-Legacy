@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers;
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.Abunta;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.AutuniteOre;
-import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.COOL;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.CableBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.CarontiteOre;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.CoffiniteOre;
@@ -48,7 +47,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.machine.flouride.FlourideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.Blocks.tileentity.Interface;
 import com.Ultra_Nerd.CodeLyokoRemake15.Records.LyokoRecords;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.LyokoTiers;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBiome;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.ItemBase;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.LaserArrowShooter;
 
@@ -89,6 +88,7 @@ public class registry
 		BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         Tiles.register(FMLJavaModLoadingContext.get().getModEventBus());
         Entities.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModBiome.BIOMES.register(FMLJavaModLoadingContext.get().getModEventBus());
         Containers.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 	public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Base.MOD_ID);
@@ -97,6 +97,7 @@ public class registry
 	public static final DeferredRegister<EntityType<?>> Entities = new DeferredRegister<>(ForgeRegistries.ENTITIES, Base.MOD_ID);
     public static final DeferredRegister<Fluid> LIQUIDS = new DeferredRegister<>(ForgeRegistries.FLUIDS, Base.MOD_ID);
     public static final DeferredRegister<SoundEvent> SOUNDS = new DeferredRegister<>(ForgeRegistries.SOUND_EVENTS, Base.MOD_ID);
+   
     //for fluids
     
     //fluid resource locations
@@ -167,7 +168,7 @@ public class registry
 	 public static final RegistryObject<Block> COMPUTER_FRAME = BLOCKS.register("computer_frame",CompFrame::new);
 	 public static final RegistryObject<Block> COMPUTER_SCREEN = BLOCKS.register("computer_screen",CompScreen::new);
 	 public static final RegistryObject<Block> COFFINITE_ORE = BLOCKS.register("coffinite_ore", CoffiniteOre::new) ;
-	 public static final RegistryObject<Block> COOLANT_BLOCK = new COOL("coolant_block", ModFluids.COOLANT_FLUID, Material.WATER);
+	
 	 public static final RegistryObject<Block> CARNOTITE_ORE = BLOCKS.register("carnotite_ore",CarontiteOre::new);
 	 public static final RegistryObject<Block> CABLE_BLOCK = BLOCKS.register("cable_block",CableBlock::new);
 	 public static final RegistryObject<Block> DIGITAL_BLOCK = BLOCKS.register("digital_block",DigialGrass::new);
@@ -181,8 +182,8 @@ public class registry
 	 public static final RegistryObject<Block> FLOURITE_BLOCK = BLOCKS.register("flourite_block",FlouriteBlock::new);
 	 public static final RegistryObject<Block> FOREST_TREE = BLOCKS.register("digital_tree",tree::new);
 	 public static final RegistryObject<Block> GUMMITE_ORE = BLOCKS.register("gummite_ore",GummiteOre::new);
-	 public static final RegistryObject<Block> HOLO = new Holo("holo", Material.DRAGON_EGG);
-	 public static final RegistryObject<Block> HOLOPROJECTOR = new HoloPro("holoprojector", Material.IRON);
+	 public static final RegistryObject<Block> HOLO = BLOCKS.register("holo", Holo::new);
+	 public static final RegistryObject<Block> HOLOPROJECTOR = BLOCKS.register("holoprojector", HoloPro::new);
 	 public static final RegistryObject<Block> MARABUNTA = BLOCKS.register("marabunta",Marabunta::new);
 	 public static final RegistryObject<Block> MOUNTAIN_TREE = BLOCKS.register("mountain_tree",MTree::new);
 	 public static final RegistryObject<Block> QUANTUM_BLOCK = BLOCKS.register("quantum_block",QuantumBlock::new);
@@ -235,6 +236,8 @@ public class registry
 	 public static final RegistryObject<Item> DIGITAL_SABER = ITEMS.register("digital_saber", () -> new SwordItem(LyokoTiers.LyokoSamurai,25,10 , new Item.Properties().group(Base.Lyoko)));
 	 public static final RegistryObject<Item> QUANTUM_SABER = ITEMS.register("quantum_saber", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().group(Base.Lyoko)));
 	 public static final RegistryObject<Item> ZWEIHANDER = ITEMS.register("zweihander", () -> new SwordItem(LyokoTiers.LyokoWarrior,30,4, new Item.Properties().group(Base.Lyoko)));	
+	 //for biomes
+	 
 	 
 	
 }

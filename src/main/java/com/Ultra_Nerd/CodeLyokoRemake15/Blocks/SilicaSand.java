@@ -7,7 +7,7 @@ import net.minecraftforge.common.ToolType;
 
 public class SilicaSand extends Block {
 	
-	public SilicaSand(String name, Material material)
+	public SilicaSand()
 	{
 super(Block.Properties.create(Material.SAND)
 				

@@ -34,7 +34,7 @@ public class TowerInterface extends HorizontalBlock {
     protected static final VoxelShape SHAPE_NORMAL_X = Block.makeCuboidShape(8.0D, 2.0D, 0.0D, 9.0D, 14.0D, 16.0D);
     protected static final VoxelShape SHAPE_COLLISION = Block.makeCuboidShape(0.0D, 2.0D, 8.D, 16.D, 14.0D, 8.D);
 	
-	public TowerInterface(String name, Material mats)
+	public TowerInterface()
 	{
 super(Block.Properties.create(Material.IRON)
 				

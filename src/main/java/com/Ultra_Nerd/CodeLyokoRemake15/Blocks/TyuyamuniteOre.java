@@ -7,7 +7,7 @@ import net.minecraftforge.common.ToolType;
 
 public class TyuyamuniteOre extends Block {
 	
-	public TyuyamuniteOre(String name, Material material)
+	public TyuyamuniteOre()
 	{
 super(Block.Properties.create(Material.ROCK)
 				
