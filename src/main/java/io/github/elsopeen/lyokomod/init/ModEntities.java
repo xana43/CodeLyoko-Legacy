@@ -1,7 +1,6 @@
 package io.github.elsopeen.lyokomod.init;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.Entityblok;
+
 import io.github.elsopeen.lyokomod.Entity.Entityblok;
 import io.github.elsopeen.lyokomod.LyokoMod;
 import net.minecraft.entity.EntityClassification;

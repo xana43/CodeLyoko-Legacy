@@ -1,10 +1,8 @@
 package io.github.elsopeen.lyokomod.init;
 
 import io.github.elsopeen.lyokomod.LyokoMod;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import io.github.elsopeen.lyokomod.Records.LyokoRecords;
+import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -16,6 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModItems {
 
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, LyokoMod.MOD_ID);
+
     
     // Territory blocks
     /*
@@ -41,6 +40,8 @@ public class ModItems {
     */
     // Numeric Sea
     public static final RegistryObject<Item> NUMERIC_SEA_BUCKET = ITEMS.register("numeric_sea_bucket", ()->new BucketItem(ModFluids.NUMERIC_SEA, (new Item.Properties()).containerItem(Items.BUCKET).maxStackSize(1).group(ModItemGroups.CODE_LYOKO_ITEMS)));
+    //for music discs
+    public static final RegistryObject<Item> LYOKO_DISC = ITEMS.register("lyoko_disc", () -> new LyokoRecords(10, ModSounds.LAZY_THEME.get(), new Item.Properties().group(ModItemGroups.CODE_LYOKO_ITEMS).maxStackSize(1).rarity(Rarity.RARE)));
 
     // Ores
     /*

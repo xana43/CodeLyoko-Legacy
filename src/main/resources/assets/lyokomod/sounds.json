@@ -4,7 +4,7 @@
     {
         "category":"entity",
         "subtitle": "entity.blok.ambient",
-        "sounds":[{"name":"cm:entity/blok/ambient", "stream":"true"}]
+        "sounds":[{"name":"lyokomod:entity/blok/ambient", "stream":"true"}]
     },
     
      "entity.blok.hurt":
@@ -12,37 +12,37 @@
     {
         "category":"entity",
         "subtitle": "entity.blok.hurt",
-        "sounds":[{"name":"cm:entity/blok/hurt", "stream":"true"}]
+        "sounds":[{"name":"lyokomod:entity/blok/hurt", "stream":"true"}]
     },
      "entity.blok.death":
     
     {
         "category":"entity",
         "subtitle": "entity.blok.death",
-        "sounds":[{"name":"cm:entity/blok/death", "stream":"true"}]
+        "sounds":[{"name":"lyokomod:entity/blok/death", "stream":"true"}]
     },
     "lyoko":
     {
         "category":"record",
         "subtitle":"play.CodeLyokoTheme",
-        "sounds":[{"name":"cm:records/lyoko", "stream":"true"}]
+        "sounds":[{"name":"lyokomod:records/lyoko", "stream":"true"}]
     },
     "laser":
     {
         "category":"neutral",
         "subtitle":"laser fire",
-        "sounds": [{"name":"cm:items/laser","stream":"true"}]
+        "sounds": [{"name":"lyokomod:items/laser","stream":"true"}]
     },
     "forestsector":
     {
         "cetegory":"ambient",
         "subtitle":"forest sector ambiance",
-        "sounds":[{"name":"cm:music/forest/forestsector", "stream":"true"}]
+        "sounds":[{"name":"lyokomod:music/forest/forestsector", "stream":"true"}]
     },
     "icesector":
     {
         "cetegory":"ambient",
         "subtitle":"ice sector ambiance",
-        "sounds":[{"name":"cm:music/ice/icesector", "stream":"true"}]
+        "sounds":[{"name":"lyokomod:music/ice/icesector", "stream":"true"}]
     }
 }

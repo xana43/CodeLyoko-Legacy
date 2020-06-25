@@ -1,24 +1,17 @@
 package io.github.elsopeen.lyokomod;
 
-import java.util.stream.Collectors;
-
 import io.github.elsopeen.lyokomod.init.*;
-import net.minecraft.block.Block;
+import io.github.elsopeen.lyokomod.world.WorldGen;
+import io.github.elsopeen.lyokomod.world.template.LyokoPlacement;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.IForgeRegistry;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import io.github.elsopeen.lyokomod.world.WorldGen;
-import io.github.elsopeen.lyokomod.world.template.LyokoPlacement;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -26,6 +19,11 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.stream.Collectors;
 
 /**
  * Main mod class
@@ -59,7 +57,8 @@ public class LyokoMod {
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onRegisterItems);
         // Register items
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-
+        //Register sounds
+        ModSounds.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
         // Register Blocks
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
