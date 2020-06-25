@@ -14,6 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModItems {
 
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, LyokoMod.MOD_ID);
+    //public static final DeferredRegister<Item> RECORDS = new DeferredRegister<>(ForgeRegistries.ITEMS,LyokoMod.MOD_ID);
 
     
     // Territory blocks

@@ -21,7 +21,7 @@ public class NumericSeaFluidBlock extends FlowingFluidBlock {
     @Override
     public void onEntityCollision(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         if(entityIn instanceof LivingEntity){
-            entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, 100);
+            entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
         }
     }
 }

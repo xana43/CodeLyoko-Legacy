@@ -1,16 +1,7 @@
 package io.github.elsopeen.lyokomod.init;
 
 import io.github.elsopeen.lyokomod.LyokoMod;
-import io.github.elsopeen.lyokomod.blocks.InterfaceBlock;
-import io.github.elsopeen.lyokomod.blocks.NumericSeaFluidBlock;
-import io.github.elsopeen.lyokomod.blocks.TowerBaseBlock;
-import io.github.elsopeen.lyokomod.blocks.TowerBodyBlock;
-import io.github.elsopeen.lyokomod.blocks.TowerBottomResetBlock;
-import io.github.elsopeen.lyokomod.blocks.TowerPlatformAccessBlock;
-import io.github.elsopeen.lyokomod.blocks.TowerPlatformCenterBlock;
-import io.github.elsopeen.lyokomod.blocks.TowerPlatformCornerBlock;
-import io.github.elsopeen.lyokomod.blocks.TowerPlatformStraightBlock;
-import io.github.elsopeen.lyokomod.blocks.TowerPlatformTShapeBlock;
+import io.github.elsopeen.lyokomod.blocks.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -56,5 +47,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> COFFINITE_ORE = BLOCKS.register("coffinite_ore", ()->new Block(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(6.f,10.f).harvestTool(ToolType.PICKAXE).harvestLevel(2).lightValue(1)));
 	public static final RegistryObject<Block> TYUYAMUNITE_ORE = BLOCKS.register("tyuyamunite_ore",() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(0).harvestLevel(1).harvestTool(ToolType.PICKAXE)));
 	public static final RegistryObject<Block> TORBERNITE_ORE = BLOCKS.register("torbernite_ore",() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
+    //special blocks
+    public static final RegistryObject<Block> MARABUNTA = BLOCKS.register("marabunta", Marabunta::new);
+    public static final RegistryObject<Block> ANTI_MARABUNTA = BLOCKS.register("anti_marabunta",AntiMarabuna::new);
 }
 

@@ -55,10 +55,11 @@ public class LyokoMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
        // Register OnItemInit method for automatic Itemblocks
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onRegisterItems);
-        // Register items
-        ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         //Register sounds
         ModSounds.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        // Register items
+        ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
         // Register Blocks
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 

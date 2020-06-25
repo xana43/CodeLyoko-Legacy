@@ -19,6 +19,8 @@
   "block.lyokomod.autunite_ore": "Autunite Ore",
   "block.lyokomod.saleeite_ore": "Uranium Silicate Ore",
   "block.lyokomod.numeric_sea_block": "Numeric Sea Fluid Blocks",
+  "block.lyokomod.marabunta": "marabunta",
+  "block.lyokomod.anti_marabunta": "anti_marabunta",
 
   "_comment": "Fluids",
   "fluid.lyokomod.numeric_sea": "Numeric Sea",
@@ -27,6 +29,9 @@
   "_comment": "Items",
   "item.lyokomod.numeric_sea_bucket": "Numeric Sea Bucket",
   "item.lyokomod.uranium_silicate": "Uranium Silicate",
+  "item.lyokomod.lyoko_disc": "Codelyoko Theme",
+  "item.lyokomod.lyoko_disc.desc": "A World Without Danger - Noam Kaniel(Subdigitals)  ",
+
 
   "_comment": "Item Groups",
   "itemGroup.code_lyoko_blocks": "Code Lyoko Blocks",
