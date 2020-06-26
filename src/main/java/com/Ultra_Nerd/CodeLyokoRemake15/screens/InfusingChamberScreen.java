@@ -28,10 +28,17 @@ public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> {
     }
 
     @Override
+    public void render(final int mouseX, final int mouseY, final float partialTicks) {
+        this.renderBackground();
+        super.render(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
+    }
+
+    @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String tn = this.tileentity.getDisplayName().getUnformattedComponentText();
 
-        this.font.drawString(tn, (this.xSize / 2 - this.font.getStringWidth(tn) / 2), 5, 4210752);
+        this.font.drawString(tn, (this.xSize / 2.f - this.font.getStringWidth(tn) / 2.f), 5, 4210752);
         this.font.drawString(this.player.getDisplayName().getUnformattedComponentText(), 122, this.ySize - 96 + 2, 4210752);
 
     }
