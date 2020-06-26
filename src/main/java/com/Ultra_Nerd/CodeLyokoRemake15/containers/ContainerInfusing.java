@@ -24,14 +24,12 @@ import java.util.Objects;
 
 public class ContainerInfusing extends Container
 {
-	protected ContainerInfusing(@Nullable ContainerType<?> type, int id) {
+	protected ContainerInfusing(@Nullable ContainerType<?> type, int id, InfusingChamberTileEntity tileentity) {
 		super(type, id);
+		this.tileentity = tileentity;
 	}
 
-	@Override
-	public boolean canInteractWith(PlayerEntity playerIn) {
-		return false;
-	}
+
 
 
 

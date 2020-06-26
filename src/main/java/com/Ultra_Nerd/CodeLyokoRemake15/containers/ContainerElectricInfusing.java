@@ -1,17 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
 
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
+import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.inventory.container.IContainerListener;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -21,23 +27,20 @@ import java.util.Objects;
 
 public class ContainerElectricInfusing extends Container
 {
-	protected ContainerElectricInfusing(@Nullable ContainerType<?> type, int id) {
-		super(type, id);
-	}
+	
 
-	@Override
-	public boolean canInteractWith(PlayerEntity playerIn) {
-		return false;
-	}
-
+	
+	
 	private final ElectricInfusingChamberTileEntity tileentity;
 	private int cookTime, energy;
+	private ScriptObjectMirror listeners;
+
 	/**
 	 * Useful constructor in outside classes
 	 * @param windowId the id of the container
 	 * @param playerInventory the playerInv of the player using this container
 	 * @param data the data sent when this container is used.
-
+	*/
 	public ContainerElectricInfusing(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
 		this(windowId, playerInventory, getTileEntity(playerInventory, data));
 	}
@@ -76,7 +79,7 @@ public class ContainerElectricInfusing extends Container
 	{
 		super.detectAndSendChanges();
 		
-		/*for(int i = 0; i < this.listeners.size(); ++i)
+		for(int i = 0; i < this.listeners.size(); ++i)
 		{
 			IContainerListener listener = (IContainerListener)this.listeners.get(i);
 			if(this.energy != this.tileentity.getField(0)) listener.sendWindowProperty(this, 0, this.tileentity.getField(0));
@@ -162,10 +165,10 @@ public class ContainerElectricInfusing extends Container
 	 * @param data Data from which to get the pos
 	 * @return the tileEntity linked to the block used
 */
-	private static ElectricInfusingChamberTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
-		Objects.requireNonNull(playerInventory, "playerInventory cannot be null!");
+	private static ElectricInfusingChamberTileEntity getTileEntity(PlayerInventory playerInven, PacketBuffer data) {
+		Objects.requireNonNull(playerInven, "playerInventory cannot be null!");
 		Objects.requireNonNull(data, "data cannot be null!");
-		final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
+		final TileEntity tileAtPos = playerInven.player.world.getTileEntity(data.readBlockPos());
 		if (tileAtPos instanceof InfusingChamberTileEntity)
 			return (ElectricInfusingChamberTileEntity) tileAtPos;
 		throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);

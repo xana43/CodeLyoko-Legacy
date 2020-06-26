@@ -2,7 +2,7 @@
     "forge_marker": 1,
     "variants": 
     {
-        "valid=false":{"model": "holoprojector"},
-        "valid=true":{"model":"cm:holo.obj"}
+        "valid=false":{"model": "cm:block/holoprojector"},
+        "valid=true":{"model":"cm:block/holo.obj"}
     }
 }

@@ -35,6 +35,7 @@ public class ModBlocks {
 	public static final RegistryObject<Block> FLOURITE_BLOCK = BLOCKS.register("flourite_block",() -> new Block(Block.Properties.create(Material.SAND).hardnessAndResistance(-1, 10).sound(SoundType.SAND).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
 	public static final RegistryObject<Block> FLOURITE_ORE = BLOCKS.register("flourite_ore",() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
 	public static final RegistryObject<Block> HOLOPROJECTOR = BLOCKS.register("holoprojector", HologramProjectorBlock::new);
+	public static final RegistryObject<Block> HOLOPROJECTOR_PROJECTION = BLOCKS.register("holo", () -> new Block(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(-1,-1).lightValue(3)));
 	public static final RegistryObject<Block> MARABUNTA = BLOCKS.register("marabunta",Marabunta::new);
 	public static final RegistryObject<Block> MOUNTAIN_TREE = BLOCKS.register("mountain_tree", MountainTreeBlock::new);
 	public static final RegistryObject<Block> QUANTUM_BLOCK = BLOCKS.register("quantum_block",() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(6, 20).sound(SoundType.METAL).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));

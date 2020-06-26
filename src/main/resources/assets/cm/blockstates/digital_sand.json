@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "cm:digital_sand" }
+        "": { "model": "cm:block/digital_sand" }
     }
 }

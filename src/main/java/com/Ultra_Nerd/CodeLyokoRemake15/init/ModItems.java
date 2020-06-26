@@ -1,9 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.items.FlourideItem;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.ItemBase;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.LaserArrowShooter;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
 import net.minecraftforge.fml.RegistryObject;
@@ -38,7 +40,7 @@ public class ModItems
 
 		 public static final RegistryObject<Item>  TRIURANIUM_OCTAOXIDE = ITEMS.register("triuranium_octaoxide", ItemBase::new);
 
-		 public static final RegistryObject<Item>  FLOURIDE = ITEMS.register("flouride", ItemBase::new);
+		 public static final RegistryObject<Item>  FLOURIDE = ITEMS.register("flouride", () -> new FlourideItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
 
 		 public static final RegistryObject<Item>  BIT = ITEMS.register("bit", ItemBase::new);
 

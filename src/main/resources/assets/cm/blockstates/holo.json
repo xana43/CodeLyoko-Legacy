@@ -1,8 +1,8 @@
 {
     "forge_marker": 1,
     "defaults": {
-        "textures": {"holo":"cm:holo"},
-        "model": "cm:holo.obj"
+        "textures": {"holo":"cm:block/holo"},
+        "model": "cm:block/holo.obj"
      },
     "variants": {
         "normal": [{}],

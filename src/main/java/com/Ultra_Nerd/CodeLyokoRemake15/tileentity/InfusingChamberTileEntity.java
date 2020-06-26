@@ -17,6 +17,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
@@ -33,11 +34,9 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class InfusingChamberTileEntity extends TileEntity  {
-    public InfusingChamberTileEntity(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
-    }
-    /*
+public class InfusingChamberTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+
+
     public ItemStackHandler handler = new ItemStackHandler(4);
     private String customName;
     private ItemStack smelting = ItemStack.EMPTY;
@@ -111,6 +110,9 @@ public class InfusingChamberTileEntity extends TileEntity  {
     public static boolean isBurning(InfusingChamberTileEntity te) {
         return te.getField(0) > 0;
     }
+
+
+
 
     @Override
     public void tick() {
@@ -244,11 +246,12 @@ public class InfusingChamberTileEntity extends TileEntity  {
         }
     }
 
+
     @Nullable
     @Override
     public Container createMenu(int windowIn, PlayerInventory playerInventory, PlayerEntity playerEntity) {
         return new ContainerInfusing(windowIn, playerInventory, this);
     }
 
-     */
+
 }
