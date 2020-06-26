@@ -2,7 +2,9 @@ package com.Ultra_Nerd.CodeLyokoRemake15;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry;
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
+import net.minecraft.block.Block;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -69,8 +71,7 @@ public class Base
 	{
 		final IForgeRegistry<Item> registry = Items.getRegistry();
 		
-		ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof FlowingFluidBlock))
-		.map(RegistryObject::get).forEach(block->
+		ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof FlowingFluidBlock) && !(block.get() instanceof HologramBlock)).map(RegistryObject::get).forEach(block->
 		{
 			final Item.Properties itemsettings = new Item.Properties().group(LYOKO_BLOCKS);
 			final BlockItem Itemblocks = new BlockItem(block,itemsettings);

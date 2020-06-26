@@ -79,7 +79,7 @@
   "item.cm.titanium": "Titanium Ingot",
   "_comment": "itemgroups",
   "itemGroup.lyoko_items": "Codelyoko:Legacy - Items",
-  "itemGroup.lyoko_blocks": "Codelyoko:legacy - Blocks",
+  "itemGroup.lyoko_blocks": "Codelyoko:Legacy - Blocks",
   "_comment": "special blocks",
   "block.cm.tower_interface": "Tower Interface",
   "tile.cm.silica_sand": "Silica rich sand",
