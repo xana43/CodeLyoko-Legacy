@@ -1,20 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.commands;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.ref;
-import com.google.common.collect.Lists;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
+public class Modteleportcommand  {
 
-import java.util.ArrayList;
-
-public class Modteleportcommand extends CommandBase {
-
-	
+	/*
 	private final ArrayList<String> coms = Lists.newArrayList(ref.MOD_ID, "tp", "tpdim","tpdimension","teleporteddimension", "teleport");
 	@Override
 	public void execute(MinecraftServer arg0, ICommandSender arg1, String[] arg2) throws CommandException {
@@ -63,5 +51,5 @@ public class Modteleportcommand extends CommandBase {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
+*/
 }

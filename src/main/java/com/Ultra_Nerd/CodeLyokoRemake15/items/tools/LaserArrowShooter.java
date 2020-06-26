@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.items.tools;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
@@ -35,13 +36,14 @@ public class LaserArrowShooter extends BowItem{
 			arrow = playerIn.inventory.getStackInSlot(i);
 		}
 		
-		if(arrow.getItem() == ModItems.LASERARROW)
+		if(arrow.getItem() == ModItems.BIT.get())
 		{
 			arrow.setCount(arrow.getCount() - 1);
 		}
 		
 		Vec3d aim = playerIn.getLookVec();
-		worldIn.playSound(null,playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), registry.LASERARROW.get(), SoundCategory.NEUTRAL, 1f, 1f);
+		//worldIn.playSound(null,playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModItems.BIT.get(), SoundCategory.NEUTRAL, 1f, 1f);
+		worldIn.playSound(playerIn,playerIn.getPosX(),playerIn.getPosY(),playerIn.getPosZ(), ModSounds.LASERARROW.get(),SoundCategory.NEUTRAL,1f,1f);
 		EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 		
 		las.setPosition(playerIn.getPosX() + aim.x * 1.5D, playerIn.getPosY() + aim.y * 1.9D, playerIn.getPosZ() + aim.z * 1.5D);

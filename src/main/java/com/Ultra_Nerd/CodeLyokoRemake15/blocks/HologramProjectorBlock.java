@@ -1,23 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ProjectorTileEntity;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.state.IProperty;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
+
+import javax.annotation.Nullable;
 
 public class HologramProjectorBlock extends ContainerBlock {
 	
@@ -37,7 +28,15 @@ super(Block.Properties.create(Material.IRON)
 					
 			);
 		
+
 	}
+
+	@Nullable
+	@Override
+	public TileEntity createNewTileEntity(IBlockReader worldIn) {
+		return null;
+	}
+	/*
 	public static PropertyBool VALID = PropertyBool.create("valid");
 	public static boolean trans = false;
 	
@@ -156,5 +155,5 @@ public int getMetaFromState(IBlockState state) { return 0; }
 
 @Override
 public IBlockState getStateFromMeta(int meta) { return this.getDefaultState(); }
-
+*/
 }

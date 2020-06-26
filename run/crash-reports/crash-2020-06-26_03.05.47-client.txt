@@ -1,0 +1,175 @@
+---- Minecraft Crash Report ----
+// My bad.
+
+Time: 6/26/20 3:05 AM
+Description: Initializing game
+
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at net.minecraftforge.fml.javafmlmod.FMLJavaModLanguageProvider$FMLModTarget.loadMod(FMLJavaModLanguageProvider.java:78) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:31.2] {}
+	at net.minecraftforge.fml.ModLoader.buildModContainerFromTOML(ModLoader.java:251) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:?] {re:classloading}
+	at net.minecraftforge.fml.ModLoader.lambda$buildMods$27(ModLoader.java:231) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:?] {re:classloading}
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[?:1.8.0_232] {}
+	at java.util.HashMap$EntrySpliterator.forEachRemaining(HashMap.java:1699) ~[?:1.8.0_232] {}
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482) ~[?:1.8.0_232] {}
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472) ~[?:1.8.0_232] {}
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[?:1.8.0_232] {}
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_232] {}
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566) ~[?:1.8.0_232] {}
+	at net.minecraftforge.fml.ModLoader.buildMods(ModLoader.java:233) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:?] {re:classloading}
+	at net.minecraftforge.fml.ModLoader.lambda$gatherAndInitializeMods$19(ModLoader.java:189) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:?] {re:classloading}
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[?:1.8.0_232] {}
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[?:1.8.0_232] {}
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1382) ~[?:1.8.0_232] {}
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482) ~[?:1.8.0_232] {}
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472) ~[?:1.8.0_232] {}
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[?:1.8.0_232] {}
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_232] {}
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566) ~[?:1.8.0_232] {}
+	at net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:191) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:?] {re:classloading}
+	at net.minecraftforge.fml.client.ClientModLoader.lambda$begin$2(ClientModLoader.java:97) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraftforge.fml.client.ClientModLoader.lambda$createRunnableWithCatch$5(ClientModLoader.java:113) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraftforge.fml.client.ClientModLoader.begin(ClientModLoader.java:97) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.client.Minecraft.<init>(Minecraft.java:397) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.client.main.Main.main(Main.java:141) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:?] {re:classloading,pl:runtimedistcleaner:A}
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_232] {}
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_232] {}
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_232] {}
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_232] {}
+	at net.minecraftforge.userdev.FMLUserdevClientLaunchProvider.lambda$launchService$0(FMLUserdevClientLaunchProvider.java:55) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:?] {}
+	at cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:37) [modlauncher-5.1.0.jar:?] {}
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:54) [modlauncher-5.1.0.jar:?] {}
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:72) [modlauncher-5.1.0.jar:?] {}
+	at cpw.mods.modlauncher.Launcher.run(Launcher.java:81) [modlauncher-5.1.0.jar:?] {}
+	at cpw.mods.modlauncher.Launcher.main(Launcher.java:65) [modlauncher-5.1.0.jar:?] {}
+	at net.minecraftforge.userdev.LaunchTesting.main(LaunchTesting.java:105) [forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:?] {}
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_232] {}
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_232] {}
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_232] {}
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_232] {}
+	at net.minecraftforge.fml.javafmlmod.FMLJavaModLanguageProvider$FMLModTarget.loadMod(FMLJavaModLanguageProvider.java:73) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:31.2] {}
+	... 36 more
+Caused by: net.minecraftforge.fml.ModLoadingException: CodeLyoko:Legacy has class loading errors
+§7Illegal private member with @SubscribeEvent annotation
+	at net.minecraftforge.fml.javafmlmod.FMLModContainer.<init>(FMLModContainer.java:77) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:31.2] {re:classloading}
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_232] {}
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_232] {}
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_232] {}
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_232] {}
+	at net.minecraftforge.fml.javafmlmod.FMLJavaModLanguageProvider$FMLModTarget.loadMod(FMLJavaModLanguageProvider.java:73) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:31.2] {}
+	... 36 more
+Caused by: java.lang.RuntimeException: Illegal private member with @SubscribeEvent annotation
+	at net.minecraftforge.eventbus.EventAccessTransformer.illegalPrivateAccess(EventAccessTransformer.java:60) ~[eventbus-2.2.0-service.jar:?] {}
+	at net.minecraftforge.eventbus.EventAccessTransformer.lambda$transform$2(EventAccessTransformer.java:50) ~[eventbus-2.2.0-service.jar:?] {}
+	at java.util.stream.ReferencePipeline$11$1.accept(ReferencePipeline.java:439) ~[?:1.8.0_232] {}
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175) ~[?:1.8.0_232] {}
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1382) ~[?:1.8.0_232] {}
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482) ~[?:1.8.0_232] {}
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472) ~[?:1.8.0_232] {}
+	at java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150) ~[?:1.8.0_232] {}
+	at java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173) ~[?:1.8.0_232] {}
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:1.8.0_232] {}
+	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:485) ~[?:1.8.0_232] {}
+	at net.minecraftforge.eventbus.EventAccessTransformer.transform(EventAccessTransformer.java:54) ~[eventbus-2.2.0-service.jar:?] {}
+	at net.minecraftforge.eventbus.EventBusEngine.processClass(EventBusEngine.java:21) ~[eventbus-2.2.0-service.jar:?] {}
+	at net.minecraftforge.eventbus.service.ModLauncherService.processClass(ModLauncherService.java:20) ~[eventbus-2.2.0-service.jar:2.2.0+59+master.4f71e48] {}
+	at cpw.mods.modlauncher.LaunchPluginHandler.offerClassNodeToPlugins(LaunchPluginHandler.java:85) ~[modlauncher-5.1.0.jar:?] {}
+	at cpw.mods.modlauncher.ClassTransformer.transform(ClassTransformer.java:115) ~[modlauncher-5.1.0.jar:?] {}
+	at cpw.mods.modlauncher.TransformingClassLoader$DelegatedClassLoader.findClass(TransformingClassLoader.java:239) ~[modlauncher-5.1.0.jar:?] {}
+	at cpw.mods.modlauncher.TransformingClassLoader.loadClass(TransformingClassLoader.java:126) ~[modlauncher-5.1.0.jar:?] {}
+	at cpw.mods.modlauncher.TransformingClassLoader.loadClass(TransformingClassLoader.java:96) ~[modlauncher-5.1.0.jar:?] {}
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351) ~[?:1.8.0_232] {}
+	at java.lang.Class.forName0(Native Method) ~[?:1.8.0_232] {}
+	at java.lang.Class.forName(Class.java:348) ~[?:1.8.0_232] {}
+	at net.minecraftforge.fml.javafmlmod.FMLModContainer.<init>(FMLModContainer.java:71) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:31.2] {re:classloading}
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_232] {}
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:1.8.0_232] {}
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.8.0_232] {}
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[?:1.8.0_232] {}
+	at net.minecraftforge.fml.javafmlmod.FMLJavaModLanguageProvider$FMLModTarget.loadMod(FMLJavaModLanguageProvider.java:73) ~[forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-recomp.jar:31.2] {}
+	... 36 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at net.minecraftforge.fml.javafmlmod.FMLJavaModLanguageProvider$FMLModTarget.loadMod(FMLJavaModLanguageProvider.java:78)
+	at net.minecraftforge.fml.ModLoader.buildModContainerFromTOML(ModLoader.java:251)
+	at net.minecraftforge.fml.ModLoader.lambda$buildMods$27(ModLoader.java:231)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.HashMap$EntrySpliterator.forEachRemaining(HashMap.java:1699)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+	at net.minecraftforge.fml.ModLoader.buildMods(ModLoader.java:233)
+	at net.minecraftforge.fml.ModLoader.lambda$gatherAndInitializeMods$19(ModLoader.java:189)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1382)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:566)
+	at net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:191)
+	at net.minecraftforge.fml.client.ClientModLoader.lambda$begin$2(ClientModLoader.java:97)
+	at net.minecraftforge.fml.client.ClientModLoader.lambda$createRunnableWithCatch$5(ClientModLoader.java:113)
+	at net.minecraftforge.fml.client.ClientModLoader.begin(ClientModLoader.java:97)
+	at net.minecraft.client.Minecraft.<init>(Minecraft.java:397)
+
+-- Initialization --
+Details:
+Stacktrace:
+	at net.minecraft.client.main.Main.main(Main.java:141)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraftforge.userdev.FMLUserdevClientLaunchProvider.lambda$launchService$0(FMLUserdevClientLaunchProvider.java:55)
+	at cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:37)
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:54)
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:72)
+	at cpw.mods.modlauncher.Launcher.run(Launcher.java:81)
+	at cpw.mods.modlauncher.Launcher.main(Launcher.java:65)
+	at net.minecraftforge.userdev.LaunchTesting.main(LaunchTesting.java:105)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.15.2
+	Minecraft Version ID: 1.15.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_232, AdoptOpenJDK
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode), 
+	Memory: 5522778552 bytes (5266 MB) / 6804209664 bytes (6489 MB) up to 15259926528 bytes (14553 MB)
+	CPUs: 16
+	JVM Flags: 1 total; -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump
+	ModLauncher: 5.1.0+69+master.79f13f7
+	ModLauncher launch target: fmluserdevclient
+	ModLauncher naming: mcp
+	ModLauncher services: 
+		/eventbus-2.2.0-service.jar eventbus PLUGINSERVICE 
+		/forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-launcher.jar object_holder_definalize PLUGINSERVICE 
+		/forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-launcher.jar runtime_enum_extender PLUGINSERVICE 
+		/accesstransformers-2.1.1-shadowed.jar accesstransformer PLUGINSERVICE 
+		/forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-launcher.jar capability_inject_definalize PLUGINSERVICE 
+		/forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-launcher.jar runtimedistcleaner PLUGINSERVICE 
+		/forge-1.15.2-31.2.21_mapped_snapshot_20200625-1.15.1-launcher.jar fml TRANSFORMATIONSERVICE 
+	FML: 31.2
+	Forge: net.minecraftforge:31.2.21
+	FML Language Providers: 
+		javafml@31.2
+		minecraft@1
+	Mod List: ~~ERROR~~ NullPointerException: null
+	Launched Version: MOD_DEV
+	Backend library: LWJGL version 3.2.2 build 10
+	Backend API: GeForce RTX 2080 SUPER/PCIe/SSE2 GL version 4.6.0 NVIDIA 451.48, NVIDIA Corporation
+	GL Caps: Using framebuffer using OpenGL 3.0
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'forge'
+	Type: Client (map_client.txt)
+	CPU: 16x AMD Ryzen 7 3800X 8-Core Processor 

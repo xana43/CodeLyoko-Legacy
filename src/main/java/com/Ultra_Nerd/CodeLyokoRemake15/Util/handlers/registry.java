@@ -40,16 +40,11 @@ public class registry
 	  
 	  
 	//for tileentities
-	 public static final RegistryObject<TileEntityType<InterfaceTileEntity>> TOWERINTERFACE = Tiles.register("tower_interface", () -> TileEntityType.Builder.create(InterfaceTileEntity::new, TOWER_INTERFACE.get()).build(null));
+	 //public static final RegistryObject<TileEntityType<InterfaceTileEntity>> TOWERINTERFACE = Tiles.register("tower_interface", () -> TileEntityType.Builder.create(InterfaceTileEntity::new, TOWER_INTERFACE.get()).build(null));
 	
 	
 	 
-	 //for tools
-	 public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().group(Base.Lyoko)));
-	 public static final RegistryObject<Item> DIGITAL_SABER = ITEMS.register("digital_saber", () -> new SwordItem(LyokoTiers.LyokoSamurai,25,10 , new Item.Properties().group(Base.Lyoko)));
-	 public static final RegistryObject<Item> QUANTUM_SABER = ITEMS.register("quantum_saber", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().group(Base.Lyoko)));
-	 public static final RegistryObject<Item> ZWEIHANDER = ITEMS.register("zweihander", () -> new SwordItem(LyokoTiers.LyokoWarrior,30,4, new Item.Properties().group(Base.Lyoko)));	
-	
+
 	 
 	 
 	

@@ -9,8 +9,9 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> {
-
+public class InfusingChamberScreen //extends ContainerScreen<ContainerInfusing>
+ {
+/*
     private static final ResourceLocation TEX = new ResourceLocation(Base.MOD_ID + ":textures/gui/FlourideInfuser.png");
     private PlayerInventory player;
     private InfusingChamberTileEntity tileentity;
@@ -63,5 +64,7 @@ public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> {
         int j = this.tileentity.getField(3);
         return j != 0 && i != 0 ? i * pixels / j : 0;
     }
+
+ */
 
 }

@@ -1,13 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.biome;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.WorldGenMinable;
 
 public class LyokoM extends Biome {
-
+	protected LyokoM(Builder biomeBuilder) {
+		super(biomeBuilder);
+	}
+/*
 	public LyokoM() {
-		super(new BiomeProperties("Lyoko Mountain sector").setBaseHeight(0).setHeightVariation(0.5f).setRainDisabled().setWaterColor(159).setTemperature(900));
+		super(new BiomeProperties("ForestModDimension Mountain sector").setBaseHeight(0).setHeightVariation(0.5f).setRainDisabled().setWaterColor(159).setTemperature(900));
 		
 		
 	
@@ -23,6 +24,8 @@ public class LyokoM extends Biome {
 		
 		// TODO Auto-generated constructor stub
 	}
+
+ */
 	
 	
 }

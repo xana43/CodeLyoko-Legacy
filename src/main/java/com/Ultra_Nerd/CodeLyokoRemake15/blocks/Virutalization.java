@@ -1,45 +1,44 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
-import com.Ultra_Nerd.CodeLyokoRemake15.commands.TeleportToDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 
 public class Virutalization extends Block {
 
-	public Virutalization(String name, Material material) {
-		super(material);
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-		Modblocks.BLOCKS.add(this);
-		ModItems.Items.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-		// TODO Auto-generated constructor stub
-	}
-	
-	@Override
-	public boolean onBlockActivated(World worldin, BlockPos pos, IBlockState state, EntityPlayer playerin, EnumHand hand, EnumFacing facing, float x, float y, float z)
-	{	
-		
+	public Virutalization() {
+		super(Block.Properties.create(Material.IRON)
 
+				.hardnessAndResistance(6, 20)
+				.sound(SoundType.METAL)
+				.lightValue(0)
+				.harvestLevel(2)
+				.harvestTool(ToolType.PICKAXE)
+
+
+
+
+
+
+		);
+
+	}
+/*
+	@Override
+	public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
 		if(!worldin.isRemote)// TODO Auto-generated method stub
 		{
-			
-			TeleportToDimension.teleportToDim(playerin, Conf.Dim, playerin.getPosition().getX(), playerin.getPosition().getY() + 5, playerin.getPosition().getZ());
+
+			TeleportToDimension.teleportToDim(player, Conf.Dim, player.getPosition().getX(), player.getPosition().getY() + 5, player.getPosition().getZ());
 			return true;
-			
+
 		}
 		else return false;
 	}
+
+ */
+
+
 
 }

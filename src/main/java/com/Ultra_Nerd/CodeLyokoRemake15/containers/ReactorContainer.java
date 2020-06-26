@@ -1,19 +1,24 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerReactorTileEntity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IContainerListener;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
+import net.minecraft.block.ContainerBlock;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockReader;
 
-public class ReactorContainer extends Container
+import javax.annotation.Nullable;
+
+public class ReactorContainer extends ContainerBlock
 {
+	protected ReactorContainer(Properties builder) {
+		super(builder);
+	}
+
+	@Nullable
+	@Override
+	public TileEntity createNewTileEntity(IBlockReader worldIn) {
+		return null;
+	}
+	/*
 	private final ComputerReactorTileEntity tileentity;
 	private int energy, Fission;
 	
@@ -98,5 +103,7 @@ public class ReactorContainer extends Container
 		}
 		
 		return stack;
-	}	
+	}
+
+	 */
 }

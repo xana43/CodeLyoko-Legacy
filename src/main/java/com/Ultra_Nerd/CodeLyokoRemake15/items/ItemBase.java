@@ -9,7 +9,7 @@ public class ItemBase extends Item
 
 	public ItemBase()
 	{
-		super(new Item.Properties().group(Base.Lyoko));
+		super(new Item.Properties().group(Base.LYOKO_ITEMS));
 	}
 	
 	

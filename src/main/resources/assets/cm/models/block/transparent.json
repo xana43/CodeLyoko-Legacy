@@ -1,6 +1,6 @@
 {
    "parent": "block/cube_all",
    "textures": {
-       "all": "cm:blocks/transparent"
+       "all": "cm:block/transparent"
    }
 }

@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:coffinite_ore" }
+        "": { "model": "cm:coffinite_ore" }
     }
 }

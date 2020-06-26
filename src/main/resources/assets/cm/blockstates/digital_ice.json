@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:digital_ice" }
+        "": { "model": "cm:digital_ice" }
     }
 }

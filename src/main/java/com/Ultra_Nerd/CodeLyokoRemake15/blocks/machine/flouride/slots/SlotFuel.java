@@ -11,7 +11,7 @@ public class SlotFuel extends Slot {
 		super(inventoryIn, index, xPosition, yPosition);
 		
 	}
-	
+	/*
 	@Override
 	public boolean isItemValid(ItemStack stack) {
 		// TODO Auto-generated method stub
@@ -23,5 +23,7 @@ public class SlotFuel extends Slot {
 		// TODO Auto-generated method stub
 		return super.getItemStackLimit(stack);
 	}
+
+	 */
 
 }

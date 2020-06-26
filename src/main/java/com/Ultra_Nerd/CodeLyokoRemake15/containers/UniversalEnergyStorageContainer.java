@@ -1,13 +1,22 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.UniversalEnergyStorageTileEntity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IContainerListener;
+import net.minecraft.block.ContainerBlock;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockReader;
 
-public class UniversalEnergyStorageContainer extends Container {
+import javax.annotation.Nullable;
 
+public class UniversalEnergyStorageContainer extends ContainerBlock {
+	protected UniversalEnergyStorageContainer(Properties builder) {
+		super(builder);
+	}
+
+	@Nullable
+	@Override
+	public TileEntity createNewTileEntity(IBlockReader worldIn) {
+		return null;
+	}
+   /*
 	private final UniversalEnergyStorageTileEntity TE;
 	private int ener;
 	public UniversalEnergyStorageContainer(InventoryPlayer player, UniversalEnergyStorageTileEntity store)
@@ -35,5 +44,5 @@ public class UniversalEnergyStorageContainer extends Container {
 		
 		this.ener = this.TE.getall(0);
 	}
-
+*/
 }

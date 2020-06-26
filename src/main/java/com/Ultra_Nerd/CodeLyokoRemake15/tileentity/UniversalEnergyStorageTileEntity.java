@@ -1,19 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraft.tileentity.TileEntityType;
 
-public class UniversalEnergyStorageTileEntity extends TileEntity implements ITickable {
 
-	
+public class UniversalEnergyStorageTileEntity extends TileEntity {
+	public UniversalEnergyStorageTileEntity(TileEntityType<?> tileEntityTypeIn) {
+		super(tileEntityTypeIn);
+	}
+
+	/*
 	private EG store = new EG(90000);
 	public  int UNIRF = store.getEnergyStored();
 	private String name;
@@ -97,4 +93,6 @@ public class UniversalEnergyStorageTileEntity extends TileEntity implements ITic
 	{
 		return this.world.getTileEntity(pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) >= 64D;
 	}
+
+	 */
 }

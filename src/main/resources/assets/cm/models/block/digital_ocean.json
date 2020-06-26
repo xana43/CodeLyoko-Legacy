@@ -1,7 +1,7 @@
 {
    "parent": "block/cube_all",
    "textures": {
-      "all":"cm:blocks/digital_still"
+      "all":"cm:block/digital_still"
        
    }
 }

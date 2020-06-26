@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:carnotite_ore" }
+        "": { "model": "cm:block/carnotite_ore" }
     }
 }

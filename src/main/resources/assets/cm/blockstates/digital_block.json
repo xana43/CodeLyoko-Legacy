@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:digital_block" }
+        "": { "model": "cm:block/digital_block" }
     }
 }

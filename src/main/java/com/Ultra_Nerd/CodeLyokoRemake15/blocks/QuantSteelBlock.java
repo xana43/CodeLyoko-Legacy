@@ -1,26 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.state.IProperty;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
 public class QuantSteelBlock extends Block
 {
-	public static final PropertyBool FORMED = PropertyBool.create("formed");
-	public static final PropertyBool AIR = PropertyBool.create("air");
+	//public static final PropertyBool FORMED = PropertyBool.create("formed");
+	//public static final PropertyBool AIR = PropertyBool.create("air");
 	
 	public static boolean trans2;
-		public QuantSteelBlock(String name, Material material)
+		public QuantSteelBlock()
 		{
 			super(Block.Properties.create(Material.IRON)
 					
@@ -72,7 +63,7 @@ public class QuantSteelBlock extends Block
 			{
 				SetModel2(false, worldIn, pos);
 			}
-		}*/
+		}
 		
 		public static void SetModel2(boolean act, World worldIn, BlockPos pos) 
 		{
@@ -178,7 +169,7 @@ public class QuantSteelBlock extends Block
 		{
 			return super.canRenderInLayer(getDefaultState(), layer.SOLID);
 		}
-	}*/
+	}
 		
 		@Override
 		protected BlockStateContainer createBlockState() {
@@ -206,7 +197,7 @@ public class QuantSteelBlock extends Block
 
 
 
-
+*/
 
 		
 		

@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "cm:items/william_chestplate"
+       "layer0": "cm:item/william_chestplate"
    }
 }

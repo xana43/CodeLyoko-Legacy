@@ -1,15 +1,28 @@
 {
-"item.solid_quantum":"Solid Quantum",
-"tile.quantum_block":"Quantum Block",
-"tile.quantum_core":"Quantum Core",
-"itemgroup.Lyoko":"Codelyoko: Legacy",
-"tile.coffinite_ore":"Coffinite Ore",
-"tile.computer_frame":"Super Computer Frame",
-"tile.computer_screen":"Super Computer Screen",
+  "comment": "blocks",
+
+  "block.cm.quantum_block":"Quantum Block",
+  "block.cm.quantum_core":"Quantum Core",
+
+  "block.cm.coffinite_ore":"Coffinite Ore",
+  "block.cm.computer_frame":"Super Computer Frame",
+  "block.cm.computer_screen":"Super Computer Screen",
+  "block.cm.uraninite_ore":"Uraninite Ore",
+  "comment": "items",
+  "item.cm.solid_quantum":"Solid Quantum",
+  "item.cm.lyokoDisc.desc":"A World Without Danger - Subdigitals (Noam)",
+  "item.cm.lyokoDisc":"CodeLyoko Theme Song",
+
+  "comment": "itemgroups",
+  "itemgroup.lyoko_items":"Codelyoko:Legacy - Items",
+  "itemgroup.lyoko_blocks": "Codelyoko:legacy - Blocks",
+  "comment": "special blocks",
+  "block.cm.tower_interface": "Tower Interface",
+
 "item.william_chestplate":"The Warrior of the past's Chestplate",
 item.william_leggings:The warrior of the past's leggings
 item.uranium_silacate:Unrefined Uranium Silacate
-tile.uraninite_ore:Uraninite Ore
+
 item.uranium_melt:Hot Uranium Melt
 item.odd_chestplate:The Feline of the past's Chestplate
 item.odd_leggings:The Feline of the past's leggings
@@ -52,8 +65,6 @@ item.qubit.name=QuBit
 item.QuByte.name=Qubyte
 item.zweihander.name=The Warrior of the past's Saber
 item.quantum_saber.name=Hand Crafted Saber
-item.record.lyokoDisc.desc=A World Without Danger - Subdigitals (Noam)
-item.lyokoDisc.name=Code Lyoko Theme Song
 item.laser_arrowshooter.name=The Feline of the past's weapon
 tile.marabunta.name=Unknown
 tile.titanium.name=Titanium Block

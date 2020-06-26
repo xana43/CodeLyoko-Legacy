@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:computer_frame" }
+        "": { "model": "cm:block/computer_frame" }
     }
 }

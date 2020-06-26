@@ -18,8 +18,8 @@ public class ModFluids {
  //for fluids
 	public static final DeferredRegister<Fluid> LIQUIDS = new DeferredRegister<>(ForgeRegistries.FLUIDS, Base.MOD_ID);
     //fluid resource locations
-    public static final ResourceLocation FLOWING_DIGITAL_OCEAN_RL = new ResourceLocation(Base.MOD_ID,"blocks/digital_flowing");
-	public static final ResourceLocation DIGITAL_OCEAN_RL = new ResourceLocation(Base.MOD_ID,"blocks/digital_still");
+    public static final ResourceLocation FLOWING_DIGITAL_OCEAN_RL = new ResourceLocation(Base.MOD_ID,"block/digital_flowing");
+	public static final ResourceLocation DIGITAL_OCEAN_RL = new ResourceLocation(Base.MOD_ID,"block/digital_still");
 	//fluid declarations
     public static final RegistryObject<FlowingFluid> FLOWING_DIGITAL_OCEAN = LIQUIDS.register("flowing_digital_ocean", () -> new ForgeFlowingFluid.Flowing(ModFluids.DIGITAL_PROPERTIES));
     public static final RegistryObject<FlowingFluid> DIGITAL_OCEAN = LIQUIDS.register("digital_ocean",() -> new ForgeFlowingFluid.Source(ModFluids.DIGITAL_PROPERTIES));

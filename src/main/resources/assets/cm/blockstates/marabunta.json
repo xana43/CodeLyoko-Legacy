@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:marabunta" }
+        "": { "model": "cm:marabunta" }
     }
 }

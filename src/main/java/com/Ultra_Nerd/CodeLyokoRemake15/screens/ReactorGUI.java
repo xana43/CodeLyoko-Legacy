@@ -1,16 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.ref;
-import com.Ultra_Nerd.CodeLyokoRemake15.containers.ReactorContainer;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerReactorTileEntity;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
-
-public class ReactorGUI extends GuiContainer
+public class ReactorGUI
 {
+	/*
 	private static final ResourceLocation TEXTURES = new ResourceLocation(ref.MOD_ID + ":textures/gui/Reactor.png");
 	private final InventoryPlayer player;
 	private final ComputerReactorTileEntity tileentity;
@@ -57,4 +50,6 @@ public class ReactorGUI extends GuiContainer
 		int i = this.tileentity.Fission;
 		return i != 0 ? i * pixels / 25 : 0;
 	}
+	
+	 */
 }

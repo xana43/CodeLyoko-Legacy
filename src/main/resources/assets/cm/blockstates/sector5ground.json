@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:sector5ground" }
+        "normal": { "model": "cm:block/sector5ground" }
     }
 }

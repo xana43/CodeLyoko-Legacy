@@ -33,7 +33,11 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class InfusingChamberTileEntity extends TileEntity implements ITickable, INamedContainerProvider {
+public class InfusingChamberTileEntity extends TileEntity  {
+    public InfusingChamberTileEntity(TileEntityType<?> tileEntityTypeIn) {
+        super(tileEntityTypeIn);
+    }
+    /*
     public ItemStackHandler handler = new ItemStackHandler(4);
     private String customName;
     private ItemStack smelting = ItemStack.EMPTY;
@@ -245,4 +249,6 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickable, 
     public Container createMenu(int windowIn, PlayerInventory playerInventory, PlayerEntity playerEntity) {
         return new ContainerInfusing(windowIn, playerInventory, this);
     }
+
+     */
 }

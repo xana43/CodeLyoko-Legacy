@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:cable_block" }
+        "": { "model": "cm:block/cable_block" }
     }
 }

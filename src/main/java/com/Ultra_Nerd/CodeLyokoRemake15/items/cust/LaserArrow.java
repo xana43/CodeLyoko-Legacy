@@ -1,22 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items.cust;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemArrow;
+import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArrowItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class LaserArrow extends ItemArrow{
+public class LaserArrow extends ArrowItem {
 
-	public LaserArrow(String name)
+	public LaserArrow()
 	{
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(null);
-		ModItems.Items.add(this);
+		super(new Item.Properties().group(Base.LYOKO_ITEMS));
 	}
 	
 	@Override
-	public boolean isInfinite(ItemStack stack, ItemStack bow, EntityPlayer player) {
+	public boolean isInfinite(ItemStack stack, ItemStack bow, PlayerEntity player) {
 		// TODO Auto-generated method stub
 		return false;
 	}

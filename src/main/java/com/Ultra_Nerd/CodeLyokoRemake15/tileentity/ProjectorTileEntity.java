@@ -10,9 +10,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
 
-public class ProjectorTileEntity extends TileEntity implements ITickable {
+public class ProjectorTileEntity //extends TileEntity implements ITickable
+{
 
-
+/*
     public static boolean valid;
     private boolean OOOF;
     private int POWER;
@@ -121,7 +122,7 @@ public class ProjectorTileEntity extends TileEntity implements ITickable {
 			else if(block != Blocks.IRON_BLOCK)
 			{
 				OOOF = true;
-			}*/
+			}
         } else if (block != ModBlocks.QUANTUM_STEEL.get()) {
             OOOF = true;
         }

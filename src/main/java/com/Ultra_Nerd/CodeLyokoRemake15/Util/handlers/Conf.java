@@ -1,16 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.ref;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-
-import java.io.File;
-
 public class Conf {
 	
-
+/*
 	public static Configuration conf;
 	public static int SKID = 5678546;
 	public static int Dim = DimensionManager.getNextFreeDimId();
@@ -56,4 +48,6 @@ public class Conf {
 		Base.conf.mkdirs();
 		fil(new File(Base.conf.getPath(), ref.MOD_ID + ".cfg"));
 	}
+
+ */
 }

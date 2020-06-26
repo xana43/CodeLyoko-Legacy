@@ -43,7 +43,7 @@ public class FlourideInfuser extends Block {
                 .harvestTool(ToolType.PICKAXE)
         );
 
-        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(INFUSING, false));
+        //this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(INFUSING, false));
 
 
         // TODO Auto-generated constructor stub
@@ -64,7 +64,7 @@ public class FlourideInfuser extends Block {
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
         // TODO Auto-generated method stub
         return new ItemStack(Modblocks.FLOURIDE_INFUSER);
-    }*/
+    }
 
     @Nonnull
     @Override
@@ -114,13 +114,13 @@ public class FlourideInfuser extends Block {
             worldIn.setTileEntity(pos, tileentity);
         }
     }
-
+/*
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get().create();
     }
-
+*/
     @Override
     public boolean hasTileEntity(BlockState state) {
         // TODO Auto-generated method stub
@@ -153,7 +153,7 @@ public class FlourideInfuser extends Block {
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(FACING)));
     }
-
+/*
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {

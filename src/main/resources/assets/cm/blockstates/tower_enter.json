@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:tower_enter" }
+        "": { "model": "cm:block/tower_enter" }
     }
 }
