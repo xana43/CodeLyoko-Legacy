@@ -16,3 +16,6 @@ gradle-app.setting
 /.idea/
 /.settings/
 /run/
+.idea/runConfigurations/runServer.xml
+.idea/runConfigurations/runData.xml
+.idea/runConfigurations/runClient.xml
