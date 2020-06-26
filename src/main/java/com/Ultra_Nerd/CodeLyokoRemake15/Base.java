@@ -1,12 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15;
- 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry;
-
+import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -25,6 +21,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod("cm")
 @Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Bus.MOD)
@@ -64,7 +62,7 @@ public class Base
 	}
 	
 	@SubscribeEvent
-	private void OnItemInit(final RegistryEvent.Register<Item> Items)
+	private static void OnItemInit(final RegistryEvent.Register<Item> Items)
 	{
 		final IForgeRegistry<Item> registry = Items.getRegistry();
 		

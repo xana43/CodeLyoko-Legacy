@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Util.compat;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-
 import net.minecraftforge.oredict.OreDictionary;
 
 public class Oredict {

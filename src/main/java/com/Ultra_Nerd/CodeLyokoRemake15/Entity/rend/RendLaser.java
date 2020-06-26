@@ -1,23 +1,29 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.ref;
 
-import net.minecraft.client.renderer.entity.RenderArrow;
-import net.minecraft.client.renderer.entity.RenderManager;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelLaserArrow;
+
+import net.minecraft.client.renderer.entity.ArrowRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+
 import net.minecraft.util.ResourceLocation;
 
-public class RendLaser extends RenderArrow<EntityLaser> {
+public class RendLaser extends ArrowRenderer<EntityLaser> {
 
-	public RendLaser(RenderManager renderManagerIn) {
-		super(renderManagerIn);
-		// TODO Auto-generated constructor stub
+
+	public RendLaser(EntityRendererManager rendManIn)
+	{
+		super(rendManIn,new ModelLaserArrow<EntityLaser>() ,1f);
 	}
-	
+
 	@Override
-	protected ResourceLocation getEntityTexture(EntityLaser entity) {
+	public ResourceLocation getEntityTexture(EntityLaser entity) {
 		// TODO Auto-generated method stub
-		return new ResourceLocation(ref.MOD_ID + ":textures/entity/projectiles/laserarrow.png");
+		return new ResourceLocation(Base.MOD_ID + ":textures/entity/projectiles/laserarrow.png");
 	}
+
+
 
 }

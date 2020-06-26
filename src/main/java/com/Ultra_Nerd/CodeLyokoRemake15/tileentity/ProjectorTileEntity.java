@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramProjectorBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.QuantSteelBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.texture.ITickable;

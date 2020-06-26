@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntitySkid;
-
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

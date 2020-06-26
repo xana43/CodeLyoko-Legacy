@@ -1,9 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.ElectricFlourideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
-import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
-
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.player.PlayerEntity;

@@ -11,11 +11,7 @@ public class FlouriteOre extends Block {
 	{
 		super(Block.Properties.create(Material.ROCK)
 				
-				.hardnessAndResistance(6, 10)
-				.sound(SoundType.STONE)
-				.lightValue(1)
-				.harvestLevel(2)
-				.harvestTool(ToolType.PICKAXE)
+
 				
 					
 					

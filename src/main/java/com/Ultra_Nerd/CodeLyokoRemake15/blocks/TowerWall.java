@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
@@ -16,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-public class TowerWall extends BlockHorizontal {
+public class TowerWall extends HorizontalBlock {
 
 public TowerWall(String name) {
 	super(Block.Properties.create(Material.MISCELLANEOUS)
@@ -69,7 +70,7 @@ public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 		// TODO Auto-generated method stub
-		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+		return this.getDefaultState().with(FACING, placer.getHorizontalFacing().getOpposite());
 		
 	}
 public IBlockState withRotation(IBlockState state, Rotation rot) {

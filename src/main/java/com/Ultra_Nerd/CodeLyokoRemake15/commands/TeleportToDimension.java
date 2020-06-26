@@ -8,13 +8,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-public class tele extends Teleporter
+public class TeleportToDimension extends Teleporter
 {
 
 	private final WorldServer world;
 	private double x,y,z;
 	
-	public tele(WorldServer world, double x, double y, double z)
+	public TeleportToDimension(WorldServer world, double x, double y, double z)
 	{
 		super(world);
 		this.world = world;
@@ -40,7 +40,7 @@ public class tele extends Teleporter
 		WorldServer worldServer = server.getWorld(dim);
 		
 		if (worldServer == null || server == null) throw new IllegalArgumentException("Dimension:" + dim + "doesn't exist");
-		worldServer.getMinecraftServer().getPlayerList().transferPlayerToDimension(entityplayermp, dim, new tele(worldServer, x, y + 5, z));
+		worldServer.getMinecraftServer().getPlayerList().transferPlayerToDimension(entityplayermp, dim, new TeleportToDimension(worldServer, x, y + 5, z));
 		player.setPositionAndUpdate(x, y + 5, z);
 		
 	}

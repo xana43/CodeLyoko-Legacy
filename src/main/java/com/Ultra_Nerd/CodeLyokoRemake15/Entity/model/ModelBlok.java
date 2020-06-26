@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
+
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.Entityblok;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 

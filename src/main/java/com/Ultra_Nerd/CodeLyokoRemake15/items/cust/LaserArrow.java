@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items.cust;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;

@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBiome;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.Bepis;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;

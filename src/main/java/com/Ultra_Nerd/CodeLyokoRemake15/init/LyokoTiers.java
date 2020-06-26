@@ -1,10 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
-import java.util.function.Supplier;
-
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;
+
+import java.util.function.Supplier;
 
 public enum LyokoTiers implements IItemTier{
 	

@@ -1,9 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InterfaceTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.LyokoTiers;
-
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InterfaceTileEntity;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ShovelItem;

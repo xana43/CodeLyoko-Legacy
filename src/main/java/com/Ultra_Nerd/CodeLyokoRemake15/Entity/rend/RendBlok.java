@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend;
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.Entityblok;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelBlok;
-
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;

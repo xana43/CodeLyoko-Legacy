@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.Bepis;
-
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.gen.IChunkGenerator;
