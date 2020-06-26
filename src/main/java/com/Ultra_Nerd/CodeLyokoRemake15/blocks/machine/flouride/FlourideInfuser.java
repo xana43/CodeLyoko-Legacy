@@ -3,10 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,6 +13,7 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -31,7 +29,10 @@ import javax.annotation.Nullable;
 
 import static net.minecraft.block.HorizontalBlock.HORIZONTAL_FACING;
 
-public class FlourideInfuser extends Block {
+public class FlourideInfuser extends HorizontalBlock {
+
+    //public static final DirectionProperty FACING = HORIZONTAL_FACING;
+    public static final BooleanProperty INFUSING = BooleanProperty.create("infusing");
 
     public FlourideInfuser() {
         super(Block.Properties.create(Material.IRON)
@@ -43,15 +44,11 @@ public class FlourideInfuser extends Block {
                 .harvestTool(ToolType.PICKAXE)
         );
 
-        //this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(INFUSING, false));
+        this.setDefaultState(this.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(INFUSING, false));
 
 
         // TODO Auto-generated constructor stub
     }
-
-    public static final DirectionProperty FACING = HORIZONTAL_FACING;
-    public static final BooleanProperty INFUSING = BooleanProperty.create("infusing");
-
 
 
     /*@Override
@@ -65,7 +62,7 @@ public class FlourideInfuser extends Block {
         // TODO Auto-generated method stub
         return new ItemStack(Modblocks.FLOURIDE_INFUSER);
     }
-
+*/
     @Nonnull
     @Override
     public ActionResultType onBlockActivated(@Nonnull BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
@@ -104,39 +101,45 @@ public class FlourideInfuser extends Block {
         BlockState state = worldIn.getBlockState(pos);
         TileEntity tileentity = worldIn.getTileEntity(pos);
         if (act)
-            worldIn.setBlockState(pos, ModBlocks.FLOURIDE_INFUSER.get().getDefaultState().with(FACING, state.get(FACING))
+            worldIn.setBlockState(pos, ModBlocks.FLOURIDE_INFUSER.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING))
                     .with(INFUSING, true), 3);
         else
-            worldIn.setBlockState(pos, ModBlocks.FLOURIDE_INFUSER.get().getDefaultState().with(FACING, state.get(FACING))
+            worldIn.setBlockState(pos, ModBlocks.FLOURIDE_INFUSER.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING))
                     .with(INFUSING, false), 3);
         if (tileentity != null) {
             tileentity.validate();
             worldIn.setTileEntity(pos, tileentity);
         }
     }
-/*
+
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get().create();
     }
-*/
+
     @Override
     public boolean hasTileEntity(BlockState state) {
         // TODO Auto-generated method stub
         return true;
     }
 
+    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        super.fillStateContainer(builder.add(DirectionProperty.create("facing", Direction.Plane.HORIZONTAL))
+        .add(INFUSING));
+    }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+        return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 
-        worldIn.setBlockState(pos, this.getDefaultState().with(FACING, placer.getHorizontalFacing().getOpposite()), 2);
+        worldIn.setBlockState(pos, this.getDefaultState().with(HORIZONTAL_FACING, placer.getHorizontalFacing().getOpposite()), 2);
     }
 
     @Override
@@ -146,12 +149,12 @@ public class FlourideInfuser extends Block {
 
     @Override
     public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation direction) {
-        return state.with(FACING, direction.rotate(state.get(FACING)));
+        return state.with(HORIZONTAL_FACING, direction.rotate(state.get(HORIZONTAL_FACING)));
     }
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+        return state.rotate(mirrorIn.toRotation(state.get(HORIZONTAL_FACING)));
     }
 /*
     @Override

@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.InfusingChamberScreen;
 import net.minecraft.client.gui.ScreenManager;
@@ -19,7 +20,7 @@ public class ClientModEventSubscriber {
         // Register ContainerType Screens
         // ScreenManager.registerFactory is not safe to call during parallel mod loading so we queue it to run later
         DeferredWorkQueue.runLater(() -> {
-            ScreenManager.registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
+            ScreenManager.<ContainerInfusing, InfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
             Base.Log.debug("Registered ContainerType Screens");
         });
     }

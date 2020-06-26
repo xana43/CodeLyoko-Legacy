@@ -28,7 +28,7 @@ public class ContainerInfusing extends Container {
         this.tileentity = tileentity;
     }
 
-    private final InfusingChamberTileEntity tileentity;
+    public final InfusingChamberTileEntity tileentity;
     private int cookTime, totalCookTime, burnTime, currentBurnTime;
 
     /**

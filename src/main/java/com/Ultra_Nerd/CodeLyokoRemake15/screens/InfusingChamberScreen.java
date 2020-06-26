@@ -4,16 +4,14 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.gui.IHasContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> implements IHasContainer<ContainerInfusing>
- {
+public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> {
 
-    private static final ResourceLocation TEX = new ResourceLocation(Base.MOD_ID + ":textures/gui/FlourideInfuser.png");
+    private static final ResourceLocation TEX = new ResourceLocation(Base.MOD_ID + ":textures/gui/flouride_infuser.png");
     private PlayerInventory player;
     private InfusingChamberTileEntity tileentity;
 
@@ -25,7 +23,8 @@ public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> im
 
     public InfusingChamberScreen(final ContainerInfusing interfaceContainer, final PlayerInventory playerInventory, final ITextComponent title) {
         super(interfaceContainer, playerInventory, title);
-
+        this.tileentity = interfaceContainer.tileentity;
+        this.player = playerInventory;
     }
 
     @Override
@@ -65,7 +64,6 @@ public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> im
         int j = this.tileentity.getField(3);
         return j != 0 && i != 0 ? i * pixels / j : 0;
     }
-
 
 
 }
