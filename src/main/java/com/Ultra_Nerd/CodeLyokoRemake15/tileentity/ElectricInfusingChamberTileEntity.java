@@ -3,9 +3,14 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.ElectricFlourideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
+import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerElectricInfusing;
+import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
@@ -20,10 +25,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class ElectricInfusingChamberTileEntity extends TileEntity implements ITickable {
+public class ElectricInfusingChamberTileEntity extends TileEntity implements ITickable, INamedContainerProvider {
     public ItemStackHandler handler = new ItemStackHandler(3);
-    private EG internal = new EG(90000);
+    private final EG internal = new EG(90000);
     private String customName;
     private ItemStack smelting = ItemStack.EMPTY;
 
@@ -40,19 +46,24 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
     }
 
     public boolean hasCapability(Capability<?> capability, Direction facing) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return true;
-        if (capability == CapabilityEnergy.ENERGY) return true;
-        else return false;
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return true;
+        } else if (capability == CapabilityEnergy.ENERGY) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Nonnull
     @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction facing) {
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, Direction facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return LazyOptional.of(() -> (T) this.handler);
         if (capability == CapabilityEnergy.ENERGY) return LazyOptional.of(() -> (T) this.internal);
         return super.getCapability(capability, facing);
     }
 
+    @Nonnull
     public ITextComponent getDisplayName() {
         return new TranslationTextComponent("container.electric_flouride_infuser");
     }
@@ -67,7 +78,7 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
     }
 
     @Override
-    public void read(CompoundNBT compound) {
+    public void read(@Nonnull CompoundNBT compound) {
         super.read(compound);
         this.handler.deserializeNBT(compound.getCompound("Inventory"));
         this.cookTime = compound.getInt("CookTime");
@@ -76,8 +87,9 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
         this.ENER = compound.getInt("GuiEnergy");
     }
 
+    @Nonnull
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT write(@Nonnull CompoundNBT compound) {
         super.write(compound);
 
         compound.putInt("CookTime", (short) this.cookTime);
@@ -96,7 +108,7 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
             if (cookTime > 0) {
                 ENER -= 20;
                 cookTime++;
-                ElectricFlourideInfuser.SetState(true, world, pos);
+                ElectricFlourideInfuser.setState(true, world, pos);
                 if (cookTime == 200) {
                     if (handler.getStackInSlot(2).getCount() > 0) {
                         handler.getStackInSlot(2).grow(1);
@@ -105,7 +117,6 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
                     }
                     smelting = ItemStack.EMPTY;
                     cookTime = 0;
-                    return;
                 }
             } else if (!Inputs[0].isEmpty() && !Inputs[1].isEmpty()) {
                 ItemStack out = FlourideInfusionResult.getInstance().getInfusingResult(Inputs[0], Inputs[1]);
@@ -123,13 +134,15 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
     }
 
     private boolean canSmelt() {
-        if (((ItemStack) this.handler.getStackInSlot(0)).isEmpty() || ((ItemStack) this.handler.getStackInSlot(1)).isEmpty())
+        if (this.handler.getStackInSlot(0).isEmpty() || this.handler.getStackInSlot(1).isEmpty())
             return false;
         else {
-            ItemStack result = FlourideInfusionResult.getInstance().getInfusingResult((ItemStack) this.handler.getStackInSlot(0), (ItemStack) this.handler.getStackInSlot(1));
-            if (result.isEmpty()) return false;
+            ItemStack result = FlourideInfusionResult.getInstance().getInfusingResult(this.handler.getStackInSlot(0), this.handler.getStackInSlot(1));
+            if (result.isEmpty()) {
+                return false;
+            }
             else {
-                ItemStack output = (ItemStack) this.handler.getStackInSlot(3);
+                ItemStack output = this.handler.getStackInSlot(3);
                 if (output.isEmpty()) return true;
                 if (!output.isItemEqual(result)) return false;
                 int res = output.getCount() + result.getCount();
@@ -168,4 +181,9 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
         }
     }
 
+    @Nullable
+    @Override
+    public Container createMenu(int windowIn, @Nonnull PlayerInventory playerInventory, @Nonnull PlayerEntity p_createMenu_3_) {
+        return new ContainerElectricInfusing(windowIn, playerInventory, this);
+    }
 }
