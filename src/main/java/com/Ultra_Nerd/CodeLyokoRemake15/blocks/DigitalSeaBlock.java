@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import java.util.function.Supplier;
@@ -17,7 +18,11 @@ public class DigitalSeaBlock extends FlowingFluidBlock {
 
 	
 	public DigitalSeaBlock(Supplier<? extends FlowingFluid> supplier) {
-		super(supplier, Block.Properties.create(Material.WATER).doesNotBlockMovement().noDrops().notSolid().hardnessAndResistance(100));
+		super(supplier, Block.Properties.create(Material.WATER).doesNotBlockMovement().noDrops()
+				.notSolid()
+				.hardnessAndResistance(100)
+				.variableOpacity()
+		);
 	   		
 	}
 	
@@ -26,24 +31,19 @@ public class DigitalSeaBlock extends FlowingFluidBlock {
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		// TODO Auto-generated method stub
 		
-			entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
+			entityIn.attackEntityFrom(DamageSource.GENERIC, Integer.MAX_VALUE);
 		
 	}
-	
-	
-	
-	
 
-	
-	
-	
+	@Override
+	public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return false;
+	}
 
-	
-	
-	
-	
-	
-	
-	
+	@Override
+	public boolean isTransparent(BlockState state) {
+		return true;
+	}
+
 
 }

@@ -1,15 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.ref;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InterfaceTileEntity;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-
-public class TowerGUI extends GuiScreen
+public class TowerGUI
 {
+	/*
 	private static final ResourceLocation TEXTURES = new ResourceLocation(ref.MOD_ID + ":textures/gui/tower.png");
 	
 	private InterfaceTileEntity tileentity;
@@ -54,6 +48,6 @@ public class TowerGUI extends GuiScreen
 		drawTexturedModalRect(posX,posY, 0, 0, sizeX,sizeY);
 		this.drawString(fontRenderer, "test", posX + 20, posY + 32,4210752);
 	}
-	
+	*/
 	
 }

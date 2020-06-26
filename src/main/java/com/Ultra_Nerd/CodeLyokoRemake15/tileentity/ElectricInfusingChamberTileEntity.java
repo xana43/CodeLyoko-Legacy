@@ -21,7 +21,11 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public class ElectricInfusingChamberTileEntity extends TileEntity implements ITickable {
+public class ElectricInfusingChamberTileEntity extends TileEntity
+{
+    public ElectricInfusingChamberTileEntity(TileEntityType<?> tileEntityTypeIn) {
+        super(tileEntityTypeIn);
+    }   /*
     public ItemStackHandler handler = new ItemStackHandler(3);
     private EG internal = new EG(90000);
     private String customName;
@@ -167,5 +171,7 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
 
         }
     }
+    */
+
 
 }

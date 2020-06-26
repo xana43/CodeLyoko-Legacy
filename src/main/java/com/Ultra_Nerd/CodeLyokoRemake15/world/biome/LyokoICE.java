@@ -1,13 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.biome;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.WorldGenMinable;
 
 public class LyokoICE extends Biome {
-
+	protected LyokoICE(Builder biomeBuilder) {
+		super(biomeBuilder);
+	}
+	/*
 	public LyokoICE() {
-		super(new BiomeProperties("Lyoko Ice Sector").setBaseHeight(0).setHeightVariation(0.5f).setRainDisabled().setWaterColor(159).setTemperature(0));
+
+		super(new BiomeProperties("ForestModDimension Ice Sector").setBaseHeight(0).setHeightVariation(0.5f).setRainDisabled().setWaterColor(159).setTemperature(0));
 		
 		
 	
@@ -23,6 +25,8 @@ public class LyokoICE extends Biome {
 		
 		// TODO Auto-generated constructor stub
 	}
+
+		 */
 	
 	
 }

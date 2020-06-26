@@ -1,26 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
-import javax.annotation.Nullable;
-
-public class InterfaceTileEntity extends TileEntity implements INamedContainerProvider
+public class InterfaceTileEntity //extends TileEntity implements INamedContainerProvider
 {
-	
+	/*
 	 @Nullable // May be accessed before onLoad
 	    @OnlyIn(Dist.CLIENT)
 	    public Interface anInterface;
@@ -69,7 +54,7 @@ public class InterfaceTileEntity extends TileEntity implements INamedContainerPr
 	    /**
 	     *
 	     * @return
-	     */
+
 	    @Override
 	    public ITextComponent getDisplayName() {
 	        return new TranslationTextComponent(ModBlocks.INTERFACE.get().getTranslationKey());
@@ -81,11 +66,11 @@ public class InterfaceTileEntity extends TileEntity implements INamedContainerPr
 	     * @param playerInv
 	     * @param playerEntity
 	     * @return
-	     */
+
 	    @Nullable
 	    @Override
 	    public Container createMenu(int windowIn, PlayerInventory playerInv, PlayerEntity playerEntity) {
 	        return new InterfaceContainer(windowIn, playerInv, this);
 	    }
-	
+	*/
 }

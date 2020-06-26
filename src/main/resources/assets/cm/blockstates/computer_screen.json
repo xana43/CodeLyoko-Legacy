@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:computer_screen" }
+        "": { "model": "cm:computer_screen" }
     }
 }

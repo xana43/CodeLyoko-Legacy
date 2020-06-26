@@ -2,7 +2,7 @@
     "ambientocclusion":"true",
    "parent": "block/cube_all",
    "textures": {
-       "all": "cm:blocks/computer_frame"
+       "all": "cm:block/computer_frame"
        
       
    }

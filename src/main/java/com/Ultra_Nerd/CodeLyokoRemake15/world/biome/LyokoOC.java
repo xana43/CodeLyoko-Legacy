@@ -1,13 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.biome;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.WorldGenMinable;
 
 public class LyokoOC extends Biome {
-
+	protected LyokoOC(Builder biomeBuilder) {
+		super(biomeBuilder);
+	}
+/*
 	public LyokoOC() {
-		super(new BiomeProperties("Lyoko Digital ocean").setBaseHeight(0).setHeightVariation(0.5f).setRainDisabled().setWaterColor(49151).setTemperature(0));
+		super(new BiomeProperties("ForestModDimension Digital ocean").setBaseHeight(0).setHeightVariation(0.5f).setRainDisabled().setWaterColor(49151).setTemperature(0));
 		
 		
 	
@@ -23,6 +24,8 @@ public class LyokoOC extends Biome {
 		
 		// TODO Auto-generated constructor stub
 	}
+
+ */
 	
 	
 }

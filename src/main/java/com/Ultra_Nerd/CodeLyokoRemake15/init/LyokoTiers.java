@@ -9,22 +9,22 @@ import java.util.function.Supplier;
 public enum LyokoTiers implements IItemTier{
 	
 	LYOKOFELINE(4, 2000, 900, 6, 90, () -> {
-		return Ingredient.fromItems(com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry.SOLID_QUANTUM.get());
+		return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
 	}),
 	LyokoGuardian(4, 4000, 40, 60, 100, () ->{
-		return Ingredient.fromItems(com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry.SOLID_QUANTUM.get());
+		return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
 	}),
 	LyokoNinja(4, 2000, 9000, 6, 90, () ->{
-		return Ingredient.fromItems(com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry.SOLID_QUANTUM.get());
+		return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
 	}),
 	LyokoSamurai(4 ,1000, 10, 25, 80, () -> {
-		return Ingredient.fromItems(com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry.SOLID_QUANTUM.get());
+		return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
 	}),
 	LyokoTool(20, 250, 7.0f, 3.0f, 900, () -> {
-		return Ingredient.fromItems(com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry.SOLID_QUANTUM.get());
+		return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
 	}),
 	LyokoWarrior(4, 4000, 20, 30, 9000, () ->{
-		return Ingredient.fromItems(com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry.SOLID_QUANTUM.get());
+		return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
 	});
 	private final int harvest,MaxUses,enchantability;
 	private final float attackdamage,efficiency;

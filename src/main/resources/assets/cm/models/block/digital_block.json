@@ -1,13 +1,13 @@
 {
    "parent": "block/cube_all",
    "textures": {
-    "particle":"cm:blocks/digital_blocktop",
-       "up": "cm:blocks/digital_blocktop",
-       "down":"cm:blocks/dd",
-       "north":"cm:blocks/dgs",
-       "south":"cm:blocks/dgs",
-       "east":"cm:blocks/dgs",
-       "west":"cm:blocks/dgs"
+    "particle":"cm:block/digital_blocktop",
+       "up": "cm:block/digital_blocktop",
+       "down":"cm:block/dd",
+       "north":"cm:block/dgs",
+       "south":"cm:block/dgs",
+       "east":"cm:block/dgs",
+       "west":"cm:block/dgs"
        
    }
 }

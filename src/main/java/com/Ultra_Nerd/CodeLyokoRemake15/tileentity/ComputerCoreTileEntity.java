@@ -1,14 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraft.tileentity.TileEntityType;
 
-public class ComputerCoreTileEntity extends TileEntity implements ITickable 
+public class ComputerCoreTileEntity extends TileEntity
 {
+	public ComputerCoreTileEntity(TileEntityType<?> tileEntityTypeIn) {
+		super(tileEntityTypeIn);
+	}
+	/*
 	private EG storage = new EG(1000000000, 1000000000);
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
@@ -31,5 +31,5 @@ public class ComputerCoreTileEntity extends TileEntity implements ITickable
 		this.storage.extractEnergy(2000000000, false);
 		
 	}
-
+*/
 }

@@ -8,6 +8,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -28,8 +29,8 @@ import org.apache.logging.log4j.Logger;
 @Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Bus.MOD)
 public class Base
 {
-	private static final Logger Log = LogManager.getLogger();
-	
+	public static final Logger Log = LogManager.getLogger();
+	public static final  ResourceLocation DimensionType = new ResourceLocation(Base.MOD_ID,"forest");
 	public static final String MOD_ID = "cm";
 	public static Base instance;
 	public Base()
@@ -38,14 +39,16 @@ public class Base
 		ModBus.addListener(this::setup);
 		ModBus.addListener(this::dostuff);
 		registry.init();
-		ModSounds.SOUNDS.register(ModBus);
+
 		ModItems.ITEMS.register(ModBus);
+		ModSounds.SOUNDS.register(ModBus);
 		ModFluids.LIQUIDS.register(ModBus);
 		ModBlocks.BLOCKS.register(ModBus);
 		ModEntities.Entities.register(ModBus);
 		ModBiome.BIOMES.register(ModBus);
 		ModContainerTypes.CONTAINER_TYPES.register(ModBus);
 		ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
+		ModDimensions.MOD_DIMENSION_DEFERRED_REGISTER.register(ModBus);
 		instance = this;
 		MinecraftForge.EVENT_BUS.register(this);
 		
@@ -62,14 +65,14 @@ public class Base
 	}
 	
 	@SubscribeEvent
-	private static void OnItemInit(final RegistryEvent.Register<Item> Items)
+	public static void OnItemInit(final RegistryEvent.Register<Item> Items)
 	{
 		final IForgeRegistry<Item> registry = Items.getRegistry();
 		
 		ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof FlowingFluidBlock))
 		.map(RegistryObject::get).forEach(block->
 		{
-			final Item.Properties itemsettings = new Item.Properties().group(Lyoko);
+			final Item.Properties itemsettings = new Item.Properties().group(LYOKO_BLOCKS);
 			final BlockItem Itemblocks = new BlockItem(block,itemsettings);
 			Itemblocks.setRegistryName(block.getRegistryName());
 			registry.register(Itemblocks);
@@ -83,12 +86,23 @@ public class Base
 		ModBiome.regbio();
 	}
 	
-	public static final ItemGroup Lyoko = new ItemGroup("Lyoko") {
+	public static final ItemGroup LYOKO_BLOCKS = new ItemGroup("lyoko_blocks") {
 		
 		@Override
 		public ItemStack createIcon() {
 			// TODO Auto-generated method stub
-			return new ItemStack(registry.BIT.get());
+			return new ItemStack(ModBlocks.TOWER_INTERFACE.get());
+		}
+	};
+
+
+
+	public static final ItemGroup LYOKO_ITEMS = new ItemGroup("Lyoko_items") {
+
+		@Override
+		public ItemStack createIcon() {
+			// TODO Auto-generated method stub
+			return new ItemStack(ModItems.BIT.get());
 		}
 	};
 	

@@ -1,30 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.Conf;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.Modblocks;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.IProperty;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
-
-import java.util.Random;
 
 public class ElectricFlourideInfuser extends Block{
 
@@ -38,11 +17,11 @@ super(Block.Properties.create(Material.IRON)
 				.harvestTool(ToolType.PICKAXE)
 				);
 		
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(INFUSING, false));
+		//this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(INFUSING, false));
 		
 		// TODO Auto-generated constructor stub
 	}
-	public static final PropertyDirection FACING = BlockHorizontal.FACING;
+	/*public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	public static final PropertyBool INFUSING = PropertyBool.create("infusing");
 	
 	
@@ -175,5 +154,5 @@ public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
 			
 			super.breakBlock(worldIn, pos, state);
 		}
-		
+		*/
 }

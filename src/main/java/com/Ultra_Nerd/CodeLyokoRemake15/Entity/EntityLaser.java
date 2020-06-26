@@ -25,7 +25,7 @@ public class EntityLaser extends ArrowEntity {
 	@Override
 	protected ItemStack getArrowStack() {
 		// TODO Auto-generated method stub
-		return new ItemStack(ModItems.LASERARROW);
+		return new ItemStack(ModItems.GIGABIT.get());
 	}
 	
 	@Override

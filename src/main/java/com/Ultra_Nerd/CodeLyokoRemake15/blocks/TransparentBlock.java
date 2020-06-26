@@ -15,7 +15,7 @@ import java.util.function.Predicate;
 
 public class TransparentBlock extends Block {
 
-    public TransparentBlock(String name, Material material) {
+    public TransparentBlock() {
         super(Block.Properties.create(Material.STRUCTURE_VOID)
                 .hardnessAndResistance(-1, -1)
                 .sound(SoundType.STONE)

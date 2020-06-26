@@ -1,16 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.commands;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Teleporter;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.server.ServerWorld;
 
 public class TeleportToDimension extends Teleporter
 {
-
+	public TeleportToDimension(ServerWorld worldIn) {
+		super(worldIn);
+	}
+/*
 	private final WorldServer world;
 	private double x,y,z;
 	
@@ -44,4 +42,6 @@ public class TeleportToDimension extends Teleporter
 		player.setPositionAndUpdate(x, y + 5, z);
 		
 	}
+
+ */
 }

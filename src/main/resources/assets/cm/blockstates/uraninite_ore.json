@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:uraninite_ore" }
+        "": { "model": "cm:uraninite_ore" }
     }
 }

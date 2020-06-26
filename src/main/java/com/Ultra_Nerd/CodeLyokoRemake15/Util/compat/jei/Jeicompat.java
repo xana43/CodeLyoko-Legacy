@@ -1,17 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.compat.jei;
 
-import mezz.jei.api.IModPlugin;
-import mezz.jei.api.IModRegistry;
-import mezz.jei.api.JEIPlugin;
-import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import net.minecraft.util.text.translation.I18n;
+public class Jeicompat {
 
-import java.util.IllegalFormatException;
-
-@JEIPlugin
-public class Jeicompat implements IModPlugin{
-
-	
+	/*
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {
 		// TODO Auto-generated method stub
@@ -41,5 +32,5 @@ public class Jeicompat implements IModPlugin{
 			return "Format error: " + s;
 		}
 	}
-	
+	*/
 }

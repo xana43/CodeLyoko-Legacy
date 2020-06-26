@@ -1,25 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.state.IProperty;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IBlockReader;
 
 
-public class TowerWall extends HorizontalBlock {
+public class TowerWall extends Block {
 
-public TowerWall(String name) {
+	public static final DirectionProperty DIRTOWER = HorizontalBlock.HORIZONTAL_FACING;
+public TowerWall() {
 	super(Block.Properties.create(Material.MISCELLANEOUS)
 			
 			.hardnessAndResistance(-1, -1)
@@ -32,70 +30,39 @@ public TowerWall(String name) {
 		);
     
 }
-
-public static final PropertyDirection FACING = BlockHorizontal.FACING;
-
-@Override
-protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, new IProperty[] { FACING });
-}
-
-
-
-
-@Override
-public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-	if(!worldIn.isRemote)
-	{
-		IBlockState north = worldIn.getBlockState(pos.north());
-		IBlockState south = worldIn.getBlockState(pos.south());
-		IBlockState east = worldIn.getBlockState(pos.east());
-		IBlockState west = worldIn.getBlockState(pos.west());
-		EnumFacing face = (EnumFacing)state.getValue(FACING);
-		
-		if(face == EnumFacing.NORTH && north.isFullBlock() && !south.isFullBlock()) face = EnumFacing.SOUTH;
-		else if(face == EnumFacing.SOUTH && south.isFullBlock() && !north.isFullBlock()) face = EnumFacing.NORTH;
-		else if(face == EnumFacing.EAST && east.isFullBlock() && !west.isFullBlock()) face = EnumFacing.EAST;
-		else if(face == EnumFacing.WEST && west.isFullBlock() && !east.isFullBlock()) face = EnumFacing.WEST;
-		worldIn.setBlockState(pos, state.withProperty(FACING, face), 2);
-		
-		
+	@Override
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(DIRTOWER);
 	}
-	
-}
 
-
-
-@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+	@Override
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		// TODO Auto-generated method stub
-		return this.getDefaultState().with(FACING, placer.getHorizontalFacing().getOpposite());
-		
-	}
-public IBlockState withRotation(IBlockState state, Rotation rot) {
-	// TODO Auto-generated method stub
-	return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
-}
- 
- @Override
-public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
-	// TODO Auto-generated method stub
-	return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
-}
- 
- @Override
-	public IBlockState getStateFromMeta(int meta) {
-		// TODO Auto-generated method stub
-		EnumFacing facing = EnumFacing.getFront(meta);
-		if(facing.getAxis() == EnumFacing.Axis.Y) facing = EnumFacing.NORTH;
-		return this.getDefaultState().withProperty(FACING, facing);
+		return this.getDefaultState().with(DIRTOWER, context.getPlacementHorizontalFacing().getOpposite());
 	}
 
-	 @Override
-	public int getMetaFromState(IBlockState state) {
-		// TODO Auto-generated method stub
-		return ((EnumFacing)state.getValue(FACING)).getIndex();
+	//mod compatiability
+	@Override
+	public BlockState rotate(BlockState state, Rotation rot) {
+		return state.with(DIRTOWER,rot.rotate(state.get(DIRTOWER)));
 	}
+
+	@Override
+	public BlockState mirror(BlockState state, Mirror mirrorIn) {
+		return state.rotate(mirrorIn.toRotation(state.get(DIRTOWER)));
+	}
+	//
+
+	@Override
+	public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean isTransparent(BlockState state) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 
 }

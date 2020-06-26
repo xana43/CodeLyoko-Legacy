@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:tower_base" }
+        "": { "model": "cm:tower_base" }
     }
 }

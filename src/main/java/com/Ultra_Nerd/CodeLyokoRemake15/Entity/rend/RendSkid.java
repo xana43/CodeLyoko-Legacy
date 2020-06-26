@@ -1,25 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntitySkid;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 
-public class RendSkid extends Render<EntitySkid>{
+public class RendSkid extends EntityRenderer<EntitySkid> {
 
-	public RendSkid(RenderManager renderManagerIn) {
+
+	public RendSkid(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn);
-	// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntitySkid entity) {
-		// TODO Auto-generated method stub
+	public ResourceLocation getEntityTexture(EntitySkid entity) {
 		return null;
 	}
-	
-	
-
-	
-	
 }

@@ -4,6 +4,8 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.ItemBase;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.LaserArrowShooter;
 import net.minecraft.item.Item;
+import net.minecraft.item.ShovelItem;
+import net.minecraft.item.SwordItem;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -44,28 +46,34 @@ public class ModItems
 
 		 public static final RegistryObject<Item>  MEGABIT = ITEMS.register("megabit", ItemBase::new);
 
-		 public static final RegistryObject<Item>  MEGABYTE = ITEMS.register("MegaByte", ItemBase::new);
+		 public static final RegistryObject<Item>  MEGABYTE = ITEMS.register("megabyte", ItemBase::new);
 
 		 public static final RegistryObject<Item>  GIGABIT = ITEMS.register("gigabit", ItemBase::new);
 
-		 public static final RegistryObject<Item>  GIGABYTE = ITEMS.register("GigaByte", ItemBase::new);
+		 public static final RegistryObject<Item>  GIGABYTE = ITEMS.register("gigabyte", ItemBase::new);
 
 		 public static final RegistryObject<Item>  TERABIT = ITEMS.register("terabit", ItemBase::new);
 
-		 public static final RegistryObject<Item>  TERABYTE = ITEMS.register("TeraByte", ItemBase::new);
+		 public static final RegistryObject<Item>  TERABYTE = ITEMS.register("terabyte", ItemBase::new);
 
 		 public static final RegistryObject<Item>  PETABIT = ITEMS.register("petabit", ItemBase::new);
 
-		 public static final RegistryObject<Item>  PETABYTE = ITEMS.register("PetaByte", ItemBase::new);
+		 public static final RegistryObject<Item>  PETABYTE = ITEMS.register("petabyte", ItemBase::new);
 
 		 public static final RegistryObject<Item>  QUBIT = ITEMS.register("qubit", ItemBase::new);
 
-		 public static final RegistryObject<Item>  QUBYTE = ITEMS.register("QuByte", ItemBase::new);
+		 public static final RegistryObject<Item>  QUBYTE = ITEMS.register("qubyte", ItemBase::new);
 
-		 public static final RegistryObject<Item>  TITANIUMI = ITEMS.register("titanium", ItemBase::new);
+		 public static final RegistryObject<Item>  TITANIUMI = ITEMS.register("titanium_ingot", ItemBase::new);
 	     
-		 public static final RegistryObject<Item> LASER_ARROWSHOOTER = ITEMS.register("laser_arrowshooter", () -> new LaserArrowShooter(new Item.Properties().group(Base.Lyoko)));
-/* 
+		 public static final RegistryObject<Item> LASER_ARROWSHOOTER = ITEMS.register("laser_arrowshooter", () -> new LaserArrowShooter(new Item.Properties().group(Base.LYOKO_ITEMS)));
+	//for tools
+	public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().group(Base.LYOKO_ITEMS)));
+	public static final RegistryObject<Item> DIGITAL_SABER = ITEMS.register("digital_saber", () -> new SwordItem(LyokoTiers.LyokoSamurai,25,10 , new Item.Properties().group(Base.LYOKO_ITEMS)));
+	public static final RegistryObject<Item> QUANTUM_SABER = ITEMS.register("quantum_saber", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().group(Base.LYOKO_ITEMS)));
+	public static final RegistryObject<Item> ZWEIHANDER = ITEMS.register("zweihander", () -> new SwordItem(LyokoTiers.LyokoWarrior,30,4, new Item.Properties().group(Base.LYOKO_ITEMS)));
+
+		 /*
  public static final List<Item> Items = new ArrayList<Item>();
  public static final List<Item> Records = new ArrayList<Item>();
 

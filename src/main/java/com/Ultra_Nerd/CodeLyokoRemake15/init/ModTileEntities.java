@@ -10,7 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModTileEntities {
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, Base.MOD_ID);
-
+/*
     public static final RegistryObject<TileEntityType<InfusingChamberTileEntity>> INFUSING_CHAMBER_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("infusing_chamber_tile_entity",
                     () -> TileEntityType.Builder.create(InfusingChamberTileEntity::new,
@@ -20,4 +20,6 @@ public class ModTileEntities {
             TILE_ENTITY_TYPES.register("electric_infusing_tile_entity",
                     ()-> TileEntityType.Builder.create(ElectricInfusingChamberTileEntity::new,
                             ModBlocks.ELECTRICFLOURIDE_INFUSER.get()).build(null));
+
+ */
 }
