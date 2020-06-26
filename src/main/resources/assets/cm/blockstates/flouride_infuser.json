@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "variants": {
     "infusing=false,facing=north": {
       "model": "cm:block/flouride_infuser"
@@ -30,5 +31,18 @@
       "model": "cm:block/lit_flouride_infuser",
       "y": 270
     }
+=======
+"variants":
+  {
+   
+  "infusing=false,facing=north":{"model":"cm:block/flouride_infuser"},
+  "infusing=false,facing=east":{"model":"cm:block/flouride_infuser", "y":90},
+  "infusing=false,facing=south":{"model":"cm:block/flouride_infuser", "y":180},
+  "infusing=false,facing=west":{"model":"cm:block/flouride_infuser", "y":270},
+  "infusing=true,facing=north":{"model":"cm:block/lit_flouride_infuser"},
+  "infusing=true,facing=east":{"model":"cm:block/lit_flouride_infuser", "y":90},
+  "infusing=true,facing=south":{"model":"cm:block/lit_flouride_infuser", "y":180},
+  "infusing=true,facing=west":{"model":"cm:block/lit_flouride_infuser", "y":270}
+>>>>>>> Stashed changes
   }
 }
