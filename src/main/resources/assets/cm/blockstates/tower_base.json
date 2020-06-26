@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "cm:tower_base" }
+        "": { "model": "cm:block/tower_base" }
     }
 }

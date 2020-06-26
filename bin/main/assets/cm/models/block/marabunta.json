@@ -1,7 +1,0 @@
-{
-   "parent": "block/cube_all",
-   "textures": {
-       "particle":"cm:blocks/marabunta",
-       "all": "cm:blocks/marabunta"
-   }
-}

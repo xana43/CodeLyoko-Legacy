@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "cm:quantum_core" }
+        "": { "model": "cm:block/quantum_core" }
     }
 }

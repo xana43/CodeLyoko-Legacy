@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -11,10 +12,16 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class Entityblok extends SkeletonEntity {
+public class EntityBlok extends SkeletonEntity {
 
 	private NearestAttackableTargetGoal<PlayerEntity> shoot;
-	public Entityblok(EntityType<? extends SkeletonEntity> type, World world) {
+
+	public EntityBlok(World world) {
+		super(ModEntities.BLOK.get(), world);
+
+	}
+
+	public EntityBlok(EntityType<? extends SkeletonEntity> type, World world) {
 		super(type,world);
 		// TODO Auto-generated constructor stub
 	}

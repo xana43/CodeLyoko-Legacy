@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.Entityblok;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityBlok;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -11,9 +11,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModEntities {
 
-	public static final DeferredRegister<EntityType<?>> Entities = new DeferredRegister<>(ForgeRegistries.ENTITIES, Base.MOD_ID);
-	public static final RegistryObject<EntityType<Entityblok>> BLOK = Entities.register("blok", () -> 
-	EntityType.Builder.<Entityblok>create(Entityblok::new, EntityClassification.MONSTER).size(2f,2f)
+	public static final DeferredRegister<EntityType<?>> Entities = DeferredRegister.create(ForgeRegistries.ENTITIES, Base.MOD_ID);
+	public static final RegistryObject<EntityType<EntityBlok>> BLOK = Entities.register("blok", () ->
+	EntityType.Builder.<EntityBlok>create(EntityBlok::new, EntityClassification.MONSTER).size(2f,2f)
 	.build(new ResourceLocation(Base.MOD_ID,"blok").toString()));
 	/*public static void registerenit()
 	{

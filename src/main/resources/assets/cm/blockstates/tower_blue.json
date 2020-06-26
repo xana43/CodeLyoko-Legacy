@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "cm:tower_blue" }
+        "": { "model": "cm:block/tower_blue" }
     }
 }

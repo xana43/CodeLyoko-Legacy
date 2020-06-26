@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "cm:transparent" }
+        "": { "model": "cm:block/transparent" }
     }
 }

@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "cm:marabunta" }
+        "": { "model": "cm:block/marabunta" }
     }
 }

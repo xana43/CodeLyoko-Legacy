@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "cm:quantum_block" }
+        "": { "model": "cm:block/quantum_block" }
     }
 }

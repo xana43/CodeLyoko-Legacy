@@ -65,7 +65,7 @@ public class Base
 	}
 	
 	@SubscribeEvent
-	public static void OnItemInit(final RegistryEvent.Register<Item> Items)
+	public static void onItemInit(final RegistryEvent.Register<Item> Items)
 	{
 		final IForgeRegistry<Item> registry = Items.getRegistry();
 		
@@ -97,7 +97,7 @@ public class Base
 
 
 
-	public static final ItemGroup LYOKO_ITEMS = new ItemGroup("Lyoko_items") {
+	public static final ItemGroup LYOKO_ITEMS = new ItemGroup("lyoko_items") {
 
 		@Override
 		public ItemStack createIcon() {

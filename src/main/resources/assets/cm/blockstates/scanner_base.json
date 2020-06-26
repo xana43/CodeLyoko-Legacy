@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:scanner_base" }
+        "normal": { "model": "cm:block/scanner_base" }
     }
 }

@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:titanium" }
+        "normal": { "model": "cm:block/titanium" }
     }
 }

@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:saleeiteOre" }
+        "normal": { "model": "cm:block/saleeite_ore" }
     }
 }

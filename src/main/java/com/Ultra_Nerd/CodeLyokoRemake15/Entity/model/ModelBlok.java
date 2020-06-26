@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.Entityblok;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityBlok;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;
@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 // Paste this class into your mod and generate all required imports
 
 
-public class ModelBlok<T extends Entityblok> extends EntityModel<T> {
+public class ModelBlok<T extends EntityBlok> extends EntityModel<T> {
 	private final ModelRenderer Body;
 	private final ModelRenderer Legs;
 	private final ModelRenderer Leg1;

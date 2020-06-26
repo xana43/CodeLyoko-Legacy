@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "cm:torbernite_ore" }
+        "normal": { "model": "cm:block/torbernite_ore" }
     }
 }
