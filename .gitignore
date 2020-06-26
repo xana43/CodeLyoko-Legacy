@@ -12,10 +12,9 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
-/run/
-/.idea/
-/.settings/
-/run/
+/run/*
+/.idea/*
+/.settings/*
 .idea/runConfigurations/runServer.xml
 .idea/runConfigurations/runData.xml
 .idea/runConfigurations/runClient.xml

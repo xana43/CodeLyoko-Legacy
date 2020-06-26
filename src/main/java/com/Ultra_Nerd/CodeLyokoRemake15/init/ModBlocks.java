@@ -31,7 +31,7 @@ public class ModBlocks {
 	public static final RegistryObject<Block> DIGITAL_ICE = BLOCKS.register("digital_ice", () -> new Block(Block.Properties.create(Material.ICE).hardnessAndResistance(40, 10).sound(SoundType.GLASS).lightValue(0)));
 	public static final RegistryObject<Block> DIGITAL_SAND = BLOCKS.register("digital_sand", () -> new Block(Block.Properties.create(Material.SAND).hardnessAndResistance(20, 10).sound(SoundType.SAND).lightValue(0).harvestLevel(20).harvestTool(ToolType.SHOVEL)));
 	public static final RegistryObject<Block> ELECTRICFLOURIDE_INFUSER = BLOCKS.register("electric_flouride_infuser",ElectricFlourideInfuser::new);
-	public static final RegistryObject<Block> FLOURIDE_INFUSER = BLOCKS.register("floride_infuser",FlourideInfuser::new);
+	public static final RegistryObject<Block> FLOURIDE_INFUSER = BLOCKS.register("flouride_infuser",FlourideInfuser::new);
 	public static final RegistryObject<Block> FLOURITE_BLOCK = BLOCKS.register("flourite_block",() -> new Block(Block.Properties.create(Material.SAND).hardnessAndResistance(-1, 10).sound(SoundType.SAND).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
 	public static final RegistryObject<Block> FLOURITE_ORE = BLOCKS.register("flourite_ore",() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
 	public static final RegistryObject<Block> HOLOPROJECTOR = BLOCKS.register("holoprojector", HologramProjectorBlock::new);

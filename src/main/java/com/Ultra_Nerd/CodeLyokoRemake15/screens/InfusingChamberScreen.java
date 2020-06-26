@@ -4,14 +4,15 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.gui.IHasContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class InfusingChamberScreen //extends ContainerScreen<ContainerInfusing>
+public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> implements IHasContainer<ContainerInfusing>
  {
-/*
+
     private static final ResourceLocation TEX = new ResourceLocation(Base.MOD_ID + ":textures/gui/FlourideInfuser.png");
     private PlayerInventory player;
     private InfusingChamberTileEntity tileentity;
@@ -65,6 +66,6 @@ public class InfusingChamberScreen //extends ContainerScreen<ContainerInfusing>
         return j != 0 && i != 0 ? i * pixels / j : 0;
     }
 
- */
+
 
 }
