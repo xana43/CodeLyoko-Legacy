@@ -32,7 +32,9 @@ public class ContainerInfusing extends Container
 	public boolean canInteractWith(PlayerEntity playerIn) {
 		return false;
 	}
-	/*
+
+
+
 	private final InfusingChamberTileEntity tileentity;
 	private int cookTime, totalCookTime, burnTime, currentBurnTime;
 
@@ -41,7 +43,7 @@ public class ContainerInfusing extends Container
 	 * @param windowId the id of the container
 	 * @param playerInventory the playerInv of the player using this container
 	 * @param data the data sent when this container is used.
-
+	*/
 	public ContainerInfusing(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
 		this(windowId, playerInventory, getTileEntity(playerInventory, data));
 	}
@@ -51,7 +53,7 @@ public class ContainerInfusing extends Container
 	 * @param windowId the id of the container
 	 * @param playerInventory the playerInv of the player using this container
 	 * @param tileEntity the tileEntity of this container
-
+*/
 	public ContainerInfusing(final int windowId, final PlayerInventory playerInventory, final InfusingChamberTileEntity tileEntity) {
 		super(ModContainerTypes.CONTAINER_INFUSING.get(), windowId);
 
@@ -188,7 +190,7 @@ public class ContainerInfusing extends Container
 	 * @param playerInventory playerInv from which to get the world
 	 * @param data Data from which to get the pos
 	 * @return the tileEntity linked to the block used
-
+*/
 	private static InfusingChamberTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
 		Objects.requireNonNull(playerInventory, "playerInventory cannot be null!");
 		Objects.requireNonNull(data, "data cannot be null!");
@@ -198,6 +200,6 @@ public class ContainerInfusing extends Container
 		throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
 	}
 
-	 */
+
 	
 }

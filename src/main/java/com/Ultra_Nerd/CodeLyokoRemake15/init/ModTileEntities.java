@@ -15,11 +15,11 @@ public class ModTileEntities {
             TILE_ENTITY_TYPES.register("infusing_chamber_tile_entity",
                     () -> TileEntityType.Builder.create(InfusingChamberTileEntity::new,
                     ModBlocks.FLOURIDE_INFUSER.get()).build(null));
-
+*/
     public static final RegistryObject<TileEntityType<ElectricInfusingChamberTileEntity>> ELECTRIC_INFUSING_CHAMBER_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("electric_infusing_tile_entity",
                     ()-> TileEntityType.Builder.create(ElectricInfusingChamberTileEntity::new,
                             ModBlocks.ELECTRICFLOURIDE_INFUSER.get()).build(null));
 
- */
+
 }

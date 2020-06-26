@@ -11,6 +11,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModContainerTypes {
     public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, Base.MOD_ID);
 
-    //public static final RegistryObject<ContainerType<ContainerInfusing>> CONTAINER_INFUSING = CONTAINER_TYPES
-         //   .register("container_infusing", ()-> IForgeContainerType.create(ContainerInfusing::new));
+    public static final RegistryObject<ContainerType<ContainerInfusing>> CONTAINER_INFUSING = CONTAINER_TYPES
+            .register("container_infusing", ()-> IForgeContainerType.create(ContainerInfusing::new));
 }
