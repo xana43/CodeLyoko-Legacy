@@ -1,9 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
@@ -16,7 +13,7 @@ import net.minecraftforge.common.ToolType;
 
 public class HologramBlock extends Block {
 
-    public static final DirectionProperty DIRHOLO = HorizontalBlock.HORIZONTAL_FACING;
+
 
     public HologramBlock()
     {
@@ -28,24 +25,16 @@ public class HologramBlock extends Block {
                 .harvestLevel(2)
                 .harvestTool(ToolType.PICKAXE)
         );
-        //this.setDefaultState(this.stateContainer.getBaseState().with(DIRHOLO, Direction.NORTH));
+
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        // TODO Auto-generated method stub
-        return this.getDefaultState().with(DIRHOLO, context.getPlacementHorizontalFacing().getOpposite());
-    }
-    //mod compatiability
-    @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(DIRHOLO,rot.rotate(state.get(DIRHOLO)));
+    public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side) {
+        return true;
     }
 
-    @Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(DIRHOLO)));
-    }
+    
+
     //
 
     @Override
