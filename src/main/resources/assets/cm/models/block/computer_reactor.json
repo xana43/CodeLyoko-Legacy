@@ -2,6 +2,6 @@
     "ambientocclusion" : "true",
    "parent": "block/cube_all",
    "textures": {
-       "all": "cm:blocks/computer_screen"
+       "all": "cm:block/computer_screen"
    }
 }

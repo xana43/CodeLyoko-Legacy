@@ -13,8 +13,8 @@ public class ModFluids {
 
 	
 	public static final ArrayList<Fluid> FLUIDS = new ArrayList<Fluid>(); 
-	public static final Fluid DIGITAL_SEA = new FluidLiquid("digital_sea", new ResourceLocation(ref.MOD_ID + ":blocks/digital_still"), new ResourceLocation(ref.MOD_ID + ":blocks/digital_flowing"));
-	public static final Fluid COOLANT_FLUID = new FluidLiquid("coolant_fluid", new ResourceLocation(ref.MOD_ID + ":blocks/coolc"), new ResourceLocation(ref.MOD_ID + ":blocks/coolf"));
+	public static final Fluid DIGITAL_SEA = new FluidLiquid("digital_sea", new ResourceLocation(ref.MOD_ID + ":block/digital_still"), new ResourceLocation(ref.MOD_ID + ":block/digital_flowing"));
+	public static final Fluid COOLANT_FLUID = new FluidLiquid("coolant_fluid", new ResourceLocation(ref.MOD_ID + ":block/coolc"), new ResourceLocation(ref.MOD_ID + ":block/coolf"));
 	public static void REGFLU()
 	{
    for(Fluid fluid : FLUIDS)
