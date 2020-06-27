@@ -2,6 +2,8 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityBlok;
+import net.minecraft.client.gui.fonts.Font;
+import net.minecraft.client.gui.fonts.FontResourceManager;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -10,6 +12,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModEntities {
+
 
 	public static final DeferredRegister<EntityType<?>> Entities = DeferredRegister.create(ForgeRegistries.ENTITIES, Base.MOD_ID);
 	public static final RegistryObject<EntityType<EntityBlok>> BLOK = Entities.register("blok", () ->

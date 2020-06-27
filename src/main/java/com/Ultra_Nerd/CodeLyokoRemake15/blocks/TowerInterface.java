@@ -1,21 +1,27 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.SoundType;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.fml.network.NetworkHooks;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class TowerInterface extends HorizontalBlock {
 
@@ -89,4 +95,35 @@ public class TowerInterface extends HorizontalBlock {
         // TODO Auto-generated method stub
         return true;
     }
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get().create();
+    }
+
+
+
+    @Nonnull
+    @Override
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult result) {
+        if(!worldIn.isRemote)
+        {
+            TileEntity Tower = worldIn.getTileEntity(pos);
+            if(Tower instanceof TowerInterfaceTileEntity)
+            {
+                NetworkHooks.openGui((ServerPlayerEntity)player,(TowerInterfaceTileEntity)Tower,pos);
+                return ActionResultType.SUCCESS;
+            }
+        }
+        return ActionResultType.FAIL;
+    }
+
+
 }

@@ -1,14 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.LyokoTiers;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InterfaceTileEntity;
 import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ShovelItem;
-import net.minecraft.item.SwordItem;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -40,7 +34,7 @@ public class registry
 	  
 	  
 	//for tileentities
-	 //public static final RegistryObject<TileEntityType<InterfaceTileEntity>> TOWERINTERFACE = Tiles.register("tower_interface", () -> TileEntityType.Builder.create(InterfaceTileEntity::new, TOWER_INTERFACE.get()).build(null));
+	 //public static final RegistryObject<TileEntityType<TowerInterfaceTileEntity>> TOWERINTERFACE = Tiles.register("tower_interface", () -> TileEntityType.Builder.create(TowerInterfaceTileEntity::new, TOWER_INTERFACE.get()).build(null));
 	
 	
 	 

@@ -4,8 +4,10 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
+import com.Ultra_Nerd.CodeLyokoRemake15.screens.TowerGUI;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -63,6 +65,7 @@ public class Base
 	
 	private void dostuff(final FMLClientSetupEvent event)
 	{
+
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.BLOK.get(), RendBlok::new);
 	}
 	
