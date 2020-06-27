@@ -15,6 +15,7 @@ public class ModSounds {
 	public static final DeferredRegister<SoundEvent> SOUNDS = new DeferredRegister<>(ForgeRegistries.SOUND_EVENTS, Base.MOD_ID);
 	//for objects that load last
 	 public static final Lazy<SoundEvent> LAZY_THEME = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"lyoko")));
+	 public static final Lazy<SoundEvent> LAZY_ARMOR = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"armor_equip")));
 //for music discs
 public static final RegistryObject<Item> LYOKO_DISC = ModItems.ITEMS.register("lyokodisc", () -> new LyokoRecords(10, LAZY_THEME.get(), new Item.Properties().group(Base.LYOKO_ITEMS).maxStackSize(1).rarity(Rarity.RARE)));
 	 //for sound events
@@ -24,5 +25,5 @@ public static final RegistryObject<Item> LYOKO_DISC = ModItems.ITEMS.register("l
     public static final RegistryObject<SoundEvent> LASERARROW = SOUNDS.register("laser", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"laser")));
     public static final RegistryObject<SoundEvent> FOREST = SOUNDS.register("forestsector", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"forestsector")));
     public static final RegistryObject<SoundEvent> ICE = SOUNDS.register("icesector", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"icesector")));
-	
+
 }

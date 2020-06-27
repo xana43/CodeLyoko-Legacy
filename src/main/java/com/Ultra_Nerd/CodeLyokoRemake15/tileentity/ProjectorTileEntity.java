@@ -1,15 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramProjectorBlock;
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.QuantSteelBlock;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.renderer.texture.ITickable;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.math.BlockPos;
-
 public class ProjectorTileEntity //extends TileEntity implements ITickable
 {
 

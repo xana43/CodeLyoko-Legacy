@@ -31,7 +31,7 @@ public enum LyokoTiers implements IItemTier{
 	private final float attackdamage,efficiency;
 	private final LazyValue<Ingredient> anvilmat;
 
-	private LyokoTiers(int harvest, int MaxUses,float efficiency,float attackdamage,int enchantability, Supplier<Ingredient> anvilmat)
+	LyokoTiers(int harvest, int MaxUses, float efficiency, float attackdamage, int enchantability, Supplier<Ingredient> anvilmat)
 	{
 		this.harvest = harvest;
 		this.MaxUses = MaxUses;

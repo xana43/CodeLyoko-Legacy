@@ -1,8 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 public class ModRes {
 	public static void ini()
 	{

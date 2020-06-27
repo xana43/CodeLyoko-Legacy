@@ -1,13 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoRemake15;
 
+
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.registry;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
-import com.Ultra_Nerd.CodeLyokoRemake15.screens.TowerGUI;
-import net.minecraft.block.Block;
 import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -42,10 +39,10 @@ public class Base
 		final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
 		ModBus.addListener(this::setup);
 		ModBus.addListener(this::dostuff);
-		registry.init();
 
-		ModItems.ITEMS.register(ModBus);
 		ModSounds.SOUNDS.register(ModBus);
+		ModItems.ITEMS.register(ModBus);
+
 		ModFluids.LIQUIDS.register(ModBus);
 		ModBlocks.BLOCKS.register(ModBus);
 		ModEntities.Entities.register(ModBus);

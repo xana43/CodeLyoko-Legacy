@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelLaserArrow;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;

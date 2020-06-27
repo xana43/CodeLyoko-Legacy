@@ -44,5 +44,12 @@
         "cetegory":"ambient",
         "subtitle":"ice sector ambiance",
         "sounds":[{"name":"cm:music/ice/icesector", "stream":"true"}]
+    },
+    "armor_equip":
+    {
+        "category":"neutral",
+        "subtitle": "digital armor equip",
+        "sounds": [{"name": "cm:events/armor_digital_equip","stream": "true"}]
+
     }
 }
