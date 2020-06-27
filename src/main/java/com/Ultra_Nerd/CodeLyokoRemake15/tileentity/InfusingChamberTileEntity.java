@@ -198,7 +198,7 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
             }
 
 
-            if (item == ModItems.FLOURIDE.get()) return 40000;
+            if (item == ModItems.FLOURIDE.get()) return 20000;
 
 
         }
@@ -206,6 +206,7 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
     }
 
     public static boolean isItemFuel(ItemStack fuel) {
+
         return getItemBurnTime(fuel) > 0;
     }
 
