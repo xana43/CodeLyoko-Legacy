@@ -1,3 +1,30 @@
+Build: 1.15.2-31.2.27 - Thu Jun 25 17:11:42 GMT 2020
+	laughlan.cov:
+		Allow RayTraceContext to be constructed with a null entity. (#6708)
+
+=========
+Build: 1.15.2-31.2.26 - Thu Jun 25 16:35:52 GMT 2020
+	lalis.jan:
+		Replace explicit shears reference in vanilla loot tables with tag for modded shears. (#6765)
+
+=========
+Build: 1.15.2-31.2.25 - Thu Jun 25 16:29:30 GMT 2020
+	hanetzer:
+		Fix cache file sorting issue on linux (#6793)
+
+=========
+Build: 1.15.2-31.2.23 - Wed Jun 24 02:14:02 GMT 2020
+	cpw:
+		Modify how modfiles load slightly, for better decoupling.
+		
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.15.2-31.2.22 - Mon Jun 22 07:52:41 GMT 2020
+	diesieben07:
+		Throw an exception from DeferredRegister when trying to register entries after registry event has fired (#6789)
+
+=========
 Build: 1.15.2-31.2.21 - Thu Jun 18 21:24:34 GMT 2020
 	Colby Prince:
 		Potential userProperties Fix (#6740)
