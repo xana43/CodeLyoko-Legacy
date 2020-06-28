@@ -19,7 +19,7 @@ import net.minecraftforge.common.ToolType;
 import java.util.Random;
 
 public class AntiMarabunta extends Block {
-    protected static final VoxelShape SOUL_SAND_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
+    protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
     public AntiMarabunta()
     {
         super(Block.Properties.create(Material.DRAGON_EGG)
@@ -41,7 +41,7 @@ public class AntiMarabunta extends Block {
     public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos,
                                         ISelectionContext context) {
         // TODO Auto-generated method stub
-        return SOUL_SAND_AABB;
+        return SHAPE;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class AntiMarabunta extends Block {
         {
 
 
-            for (int i = 0; i < 9000; ++i)
+            for (int i = 0; i < 20; ++i)
             {
                 BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 

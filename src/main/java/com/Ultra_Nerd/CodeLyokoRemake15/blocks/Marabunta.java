@@ -23,7 +23,7 @@ import net.minecraftforge.common.ToolType;
 import java.util.Random;
 
 public class Marabunta extends Block {
-	protected static final VoxelShape SOUL_SAND_AABB = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
+	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
 	public Marabunta()
 	{
 		super(Block.Properties.create(Material.DRAGON_EGG)
@@ -48,7 +48,7 @@ public class Marabunta extends Block {
 	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos,
 										ISelectionContext context) {
 		// TODO Auto-generated method stub
-		return SOUL_SAND_AABB;
+		return SHAPE;
 	}
 	/**
 	 * Called When an Entity Collided with the Block
@@ -78,7 +78,7 @@ public class Marabunta extends Block {
 				// BlockState iblockstate = worldIn.getBlockState(blockpos.up());
 				BlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-				if (iblockstate1.getBlock() == Blocks.COARSE_DIRT || iblockstate1.getBlock() == Blocks.GRASS_PATH|| iblockstate1.getBlock() == Blocks.DIRT ||    iblockstate1.getBlock() == ModBlocks.DIGITAL_GRASS.get() || iblockstate1.getBlock() == ModBlocks.DIGITAL_ICE.get())
+				if (iblockstate1.getBlock() == Blocks.COARSE_DIRT || iblockstate1.getBlock() == Blocks.GRASS_PATH|| iblockstate1.getBlock() == Blocks.DIRT ||    iblockstate1.getBlock() == ModBlocks.DIGITAL_GRASS.get() || iblockstate1.getBlock() == ModBlocks.DIGITAL_ICE.get() || iblockstate1.getBlock() == Blocks.GRASS_BLOCK)
 				{
 					worldIn.setBlockState(blockpos, ModBlocks.MARABUNTA.get().getDefaultState());
 				}

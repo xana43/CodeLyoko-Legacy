@@ -4,7 +4,7 @@
     {
         "category":"entity",
         "subtitle": "entity.blok.ambient",
-        "sounds":[{"name":"cm:entity/blok/ambient", "stream":"true"}]
+        "sounds":[{"name":"cm:entity/blok/ambient", "stream":false}]
     },
     
      "entity.blok.hurt":
@@ -12,44 +12,68 @@
     {
         "category":"entity",
         "subtitle": "entity.blok.hurt",
-        "sounds":[{"name":"cm:entity/blok/hurt", "stream":"true"}]
+        "sounds":[{"name":"cm:entity/blok/hurt", "stream":false}]
     },
      "entity.blok.death":
     
     {
         "category":"entity",
         "subtitle": "entity.blok.death",
-        "sounds":[{"name":"cm:entity/blok/death", "stream":"true"}]
+        "sounds":[{"name":"cm:entity/blok/death", "stream":false}]
     },
     "lyoko":
     {
         "category":"record",
         "subtitle":"play.CodeLyokoTheme",
-        "sounds":[{"name":"cm:records/lyoko", "stream":"true"}]
+        "sounds":[{"name":"cm:records/lyoko", "stream":true,"preload": true}]
     },
     "laser":
     {
         "category":"neutral",
         "subtitle":"laser fire",
-        "sounds": [{"name":"cm:items/laser","stream":"true"}]
+        "sounds": [{"name":"cm:items/laser","stream":false,"preload": true}]
     },
     "forestsector":
     {
         "cetegory":"ambient",
         "subtitle":"forest sector ambiance",
-        "sounds":[{"name":"cm:music/forest/forestsector", "stream":"true"}]
+        "sounds":[{"name":"cm:music/forest/forestsector", "stream":true,"preload": true}]
     },
     "icesector":
     {
         "cetegory":"ambient",
         "subtitle":"ice sector ambiance",
-        "sounds":[{"name":"cm:music/ice/icesector", "stream":"true"}]
+        "sounds":[{"name":"cm:music/ice/icesector", "stream":true,"preload": true}]
     },
-    "armor_equip":
+    "armor_equip_warrior":
     {
         "category":"neutral",
-        "subtitle": "digital armor equip",
-        "sounds": [{"name": "cm:events/armor_digital_equip","stream": "true"}]
+        "subtitle": "digital armor equip: Warrior Type",
+        "sounds": [{"name": "cm:events/armor_digital_equip_warrior","stream": false,"preload": true}]
 
+    },
+    "armor_equip_feline":
+    {
+      "category": "neutral",
+        "subtitle": "digital armor equip: Feline Type",
+        "sounds": [{"name": "cm:events/armor_digital_equip_feline","stream": false,"preload": true}]
+    },
+    "armor_equip_guardian":
+    {
+        "category": "neutral",
+        "subtitle": "digital armor equip: Guardian Type",
+        "sounds": [{"name": "cm:events/armor_digital_equip_guardian","stream": false,"preload": true}]
+    },
+    "armor_equip_ninja":
+    {
+        "category": "neutral",
+        "subtitle": "digital armor equip: Ninja Type",
+        "sounds": [{"name": "cm:events/armor_digital_equip_ninja","stream": false,"preload": true}]
+    },
+    "armor_equip_samurai":
+    {
+        "category": "neutral",
+        "subtitle": "digital armor equip: Samurai Type",
+        "sounds": [{"name": "cm:events/armor_digital_equip_samurai","stream": false,"preload": true}]
     }
 }

@@ -15,7 +15,11 @@ public class ModSounds {
 	public static final DeferredRegister<SoundEvent> SOUNDS = new DeferredRegister<>(ForgeRegistries.SOUND_EVENTS, Base.MOD_ID);
 	//for objects that load last
 	 public static final Lazy<SoundEvent> LAZY_THEME = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"lyoko")));
-	 public static final Lazy<SoundEvent> LAZY_ARMOR = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"armor_equip")));
+	 public static final Lazy<SoundEvent> LAZY_WARRIOR = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"armor_equip_warrior")));
+	 public static final Lazy<SoundEvent> LAZY_FELINE = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"armor_equip_feline")));
+	 public static final Lazy<SoundEvent> LAZY_NINJA = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"armor_equip_ninja")));
+	 public static final Lazy<SoundEvent> LAZY_SAMURAI = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"armor_equip_samurai")));
+	 public static final Lazy<SoundEvent> LAZY_GUARDIAN = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"armor_equip_guardian")));
 //for music discs
 public static final RegistryObject<Item> LYOKO_DISC = ModItems.ITEMS.register("lyokodisc", () -> new LyokoRecords(10, LAZY_THEME.get(), new Item.Properties().group(Base.LYOKO_ITEMS).maxStackSize(1).rarity(Rarity.RARE)));
 	 //for sound events
