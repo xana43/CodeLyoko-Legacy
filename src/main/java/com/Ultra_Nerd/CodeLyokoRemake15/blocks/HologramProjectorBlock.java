@@ -1,20 +1,26 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.ContainerBlock;
-import net.minecraft.block.SoundType;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.HologramProjectorTileEntity;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
 
 public class HologramProjectorBlock extends ContainerBlock {
-	
+	public static BooleanProperty VALID = BooleanProperty.create("valid");
+
 	public HologramProjectorBlock()
 	{
-super(Block.Properties.create(Material.IRON)
+	super(Block.Properties.create(Material.IRON)
 				
 				.hardnessAndResistance(6, 10)
 				.sound(SoundType.METAL)
@@ -27,23 +33,33 @@ super(Block.Properties.create(Material.IRON)
 					
 					
 			);
-		
+		this.setDefaultState(this.getDefaultState().with(VALID,false));
 
+	}
+
+
+	@Override
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+		super.fillStateContainer(builder.add(BooleanProperty.create("valid")));
+	}
+
+	@Nullable
+	@Override
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		return this.getBlock().getDefaultState().with(VALID,false);
+	}
+
+
+	@Override
+	public BlockRenderType getRenderType(BlockState state) {
+		return BlockRenderType.MODEL;
 	}
 
 	@Nullable
 	@Override
 	public TileEntity createNewTileEntity(IBlockReader worldIn) {
-		return null;
-	}
-	/*
-	public static PropertyBool VALID = PropertyBool.create("valid");
-	public static boolean trans = false;
-	
-	@Override
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
 		// TODO Auto-generated method stub
-		return new ProjectorTileEntity();
+		return new HologramProjectorTileEntity();
 	}
 	
 	@Override
@@ -58,102 +74,23 @@ super(Block.Properties.create(Material.IRON)
 		return true;
 	}
 
-	public static void SetModel(boolean act, World worldIn, BlockPos pos) 
+	public static void SetModel(boolean act, World worldIn, BlockPos pos)
 	{
 		 BlockState state = worldIn.getBlockState(pos);
 		 TileEntity tileentity = worldIn.getTileEntity(pos);
-		 
-		 if(act) worldIn.setBlockState(pos, Modblocks.HOLOPROJECTOR.getDefaultState().withProperty(VALID, true), 3);
-		 else worldIn.setBlockState(pos, Modblocks.HOLOPROJECTOR.getDefaultState().withProperty(VALID, false), 3);
-		 if(tileentity != null)
-		 {
-			 tileentity.validate();
-			 worldIn.setTileEntity(pos, tileentity);
-		 }
-		 
-		
-	}
-	
-	@Override
-	public boolean isOpaqueCube(IBlockState state) {
-		// TODO Auto-generated method stub
-		if(state == VALID || trans)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-		
-	}
-	
-	@Override
-	public boolean isTranslucent(IBlockState state) {
-		if(state == VALID || trans)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	@Override
-	public boolean isFullCube(IBlockState state) {
-		if(state == VALID || trans)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-		
-	}
-	
-	@Override
-	public boolean isFullBlock(IBlockState state) {
-		// TODO Auto-generated method stub
-		if(state == VALID || trans)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-	}
-	
-	@Override
-	public BlockRenderLayer getBlockLayer() {
-		// TODO Auto-generated method stub
-		if(trans)
-		{
-			return BlockRenderLayer.TRANSLUCENT;
-		}
-		else
-		{
-			return BlockRenderLayer.SOLID;
-		}	
-		
-	}
-	
-@Override
-protected BlockStateContainer createBlockState() {
-	// TODO Auto-generated method stub
-	return new BlockStateContainer(this, new IProperty[] {VALID});
-}
-@Override
-	public EnumBlockRenderType getRenderType(IBlockState state) {
-		// TODO Auto-generated method stub
-		return EnumBlockRenderType.MODEL;
-	}
-@Override
-public int getMetaFromState(IBlockState state) { return 0; }
 
-@Override
-public IBlockState getStateFromMeta(int meta) { return this.getDefaultState(); }
-*/
+		 if(act) {
+			 worldIn.setBlockState(pos, ModBlocks.HOLOPROJECTOR.get().getDefaultState().with(VALID, true), 3);
+
+		 }
+		 else worldIn.setBlockState(pos, ModBlocks.HOLOPROJECTOR.get().getDefaultState().with(VALID, false), 3);
+
+
+
+	}
+
+
+
+
+
 }

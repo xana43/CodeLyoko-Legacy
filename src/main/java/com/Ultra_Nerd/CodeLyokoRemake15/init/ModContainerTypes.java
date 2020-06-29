@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
+import com.Ultra_Nerd.CodeLyokoRemake15.containers.HologramContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
@@ -16,4 +17,6 @@ public class ModContainerTypes {
             .register("container_infusing", ()-> IForgeContainerType.create(ContainerInfusing::new));
     public static final RegistryObject<ContainerType<TowerInterfaceContainer>> TOWER_INTERFACE_CONTAINER = CONTAINER_TYPES
             .register("tower_interface_container",() -> IForgeContainerType.create(TowerInterfaceContainer::new));
+    public static final RegistryObject<ContainerType<HologramContainer>> HOLOGRAM_CONTAINER = CONTAINER_TYPES
+            .register("hologram_container", () -> IForgeContainerType.create(HologramContainer::new));
 }

@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.HologramProjectorTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -24,5 +25,8 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<TowerInterfaceTileEntity>> TOWER_INTERFACE_TILE_ENTITY =
     TILE_ENTITY_TYPES.register("tower_interface_tile_entity",() -> TileEntityType.Builder.create(TowerInterfaceTileEntity::new,
             ModBlocks.TOWER_INTERFACE.get()).build(null));
+    public static final RegistryObject<TileEntityType<HologramProjectorTileEntity>> HOLOGRAM_TILE_ENTITY =
+            TILE_ENTITY_TYPES.register("hologram_tile_entity", () -> TileEntityType.Builder.create(HologramProjectorTileEntity::new,
+                    ModBlocks.HOLOPROJECTOR.get()).build(null));
 
 }
