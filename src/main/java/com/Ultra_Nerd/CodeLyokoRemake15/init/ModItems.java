@@ -6,10 +6,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.items.ItemBase;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.LaserArrowShooter;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.ZweihanderWeapon;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ShovelItem;
-import net.minecraft.item.SwordItem;
+import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -70,7 +67,7 @@ public class ModItems
 
 		 public static final RegistryObject<Item>  TITANIUMI = ITEMS.register("titanium_ingot", ItemBase::new);
 	     
-		 public static final RegistryObject<Item> LASER_ARROWSHOOTER = ITEMS.register("laser_arrowshooter", () -> new LaserArrowShooter(new Item.Properties().group(Base.LYOKO_ITEMS)));
+		 public static final RegistryObject<BowItem> LASER_ARROWSHOOTER = ITEMS.register("laser_arrowshooter", () -> new LaserArrowShooter(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(40).setNoRepair()));
 	//for tools
 	public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().group(Base.LYOKO_ITEMS)));
 	public static final RegistryObject<Item> DIGITAL_SABER = ITEMS.register("digital_saber", () -> new SwordItem(LyokoTiers.LyokoSamurai,25,10 , new Item.Properties().group(Base.LYOKO_ITEMS)));

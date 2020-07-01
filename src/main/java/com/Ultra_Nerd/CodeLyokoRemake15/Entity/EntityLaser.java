@@ -21,7 +21,9 @@ public class EntityLaser extends ArrowEntity {
 		super(worldIn, x, y, z);
 		// TODO Auto-generated constructor stub
 	}
-	
+
+
+
 	@Override
 	protected ItemStack getArrowStack() {
 		// TODO Auto-generated method stub
