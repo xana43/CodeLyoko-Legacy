@@ -21,7 +21,7 @@ public class ModSounds {
 	 public static final Lazy<SoundEvent> LAZY_SAMURAI = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"armor_equip_samurai")));
 	 public static final Lazy<SoundEvent> LAZY_GUARDIAN = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"armor_equip_guardian")));
 //for music discs
-public static final RegistryObject<Item> LYOKO_DISC = ModItems.ITEMS.register("lyokodisc", () -> new LyokoRecords(10, LAZY_THEME.get(), new Item.Properties().group(Base.LYOKO_ITEMS).maxStackSize(1).rarity(Rarity.RARE)));
+public static final RegistryObject<Item> LYOKO_DISC = ModItems.ITEMS.register("lyokodisc", () -> new LyokoRecords((byte) 10, LAZY_THEME.get(), new Item.Properties().group(Base.LYOKO_ITEMS).maxStackSize(1).rarity(Rarity.RARE)));
 	 //for sound events
 	 public static final RegistryObject<SoundEvent> BLOKAMBIENT = SOUNDS.register("entity.blok.ambient", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"entity.blok.ambient")));
 	 public static final RegistryObject<SoundEvent> BLOKHURT = SOUNDS.register("entity.blok.hurt", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"entity.blok.hurt")));

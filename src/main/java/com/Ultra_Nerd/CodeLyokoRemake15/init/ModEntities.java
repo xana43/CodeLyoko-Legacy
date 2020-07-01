@@ -12,7 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModEntities {
 
 
-	public static final DeferredRegister<EntityType<?>> Entities = DeferredRegister.create(ForgeRegistries.ENTITIES, Base.MOD_ID);
+	public static final DeferredRegister<EntityType<?>> Entities = new DeferredRegister<>(ForgeRegistries.ENTITIES, Base.MOD_ID);
 	public static final RegistryObject<EntityType<EntityBlok>> BLOK = Entities.register("blok", () ->
 	EntityType.Builder.<EntityBlok>create(EntityBlok::new, EntityClassification.MONSTER).size(2f,2f)
 	.build(new ResourceLocation(Base.MOD_ID,"blok").toString()));

@@ -11,9 +11,9 @@ import net.minecraft.item.SwordItem;
 
 public class ZweihanderWeapon extends SwordItem {
     private final float attackdamage;
-    private final float attackspeed;
+    private final byte attackspeed;
 
-    public ZweihanderWeapon(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
+    public ZweihanderWeapon(IItemTier tier, byte attackDamageIn, byte attackSpeedIn, Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
         this.attackspeed = attackSpeedIn;
         this.attackdamage = (float)attackDamageIn + tier.getAttackDamage();

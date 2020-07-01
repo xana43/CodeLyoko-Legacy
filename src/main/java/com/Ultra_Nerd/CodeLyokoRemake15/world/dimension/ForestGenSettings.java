@@ -6,11 +6,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.GenerationSettings;
 
 public class ForestGenSettings extends GenerationSettings {
-    public int BiomeSize(){
+    public byte BiomeSize(){
         return 4;
     }
 
-    public int getBiomID()
+    public byte getBiomID()
     {
         return 90;
     }

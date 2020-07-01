@@ -50,7 +50,7 @@ public class AntiMarabunta extends Block {
         {
 
 
-            for (int i = 0; i < 20; ++i)
+            for (byte i = 0; i < 20; ++i)
             {
                 BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 
@@ -70,7 +70,7 @@ public class AntiMarabunta extends Block {
 
             }
 
-            for (int i = 0; i < 1; ++i)
+            for (byte i = 0; i < 1; ++i)
             {
                 BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 

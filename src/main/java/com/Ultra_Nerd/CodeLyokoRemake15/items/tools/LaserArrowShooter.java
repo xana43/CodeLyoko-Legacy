@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 
 
 public class LaserArrowShooter extends BowItem{
-private int Count = 100;
+private byte Count = 100;
 
 	@Override
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
