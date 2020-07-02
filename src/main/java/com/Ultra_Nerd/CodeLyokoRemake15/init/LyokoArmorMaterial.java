@@ -16,10 +16,10 @@ public enum  LyokoArmorMaterial implements IArmorMaterial {
 
 
 
-     WARRIOR(Base.MOD_ID + ":william",33 , new byte[]{11,14,16,11}, 420 , ModSounds.LAZY_WARRIOR.get(), 10F, () -> {
+     WARRIOR(Base.MOD_ID + ":william",33 , new byte[]{15,19,20,15}, 420 , ModSounds.LAZY_WARRIOR.get(), 10F, () -> {
         return Ingredient.fromItems(ModItems.PETABYTE.get());
     }),
-    BLANKHELM(Base.MOD_ID + ":blank",5 , new byte[]{8,9,10,8}, 0 , SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 10F, () -> {
+    BLANKHELM(Base.MOD_ID + ":blank",5 , new byte[]{15,19,20,15}, 0 , SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 10F, () -> {
         return Ingredient.fromItems(ModItems.PETABYTE.get());
     }),
     FELNINE(Base.MOD_ID + ":odd",25 , new byte[]{4,7,9,4}, 420 , ModSounds.LAZY_FELINE.get(), 0F, () -> {

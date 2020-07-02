@@ -97,6 +97,19 @@ public class Base
 	};
 
 
+	public static final ItemGroup LYOKO_ARMOR = new ItemGroup("lyoko_armor") {
+		@Override
+		public ItemStack createIcon() {
+			return new ItemStack(ModItems.WILLIAM_CHESTPLATE.get());
+		}
+	};
+
+	public static final ItemGroup LYOKO_WEAPONS = new ItemGroup("lyoko_weapons") {
+		@Override
+		public ItemStack createIcon() {
+			return new ItemStack(ModItems.LASER_ARROWSHOOTER.get());
+		}
+	};
 
 	public static final ItemGroup LYOKO_ITEMS = new ItemGroup("lyoko_items") {
 
