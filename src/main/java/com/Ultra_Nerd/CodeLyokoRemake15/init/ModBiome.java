@@ -46,13 +46,13 @@ public class ModBiome {
 			.scale(4)
 			.temperature(10)
 
-			 .category(Category.TAIGA)
+			 .category(Category.NONE)
 			 .downfall(0)
 			 .parent(null)));
 	public static final RegistryObject<Biome>FOREST = BIOMES.register("forest_sector",() -> new LyokoFS(new Biome.Builder()
 			.precipitation(RainType.NONE)
 			.surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(ModBlocks.DIGITAL_GRASS.get()
-			.getDefaultState(),ModBlocks.DIGITAL_GRASS.get().getDefaultState(),ModBlocks.DIGITAL_GRASS.get().getDefaultState()))
+			.getDefaultState(),ModBlocks.DIGITAL_DIRT.get().getDefaultState(),ModBlocks.DIGITAL_DIRT.get().getDefaultState()))
 			.category(Category.FOREST)
 			.downfall(0)
 			.waterColor(3099807)
@@ -61,6 +61,7 @@ public class ModBiome {
 			.scale(4)
 			.temperature(10)
 			.parent(null)
+
 			));
 	public static final RegistryObject<Biome>DESERT = BIOMES.register("desert_sector", () -> new LyokoDES(new Biome.Builder()
 		.precipitation(RainType.NONE)

@@ -25,6 +25,8 @@ public class ForestGenSettings extends GenerationSettings {
         return ModBlocks.DIGITAL_GRASS.get().getDefaultState();
     }
 
+
+
     @Override
     public BlockState getDefaultFluid() {
         return ModFluids.DIO.get().getDefaultState();

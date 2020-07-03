@@ -6,13 +6,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraftforge.client.IRenderHandler;
 
 import javax.annotation.Nullable;
 
-public class ForestDimension extends Dimension {
+public class ForestDimension extends Dimension  {
     public ForestDimension(World world, DimensionType type) {
         super(world,type,0.0f);
     }
@@ -20,6 +22,43 @@ public class ForestDimension extends Dimension {
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
         return new ForestGenerator(world,new ForestProvider(),new ForestGenSettings());
+    }
+
+    @Override
+    public void setSkyRenderer(IRenderHandler skyRenderer) {
+        super.setSkyRenderer(skyRenderer);
+    }
+
+    @Override
+    public boolean isSkyColored() {
+        return true;
+    }
+
+    @Override
+    public boolean hasSkyLight() {
+        return true;
+    }
+
+
+    @Override
+    public boolean isDaytime() {
+        return true;
+    }
+
+    @Override
+    public boolean isNether() {
+        return false;
+    }
+
+
+    @Override
+    public boolean canDoRainSnowIce(Chunk chunk) {
+        return false;
+    }
+
+    @Override
+    public boolean canDoLightning(Chunk chunk) {
+        return true;
     }
 
 
@@ -38,7 +77,7 @@ public class ForestDimension extends Dimension {
 
     @Override
     public float calculateCelestialAngle(long worldTime, float partialTicks) {
-        return 0;
+        return 1000;
     }
 
     @Override
@@ -48,7 +87,7 @@ public class ForestDimension extends Dimension {
 
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
-        return Vec3d.ZERO;
+        return new Vec3d(1000,1000,1000);
     }
 
     @Override
@@ -70,4 +109,6 @@ public class ForestDimension extends Dimension {
     public boolean canMineBlock(PlayerEntity player, BlockPos pos) {
         return false;
     }
+
+    
 }
