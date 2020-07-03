@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension;
+package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;

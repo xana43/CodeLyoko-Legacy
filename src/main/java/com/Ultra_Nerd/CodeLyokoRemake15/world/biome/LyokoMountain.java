@@ -2,12 +2,12 @@ package com.Ultra_Nerd.CodeLyokoRemake15.world.biome;
 
 import net.minecraft.world.biome.Biome;
 
-public class LyokoM extends Biome {
-	protected LyokoM(Builder biomeBuilder) {
+public class LyokoMountain extends Biome {
+	protected LyokoMountain(Builder biomeBuilder) {
 		super(biomeBuilder);
 	}
 /*
-	public LyokoM() {
+	public LyokoMountain() {
 		super(new BiomeProperties("ForestModDimension Mountain sector").setBaseHeight(0).setHeightVariation(0.5f).setRainDisabled().setWaterColor(159).setTemperature(900));
 		
 		

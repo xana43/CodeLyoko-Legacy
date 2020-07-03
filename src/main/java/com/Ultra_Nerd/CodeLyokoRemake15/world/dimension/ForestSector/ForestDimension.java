@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension;
+package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.world.generators.ForestGenerator;
 import net.minecraft.entity.player.PlayerEntity;
@@ -87,8 +87,10 @@ public class ForestDimension extends Dimension  {
 
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
-        return new Vec3d(1000,1000,1000);
+        return new Vec3d(0.9f,1,0.6F);
     }
+
+
 
     @Override
     public boolean canRespawnHere() {
@@ -110,5 +112,10 @@ public class ForestDimension extends Dimension  {
         return false;
     }
 
-    
+
+
+    @Override
+    public void setAllowedSpawnTypes(boolean allowHostile, boolean allowPeaceful) {
+        super.setAllowedSpawnTypes(true,false);
+    }
 }

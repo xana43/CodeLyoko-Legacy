@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension;
+package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector;
 
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.Dimension;

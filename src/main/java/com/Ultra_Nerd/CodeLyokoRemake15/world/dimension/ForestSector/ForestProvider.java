@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension;
+package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBiome;
 import com.google.common.collect.ImmutableSet;

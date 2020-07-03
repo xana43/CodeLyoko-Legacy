@@ -2,9 +2,9 @@ package com.Ultra_Nerd.CodeLyokoRemake15.world.biome;
 
 import net.minecraft.world.biome.Biome;
 
-public class Lyoko5 extends Biome {
+public class LyokoCarthage extends Biome {
 
-	public Lyoko5(Builder biomeBuilder) {
+	public LyokoCarthage(Builder biomeBuilder) {
 		super(biomeBuilder);
 		
 		// TODO Auto-generated constructor stub
@@ -15,7 +15,6 @@ public class Lyoko5 extends Biome {
 		// TODO Auto-generated method stub
 		return 72;
 	}
-	
-	
-	
+
+
 }

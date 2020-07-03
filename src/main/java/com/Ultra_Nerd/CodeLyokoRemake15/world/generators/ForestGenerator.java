@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.generators;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestGenSettings;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestGenSettings;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.NoiseChunkGenerator;

@@ -5,11 +5,13 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class EntityBlok extends SkeletonEntity {
@@ -20,6 +22,14 @@ public class EntityBlok extends SkeletonEntity {
 		super(ModEntities.BLOK.get(), world);
 
 	}
+
+
+	@Override
+	protected boolean isInDaylight() {
+		return false;
+	}
+
+
 
 	public EntityBlok(EntityType<? extends SkeletonEntity> type, World world) {
 		super(type,world);
@@ -61,16 +71,30 @@ public class EntityBlok extends SkeletonEntity {
 		// TODO Auto-generated method stub
 		return super.getDeathSound();
 	}
-	
+
+	@Override
+	protected SoundEvent getStepSound() {
+		return super.getStepSound();
+	}
+
+	@Override
+	public boolean canSpawn(IWorld worldIn, SpawnReason spawnReasonIn) {
+		return true;
+	}
+
+
+
+
+
 	@Override
 	protected void registerAttributes() {
 		// TODO Auto-generated method stub
 		super.registerAttributes();
 		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(10D);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20D);
-		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(10D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10D);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(10D);
+		//this.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(10D);
 		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10D);
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
 	}
