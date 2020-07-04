@@ -4,13 +4,17 @@ package com.Ultra_Nerd.CodeLyokoRemake15;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
+import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.AelitaArmorElytra;
 import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.client.GameSettings;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -39,7 +43,7 @@ public class Base
 		final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
 		ModBus.addListener(this::setup);
 		ModBus.addListener(this::dostuff);
-
+		ModBus.addListener(this::RightClick);
 		ModSounds.SOUNDS.register(ModBus);
 		ModItems.ITEMS.register(ModBus);
 
@@ -58,6 +62,16 @@ public class Base
 	private void setup(final FMLCommonSetupEvent event)
 	{
 		
+	}
+
+
+	private void RightClick(final InputEvent.MouseInputEvent event)
+	{
+		GameSettings settings = Minecraft.getInstance().gameSettings;
+		if(settings.keyBindUseItem.isPressed())
+		{
+			AelitaArmorElytra.EnergyBall(Minecraft.getInstance().player,Minecraft.getInstance().world);
+		}
 	}
 	
 	private void dostuff(final FMLClientSetupEvent event)
