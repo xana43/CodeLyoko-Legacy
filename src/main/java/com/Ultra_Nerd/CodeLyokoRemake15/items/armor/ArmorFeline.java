@@ -13,10 +13,10 @@ import net.minecraft.world.World;
 
 public class ArmorFeline extends ArmorItem {
 	private byte I = 0;
-
+	private int damage;
 	public ArmorFeline(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
 		super(materialIn, slot, builder);
-
+		this.damage = materialIn.getDurability(slot);
 	}
 
 
@@ -41,8 +41,8 @@ public class ArmorFeline extends ArmorItem {
 						I = 0;
 					}
 
-				player.addPotionEffect(new EffectInstance(Effects.SPEED,0,3,false,false,false));
-				if(player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getDamage() < 30)
+				player.addPotionEffect(new EffectInstance(Effects.SPEED,-1,3,false,false,false));
+				if(player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getDamage() < damage)
 				{
 
 
