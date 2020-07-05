@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -12,11 +13,14 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
+import java.util.Random;
+
 public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
 {
 
 	private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID + ":textures/gui/towerinterface.png");
 	private TextFieldWidget text;
+	private TextFieldWidget Accepted;
 
 
 
@@ -38,6 +42,7 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
         this.text.mouseClicked(mouseX,mouseY,mouseButton);
+        //this.Accepted.mouseClicked(mouseX,mouseY,mouseButton);
         return super.mouseClicked(mouseX,mouseY,mouseButton);
     }
 
@@ -46,11 +51,42 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
         this.renderBackground();
         super.render(p_render_1_,p_render_2_,p_render_3_);
         this.text.render(p_render_1_,p_render_2_,p_render_3_);
+        this.Accepted.render(p_render_1_,p_render_2_,p_render_3_);
     }
 
     @Override
     public void tick() {
         this.text.tick();
+        int I = 100;
+        if(this.text.getText().matches("LYOKO") || this.text.getText().matches("CHIMERA") || this.text.getText().matches("EARTH"))
+        {
+            I = 100;
+            this.Accepted.setTextColor(65280);
+            this.Accepted.setText("ACCEPTED");
+            this.text.setText("");
+            this.text.setCursorPositionZero();
+        }
+        else if(this.text.getText().matches("XANA"))
+        {
+            I = 100;
+            this.Accepted.setTextColor(16711680);
+            this.Accepted.setText("ACCEPTED");
+            this.text.setText("");
+            this.text.setCursorPositionZero();
+        }
+        else
+        {
+
+            I =- 1;
+            if(I == 0)
+            {
+                this.Accepted.setText("");
+            }
+        }
+
+
+
+
 
     }
 
@@ -63,6 +99,7 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
          y = (this.height - this.ySize) / 2;
          this.setTextField();
 
+
     }
     @Override
     public boolean keyPressed(int Key, int p_keyPressed_2_, int p_keyPressed_3_) {
@@ -72,15 +109,20 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
         {
             case 8:this.text.deleteFromCursor(1);
 
+
+
+
         }
         this.text.keyPressed(Key,p_keyPressed_2_,p_keyPressed_3_);
+        this.Accepted.keyPressed(Key,p_keyPressed_2_,p_keyPressed_3_);
         return super.keyPressed(Key, p_keyPressed_2_, p_keyPressed_3_);
     }
 
     @Override
     public boolean charTyped(char key, int Keynum) {
-
+        float rand = 1f + new Random().nextFloat() * (4 - 1);
         this.text.charTyped(Character.toUpperCase(key),Keynum);
+        this.playerInventory.player.playSound(ModSounds.GUISOUND.get(),1,rand);
         return super.charTyped(key,Keynum);
 
     }
@@ -102,8 +144,28 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
         this.text.setEnabled(true);
         this.text.setCursorPositionZero();
         this.text.setCanLoseFocus(false);
+        this.text.active = true;
         this.text.isFocused();
         this.text.canWrite();
+        int tx2 = this.width / 2 ;
+        int ty2 = this.height / 2;
+        //String Code = this.text != null ? this.text.getText() : "";
+        FontRenderer gunship_font2 = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation(Base.MOD_ID + ":gunship"));
+        assert gunship_font2 != null;
+        this.Accepted = new TextFieldWidget(gunship_font, tx2-95, ty2+20, 200, 33, I18n.format("gui.lyokomod.indicator"));
+        this.Accepted.setMaxStringLength(8);
+        this.Accepted.setEnableBackgroundDrawing(false);
+        this.Accepted.setVisible(true);
+        this.Accepted.setTextColor(65280);
+        this.Accepted.setFocused2(false);
+        this.Accepted.setEnabled(true);
+        this.Accepted.setCursorPositionZero();
+        this.Accepted.setCanLoseFocus(true);
+        this.Accepted.getVisible();
+        this.Accepted.isFocused();
+        this.Accepted.canWrite();
+        this.Accepted.active = true;
+
     }
 
 

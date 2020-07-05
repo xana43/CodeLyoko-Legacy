@@ -75,5 +75,11 @@
         "category": "neutral",
         "subtitle": "digital armor equip: Samurai Type",
         "sounds": [{"name": "cm:events/armor_digital_equip_samurai","stream": false,"preload": true}]
+    },
+    "gui":
+    {
+        "category": "neutral",
+        "subtitle": "player type on tower console",
+        "sounds":[{"name": "cm:events/user_type_in_interface","stream": false,"preload": true}]
     }
 }
