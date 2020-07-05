@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
@@ -41,21 +42,30 @@ public class AelitaArmorElytra extends ArmorItem {
     
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        if(player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get() && player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() == ModItems.AELITA_LEGGINGS.get() &&player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.AELITA_BOOTS.get())
-        {
-
-            if(player.isAirBorne && player.isCrouching() && !player.onGround)
+        if(!(player.world.dimension instanceof ForestDimension)) {
+            if(player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get())
             {
-                if(!player.isElytraFlying()) {
-                    player.startFallFlying();
+                player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).setCount(0);
 
+                if(player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
+                    player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).setCount(0);
                 }
-                player.onLivingFall(0,0);
             }
-            else if(player.isElytraFlying())
-            {
-                player.stopFallFlying();
-                player.onLivingFall(0,0);
+
+        }
+        else {
+            if (player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get() && player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() == ModItems.AELITA_LEGGINGS.get() && player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.AELITA_BOOTS.get()) {
+
+                if (player.isAirBorne && player.isCrouching() && !player.onGround) {
+                    if (!player.isElytraFlying()) {
+                        player.startFallFlying();
+
+                    }
+                    player.onLivingFall(0, 0);
+                } else if (player.isElytraFlying()) {
+                    player.stopFallFlying();
+                    player.onLivingFall(0, 0);
+                }
             }
         }
     }

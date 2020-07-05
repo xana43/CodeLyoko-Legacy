@@ -28,12 +28,27 @@ public class ArmorFeline extends ArmorItem {
 
 	if(!(player.world.dimension instanceof ForestDimension))
 	{
-		if(player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get() || player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() == ModItems.ODD_LEGGINGS.get() || player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.ODD_BOOTS.get())
+		if(player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get())
 		{
-		player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).setCount(0);
+			player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).setCount(0);
+
+			if(player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
+				player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).setCount(0);
+			}
+		}
+		if(player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() == ModItems.ODD_LEGGINGS.get())
+		{
 			player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).setCount(0);
+			if(player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
+				player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).setCount(0);
+			}
+		}
+		if(player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.ODD_BOOTS.get())
+		{
 			player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).setCount(0);
-			player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).setCount(0);
+			if(player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
+				player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).setCount(0);
+			}
 		}
 	}
 	else {

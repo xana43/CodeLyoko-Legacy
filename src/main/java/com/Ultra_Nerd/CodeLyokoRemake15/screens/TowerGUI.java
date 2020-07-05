@@ -5,14 +5,18 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
@@ -21,7 +25,6 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
 	private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID + ":textures/gui/towerinterface.png");
 	private TextFieldWidget text;
 	private TextFieldWidget Accepted;
-
 
 
 
@@ -35,13 +38,36 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
         this.guiTop = 0;
         this.xSize = 200;
         this.ySize = 141;
+        KeyBinding.setKeyBindState(Minecraft.getInstance().gameSettings.keyBindInventory.getKey(),false);
+        Minecraft.getInstance().gameSettings.keyBindInventory.setPressed(false);
 
+    }
 
+    @Override
+    public boolean isMouseOver(double p_isMouseOver_1_, double p_isMouseOver_3_) {
+        return false;
+    }
+
+    @Override
+    public boolean changeFocus(boolean p_changeFocus_1_) {
+        return false;
+    }
+
+    @Override
+    public Minecraft getMinecraft() {
+        return super.getMinecraft();
+    }
+
+    @Override
+    public void setFocused(@Nullable IGuiEventListener p_setFocused_1_) {
+        super.setFocused(p_setFocused_1_);
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
         this.text.mouseClicked(mouseX,mouseY,mouseButton);
+        KeyBinding.setKeyBindState(Minecraft.getInstance().gameSettings.keyBindInventory.getKey(),false);
+        Minecraft.getInstance().gameSettings.keyBindInventory.setPressed(false);
         //this.Accepted.mouseClicked(mouseX,mouseY,mouseButton);
         return super.mouseClicked(mouseX,mouseY,mouseButton);
     }
@@ -54,8 +80,12 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
         this.Accepted.render(p_render_1_,p_render_2_,p_render_3_);
     }
 
+
     @Override
     public void tick() {
+        KeyBinding.setKeyBindState(Minecraft.getInstance().gameSettings.keyBindInventory.getKey(),false);
+        Minecraft.getInstance().gameSettings.keyBindInventory.setPressed(false);
+        KeyBinding.unPressAllKeys();
         this.text.tick();
         int I = 100;
         if(this.text.getText().matches("LYOKO") || this.text.getText().matches("CHIMERA") || this.text.getText().matches("EARTH"))
@@ -98,9 +128,30 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
          x = (this.width - this.xSize) / 2;
          y = (this.height - this.ySize) / 2;
          this.setTextField();
+        KeyBinding.setKeyBindState(Minecraft.getInstance().gameSettings.keyBindInventory.getKey(),false);
 
 
     }
+
+    @Override
+    public boolean isPauseScreen() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldCloseOnEsc() {
+        return false;
+    }
+
+    @Override
+    public void onClose() {
+
+
+
+    }
+
+
+
     @Override
     public boolean keyPressed(int Key, int p_keyPressed_2_, int p_keyPressed_3_) {
 
@@ -108,6 +159,13 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
         switch(Key)
         {
             case 8:this.text.deleteFromCursor(1);
+            case 69: KeyBinding.setKeyBindState(Minecraft.getInstance().gameSettings.keyBindInventory.getKey(),false);
+            minecraft.gameSettings.keyBindInventory.setPressed(false);
+
+
+
+
+
 
 
 
