@@ -27,7 +27,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class FlourideInfuser extends HorizontalBlock {
-
     //public static final DirectionProperty FACING = HORIZONTAL_FACING;
     public static final BooleanProperty INFUSING = BooleanProperty.create("infusing");
 

@@ -55,9 +55,9 @@ public class ContainerInfusing extends Container {
         this.tileentity = tileEntity;
         IItemHandler handler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).orElse(null);
 
-        this.addSlot(new SlotItemHandler(handler, 0, 25, 15));
-        this.addSlot(new SlotItemHandler(handler, 1, 57, 14));
-        this.addSlot(new SlotItemHandler(handler, 2, 59, 60));
+        this.addSlot(new SlotItemHandler(handler, 0, 24, 16));
+        this.addSlot(new SlotItemHandler(handler, 1, 56, 15));
+        this.addSlot(new SlotItemHandler(handler, 2, 58, 59));
         this.addSlot(new SlotItemHandler(handler, 3, 120, 30));
 
         for (int y = 0; y < 3; y++) {
@@ -74,20 +74,6 @@ public class ContainerInfusing extends Container {
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
-
-//		for(int i = 0; i < this.listeners.size(); ++i)
-//		{
-//			IContainerListener listener = (IContainerListener)this.listeners.get(i);
-//
-//			if(this.cookTime != this.tileentity.getField(2))
-//				listener.sendWindowProperty(this, 2, this.tileentity.getField(2));
-//			if(this.burnTime != this.tileentity.getField(0))
-//				listener.sendWindowProperty(this, 0, this.tileentity.getField(0));
-//			if(this.currentBurnTime != this.tileentity.getField(1))
-//				listener.sendWindowProperty(this, 1, this.tileentity.getField(1));
-//			if(this.totalCookTime != this.tileentity.getField(3))
-//				listener.sendWindowProperty(this, 3, this.tileentity.getField(3));
-//		}
 
         this.cookTime = this.tileentity.getField(2);
         this.burnTime = this.tileentity.getField(0);
