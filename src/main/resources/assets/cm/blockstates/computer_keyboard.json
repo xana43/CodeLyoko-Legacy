@@ -1,0 +1,10 @@
+{
+"variants":
+  {
+  "facing=north":{"model":"cm:block/computer_keyboard"},
+  "facing=east":{"model":"cm:block/computer_keyboard", "y": 90},
+  "facing=south":{"model":"cm:block/computer_keyboard", "y": 180},
+  "facing=west":{"model":"cm:block/computer_keyboard", "y" : 270}
+ 
+  }
+}

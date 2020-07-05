@@ -26,7 +26,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TowerInterface extends HorizontalBlock {
+public class TowerInterface extends Block {
 
     public static final DirectionProperty DIRINTERFACE = HorizontalBlock.HORIZONTAL_FACING;
 
