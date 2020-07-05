@@ -15,6 +15,10 @@ import net.minecraftforge.client.IRenderHandler;
 import javax.annotation.Nullable;
 
 public class ForestDimension extends Dimension  {
+
+
+
+
     public ForestDimension(World world, DimensionType type) {
         super(world,type,0.0f);
     }
@@ -23,6 +27,9 @@ public class ForestDimension extends Dimension  {
     public ChunkGenerator<?> createChunkGenerator() {
         return new ForestGenerator(world,new ForestProvider(),new ForestGenSettings());
     }
+
+
+
 
     @Override
     public void setSkyRenderer(IRenderHandler skyRenderer) {
