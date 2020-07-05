@@ -4,11 +4,15 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.InfusingChamberScreen;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.TowerGUI;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
@@ -23,8 +27,12 @@ public class ClientModEventSubscriber {
 
     @SubscribeEvent
     public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
-
-
+        //makes certain blocks behave properly
+        RenderTypeLookup.setRenderLayer(ModBlocks.TOWER_INTERFACE.get(), RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(ModFluids.DIO.get(),RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModFluids.DIGITAL_OCEAN.get(),RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_DIGITAL_OCEAN.get(),RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.TRANSPARENT.get(),RenderType.getCutout());
         // Register ContainerType Screens
         // ScreenManager.registerFactory is not safe to call during parallel mod loading so we queue it to run later
         DeferredWorkQueue.runLater(() -> {

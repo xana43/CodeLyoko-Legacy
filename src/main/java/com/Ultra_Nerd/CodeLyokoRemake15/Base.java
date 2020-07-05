@@ -8,6 +8,8 @@ import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.AelitaArmorElytra;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -61,7 +63,8 @@ public class Base
 	
 	private void setup(final FMLCommonSetupEvent event)
 	{
-		
+
+
 	}
 
 

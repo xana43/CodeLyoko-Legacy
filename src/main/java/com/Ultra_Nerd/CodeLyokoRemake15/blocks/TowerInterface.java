@@ -2,10 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -47,6 +44,7 @@ public class TowerInterface extends Block {
                 .harvestTool(ToolType.PICKAXE)
         );
         this.setDefaultState(this.stateContainer.getBaseState().with(DIRINTERFACE, Direction.NORTH));
+
     }
 
     @Override
@@ -98,6 +96,13 @@ public class TowerInterface extends Block {
         // TODO Auto-generated method stub
         return true;
     }
+
+
+
+
+
+
+
 
     @Override
     public boolean hasTileEntity(BlockState state) {

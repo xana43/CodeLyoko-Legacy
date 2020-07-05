@@ -16,7 +16,7 @@ import java.util.function.Predicate;
 public class TransparentBlock extends Block {
 
     public TransparentBlock() {
-        super(Block.Properties.create(Material.STRUCTURE_VOID)
+        super(Block.Properties.create(Material.GLASS)
                 .hardnessAndResistance(-1, -1)
                 .sound(SoundType.STONE)
                 .harvestLevel(-1)
@@ -35,6 +35,8 @@ public class TransparentBlock extends Block {
         // TODO Auto-generated method stub
         return true;
     }
+
+
 
     @Override
     public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
