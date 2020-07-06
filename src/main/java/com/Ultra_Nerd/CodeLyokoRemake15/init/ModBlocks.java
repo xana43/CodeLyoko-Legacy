@@ -39,6 +39,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> HOLOPROJECTOR = BLOCKS.register("holoprojector", HologramProjectorBlock::new);
     public static final RegistryObject<Block> HOLOPROJECTOR_PROJECTION = BLOCKS.register("holo", HologramBlock::new);
     public static final RegistryObject<Block> MARABUNTA = BLOCKS.register("marabunta", Marabunta::new);
+    public static final RegistryObject<Block> METATYUYAMUNITE_ORE = BLOCKS.register("metatyuyamunite_ore", TyuyamuniteOre::new);
     public static final RegistryObject<Block> MOUNTAIN_TREE = BLOCKS.register("mountain_tree", MountainTreeBlock::new);
     public static final RegistryObject<Block> PROJECTOR_FOCUS = BLOCKS.register("projector_focus",ProjectorFocusblock::new);
     public static final RegistryObject<Block> QUANTUM_BLOCK = BLOCKS.register("quantum_block", () -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(6, 20).sound(SoundType.METAL).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));

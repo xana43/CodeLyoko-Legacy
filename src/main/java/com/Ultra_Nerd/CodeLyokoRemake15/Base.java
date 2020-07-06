@@ -5,11 +5,10 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.AelitaArmorElytra;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.ModOreGen;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -27,6 +26,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
@@ -67,12 +67,20 @@ public class Base
 
 	}
 
+	@SubscribeEvent
+	public void OreGen(final FMLLoadCompleteEvent event)
+	{
+		Log.debug("chunk");
+		ModOreGen.genOre();
+	}
 
-	private void RightClick(final InputEvent.MouseInputEvent event)
+	@SubscribeEvent
+	public void RightClick(final InputEvent.MouseInputEvent event)
 	{
 		GameSettings settings = Minecraft.getInstance().gameSettings;
 		if(settings.keyBindUseItem.isPressed())
 		{
+			assert Minecraft.getInstance().player != null;
 			AelitaArmorElytra.EnergyBall(Minecraft.getInstance().player,Minecraft.getInstance().world);
 		}
 	}

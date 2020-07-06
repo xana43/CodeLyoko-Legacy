@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items.armor;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
@@ -24,7 +23,7 @@ public class AelitaArmorElytra extends ArmorItem {
 
     public static void EnergyBall(PlayerEntity playerIn,World worldIn)
     {
-        Base.Log.debug("richt");
+
 
 
         Vec3d aim = playerIn.getLookVec();
