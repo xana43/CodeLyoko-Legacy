@@ -46,6 +46,7 @@ public class Base
 		ModBus.addListener(this::setup);
 		ModBus.addListener(this::dostuff);
 		ModBus.addListener(this::RightClick);
+		ModBus.addListener(this::OreGen);
 		ModSounds.SOUNDS.register(ModBus);
 		ModItems.ITEMS.register(ModBus);
 
@@ -64,17 +65,18 @@ public class Base
 	private void setup(final FMLCommonSetupEvent event)
 	{
 
-
 	}
 
-	@SubscribeEvent
+
 	public void OreGen(final FMLLoadCompleteEvent event)
 	{
-		Log.debug("chunk");
+
 		ModOreGen.genOre();
 	}
 
-	@SubscribeEvent
+
+
+
 	public void RightClick(final InputEvent.MouseInputEvent event)
 	{
 		GameSettings settings = Minecraft.getInstance().gameSettings;
