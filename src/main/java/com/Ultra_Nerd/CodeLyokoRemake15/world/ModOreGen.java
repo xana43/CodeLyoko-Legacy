@@ -42,6 +42,7 @@ public static void genOre()
                     .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
                             ModBlocks.CARNOTITE_ORE.get().getDefaultState(),20)).withPlacement(customC));
         }
+
         //tyuyamunite and meta-tyuyamunite
         if(biome == Biomes.MOUNTAINS || biome == Biomes.MOUNTAIN_EDGE)
         {
@@ -55,7 +56,8 @@ public static void genOre()
         {
             ConfiguredPlacement custom2 = Placement.COUNT_RANGE.configure(new CountRangeConfig(4,14,14,20));
             biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,Feature.ORE
-                    .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,ModBlocks.METATYUYAMUNITE_ORE.get().getDefaultState(),6))
+                    .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.
+                            NATURAL_STONE,ModBlocks.METATYUYAMUNITE_ORE.get().getDefaultState(),6))
             .withPlacement(custom2));
         }
     }
