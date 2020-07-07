@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15;
 
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendLaser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.AelitaArmorElytra;
@@ -91,6 +92,7 @@ public class Base
 	{
 
 		RenderingRegistry.registerEntityRenderingHandler(ModEntities.BLOK.get(), RendBlok::new);
+		RenderingRegistry.registerEntityRenderingHandler(ModEntities.LASER.get(), RendLaser::new);
 	}
 	
 	@SubscribeEvent

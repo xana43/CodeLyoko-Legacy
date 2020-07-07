@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
@@ -7,8 +8,8 @@ import net.minecraft.world.World;
 
 public class EntityLaser extends ArrowEntity {
 
-	public EntityLaser(final EntityType<? extends EntityLaser> entityType,World world) {
-		super(entityType,world);
+	public EntityLaser(EntityType<? extends EntityLaser> Laser,World world) {
+		super(Laser,world);
 		// TODO Auto-generated constructor stub
 	}
 	public EntityLaser(World worldIn,LivingEntity throwerIn) {
@@ -20,10 +21,14 @@ public class EntityLaser extends ArrowEntity {
 		// TODO Auto-generated constructor stub
 	}
 
+	public EntityLaser(World world)
+	{
+		super(ModEntities.LASER.get(),world);
+	}
 
 
-	
-	
+
+
 	@Override
 	protected boolean makeFlySound() {
 		// TODO Auto-generated method stub

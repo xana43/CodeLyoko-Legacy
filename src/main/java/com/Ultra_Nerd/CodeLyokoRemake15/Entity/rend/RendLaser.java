@@ -18,7 +18,7 @@ public class RendLaser extends ArrowRenderer<EntityLaser> {
 	@Override
 	public ResourceLocation getEntityTexture(EntityLaser entity) {
 		// TODO Auto-generated method stub
-		return new ResourceLocation(Base.MOD_ID + ":textures/entity/projectiles/laserarrow.png");
+		return new ResourceLocation(Base.MOD_ID + ":textures/entity/laserarrow.png");
 	}
 
 

@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items.tools;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
@@ -43,10 +44,11 @@ private byte Count = 100;
 		Count = 100;
 
 		Vec3d aim = playerIn.getLookVec();
-		if(item.getDamage() < 40 && playerIn.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() != ModItems.AELITA_CHESTPLATE.get() && playerIn.world.dimension instanceof ForestDimension) {
+		if(item.getDamage() < 40 && playerIn.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get() && playerIn.world.dimension instanceof ForestDimension) {
 		//worldIn.playSound(null,playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModItems.BIT.get(), SoundCategory.NEUTRAL, 1f, 1f);
+
 		worldIn.playSound(playerIn,playerIn.getPosX(),playerIn.getPosY(),playerIn.getPosZ(), ModSounds.LASERARROW.get(),SoundCategory.NEUTRAL,1f,1f);
-		EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
+		EntityLaser las = ModEntities.LASER.get().create(worldIn); //new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 		
 		las.setPosition(playerIn.getPosX() + aim.x * 1.5D, playerIn.getPosY() + aim.y * 1.9D, playerIn.getPosZ() + aim.z * 1.5D);
 		las.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0f, 10f, 0f);		

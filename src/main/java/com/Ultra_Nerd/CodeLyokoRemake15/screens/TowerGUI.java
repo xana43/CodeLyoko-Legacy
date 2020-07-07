@@ -143,12 +143,7 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
         return false;
     }
 
-    @Override
-    public void onClose() {
 
-
-
-    }
 
 
 
@@ -159,8 +154,11 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer>
         switch(Key)
         {
             case 8:this.text.deleteFromCursor(1);
-            case 69: KeyBinding.setKeyBindState(Minecraft.getInstance().gameSettings.keyBindInventory.getKey(),false);
-            minecraft.gameSettings.keyBindInventory.setPressed(false);
+            case 69:
+                KeyBinding.unPressAllKeys();
+                KeyBinding.setKeyBindState(Minecraft.getInstance().gameSettings.keyBindInventory.getKey(),false);
+                KeyBinding.updateKeyBindState();
+                minecraft.gameSettings.keyBindInventory.setPressed(false);
 
 
 
