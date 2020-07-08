@@ -38,7 +38,8 @@ import org.apache.logging.log4j.Logger;
 public class Base
 {
 	public static final Logger Log = LogManager.getLogger();
-	public static final  ResourceLocation DimensionType = new ResourceLocation(Base.MOD_ID,"forest");
+	public static final  ResourceLocation DimensionTypeForest = new ResourceLocation(Base.MOD_ID,"forest");
+	public static final ResourceLocation DimenstionTypeCarthage = new ResourceLocation(Base.MOD_ID,"sector5");
 	public static final String MOD_ID = "cm";
 	public static Base instance;
 	public Base()

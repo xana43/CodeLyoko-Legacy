@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthadge.Sector5ModDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestModDimension;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.fml.RegistryObject;
@@ -29,5 +30,5 @@ public class ModDimensions {
 	*/
 
     public static final RegistryObject<ModDimension> FOREST_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("forest_dimension",() -> new ForestModDimension());
-
+    public static final RegistryObject<ModDimension> SECTOR_5 = MOD_DIMENSION_DEFERRED_REGISTER.register("sector_5", () -> new Sector5ModDimension());
 }

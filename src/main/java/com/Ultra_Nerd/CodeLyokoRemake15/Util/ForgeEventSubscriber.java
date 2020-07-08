@@ -15,9 +15,14 @@ public class ForgeEventSubscriber {
     @SubscribeEvent
     public static void InitDims(final RegisterDimensionsEvent event)
     {
-        if(DimensionType.byName(Base.DimensionType) == null)
+        if(DimensionType.byName(Base.DimensionTypeForest) == null)
         {
-            DimensionManager.registerDimension(Base.DimensionType, ModDimensions.FOREST_DIMENSION.get(),null,true);
+            DimensionManager.registerDimension(Base.DimensionTypeForest, ModDimensions.FOREST_DIMENSION.get(),null,true);
+
+        }
+        if(DimensionType.byName(Base.DimenstionTypeCarthage) == null)
+        {
+            DimensionManager.registerDimension(Base.DimenstionTypeCarthage, ModDimensions.SECTOR_5.get(),null,true);
         }
         Base.Log.info("All Dimensions loaded");
     }

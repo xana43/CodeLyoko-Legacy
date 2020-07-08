@@ -55,7 +55,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> SECTOR_5 = BLOCKS.register("sector5ground", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1, -1).sound(SoundType.GLASS).lightValue(4)));
     public static final RegistryObject<Block> SCANNER_BASE = BLOCKS.register("scanner_base", Scanner::new);
     public static final RegistryObject<Block> Storage = BLOCKS.register("universal", UniversalEnergyBlock::new);
-    //public static final RegistryObject<Block> SKLODOWSKITE_ORE
+    public static final RegistryObject<Block> SKLODOWSKITE_ORE = BLOCKS.register("sklodowskite_ore",() -> new Block(Block.Properties.create(Material.ROCK).harvestLevel(3).hardnessAndResistance(4,4).sound(SoundType.STONE).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> SILICA_SAND = BLOCKS.register("silica_sand", () -> new Block(Block.Properties.create(Material.SAND).hardnessAndResistance(6, 10).sound(SoundType.SAND).lightValue(1).harvestLevel(1).harvestTool(ToolType.SHOVEL)));
     public static final RegistryObject<Block> TOWER_WHITE = BLOCKS.register("tower_white", () -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(20, 20).sound(SoundType.GLASS).lightValue(4).harvestLevel(20).harvestTool(ToolType.SHOVEL)));
     public static final RegistryObject<Block> TOWER_INTERFACE = BLOCKS.register("tower_interface", TowerInterface::new);
@@ -70,5 +70,5 @@ public class ModBlocks {
     public static final RegistryObject<Block> URANUM_REACTOR = BLOCKS.register("computer_reactor", UraniumReactor::new);
     public static final RegistryObject<Block> URANINITE_ORE = BLOCKS.register("uraninite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(1).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> URANIUM_BLOCK = BLOCKS.register("uranium_block", () -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(6, 20).sound(SoundType.METAL).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
-    //public static final RegistryObject<Block> URANOPHANE_ORE =  Blocks.register("uranophane_ore", UranophaneOre::new);
+    public static final RegistryObject<Block> URANOPHANE_ORE =  BLOCKS.register("uranophane_ore", () -> new Block(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(4,4).harvestLevel(2).harvestTool(ToolType.PICKAXE))/*UranophaneOre::new*/);
 }

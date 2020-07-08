@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class DigitalForestTree extends BigTree {
    public static final HugeTreeFeatureConfig DIGITAL_TREE_FOREST_CONFIG = (new HugeTreeFeatureConfig.Builder
-           (new SimpleBlockStateProvider(ModBlocks.DIGITAL_WOOD_FOREST.get().getDefaultState()),new SimpleBlockStateProvider(Blocks.AIR.getDefaultState())).baseHeight(80)
+           (new SimpleBlockStateProvider(ModBlocks.DIGITAL_WOOD_FOREST.get().getDefaultState()),new SimpleBlockStateProvider(Blocks.AIR.getDefaultState())).baseHeight(128)
            .setSapling((IPlantable)ModBlocks.DIGITAL_TREE_FOREST_SAPLING.get()).build());
 
 
