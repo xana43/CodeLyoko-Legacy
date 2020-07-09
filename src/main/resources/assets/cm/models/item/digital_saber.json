@@ -1,6 +1,5 @@
 {
-   "parent": "item/generated",
-   "textures": {
-       "layer0": "cm:item/odd_boots"
-   }
+  "loader": "forge:obj",
+  "model": "cm:models/item/digital_saber.obj",
+  "flip-v": true
 }

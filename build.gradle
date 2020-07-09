@@ -17,7 +17,7 @@ version = 'buildfile'
 group = 'com.Ultra_Nerd.cm' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'cm'
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '14' // Need this here so eclipse task generates correctly.
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.

@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.LyokoCarthage;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.LyokoDesert;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.LyokoForest;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.LyokoICE;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
@@ -77,12 +78,24 @@ public class ModBiome {
 			.parent(null)
 	));
 
-	
+	public static final RegistryObject<Biome>ICE = BIOMES.register("ice_sector", () -> new LyokoICE(new Biome.Builder()
+	.precipitation(RainType.NONE)
+	.surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(ModBlocks.DIGITAL_ICE.get().getDefaultState(),
+			ModBlocks.DIGITAL_ICE.get().getDefaultState(),ModBlocks.DIGITAL_ICE.get().getDefaultState()))
+	.category(Category.TAIGA)
+	.downfall(0)
+	.depth(70)
+	.parent(null)
+	.scale(9)
+	.depth(80)
+	.temperature(-1)
+	));
 	public static void regbio()
 	{
-		initBiome(SECTOR5.get(),Type.DENSE,Type.END);
+		initBiome(SECTOR5.get(),Type.DENSE,Type.END,Type.MODIFIED,Type.SPOOKY);
 		initBiome(FOREST.get(),Type.LUSH,Type.FOREST);
-
+		initBiome(DESERT.get(),Type.SPARSE,Type.SPARSE,Type.DRY,Type.SANDY);
+		initBiome(ICE.get(),Type.DRY,Type.COLD,Type.DEAD,Type.SNOWY);
 	}
 
 	private static void initBiome(Biome biome,Type... types)
