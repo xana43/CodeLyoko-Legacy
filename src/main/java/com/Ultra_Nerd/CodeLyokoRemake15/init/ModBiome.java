@@ -89,6 +89,8 @@ public class ModBiome {
 	.scale(9)
 	.depth(80)
 	.temperature(-1)
+	.waterColor(0)
+	.waterFogColor(9)
 	));
 	public static void regbio()
 	{
