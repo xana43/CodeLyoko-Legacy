@@ -1,5 +1,4 @@
 {
   "loader": "forge:obj",
-  "model": "cm:models/item/digital_saber.obj",
-  "flip-v": true
+  "model": "cm:models/item/digital_saber.obj"
 }
