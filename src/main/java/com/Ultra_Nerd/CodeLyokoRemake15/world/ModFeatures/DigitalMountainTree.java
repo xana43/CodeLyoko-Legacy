@@ -15,7 +15,7 @@ import java.util.Random;
 public class DigitalMountainTree extends Tree {
    public static final TreeFeatureConfig DIGITAL_TREE_MOUNATIN_CONFIG = (new TreeFeatureConfig.Builder
            (new SimpleBlockStateProvider(ModBlocks.DIGITAL_WOOD_MOUNTAIN.get().getDefaultState()),new SimpleBlockStateProvider(ModBlocks.DIGITAL_LEAF_MOUNTAIN.get().getDefaultState())
-           ,new BlobFoliagePlacer(4,1))).baseHeight(5)
+           ,new BlobFoliagePlacer(4,4))).baseHeight(5)
            .setSapling((IPlantable)ModBlocks.DIGITAL_MOUNTAIN_SAPPLING.get()).build();
 
 
