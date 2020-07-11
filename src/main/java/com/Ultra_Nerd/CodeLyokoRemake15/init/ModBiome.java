@@ -1,10 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.LyokoCarthage;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.LyokoDesert;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.LyokoForest;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.LyokoICE;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
@@ -92,12 +89,28 @@ public class ModBiome {
 	.waterColor(0)
 	.waterFogColor(9)
 	));
+
+	public static final RegistryObject<Biome>MOUNTAIN = BIOMES.register("mountain_sector",() -> new LyokoMountain(
+			new Biome.Builder().precipitation(RainType.NONE)
+			.surfaceBuilder(SurfaceBuilder.DEFAULT,new SurfaceBuilderConfig(ModBlocks.DIGITAL_ROCK.get().getDefaultState(),
+					ModBlocks.DIGITAL_ROCK.get().getDefaultState(),ModBlocks.DIGITAL_ROCK.get().getDefaultState()))
+			.waterFogColor(1)
+			.waterColor(1)
+			.temperature(2)
+			.parent("Mounatain")
+			.scale(9)
+			.depth(80)
+			.category(Category.EXTREME_HILLS)
+			.downfall(0)
+	));
+
 	public static void regbio()
 	{
 		initBiome(SECTOR5.get(),Type.DENSE,Type.END,Type.MODIFIED,Type.SPOOKY);
 		initBiome(FOREST.get(),Type.LUSH,Type.FOREST);
 		initBiome(DESERT.get(),Type.SPARSE,Type.SPARSE,Type.DRY,Type.SANDY);
 		initBiome(ICE.get(),Type.DRY,Type.COLD,Type.DEAD,Type.SNOWY);
+		initBiome(MOUNTAIN.get(),Type.HILLS,Type.MODIFIED,Type.MOUNTAIN);
 	}
 
 	private static void initBiome(Biome biome,Type... types)

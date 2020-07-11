@@ -5,7 +5,9 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.ElectricFlourideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.saplings.DigitalSapling;
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.saplings.DigitalMountainSapling;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.DigitalForestTree;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.DigitalMountainTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
@@ -36,6 +38,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> DIGITAL_TREE_FOREST_SAPLING = BLOCKS.register("digital_tree_forest_sapling", () -> new DigitalSapling(DigitalForestTree::new,Block.Properties.from(Blocks.JUNGLE_SAPLING)));
     public static final RegistryObject<Block> DIGITAL_WOOD_MOUNTAIN = BLOCKS.register("digital_wood_mountain",() -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(-1,-1).sound(SoundType.WOOD).harvestLevel(-1)));
     public static final RegistryObject<Block> DIGITAL_LEAF_MOUNTAIN = BLOCKS.register("digital_leaf_mountain",() -> new Block(Block.Properties.create(Material.LEAVES).hardnessAndResistance(-1,-1).sound(SoundType.STEM).harvestLevel(-1)));
+    public static final RegistryObject<Block> DIGITAL_MOUNTAIN_SAPPLING = BLOCKS.register("digital_mountain_sapling",() -> new DigitalMountainSapling(DigitalMountainTree::new,Block.Properties.from(Blocks.ACACIA_SAPLING)));
     public static final RegistryObject<Block> DIGITAL_ICE = BLOCKS.register("digital_ice", () -> new Block(Block.Properties.create(Material.ICE).hardnessAndResistance(40, 10).sound(SoundType.GLASS).lightValue(0)));
     public static final RegistryObject<Block> DIGITAL_SAND = BLOCKS.register("digital_sand", () -> new Block(Block.Properties.create(Material.SAND).hardnessAndResistance(20, 10).sound(SoundType.SAND).lightValue(0).harvestLevel(20).harvestTool(ToolType.SHOVEL)));
     public static final RegistryObject<Block> ELECTRICFLOURIDE_INFUSER = BLOCKS.register("electric_flouride_infuser", ElectricFlourideInfuser::new);

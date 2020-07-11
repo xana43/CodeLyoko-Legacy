@@ -20,9 +20,13 @@ public class ForgeEventSubscriber {
             DimensionManager.registerDimension(Base.DimensionTypeForest, ModDimensions.FOREST_DIMENSION.get(),null,true);
 
         }
-        if(DimensionType.byName(Base.DimenstionTypeCarthage) == null)
+        if(DimensionType.byName(Base.DimensionTypeCarthage) == null)
         {
-            DimensionManager.registerDimension(Base.DimenstionTypeCarthage, ModDimensions.SECTOR_5.get(),null,true);
+            DimensionManager.registerDimension(Base.DimensionTypeCarthage, ModDimensions.SECTOR_5.get(),null,true);
+        }
+        if(DimensionType.byName(Base.DimensionTypeMountain) == null)
+        {
+            DimensionManager.registerDimension(Base.DimensionTypeMountain, ModDimensions.MOUNTAIN_DIMENSION.get(),null,true);
         }
         Base.Log.info("All Dimensions loaded");
     }

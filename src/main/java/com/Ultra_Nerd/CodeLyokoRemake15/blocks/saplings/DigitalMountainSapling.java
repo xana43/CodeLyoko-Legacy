@@ -20,12 +20,12 @@ import net.minecraftforge.event.ForgeEventFactory;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class DigitalSapling extends BushBlock implements IGrowable {
+public class DigitalMountainSapling extends BushBlock implements IGrowable {
 
-    public static final IntegerProperty PROGRESSFOREST = BlockStateProperties.STAGE_0_1;
+    public static final IntegerProperty PROGRESSMOUNTAIN = BlockStateProperties.STAGE_0_1;
     protected static final VoxelShape shape = Block.makeCuboidShape(2.0D,0.0D,2.0D,14.0D,12.0D,14.0D);
     private final Supplier<Tree> tree;
-    public DigitalSapling(Supplier<Tree> TreeStruct, Properties properties) {
+    public DigitalMountainSapling(Supplier<Tree> TreeStruct, Properties properties) {
         super(properties);
         this.tree = TreeStruct;
     }
@@ -50,14 +50,15 @@ public class DigitalSapling extends BushBlock implements IGrowable {
 
     @Override
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return state.getBlock() == ModBlocks.DIGITAL_GRASS.get();
+        return state.getBlock() == ModBlocks.DIGITAL_ROCK.get();
     }
+
 
     public void grow(ServerWorld world, BlockPos pos, BlockState state, Random rand)
     {
-        if(state.get(PROGRESSFOREST) == 0)
+        if(state.get(PROGRESSMOUNTAIN) == 0)
         {
-            world.setBlockState(pos,state.cycle(PROGRESSFOREST),4);
+            world.setBlockState(pos,state.cycle(PROGRESSMOUNTAIN),4);
 
         }
         else
@@ -88,6 +89,6 @@ public class DigitalSapling extends BushBlock implements IGrowable {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(PROGRESSFOREST);
+        builder.add(PROGRESSMOUNTAIN);
     }
 }

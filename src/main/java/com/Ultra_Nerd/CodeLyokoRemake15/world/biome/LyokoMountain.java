@@ -1,31 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.biome;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.DigitalMountainTree;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
+import net.minecraft.world.gen.placement.Placement;
 
 public class LyokoMountain extends Biome {
-	protected LyokoMountain(Builder biomeBuilder) {
+	public LyokoMountain(Builder biomeBuilder) {
 		super(biomeBuilder);
-	}
-/*
-	public LyokoMountain() {
-		super(new BiomeProperties("ForestModDimension Mountain sector").setBaseHeight(0).setHeightVariation(0.5f).setRainDisabled().setWaterColor(159).setTemperature(900));
-		
-		
-	
-		topBlock = Modblocks.DIGITAL_ROCK.getDefaultState();
-		fillerBlock = Modblocks.URANINITE_ORE.getDefaultState();
-		this.decorator.ironGen = new WorldGenMinable(Modblocks.SILICA_SAND.getDefaultState(), 10);
-		this.spawnableCaveCreatureList.clear();
-		this.spawnableCreatureList.clear();
-		this.spawnableMonsterList.clear();
-		this.spawnableWaterCreatureList.clear();
-		
-	
-		
-		// TODO Auto-generated constructor stub
+
+		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.ACACIA_TREE.withConfiguration(DigitalMountainTree.DIGITAL_TREE_MOUNATIN_CONFIG)
+				.withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(1,1,1))));
+
 	}
 
- */
 	
-	
+
 }
