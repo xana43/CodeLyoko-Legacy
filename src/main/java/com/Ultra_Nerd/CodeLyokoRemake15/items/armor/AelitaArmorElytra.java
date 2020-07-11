@@ -56,7 +56,7 @@ public class AelitaArmorElytra extends ArmorItem {
             if (player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get() && player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() == ModItems.AELITA_LEGGINGS.get() && player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.AELITA_BOOTS.get()) {
 
                 player.onLivingFall(2, 1);
-                if (player.isAirBorne && player.isCrouching() && !player.onGround) {
+                if (player.isAirBorne && player.isCrouching() && player.isSprinting() && !player.onGround) {
 
                     if (!player.isElytraFlying()) {
                         player.startFallFlying();

@@ -31,7 +31,7 @@ public class DigitalSeaBlock extends FlowingFluidBlock {
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		// TODO Auto-generated method stub
 		
-			entityIn.attackEntityFrom(DamageSource.GENERIC, Byte.MAX_VALUE);
+			entityIn.attackEntityFrom(new DamageSource(this.getTranslationKey()), Byte.MAX_VALUE);
 		
 	}
 
