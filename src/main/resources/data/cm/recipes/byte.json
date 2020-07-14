@@ -3,28 +3,28 @@
     
     "pattern":
     [
-        "MMM",
-        "MBM",
-        "MMM"
+        "BBB",
+        "BDB",
+        "BBB"
     ],
     
     "key":
     {
         "B":
         {
-            "item": "cm:GigaByte"
+            "item": "cm:bit"
         },
         
-        "M":
+        "D":
         {
-            "item": "cm:terabit"
+            "item": "minecraft:diamond"
         }
         
     },
     
     "result":
     {
-        "item": "cm:TeraByte",
-        "count": 4
+        "item": "cm:byte",
+        "count": 1
     }
 }

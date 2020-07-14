@@ -12,19 +12,19 @@
     {
         "B":
         {
-            "item": "cm:TeraByte"
+            "item": "cm:gigabyte"
         },
         
         "M":
         {
-            "item": "cm:petabit"
+            "item": "cm:terabit"
         }
         
     },
     
     "result":
     {
-        "item": "cm:PetaByte",
-        "count": 4
+        "item": "cm:terabyte",
+        "count": 1
     }
 }

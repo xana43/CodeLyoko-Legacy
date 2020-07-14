@@ -1,29 +1,34 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
 
-import net.minecraft.block.ContainerBlock;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
 
 import javax.annotation.Nullable;
 
-public class ReactorContainer extends ContainerBlock
+public class ReactorContainer extends Container
 {
-	protected ReactorContainer(Properties builder) {
-		super(builder);
+	public ReactorContainer(@Nullable ContainerType<?> type, int id) {
+		super(type, id);
 	}
 
-	@Nullable
 	@Override
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
-		return null;
+	public boolean canInteractWith(PlayerEntity playerIn) {
+		return false;
 	}
+	//protected ReactorContainer(Properties builder) {
+	//	super(builder);
+//	}
+
 	/*
+
 	private final ComputerReactorTileEntity tileentity;
 	private int energy, Fission;
 	
-	public ReactorContainer(InventoryPlayer player, ComputerReactorTileEntity tileentity)
+	public ReactorContainer(final int windowID,final PlayerInventory player,final ComputerReactorTileEntity tileentity)
 	{
+		super(ModContainerTypes.COMPUTER_REACTOR_CONTAINER.get(),windowID);
 		this.tileentity = tileentity;
 		IItemHandler handler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		
@@ -44,7 +49,7 @@ public class ReactorContainer extends ContainerBlock
 	}
 	
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn) 
+	public boolean canInteractWith(PlayerEntity playerIn)
 	{
 		return this.tileentity.isUsableByPlayer(playerIn);
 	}
@@ -72,7 +77,7 @@ public class ReactorContainer extends ContainerBlock
 	}
 	
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index)
 	{
 		ItemStack stack = ItemStack.EMPTY;
 		Slot slot = (Slot)this.inventorySlots.get(index);

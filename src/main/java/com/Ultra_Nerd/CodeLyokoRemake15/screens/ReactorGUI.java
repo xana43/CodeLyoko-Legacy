@@ -1,14 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 
-public class ReactorGUI
+public class ReactorGUI //extends ContainerScreen<ReactorContainer>
 {
 	/*
 	private static final ResourceLocation TEXTURES = new ResourceLocation(ref.MOD_ID + ":textures/gui/Reactor.png");
-	private final InventoryPlayer player;
+	private final PlayerEntity player;
 	private final ComputerReactorTileEntity tileentity;
 	
-	public ReactorGUI(InventoryPlayer player, ComputerReactorTileEntity tileentity)
+	public ReactorGUI(PlayerEntity player, ComputerReactorTileEntity tileentity)
 	{
 		super(new ReactorContainer(player, tileentity));
 		this.player = player;
@@ -50,6 +50,6 @@ public class ReactorGUI
 		int i = this.tileentity.Fission;
 		return i != 0 ? i * pixels / 25 : 0;
 	}
-	
-	 */
+	*/
+
 }

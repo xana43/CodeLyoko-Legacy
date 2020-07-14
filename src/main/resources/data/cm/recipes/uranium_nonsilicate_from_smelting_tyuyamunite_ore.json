@@ -1,0 +1,14 @@
+{
+  "type":"minecraft:smelting",
+  "ingredient":
+  {
+    "item":"cm:tyuyamunite_ore"
+
+  },
+  "result":"cm:uranium_dioxide",
+  "experience":5.0,
+  "cookingtime": 300
+
+
+
+}

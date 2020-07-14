@@ -14,7 +14,6 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,9 +37,7 @@ import org.apache.logging.log4j.Logger;
 public class Base
 {
 	public static final Logger Log = LogManager.getLogger();
-	public static final  ResourceLocation DimensionTypeForest = new ResourceLocation(Base.MOD_ID,"forest");
-	public static final ResourceLocation DimensionTypeCarthage = new ResourceLocation(Base.MOD_ID,"sector5");
-	public static final ResourceLocation DimensionTypeMountain = new ResourceLocation(Base.MOD_ID,"mountain");
+
 	public static final String MOD_ID = "cm";
 	public static Base instance;
 	public Base()

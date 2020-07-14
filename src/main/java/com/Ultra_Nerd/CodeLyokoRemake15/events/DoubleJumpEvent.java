@@ -17,12 +17,12 @@ public class DoubleJumpEvent
         PlayerEntity Entity = Minecraft.getInstance().player;
 
         Minecraft minecraft = Minecraft.getInstance();
-        byte d = 10;
-            if(!Entity.onGround)
-            {
+ //       byte d = 10;
+//            if(!Entity.onGround)
+ //           {
 
-
-            }
+//
+ //           }
 
 
     }

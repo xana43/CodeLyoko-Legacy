@@ -2,8 +2,8 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.util.DamageSource;
@@ -18,15 +18,15 @@ public class DigitalSeaBlock extends FlowingFluidBlock {
 
 	
 	public DigitalSeaBlock(Supplier<? extends FlowingFluid> supplier) {
-		super(supplier, Block.Properties.create(Material.WATER).doesNotBlockMovement().noDrops()
-				.notSolid()
-				.hardnessAndResistance(100)
-				.variableOpacity()
+		super(supplier, Block.Properties.from(Blocks.WATER).variableOpacity()
+
 		);
-	   		
+
 	}
-	
-	
+
+
+
+
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		// TODO Auto-generated method stub

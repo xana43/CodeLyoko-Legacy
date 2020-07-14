@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
-public class ModRes {
+public class ModRecipes {
 	public static void ini()
 	{
 		/*

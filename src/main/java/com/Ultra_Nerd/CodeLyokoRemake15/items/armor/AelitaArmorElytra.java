@@ -64,10 +64,11 @@ public class AelitaArmorElytra extends ArmorItem {
                     }
                     player.onLivingFall(0, 0);
                     player.fallDistance = 0;
-                } else if (player.isElytraFlying() && player.onGround) {
-                    player.stopFallFlying();
+                } else if (player.isElytraFlying() && !player.isAirBorne) {
+
                     player.fallDistance = 0;
                     player.onLivingFall(0, 0);
+                    player.stopFallFlying();
                 }
 
             }

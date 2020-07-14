@@ -20,7 +20,6 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
@@ -38,13 +37,12 @@ public class TowerInterface extends Block {
 
     public TowerInterface()
     {
-        super(Block.Properties.create(Material.ROCK)
+        super(Block.Properties.create(Material.DRAGON_EGG)
 
-                .hardnessAndResistance(-1, 10)
-                .sound(SoundType.METAL)
-                .lightValue(0)
-                .harvestLevel(2)
-                .harvestTool(ToolType.PICKAXE)
+                .hardnessAndResistance(-1, -1)
+                .sound(SoundType.field_226947_m_)
+                .lightValue(4)
+
         );
         this.setDefaultState(this.stateContainer.getBaseState().with(DIRINTERFACE, Direction.NORTH));
 
@@ -76,6 +74,11 @@ public class TowerInterface extends Block {
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         // TODO Auto-generated method stub
         return this.getDefaultState().with(DIRINTERFACE, context.getPlacementHorizontalFacing().getOpposite());
+    }
+
+    @Override
+    public boolean isViewBlocking(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return false;
     }
 
     //mod compatiability

@@ -12,7 +12,7 @@
     {
         "B":
         {
-            "item": "cm:PetaByte"
+            "item": "cm:petabyte"
         },
         
         "M":
@@ -24,7 +24,7 @@
     
     "result":
     {
-        "item": "cm:QuByte",
-        "count": 4
+        "item": "cm:qubyte",
+        "count": 1
     }
 }

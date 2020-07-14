@@ -3,28 +3,28 @@
     
     "pattern":
     [
-        "GGG",
-        "GBG",
-        "GGG"
+        "MMM",
+        "MBM",
+        "MMM"
     ],
     
     "key":
     {
         "B":
         {
-            "item": "cm:Megabyte"
+            "item": "cm:byte"
         },
         
-        "G":
+        "M":
         {
-            "item": "cm:gigabit"
+            "item": "cm:megabit"
         }
         
     },
     
     "result":
     {
-        "item": "cm:GigaByte",
-        "count": 4
+        "item": "cm:megabyte",
+        "count": 1
     }
 }

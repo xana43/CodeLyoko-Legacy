@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "cm:tyuyamunite_ore",
+    "cm:torbernite_ore",
+    "cm:uraninite_ore",
+    "cm:gummite_ore",
+    "cm:coffinite_ore"
+  ]
+}

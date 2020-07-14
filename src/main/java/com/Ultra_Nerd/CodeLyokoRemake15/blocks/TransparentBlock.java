@@ -36,6 +36,10 @@ public class TransparentBlock extends Block {
         return true;
     }
 
+    @Override
+    public boolean isViewBlocking(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return false;
+    }
 
 
     @Override

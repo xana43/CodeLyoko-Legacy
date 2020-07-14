@@ -1,5 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
@@ -9,57 +12,69 @@ public class UniversalEnergyStorageTileEntity extends TileEntity {
 		super(tileEntityTypeIn);
 	}
 
-	/*
+
 	private EG store = new EG(90000);
 	public  int UNIRF = store.getEnergyStored();
 	private String name;
+
+
+
+
 	@Override
-	public void update() {
+	public void updateContainingBlockInfo() {
 		if(world.isBlockPowered(this.pos))
 		{
 			//System.out.println(Integer.toString(UNIRF));
-			 UNIRF += 100;
+			UNIRF += 100;
 		}
-		
 	}
+/*
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		if(capability == CapabilityEnergy.ENERGY) return true;// TODO Auto-generated method stub
 		return super.hasCapability(capability, facing);
 	}
-	
-	
+
+
+
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if(capability == CapabilityEnergy.ENERGY) return (T)this.store;
 		return super.getCapability(capability, facing);
 	}
-	
+
+ */
+
+
+
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+	public CompoundNBT write(CompoundNBT compound) {
 		// TODO Auto-generated method stub
-		super.writeToNBT(compound);
-		compound.setInteger("Chat", this.UNIRF);
-		compound.setString("name", this.getDisplayName().toString());
+		super.write(compound);
+		compound.putInt("Chat", this.UNIRF);
+		compound.putString("name", this.getName());
 		this.store.WRTNBT(compound);
 		return compound;
 	}
-	
+
 	@Override
-	public void readFromNBT(NBTTagCompound compound) {
+	public void read(CompoundNBT compound) {
 		// TODO Auto-generated method stub
-		super.readFromNBT(compound);
-		this.UNIRF = compound.getInteger("Chat");
+		super.read(compound);
+		this.UNIRF = compound.getInt("Chat");
 		this.name = compound.getString("name");
 		
 	}
-	
-	
-	@Override
-	public ITextComponent getDisplayName() {
-		// TODO Auto-generated method stub
-		return new TextComponentTranslation("container.universal");
+
+	public String getName() {
+		return "container.universal";
 	}
+
+	//@Override
+//	public ITextComponent getDisplayName() {
+//		// TODO Auto-generated method stub
+	//	return new TextComponentTranslation("container.universal");
+	//}
 	public int getStore() {
 		return UNIRF;
 	}
@@ -89,10 +104,11 @@ public class UniversalEnergyStorageTileEntity extends TileEntity {
 		}
 	}
 	
-	public boolean useable(EntityPlayer player)
+	public boolean useable(PlayerEntity player)
 	{
-		return this.world.getTileEntity(pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) >= 64D;
+		assert this.world != null;
+		return this.world.getTileEntity(pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) >= 64D;
 	}
 
-	 */
+
 }

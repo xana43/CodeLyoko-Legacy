@@ -18,7 +18,7 @@ public class ModBiome {
 	/*public static final Biome LYOKO_FS = new LyokoForest();
 	public static final Biome LYOKO_ICE = new LyokoICE();
     public static final Biome LYOKO_DESERT = new LyokoDesert();
-    public static final Biome LYOKO_OCEAN = new LyokoOC();
+    public static final Biome LYOKO_OCEAN = new LyokoOcean();
     public static final Biome LYOKO_M = new LyokoMountain();
     public static final Biome SECTOR_5 = new LyokoCarthage();
 	public static void registerBiomes()
@@ -104,8 +104,24 @@ public class ModBiome {
 			.downfall(0)
 	));
 
+	public static final RegistryObject<Biome>OCEAN = BIOMES.register("digital_ocean",() -> new LyokoOcean(
+			new Biome.Builder().precipitation(RainType.RAIN)
+			.downfall(90)
+			.surfaceBuilder(SurfaceBuilder.DEFAULT,new SurfaceBuilderConfig(ModFluids.DIO.get().getDefaultState(),
+					ModFluids.DIO.get().getDefaultState(),ModFluids.DIO.get().getDefaultState()))
+			.parent(null)
+			.waterColor(126)
+			.waterFogColor(182)
+			.scale(20)
+			.depth(20)
+			.category(Category.OCEAN)
+			.temperature(1)
+
+	));
+
 	public static void regbio()
 	{
+		initBiome(OCEAN.get(),Type.MODIFIED,Type.OCEAN,Type.WATER);
 		initBiome(SECTOR5.get(),Type.DENSE,Type.END,Type.MODIFIED,Type.SPOOKY);
 		initBiome(FOREST.get(),Type.LUSH,Type.FOREST);
 		initBiome(DESERT.get(),Type.SPARSE,Type.SPARSE,Type.DRY,Type.SANDY);
