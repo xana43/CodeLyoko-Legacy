@@ -14,15 +14,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
 
-public class TowerWall extends Block {
+public class TowerEnter extends Block {
 
-	public static final DirectionProperty DIRTOWER = HorizontalBlock.HORIZONTAL_FACING;
-public TowerWall() {
-	super(Block.Properties.create(Material.MISCELLANEOUS)
+	public static final DirectionProperty DIRTOWER2 = HorizontalBlock.HORIZONTAL_FACING;
+public TowerEnter() {
+	super(Properties.create(Material.MISCELLANEOUS)
 			
 			.hardnessAndResistance(-1, -1)
 			.sound(SoundType.GLASS)
-			.lightValue(11)
+			.lightValue(5).doesNotBlockMovement()
 				
 				
 				
@@ -30,6 +30,10 @@ public TowerWall() {
 		);
     
 }
+	@Override
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(DIRTOWER2);
+	}
 
 	@Override
 	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
@@ -37,25 +41,20 @@ public TowerWall() {
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(DIRTOWER);
-	}
-
-	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		// TODO Auto-generated method stub
-		return this.getDefaultState().with(DIRTOWER, context.getPlacementHorizontalFacing().getOpposite());
+		return this.getDefaultState().with(DIRTOWER2, context.getPlacementHorizontalFacing().getOpposite());
 	}
 
 	//mod compatiability
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.with(DIRTOWER,rot.rotate(state.get(DIRTOWER)));
+		return state.with(DIRTOWER2,rot.rotate(state.get(DIRTOWER2)));
 	}
 
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.toRotation(state.get(DIRTOWER)));
+		return state.rotate(mirrorIn.toRotation(state.get(DIRTOWER2)));
 	}
 	//
 

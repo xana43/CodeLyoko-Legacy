@@ -1,5 +1,9 @@
 {
     "variants": {
-        "": { "model": "cm:block/tower_enter" }
+
+        "facing=north":{"model":"cm:block/tower_enter"},
+        "facing=east":{"model":"cm:block/tower_enter", "y": 90},
+        "facing=south":{"model":"cm:block/tower_enter", "y": 180},
+        "facing=west":{"model":"cm:block/tower_enter", "y" : 270}
     }
 }
