@@ -36,6 +36,10 @@ public class ForgeEventSubscriber {
         {
             DimensionManager.registerDimension(ModDimensionTypes.DimensionTypeIce,ModDimensions.ICE_DIMENSION.get(),null,true);
         }
+        if(DimensionType.byName(ModDimensionTypes.DimensionTypeDesert) == null)
+        {
+            DimensionManager.registerDimension(ModDimensionTypes.DimensionTypeDesert,ModDimensions.DESERT_DIMENSION.get(),null,true);
+        }
         Base.Log.info("All Dimensions loaded");
     }
 }

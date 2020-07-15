@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityBlok;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityFan;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -20,6 +21,10 @@ public class ModEntities {
 	public static final RegistryObject<EntityType<EntityLaser>> LASER = Entities.register("laser", () ->
 			EntityType.Builder.<EntityLaser>create(EntityLaser::new, EntityClassification.MISC).size(1f,1f)
 					.build(new ResourceLocation(Base.MOD_ID,"laserarrow").toString()));
+	public static final RegistryObject<EntityType<EntityFan>> FAN = Entities.register("fan",() ->
+			EntityType.Builder.<EntityFan>create(EntityFan::new,EntityClassification.MISC).size(1,1).build(
+					new ResourceLocation(Base.MOD_ID,"fan").toString()
+			));
 
 	/*public static void registerenit()
 	{

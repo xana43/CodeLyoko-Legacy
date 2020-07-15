@@ -4,6 +4,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendLaser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramBlock;
+import com.Ultra_Nerd.CodeLyokoRemake15.events.DimensionEnterEvent;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.AelitaArmorElytra;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModOreGen;
@@ -49,7 +50,7 @@ public class Base
 		ModBus.addListener(this::OreGen);
 		ModSounds.SOUNDS.register(ModBus);
 		ModItems.ITEMS.register(ModBus);
-
+		ModBus.addListener(DimensionEnterEvent::EnterDimension);
 		ModFluids.LIQUIDS.register(ModBus);
 		ModBlocks.BLOCKS.register(ModBus);
 		ModEntities.Entities.register(ModBus);

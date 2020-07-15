@@ -2,6 +2,8 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendFan;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendLaser;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
@@ -15,7 +17,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -33,13 +34,16 @@ public class ClientModEventSubscriber {
         RenderTypeLookup.setRenderLayer(ModFluids.DIGITAL_OCEAN.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_DIGITAL_OCEAN.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.TRANSPARENT.get(),RenderType.getCutoutMipped());
-        // Register ContainerType Screens
-        // ScreenManager.registerFactory is not safe to call during parallel mod loading so we queue it to run later
-        DeferredWorkQueue.runLater(() -> {
-            ScreenManager.<ContainerInfusing, InfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
-            ScreenManager.<TowerInterfaceContainer,TowerGUI>registerFactory(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);
-            RenderingRegistry.registerEntityRenderingHandler(ModEntities.BLOK.get(), RendBlok::new);
-            Base.Log.debug("Registered ContainerType Screens");
-        });
+        //registers the screens and entities
+        ScreenManager.<ContainerInfusing, InfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
+        ScreenManager.<TowerInterfaceContainer, TowerGUI>registerFactory(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BLOK.get(), RendBlok::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LASER.get(), RendLaser::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.FAN.get(), RendFan::new);
+
+
+
+
+
     }
 }

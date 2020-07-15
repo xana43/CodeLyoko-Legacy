@@ -1,16 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.generators;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthadge.Sector5GenSettings;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertGenSettings;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.NoiseChunkGenerator;
 
-public class Sector5Generator extends NoiseChunkGenerator<Sector5GenSettings> {
+public class DesertGenerator extends NoiseChunkGenerator<DesertGenSettings> {
 
+    public DesertGenerator(IWorld worldIn, BiomeProvider biomeProviderIn, DesertGenSettings settingsIn) {
+        super(worldIn, biomeProviderIn, 8, 4, 128, settingsIn, true);
 
-    public Sector5Generator(IWorld worldIn, BiomeProvider biomeProvidein, Sector5GenSettings settingsIn) {
-        super(worldIn, biomeProvidein, 8, 4, 128, settingsIn, true);
     }
+
+
 
 
     @Override
@@ -51,4 +53,5 @@ public class Sector5Generator extends NoiseChunkGenerator<Sector5GenSettings> {
     public int getSeaLevel() {
         return 1;
     }
+
 }

@@ -1,0 +1,9 @@
+{
+  "loader": "forge:obj",
+  "model": "cm:models/block/uraniumcanister.obj",
+  "flip-v": true,
+  "ambientocclusion": true,
+  "textures": {
+    "particle": "cm:block/body"
+  }
+}

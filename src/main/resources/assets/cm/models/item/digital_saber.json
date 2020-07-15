@@ -1,4 +1,5 @@
 {
   "loader": "forge:obj",
-  "model": "cm:models/item/digital_saber.obj"
+  "model": "cm:models/item/digital_saber.obj",
+  "ambientocclusion": true
 }

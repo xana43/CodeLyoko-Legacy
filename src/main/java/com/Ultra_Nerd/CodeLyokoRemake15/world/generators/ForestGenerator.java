@@ -14,6 +14,7 @@ public class ForestGenerator extends NoiseChunkGenerator<ForestGenSettings>
 		//this.spawnPoint = settingsIn.getSpawnPos();
 	}
 
+	@Override
 	protected void fillNoiseColumn(double[] noiseColumn, int noiseX, int noiseZ) {
 		double d0 = 1368.824D;
 		double d1 = 684.412D;
@@ -21,7 +22,7 @@ public class ForestGenerator extends NoiseChunkGenerator<ForestGenSettings>
 		double d3 = 4.277575000000001D;
 		int i = 64;
 		int j = -3000;
-		this.calcNoiseColumn(noiseColumn, noiseX, noiseZ, 1368.824D, 684.412D, 17.110300000000002D, 4.277575000000001D, 64, -3000);
+		this.calcNoiseColumn(noiseColumn, noiseX, noiseZ, 1368.824D, 684.412D, 17.110300000000002D, 3.277575000000001D, 1, -2000);
 	}
 
 	protected double[] getBiomeNoiseColumn(int noiseX, int noiseZ) {
@@ -40,11 +41,15 @@ public class ForestGenerator extends NoiseChunkGenerator<ForestGenSettings>
 		return 8.0D;
 	}
 
+
+
+	@Override
 	public int getGroundHeight() {
 		return 50;
 	}
 
+	@Override
 	public int getSeaLevel() {
-		return 5;
+		return 1;
 	}
 }

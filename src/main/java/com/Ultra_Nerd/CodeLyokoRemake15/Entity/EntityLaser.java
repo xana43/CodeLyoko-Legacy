@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class EntityLaser extends ArrowEntity {
 
-	public EntityLaser(EntityType<? extends EntityLaser> Laser,World world) {
+	public EntityLaser(EntityType<? extends ArrowEntity> Laser,World world) {
 		super(Laser,world);
 		// TODO Auto-generated constructor stub
 	}

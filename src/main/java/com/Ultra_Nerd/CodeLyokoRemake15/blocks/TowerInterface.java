@@ -40,7 +40,7 @@ public class TowerInterface extends Block {
         super(Block.Properties.create(Material.DRAGON_EGG)
 
                 .hardnessAndResistance(-1, -1)
-                .sound(SoundType.field_226947_m_)
+                .sound(SoundType.METAL)
                 .lightValue(4)
 
         );

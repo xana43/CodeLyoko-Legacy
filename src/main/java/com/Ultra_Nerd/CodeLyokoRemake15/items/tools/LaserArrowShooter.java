@@ -22,6 +22,8 @@ import net.minecraft.world.World;
 public class LaserArrowShooter extends BowItem{
 private byte Count = 100;
 
+
+
 	@Override
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		Count -= 1;
@@ -58,11 +60,11 @@ private byte Count = 100;
 		}
 
 			item.damageItem(1, playerIn, null);
-			return new ActionResult<ItemStack>(ActionResultType.SUCCESS, item);
+			return new ActionResult<>(ActionResultType.SUCCESS, item);
 		}
 		else
 		{
-			return new ActionResult<ItemStack>(ActionResultType.FAIL, item);
+			return new ActionResult<>(ActionResultType.FAIL, item);
 		}
 	}
 

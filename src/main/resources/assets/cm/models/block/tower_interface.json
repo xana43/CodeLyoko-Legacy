@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "tower_interface",
+	"ambientocclusion": true,
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "cm:block/interface",
@@ -11,6 +12,7 @@
 			"from": [1, 9, 3],
 			"to": [15, 9.1, 12],
 			"rotation": {"angle": -45, "axis": "x", "origin": [8.5, 8.5, 7.5]},
+			"shade": true,
 			"faces": {
 				"north": {"uv": [0, 0, 7, 0.05], "rotation": 180, "texture": "#missing"},
 				"east": {"uv": [0, 0, 0.05, 4.5], "rotation": 270, "texture": "#missing"},
