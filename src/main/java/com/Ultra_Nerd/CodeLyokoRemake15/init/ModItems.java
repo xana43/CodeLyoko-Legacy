@@ -25,52 +25,63 @@ public class ModItems
 	public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Base.MOD_ID);
 
 		//for items
-		 public static final RegistryObject<Item> SOLID_QUANTUM = ITEMS.register("solid_quantum", ItemBase::new);
-
-		 public static final RegistryObject<Item>  SILICON_WAFER = ITEMS.register("silicon_wafer", ItemBase::new);
-
-		 public static final RegistryObject<Item>  URANIUM_SILICATE = ITEMS.register("uranium_silicate", ItemBase::new);
-
-		 public static final RegistryObject<Item>  URANIUM_DIOXIDE = ITEMS.register("uranium_dioxide", ItemBase::new);
-
-		 public static final RegistryObject<Item>  URANIUM_MELT = ITEMS.register("uranium_melt", ItemBase::new);
-
-		 public static final RegistryObject<Item>  URANIUM_ISOTOPE238 = ITEMS.register("uranium_isotope238", ItemBase::new);
-
-		 public static final RegistryObject<Item>  URANIUM_ISOTOPE235 = ITEMS.register("uranium_isotope235", ItemBase::new);
-
-		 public static final RegistryObject<Item>  RAW_SILICADUST = ITEMS.register("raw_silicadust", ItemBase::new);
-
-		 public static final RegistryObject<Item>  TRIURANIUM_OCTAOXIDE = ITEMS.register("triuranium_octaoxide", ItemBase::new);
-
-		 public static final RegistryObject<Item>  FLOURIDE = ITEMS.register("flouride", () -> new FlourideItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
-
-		 public static final RegistryObject<Item>  BIT = ITEMS.register("bit", ItemBase::new);
-
-		 public static final RegistryObject<Item>  BYTE = ITEMS.register("byte", ItemBase::new);
-
-		 public static final RegistryObject<Item>  MEGABIT = ITEMS.register("megabit", ItemBase::new);
-
-		 public static final RegistryObject<Item>  MEGABYTE = ITEMS.register("megabyte", ItemBase::new);
-
-		 public static final RegistryObject<Item>  GIGABIT = ITEMS.register("gigabit", ItemBase::new);
-
-		 public static final RegistryObject<Item>  GIGABYTE = ITEMS.register("gigabyte", ItemBase::new);
-
-		 public static final RegistryObject<Item>  TERABIT = ITEMS.register("terabit", ItemBase::new);
-
-		 public static final RegistryObject<Item>  TERABYTE = ITEMS.register("terabyte", ItemBase::new);
-
-		 public static final RegistryObject<Item>  PETABIT = ITEMS.register("petabit", ItemBase::new);
-
+		 public static final RegistryObject<Item>  COMPUTER_ARM_CORE = ITEMS.register("computer_arm_core",ItemBase::new);
+		 public static final RegistryObject<Item>  COMPUTER_X86_CORE = ITEMS.register("computer_x86_core",ItemBase::new);
+		 public static final RegistryObject<Item>  COMPUTER_CISC_CORE = ITEMS.register("computer_cisc_core",ItemBase::new);
+		 public static final RegistryObject<Item>  COMPUTER_RISC_CORE = ITEMS.register("computer_risc_core",ItemBase::new);
+		 public static final RegistryObject<Item>  COMPUTER_ASIC_CORE = ITEMS.register("computer_asic_core",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_QUANTUM_CORE = ITEMS.register("computer_quantum_core",ItemBase::new);
+		 public static final RegistryObject<Item>  COMPUTER_ARMAPU_CORE = ITEMS.register("computer_armapu_core",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_X86APU_CORE = ITEMS.register("computer_x86apu_core",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_CISCAPU_CORE = ITEMS.register("computer_ciscapu_core",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_RISCAPU_CORE = ITEMS.register("computer_riscapu_core",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_ASICAPU_CORE = ITEMS.register("computer_asicapu_core",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_RISCGPU_CORE = ITEMS.register("computer_riscgpu_core",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_ASICGPU_CORE = ITEMS.register("computer_asicgpu_core",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_NEURALGPU_CORE = ITEMS.register("computer_neuralgpu_core",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_QUANTUMNUMAGPU_CORE = ITEMS.register("computer_quantumnumagpu_core",ItemBase::new);
+		 public static final RegistryObject<Item>  COMPUTER_DRAM_SDR_RAM = ITEMS.register("computer_dram_sdr_ram",ItemBase::new);
+		 public static final RegistryObject<Item>  COMPUTER_DRAM_DDR_RAM = ITEMS.register("computer_dram_ddr_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_DRAM2_DDR_RAM = ITEMS.register("computer_dram_ddr2_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_DRAM3_DDR_RAM = ITEMS.register("computer_dram_ddr3_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_DRAM4_DDR_RAM = ITEMS.register("computer_dram_ddr4_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_DRAM5_DDR_RAM = ITEMS.register("computer_dram_ddr5_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_SRAM_DDR_RAM = ITEMS.register("computer_sram_ddr_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_SRAM_DDR2_RAM = ITEMS.register("computer_sram_ddr2_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_SRAM_DDR3_RAM = ITEMS.register("computer_sram_ddr3_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_SRAM_DDR4_RAM = ITEMS.register("computer_sram_ddr4_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_SRAM_DDR5_RAM = ITEMS.register("computer_sram_ddr5_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_SRAM_ECC_DDR_RAM = ITEMS.register("computer_sram_ecc_ddr_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_SRAM_ECC_DDR2_RAM = ITEMS.register("computer_sram_ecc_ddr2_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_SRAM_ECC_DDR3_RAM = ITEMS.register("computer_sram_ecc_ddr3_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_SRAM_ECC_DDR4_RAM = ITEMS.register("computer_sram_ecc_ddr4_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_SRAM_ECC_DDR5_RAM = ITEMS.register("computer_sram_ecc_ddr5_ram",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_QRAM_LOWDENSITY = ITEMS.register("computer_qram_lowdensity",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_QRAM_MEDIUMDENSITY = ITEMS.register("computer_qram_mediumdensity",ItemBase::new);
+	     public static final RegistryObject<Item>  COMPUTER_QRAM_HIGHDENSITY = ITEMS.register("computer_qram_highdensity",ItemBase::new);
+	     public static final RegistryObject<Item>  BIT = ITEMS.register("bit", ItemBase::new);
+	     public static final RegistryObject<Item>  BYTE = ITEMS.register("byte", ItemBase::new);
+	     public static final RegistryObject<Item>  FLOURIDE = ITEMS.register("flouride", () -> new FlourideItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+	     public static final RegistryObject<Item>  GIGABIT = ITEMS.register("gigabit", ItemBase::new);
+	     public static final RegistryObject<Item>  GIGABYTE = ITEMS.register("gigabyte", ItemBase::new);
+	     public static final RegistryObject<Item>  MEGABIT = ITEMS.register("megabit", ItemBase::new);
+	     public static final RegistryObject<Item>  MEGABYTE = ITEMS.register("megabyte", ItemBase::new);
+	     public static final RegistryObject<Item>  PETABIT = ITEMS.register("petabit", ItemBase::new);
 		 public static final RegistryObject<Item>  PETABYTE = ITEMS.register("petabyte", ItemBase::new);
-
-		 public static final RegistryObject<Item>  QUBIT = ITEMS.register("qubit", ItemBase::new);
-
-		 public static final RegistryObject<Item>  QUBYTE = ITEMS.register("qubyte", ItemBase::new);
-
-		 public static final RegistryObject<Item>  TITANIUMINGOT = ITEMS.register("titanium_ingot", ItemBase::new);
-
+	     public static final RegistryObject<Item>  QUBIT = ITEMS.register("qubit", ItemBase::new);
+	     public static final RegistryObject<Item>  QUBYTE = ITEMS.register("qubyte", ItemBase::new);
+	     public static final RegistryObject<Item>  RAW_SILICADUST = ITEMS.register("raw_silicadust", ItemBase::new);
+	     public static final RegistryObject<Item>  SOLID_QUANTUM = ITEMS.register("solid_quantum", ItemBase::new);
+		 public static final RegistryObject<Item>  SILICON_WAFER = ITEMS.register("silicon_wafer", ItemBase::new);
+		 public static final RegistryObject<Item>  URANIUM_SILICATE = ITEMS.register("uranium_silicate", ItemBase::new);
+		 public static final RegistryObject<Item>  TRIURANIUM_OCTAOXIDE = ITEMS.register("triuranium_octaoxide", ItemBase::new);
+	     public static final RegistryObject<Item>  TERABIT = ITEMS.register("terabit", ItemBase::new);
+	     public static final RegistryObject<Item>  TERABYTE = ITEMS.register("terabyte", ItemBase::new);
+	     public static final RegistryObject<Item>  TITANIUMINGOT = ITEMS.register("titanium_ingot", ItemBase::new);
+	     public static final RegistryObject<Item>  URANIUM_DIOXIDE = ITEMS.register("uranium_dioxide", ItemBase::new);
+		 public static final RegistryObject<Item>  URANIUM_MELT = ITEMS.register("uranium_melt", ItemBase::new);
+		 public static final RegistryObject<Item>  URANIUM_ISOTOPE238 = ITEMS.register("uranium_isotope238", ItemBase::new);
+		 public static final RegistryObject<Item>  URANIUM_ISOTOPE235 = ITEMS.register("uranium_isotope235", ItemBase::new);
 	//for tools
 	public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().group(Base.LYOKO_ITEMS)));
 	//for weapons
