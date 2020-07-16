@@ -44,8 +44,8 @@ public enum  LyokoArmorMaterial implements IArmorMaterial {
     private final float toughness;
     private final LazyValue<Ingredient> redigitizeMaterial;
 
-    private LyokoArmorMaterial(String nameIn, int maxDamageFactor, byte[] damageReduction, int enchant, SoundEvent soundsIn,
-                               float toughnessIn, Supplier<Ingredient> redigitizeMaterialIn)
+    LyokoArmorMaterial(String nameIn, int maxDamageFactor, byte[] damageReduction, int enchant, SoundEvent soundsIn,
+                       float toughnessIn, Supplier<Ingredient> redigitizeMaterialIn)
     {
         this.name = nameIn;
         this.damageReduction = damageReduction;

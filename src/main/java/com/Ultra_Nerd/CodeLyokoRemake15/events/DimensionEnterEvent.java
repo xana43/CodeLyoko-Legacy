@@ -22,7 +22,7 @@ public class DimensionEnterEvent {
 
            PlayerEntity player = event.getPlayer();
 
-                if (event.getTo() instanceof ForestDimension) {
+                if (player.world.dimension instanceof ForestDimension) {
                         if(player.inventory.armorInventory.isEmpty()) {
                             player.inventory.armorInventory.add(EquipmentSlotType.CHEST.getSlotIndex(), new ItemStack(ModItems.AELITA_CHESTPLATE.get()));
                         }

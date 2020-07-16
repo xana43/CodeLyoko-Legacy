@@ -29,7 +29,7 @@ public class ModFluids {
     		.temperature(100).luminosity(10).overlay(DIGITAL_OCEAN_RL)).block(() -> ModFluids.DIO.get());
     //fluid blocks
     public static final RegistryObject<FlowingFluidBlock> DIO = ModBlocks.BLOCKS.register("digital_ocean", () -> new DigitalSeaBlock(DIGITAL_OCEAN));
-	
+	public static final RegistryObject<FlowingFluidBlock> URANIUM = ModBlocks.BLOCKS.register("uranium_waste", () -> new DigitalSeaBlock(DIGITAL_OCEAN));
 	
 	
 }

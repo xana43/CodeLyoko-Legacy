@@ -41,7 +41,7 @@ public class TowerInterface extends Block {
 
                 .hardnessAndResistance(-1, -1)
                 .sound(SoundType.METAL)
-                .lightValue(4)
+                .lightValue(5)
 
         );
         this.setDefaultState(this.stateContainer.getBaseState().with(DIRINTERFACE, Direction.NORTH));

@@ -260,7 +260,7 @@ public class Scanner extends HorizontalBlock {
     public Scanner() {
         super(Block.Properties.create(Material.ROCK)
 
-                .hardnessAndResistance(-1, 10)
+                .hardnessAndResistance(10, 10)
                 .sound(SoundType.METAL)
                 .lightValue(0)
                 .harvestLevel(2)
