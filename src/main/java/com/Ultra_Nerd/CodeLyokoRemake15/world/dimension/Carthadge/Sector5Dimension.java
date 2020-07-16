@@ -9,9 +9,10 @@ import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class Sector5Dimension extends Dimension {
-
+    public static final BlockPos SPAWN = new BlockPos(100, 50, 0);
     public Sector5Dimension(World world, DimensionType type) {
         super(world,type,0.0f);
     }
@@ -24,18 +25,21 @@ public class Sector5Dimension extends Dimension {
 
 
 
-    @Nullable
     @Override
+    @Nullable
     public BlockPos findSpawn(ChunkPos chunkPosIn, boolean checkValid) {
-        return null;
+        Random random = new Random(this.world.getSeed());
+        BlockPos blockpos = new BlockPos(chunkPosIn.getXStart() + random.nextInt(15), 0, chunkPosIn.getZEnd() + random.nextInt(15));
+        return this.world.getGroundAboveSeaLevel(blockpos).getMaterial().blocksMovement() ? blockpos : null;
     }
-
-    @Nullable
+    public BlockPos getSpawnCoordinate() {
+        return SPAWN;
+    }
     @Override
+    @Nullable
     public BlockPos findSpawn(int posX, int posZ, boolean checkValid) {
-        return null;
+        return this.findSpawn(new ChunkPos(posX >> 4, posZ >> 4), checkValid);
     }
-
     @Override
     public float calculateCelestialAngle(long worldTime, float partialTicks) {
         return 0;

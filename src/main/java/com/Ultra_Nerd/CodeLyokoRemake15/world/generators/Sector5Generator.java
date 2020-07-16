@@ -41,7 +41,7 @@ public class Sector5Generator extends ChunkGenerator<Sector5GenSettings> {
             for (z = 0; z < 16; z++) {
                 int realx = chunkpos.x * 16 + x;
                 int realz = chunkpos.z * 16 + z;
-                int height = (int) (Math.tan(Math.sqrt((x - realz)^2 * (z - realx)^2)) * Math.PI);
+                int height = (int) (65 * ((Math.sin(realx / 20.0f)*5) + ((Math.sin(realz / 20.0f)*5)))) ;
                 for (int y = 1 ; y < height ; y++) {
                     chunk.setBlockState(pos.setPos(x, y, z), stone, false);
                 }
