@@ -22,6 +22,7 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Base.MOD_ID);
 
     //for blocks
+    public static final RegistryObject<Block> ARCHITECTURE_WORK_STATION = BLOCKS.register("architecture_work_station",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> ANTI_MARABUNTA = BLOCKS.register("anti_marabunta", AntiMarabunta::new);
     public static final RegistryObject<Block> AUTUNITE_ORE = BLOCKS.register("autunite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3, 2).sound(SoundType.STONE).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> BLACK_VOID = BLOCKS.register("black_void",BlackVoid::new);
@@ -84,5 +85,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> URANIUM_BLOCK = BLOCKS.register("uranium_block", () -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(6, 20).sound(SoundType.METAL).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> URANIUM_CANISTER = BLOCKS.register("uranium_canister",() -> new UraniumCanister(Block.Properties.create(Material.DRAGON_EGG).harvestTool(ToolType.PICKAXE).harvestLevel(2).hardnessAndResistance(5,5).lightValue(2).variableOpacity()));
     public static final RegistryObject<Block> URANOPHANE_ORE =  BLOCKS.register("uranophane_ore", () -> new Block(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(4,4).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
+    public static final RegistryObject<Block> UV_MACHINE = BLOCKS.register("uv_machine", () -> new Block(Block.Properties.from(Blocks.ANVIL)));
+    public static final RegistryObject<Block> UV_FOCUS = BLOCKS.register("uv_focus",() -> new Block(Block.Properties.from(Blocks.GLASS)));
+    public static final RegistryObject<Block> UV_LIGHT = BLOCKS.register("uv_light",() -> new Block(Block.Properties.from(Blocks.GLOWSTONE)));
 
-}
+ }

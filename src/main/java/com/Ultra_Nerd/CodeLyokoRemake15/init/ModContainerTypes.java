@@ -20,5 +20,5 @@ public class ModContainerTypes {
     public static final RegistryObject<ContainerType<HologramContainer>> HOLOGRAM_CONTAINER = CONTAINER_TYPES
             .register("hologram_container", () -> IForgeContainerType.create(HologramContainer::new));
     //public static final RegistryObject<ContainerType<ReactorContainer>>COMPUTER_REACTOR_CONTAINER = CONTAINER_TYPES
-     //       .register("computer_recator_container",() -> IForgeContainerType.create(ReactorContainer::new));
+     //       .register("computer_reactor_container",() -> IForgeContainerType.create(ReactorContainer::new));
 }

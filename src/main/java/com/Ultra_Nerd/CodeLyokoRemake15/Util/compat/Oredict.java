@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Util.compat;
 public class Oredict {
 	public static void registerOres()
 	{
+
 		/*
 		OreDictionary.registerOre("oreUranium", Modblocks.URANINITE_ORE);
 		OreDictionary.registerOre("oreUranium", Modblocks.COFFINITE_ORE);
