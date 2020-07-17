@@ -39,6 +39,7 @@ public class LiquidHelium extends FlowingFluidBlock {
             livingEntity.limbSwingAmount = 0;
             livingEntity.limbSwing = 0;
             livingEntity.prevLimbSwingAmount = 0;
+
         }
     }
 

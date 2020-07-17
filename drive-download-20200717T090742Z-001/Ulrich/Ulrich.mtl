@@ -1,0 +1,44 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 12.11.2017 11:14:22
+
+newmtl Tex_0096_0_dds
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\jordan\Desktop\pcsx\_NinjaRipper\2017.05.13_16.06.30_Dolphin.exe_742\Ulrich\Tex_0096_0.dds
+	map_Kd C:\Users\jordan\Desktop\pcsx\_NinjaRipper\2017.05.13_16.06.30_Dolphin.exe_742\Ulrich\Tex_0096_0.dds
+
+newmtl Tex_0148_0_dds
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\jordan\Desktop\pcsx\_NinjaRipper\2017.05.13_16.06.30_Dolphin.exe_742\Ulrich\Tex_0148_0.dds
+	map_Kd C:\Users\jordan\Desktop\pcsx\_NinjaRipper\2017.05.13_16.06.30_Dolphin.exe_742\Ulrich\Tex_0148_0.dds
+
+newmtl Tex_0150_0_dds
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka C:\Users\jordan\Desktop\pcsx\_NinjaRipper\2017.05.13_16.06.30_Dolphin.exe_742\Ulrich\Tex_0150_0.dds
+	map_Kd C:\Users\jordan\Desktop\pcsx\_NinjaRipper\2017.05.13_16.06.30_Dolphin.exe_742\Ulrich\Tex_0150_0.dds
