@@ -13,4 +13,10 @@ public class KeyBoardAccess {
     {
         return InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(),GLFW.GLFW_KEY_E);
     }
+
+    @OnlyIn(Dist.CLIENT)
+    public static boolean shift()
+    {
+        return InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(),GLFW.GLFW_KEY_LEFT_SHIFT) || InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(),GLFW.GLFW_KEY_RIGHT_SHIFT) ;
+    }
 }

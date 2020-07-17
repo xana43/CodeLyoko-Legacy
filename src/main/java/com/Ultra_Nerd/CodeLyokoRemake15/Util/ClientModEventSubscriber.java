@@ -34,6 +34,10 @@ public class ClientModEventSubscriber {
         RenderTypeLookup.setRenderLayer(ModFluids.DIGITAL_OCEAN.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_DIGITAL_OCEAN.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.TRANSPARENT.get(),RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_LIQUIDHELIUM.get(),RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModFluids.STILL_LIQUIDHELIUM.get(),RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModFluids.LIQUIDHELIUM.get(),RenderType.getTranslucent());
+
         //registers the screens and entities
         ScreenManager.<ContainerInfusing, InfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
         ScreenManager.<TowerInterfaceContainer, TowerGUI>registerFactory(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);
