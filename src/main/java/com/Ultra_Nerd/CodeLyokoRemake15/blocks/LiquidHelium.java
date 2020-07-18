@@ -32,14 +32,13 @@ public class LiquidHelium extends FlowingFluidBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-        entityIn.attackEntityFrom(new DamageSource(this.getTranslationKey()), RANDOM.nextInt(4));
         if(entityIn instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity) entityIn;
+            livingEntity.attackEntityFrom(new DamageSource(this.getTranslationKey()), RANDOM.nextInt(4));
             livingEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, -1, 4, false, false, false));
             livingEntity.limbSwingAmount = 0;
             livingEntity.limbSwing = 0;
             livingEntity.prevLimbSwingAmount = 0;
-
         }
     }
 
