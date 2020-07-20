@@ -38,6 +38,7 @@ public class ClientModEventSubscriber {
         RenderTypeLookup.setRenderLayer(ModFluids.STILL_LIQUIDHELIUM.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModFluids.LIQUIDHELIUM.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.CHIPLET_FRANZ_BLOCK.get(),RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.HOLOPROJECTOR_PROJECTION.get(),RenderType.getTranslucent());
 
         //registers the screens and entities
         ScreenManager.<ContainerInfusing, InfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);

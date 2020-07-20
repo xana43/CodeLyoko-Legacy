@@ -46,7 +46,7 @@ public class ProjectorFocusblock extends ContainerBlock {
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		super.fillStateContainer(builder.add(BooleanProperty.create("validfocus")));
+		super.fillStateContainer(builder.add(VALIDFOCUS));
 	}
 
 

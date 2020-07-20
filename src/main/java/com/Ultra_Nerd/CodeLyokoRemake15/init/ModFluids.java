@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.DigitalSeaBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LiquidHelium;
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.UraniumWaste;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
@@ -42,7 +43,7 @@ public class ModFluids {
             FluidAttributes.builder(URANIUM_STILL_RL,URANIUM_FLOW_RL).density(6).temperature(921378).luminosity(40).overlay(URANIUM_STILL_RL)).block(()->ModFluids.URANIUM.get());
     //fluid blocks
     public static final RegistryObject<FlowingFluidBlock> DIO = ModBlocks.BLOCKS.register("digital_ocean", () -> new DigitalSeaBlock(DIGITAL_OCEAN));
-	public static final RegistryObject<FlowingFluidBlock> URANIUM = ModBlocks.BLOCKS.register("uranium_waste", () -> new DigitalSeaBlock(STILL_URANIUM));
+	public static final RegistryObject<FlowingFluidBlock> URANIUM = ModBlocks.BLOCKS.register("uranium_waste", () -> new UraniumWaste(STILL_URANIUM));
 	public static final RegistryObject<FlowingFluidBlock> LIQUIDHELIUM = ModBlocks.BLOCKS.register("liquidhelium",() -> new LiquidHelium(FLOWING_LIQUIDHELIUM));
 	
 }
