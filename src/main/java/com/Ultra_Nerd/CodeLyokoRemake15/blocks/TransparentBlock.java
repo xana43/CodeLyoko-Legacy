@@ -20,6 +20,7 @@ public class TransparentBlock extends Block {
                 .hardnessAndResistance(-1, -1)
                 .sound(SoundType.STONE)
                 .harvestLevel(-1)
+                .notSolid()
         );
 
     }

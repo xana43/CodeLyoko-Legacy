@@ -2,7 +2,9 @@
   "replace" : false,
   "values": [
     "cm:digital_ocean",
-    "cm:flowing_digital_ocean"
+    "cm:flowing_digital_ocean",
+    "cm:still_uranium",
+    "cm:flowing_uranium"
 
 
   ]
