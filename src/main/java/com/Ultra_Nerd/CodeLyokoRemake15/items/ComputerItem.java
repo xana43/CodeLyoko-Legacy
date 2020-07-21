@@ -30,7 +30,7 @@ public class ComputerItem extends Item
 		}
 		else
 		{
-			tooltip.add(new StringTextComponent("Hold " + "\u00A7e" + "Shift" + "\u00A77" + "For more details"));
+			tooltip.add(new StringTextComponent("Hold " + "\u00A7e" + "Shift " + "\u00A77" + "For more details"));
 		}
 	}
 

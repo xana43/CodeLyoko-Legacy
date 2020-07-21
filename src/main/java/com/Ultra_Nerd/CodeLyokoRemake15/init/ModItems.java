@@ -28,13 +28,19 @@ public class ModItems
 	public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Base.MOD_ID);
 
 		//for items
-		 public static final RegistryObject<Item>  CPU_PACKAGE_ARM = ITEMS.register("cpu_package",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
+		 public static final RegistryObject<Item>  CPU_PACKAGE_ARM = ITEMS.register("cpu_package_arm",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
 		 public static final RegistryObject<Item>  CPU_PACKAGE_x86 = ITEMS.register("cpu_package_x86",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
 		 public static final RegistryObject<Item>  CPU_PACKAGE_CISC = ITEMS.register("cpu_package_cisc",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
 		 public static final RegistryObject<Item>  CPU_PACKAGE_RISC = ITEMS.register("cpu_package_risc",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.RARE)));
 		 public static final RegistryObject<Item>  CPU_PACKAGE_ASIC = ITEMS.register("cpu_package_asic",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.EPIC)));
 		 public static final RegistryObject<Item>  CPU_PACKAGE_QUANTUM = ITEMS.register("cpu_package_quantum",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.create("LEGENDARY", TextFormatting.DARK_AQUA))));
-	     public static final RegistryObject<Item>  GPU_PACKAGE_x86 = ITEMS.register("gpu_package_x86",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
+	     public static final RegistryObject<Item>  CPU_DIE_ARM = ITEMS.register("cpu_die_arm",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
+	     public static final RegistryObject<Item>  CPU_DIE_x86 = ITEMS.register("cpu_die_x86",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
+	     public static final RegistryObject<Item>  CPU_DIE_CISC = ITEMS.register("cpu_die_cisc",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
+	     public static final RegistryObject<Item>  CPU_DIE_RISC = ITEMS.register("cpu_die_risc",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.RARE)));
+	     public static final RegistryObject<Item>  CPU_DIE_ASIC = ITEMS.register("cpu_die_asic",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.EPIC)));
+	     public static final RegistryObject<Item>  CPU_DIE_QUANTUM = ITEMS.register("cpu_die_quantum",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.create("LEGENDARY", TextFormatting.DARK_AQUA))));
+		 public static final RegistryObject<Item>  GPU_PACKAGE_x86 = ITEMS.register("gpu_package_x86",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
 	     public static final RegistryObject<Item>  GPU_PACKAGE_CISC = ITEMS.register("gpu_package_cisc",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
 	     public static final RegistryObject<Item>  GPU_PACKAGE_RISC = ITEMS.register("gpu_package_risc",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.RARE)));
 	     public static final RegistryObject<Item>  GPU_PACKAGE_ASIC = ITEMS.register("gpu_package_asic",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.EPIC)));
