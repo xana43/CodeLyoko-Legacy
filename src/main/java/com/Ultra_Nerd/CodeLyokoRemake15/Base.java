@@ -1,8 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendLaser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.events.DimensionEnterEvent;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
@@ -22,7 +20,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -91,8 +88,7 @@ public class Base
 	private void dostuff(final FMLClientSetupEvent event)
 	{
 
-		RenderingRegistry.registerEntityRenderingHandler(ModEntities.BLOK.get(), RendBlok::new);
-		RenderingRegistry.registerEntityRenderingHandler(ModEntities.LASER.get(), RendLaser::new);
+
 	}
 	
 	@SubscribeEvent

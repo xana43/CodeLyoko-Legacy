@@ -1,10 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.HologramProjectorTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.*;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -28,5 +25,6 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<HologramProjectorTileEntity>> HOLOGRAM_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("hologram_tile_entity", () -> TileEntityType.Builder.create(HologramProjectorTileEntity::new,
                     ModBlocks.HOLOPROJECTOR.get()).build(null));
-
+    public static final RegistryObject<TileEntityType<QuantumChipletTileEntity>> QUANTUM_CHIPLET_TILE_ENTITY = TILE_ENTITY_TYPES.register("quantum_chiplet_tile_entity",
+    ()-> TileEntityType.Builder.create(QuantumChipletTileEntity::new,ModBlocks.CHIPLET_FRANZ_BLOCK.get()).build(null));
 }

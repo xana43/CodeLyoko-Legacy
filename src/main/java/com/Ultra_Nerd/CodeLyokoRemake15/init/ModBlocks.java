@@ -31,7 +31,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> COMPUTER_KEYBOARD = BLOCKS.register("computer_keyboard", ComputerKeyboard::new);
     public static final RegistryObject<Block> CHIPLET_BASIC_BLOCK = BLOCKS.register("chiplet_basic_block", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> CHIPLET_ADVANCED_BLOCK = BLOCKS.register("chiplet_advanced_block" , () -> new ChipletAdvancedBlock(Block.Properties.from(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> CHIPLET_FRANZ_BLOCK = BLOCKS.register("chiplet_franz_block", () -> new FranzChiplet(Block.Properties.from(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> CHIPLET_FRANZ_BLOCK = BLOCKS.register("chiplet_franz_block", FranzChiplet::new);
     public static final RegistryObject<Block> COMPUTER_COOLING_BLOCK = BLOCKS.register("computer_cooling_block", () -> new CoolingBlock(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> COMPUTER_LIQUID_CIRULATOR = BLOCKS.register("computer_liquid_cirulator",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> COMPUTER_TOWER_CONTROL_PANEL = BLOCKS.register("computer_tower_control_panel",ControlPanel::new);

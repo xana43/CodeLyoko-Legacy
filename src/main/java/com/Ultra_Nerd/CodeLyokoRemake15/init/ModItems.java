@@ -1,10 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.ComputerItem;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.FlourideItem;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.ItemBase;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.TrustyScrewDriverItem;
+import com.Ultra_Nerd.CodeLyokoRemake15.items.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.AelitaArmorElytra;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.ArmorFeline;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.ArmorWarrior;
@@ -96,7 +93,7 @@ public class ModItems
 	     public static final RegistryObject<Item>  QUBYTE = ITEMS.register("qubyte", ItemBase::new);
 	     public static final RegistryObject<Item>  RAW_SILICADUST = ITEMS.register("raw_silicadust", ItemBase::new);
 	     public static final RegistryObject<Item>  SOLID_QUANTUM = ITEMS.register("solid_quantum", ItemBase::new);
-		 public static final RegistryObject<Item>  SILICON_WAFER = ITEMS.register("silicon_wafer", ItemBase::new);
+		 public static final RegistryObject<Item>  SILICON_WAFER = ITEMS.register("silicon_wafer", () -> new WaferText(new Item.Properties().group(Base.LYOKO_ITEMS)));
 		 public static final RegistryObject<Item>  URANIUM_SILICATE = ITEMS.register("uranium_silicate", ItemBase::new);
 		 public static final RegistryObject<Item>  TRIURANIUM_OCTAOXIDE = ITEMS.register("triuranium_octaoxide", ItemBase::new);
 	     public static final RegistryObject<Item>  TERABIT = ITEMS.register("terabit", ItemBase::new);

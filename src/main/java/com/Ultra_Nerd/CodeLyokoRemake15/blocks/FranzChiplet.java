@@ -1,14 +1,27 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.QuantumChipletTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 
+import javax.annotation.Nonnull;
 import java.util.stream.Stream;
 
 public class FranzChiplet extends Block {
@@ -121,12 +134,54 @@ public class FranzChiplet extends Block {
             Block.makeCuboidShape(5, 4, 0, 11, 5, 1)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
-    public FranzChiplet(Properties properties) {
-        super(properties);
+    public FranzChiplet() {
+        super(Block.Properties.from(Blocks.IRON_BLOCK));
     }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return shape;
+    }
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
+
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get().create();
+    }
+
+
+
+    @Nonnull
+    @Override
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult result) {
+        if(!worldIn.isRemote)
+        {
+            TileEntity Chiplet = worldIn.getTileEntity(pos);
+            if(Chiplet instanceof QuantumChipletTileEntity)
+            {
+
+                NetworkHooks.openGui((ServerPlayerEntity)player,(QuantumChipletTileEntity)Chiplet,pos);
+                return ActionResultType.SUCCESS;
+            }
+        }
+        return ActionResultType.FAIL;
+    }
+
+    @Override
+    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        if(state.getBlock() != newState.getBlock())
+        {
+            TileEntity tile1 = worldIn.getTileEntity(pos);
+            if(tile1 instanceof QuantumChipletTileEntity)
+            {
+                assert tile1 != null;
+                InventoryHelper.dropItems(worldIn,pos,((QuantumChipletTileEntity)tile1).getItems());
+            }
+        }
     }
 }
