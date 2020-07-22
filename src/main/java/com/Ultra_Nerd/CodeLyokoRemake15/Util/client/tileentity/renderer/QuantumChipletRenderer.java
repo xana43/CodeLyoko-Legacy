@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.client.tileentity.renderer;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.QuantumChipletTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -41,6 +43,7 @@ public class QuantumChipletRenderer extends TileEntityRenderer<QuantumChipletTil
                     matrixStackIn.scale(.5f, .5f, .5f);
                     matrixStackIn.translate(1, 1, 1);
                     matrixStackIn.rotate(Vector3f.YP.rotationDegrees(degrees++ * 16));
+                    PlaySound(tileEntityIn);
                     renderItem(stack, partialTicks, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
                     matrixStackIn.pop();
                 }
@@ -50,5 +53,10 @@ public class QuantumChipletRenderer extends TileEntityRenderer<QuantumChipletTil
     private void renderItem(ItemStack stack, float partialTicks, MatrixStack matrix,IRenderTypeBuffer buff,int lightIn, int overlayIn)
     {
         Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.FIXED,lightIn, OverlayTexture.NO_OVERLAY,matrix,buff);
+    }
+
+    private void PlaySound(QuantumChipletTileEntity tileEntity)
+    {
+        tileEntity.getWorld().playSound(tileEntity.getPos().getX(),tileEntity.getPos().getY(),tileEntity.getPos().getZ(), ModSounds.GUISOUND.get(), SoundCategory.NEUTRAL,1,1,false);
     }
 }

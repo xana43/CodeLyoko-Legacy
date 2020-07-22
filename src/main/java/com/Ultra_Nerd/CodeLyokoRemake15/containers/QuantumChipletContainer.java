@@ -65,6 +65,10 @@ public class QuantumChipletContainer extends Container {
         return isWithinUsableDistance(callable,playerIn, ModBlocks.CHIPLET_FRANZ_BLOCK.get());
     }
 
+
+
+
+
     @Override
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
         ItemStack IStack = ItemStack.EMPTY;
