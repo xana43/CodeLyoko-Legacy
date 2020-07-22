@@ -20,7 +20,7 @@ public class QuantumChipletScreen extends ContainerScreen<QuantumChipletContaine
         this.ySize = 166;
     }
 
-    private static final ResourceLocation BACK_TEX = new ResourceLocation(Base.MOD_ID + "textures/gui/quantumchiplet.png");
+    private static final ResourceLocation BACK_TEX = new ResourceLocation(Base.MOD_ID + ":textures/gui/quantumchiplet.png");
 
     @Override
     public void render(final int p_render_1_, final int p_render_2_,final float p_render_3_) {

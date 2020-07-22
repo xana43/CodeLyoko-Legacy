@@ -27,18 +27,17 @@ public class QuantumChipletContainer extends Container {
         int startX = 8;
         int startY = 84;
         int slotSizePlus2 = 18;
-        for(int row = 0; row < 3; row++)
-        {
-            for(int column = 0; column < 9; column++)
-            {
-                this.addSlot(new Slot(PI,9 + (row * 9) + column, startY + (column * slotSizePlus2),startY + (row * slotSizePlus2)));
+        for (int row = 0; row < 3; row++) {
+            for (int column = 0; column < 9; column++) {
+                this.addSlot(new Slot(PI, 9 + (row * 9) + column, startX + (column * slotSizePlus2),
+                        startY + (row * slotSizePlus2)));
             }
         }
         //hotbor
-        int HotY = 142;
+
         for(int colum = 0; colum < 9; colum++)
         {
-            this.addSlot(new Slot(PI,colum,startX + (colum * slotSizePlus2),HotY));
+            this.addSlot(new Slot(PI,colum,startX + (colum * slotSizePlus2),142));
         }
     }
 

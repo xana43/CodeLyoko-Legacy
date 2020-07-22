@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.containers.QuantumChipletContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -67,7 +68,7 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
 
     @Override
     protected Container createMenu(int id, PlayerInventory player) {
-        return null;
+        return new QuantumChipletContainer(id,player,this);
     }
 
     @Override
@@ -131,7 +132,7 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return !stack.isDamaged();
+        return !stack.isDamaged() ;
     }
 
     @Override

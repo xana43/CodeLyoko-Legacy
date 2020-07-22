@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.client.tileentity.renderer;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.QuantumChipletTileEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
@@ -18,56 +19,31 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class QuantumChipletRenderer extends TileEntityRenderer<QuantumChipletTileEntity> {
 
     private float degrees;
-    private float height;
+
 
     public QuantumChipletRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
         degrees = 0;
-        height = 0;
+
     }
 
     @Override
     public void render(QuantumChipletTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
         NonNullList<ItemStack> items = tileEntityIn.getItems();
-        float lastHeight = height;
+
         for(ItemStack stack : items)
         {
             if(!stack.isEmpty())
             {
-                matrixStackIn.push();
-                matrixStackIn.scale(1,1,1);
-                matrixStackIn.translate(.5,.5,.5);
-                if(this.height <= lastHeight)
-                {
-                    if(this.height > 0)
-                    {
-                        this.height--;
-                    }
-                    else
-                    {
-                        this.height++;
-                    }
+                if(stack.getItem() == ModItems.SOLID_QUANTUM.get()) {
+                    matrixStackIn.push();
+                    matrixStackIn.scale(.5f, .5f, .5f);
+                    matrixStackIn.translate(1, 1, 1);
+                    matrixStackIn.rotate(Vector3f.YP.rotationDegrees(degrees++ * 16));
+                    renderItem(stack, partialTicks, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
+                    matrixStackIn.pop();
                 }
-                else
-                {
-                    if(this.height < 1)
-                    {
-                        this.height++;
-                    }
-                    else
-                    {
-                        this.height--;
-                    }
-                }
-
-                if(degrees == 360)
-                {
-                    degrees = 0;
-                }
-                matrixStackIn.rotate(Vector3f.YP.rotationDegrees(degrees++ / 3));
-                renderItem(stack,partialTicks,matrixStackIn,bufferIn,combinedLightIn,combinedOverlayIn);
-                matrixStackIn.pop();
             }
         }
     }
