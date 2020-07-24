@@ -1,13 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoRemake15;
 
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.KeyBoardAccess;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.events.DimensionEnterEvent;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.AelitaArmorElytra;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModOreGen;
 import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -77,8 +77,7 @@ public class Base
 
 	public void RightClick(final InputEvent.MouseInputEvent event)
 	{
-		GameSettings settings = Minecraft.getInstance().gameSettings;
-		if(settings.keyBindUseItem.isPressed())
+		if(KeyBoardAccess.rightClick())
 		{
 			assert Minecraft.getInstance().player != null;
 			AelitaArmorElytra.EnergyBall(Minecraft.getInstance().player,Minecraft.getInstance().world);

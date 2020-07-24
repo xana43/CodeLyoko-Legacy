@@ -8,10 +8,11 @@ import org.lwjgl.glfw.GLFW;
 
 public class KeyBoardAccess {
     private static final long MINECRAFT = Minecraft.getInstance().getMainWindow().getHandle();
+
     @OnlyIn(Dist.CLIENT)
-    public static boolean isHoldingE()
+    public static boolean rightClick()
     {
-        return InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(),GLFW.GLFW_KEY_E);
+        return InputMappings.isKeyDown(MINECRAFT,GLFW.GLFW_MOUSE_BUTTON_RIGHT);
     }
 
     @OnlyIn(Dist.CLIENT)

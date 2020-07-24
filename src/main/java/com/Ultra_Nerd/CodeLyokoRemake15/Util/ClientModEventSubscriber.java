@@ -29,6 +29,7 @@ public class ClientModEventSubscriber {
 
     @SubscribeEvent
     public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
+
         //makes certain blocks behave properly
         RenderTypeLookup.setRenderLayer(ModBlocks.TOWER_INTERFACE.get(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(ModFluids.DIO.get(),RenderType.getTranslucent());
