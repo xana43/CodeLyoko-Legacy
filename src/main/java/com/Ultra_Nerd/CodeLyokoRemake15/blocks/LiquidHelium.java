@@ -34,7 +34,7 @@ public class LiquidHelium extends FlowingFluidBlock {
         if(entityIn instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity) entityIn;
             livingEntity.attackEntityFrom(new DamageSource(this.getTranslationKey()), RANDOM.nextInt(4));
-            livingEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, -1, 4, false, false, false));
+            livingEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, -1, 5, false, false, false));
             livingEntity.limbSwingAmount = 0;
             livingEntity.limbSwing = 0;
             livingEntity.prevLimbSwingAmount = 0;

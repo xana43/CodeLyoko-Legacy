@@ -28,7 +28,9 @@ public class StoryBook extends WrittenBookItem {
         if(!worldIn.isRemote())
         {
             Minecraft.getInstance().displayGuiScreen(new StoryBookGUI());
+           Minecraft.getInstance().player.sendChatMessage("this feature isn't working yet");
         }
+
         return stack;
     }
 

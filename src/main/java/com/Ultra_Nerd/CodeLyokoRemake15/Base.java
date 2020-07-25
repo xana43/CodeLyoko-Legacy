@@ -85,7 +85,7 @@ CompoundNBT existing;
 			if(!existing.contains(nbt))
 			{
 				existing.putBoolean(nbt,true);
-			player.inventory.add(0, new ItemStack(Items.WRITABLE_BOOK, 1));
+			player.inventory.add(0, new ItemStack(ModItems.STORY_BOOK.get(), 1));
 			}
 		}
 	}
