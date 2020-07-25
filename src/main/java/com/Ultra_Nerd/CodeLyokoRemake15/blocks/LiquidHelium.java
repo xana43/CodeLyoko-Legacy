@@ -7,6 +7,7 @@ import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.FlowingFluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -16,9 +17,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.ILightReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class LiquidHelium extends FlowingFluidBlock {
@@ -43,14 +42,6 @@ public class LiquidHelium extends FlowingFluidBlock {
     }
 
     @Override
-    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-        if(worldIn.getBlockState(new BlockPos(pos.getX() + 1,pos.getY(),pos.getZ()+1)) == Blocks.AIR.getDefaultState()) {
-            worldIn.setBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1), Blocks.SNOW.getDefaultState());
-        }
-        super.tick(state, worldIn, pos, rand);
-    }
-
-    @Override
     public Vec3d getFogColor(BlockState state, IWorldReader world, BlockPos pos, Entity entity, Vec3d originalColor, float partialTicks) {
         return new Vec3d(1,1,1);
     }
@@ -62,6 +53,18 @@ public class LiquidHelium extends FlowingFluidBlock {
 
     @Override
     public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+        if(worldIn.getBlockState(new BlockPos(pos.getX(),pos.getY() - 1 ,pos.getZ())) == Blocks.WATER.getDefaultState()) {
+            worldIn.setBlockState(new BlockPos(pos.getX() , pos.getY() - 1, pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
+        }
+        if(worldIn.getFluidState(new BlockPos(pos.getX(),pos.getY() - 1 ,pos.getZ())) == Fluids.FLOWING_WATER.getDefaultState()) {
+            worldIn.setBlockState(new BlockPos(pos.getX() , pos.getY() - 1, pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
+        }
+        if(worldIn.getBlockState(new BlockPos(pos.getX(),pos.getY() - 1 ,pos.getZ())) == Blocks.LAVA.getDefaultState()) {
+            worldIn.setBlockState(new BlockPos(pos.getX() , pos.getY() - 1, pos.getZ()), Blocks.DIAMOND_BLOCK.getDefaultState());
+        }
+        if(worldIn.getFluidState(new BlockPos(pos.getX(),pos.getY() - 1 ,pos.getZ())) == Fluids.FLOWING_LAVA.getDefaultState()) {
+            worldIn.setBlockState(new BlockPos(pos.getX() , pos.getY() - 1, pos.getZ()), Blocks.OBSIDIAN.getDefaultState());
+        }
         if(worldIn.getBlockState(new BlockPos(pos.getX() + 1,pos.getY(),pos.getZ()+1)) == Blocks.AIR.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1), Blocks.SNOW.getDefaultState());
         }

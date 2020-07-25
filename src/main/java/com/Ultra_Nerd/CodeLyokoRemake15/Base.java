@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.KeyBoardAccess;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.events.DimensionEnterEvent;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
@@ -9,14 +8,14 @@ import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.AelitaArmorElytra;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModOreGen;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.*;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
@@ -29,6 +28,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.glfw.GLFW;
 
 @Mod("cm")
 @Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Bus.MOD)
@@ -45,6 +45,7 @@ public class Base
 		ModBus.addListener(this::dostuff);
 		ModBus.addListener(this::RightClick);
 		ModBus.addListener(this::OreGen);
+		ModBus.addListener(this::PlayerSetup);
 		ModSounds.SOUNDS.register(ModBus);
 		ModItems.ITEMS.register(ModBus);
 		ModBus.addListener(DimensionEnterEvent::EnterDimension);
@@ -64,8 +65,30 @@ public class Base
 	{
 
 	}
+private static final String nbt = "firstjoin";
+	@SubscribeEvent
+	public void PlayerSetup(final EntityJoinWorldEvent event)
+	{
+		if(event.getEntity() instanceof PlayerEntity) {
+CompoundNBT tag =event.getEntity().getPersistentData();
+CompoundNBT existing;
+			PlayerEntity player = (PlayerEntity)event.getEntity();
+			if(!tag.contains(PlayerEntity.PERSISTED_NBT_TAG))
+			{
+				tag.put(PlayerEntity.PERSISTED_NBT_TAG,(existing = new CompoundNBT()));
+			}
+			else
+			{
+				existing = tag.getCompound(PlayerEntity.PERSISTED_NBT_TAG);
+			}
 
-
+			if(!existing.contains(nbt))
+			{
+				existing.putBoolean(nbt,true);
+			player.inventory.add(0, new ItemStack(Items.WRITABLE_BOOK, 1));
+			}
+		}
+	}
 	public void OreGen(final FMLLoadCompleteEvent event)
 	{
 
@@ -77,13 +100,14 @@ public class Base
 
 	public void RightClick(final InputEvent.MouseInputEvent event)
 	{
-		if(KeyBoardAccess.rightClick())
+		if(event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT)
 		{
 			assert Minecraft.getInstance().player != null;
 			AelitaArmorElytra.EnergyBall(Minecraft.getInstance().player,Minecraft.getInstance().world);
 		}
 	}
-	
+
+
 	private void dostuff(final FMLClientSetupEvent event)
 	{
 

@@ -1,7 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -15,15 +17,33 @@ import net.minecraft.world.World;
 import java.util.function.Supplier;
 
 public class UraniumWaste extends FlowingFluidBlock {
+   private static int timer = 200;
     public UraniumWaste(Supplier<? extends FlowingFluid> supplier) {
         super(supplier, Block.Properties.create(Material.LAVA)
                 .noDrops()
                 .hardnessAndResistance(100,100)
                 .doesNotBlockMovement()
                 .lightValue(5)
-
+                .tickRandomly()
         );
     }
+
+
+
+    @Override
+    public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+        if(worldIn.getBlockState(new BlockPos(pos.getX(),pos.getY() - 1, pos.getZ())) == Blocks.WATER.getDefaultState())
+        {
+            worldIn.setBlockState(new BlockPos(pos.getX(),pos.getY() - 1, pos.getZ()) , ModFluids.URANIUM.get().getDefaultState());
+        }
+        if(worldIn.getBlockState(new BlockPos(pos.getX() + 1,pos.getY(), pos.getZ() + 1)) == Blocks.WATER.getDefaultState())
+        {
+            worldIn.setBlockState(new BlockPos(pos.getX() + 1,pos.getY(), pos.getZ() + 1) , ModFluids.URANIUM.get().getDefaultState());
+        }
+
+
+    }
+
 
     @Override
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
