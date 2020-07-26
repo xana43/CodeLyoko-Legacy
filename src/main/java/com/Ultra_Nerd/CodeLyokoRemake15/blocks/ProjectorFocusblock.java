@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -22,20 +21,13 @@ public class ProjectorFocusblock extends ContainerBlock {
 	public ProjectorFocusblock()
 	{
 	super(Properties.create(Material.GLASS)
-				
 				.hardnessAndResistance(6, 10)
 				.sound(SoundType.GLASS)
 				.lightValue(2)
 				.harvestLevel(0)
 				.harvestTool(ToolType.PICKAXE)
-				
-					
-					
-					
-					
 			);
 		this.setDefaultState(this.getDefaultState().with(VALIDFOCUS,false));
-
 	}
 
 	@Nullable
@@ -54,12 +46,10 @@ public class ProjectorFocusblock extends ContainerBlock {
 	public BlockRenderType getRenderType(BlockState state) {
 		if(this.getDefaultState().get(VALIDFOCUS))
 		{
-			Base.Log.debug("invis");
 			return BlockRenderType.INVISIBLE;
 		}
 		else
 		{
-			Base.Log.debug("model");
 			return BlockRenderType.MODEL;
 		}
 	}

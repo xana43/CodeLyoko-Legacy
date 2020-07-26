@@ -11,14 +11,12 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensionTypes;
 
 @Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventSubscriber {
-
     @SubscribeEvent
     public static void InitDims(final RegisterDimensionsEvent event)
     {
         if(DimensionType.byName(ModDimensionTypes.DimensionTypeForest) == null)
         {
             DimensionManager.registerDimension(ModDimensionTypes.DimensionTypeForest, ModDimensions.FOREST_DIMENSION.get(),null,true);
-
         }
         if(DimensionType.byName(ModDimensionTypes.DimensionTypeCarthage) == null)
         {

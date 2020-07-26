@@ -27,23 +27,14 @@ public class Marabunta extends Block {
 	public Marabunta()
 	{
 		super(Block.Properties.create(Material.DRAGON_EGG)
-
 				.hardnessAndResistance(6, 10)
 				.sound(SoundType.STONE)
 				.lightValue(0)
 				.harvestLevel(2)
 				.harvestTool(ToolType.PICKAXE)
 				.tickRandomly()
-
-
-
-
 		);
-
 	}
-
-
-
 	@Override
 	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos,
 										ISelectionContext context) {
@@ -64,8 +55,6 @@ public class Marabunta extends Block {
 		// TODO Auto-generated method stub
 		if (!worldIn.isRemote)
 		{
-
-
 			for (int i = 0; i < 90; ++i)
 			{
 				BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
@@ -74,11 +63,10 @@ public class Marabunta extends Block {
 				{
 					return;
 				}
-
 				// BlockState iblockstate = worldIn.getBlockState(blockpos.up());
 				BlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-				if (iblockstate1.getBlock() == Blocks.COARSE_DIRT || iblockstate1.getBlock() == Blocks.GRASS_PATH|| iblockstate1.getBlock() == Blocks.DIRT ||    iblockstate1.getBlock() == ModBlocks.DIGITAL_GRASS.get() || iblockstate1.getBlock() == ModBlocks.DIGITAL_ICE.get() || iblockstate1.getBlock() == Blocks.GRASS_BLOCK)
+				if (iblockstate1.getBlock() == Blocks.COARSE_DIRT || iblockstate1.getBlock() == Blocks.GRASS_PATH || iblockstate1.getBlock() == Blocks.DIRT ||    iblockstate1.getBlock() == ModBlocks.DIGITAL_GRASS.get() || iblockstate1.getBlock() == ModBlocks.DIGITAL_ICE.get() || iblockstate1.getBlock() == Blocks.GRASS_BLOCK)
 				{
 					worldIn.setBlockState(blockpos, ModBlocks.MARABUNTA.get().getDefaultState());
 				}

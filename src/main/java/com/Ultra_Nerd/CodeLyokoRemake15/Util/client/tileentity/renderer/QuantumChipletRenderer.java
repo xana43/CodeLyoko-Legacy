@@ -57,6 +57,6 @@ public class QuantumChipletRenderer extends TileEntityRenderer<QuantumChipletTil
 
     private void PlaySound(QuantumChipletTileEntity tileEntity)
     {
-        tileEntity.getWorld().playSound(tileEntity.getPos().getX(),tileEntity.getPos().getY(),tileEntity.getPos().getZ(), ModSounds.QUANTUMZAP.get(), SoundCategory.RECORDS,1,1,false);
+        tileEntity.getWorld().playSound(tileEntity.getPos().getX(),tileEntity.getPos().getY(),tileEntity.getPos().getZ(), ModSounds.QUANTUMZAP.get(), SoundCategory.BLOCKS,1,1,true);
     }
 }

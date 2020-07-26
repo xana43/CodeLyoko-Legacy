@@ -25,15 +25,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = Base.MOD_ID, value = Dist.CLIENT)
 
 public class ClientModEventSubscriber {
-
-
-
-
-
-
     @SubscribeEvent
     public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
-
         //makes certain blocks behave properly
         RenderTypeLookup.setRenderLayer(ModBlocks.TOWER_INTERFACE.get(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(ModFluids.DIO.get(),RenderType.getTranslucent());
@@ -45,7 +38,6 @@ public class ClientModEventSubscriber {
         RenderTypeLookup.setRenderLayer(ModFluids.LIQUIDHELIUM.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.CHIPLET_FRANZ_BLOCK.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.HOLOPROJECTOR_PROJECTION.get(),RenderType.getTranslucent());
-
         //registers the screens and entities
         ScreenManager.<ContainerInfusing, InfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
         ScreenManager.<TowerInterfaceContainer, TowerGUI>registerFactory(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);
@@ -54,10 +46,6 @@ public class ClientModEventSubscriber {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LASER.get(), RendLaser::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FAN.get(), RendFan::new);
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get(), QuantumChipletRenderer::new);
-        
-
-
-
     }
 
 

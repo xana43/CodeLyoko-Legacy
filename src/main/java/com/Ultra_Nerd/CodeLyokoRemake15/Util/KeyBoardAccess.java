@@ -5,7 +5,6 @@ import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.glfw.GLFW;
-
 public class KeyBoardAccess {
     private static final long MINECRAFT = Minecraft.getInstance().getMainWindow().getHandle();
 
