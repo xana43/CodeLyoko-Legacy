@@ -32,6 +32,14 @@ public class CustomLiquidHeliumFluid extends ForgeFlowingFluid {
 
                 return;
             }
+            if (this.isIn(FluidTags.WATER) && ifluidstate.isTagged(FluidTags.LAVA)) {
+                if (blockStateIn.getBlock() instanceof FlowingFluidBlock) {
+                    worldIn.setBlockState(pos, net.minecraftforge.event.ForgeEventFactory.fireFluidPlaceBlockEvent(worldIn, pos, pos, Blocks.DIAMOND_BLOCK.getDefaultState()), 3);
+                }
+
+
+                return;
+            }
         }
         super.flowInto(worldIn, pos, blockStateIn, direction, fluidStateIn);
     }
