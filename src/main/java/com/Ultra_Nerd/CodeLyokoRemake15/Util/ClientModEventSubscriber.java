@@ -25,6 +25,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = Base.MOD_ID, value = Dist.CLIENT)
 
 public class ClientModEventSubscriber {
+
+
+
     @SubscribeEvent
     public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
         //makes certain blocks behave properly

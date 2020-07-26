@@ -121,6 +121,7 @@ public class ForestDimension extends Dimension  {
 
 
 
+
     @Override
     public void setAllowedSpawnTypes(boolean allowHostile, boolean allowPeaceful) {
         super.setAllowedSpawnTypes(true,false);

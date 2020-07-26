@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import java.util.function.Supplier;
 
 public class UraniumWaste extends FlowingFluidBlock {
-   private static int timer = 200;
+   private static final int timer = 200;
     public UraniumWaste(Supplier<? extends FlowingFluid> supplier) {
         super(supplier, Block.Properties.create(Material.LAVA)
                 .noDrops()

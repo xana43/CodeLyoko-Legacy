@@ -1,7 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items.armor;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthadge.Sector5Dimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainDimension;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
@@ -13,18 +18,23 @@ import net.minecraft.world.World;
 
 public class ArmorWarrior extends ArmorItem {
 	private byte I = 0;
-	private int damage;
+	private final int damage;
 	public ArmorWarrior(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
 		super(materialIn, slot, builder);
 		this.damage = materialIn.getDurability(slot);
 	}
 
 
-
+	private boolean checkDim(PlayerEntity player)
+	{
+		return player.world.dimension instanceof ForestDimension || player.world.dimension instanceof IceDimension ||
+				player.world.dimension instanceof DesertDimension || player.world.dimension instanceof MountainDimension
+				|| player.world.dimension instanceof Sector5Dimension || player.world.dimension instanceof OceanDimension;
+	}
 
 	@Override
 	public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-		if (!(player.world.dimension instanceof ForestDimension)) {
+		if (!checkDim(player)) {
 			if(player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.WILLIAM_CHESTPLATE.get())
 			{
 				player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).setCount(0);
