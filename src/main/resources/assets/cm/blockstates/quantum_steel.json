@@ -2,8 +2,7 @@
     "forge_marker":1,
     "variants":
     {
-	 "air=false,formed=true":{"model":"cm:block/transparent"},
-     "air=true,formed=true":{"model": "cm:block/transparent"},
-     "air=false,formed=false":{"model": "cm:block/quantum_steel"}
+	 "formed=true":{"model":"cm:block/transparent"},
+     "formed=false":{"model": "cm:block/quantum_steel"}
     }
 }

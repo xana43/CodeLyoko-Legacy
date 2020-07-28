@@ -6,6 +6,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.containers.HologramContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -18,12 +19,15 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 
 public class HologramProjectorTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
     public static boolean valid = false;
     private boolean OOOF = false;
     private int x,y,z;
+    boolean once = false;
+    private List<BlockState> stateList;
     public HologramProjectorTileEntity(TileEntityType<?> tileEntityTypeIn) {
 
         super(tileEntityTypeIn);
@@ -37,7 +41,7 @@ public HologramProjectorTileEntity()
 
     @Override
     public void tick() {
-        boolean once = false;
+
         boolean onceback = false;
 
 
@@ -55,6 +59,8 @@ public HologramProjectorTileEntity()
             if (blockState == ModBlocks.PROJECTOR_FOCUS.get() && !once) {
 
                 ProjectorFocusblock.SetModelFocus(true, this.world, new BlockPos(this.pos.getX(),this.pos.getY() + 1,this.pos.getZ()));
+                HologramProjectorBlock.SetModel(true, this.world, this.pos);
+               // QuantumSteel.SetModel(true,this.world,new BlockPos(this.pos.getX() + 1, this.pos.getY(),this.pos.getZ()));
 
                 once = true;
             }
@@ -63,7 +69,8 @@ public HologramProjectorTileEntity()
         } else {
 
             HologramProjectorBlock.SetModel(false, this.world, this.pos);
-            //ProjectorFocusblock.SetModelFocus(false, this.world, new BlockPos(this.pos.getX(),this.pos.getY() + 1,this.pos.getZ()));
+            ProjectorFocusblock.SetModelFocus(false, this.world, new BlockPos(this.pos.getX(),this.pos.getY() + 1,this.pos.getZ()));
+
 
             }
 
@@ -74,7 +81,6 @@ public HologramProjectorTileEntity()
 
         x++;
         if (x > 1) {
-            //System.out.println("notworking");
             x = -1;
             y++;
             if (y > 0) {
@@ -115,6 +121,7 @@ public HologramProjectorTileEntity()
             if (block != ModBlocks.QUANTUM_STEEL.get()) {
                 OOOF = true;
             }
+
         }
     }
 

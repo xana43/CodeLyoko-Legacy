@@ -42,6 +42,8 @@ public class ClientModEventSubscriber {
         RenderTypeLookup.setRenderLayer(ModBlocks.CHIPLET_FRANZ_BLOCK.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.UV_FOCUS.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.HOLOPROJECTOR_PROJECTION.get(),RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.PROJECTOR_FOCUS.get(),RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(ModBlocks.HOLOPROJECTOR.get(),RenderType.getTranslucent());
         //registers the screens and entities
         ScreenManager.<ContainerInfusing, InfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
         ScreenManager.<TowerInterfaceContainer, TowerGUI>registerFactory(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);

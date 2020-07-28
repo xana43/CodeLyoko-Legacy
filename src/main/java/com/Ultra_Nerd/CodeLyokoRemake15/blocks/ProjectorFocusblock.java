@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
@@ -26,6 +25,7 @@ public class ProjectorFocusblock extends ContainerBlock {
 				.lightValue(2)
 				.harvestLevel(0)
 				.harvestTool(ToolType.PICKAXE)
+			.notSolid()
 			);
 		this.setDefaultState(this.getDefaultState().with(VALIDFOCUS,false));
 	}
@@ -66,12 +66,12 @@ public class ProjectorFocusblock extends ContainerBlock {
 		 TileEntity tileentity = worldIn.getTileEntity(pos);
 
 		 if(act) {
-			 worldIn.setBlockState(pos, ModBlocks.PROJECTOR_FOCUS.get().getDefaultState().with(VALIDFOCUS, true), 3);
+			 worldIn.setBlockState(pos, state.with(VALIDFOCUS, true));
 
 		 }
 		 else {
 
-			 worldIn.setBlockState(pos, ModBlocks.PROJECTOR_FOCUS.get().getDefaultState().with(VALIDFOCUS, false), 3);
+			 worldIn.setBlockState(pos, state.with(VALIDFOCUS, false));
 
 		 }
 

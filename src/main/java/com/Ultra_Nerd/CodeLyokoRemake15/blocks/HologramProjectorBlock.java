@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.HologramProjectorTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -80,10 +79,12 @@ public class HologramProjectorBlock extends ContainerBlock {
 		 TileEntity tileentity = worldIn.getTileEntity(pos);
 
 		 if(act) {
-			 worldIn.setBlockState(pos, ModBlocks.HOLOPROJECTOR.get().getDefaultState().with(VALID, true), 3);
+			 worldIn.setBlockState(pos, state.with(VALID,true));
 
 		 }
-		 else worldIn.setBlockState(pos, ModBlocks.HOLOPROJECTOR.get().getDefaultState().with(VALID, false), 3);
+		 else {
+			 worldIn.setBlockState(pos, state.with(VALID,false));
+		 }
 
 
 

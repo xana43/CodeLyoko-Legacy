@@ -318,7 +318,7 @@ public class ComputerKeyboard extends Block {
 
 
 		);
-        this.getDefaultState().with(directionProperty, Direction.NORTH);
+        this.setDefaultState(this.getStateContainer().getBaseState().with(directionProperty, Direction.NORTH));
     }
 
     @Override
