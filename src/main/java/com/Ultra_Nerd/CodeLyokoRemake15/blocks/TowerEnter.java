@@ -36,10 +36,10 @@ public TowerEnter() {
 		builder.add(DIRTOWER2);
 	}
 
-	@Override
-	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-		return 5;
-	}
+
+
+
+
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
