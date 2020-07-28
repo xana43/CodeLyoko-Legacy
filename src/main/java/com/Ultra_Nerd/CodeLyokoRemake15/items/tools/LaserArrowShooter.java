@@ -26,12 +26,14 @@ private byte Count = 100;
 
 	@Override
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-		Count -= 1;
-		if(Count == 0) {
-			if(stack.getDamage() != 0) {
-				stack.damageItem(-1, (PlayerEntity) entityIn, null);
+		if(!worldIn.isRemote()) {
+			Count -= 1;
+			if (Count == 0) {
+				if (stack.getDamage() != 0) {
+					stack.damageItem(-1, (PlayerEntity) entityIn, null);
+				}
+				Count = 100;
 			}
-			Count = 100;
 		}
 	}
 
@@ -49,7 +51,10 @@ private byte Count = 100;
 		if(item.getDamage() < 40 && playerIn.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get() && playerIn.world.dimension instanceof ForestDimension) {
 		//worldIn.playSound(null,playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModItems.BIT.get(), SoundCategory.NEUTRAL, 1f, 1f);
 
+	if(!worldIn.isRemote()){
 		worldIn.playSound(playerIn,playerIn.getPosX(),playerIn.getPosY(),playerIn.getPosZ(), ModSounds.LASERARROW.get(),SoundCategory.NEUTRAL,1f,1f);
+	}
+
 		EntityLaser las = ModEntities.LASER.get().create(worldIn); //new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 		
 		las.setPosition(playerIn.getPosX() + aim.x * 1.5D, playerIn.getPosY() + aim.y * 1.9D, playerIn.getPosZ() + aim.z * 1.5D);

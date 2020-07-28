@@ -1,17 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.player;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthadge.Sector5Dimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainDimension;
-import com.mojang.authlib.GameProfile;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.GameType;
-import net.minecraft.world.World;
+public class PlayerHealthCustom {
 
-public class PlayerHealthCustom extends PlayerEntity {
-
-
+/*
     public PlayerHealthCustom(World worldIn, GameProfile gameProfileIn) {
         super(worldIn, gameProfileIn);
     }
@@ -49,4 +40,6 @@ public class PlayerHealthCustom extends PlayerEntity {
     public boolean isCreative() {
         return false;
     }
+
+ */
 }

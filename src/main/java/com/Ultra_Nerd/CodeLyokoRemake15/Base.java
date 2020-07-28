@@ -2,14 +2,15 @@ package com.Ultra_Nerd.CodeLyokoRemake15;
 
 
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramBlock;
-import com.Ultra_Nerd.CodeLyokoRemake15.events.DimensionEnterEvent;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.AelitaArmorElytra;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModOreGen;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.InputEvent;
@@ -48,7 +49,6 @@ public class Base
 		ModBus.addListener(this::PlayerSetup);
 		ModSounds.SOUNDS.register(ModBus);
 		ModItems.ITEMS.register(ModBus);
-		ModBus.addListener(DimensionEnterEvent::EnterDimension);
 		ModFluids.LIQUIDS.register(ModBus);
 		ModBlocks.BLOCKS.register(ModBus);
 		ModEntities.Entities.register(ModBus);
@@ -103,7 +103,7 @@ CompoundNBT existing;
 		if(event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT)
 		{
 			assert Minecraft.getInstance().player != null;
-			AelitaArmorElytra.EnergyBall(Minecraft.getInstance().player,Minecraft.getInstance().world);
+			//AelitaArmorElytra.EnergyBall(Minecraft.getInstance().player,Minecraft.getInstance().world);
 		}
 	}
 

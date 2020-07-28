@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.screens.StoryBookGUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -27,7 +26,7 @@ public class StoryBook extends WrittenBookItem {
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         if(!worldIn.isRemote())
         {
-            Minecraft.getInstance().displayGuiScreen(new StoryBookGUI());
+            //Minecraft.getInstance().displayGuiScreen(new StoryBookGUI());
            Minecraft.getInstance().player.sendChatMessage("this feature isn't working yet");
         }
 

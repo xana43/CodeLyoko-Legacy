@@ -1,10 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.ReadBookScreen;
-import net.minecraft.util.ResourceLocation;
-
-public class StoryBookGUI extends ReadBookScreen {
+public class StoryBookGUI //extends ReadBookScreen
+{/*
     static final ResourceLocation texture = new ResourceLocation("minecraft:textures/gui/book.png");
 
     private static final int BUTTON_NEXT = 0;
@@ -29,5 +26,6 @@ public class StoryBookGUI extends ReadBookScreen {
     public void init(Minecraft p_init_1_, int p_init_2_, int p_init_3_) {
         super.init(p_init_1_, p_init_2_, p_init_3_);
     }
+    */
 
 }
