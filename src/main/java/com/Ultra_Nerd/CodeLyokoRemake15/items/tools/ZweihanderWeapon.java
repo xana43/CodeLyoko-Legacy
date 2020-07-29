@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.items.tools;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.block.Blocks;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -11,12 +12,13 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class ZweihanderWeapon extends SwordItem {
     private final float attackdamage;
     private final float attackspeed;
-
+    private short Count = 256;
     public ZweihanderWeapon(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
         this.attackspeed = attackSpeedIn;
@@ -29,8 +31,38 @@ public class ZweihanderWeapon extends SwordItem {
     }
 
 
+
+
+    @Override
+    public boolean onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
+        if(stack.getDamage() < 3999) {
+            Vec3d aim = player.getLookVec();
+            stack.setDamage(stack.getDamage() + 200);
+            entity.addVelocity(aim.x, aim.y, aim.z);
+            Count = 256;
+
+        }
+
+        return stack.getDamage() >= 3999;
+
+    }
+
     @Override
     public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+        if(stack.getDamage() > 4000)
+        {
+            stack.setDamage(3999);
+        }
+        if(!worldIn.isRemote()) {
+            Count -= 1;
+            if (Count == 0) {
+                if (stack.getDamage() != 0) {
+                    stack.damageItem(-1, (PlayerEntity) entityIn, null);
+                }
+
+                Count = 256;
+            }
+        }
         if(entityIn instanceof PlayerEntity)
         {
             PlayerEntity player = (PlayerEntity)entityIn;
@@ -38,6 +70,23 @@ public class ZweihanderWeapon extends SwordItem {
 
 
         }
+        if(!stack.isEnchanted() && stack.getDamage() < 1999)
+        {
+            stack.addEnchantment(Enchantments.SWEEPING,Enchantments.SWEEPING.getMaxLevel());
+            stack.addEnchantment(Enchantments.SHARPNESS,Enchantments.SHARPNESS.getMaxLevel());
+
+        }
+        else if(stack.getDamage() >= 3999)
+        {
+            stack.getEnchantmentTagList().clear();
+
+
+        }
+    }
+
+    @Override
+    public boolean hasEffect(ItemStack stack) {
+        return false;
     }
 
     @Override

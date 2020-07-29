@@ -51,9 +51,9 @@ private byte Count = 100;
 		if(item.getDamage() < 40 && playerIn.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get() && playerIn.world.dimension instanceof ForestDimension) {
 		//worldIn.playSound(null,playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModItems.BIT.get(), SoundCategory.NEUTRAL, 1f, 1f);
 
-	if(!worldIn.isRemote()){
+
 		worldIn.playSound(playerIn,playerIn.getPosX(),playerIn.getPosY(),playerIn.getPosZ(), ModSounds.LASERARROW.get(),SoundCategory.NEUTRAL,1f,1f);
-	}
+
 
 		EntityLaser las = ModEntities.LASER.get().create(worldIn); //new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 		

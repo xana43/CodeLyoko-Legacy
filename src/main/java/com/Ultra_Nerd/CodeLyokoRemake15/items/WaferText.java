@@ -18,6 +18,6 @@ public class WaferText extends Item {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new StringTextComponent("Made by CSMC"));
+        tooltip.add(new StringTextComponent("Made by MSMC"));
     }
 }

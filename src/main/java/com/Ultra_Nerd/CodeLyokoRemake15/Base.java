@@ -49,7 +49,7 @@ public class Base
 		ModBus.addListener(this::dostuff);
 		ModBus.addListener(this::RightClick);
 		ModBus.addListener(this::OreGen);
-		ModBus.addListener(this::PlayerSetup);
+
 
 		ModSounds.SOUNDS.register(ModBus);
 		ModItems.ITEMS.register(ModBus);

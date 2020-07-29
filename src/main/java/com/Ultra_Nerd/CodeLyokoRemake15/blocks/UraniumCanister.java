@@ -34,7 +34,7 @@ public class UraniumCanister extends Block {
     @Override
     public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state) {
 
-            worldIn.setBlockState(pos, ModFluids.URANIUM.get().getDefaultState(),0);
+            worldIn.setBlockState(pos, ModFluids.URANIUM.get().getDefaultState(),1);
 
         super.onPlayerDestroy(worldIn, pos, state);
     }

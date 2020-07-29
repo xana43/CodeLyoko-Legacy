@@ -84,7 +84,7 @@ public TowerWall() {
 	@Override
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		super.animateTick(stateIn, worldIn, pos, rand);
-		worldIn.addParticle(new ColoredParticle.ColoredParticleData(0,0,1,1),pos.getX() + 0.5f,pos.getY() + 0.5f,pos.getZ() + 0.5f,0,0,0);
+		worldIn.addParticle(new ColoredParticle.ColoredParticleData(0,0,1,0.5f),pos.getX(),pos.getY() + 0.5f,pos.getZ() + 0.5f,0,0,0);
 
 	}
 }

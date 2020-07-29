@@ -370,8 +370,5 @@ public class ComputerKeyboard extends Block {
         return false;
     }
 
-    @Override
-    public boolean isTransparent(BlockState state) {
-        return true;
-    }
+
 }

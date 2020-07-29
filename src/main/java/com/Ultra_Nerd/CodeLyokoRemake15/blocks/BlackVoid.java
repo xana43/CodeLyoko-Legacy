@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -44,7 +43,7 @@ public class BlackVoid extends Block {
         super(Block.Properties.create(Material.STRUCTURE_VOID)
 
                 .hardnessAndResistance(-1, -1)
-                .sound(SoundType.METAL)
+                .sound(null)
                 .lightValue(90)
 
 
@@ -105,6 +104,14 @@ public class BlackVoid extends Block {
     }
 
 
+    @Override
+    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+        entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
+        entityIn.fallDistance = Integer.MAX_VALUE;
+    }
 
-
+    @Override
+    public void onLanded(IBlockReader worldIn, Entity entityIn) {
+        entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
+    }
 }
