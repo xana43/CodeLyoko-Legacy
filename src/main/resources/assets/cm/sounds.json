@@ -87,5 +87,11 @@
         "category": "records",
         "subtitle": "quantum chiplet zapping away",
         "sounds": [{"name" :  "cm:events/quantumchipletactive","steam":  false, "preload": true}]
+    },
+    "digital_ocean":
+    {
+        "category": "ambient",
+        "subtitle": "digital ocean ambiance",
+        "sounds": [{"name": "cm:music/sea/digital_sea","stream": true,"preload": true}]
     }
 }
