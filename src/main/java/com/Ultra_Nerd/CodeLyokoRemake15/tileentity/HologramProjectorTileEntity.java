@@ -69,8 +69,10 @@ public HologramProjectorTileEntity()
         } else {
 
             HologramProjectorBlock.SetModel(false, this.world, this.pos);
-            ProjectorFocusblock.SetModelFocus(false, this.world, new BlockPos(this.pos.getX(),this.pos.getY() + 1,this.pos.getZ()));
-
+            if(this.world.getBlockState(new BlockPos(this.pos.getX(),this.pos.getY() + 1,this.pos.getZ())) == ModBlocks.PROJECTOR_FOCUS.get().getDefaultState())
+            {
+                ProjectorFocusblock.SetModelFocus(false, this.world, new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ()));
+            }
 
             }
 

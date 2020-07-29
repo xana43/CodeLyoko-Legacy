@@ -25,6 +25,7 @@ public class ModItems
 	public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Base.MOD_ID);
 
 		//for items
+	     public static final RegistryObject<BlokItem>  BLOK_SPAWN_EGG = ITEMS.register("blok_spawn_egg",() -> new BlokItem(ModEntities.BLOK,1,1,new Item.Properties().group(Base.LYOKO_ITEMS)));
 		 public static final RegistryObject<Item>  CPU_PACKAGE_ARM = ITEMS.register("cpu_package_arm",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
 		 public static final RegistryObject<Item>  CPU_PACKAGE_x86 = ITEMS.register("cpu_package_x86",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
 		 public static final RegistryObject<Item>  CPU_PACKAGE_CISC = ITEMS.register("cpu_package_cisc",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));

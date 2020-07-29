@@ -61,7 +61,9 @@ public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> {
 
     private int getBurnLeftSDca(int pixels) {
         int i = this.tileentity.getField(1);
-        if (i == 0) i = 20;
+        if (i == 0) {
+            i = 20;
+        }
         return this.tileentity.getField(0) * pixels / i;
     }
 

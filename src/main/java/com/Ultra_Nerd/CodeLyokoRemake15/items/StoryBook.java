@@ -1,10 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.WrittenBookItem;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
@@ -22,15 +24,12 @@ public class StoryBook extends WrittenBookItem {
         return new StringTextComponent("Entry 1");
     }
 
-    @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if(!worldIn.isRemote())
-        {
-            //Minecraft.getInstance().displayGuiScreen(new StoryBookGUI());
-           Minecraft.getInstance().player.sendChatMessage("this feature isn't working yet");
-        }
+    
 
-        return stack;
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        playerIn.sendMessage(new StringTextComponent("doesn't work yet"));
+        return new ActionResult<>(ActionResultType.SUCCESS,playerIn.getHeldItem(handIn));
     }
 
     @Override

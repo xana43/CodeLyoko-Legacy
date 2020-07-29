@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.particles.ColoredParticle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
@@ -12,6 +13,10 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+
+import java.util.Random;
 
 
 public class TowerWall extends Block {
@@ -70,5 +75,16 @@ public TowerWall() {
 		return true;
 	}
 
+	@Override
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+		super.tick(state, worldIn, pos, rand);
+		worldIn.addParticle(new ColoredParticle.ColoredParticleData(0,0,1,1),pos.getX() + 0.5f,pos.getY() + 0.5f,pos.getZ() + 0.5f,0,0,0);
+	}
 
+	@Override
+	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+		super.animateTick(stateIn, worldIn, pos, rand);
+		worldIn.addParticle(new ColoredParticle.ColoredParticleData(0,0,1,1),pos.getX() + 0.5f,pos.getY() + 0.5f,pos.getZ() + 0.5f,0,0,0);
+
+	}
 }

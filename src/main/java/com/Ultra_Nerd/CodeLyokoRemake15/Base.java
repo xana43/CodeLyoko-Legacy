@@ -3,9 +3,11 @@ package com.Ultra_Nerd.CodeLyokoRemake15;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
+import com.Ultra_Nerd.CodeLyokoRemake15.items.BlokItem;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModOreGen;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -42,17 +44,20 @@ public class Base
 	public Base()
 	{
 		final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
+		ModParticles.PARTICLE_TYPE_DEFERRED_REGISTER.register(ModBus);
 		ModBus.addListener(this::setup);
 		ModBus.addListener(this::dostuff);
 		ModBus.addListener(this::RightClick);
 		ModBus.addListener(this::OreGen);
 		ModBus.addListener(this::PlayerSetup);
+
 		ModSounds.SOUNDS.register(ModBus);
 		ModItems.ITEMS.register(ModBus);
 		ModFluids.LIQUIDS.register(ModBus);
 		ModBlocks.BLOCKS.register(ModBus);
 		ModEntities.Entities.register(ModBus);
 		ModBiome.BIOMES.register(ModBus);
+
 		ModContainerTypes.CONTAINER_TYPES.register(ModBus);
 		ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
 		ModDimensions.MOD_DIMENSION_DEFERRED_REGISTER.register(ModBus);
@@ -60,7 +65,13 @@ public class Base
 		MinecraftForge.EVENT_BUS.register(this);
 		
 	}
-	
+
+	@SubscribeEvent
+	public void onRegisterEnties(final RegistryEvent.Register<EntityType<?>> event){
+		BlokItem.initEgg();
+	}
+
+
 	private void setup(final FMLCommonSetupEvent event)
 	{
 
