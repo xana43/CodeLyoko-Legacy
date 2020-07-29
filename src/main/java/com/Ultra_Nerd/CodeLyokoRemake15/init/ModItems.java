@@ -6,6 +6,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.AelitaArmorElytra;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.ArmorFeline;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.ArmorWarrior;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.LaserArrowShooter;
+import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.SaberKatana;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.YumiFans;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.ZweihanderWeapon;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -101,16 +102,17 @@ public class ModItems
 	     public static final RegistryObject<Item>  TERABIT = ITEMS.register("terabit", ItemBase::new);
 	     public static final RegistryObject<Item>  TERABYTE = ITEMS.register("terabyte", ItemBase::new);
 	     public static final RegistryObject<Item>  TITANIUMINGOT = ITEMS.register("titanium_ingot", ItemBase::new);
-	     public static final RegistryObject<Item>  TRUSTTY_SCREWDRIVER = ITEMS.register("trusty_screwdriver",()->new TrustyScrewDriverItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
 	     public static final RegistryObject<Item>  URANIUM_DIOXIDE = ITEMS.register("uranium_dioxide", ItemBase::new);
 		 public static final RegistryObject<Item>  URANIUM_MELT = ITEMS.register("uranium_melt", ItemBase::new);
 		 public static final RegistryObject<Item>  URANIUM_ISOTOPE238 = ITEMS.register("uranium_isotope238", ItemBase::new);
 		 public static final RegistryObject<Item>  URANIUM_ISOTOPE235 = ITEMS.register("uranium_isotope235", ItemBase::new);
 	//for tools
 	public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().group(Base.LYOKO_ITEMS)));
+	public static final RegistryObject<Item> TRUSTTY_SCREWDRIVER = ITEMS.register("trusty_screwdriver",()->new TrustyScrewDriverItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+
 	//for weapons
 
-	public static final RegistryObject<SwordItem> DIGITAL_SABER = ITEMS.register("digital_saber", () -> new SwordItem(LyokoTiers.LyokoSamurai,25,-1 , new Item.Properties().group(Base.LYOKO_WEAPONS)));
+	public static final RegistryObject<SwordItem> DIGITAL_SABER = ITEMS.register("digital_saber", () -> new SaberKatana(LyokoTiers.LyokoSamurai,25,-0.9f , new Item.Properties().group(Base.LYOKO_WEAPONS)));
 	public static final RegistryObject<BowItem> LASER_ARROWSHOOTER = ITEMS.register("laser_arrowshooter", () -> new LaserArrowShooter(new Item.Properties().group(Base.LYOKO_WEAPONS).maxDamage(40).setNoRepair()));
 	public static final RegistryObject<SwordItem> QUANTUM_SABER = ITEMS.register("quantum_saber", () -> new SwordItem(LyokoTiers.LyokoTool, 15, 2, new Item.Properties().group(Base.LYOKO_WEAPONS).maxDamage(50)));
 	public static final RegistryObject<TridentItem> YUMI_TRADITONAL_FANS = ITEMS.register("yumi_traditional_fans", () -> new YumiFans(new Item.Properties().group(Base.LYOKO_WEAPONS).maxDamage(20).setNoRepair()));

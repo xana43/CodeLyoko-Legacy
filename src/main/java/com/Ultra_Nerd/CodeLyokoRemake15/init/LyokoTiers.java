@@ -25,6 +25,9 @@ public enum LyokoTiers implements IItemTier{
 	}),
 	LyokoWarrior(4, 4000, 0, 30, 9000, () ->{
 		return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
+	}),
+	LyokoArcher(4,2500,9200,3,50,() ->{
+		return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
 	});
 
 	private final int harvest,MaxUses,enchantability;

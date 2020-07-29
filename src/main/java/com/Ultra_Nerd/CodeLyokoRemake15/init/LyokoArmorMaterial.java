@@ -33,6 +33,9 @@ public enum  LyokoArmorMaterial implements IArmorMaterial {
     }),
     GUARDIAN(Base.MOD_ID + ":aelita",23 , new byte[]{5,8,10,5}, 420 , ModSounds.LAZY_GUARDIAN.get(), 10F, () -> {
         return Ingredient.fromItems(ModItems.TERABYTE.get());
+    }),
+    ARCHER(Base.MOD_ID + ":jeremy",15,new byte[]{1,3,4,1},420, ModSounds.LAZY_ARCHER.get(),5 , () -> {
+        return Ingredient.fromItems(ModItems.GIGABIT.get());
     });
 
     private static final byte[] MAX_DAMAGE_ARRAY = new byte[] {16,16,16,16};

@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -43,7 +44,7 @@ public class BlackVoid extends Block {
         super(Block.Properties.create(Material.STRUCTURE_VOID)
 
                 .hardnessAndResistance(-1, -1)
-                .sound(null)
+                .sound(SoundType.METAL)
                 .lightValue(90)
 
 
