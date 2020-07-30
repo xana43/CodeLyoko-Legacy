@@ -1,5 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.screens.StoryBookGUI;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -24,10 +26,20 @@ public class StoryBook extends WrittenBookItem {
         return new StringTextComponent("Entry 1");
     }
 
-    
+
+    @Override
+    public boolean hasContainerItem(ItemStack stack) {
+        return true;
+    }
+
+
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+       if(!worldIn.isRemote) {
+           Minecraft.getInstance().displayGuiScreen(new StoryBookGUI());
+       }
+
         playerIn.sendMessage(new StringTextComponent("doesn't work yet"));
         return new ActionResult<>(ActionResultType.SUCCESS,playerIn.getHeldItem(handIn));
     }
