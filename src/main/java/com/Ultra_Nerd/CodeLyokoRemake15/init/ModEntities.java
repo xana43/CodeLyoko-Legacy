@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityBlok;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityFan;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.HornetEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -25,6 +26,11 @@ public class ModEntities {
 			EntityType.Builder.<EntityFan>create(EntityFan::new,EntityClassification.MISC).size(1,1).build(
 					new ResourceLocation(Base.MOD_ID,"fan").toString()
 			));
+	public static final RegistryObject<EntityType<HornetEntity>> HORNET = Entities.register("hornet", () ->
+			EntityType.Builder.<HornetEntity>create(HornetEntity::new,EntityClassification.MONSTER).size(1,1)
+	.build(
+			new ResourceLocation(Base.MOD_ID,"hornet").toString()
+	));
 
 
 }
