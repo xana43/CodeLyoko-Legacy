@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items.tools;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.Entity;
@@ -8,8 +9,11 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
+import net.minecraft.util.Hand;
+import net.minecraft.util.HandSide;
 import net.minecraft.world.World;
 
 public class SaberKatana extends SwordItem {
@@ -30,10 +34,25 @@ public class SaberKatana extends SwordItem {
     @Override
     public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 
+        if (entityIn instanceof PlayerEntity)
+        {
+            PlayerEntity player = (PlayerEntity)entityIn;
+            if(player.getHeldItem(Hand.OFF_HAND).getItem() instanceof Item)
+            {
+                ItemStack IStack = player.getHeldItem(Hand.OFF_HAND).getStack();
+                if(player.getHeldItem(Hand.MAIN_HAND).getItem() == ModItems.DIGITAL_SABER.get())
+                {
 
+                player.inventory.add(player.inventory.getFirstEmptyStack(),IStack);
+
+                }
+
+            }
+            player.setPrimaryHand(HandSide.RIGHT);
+        }
         if(stack.getDamage() >= this.getMaxDamage(stack))
         {
-            stack.setDamage(this.getMaxDamage(stack) - 1);
+            stack.setDamage(this.getMaxDamage(stack));
         }
 
         if(timer-- == 0 && stack.getDamage() != 0)

@@ -1,0 +1,38 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "GGG",
+        "CEC",
+        "III"
+    ],
+    
+    "key":
+    {
+        "G":
+        {
+            "item": "minecraft:glass"
+        },
+
+        "C":
+        {
+            "item": "minecraft:iron_block"
+        },
+        "I":
+        {
+            "item": "cm:molten_polycarbonate_concentrate"
+        },
+        "E":
+        {
+            "item": "minecraft:redstone"
+        }
+        
+    },
+    
+    "result":
+    {
+        "item": "cm:computer_screen",
+        "count": 1
+    }
+}

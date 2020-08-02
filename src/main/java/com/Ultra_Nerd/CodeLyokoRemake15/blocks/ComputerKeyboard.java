@@ -313,6 +313,8 @@ public class ComputerKeyboard extends Block {
             .hardnessAndResistance(1, 10)
 			.sound(SoundType.METAL)
 			.lightValue(0)
+            .harvestLevel(0)
+
 
 
 
@@ -330,6 +332,8 @@ public class ComputerKeyboard extends Block {
     public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return false;
     }
+
+
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {

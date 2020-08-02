@@ -6,7 +6,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.BlokItem;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModOreGen;
 import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
@@ -15,7 +14,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -31,7 +29,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.lwjgl.glfw.GLFW;
 
 @Mod("cm")
 @Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Bus.MOD)
@@ -47,17 +44,13 @@ public class Base
 		ModParticles.PARTICLE_TYPE_DEFERRED_REGISTER.register(ModBus);
 		ModBus.addListener(this::setup);
 		ModBus.addListener(this::dostuff);
-		ModBus.addListener(this::RightClick);
 		ModBus.addListener(this::OreGen);
-
-
 		ModSounds.SOUNDS.register(ModBus);
 		ModItems.ITEMS.register(ModBus);
 		ModFluids.LIQUIDS.register(ModBus);
 		ModBlocks.BLOCKS.register(ModBus);
 		ModEntities.Entities.register(ModBus);
 		ModBiome.BIOMES.register(ModBus);
-
 		ModContainerTypes.CONTAINER_TYPES.register(ModBus);
 		ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
 		ModDimensions.MOD_DIMENSION_DEFERRED_REGISTER.register(ModBus);
@@ -109,14 +102,7 @@ CompoundNBT existing;
 
 
 
-	public void RightClick(final InputEvent.MouseInputEvent event)
-	{
-		if(event.getButton() == GLFW.GLFW_MOUSE_BUTTON_RIGHT)
-		{
-			assert Minecraft.getInstance().player != null;
-			//AelitaArmorElytra.EnergyBall(Minecraft.getInstance().player,Minecraft.getInstance().world);
-		}
-	}
+
 
 
 	private void dostuff(final FMLClientSetupEvent event)

@@ -1,0 +1,34 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "CCC",
+        "SSS",
+        "BBB"
+    ],
+    
+    "key":
+    {
+        "C":
+        {
+            "item": "cm:key_cap"
+        },
+        
+        "S":
+        {
+            "item": "cm:key_spring"
+        },
+        "B":
+        {
+            "item": "cm:colored_polycarbonate_body_part"
+        }
+        
+    },
+    
+    "result":
+    {
+        "item": "cm:computer_keyboard",
+        "count": 1
+    }
+}

@@ -40,7 +40,7 @@ public class StoryBook extends WrittenBookItem {
            Minecraft.getInstance().displayGuiScreen(new StoryBookGUI());
        }
 
-        playerIn.sendMessage(new StringTextComponent("doesn't work yet"));
+        playerIn.sendMessage(new StringTextComponent("doesn't work properly yet"));
         return new ActionResult<>(ActionResultType.SUCCESS,playerIn.getHeldItem(handIn));
     }
 

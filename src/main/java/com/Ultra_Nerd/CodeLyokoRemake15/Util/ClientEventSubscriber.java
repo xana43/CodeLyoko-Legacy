@@ -7,6 +7,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimen
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.dimension.OverworldDimension;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -31,6 +32,10 @@ public class ClientEventSubscriber {
             }
             else if(player.world.dimension instanceof OceanDimension && Minecraft.getInstance().player != null) {
                 Minecraft.getInstance().player.playSound(ModSounds.OCEAN.get(),1f,1f);
+            }
+            else if(player.world.dimension instanceof OverworldDimension && Minecraft.getInstance().player != null)
+            {
+                Minecraft.getInstance().getMusicTicker().tick();
             }
         }
     }

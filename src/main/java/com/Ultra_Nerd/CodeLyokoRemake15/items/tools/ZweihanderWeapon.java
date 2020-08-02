@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items.tools;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -12,6 +12,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -66,8 +67,11 @@ public class ZweihanderWeapon extends SwordItem {
         if(entityIn instanceof PlayerEntity)
         {
             PlayerEntity player = (PlayerEntity)entityIn;
-            player.setItemStackToSlot(EquipmentSlotType.OFFHAND,new ItemStack(Blocks.AIR));
+            ItemStack IStack = player.getHeldItem(Hand.MAIN_HAND).getStack();
+            if(player.getHeldItem(Hand.MAIN_HAND).getItem() == ModItems.ZWEIHANDER.get()) {
 
+                player.inventory.add(player.inventory.getFirstEmptyStack(),IStack);
+            }
 
         }
         if(!stack.isEnchanted() && stack.getDamage() < 1999)
