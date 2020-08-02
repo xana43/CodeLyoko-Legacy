@@ -25,7 +25,7 @@ public class ComputerKeyboard extends Block {
     public static final DirectionProperty directionProperty = HorizontalBlock.HORIZONTAL_FACING;
 
 
-    private VoxelShape SHAPE_N = Stream.of(
+    private static final VoxelShape SHAPE_N = Stream.of(
             Block.makeCuboidShape(-0.3055970149253753, 5.24120673250286, 2.787371867921733, 15.694402985074625, 6.91620673250286, 11.787371867921731),
             Block.makeCuboidShape(10.244402985074625, 6.387147486637496, 9.99899916689835, 11.244402985074625, 7.262147486637496, 10.99899916689835),
             Block.makeCuboidShape(8.094402985074625, 6.387147486637496, 9.99899916689835, 9.094402985074627, 7.262147486637496, 10.99899916689835),
@@ -95,7 +95,7 @@ public class ComputerKeyboard extends Block {
             Block.makeCuboidShape(0.5444029850746235, 6.25309163087795, 8.42812233291787, 1.9944029850746263, 7.2530916308779485, 9.42812233291787)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
-    private VoxelShape SHAPE_S = Stream.of(
+    private static final VoxelShape SHAPE_S = Stream.of(
             Block.makeCuboidShape(0, 5.24120673250286, 3.650424514942717, 16, 6.91620673250286, 12.650424514942717),
             Block.makeCuboidShape(4.449999999999998, 6.387147486637496, 4.4387972159660976, 5.449999999999998, 7.262147486637496, 5.4387972159660976),
             Block.makeCuboidShape(6.599999999999999, 6.387147486637496, 4.4387972159660976, 7.6, 7.262147486637496, 5.4387972159660976),
@@ -165,7 +165,7 @@ public class ComputerKeyboard extends Block {
             Block.makeCuboidShape(13.7, 6.25309163087795, 6.009674049946579, 15.15, 7.2530916308779485, 7.009674049946579)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
-    private VoxelShape SHAPE_E = Stream.of(
+    private static final VoxelShape SHAPE_E = Stream.of(
             Block.makeCuboidShape(3.778727816047806, 5.24120673250286, -0.43390031603046264, 12.778727816047805, 6.91620673250286, 15.566099683969536),
             Block.makeCuboidShape(4.567100517071187, 6.387147486637496, 10.116099683969537, 5.567100517071187, 7.262147486637496, 11.116099683969537),
             Block.makeCuboidShape(4.567100517071187, 6.387147486637496, 7.966099683969538, 5.567100517071187, 7.262147486637496, 8.966099683969539),
@@ -235,7 +235,7 @@ public class ComputerKeyboard extends Block {
             Block.makeCuboidShape(6.137977351051668, 6.25309163087795, 0.4160996839695361, 7.137977351051668, 7.2530916308779485, 1.866099683969539)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
-    private VoxelShape SHAPE_W = Stream.of(
+    private static final VoxelShape SHAPE_W = Stream.of(
             Block.makeCuboidShape(2.9156751690268203, 5.24120673250286, -0.12830330110508648, 11.91567516902682, 6.91620673250286, 15.871696698894912),
             Block.makeCuboidShape(10.127302468003439, 6.387147486637496, 4.321696698894913, 11.127302468003439, 7.262147486637496, 5.321696698894913),
             Block.makeCuboidShape(10.127302468003439, 6.387147486637496, 6.471696698894911, 11.127302468003439, 7.262147486637496, 7.471696698894912),

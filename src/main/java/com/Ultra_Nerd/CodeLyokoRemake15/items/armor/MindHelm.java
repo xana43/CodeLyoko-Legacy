@@ -32,6 +32,12 @@ public static void resting(TickEvent.PlayerTickEvent event)
         }
     }
 }
+
+    @Override
+    public boolean isDamageable() {
+        return false;
+    }
+
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
         Base.Log.debug(timer);

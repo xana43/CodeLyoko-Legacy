@@ -22,7 +22,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class BlackVoid extends Block {
-    private VoxelShape nullshape = Stream.of(
+    private static final VoxelShape nullshape = Stream.of(
             Block.makeCuboidShape(3, 0, 3, 10, 0.5, 4),
             Block.makeCuboidShape(3, 0, 1, 10, 0.5, 2),
             Block.makeCuboidShape(9, 0, 1, 16, 0.5, 2),

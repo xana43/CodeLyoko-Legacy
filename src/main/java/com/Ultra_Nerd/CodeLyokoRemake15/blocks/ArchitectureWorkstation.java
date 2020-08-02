@@ -19,10 +19,10 @@ public class ArchitectureWorkstation extends Block {
 
     public static final DirectionProperty ComputerStation = HorizontalBlock.HORIZONTAL_FACING;
     private static final BooleanProperty on = BooleanProperty.create("active");
-    private VoxelShape shapeN = Block.makeCuboidShape(4, 0, 0, 12, 16, 16);
-    private VoxelShape shapeE = Block.makeCuboidShape(0, 0, 4, 16, 16, 12);
-    private VoxelShape shapeS = Block.makeCuboidShape(4, 0, 0, 12, 16, 16);
-    private VoxelShape shapeW = Block.makeCuboidShape(0, 0, 4, 16, 16, 12);
+    private static final VoxelShape shapeN = Block.makeCuboidShape(4, 0, 0, 12, 16, 16);
+    private static final VoxelShape shapeE = Block.makeCuboidShape(0, 0, 4, 16, 16, 12);
+    private static final VoxelShape shapeS = Block.makeCuboidShape(4, 0, 0, 12, 16, 16);
+    private static final VoxelShape shapeW = Block.makeCuboidShape(0, 0, 4, 16, 16, 12);
     public ArchitectureWorkstation(Properties properties) {
         super(properties);
 

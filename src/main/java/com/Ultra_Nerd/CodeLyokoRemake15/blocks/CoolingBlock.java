@@ -12,7 +12,7 @@ import net.minecraft.world.IBlockReader;
 import java.util.stream.Stream;
 
 public class CoolingBlock extends Block {
-    private VoxelShape shape = Stream.of(
+    private static final VoxelShape shape = Stream.of(
             Block.makeCuboidShape(9, 0, 7, 13, 32, 9),
             Block.makeCuboidShape(9, 0, 23, 13, 32, 25),
             Block.makeCuboidShape(25, 0, 23, 29, 32, 25),

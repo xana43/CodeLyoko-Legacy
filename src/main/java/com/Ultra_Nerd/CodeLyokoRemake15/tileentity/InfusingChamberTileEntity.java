@@ -54,14 +54,15 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
     }
 
     public boolean hasCapability(Capability<?> capability, Direction facing) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return true;
-        else return false;
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
     }
 
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return LazyOptional.of(() -> (T) this.handler);
+        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return LazyOptional.of(() -> (T) this.handler);
+        }
         return super.getCapability(cap, side);
     }
 

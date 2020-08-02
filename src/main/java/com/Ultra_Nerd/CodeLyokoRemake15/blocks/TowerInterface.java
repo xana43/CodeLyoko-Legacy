@@ -30,9 +30,9 @@ public class TowerInterface extends Block {
     public static final DirectionProperty DIRINTERFACE = HorizontalBlock.HORIZONTAL_FACING;
 
     private static final VoxelShape SHAPE_N = Block.makeCuboidShape(1, 9, 3, 15, 9.1, 12);
-    private static  final VoxelShape SHAPE_S = Block.makeCuboidShape(1, 9, 3, 15, 9.1, 12);
-    private static  final VoxelShape SHAPE_E = Block.makeCuboidShape(4, 9, 1, 13, 9.1, 15);
-    private static  final  VoxelShape SHAPE_W = Block.makeCuboidShape(4, 9, 1, 13, 9.1, 15);
+    private static final VoxelShape SHAPE_S = Block.makeCuboidShape(1, 9, 3, 15, 9.1, 12);
+    private static final VoxelShape SHAPE_E = Block.makeCuboidShape(4, 9, 1, 13, 9.1, 15);
+    private static final VoxelShape SHAPE_W = Block.makeCuboidShape(4, 9, 1, 13, 9.1, 15);
 
 
     public TowerInterface()

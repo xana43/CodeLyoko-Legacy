@@ -12,7 +12,7 @@ import net.minecraft.world.IBlockReader;
 import java.util.stream.Stream;
 
 public class ChipletAdvancedBlock extends Block {
-    private VoxelShape shape = Stream.of(
+    private static final VoxelShape shape = Stream.of(
             Block.makeCuboidShape(1, 0, 1, 15, 16, 15),
             Block.makeCuboidShape(0, 2, 1, 1, 3, 15),
             Block.makeCuboidShape(0, 0, 1, 1, 1, 15),

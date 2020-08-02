@@ -41,7 +41,7 @@ public enum  LyokoArmorMaterial implements IArmorMaterial {
     private static final byte[] MAX_DAMAGE_ARRAY = new byte[] {16,16,16,16};
     private final String name;
     private final int maxDamageFactor;
-    private  final byte[] damageReduction;
+    private final byte[] damageReduction;
     private final int enchant;
     private final SoundEvent soundEvent;
     private final float toughness;

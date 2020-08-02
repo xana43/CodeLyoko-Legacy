@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
 import java.util.stream.Stream;
 
 public class FranzChiplet extends Block {
-    private VoxelShape shape = Stream.of(
+    private final static VoxelShape shape = Stream.of(
             Block.makeCuboidShape(4, 4, 0, 5, 5, 1),
             Block.makeCuboidShape(0, 0, 0, 4, 16, 2),
             Block.makeCuboidShape(0, 0, 14, 4, 16, 16),

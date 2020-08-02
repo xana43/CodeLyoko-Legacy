@@ -69,8 +69,8 @@ private boolean checkDim(PlayerEntity player)
 		) {
 
 			if (player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get() && player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() == ModItems.ODD_LEGGINGS.get() && player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.ODD_BOOTS.get()) {
-				I++;
-				if (I == 1000) {
+
+				if (I++ == 1000) {
 					if (stack.getDamage() != 0) {
 						stack.damageItem(-1, player, null);
 					}

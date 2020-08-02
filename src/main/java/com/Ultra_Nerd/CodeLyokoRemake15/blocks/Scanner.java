@@ -29,7 +29,7 @@ import java.util.stream.Stream;
 public class Scanner extends HorizontalBlock {
 
     public static final DirectionProperty DIRSCANNER = HorizontalBlock.HORIZONTAL_FACING;
-    private static VoxelShape SHAPE_N = Stream.of(
+    private final static VoxelShape SHAPE_N = Stream.of(
             Block.makeCuboidShape(2, -16, -2, 14, -15, 18),
             Block.makeCuboidShape(-4, -16, 5, -3, 32, 11),
             Block.makeCuboidShape(-3, 31, 5, -2, 32, 11),
@@ -86,7 +86,7 @@ public class Scanner extends HorizontalBlock {
             Block.makeCuboidShape(17, -16, 1, 18, 32, 2),
             Block.makeCuboidShape(2, 31, -2, 14, 32, 18)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-    private VoxelShape SHAPE_S = Stream.of(
+    private final static VoxelShape SHAPE_S = Stream.of(
             Block.makeCuboidShape(1.9999999999999991, -16, -2.345454545454545, 14, -15, 17.654545454545456),
             Block.makeCuboidShape(19, -16, 4.654545454545454, 20, 32, 10.654545454545456),
             Block.makeCuboidShape(18, 31, 4.654545454545454, 19, 32, 10.654545454545456),
@@ -143,7 +143,7 @@ public class Scanner extends HorizontalBlock {
             Block.makeCuboidShape(-2, -16, 13.654545454545456, -1, 32, 14.654545454545456),
             Block.makeCuboidShape(1.9999999999999991, 31, -2.345454545454545, 14, 32, 17.654545454545456)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-    private VoxelShape SHAPE_E = Stream.of(
+    private final static VoxelShape SHAPE_E = Stream.of(
             Block.makeCuboidShape(-2.172727272727272, -16, 1.8272727272727272, 17.827272727272728, -15, 13.827272727272728),
             Block.makeCuboidShape(4.827272727272727, -16, -4.172727272727273, 10.827272727272728, 32, -3.172727272727273),
             Block.makeCuboidShape(4.827272727272727, 31, -3.172727272727273, 10.827272727272728, 32, -2.172727272727273),
@@ -200,7 +200,7 @@ public class Scanner extends HorizontalBlock {
             Block.makeCuboidShape(13.827272727272728, -16, 16.827272727272728, 14.827272727272728, 32, 17.827272727272728),
             Block.makeCuboidShape(-2.172727272727272, 31, 1.8272727272727272, 17.827272727272728, 32, 13.827272727272728)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-    private VoxelShape SHAPE_W = Stream.of(
+    private final static VoxelShape SHAPE_W = Stream.of(
             Block.makeCuboidShape(-1.827272727272728, -16, 1.8272727272727263, 18.172727272727272, -15, 13.827272727272728),
             Block.makeCuboidShape(5.172727272727271, -16, 18.827272727272728, 11.172727272727272, 32, 19.827272727272728),
             Block.makeCuboidShape(5.172727272727271, 31, 17.827272727272728, 11.172727272727272, 32, 18.827272727272728),

@@ -20,7 +20,7 @@ public SeaPylon() {
 			
 			.hardnessAndResistance(-1, -1)
 			.sound(SoundType.GLASS)
-			.lightValue(5)
+			.lightValue(8)
 			.notSolid()
 
 				

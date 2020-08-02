@@ -26,7 +26,7 @@ public class ControlPanel extends Block {
 
 	public static final DirectionProperty PANEL = HorizontalBlock.HORIZONTAL_FACING;
 	public static final BooleanProperty ScreenOn = BooleanProperty.create("screen_on");
-	private VoxelShape shapeN = Stream.of(
+	private static final VoxelShape shapeN = Stream.of(
 			Block.makeCuboidShape(0.09999999999999964, -4, 2.2226819720551028, 1.1000000000000014, 0.025, 3.2226819720551028),
 			Block.makeCuboidShape(0.09999999999999964, 6.598148784203678, 12.919292458096445, 15.125000000000002, 7.548148784203677, 21.919292458096443),
 			Block.makeCuboidShape(0.07500000000000107, 6.59814878420368, 12.085408981613261, 16.1, 7.548148784203679, 12.935408981613262),
@@ -58,7 +58,7 @@ public class ControlPanel extends Block {
 			Block.makeCuboidShape(0.09999999999999964, 0, 4.222681972055103, 1.1000000000000014, 0.1, 5.222681972055103),
 			Block.makeCuboidShape(0.09999999999999964, 0, 3.2226819720551028, 1.1000000000000014, 0.05, 4.222681972055103)
 	).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-	private VoxelShape shapeS = Stream.of(
+	private static final VoxelShape shapeS = Stream.of(
 			Block.makeCuboidShape(15, -4, 14, 16, 0.025, 15),
 			Block.makeCuboidShape(0.9749999999999996, 6.598148784203678, -4.69661048604134, 16, 7.548148784203677, 4.303389513958658),
 			Block.makeCuboidShape(-1.7763568394002505e-15, 6.59814878420368, 4.28727299044184, 16.025, 7.548148784203679, 5.137272990441842),
@@ -90,7 +90,7 @@ public class ControlPanel extends Block {
 			Block.makeCuboidShape(15, 0, 12, 16, 0.1, 13),
 			Block.makeCuboidShape(15, 0, 13, 16, 0.05, 14)
 	).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-	private VoxelShape shapeE = Stream.of(
+	private static final VoxelShape shapeE = Stream.of(
 			Block.makeCuboidShape(13.43865901397245, -4, 0.6613409860275503, 14.43865901397245, 0.025, 1.661340986027552),
 			Block.makeCuboidShape(-5.257951472068891, 6.598148784203678, 0.6613409860275503, 3.7420485279311073, 7.548148784203677, 15.686340986027552),
 			Block.makeCuboidShape(3.7259320044142896, 6.59814878420368, 0.6363409860275517, 4.575932004414291, 7.548148784203679, 16.661340986027554),
@@ -122,7 +122,7 @@ public class ControlPanel extends Block {
 			Block.makeCuboidShape(11.43865901397245, 0, 0.6613409860275503, 12.43865901397245, 0.1, 1.661340986027552),
 			Block.makeCuboidShape(12.43865901397245, 0, 0.6613409860275503, 13.43865901397245, 0.05, 1.661340986027552)
 	).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-	private VoxelShape shapeW = Stream.of(
+	private static final VoxelShape shapeW = Stream.of(
 			Block.makeCuboidShape(1.661340986027552, -4, 15.56134098602755, 2.661340986027552, 0.025, 16.561340986027552),
 			Block.makeCuboidShape(12.357951472068894, 6.598148784203678, 1.5363409860275503, 21.35795147206889, 7.548148784203677, 16.561340986027552),
 			Block.makeCuboidShape(11.52406799558571, 6.59814878420368, 0.5613409860275489, 12.374067995585712, 7.548148784203679, 16.58634098602755),

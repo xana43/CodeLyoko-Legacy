@@ -25,14 +25,13 @@ public class ModBiome {
 			 .waterFogColor(3099807)
 			 .surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(ModBlocks.SECTOR_5.get()
 			 .getDefaultState(),Blocks.AIR.getDefaultState(),Blocks.AIR.getDefaultState()))
-			.depth(70)
-			.scale(4)
-			.temperature(10)
-
+			 .depth(70)
+			 .scale(4)
+			 .temperature(10)
 			 .category(Category.NONE)
 			 .downfall(0)
 			 .parent(null)));
-	public static final RegistryObject<Biome>FOREST = BIOMES.register("forest_sector",() -> new LyokoForest(new Biome.Builder()
+	public static final RegistryObject<Biome> FOREST = BIOMES.register("forest_sector",() -> new LyokoForest(new Biome.Builder()
 			.precipitation(RainType.NONE)
 			.surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(ModBlocks.DIGITAL_GRASS.get()
 			.getDefaultState(),ModBlocks.DIGITAL_DIRT.get().getDefaultState(),ModBlocks.DIGITAL_DIRT.get().getDefaultState()))
@@ -44,9 +43,8 @@ public class ModBiome {
 			.scale(4)
 			.temperature(10)
 			.parent(null)
-
 			));
-	public static final RegistryObject<Biome>DESERT = BIOMES.register("desert_sector", () -> new LyokoDesert(new Biome.Builder()
+	public static final RegistryObject<Biome> DESERT = BIOMES.register("desert_sector", () -> new LyokoDesert(new Biome.Builder()
 		.precipitation(RainType.NONE)
 			.surfaceBuilder(SurfaceBuilder.DEFAULT,new SurfaceBuilderConfig(ModBlocks.DIGITAL_SAND.get().getDefaultState(),
 					ModBlocks.DIGITAL_SAND.get().getDefaultState(),ModBlocks.DIGITAL_SAND.get().getDefaultState()))
@@ -60,7 +58,7 @@ public class ModBiome {
 			.parent(null)
 	));
 
-	public static final RegistryObject<Biome>ICE = BIOMES.register("ice_sector", () -> new LyokoICE(new Biome.Builder()
+	public static final RegistryObject<Biome> ICE = BIOMES.register("ice_sector", () -> new LyokoICE(new Biome.Builder()
 	.precipitation(RainType.NONE)
 	.surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(ModBlocks.DIGITAL_ICE.get().getDefaultState(),
 			ModBlocks.DIGITAL_ICE.get().getDefaultState(),ModBlocks.DIGITAL_ICE.get().getDefaultState()))
@@ -75,7 +73,7 @@ public class ModBiome {
 	.waterFogColor(9)
 	));
 
-	public static final RegistryObject<Biome>MOUNTAIN = BIOMES.register("mountain_sector",() -> new LyokoMountain(
+	public static final RegistryObject<Biome> MOUNTAIN = BIOMES.register("mountain_sector",() -> new LyokoMountain(
 			new Biome.Builder().precipitation(RainType.NONE)
 			.surfaceBuilder(SurfaceBuilder.DEFAULT,new SurfaceBuilderConfig(ModBlocks.DIGITAL_ROCK.get().getDefaultState(),
 					ModBlocks.DIGITAL_ROCK.get().getDefaultState(),ModBlocks.DIGITAL_ROCK.get().getDefaultState()))
@@ -89,7 +87,7 @@ public class ModBiome {
 			.downfall(0)
 	));
 
-	public static final RegistryObject<Biome>OCEAN = BIOMES.register("digital_ocean",() -> new LyokoOcean(
+	public static final RegistryObject<Biome> OCEAN = BIOMES.register("digital_ocean",() -> new LyokoOcean(
 			new Biome.Builder().precipitation(RainType.RAIN)
 			.downfall(90)
 			.surfaceBuilder(SurfaceBuilder.DEFAULT,new SurfaceBuilderConfig(ModFluids.DIO.get().getDefaultState(),

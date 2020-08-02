@@ -94,9 +94,7 @@ public class AntiMarabunta extends Block {
         }
     }
 
-    /**
-     * Called When an Entity Collided with the Block
-     */
+
 
 
 
