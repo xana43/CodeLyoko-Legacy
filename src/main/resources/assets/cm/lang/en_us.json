@@ -89,5 +89,7 @@
   "container.flouride_infuser": "Flouride Infuser",
   "entity.cm.blok": "Blok",
   "container.Reactor": "Integrated Reactor",
-  "death.cm.attack.block.digital_ocean": "%s was de-virtualized, broken down,  and swept away by the digital current"
+  "death.cm.attack.block.digital_ocean": "%s was de-virtualized, broken down,  and swept away by the digital current",
+  "_comment": "GUIs",
+  "gui.cm.story_screen" : "Story Screen"
 }

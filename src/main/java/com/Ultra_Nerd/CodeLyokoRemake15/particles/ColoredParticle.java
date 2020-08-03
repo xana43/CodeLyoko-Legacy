@@ -77,6 +77,7 @@ public class ColoredParticle extends SpriteTexturedParticle {
         }
     }
     public static class ColoredParticleData implements IParticleData {
+        public static final ColoredParticleData TOWER_PARTICLE = new ColoredParticleData(0.125f,0.25f,1,1);
         public static final IParticleData.IDeserializer<ColoredParticleData> DESERIALIZE = new IParticleData.IDeserializer<ColoredParticleData>(){
             @Override
             public ColoredParticleData deserialize(ParticleType<ColoredParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
