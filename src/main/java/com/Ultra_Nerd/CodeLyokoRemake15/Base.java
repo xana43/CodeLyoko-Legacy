@@ -41,7 +41,6 @@ public class Base
 	public Base()
 	{
 		final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
-		ModParticles.PARTICLE_TYPE_DEFERRED_REGISTER.register(ModBus);
 		ModBus.addListener(this::setup);
 		ModBus.addListener(this::dostuff);
 		ModBus.addListener(this::OreGen);
@@ -49,6 +48,7 @@ public class Base
 		ModItems.ITEMS.register(ModBus);
 		ModFluids.LIQUIDS.register(ModBus);
 		ModBlocks.BLOCKS.register(ModBus);
+		ModParticles.PARTICLES.register(ModBus);
 		ModEntities.Entities.register(ModBus);
 		ModBiome.BIOMES.register(ModBus);
 		ModContainerTypes.CONTAINER_TYPES.register(ModBus);
