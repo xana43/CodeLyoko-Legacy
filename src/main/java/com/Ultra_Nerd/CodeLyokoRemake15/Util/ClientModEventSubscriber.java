@@ -40,7 +40,7 @@ public static void registerParticles(ParticleFactoryRegisterEvent event)
     public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
         //makes certain blocks behave properly
         RenderTypeLookup.setRenderLayer(ModBlocks.TOWER_INTERFACE.get(), RenderType.getCutoutMipped());
-        RenderTypeLookup.setRenderLayer(ModFluids.DIO.get(),RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModFluids.DIGITAL_SEA_BLOCK.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModFluids.DIGITAL_OCEAN.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_DIGITAL_OCEAN.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.TRANSPARENT.get(),RenderType.getCutoutMipped());

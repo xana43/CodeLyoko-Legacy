@@ -3,6 +3,5 @@
    "textures": {
     "particle":"cm:block/dice",
       "all":"cm:block/dice"
-       
    }
 }

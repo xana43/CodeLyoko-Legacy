@@ -38,18 +38,15 @@ public class BlackVoid extends Block {
             Block.makeCuboidShape(9.024999999999991, 0, 13.024999999999999, 16.02500000000001, 0.5, 14.024999999999997),
             Block.makeCuboidShape(9.024999999999991, 0, 15.024999999999999, 16.02500000000001, 0.5, 16.025),
             Block.makeCuboidShape(1.5249999999999915, 0, 15.024999999999999, 8.52500000000001, 0.5, 16.025)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
 
     public BlackVoid() {
         super(Block.Properties.create(Material.STRUCTURE_VOID)
-
                 .hardnessAndResistance(-1, -1)
                 .sound(SoundType.METAL)
                 .lightValue(90)
-
-
-
-
         );
     }
 
@@ -60,7 +57,6 @@ public class BlackVoid extends Block {
 
     @Override
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-
         entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
     }
 

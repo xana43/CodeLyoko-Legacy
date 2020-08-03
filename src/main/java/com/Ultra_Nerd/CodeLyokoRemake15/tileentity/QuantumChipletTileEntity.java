@@ -22,28 +22,27 @@ import net.minecraftforge.common.util.Constants;
 
 public class QuantumChipletTileEntity extends LockableTileEntity implements INamedContainerProvider, IClearable {
 
-   protected NonNullList<ItemStack> items = NonNullList.withSize(1,ItemStack.EMPTY);
+    protected NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
 
-    public QuantumChipletTileEntity(TileEntityType<?> TileEntityIn)
-   {
-       super (TileEntityIn);
-   }
-   public QuantumChipletTileEntity()
-   {
-       this(ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get());
-   }
+    public QuantumChipletTileEntity(TileEntityType<?> TileEntityIn) {
+        super(TileEntityIn);
+    }
+
+    public QuantumChipletTileEntity() {
+        this(ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get());
+    }
 
     @Override
     public void read(CompoundNBT compound) {
         super.read(compound);
-        this.items = NonNullList.withSize(this.getSizeInventory(),ItemStack.EMPTY);
-        ItemStackHelper.loadAllItems(compound,this.items);
+        this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+        ItemStackHelper.loadAllItems(compound, this.items);
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
-        ItemStackHelper.saveAllItems(compound,this.items);
+        ItemStackHelper.saveAllItems(compound, this.items);
         return compound;
     }
 
@@ -58,7 +57,7 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
     @Override
     public void markDirty() {
         super.markDirty();
-        this.world.notifyBlockUpdate(this.getPos(),this.getBlockState(),this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
     }
 
     @Override
@@ -68,7 +67,7 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
 
     @Override
     protected Container createMenu(int id, PlayerInventory player) {
-        return new QuantumChipletContainer(id,player,this);
+        return new QuantumChipletContainer(id, player, this);
     }
 
     @Override
@@ -78,10 +77,8 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
 
     @Override
     public boolean isEmpty() {
-        for(ItemStack itemstack : this.items)
-        {
-            if(!itemstack.isEmpty())
-            {
+        for (ItemStack itemstack : this.items) {
+            if (!itemstack.isEmpty()) {
                 return false;
             }
         }
@@ -95,25 +92,23 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
 
     @Override
     public ItemStack decrStackSize(int index, int count) {
-        return ItemStackHelper.getAndSplit(this.items,index,count);
+        return ItemStackHelper.getAndSplit(this.items, index, count);
     }
 
     @Override
     public ItemStack removeStackFromSlot(int index) {
-        return ItemStackHelper.getAndRemove(this.items,index);
+        return ItemStackHelper.getAndRemove(this.items, index);
     }
 
     @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
         ItemStack Istack = this.items.get(index);
-        boolean flag = !stack.isEmpty() && stack.isItemEqual(Istack) && ItemStack.areItemStackTagsEqual(stack,Istack);
-        this.items.set(index,stack);
-        if(stack.getCount() > this.getInventoryStackLimit())
-        {
+        boolean flag = !stack.isEmpty() && stack.isItemEqual(Istack) && ItemStack.areItemStackTagsEqual(stack, Istack);
+        this.items.set(index, stack);
+        if (stack.getCount() > this.getInventoryStackLimit()) {
             stack.setCount(this.getInventoryStackLimit());
         }
-        if(!flag)
-        {
+        if (!flag) {
             this.markDirty();
         }
     }
@@ -121,18 +116,16 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
     @Override
     public boolean isUsableByPlayer(PlayerEntity player) {
         assert this.world != null;
-        if(this.world.getTileEntity(pos) != this)
-        {
+        if (this.world.getTileEntity(pos) != this) {
             return false;
-        }
-        else{
-            return player.getDistanceSq((double)this.pos.getX() + 0.5D,(double)this.pos.getY() + 0.5D,(double)this.pos.getZ() + 0.5D) <= 64D;
+        } else {
+            return player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64D;
         }
     }
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return !stack.isDamaged() ;
+        return !stack.isDamaged();
     }
 
     @Override
@@ -146,7 +139,7 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
         CompoundNBT nbt = new CompoundNBT();
         this.write(nbt);
 
-        return new SUpdateTileEntityPacket(this.pos,1,nbt);
+        return new SUpdateTileEntityPacket(this.pos, 1, nbt);
 
     }
 

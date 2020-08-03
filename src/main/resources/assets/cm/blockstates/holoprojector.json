@@ -1,5 +1,4 @@
 {
-
     "variants": 
     {
         "valid=false":{"model": "cm:block/holoprojector"},

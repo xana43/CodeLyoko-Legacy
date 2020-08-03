@@ -29,6 +29,6 @@ public class DesertGenSettings extends GenerationSettings {
 
     @Override
     public BlockState getDefaultFluid() {
-        return ModFluids.DIO.get().getDefaultState();
+        return ModFluids.DIGITAL_SEA_BLOCK.get().getDefaultState();
     }
 }

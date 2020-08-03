@@ -22,7 +22,7 @@ public class OceanGenSettings extends GenerationSettings {
 
     @Override
     public BlockState getDefaultBlock() {
-        return ModFluids.DIO.get().getDefaultState();
+        return ModFluids.DIGITAL_SEA_BLOCK.get().getDefaultState();
     }
 
 

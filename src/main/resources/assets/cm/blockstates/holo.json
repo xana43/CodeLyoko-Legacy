@@ -1,8 +1,5 @@
 {
-
     "variants": {
         "": {"model": "cm:block/holo"}
-
-
     }
 }

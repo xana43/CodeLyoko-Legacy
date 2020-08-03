@@ -37,13 +37,13 @@ public class ModFluids {
     //fluid properties
     public static final ForgeFlowingFluid.Properties DIGITAL_PROPERTIES = new ForgeFlowingFluid.Properties(() -> DIGITAL_OCEAN.get(), () -> FLOWING_DIGITAL_OCEAN.get(), 
     		FluidAttributes.builder(DIGITAL_OCEAN_RL, FLOWING_DIGITAL_OCEAN_RL).density(1)
-    		.temperature(10).luminosity(10).overlay(DIGITAL_OCEAN_RL)).block(() -> ModFluids.DIO.get());
+    		.temperature(10).luminosity(10).overlay(DIGITAL_OCEAN_RL)).block(() -> ModFluids.DIGITAL_SEA_BLOCK.get());
     public static final ForgeFlowingFluid.Properties HELIUM_PROPERTIES = new ForgeFlowingFluid.Properties(() -> STILL_LIQUIDHELIUM.get(),() -> FLOWING_LIQUIDHELIUM.get(),
             FluidAttributes.builder(LIQUIDHELIUM_STILL_RL,LIQUIDHELIUM_FLOWING_RL).overlay(LIQUIDHELIUM_STILL_RL).density(2).temperature(-1000).viscosity(-1).luminosity(0)).block(() -> ModFluids.LIQUIDHELIUM.get());
     public static final ForgeFlowingFluid.Properties URANIUM_PROPERTIES = new ForgeFlowingFluid.Properties(() -> STILL_URANIUM.get(),() -> FLOWING_URANIUM.get(),
             FluidAttributes.builder(URANIUM_STILL_RL,URANIUM_FLOW_RL).density(3).viscosity(0).temperature(921378).luminosity(40).overlay(URANIUM_STILL_RL)).block(()->ModFluids.URANIUM.get());
     //fluid blocks
-    public static final RegistryObject<FlowingFluidBlock> DIO = ModBlocks.BLOCKS.register("digital_ocean", () -> new DigitalSeaBlock(DIGITAL_OCEAN));
+    public static final RegistryObject<FlowingFluidBlock> DIGITAL_SEA_BLOCK = ModBlocks.BLOCKS.register("digital_ocean", () -> new DigitalSeaBlock(DIGITAL_OCEAN));
 	public static final RegistryObject<FlowingFluidBlock> URANIUM = ModBlocks.BLOCKS.register("uranium_waste", () -> new UraniumWaste(STILL_URANIUM));
 	public static final RegistryObject<FlowingFluidBlock> LIQUIDHELIUM = ModBlocks.BLOCKS.register("liquidhelium",() -> new LiquidHelium(STILL_LIQUIDHELIUM));
 	

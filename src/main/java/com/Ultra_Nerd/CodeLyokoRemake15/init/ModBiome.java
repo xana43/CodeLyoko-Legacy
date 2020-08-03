@@ -90,8 +90,8 @@ public class ModBiome {
 	public static final RegistryObject<Biome> OCEAN = BIOMES.register("digital_ocean",() -> new LyokoOcean(
 			new Biome.Builder().precipitation(RainType.RAIN)
 			.downfall(90)
-			.surfaceBuilder(SurfaceBuilder.DEFAULT,new SurfaceBuilderConfig(ModFluids.DIO.get().getDefaultState(),
-					ModFluids.DIO.get().getDefaultState(),ModFluids.DIO.get().getDefaultState()))
+			.surfaceBuilder(SurfaceBuilder.DEFAULT,new SurfaceBuilderConfig(ModFluids.DIGITAL_SEA_BLOCK.get().getDefaultState(),
+					ModFluids.DIGITAL_SEA_BLOCK.get().getDefaultState(),ModFluids.DIGITAL_SEA_BLOCK.get().getDefaultState()))
 			.parent(null)
 			.waterColor(126)
 			.waterFogColor(182)

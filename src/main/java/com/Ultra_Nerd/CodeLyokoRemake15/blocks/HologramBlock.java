@@ -11,12 +11,8 @@ import net.minecraftforge.common.ToolType;
 
 public class HologramBlock extends Block {
 
-
-
-    public HologramBlock()
-    {
+    public HologramBlock() {
         super(Block.Properties.create(Material.ROCK)
-
                 .hardnessAndResistance(-1, 10)
                 .sound(SoundType.METAL)
                 .lightValue(0)
@@ -31,15 +27,12 @@ public class HologramBlock extends Block {
         return true;
     }
 
-    
-
-    //
-
     @Override
     public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
         // TODO Auto-generated method stub
         return false;
     }
+
     @Override
     public boolean isTransparent(BlockState state) {
         // TODO Auto-generated method stub

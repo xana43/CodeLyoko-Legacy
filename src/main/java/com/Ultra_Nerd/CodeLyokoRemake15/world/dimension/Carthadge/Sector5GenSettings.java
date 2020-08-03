@@ -29,6 +29,6 @@ public class Sector5GenSettings extends GenerationSettings {
 
     @Override
     public BlockState getDefaultFluid() {
-        return ModFluids.DIO.get().getDefaultState();
+        return ModFluids.DIGITAL_SEA_BLOCK.get().getDefaultState();
     }
 }

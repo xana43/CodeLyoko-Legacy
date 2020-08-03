@@ -22,7 +22,7 @@ public class DigitalOceanGenerator extends ChunkGenerator<OceanGenSettings> {
     @Override
     public void generateSurface(WorldGenRegion p_225551_1_, IChunk chunk) {
         BlockState bedrock = Blocks.BEDROCK.getDefaultState();
-        BlockState stone = ModFluids.DIO.get().getDefaultState();
+        BlockState stone = ModFluids.DIGITAL_SEA_BLOCK.get().getDefaultState();
 
 
 

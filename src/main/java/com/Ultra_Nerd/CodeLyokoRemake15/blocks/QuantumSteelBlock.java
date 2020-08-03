@@ -7,9 +7,9 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class QuantumSteel extends Block {
+public class QuantumSteelBlock extends Block {
     public static final BooleanProperty formed = BooleanProperty.create("formed");
-    public QuantumSteel(Properties properties) {
+    public QuantumSteelBlock(Properties properties) {
         super(properties);
         this.setDefaultState(this.getStateContainer().getBaseState().with(formed,false));
     }
@@ -19,20 +19,14 @@ public class QuantumSteel extends Block {
         builder.add(formed);
     }
 
-    public static void SetModel(boolean act, World worldIn, BlockPos pos)
+    public static void setModel(boolean act, World worldIn, BlockPos pos)
     {
         BlockState state = worldIn.getBlockState(pos);
-
-
         if(act) {
             worldIn.setBlockState(pos, state.with(formed,true));
-
         }
         else {
             worldIn.setBlockState(pos, state.with(formed,false));
         }
-
-
-
     }
 }
