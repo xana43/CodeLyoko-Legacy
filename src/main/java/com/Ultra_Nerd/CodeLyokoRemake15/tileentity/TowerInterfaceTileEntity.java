@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.TowerInterface;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
@@ -25,7 +24,6 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.common.Mod;
 
 import javax.annotation.Nullable;
 
@@ -41,7 +39,7 @@ public class TowerInterfaceTileEntity extends TileEntity implements INamedContai
 	}
 
 	public TowerInterfaceTileEntity() {
-		super(ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get());
+		this(ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get());
 	}
 
 	// @OnlyIn(Dist.CLIENT) Makes it so this method will be removed from the class on the PHYSICAL SERVER

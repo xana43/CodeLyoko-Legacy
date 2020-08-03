@@ -12,12 +12,14 @@ import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class RendFan extends EntityRenderer<EntityFan> {
     public RendFan(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);
     }
-
     public static final ResourceLocation Fan = new ResourceLocation(Base.MOD_ID,"textures/entity/laserarrow.png");
     private final ModelFan FanModel = new ModelFan();
 

@@ -14,10 +14,10 @@ import net.minecraftforge.common.ToolType;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ProjectorFocusBlock extends ContainerBlock {
+public class ProjectorFocusblock extends ContainerBlock {
     public static BooleanProperty VALIDFOCUS = BooleanProperty.create("validfocus");
 
-    public ProjectorFocusBlock() {
+    public ProjectorFocusblock() {
         super(Properties.create(Material.GLASS)
                 .hardnessAndResistance(6, 10)
                 .sound(SoundType.GLASS)

@@ -143,7 +143,7 @@ public class ModItems
 	public static final RegistryObject<ArmorItem> YUMI_LEGGINGS = ITEMS.register("yumi_leggings", () -> new ArmorItem(LyokoArmorMaterial.NINJA, EquipmentSlotType.LEGS, new Item.Properties().group(Base.LYOKO_ARMOR)));
 	public static final RegistryObject<ArmorItem> YUMI_BOOTS = ITEMS.register("yumi_boots", () -> new ArmorItem(LyokoArmorMaterial.NINJA, EquipmentSlotType.FEET, new Item.Properties().group(Base.LYOKO_ARMOR)));
 	public static final RegistryObject<ArmorItem> MIND_HELMET = ITEMS.register("mind_helmet",() -> new MindHelm(LyokoArmorMaterial.BLANKHELM,EquipmentSlotType.HEAD,new Item.Properties().group(Base.LYOKO_ARMOR).rarity(Rarity.EPIC)));
-	public static final RegistryObject<ArmorItem> LINKER = ITEMS.register("linker",() -> new linker(ArmorMaterial.DIAMOND,EquipmentSlotType.CHEST,new Item.Properties().group(Base.LYOKO_ARMOR).rarity(Rarity.EPIC)));
+	public static final RegistryObject<ArmorItem> LINKER = ITEMS.register("linker",() -> new linker(LyokoArmorMaterial.LINKER,EquipmentSlotType.CHEST,new Item.Properties().group(Base.LYOKO_ARMOR).rarity(Rarity.EPIC)));
 
  
 }

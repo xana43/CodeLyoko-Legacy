@@ -1,17 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramProjectorBlock;
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.ProjectorFocusBlock;
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.ProjectorFocusblock;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.QuantumSteelBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.HologramContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.impl.SetBlockCommand;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -40,7 +35,7 @@ public class HologramProjectorTileEntity extends TileEntity implements ITickable
     }
 
     public HologramProjectorTileEntity() {
-        super(ModTileEntities.HOLOGRAM_TILE_ENTITY.get());
+        this(ModTileEntities.HOLOGRAM_TILE_ENTITY.get());
     }
 
     private BlockPos focus;
@@ -54,7 +49,7 @@ public class HologramProjectorTileEntity extends TileEntity implements ITickable
             // Projector block
             getWorld().setBlockState(this.getPos(), getWorld().getBlockState(getPos()).with(HologramProjectorBlock.VALID, true));
             // Lens/Focus
-            getWorld().setBlockState(focus, getWorld().getBlockState(focus).with(ProjectorFocusBlock.VALIDFOCUS, true));
+            getWorld().setBlockState(focus, getWorld().getBlockState(focus).with(ProjectorFocusblock.VALIDFOCUS, true));
             // Quantum Steel blocks
             BlockPos steel_1, steel_2;
             for (int i : new int[]{-1,1}) {
@@ -72,7 +67,7 @@ public class HologramProjectorTileEntity extends TileEntity implements ITickable
             if (getWorld().getBlockState(this.getPos()).getBlock() == ModBlocks.HOLOPROJECTOR.get())
                 getWorld().setBlockState(this.getPos(), getWorld().getBlockState(getPos()).with(HologramProjectorBlock.VALID, false));
             if (getWorld().getBlockState(focus).getBlock() == ModBlocks.PROJECTOR_FOCUS.get())
-                getWorld().setBlockState(focus, getWorld().getBlockState(focus).with(ProjectorFocusBlock.VALIDFOCUS, false));
+                getWorld().setBlockState(focus, getWorld().getBlockState(focus).with(ProjectorFocusblock.VALIDFOCUS, false));
             BlockPos steel;
             for (int i : new int[]{-1,1}) {
                 steel = new BlockPos(this.getPos().getX() + i, this.getPos().getY(), this.getPos().getZ());

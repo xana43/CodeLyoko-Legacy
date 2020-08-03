@@ -15,6 +15,8 @@ public class RendLaser extends ArrowRenderer<EntityLaser> {
 
 	}
 
+
+
 	@Override
 	public ResourceLocation getEntityTexture(EntityLaser entity) {
 		// TODO Auto-generated method stub
