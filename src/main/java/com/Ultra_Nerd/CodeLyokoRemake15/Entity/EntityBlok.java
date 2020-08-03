@@ -9,10 +9,12 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.IPacket;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 public class EntityBlok extends SkeletonEntity {
 
@@ -24,6 +26,10 @@ public class EntityBlok extends SkeletonEntity {
 	}
 
 
+	@Override
+	public IPacket<?> createSpawnPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
 	@Override
 	protected boolean isInDaylight() {
 		return false;
