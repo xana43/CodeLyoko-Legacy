@@ -1,19 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
 
-public class ProjectorFocusblock extends ContainerBlock {
+public class ProjectorFocusblock extends Block {
 	public static BooleanProperty VALIDFOCUS = BooleanProperty.create("validfocus");
 
 
@@ -69,9 +70,5 @@ public class ProjectorFocusblock extends ContainerBlock {
 	}
 
 
-	@Nullable
-	@Override
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
-		return null;
-	}
+
 }
