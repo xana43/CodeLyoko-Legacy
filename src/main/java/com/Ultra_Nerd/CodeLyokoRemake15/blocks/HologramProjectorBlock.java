@@ -1,7 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.HologramProjectorTileEntity;
-import net.minecraft.block.*;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
@@ -14,7 +17,7 @@ import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
 
-public class HologramProjectorBlock extends ContainerBlock {
+public class HologramProjectorBlock extends Block {
 	public static BooleanProperty VALID = BooleanProperty.create("valid");
 
 	public HologramProjectorBlock()
@@ -54,12 +57,14 @@ public class HologramProjectorBlock extends ContainerBlock {
 		return BlockRenderType.MODEL;
 	}
 
+
 	@Nullable
 	@Override
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
-		// TODO Auto-generated method stub
-		return new HologramProjectorTileEntity();
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+		return ModTileEntities.HOLOGRAM_TILE_ENTITY.get().create();
 	}
+
+
 	
 	@Override
 	public boolean hasTileEntity() {

@@ -4,7 +4,9 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.network.IPacket;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 public class EntityLaser extends ArrowEntity {
 
@@ -27,7 +29,10 @@ public class EntityLaser extends ArrowEntity {
 	}
 
 
-
+	@Override
+	public IPacket<?> createSpawnPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
 
 	@Override
 	protected boolean makeFlySound() {

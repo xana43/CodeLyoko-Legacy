@@ -115,7 +115,7 @@ public class ModItems
 
 	//for tools
 	public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().group(Base.LYOKO_ITEMS)));
-	public static final RegistryObject<Item> TRUSTTY_SCREWDRIVER = ITEMS.register("trusty_screwdriver",()->new TrustyScrewDriverItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+	public static final RegistryObject<Item> TRUSTTY_SCREWDRIVER = ITEMS.register("trusty_screwdriver",() -> new TrustyScrewDriverItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
 
 	//for weapons
 	public static final RegistryObject<SwordItem> DIGITAL_SABER = ITEMS.register("digital_saber", () -> new SaberKatana(LyokoTiers.LyokoSamurai,25,-0.9f , new Item.Properties().group(Base.LYOKO_WEAPONS)));

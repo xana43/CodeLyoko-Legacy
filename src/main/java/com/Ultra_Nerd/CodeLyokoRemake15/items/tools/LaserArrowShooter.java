@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items.tools;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
@@ -55,7 +54,7 @@ private byte Count = 100;
 		worldIn.playSound(playerIn,playerIn.getPosX(),playerIn.getPosY(),playerIn.getPosZ(), ModSounds.LASERARROW.get(),SoundCategory.NEUTRAL,1f,1f);
 
 
-		EntityLaser las = ModEntities.LASER.get().create(worldIn); //new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
+		EntityLaser las =  new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 		
 		las.setPosition(playerIn.getPosX() + aim.x * 1.5D, playerIn.getPosY() + aim.y * 1.9D, playerIn.getPosZ() + aim.z * 1.5D);
 		las.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0f, 10f, 0f);		
