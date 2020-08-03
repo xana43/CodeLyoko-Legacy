@@ -37,7 +37,7 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
     public int ENER = internal.getEnergyStored();
 
     public ElectricInfusingChamberTileEntity() {
-        super(ModTileEntities.ELECTRIC_INFUSING_CHAMBER_TILE_ENTITY.get());
+        this(ModTileEntities.ELECTRIC_INFUSING_CHAMBER_TILE_ENTITY.get());
     }
 
     public ElectricInfusingChamberTileEntity(TileEntityType<?> tileEntityTypeIn) {

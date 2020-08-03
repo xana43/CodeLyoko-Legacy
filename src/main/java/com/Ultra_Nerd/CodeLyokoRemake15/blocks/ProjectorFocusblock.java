@@ -42,17 +42,7 @@ public class ProjectorFocusblock extends ContainerBlock {
 	}
 
 
-	@Override
-	public BlockRenderType getRenderType(BlockState state) {
-		if(this.getDefaultState().get(VALIDFOCUS))
-		{
-			return BlockRenderType.INVISIBLE;
-		}
-		else
-		{
-			return BlockRenderType.MODEL;
-		}
-	}
+
 
 	@Override
 	public boolean hasTileEntity(BlockState state) {

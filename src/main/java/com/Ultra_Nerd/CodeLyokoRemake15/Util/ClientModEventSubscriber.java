@@ -49,8 +49,7 @@ public static void registerParticles(ParticleFactoryRegisterEvent event)
         RenderTypeLookup.setRenderLayer(ModFluids.LIQUIDHELIUM.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.CHIPLET_FRANZ_BLOCK.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.UV_FOCUS.get(),RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.HOLOPROJECTOR_PROJECTION.get(),RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.PROJECTOR_FOCUS.get(),RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(ModBlocks.PROJECTOR_FOCUS.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.HOLOPROJECTOR.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.FALSE_WATER.get(),RenderType.getTranslucent());
         //registers the screens and entities

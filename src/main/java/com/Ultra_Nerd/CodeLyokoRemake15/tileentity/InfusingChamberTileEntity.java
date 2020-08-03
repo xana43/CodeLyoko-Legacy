@@ -46,7 +46,7 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
     private int totalCookTime = 400;
 
     public InfusingChamberTileEntity() {
-        super(ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get());
+        this(ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get());
     }
 
     public InfusingChamberTileEntity(TileEntityType<?> tileEntityTypeIn) {

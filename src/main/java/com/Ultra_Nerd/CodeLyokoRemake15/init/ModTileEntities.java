@@ -28,4 +28,7 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<QuantumChipletTileEntity>> QUANTUM_CHIPLET_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("quantum_chiplet_tile_entity", () -> TileEntityType.Builder.create(QuantumChipletTileEntity::new,
                     ModBlocks.CHIPLET_FRANZ_BLOCK.get()).build(null));
+    public static final RegistryObject<TileEntityType<ScannerTileEntity>> SCANNER_TILE_ENTITY =
+            TILE_ENTITY_TYPES.register("scanner_tile_entity", () -> TileEntityType.Builder.create(ScannerTileEntity::new,
+                    ModBlocks.SCANNER_BASE.get()).build(null));
 }

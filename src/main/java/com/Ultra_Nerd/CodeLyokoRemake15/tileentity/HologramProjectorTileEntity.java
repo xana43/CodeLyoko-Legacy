@@ -35,7 +35,7 @@ public class HologramProjectorTileEntity extends TileEntity implements ITickable
 
 public HologramProjectorTileEntity()
 {
-        super(ModTileEntities.HOLOGRAM_TILE_ENTITY.get());
+        this(ModTileEntities.HOLOGRAM_TILE_ENTITY.get());
 }
 
 

@@ -55,7 +55,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> FALSE_WATER = BLOCKS.register("false_water",() -> new Block(Block.Properties.from(Blocks.WATER)));
     public static final RegistryObject<Block> GUMMITE_ORE = BLOCKS.register("gummite_ore",() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(3).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> HOLOPROJECTOR = BLOCKS.register("holoprojector", HologramProjectorBlock::new);
-    public static final RegistryObject<Block> HOLOPROJECTOR_PROJECTION = BLOCKS.register("holo", HologramBlock::new);
     public static final RegistryObject<Block> LYOKO_CORE = BLOCKS.register("lyoko_core",() -> new Block(Block.Properties.from(Blocks.DRAGON_EGG)));
     public static final RegistryObject<Block> MARABUNTA = BLOCKS.register("marabunta", Marabunta::new);
     public static final RegistryObject<Block> METATYUYAMUNITE_ORE = BLOCKS.register("metatyuyamunite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3, 10).sound(SoundType.STONE).lightValue(0).harvestLevel(1).harvestTool(ToolType.PICKAXE)));
