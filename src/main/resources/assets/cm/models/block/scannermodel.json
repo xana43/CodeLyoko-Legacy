@@ -1,0 +1,5 @@
+{
+  "loader": "forge:obj",
+  "model": "cm:models/block/scanner.obj",
+  "ambientocclusion": true
+}

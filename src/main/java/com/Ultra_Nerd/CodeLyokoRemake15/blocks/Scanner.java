@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class Scanner extends Block {
-    private static final BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
+    public static final BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
 
     public Scanner() {
         super(Block.Properties.create(Material.ROCK)

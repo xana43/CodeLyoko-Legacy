@@ -1,6 +1,6 @@
 {
    "parent": "block/cube_all",
    "textures": {
-       "all": "cm:block/dice"
+       "all": "cm:block/quantum_steel"
    }
 }
