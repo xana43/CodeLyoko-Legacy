@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15;
 
 
 
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.SeaPylon;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.BlokItem;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModOreGen;
@@ -116,7 +117,7 @@ CompoundNBT existing;
 	{
 		final IForgeRegistry<Item> registry = Items.getRegistry();
 		
-		ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof FlowingFluidBlock)).map(RegistryObject::get).forEach(block->
+		ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof FlowingFluidBlock) || !(block.get() instanceof SeaPylon)).map(RegistryObject::get).forEach(block->
 		{
 			final Item.Properties itemsettings = new Item.Properties().group(LYOKO_BLOCKS);
 			final BlockItem Itemblocks = new BlockItem(block,itemsettings);

@@ -1,21 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
-import net.minecraft.block.ContainerBlock;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
 
 import javax.annotation.Nullable;
 
-public class UniversalEnergyStorageContainer extends ContainerBlock {
-	protected UniversalEnergyStorageContainer(Properties builder) {
-		super(builder);
+public class UniversalEnergyStorageContainer extends Container {
+	protected UniversalEnergyStorageContainer(@Nullable ContainerType<?> type, int id) {
+		super(type, id);
 	}
 
-	@Nullable
 	@Override
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
-		return null;
+	public boolean canInteractWith(PlayerEntity playerIn) {
+		return false;
 	}
+
    /*
 	private final UniversalEnergyStorageTileEntity TE;
 	private int ener;

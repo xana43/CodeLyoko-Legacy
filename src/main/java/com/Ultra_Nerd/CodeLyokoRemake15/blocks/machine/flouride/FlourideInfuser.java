@@ -26,8 +26,8 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class FlourideInfuser extends HorizontalBlock {
-    //public static final DirectionProperty FACING = HORIZONTAL_FACING;
+public class FlourideInfuser extends Block {
+    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
     public static final BooleanProperty INFUSING = BooleanProperty.create("infusing");
 
     public FlourideInfuser() {
@@ -40,25 +40,14 @@ public class FlourideInfuser extends HorizontalBlock {
                 .harvestTool(ToolType.PICKAXE)
         );
 
-        this.setDefaultState(this.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(INFUSING, false));
+        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(INFUSING, false));
 
 
-        // TODO Auto-generated constructor stub
+
     }
 
 
-    /*@Override
-    public Item getItemDropped(BlockState state, Random rand, int fortune) {
-        // TODO Auto-generated method stub
-        return Item.getItemFromBlock(ModBlocks.FLOURIDE_INFUSER.get());
-    }
 
-    @Override
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        // TODO Auto-generated method stub
-        return new ItemStack(Modblocks.FLOURIDE_INFUSER);
-    }
-*/
     @Nonnull
     @Override
     public ActionResultType onBlockActivated(@Nonnull BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
@@ -72,36 +61,18 @@ public class FlourideInfuser extends HorizontalBlock {
     }
 
 
-    /*@Override
-    public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
 
-        if (!worldIn.isRemote) {
-            BlockState north = worldIn.getBlockState(pos.north());
-            BlockState south = worldIn.getBlockState(pos.south());
-            BlockState east = worldIn.getBlockState(pos.east());
-            BlockState west = worldIn.getBlockState(pos.west());
-            Direction face =  state.get(FACING);
-
-            if (face == Direction.NORTH && north.isFullBlock() && !south.isFullBlock()) face = EnumFacing.SOUTH;
-            else if (face == EnumFacing.SOUTH && south.isFullBlock() && !north.isFullBlock()) face = EnumFacing.NORTH;
-            else if (face == EnumFacing.EAST && east.isFullBlock() && !west.isFullBlock()) face = EnumFacing.EAST;
-            else if (face == EnumFacing.WEST && west.isFullBlock() && !east.isFullBlock()) face = EnumFacing.WEST;
-            worldIn.setBlockState(pos, state.withProperty(FACING, face), 2);
-
-
-        }
-
-    }*/
 
     public static void setState(boolean act, World worldIn, BlockPos pos) {
         BlockState state = worldIn.getBlockState(pos);
         TileEntity tileentity = worldIn.getTileEntity(pos);
-        if (act)
-            worldIn.setBlockState(pos, ModBlocks.FLOURIDE_INFUSER.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING))
+        if (act) {
+            worldIn.setBlockState(pos, ModBlocks.FLOURIDE_INFUSER.get().getDefaultState().with(FACING, state.get(FACING))
                     .with(INFUSING, true), 3);
-        else
-            worldIn.setBlockState(pos, ModBlocks.FLOURIDE_INFUSER.get().getDefaultState().with(HORIZONTAL_FACING, state.get(HORIZONTAL_FACING))
+        } else {
+            worldIn.setBlockState(pos, ModBlocks.FLOURIDE_INFUSER.get().getDefaultState().with(FACING, state.get(FACING))
                     .with(INFUSING, false), 3);
+        }
         if (tileentity != null) {
             tileentity.validate();
             worldIn.setTileEntity(pos, tileentity);
@@ -129,13 +100,13 @@ public class FlourideInfuser extends HorizontalBlock {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
+        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 
-        worldIn.setBlockState(pos, this.getDefaultState().with(HORIZONTAL_FACING, placer.getHorizontalFacing().getOpposite()), 2);
+        worldIn.setBlockState(pos, this.getDefaultState().with(FACING, placer.getHorizontalFacing().getOpposite()), 2);
     }
 
     @Override
@@ -145,32 +116,13 @@ public class FlourideInfuser extends HorizontalBlock {
 
     @Override
     public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation direction) {
-        return state.with(HORIZONTAL_FACING, direction.rotate(state.get(HORIZONTAL_FACING)));
+        return state.with(FACING, direction.rotate(state.get(FACING)));
     }
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(HORIZONTAL_FACING)));
-    }
-/*
-    @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (state.getBlock() != newState.getBlock()) {
-            TileEntity te = worldIn.getTileEntity(pos);
-            if (te instanceof InfusingChamberTileEntity) {
-                InventoryHelper.dropItems(worldIn, pos, NonNullList.from(((InfusingChamberTileEntity) te).handler.getStackInSlot(0)));
-            }
-        }
+        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
     }
 
-    /*@Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        InfusingChamberTileEntity tileentity = (InfusingChamberTileEntity) worldIn.getTileEntity(pos);
-        worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileentity.handler.getStackInSlot(0)));
-        worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileentity.handler.getStackInSlot(1)));
-        worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileentity.handler.getStackInSlot(2)));
-        worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileentity.handler.getStackInSlot(3)));
-        super.breakBlock(worldIn, pos, state);
-    }*/
 
 }
