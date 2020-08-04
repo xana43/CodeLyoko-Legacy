@@ -3,26 +3,18 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.HologramProjectorBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.ProjectorFocusblock;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.QuantumSteelBlock;
-import com.Ultra_Nerd.CodeLyokoRemake15.containers.HologramContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-
-import javax.annotation.Nullable;
 
 
-public class HologramProjectorTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
-    public static boolean once = false;
+public class HologramProjectorTileEntity extends TileEntity implements ITickableTileEntity//, INamedContainerProvider
+{
+    private static boolean once = false;
     //private boolean invalid_block = false;
     //private int x, y, z;
     //boolean once = false;
@@ -62,8 +54,7 @@ public class HologramProjectorTileEntity extends TileEntity implements ITickable
                 getWorld().setBlockState(steel_4, getWorld().getBlockState(steel_4).with(QuantumSteelBlock.formed,true));
                 getWorld().setBlockState(steel_5, getWorld().getBlockState(steel_5).with(QuantumSteelBlock.formed,true));
             }
-            //getWorld().setBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY() + 2, this.getPos().getZ()),
-            //        ModBlocks.HOLOPROJECTOR_PROJECTION.get().getDefaultState());
+
             once = true;
             //useUran();
         } else if (!checkStructure()) {
@@ -162,7 +153,7 @@ public class HologramProjectorTileEntity extends TileEntity implements ITickable
                 invalid_block = true;
             }
         }
-    }*/
+    }
 
     @Override
     public ITextComponent getDisplayName() {
@@ -173,5 +164,5 @@ public class HologramProjectorTileEntity extends TileEntity implements ITickable
     @Override
     public Container createMenu(int windowIn, PlayerInventory playerInv, PlayerEntity playerEntity) {
         return new HologramContainer(windowIn, playerInv, this);
-    }
+    }*/
 }
