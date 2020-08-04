@@ -16,7 +16,7 @@ import net.minecraftforge.common.ToolType;
 import javax.annotation.Nullable;
 
 public class Scanner extends Block {
-private BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
+private static BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
 
     public Scanner() {
         super(Block.Properties.create(Material.ROCK)
@@ -27,13 +27,13 @@ private BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
                 .harvestLevel(2)
                 .harvestTool(ToolType.PICKAXE)
         );
-this.getDefaultState().with(this.Scanner,false);
+this.getDefaultState().with(Scanner,false);
     }
 
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(this.Scanner);
+        builder.add(Scanner);
     }
 
     @Override

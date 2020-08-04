@@ -27,7 +27,7 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
 
 
             once = true;
-            //useUran();
+
         } else if (!checkStructure()) {
             once = false;
 

@@ -45,11 +45,11 @@ public class Base
 		ModBus.addListener(this::setup);
 		ModBus.addListener(this::dostuff);
 		ModBus.addListener(this::OreGen);
+		ModParticles.PARTICLES.register(ModBus);
 		ModSounds.SOUNDS.register(ModBus);
 		ModItems.ITEMS.register(ModBus);
 		ModFluids.LIQUIDS.register(ModBus);
 		ModBlocks.BLOCKS.register(ModBus);
-		ModParticles.PARTICLES.register(ModBus);
 		ModEntities.Entities.register(ModBus);
 		ModBiome.BIOMES.register(ModBus);
 		ModContainerTypes.CONTAINER_TYPES.register(ModBus);
