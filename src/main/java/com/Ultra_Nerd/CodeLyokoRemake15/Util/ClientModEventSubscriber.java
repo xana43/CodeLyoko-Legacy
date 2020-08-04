@@ -43,9 +43,9 @@ public class ClientModEventSubscriber {
         RenderTypeLookup.setRenderLayer(ModFluids.DIGITAL_OCEAN.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_DIGITAL_OCEAN.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.TRANSPARENT.get(), RenderType.getCutoutMipped());
-        RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_LIQUIDHELIUM.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModFluids.STILL_LIQUIDHELIUM.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModFluids.LIQUIDHELIUM.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_LIQUID_HELIUM.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModFluids.STILL_LIQUID_HELIUM.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModFluids.LIQUID_HELIUM.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.CHIPLET_FRANZ_BLOCK.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.UV_FOCUS.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.QUANTUM_STEEL_BLOCK.get(), RenderType.getCutoutMipped());
