@@ -13,10 +13,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class Scanner extends Block {
-private static BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
+    private static final BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
 
     public Scanner() {
         super(Block.Properties.create(Material.ROCK)
@@ -27,7 +28,7 @@ private static BooleanProperty Scanner = BooleanProperty.create("scanner_formed"
                 .harvestLevel(2)
                 .harvestTool(ToolType.PICKAXE)
         );
-this.getDefaultState().with(Scanner,false);
+        this.getDefaultState().with(Scanner, false);
     }
 
 
@@ -48,17 +49,17 @@ this.getDefaultState().with(Scanner,false);
     }
 
     @Override
-    public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         return false;
     }
 
     @Override
-    public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side) {
+    public boolean isSideInvisible(@Nonnull BlockState state, @Nonnull BlockState adjacentBlockState, @Nonnull Direction side) {
         return false;
     }
 
     @Override
-    public boolean isTransparent(BlockState state) {
+    public boolean isTransparent(@Nonnull BlockState state) {
         return false;
     }
 }

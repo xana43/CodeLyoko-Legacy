@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 
 public class HologramProjectorTileEntity extends TileEntity implements ITickableTileEntity//, INamedContainerProvider
 {
-    private static boolean once = false;
+    private boolean once = false;
     //private boolean invalid_block = false;
     //private int x, y, z;
     //boolean once = false;
