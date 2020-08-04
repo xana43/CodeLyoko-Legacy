@@ -4,8 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class QuantumSteelBlock extends Block {
     public static final BooleanProperty formed = BooleanProperty.create("formed");
@@ -19,14 +17,5 @@ public class QuantumSteelBlock extends Block {
         builder.add(formed);
     }
 
-    public static void setModel(boolean act, World worldIn, BlockPos pos)
-    {
-        BlockState state = worldIn.getBlockState(pos);
-        if(act) {
-            worldIn.setBlockState(pos, state.with(formed,true));
-        }
-        else {
-            worldIn.setBlockState(pos, state.with(formed,false));
-        }
-    }
+
 }

@@ -49,9 +49,11 @@ public static void registerParticles(ParticleFactoryRegisterEvent event)
         RenderTypeLookup.setRenderLayer(ModFluids.LIQUIDHELIUM.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.CHIPLET_FRANZ_BLOCK.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.UV_FOCUS.get(),RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.QUANTUM_STEEL_BLOCK.get(),RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(ModBlocks.PROJECTOR_FOCUS.get(),RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.HOLOPROJECTOR.get(),RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.FALSE_WATER.get(),RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.PROJECTOR_FOCUS.get(), RenderType.getTranslucent());
         //registers the screens and entities
         ScreenManager.<ContainerInfusing, InfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
         ScreenManager.<TowerInterfaceContainer, TowerGUI>registerFactory(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);

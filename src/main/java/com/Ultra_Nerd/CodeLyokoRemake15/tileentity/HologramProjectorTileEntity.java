@@ -19,8 +19,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Objects;
 
 
 public class HologramProjectorTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
@@ -51,12 +49,18 @@ public class HologramProjectorTileEntity extends TileEntity implements ITickable
             // Lens/Focus
             getWorld().setBlockState(focus, getWorld().getBlockState(focus).with(ProjectorFocusblock.VALIDFOCUS, true));
             // Quantum Steel blocks
-            BlockPos steel_1, steel_2;
+            BlockPos steel_1, steel_2,steel_3,steel_4,steel_5;
             for (int i : new int[]{-1,1}) {
                 steel_1 = new BlockPos(this.getPos().getX() + i, this.getPos().getY(), this.getPos().getZ());
                 steel_2 = new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() + i);
+                steel_3 = new BlockPos(this.getPos().getX() + i,this.getPos().getY() - 1,this.getPos().getZ());
+                steel_4 = new BlockPos(this.getPos().getX(),this.getPos().getY() - 1,this.getPos().getZ() + i);
+                steel_5 = new BlockPos(this.getPos().getX(),this.getPos().getY() - 1,this.getPos().getZ());
                 getWorld().setBlockState(steel_1, getWorld().getBlockState(steel_1).with(QuantumSteelBlock.formed, true));
                 getWorld().setBlockState(steel_2, getWorld().getBlockState(steel_2).with(QuantumSteelBlock.formed, true));
+                getWorld().setBlockState(steel_3, getWorld().getBlockState(steel_3).with(QuantumSteelBlock.formed,true));
+                getWorld().setBlockState(steel_4, getWorld().getBlockState(steel_4).with(QuantumSteelBlock.formed,true));
+                getWorld().setBlockState(steel_5, getWorld().getBlockState(steel_5).with(QuantumSteelBlock.formed,true));
             }
             //getWorld().setBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY() + 2, this.getPos().getZ()),
             //        ModBlocks.HOLOPROJECTOR_PROJECTION.get().getDefaultState());
@@ -64,20 +68,41 @@ public class HologramProjectorTileEntity extends TileEntity implements ITickable
             //useUran();
         } else if (!checkStructure()) {
             once = false;
-            if (getWorld().getBlockState(this.getPos()).getBlock() == ModBlocks.HOLOPROJECTOR.get())
+            if (getWorld().getBlockState(this.getPos()).getBlock() == ModBlocks.HOLOPROJECTOR.get()) {
                 getWorld().setBlockState(this.getPos(), getWorld().getBlockState(getPos()).with(HologramProjectorBlock.VALID, false));
-            if (getWorld().getBlockState(focus).getBlock() == ModBlocks.PROJECTOR_FOCUS.get())
+            }
+            if (getWorld().getBlockState(focus).getBlock() == ModBlocks.PROJECTOR_FOCUS.get()) {
                 getWorld().setBlockState(focus, getWorld().getBlockState(focus).with(ProjectorFocusblock.VALIDFOCUS, false));
-            BlockPos steel;
+            }
+            BlockPos steel,steelcenter;
             for (int i : new int[]{-1,1}) {
                 steel = new BlockPos(this.getPos().getX() + i, this.getPos().getY(), this.getPos().getZ());
-                if (getWorld().getBlockState(steel).getBlock() == ModBlocks.QUANTUM_STEEL_BLOCK.get())
+                if (getWorld().getBlockState(steel).getBlock() == ModBlocks.QUANTUM_STEEL_BLOCK.get()) {
                     getWorld().setBlockState(steel, getWorld().getBlockState(steel).with(QuantumSteelBlock.formed, false));
+                }
             }
             for (int j : new int[]{-1,1}) {
                 steel = new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() + j);
-                if (getWorld().getBlockState(steel).getBlock() == ModBlocks.QUANTUM_STEEL_BLOCK.get())
+                if (getWorld().getBlockState(steel).getBlock() == ModBlocks.QUANTUM_STEEL_BLOCK.get()) {
                     getWorld().setBlockState(steel, getWorld().getBlockState(steel).with(QuantumSteelBlock.formed, false));
+                }
+            }
+            for (int j : new int[]{-1,1}) {
+                steel = new BlockPos(this.getPos().getX(), this.getPos().getY() - 1, this.getPos().getZ() + j);
+                if (getWorld().getBlockState(steel).getBlock() == ModBlocks.QUANTUM_STEEL_BLOCK.get()) {
+                    getWorld().setBlockState(steel, getWorld().getBlockState(steel).with(QuantumSteelBlock.formed, false));
+                }
+            }
+            for (int i : new int[]{-1,1}) {
+                steel = new BlockPos(this.getPos().getX() + i, this.getPos().getY() - 1, this.getPos().getZ());
+                if (getWorld().getBlockState(steel).getBlock() == ModBlocks.QUANTUM_STEEL_BLOCK.get()) {
+                    getWorld().setBlockState(steel, getWorld().getBlockState(steel).with(QuantumSteelBlock.formed, false));
+                }
+            }
+            steelcenter = new BlockPos(new BlockPos(this.getPos().getX(),this.getPos().getY() -1,this.getPos().getZ()));
+            if(getWorld().getBlockState(steelcenter).getBlock() == ModBlocks.QUANTUM_STEEL_BLOCK.get())
+            {
+                getWorld().setBlockState(steelcenter,getWorld().getBlockState(steelcenter).with(QuantumSteelBlock.formed,false));
             }
             //getWorld().setBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY() + 2, this.getPos().getZ()),
             //        Blocks.AIR.getDefaultState());
@@ -94,7 +119,11 @@ public class HologramProjectorTileEntity extends TileEntity implements ITickable
         for (int i: data) {
             Block side = world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY(), this.getPos().getZ())).getBlock();
             Block side2 = world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() + i)).getBlock();
-            if (side != ModBlocks.QUANTUM_STEEL_BLOCK.get() || side2 != ModBlocks.QUANTUM_STEEL_BLOCK.get()) {
+            Block sidebelow = world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() - 1, this.getPos().getZ())).getBlock();
+            Block sidebelow2 = world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY() - 1, this.getPos().getZ() + i)).getBlock();
+            Block middlebelow = world.getBlockState(new BlockPos(this.getPos().getX(),this.getPos().getY() - 1,this.getPos().getZ())).getBlock();
+            if (side != ModBlocks.QUANTUM_STEEL_BLOCK.get() || side2 != ModBlocks.QUANTUM_STEEL_BLOCK.get() || sidebelow != ModBlocks.QUANTUM_STEEL_BLOCK.get()
+            || sidebelow2 != ModBlocks.QUANTUM_STEEL_BLOCK.get() || middlebelow != ModBlocks.QUANTUM_STEEL_BLOCK.get()) {
                 return false;
             }
         }

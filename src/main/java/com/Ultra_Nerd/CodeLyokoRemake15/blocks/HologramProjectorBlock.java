@@ -10,9 +10,7 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
@@ -67,13 +65,6 @@ public class HologramProjectorBlock extends Block {
         return true;
     }
 
-    public static void setModel(boolean act, World worldIn, BlockPos pos) {
-        BlockState state = worldIn.getBlockState(pos);
-        if (act) {
-            worldIn.setBlockState(pos, state.with(VALID, true));
-        } else {
-            worldIn.setBlockState(pos, state.with(VALID, false));
-        }
-    }
+
 
 }
