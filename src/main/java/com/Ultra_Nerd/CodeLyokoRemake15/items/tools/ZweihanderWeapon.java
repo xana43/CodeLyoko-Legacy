@@ -67,7 +67,7 @@ public class ZweihanderWeapon extends SwordItem {
         if(entityIn instanceof PlayerEntity)
         {
             PlayerEntity player = (PlayerEntity)entityIn;
-            ItemStack IStack = player.getHeldItem(Hand.MAIN_HAND).getStack();
+            ItemStack IStack = player.getHeldItem(Hand.OFF_HAND).getStack();
             if(player.getHeldItem(Hand.MAIN_HAND).getItem() == ModItems.ZWEIHANDER.get()) {
 
                 player.inventory.add(player.inventory.getFirstEmptyStack(),IStack);

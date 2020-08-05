@@ -53,11 +53,7 @@ public class HologramProjectorBlock extends Block {
         return ModTileEntities.HOLOGRAM_TILE_ENTITY.get().create();
     }
 
-    @Override
-    public boolean hasTileEntity() {
-        // TODO Auto-generated method stub
-        return true;
-    }
+
 
     @Override
     public boolean hasTileEntity(BlockState state) {

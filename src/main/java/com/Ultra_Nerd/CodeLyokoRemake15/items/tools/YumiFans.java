@@ -34,7 +34,7 @@ public class YumiFans extends TridentItem {
                 if(!worldIn.isRemote()) {
                     worldIn.addEntity(fan);
                 }
-                worldIn.playMovingSound((PlayerEntity) null, fan, SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                worldIn.playMovingSound(playerentity, fan, SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
                 if (!playerentity.abilities.isCreativeMode) {
                     playerentity.inventory.deleteStack(stack);
                 }

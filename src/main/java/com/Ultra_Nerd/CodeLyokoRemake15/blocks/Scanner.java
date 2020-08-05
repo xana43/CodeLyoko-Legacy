@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class Scanner extends Block {
-    public static final BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
+    public static BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
 
     public Scanner() {
         super(Block.Properties.create(Material.ROCK)
@@ -28,7 +28,7 @@ public class Scanner extends Block {
                 .harvestLevel(2)
                 .harvestTool(ToolType.PICKAXE)
         );
-        this.getDefaultState().with(Scanner, false);
+        this.setDefaultState(this.getDefaultState().with(Scanner,false));
     }
 
 
