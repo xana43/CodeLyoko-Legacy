@@ -40,7 +40,7 @@ public class Scanner extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(directionProperty,context.getPlacementHorizontalFacing().getOpposite());
+        return this.getDefaultState().with(directionProperty,context.getPlacementHorizontalFacing());
     }
 
     //mod compatiability

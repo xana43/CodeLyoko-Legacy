@@ -1,10 +1,24 @@
 {
-"variants":
-  {
-    "scanner_formed=false":{"model":"cm:block/scanner"},
-    "scanner_formed=true, facing=north": {"model": "cm:block/scannermodel", "axis": "y", "angle": "180"},
-    "scanner_formed=true, facing=south": {"model": "cm:block/scannermodel", "axis": "y", "angle": "0"},
-    "scanner_formed=true, facing=west": {"model": "cm:block/scannermodel", "axis": "y", "angle": "90"},
-    "scanner_formed=true, facing=east": {"model": "cm:block/scannermodel", "axis": "y", "angle": "270"}
+  "variants": {
+    "facing=north,scanner_formed=false": {"model": "cm:block/scanner"},
+    "facing=south,scanner_formed=false": {"model": "cm:block/scanner"},
+    "facing=west,scanner_formed=false": {"model": "cm:block/scanner"},
+    "facing=east,scanner_formed=false": {"model": "cm:block/scanner"},
+    "facing=north,scanner_formed=true": {
+      "model": "cm:block/scannermodel",
+      "y": "180"
+    },
+    "facing=south,scanner_formed=true": {
+      "model": "cm:block/scannermodel",
+      "y": "0"
+    },
+    "facing=west,scanner_formed=true": {
+      "model": "cm:block/scannermodel",
+      "y": "90"
+    },
+    "facing=east,scanner_formed=true": {
+      "model": "cm:block/scannermodel",
+      "y": "270"
+    }
   }
 }

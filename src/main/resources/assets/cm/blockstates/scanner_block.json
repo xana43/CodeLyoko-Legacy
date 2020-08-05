@@ -1,6 +1,6 @@
 {
   "variants": {
-    "scanner_frame_invis=false": "cm:block/frame",
-    "scanner_frame_invis=true": "cm:block/transparent"
+    "scanner_frame_invis=false": {"model": "cm:block/frame"},
+    "scanner_frame_invis=true": {"model": "cm:block/transparent"}
   }
 }

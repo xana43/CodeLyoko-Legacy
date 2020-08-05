@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.HornetRenderer;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendFan;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendLaser;
@@ -60,6 +61,7 @@ public class ClientModEventSubscriber {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.BLOK.get(), RendBlok::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LASER.get(), RendLaser::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FAN.get(), RendFan::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.HORNET.get(), HornetRenderer::new);
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get(), QuantumChipletRenderer::new);
     }
 

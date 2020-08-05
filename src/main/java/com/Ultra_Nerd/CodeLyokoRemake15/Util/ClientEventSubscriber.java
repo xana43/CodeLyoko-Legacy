@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 public class ClientEventSubscriber {
 
     private static int[] timer = new int[] {131000, 140000,103000,0,0,0,0};
+
     @SubscribeEvent
     public  static void PlayerJoinMusic(final EntityJoinWorldEvent event)
     {
@@ -39,10 +40,10 @@ public class ClientEventSubscriber {
             }
         }
     }
+
     @SubscribeEvent
     public static void PlayerDimension(final TickEvent.PlayerTickEvent event)
     {
-
 
         if (event.player.world.dimension instanceof ForestDimension && event.phase == TickEvent.Phase.END) {
             if (timer[0]-- <= 0 && Minecraft.getInstance().player != null) {
