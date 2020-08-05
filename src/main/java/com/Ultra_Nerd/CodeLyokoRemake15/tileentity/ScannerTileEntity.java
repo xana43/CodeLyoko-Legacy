@@ -20,7 +20,9 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
     public ScannerTileEntity(){
         this(ModTileEntities.SCANNER_TILE_ENTITY.get());
     }
-    private static boolean once = false;
+
+    private boolean once = false;
+
     @Override
     public void tick() {
         if (checkStructure() && !once) {
@@ -36,13 +38,13 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
                     h1 = new BlockPos(this.getPos().getX() + i, this.getPos().getY() + t, this.getPos().getZ());
                     h2 = new BlockPos(this.getPos().getX(), this.getPos().getY() + t, this.getPos().getZ() + 1);
                     h3 = new BlockPos(this.getPos().getX() + i,this.getPos().getY() + t,this.getPos().getZ() + 1);
+                    getWorld().setBlockState(h1, getWorld().getBlockState(h1).with(ScannerFrame.ScannerFrameInvis, true));
+                    getWorld().setBlockState(h2, getWorld().getBlockState(h2).with(ScannerFrame.ScannerFrameInvis, true));
+                    getWorld().setBlockState(h3, getWorld().getBlockState(h3).with(ScannerFrame.ScannerFrameInvis,true));
                 }
                 getWorld().setBlockState(side1, getWorld().getBlockState(side1).with(ScannerFrame.ScannerFrameInvis, true));
                 getWorld().setBlockState(side2, getWorld().getBlockState(side2).with(ScannerFrame.ScannerFrameInvis, true));
                 getWorld().setBlockState(side3, getWorld().getBlockState(side3).with(ScannerFrame.ScannerFrameInvis,true));
-                getWorld().setBlockState(h1, getWorld().getBlockState(h1).with(ScannerFrame.ScannerFrameInvis, true));
-                getWorld().setBlockState(h2, getWorld().getBlockState(h2).with(ScannerFrame.ScannerFrameInvis, true));
-                getWorld().setBlockState(h3, getWorld().getBlockState(h3).with(ScannerFrame.ScannerFrameInvis,true));
 
             }
 

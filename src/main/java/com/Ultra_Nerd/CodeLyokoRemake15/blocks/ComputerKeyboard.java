@@ -314,11 +314,6 @@ public class ComputerKeyboard extends Block {
 			.sound(SoundType.METAL)
 			.lightValue(0)
             .harvestLevel(0)
-
-
-
-
-
 		);
         this.setDefaultState(this.getStateContainer().getBaseState().with(directionProperty, Direction.NORTH));
     }

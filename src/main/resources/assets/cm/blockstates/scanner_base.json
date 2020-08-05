@@ -1,9 +1,10 @@
 {
 "variants":
   {
-  "scanner_formed=false":{"model":"cm:block/scanner"},
-    "scanner_formed=true": {"model": "cm:block/scannermodel"}
-
- 
+    "scanner_formed=false":{"model":"cm:block/scanner"},
+    "scanner_formed=true, facing=north": {"model": "cm:block/scannermodel", "axis": "y", "angle": "180"},
+    "scanner_formed=true, facing=south": {"model": "cm:block/scannermodel", "axis": "y", "angle": "0"},
+    "scanner_formed=true, facing=west": {"model": "cm:block/scannermodel", "axis": "y", "angle": "90"},
+    "scanner_formed=true, facing=east": {"model": "cm:block/scannermodel", "axis": "y", "angle": "270"}
   }
 }
