@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "facing=north,scanner_frame_invis=false": { "model": "cm:block/scanner_frame" },
+        "facing=south,scanner_frame_invis=false": { "model": "cm:block/scanner_frame", "y": 90  },
+        "facing=east,scanner_frame_invis=false": { "model": "cm:block/scanner_frame","y": 180 },
+        "facing=west,scanner_frame_invis=false": { "model": "cm:block/scanner_frame","y": 270 },
+        "facing=north,scanner_frame_invis=true": {"model": "cm:block/transparent"},
+        "facing=south,scanner_frame_invis=true": {"model": "cm:block/transparent"},
+        "facing=east,scanner_frame_invis=true": {"model": "cm:block/transparent"},
+        "facing=west,scanner_frame_invis=true": {"model": "cm:block/transparent"}
+    }
+}

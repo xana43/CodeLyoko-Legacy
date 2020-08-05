@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": { "model": "cm:block/scanner_top" },
+    "facing=south": { "model": "cm:block/scanner_top", "y": 90  },
+    "facing=east": { "model": "cm:block/scanner_top","y": 180 },
+    "facing=west": { "model": "cm:block/scanner_top","y": 270 }
+  }
+
+
+}

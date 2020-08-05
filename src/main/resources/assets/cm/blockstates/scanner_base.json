@@ -5,19 +5,19 @@
     "facing=west,scanner_formed=false": {"model": "cm:block/scanner"},
     "facing=east,scanner_formed=false": {"model": "cm:block/scanner"},
     "facing=north,scanner_formed=true": {
-      "model": "cm:block/scannermodel",
+      "model": "cm:block/scanner_bottom",
       "y": 0
     },
     "facing=south,scanner_formed=true": {
-      "model": "cm:block/scannermodel",
+      "model": "cm:block/scanner_bottom",
       "y": 180
     },
     "facing=west,scanner_formed=true": {
-      "model": "cm:block/scannermodel",
+      "model": "cm:block/scanner_bottom",
       "y": 270
     },
     "facing=east,scanner_formed=true": {
-      "model": "cm:block/scannermodel",
+      "model": "cm:block/scanner_bottom",
       "y": 90
     }
   }
