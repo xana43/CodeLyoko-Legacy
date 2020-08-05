@@ -75,17 +75,18 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
             Block side = world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY(), this.getPos().getZ())).getBlock();
             Block side2 = world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() + 1)).getBlock();
             Block side3 = world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY(), this.getPos().getZ() + 1)).getBlock();
-            Block height2 = null;
-            Block height1 = null;
-            Block height3 = null;
+
+            Block height1, height2,height3,height4;
+
             if (side != ModBlocks.SCANNER_BLOCK.get() || side2 != ModBlocks.SCANNER_BLOCK.get() || side3 != ModBlocks.SCANNER_BLOCK.get())
                 return false;
             for (int h : height) {
                 height1 = world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY() + h, this.getPos().getZ() + 1)).getBlock();
                 height2 = world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + h, this.getPos().getZ())).getBlock();
                 height3 = world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + h, this.getPos().getZ() + 1)).getBlock();
-
-                if(height2 != ModBlocks.SCANNER_BLOCK.get() || height1 != ModBlocks.SCANNER_BLOCK.get() || height3 != ModBlocks.SCANNER_BLOCK.get()) {
+                height4 = world.getBlockState(new BlockPos(this.getPos().getX(),this.getPos().getY() + h,this.getPos().getZ())).getBlock();
+                if(height2 != ModBlocks.SCANNER_BLOCK.get() || height1 != ModBlocks.SCANNER_BLOCK.get() || height3 != ModBlocks.SCANNER_BLOCK.get()
+                || height4 != ModBlocks.SCANNER_BLOCK.get()) {
                     return false;
                 }
             }
@@ -98,17 +99,16 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
             Block side = world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY(), this.getPos().getZ())).getBlock();
             Block side2 = world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() - 1)).getBlock();
             Block side3 = world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY(), this.getPos().getZ() - 1)).getBlock();
-            Block height2 = null;
-            Block height1 = null;
-            Block height3 = null;
+            Block height1, height2,height3,height4;
             if (side != ModBlocks.SCANNER_BLOCK.get() || side2 != ModBlocks.SCANNER_BLOCK.get() || side3 != ModBlocks.SCANNER_BLOCK.get())
                 return false;
             for (int h : height) {
                 height1 = world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY() + h, this.getPos().getZ() - 1)).getBlock();
                 height2 = world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + h, this.getPos().getZ())).getBlock();
                 height3 = world.getBlockState(new BlockPos(this.getPos().getX() + i, this.getPos().getY() + h, this.getPos().getZ() - 1)).getBlock();
-
-                if(height2 != ModBlocks.SCANNER_BLOCK.get() || height1 != ModBlocks.SCANNER_BLOCK.get() || height3 != ModBlocks.SCANNER_BLOCK.get()) {
+                height4 = world.getBlockState(new BlockPos(this.getPos().getX(),this.getPos().getY() + h,this.getPos().getZ())).getBlock();
+                if(height2 != ModBlocks.SCANNER_BLOCK.get() || height1 != ModBlocks.SCANNER_BLOCK.get() || height3 != ModBlocks.SCANNER_BLOCK.get()
+                        || height4 != ModBlocks.SCANNER_BLOCK.get()) {
                     return false;
                 }
             }
@@ -121,17 +121,16 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
             Block side = world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() + i)).getBlock();
             Block side2 = world.getBlockState(new BlockPos(this.getPos().getX() - 1, this.getPos().getY(), this.getPos().getZ())).getBlock();
             Block side3 = world.getBlockState(new BlockPos(this.getPos().getX() - 1, this.getPos().getY(), this.getPos().getZ() + i)).getBlock();
-            Block height2 = null;
-            Block height1 = null;
-            Block height3 = null;
+            Block height1, height2,height3,height4;
             if (side != ModBlocks.SCANNER_BLOCK.get() || side2 != ModBlocks.SCANNER_BLOCK.get() || side3 != ModBlocks.SCANNER_BLOCK.get())
                 return false;
             for (int h : height) {
                 height1 = world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY() + h, this.getPos().getZ() + i)).getBlock();
                 height2 = world.getBlockState(new BlockPos(this.getPos().getX() - 1, this.getPos().getY() + h, this.getPos().getZ())).getBlock();
                 height3 = world.getBlockState(new BlockPos(this.getPos().getX() - 1, this.getPos().getY() + h, this.getPos().getZ() + i)).getBlock();
-
-                if(height2 != ModBlocks.SCANNER_BLOCK.get() || height1 != ModBlocks.SCANNER_BLOCK.get() || height3 != ModBlocks.SCANNER_BLOCK.get()) {
+                height4 = world.getBlockState(new BlockPos(this.getPos().getX(),this.getPos().getY() + h,this.getPos().getZ())).getBlock();
+                if(height2 != ModBlocks.SCANNER_BLOCK.get() || height1 != ModBlocks.SCANNER_BLOCK.get() || height3 != ModBlocks.SCANNER_BLOCK.get()
+                        || height4 != ModBlocks.SCANNER_BLOCK.get()) {
                     return false;
                 }
             }
@@ -144,17 +143,16 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
             Block side = world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() + i)).getBlock();
             Block side2 = world.getBlockState(new BlockPos(this.getPos().getX() + 1, this.getPos().getY(), this.getPos().getZ() + i)).getBlock();
             Block side3 = world.getBlockState(new BlockPos(this.getPos().getX() + 1, this.getPos().getY(), this.getPos().getZ() + i)).getBlock();
-            Block height2 = null;
-            Block height1 = null;
-            Block height3 = null;
+            Block height1, height2,height3,height4;
             if (side != ModBlocks.SCANNER_BLOCK.get() || side2 != ModBlocks.SCANNER_BLOCK.get() || side3 != ModBlocks.SCANNER_BLOCK.get())
                 return false;
             for (int h : height) {
                 height1 = world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY() + h, this.getPos().getZ() + i)).getBlock();
                 height2 = world.getBlockState(new BlockPos(this.getPos().getX() + 1, this.getPos().getY() + h, this.getPos().getZ())).getBlock();
                 height3 = world.getBlockState(new BlockPos(this.getPos().getX() + 1, this.getPos().getY() + h, this.getPos().getZ() + i)).getBlock();
-
-                if(height2 != ModBlocks.SCANNER_BLOCK.get() || height1 != ModBlocks.SCANNER_BLOCK.get() || height3 != ModBlocks.SCANNER_BLOCK.get()) {
+                height4 = world.getBlockState(new BlockPos(this.getPos().getX(),this.getPos().getY() + h,this.getPos().getZ())).getBlock();
+                if(height2 != ModBlocks.SCANNER_BLOCK.get() || height1 != ModBlocks.SCANNER_BLOCK.get() || height3 != ModBlocks.SCANNER_BLOCK.get()
+                        || height4 != ModBlocks.SCANNER_BLOCK.get()) {
                     return false;
                 }
             }
@@ -164,8 +162,8 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
 
     private void activateSouth() {
         getWorld().setBlockState(this.getPos(), getWorld().getBlockState(getPos()).with(Scanner.Scanner, true));
-        BlockPos side1, side2, side3, side4, side5;
-        BlockPos h1 = null, h2 = null, h3 = null;
+        BlockPos side1, side2, side3;
+        BlockPos h1, h2, h3,h4;
         for (int i : data) {
             side1 = new BlockPos(this.getPos().getX() + i, this.getPos().getY(), this.getPos().getZ());
             side2 = new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() + 1);
@@ -174,9 +172,11 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
                 h1 = new BlockPos(this.getPos().getX() + i, this.getPos().getY() + t, this.getPos().getZ());
                 h2 = new BlockPos(this.getPos().getX(), this.getPos().getY() + t, this.getPos().getZ() + 1);
                 h3 = new BlockPos(this.getPos().getX() + i, this.getPos().getY() + t, this.getPos().getZ() + 1);
+                h4 = new BlockPos(this.getPos().getX(),this.getPos().getY() + t,this.getPos().getZ());
                 getWorld().setBlockState(h1, getWorld().getBlockState(h1).with(ScannerFrame.ScannerFrameInvis, true));
                 getWorld().setBlockState(h2, getWorld().getBlockState(h2).with(ScannerFrame.ScannerFrameInvis, true));
                 getWorld().setBlockState(h3, getWorld().getBlockState(h3).with(ScannerFrame.ScannerFrameInvis, true));
+                getWorld().setBlockState(h4, getWorld().getBlockState(h4).with(ScannerFrame.ScannerFrameInvis,true));
             }
             getWorld().setBlockState(side1, getWorld().getBlockState(side1).with(ScannerFrame.ScannerFrameInvis, true));
             getWorld().setBlockState(side2, getWorld().getBlockState(side2).with(ScannerFrame.ScannerFrameInvis, true));
@@ -187,8 +187,8 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
 
     private void activateNorth() {
         getWorld().setBlockState(this.getPos(), getWorld().getBlockState(getPos()).with(Scanner.Scanner, true));
-        BlockPos side1, side2, side3, side4, side5;
-        BlockPos h1 = null, h2 = null, h3 = null;
+        BlockPos side1, side2, side3;
+        BlockPos h1, h2, h3,h4;
         for (int i : data) {
             side1 = new BlockPos(this.getPos().getX() + i, this.getPos().getY(), this.getPos().getZ());
             side2 = new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() - 1);
@@ -197,9 +197,11 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
                 h1 = new BlockPos(this.getPos().getX() + i, this.getPos().getY() + t, this.getPos().getZ());
                 h2 = new BlockPos(this.getPos().getX(), this.getPos().getY() + t, this.getPos().getZ() - 1);
                 h3 = new BlockPos(this.getPos().getX() + i, this.getPos().getY() + t, this.getPos().getZ() - 1);
+                h4 = new BlockPos(this.getPos().getX(),this.getPos().getY() + t,this.getPos().getZ());
                 getWorld().setBlockState(h1, getWorld().getBlockState(h1).with(ScannerFrame.ScannerFrameInvis, true));
                 getWorld().setBlockState(h2, getWorld().getBlockState(h2).with(ScannerFrame.ScannerFrameInvis, true));
                 getWorld().setBlockState(h3, getWorld().getBlockState(h3).with(ScannerFrame.ScannerFrameInvis, true));
+                getWorld().setBlockState(h4, getWorld().getBlockState(h4).with(ScannerFrame.ScannerFrameInvis,true));
             }
             getWorld().setBlockState(side1, getWorld().getBlockState(side1).with(ScannerFrame.ScannerFrameInvis, true));
             getWorld().setBlockState(side2, getWorld().getBlockState(side2).with(ScannerFrame.ScannerFrameInvis, true));
@@ -210,8 +212,8 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
 
     private void activateWest() {
         getWorld().setBlockState(this.getPos(), getWorld().getBlockState(getPos()).with(Scanner.Scanner, true));
-        BlockPos side1, side2, side3, side4, side5;
-        BlockPos h1 = null, h2 = null, h3 = null;
+        BlockPos side1, side2, side3;
+        BlockPos h1 = null, h2 = null, h3,h4;
         for (int i : data) {
             side1 = new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() + i);
             side2 = new BlockPos(this.getPos().getX() - 1, this.getPos().getY(), this.getPos().getZ());
@@ -220,9 +222,11 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
                 h1 = new BlockPos(this.getPos().getX(), this.getPos().getY() + t, this.getPos().getZ() + i);
                 h2 = new BlockPos(this.getPos().getX() - 1, this.getPos().getY() + t, this.getPos().getZ());
                 h3 = new BlockPos(this.getPos().getX() - 1, this.getPos().getY() + t, this.getPos().getZ() + i);
+                h4 = new BlockPos(this.getPos().getX(),this.getPos().getY() + t,this.getPos().getZ());
                 getWorld().setBlockState(h1, getWorld().getBlockState(h1).with(ScannerFrame.ScannerFrameInvis, true));
                 getWorld().setBlockState(h2, getWorld().getBlockState(h2).with(ScannerFrame.ScannerFrameInvis, true));
                 getWorld().setBlockState(h3, getWorld().getBlockState(h3).with(ScannerFrame.ScannerFrameInvis, true));
+                getWorld().setBlockState(h4, getWorld().getBlockState(h4).with(ScannerFrame.ScannerFrameInvis,true));
             }
             getWorld().setBlockState(side1, getWorld().getBlockState(side1).with(ScannerFrame.ScannerFrameInvis, true));
             getWorld().setBlockState(side2, getWorld().getBlockState(side2).with(ScannerFrame.ScannerFrameInvis, true));
@@ -233,8 +237,8 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
 
     private void activateEast() {
         getWorld().setBlockState(this.getPos(), getWorld().getBlockState(getPos()).with(Scanner.Scanner, true));
-        BlockPos side1, side2, side3, side4, side5;
-        BlockPos h1 = null, h2 = null, h3 = null;
+        BlockPos side1, side2, side3;
+        BlockPos h1, h2, h3,h4;
         for (int i : data) {
             side1 = new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() + i);
             side2 = new BlockPos(this.getPos().getX() + 1, this.getPos().getY(), this.getPos().getZ());
@@ -243,9 +247,11 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
                 h1 = new BlockPos(this.getPos().getX(), this.getPos().getY() + t, this.getPos().getZ() + i);
                 h2 = new BlockPos(this.getPos().getX() + 1, this.getPos().getY() + t, this.getPos().getZ());
                 h3 = new BlockPos(this.getPos().getX() + 1, this.getPos().getY() + t, this.getPos().getZ() + i);
+                h4 = new BlockPos(this.getPos().getX(),this.getPos().getY() + t,this.getPos().getZ());
                 getWorld().setBlockState(h1, getWorld().getBlockState(h1).with(ScannerFrame.ScannerFrameInvis, true));
                 getWorld().setBlockState(h2, getWorld().getBlockState(h2).with(ScannerFrame.ScannerFrameInvis, true));
                 getWorld().setBlockState(h3, getWorld().getBlockState(h3).with(ScannerFrame.ScannerFrameInvis, true));
+                getWorld().setBlockState(h4, getWorld().getBlockState(h4).with(ScannerFrame.ScannerFrameInvis,true));
             }
             getWorld().setBlockState(side1, getWorld().getBlockState(side1).with(ScannerFrame.ScannerFrameInvis, true));
             getWorld().setBlockState(side2, getWorld().getBlockState(side2).with(ScannerFrame.ScannerFrameInvis, true));
@@ -265,6 +271,11 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
                     getWorld().setBlockState(frame, getWorld().getBlockState(frame).with(ScannerFrame.ScannerFrameInvis, false));
                 }
             }
+            frame = new BlockPos(this.getPos().getX(),this.getPos().getY() + h,this.getPos().getZ());
+            if(getWorld().getBlockState(frame).getBlock() == ModBlocks.SCANNER_BLOCK.get())
+            {
+                getWorld().setBlockState(frame,getWorld().getBlockState(frame).with(ScannerFrame.ScannerFrameInvis, false));
+            }
         }
     }
 
@@ -272,7 +283,7 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
         if (getWorld().getBlockState(this.getPos()).getBlock() == ModBlocks.SCANNER_BASE.get()) {
             getWorld().setBlockState(this.getPos(), getWorld().getBlockState(getPos()).with(Scanner.Scanner, false));
         }
-        BlockPos frame = null;
+        BlockPos frame;
         for (int j : data) {
             frame = new BlockPos(this.getPos().getX() + j, this.getPos().getY(), this.getPos().getZ());
             if (getWorld().getBlockState(frame).getBlock() == ModBlocks.SCANNER_BLOCK.get()) {
@@ -290,6 +301,13 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
                     getWorld().setBlockState(frame, getWorld().getBlockState(frame).with(ScannerFrame.ScannerFrameInvis, false));
                 }
             }
+
+                frame = new BlockPos(this.getPos().getX(),this.getPos().getY() + h,this.getPos().getZ());
+                if(getWorld().getBlockState(frame).getBlock() == ModBlocks.SCANNER_BLOCK.get())
+                {
+                    getWorld().setBlockState(frame,getWorld().getBlockState(frame).with(ScannerFrame.ScannerFrameInvis, false));
+                }
+
         }
     }
 
@@ -297,7 +315,7 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
         if (getWorld().getBlockState(this.getPos()).getBlock() == ModBlocks.SCANNER_BASE.get()) {
             getWorld().setBlockState(this.getPos(), getWorld().getBlockState(getPos()).with(Scanner.Scanner, false));
         }
-        BlockPos frame = null;
+        BlockPos frame;
         for (int j : data) {
             frame = new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() + j);
             if (getWorld().getBlockState(frame).getBlock() == ModBlocks.SCANNER_BLOCK.get()) {
@@ -411,6 +429,7 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
                 getWorld().setBlockState(frame, getWorld().getBlockState(frame).with(ScannerFrame.ScannerFrameInvis, false));
             }
         }
+
         deactivateHeightWestEast();
         for (int h : height) {
             for (int j : data) {
@@ -426,5 +445,6 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
                 getWorld().setBlockState(frame, getWorld().getBlockState(frame).with(ScannerFrame.ScannerFrameInvis, false));
             }
         }
+
     }
 }
