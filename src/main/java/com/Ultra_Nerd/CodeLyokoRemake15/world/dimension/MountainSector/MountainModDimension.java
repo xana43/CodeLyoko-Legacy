@@ -8,8 +8,10 @@ import net.minecraftforge.common.ModDimension;
 import java.util.function.BiFunction;
 
 public class MountainModDimension extends ModDimension {
+
     @Override
     public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
         return MountainDimension::new;
     }
+
 }

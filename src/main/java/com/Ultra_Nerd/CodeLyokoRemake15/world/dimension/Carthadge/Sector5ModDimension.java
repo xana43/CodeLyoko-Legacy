@@ -13,4 +13,5 @@ public class Sector5ModDimension extends ModDimension {
     public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
         return Sector5Dimension::new;
     }
+
 }

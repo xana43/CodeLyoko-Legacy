@@ -15,6 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 
+import javax.annotation.Nonnull;
+
 public class CableBlock extends Block {
 
     public static final DirectionProperty DIR = HorizontalBlock.HORIZONTAL_FACING;
@@ -44,11 +46,13 @@ public class CableBlock extends Block {
     }
 
     //mod compatibility
+    @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.with(DIR, rot.rotate(state.get(DIR)));
     }
 
+    @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(DIR)));
@@ -56,13 +60,13 @@ public class CableBlock extends Block {
     //
 
     @Override
-    public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean isTransparent(BlockState state) {
+    public boolean isTransparent(@Nonnull BlockState state) {
         // TODO Auto-generated method stub
         return true;
     }

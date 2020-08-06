@@ -5,6 +5,8 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
+
 public class RendSkid extends EntityRenderer<EntitySkid> {
 
 
@@ -12,8 +14,9 @@ public class RendSkid extends EntityRenderer<EntitySkid> {
 		super(renderManagerIn);
 	}
 
+	@Nonnull
 	@Override
-	public ResourceLocation getEntityTexture(EntitySkid entity) {
+	public ResourceLocation getEntityTexture(@Nonnull EntitySkid entity) {
 		return null;
 	}
 }

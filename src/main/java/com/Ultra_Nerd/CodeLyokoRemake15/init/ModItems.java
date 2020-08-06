@@ -17,7 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModItems {
 
 
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Base.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Base.MOD_ID);
 
     //for items
     public static final RegistryObject<BlokItem> BLOK_SPAWN_EGG = ITEMS.register("blok_spawn_egg", () -> new BlokItem(ModEntities.BLOK, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));

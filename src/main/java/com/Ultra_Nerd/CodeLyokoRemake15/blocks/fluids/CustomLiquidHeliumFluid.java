@@ -10,18 +10,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
+import javax.annotation.Nonnull;
+
 public class CustomLiquidHeliumFluid extends ForgeFlowingFluid {
     protected CustomLiquidHeliumFluid(Properties properties) {
         super(properties);
     }
 
     @Override
-    public boolean isSource(IFluidState state) {
+    public boolean isSource(@Nonnull IFluidState state) {
         return false;
     }
 
     @Override
-    protected void flowInto(IWorld worldIn, BlockPos pos, BlockState blockStateIn, Direction direction, IFluidState fluidStateIn) {
+    protected void flowInto(@Nonnull IWorld worldIn, @Nonnull BlockPos pos, @Nonnull BlockState blockStateIn, @Nonnull Direction direction, @Nonnull IFluidState fluidStateIn) {
         if (direction == Direction.DOWN) {
             IFluidState ifluidstate = worldIn.getFluidState(pos);
             if (this.isIn(FluidTags.WATER) && ifluidstate.isTagged(FluidTags.WATER)) {
@@ -50,7 +52,7 @@ public class CustomLiquidHeliumFluid extends ForgeFlowingFluid {
     }
 
     @Override
-    public int getLevel(IFluidState p_207192_1_) {
+    public int getLevel(@Nonnull IFluidState p_207192_1_) {
         return 0;
     }
 }

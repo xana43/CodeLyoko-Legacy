@@ -132,14 +132,17 @@ public class FranzChiplet extends Block {
             Block.makeCuboidShape(5, 4, 15, 11, 5, 16),
             Block.makeCuboidShape(4, 4, 15, 5, 5, 16),
             Block.makeCuboidShape(5, 4, 0, 11, 5, 1)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
 
     public FranzChiplet() {
         super(Block.Properties.from(Blocks.IRON_BLOCK));
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
         return shape;
     }
 
@@ -155,17 +158,14 @@ public class FranzChiplet extends Block {
     }
 
 
-
     @Nonnull
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult result) {
-        if(!worldIn.isRemote)
-        {
+    public ActionResultType onBlockActivated(@Nonnull BlockState state, World worldIn, @Nonnull BlockPos pos, @Nonnull PlayerEntity player, @Nonnull Hand handIn, @Nonnull BlockRayTraceResult result) {
+        if (!worldIn.isRemote) {
             TileEntity Chiplet = worldIn.getTileEntity(pos);
-            if(Chiplet instanceof QuantumChipletTileEntity)
-            {
+            if (Chiplet instanceof QuantumChipletTileEntity) {
 
-                NetworkHooks.openGui((ServerPlayerEntity)player,(QuantumChipletTileEntity)Chiplet,pos);
+                NetworkHooks.openGui((ServerPlayerEntity) player, (QuantumChipletTileEntity) Chiplet, pos);
                 return ActionResultType.SUCCESS;
             }
         }
@@ -173,14 +173,11 @@ public class FranzChiplet extends Block {
     }
 
     @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-        if(state.getBlock() != newState.getBlock())
-        {
+    public void onReplaced(BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
+        if (state.getBlock() != newState.getBlock()) {
             TileEntity tile1 = worldIn.getTileEntity(pos);
-            if(tile1 instanceof QuantumChipletTileEntity)
-            {
-                assert tile1 != null;
-                InventoryHelper.dropItems(worldIn,pos,((QuantumChipletTileEntity)tile1).getItems());
+            if (tile1 instanceof QuantumChipletTileEntity) {
+                InventoryHelper.dropItems(worldIn, pos, ((QuantumChipletTileEntity) tile1).getItems());
             }
         }
     }

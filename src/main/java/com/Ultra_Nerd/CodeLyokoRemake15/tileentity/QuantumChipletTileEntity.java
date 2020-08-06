@@ -20,6 +20,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.Constants;
 
+import javax.annotation.Nonnull;
+
 public class QuantumChipletTileEntity extends LockableTileEntity implements INamedContainerProvider, IClearable {
 
     protected NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
@@ -33,14 +35,15 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
     }
 
     @Override
-    public void read(CompoundNBT compound) {
+    public void read(@Nonnull CompoundNBT compound) {
         super.read(compound);
         this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(compound, this.items);
     }
 
+    @Nonnull
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT write(@Nonnull CompoundNBT compound) {
         super.write(compound);
         ItemStackHelper.saveAllItems(compound, this.items);
         return compound;
@@ -60,13 +63,15 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
         this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
     }
 
+    @Nonnull
     @Override
     protected ITextComponent getDefaultName() {
         return new TranslationTextComponent("container." + Base.MOD_ID + ".quantum_chiplet");
     }
 
+    @Nonnull
     @Override
-    protected Container createMenu(int id, PlayerInventory player) {
+    protected Container createMenu(int id, @Nonnull PlayerInventory player) {
         return new QuantumChipletContainer(id, player, this);
     }
 
@@ -85,16 +90,19 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
         return true;
     }
 
+    @Nonnull
     @Override
     public ItemStack getStackInSlot(int index) {
         return this.items.get(index);
     }
 
+    @Nonnull
     @Override
     public ItemStack decrStackSize(int index, int count) {
         return ItemStackHelper.getAndSplit(this.items, index, count);
     }
 
+    @Nonnull
     @Override
     public ItemStack removeStackFromSlot(int index) {
         return ItemStackHelper.getAndRemove(this.items, index);
@@ -114,7 +122,7 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
     }
 
     @Override
-    public boolean isUsableByPlayer(PlayerEntity player) {
+    public boolean isUsableByPlayer(@Nonnull PlayerEntity player) {
         assert this.world != null;
         if (this.world.getTileEntity(pos) != this) {
             return false;
@@ -148,6 +156,7 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
         this.read(pkt.getNbtCompound());
     }
 
+    @Nonnull
     @Override
     public CompoundNBT getUpdateTag() {
         return this.write(new CompoundNBT());

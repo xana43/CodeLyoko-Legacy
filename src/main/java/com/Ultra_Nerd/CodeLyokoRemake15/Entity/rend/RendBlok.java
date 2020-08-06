@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
+
 public class RendBlok extends MobRenderer<EntityBlok, ModelBlok<EntityBlok>>
 {
 
@@ -16,10 +18,10 @@ public class RendBlok extends MobRenderer<EntityBlok, ModelBlok<EntityBlok>>
 	{
 		super(rendManIn,new ModelBlok<EntityBlok>() ,1f);
 	}
-	
-	
-    @Override
-    public ResourceLocation getEntityTexture(EntityBlok entity) {
+
+	@Nonnull
+	@Override
+    public ResourceLocation getEntityTexture(@Nonnull EntityBlok entity) {
 		return tex;
 	}
     

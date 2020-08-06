@@ -8,6 +8,8 @@ import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class linker extends ArmorItem {
     public linker(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
         super(materialIn, slot, builder);
@@ -15,17 +17,16 @@ public class linker extends ArmorItem {
 
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        if(stack.getDamage() < stack.getMaxDamage() - 1) {
+        if (stack.getDamage() < stack.getMaxDamage() - 1) {
             stack.damageItem(1, player, null);
         }
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
 
-        if(stack.getDamage() != 0 && itemSlot != EquipmentSlotType.CHEST.getIndex())
-        {
-            stack.damageItem(-1,(PlayerEntity)entityIn,null);
+        if (stack.getDamage() != 0 && itemSlot != EquipmentSlotType.CHEST.getIndex()) {
+            stack.damageItem(-1, (PlayerEntity) entityIn, null);
         }
 
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);

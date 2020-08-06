@@ -14,6 +14,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ToolType;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class AntiMarabunta extends Block {
@@ -30,15 +31,16 @@ public class AntiMarabunta extends Block {
         );
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos,
-                                        ISelectionContext context) {
+    public VoxelShape getCollisionShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos,
+                                        @Nonnull ISelectionContext context) {
         // TODO Auto-generated method stub
         return SHAPE;
     }
 
     @Override
-    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+    public void tick(@Nonnull BlockState state, ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
         if (!worldIn.isRemote) {
             for (byte i = 0; i < 20; ++i) {
                 BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);

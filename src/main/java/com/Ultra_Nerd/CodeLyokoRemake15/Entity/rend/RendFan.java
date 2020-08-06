@@ -15,6 +15,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
+
 @OnlyIn(Dist.CLIENT)
 public class RendFan extends EntityRenderer<EntityFan> {
     public RendFan(EntityRendererManager renderManagerIn) {
@@ -26,7 +28,7 @@ public class RendFan extends EntityRenderer<EntityFan> {
 
 
     @Override
-    public void render(EntityFan entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+    public void render(EntityFan entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, @Nonnull IRenderTypeBuffer bufferIn, int packedLightIn) {
         matrixStackIn.push();
         matrixStackIn.rotate(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationYaw, entityIn.rotationYaw) - 90.0F));
         matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationPitch, entityIn.rotationPitch) + 90.0F));
@@ -39,7 +41,8 @@ public class RendFan extends EntityRenderer<EntityFan> {
     /**
      * Returns the location of an entity's texture.
      */
-    public ResourceLocation getEntityTexture(EntityFan entity) {
+    @Nonnull
+    public ResourceLocation getEntityTexture(@Nonnull EntityFan entity) {
         return Fan;
     }
 }

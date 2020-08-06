@@ -6,28 +6,27 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
+import javax.annotation.Nonnull;
+
 
 public class UniversalEnergyStorageTileEntity extends TileEntity {
-	public UniversalEnergyStorageTileEntity(TileEntityType<?> tileEntityTypeIn) {
-		super(tileEntityTypeIn);
-	}
+    public UniversalEnergyStorageTileEntity(TileEntityType<?> tileEntityTypeIn) {
+        super(tileEntityTypeIn);
+    }
 
 
-	private EG store = new EG(90000);
-	public  int UNIRF = store.getEnergyStored();
-	private String name;
+    private EG store = new EG(90000);
+    public int UNIRF = store.getEnergyStored();
+    private String name;
 
 
-
-
-	@Override
-	public void updateContainingBlockInfo() {
-		if(world.isBlockPowered(this.pos))
-		{
-			//System.out.println(Integer.toString(UNIRF));
-			UNIRF += 100;
-		}
-	}
+    @Override
+    public void updateContainingBlockInfo() {
+        if (world.isBlockPowered(this.pos)) {
+            //System.out.println(Integer.toString(UNIRF));
+            UNIRF += 100;
+        }
+    }
 /*
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
@@ -45,70 +44,64 @@ public class UniversalEnergyStorageTileEntity extends TileEntity {
 
  */
 
-
-
+	@Nonnull
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		// TODO Auto-generated method stub
-		super.write(compound);
-		compound.putInt("Chat", this.UNIRF);
-		compound.putString("name", this.getName());
-		this.store.WRTNBT(compound);
-		return compound;
-	}
+    public CompoundNBT write(@Nonnull CompoundNBT compound) {
+        // TODO Auto-generated method stub
+        super.write(compound);
+        compound.putInt("Chat", this.UNIRF);
+        compound.putString("name", this.getName());
+        this.store.WRTNBT(compound);
+        return compound;
+    }
 
-	@Override
-	public void read(CompoundNBT compound) {
-		// TODO Auto-generated method stub
-		super.read(compound);
-		this.UNIRF = compound.getInt("Chat");
-		this.name = compound.getString("name");
-		
-	}
+    @Override
+    public void read(@Nonnull CompoundNBT compound) {
+        // TODO Auto-generated method stub
+        super.read(compound);
+        this.UNIRF = compound.getInt("Chat");
+        this.name = compound.getString("name");
 
-	public String getName() {
-		return "container.universal";
-	}
+    }
 
-	//@Override
+    public String getName() {
+        return "container.universal";
+    }
+
+    //@Override
 //	public ITextComponent getDisplayName() {
 //		// TODO Auto-generated method stub
-	//	return new TextComponentTranslation("container.universal");
-	//}
-	public int getStore() {
-		return UNIRF;
-	}
-	
-	public int getStoreMax() {
-		return this.store.getMaxEnergyStored();
-	}
-	
-	public int getall(int id)
-	{
-		switch(id)
-		{
-		case 0:
-			return this.UNIRF;
-		default:
-				return 0;
-		}
-	}
-	
-	public void setall(int cal)
-	{
-		switch(cal)
-		{
-		case 0:
-			this.UNIRF = cal;
-		
-		}
-	}
-	
-	public boolean useable(PlayerEntity player)
-	{
-		assert this.world != null;
-		return this.world.getTileEntity(pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) >= 64D;
-	}
+    //	return new TextComponentTranslation("container.universal");
+    //}
+    public int getStore() {
+        return UNIRF;
+    }
+
+    public int getStoreMax() {
+        return this.store.getMaxEnergyStored();
+    }
+
+    public int getall(int id) {
+        switch (id) {
+            case 0:
+                return this.UNIRF;
+            default:
+                return 0;
+        }
+    }
+
+    public void setall(int cal) {
+        switch (cal) {
+            case 0:
+                this.UNIRF = cal;
+
+        }
+    }
+
+    public boolean useable(PlayerEntity player) {
+        assert this.world != null;
+        return this.world.getTileEntity(pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) >= 64D;
+    }
 
 
 }

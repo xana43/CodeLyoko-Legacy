@@ -9,15 +9,9 @@ import java.util.function.BiFunction;
 
 public class DesertModDimension extends ModDimension {
 
-
-
-
-
-
-        @Override
-        public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
-            return DesertDimension::new;
-        }
-
+    @Override
+    public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
+        return DesertDimension::new;
+    }
 
 }

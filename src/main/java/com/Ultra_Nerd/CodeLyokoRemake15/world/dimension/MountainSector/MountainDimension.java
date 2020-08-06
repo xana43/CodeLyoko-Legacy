@@ -10,13 +10,16 @@ import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class MountainDimension extends Dimension {
+
     public MountainDimension(World world, DimensionType type) {
         super(world, type, 0.0f);
     }
 
+    @Nonnull
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
         return new MounatainGenerator(world,new MountainProvider(),new MountainGenSettings());
@@ -24,7 +27,7 @@ public class MountainDimension extends Dimension {
 
     @Nullable
     @Override
-    public BlockPos findSpawn(ChunkPos chunkPosIn, boolean checkValid) {
+    public BlockPos findSpawn(@Nonnull ChunkPos chunkPosIn, boolean checkValid) {
         return null;
     }
 
@@ -44,13 +47,14 @@ public class MountainDimension extends Dimension {
         return false;
     }
 
+    @Nonnull
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
         return new Vec3d(0.53,0.81,0.92);
     }
 
     @Override
-    public void setCloudRenderer(IRenderHandler renderer) {
+    public void setCloudRenderer(@Nonnull IRenderHandler renderer) {
         super.setCloudRenderer(renderer);
     }
 

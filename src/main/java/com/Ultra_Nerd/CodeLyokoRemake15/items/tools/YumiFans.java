@@ -13,13 +13,15 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class YumiFans extends TridentItem {
     public YumiFans(Properties builder) {
         super(builder);
 
     }
     @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+    public void onPlayerStoppedUsing(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof PlayerEntity) {
             PlayerEntity playerentity = (PlayerEntity) entityLiving;
             int i = this.getUseDuration(stack) - timeLeft;

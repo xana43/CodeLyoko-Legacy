@@ -139,8 +139,7 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
             ItemStack result = FlourideInfusionResult.getInstance().getInfusingResult(this.handler.getStackInSlot(0), this.handler.getStackInSlot(1));
             if (result.isEmpty()) {
                 return false;
-            }
-            else {
+            } else {
                 ItemStack output = this.handler.getStackInSlot(3);
                 if (output.isEmpty()) return true;
                 if (!output.isItemEqual(result)) return false;

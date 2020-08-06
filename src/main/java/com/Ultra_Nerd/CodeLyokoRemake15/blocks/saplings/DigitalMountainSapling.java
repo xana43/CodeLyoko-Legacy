@@ -17,28 +17,31 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.ForgeEventFactory;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 import java.util.function.Supplier;
 
 public class DigitalMountainSapling extends BushBlock implements IGrowable {
 
-    public static final IntegerProperty PROGRESSMOUNTAIN = BlockStateProperties.STAGE_0_1;
+    public static final IntegerProperty PROGRESS_MOUNTAIN = BlockStateProperties.STAGE_0_1;
     protected static final VoxelShape shape = Block.makeCuboidShape(2.0D,0.0D,2.0D,14.0D,12.0D,14.0D);
     private final Supplier<Tree> tree;
+
     public DigitalMountainSapling(Supplier<Tree> TreeStruct, Properties properties) {
         super(properties);
         this.tree = TreeStruct;
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
         return shape;
     }
 
 
 
     @Override
-    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+    public void tick(@Nonnull BlockState state, @Nonnull ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
         super.tick(state, worldIn, pos, rand);
         if(!worldIn.isAreaLoaded(pos,1))
         {
@@ -51,16 +54,16 @@ public class DigitalMountainSapling extends BushBlock implements IGrowable {
     }
 
     @Override
-    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    protected boolean isValidGround(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         return state.getBlock() == ModBlocks.DIGITAL_ROCK.get();
     }
 
 
     public void grow(ServerWorld world, BlockPos pos, BlockState state, Random rand)
     {
-        if(state.get(PROGRESSMOUNTAIN) == 0)
+        if(state.get(PROGRESS_MOUNTAIN) == 0)
         {
-            world.setBlockState(pos,state.cycle(PROGRESSMOUNTAIN),4);
+            world.setBlockState(pos,state.cycle(PROGRESS_MOUNTAIN),4);
 
         }
         else
@@ -76,22 +79,22 @@ public class DigitalMountainSapling extends BushBlock implements IGrowable {
 
 
     @Override
-    public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean canGrow(@Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state, boolean isClient) {
         return true;
     }
 
     @Override
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+    public boolean canUseBonemeal(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull BlockState state) {
         return false;
     }
 
     @Override
-    public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+    public void grow(@Nonnull ServerWorld worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull BlockState state) {
         this.grow(worldIn,pos,state,rand);
     }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(PROGRESSMOUNTAIN);
+        builder.add(PROGRESS_MOUNTAIN);
     }
 }

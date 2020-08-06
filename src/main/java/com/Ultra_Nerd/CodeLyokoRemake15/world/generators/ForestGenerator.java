@@ -5,6 +5,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.NoiseChunkGenerator;
 
+import javax.annotation.Nonnull;
+
 public class ForestGenerator extends NoiseChunkGenerator<ForestGenSettings>
 {
 	//private final BlockPos spawnPoint;
@@ -15,7 +17,7 @@ public class ForestGenerator extends NoiseChunkGenerator<ForestGenSettings>
 	}
 
 	@Override
-	protected void fillNoiseColumn(double[] noiseColumn, int noiseX, int noiseZ) {
+	protected void fillNoiseColumn(@Nonnull double[] noiseColumn, int noiseX, int noiseZ) {
 		double d0 = 1368.824D;
 		double d1 = 684.412D;
 		double d2 = 17.110300000000002D;
@@ -25,6 +27,7 @@ public class ForestGenerator extends NoiseChunkGenerator<ForestGenSettings>
 		this.calcNoiseColumn(noiseColumn, noiseX, noiseZ, 1368.824D, 684.412D, 17.110300000000002D, 3.277575000000001D, 1, -2000);
 	}
 
+	@Nonnull
 	protected double[] getBiomeNoiseColumn(int noiseX, int noiseZ) {
 		return new double[]{(double)this.biomeProvider.func_222365_c(noiseX, noiseZ), 0.0D};
 	}

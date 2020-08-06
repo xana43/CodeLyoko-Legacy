@@ -9,15 +9,9 @@ import java.util.function.BiFunction;
 
 public class OceanModDimension extends ModDimension {
 
-
-
-
-
-
-        @Override
-        public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
-            return OceanDimension::new;
-        }
-
+    @Override
+    public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
+        return OceanDimension::new;
+    }
 
 }

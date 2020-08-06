@@ -18,10 +18,12 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public class BlackVoid extends Block {
+
     private static final VoxelShape nullshape = Stream.of(
             Block.makeCuboidShape(3, 0, 3, 10, 0.5, 4),
             Block.makeCuboidShape(3, 0, 1, 10, 0.5, 2),
@@ -50,28 +52,29 @@ public class BlackVoid extends Block {
         );
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
         return nullshape;
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+    public void onEntityCollision(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, Entity entityIn) {
         entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
     }
 
     @Override
-    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
+    public void onEntityWalk(@Nonnull World worldIn, @Nonnull BlockPos pos, Entity entityIn) {
         entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
     }
 
     @Override
-    public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         return false;
     }
 
     @Override
-    public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
+    public boolean isReplaceable(@Nonnull BlockState state, @Nonnull BlockItemUseContext useContext) {
         return false;
     }
 
@@ -96,19 +99,19 @@ public class BlackVoid extends Block {
     }
 
     @Override
-    public boolean isReplaceable(BlockState state, Fluid fluidIn) {
+    public boolean isReplaceable(@Nonnull BlockState state, @Nonnull Fluid fluidIn) {
         return false;
     }
 
 
     @Override
-    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+    public void onFallenUpon(@Nonnull World worldIn, @Nonnull BlockPos pos, Entity entityIn, float fallDistance) {
         entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
         entityIn.fallDistance = Integer.MAX_VALUE;
     }
 
     @Override
-    public void onLanded(IBlockReader worldIn, Entity entityIn) {
+    public void onLanded(@Nonnull IBlockReader worldIn, Entity entityIn) {
         entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
     }
 }

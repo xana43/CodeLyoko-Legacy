@@ -220,8 +220,9 @@ public class Scanner extends Block {
         this.setDefaultState(this.getDefaultState().with(Scanner,false).with(directionProperty, Direction.NORTH));
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
         if(state.get(Scanner)) {
             switch(state.get(directionProperty))
             {
@@ -249,13 +250,14 @@ public class Scanner extends Block {
     }
 
     //mod compatiability
+    @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.with(directionProperty,rot.rotate(state.get(directionProperty)));
     }
 
 
-
+    @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(directionProperty)));

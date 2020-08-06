@@ -10,6 +10,7 @@ import net.minecraft.world.gen.feature.HugeTreeFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraftforge.common.IPlantable;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
@@ -22,13 +23,13 @@ public class DigitalForestTree extends BigTree {
 
     @Nullable
     @Override
-    protected ConfiguredFeature<HugeTreeFeatureConfig, ?> getHugeTreeFeature(Random p_225547_1_) {
+    protected ConfiguredFeature<HugeTreeFeatureConfig, ?> getHugeTreeFeature(@Nonnull Random p_225547_1_) {
          return Feature.MEGA_JUNGLE_TREE.withConfiguration(DIGITAL_TREE_FOREST_CONFIG);
     }
 
     @Nullable
     @Override
-    protected ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean p_225546_2_) {
+    protected ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(@Nonnull Random randomIn, boolean p_225546_2_) {
         return null;
     }
 }

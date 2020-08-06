@@ -16,14 +16,17 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.HandSide;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class SaberKatana extends SwordItem {
     private final float attackdamage;
     private final float attackspeed;
     private byte timer = 127;
+
     public SaberKatana(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
         this.attackspeed = attackSpeedIn;
-        this.attackdamage = (float)attackDamageIn + tier.getAttackDamage();
+        this.attackdamage = (float) attackDamageIn + tier.getAttackDamage();
     }
 
     @Override
@@ -32,32 +35,27 @@ public class SaberKatana extends SwordItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
 
-        if (entityIn instanceof PlayerEntity)
-        {
-            PlayerEntity player = (PlayerEntity)entityIn;
-            if(player.getHeldItem(Hand.OFF_HAND).getItem() instanceof Item)
-            {
+        if (entityIn instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) entityIn;
+            if (player.getHeldItem(Hand.OFF_HAND).getItem() instanceof Item) {
                 ItemStack IStack = player.getHeldItem(Hand.OFF_HAND).getStack();
-                if(player.getHeldItem(Hand.MAIN_HAND).getItem() == ModItems.DIGITAL_SABER.get())
-                {
+                if (player.getHeldItem(Hand.MAIN_HAND).getItem() == ModItems.DIGITAL_SABER.get()) {
 
-                player.inventory.add(player.inventory.getFirstEmptyStack(),IStack);
+                    player.inventory.add(player.inventory.getFirstEmptyStack(), IStack);
 
                 }
 
             }
             player.setPrimaryHand(HandSide.RIGHT);
         }
-        if(stack.getDamage() >= this.getMaxDamage(stack))
-        {
+        if (stack.getDamage() >= this.getMaxDamage(stack)) {
             stack.setDamage(this.getMaxDamage(stack));
         }
 
-        if(timer-- == 0 && stack.getDamage() != 0)
-        {
-            stack.damageItem(-1,(PlayerEntity)entityIn,null);
+        if (timer-- == 0 && stack.getDamage() != 0) {
+            stack.damageItem(-1, (PlayerEntity) entityIn, null);
             timer = 127;
         }
 

@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Locale;
 
@@ -55,6 +56,7 @@ public class ColoredParticle extends SpriteTexturedParticle {
         }
     }
 
+    @Nonnull
     @Override
     public IParticleRenderType getRenderType() {
         return IParticleRenderType.PARTICLE_SHEET_OPAQUE;
@@ -70,7 +72,7 @@ public class ColoredParticle extends SpriteTexturedParticle {
 
         @Nullable
         @Override
-        public Particle makeParticle(ColoredParticleData typeIn, World worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle makeParticle(@Nonnull ColoredParticleData typeIn, @Nonnull World worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             ColoredParticle part = new ColoredParticle(worldIn,x,y,z,xSpeed,ySpeed,zSpeed,typeIn,ss);
             part.selectSpriteRandomly(ss);
             return part;
@@ -80,7 +82,7 @@ public class ColoredParticle extends SpriteTexturedParticle {
         public static final ColoredParticleData TOWER_PARTICLE = new ColoredParticleData(0.125f,0.25f,1,1);
         public static final IParticleData.IDeserializer<ColoredParticleData> DESERIALIZE = new IParticleData.IDeserializer<ColoredParticleData>(){
             @Override
-            public ColoredParticleData deserialize(ParticleType<ColoredParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+            public ColoredParticleData deserialize(@Nonnull ParticleType<ColoredParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
                 reader.expect(' ');
                 float red = (float) reader.readDouble();
                 reader.expect(' ');
@@ -93,7 +95,7 @@ public class ColoredParticle extends SpriteTexturedParticle {
             }
 
             @Override
-            public ColoredParticleData read(ParticleType<ColoredParticleData> particleTypeIn, PacketBuffer buffer) {
+            public ColoredParticleData read(@Nonnull ParticleType<ColoredParticleData> particleTypeIn, PacketBuffer buffer) {
                 return new ColoredParticleData(buffer.readFloat(),buffer.readFloat(),buffer.readFloat(),buffer.readFloat());
             }
         };
@@ -114,11 +116,13 @@ public class ColoredParticle extends SpriteTexturedParticle {
             buffer.writeFloat(this.alpha);
         }
 
+        @Nonnull
         @Override
         public String getParameters() {
             return String.format(Locale.ROOT,"%s %.2f,%.2f,%.2f,%.2f", Registry.PARTICLE_TYPE.getKey(this.getType()),this.red,this.green,this.blue,this.alpha);
         }
 
+        @Nonnull
         @Override
         public ParticleType<?> getType() {
             return ModParticles.TOWER_PARTICLE.get();

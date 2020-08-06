@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 
@@ -25,12 +26,9 @@ public class TowerWall extends Block {
 
     public TowerWall() {
         super(Block.Properties.create(Material.MISCELLANEOUS)
-
                 .hardnessAndResistance(-1, -1)
                 .sound(SoundType.GLASS)
                 .lightValue(11)
-
-
         );
 
     }
@@ -52,11 +50,13 @@ public class TowerWall extends Block {
     }
 
     //mod compatiability
+    @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.with(DIRTOWER, rot.rotate(state.get(DIRTOWER)));
     }
 
+    @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(DIRTOWER)));
@@ -64,21 +64,20 @@ public class TowerWall extends Block {
     //
 
     @Override
-    public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean isTransparent(BlockState state) {
+    public boolean isTransparent(@Nonnull BlockState state) {
         // TODO Auto-generated method stub
         return true;
     }
 
 
-
     @Override
-    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+    public void animateTick(@Nonnull BlockState stateIn, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
         super.animateTick(stateIn, worldIn, pos, rand);
         double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D);
         double d1 = (double) pos.getY() + 0.5D + (rand.nextDouble() - 0.5D);

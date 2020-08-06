@@ -13,6 +13,8 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.WorldGenRegion;
 
+import javax.annotation.Nonnull;
+
 public class Sector5Generator extends ChunkGenerator<Sector5GenSettings> {
 
 
@@ -21,7 +23,7 @@ public class Sector5Generator extends ChunkGenerator<Sector5GenSettings> {
     }
 
     @Override
-    public void generateSurface(WorldGenRegion p_225551_1_, IChunk chunk) {
+    public void generateSurface(@Nonnull WorldGenRegion p_225551_1_, IChunk chunk) {
         BlockState bedrock = ModFluids.DIGITAL_SEA_BLOCK.get().getDefaultState();
         BlockState stone = ModBlocks.SECTOR_5.get().getDefaultState();
         ChunkPos chunkpos = chunk.getPos();
@@ -53,12 +55,12 @@ public class Sector5Generator extends ChunkGenerator<Sector5GenSettings> {
 
 
     @Override
-    public void makeBase(IWorld worldIn, IChunk chunkIn) {
+    public void makeBase(@Nonnull IWorld worldIn, @Nonnull IChunk chunkIn) {
 
     }
 
     @Override
-    public int getHeight(int x, int z, Heightmap.Type heightmapType) {
+    public int getHeight(int x, int z, @Nonnull Heightmap.Type heightmapType) {
         return 0;
     }
 

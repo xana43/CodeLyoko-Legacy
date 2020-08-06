@@ -17,6 +17,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
+
 @OnlyIn(Dist.CLIENT)
 public class QuantumChipletRenderer extends TileEntityRenderer<QuantumChipletTileEntity> {
 
@@ -30,15 +32,14 @@ public class QuantumChipletRenderer extends TileEntityRenderer<QuantumChipletTil
     }
 
     @Override
-    public void render(QuantumChipletTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(QuantumChipletTileEntity tileEntityIn, float partialTicks, @Nonnull MatrixStack matrixStackIn,
+                       @Nonnull IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
         NonNullList<ItemStack> items = tileEntityIn.getItems();
 
-        for(ItemStack stack : items)
-        {
-            if(!stack.isEmpty())
-            {
-                if(stack.getItem() == ModItems.SOLID_QUANTUM.get()) {
+        for (ItemStack stack : items) {
+            if (!stack.isEmpty()) {
+                if (stack.getItem() == ModItems.SOLID_QUANTUM.get()) {
                     matrixStackIn.push();
                     matrixStackIn.scale(.5f, .5f, .5f);
                     matrixStackIn.translate(1, 1, 1);
@@ -50,13 +51,12 @@ public class QuantumChipletRenderer extends TileEntityRenderer<QuantumChipletTil
             }
         }
     }
-    private void renderItem(ItemStack stack, float partialTicks, MatrixStack matrix,IRenderTypeBuffer buff,int lightIn, int overlayIn)
-    {
-        Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.FIXED,lightIn, OverlayTexture.NO_OVERLAY,matrix,buff);
+
+    private void renderItem(ItemStack stack, float partialTicks, MatrixStack matrix, IRenderTypeBuffer buff, int lightIn, int overlayIn) {
+        Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.FIXED, lightIn, OverlayTexture.NO_OVERLAY, matrix, buff);
     }
 
-    private void PlaySound(QuantumChipletTileEntity tileEntity)
-    {
-        tileEntity.getWorld().playSound(tileEntity.getPos().getX(),tileEntity.getPos().getY(),tileEntity.getPos().getZ(), ModSounds.QUANTUMZAP.get(), SoundCategory.BLOCKS,1,1,true);
+    private void PlaySound(QuantumChipletTileEntity tileEntity) {
+        tileEntity.getWorld().playSound(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(), ModSounds.QUANTUMZAP.get(), SoundCategory.BLOCKS, 1, 1, true);
     }
 }
