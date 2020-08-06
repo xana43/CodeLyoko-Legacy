@@ -19,11 +19,12 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
 public class ScannerFrame extends Block {
     public static final DirectionProperty directionPropertyFrame = HorizontalBlock.HORIZONTAL_FACING;
-    private static final VoxelShape shapeN = Stream.of(
+    private static final VoxelShape shapeS = Stream.of(
             Block.makeCuboidShape(-4, 0, 5, -3, 15.3, 11),
             Block.makeCuboidShape(19, 0, 5, 20, 15.3, 11),
             Block.makeCuboidShape(5, 0, 19, 11, 15.3, 20),
@@ -51,8 +52,10 @@ public class ScannerFrame extends Block {
             Block.makeCuboidShape(14, 0, 17, 15, 15.3, 18),
             Block.makeCuboidShape(-2, 0, 14, -1, 15.3, 15),
             Block.makeCuboidShape(17, 0, 1, 18, 15.3, 2)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-    private static final VoxelShape shapeS = Stream.of(
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
+    private static final VoxelShape shapeN = Stream.of(
             Block.makeCuboidShape(19, 0, 5.8518599999999985, 20, 15.3, 11.851859999999999),
             Block.makeCuboidShape(-4.000000000000002, 0, 5.8518599999999985, -3.0000000000000018, 15.3, 11.851859999999999),
             Block.makeCuboidShape(5, 0, -3.1481400000000015, 11, 15.3, -2.1481400000000015),
@@ -80,8 +83,10 @@ public class ScannerFrame extends Block {
             Block.makeCuboidShape(1, 0, -1.1481400000000015, 2, 15.3, -0.1481400000000015),
             Block.makeCuboidShape(17, 0, 1.8518599999999985, 18, 15.3, 2.8518599999999985),
             Block.makeCuboidShape(-2.0000000000000018, 0, 14.851859999999999, -1.0000000000000018, 15.3, 15.851859999999999)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-    private static final VoxelShape shapeE =Stream.of(
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
+    private static final VoxelShape shapeW = Stream.of(
             Block.makeCuboidShape(5.425929999999999, 0, -3.5740700000000007, 11.42593, 15.3, -2.5740700000000007),
             Block.makeCuboidShape(5.425929999999999, 0, 19.42593, 11.42593, 15.3, 20.42593),
             Block.makeCuboidShape(-3.5740700000000007, 0, 5.425929999999999, -2.5740700000000007, 15.3, 11.42593),
@@ -109,8 +114,10 @@ public class ScannerFrame extends Block {
             Block.makeCuboidShape(-1.5740700000000007, 0, 14.42593, -0.5740700000000007, 15.3, 15.42593),
             Block.makeCuboidShape(1.4259299999999993, 0, -1.5740700000000007, 2.4259299999999993, 15.3, -0.5740700000000007),
             Block.makeCuboidShape(14.42593, 0, 17.42593, 15.42593, 15.3, 18.42593)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-    private static final VoxelShape shapeW =Stream.of(
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
+    private static final VoxelShape shapeE = Stream.of(
             Block.makeCuboidShape(4.574070000000001, 0, 19.42593, 10.57407, 15.3, 20.42593),
             Block.makeCuboidShape(4.574070000000001, 0, -3.5740700000000025, 10.57407, 15.3, -2.5740700000000025),
             Block.makeCuboidShape(18.57407, 0, 5.425929999999999, 19.57407, 15.3, 11.42593),
@@ -138,32 +145,59 @@ public class ScannerFrame extends Block {
             Block.makeCuboidShape(16.57407, 0, 1.4259299999999993, 17.57407, 15.3, 2.4259299999999993),
             Block.makeCuboidShape(13.57407, 0, 17.42593, 14.57407, 15.3, 18.42593),
             Block.makeCuboidShape(0.5740700000000007, 0, -1.5740700000000025, 1.5740700000000007, 15.3, -0.5740700000000025)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
 
+    private static final VoxelShape blockShape = Block.makeCuboidShape(0,0,0,16,16,16);
 
 
     public static final BooleanProperty ScannerFrameInvis = BooleanProperty.create("scanner_frame_invis");
+
     public ScannerFrame(Properties properties) {
         super(properties);
 
-    this.setDefaultState(this.getStateContainer().getBaseState().with(ScannerFrameInvis,false).with(directionPropertyFrame,Direction.NORTH));
+        this.setDefaultState(this.getStateContainer().getBaseState().with(ScannerFrameInvis, false)
+                .with(directionPropertyFrame, Direction.NORTH));
     }
 
-
+    @Nullable
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        switch(state.get(directionPropertyFrame))
-        {
-            case NORTH:
-                return shapeN;
-            case SOUTH:
-                return shapeS;
-            case EAST:
-                return  shapeE;
-            case WEST:
-                return shapeW;
-            default:
-                return  shapeN;
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        return this.getDefaultState().with(directionPropertyFrame,context.getPlacementHorizontalFacing());
+    }
+
+    //mod compatiability
+    @Nonnull
+    @Override
+    public BlockState rotate(BlockState state, Rotation rot) {
+        return state.with(directionPropertyFrame,rot.rotate(state.get(directionPropertyFrame)));
+    }
+
+    @Nonnull
+    @Override
+    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+        return state.rotate(mirrorIn.toRotation(state.get(directionPropertyFrame)));
+    }
+
+    @Nonnull
+    @Override
+    public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
+        if(state.get(ScannerFrameInvis)) {
+            switch (state.get(directionPropertyFrame)) {
+                case NORTH:
+                    return shapeN;
+                case SOUTH:
+                    return shapeS;
+                case EAST:
+                    return shapeE;
+                case WEST:
+                    return shapeW;
+                default:
+                    return shapeN;
+            }
+        } else {
+            return blockShape;
         }
     }
 
@@ -174,43 +208,22 @@ public class ScannerFrame extends Block {
 
     @Override
     public boolean isSideInvisible(@Nonnull BlockState state, @Nonnull BlockState adjacentBlockState, @Nonnull Direction side) {
-        return state.get(ScannerFrameInvis);
-    }
-
-
-    @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        // TODO Auto-generated method stub
-        return this.getDefaultState().with(directionPropertyFrame, context.getPlacementHorizontalFacing().getOpposite());
-    }
-
-    //mod compatiability
-    @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(directionPropertyFrame,rot.rotate(state.get(directionPropertyFrame)));
-    }
-
-    @Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(directionPropertyFrame)));
+        return false;
     }
 
     @Nonnull
     @Override
     public BlockRenderType getRenderType(@Nonnull BlockState state) {
-        if(state.get(ScannerFrameInvis))
-            return BlockRenderType.INVISIBLE;
-        else
-            return BlockRenderType.MODEL;
+        return BlockRenderType.MODEL;
     }
 
     @Override
-    public boolean isTransparent(BlockState state) {
-        return state.get(ScannerFrameInvis);
+    public boolean isTransparent(@Nonnull BlockState state) {
+        return false;
     }
 
     @Override
-    public boolean isViewBlocking(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
+    public boolean isViewBlocking(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         return false;
     }
 }
