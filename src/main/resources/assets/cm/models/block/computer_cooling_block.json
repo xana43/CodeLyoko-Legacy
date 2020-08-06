@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "cm:block/chipletfins",
-		"1": "cm:block/tower_block",
+		"1": "cm:block/tower_white",
 		"particle": "cm:block/chipletfins"
 	},
 	"elements": [
