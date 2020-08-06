@@ -1,9 +1,9 @@
 {
   "variants": {
-    "facing=north,scanner_formed=false": {"model": "cm:block/scanner"},
-    "facing=south,scanner_formed=false": {"model": "cm:block/scanner"},
-    "facing=west,scanner_formed=false": {"model": "cm:block/scanner"},
-    "facing=east,scanner_formed=false": {"model": "cm:block/scanner"},
+    "facing=north,scanner_formed=false": {"model": "cm:block/scanner_bottom"},
+    "facing=south,scanner_formed=false": {"model": "cm:block/scanner_bottom","y": 180},
+    "facing=west,scanner_formed=false": {"model": "cm:block/scanner_bottom","y": 270},
+    "facing=east,scanner_formed=false": {"model": "cm:block/scanner_bottom","y": 90},
     "facing=north,scanner_formed=true": {
       "model": "cm:block/scanner_bottom",
       "y": 0
