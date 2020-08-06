@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
@@ -16,11 +17,14 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
 public class ScannerTop extends Block {
     public static final DirectionProperty directionPropertyTop = HorizontalBlock.HORIZONTAL_FACING;
-    private static final VoxelShape shapeN = Stream.of(
+    public static final BooleanProperty scannerFormedTop = BooleanProperty.create("scanner_formed_top");
+    private static final VoxelShape shapeS = Stream.of(
             Block.makeCuboidShape(-4, 0, 5, -3, 15.3, 11),
             Block.makeCuboidShape(19, 0, 5, 20, 15.3, 11),
             Block.makeCuboidShape(5, 0, 19, 11, 15.3, 20),
@@ -64,7 +68,7 @@ public class ScannerTop extends Block {
             Block.makeCuboidShape(11, 14.25, -3, 14, 15.25, -2),
             Block.makeCuboidShape(2, 14.25, -3, 5, 15.25, -2)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-    private static final VoxelShape shapeS =Stream.of(
+    private static final VoxelShape shapeN =Stream.of(
             Block.makeCuboidShape(19, 0, 4.54762, 20, 15.3, 10.547620000000002),
             Block.makeCuboidShape(-4, 0, 4.54762, -3, 15.3, 10.547620000000002),
             Block.makeCuboidShape(4.999999999999999, 0, -4.452379999999999, 11, 15.3, -3.452379999999999),
@@ -108,7 +112,7 @@ public class ScannerTop extends Block {
             Block.makeCuboidShape(1.9999999999999991, 14.25, 17.547620000000002, 4.999999999999999, 15.25, 18.547620000000002),
             Block.makeCuboidShape(11, 14.25, 17.547620000000002, 14, 15.25, 18.547620000000002)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-    private static final VoxelShape shapeE = Stream.of(
+    private static final VoxelShape shapeW = Stream.of(
             Block.makeCuboidShape(4.77381, 0, -4.22619, 10.773810000000001, 15.3, -3.22619),
             Block.makeCuboidShape(4.77381, 0, 18.77381, 10.773810000000001, 15.3, 19.77381),
             Block.makeCuboidShape(-4.226189999999999, 0, 4.77381, -3.226189999999999, 15.3, 10.773810000000001),
@@ -153,7 +157,7 @@ public class ScannerTop extends Block {
             Block.makeCuboidShape(17.77381, 14.25, 1.77381, 18.77381, 15.25, 4.77381)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
-    private static final VoxelShape shapeW = Stream.of(
+    private static final VoxelShape shapeE = Stream.of(
             Block.makeCuboidShape(5.226189999999998, 0, 18.77381, 11.226189999999999, 15.3, 19.77381),
             Block.makeCuboidShape(5.226189999999998, 0, -4.22619, 11.226189999999999, 15.3, -3.22619),
             Block.makeCuboidShape(19.22619, 0, 4.773809999999999, 20.22619, 15.3, 10.773810000000001),
@@ -198,46 +202,56 @@ public class ScannerTop extends Block {
             Block.makeCuboidShape(-2.773810000000001, 14.25, 10.773810000000001, -1.773810000000001, 15.25, 13.773810000000001)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
+    private static final VoxelShape blockShape = Block.makeCuboidShape(0,0,0,16,16,16);
 
 
     public ScannerTop(Properties properties) {
         super(properties);
 
-        this.setDefaultState(this.getDefaultState().with(directionPropertyTop, Direction.NORTH));
+        this.setDefaultState(this.getDefaultState().with(directionPropertyTop, Direction.NORTH).with(scannerFormedTop, false));
     }
+    @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        // TODO Auto-generated method stub
-        return this.getDefaultState().with(directionPropertyTop, context.getPlacementHorizontalFacing().getOpposite());
-    }
-    @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) { builder.add(directionPropertyTop);
+        return this.getDefaultState().with(directionPropertyTop,context.getPlacementHorizontalFacing());
     }
 
     //mod compatiability
+    @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.with(directionPropertyTop,rot.rotate(state.get(directionPropertyTop)));
     }
 
+    @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(directionPropertyTop)));
     }
+
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        switch(state.get(directionPropertyTop))
-        {
-            case NORTH:
-                return shapeN;
-            case SOUTH:
-                return shapeS;
-            case EAST:
-                return  shapeE;
-            case WEST:
-                return shapeW;
-            default:
-                return  shapeN;
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(directionPropertyTop).add(scannerFormedTop);
+    }
+
+    @Nonnull
+    @Override
+    public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
+        if(state.get(scannerFormedTop)) {
+            switch (state.get(directionPropertyTop)) {
+                case NORTH:
+                    return shapeN;
+                case SOUTH:
+                    return shapeS;
+                case EAST:
+                    return shapeE;
+                case WEST:
+                    return shapeW;
+                default:
+                    return shapeN;
+            }
+        } else {
+            return blockShape;
         }
     }
 }
