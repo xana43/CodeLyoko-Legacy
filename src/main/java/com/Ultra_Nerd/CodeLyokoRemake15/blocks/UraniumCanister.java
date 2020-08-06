@@ -16,49 +16,52 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class UraniumCanister extends Block {
 
-    protected static final VoxelShape shape = Block.makeCuboidShape(3.5D,0.0D,3.5D,12.0D,15.0D,12.0D);
+    protected static final VoxelShape shape = Block.makeCuboidShape(3.5D, 0.0D, 3.5D, 12.0D, 15.0D, 12.0D);
+
     public UraniumCanister(Properties properties) {
         super(properties);
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
         return shape;
     }
 
 
-
-
     @Override
-    public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState state) {
+    public void onPlayerDestroy(IWorld worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state) {
 
-            worldIn.setBlockState(pos, ModFluids.URANIUM.get().getDefaultState(),1);
+        worldIn.setBlockState(pos, ModFluids.URANIUM.get().getDefaultState(), 1);
 
         super.onPlayerDestroy(worldIn, pos, state);
     }
 
+    @Nonnull
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, PlayerEntity player, @Nonnull Hand handIn, @Nonnull BlockRayTraceResult hit) {
 
 
-            if(!player.isCreative()) {
-                player.addPotionEffect(new EffectInstance(Effects.HUNGER, 100, 2, false, false, false));
-                player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 4000, 255, false, false, false));
-                player.addPotionEffect(new EffectInstance(Effects.POISON, 100, 1, false, true, false));
-            }
+        if (!player.isCreative()) {
+            player.addPotionEffect(new EffectInstance(Effects.HUNGER, 100, 2, false, false, false));
+            player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 4000, 255, false, false, false));
+            player.addPotionEffect(new EffectInstance(Effects.POISON, 100, 1, false, true, false));
+        }
 
         return ActionResultType.SUCCESS;
     }
 
     @Override
-    public boolean isTransparent(BlockState state) {
+    public boolean isTransparent(@Nonnull BlockState state) {
         return true;
     }
 
     @Override
-    public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         return true;
     }
 }

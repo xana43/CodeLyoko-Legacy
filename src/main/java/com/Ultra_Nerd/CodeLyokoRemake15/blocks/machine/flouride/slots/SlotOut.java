@@ -5,6 +5,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public class SlotOut extends Slot {
 
 	private final PlayerEntity player;
@@ -17,19 +19,21 @@ public class SlotOut extends Slot {
 	
 	
 	@Override
-	public boolean isItemValid(ItemStack stack) {
+	public boolean isItemValid(@Nonnull ItemStack stack) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
+	@Nonnull
 	@Override
-	public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack) {
+	public ItemStack onTake(@Nonnull PlayerEntity thePlayer, @Nonnull ItemStack stack) {
 		// TODO Auto-generated method stub
 		this.onCrafting(stack);
 		super.onTake(thePlayer, stack);
 		return stack;
 	}
-	
+
+	@Nonnull
 	@Override
 	public ItemStack decrStackSize(int amount) {
 		// TODO Auto-generated method stub

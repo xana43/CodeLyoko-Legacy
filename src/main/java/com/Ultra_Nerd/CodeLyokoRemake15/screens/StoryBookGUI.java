@@ -10,6 +10,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
+
 @OnlyIn(Dist.CLIENT)
 public class StoryBookGUI extends ReadBookScreen {
 
@@ -31,7 +33,7 @@ public class StoryBookGUI extends ReadBookScreen {
     }
 
     @Override
-    public void init(Minecraft p_init_1_, int p_init_2_, int p_init_3_) {
+    public void init(@Nonnull Minecraft p_init_1_, int p_init_2_, int p_init_3_) {
         super.init(p_init_1_, p_init_2_, p_init_3_);
         Initall();
     }

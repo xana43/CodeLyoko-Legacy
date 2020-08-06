@@ -10,15 +10,16 @@ import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class OceanDimension extends Dimension {
+
     public OceanDimension(World world, DimensionType type) {
        super(world,type,0);
     }
 
-
-
+    @Nonnull
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
         return new DigitalOceanGenerator(world,new OceanProvider(),new OceanGenSettings());
@@ -26,7 +27,7 @@ public class OceanDimension extends Dimension {
 
     @Nullable
     @Override
-    public BlockPos findSpawn(ChunkPos chunkPosIn, boolean checkValid) {
+    public BlockPos findSpawn(@Nonnull ChunkPos chunkPosIn, boolean checkValid) {
         return null;
     }
 
@@ -46,6 +47,7 @@ public class OceanDimension extends Dimension {
         return false;
     }
 
+    @Nonnull
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
         return new Vec3d(0,0.2,1);

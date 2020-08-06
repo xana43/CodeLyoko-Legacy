@@ -8,22 +8,20 @@ import net.minecraftforge.common.ToolType;
 
 public class UniversalEnergyBlock extends Block {
 
-	//private UniversalEnergyStorageTileEntity Text = new UniversalEnergyStorageTileEntity();
-	public UniversalEnergyBlock() {
-		super(Block.Properties.create(Material.MISCELLANEOUS)
+    //private UniversalEnergyStorageTileEntity Text = new UniversalEnergyStorageTileEntity();
+    public UniversalEnergyBlock() {
+        super(Block.Properties.create(Material.MISCELLANEOUS)
 
-				.hardnessAndResistance(3, 10)
-				.sound(SoundType.GLASS)
-				.lightValue(4)
-				.harvestLevel(2)
-				.harvestTool(ToolType.PICKAXE)
-
-
+                .hardnessAndResistance(3, 10)
+                .sound(SoundType.GLASS)
+                .lightValue(4)
+                .harvestLevel(2)
+                .harvestTool(ToolType.PICKAXE)
 
 
-		);
+        );
 
-	}
+    }
 	/*
   @Override
 public boolean hasTileEntity(IBlockState state) {

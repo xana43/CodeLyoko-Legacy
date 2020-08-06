@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.ForgeEventFactory;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -25,18 +26,21 @@ public class DigitalSapling extends BushBlock implements IGrowable {
     public static final IntegerProperty PROGRESSFOREST = BlockStateProperties.STAGE_0_1;
     protected static final VoxelShape shape = Block.makeCuboidShape(2.0D,0.0D,2.0D,14.0D,12.0D,14.0D);
     private final Supplier<Tree> tree;
+
     public DigitalSapling(Supplier<Tree> TreeStruct, Properties properties) {
         super(properties);
         this.tree = TreeStruct;
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
         return shape;
     }
 
+    @Nonnull
     @Override
-    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+    public void tick(@Nonnull BlockState state, @Nonnull ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
         super.tick(state, worldIn, pos, rand);
         if(!worldIn.isAreaLoaded(pos,1))
         {
@@ -49,7 +53,7 @@ public class DigitalSapling extends BushBlock implements IGrowable {
     }
 
     @Override
-    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    protected boolean isValidGround(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         return state.getBlock() == ModBlocks.DIGITAL_GRASS.get();
     }
 
@@ -72,17 +76,17 @@ public class DigitalSapling extends BushBlock implements IGrowable {
 
 
     @Override
-    public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean canGrow(@Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state, boolean isClient) {
         return true;
     }
 
     @Override
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+    public boolean canUseBonemeal(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull BlockState state) {
         return false;
     }
 
     @Override
-    public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+    public void grow(@Nonnull ServerWorld worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull BlockState state) {
         this.grow(worldIn,pos,state,rand);
     }
 

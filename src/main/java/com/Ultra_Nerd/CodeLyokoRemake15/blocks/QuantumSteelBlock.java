@@ -12,7 +12,9 @@ import net.minecraft.world.IBlockReader;
 import javax.annotation.Nonnull;
 
 public class QuantumSteelBlock extends Block {
+
     public static final BooleanProperty formed = BooleanProperty.create("formed");
+
     public QuantumSteelBlock(Properties properties) {
         super(properties);
         this.setDefaultState(this.getStateContainer().getBaseState().with(formed,false));

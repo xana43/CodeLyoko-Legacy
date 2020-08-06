@@ -11,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 
+import javax.annotation.Nonnull;
 import java.util.function.Predicate;
 
 public class TransparentBlock extends Block {
@@ -25,32 +26,33 @@ public class TransparentBlock extends Block {
 
     }
 
+    @Nonnull
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
+    public BlockRenderType getRenderType(@Nonnull BlockState state) {
         // TODO Auto-generated method stub
         return BlockRenderType.INVISIBLE;
     }
 
     @Override
-    public boolean isTransparent(BlockState state) {
+    public boolean isTransparent(@Nonnull BlockState state) {
         // TODO Auto-generated method stub
         return true;
     }
 
     @Override
-    public boolean isViewBlocking(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public boolean isViewBlocking(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         return false;
     }
 
 
     @Override
-    public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
+    public boolean isReplaceable(@Nonnull BlockState state, @Nonnull BlockItemUseContext useContext) {
         // TODO Auto-generated method stub
         return false;
     }
@@ -63,7 +65,7 @@ public class TransparentBlock extends Block {
     }
 
     @Override
-    public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side) {
+    public boolean isSideInvisible(@Nonnull BlockState state, @Nonnull BlockState adjacentBlockState, @Nonnull Direction side) {
         // TODO Auto-generated method stub
         return true;
     }

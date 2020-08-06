@@ -35,8 +35,7 @@ public class TowerInterface extends Block {
     private static final VoxelShape SHAPE_W = Block.makeCuboidShape(4, 9, 1, 13, 9.1, 15);
 
 
-    public TowerInterface()
-    {
+    public TowerInterface() {
         super(Block.Properties.create(Material.DRAGON_EGG)
 
                 .hardnessAndResistance(-1, -1)
@@ -53,20 +52,20 @@ public class TowerInterface extends Block {
         builder.add(DIRINTERFACE);
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        switch(state.get(DIRINTERFACE))
-        {
+    public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
+        switch (state.get(DIRINTERFACE)) {
             case NORTH:
                 return SHAPE_N;
             case SOUTH:
                 return SHAPE_S;
             case EAST:
-                return  SHAPE_E;
+                return SHAPE_E;
             case WEST:
                 return SHAPE_W;
             default:
-                return  SHAPE_N;
+                return SHAPE_N;
         }
     }
 
@@ -77,37 +76,35 @@ public class TowerInterface extends Block {
     }
 
     @Override
-    public boolean isViewBlocking(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public boolean isViewBlocking(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         return false;
     }
 
     //mod compatiability
+    @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(DIRINTERFACE,rot.rotate(state.get(DIRINTERFACE)));
+        return state.with(DIRINTERFACE, rot.rotate(state.get(DIRINTERFACE)));
     }
 
+    @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(DIRINTERFACE)));
     }
+
     //
     @Override
-    public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         // TODO Auto-generated method stub
         return false;
     }
+
     @Override
-    public boolean isTransparent(BlockState state) {
+    public boolean isTransparent(@Nonnull BlockState state) {
         // TODO Auto-generated method stub
         return true;
     }
-
-
-
-
-
-
 
 
     @Override
@@ -123,16 +120,14 @@ public class TowerInterface extends Block {
     }
 
 
-
     @Nonnull
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult result) {
-        if(!worldIn.isRemote)
-        {
+    public ActionResultType onBlockActivated(@Nonnull BlockState state, World worldIn, @Nonnull BlockPos pos, @Nonnull PlayerEntity player,
+                                             @Nonnull Hand handIn, @Nonnull BlockRayTraceResult result) {
+        if (!worldIn.isRemote) {
             TileEntity Tower = worldIn.getTileEntity(pos);
-            if(Tower instanceof TowerInterfaceTileEntity)
-            {
-                NetworkHooks.openGui((ServerPlayerEntity)player,(TowerInterfaceTileEntity)Tower,pos);
+            if (Tower instanceof TowerInterfaceTileEntity) {
+                NetworkHooks.openGui((ServerPlayerEntity) player, (TowerInterfaceTileEntity) Tower, pos);
                 return ActionResultType.SUCCESS;
             }
         }

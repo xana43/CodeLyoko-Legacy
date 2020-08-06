@@ -8,6 +8,8 @@ import net.minecraft.network.IPacket;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import javax.annotation.Nonnull;
+
 public class EntityLaser extends ArrowEntity {
 
 	public EntityLaser(EntityType<? extends ArrowEntity> Laser,World world) {
@@ -28,7 +30,7 @@ public class EntityLaser extends ArrowEntity {
 		super(ModEntities.LASER.get(),world);
 	}
 
-
+	@Nonnull
 	@Override
 	public IPacket<?> createSpawnPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
@@ -50,7 +52,7 @@ public class EntityLaser extends ArrowEntity {
 	}
 	
 	@Override
-	protected void arrowHit(LivingEntity live) {
+	protected void arrowHit(@Nonnull LivingEntity live) {
 		if(!this.world.isRemote)
 		{
 			super.arrowHit(live);

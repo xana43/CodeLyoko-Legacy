@@ -9,6 +9,8 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
+import javax.annotation.Nonnull;
+
 public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> {
 
     private static final ResourceLocation TEX = new ResourceLocation(Base.MOD_ID + ":textures/gui/flouride_infuser.png");

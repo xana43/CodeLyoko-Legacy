@@ -11,39 +11,35 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 
 public class DigitalSeaBlock extends FlowingFluidBlock {
 
-	
-	public DigitalSeaBlock(Supplier<? extends FlowingFluid> supplier) {
-		super(supplier, Block.Properties.from(Blocks.WATER).variableOpacity()
 
-		);
-
-	}
+    public DigitalSeaBlock(Supplier<? extends FlowingFluid> supplier) {
+        super(supplier, Block.Properties.from(Blocks.WATER).variableOpacity());
+    }
 
 
+    @Override
+    public void onEntityCollision(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, Entity entityIn) {
+        // TODO Auto-generated method stub
 
+        entityIn.attackEntityFrom(new DamageSource(this.getTranslationKey()), Byte.MAX_VALUE);
 
-	@Override
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-		// TODO Auto-generated method stub
-		
-			entityIn.attackEntityFrom(new DamageSource(this.getTranslationKey()), Byte.MAX_VALUE);
-		
-	}
+    }
 
-	@Override
-	public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return false;
-	}
+    @Override
+    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
+        return false;
+    }
 
-	@Override
-	public boolean isTransparent(BlockState state) {
-		return true;
-	}
+    @Override
+    public boolean isTransparent(@Nonnull BlockState state) {
+        return true;
+    }
 
 
 }

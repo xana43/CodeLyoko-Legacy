@@ -27,6 +27,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class FlourideInfuser extends Block {
+
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
     public static final BooleanProperty INFUSING = BooleanProperty.create("infusing");
 
@@ -46,11 +47,10 @@ public class FlourideInfuser extends Block {
 
     }
 
-
-
     @Nonnull
     @Override
-    public ActionResultType onBlockActivated(@Nonnull BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(@Nonnull BlockState state, World worldIn, @Nonnull BlockPos pos,
+                                             @Nonnull PlayerEntity player, @Nonnull Hand handIn, @Nonnull BlockRayTraceResult hit) {
         if (!worldIn.isRemote) {
             final TileEntity tileEntity = worldIn.getTileEntity(pos);
             if (tileEntity instanceof InfusingChamberTileEntity) {
@@ -59,9 +59,6 @@ public class FlourideInfuser extends Block {
         }
         return ActionResultType.SUCCESS;
     }
-
-
-
 
     public static void setState(boolean act, World worldIn, BlockPos pos) {
         BlockState state = worldIn.getBlockState(pos);
@@ -104,13 +101,14 @@ public class FlourideInfuser extends Block {
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-
+    public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state,
+                                @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
         worldIn.setBlockState(pos, this.getDefaultState().with(FACING, placer.getHorizontalFacing().getOpposite()), 2);
     }
 
+    @Nonnull
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
+    public BlockRenderType getRenderType(@Nonnull BlockState state) {
         return BlockRenderType.MODEL;
     }
 
@@ -119,6 +117,7 @@ public class FlourideInfuser extends Block {
         return state.with(FACING, direction.rotate(state.get(FACING)));
     }
 
+    @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(FACING)));

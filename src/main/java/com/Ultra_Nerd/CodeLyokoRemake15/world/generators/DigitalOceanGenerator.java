@@ -12,6 +12,8 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.WorldGenRegion;
 
+import javax.annotation.Nonnull;
+
 public class DigitalOceanGenerator extends ChunkGenerator<OceanGenSettings> {
 
     public DigitalOceanGenerator(IWorld worldIn, BiomeProvider biomeProviderIn, OceanGenSettings settingsIn) {
@@ -20,10 +22,9 @@ public class DigitalOceanGenerator extends ChunkGenerator<OceanGenSettings> {
     }
 
     @Override
-    public void generateSurface(WorldGenRegion p_225551_1_, IChunk chunk) {
+    public void generateSurface(@Nonnull WorldGenRegion p_225551_1_, @Nonnull IChunk chunk) {
         BlockState bedrock = Blocks.BEDROCK.getDefaultState();
         BlockState stone = ModFluids.DIGITAL_SEA_BLOCK.get().getDefaultState();
-
 
 
         BlockPos.Mutable pos = new BlockPos.Mutable();
@@ -37,36 +38,33 @@ public class DigitalOceanGenerator extends ChunkGenerator<OceanGenSettings> {
             }
         }
 
-         for (x = 0; x < 16; x++) {
-        for (z = 0; z < 16; z++) {
+        for (x = 0; x < 16; x++) {
+            for (z = 0; z < 16; z++) {
 
-            int height = /*(int)*/ 256;//(65 * Math.tan(realx / 20.0f) * 60 + Math.tan(realz / 20.0f) * 60);
-            for (int y = 1; y < height; y++) {
-                chunk.setBlockState(pos.setPos(x, y, z), stone, false);
+                int height = /*(int)*/ 256;//(65 * Math.tan(realx / 20.0f) * 60 + Math.tan(realz / 20.0f) * 60);
+                for (int y = 1; y < height; y++) {
+                    chunk.setBlockState(pos.setPos(x, y, z), stone, false);
+                }
             }
-        }
 
         }
     }
 
 
-
-
     @Override
-    public void makeBase(IWorld worldIn, IChunk chunkIn) {
+    public void makeBase(@Nonnull IWorld worldIn, @Nonnull IChunk chunkIn) {
 
     }
 
     @Override
-    public int getHeight(int x, int z, Heightmap.Type heightmapType) {
+    public int getHeight(int x, int z, @Nonnull Heightmap.Type heightmapType) {
         return 0;
     }
 
 
-
     @Override
     public int getGroundHeight() {
-        return world.getSeaLevel()+1;
+        return world.getSeaLevel() + 1;
     }
 
 }

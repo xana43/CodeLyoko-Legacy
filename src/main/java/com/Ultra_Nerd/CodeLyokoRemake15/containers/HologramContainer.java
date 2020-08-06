@@ -10,20 +10,22 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
 
+import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class HologramContainer extends Container {
     private TileEntity te;
     private final IWorldPosCallable canInteractWithCallable;
-    public HologramContainer(int windowid,PlayerInventory inventory, HologramProjectorTileEntity te) {
-        super(ModContainerTypes.HOLOGRAM_CONTAINER.get(),windowid);
+
+    public HologramContainer(int windowid, PlayerInventory inventory, HologramProjectorTileEntity te) {
+        super(ModContainerTypes.HOLOGRAM_CONTAINER.get(), windowid);
         this.te = te;
-        this.canInteractWithCallable = IWorldPosCallable.of(te.getWorld(),te.getPos());
+        this.canInteractWithCallable = IWorldPosCallable.of(te.getWorld(), te.getPos());
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(canInteractWithCallable,playerIn, ModBlocks.HOLOPROJECTOR.get());
+    public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
+        return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.HOLOPROJECTOR.get());
     }
 
 
@@ -31,17 +33,13 @@ public class HologramContainer extends Container {
         this(windowId, playerInventory, getHoloEntity(playerInventory, data));
     }
 
-    private static HologramProjectorTileEntity getHoloEntity(final PlayerInventory inventory, final PacketBuffer data)
-    {
-        Objects.requireNonNull(inventory,"player inventory can't be null");
-        Objects.requireNonNull(data,"data can't be null");
+    private static HologramProjectorTileEntity getHoloEntity(final PlayerInventory inventory, final PacketBuffer data) {
+        Objects.requireNonNull(inventory, "player inventory can't be null");
+        Objects.requireNonNull(data, "data can't be null");
         final TileEntity tileAtPos = inventory.player.world.getTileEntity(data.readBlockPos());
-        if(tileAtPos instanceof HologramProjectorTileEntity)
-        {
+        if (tileAtPos instanceof HologramProjectorTileEntity) {
             return (HologramProjectorTileEntity) tileAtPos;
-        }
-        else
-        {
+        } else {
             throw new IllegalStateException("TileEntity isn't correct" + tileAtPos);
         }
     }

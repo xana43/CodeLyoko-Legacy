@@ -25,25 +25,26 @@ import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TowerInterfaceTileEntity extends TileEntity implements INamedContainerProvider
-{
+public class TowerInterfaceTileEntity extends TileEntity implements INamedContainerProvider {
 
-	@Nullable // May be accessed before onLoad
-	@OnlyIn(Dist.CLIENT)
-	public TowerInterfaceTileEntity anInterface;
-	protected int PlayersPresent;
-	public TowerInterfaceTileEntity(TileEntityType<?> tileEntityTypeIn) {
-		super(tileEntityTypeIn);
-	}
+    @Nullable // May be accessed before onLoad
+    @OnlyIn(Dist.CLIENT)
+    public TowerInterfaceTileEntity anInterface;
+    protected int PlayersPresent;
 
-	public TowerInterfaceTileEntity() {
-		this(ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get());
-	}
+    public TowerInterfaceTileEntity(TileEntityType<?> tileEntityTypeIn) {
+        super(tileEntityTypeIn);
+    }
 
-	// @OnlyIn(Dist.CLIENT) Makes it so this method will be removed from the class on the PHYSICAL SERVER
-	// This is because we only want the Interface on the physical client - its rendering only.
+    public TowerInterfaceTileEntity() {
+        this(ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get());
+    }
+
+    // @OnlyIn(Dist.CLIENT) Makes it so this method will be removed from the class on the PHYSICAL SERVER
+    // This is because we only want the Interface on the physical client - its rendering only.
 	/*@OnlyIn(Dist.CLIENT)
 	@Override
 	public void onLoad() {
@@ -57,93 +58,86 @@ public class TowerInterfaceTileEntity extends TileEntity implements INamedContai
 	 */
 
 
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        // This, combined with isGlobalRenderer in the TileEntityRenderer makes it so that the
+        // render does not disappear if the player can't see the block
+        // This is useful for rendering larger models or dynamically sized models
+        return INFINITE_EXTENT_AABB;
+    }
 
-	@Override
-	public AxisAlignedBB getRenderBoundingBox() {
-		// This, combined with isGlobalRenderer in the TileEntityRenderer makes it so that the
-		// render does not disappear if the player can't see the block
-		// This is useful for rendering larger models or dynamically sized models
-		return INFINITE_EXTENT_AABB;
-	}
+    @Override
+    public SUpdateTileEntityPacket getUpdatePacket() {
+        CompoundNBT nbtTag = new CompoundNBT();
+        //Write your data into the nbtTag
+        return new SUpdateTileEntityPacket(getPos(), -1, nbtTag);
+    }
 
-	@Override
-	public SUpdateTileEntityPacket getUpdatePacket() {
-		CompoundNBT nbtTag = new CompoundNBT();
-		//Write your data into the nbtTag
-		return new SUpdateTileEntityPacket(getPos(), -1, nbtTag);
-	}
+    @Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+        CompoundNBT tag = pkt.getNbtCompound();
+        //Handle your Data
+    }
 
-	@Override
-	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-		CompoundNBT tag = pkt.getNbtCompound();
-		//Handle your Data
-	}
+    /**
+     * @return display name of the interface
+     */
+    @Nonnull
+    @Override
+    public ITextComponent getDisplayName() {
+        return new TranslationTextComponent(ModBlocks.TOWER_INTERFACE.get().getTranslationKey());
+    }
 
-	/**
-	 * @return
-	 */
-	@Override
-	public ITextComponent getDisplayName() {
-		return new TranslationTextComponent(ModBlocks.TOWER_INTERFACE.get().getTranslationKey());
-	}
+    /**
+     * Create a containder from interfaceTileEntity
+     *
+     * @param windowIn     Id of GUI
+     * @param playerInv    Inventory of interacting player
+     * @param playerEntity PlayerEntity of interacting player
+     * @return Gui container
+     */
+    @Nullable
+    @Override
+    public Container createMenu(int windowIn, @Nonnull PlayerInventory playerInv, @Nonnull PlayerEntity playerEntity) {
+        return new TowerInterfaceContainer(windowIn, playerInv, this);
+    }
 
-	/**
-	 * Create a containder from interfaceTileEntity
-	 *
-	 * @param windowIn
-	 * @param playerInv
-	 * @param playerEntity
-	 * @return
-	 */
-	@Nullable
-	@Override
-	public Container createMenu(int windowIn, PlayerInventory playerInv, PlayerEntity playerEntity) {
-		return new TowerInterfaceContainer(windowIn, playerInv, this);
-	}
+    private void IntrfaceSound(SoundEvent sound) {
+        double dx = (double) this.pos.getX() + 0.5D;
+        double dy = (double) this.pos.getY() + 0.5D;
+        double dz = (double) this.pos.getZ() + 0.5D;
+        this.world.playSound((PlayerEntity) null, dx, dy, dz, sound, SoundCategory.BLOCKS, 0.5f, this.world.rand.nextFloat() * 0.1f + 0.2f);
+    }
 
-	private void IntrfaceSound(SoundEvent sound)
-	{
-		double dx = (double)this.pos.getX() + 0.5D;
-		double dy = (double)this.pos.getY() + 0.5D;
-		double dz = (double)this.pos.getZ() + 0.5D;
-		this.world.playSound((PlayerEntity)null,dx,dy,dz,sound, SoundCategory.BLOCKS,0.5f,this.world.rand.nextFloat() * 0.1f + 0.2f);
-	}
+    @Override
+    public boolean receiveClientEvent(int id, int type) {
+        if (id == 1) {
+            this.PlayersPresent = type;
+            return true;
+        } else {
+            return super.receiveClientEvent(id, type);
+        }
+    }
 
-	@Override
-	public boolean receiveClientEvent(int id, int type) {
-		if(id == 1)
-		{
-			this.PlayersPresent = type;
-			return true;
-		}
-		else
-		{
-			return super.receiveClientEvent(id,type);
-		}
-	}
-	protected void onActiveateOrDeactiveate() {
-		Block block = this.getBlockState().getBlock();
-		if (block instanceof TowerInterface)
-		{
-			this.world.addBlockEvent(this.pos,block,1,this.PlayersPresent);
-			this.world.notifyNeighborsOfStateChange(this.pos,block);
-		}
-	}
+    protected void onActiveateOrDeactiveate() {
+        Block block = this.getBlockState().getBlock();
+        if (block instanceof TowerInterface) {
+            this.world.addBlockEvent(this.pos, block, 1, this.PlayersPresent);
+            this.world.notifyNeighborsOfStateChange(this.pos, block);
+        }
+    }
 
-	public static int getPlayersPresent(IBlockReader read, BlockPos pos)
-	{
-		BlockState state = read.getBlockState(pos);
-		if(state.hasTileEntity())
-		{
-			TileEntity te = read.getTileEntity(pos);
-			if(te instanceof TowerInterfaceTileEntity)
-			{
-				return ((TowerInterfaceTileEntity)te).PlayersPresent;
-			}
-		}
+    public static int getPlayersPresent(IBlockReader read, BlockPos pos) {
+        BlockState state = read.getBlockState(pos);
+        if (state.hasTileEntity()) {
+            TileEntity te = read.getTileEntity(pos);
+            if (te instanceof TowerInterfaceTileEntity) {
+                return ((TowerInterfaceTileEntity) te).PlayersPresent;
+            }
+        }
 
-			return 0;
+        return 0;
 
-	}
+    }
 
 }

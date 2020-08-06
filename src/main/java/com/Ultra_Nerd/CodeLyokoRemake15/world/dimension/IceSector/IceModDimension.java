@@ -13,4 +13,5 @@ public class IceModDimension extends ModDimension {
     public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
         return IceDimension::new;
     }
+    
 }

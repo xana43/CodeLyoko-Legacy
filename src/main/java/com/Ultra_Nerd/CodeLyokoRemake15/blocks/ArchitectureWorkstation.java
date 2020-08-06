@@ -15,6 +15,8 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
+import javax.annotation.Nonnull;
+
 public class ArchitectureWorkstation extends Block {
 
     public static final DirectionProperty ComputerStation = HorizontalBlock.HORIZONTAL_FACING;
@@ -43,18 +45,21 @@ public class ArchitectureWorkstation extends Block {
     }
 
     //mod compatiability
+    @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.with(ComputerStation,rot.rotate(state.get(ComputerStation)));
     }
 
+    @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(ComputerStation)));
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
         switch(state.get(ComputerStation))
         {
             case NORTH:

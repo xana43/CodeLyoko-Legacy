@@ -10,6 +10,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public enum  LyokoArmorMaterial implements IArmorMaterial {
@@ -77,6 +78,7 @@ public enum  LyokoArmorMaterial implements IArmorMaterial {
         return this.enchant;
     }
 
+    @Nonnull
     @Override
     public SoundEvent getSoundEvent() {
         return this.soundEvent;
@@ -88,6 +90,7 @@ public enum  LyokoArmorMaterial implements IArmorMaterial {
     }
 
     @OnlyIn(Dist.CLIENT)
+    @Nonnull
     @Override
     public String getName() {
         return this.name;

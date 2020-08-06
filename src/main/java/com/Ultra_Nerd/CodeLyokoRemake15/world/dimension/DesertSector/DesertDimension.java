@@ -10,23 +10,24 @@ import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class DesertDimension extends Dimension {
+
     public DesertDimension(World world, DimensionType type) {
-       super(world,type,0);
+        super(world, type, 0);
     }
 
-
-
+    @Nonnull
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
-        return new DesertGenerator(world,new DesertProvider(),new DesertGenSettings());
+        return new DesertGenerator(world, new DesertProvider(), new DesertGenSettings());
     }
 
     @Nullable
     @Override
-    public BlockPos findSpawn(ChunkPos chunkPosIn, boolean checkValid) {
+    public BlockPos findSpawn(@Nonnull ChunkPos chunkPosIn, boolean checkValid) {
         return null;
     }
 
@@ -46,9 +47,10 @@ public class DesertDimension extends Dimension {
         return false;
     }
 
+    @Nonnull
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
-        return new Vec3d(74.9056,0.3637,0.3630);
+        return new Vec3d(74.9056, 0.3637, 0.3630);
     }
 
     @Override

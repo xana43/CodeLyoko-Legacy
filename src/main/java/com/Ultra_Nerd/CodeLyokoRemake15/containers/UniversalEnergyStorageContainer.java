@@ -4,6 +4,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class UniversalEnergyStorageContainer extends Container {
@@ -12,7 +13,7 @@ public class UniversalEnergyStorageContainer extends Container {
 	}
 
 	@Override
-	public boolean canInteractWith(PlayerEntity playerIn) {
+	public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
 		return false;
 	}
 

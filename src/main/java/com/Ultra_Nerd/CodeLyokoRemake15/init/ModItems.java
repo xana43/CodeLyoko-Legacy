@@ -17,7 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModItems {
 
 
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Base.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Base.MOD_ID);
 
     //for items
     public static final RegistryObject<Item> APU_PACKAGE_ARM = ITEMS.register("apu_package_arm",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));

@@ -18,6 +18,7 @@ import net.minecraft.world.ILightReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class LiquidHelium extends FlowingFluidBlock {
@@ -30,8 +31,8 @@ public class LiquidHelium extends FlowingFluidBlock {
     }
 
     @Override
-    public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-        if(entityIn instanceof LivingEntity) {
+    public void onEntityCollision(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
+        if (entityIn instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity) entityIn;
             livingEntity.attackEntityFrom(new DamageSource(this.getTranslationKey()), RANDOM.nextInt(2));
             livingEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, -1, 6, false, false, false));
@@ -43,7 +44,7 @@ public class LiquidHelium extends FlowingFluidBlock {
 
     @Override
     public Vec3d getFogColor(BlockState state, IWorldReader world, BlockPos pos, Entity entity, Vec3d originalColor, float partialTicks) {
-        return new Vec3d(1,1,1);
+        return new Vec3d(1, 1, 1);
     }
 
     @Override
@@ -52,97 +53,97 @@ public class LiquidHelium extends FlowingFluidBlock {
     }
 
     @Override
-    public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean isMoving) {
+    public void onBlockAdded(@Nonnull BlockState state, World worldIn, BlockPos pos, @Nonnull BlockState oldState, boolean isMoving) {
         //water
-        if(worldIn.getBlockState(new BlockPos(pos.getX(),pos.getY() - 1 ,pos.getZ())) == Blocks.WATER.getDefaultState()) {
-            worldIn.setBlockState(new BlockPos(pos.getX() , pos.getY() - 1, pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
+        if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())) == Blocks.WATER.getDefaultState()) {
+            worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX(),pos.getY() + 1 ,pos.getZ())) == Blocks.WATER.getDefaultState()) {
-            worldIn.setBlockState(new BlockPos(pos.getX() , pos.getY() + 1, pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
+        if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ())) == Blocks.WATER.getDefaultState()) {
+            worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getFluidState(new BlockPos(pos.getX(),pos.getY() - 1 ,pos.getZ())) == Fluids.FLOWING_WATER.getDefaultState()) {
-            worldIn.setBlockState(new BlockPos(pos.getX() , pos.getY() - 1, pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
+        if (worldIn.getFluidState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())) == Fluids.FLOWING_WATER.getDefaultState()) {
+            worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX(),pos.getY() - 1 ,pos.getZ())) == Blocks.LAVA.getDefaultState()) {
-            worldIn.setBlockState(new BlockPos(pos.getX() , pos.getY() - 1, pos.getZ()), Blocks.DIAMOND_BLOCK.getDefaultState());
+        if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())) == Blocks.LAVA.getDefaultState()) {
+            worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), Blocks.DIAMOND_BLOCK.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX(),pos.getY() + 1 ,pos.getZ())) == Blocks.LAVA.getDefaultState()) {
-            worldIn.setBlockState(new BlockPos(pos.getX() , pos.getY() + 1, pos.getZ()), Blocks.DIAMOND_BLOCK.getDefaultState());
+        if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ())) == Blocks.LAVA.getDefaultState()) {
+            worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()), Blocks.DIAMOND_BLOCK.getDefaultState());
         }
-        if(worldIn.getFluidState(new BlockPos(pos.getX(),pos.getY() - 1 ,pos.getZ())) == Fluids.FLOWING_LAVA.getDefaultState()) {
-            worldIn.setBlockState(new BlockPos(pos.getX() , pos.getY() - 1, pos.getZ()), Blocks.OBSIDIAN.getDefaultState());
+        if (worldIn.getFluidState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())) == Fluids.FLOWING_LAVA.getDefaultState()) {
+            worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), Blocks.OBSIDIAN.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX() + 1,pos.getY(),pos.getZ() + 1)) == Blocks.WATER.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1)) == Blocks.WATER.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX() - 1,pos.getY(),pos.getZ() - 1)) == Blocks.WATER.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() - 1)) == Blocks.WATER.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() - 1), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX(),pos.getY(),pos.getZ() + 1)) == Blocks.WATER.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)) == Blocks.WATER.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX() + 1,pos.getY(),pos.getZ())) == Blocks.WATER.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ())) == Blocks.WATER.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX() - 1,pos.getY(),pos.getZ())) == Blocks.WATER.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ())) == Blocks.WATER.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX(),pos.getY(),pos.getZ() - 1)) == Blocks.WATER.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)) == Blocks.WATER.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX() + 1,pos.getY(),pos.getZ() + 1)) == Blocks.LAVA.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1)) == Blocks.LAVA.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX() - 1,pos.getY(),pos.getZ() - 1)) == Blocks.LAVA.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() - 1)) == Blocks.LAVA.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() - 1), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX(),pos.getY(),pos.getZ() + 1)) == Blocks.LAVA.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)) == Blocks.LAVA.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX() + 1,pos.getY(),pos.getZ())) == Blocks.LAVA.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ())) == Blocks.LAVA.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX() - 1,pos.getY(),pos.getZ())) == Blocks.LAVA.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ())) == Blocks.LAVA.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX(),pos.getY(),pos.getZ() - 1)) == Blocks.LAVA.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)) == Blocks.LAVA.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getFluidState(new BlockPos(pos.getX() + 1,pos.getY(),pos.getZ() + 1)) == Fluids.FLOWING_WATER.getDefaultState()) {
+        if (worldIn.getFluidState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1)) == Fluids.FLOWING_WATER.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getFluidState(new BlockPos(pos.getX() - 1,pos.getY(),pos.getZ() - 1)) == Fluids.FLOWING_WATER.getDefaultState()) {
+        if (worldIn.getFluidState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() - 1)) == Fluids.FLOWING_WATER.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() - 1), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getFluidState(new BlockPos(pos.getX(),pos.getY(),pos.getZ() + 1)) == Fluids.FLOWING_WATER.getDefaultState()) {
+        if (worldIn.getFluidState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)) == Fluids.FLOWING_WATER.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getFluidState(new BlockPos(pos.getX() + 1,pos.getY(),pos.getZ())) == Fluids.FLOWING_WATER.getDefaultState()) {
+        if (worldIn.getFluidState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ())) == Fluids.FLOWING_WATER.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getFluidState(new BlockPos(pos.getX() - 1,pos.getY(),pos.getZ())) == Fluids.FLOWING_WATER.getDefaultState()) {
+        if (worldIn.getFluidState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ())) == Fluids.FLOWING_WATER.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
         }
-        if(worldIn.getFluidState(new BlockPos(pos.getX(),pos.getY(),pos.getZ() - 1)) == Fluids.FLOWING_WATER.getDefaultState()) {
+        if (worldIn.getFluidState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)) == Fluids.FLOWING_WATER.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1), Blocks.BLUE_ICE.getDefaultState());
         }
         //snow
-        if(worldIn.getBlockState(new BlockPos(pos.getX() + 1,pos.getY(),pos.getZ() + 1)) == Blocks.AIR.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1)) == Blocks.AIR.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1), Blocks.SNOW.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX() - 1,pos.getY(),pos.getZ() - 1)) == Blocks.AIR.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() - 1)) == Blocks.AIR.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() - 1), Blocks.SNOW.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX(),pos.getY(),pos.getZ() + 1)) == Blocks.AIR.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)) == Blocks.AIR.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1), Blocks.SNOW.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX() + 1,pos.getY(),pos.getZ())) == Blocks.AIR.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ())) == Blocks.AIR.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()), Blocks.SNOW.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX() - 1,pos.getY(),pos.getZ())) == Blocks.AIR.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ())) == Blocks.AIR.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()), Blocks.SNOW.getDefaultState());
         }
-        if(worldIn.getBlockState(new BlockPos(pos.getX(),pos.getY(),pos.getZ() - 1)) == Blocks.AIR.getDefaultState()) {
+        if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)) == Blocks.AIR.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1), Blocks.SNOW.getDefaultState());
         }
 

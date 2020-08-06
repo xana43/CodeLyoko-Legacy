@@ -74,12 +74,13 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
         this.customName = customName;
     }
 
+    @Nonnull
     public ITextComponent getDisplayName() {
         return this.hasCustomName() ? new StringTextComponent(this.customName) : new TranslationTextComponent("container.flouride_infuser");
     }
 
     @Override
-    public void read(CompoundNBT compound) {
+    public void read(@Nonnull CompoundNBT compound) {
         super.read(compound);
         this.handler.deserializeNBT(compound.getCompound("Inventory"));
         this.burnTime = compound.getInt("BurnTime");
@@ -90,8 +91,9 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
         if (compound.contains("CustomName", 8)) this.setCustomName(compound.getString("CustomName"));
     }
 
+    @Nonnull
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT write(@Nonnull CompoundNBT compound) {
         super.write(compound);
         compound.putInt("BurnTime", (short) this.burnTime);
         compound.putInt("CookTime", (short) this.cookTime);
@@ -110,8 +112,6 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
     public static boolean isBurning(InfusingChamberTileEntity te) {
         return te.getField(0) > 0;
     }
-
-
 
 
     @Override
@@ -153,7 +153,6 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
 
                 smelting = ItemStack.EMPTY;
                 cookTime = 0;
-                return;
             }
         } else {
             if (this.canSmelt() && this.isBurning()) {
@@ -250,7 +249,7 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
 
     @Nullable
     @Override
-    public Container createMenu(int windowIn, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+    public Container createMenu(int windowIn, @Nonnull PlayerInventory playerInventory, @Nonnull PlayerEntity playerEntity) {
         return new ContainerInfusing(windowIn, playerInventory, this);
     }
 

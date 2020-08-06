@@ -13,6 +13,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import javax.annotation.Nonnull;
+
 public class HornetEntity extends PhantomEntity {
 
 
@@ -20,10 +22,12 @@ public class HornetEntity extends PhantomEntity {
         super(type, worldIn);
     }
 
+    @Nonnull
     @Override
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
+
     @Override
     protected boolean isInDaylight() {
         return false;
@@ -40,7 +44,7 @@ public class HornetEntity extends PhantomEntity {
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
         return super.getHurtSound(damageSourceIn);
     }
 
@@ -55,13 +59,13 @@ public class HornetEntity extends PhantomEntity {
     }
 
     @Override
-    protected boolean canBeRidden(Entity entityIn) {
+    protected boolean canBeRidden(@Nonnull Entity entityIn) {
         return false;
     }
 
 
     @Override
-    public boolean canSpawn(IWorld worldIn, SpawnReason spawnReasonIn) {
+    public boolean canSpawn(@Nonnull IWorld worldIn, @Nonnull SpawnReason spawnReasonIn) {
         return true;
     }
 

@@ -9,6 +9,7 @@ import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class IceDimension extends Dimension {
@@ -16,6 +17,7 @@ public class IceDimension extends Dimension {
         super(p_i225788_1_, p_i225788_2_, 0);
     }
 
+    @Nonnull
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
         return new IceGenerator(world,new IceProvider(),new IceGenSettings());
@@ -23,7 +25,7 @@ public class IceDimension extends Dimension {
 
     @Nullable
     @Override
-    public BlockPos findSpawn(ChunkPos chunkPosIn, boolean checkValid) {
+    public BlockPos findSpawn(@Nonnull ChunkPos chunkPosIn, boolean checkValid) {
         return null;
     }
 
@@ -43,6 +45,7 @@ public class IceDimension extends Dimension {
         return false;
     }
 
+    @Nonnull
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
         return new Vec3d(0.15,0.06,1.864);

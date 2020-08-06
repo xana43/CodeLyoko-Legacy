@@ -14,24 +14,26 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Base.MOD_ID,bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+import javax.annotation.Nonnull;
+
+@Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class MindHelm extends ArmorItem {
     private static long timer = 3600000;
     private byte damage = 1;
     private static boolean inventory = false;
+
     public MindHelm(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
         super(materialIn, slot, builder);
     }
-@SubscribeEvent
-public static void resting(TickEvent.PlayerTickEvent event)
-{
-    if(event.phase == TickEvent.Phase.END || event.phase == TickEvent.Phase.START)
-    {
-        if(inventory && timer != 3600000) {
-            timer++;
+
+    @SubscribeEvent
+    public static void resting(TickEvent.PlayerTickEvent event) {
+        if (event.phase == TickEvent.Phase.END || event.phase == TickEvent.Phase.START) {
+            if (inventory && timer != 3600000) {
+                timer++;
+            }
         }
     }
-}
 
     @Override
     public boolean isDamageable() {
@@ -42,7 +44,7 @@ public static void resting(TickEvent.PlayerTickEvent event)
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
         Base.Log.debug(timer);
         inventory = false;
-        if(timer-- <= 0) {
+        if (timer-- <= 0) {
             damage++;
             player.getEntity().attackEntityFrom(new DamageSource(this.getTranslationKey()), damage);
             timer = 60000;
@@ -50,10 +52,9 @@ public static void resting(TickEvent.PlayerTickEvent event)
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
 
-        if(stack.getEquipmentSlot() != EquipmentSlotType.HEAD || itemSlot != EquipmentSlotType.HEAD.getIndex())
-        {
+        if (stack.getEquipmentSlot() != EquipmentSlotType.HEAD || itemSlot != EquipmentSlotType.HEAD.getIndex()) {
             inventory = true;
         }
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);

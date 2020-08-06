@@ -13,6 +13,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import javax.annotation.Nonnull;
+
 public class EntityFan extends TridentEntity {
     private boolean dealtDamage;
     private ItemStack thrownStack = new ItemStack(ModItems.YUMI_TRADITONAL_FANS.get());
@@ -21,12 +23,12 @@ public class EntityFan extends TridentEntity {
         super(type, worldIn);
     }
 
-    public EntityFan(World world, LivingEntity thrower, ItemStack thrownStackIn)
-    {
-        super(ModEntities.FAN.get(),world);
+    public EntityFan(World world, LivingEntity thrower, ItemStack thrownStackIn) {
+        super(ModEntities.FAN.get(), world);
         this.thrownStack = thrownStackIn.copy();
     }
 
+    @Nonnull
     @Override
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
@@ -40,26 +42,25 @@ public class EntityFan extends TridentEntity {
 
         Entity entity = this.getShooter();
         if ((this.dealtDamage || this.getNoClip()) && entity != null) {
-                this.setNoClip(true);
-                Vec3d vec3d = new Vec3d(entity.getPosX() - this.getPosX(), entity.getPosYEye() - this.getPosY(), entity.getPosZ() - this.getPosZ());
-                this.setRawPosition(this.getPosX(), this.getPosY() + vec3d.y * 0.015D * 1, this.getPosZ());
-                if (this.world.isRemote) {
-                    this.lastTickPosY = this.getPosY();
-                }
-
-
-                this.setMotion(this.getMotion().scale(0.95D).add(vec3d.normalize().scale(1)));
-                if (this.returningTicks == 0) {
-                    this.playSound(SoundEvents.ITEM_TRIDENT_RETURN, 10.0F, 1.0F);
-                }
-
-                ++this.returningTicks;
+            this.setNoClip(true);
+            Vec3d vec3d = new Vec3d(entity.getPosX() - this.getPosX(), entity.getPosYEye() - this.getPosY(), entity.getPosZ() - this.getPosZ());
+            this.setRawPosition(this.getPosX(), this.getPosY() + vec3d.y * 0.015D * 1, this.getPosZ());
+            if (this.world.isRemote) {
+                this.lastTickPosY = this.getPosY();
             }
+
+
+            this.setMotion(this.getMotion().scale(0.95D).add(vec3d.normalize().scale(1)));
+            if (this.returningTicks == 0) {
+                this.playSound(SoundEvents.ITEM_TRIDENT_RETURN, 10.0F, 1.0F);
+            }
+
+            ++this.returningTicks;
+        }
 
 
         super.tick();
     }
-
 
 
 }

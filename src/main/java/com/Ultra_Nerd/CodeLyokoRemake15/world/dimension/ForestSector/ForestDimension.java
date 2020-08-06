@@ -12,25 +12,22 @@ import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ForestDimension extends Dimension  {
-
-
-
 
     public ForestDimension(World world, DimensionType type) {
         super(world,type,0.0f);
     }
 
+    @Nonnull
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
         return new ForestGenerator(world,new ForestProvider(),new ForestGenSettings());
     }
 
-
-
-
+    @Nonnull
     @Override
     public void setSkyRenderer(IRenderHandler skyRenderer) {
         super.setSkyRenderer(skyRenderer);
@@ -68,11 +65,9 @@ public class ForestDimension extends Dimension  {
         return true;
     }
 
-
-
     @Nullable
     @Override
-    public BlockPos findSpawn(ChunkPos chunkPosIn, boolean checkValid) {
+    public BlockPos findSpawn(@Nonnull ChunkPos chunkPosIn, boolean checkValid) {
         return null;
     }
 
@@ -92,12 +87,11 @@ public class ForestDimension extends Dimension  {
         return false;
     }
 
+    @Nonnull
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
         return new Vec3d(0.9f,1,0.6F);
     }
-
-
 
     @Override
     public boolean canRespawnHere() {
@@ -118,9 +112,6 @@ public class ForestDimension extends Dimension  {
     public boolean canMineBlock(PlayerEntity player, BlockPos pos) {
         return false;
     }
-
-
-
 
     @Override
     public void setAllowedSpawnTypes(boolean allowHostile, boolean allowPeaceful) {
