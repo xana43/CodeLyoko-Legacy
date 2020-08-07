@@ -51,6 +51,7 @@ public class ModItems {
     public static final RegistryObject<Item> COMPUTER_DRAM_DIE = ITEMS.register("computer_dram_die",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> COMPUTER_SRAM_DIE = ITEMS.register("computer_sram_die",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> COMPUTER_QRAM_DIE = ITEMS.register("computer_qram_die",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> COMPUTER_SRAM_CONTROLLER = ITEMS.register("computer_sram_controller",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> COMPUTER_SDR_CONTROLLER = ITEMS.register("computer_sdr_controller",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> COMPUTER_DDR_CONTROLLER = ITEMS.register("computer_ddr_controller",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> COMPUTER_ECC_CONTROLLER = ITEMS.register("computer_ecc_controller",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
