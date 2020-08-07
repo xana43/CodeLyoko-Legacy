@@ -3,10 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.*;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.LaserArrowShooter;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.SaberKatana;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.YumiFans;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.ZweihanderWeapon;
+import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.*;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.text.TextFormatting;
@@ -20,14 +17,14 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Base.MOD_ID);
 
     //for items
-    public static final RegistryObject<Item> APU_PACKAGE_ARM = ITEMS.register("apu_package_arm",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> APU_PACKAGE_x86 = ITEMS.register("apu_package_x86",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> APU_PACKAGE_ASIC = ITEMS.register("apu_package_asic",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> APU_PACKAGE_RISC = ITEMS.register("apu_package_risc",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.EPIC)));
-    public static final RegistryObject<Item> APU_DIE_ARM = ITEMS.register("apu_die_arm",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> APU_DIE_x86 = ITEMS.register("apu_die_x86",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> APU_DIE_ASIC = ITEMS.register("apu_die_asic",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> APU_DIE_RISC = ITEMS.register("apu_die_risc",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> APU_PACKAGE_ARM = ITEMS.register("apu_package_arm", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> APU_PACKAGE_x86 = ITEMS.register("apu_package_x86", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> APU_PACKAGE_ASIC = ITEMS.register("apu_package_asic", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> APU_PACKAGE_RISC = ITEMS.register("apu_package_risc", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> APU_DIE_ARM = ITEMS.register("apu_die_arm", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> APU_DIE_x86 = ITEMS.register("apu_die_x86", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> APU_DIE_ASIC = ITEMS.register("apu_die_asic", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> APU_DIE_RISC = ITEMS.register("apu_die_risc", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.EPIC)));
     public static final RegistryObject<BlokItem> BLOK_SPAWN_EGG = ITEMS.register("blok_spawn_egg", () -> new BlokItem(ModEntities.BLOK, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> CPU_PACKAGE_ARM = ITEMS.register("cpu_package_arm", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> CPU_PACKAGE_x86 = ITEMS.register("cpu_package_x86", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
@@ -48,13 +45,13 @@ public class ModItems {
     public static final RegistryObject<Item> COMPUTER_ASIC_GPU_CORE = ITEMS.register("computer_asic_gpu_core", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> COMPUTER_NEURAL_GPU_CORE = ITEMS.register("computer_neural_gpu_core", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.create("LEGENDARY", TextFormatting.DARK_AQUA))));
     public static final RegistryObject<Item> COMPUTER_QUANTUM_NUMA_GPU_CORE = ITEMS.register("computer_quantum_numa_gpu_core", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.create("QUANTUM", TextFormatting.DARK_GRAY))));
-    public static final RegistryObject<Item> COMPUTER_DRAM_DIE = ITEMS.register("computer_dram_die",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> COMPUTER_SRAM_DIE = ITEMS.register("computer_sram_die",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> COMPUTER_QRAM_DIE = ITEMS.register("computer_qram_die",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> COMPUTER_SRAM_CONTROLLER = ITEMS.register("computer_sram_controller",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> COMPUTER_SDR_CONTROLLER = ITEMS.register("computer_sdr_controller",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> COMPUTER_DDR_CONTROLLER = ITEMS.register("computer_ddr_controller",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> COMPUTER_ECC_CONTROLLER = ITEMS.register("computer_ecc_controller",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> COMPUTER_DRAM_DIE = ITEMS.register("computer_dram_die", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> COMPUTER_SRAM_DIE = ITEMS.register("computer_sram_die", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> COMPUTER_QRAM_DIE = ITEMS.register("computer_qram_die", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> COMPUTER_SRAM_CONTROLLER = ITEMS.register("computer_sram_controller", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> COMPUTER_SDR_CONTROLLER = ITEMS.register("computer_sdr_controller", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> COMPUTER_DDR_CONTROLLER = ITEMS.register("computer_ddr_controller", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> COMPUTER_ECC_CONTROLLER = ITEMS.register("computer_ecc_controller", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> COMPUTER_DRAM_SDR_RAM = ITEMS.register("computer_dram_sdr_ram", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.create("common_part", TextFormatting.GRAY))));
     public static final RegistryObject<Item> COMPUTER_DRAM_DDR_RAM = ITEMS.register("computer_dram_ddr_ram", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.create("common_part", TextFormatting.GRAY))));
     public static final RegistryObject<Item> COMPUTER_DRAM2_DDR_RAM = ITEMS.register("computer_dram_ddr2_ram", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.create("common_part", TextFormatting.GRAY))));
@@ -83,7 +80,7 @@ public class ModItems {
     public static final RegistryObject<Item> FLOURIDE = ITEMS.register("flouride", () -> new FlourideItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> GIGABIT = ITEMS.register("gigabit", ItemBase::new);
     public static final RegistryObject<Item> GIGABYTE = ITEMS.register("gigabyte", ItemBase::new);
-    public static final RegistryObject<Item> GPU_COMPUTE_PROCESSOR_CORE = ITEMS.register("gpu_compute_processor_core",() -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> GPU_COMPUTE_PROCESSOR_CORE = ITEMS.register("gpu_compute_processor_core", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> GPU_COMPUTE_PROCESSOR = ITEMS.register("gpu_compute_processor", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> GPU_PACKAGE_RISC = ITEMS.register("gpu_package_risc", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> GPU_PACKAGE_ASIC = ITEMS.register("gpu_package_asic", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.EPIC)));
@@ -126,6 +123,7 @@ public class ModItems {
     public static final RegistryObject<SwordItem> QUANTUM_SABER = ITEMS.register("quantum_saber", () -> new SwordItem(LyokoTiers.LyokoTool, 15, 2, new Item.Properties().group(Base.LYOKO_WEAPONS).maxDamage(50).rarity(Rarity.EPIC)));
     public static final RegistryObject<TridentItem> YUMI_TRADITONAL_FANS = ITEMS.register("yumi_traditional_fans", () -> new YumiFans(new Item.Properties().group(Base.LYOKO_WEAPONS).maxDamage(20).setNoRepair()));
     public static final RegistryObject<SwordItem> ZWEIHANDER = ITEMS.register("zweihander", () -> new ZweihanderWeapon(LyokoTiers.LyokoWarrior, 60, -3.9f, new Item.Properties().group(Base.LYOKO_WEAPONS)));
+    public static final RegistryObject<BowItem> FORCE_FIELD_EMITTER = ITEMS.register("force_field_emitter", () -> new ForceFieldEmitter(new Item.Properties().group(Base.LYOKO_WEAPONS).maxDamage(40).rarity(Rarity.EPIC)));
 
     //for armor
     public static final RegistryObject<ArmorItem> AELITA_CHESTPLATE = ITEMS.register("aelita_chestplate", () -> new AelitaArmorElytra(LyokoArmorMaterial.GUARDIAN, EquipmentSlotType.CHEST, new Item.Properties().group(Base.LYOKO_ARMOR)));

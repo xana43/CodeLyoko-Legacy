@@ -48,7 +48,7 @@ public class EntityLaser extends ArrowEntity {
 	@Override
 	public void setDamage(double damageIn) {
 		// TODO Auto-generated method stub
-		super.setDamage(10);
+		super.setDamage(damageIn);
 	}
 	
 	@Override
