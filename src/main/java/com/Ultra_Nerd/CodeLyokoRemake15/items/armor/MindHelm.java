@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 
 @Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class MindHelm extends ArmorItem {
-    private static long timer = 3600000;
+    private static int timer = 3600000;
     private byte damage = 1;
     private static boolean inventory = false;
 

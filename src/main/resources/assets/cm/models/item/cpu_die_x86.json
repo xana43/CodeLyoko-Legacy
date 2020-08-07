@@ -2,6 +2,7 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "cm:item/die_1",
-    "layer1": "cm:item/86xdie"
+    "layer1": "cm:item/86xdie",
+    "layer2": "cm:item/x86_memory_controller"
   }
 }
