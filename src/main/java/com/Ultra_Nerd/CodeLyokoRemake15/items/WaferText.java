@@ -21,4 +21,9 @@ public class WaferText extends Item {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         tooltip.add(new StringTextComponent("Made by MSMC"));
     }
+
+    @Override
+    public boolean isDamageable() {
+        return false;
+    }
 }

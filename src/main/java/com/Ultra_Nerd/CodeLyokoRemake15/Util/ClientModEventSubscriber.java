@@ -18,6 +18,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,6 +30,8 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+
+import javax.annotation.Nullable;
 
 @Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 
@@ -39,6 +46,19 @@ public class ClientModEventSubscriber {
     @SubscribeEvent
     public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
         //makes certain blocks behave properly
+        ModItems.SILICON_WAFER.get().addPropertyOverride(new ResourceLocation(Base.MOD_ID, "quality"), new IItemPropertyGetter() {
+            @Override
+            public float call(ItemStack stack, @Nullable World world, @Nullable LivingEntity entityin) {
+                switch (stack.getDamage())
+                {
+                    case 1: return 0.25f;
+                    case 2: return 0.5f;
+                    case 3: return 0.75f;
+                    case 4: return 1.0f;
+                    default: return 0.0f;
+                }
+            }
+        });
         RenderTypeLookup.setRenderLayer(ModBlocks.TOWER_INTERFACE.get(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(ModFluids.DIGITAL_SEA_BLOCK.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModFluids.DIGITAL_OCEAN.get(), RenderType.getTranslucent());
