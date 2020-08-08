@@ -22,7 +22,7 @@ public class ModEntities {
                     .build(new ResourceLocation(Base.MOD_ID, "blok").toString()));
     public static final RegistryObject<EntityType<EntityLaser>> LASER = Entities.register("laser", () ->
             EntityType.Builder.<EntityLaser>create(EntityLaser::new, EntityClassification.MISC).size(1f, 1f)
-                    .build(new ResourceLocation(Base.MOD_ID, "laserarrow").toString()));
+                    .build(new ResourceLocation(Base.MOD_ID, "laser").toString()));
     public static final RegistryObject<EntityType<EntityFan>> FAN = Entities.register("fan", () ->
             EntityType.Builder.<EntityFan>create(EntityFan::new, EntityClassification.MISC).size(1, 1).build(
                     new ResourceLocation(Base.MOD_ID, "fan").toString()

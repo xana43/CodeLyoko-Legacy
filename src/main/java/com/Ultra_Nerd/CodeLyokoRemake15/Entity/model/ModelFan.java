@@ -17,9 +17,9 @@ public class ModelFan<T extends EntityFan> extends EntityModel<T> {
 	public ModelFan() {
 		textureWidth = 16;
 		textureHeight = 16;
-
 		bb_main = new ModelRenderer(this);
-		bb_main.setRotationPoint(0.0F, 24.0F, 0.0F);
+		bb_main.addBox(0.f,0.f,0.f,16f,2f,16f);
+		//bb_main.setRotationPoint(0.0F, 24.0F, 0.0F);
 
 	}
 
@@ -30,7 +30,7 @@ public class ModelFan<T extends EntityFan> extends EntityModel<T> {
 
 	@Override
 	public void render(@Nonnull MatrixStack matrixStack, @Nonnull IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-		bb_main.render(matrixStack, buffer, packedLight, packedOverlay);
+		bb_main.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
