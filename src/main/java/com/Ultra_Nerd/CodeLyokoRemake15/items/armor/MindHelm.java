@@ -42,7 +42,7 @@ public class MindHelm extends ArmorItem {
 
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        //Base.Log.debug(timer);
+
         inventory = false;
         if (timer-- <= 0) {
             damage++;

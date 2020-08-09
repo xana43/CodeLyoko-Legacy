@@ -46,6 +46,8 @@ public class ClientModEventSubscriber {
     @SubscribeEvent
     public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
         //makes certain blocks behave properly
+
+
         ModItems.SILICON_WAFER.get().addPropertyOverride(new ResourceLocation(Base.MOD_ID, "quality"), new IItemPropertyGetter() {
             @Override
             public float call(ItemStack stack, @Nullable World world, @Nullable LivingEntity entityin) {
@@ -74,6 +76,7 @@ public class ClientModEventSubscriber {
         RenderTypeLookup.setRenderLayer(ModBlocks.HOLOPROJECTOR.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.FALSE_WATER.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.PROJECTOR_FOCUS.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.LYOKO_CORE.get(),RenderType.getTranslucent());
         //registers the screens and entities
         ScreenManager.<ContainerInfusing, InfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
         ScreenManager.<TowerInterfaceContainer, TowerGUI>registerFactory(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);

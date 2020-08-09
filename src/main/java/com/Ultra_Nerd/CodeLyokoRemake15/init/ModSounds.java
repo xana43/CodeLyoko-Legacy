@@ -11,8 +11,9 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class ModSounds {
+public class ModSounds  {
 	 public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Base.MOD_ID);
+
 	//for objects that load last
 	 public static final Lazy<SoundEvent> LAZY_THEME = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"lyoko")));
 	 public static final Lazy<SoundEvent> LAZY_WARRIOR = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"armor_equip_warrior")));

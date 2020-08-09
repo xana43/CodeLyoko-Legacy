@@ -1,0 +1,5 @@
+{
+  "loader": "forge:obj",
+  "model": "cm:models/block/core_of_lyoko.obj",
+  "flip-v": true
+}
