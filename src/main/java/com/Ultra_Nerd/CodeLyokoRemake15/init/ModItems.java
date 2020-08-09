@@ -103,6 +103,7 @@ public class ModItems {
     public static final RegistryObject<WrittenBookItem> STORY_BOOK = ITEMS.register("story_book", () -> new StoryBook(new Item.Properties().group(Base.LYOKO_ITEMS).maxStackSize(1)));
     public static final RegistryObject<Item> SILICON_WAFER = ITEMS.register("silicon_wafer", () -> new WaferText(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(4)));
     public static final RegistryObject<Item> URANIUM_SILICATE = ITEMS.register("uranium_silicate", ItemBase::new);
+    public static final RegistryObject<Item> URANIUM_SILICON_PLATE = ITEMS.register("uranium_silicon_plate",ItemBase::new);
     public static final RegistryObject<Item> TRIURANIUM_OCTAOXIDE = ITEMS.register("triuranium_octaoxide", ItemBase::new);
     public static final RegistryObject<Item> TERABIT = ITEMS.register("terabit", ItemBase::new);
     public static final RegistryObject<Item> TERABYTE = ITEMS.register("terabyte", ItemBase::new);

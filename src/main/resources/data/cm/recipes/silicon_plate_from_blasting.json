@@ -1,0 +1,15 @@
+{
+  "type":"minecraft:blasting",
+  "ingredient":
+  {
+
+    "item":"cm:uranium_silicate"
+
+  },
+  "result":"cm:uranium_silicon_plate",
+  "experience":5.0,
+  "cookingtime": 300
+
+
+
+}
