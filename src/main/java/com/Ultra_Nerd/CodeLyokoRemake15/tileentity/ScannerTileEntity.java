@@ -5,12 +5,10 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.ScannerFrame;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.ScannerTop;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 
 public class ScannerTileEntity extends TileEntity implements ITickableTileEntity {

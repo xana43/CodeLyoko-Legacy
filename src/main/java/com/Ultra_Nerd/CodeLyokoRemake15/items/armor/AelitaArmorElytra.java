@@ -1,8 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items.armor;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthadge.Sector5Dimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimension;
@@ -16,8 +14,6 @@ import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;

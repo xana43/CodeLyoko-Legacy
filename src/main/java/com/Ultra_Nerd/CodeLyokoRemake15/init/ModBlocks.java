@@ -73,6 +73,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> SKLODOWSKITE_ORE = BLOCKS.register("sklodowskite_ore",() -> new Block(Block.Properties.create(Material.ROCK).harvestLevel(3).hardnessAndResistance(4,4).sound(SoundType.STONE).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> SILICA_SAND = BLOCKS.register("silica_sand", () -> new SandBlock(0xFFFFFF,Block.Properties.from(Blocks.SAND)));
     public static final RegistryObject<Block> SECTOR5_STEEL = BLOCKS.register("sector5_steel",() -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(-1,-1)));
+    public static final RegistryObject<Block> ROUTER = BLOCKS.register("router",() -> new Router(Block.Properties.from(Blocks.DRAGON_EGG)));
     public static final RegistryObject<Block> TOWER_WHITE = BLOCKS.register("tower_white", () -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(-1, -1).sound(SoundType.GLASS).lightValue(12).harvestLevel(20).harvestTool(ToolType.SHOVEL)));
     public static final RegistryObject<Block> TOWER_INTERFACE = BLOCKS.register("tower_interface", TowerInterface::new);
     public static final RegistryObject<Block> TOWER_BASE = BLOCKS.register("tower_base", () -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(-1, -1).sound(SoundType.GLASS).lightValue(10).harvestLevel(20).harvestTool(ToolType.SHOVEL)));
