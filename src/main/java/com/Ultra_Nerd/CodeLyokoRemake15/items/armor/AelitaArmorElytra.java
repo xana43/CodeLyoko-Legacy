@@ -7,6 +7,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimens
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainDimension;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
@@ -47,11 +48,65 @@ public class AelitaArmorElytra extends ArmorItem {
                 || player.world.dimension instanceof Sector5Dimension || player.world.dimension instanceof OceanDimension;
     }
 
+
+    @Override
+    public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+        super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
+        if (entityIn instanceof PlayerEntity || !worldIn.isRemote) {
+            PlayerEntity player = (PlayerEntity) entityIn;
+
+            if (!checkDim(player)) {
+                if (player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get()) {
+                    player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).setCount(0);
+                }
+                if (player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
+                    player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).setCount(0);
+                }
+                if (player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() == ModItems.AELITA_LEGGINGS.get()) {
+                    player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).setCount(0);
+                }
+                if (player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.AELITA_BOOTS.get()) {
+                    player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).setCount(0);
+                }
+                for (int I = 0; I < player.inventory.getSizeInventory(); I++) {
+                    if (player.inventory.getStackInSlot(I).getItem() == ModItems.FORCE_FIELD_EMITTER.get()) {
+                        player.inventory.setInventorySlotContents(I, ItemStack.EMPTY);
+                    }
+                }
+            }
+        }
+    }
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        /*if (KeyBoardAccess.rightClick()) {
-            EnergyBall(player, world);
-        }*/
+        if (!checkDim(player)) {
+            if (player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get()) {
+                player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).setCount(0);
+            }
+            if (player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
+                player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).setCount(0);
+            }
+            if (player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() == ModItems.AELITA_LEGGINGS.get()) {
+                player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).setCount(0);
+            }
+            if (player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.AELITA_BOOTS.get()) {
+                player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).setCount(0);
+            }
+            for(int I = 0; I < player.inventory.getSizeInventory(); I++)
+            {
+                if(player.inventory.getStackInSlot(I).getItem() == ModItems.FORCE_FIELD_EMITTER.get())
+                {
+                    player.inventory.setInventorySlotContents(I, ItemStack.EMPTY);
+                }
+            }
+        } else {
+            if (player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get() &&
+                    player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() == ModItems.AELITA_LEGGINGS.get() &&
+                    player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.AELITA_BOOTS.get()) {
+                if(player.inventory.getStackInSlot(EquipmentSlotType.MAINHAND.getIndex()).getItem() != ModItems.FORCE_FIELD_EMITTER.get()) {
+                    player.inventory.add(EquipmentSlotType.MAINHAND.getSlotIndex(), new ItemStack(ModItems.FORCE_FIELD_EMITTER.get(), 1));
+                }
+            }
+        }
 
 
         if (player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get() &&
@@ -89,6 +144,12 @@ public class AelitaArmorElytra extends ArmorItem {
             }
             if (playerIn.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
                 playerIn.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).setCount(0);
+            }
+            if (playerIn.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() == ModItems.AELITA_LEGGINGS.get()) {
+                playerIn.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).setCount(0);
+            }
+            if (playerIn.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.AELITA_BOOTS.get()) {
+                playerIn.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).setCount(0);
             }
         } else {
             if (playerIn.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get() &&

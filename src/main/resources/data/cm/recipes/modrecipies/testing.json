@@ -1,0 +1,10 @@
+{
+  "type": "cm:test",
+  "output": {
+    "item": "cm:lyoko_core"
+  },
+  "input": {
+    "item": "cm:bit"
+
+  }
+}

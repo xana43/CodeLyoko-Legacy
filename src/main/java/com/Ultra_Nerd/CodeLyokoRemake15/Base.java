@@ -52,6 +52,7 @@ public class Base
 		ModFluids.LIQUIDS.register(ModBus);
 		ModBlocks.BLOCKS.register(ModBus);
 		ModEntities.Entities.register(ModBus);
+		ModRecipes.RECIPE_SERIALIZER_DEFERRED_REGISTER.register(ModBus);
 		ModBiome.BIOMES.register(ModBus);
 		ModContainerTypes.CONTAINER_TYPES.register(ModBus);
 		ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
