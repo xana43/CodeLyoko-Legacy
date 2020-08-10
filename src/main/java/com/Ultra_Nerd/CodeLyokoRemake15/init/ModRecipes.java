@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Recipies.ICustomRecipes;
 import com.Ultra_Nerd.CodeLyokoRemake15.Recipies.RecipeSerializers;
 import com.Ultra_Nerd.CodeLyokoRemake15.Recipies.TestRecipe;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +19,7 @@ public class ModRecipes {
     public static final IRecipeType<ICustomRecipes> TYPE = registerType(ICustomRecipes.RECIPE_TYPE);
 
 
-    private static class RegistryType<T extends IRecipeType<?>> implements IRecipeType<T>{
+    private static class RegistryType<T extends IRecipe<?>> implements IRecipeType<T>{
         @Override
         public String toString() {
             return Registry.RECIPE_TYPE.getKey(this).toString();
