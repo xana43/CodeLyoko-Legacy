@@ -3,7 +3,12 @@ package com.Ultra_Nerd.CodeLyokoRemake15.items.tools;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthadge.Sector5Dimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainDimension;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -41,6 +46,13 @@ public class LaserArrowShooter extends BowItem {
         // TODO Auto-generated constructor stub
     }
 
+
+    private boolean checkDim(PlayerEntity player) {
+        return player.world.dimension instanceof ForestDimension || player.world.dimension instanceof IceDimension ||
+                player.world.dimension instanceof DesertDimension || player.world.dimension instanceof MountainDimension
+                || player.world.dimension instanceof Sector5Dimension || player.world.dimension instanceof OceanDimension;
+    }
+
 	@Nonnull
 	@Override
     public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, PlayerEntity playerIn, @Nonnull Hand handIn) {
@@ -48,7 +60,7 @@ public class LaserArrowShooter extends BowItem {
         Count = 100;
 
         Vec3d aim = playerIn.getLookVec();
-        if (item.getDamage() < 40 && playerIn.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get() && playerIn.world.dimension instanceof ForestDimension) {
+        if (item.getDamage() < 40 && playerIn.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get() && checkDim(playerIn)) {
             //worldIn.playSound(null,playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModItems.BIT.get(), SoundCategory.NEUTRAL, 1f, 1f);
 
 
@@ -65,7 +77,7 @@ public class LaserArrowShooter extends BowItem {
             }
 
             item.damageItem(1, playerIn, null);
-            return new ActionResult<>(ActionResultType.SUCCESS, item);
+            return new ActionResult<>(ActionResultType.PASS, item);
         } else {
             return new ActionResult<>(ActionResultType.FAIL, item);
         }
