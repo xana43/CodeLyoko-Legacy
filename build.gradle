@@ -112,6 +112,9 @@ processResources {
     }
 }
 
+repositories {
+    maven {url 'https://repo.repsy.io/mvn/gandiber/geckolib' }
+}
 
 
 dependencies {
@@ -119,14 +122,11 @@ dependencies {
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.15.2-31.2.36'
-    implementation fg.deobf('software.bernie.geckolib:forge-1.15.2-geckolib:2.0.0')
+    compile fg.deobf('software.bernie.geckolib:forge-1.15.2-geckolib:SNAPSHOT-53')
 
 
 }
-repositories {
-    //maven { url  'https://jitpack.io' }
-    maven { url 'https://repo.repsy.io/mvn/gandiber/geckolib' }
-}
+
 
 
 // Example for how to get properties into the manifest for reading by the runtime..
