@@ -26,6 +26,10 @@ public class ModItems {
     public static final RegistryObject<Item> APU_DIE_ASIC = ITEMS.register("apu_die_asic", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> APU_DIE_RISC = ITEMS.register("apu_die_risc", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.EPIC)));
     public static final RegistryObject<BlokItem> BLOK_SPAWN_EGG = ITEMS.register("blok_spawn_egg", () -> new BlokItem(ModEntities.BLOK, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> COPPER_FERRIC_SULFIDE = ITEMS.register("copper_ferric_sulfide", () -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> COPPERII_SULFATE = ITEMS.register("copperii_sulfate", () -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> CUPROUS_OXIDE = ITEMS.register("cuprous_oxide", () -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> BLISTER_COPPER = ITEMS.register("blister_copper", () -> new BlisterCopper(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(60)));
     public static final RegistryObject<Item> CPU_PACKAGE_ARM = ITEMS.register("cpu_package_arm", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> CPU_PACKAGE_x86 = ITEMS.register("cpu_package_x86", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> CPU_PACKAGE_RISC = ITEMS.register("cpu_package_risc", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.RARE)));
@@ -117,7 +121,7 @@ public class ModItems {
     //for tools
     public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> TRUSTTY_SCREWDRIVER = ITEMS.register("trusty_screwdriver", () -> new TrustyScrewDriverItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
-
+    public static final RegistryObject<Item> SOLDERING_IRON = ITEMS.register("soldering_iron", () -> new soldering_iron(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(100)));
     //for weapons
     public static final RegistryObject<SwordItem> DIGITAL_SABER = ITEMS.register("digital_saber", () -> new SaberKatana(LyokoTiers.LyokoSamurai, 25, -0.9f, new Item.Properties().group(Base.LYOKO_WEAPONS)));
     public static final RegistryObject<BowItem> LASER_ARROWSHOOTER = ITEMS.register("laser_arrowshooter", () -> new LaserArrowShooter(new Item.Properties().group(Base.LYOKO_WEAPONS).maxDamage(40).setNoRepair()));
