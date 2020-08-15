@@ -28,6 +28,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> BORNITE_ORE = BLOCKS.register("bornite_ore", () -> new Block(Block.Properties.from(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> CHALCOPYRITE_ORE = BLOCKS.register("chalcopyrite_ore", () -> new Block(Block.Properties.from(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> COVELLITE_ORE = BLOCKS.register("covellite_ore", () -> new Block(Block.Properties.from(Blocks.IRON_ORE)));
+    public static final RegistryObject<Block> CHALCOCITE_ORE = BLOCKS.register("chalcocite_ore", () -> new Block(Block.Properties.from(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> COMPUTER_FRAME = BLOCKS.register("computer_frame", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> CENTRAL_CONTROL_UNIT = BLOCKS.register("central_control_unit",() -> new ComputerCentralControlUnit(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> COMPUTER_SCREEN = BLOCKS.register("computer_screen", () -> new Block(Block.Properties.create(Material.GLASS).hardnessAndResistance(1, 20).sound(SoundType.GLASS).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
@@ -53,6 +54,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> DIGITAL_SAND = BLOCKS.register("digital_sand", () -> new Block(Block.Properties.create(Material.SAND)));
     public static final RegistryObject<Block> DIGITAL_DARKNESS = BLOCKS.register("digital_darkness",() -> new Block(Block.Properties.create(Material.DRAGON_EGG).lightValue(-1)));
     public static final RegistryObject<Block> ELECTRICFLOURIDE_INFUSER = BLOCKS.register("electric_flouride_infuser", ElectricFlourideInfuser::new);
+    public static final RegistryObject<Block> ELECTROPLATING_MACHINE = BLOCKS.register("electroplating_machine",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> ELECTROPLATING_MACHINE_FRAME = BLOCKS.register("electroplating_machine_frame", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> ELECTROPLATING_ANODE = BLOCKS.register("electroplating_anode",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> ELECTROPLATING_CATHODE = BLOCKS.register("electroplating_cathode", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> FLOURIDE_INFUSER = BLOCKS.register("flouride_infuser", FlourideInfuser::new);
     public static final RegistryObject<Block> FLOURITE_BLOCK = BLOCKS.register("flourite_block", () -> new Block(Block.Properties.create(Material.SAND).hardnessAndResistance(-1, 10).sound(SoundType.SAND).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> FLOURITE_ORE = BLOCKS.register("flourite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
@@ -62,7 +67,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> LYOKO_CORE = BLOCKS.register("lyoko_core",() -> new LyokoCore(Block.Properties.from(Blocks.DRAGON_EGG).notSolid()));
     public static final RegistryObject<Block> MARABUNTA = BLOCKS.register("marabunta", Marabunta::new);
     public static final RegistryObject<Block> METATYUYAMUNITE_ORE = BLOCKS.register("metatyuyamunite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3, 10).sound(SoundType.STONE).lightValue(0).harvestLevel(1).harvestTool(ToolType.PICKAXE)));
-    public static final RegistryObject<Block> MOUNTAIN_TREE = BLOCKS.register("mountain_tree", () -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(-1, -1).sound(SoundType.WOOD).lightValue(0).harvestLevel(-1)));
     public static final RegistryObject<Block> PROJECTOR_FOCUS = BLOCKS.register("projector_focus", ProjectorFocusblock::new);
     public static final RegistryObject<Block> QUANTUM_BLOCK = BLOCKS.register("quantum_block", () -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(6, 20).sound(SoundType.METAL).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> QUANTUM_CORE = BLOCKS.register("quantum_core", () -> new Block(Block.Properties.create(Material.REDSTONE_LIGHT).hardnessAndResistance(1, 20).sound(SoundType.GLASS).lightValue(1).harvestLevel(0)));

@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlisterCopper extends Item {
-    private short I = 1000;
+    private short I = 500;
     public BlisterCopper(Properties properties) {
         super(properties);
     }
@@ -43,7 +43,7 @@ public class BlisterCopper extends Item {
 
                         stack.setDamage(stack.getDamage() + 1);
 
-                        I = 1000;
+                        I = 500;
                     }
                 }
                 if(stack.getDamage() == 60)

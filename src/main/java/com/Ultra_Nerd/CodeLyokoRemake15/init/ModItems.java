@@ -26,8 +26,10 @@ public class ModItems {
     public static final RegistryObject<Item> APU_DIE_ASIC = ITEMS.register("apu_die_asic", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> APU_DIE_RISC = ITEMS.register("apu_die_risc", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.EPIC)));
     public static final RegistryObject<BlokItem> BLOK_SPAWN_EGG = ITEMS.register("blok_spawn_egg", () -> new BlokItem(ModEntities.BLOK, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> COPPER_FERRIC_SULFIDE = ITEMS.register("copper_ferric_sulfide", () -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> COPPERII_SULFATE = ITEMS.register("copperii_sulfate", () -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> CHALCOPYRITE_ITEM = ITEMS.register("chalcopyrite_item", () -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(5)));
+    public static final RegistryObject<Item> BORNITE_ITEM = ITEMS.register("bornite_item",() -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(4)));
+    public static final RegistryObject<Item> CHALCOCITE_ITEM = ITEMS.register("chalcocite_item",() -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(7)));
+    public static final RegistryObject<Item> COVELLITE_ITEM = ITEMS.register("covellite_item",() -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(6)));
     public static final RegistryObject<Item> CUPROUS_OXIDE = ITEMS.register("cuprous_oxide", () -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> BLISTER_COPPER = ITEMS.register("blister_copper", () -> new BlisterCopper(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(60)));
     public static final RegistryObject<Item> CPU_PACKAGE_ARM = ITEMS.register("cpu_package_arm", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
