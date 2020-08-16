@@ -1,5 +1,13 @@
 {
   "variants": {
-    "": {"model":"cm:block/router"}
+    "facing=north,ractive=false": {"model":"cm:block/router"},
+    "facing=east,ractive=false": {"model": "cm:block/router", "y": 90},
+    "facing=south,ractive=false": {"model": "cm:block/router","y": 180},
+    "facing=west,ractive=false": {"model": "cm:block/router","y": 270},
+    "facing=north,ractive=true": {"model":"cm:block/router_active"},
+    "facing=east,ractive=true": {"model": "cm:block/router_active", "y": 90},
+    "facing=south,ractive=true": {"model": "cm:block/router_active","y": 180},
+    "facing=west,ractive=true": {"model": "cm:block/router_active","y": 270}
+
   }
 }
