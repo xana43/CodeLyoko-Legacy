@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class UraniumWaste extends FlowingFluidBlock {
-    private static final int timer = 200;
+
 
     public UraniumWaste(Supplier<? extends FlowingFluid> supplier) {
         super(supplier, Block.Properties.create(Material.LAVA)
