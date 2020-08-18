@@ -56,8 +56,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> ELECTRICFLOURIDE_INFUSER = BLOCKS.register("electric_flouride_infuser", ElectricFlourideInfuser::new);
     public static final RegistryObject<Block> ELECTROPLATING_MACHINE = BLOCKS.register("electroplating_machine",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> ELECTROPLATING_MACHINE_FRAME = BLOCKS.register("electroplating_machine_frame", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> ELECTROPLATING_ANODE = BLOCKS.register("electroplating_anode",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> ELECTROPLATING_CATHODE = BLOCKS.register("electroplating_cathode", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> ELECTROPLATING_ANODE = BLOCKS.register("electroplating_anode",() -> new ElectroplatingRodImplements(Block.Properties.from(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> ELECTROPLATING_CATHODE = BLOCKS.register("electroplating_cathode", () -> new ElectroplatingRodImplements(Block.Properties.from(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> ANODE_PART = BLOCKS.register("anodepart",() -> new ElectroplatingRodParts(Block.Properties.from(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> CATHODE_PART = BLOCKS.register("cathodepart", () -> new ElectroplatingRodParts(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> FLOURIDE_INFUSER = BLOCKS.register("flouride_infuser", FlourideInfuser::new);
     public static final RegistryObject<Block> FLOURITE_BLOCK = BLOCKS.register("flourite_block", () -> new Block(Block.Properties.create(Material.SAND).hardnessAndResistance(-1, 10).sound(SoundType.SAND).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> FLOURITE_ORE = BLOCKS.register("flourite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
