@@ -23,12 +23,12 @@ import javax.annotation.Nonnull;
 public class QuantumChipletRenderer extends TileEntityRenderer<QuantumChipletTileEntity> {
 
     private float degrees;
-
+    private int delay;
 
     public QuantumChipletRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
         degrees = 0;
-
+        delay = 0;
     }
 
     @Override
@@ -44,7 +44,11 @@ public class QuantumChipletRenderer extends TileEntityRenderer<QuantumChipletTil
                     matrixStackIn.scale(.5f, .5f, .5f);
                     matrixStackIn.translate(1, 1, 1);
                     matrixStackIn.rotate(Vector3f.YP.rotationDegrees(degrees++ * 16));
-                    PlaySound(tileEntityIn);
+                    delay++;
+                    if(delay == 10) {
+                        PlaySound(tileEntityIn);
+                        delay = 0;
+                    }
                     renderItem(stack, partialTicks, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
                     matrixStackIn.pop();
                 }

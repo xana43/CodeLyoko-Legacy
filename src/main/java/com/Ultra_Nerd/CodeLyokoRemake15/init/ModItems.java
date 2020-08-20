@@ -130,8 +130,8 @@ public class ModItems {
     public static final RegistryObject<SwordItem> QUANTUM_SABER = ITEMS.register("quantum_saber", () -> new SwordItem(LyokoTiers.LyokoTool, 15, 2, new Item.Properties().group(Base.LYOKO_WEAPONS).maxDamage(50).rarity(Rarity.EPIC)));
     public static final RegistryObject<TridentItem> YUMI_TRADITONAL_FANS = ITEMS.register("yumi_traditional_fans", () -> new YumiFans(new Item.Properties().group(Base.LYOKO_WEAPONS).maxDamage(20).setNoRepair()));
     public static final RegistryObject<SwordItem> ZWEIHANDER = ITEMS.register("zweihander", () -> new ZweihanderWeapon(LyokoTiers.LyokoWarrior, 60, -3.9f, new Item.Properties().group(Base.LYOKO_WEAPONS)));
-    public static final RegistryObject<BowItem> FORCE_FIELD_EMITTER = ITEMS.register("force_field_emitter", () -> new ForceFieldEmitter(new Item.Properties().group(Base.LYOKO_WEAPONS).maxDamage(40).rarity(Rarity.EPIC)));
-
+    public static final RegistryObject<BowItem> FORCE_FIELD_EMITTER = ITEMS.register("force_field_emitter", () -> new ForceFieldEmitter(new Item.Properties().group(Base.LYOKO_WEAPONS).rarity(Rarity.EPIC)));
+    public static final RegistryObject<BowItem> ARCHER_BOW = ITEMS.register("archer_bow", () -> new ArcherClassBow(new Item.Properties().group(Base.LYOKO_WEAPONS).maxDamage(40)));
     //for armor
     public static final RegistryObject<ArmorItem> AELITA_CHESTPLATE = ITEMS.register("aelita_chestplate", () -> new AelitaArmorElytra(LyokoArmorMaterial.GUARDIAN, EquipmentSlotType.CHEST, new Item.Properties().group(Base.LYOKO_ARMOR)));
     public static final RegistryObject<ArmorItem> AELITA_LEGGINGS = ITEMS.register("aelita_leggings", () -> new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlotType.LEGS, new Item.Properties().group(Base.LYOKO_ARMOR)));
@@ -152,6 +152,8 @@ public class ModItems {
     public static final RegistryObject<ArmorItem> YUMI_BOOTS = ITEMS.register("yumi_boots", () -> new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlotType.FEET, new Item.Properties().group(Base.LYOKO_ARMOR)));
     public static final RegistryObject<ArmorItem> MIND_HELMET = ITEMS.register("mind_helmet", () -> new MindHelm(LyokoArmorMaterial.BLANKHELM, EquipmentSlotType.HEAD, new Item.Properties().group(Base.LYOKO_ARMOR).rarity(Rarity.EPIC)));
     public static final RegistryObject<ArmorItem> LINKER = ITEMS.register("linker", () -> new linker(LyokoArmorMaterial.LINKER, EquipmentSlotType.CHEST, new Item.Properties().group(Base.LYOKO_ARMOR).rarity(Rarity.EPIC)));
-
+    public static final RegistryObject<ArmorItem> JEREMY_CHESTPLATE = ITEMS.register("jeremy_chestplate",() -> new ArmorArcher(LyokoArmorMaterial.ARCHER,EquipmentSlotType.CHEST,new Item.Properties().group(Base.LYOKO_ARMOR)));
+    public static final RegistryObject<ArmorItem> JEREMY_LEGGINGS = ITEMS.register("jeremy_leggings",() -> new ArmorArcher(LyokoArmorMaterial.ARCHER,EquipmentSlotType.LEGS,new Item.Properties().group(Base.LYOKO_ARMOR)));
+    public static final RegistryObject<ArmorItem> JEREMY_BOOTS = ITEMS.register("jeremy_boots", () -> new ArmorArcher(LyokoArmorMaterial.ARCHER,EquipmentSlotType.FEET,new Item.Properties().group(Base.LYOKO_ARMOR)));
 
 }
