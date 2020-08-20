@@ -41,6 +41,15 @@ public class ClientModEventSubscriber {
     public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
         //makes certain blocks behave properly
 
+        ModItems.JEREMY_LAPTOP.get().addPropertyOverride(new ResourceLocation(Base.MOD_ID,"state"), (stack,world,entityin) ->{
+            switch (stack.getDamage())
+            {
+                case 0: return 0.1f;
+                case 1: return 0.2f;
+                default: return 0;
+            }
+        });
+
         ModItems.RAW_POLYCARBONATE.get().addPropertyOverride(new ResourceLocation(Base.MOD_ID, "quantity"), (stack,world,entityin) ->{
 
                         switch(stack.getCount())
