@@ -23,7 +23,11 @@ public class StoryBookGUI extends ReadBookScreen {
 
 
     public StoryBookGUI() {
+        super();
+    }
 
+    public StoryBookGUI(ReadBookScreen.IBookInfo iBookInfo) {
+        super(iBookInfo);
     }
 
     @Override
