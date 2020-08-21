@@ -153,7 +153,8 @@ public class ContainerInfusing extends Container {
         final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
         if (tileAtPos instanceof InfusingChamberTileEntity)
             return (InfusingChamberTileEntity) tileAtPos;
-        throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
+        else
+            throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
     }
 
 

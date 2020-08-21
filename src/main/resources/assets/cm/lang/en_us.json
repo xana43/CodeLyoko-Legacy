@@ -213,16 +213,19 @@
 
   "_comment_4": "special blocks",
   "block.cm.tower_interface": "Tower Interface",
-  "container.flouride_infuser": "Flouride Infuser",
-  "container.Reactor": "Integrated Reactor",
   "death.attack.block.cm.digital_ocean": "%s was de-virtualized, broken down, and swept away by the digital current",
 
-  "_comment_5": "GUIs",
+  "_comment_5": "Containers",
+  "container.flouride_infuser": "Flouride Infuser",
+  "container.electric_flouride_infuser": "Electric Flouride Infuser",
+  "container.Reactor": "Integrated Reactor",
+
+  "_comment_6": "GUIs",
   "gui.cm.story_screen" : "Story Screen",
   "gui.cm.interface_input": "Enter code",
   "gui.cm.indicator": "",
 
-  "_comment_6": "Entities",
+  "_comment_7": "Entities",
   "entity.cm.blok": "Blok",
   "entity.cm.laser": "Laser arrow"
 }
