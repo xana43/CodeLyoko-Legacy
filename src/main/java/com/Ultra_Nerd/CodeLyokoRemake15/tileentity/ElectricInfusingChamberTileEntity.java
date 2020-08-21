@@ -152,7 +152,8 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
 
     public boolean isUsableByPlayer(PlayerEntity player) {
         assert this.world != null;
-        return this.world.getTileEntity(this.pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+        return this.world.getTileEntity(this.pos) == this &&
+                player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
     }
 
     public int getField(int id) {

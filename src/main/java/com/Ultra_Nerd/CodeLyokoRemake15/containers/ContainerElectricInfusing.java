@@ -4,6 +4,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
+import com.google.common.collect.Lists;
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -21,14 +22,17 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Objects;
 
 public class ContainerElectricInfusing extends Container {
 
 
-    private final ElectricInfusingChamberTileEntity tileentity;
+    public final ElectricInfusingChamberTileEntity tileentity;
     private int cookTime, energy;
-    private ScriptObjectMirror listeners;
+    //private ScriptObjectMirror listeners;
+
+    private final List<IContainerListener> listeners = Lists.newArrayList();
 
     /**
      * Useful constructor in outside classes
@@ -49,7 +53,7 @@ public class ContainerElectricInfusing extends Container {
      * @param tileEntity      the tileEntity of this container
      */
     public ContainerElectricInfusing(final int windowId, final PlayerInventory playerInventory, final ElectricInfusingChamberTileEntity tileEntity) {
-        super(ModContainerTypes.CONTAINER_INFUSING.get(), windowId);
+        super(ModContainerTypes.CONTAINER_ELECTRIC_INFUSING.get(), windowId);
         this.tileentity = tileEntity;
         IItemHandler handler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).orElse(null);
 
@@ -69,11 +73,24 @@ public class ContainerElectricInfusing extends Container {
     }
 
     @Override
+    public void addListener(IContainerListener listener) {
+        if (!this.listeners.contains(listener)) {
+            this.listeners.add(listener);
+            listener.sendAllContents(this, this.getInventory());
+            this.detectAndSendChanges();
+        }
+    }
+
+    @Override
+    public void removeListener(IContainerListener listener) {
+        this.listeners.remove(listener);
+    }
+
+    @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (int i = 0; i < this.listeners.size(); ++i) {
-            IContainerListener listener = (IContainerListener) this.listeners.get(i);
+        for (IContainerListener listener : this.listeners) {
             if (this.energy != this.tileentity.getField(0))
                 listener.sendWindowProperty(this, 0, this.tileentity.getField(0));
             if (this.cookTime != this.tileentity.getField(1))
