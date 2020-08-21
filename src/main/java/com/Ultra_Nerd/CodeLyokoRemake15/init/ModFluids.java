@@ -38,7 +38,7 @@ public class ModFluids {
     public static final ForgeFlowingFluid.Properties DIGITAL_PROPERTIES = new ForgeFlowingFluid.Properties(DIGITAL_OCEAN, FLOWING_DIGITAL_OCEAN,
     		FluidAttributes.builder(DIGITAL_OCEAN_RL, FLOWING_DIGITAL_OCEAN_RL).density(1)
     		.temperature(10).luminosity(10).overlay(DIGITAL_OCEAN_RL)).block(ModFluids.DIGITAL_SEA_BLOCK);
-    public static final ForgeFlowingFluid.Properties HELIUM_PROPERTIES = new ForgeFlowingFluid.Properties(STILL_LIQUID_HELIUM, FLOWING_LIQUID_HELIUM,
+    public static final CustomLiquidHeliumFluid.Properties HELIUM_PROPERTIES = new CustomLiquidHeliumFluid.Properties(STILL_LIQUID_HELIUM, FLOWING_LIQUID_HELIUM,
             FluidAttributes.builder(LIQUID_HELIUM_STILL_RL, LIQUID_HELIUM_FLOWING_RL).overlay(LIQUID_HELIUM_STILL_RL).density(2).temperature(-1000).viscosity(0).luminosity(0)).block(ModFluids.LIQUID_HELIUM);
     public static final ForgeFlowingFluid.Properties URANIUM_PROPERTIES = new ForgeFlowingFluid.Properties(STILL_URANIUM, FLOWING_URANIUM,
             FluidAttributes.builder(URANIUM_STILL_RL,URANIUM_FLOW_RL).density(3).viscosity(0).temperature(921378).luminosity(40).overlay(URANIUM_STILL_RL)).block(ModFluids.URANIUM);
