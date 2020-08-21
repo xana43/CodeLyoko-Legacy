@@ -16,18 +16,18 @@
       "y": 270
     },
     "infusing=true,facing=north": {
-      "model": "cm:block/lit_flouride_infuser"
+      "model": "cm:block/lit_electric_flouride_infuser"
     },
     "infusing=true,facing=east": {
-      "model": "cm:block/lit_flouride_infuser",
+      "model": "cm:block/lit_electric_flouride_infuser",
       "y": 90
     },
     "infusing=true,facing=south": {
-      "model": "cm:block/lit_flouride_infuser",
+      "model": "cm:block/lit_electroc_flouride_infuser",
       "y": 180
     },
     "infusing=true,facing=west": {
-      "model": "cm:block/lit_flouride_infuser",
+      "model": "cm:block/lit_electric_flouride_infuser",
       "y": 270
     }
   }

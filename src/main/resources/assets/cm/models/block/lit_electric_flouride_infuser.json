@@ -1,0 +1,14 @@
+{
+   "parent":"block/orientable",
+   "textures": {
+       "particle":"cm:block/flouride_infuser_side_electric_active",
+       "north":"cm:block/flouride_infuser_side_electric_active",
+       "down":"cm:block/flouride_infuser_side",
+       "up":"cm:block/lit_flouride_infuser_front_on",
+       "south":"cm:block/flouride_infuser_side_electric_active",
+       "east":"cm:block/flouride_infuser_side_electric_active",
+       "west":"cm:block/flouride_infuser_side_electric_active"
+       
+       
+   }
+}

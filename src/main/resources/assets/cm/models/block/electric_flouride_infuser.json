@@ -1,6 +1,11 @@
 {
    "parent": "block/cube_all",
    "textures": {
-       "all": "cm:block/coffinite_ore"
+       "up": "cm:block/flouride_infuser_front_off",
+        "down": "cm:block/flouride_infuser_side",
+     "north": "cm:block/flouride_infuser_side_electric_idle",
+     "south": "cm:block/flouride_infuser_side_electric_idle",
+     "east": "cm:block/flouride_infuser_side_electric_idle",
+     "west": "cm:block/flouride_infuser_side_electric_idle"
    }
 }
