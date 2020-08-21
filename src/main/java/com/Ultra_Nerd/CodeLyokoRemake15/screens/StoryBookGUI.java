@@ -15,7 +15,6 @@ import javax.annotation.Nonnull;
 @OnlyIn(Dist.CLIENT)
 public class StoryBookGUI extends ReadBookScreen {
 
-
     private static final int BUTTON_NEXT = 0;
     private static final int BUTTON_PREV = 1;
     private TextFieldWidget story;

@@ -32,8 +32,10 @@ public class LaptopGUI extends Screen {
 
     @Override
     public void render(int p_render_1_, int p_render_2_, float p_render_3_) {
-       blit(x,y,0,0,this.height,this.width);
+this.blit(x,y,x,y,this.height,this.width);
+
         assert this.minecraft != null;
+        this.minecraft.textureManager.getTexture(TEXTURE);
         this.minecraft.textureManager.bindTexture(TEXTURE);
         super.render(p_render_1_, p_render_2_, p_render_3_);
     }
