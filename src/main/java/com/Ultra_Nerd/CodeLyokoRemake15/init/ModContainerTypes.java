@@ -15,6 +15,8 @@ public class ModContainerTypes {
             .register("container_infusing", () -> IForgeContainerType.create(ContainerInfusing::new));
     public static final RegistryObject<ContainerType<TowerInterfaceContainer>> TOWER_INTERFACE_CONTAINER = CONTAINER_TYPES
             .register("tower_interface_container",() -> IForgeContainerType.create(TowerInterfaceContainer::new));
+    public static final RegistryObject<ContainerType<ContainerElectricInfusing>> CONTAINER_ELECTRIC_INFUSING = CONTAINER_TYPES
+            .register("container_electric_infusing",() -> IForgeContainerType.create(ContainerElectricInfusing::new));
     public static final RegistryObject<ContainerType<HologramContainer>> HOLOGRAM_CONTAINER = CONTAINER_TYPES
             .register("hologram_container", () -> IForgeContainerType.create(HologramContainer::new));
     //public static final RegistryObject<ContainerType<ReactorContainer>> COMPUTER_REACTOR_CONTAINER = CONTAINER_TYPES
