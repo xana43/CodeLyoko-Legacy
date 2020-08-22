@@ -4,7 +4,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,6 +11,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 
 public class TowerInterface extends Block {
 
-    public static final DirectionProperty DIRINTERFACE = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty DIRINTERFACE = BlockStateProperties.HORIZONTAL_FACING;
 
     private static final VoxelShape SHAPE_N = Block.makeCuboidShape(1, 9, 3, 15, 9.1, 12);
     private static final VoxelShape SHAPE_S = Block.makeCuboidShape(1, 9, 3, 15, 9.1, 12);

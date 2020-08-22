@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.*;
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.electroplate.ElectroplatingMachine;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.ElectricFlourideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.saplings.DigitalMountainSapling;
@@ -54,7 +55,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> DIGITAL_SAND = BLOCKS.register("digital_sand", () -> new Block(Block.Properties.create(Material.SAND)));
     public static final RegistryObject<Block> DIGITAL_DARKNESS = BLOCKS.register("digital_darkness",() -> new Block(Block.Properties.create(Material.DRAGON_EGG).lightValue(-1)));
     public static final RegistryObject<Block> ELECTRICFLOURIDE_INFUSER = BLOCKS.register("electric_flouride_infuser", ElectricFlourideInfuser::new);
-    public static final RegistryObject<Block> ELECTROPLATING_MACHINE = BLOCKS.register("electroplating_machine",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> ELECTROPLATING_MACHINE = BLOCKS.register("electroplating_machine",() -> new ElectroplatingMachine(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> ELECTROPLATING_MACHINE_FRAME = BLOCKS.register("electroplating_machine_frame", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> ELECTROPLATING_ANODE = BLOCKS.register("electroplating_anode",() -> new ElectroplatingRodImplements(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> ELECTROPLATING_CATHODE = BLOCKS.register("electroplating_cathode", () -> new ElectroplatingRodImplements(Block.Properties.from(Blocks.IRON_BLOCK)));

@@ -2,11 +2,11 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
 public class ScannerTop extends Block {
-    public static final DirectionProperty directionPropertyTop = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty directionPropertyTop = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty scannerFormedTop = BooleanProperty.create("scanner_formed_top");
     private static final VoxelShape shapeS = Stream.of(
             Block.makeCuboidShape(-4, 0, 5, -3, 15.3, 11),

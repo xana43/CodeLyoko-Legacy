@@ -5,7 +5,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusion
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
 import com.google.common.collect.Lists;
-import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;

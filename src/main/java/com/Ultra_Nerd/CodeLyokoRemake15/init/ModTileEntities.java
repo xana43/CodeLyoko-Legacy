@@ -34,4 +34,7 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<CentralControlUnitTileEntity>> CENTRAL_CONTROL_UNIT_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("central_control_unit_tile_entity", () -> TileEntityType.Builder.create(CentralControlUnitTileEntity::new
             ,ModBlocks.CENTRAL_CONTROL_UNIT.get()).build(null));
+    public static final RegistryObject<TileEntityType<ElectroplatingTileEntity>> ELECTROPLATING_TILE_ENTITY =
+            TILE_ENTITY_TYPES.register("electroplating_tile_entity", () -> TileEntityType.Builder.create(ElectroplatingTileEntity::new
+                    ,ModBlocks.ELECTROPLATING_MACHINE.get()).build(null));
 }

@@ -3,12 +3,12 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.particles.ColoredParticle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -22,7 +22,7 @@ import java.util.Random;
 
 public class TowerWall extends Block {
 
-    public static final DirectionProperty DIRTOWER = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty DIRTOWER = BlockStateProperties.HORIZONTAL_FACING;
 
     public TowerWall() {
         super(Block.Properties.create(Material.MISCELLANEOUS)

@@ -2,11 +2,11 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -79,7 +79,7 @@ public class Router extends Block {
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
 
-    public static final DirectionProperty ROUTER_DIRECTION = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty ROUTER_DIRECTION = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty ROUTER_ACTIVE = BooleanProperty.create("ractive");
 
     public Router(Properties properties) {
