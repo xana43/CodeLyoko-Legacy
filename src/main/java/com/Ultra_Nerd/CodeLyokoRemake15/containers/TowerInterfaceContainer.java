@@ -23,11 +23,9 @@ public class TowerInterfaceContainer extends Container {
         this.canInteractWithCallable = IWorldPosCallable.of(TowerEntity.getWorld(), TowerEntity.getPos());
     }
 
-    @Override
-    public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
-        return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.TOWER_INTERFACE.get());
+    public TowerInterfaceContainer(final int windowid, final PlayerInventory inven, final PacketBuffer data) {
+        this(windowid, inven, getTowerEntity(inven, data));
     }
-
 
     private static TowerInterfaceTileEntity getTowerEntity(final PlayerInventory inventory, final PacketBuffer data) {
         Objects.requireNonNull(inventory, "player inventory can't be null");
@@ -40,8 +38,9 @@ public class TowerInterfaceContainer extends Container {
         }
     }
 
-    public TowerInterfaceContainer(final int windowid, final PlayerInventory inven, final PacketBuffer data) {
-        this(windowid, inven, getTowerEntity(inven, data));
+    @Override
+    public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
+        return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.TOWER_INTERFACE.get());
     }
 
 }

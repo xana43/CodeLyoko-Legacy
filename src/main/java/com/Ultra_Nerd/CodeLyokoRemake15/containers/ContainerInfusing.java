@@ -24,13 +24,12 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 
 public class ContainerInfusing extends Container {
+    public final InfusingChamberTileEntity tileentity;
+    private int cookTime, totalCookTime, burnTime, currentBurnTime;
     protected ContainerInfusing(@Nullable ContainerType<?> type, int id, InfusingChamberTileEntity tileentity) {
         super(type, id);
         this.tileentity = tileentity;
     }
-
-    public final InfusingChamberTileEntity tileentity;
-    private int cookTime, totalCookTime, burnTime, currentBurnTime;
 
     /**
      * Useful constructor in outside classes
@@ -72,6 +71,23 @@ public class ContainerInfusing extends Container {
         }
     }
 
+    /**
+     * Get tileEntity from playerInv and packet
+     *
+     * @param playerInventory playerInv from which to get the world
+     * @param data            Data from which to get the pos
+     * @return the tileEntity linked to the block used
+     */
+    private static InfusingChamberTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
+        Objects.requireNonNull(playerInventory, "playerInventory cannot be null!");
+        Objects.requireNonNull(data, "data cannot be null!");
+        final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
+        if (tileAtPos instanceof InfusingChamberTileEntity)
+            return (InfusingChamberTileEntity) tileAtPos;
+        else
+            throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
+    }
+
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
@@ -88,7 +104,6 @@ public class ContainerInfusing extends Container {
         this.tileentity.setField(id, data);
     }
 
-
     @Override
     public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
         return this.tileentity.isUsableByPlayer(playerIn);
@@ -98,7 +113,7 @@ public class ContainerInfusing extends Container {
     @Override
     public ItemStack transferStackInSlot(@Nonnull PlayerEntity playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
-        Slot slot = (Slot) this.inventorySlots.get(index);
+        Slot slot = this.inventorySlots.get(index);
 
         if (slot != null && slot.getHasStack()) {
             ItemStack stack1 = slot.getStack();
@@ -108,7 +123,7 @@ public class ContainerInfusing extends Container {
                 if (!this.mergeItemStack(stack1, 4, 40, true)) return ItemStack.EMPTY;
                 slot.onSlotChange(stack1, stack);
             } else if (index != 2 && index != 1 && index != 0) {
-                Slot slot1 = (Slot) this.inventorySlots.get(index + 1);
+                Slot slot1 = this.inventorySlots.get(index + 1);
 
                 if (!FlourideInfusionResult.getInstance().getInfusingResult(stack1, slot1.getStack()).isEmpty()) {
                     if (!this.mergeItemStack(stack1, 0, 2, false)) {
@@ -138,23 +153,6 @@ public class ContainerInfusing extends Container {
             slot.onTake(playerIn, stack1);
         }
         return stack;
-    }
-
-    /**
-     * Get tileEntity from playerInv and packet
-     *
-     * @param playerInventory playerInv from which to get the world
-     * @param data            Data from which to get the pos
-     * @return the tileEntity linked to the block used
-     */
-    private static InfusingChamberTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
-        Objects.requireNonNull(playerInventory, "playerInventory cannot be null!");
-        Objects.requireNonNull(data, "data cannot be null!");
-        final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
-        if (tileAtPos instanceof InfusingChamberTileEntity)
-            return (InfusingChamberTileEntity) tileAtPos;
-        else
-            throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
     }
 
 

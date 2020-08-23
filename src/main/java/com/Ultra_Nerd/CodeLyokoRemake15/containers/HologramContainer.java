@@ -14,20 +14,14 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class HologramContainer extends Container {
-    private TileEntity te;
     private final IWorldPosCallable canInteractWithCallable;
+    private final TileEntity te;
 
     public HologramContainer(int windowid, PlayerInventory inventory, HologramProjectorTileEntity te) {
         super(ModContainerTypes.HOLOGRAM_CONTAINER.get(), windowid);
         this.te = te;
         this.canInteractWithCallable = IWorldPosCallable.of(te.getWorld(), te.getPos());
     }
-
-    @Override
-    public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
-        return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.HOLOPROJECTOR.get());
-    }
-
 
     public HologramContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
         this(windowId, playerInventory, getHoloEntity(playerInventory, data));
@@ -42,6 +36,11 @@ public class HologramContainer extends Container {
         } else {
             throw new IllegalStateException("TileEntity isn't correct" + tileAtPos);
         }
+    }
+
+    @Override
+    public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
+        return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.HOLOPROJECTOR.get());
     }
 
 }

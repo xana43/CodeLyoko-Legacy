@@ -47,42 +47,38 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ElectroplatingTileEntity extends TileEntity implements ITickable, INamedContainerProvider {
-private boolean once = false;
-private final int maxSmeltTime = 1000;
-public int currentTime;
-private CustomItemHandler inventory;
+    private boolean once = false;
+    private final int maxSmeltTime = 1000;
+    public int currentTime;
+    private CustomItemHandler inventory;
 
     public ElectroplatingTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
         this.inventory = new CustomItemHandler(2);
     }
-public ElectroplatingTileEntity()
-{
-    this(ModTileEntities.ELECTROPLATING_TILE_ENTITY.get());
-}
 
-@Nullable
-private TestRecipe getRecipe(ItemStack stack)
-{
-    if(stack == null)
-    {
+    public ElectroplatingTileEntity() {
+        this(ModTileEntities.ELECTROPLATING_TILE_ENTITY.get());
+    }
+
+    @Nullable
+    private TestRecipe getRecipe(ItemStack stack) {
+        if (stack == null) {
+            return null;
+        }
+        Set<IRecipe<?>> recipes = findRecipesByType(ModRecipes.TYPE, this.world);
+        for (IRecipe<?> Recipe : recipes) {
+            TestRecipe recipe = (TestRecipe) Recipe;
+            if (recipe.matches(new RecipeWrapper(this.inventory), this.world)) {
+                return recipe;
+            }
+        }
         return null;
     }
-    Set<IRecipe<?>> recipes = findRecipesByType(ModRecipes.TYPE,this.world);
-    for(IRecipe<?> Recipe : recipes)
-    {
-        TestRecipe recipe = (TestRecipe) Recipe;
-        if(recipe.matches(new RecipeWrapper(this.inventory),this.world))
-        {
-           return recipe;
-        }
-    }
-    return null;
-}
 
     public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> type, World world) {
-    return world != null ? world.getRecipeManager().getRecipes().stream()
-            .filter(recipe -> recipe.getType() == type).collect(Collectors.toSet()) : Collections.emptySet();
+        return world != null ? world.getRecipeManager().getRecipes().stream()
+                .filter(recipe -> recipe.getType() == type).collect(Collectors.toSet()) : Collections.emptySet();
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -92,16 +88,13 @@ private TestRecipe getRecipe(ItemStack stack)
                 .filter(recipe -> recipe.getType() == type).collect(Collectors.toSet()) : Collections.emptySet();
     }
 
-    public static Set<ItemStack> getInputs(IRecipeType<?> type,World world)
-    {
+    public static Set<ItemStack> getInputs(IRecipeType<?> type, World world) {
         Set<ItemStack> inputs = new HashSet<ItemStack>();
-        Set<IRecipe<?>> recipes = findRecipesByType(type ,world);
-        for(IRecipe<?> recipe : recipes)
-        {
+        Set<IRecipe<?>> recipes = findRecipesByType(type, world);
+        for (IRecipe<?> recipe : recipes) {
             NonNullList<Ingredient> ingredients = recipe.getIngredients();
             ingredients.forEach(ingredient -> {
-                for(ItemStack stack : ingredient.getMatchingStacks())
-                {
+                for (ItemStack stack : ingredient.getMatchingStacks()) {
                     inputs.add(stack);
                 }
             });
@@ -111,46 +104,36 @@ private TestRecipe getRecipe(ItemStack stack)
 
     @Override
     public void tick() {
-            boolean dirty = false;
-            if(CheckStruct() && !once)
-            {
-                Activeate();
-                once = true;
-            }
-            else if(!CheckStruct())
-            {
-                once = false;
-                Deactive();
-            }
-            if(this.world != null && !this.world.isRemote)
-            {
-                if(this.world.isBlockPowered(this.pos))
-                {
-                    if(this.getRecipe(this.inventory.getStackInSlot(0)) != null)
-                    {
-                        if(this.currentTime != this.maxSmeltTime)
-                        {
-                            this.world.setBlockState(this.getPos(),this.getBlockState().with(ElectroplatingMachine.ELECTRO_ACTIVE,true));
-                            this.currentTime++;
-                            dirty = true;
-                        }
-                        else
-                        {
-                            this.world.setBlockState(this.getPos(),this.getBlockState().with(ElectroplatingMachine.ELECTRO_ACTIVE,false));
-                            this.currentTime = 0;
-                            ItemStack output = this.getRecipe(this.inventory.getStackInSlot(0)).getRecipeOutput();
-                            this.inventory.insertItem(1,output.copy(),false);
-                            this.inventory.decrStackSize(0,1);
-                            dirty = true;
-                        }
+        boolean dirty = false;
+        if (CheckStruct() && !once) {
+            Activeate();
+            once = true;
+        } else if (!CheckStruct()) {
+            once = false;
+            Deactive();
+        }
+        if (this.world != null && !this.world.isRemote) {
+            if (this.world.isBlockPowered(this.pos)) {
+                if (this.getRecipe(this.inventory.getStackInSlot(0)) != null) {
+                    if (this.currentTime != this.maxSmeltTime) {
+                        this.world.setBlockState(this.getPos(), this.getBlockState().with(ElectroplatingMachine.ELECTRO_ACTIVE, true));
+                        this.currentTime++;
+                        dirty = true;
+                    } else {
+                        this.world.setBlockState(this.getPos(), this.getBlockState().with(ElectroplatingMachine.ELECTRO_ACTIVE, false));
+                        this.currentTime = 0;
+                        ItemStack output = this.getRecipe(this.inventory.getStackInSlot(0)).getRecipeOutput();
+                        this.inventory.insertItem(1, output.copy(), false);
+                        this.inventory.decrStackSize(0, 1);
+                        dirty = true;
                     }
                 }
             }
-            if(dirty)
-            {
-                this.markDirty();
-                this.world.notifyBlockUpdate(this.getPos(),this.getBlockState(),this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
-            }
+        }
+        if (dirty) {
+            this.markDirty();
+            this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+        }
     }
 
     @Override
@@ -159,19 +142,17 @@ private TestRecipe getRecipe(ItemStack stack)
     }
 
 
-
-
     @Nullable
     @Override
-    public Container createMenu(final int windowID,final PlayerInventory playerInv,final PlayerEntity playerIn) {
-        return new ContainerElectroplate(windowID,playerInv,this);
+    public Container createMenu(final int windowID, final PlayerInventory playerInv, final PlayerEntity playerIn) {
+        return new ContainerElectroplate(windowID, playerInv, this);
     }
 
     @Override
     public void read(CompoundNBT compound) {
         super.read(compound);
         NonNullList<ItemStack> inv = NonNullList.<ItemStack>withSize(this.inventory.getSlots(), ItemStack.EMPTY);
-        ItemStackHelper.loadAllItems(compound,inv);
+        ItemStackHelper.loadAllItems(compound, inv);
         this.inventory.setNonNullList(inv);
         this.currentTime = compound.getInt("currentElectroTime");
 
@@ -179,21 +160,20 @@ private TestRecipe getRecipe(ItemStack stack)
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
-         super.write(compound);
-        ItemStackHelper.saveAllItems(compound,this.inventory.toNonNullList());
-        compound.putInt("currentElectroTime",this.currentTime);
-         return compound;
+        super.write(compound);
+        ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
+        compound.putInt("currentElectroTime", this.currentTime);
+        return compound;
     }
 
-    public final IItemHandlerModifiable getInventory()
-    {
+    public final IItemHandlerModifiable getInventory() {
         return this.inventory;
     }
 
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(cap,LazyOptional.of(() -> this.inventory));
+        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(cap, LazyOptional.of(() -> this.inventory));
     }
 
     @Nullable
@@ -220,27 +200,22 @@ private TestRecipe getRecipe(ItemStack stack)
     public void handleUpdateTag(CompoundNBT nbt) {
         this.read(nbt);
     }
-    //multiblock stuff
-    private boolean CheckStruct()
-    {
 
-        if(this.getBlockState().get(ElectroplatingMachine.ELECTRO_FACING) == Direction.NORTH)
-        {
-            int[] locationX = {1,2};
-            int[] locationZ = {1,2,3};
-            for(int I : locationX) {
-                if (world.getBlockState(new BlockPos(this.getPos().getX() + I, this.getPos().getY(),this.getPos().getZ()))
-                == ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getBlock().getDefaultState())
-                {
-                    if(world.getBlockState(new BlockPos(this.getPos().getX() - I,this.getPos().getY(),this.getPos().getZ())) ==
-                            ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getDefaultState())
-                    {
-                        if(world.getBlockState(new BlockPos(this.getPos().getX(),this.getPos().getY(),this.getPos().getZ() + I))
-                        == ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getDefaultState())
-                        {
-                            if(world.getBlockState(new BlockPos(this.getPos().getX(),this.getPos().getY(),this.getPos().getZ() - I)) ==
-                            ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getDefaultState())
-                            {
+    //multiblock stuff
+    private boolean CheckStruct() {
+
+        if (this.getBlockState().get(ElectroplatingMachine.ELECTRO_FACING) == Direction.NORTH) {
+            int[] locationX = {1, 2};
+            int[] locationZ = {1, 2, 3};
+            for (int I : locationX) {
+                if (world.getBlockState(new BlockPos(this.getPos().getX() + I, this.getPos().getY(), this.getPos().getZ()))
+                        == ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getBlock().getDefaultState()) {
+                    if (world.getBlockState(new BlockPos(this.getPos().getX() - I, this.getPos().getY(), this.getPos().getZ())) ==
+                            ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getDefaultState()) {
+                        if (world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() + I))
+                                == ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getDefaultState()) {
+                            if (world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() - I)) ==
+                                    ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getDefaultState()) {
                                 Base.Log.debug("foprmed");
                                 return true;
                             }
@@ -252,12 +227,12 @@ private TestRecipe getRecipe(ItemStack stack)
         Base.Log.debug("dead");
         return false;
     }
-    private static void Activeate()
-    {
+
+    private static void Activeate() {
 
     }
-    private static void Deactive()
-    {
+
+    private static void Deactive() {
 
     }
 

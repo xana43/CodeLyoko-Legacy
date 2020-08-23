@@ -22,48 +22,50 @@ import java.util.Objects;
 public class ContainerElectroplate extends Container {
 
     private final IWorldPosCallable canInteractWithCallable;
-    private ElectroplatingTileEntity tileEntity;
     public FunctionalVariableReferenceHolder currentTime;
-    public ContainerElectroplate(final int WindowID, final PlayerInventory plinv, final ElectroplatingTileEntity tile){
-        super(ModContainerTypes.ELECTROPLATING_CONTAINER.get(),WindowID);
+    private final ElectroplatingTileEntity tileEntity;
+
+    public ContainerElectroplate(final int WindowID, final PlayerInventory plinv, final ElectroplatingTileEntity tile) {
+        super(ModContainerTypes.ELECTROPLATING_CONTAINER.get(), WindowID);
         this.tileEntity = tile;
-        this.canInteractWithCallable = IWorldPosCallable.of(tile.getWorld(),tile.getPos());
+        this.canInteractWithCallable = IWorldPosCallable.of(tile.getWorld(), tile.getPos());
         final int slotSizePlus2 = 18;
         final int startX = 8;
 
         //hotbar gui
         int Hotbary = 142;
-        for(int colum = 0; colum < 9; colum++)
-        {
-            this.addSlot(new Slot(plinv,colum,startX + (colum * slotSizePlus2),Hotbary));
+        for (int colum = 0; colum < 9; colum++) {
+            this.addSlot(new Slot(plinv, colum, startX + (colum * slotSizePlus2), Hotbary));
         }
         //main gui
         final int startY = 84;
-        for(int row = 0; row < 3; row++)
-        {
-            for(int colum = 0; colum < 9; colum++)
-            {
-                this.addSlot(new Slot(plinv,9 + (row * 9) + colum,startX + (colum * slotSizePlus2),startY + (row * slotSizePlus2)));
+        for (int row = 0; row < 3; row++) {
+            for (int colum = 0; colum < 9; colum++) {
+                this.addSlot(new Slot(plinv, 9 + (row * 9) + colum, startX + (colum * slotSizePlus2), startY + (row * slotSizePlus2)));
             }
         }
 
         //plater slots
-        for(int inputslotsrow = 0; inputslotsrow < 5; inputslotsrow++) {
-            for(int inputslotscolum = 0; inputslotscolum < 6; inputslotscolum++) {
+        for (int inputslotsrow = 0; inputslotsrow < 5; inputslotsrow++) {
+            for (int inputslotscolum = 0; inputslotscolum < 6; inputslotscolum++) {
                 this.addSlot(new SlotItemHandler(tile.getInventory(), 6 + (inputslotsrow * 6), (inputslotscolum * slotSizePlus2), (inputslotsrow * slotSizePlus2)));
             }
         }
-        for(int outslotsrow = 0; outslotsrow < 5; outslotsrow++) {
-            for(int outslotscolum = 0; outslotscolum < 6; outslotscolum++) {
-                this.addSlot(new SlotItemHandler(tile.getInventory(), 6 + (outslotsrow * 6), 10 + (outslotscolum * slotSizePlus2),10 + (outslotsrow * slotSizePlus2)));
+        for (int outslotsrow = 0; outslotsrow < 5; outslotsrow++) {
+            for (int outslotscolum = 0; outslotscolum < 6; outslotscolum++) {
+                this.addSlot(new SlotItemHandler(tile.getInventory(), 6 + (outslotsrow * 6), 10 + (outslotscolum * slotSizePlus2), 10 + (outslotsrow * slotSizePlus2)));
             }
         }
-        this.trackInt(new FunctionalVariableReferenceHolder(() -> this.tileEntity.currentTime,value -> this.tileEntity.currentTime = value));
-    }
-    public ContainerElectroplate(final int WindowID, final PlayerInventory plinv, final PacketBuffer data){
-        this(WindowID,plinv,getTileEntity(plinv,data));
+        this.trackInt(new FunctionalVariableReferenceHolder(() -> this.tileEntity.currentTime, value -> this.tileEntity.currentTime = value));
     }
 
+    public ContainerElectroplate(final int WindowID, final PlayerInventory plinv, final PacketBuffer data) {
+        this(WindowID, plinv, getTileEntity(plinv, data));
+    }
+
+    public ElectroplatingTileEntity getTileEntity() {
+        return this.tileEntity;
+    }
 
     private static ElectroplatingTileEntity getTileEntity(PlayerInventory playerInven, PacketBuffer data) {
         Objects.requireNonNull(playerInven, "playerInventory cannot be null!");
@@ -73,16 +75,17 @@ public class ContainerElectroplate extends Container {
             return (ElectroplatingTileEntity) tileAtPos;
         throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
     }
+
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(canInteractWithCallable,playerIn, ModBlocks.ELECTROPLATING_MACHINE.get());
+        return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.ELECTROPLATING_MACHINE.get());
     }
 
     @Nonnull
     @Override
     public ItemStack transferStackInSlot(@Nonnull PlayerEntity playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
-        Slot slot = (Slot) this.inventorySlots.get(index);
+        Slot slot = this.inventorySlots.get(index);
 
         if (slot != null && slot.getHasStack()) {
             ItemStack stack1 = slot.getStack();
@@ -92,7 +95,7 @@ public class ContainerElectroplate extends Container {
                 if (!this.mergeItemStack(stack1, 4, 40, true)) return ItemStack.EMPTY;
                 slot.onSlotChange(stack1, stack);
             } else if (index != 2 && index != 1 && index != 0) {
-                Slot slot1 = (Slot) this.inventorySlots.get(index + 1);
+                Slot slot1 = this.inventorySlots.get(index + 1);
 
                 if (!FlourideInfusionResult.getInstance().getInfusingResult(stack1, slot1.getStack()).isEmpty()) {
                     if (!this.mergeItemStack(stack1, 0, 2, false)) {

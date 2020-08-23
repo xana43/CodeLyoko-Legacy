@@ -28,10 +28,9 @@ public class ContainerElectricInfusing extends Container {
 
 
     public final ElectricInfusingChamberTileEntity tileentity;
-    private int cookTime, energy;
-    //private ScriptObjectMirror listeners;
-
     private final List<IContainerListener> listeners = Lists.newArrayList();
+    //private ScriptObjectMirror listeners;
+    private int cookTime, energy;
 
     /**
      * Useful constructor in outside classes
@@ -69,6 +68,22 @@ public class ContainerElectricInfusing extends Container {
         for (int x = 0; x < 9; x++) {
             this.addSlot(new Slot(playerInventory, x, 8 + x * 18, 142));
         }
+    }
+
+    /**
+     * Get tileEntity from playerInv and packet
+     *
+     * @param playerInven playerInv from which to get the world
+     * @param data        Data from which to get the pos
+     * @return the tileEntity linked to the block used
+     */
+    private static ElectricInfusingChamberTileEntity getTileEntity(PlayerInventory playerInven, PacketBuffer data) {
+        Objects.requireNonNull(playerInven, "playerInventory cannot be null!");
+        Objects.requireNonNull(data, "data cannot be null!");
+        final TileEntity tileAtPos = playerInven.player.world.getTileEntity(data.readBlockPos());
+        if (tileAtPos instanceof ElectricInfusingChamberTileEntity)
+            return (ElectricInfusingChamberTileEntity) tileAtPos;
+        throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
     }
 
     @Override
@@ -116,7 +131,7 @@ public class ContainerElectricInfusing extends Container {
     @Override
     public ItemStack transferStackInSlot(@Nonnull PlayerEntity playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
-        Slot slot = (Slot) this.inventorySlots.get(index);
+        Slot slot = this.inventorySlots.get(index);
 
         if (slot != null && slot.getHasStack()) {
             ItemStack stack1 = slot.getStack();
@@ -126,7 +141,7 @@ public class ContainerElectricInfusing extends Container {
                 if (!this.mergeItemStack(stack1, 4, 40, true)) return ItemStack.EMPTY;
                 slot.onSlotChange(stack1, stack);
             } else if (index != 2 && index != 1 && index != 0) {
-                Slot slot1 = (Slot) this.inventorySlots.get(index + 1);
+                Slot slot1 = this.inventorySlots.get(index + 1);
 
                 if (!FlourideInfusionResult.getInstance().getInfusingResult(stack1, slot1.getStack()).isEmpty()) {
                     if (!this.mergeItemStack(stack1, 0, 2, false)) {
@@ -150,22 +165,6 @@ public class ContainerElectricInfusing extends Container {
             slot.onTake(playerIn, stack1);
         }
         return stack;
-    }
-
-    /**
-     * Get tileEntity from playerInv and packet
-     *
-     * @param playerInven playerInv from which to get the world
-     * @param data            Data from which to get the pos
-     * @return the tileEntity linked to the block used
-     */
-    private static ElectricInfusingChamberTileEntity getTileEntity(PlayerInventory playerInven, PacketBuffer data) {
-        Objects.requireNonNull(playerInven, "playerInventory cannot be null!");
-        Objects.requireNonNull(data, "data cannot be null!");
-        final TileEntity tileAtPos = playerInven.player.world.getTileEntity(data.readBlockPos());
-        if (tileAtPos instanceof ElectricInfusingChamberTileEntity)
-            return (ElectricInfusingChamberTileEntity) tileAtPos;
-        throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
     }
 
 

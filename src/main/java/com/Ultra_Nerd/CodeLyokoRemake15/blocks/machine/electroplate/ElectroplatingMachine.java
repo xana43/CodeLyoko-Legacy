@@ -7,7 +7,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
@@ -20,6 +22,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -31,11 +34,11 @@ public class ElectroplatingMachine extends Block {
 
     public ElectroplatingMachine(Properties properties) {
         super(properties);
-        this.setDefaultState(getStateContainer().getBaseState().with(ELECTRO_FACING, Direction.NORTH).with(ELECTRO_ACTIVE,false));
+        this.setDefaultState(getStateContainer().getBaseState().with(ELECTRO_FACING, Direction.NORTH).with(ELECTRO_ACTIVE, false));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void fillStateContainer(@Nonnull StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
         builder.add(ELECTRO_ACTIVE).add(ELECTRO_FACING);
     }
@@ -83,23 +86,23 @@ public class ElectroplatingMachine extends Block {
 
 
     @Override
-    public boolean hasComparatorInputOverride(BlockState state) {
+    public boolean hasComparatorInputOverride(@Nonnull BlockState state) {
         return true;
     }
 
     @Override
-    public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
+    public int getComparatorInputOverride(@Nonnull BlockState blockState, World worldIn, @Nonnull BlockPos pos) {
         return Container.calcRedstone(worldIn.getTileEntity(pos));
     }
 
+    @Nonnull
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(worldIn != null && !worldIn.isRemote)
-        {
+    public ActionResultType onBlockActivated(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos,
+                                             @Nonnull PlayerEntity player, @Nonnull Hand handIn, @Nonnull BlockRayTraceResult hit) {
+        if (!worldIn.isRemote) {
             TileEntity tile = worldIn.getTileEntity(pos);
-            if(tile instanceof ElectroplatingTileEntity)
-            {
-                //NetworkHooks.openGui((ServerPlayerEntity)player,(INamedContainerProvider)tile,pos);
+            if (tile instanceof ElectroplatingTileEntity) {
+                //NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tile, pos);
                 player.sendMessage(new StringTextComponent("not implemented yet"));
                 return ActionResultType.SUCCESS;
             }
@@ -108,20 +111,16 @@ public class ElectroplatingMachine extends Block {
     }
 
     @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-
-
+    public void onReplaced(@Nonnull BlockState state, World worldIn, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         TileEntity tile = worldIn.getTileEntity(pos);
-        if(tile instanceof ElectroplatingTileEntity)
-        {
-            ElectroplatingTileEntity plater = (ElectroplatingTileEntity)tile;
-            ((CustomItemHandler)plater.getInventory()).toNonNullList().forEach(item -> {
-               ItemEntity itemEntity = new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(),item);
+        if (tile instanceof ElectroplatingTileEntity) {
+            ElectroplatingTileEntity plater = (ElectroplatingTileEntity) tile;
+            ((CustomItemHandler) plater.getInventory()).toNonNullList().forEach(item -> {
+                ItemEntity itemEntity = new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), item);
                 worldIn.addEntity(itemEntity);
             });
         }
-        if(state.hasTileEntity() && state.getBlock() != newState.getBlock())
-        {
+        if (state.hasTileEntity() && state.getBlock() != newState.getBlock()) {
             worldIn.removeTileEntity(pos);
         }
     }
