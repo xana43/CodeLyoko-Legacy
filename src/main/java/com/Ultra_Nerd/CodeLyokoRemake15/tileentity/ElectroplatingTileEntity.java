@@ -1,9 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Recipies.TestRecipe;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.CustomItemHandler;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.electroplate.ElectroplatingMachine;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerElectroplate;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModRecipes;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.client.Minecraft;
@@ -25,6 +27,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -44,7 +47,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ElectroplatingTileEntity extends TileEntity implements ITickable, INamedContainerProvider {
-
+private boolean once = false;
 private final int maxSmeltTime = 1000;
 public int currentTime;
 private CustomItemHandler inventory;
@@ -105,10 +108,20 @@ private TestRecipe getRecipe(ItemStack stack)
         }
         return inputs;
     }
+
     @Override
     public void tick() {
             boolean dirty = false;
-
+            if(CheckStruct() && !once)
+            {
+                Activeate();
+                once = true;
+            }
+            else if(!CheckStruct())
+            {
+                once = false;
+                Deactive();
+            }
             if(this.world != null && !this.world.isRemote)
             {
                 if(this.world.isBlockPowered(this.pos))
@@ -144,6 +157,9 @@ private TestRecipe getRecipe(ItemStack stack)
     public ITextComponent getDisplayName() {
         return null;
     }
+
+
+
 
     @Nullable
     @Override
@@ -204,4 +220,46 @@ private TestRecipe getRecipe(ItemStack stack)
     public void handleUpdateTag(CompoundNBT nbt) {
         this.read(nbt);
     }
+    //multiblock stuff
+    private boolean CheckStruct()
+    {
+
+        if(this.getBlockState().get(ElectroplatingMachine.ELECTRO_FACING) == Direction.NORTH)
+        {
+            int[] locationX = {1,2};
+            int[] locationZ = {1,2,3};
+            for(int I : locationX) {
+                if (world.getBlockState(new BlockPos(this.getPos().getX() + I, this.getPos().getY(),this.getPos().getZ()))
+                == ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getBlock().getDefaultState())
+                {
+                    if(world.getBlockState(new BlockPos(this.getPos().getX() - I,this.getPos().getY(),this.getPos().getZ())) ==
+                            ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getDefaultState())
+                    {
+                        if(world.getBlockState(new BlockPos(this.getPos().getX(),this.getPos().getY(),this.getPos().getZ() + I))
+                        == ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getDefaultState())
+                        {
+                            if(world.getBlockState(new BlockPos(this.getPos().getX(),this.getPos().getY(),this.getPos().getZ() - I)) ==
+                            ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getDefaultState())
+                            {
+                                Base.Log.debug("foprmed");
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Base.Log.debug("dead");
+        return false;
+    }
+    private static void Activeate()
+    {
+
+    }
+    private static void Deactive()
+    {
+
+    }
+
+
 }

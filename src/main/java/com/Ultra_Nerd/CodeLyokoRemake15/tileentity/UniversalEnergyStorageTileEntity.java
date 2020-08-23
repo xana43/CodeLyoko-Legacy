@@ -5,15 +5,20 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.Direction;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 
 public class UniversalEnergyStorageTileEntity extends TileEntity {
     public UniversalEnergyStorageTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
-
+    private CapabilityEnergy energy = new CapabilityEnergy();
 
     private EG store = new EG(90000);
     public int UNIRF = store.getEnergyStored();
@@ -27,22 +32,20 @@ public class UniversalEnergyStorageTileEntity extends TileEntity {
             UNIRF += 100;
         }
     }
-/*
-	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		if(capability == CapabilityEnergy.ENERGY) return true;// TODO Auto-generated method stub
-		return super.hasCapability(capability, facing);
-	}
 
 
 
-	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if(capability == CapabilityEnergy.ENERGY) return (T)this.store;
-		return super.getCapability(capability, facing);
-	}
+    @Nonnull
+    @Override
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+        if(cap == CapabilityEnergy.ENERGY) return LazyOptional.of(() -> (T)this.energy);
+            return super.getCapability(cap,side);
 
- */
+    }
+
+
+
+
 
 	@Nonnull
 	@Override
