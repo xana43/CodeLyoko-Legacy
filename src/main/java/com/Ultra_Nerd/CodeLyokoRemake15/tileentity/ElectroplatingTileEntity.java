@@ -106,11 +106,11 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
     public void tick() {
         boolean dirty = false;
         if (CheckStruct() && !once) {
-            Activeate();
+            activate();
             once = true;
         } else if (!CheckStruct()) {
             once = false;
-            Deactive();
+            deactivate();
         }
         if (this.world != null && !this.world.isRemote) {
             if (this.world.isBlockPowered(this.pos)) {
@@ -136,6 +136,7 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
         }
     }
 
+    @Nonnull
     @Override
     public ITextComponent getDisplayName() {
         return null;
@@ -144,12 +145,12 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
 
     @Nullable
     @Override
-    public Container createMenu(final int windowID, final PlayerInventory playerInv, final PlayerEntity playerIn) {
+    public Container createMenu(final int windowID, @Nonnull final PlayerInventory playerInv, @Nonnull final PlayerEntity playerIn) {
         return new ContainerElectroplate(windowID, playerInv, this);
     }
 
     @Override
-    public void read(CompoundNBT compound) {
+    public void read(@Nonnull CompoundNBT compound) {
         super.read(compound);
         NonNullList<ItemStack> inv = NonNullList.<ItemStack>withSize(this.inventory.getSlots(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(compound, inv);
@@ -158,8 +159,9 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
 
     }
 
+    @Nonnull
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT write(@Nonnull CompoundNBT compound) {
         super.write(compound);
         ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
         compound.putInt("currentElectroTime", this.currentTime);
@@ -189,6 +191,7 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
         this.read(pkt.getNbtCompound());
     }
 
+    @Nonnull
     @Override
     public CompoundNBT getUpdateTag() {
         CompoundNBT nbt = new CompoundNBT();
@@ -228,11 +231,11 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
         return false;
     }
 
-    private static void Activeate() {
+    private static void activate() {
 
     }
 
-    private static void Deactive() {
+    private static void deactivate() {
 
     }
 

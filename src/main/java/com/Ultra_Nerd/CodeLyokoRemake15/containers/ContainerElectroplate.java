@@ -33,9 +33,9 @@ public class ContainerElectroplate extends Container {
         final int startX = 8;
 
         //hotbar gui
-        int Hotbary = 142;
+        int hotbar = 142;
         for (int colum = 0; colum < 9; colum++) {
-            this.addSlot(new Slot(plinv, colum, startX + (colum * slotSizePlus2), Hotbary));
+            this.addSlot(new Slot(plinv, colum, startX + (colum * slotSizePlus2), hotbar));
         }
         //main gui
         final int startY = 84;
@@ -48,12 +48,12 @@ public class ContainerElectroplate extends Container {
         //plater slots
         for (int inputslotsrow = 0; inputslotsrow < 5; inputslotsrow++) {
             for (int inputslotscolum = 0; inputslotscolum < 6; inputslotscolum++) {
-                this.addSlot(new SlotItemHandler(tile.getInventory(), 6 + (inputslotsrow * 6), (inputslotscolum * slotSizePlus2), (inputslotsrow * slotSizePlus2)));
+                this.addSlot(new SlotItemHandler(tile.getInventory(), 0/*6 + (inputslotsrow * 6)*/, (inputslotscolum * slotSizePlus2), (inputslotsrow * slotSizePlus2)));
             }
         }
         for (int outslotsrow = 0; outslotsrow < 5; outslotsrow++) {
             for (int outslotscolum = 0; outslotscolum < 6; outslotscolum++) {
-                this.addSlot(new SlotItemHandler(tile.getInventory(), 6 + (outslotsrow * 6), 10 + (outslotscolum * slotSizePlus2), 10 + (outslotsrow * slotSizePlus2)));
+                this.addSlot(new SlotItemHandler(tile.getInventory(), 0/*6 + (outslotsrow * 6)*/, 10 + (outslotscolum * slotSizePlus2), 10 + (outslotsrow * slotSizePlus2)));
             }
         }
         this.trackInt(new FunctionalVariableReferenceHolder(() -> this.tileEntity.currentTime, value -> this.tileEntity.currentTime = value));
@@ -77,7 +77,7 @@ public class ContainerElectroplate extends Container {
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
+    public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
         return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.ELECTROPLATING_MACHINE.get());
     }
 

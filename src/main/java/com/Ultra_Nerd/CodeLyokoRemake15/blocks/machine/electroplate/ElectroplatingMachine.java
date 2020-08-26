@@ -102,7 +102,7 @@ public class ElectroplatingMachine extends Block {
         if (!worldIn.isRemote) {
             TileEntity tile = worldIn.getTileEntity(pos);
             if (tile instanceof ElectroplatingTileEntity) {
-                //NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tile, pos);
+                NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tile, pos);
                 player.sendMessage(new StringTextComponent("not implemented yet"));
                 return ActionResultType.SUCCESS;
             }
