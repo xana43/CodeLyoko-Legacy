@@ -48,8 +48,8 @@ public class Base
 		ModBus.addListener(this::OreGen);
 		ModParticles.PARTICLES.register(ModBus);
 		ModSounds.SOUNDS.register(ModBus);
-		ModItems.ITEMS.register(ModBus);
 		ModFluids.LIQUIDS.register(ModBus);
+		ModItems.ITEMS.register(ModBus);
 		ModBlocks.BLOCKS.register(ModBus);
 		ModEntities.Entities.register(ModBus);
 		ModRecipes.RECIPE_SERIALIZER_DEFERRED_REGISTER.register(ModBus);

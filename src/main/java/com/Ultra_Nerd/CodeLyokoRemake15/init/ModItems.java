@@ -157,5 +157,6 @@ public class ModItems {
     public static final RegistryObject<ArmorItem> JEREMY_CHESTPLATE = ITEMS.register("jeremy_chestplate",() -> new ArmorArcher(LyokoArmorMaterial.ARCHER,EquipmentSlotType.CHEST,new Item.Properties().group(Base.LYOKO_ARMOR)));
     public static final RegistryObject<ArmorItem> JEREMY_LEGGINGS = ITEMS.register("jeremy_leggings",() -> new ArmorArcher(LyokoArmorMaterial.ARCHER,EquipmentSlotType.LEGS,new Item.Properties().group(Base.LYOKO_ARMOR)));
     public static final RegistryObject<ArmorItem> JEREMY_BOOTS = ITEMS.register("jeremy_boots", () -> new ArmorArcher(LyokoArmorMaterial.ARCHER,EquipmentSlotType.FEET,new Item.Properties().group(Base.LYOKO_ARMOR)));
-
+    //for buckets
+    public static final RegistryObject<BucketItem> LIQUID_HELIUM_BUKET = ITEMS.register("liquid_helium_bucket", () -> new BucketItem(ModFluids.STILL_LIQUID_HELIUM.get(),new Item.Properties().group(Base.LYOKO_ITEMS).maxStackSize(1)));
 }
