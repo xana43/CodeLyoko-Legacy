@@ -13,13 +13,23 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
 import javax.annotation.Nonnull;
 
 public class CustomLiquidHeliumFluid extends ForgeFlowingFluid {
-    protected CustomLiquidHeliumFluid(Properties properties) {
+
+
+
+    public CustomLiquidHeliumFluid(Properties properties) {
         super(properties);
+
+
+
+
+
+
+
     }
 
     @Override
     public boolean isSource(@Nonnull IFluidState state) {
-        return false;
+        return true;
     }
 
     @Override
@@ -46,6 +56,8 @@ public class CustomLiquidHeliumFluid extends ForgeFlowingFluid {
         super.flowInto(worldIn, pos, blockStateIn, direction, fluidStateIn);
     }
 
+
+
     @Override
     protected boolean canSourcesMultiply() {
         return false;
@@ -53,6 +65,8 @@ public class CustomLiquidHeliumFluid extends ForgeFlowingFluid {
 
     @Override
     public int getLevel(@Nonnull IFluidState p_207192_1_) {
-        return 0;
+        return 8;
     }
+
+
 }
