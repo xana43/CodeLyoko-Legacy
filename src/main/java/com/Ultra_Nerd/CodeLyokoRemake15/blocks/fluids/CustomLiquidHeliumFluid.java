@@ -21,9 +21,11 @@ public class CustomLiquidHeliumFluid extends ForgeFlowingFluid {
 
     }
 
+
+
     @Override
     public boolean isSource(@Nonnull IFluidState state) {
-        return true;
+        return false;
     }
 
     @Override
