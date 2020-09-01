@@ -15,14 +15,8 @@ import javax.annotation.Nonnull;
 public class CustomLiquidHeliumFluid extends ForgeFlowingFluid {
 
 
-
     public CustomLiquidHeliumFluid(Properties properties) {
         super(properties);
-
-
-
-
-
 
 
     }
@@ -55,7 +49,6 @@ public class CustomLiquidHeliumFluid extends ForgeFlowingFluid {
         }
         super.flowInto(worldIn, pos, blockStateIn, direction, fluidStateIn);
     }
-
 
 
     @Override
