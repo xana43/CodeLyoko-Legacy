@@ -8,6 +8,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.BlokItem;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModOreGen;
 import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
@@ -15,9 +16,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -32,14 +35,17 @@ import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Random;
+
 @Mod("cm")
 @Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Bus.MOD)
 public class Base
 {
 	public static final Logger Log = LogManager.getLogger();
-
+	public static boolean XANA = false;
 	public static final String MOD_ID = "cm";
 	public static Base instance;
+	public static int random = 1000;
 	public Base()
 	{
 		final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -67,7 +73,25 @@ public class Base
 		BlokItem.initEgg();
 	}
 
+	@SubscribeEvent
+	public void tickPast(final TickEvent event)
+	{
 
+		if((event.phase == TickEvent.Phase.START || event.phase == TickEvent.Phase.END) && Minecraft.getInstance().world != null)
+		{
+
+			random = new Random().nextInt(1000);
+			Base.Log.debug(random);
+			if(random == 20 && !XANA)
+			{
+				assert Minecraft.getInstance().player != null;
+				Minecraft.getInstance().player.sendMessage(new StringTextComponent("xana is attacking"));
+				XANA = true;
+			}
+
+
+		}
+	}
 	private void setup(final FMLCommonSetupEvent event)
 	{
 
@@ -76,6 +100,7 @@ private static final String nbt = "firstjoin";
 	@SubscribeEvent
 	public void PlayerSetup(final EntityJoinWorldEvent event)
 	{
+		random = 1000;
 		if(event.getEntity() instanceof PlayerEntity) {
 CompoundNBT tag =event.getEntity().getPersistentData();
 CompoundNBT existing;
