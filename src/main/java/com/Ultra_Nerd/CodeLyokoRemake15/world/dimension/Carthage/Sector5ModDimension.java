@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthadge;
+package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage;
 
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.Dimension;

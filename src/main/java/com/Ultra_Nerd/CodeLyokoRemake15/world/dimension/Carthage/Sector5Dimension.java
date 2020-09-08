@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthadge;
+package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.world.generators.Sector5Generator;
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,6 +8,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraftforge.client.IRenderHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -76,5 +77,11 @@ public class Sector5Dimension extends Dimension {
     @Override
     public boolean doesXZShowFog(int x, int z) {
         return false;
+    }
+
+    @Nullable
+    @Override
+    public IRenderHandler getSkyRenderer() {
+        return super.getSkyRenderer();
     }
 }

@@ -16,76 +16,74 @@ import javax.annotation.Nonnull;
 public class ModelHornet extends AnimatedEntityModel<HornetEntity> {
 
     private final AnimatedModelRenderer body;
-	private final AnimatedModelRenderer mainbody;
-	private final AnimatedModelRenderer wingL;
-	private final AnimatedModelRenderer wingR;
-	private final AnimatedModelRenderer stinger;
-	private final AnimatedModelRenderer head;
-	private final AnimatedModelRenderer proboscis;
+    private final AnimatedModelRenderer mainbody;
+    private final AnimatedModelRenderer wingL;
+    private final AnimatedModelRenderer wingR;
+    private final AnimatedModelRenderer stinger;
+    private final AnimatedModelRenderer head;
+    private final AnimatedModelRenderer proboscis;
 
-    public ModelHornet()
-    {
+    public ModelHornet() {
         textureWidth = 16;
-    textureHeight = 16;
-    body = new AnimatedModelRenderer(this);
-		body.setRotationPoint(-0.9F, 16.0F, 2.0F);
-		
-		body.setModelRendererName("body");
-		this.registerModelRenderer(body);
+        textureHeight = 16;
+        body = new AnimatedModelRenderer(this);
+        body.setRotationPoint(-0.9F, 16.0F, 2.0F);
 
-		mainbody = new AnimatedModelRenderer(this);
-		mainbody.setRotationPoint(0.0F, 0.0F, -3.0F);
-		body.addChild(mainbody);
-		mainbody.setTextureOffset(0, 0).addBox(-0.875F, -1.875F, 1.0F, 1.0F, 1.0F, 3.0F, 0.0F, false);
-		mainbody.setModelRendererName("mainbody");
-		this.registerModelRenderer(mainbody);
+        body.setModelRendererName("body");
+        this.registerModelRenderer(body);
 
-		wingL = new AnimatedModelRenderer(this);
-		wingL.setRotationPoint(0.8875F, -1.6F, 2.5F);
-		mainbody.addChild(wingL);
-		wingL.setTextureOffset(0, 0).addBox(-0.0125F, 0.0F, -1.5F, 2.0F, 0.0F, 3.0F, 0.0F, false);
-		wingL.setModelRendererName("wingL");
-		this.registerModelRenderer(wingL);
+        mainbody = new AnimatedModelRenderer(this);
+        mainbody.setRotationPoint(0.0F, 0.0F, -3.0F);
+        body.addChild(mainbody);
+        mainbody.setTextureOffset(0, 0).addBox(-0.875F, -1.875F, 1.0F, 1.0F, 1.0F, 3.0F, 0.0F, false);
+        mainbody.setModelRendererName("mainbody");
+        this.registerModelRenderer(mainbody);
 
-		wingR = new AnimatedModelRenderer(this);
-		wingR.setRotationPoint(-0.8375F, -1.6F, 2.5F);
-		mainbody.addChild(wingR);
-		wingR.setTextureOffset(0, 2).addBox(-2.5125F, 0.0F, -1.5F, 2.0F, 0.0F, 3.0F, 0.0F, false);
-		wingR.setModelRendererName("wingR");
-		this.registerModelRenderer(wingR);
+        wingL = new AnimatedModelRenderer(this);
+        wingL.setRotationPoint(0.8875F, -1.6F, 2.5F);
+        mainbody.addChild(wingL);
+        wingL.setTextureOffset(0, 0).addBox(-0.0125F, 0.0F, -1.5F, 2.0F, 0.0F, 3.0F, 0.0F, false);
+        wingL.setModelRendererName("wingL");
+        this.registerModelRenderer(wingL);
 
-		stinger = new AnimatedModelRenderer(this);
-		stinger.setRotationPoint(0.0F, 0.0F, 3.0F);
-		mainbody.addChild(stinger);
-		stinger.setTextureOffset(2, 5).addBox(-0.25F, -1.275F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, false);
-		stinger.setModelRendererName("stinger");
-		this.registerModelRenderer(stinger);
+        wingR = new AnimatedModelRenderer(this);
+        wingR.setRotationPoint(-0.8375F, -1.6F, 2.5F);
+        mainbody.addChild(wingR);
+        wingR.setTextureOffset(0, 2).addBox(-2.5125F, 0.0F, -1.5F, 2.0F, 0.0F, 3.0F, 0.0F, false);
+        wingR.setModelRendererName("wingR");
+        this.registerModelRenderer(wingR);
 
-		head = new AnimatedModelRenderer(this);
-		head.setRotationPoint(0.0F, 0.0F, 0.0F);
-		mainbody.addChild(head);
-		head.setTextureOffset(5, 5).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 2.0F, 2.0F, 0.0F, false);
-		head.setModelRendererName("head");
-		this.registerModelRenderer(head);
+        stinger = new AnimatedModelRenderer(this);
+        stinger.setRotationPoint(0.0F, 0.0F, 3.0F);
+        mainbody.addChild(stinger);
+        stinger.setTextureOffset(2, 5).addBox(-0.25F, -1.275F, 1.0F, 0.0F, 0.0F, 0.0F, 0.0F, false);
+        stinger.setModelRendererName("stinger");
+        this.registerModelRenderer(stinger);
 
-		proboscis = new AnimatedModelRenderer(this);
-		proboscis.setRotationPoint(-0.7F, -0.425F, -0.5F);
-		head.addChild(proboscis);
-		proboscis.setTextureOffset(2, 12).addBox(0.45F, -0.5F, -1.425F, 0.0F, 0.0F, 0.0F, 0.0F, false);
-		proboscis.setModelRendererName("proboscis");
-		this.registerModelRenderer(proboscis);
+        head = new AnimatedModelRenderer(this);
+        head.setRotationPoint(0.0F, 0.0F, 0.0F);
+        mainbody.addChild(head);
+        head.setTextureOffset(5, 5).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+        head.setModelRendererName("head");
+        this.registerModelRenderer(head);
 
-    this.rootBones.add(body);
-  }
+        proboscis = new AnimatedModelRenderer(this);
+        proboscis.setRotationPoint(-0.7F, -0.425F, -0.5F);
+        head.addChild(proboscis);
+        proboscis.setTextureOffset(2, 12).addBox(0.45F, -0.5F, -1.425F, 0.0F, 0.0F, 0.0F, 0.0F, false);
+        proboscis.setModelRendererName("proboscis");
+        this.registerModelRenderer(proboscis);
 
-	@Override
-	public void render(@Nonnull MatrixStack matrixStack, @Nonnull IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		body.render(matrixStack, buffer, packedLight, packedOverlay);
-	}
+        this.rootBones.add(body);
+    }
 
-	@Override
-    public ResourceLocation getAnimationFileLocation()
-    {
+    @Override
+    public void render(@Nonnull MatrixStack matrixStack, @Nonnull IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        body.render(matrixStack, buffer, packedLight, packedOverlay);
+    }
+
+    @Override
+    public ResourceLocation getAnimationFileLocation() {
         return new ResourceLocation("cm", "animations/entities/hornet.json");
     }
 }

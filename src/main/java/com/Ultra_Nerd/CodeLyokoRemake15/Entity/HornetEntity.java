@@ -22,12 +22,12 @@ import javax.annotation.Nonnull;
 
 public class HornetEntity extends PhantomEntity implements IAnimatedEntity {
 
-     EntityAnimationManager manager = new EntityAnimationManager();
-     EntityAnimationController controller = new EntityAnimationController(this,"movecontroller",20,this::animationpred);
+    EntityAnimationManager manager = new EntityAnimationManager();
+    EntityAnimationController controller = new EntityAnimationController(this, "movecontroller", 20, this::animationPred);
 
     public HornetEntity(EntityType<? extends PhantomEntity> type, World worldIn) {
         super(type, worldIn);
-        registercontrollers();
+        registerControllers();
     }
 
     @Nonnull
@@ -93,21 +93,18 @@ public class HornetEntity extends PhantomEntity implements IAnimatedEntity {
     public EntityAnimationManager getAnimationManager() {
         return manager;
     }
-    private <E extends HornetEntity> boolean animationpred(AnimationTestEvent<E> event)
-    {
-        if(event.isWalking())
-        {
-            controller.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly",true));
+
+    private <E extends HornetEntity> boolean animationPred(AnimationTestEvent<E> event) {
+        if (event.isWalking()) {
+            controller.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly", true));
             return true;
-        }
-        else
-        {
-            controller.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly",true));
+        } else {
+            controller.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly", true));
             return true;
         }
     }
-    private void registercontrollers()
-    {
+
+    private void registerControllers() {
         manager.addAnimationController(controller);
 
     }
