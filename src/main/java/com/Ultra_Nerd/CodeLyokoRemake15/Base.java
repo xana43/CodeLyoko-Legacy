@@ -79,11 +79,12 @@ public class Base
 
 		if((event.phase == TickEvent.Phase.START || event.phase == TickEvent.Phase.END) && Minecraft.getInstance().world != null)
 		{
+			random--;
 
-			random = new Random().nextInt(1000);
 			//Base.Log.debug(random);
-			if(random == 20 && !XANA)
+			if(random == 0 && !XANA)
 			{
+				random = new Random().nextInt(1000);
 				assert Minecraft.getInstance().player != null;
 				Minecraft.getInstance().player.sendMessage(new StringTextComponent("xana is attacking"));
 				XANA = true;
@@ -102,7 +103,7 @@ private static final String nbt = "firstjoin";
 	{
 		random = 1000;
 		if(event.getEntity() instanceof PlayerEntity) {
-CompoundNBT tag =event.getEntity().getPersistentData();
+CompoundNBT tag = event.getEntity().getPersistentData();
 CompoundNBT existing;
 			PlayerEntity player = (PlayerEntity)event.getEntity();
 			if(!tag.contains(PlayerEntity.PERSISTED_NBT_TAG))
