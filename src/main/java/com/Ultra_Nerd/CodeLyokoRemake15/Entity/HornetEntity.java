@@ -110,4 +110,5 @@ public class HornetEntity extends MobEntity implements IAnimatedEntity {
         manager.addAnimationController(controller);
 
     }
+
 }

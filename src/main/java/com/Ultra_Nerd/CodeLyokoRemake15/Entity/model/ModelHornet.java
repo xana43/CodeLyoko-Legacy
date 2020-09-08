@@ -24,13 +24,13 @@ public class ModelHornet extends AnimatedEntityModel<HornetEntity> {
         textureWidth = 16;
     textureHeight = 16;
     body = new AnimatedModelRenderer(this);
-		body.setRotationPoint(-0.9F, 16.0F, 2.0F);
+		body.setRotationPoint(0.0F, 24.0F, 0.0F);
 		
 		body.setModelRendererName("body");
 		this.registerModelRenderer(body);
 
 		mainbody = new AnimatedModelRenderer(this);
-		mainbody.setRotationPoint(0.0F, 0.0F, -3.0F);
+		mainbody.setRotationPoint(-0.9F, -8.0F, -1.0F);
 		body.addChild(mainbody);
 		mainbody.setTextureOffset(0, 0).addBox(-0.875F, -1.875F, 1.0F, 1.0F, 1.0F, 3.0F, 0.0F, false);
 		mainbody.setModelRendererName("mainbody");
@@ -58,24 +58,26 @@ public class ModelHornet extends AnimatedEntityModel<HornetEntity> {
 		this.registerModelRenderer(stinger);
 
 		head = new AnimatedModelRenderer(this);
-		head.setRotationPoint(0.0F, 0.0F, 0.0F);
+		head.setRotationPoint(0.0F, -1.0F, 1.0F);
 		mainbody.addChild(head);
-		head.setTextureOffset(5, 5).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 2.0F, 2.0F, 0.0F, false);
+		head.setTextureOffset(5, 5).addBox(-1.0F, -1.0F, -2.0F, 2.0F, 2.0F, 2.0F, 0.0F, false);
 		head.setModelRendererName("head");
 		this.registerModelRenderer(head);
 
 		proboscis = new AnimatedModelRenderer(this);
-		proboscis.setRotationPoint(-0.7F, -0.425F, -0.5F);
+		proboscis.setRotationPoint(-0.7F, 0.575F, -1.5F);
 		head.addChild(proboscis);
 		proboscis.setTextureOffset(2, 12).addBox(0.45F, -0.5F, -1.425F, 0.0F, 0.0F, 0.0F, 0.0F, false);
 		proboscis.setModelRendererName("proboscis");
 		this.registerModelRenderer(proboscis);
 
     this.rootBones.add(body);
+
   }
 
 
-    @Override
+
+	@Override
     public ResourceLocation getAnimationFileLocation()
     {
         return new ResourceLocation("cm", "animations/entities/hornet.json");
