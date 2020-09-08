@@ -20,7 +20,7 @@ public class HornetRenderer extends MobRenderer<HornetEntity, ModelHornet> {
     }
 
     @Override
-    protected void applyRotations(HornetEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+    protected void applyRotations(@Nonnull HornetEntity entityLiving,@Nonnull MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
         super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
     }
 
