@@ -23,7 +23,7 @@ public class ModBiome {
             .precipitation(RainType.NONE)
             .waterColor(3099807)
             .waterFogColor(3099807)
-            .surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(ModBlocks.SECTOR_5.get()
+            .surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(ModBlocks.SECTOR5_STEEL.get()
                     .getDefaultState(), Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState()))
             .depth(70)
             .scale(4)

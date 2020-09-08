@@ -25,7 +25,7 @@ public class Sector5Generator extends ChunkGenerator<Sector5GenSettings> {
     @Override
     public void generateSurface(@Nonnull WorldGenRegion p_225551_1_, IChunk chunk) {
         BlockState bedrock = ModFluids.DIGITAL_SEA_BLOCK.get().getDefaultState();
-        BlockState stone = ModBlocks.SECTOR_5.get().getDefaultState();
+        BlockState stone = ModBlocks.SECTOR5_STEEL.get().getDefaultState();
         ChunkPos chunkpos = chunk.getPos();
 
         BlockPos.Mutable pos = new BlockPos.Mutable();

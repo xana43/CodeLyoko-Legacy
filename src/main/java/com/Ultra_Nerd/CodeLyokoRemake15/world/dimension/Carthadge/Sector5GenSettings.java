@@ -13,7 +13,7 @@ public class Sector5GenSettings extends GenerationSettings {
         return 4;
     }
 
-    public byte getBiomID()
+    public byte getBiomeID()
     {
         return 91;
     }
@@ -21,7 +21,7 @@ public class Sector5GenSettings extends GenerationSettings {
     @Nonnull
     @Override
     public BlockState getDefaultBlock() {
-        return ModBlocks.SECTOR_5.get().getDefaultState();
+        return ModBlocks.SECTOR5_STEEL.get().getDefaultState();
     }
 
     @Nonnull

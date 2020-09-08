@@ -19,6 +19,7 @@ public class Sector5Dimension extends Dimension {
 
     public Sector5Dimension(World world, DimensionType type) {
         super(world, type, 0.0f);
+
     }
 
     @Nonnull

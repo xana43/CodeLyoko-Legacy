@@ -21,7 +21,6 @@ public class ClientEventSubscriber {
 
 
 
-
     @SubscribeEvent
     public  static void PlayerJoinMusic(final EntityJoinWorldEvent event)
     {
