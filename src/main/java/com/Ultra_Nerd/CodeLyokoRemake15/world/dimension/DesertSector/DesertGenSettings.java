@@ -13,7 +13,7 @@ public class DesertGenSettings extends GenerationSettings {
         return 4;
     }
 
-    public byte getBiomID()
+    public byte getBiomeID()
     {
         return 109;
     }

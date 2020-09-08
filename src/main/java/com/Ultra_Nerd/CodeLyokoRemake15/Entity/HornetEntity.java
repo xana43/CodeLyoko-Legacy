@@ -3,9 +3,8 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -20,15 +19,16 @@ import software.bernie.geckolib.manager.EntityAnimationManager;
 
 import javax.annotation.Nonnull;
 
-public class HornetEntity extends PhantomEntity implements IAnimatedEntity {
+public class HornetEntity extends MobEntity implements IAnimatedEntity {
 
     EntityAnimationManager manager = new EntityAnimationManager();
     EntityAnimationController controller = new EntityAnimationController(this, "movecontroller", 20, this::animationPred);
 
-    public HornetEntity(EntityType<? extends PhantomEntity> type, World worldIn) {
-        super(type, worldIn);
+    public HornetEntity(EntityType<HornetEntity> hornetEntityEntityType, World world) {
+        super(hornetEntityEntityType,world);
         registerControllers();
     }
+
 
     @Nonnull
     @Override
@@ -76,7 +76,7 @@ public class HornetEntity extends PhantomEntity implements IAnimatedEntity {
     public boolean canSpawn(@Nonnull IWorld worldIn, @Nonnull SpawnReason spawnReasonIn) {
         return true;
     }
-
+/*
     @Override
     protected void registerAttributes() {
         // TODO Auto-generated method stub
@@ -88,6 +88,8 @@ public class HornetEntity extends PhantomEntity implements IAnimatedEntity {
         this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10D);
         this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
     }
+
+ */
 
     @Override
     public EntityAnimationManager getAnimationManager() {

@@ -57,6 +57,9 @@
 					},
 					"position": {
 						"vector": [0, 0, 0]
+					},
+					"scale": {
+						"vector": [1, 1, 1]
 					}
 				},
 				"head": {
@@ -65,6 +68,9 @@
 					},
 					"position": {
 						"vector": [0, 0, 0]
+					},
+					"scale": {
+						"vector": [1, 1, 1]
 					}
 				},
 				"stinger": {
