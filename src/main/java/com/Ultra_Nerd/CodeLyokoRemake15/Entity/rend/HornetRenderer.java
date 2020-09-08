@@ -12,15 +12,14 @@ import javax.annotation.Nonnull;
 
 public class HornetRenderer extends MobRenderer<HornetEntity, ModelHornet> {
 
-    protected static final ResourceLocation tex = new ResourceLocation(Base.MOD_ID,"textures/entity/hornet/hornetbody.png");
+    protected static final ResourceLocation tex = new ResourceLocation(Base.MOD_ID, "textures/entity/hornet/hornetbody.png");
 
-    public HornetRenderer(EntityRendererManager rendManIn)
-    {
-        super(rendManIn,new ModelHornet() ,1f);
+    public HornetRenderer(EntityRendererManager rendManIn) {
+        super(rendManIn, new ModelHornet(), 1f);
     }
 
     @Override
-    protected void applyRotations(@Nonnull HornetEntity entityLiving,@Nonnull MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+    protected void applyRotations(@Nonnull HornetEntity entityLiving, @Nonnull MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
         super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
     }
 

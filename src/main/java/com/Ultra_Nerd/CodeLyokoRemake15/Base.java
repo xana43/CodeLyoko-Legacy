@@ -81,7 +81,7 @@ public class Base
 		{
 
 			random = new Random().nextInt(1000);
-			Base.Log.debug(random);
+			//Base.Log.debug(random);
 			if(random == 20 && !XANA)
 			{
 				assert Minecraft.getInstance().player != null;
