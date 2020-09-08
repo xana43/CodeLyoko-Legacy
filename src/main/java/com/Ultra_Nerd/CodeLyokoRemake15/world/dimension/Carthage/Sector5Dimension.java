@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class Sector5Dimension extends Dimension {
 
-    public static final BlockPos SPAWN = new BlockPos(100, 50, 0);
+    public static final BlockPos SPAWN = new BlockPos(0, 128, 0);
 
     public Sector5Dimension(World world, DimensionType type) {
         super(world, type, 0.0f);
@@ -33,9 +33,10 @@ public class Sector5Dimension extends Dimension {
     @Override
     @Nullable
     public BlockPos findSpawn(ChunkPos chunkPosIn, boolean checkValid) {
-        Random random = new Random(this.world.getSeed());
+        /*Random random = new Random(this.world.getSeed());
         BlockPos blockpos = new BlockPos(chunkPosIn.getXStart() + random.nextInt(15), 0, chunkPosIn.getZEnd() + random.nextInt(15));
-        return this.world.getGroundAboveSeaLevel(blockpos).getMaterial().blocksMovement() ? blockpos : null;
+        return this.world.getGroundAboveSeaLevel(blockpos).getMaterial().blocksMovement() ? blockpos : null;*/
+        return SPAWN;
     }
 
     public BlockPos getSpawnCoordinate() {
