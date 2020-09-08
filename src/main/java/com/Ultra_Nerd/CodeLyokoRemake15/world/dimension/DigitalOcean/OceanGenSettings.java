@@ -13,7 +13,7 @@ public class OceanGenSettings extends GenerationSettings {
         return 4;
     }
 
-    public byte getBiomID()
+    public byte getBiomeID()
     {
         return 112;
     }
