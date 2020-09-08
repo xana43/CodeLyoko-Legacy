@@ -12,14 +12,22 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+import software.bernie.geckolib.animation.builder.AnimationBuilder;
+import software.bernie.geckolib.animation.controller.EntityAnimationController;
+import software.bernie.geckolib.entity.IAnimatedEntity;
+import software.bernie.geckolib.event.AnimationTestEvent;
+import software.bernie.geckolib.manager.EntityAnimationManager;
 
 import javax.annotation.Nonnull;
 
-public class HornetEntity extends PhantomEntity {
+public class HornetEntity extends PhantomEntity implements IAnimatedEntity {
 
+     EntityAnimationManager manager = new EntityAnimationManager();
+     EntityAnimationController controller = new EntityAnimationController(this,"movecontroller",20,this::animationpred);
 
     public HornetEntity(EntityType<? extends PhantomEntity> type, World worldIn) {
         super(type, worldIn);
+        registercontrollers();
     }
 
     @Nonnull
@@ -79,5 +87,28 @@ public class HornetEntity extends PhantomEntity {
         this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10D);
         this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10D);
         this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
+    }
+
+    @Override
+    public EntityAnimationManager getAnimationManager() {
+        return manager;
+    }
+    private <E extends HornetEntity> boolean animationpred(AnimationTestEvent<E> event)
+    {
+        if(event.isWalking())
+        {
+            controller.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly",true));
+            return true;
+        }
+        else
+        {
+            controller.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly",true));
+            return true;
+        }
+    }
+    private void registercontrollers()
+    {
+        manager.addAnimationController(controller);
+
     }
 }
