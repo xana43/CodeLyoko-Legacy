@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthadge;
+package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;

@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.world.generators;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthadge.Sector5GenSettings;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage.Sector5GenSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
