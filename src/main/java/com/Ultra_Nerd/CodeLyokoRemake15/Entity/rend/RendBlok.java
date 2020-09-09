@@ -6,9 +6,11 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelBlok;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
-
+@OnlyIn(Dist.CLIENT)
 public class RendBlok extends MobRenderer<EntityBlok, ModelBlok<EntityBlok>>
 {
 
