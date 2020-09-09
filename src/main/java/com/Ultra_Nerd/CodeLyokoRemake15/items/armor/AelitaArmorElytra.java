@@ -21,7 +21,6 @@ import javax.annotation.Nonnull;
 
 
 public class AelitaArmorElytra extends ArmorItem {
-
     public AelitaArmorElytra(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
         super(materialIn, slot, builder);
     }
