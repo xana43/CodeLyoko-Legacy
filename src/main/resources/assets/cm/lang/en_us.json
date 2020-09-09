@@ -204,6 +204,7 @@
   "item.cm.chalcocite_item":"Crushed Chalcocite(Cu2S)",
   "item.cm.bornite_item": "Crushed Bornite(Cu5FeS4)",
   "item.cm.chalcopyrite_item": "Crushed Chalcopyrite(CuFeS2)",
+  "item.cm.liquid_helium_bucket": "Liquid Helium Bucket",
 
   "_comment_3": "itemgroups",
   "itemGroup.lyoko_items": "Code Lyoko: Legacy - Items",
