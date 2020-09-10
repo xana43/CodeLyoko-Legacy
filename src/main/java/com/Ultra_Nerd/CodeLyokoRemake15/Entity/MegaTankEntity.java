@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -21,7 +22,7 @@ import software.bernie.geckolib.manager.EntityAnimationManager;
 import javax.annotation.Nonnull;
 
 public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
-    private static boolean walking = false;
+
     private final EntityAnimationManager TankManager = new EntityAnimationManager();
     private final EntityAnimationController Tankcontroller = new EntityAnimationController(this, "movecontroller", 20, this::animationPred);
     public MegaTankEntity(EntityType<MegaTankEntity> type, World world) {
@@ -98,25 +99,21 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
     @Override
     protected SoundEvent getStepSound() {
 
-        if(!this.isAggressive() && walking) {
-            return super.getStepSound();
-        }
-        else
-        {
-            return null;
-        }
+
+            return ModSounds.MEGATANKROLL.get();
+
     }
 
     private <E extends MegaTankEntity> boolean animationPred(AnimationTestEvent<E> event) {
 
         if ((event.isWalking() || event.getEntity().isSwimming()) && !event.getEntity().isAggressive()) {
             Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.move", true));
-            walking = true;
+
             return true;
         } else if (event.getEntity().isAggressive()){
             //Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.attack", false));
             Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.open",true));
-            walking = false;
+
             return true;
         }
         else

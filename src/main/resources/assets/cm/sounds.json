@@ -93,5 +93,11 @@
         "category": "ambient",
         "subtitle": "digital ocean ambiance",
         "sounds": [{"name": "cm:music/sea/digital_sea","stream": true,"preload": true}]
+    },
+    "entity.megatank.move":
+    {
+        "category": "entity",
+        "subtitle": "megatank rolls",
+        "sounds": [{"name": "cm:entity/megatank/tankrolling","stream": false,"preload": true}]
     }
 }
