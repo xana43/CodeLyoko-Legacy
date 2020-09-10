@@ -32,10 +32,6 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
 
     }
 
-    @Override
-    public boolean isAggressive() {
-        return true;
-    }
 
     @Override
     protected boolean canBeRidden(@Nonnull Entity entityIn) {
@@ -57,7 +53,7 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
     public boolean canBeHitWithPotion() {
         return false;
     }
-    
+
 
     @Override
     protected void registerAttributes() {
@@ -65,10 +61,15 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
         super.registerAttributes();
         this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(10D);
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
         this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10D);
         this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10D);
         this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
+    }
+
+    @Override
+    public boolean isSprinting() {
+        return true;
     }
 
     @Override
@@ -76,15 +77,24 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
         return false;
     }
 
-    private <E extends HornetEntity> boolean animationPred(AnimationTestEvent<E> event) {
+    private <E extends MegaTankEntity> boolean animationPred(AnimationTestEvent<E> event) {
 
-        if (event.isWalking()) {
+        if ((event.isWalking() || event.getEntity().isSwimming()) && !event.getEntity().isAggressive()) {
             Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.move", true));
             return true;
-        } else {
-            Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.idle", true));
+        } else if (event.getEntity().isAggressive()){
+            //Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.attack", false));
+            Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.open",true));
             return true;
         }
+        else
+        {
+            Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.idle",true));
+            return true;
+        }
+
+
+
     }
     @Override
     public EntityAnimationManager getAnimationManager() {
