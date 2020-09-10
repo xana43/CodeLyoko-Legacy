@@ -1,10 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityBlok;
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityFan;
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.HornetEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.*;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -32,6 +29,8 @@ public class ModEntities {
                     .build(
                             new ResourceLocation(Base.MOD_ID, "hornet").toString()
                     ));
-
+    public static final RegistryObject<EntityType<MegaTankEntity>> MEGATANK = Entities.register("megatank", () ->
+            EntityType.Builder.<MegaTankEntity>create(MegaTankEntity::new,EntityClassification.MONSTER).size(3,3)
+    .build(new ResourceLocation(Base.MOD_ID,"megatank").toString()));
 
 }
