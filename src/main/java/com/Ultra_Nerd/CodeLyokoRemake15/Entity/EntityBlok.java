@@ -6,26 +6,36 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.SkeletonEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+import software.bernie.geckolib.animation.controller.EntityAnimationController;
+import software.bernie.geckolib.entity.IAnimatedEntity;
+import software.bernie.geckolib.event.AnimationTestEvent;
+import software.bernie.geckolib.manager.EntityAnimationManager;
 
 import javax.annotation.Nonnull;
 
-public class EntityBlok extends SkeletonEntity {
+public class EntityBlok extends SkeletonEntity implements IAnimatedEntity {
 
-    private NearestAttackableTargetGoal<PlayerEntity> shoot;
 
+    private static final EntityAnimationManager manager = new EntityAnimationManager();
+    private final EntityAnimationController controller = new EntityAnimationController(this,"blokcontroller",20,this::pred);
     public EntityBlok(World world) {
         super(ModEntities.BLOK.get(), world);
-
+        manager.addAnimationController(controller);
     }
+
+
+
+    private <E extends EntityBlok> boolean pred(AnimationTestEvent<E> event) {
+        return false;
+    }
+
 
     @Nonnull
     @Override
@@ -105,4 +115,8 @@ public class EntityBlok extends SkeletonEntity {
         this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
     }
 
+    @Override
+    public EntityAnimationManager getAnimationManager() {
+        return manager;
+    }
 }
