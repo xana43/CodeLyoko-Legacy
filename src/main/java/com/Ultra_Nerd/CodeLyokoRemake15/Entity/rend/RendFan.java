@@ -20,13 +20,13 @@ public class RendFan extends EntityRenderer<EntityFan> {
     public RendFan(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);
     }
-    public static final ResourceLocation Fan = new ResourceLocation(Base.MOD_ID,"textures/entity/laserarrow.png");
+    public static final ResourceLocation Fan = new ResourceLocation(Base.MOD_ID,"textures/entity/projectiles/fan/fan.png");
     private final ModelFan FanModel = new ModelFan();
 
 
 
     @Override
-    public void render(EntityFan entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, @Nonnull IRenderTypeBuffer bufferIn, int packedLightIn) {
+    public void render(@Nonnull EntityFan entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, @Nonnull IRenderTypeBuffer bufferIn, int packedLightIn) {
         matrixStackIn.push();
         //matrixStackIn.rotate(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationYaw, entityIn.rotationYaw) - 90.0F));
         //matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationPitch, entityIn.rotationPitch) + 90.0F));

@@ -7,6 +7,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.network.IPacket;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -19,7 +21,7 @@ import software.bernie.geckolib.manager.EntityAnimationManager;
 import javax.annotation.Nonnull;
 
 public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
-
+    private static boolean walking = false;
     private final EntityAnimationManager TankManager = new EntityAnimationManager();
     private final EntityAnimationController Tankcontroller = new EntityAnimationController(this, "movecontroller", 20, this::animationPred);
     public MegaTankEntity(EntityType<MegaTankEntity> type, World world) {
@@ -77,14 +79,44 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
         return false;
     }
 
+    @Override
+    protected SoundEvent getDeathSound() {
+        return super.getDeathSound();
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return super.getAmbientSound();
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
+        return super.getHurtSound(damageSourceIn);
+    }
+
+    @Nonnull
+    @Override
+    protected SoundEvent getStepSound() {
+
+        if(!this.isAggressive() && walking) {
+            return super.getStepSound();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     private <E extends MegaTankEntity> boolean animationPred(AnimationTestEvent<E> event) {
 
         if ((event.isWalking() || event.getEntity().isSwimming()) && !event.getEntity().isAggressive()) {
             Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.move", true));
+            walking = true;
             return true;
         } else if (event.getEntity().isAggressive()){
             //Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.attack", false));
             Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.open",true));
+            walking = false;
             return true;
         }
         else

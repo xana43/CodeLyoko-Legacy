@@ -12,13 +12,19 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+import software.bernie.geckolib.animation.builder.AnimationBuilder;
+import software.bernie.geckolib.animation.controller.EntityAnimationController;
+import software.bernie.geckolib.entity.IAnimatedEntity;
+import software.bernie.geckolib.event.AnimationTestEvent;
+import software.bernie.geckolib.manager.EntityAnimationManager;
 
 import javax.annotation.Nonnull;
 
-public class EntityFan extends TridentEntity {
+public class EntityFan extends TridentEntity implements IAnimatedEntity {
     private boolean dealtDamage;
     private ItemStack thrownStack = new ItemStack(ModItems.YUMI_TRADITONAL_FANS.get());
-
+    private EntityAnimationManager manager = new EntityAnimationManager();
+    private EntityAnimationController controller = new EntityAnimationController(this,"fancontroller",20,this::animationpred);
     public EntityFan(EntityType<? extends TridentEntity> type, World worldIn) {
         super(type, worldIn);
     }
@@ -26,7 +32,9 @@ public class EntityFan extends TridentEntity {
     public EntityFan(World world, LivingEntity thrower, ItemStack thrownStackIn) {
         super(ModEntities.FAN.get(), world);
         this.thrownStack = thrownStackIn.copy();
+        manager.addAnimationController(controller);
     }
+
 
     @Nonnull
     @Override
@@ -60,6 +68,18 @@ public class EntityFan extends TridentEntity {
 
 
         super.tick();
+    }
+
+    private <E extends EntityFan> boolean animationpred(AnimationTestEvent<E> event) {
+
+           controller.setAnimation(new AnimationBuilder().addAnimation("animation.fan.spin",true));
+           return true;
+
+
+    }
+    @Override
+    public EntityAnimationManager getAnimationManager() {
+        return manager;
     }
 
 
