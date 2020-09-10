@@ -38,7 +38,6 @@ public class DigitalSapling extends BushBlock implements IGrowable {
         return shape;
     }
 
-    @Nonnull
     @Override
     public void tick(@Nonnull BlockState state, @Nonnull ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
         super.tick(state, worldIn, pos, rand);

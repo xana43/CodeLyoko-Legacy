@@ -1,14 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.SpawnReason;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -20,16 +20,23 @@ import software.bernie.geckolib.manager.EntityAnimationManager;
 
 import javax.annotation.Nonnull;
 
-public class HornetEntity extends PhantomEntity implements IAnimatedEntity {
+public class HornetEntity extends PhantomEntity implements IAnimatedEntity,IRangedAttackMob {
 
    private final EntityAnimationManager manager = new EntityAnimationManager();
    private final EntityAnimationController controller = new EntityAnimationController(this, "movecontroller", 20, this::animationPred);
+   private RangedAttackGoal rangedAttackGoal;
 
     public HornetEntity(EntityType<HornetEntity> hornetEntityEntityType, World world) {
         super(hornetEntityEntityType,world);
         manager.addAnimationController(controller);
     }
 
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        this.rangedAttackGoal = new RangedAttackGoal(this,1,1,1);
+       this.goalSelector.addGoal(4,rangedAttackGoal);
+    }
 
     @Nonnull
     @Override
@@ -108,5 +115,16 @@ public class HornetEntity extends PhantomEntity implements IAnimatedEntity {
     }
 
 
+    @Override
+    public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
 
+        EntityLaser laser = new EntityLaser(this.world, 1.0D, 1.0D, 1.0D);
+        double d0 = target.getPosX() - this.getPosX();
+        double d1 = target.getPosYHeight(0.3333333333333333D) - laser.getPosY();
+        double d2 = target.getPosZ() - this.getPosZ();
+        double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
+        laser.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, (float)(14 - this.world.getDifficulty().getId() * 4));
+        this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+        this.world.addEntity(laser);
+    }
 }

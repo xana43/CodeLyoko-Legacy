@@ -11,13 +11,15 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class LaptopClass extends Item {
     public LaptopClass(Properties properties) {
         super(properties);
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         if(!(Minecraft.getInstance().currentScreen instanceof LaptopGUI) && stack.getDamage() != 0)
         {
             stack.setDamage(0);
@@ -25,8 +27,9 @@ public class LaptopClass extends Item {
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nonnull PlayerEntity playerIn, @Nonnull Hand handIn) {
        if(!worldIn.isRemote)
        {
            Minecraft.getInstance().displayGuiScreen(new LaptopGUI(new StringTextComponent("test")));

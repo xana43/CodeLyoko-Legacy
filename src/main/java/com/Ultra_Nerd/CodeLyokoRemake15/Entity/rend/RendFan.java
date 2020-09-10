@@ -39,6 +39,7 @@ public class RendFan extends EntityRenderer<EntityFan> {
     /**
      * Returns the location of an entity's texture.
      */
+    @Override
     @Nonnull
     public ResourceLocation getEntityTexture(@Nonnull EntityFan entity) {
         return Fan;

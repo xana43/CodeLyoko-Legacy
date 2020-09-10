@@ -46,13 +46,15 @@ public class LiquidHeliumFluid extends ForgeFlowingFluid {
                 new ResourceLocation("cm:block/liquid_helium_flow"))
                 .overlay(new ResourceLocation("cm:block/liquid_helium_still"))
                 .translationKey("block.cm.liquid_helium_block")
-                .color(0x182678).build(this);
+                .color(0x868686).build(this);
     }
 
     @Override
     public boolean isEquivalentTo(Fluid fluidIn) {
         return fluidIn.equals(ModFluids.FLOWING_LIQUID_HELIUM.get()) || fluidIn.equals(ModFluids.STILL_LIQUID_HELIUM.get());
     }
+
+
 
     @Nonnull
     @Override
@@ -72,6 +74,7 @@ public class LiquidHeliumFluid extends ForgeFlowingFluid {
         return ModItems.LIQUID_HELIUM_BUCKET.get();
     }
 
+    @Override
     @OnlyIn(Dist.CLIENT)
     public void animateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, IFluidState state, @Nonnull Random random) {
         if (!state.isSource() && !state.get(FALLING)) {
@@ -84,6 +87,7 @@ public class LiquidHeliumFluid extends ForgeFlowingFluid {
 
     }
 
+    @Override
     @Nullable
     @OnlyIn(Dist.CLIENT)
     public IParticleData getDripParticleData() {
@@ -93,7 +97,7 @@ public class LiquidHeliumFluid extends ForgeFlowingFluid {
     @Override
     protected boolean canDisplace(@Nonnull IFluidState state, @Nonnull IBlockReader world, @Nonnull BlockPos pos,
                                   @Nonnull Fluid fluid, @Nonnull Direction dir) {
-        return false;
+        return true;
     }
 
     @Nonnull
@@ -176,15 +180,18 @@ public class LiquidHeliumFluid extends ForgeFlowingFluid {
             return super.createAttributes();
         }
 
+        @Override
         protected void fillStateContainer(@Nonnull StateContainer.Builder<Fluid, IFluidState> builder) {
             super.fillStateContainer(builder);
             builder.add(LEVEL_1_8);
         }
 
+        @Override
         public int getLevel(@Nonnull IFluidState state) {
             return state.get(LEVEL_1_8);
         }
 
+        @Override
         public boolean isSource(@Nonnull IFluidState state) {
             return false;
         }
@@ -201,10 +208,12 @@ public class LiquidHeliumFluid extends ForgeFlowingFluid {
             return super.createAttributes();
         }
 
+        @Override
         public int getLevel(@Nonnull IFluidState state) {
             return 8;
         }
 
+        @Override
         public boolean isSource(@Nonnull IFluidState state) {
             return true;
         }
