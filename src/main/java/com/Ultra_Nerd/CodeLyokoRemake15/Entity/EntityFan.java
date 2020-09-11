@@ -9,6 +9,7 @@ import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -19,6 +20,7 @@ import software.bernie.geckolib.event.AnimationTestEvent;
 import software.bernie.geckolib.manager.EntityAnimationManager;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class EntityFan extends TridentEntity implements IAnimatedEntity {
     private boolean dealtDamage;
@@ -77,6 +79,13 @@ public class EntityFan extends TridentEntity implements IAnimatedEntity {
 
 
     }
+
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBox(Entity entityIn) {
+        return this.getCollisionBox(entityIn);
+    }
+
     @Override
     public EntityAnimationManager getAnimationManager() {
         return manager;

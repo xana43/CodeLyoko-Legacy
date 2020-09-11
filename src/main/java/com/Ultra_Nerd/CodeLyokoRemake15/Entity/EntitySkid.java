@@ -24,9 +24,11 @@ public class EntitySkid extends BoatEntity {
 	public IPacket<?> createSpawnPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
+
+
 	@Override
 	public void setDamageTaken(float damageTaken) {
-		// TODO Auto-generated method stub
+
 		super.setDamageTaken(0);
 	}
 	
