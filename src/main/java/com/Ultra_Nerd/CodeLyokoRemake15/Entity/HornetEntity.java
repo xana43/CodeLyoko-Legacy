@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.entity.monster.PhantomEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
@@ -25,11 +26,13 @@ public class HornetEntity extends PhantomEntity implements IAnimatedEntity,IRang
 
    private final EntityAnimationManager manager = new EntityAnimationManager();
    private final EntityAnimationController controller = new EntityAnimationController(this, "movecontroller", 20, this::animationPred);
+   private final EntityAnimationController controller2 = new EntityAnimationController(this,"attackcontroller",20,this::animationPred);
    private RangedAttackGoal rangedAttackGoal;
 
     public HornetEntity(EntityType<HornetEntity> hornetEntityEntityType, World world) {
         super(hornetEntityEntityType,world);
         manager.addAnimationController(controller);
+        manager.addAnimationController(controller2);
     }
     @Override
     public void tick() {
@@ -105,7 +108,6 @@ public class HornetEntity extends PhantomEntity implements IAnimatedEntity,IRang
 
     @Override
     protected void registerAttributes() {
-        // TODO Auto-generated method stub
         super.registerAttributes();
         this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1D);
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D);
@@ -125,8 +127,15 @@ public class HornetEntity extends PhantomEntity implements IAnimatedEntity,IRang
     private <E extends HornetEntity> boolean animationPred(AnimationTestEvent<E> event) {
         if (event.isWalking()) {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly", true));
+
             return true;
-        } else {
+        }
+        if(event.getEntity().getAttackTarget() instanceof PlayerEntity)
+        {
+            controller2.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.attack",false));
+            return true;
+        }
+        else {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly", true));
             return true;
         }
