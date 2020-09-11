@@ -27,9 +27,9 @@ public class ModItems {
     public static final RegistryObject<Item> APU_DIE_RISC = ITEMS.register("apu_die_risc", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.EPIC)));
     public static final RegistryObject<BlokItem> BLOK_SPAWN_EGG = ITEMS.register("blok_spawn_egg", () -> new BlokItem(ModEntities.BLOK, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> CHALCOPYRITE_ITEM = ITEMS.register("chalcopyrite_item", () -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(5)));
-    public static final RegistryObject<Item> BORNITE_ITEM = ITEMS.register("bornite_item",() -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(4)));
-    public static final RegistryObject<Item> CHALCOCITE_ITEM = ITEMS.register("chalcocite_item",() -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(7)));
-    public static final RegistryObject<Item> COVELLITE_ITEM = ITEMS.register("covellite_item",() -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(6)));
+    public static final RegistryObject<Item> BORNITE_ITEM = ITEMS.register("bornite_item", () -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(4)));
+    public static final RegistryObject<Item> CHALCOCITE_ITEM = ITEMS.register("chalcocite_item", () -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(7)));
+    public static final RegistryObject<Item> COVELLITE_ITEM = ITEMS.register("covellite_item", () -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(6)));
     public static final RegistryObject<Item> CUPROUS_OXIDE = ITEMS.register("cuprous_oxide", () -> new Item(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> BLISTER_COPPER = ITEMS.register("blister_copper", () -> new BlisterCopper(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(60)));
     public static final RegistryObject<Item> CPU_PACKAGE_ARM = ITEMS.register("cpu_package_arm", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.COMMON)));
@@ -83,7 +83,7 @@ public class ModItems {
     public static final RegistryObject<Item> COLORED_POLYCARBONATE_BODY_PART = ITEMS.register("colored_polycarbonate_body_part", ItemBase::new);
     public static final RegistryObject<Item> BIT = ITEMS.register("bit", ItemBase::new);
     public static final RegistryObject<Item> BYTE = ITEMS.register("byte", ItemBase::new);
-    public static final RegistryObject<Item> FLOURIDE = ITEMS.register("flouride", () -> new FlourideItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> FLUORIDE = ITEMS.register("fluoride", () -> new FluorideItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> GIGABIT = ITEMS.register("gigabit", ItemBase::new);
     public static final RegistryObject<Item> GIGABYTE = ITEMS.register("gigabyte", ItemBase::new);
     public static final RegistryObject<Item> GPU_COMPUTE_PROCESSOR_CORE = ITEMS.register("gpu_compute_processor_core", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
@@ -109,11 +109,11 @@ public class ModItems {
     public static final RegistryObject<WrittenBookItem> STORY_BOOK = ITEMS.register("story_book", () -> new StoryBook(new Item.Properties().group(Base.LYOKO_ITEMS).maxStackSize(1)));
     public static final RegistryObject<Item> SILICON_WAFER = ITEMS.register("silicon_wafer", () -> new WaferText(new Item.Properties().group(Base.LYOKO_ITEMS).maxDamage(4)));
     public static final RegistryObject<Item> URANIUM_SILICATE = ITEMS.register("uranium_silicate", ItemBase::new);
-    public static final RegistryObject<Item> URANIUM_SILICON_PLATE = ITEMS.register("uranium_silicon_plate",ItemBase::new);
+    public static final RegistryObject<Item> URANIUM_SILICON_PLATE = ITEMS.register("uranium_silicon_plate", ItemBase::new);
     public static final RegistryObject<Item> TRIURANIUM_OCTAOXIDE = ITEMS.register("triuranium_octaoxide", ItemBase::new);
     public static final RegistryObject<Item> TERABIT = ITEMS.register("terabit", ItemBase::new);
     public static final RegistryObject<Item> TERABYTE = ITEMS.register("terabyte", ItemBase::new);
-    public static final RegistryObject<Item> TITANIUMINGOT = ITEMS.register("titanium_ingot", ItemBase::new);
+    public static final RegistryObject<Item> TITANIUM_INGOT = ITEMS.register("titanium_ingot", ItemBase::new);
     public static final RegistryObject<Item> URANIUM_DIOXIDE = ITEMS.register("uranium_dioxide", ItemBase::new);
     public static final RegistryObject<Item> URANIUM_MELT = ITEMS.register("uranium_melt", ItemBase::new);
     public static final RegistryObject<Item> URANIUM_ISOTOPE238 = ITEMS.register("uranium_isotope238", ItemBase::new);
@@ -154,9 +154,9 @@ public class ModItems {
     public static final RegistryObject<ArmorItem> YUMI_BOOTS = ITEMS.register("yumi_boots", () -> new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlotType.FEET, new Item.Properties().group(Base.LYOKO_ARMOR)));
     public static final RegistryObject<ArmorItem> MIND_HELMET = ITEMS.register("mind_helmet", () -> new MindHelm(LyokoArmorMaterial.BLANKHELM, EquipmentSlotType.HEAD, new Item.Properties().group(Base.LYOKO_ARMOR).rarity(Rarity.EPIC)));
     public static final RegistryObject<ArmorItem> LINKER = ITEMS.register("linker", () -> new linker(LyokoArmorMaterial.LINKER, EquipmentSlotType.CHEST, new Item.Properties().group(Base.LYOKO_ARMOR).rarity(Rarity.EPIC)));
-    public static final RegistryObject<ArmorItem> JEREMY_CHESTPLATE = ITEMS.register("jeremy_chestplate",() -> new ArmorArcher(LyokoArmorMaterial.ARCHER,EquipmentSlotType.CHEST,new Item.Properties().group(Base.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> JEREMY_LEGGINGS = ITEMS.register("jeremy_leggings",() -> new ArmorArcher(LyokoArmorMaterial.ARCHER,EquipmentSlotType.LEGS,new Item.Properties().group(Base.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> JEREMY_BOOTS = ITEMS.register("jeremy_boots", () -> new ArmorArcher(LyokoArmorMaterial.ARCHER,EquipmentSlotType.FEET,new Item.Properties().group(Base.LYOKO_ARMOR)));
+    public static final RegistryObject<ArmorItem> JEREMY_CHESTPLATE = ITEMS.register("jeremy_chestplate", () -> new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlotType.CHEST, new Item.Properties().group(Base.LYOKO_ARMOR)));
+    public static final RegistryObject<ArmorItem> JEREMY_LEGGINGS = ITEMS.register("jeremy_leggings", () -> new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlotType.LEGS, new Item.Properties().group(Base.LYOKO_ARMOR)));
+    public static final RegistryObject<ArmorItem> JEREMY_BOOTS = ITEMS.register("jeremy_boots", () -> new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlotType.FEET, new Item.Properties().group(Base.LYOKO_ARMOR)));
     //for buckets
     public static final RegistryObject<BucketItem> LIQUID_HELIUM_BUCKET = ITEMS.register("liquid_helium_bucket", () -> new BucketItem(ModFluids.STILL_LIQUID_HELIUM, new Item.Properties().group(Base.LYOKO_ITEMS).maxStackSize(1)));
 }

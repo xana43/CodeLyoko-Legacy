@@ -21,9 +21,9 @@ public class FlourideInfusionResult {
     }
 
     private FlourideInfusionResult() {
-        addRefiningRecipe(new ItemStack(ModItems.URANIUM_DIOXIDE.get()), new ItemStack(ModItems.FLOURIDE.get()),
+        addRefiningRecipe(new ItemStack(ModItems.URANIUM_DIOXIDE.get()), new ItemStack(ModItems.FLUORIDE.get()),
                 new ItemStack(ModItems.URANIUM_ISOTOPE238.get()), 5.0F);
-        addRefiningRecipe(new ItemStack(ModItems.URANIUM_MELT.get()), new ItemStack(ModBlocks.FLOURITE_BLOCK.get()),
+        addRefiningRecipe(new ItemStack(ModItems.URANIUM_MELT.get()), new ItemStack(ModBlocks.FLUORITE_BLOCK.get()),
                 new ItemStack(ModItems.URANIUM_ISOTOPE238.get()), 1f);
     }
 

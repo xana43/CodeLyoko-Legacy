@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.ElectricFlourideInfuser;
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.ElectricFluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerElectricInfusing;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
@@ -107,7 +107,7 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
             if (cookTime > 0) {
                 ENER -= 20;
                 cookTime++;
-                ElectricFlourideInfuser.setState(true, world, pos);
+                ElectricFluorideInfuser.setState(true, world, pos);
                 if (cookTime == 200) {
                     if (handler.getStackInSlot(2).getCount() > 0) {
                         handler.getStackInSlot(2).grow(1);

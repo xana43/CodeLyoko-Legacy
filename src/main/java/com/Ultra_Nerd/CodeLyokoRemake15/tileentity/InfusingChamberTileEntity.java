@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfuser;
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
@@ -118,7 +118,7 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
     public void tick() {
         if (this.isBurning()) {
             --this.burnTime;
-            FlourideInfuser.setState(true, world, pos);
+            FluorideInfuser.setState(true, world, pos);
         }
 
         ItemStack[] inputs = new ItemStack[]{handler.getStackInSlot(0), handler.getStackInSlot(1)};
@@ -193,11 +193,11 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
                 Block block = Block.getBlockFromItem(item);
 
 
-                if (block == ModBlocks.FLOURITE_BLOCK.get()) return 40000;
+                if (block == ModBlocks.FLUORITE_BLOCK.get()) return 40000;
             }
 
 
-            if (item == ModItems.FLOURIDE.get()) return 20000;
+            if (item == ModItems.FLUORIDE.get()) return 20000;
 
 
         }

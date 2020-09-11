@@ -25,11 +25,11 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ElectricFlourideInfuser extends Block {
+public class ElectricFluorideInfuser extends Block {
 
     public static DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
-    public ElectricFlourideInfuser() {
+    public ElectricFluorideInfuser() {
         super(Block.Properties.create(Material.IRON)
 
                 .hardnessAndResistance(6, 10)
@@ -69,10 +69,10 @@ public class ElectricFlourideInfuser extends Block {
         BlockState state = worldIn.getBlockState(pos);
         TileEntity tileentity = worldIn.getTileEntity(pos);
         if (act)
-            worldIn.setBlockState(pos, ModBlocks.ELECTRICFLOURIDE_INFUSER.get().getDefaultState()
+            worldIn.setBlockState(pos, ModBlocks.ELECTRIC_FLUORIDE_INFUSER.get().getDefaultState()
                     .with(FACING, state.get(FACING)).with(INFUSING, true), 3);
         else
-            worldIn.setBlockState(pos, ModBlocks.ELECTRICFLOURIDE_INFUSER.get().getDefaultState()
+            worldIn.setBlockState(pos, ModBlocks.ELECTRIC_FLUORIDE_INFUSER.get().getDefaultState()
                     .with(FACING, state.get(FACING)).with(INFUSING, false), 3);
         if (tileentity != null) {
             tileentity.validate();

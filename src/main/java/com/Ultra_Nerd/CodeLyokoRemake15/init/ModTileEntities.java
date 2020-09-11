@@ -13,12 +13,12 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<InfusingChamberTileEntity>> INFUSING_CHAMBER_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("infusing_chamber_tile_entity",
                     () -> TileEntityType.Builder.create(InfusingChamberTileEntity::new,
-                    ModBlocks.FLOURIDE_INFUSER.get()).build(null));
+                    ModBlocks.FLUORIDE_INFUSER.get()).build(null));
 
     public static final RegistryObject<TileEntityType<ElectricInfusingChamberTileEntity>> ELECTRIC_INFUSING_CHAMBER_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("electric_infusing_tile_entity",
                     ()-> TileEntityType.Builder.create(ElectricInfusingChamberTileEntity::new,
-                            ModBlocks.ELECTRICFLOURIDE_INFUSER.get()).build(null));
+                            ModBlocks.ELECTRIC_FLUORIDE_INFUSER.get()).build(null));
     public static final RegistryObject<TileEntityType<TowerInterfaceTileEntity>> TOWER_INTERFACE_TILE_ENTITY =
     TILE_ENTITY_TYPES.register("tower_interface_tile_entity",() -> TileEntityType.Builder.create(TowerInterfaceTileEntity::new,
             ModBlocks.TOWER_INTERFACE.get()).build(null));
