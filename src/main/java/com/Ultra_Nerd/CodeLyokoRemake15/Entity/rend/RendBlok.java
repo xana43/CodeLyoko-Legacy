@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 public class RendBlok extends MobRenderer<EntityBlok, ModelBlok>
 {
 
-	protected static final ResourceLocation tex = new ResourceLocation(Base.MOD_ID,"textures/entity/blok/bloktemplate.png");
+	protected static final ResourceLocation tex = new ResourceLocation(Base.MOD_ID,"textures/entity/blok/blok.png");
 	
 	public RendBlok(EntityRendererManager rendManIn)
 	{
