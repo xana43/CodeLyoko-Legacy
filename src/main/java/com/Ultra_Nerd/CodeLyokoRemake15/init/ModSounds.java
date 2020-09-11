@@ -35,4 +35,5 @@ public class ModSounds  {
 	 public static final RegistryObject<SoundEvent> QUANTUMZAP = SOUNDS.register("quantum_zap", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"quantum_zap")));
 	 public static final RegistryObject<SoundEvent> THEME = SOUNDS.register("lyoko", LAZY_THEME);
 	 public static final RegistryObject<SoundEvent> MEGATANKROLL = SOUNDS.register("entity.megatank.move",() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"entity.megatank.move")));
+	 public static final RegistryObject<SoundEvent> HORNETFLY = SOUNDS.register("entity.hornet.fly",() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"entity.hornet.fly")));
 }

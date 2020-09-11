@@ -2,7 +2,7 @@
     "entity.blok.ambient":
     
     {
-        "category":"entity",
+        "category":"hostile",
         "subtitle": "entity.blok.ambient",
         "sounds":[{"name":"cm:entity/blok/ambient", "stream":false}]
     },
@@ -10,14 +10,14 @@
      "entity.blok.hurt":
     
     {
-        "category":"entity",
+        "category":"hostile",
         "subtitle": "entity.blok.hurt",
         "sounds":[{"name":"cm:entity/blok/hurt", "stream":false}]
     },
      "entity.blok.death":
     
     {
-        "category":"entity",
+        "category":"hostile",
         "subtitle": "entity.blok.death",
         "sounds":[{"name":"cm:entity/blok/death", "stream":false}]
     },
@@ -29,50 +29,50 @@
     },
     "laser":
     {
-        "category":"neutral",
+        "category":"player",
         "subtitle":"laser fire",
         "sounds": [{"name":"cm:items/laser","stream":false,"preload": true}]
     },
     "forestsector":
     {
-        "cetegory":"ambient",
+        "cetegory":"music",
         "subtitle":"forest sector ambiance",
         "sounds":[{"name":"cm:music/forest/forestsector", "stream":true,"preload": true}]
     },
     "icesector":
     {
-        "cetegory":"ambient",
+        "cetegory":"music",
         "subtitle":"ice sector ambiance",
         "sounds":[{"name":"cm:music/ice/icesector", "stream":true,"preload": true}]
     },
     "armor_equip_warrior":
     {
-        "category":"neutral",
+        "category":"player",
         "subtitle": "digital armor equip: Warrior Type",
         "sounds": [{"name": "cm:events/armor_digital_equip_warrior","stream": false,"preload": true}]
 
     },
     "armor_equip_feline":
     {
-      "category": "neutral",
+      "category": "player",
         "subtitle": "digital armor equip: Feline Type",
         "sounds": [{"name": "cm:events/armor_digital_equip_feline","stream": false,"preload": true}]
     },
     "armor_equip_guardian":
     {
-        "category": "neutral",
+        "category": "player",
         "subtitle": "digital armor equip: Guardian Type",
         "sounds": [{"name": "cm:events/armor_digital_equip_guardian","stream": false,"preload": true}]
     },
     "armor_equip_ninja":
     {
-        "category": "neutral",
+        "category": "player",
         "subtitle": "digital armor equip: Ninja Type",
         "sounds": [{"name": "cm:events/armor_digital_equip_ninja","stream": false,"preload": true}]
     },
     "armor_equip_samurai":
     {
-        "category": "neutral",
+        "category": "player",
         "subtitle": "digital armor equip: Samurai Type",
         "sounds": [{"name": "cm:events/armor_digital_equip_samurai","stream": false,"preload": true}]
     },
@@ -84,20 +84,26 @@
     },
     "quantum_zap":
     {
-        "category": "records",
+        "category": "block",
         "subtitle": "quantum chiplet zapping away",
         "sounds": [{"name" :  "cm:events/quantumchipletactive","steam":  false, "preload": true}]
     },
     "digital_ocean":
     {
-        "category": "ambient",
+        "category": "music",
         "subtitle": "digital ocean ambiance",
         "sounds": [{"name": "cm:music/sea/digital_sea","stream": true,"preload": true}]
     },
     "entity.megatank.move":
     {
-        "category": "entity",
+        "category": "hostile",
         "subtitle": "megatank rolls",
         "sounds": [{"name": "cm:entity/megatank/tankrolling","stream": false,"preload": true}]
+    },
+    "entity.hornet.fly":
+    {
+        "category": "hostile",
+        "subtitle": "hornet flies",
+        "sounds": [{"name": "cm:entity/hornet/hornetfly","stream": false,"preload": true}]
     }
 }

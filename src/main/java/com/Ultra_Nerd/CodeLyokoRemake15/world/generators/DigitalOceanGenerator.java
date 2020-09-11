@@ -1,7 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.generators;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanGenSettings;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -20,13 +22,13 @@ public class DigitalOceanGenerator extends ChunkGenerator<OceanGenSettings> {
         super(worldIn, biomeProviderIn, settingsIn);
 
     }
-
+//TODO:Generate digital sea roof
     @Override
     public void generateSurface(@Nonnull WorldGenRegion p_225551_1_, @Nonnull IChunk chunk) {
         BlockState bedrock = Blocks.BEDROCK.getDefaultState();
         BlockState stone = ModFluids.DIGITAL_SEA_BLOCK.get().getDefaultState();
-
-
+        Block steel = ModBlocks.SECTOR5_STEEL.get();
+        Block pylon = ModBlocks.DIGITAL_SEA_PYLON.get();
         BlockPos.Mutable pos = new BlockPos.Mutable();
 
         int x;
