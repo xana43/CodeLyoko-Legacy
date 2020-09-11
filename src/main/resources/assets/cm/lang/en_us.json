@@ -78,6 +78,12 @@
   "block.cm.bornite_ore": "Bornite Ore",
   "block.cm.covellite_ore": "Covellite Ore",
   "block.cm.chalcocite_ore": "Chalcocite Ore",
+  "block.cm.anodepart": "Anode Part",
+  "block.cm:cathodepart": "Cathode Part",
+  "block.cm.electroplating_machine": "electroplating machine",
+  "block.cm.electroplating_machine_frame": "electroplating machine frame",
+  "block.cm.electroplating_anode": "Anode",
+  "block.cm.electroplating_cathode": "Cathode",
 
   "_comment_2": "items",
   "item.cm.solid_quantum": "Solid Quantum",
@@ -205,7 +211,27 @@
   "item.cm.bornite_item": "Crushed Bornite(Cu5FeS4)",
   "item.cm.chalcopyrite_item": "Crushed Chalcopyrite(CuFeS2)",
   "item.cm.liquid_helium_bucket": "Liquid Helium Bucket",
-
+  "item.cm.archer_bow": "The Bow Of the Archer",
+  "item.cm.computer_dram_die": "DRAM die",
+  "item.cm.computer_sram_die": "SRAM die",
+  "item.cm.jeremys_laptop": "Jeremy Belpois' Laptop",
+  "item.cm.soldering_iron": "soldering iron",
+  "item.cm.apu_package_arm": "Arm Apu Package",
+  "item.cm.apu_package_x86": "x86 Apu Package",
+  "item.cm.apu_package_asic": "Asic Apu Package",
+  "item.cm.apu_package_risc": "Risc Apu Package",
+  "item.cm.apu_die_arm": "Arm Apu Die",
+  "item.cm.apu_die_x86": "x86 Apu Die",
+  "item.cm.apu_die_asic": "Asic Apu Die",
+  "item.cm.apu_die_risc": "Risc Apu Die",
+  "item.cm.uranium_silicon_plate": "Uranium silicate based plate",
+  "item.cm.computer_qram_die": "QRAM Die",
+  "item.cm.computer_sram_controller": "SRAM controller",
+  "item.cm.computer_sdr_controller": "SDR controller",
+  "item.cm.computer_ddr_controller": "DDR controller",
+  "item.cm.computer_ecc_controller": "ECC controller",
+  "item.cm.cuprous_oxide": "Cuperous Oxide",
+  "item.cm.blister_copper": "Blister Copper",
   "_comment_3": "itemgroups",
   "itemGroup.lyoko_items": "Code Lyoko: Legacy - Items",
   "itemGroup.lyoko_blocks": "Code Lyoko: Legacy - Blocks",
@@ -229,5 +255,10 @@
 
   "_comment_7": "Entities",
   "entity.cm.blok": "Blok",
-  "entity.cm.laser": "Laser arrow"
+  "entity.cm.laser": "Laser arrow",
+  "entity.cm.megatank": "Mega Tank",
+  "entity.cm.hornet": "Hornet",
+  "entity.cm.manta": "Manta",
+  "entity.cm.fan": "Thrown Fan"
+
 }

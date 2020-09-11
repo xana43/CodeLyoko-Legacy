@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "cm:electric_flouride_infuser"
+          "name": "cm:fluoride_infuser"
         }
       ],
       "conditions": [

@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.MantaEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -25,10 +26,9 @@ public class DigitalSeaBlock extends FlowingFluidBlock {
 
     @Override
     public void onEntityCollision(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, Entity entityIn) {
-        // TODO Auto-generated method stub
-
-        entityIn.attackEntityFrom(new DamageSource(this.getTranslationKey()), Byte.MAX_VALUE);
-
+        if(!(entityIn instanceof MantaEntity)) {
+            entityIn.attackEntityFrom(new DamageSource(this.getTranslationKey()), Byte.MAX_VALUE);
+        }
     }
 
     @Override

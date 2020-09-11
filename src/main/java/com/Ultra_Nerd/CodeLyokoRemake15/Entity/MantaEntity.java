@@ -1,77 +1,52 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
-import net.minecraft.entity.*;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.PhantomEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
+import software.bernie.geckolib.animation.controller.EntityAnimationController;
 import software.bernie.geckolib.entity.IAnimatedEntity;
+import software.bernie.geckolib.event.AnimationTestEvent;
 import software.bernie.geckolib.manager.EntityAnimationManager;
 
-import javax.annotation.Nonnull;
-
 public class MantaEntity extends PhantomEntity implements IAnimatedEntity, IRangedAttackMob {
-
-    public MantaEntity(EntityType<? extends PhantomEntity> type, World worldIn) {
+    private final EntityAnimationManager manager = new EntityAnimationManager();
+    private final EntityAnimationController controller = new EntityAnimationController(this,"mantamovecontroller",20,this::animationPred);
+    public MantaEntity(EntityType<? extends MantaEntity> type, World worldIn) {
         super(type, worldIn);
+        manager.addAnimationController(controller);
+    }
+
+    @Override
+    protected boolean isInDaylight() {
+        return false;
     }
 
     @Override
     public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
 
+        EntityLaser laser = new EntityLaser(this.world, 1.0D, 1.0D, 1.0D);
+        double d0 = target.getPosX() - this.getPosX();
+        double d1 = target.getPosYHeight(0.3333333333333333D) - laser.getPosY();
+        double d2 = target.getPosZ() - this.getPosZ();
+        double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
+        laser.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, (float)(14 - this.world.getDifficulty().getId() * 4));
+        this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+        this.world.addEntity(laser);
     }
-
     @Override
     public EntityAnimationManager getAnimationManager() {
-        return null;
+        return manager;
     }
 
-    @Override
-    public Entity getEntity() {
-        return null;
+
+    private <E extends MantaEntity> boolean animationPred(AnimationTestEvent<E> event) {
+       return false;
     }
 
-    @Override
-    public void deserializeNBT(CompoundNBT nbt) {
-
-    }
-
-    @Override
-    public CompoundNBT serializeNBT() {
-        return null;
-    }
-
-    @Override
-    public boolean shouldRiderSit() {
-        return false;
-    }
-
-    @Override
-    public ItemStack getPickedResult(RayTraceResult target) {
-        return null;
-    }
-
-    @Override
-    public boolean canRiderInteract() {
-        return false;
-    }
-
-    @Override
-    public boolean canBeRiddenInWater(Entity rider) {
-        return false;
-    }
-
-    @Override
-    public EntityClassification getClassification(boolean forSpawnCount) {
-        return null;
-    }
-
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap) {
-        return null;
-    }
 }
+
+
