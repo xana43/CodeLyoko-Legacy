@@ -61,11 +61,13 @@ public class BlackVoid extends Block {
     @Override
     public void onEntityCollision(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, Entity entityIn) {
         entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
+        entityIn.fallDistance = Integer.MAX_VALUE;
     }
 
     @Override
     public void onEntityWalk(@Nonnull World worldIn, @Nonnull BlockPos pos, Entity entityIn) {
         entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
+        entityIn.fallDistance = Integer.MAX_VALUE;
     }
 
     @Override
