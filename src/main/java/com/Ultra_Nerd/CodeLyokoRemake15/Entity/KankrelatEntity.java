@@ -34,6 +34,10 @@ public class KankrelatEntity extends SkeletonEntity implements IAnimatedEntity {
         }
     }
 
+    @Override
+    protected boolean isInDaylight() {
+        return false;
+    }
 
     @Nonnull
     @Override
