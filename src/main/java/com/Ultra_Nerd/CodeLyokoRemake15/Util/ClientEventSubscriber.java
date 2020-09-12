@@ -70,7 +70,7 @@ public class ClientEventSubscriber {
             }
 
         }
-        else if(!(event.player.world.dimension instanceof ForestDimension) && Minecraft.getInstance().player != null)
+        else if(!(event.player.world.dimension instanceof IceDimension) && Minecraft.getInstance().player != null)
         {
             timer[1] = 140000;
 

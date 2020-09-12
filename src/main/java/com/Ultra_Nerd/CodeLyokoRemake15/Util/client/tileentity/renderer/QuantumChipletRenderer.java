@@ -43,7 +43,7 @@ public class QuantumChipletRenderer extends TileEntityRenderer<QuantumChipletTil
                     matrixStackIn.push();
                     matrixStackIn.scale(.5f, .5f, .5f);
                     matrixStackIn.translate(1, 1, 1);
-                    matrixStackIn.rotate(Vector3f.YP.rotationDegrees(degrees++ * 16));
+                    matrixStackIn.rotate(Vector3f.YP.rotationDegrees(degrees++));
                     delay++;
                     if(delay == 10) {
                         PlaySound(tileEntityIn);
