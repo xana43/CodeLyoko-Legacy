@@ -38,4 +38,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<EntitySkid>> SKID = Entities.register("skidbladnir",() ->
             EntityType.Builder.<EntitySkid>create(EntitySkid::new,EntityClassification.AMBIENT).size(1,1)
     .build(new ResourceLocation(Base.MOD_ID,"skid").toString()));
+    public static final RegistryObject<EntityType<KankrelatEntity>> KANKRELAT = Entities.register("kankrelat",() ->
+            EntityType.Builder.<KankrelatEntity>create(KankrelatEntity::new,EntityClassification.MONSTER).size(1,1)
+    .build(new ResourceLocation(Base.MOD_ID,"kankrelat").toString()));
 }

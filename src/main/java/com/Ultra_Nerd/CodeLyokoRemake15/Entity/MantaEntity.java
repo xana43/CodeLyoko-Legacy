@@ -5,12 +5,16 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.PhantomEntity;
+import net.minecraft.network.IPacket;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib.animation.controller.EntityAnimationController;
 import software.bernie.geckolib.entity.IAnimatedEntity;
 import software.bernie.geckolib.event.AnimationTestEvent;
 import software.bernie.geckolib.manager.EntityAnimationManager;
+
+import javax.annotation.Nonnull;
 
 public class MantaEntity extends PhantomEntity implements IAnimatedEntity, IRangedAttackMob {
     private final EntityAnimationManager manager = new EntityAnimationManager();
@@ -25,6 +29,11 @@ public class MantaEntity extends PhantomEntity implements IAnimatedEntity, IRang
         return false;
     }
 
+    @Nonnull
+    @Override
+    public IPacket<?> createSpawnPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
     @Override
     public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
 
