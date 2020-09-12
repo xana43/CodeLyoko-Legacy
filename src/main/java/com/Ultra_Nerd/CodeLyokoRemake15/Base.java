@@ -7,6 +7,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.SeaPylon;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.BlokItem;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModOreGen;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.StructGen;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
@@ -24,12 +25,12 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
@@ -51,7 +52,6 @@ public class Base
 		final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
 		ModBus.addListener(this::setup);
 		ModBus.addListener(this::dostuff);
-		ModBus.addListener(this::OreGen);
 		ModParticles.PARTICLES.register(ModBus);
 		ModSounds.SOUNDS.register(ModBus);
 		ModItems.ITEMS.register(ModBus);
@@ -63,6 +63,7 @@ public class Base
 		ModContainerTypes.CONTAINER_TYPES.register(ModBus);
 		ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
 		ModDimensions.MOD_DIMENSION_DEFERRED_REGISTER.register(ModBus);
+		ModWorldFeatures.FEATURES.register(ModBus);
 		instance = this;
 		MinecraftForge.EVENT_BUS.register(this);
 		
@@ -95,7 +96,8 @@ public class Base
 	}
 	private void setup(final FMLCommonSetupEvent event)
 	{
-
+		DeferredWorkQueue.runLater(ModOreGen::genOre);
+		DeferredWorkQueue.runLater(StructGen::genStruct);
 	}
 private static final String nbt = "firstjoin";
 	@SubscribeEvent
@@ -122,11 +124,7 @@ CompoundNBT existing;
 			}
 		}
 	}
-	public void OreGen(final FMLLoadCompleteEvent event)
-	{
 
-		ModOreGen.genOre();
-	}
 
 
 
