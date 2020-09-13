@@ -4,13 +4,15 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 // Paste this class into your mod and generate all required imports
 
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.HoverboardEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
-public class ModelHoverboard extends EntityModel<Entity> {
+import javax.annotation.Nonnull;
+
+public class ModelHoverboard<T extends HoverboardEntity> extends EntityModel<T> {
 	private final ModelRenderer mainbody;
 	private final ModelRenderer thruster;
 
@@ -56,19 +58,13 @@ public class ModelHoverboard extends EntityModel<Entity> {
 	}
 
 	@Override
-	public void setRotationAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
+	public void setRotationAngles(@Nonnull HoverboardEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
 		//previously the render function, render code was moved to a method below
 	}
 
 	@Override
-	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+	public void render(@Nonnull MatrixStack matrixStack, @Nonnull IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
 		mainbody.render(matrixStack, buffer, packedLight, packedOverlay);
-	}
-
-	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-		modelRenderer.rotateAngleX = x;
-		modelRenderer.rotateAngleY = y;
-		modelRenderer.rotateAngleZ = z;
 	}
 
 }

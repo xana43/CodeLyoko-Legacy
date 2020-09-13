@@ -41,4 +41,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<KankrelatEntity>> KANKRELAT = Entities.register("kankrelat",() ->
             EntityType.Builder.<KankrelatEntity>create(KankrelatEntity::new,EntityClassification.MONSTER).size(1,1)
     .build(new ResourceLocation(Base.MOD_ID,"kankrelat").toString()));
+    public static final RegistryObject<EntityType<HoverboardEntity>> HOVERBOARD = Entities.register("hoverboard", () ->
+            EntityType.Builder.<HoverboardEntity>create(HoverboardEntity::new,EntityClassification.MISC).size(1,1)
+    .build(new ResourceLocation(Base.MOD_ID,"hoverboard").toString()));
 }
