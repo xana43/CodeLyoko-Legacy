@@ -28,6 +28,7 @@ public class HoverboardRenderer<T extends HoverboardEntity> extends EntityRender
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.push();
         matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
+        matrixStackIn.translate(0,-5,0);
         this.BoardModel.setRotationAngles(entityIn,0,0,0,0,0);
         IVertexBuilder vertexBuilder = bufferIn.getBuffer(this.BoardModel.getRenderType(this.getEntityTexture(entityIn)));
         this.BoardModel.render(matrixStackIn,vertexBuilder,packedLightIn, OverlayTexture.NO_OVERLAY,1,1,1,1);
