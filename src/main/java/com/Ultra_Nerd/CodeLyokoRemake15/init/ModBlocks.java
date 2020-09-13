@@ -91,6 +91,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> TOWER_WALL = BLOCKS.register("tower_wall", TowerWall::new);
     public static final RegistryObject<Block> TOWER_BLUE = BLOCKS.register("tower_blue", () -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(-1, -1).sound(SoundType.GLASS).lightValue(10).harvestLevel(20).harvestTool(ToolType.SHOVEL)));
     public static final RegistryObject<Block> TOWER_TOP = BLOCKS.register("tower_top",() -> new Block(Block.Properties.from(Blocks.IRON_BLOCK).sound(SoundType.GLASS).lightValue(10)));
+    public static final RegistryObject<Block> TOWER_WALL_CORNER = BLOCKS.register("tower_wall_corner", TowerWallCorner::new);
     public static final RegistryObject<TowerBottomBlock> TOWER_BOTTOM = BLOCKS.register("tower_bottom", ()-> new TowerBottomBlock(Block.Properties.from(Blocks.IRON_BLOCK).sound(SoundType.GLASS).lightValue(10)));
     public static final RegistryObject<Block> TYUYAMUNITE_ORE = BLOCKS.register("tyuyamunite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(0).harvestLevel(1).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> TORBERNITE_ORE = BLOCKS.register("torbernite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
