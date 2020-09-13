@@ -1,13 +1,19 @@
-// Made with Blockbench 3.6.6
+package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;// Made with Blockbench 3.6.6
 // Exported for Minecraft version 1.15
 // Paste this class into your mod and generate all required imports
 
 
-public class Hoverboard extends EntityModel<Entity> {
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+
+public class ModelHoverboard extends EntityModel<Entity> {
 	private final ModelRenderer mainbody;
 	private final ModelRenderer thruster;
 
-	public Hoverboard() {
+	public ModelHoverboard() {
 		textureWidth = 32;
 		textureHeight = 32;
 

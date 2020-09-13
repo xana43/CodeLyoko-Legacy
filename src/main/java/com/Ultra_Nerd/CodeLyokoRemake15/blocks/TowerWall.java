@@ -84,16 +84,16 @@ public class TowerWall extends Block {
         double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
         if (stateIn.get(DIRTOWER) == Direction.NORTH) {
             worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
-                    d0, d1, pos.getZ() + 1.25f, 0, 0, 0);
+                    d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
         } else if (stateIn.get(DIRTOWER) == Direction.SOUTH) {
             worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
-                    d0, d1, pos.getZ() - 0.25f, 0, 0, 0);
+                    d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
         } else if (stateIn.get(DIRTOWER) == Direction.EAST) {
             worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
-                    pos.getX() - 0.25f, d1, d2, 0, 0, 0);
+                    pos.getX() - 0.25f, d1, d2, 0, -1, 0);
         } else if (stateIn.get(DIRTOWER) == Direction.WEST) {
             worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
-                    pos.getX() + 1.25f, d1, d2, 0, 0, 0);
+                    pos.getX() + 1.25f, d1, d2, 0, -1, 0);
         }
     }
 }
