@@ -84,6 +84,7 @@
   "block.cm.electroplating_machine_frame": "electroplating machine frame",
   "block.cm.electroplating_anode": "Anode",
   "block.cm.electroplating_cathode": "Cathode",
+  "block.cm.tower_bottom": "Tower Bottom",
 
   "_comment_2": "items",
   "item.cm.solid_quantum": "Solid Quantum",
