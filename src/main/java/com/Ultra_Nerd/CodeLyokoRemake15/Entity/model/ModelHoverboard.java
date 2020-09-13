@@ -1,4 +1,5 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;// Made with Blockbench 3.6.6
+package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
+// Made with Blockbench 3.6.6
 // Exported for Minecraft version 1.15
 // Paste this class into your mod and generate all required imports
 
@@ -69,4 +70,5 @@ public class ModelHoverboard extends EntityModel<Entity> {
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
 	}
+
 }
