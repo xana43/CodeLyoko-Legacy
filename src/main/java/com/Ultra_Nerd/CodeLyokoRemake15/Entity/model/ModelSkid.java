@@ -2,7 +2,9 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.renderer.model.*;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
@@ -22,7 +24,7 @@ public class ModelSkid implements/*IMultipartModelGeometry<OBJModel>,*/ IModelGe
 
     public ModelSkid() {
 
-        objModel = loader.loadModel(new OBJModel.ModelSettings(new ResourceLocation(Base.MOD_ID,"models/entities/skid"),false,true,
+        objModel = loader.loadModel(new OBJModel.ModelSettings(new ResourceLocation(Base.MOD_ID,"models/entities/skid/skid.obj"),false,true,
                 true,false,null));
     }
 
@@ -37,12 +39,12 @@ public class ModelSkid implements/*IMultipartModelGeometry<OBJModel>,*/ IModelGe
     }
 
     @Override
-    public Collection<Material> getTextures(IModelConfiguration owner, Function modelGetter, Set missingTextureErrors) {
+    public Collection<Material> getTextures(IModelConfiguration owner, Function<ResourceLocation, IUnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
         return this.objModel.getTextures(owner,modelGetter,missingTextureErrors);
     }
 
     @Override
-    public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
+    public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
         return this.objModel.bake(owner,bakery,spriteGetter,modelTransform,overrides,modelLocation);
     }
 
