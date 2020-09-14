@@ -2,12 +2,17 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class TowerBottomBlock extends Block {
 
@@ -27,5 +32,9 @@ public class TowerBottomBlock extends Block {
             }
         }
         super.onEntityWalk(worldIn, pos, entityIn);
+    }
+    @Override
+    public boolean canCreatureSpawn(BlockState state, IBlockReader world, BlockPos pos, EntitySpawnPlacementRegistry.PlacementType type, @Nullable EntityType<?> entityType) {
+        return false;
     }
 }
