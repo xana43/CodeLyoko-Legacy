@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
+package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

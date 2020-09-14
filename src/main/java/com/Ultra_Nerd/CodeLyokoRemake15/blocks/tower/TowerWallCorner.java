@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
+package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.particles.ColoredParticle;
 import net.minecraft.block.Block;
@@ -20,12 +20,12 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 
-public class TowerWall extends Block {
+public class TowerWallCorner extends Block {
 
-    public static final DirectionProperty DIRTOWER = BlockStateProperties.HORIZONTAL_FACING;
+    public static final DirectionProperty DIRTOWERC = BlockStateProperties.HORIZONTAL_FACING;
 
-    public TowerWall() {
-        super(Block.Properties.create(Material.MISCELLANEOUS)
+    public TowerWallCorner() {
+        super(Properties.create(Material.MISCELLANEOUS)
                 .hardnessAndResistance(-1, -1)
                 .sound(SoundType.GLASS)
                 .lightValue(11)
@@ -40,26 +40,26 @@ public class TowerWall extends Block {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(DIRTOWER);
+        builder.add(DIRTOWERC);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         // TODO Auto-generated method stub
-        return this.getDefaultState().with(DIRTOWER, context.getPlacementHorizontalFacing().getOpposite());
+        return this.getDefaultState().with(DIRTOWERC, context.getPlacementHorizontalFacing().getOpposite());
     }
 
     //mod compatiability
     @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(DIRTOWER, rot.rotate(state.get(DIRTOWER)));
+        return state.with(DIRTOWERC, rot.rotate(state.get(DIRTOWERC)));
     }
 
     @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(DIRTOWER)));
+        return state.rotate(mirrorIn.toRotation(state.get(DIRTOWERC)));
     }
     //
 
@@ -82,16 +82,16 @@ public class TowerWall extends Block {
         double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D);
         double d1 = (double) pos.getY() + 0.5D + (rand.nextDouble() - 0.5D);
         double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
-        if (stateIn.get(DIRTOWER) == Direction.NORTH) {
+        if (stateIn.get(DIRTOWERC) == Direction.NORTH) {
             worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
                     d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
-        } else if (stateIn.get(DIRTOWER) == Direction.SOUTH) {
+        } else if (stateIn.get(DIRTOWERC) == Direction.SOUTH) {
             worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
                     d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
-        } else if (stateIn.get(DIRTOWER) == Direction.EAST) {
+        } else if (stateIn.get(DIRTOWERC) == Direction.EAST) {
             worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
                     pos.getX() - 0.25f, d1, d2, 0, -1, 0);
-        } else if (stateIn.get(DIRTOWER) == Direction.WEST) {
+        } else if (stateIn.get(DIRTOWERC) == Direction.WEST) {
             worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
                     pos.getX() + 1.25f, d1, d2, 0, -1, 0);
         }

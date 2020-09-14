@@ -1,5 +1,10 @@
 {
-    "variants": {
-        "": { "model": "cm:block/tower_base" }
+    "variants":
+    {
+        "facing=north":{"model":"cm:block/tower_base"},
+        "facing=east":{"model":"cm:block/tower_base", "y": 90},
+        "facing=south":{"model":"cm:block/tower_base", "y": 180},
+        "facing=west":{"model":"cm:block/tower_base", "y" : 270}
+
     }
 }
