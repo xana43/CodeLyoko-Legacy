@@ -2,11 +2,13 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.extensions.IForgeEntity;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -15,9 +17,52 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class HoverboardEntity extends Entity implements IForgeEntity {
+    private float i = 0;
 
+    private final AxisAlignedBB axisAlignedBB = this.getBoundingBox();
     public HoverboardEntity(EntityType<? extends HoverboardEntity> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
+        this.setBoundingBox(new AxisAlignedBB(axisAlignedBB.minX,axisAlignedBB.minY,axisAlignedBB.minZ,axisAlignedBB.maxX,axisAlignedBB.maxY,axisAlignedBB.maxZ));
+
+        recalculateSize();
+    }
+
+
+
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox() {
+        return this.getCollisionBox(this);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        i+= 0.0000000000001f;
+        Vec3d motion = this.getMotion();
+        this.setMotion(motion.add(0,0,this.getMotion().getZ() + i));
+        if(this.isBeingRidden()) {
+            this.moveForced(this.getMotion().x, this.getPosY(), this.getMotion().z);
+        }
+        else if(!this.isBeingRidden())
+        {
+            i = 0;
+        }
+        }
+
+    @Override
+    public void move(@Nonnull MoverType typeIn, @Nonnull Vec3d pos) {
+        super.move(typeIn, pos);
+    }
+
+    @Override
+    public boolean isLiving() {
+        return false;
+    }
+
+    @Override
+    public void applyEntityCollision(@Nonnull Entity entityIn) {
+        super.applyEntityCollision(this);
     }
 
     @Override
@@ -63,7 +108,7 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
     @Nullable
     @Override
     public AxisAlignedBB getCollisionBox(Entity entityIn) {
-        return super.getCollisionBox(entityIn);
+        return axisAlignedBB;
     }
 
     @Override
