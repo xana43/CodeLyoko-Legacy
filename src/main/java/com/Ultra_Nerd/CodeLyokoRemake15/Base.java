@@ -42,6 +42,7 @@ import java.util.Random;
 @Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Bus.MOD)
 public class Base
 {
+
 	public static final Logger Log = LogManager.getLogger();
 	public static boolean XANA = false;
 	public static final String MOD_ID = "cm";
@@ -49,6 +50,7 @@ public class Base
 	public static int random = 1000;
 	public Base()
 	{
+
 		final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
 		ModBus.addListener(this::setup);
 		ModBus.addListener(this::dostuff);

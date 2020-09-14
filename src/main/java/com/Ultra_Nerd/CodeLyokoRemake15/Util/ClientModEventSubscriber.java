@@ -97,6 +97,7 @@ public class ClientModEventSubscriber {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.SKID.get(),RendSkid::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.KANKRELAT.get(), KankrelatRenderder::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.HOVERBOARD.get(), HoverboardRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.OVERBOARD.get(),OverboardRenderer::new);
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get(), QuantumChipletRenderer::new);
     }
 
