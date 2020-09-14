@@ -6,6 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
@@ -34,7 +36,10 @@ public class TowerInterface extends Block {
     private static final VoxelShape SHAPE_E = Block.makeCuboidShape(4, 9, 1, 13, 9.1, 15);
     private static final VoxelShape SHAPE_W = Block.makeCuboidShape(4, 9, 1, 13, 9.1, 15);
 
-
+    @Override
+    public boolean canCreatureSpawn(BlockState state, IBlockReader world, BlockPos pos, EntitySpawnPlacementRegistry.PlacementType type, @Nullable EntityType<?> entityType) {
+        return false;
+    }
     public TowerInterface() {
         super(Block.Properties.create(Material.DRAGON_EGG)
 

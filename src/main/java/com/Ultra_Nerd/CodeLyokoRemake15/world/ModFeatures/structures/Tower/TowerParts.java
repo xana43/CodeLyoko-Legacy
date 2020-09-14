@@ -26,9 +26,9 @@ import java.util.Map;
 import java.util.Random;
 
 public class TowerParts {
-    private static final ResourceLocation PART1 = new ResourceLocation(Base.MOD_ID,"tower");
-    private static final Map<ResourceLocation, BlockPos> offset = ImmutableMap.of(PART1,new BlockPos(0,1,0));
-
+    private static final ResourceLocation PART1 = new ResourceLocation(Base.MOD_ID,"tower_new_bellow");
+    private static final ResourceLocation PART2 = new ResourceLocation(Base.MOD_ID,"tower_new_top");
+    private static final Map<ResourceLocation, BlockPos> offset = ImmutableMap.of(PART1,new BlockPos(0,-14,0),PART2,new BlockPos(0,0,0));
     public static void Start(TemplateManager manager, BlockPos pos, Rotation rotation, List<StructurePiece> pieces, Random rand)
     {
         int x = pos.getX();
@@ -36,6 +36,7 @@ public class TowerParts {
         BlockPos rotoff = new BlockPos(0,0,0).rotate(rotation);
         BlockPos blockPos = rotoff.add(x,pos.getY(),z);
         pieces.add(new TowerParts.Part(manager,PART1,blockPos,rotation));
+        pieces.add(new TowerParts.Part(manager,PART2,blockPos,rotation));
     }
 
     public static class Part extends TemplateStructurePiece{
@@ -47,7 +48,9 @@ public class TowerParts {
             super(ModWorldFeatures.TOWER_PART, 0);
             this.resourceLocation = resourceLocationIn;
             BlockPos blockpos = TowerParts.offset.get(resourceLocation);
+            //BlockPos blockpos2 = TowerParts.offset2.get(resourceLocation);
             this.templatePosition = pos.add(blockpos.getX(), blockpos.getY(), blockpos.getZ());
+            //this.templatePosition = pos.add(blockpos2.getX(),blockpos2.getY(),blockpos2.getZ());
             this.rotation = rotationIn;
             this.setupPiece(templateManagerIn);
         }
@@ -95,6 +98,7 @@ public class TowerParts {
             BlockPos blockpos = TowerParts.offset.get(this.resourceLocation);
             this.templatePosition.add(Template.transformedBlockPos(placementsettings,
                     new BlockPos(0 - blockpos.getX(), 0, 0 - blockpos.getZ())));
+
 
             return super.create(worldIn, generator, randomIn, structureBoundingBoxIn, chunkPos);
         }
