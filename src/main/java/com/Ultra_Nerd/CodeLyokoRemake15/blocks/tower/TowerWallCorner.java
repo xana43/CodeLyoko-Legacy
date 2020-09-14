@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower;
 import com.Ultra_Nerd.CodeLyokoRemake15.particles.ColoredParticle;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
@@ -15,6 +16,8 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -76,6 +79,7 @@ public class TowerWallCorner extends Block {
     }
 
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void animateTick(@Nonnull BlockState stateIn, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
         super.animateTick(stateIn, worldIn, pos, rand);
@@ -83,17 +87,37 @@ public class TowerWallCorner extends Block {
         double d1 = (double) pos.getY() + 0.5D + (rand.nextDouble() - 0.5D);
         double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
         if (stateIn.get(DIRTOWERC) == Direction.NORTH) {
-            worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
-                    d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
+            if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)) == Blocks.AIR.getDefaultState()) {
+                worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
+                        d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
+            } else {
+                worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
+                        pos.getX() - 0.25f, d1, d2, 0, -1, 0);
+            }
         } else if (stateIn.get(DIRTOWERC) == Direction.SOUTH) {
-            worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
-                    d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
+            if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)) == Blocks.AIR.getDefaultState()) {
+                worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
+                        d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
+            } else {
+                worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
+                        pos.getX() + 1.25f, d1, d2, 0, -1, 0);
+            }
         } else if (stateIn.get(DIRTOWERC) == Direction.EAST) {
-            worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
-                    pos.getX() - 0.25f, d1, d2, 0, -1, 0);
+            if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ())) == Blocks.AIR.getDefaultState()) {
+                worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
+                        pos.getX() - 0.25f, d1, d2, 0, -1, 0);
+            } else {
+                worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
+                        d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
+            }
         } else if (stateIn.get(DIRTOWERC) == Direction.WEST) {
-            worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
-                    pos.getX() + 1.25f, d1, d2, 0, -1, 0);
+            if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ())) == Blocks.AIR.getDefaultState()) {
+                worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
+                        pos.getX() + 1.25f, d1, d2, 0, -1, 0);
+            } else {
+                worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
+                        d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
+            }
         }
     }
 }

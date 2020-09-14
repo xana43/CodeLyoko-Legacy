@@ -1,12 +1,12 @@
 {
    "parent": "block/cube_all",
    "textures": {
-     "particle": "cm:block/tower_block",
-     "up":"cm:block/tower_block",
-     "down":"cm:block/tower_block",
+     "particle": "cm:block/tower_base",
+     "up":"cm:block/tower_base",
+     "down":"cm:block/tower_base",
      "north":"cm:block/tower_wall",
-     "south":"cm:block/tower_block",
-     "east":"cm:block/tower_block",
-     "west":"cm:block/tower_block"
+     "south":"cm:block/tower_base",
+     "east":"cm:block/tower_base",
+     "west":"cm:block/tower_base"
    }
 }

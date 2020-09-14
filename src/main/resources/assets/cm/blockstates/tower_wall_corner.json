@@ -1,7 +1,7 @@
 {
 "variants":
   {
-  "facing=north":{"model":"cm:block/tower_wall_corner"},
+  "facing=north":{"model":"cm:block/tower_wall_corner", "y" : 0},
   "facing=east":{"model":"cm:block/tower_wall_corner", "y": 90},
   "facing=south":{"model":"cm:block/tower_wall_corner", "y": 180},
   "facing=west":{"model":"cm:block/tower_wall_corner", "y" : 270}
