@@ -59,7 +59,7 @@ public class ColoredParticle extends SpriteTexturedParticle {
     @Nonnull
     @Override
     public IParticleRenderType getRenderType() {
-        return IParticleRenderType.PARTICLE_SHEET_OPAQUE;
+        return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
     @OnlyIn(Dist.CLIENT)
     public static class Factory implements IParticleFactory<ColoredParticleData>

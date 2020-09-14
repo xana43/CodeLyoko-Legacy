@@ -6,6 +6,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.tileentity.renderer.QuantumC
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.particles.ColoredParticle;
+import com.Ultra_Nerd.CodeLyokoRemake15.particles.TowerParticleFactory;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
@@ -28,6 +29,7 @@ public class ClientModEventSubscriber {
     @SubscribeEvent
     public static void registerParticles(ParticleFactoryRegisterEvent event) {
         Minecraft.getInstance().particles.registerFactory(ModParticles.TOWER_PARTICLE.get(), ColoredParticle.Factory::new);
+        Minecraft.getInstance().particles.registerFactory(ModParticles.TOWER_PARTICLE_2.get(), TowerParticleFactory::new);
     }
 
     @SubscribeEvent
