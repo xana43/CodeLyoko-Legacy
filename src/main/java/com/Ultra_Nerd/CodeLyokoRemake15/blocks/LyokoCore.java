@@ -2,8 +2,12 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+
+import javax.annotation.Nonnull;
 
 public class LyokoCore extends Block {
     public LyokoCore(Properties properties) {
@@ -11,7 +15,7 @@ public class LyokoCore extends Block {
     }
 
     @Override
-    public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         return false;
     }
 
@@ -19,4 +23,15 @@ public class LyokoCore extends Block {
     public boolean isVariableOpacity() {
         return true;
     }
+
+    @Override
+    public boolean canCreatureSpawn(BlockState state, IBlockReader world, BlockPos pos, EntitySpawnPlacementRegistry.PlacementType type, @org.jetbrains.annotations.Nullable EntityType<?> entityType) {
+        return false;
+    }
+
+    @Override
+    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+        return 100;
+    }
+
 }
