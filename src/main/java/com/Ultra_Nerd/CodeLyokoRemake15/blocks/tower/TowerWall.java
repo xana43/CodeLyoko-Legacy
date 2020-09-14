@@ -37,6 +37,11 @@ public class TowerWall extends Block {
     }
 
     @Override
+    public int getLightValue(@Nonnull BlockState state) {
+        return 5;
+    }
+
+    @Override
     public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
         return 5;
     }
