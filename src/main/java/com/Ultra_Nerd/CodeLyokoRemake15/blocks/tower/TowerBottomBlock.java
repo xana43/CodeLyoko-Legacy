@@ -31,6 +31,7 @@ public class TowerBottomBlock extends Block {
 
             }
         }
+
         super.onEntityWalk(worldIn, pos, entityIn);
     }
     @Override

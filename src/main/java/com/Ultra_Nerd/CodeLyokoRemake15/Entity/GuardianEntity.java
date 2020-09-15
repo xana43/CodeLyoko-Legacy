@@ -34,7 +34,7 @@ public class GuardianEntity extends FlyingEntity implements IMob, IRangedAttackM
     @Override
     protected void registerAttributes() {
         super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
+     //   this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
         this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);

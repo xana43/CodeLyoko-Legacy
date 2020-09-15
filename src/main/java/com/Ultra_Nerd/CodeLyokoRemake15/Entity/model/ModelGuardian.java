@@ -2838,7 +2838,7 @@ public class ModelGuardian extends EntityModel<GuardianEntity> {
 		guardian2.setTextureOffset(0, 0).addBox(4.0F, -12.0F, -21.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
 		guardian2.setTextureOffset(0, 0).addBox(1.0F, -12.0F, 27.0F, 3.0F, 1.0F, 1.0F, 0.0F, false);
 		guardian2.setTextureOffset(0, 0).addBox(-18.0F, -12.0F, 27.0F, 3.0F, 1.0F, 1.0F, 0.0F, false);
-		guardian2.setTextureOffset(0, 0).addBox(-18.0F, -12.0F, -22.0F, 3.0F, 1.0F, 1.0F, 0.0F, false);
+	/*	guardian2.setTextureOffset(0, 0).addBox(-18.0F, -12.0F, -22.0F, 3.0F, 1.0F, 1.0F, 0.0F, false);
 		guardian2.setTextureOffset(0, 0).addBox(1.0F, -12.0F, -22.0F, 3.0F, 1.0F, 1.0F, 0.0F, false);
 		guardian2.setTextureOffset(0, 0).addBox(-3.0F, -12.0F, 28.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
 		guardian2.setTextureOffset(0, 0).addBox(-15.0F, -12.0F, 28.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
@@ -3451,7 +3451,7 @@ public class ModelGuardian extends EntityModel<GuardianEntity> {
 		guardian2.setTextureOffset(0, 0).addBox(3.0F, -29.0F, 32.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
 		guardian2.setTextureOffset(0, 0).addBox(5.0F, -29.0F, 31.0F, 3.0F, 1.0F, 1.0F, 0.0F, false);
 		guardian2.setTextureOffset(0, 0).addBox(8.0F, -29.0F, 30.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		guardian2.setTextureOffset(0, 0).addBox(9.0F, -29.0F, 29.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
+		/*guardian2.setTextureOffset(0, 0).addBox(9.0F, -29.0F, 29.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
 		guardian2.setTextureOffset(0, 0).addBox(11.0F, -29.0F, 28.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
 		guardian2.setTextureOffset(0, 0).addBox(12.0F, -29.0F, 27.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
 		guardian2.setTextureOffset(0, 0).addBox(14.0F, -29.0F, 26.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
@@ -3754,7 +3754,7 @@ public class ModelGuardian extends EntityModel<GuardianEntity> {
 		guardian2.setTextureOffset(0, 0).addBox(13.0F, -21.0F, 25.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
 		guardian2.setTextureOffset(0, 0).addBox(12.0F, -21.0F, 26.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
 		guardian2.setTextureOffset(0, 0).addBox(9.0F, -21.0F, 28.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
-		guardian2.setTextureOffset(0, 0).addBox(-24.0F, -21.0F, 28.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+		guardian2.setTextureOffset(0, 0).addBox(-24.0F, -21.0F, 28.0F, 1.0F, 1.0F, 1.0F, 0.0F, false);*/
 	}
 
 	@Override

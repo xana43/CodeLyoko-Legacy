@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.particles.ColoredParticle;
 import com.Ultra_Nerd.CodeLyokoRemake15.particles.TowerParticleData;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -101,13 +100,13 @@ public class TowerWall extends Block {
             worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                     d0, d1, pos.getZ() + 1.25f, 0, 0, 0);
         } else if (stateIn.get(DIRTOWER) == Direction.SOUTH) {
-            worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
+            worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                     d0, d1, pos.getZ() - 0.25f, 0, 0, 0);
         } else if (stateIn.get(DIRTOWER) == Direction.EAST) {
-            worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
+            worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                     pos.getX() - 0.25f, d1, d2, 0, 0, 0);
         } else if (stateIn.get(DIRTOWER) == Direction.WEST) {
-            worldIn.addParticle(ColoredParticle.ColoredParticleData.TOWER_PARTICLE,
+            worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                     pos.getX() + 1.25f, d1, d2, 0, 0, 0);
         }
     }

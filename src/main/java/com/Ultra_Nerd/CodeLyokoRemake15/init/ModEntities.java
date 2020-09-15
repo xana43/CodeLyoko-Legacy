@@ -48,6 +48,6 @@ public class ModEntities {
             EntityType.Builder.<OverboardEntity>create(OverboardEntity::new,EntityClassification.MISC).size(4,2)
     .build(new ResourceLocation(Base.MOD_ID,"overboard").toString()));
     public static final RegistryObject<EntityType<GuardianEntity>> GUARDIAN = Entities.register("guardian",() ->
-            EntityType.Builder.<GuardianEntity>create(GuardianEntity::new,EntityClassification.MONSTER).size(64,64)
+            EntityType.Builder.<GuardianEntity>create(GuardianEntity::new,EntityClassification.MONSTER).size(8,8)
     .build(new ResourceLocation(Base.MOD_ID,"guardian").toString()));
 }
