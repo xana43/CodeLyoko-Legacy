@@ -15,4 +15,22 @@ public class KeyBoardAccess {
     public static boolean shift() {
         return InputMappings.isKeyDown(MINECRAFT, GLFW.GLFW_KEY_LEFT_SHIFT) || InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), GLFW.GLFW_KEY_RIGHT_SHIFT);
     }
+
+    public static boolean w()
+    {
+        return InputMappings.isKeyDown(MINECRAFT,GLFW.GLFW_KEY_W);
+    }
+    public static boolean S()
+    {
+        return InputMappings.isKeyDown(MINECRAFT,GLFW.GLFW_KEY_S);
+    }
+
+    public static boolean Q()
+    {
+        return InputMappings.isKeyDown(MINECRAFT,GLFW.GLFW_KEY_Q);
+    }
+    public static boolean Z()
+    {
+        return InputMappings.isKeyDown(MINECRAFT,GLFW.GLFW_KEY_Z);
+    }
 }
