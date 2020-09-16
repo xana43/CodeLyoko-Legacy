@@ -48,7 +48,7 @@ public class BlackVoid extends Block {
         super(Block.Properties.create(Material.STRUCTURE_VOID)
                 .hardnessAndResistance(-1, -1)
                 .sound(SoundType.METAL)
-                .lightValue(90)
+                .lightValue(-90)
         );
     }
 

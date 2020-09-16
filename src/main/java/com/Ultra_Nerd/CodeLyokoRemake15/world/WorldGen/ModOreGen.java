@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.world;
+package com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import net.minecraft.world.biome.Biome;

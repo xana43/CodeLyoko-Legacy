@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.world;
+package com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBiome;
@@ -22,22 +22,30 @@ public class CreatureSpawn {
             if(biomes == ModBiome.DESERT.get())
             {
                 biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.BLOK.get(),
-                        8,2,5));
+                        8,1,3));
+                biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.MEGATANK.get(),
+                        4,1,2));
             }
             else if( biomes == ModBiome.FOREST.get())
             {
                 biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.BLOK.get(),
-                        8,2,5));
+                        8,2,2));
+                biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.MEGATANK.get(),
+                        4,1,2));
             }
             else if(biomes == ModBiome.ICE.get())
             {
                 biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.BLOK.get(),
-                        8,2,5));
+                        8,2,2));
+                biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.MEGATANK.get(),
+                        4,1,2));
             }
             else if(biomes == ModBiome.MOUNTAIN.get())
             {
                 biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.BLOK.get(),
-                        8,2,5));
+                        8,2,2));
+                biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.MEGATANK.get(),
+                        4,1,2));
             }
 
         }

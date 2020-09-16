@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -31,9 +32,22 @@ public class TowerBottomBlock extends Block {
 
             }
         }
-
+        if(!(entityIn instanceof PlayerEntity))
+        {
+            entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD,Integer.MAX_VALUE);
+        }
         super.onEntityWalk(worldIn, pos, entityIn);
     }
+
+    @Override
+    public void onEntityCollision(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
+        super.onEntityCollision(state, worldIn, pos, entityIn);
+        if(!(entityIn instanceof PlayerEntity))
+        {
+            entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD,Integer.MAX_VALUE);
+        }
+    }
+
     @Override
     public boolean canCreatureSpawn(BlockState state, IBlockReader world, BlockPos pos, EntitySpawnPlacementRegistry.PlacementType type, @Nullable EntityType<?> entityType) {
         return false;
