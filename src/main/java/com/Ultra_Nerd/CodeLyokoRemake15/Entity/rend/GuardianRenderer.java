@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.GuardianEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.MathGuardianModel;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelGuardian;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -13,12 +14,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
-public class GuardianRenderer extends MobRenderer<GuardianEntity, ModelGuardian> {
+public class GuardianRenderer extends MobRenderer<GuardianEntity, MathGuardianModel> {
 
     protected static final ResourceLocation tex = new ResourceLocation(Base.MOD_ID, "textures/entity/guardian/guardian.png");
 
     public GuardianRenderer(EntityRendererManager rendManIn) {
-        super(rendManIn, new ModelGuardian(), 1f);
+        super(rendManIn, new MathGuardianModel(), 1f);
     }
 
     @Override
