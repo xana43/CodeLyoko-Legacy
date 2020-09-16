@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend;
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.GuardianEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.MathGuardianModel;
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelGuardian;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
