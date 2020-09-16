@@ -1,6 +1,5 @@
 {
-    "parent": "block/fence_inventory",
-    "textures": {
-        "texture": "block/acacia_planks"
-    }
+    "parent": "block/cable_block_post"
+
+
 }
