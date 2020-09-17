@@ -1,5 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.KeyBoardAccess;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
@@ -17,8 +19,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class OverboardEntity extends Entity implements IForgeEntity {
-    private float i = 0;
 
+    private float Vel = 0;
+    private float WDown = 0;
+    private float QDown = 0;
+    private float ZDown = 0;
     private final AxisAlignedBB axisAlignedBB = this.getBoundingBox();
     public OverboardEntity(EntityType<? extends OverboardEntity> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
@@ -26,6 +31,7 @@ public class OverboardEntity extends Entity implements IForgeEntity {
 
         recalculateSize();
     }
+
 
 
 
@@ -38,37 +44,95 @@ public class OverboardEntity extends Entity implements IForgeEntity {
     @Override
     public void tick() {
         super.tick();
-        i+= 0.0000000000001f;
-        Vec3d motion = this.getMotion();
-        this.setMotion(motion.add(0,0,this.getMotion().getZ() + i));
+
+
         if(this.isBeingRidden()) {
-            this.moveForced(this.getMotion().x, this.getPosY(), this.getMotion().z);
+            if(this.getRidingEntity() != null) {
+                assert Minecraft.getInstance().player != null;
+                setRotation(Minecraft.getInstance().player.rotationYaw, 0);
+            }
+            if(KeyBoardAccess.Q())
+            {
+                QDown += 0.0000001f;
+
+                this.move(MoverType.PLAYER, new Vec3d(0,this.getUpVector(10).y + QDown,0));
+            }
+            else if(KeyBoardAccess.Z())
+            {
+
+                ZDown += 0.0000001f;
+                this.move(MoverType.PLAYER, new Vec3d(0,-(this.getUpVector(10).getY() + ZDown),0));
+
+            }
+            if(!KeyBoardAccess.Z())
+            {
+                ZDown = 0;
+            }
+            if(!KeyBoardAccess.Q())
+            {
+                QDown = 0;
+            }
+
+
+            // rotateTowards(this.rider.cameraYaw,this.rider.rotationPitch);
+            if(KeyBoardAccess.w()) {
+                WDown += 0.00001f;
+                if(this.getRidingEntity() != null) {
+                    if (Vel < 5 && !this.getRidingEntity().isSprinting()) {
+                        Vel += Math.pow(0.0001f, WDown);
+
+                    }
+                    else if(Vel < 7 && this.getRidingEntity().isSprinting())
+                    {
+                        Vel += Math.pow(0.001f, WDown);
+                    }
+                    else if (Vel >= 5) {
+                        Vel = 5;
+                    }
+                }
+
+                this.move(MoverType.PLAYER, new Vec3d(this.getForward().x,this.getForward().y,this.getForward().z + Vel));
+            }
+            else if(Vel != 0 && (!KeyBoardAccess.w() || !KeyBoardAccess.S()))
+            {
+                if(Vel > 0) {
+                    Vel -= 0.0001f;
+                }
+                else if(Vel < 0)
+                {
+                    Vel += 0.0001f;
+                }
+                WDown = 0;
+                this.move(MoverType.PLAYER, new Vec3d(this.getForward().x,this.getForward().y,this.getForward().z + Vel));
+            }
+            if(KeyBoardAccess.S())
+            {
+                if(Vel > -3)
+                {
+                    Vel -= Math.pow(0.0001f,WDown);
+                }
+                if(Vel < -3)
+                {
+                    Vel = -3;
+                }
+
+            }
+
+
+
         }
         else if(!this.isBeingRidden())
         {
-            i = 0;
+            Vel = 0;
+            /*
+            if(Vel != 0) {
+                Vel -= 0.5f;
+            }
+            */
+
+
+
         }
-        }
-
-    @Override
-    public void move(@Nonnull MoverType typeIn, @Nonnull Vec3d pos) {
-        super.move(typeIn, pos);
-    }
-
-    @Override
-    public boolean isLiving() {
-        return false;
-    }
-
-    @Override
-    public void applyEntityCollision(@Nonnull Entity entityIn) {
-        super.applyEntityCollision(this);
-    }
-
-    @Override
-    public void setVelocity(double x, double y, double z) {
-        super.setVelocity(x, y, z);
-        this.setMotion(x,y,z);
     }
 
     @Override
@@ -107,7 +171,7 @@ public class OverboardEntity extends Entity implements IForgeEntity {
 
     @Nullable
     @Override
-    public AxisAlignedBB getCollisionBox(Entity entityIn) {
+    public AxisAlignedBB getCollisionBox(@Nonnull Entity entityIn) {
         return axisAlignedBB;
     }
 
@@ -132,7 +196,7 @@ public class OverboardEntity extends Entity implements IForgeEntity {
     }
 
     @Override
-    protected boolean canBeRidden(Entity entityIn) {
+    protected boolean canBeRidden(@Nonnull Entity entityIn) {
         return true;
     }
 
@@ -142,12 +206,12 @@ public class OverboardEntity extends Entity implements IForgeEntity {
     }
 
     @Override
-    protected void readAdditional(CompoundNBT compound) {
+    protected void readAdditional(@Nonnull CompoundNBT compound) {
 
     }
 
     @Override
-    protected void writeAdditional(CompoundNBT compound) {
+    protected void writeAdditional(@Nonnull CompoundNBT compound) {
 
     }
 

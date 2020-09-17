@@ -45,7 +45,7 @@ public class ModEntities {
             EntityType.Builder.<HoverboardEntity>create(HoverboardEntity::new,EntityClassification.MISC).size(1,1)
     .build(new ResourceLocation(Base.MOD_ID,"hoverboard").toString()));
     public static final RegistryObject<EntityType<OverboardEntity>> OVERBOARD = Entities.register("overboard",() ->
-            EntityType.Builder.<OverboardEntity>create(OverboardEntity::new,EntityClassification.MISC).size(4,2)
+            EntityType.Builder.<OverboardEntity>create(OverboardEntity::new,EntityClassification.MISC).size(2,1)
     .build(new ResourceLocation(Base.MOD_ID,"overboard").toString()));
     public static final RegistryObject<EntityType<GuardianEntity>> GUARDIAN = Entities.register("guardian",() ->
             EntityType.Builder.<GuardianEntity>create(GuardianEntity::new,EntityClassification.MONSTER).size(8,8)

@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.KeyBoardAccess;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -25,14 +24,11 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
     private float WDown = 0;
     private float QDown = 0;
     private float ZDown = 0;
-    private PlayerEntity rider;
     private final AxisAlignedBB axisAlignedBB = this.getBoundingBox();
     public HoverboardEntity(EntityType<? extends HoverboardEntity> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
         this.setBoundingBox(new AxisAlignedBB(axisAlignedBB.minX,axisAlignedBB.minY,axisAlignedBB.minZ,axisAlignedBB.maxX,axisAlignedBB.maxY,axisAlignedBB.maxZ));
-        if(this.getRidingEntity() instanceof PlayerEntity && rider == null) {
-            rider = (PlayerEntity) this.getRidingEntity();
-        }
+
         recalculateSize();
     }
 
@@ -56,7 +52,7 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
     public void tick() {
         super.tick();
 
-        Base.Log.info(Vel);
+
         if(this.isBeingRidden()) {
             if(this.getRidingEntity() != null) {
                 assert Minecraft.getInstance().player != null;
