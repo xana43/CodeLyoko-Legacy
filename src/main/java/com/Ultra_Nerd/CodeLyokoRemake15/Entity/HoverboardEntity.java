@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.KeyBoardAccess;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
@@ -10,6 +11,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.play.server.SEntityPacket;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -46,7 +48,10 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
         return this.getCollisionBox(this);
     }
 
-
+    @Override
+    public void setRenderYawOffset(float offset) {
+        super.setRenderYawOffset(offset);
+    }
 
     @Override
     public void tick() {
@@ -54,6 +59,10 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
 
         Base.Log.info(Vel);
         if(this.isBeingRidden()) {
+            if(this.getRidingEntity() != null) {
+                assert Minecraft.getInstance().player != null;
+                setRotation(Minecraft.getInstance().player.rotationYaw, 0);
+            }
             if(KeyBoardAccess.Q())
             {
                 QDown += 0.0000001f;
@@ -64,7 +73,7 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
             {
 
                     ZDown += 0.0000001f;
-                    this.move(MoverType.PLAYER, new Vec3d(0,this.getUpVector(10).getY() - ZDown,0));
+                    this.move(MoverType.PLAYER, new Vec3d(0,-(this.getUpVector(10).getY() + ZDown),0));
 
             }
             if(!KeyBoardAccess.Z())
@@ -88,9 +97,10 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
                 {
                     Vel = 5;
                 }
-
-                this.move(MoverType.PLAYER, new Vec3d(this.getForward().x,this.getForward().y,this.getForward().z + Vel));
-            }
+                if(this.getRidingEntity() != null) {
+                    this.move(MoverType.PLAYER, new Vec3d(this.getRidingEntity().getForward().x, this.getRidingEntity().getForward().y, this.getRidingEntity().getForward().z + Vel));
+                }
+                }
             else if(Vel != 0 && (!KeyBoardAccess.w() || !KeyBoardAccess.S()))
             {
                 if(Vel > 0) {
@@ -214,6 +224,11 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
     @Override
     protected void registerData() {
 
+    }
+
+    @Override
+    public float getRotatedYaw(@Nonnull Rotation transformRotation) {
+        return super.getRotatedYaw(transformRotation);
     }
 
     @Override
