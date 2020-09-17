@@ -9,7 +9,6 @@ import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
-import net.minecraft.network.play.server.SEntityPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -89,13 +88,18 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
            // rotateTowards(this.rider.cameraYaw,this.rider.rotationPitch);
             if(KeyBoardAccess.w()) {
                 WDown += 0.00001f;
-                if(Vel < 5) {
-                    Vel += Math.pow(0.0001f,WDown);
+                if(this.getRidingEntity() != null) {
+                    if (Vel < 5 && !this.getRidingEntity().isSprinting()) {
+                        Vel += Math.pow(0.0001f, WDown);
 
-                }
-                else if(Vel >= 5)
-                {
-                    Vel = 5;
+                    }
+                    else if(Vel < 7 && this.getRidingEntity().isSprinting())
+                    {
+                        Vel += Math.pow(0.001f, WDown);
+                    }
+                    else if (Vel >= 5) {
+                        Vel = 5;
+                    }
                 }
 
                 this.move(MoverType.PLAYER, new Vec3d(this.getForward().x,this.getForward().y,this.getForward().z + Vel));
@@ -249,9 +253,7 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
     @Override
     public void setPacketCoordinates(double p_213312_1_, double p_213312_3_, double p_213312_5_) {
         super.setPacketCoordinates(p_213312_1_, p_213312_3_, p_213312_5_);
-        this.serverPosX = SEntityPacket.func_218743_a(p_213312_1_);
-        this.serverPosY = SEntityPacket.func_218743_a(p_213312_3_);
-        this.serverPosZ = SEntityPacket.func_218743_a(p_213312_5_);
+
 
     }
 }
