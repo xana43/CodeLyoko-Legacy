@@ -97,10 +97,9 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
                 {
                     Vel = 5;
                 }
-                if(this.getRidingEntity() != null) {
-                    this.move(MoverType.PLAYER, new Vec3d(this.getRidingEntity().getForward().x, this.getRidingEntity().getForward().y, this.getRidingEntity().getForward().z + Vel));
-                }
-                }
+
+                this.move(MoverType.PLAYER, new Vec3d(this.getForward().x,this.getForward().y,this.getForward().z + Vel));
+            }
             else if(Vel != 0 && (!KeyBoardAccess.w() || !KeyBoardAccess.S()))
             {
                 if(Vel > 0) {
