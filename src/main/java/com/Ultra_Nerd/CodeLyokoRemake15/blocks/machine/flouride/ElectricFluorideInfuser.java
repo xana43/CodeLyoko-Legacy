@@ -126,10 +126,11 @@ public class ElectricFluorideInfuser extends Block {
         if (state.getBlock() != newState.getBlock()) {
             TileEntity te = worldIn.getTileEntity(pos);
             if (te instanceof ElectricInfusingChamberTileEntity) {
+                assert te != null;
                 InventoryHelper.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(0)));
                 InventoryHelper.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(1)));
                 InventoryHelper.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(2)));
-                InventoryHelper.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(3)));
+                //InventoryHelper.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(3)));
             }
         }
     }
