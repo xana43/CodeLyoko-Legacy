@@ -18,7 +18,7 @@ import net.minecraft.util.math.MathHelper;
 import javax.annotation.Nonnull;
 
 public class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer<T> {
-    ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/overboard/overboard.png");
+    ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/overboard/overboarduv.png");
     protected final EntityModel<T> BoardModel = new ModelOverboard<>();
     public OverboardRenderer(EntityRendererManager renderManager) {
         super(renderManager);
