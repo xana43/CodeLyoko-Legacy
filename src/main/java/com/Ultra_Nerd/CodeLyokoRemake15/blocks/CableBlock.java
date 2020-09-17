@@ -14,36 +14,41 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 public class CableBlock extends FenceBlock {
 
+    private final static Map<CableBlock, LinkedList<CableBlock>> CABLE_LISTS = new HashMap<>();
+    private CableBlock startOfCable;
 
     private final VoxelShape[] shape;
-    private final VoxelShape mainshape = Block.makeCuboidShape(1, 0, 1, 15, 14, 15);
+    private final VoxelShape mainShape = Block.makeCuboidShape(1, 0, 1, 15, 14, 15);
+
     public CableBlock(Properties properties) {
         super(properties);
         this.shape = this.makeShapes(10, 10, 10, 10, 10);
     }
 
 
-
     @Nonnull
     @Override
     public VoxelShape getCollisionShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
-        return mainshape;
+        return mainShape;
     }
 
 
     @Nonnull
     @Override
-    public ActionResultType onBlockActivated(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull PlayerEntity player, @Nonnull Hand handIn, BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull PlayerEntity player, @Nonnull Hand handIn, @Nonnull BlockRayTraceResult hit) {
         return ActionResultType.PASS;
     }
 
     @Nonnull
     @Override
     public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
-        return mainshape;
+        return mainShape;
     }
 
     @Nonnull
@@ -51,9 +56,6 @@ public class CableBlock extends FenceBlock {
     public VoxelShape getRenderShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         return this.shape[this.getIndex(state)];
     }
-
-
-
 
     @Override
     public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
@@ -67,5 +69,30 @@ public class CableBlock extends FenceBlock {
         return true;
     }
 
+    @Override
+    public void onBlockAdded(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull BlockState oldState, boolean isMoving) {
+        int counter = 0;
+        BlockState around;
+        for (int x = -1; x < 2; x++) {
+            for (int y = -1; y < 2; y++) {
+                for (int z = -1; z < 2; z++) {
+                    BlockState surrounding = worldIn.getBlockState(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
+                    if (surrounding.getBlock() instanceof CableBlock) {
+                        around=surrounding;
+                        if (counter < 2) {
+                            counter++;
+                            CABLE_LISTS.get(((CableBlock) surrounding.getBlock()).startOfCable).addLast(this);
+                        } else {
+                            return;
+                        }
+                    }
+                }
+            }
+        }
 
+        this.startOfCable = this;
+        CABLE_LISTS.put(this, new LinkedList<>());
+        CABLE_LISTS.get(this).add(this);
+
+    }
 }
