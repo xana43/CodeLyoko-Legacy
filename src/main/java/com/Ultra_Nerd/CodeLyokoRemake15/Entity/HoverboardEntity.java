@@ -58,13 +58,13 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
             {
                 QDown += 0.0000001f;
 
-                this.move(MoverType.PLAYER, new Vec3d(this.getForward().x,this.getPosY() - QDown,this.getForward().z));
+                this.move(MoverType.PLAYER, new Vec3d(0,this.getUpVector(10).y + QDown,0));
             }
             else if(KeyBoardAccess.Z())
             {
 
                     ZDown += 0.0000001f;
-                    this.move(MoverType.PLAYER, new Vec3d(this.getForward().x,this.getPosY() + ZDown,this.getForward().z));
+                    this.move(MoverType.PLAYER, new Vec3d(0,this.getUpVector(10).getY() - ZDown,0));
 
             }
             if(!KeyBoardAccess.Z())
@@ -94,11 +94,11 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
             else if(Vel != 0 && (!KeyBoardAccess.w() || !KeyBoardAccess.S()))
             {
                 if(Vel > 0) {
-                    Vel -= 0.001f;
+                    Vel -= 0.0001f;
                 }
                 else if(Vel < 0)
                 {
-                    Vel += 0.001f;
+                    Vel += 0.0001f;
                 }
                 WDown = 0;
                 this.move(MoverType.PLAYER, new Vec3d(this.getForward().x,this.getForward().y,this.getForward().z + Vel));
@@ -121,19 +121,15 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
         }
         else if(!this.isBeingRidden())
         {
-            if(Vel > 0) {
-                Vel -= 0.001f;
-            }
-            else if(Vel < 0)
-            {
-                Vel += 0.001f;
-            }
+           Vel = 0;
             /*
             if(Vel != 0) {
                 Vel -= 0.5f;
             }
-            //this.move(MoverType.PLAYER, new Vec3d(this.getForward().x,this.getForward().y,this.getForward().z - Vel));
             */
+
+
+
         }
         }
 
