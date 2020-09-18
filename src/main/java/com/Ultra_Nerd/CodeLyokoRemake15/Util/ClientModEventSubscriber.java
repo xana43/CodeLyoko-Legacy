@@ -25,7 +25,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class ClientModEventSubscriber {
 
-
     @SubscribeEvent
     public static void registerParticles(ParticleFactoryRegisterEvent event) {
         Minecraft.getInstance().particles.registerFactory(ModParticles.TOWER_PARTICLE.get(), ColoredParticle.Factory::new);

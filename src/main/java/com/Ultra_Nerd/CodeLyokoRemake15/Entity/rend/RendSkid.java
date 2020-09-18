@@ -16,6 +16,10 @@ import javax.annotation.Nonnull;
 @OnlyIn(Dist.CLIENT)
 public class RendSkid extends EntityRenderer<EntitySkid>{
 	private final ModelSkid skid = new ModelSkid();
+
+
+
+
 	private final ResourceLocation skidtex = new ResourceLocation(Base.MOD_ID,"models/entities/skid/95adf18e.png");
 	public RendSkid(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn);

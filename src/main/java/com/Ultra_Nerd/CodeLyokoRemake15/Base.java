@@ -136,8 +136,6 @@ CompoundNBT existing;
 
 	private void dostuff(final FMLClientSetupEvent event)
 	{
-
-
 	}
 	
 	@SubscribeEvent
