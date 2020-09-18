@@ -2,22 +2,37 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonObject;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.resources.IResourceManager;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ILightReader;
+import net.minecraftforge.client.extensions.IForgeBakedModel;
+import net.minecraftforge.client.model.IModelBuilder;
 import net.minecraftforge.client.model.IModelConfiguration;
+import net.minecraftforge.client.model.IModelLoader;
+import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
 import net.minecraftforge.client.model.geometry.IModelGeometryPart;
+import net.minecraftforge.client.model.geometry.IMultipartModelGeometry;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.client.model.obj.OBJModel;
 
-import java.util.Collection;
-import java.util.Optional;
-import java.util.Set;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
 import java.util.function.Function;
 
-public class ModelSkid implements/*IMultipartModelGeometry<OBJModel>,*/ IModelGeometry<OBJModel> {
+public class ModelSkid implements IMultipartModelGeometry<OBJModel>, IModelGeometry<OBJModel>, IForgeBakedModel, IModelLoader, IRenderTypeBuffer {
 
     public OBJLoader loader = new OBJLoader();
     public OBJModel objModel;
@@ -26,6 +41,13 @@ public class ModelSkid implements/*IMultipartModelGeometry<OBJModel>,*/ IModelGe
 
         objModel = loader.loadModel(new OBJModel.ModelSettings(new ResourceLocation(Base.MOD_ID,"models/entities/skid/skid.obj"),false,true,
                 true,false,null));
+
+    }
+
+    @Nonnull
+    @Override
+    public IModelData getModelData(@Nonnull ILightReader world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull IModelData tileData) {
+        return this.getBakedModel().getModelData(world, pos, state, tileData);
     }
 
     @Override
@@ -48,17 +70,38 @@ public class ModelSkid implements/*IMultipartModelGeometry<OBJModel>,*/ IModelGe
         return this.objModel.bake(owner,bakery,spriteGetter,modelTransform,overrides,modelLocation);
     }
 
+    @Override
+    public void addQuads(IModelConfiguration owner, IModelBuilder<?> modelBuilder, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, IModelTransform modelTransform, ResourceLocation modelLocation) {
+        this.objModel.addQuads(owner,modelBuilder,bakery,spriteGetter,modelTransform,modelLocation);
+    }
+
+    @Nonnull
+    @Override
+    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
+        return this.getBakedModel().getQuads(state, side, rand, extraData);
+    }
+
+    @Override
+    public void onResourceManagerReload(@Nonnull IResourceManager resourceManager) {
+
+    }
+
+    @Nonnull
+    @Override
+    public IModelGeometry read(@Nonnull JsonDeserializationContext deserializationContext, @Nonnull JsonObject modelContents) {
+        return this.loader.read(deserializationContext,modelContents);
+    }
 
 
 
+    @Nonnull
+    @Override
+    public IVertexBuilder getBuffer(@Nonnull RenderType p_getBuffer_1_) {
+        return this.getBuffer(p_getBuffer_1_);
+    }
 
 
-
-
-
-
-
-   /* OBJLoader Loader = new OBJLoader();
+    /* OBJLoader Loader = new OBJLoader();
     public ModelSkid(EntityRendererManager entityRendererManager) {
         super(entityRendererManager);
         Loader.loadModel(new OBJModel.ModelSettings());

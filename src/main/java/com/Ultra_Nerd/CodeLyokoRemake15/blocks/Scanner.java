@@ -29,7 +29,7 @@ import java.util.stream.Stream;
 public class Scanner extends Block {
     public static BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
     public static final DirectionProperty directionProperty = HorizontalBlock.HORIZONTAL_FACING;
-    private VoxelShape shapeS = Stream.of(
+    private final VoxelShape shapeS = Stream.of(
             Block.makeCuboidShape(2, 0, -2, 14, 1, 18),
             Block.makeCuboidShape(-4, 0, 5, -3, 15.3, 11),
             Block.makeCuboidShape(-3, 0, 5, -2, 1, 11),
@@ -73,7 +73,7 @@ public class Scanner extends Block {
             Block.makeCuboidShape(-2, 0, 14, -1, 15.3, 15),
             Block.makeCuboidShape(17, 0, 1, 18, 15.3, 2)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-    private VoxelShape shapeN = Stream.of(
+    private final VoxelShape shapeN = Stream.of(
             Block.makeCuboidShape(2, 0, -2.4523809523809526, 14, 1, 17.54761904761905),
             Block.makeCuboidShape(19, 0, 4.5476190476190474, 20, 15.3, 10.547619047619047),
             Block.makeCuboidShape(18, 0, 4.5476190476190474, 19, 1, 10.547619047619047),
@@ -117,7 +117,7 @@ public class Scanner extends Block {
             Block.makeCuboidShape(17, 0, 0.5476190476190474, 18, 15.3, 1.5476190476190474),
             Block.makeCuboidShape(-2.0000000000000018, 0, 13.547619047619047, -1.0000000000000018, 15.3, 14.547619047619047)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-    private VoxelShape shapeW = Stream.of(
+    private final VoxelShape shapeW = Stream.of(
             Block.makeCuboidShape(-2.2261904761904763, 0, 1.7738095238095237, 17.773809523809526, 1, 13.773809523809524),
             Block.makeCuboidShape(4.773809523809524, 0, -4.226190476190476, 10.773809523809524, 15.3, -3.2261904761904763),
             Block.makeCuboidShape(4.773809523809524, 0, -3.2261904761904763, 10.773809523809524, 1, -2.2261904761904763),
@@ -161,7 +161,7 @@ public class Scanner extends Block {
             Block.makeCuboidShape(0.7738095238095237, 0, -2.2261904761904763, 1.7738095238095237, 15.3, -1.2261904761904763),
             Block.makeCuboidShape(13.773809523809524, 0, 16.773809523809526, 14.773809523809524, 15.3, 17.773809523809526)
     ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-    private VoxelShape shapeE = Stream.of(
+    private final VoxelShape shapeE = Stream.of(
             Block.makeCuboidShape(-1.7738095238095273, 0, 1.7738095238095237, 18.226190476190474, 1, 13.773809523809524),
             Block.makeCuboidShape(5.226190476190476, 0, 18.773809523809526, 11.226190476190476, 15.3, 19.773809523809526),
             Block.makeCuboidShape(5.226190476190476, 0, 17.773809523809526, 11.226190476190476, 1, 18.773809523809526),
