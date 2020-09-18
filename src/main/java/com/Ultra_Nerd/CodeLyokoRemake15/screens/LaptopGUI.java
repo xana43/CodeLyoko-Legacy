@@ -35,7 +35,6 @@ public class LaptopGUI extends Screen {
 this.blit(x,y,x,y,this.height,this.width);
 
         assert this.minecraft != null;
-        this.minecraft.textureManager.getTexture(TEXTURE);
         this.minecraft.textureManager.bindTexture(TEXTURE);
         super.render(p_render_1_, p_render_2_, p_render_3_);
     }

@@ -27,7 +27,7 @@ public class OverbikeRenderer<T extends OverbikeEntity> extends EntityRenderer<T
     public void render(@Nonnull T entityIn, float entityYaw, float partialTicks, @Nonnull MatrixStack matrixStackIn, @Nonnull IRenderTypeBuffer bufferIn, int packedLightIn) {
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.push();
-        matrixStackIn.scale(-2F, -2F, 2.0F);
+        matrixStackIn.scale(-1F, -1F, 1.0F);
         matrixStackIn.translate(0,-1.5f,0);
         this.BoardModel.setRotationAngles(entityIn,0,0,0,0,0);
         IVertexBuilder vertexBuilder = bufferIn.getBuffer(this.BoardModel.getRenderType(this.getEntityTexture(entityIn)));
