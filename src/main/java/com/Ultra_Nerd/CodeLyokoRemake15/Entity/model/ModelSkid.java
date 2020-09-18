@@ -32,16 +32,16 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Function;
 
-public class ModelSkid implements IMultipartModelGeometry<OBJModel>, IModelGeometry<OBJModel>, IForgeBakedModel, IModelLoader, IRenderTypeBuffer {
+public class ModelSkid implements IMultipartModelGeometry<OBJModel>, IModelGeometry<OBJModel>, IForgeBakedModel, IModelLoader<OBJModel>, IRenderTypeBuffer, IBakedModel {
 
-    public OBJLoader loader = new OBJLoader();
-    public OBJModel objModel;
-
+    private final OBJLoader loader = new OBJLoader();
+    private final OBJModel objModel;
+    public  IBakedModel bakedModel;
     public ModelSkid() {
 
         objModel = loader.loadModel(new OBJModel.ModelSettings(new ResourceLocation(Base.MOD_ID,"models/entities/skid/skid.obj"),false,true,
                 true,false,null));
-
+        bakedModel = this.getBakedModel();
     }
 
     @Nonnull
@@ -88,7 +88,7 @@ public class ModelSkid implements IMultipartModelGeometry<OBJModel>, IModelGeome
 
     @Nonnull
     @Override
-    public IModelGeometry read(@Nonnull JsonDeserializationContext deserializationContext, @Nonnull JsonObject modelContents) {
+    public OBJModel read(@Nonnull JsonDeserializationContext deserializationContext, @Nonnull JsonObject modelContents) {
         return this.loader.read(deserializationContext,modelContents);
     }
 
@@ -98,6 +98,42 @@ public class ModelSkid implements IMultipartModelGeometry<OBJModel>, IModelGeome
     @Override
     public IVertexBuilder getBuffer(@Nonnull RenderType p_getBuffer_1_) {
         return this.getBuffer(p_getBuffer_1_);
+    }
+
+    @Nonnull
+    @Override
+    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, Random rand) {
+        return this.bakedModel.getQuads(state, side, rand);
+    }
+
+    @Override
+    public boolean isAmbientOcclusion() {
+        return false;
+    }
+
+    @Override
+    public boolean isGui3d() {
+        return false;
+    }
+
+    @Override
+    public boolean func_230044_c_() {
+        return false;
+    }
+
+    @Override
+    public boolean isBuiltInRenderer() {
+        return false;
+    }
+
+    @Override
+    public TextureAtlasSprite getParticleTexture() {
+        return null;
+    }
+
+    @Override
+    public ItemOverrideList getOverrides() {
+        return null;
     }
 
 

@@ -4,38 +4,53 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelSkid;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.model.BakedQuad;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.model.BakedModelWrapper;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 @OnlyIn(Dist.CLIENT)
-public class RendSkid extends EntityRenderer<EntitySkid>{
+public class RendSkid extends EntityRenderer<EntitySkid>  {
 	private final ModelSkid skid = new ModelSkid();
-
-
-
+	BakedModelWrapper<ModelSkid> wrapper;
+	
 
 	private final ResourceLocation skidtex = new ResourceLocation(Base.MOD_ID,"models/entities/skid/95adf18e.png");
 	public RendSkid(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn);
 
-
+		wrapper = new BakedModelWrapper<ModelSkid>(this.skid) {
+			@Nonnull
+			@Override
+			public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, Random rand) {
+				return this.originalModel.bakedModel.getQuads(state, side, rand);
+			}
+		};
 	}
 
 
 
 	@Override
 	public void render(@Nonnull EntitySkid entityIn, float entityYaw, float partialTicks, @Nonnull MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+
 		matrixStackIn.push();
-		
+
 
 		matrixStackIn.pop();
+
+
+		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 	}
 
 	@Nonnull
@@ -43,8 +58,6 @@ public class RendSkid extends EntityRenderer<EntitySkid>{
 	public ResourceLocation getEntityTexture(@Nonnull EntitySkid entity) {
 		return skidtex;
 	}
-
-
 
 
 
