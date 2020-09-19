@@ -21,11 +21,14 @@ public class CustomCarthadgeSky implements SkyRenderHandler {
 
     @Override
     public void render(int ticks, float partialTicks, MatrixStack matrixStack, ClientWorld world, Minecraft mc) {
-  //  world.dimension.getSkyRenderer().render(ticks, partialTicks, world, mc);
-        matrixStack.push();
-        //mc.worldRenderer.renderSky(matrixStack,partialTicks);
+
+
         mc.textureManager.bindTexture(texturelocation);
-        
+        if(mc.worldRenderer != null) {
+            mc.worldRenderer.renderSky(matrixStack, partialTicks);
+            mc.worldRenderer.setWorldAndLoadRenderers(world);
+        }
+
 
 
 
