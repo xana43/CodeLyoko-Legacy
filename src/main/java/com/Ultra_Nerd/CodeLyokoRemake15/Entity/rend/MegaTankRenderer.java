@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
 public class MegaTankRenderer extends MobRenderer<MegaTankEntity, ModelMegaTank> {
-    private ResourceLocation Tex = new ResourceLocation(Base.MOD_ID,"textures/entity/megatank/megatank.png");
+    private static final ResourceLocation Tex = new ResourceLocation(Base.MOD_ID,"textures/entity/megatank/megatank.png");
     public MegaTankRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new ModelMegaTank(), 2);
     }
@@ -25,7 +25,7 @@ public class MegaTankRenderer extends MobRenderer<MegaTankEntity, ModelMegaTank>
     }
     @Nonnull
     @Override
-    public ResourceLocation getEntityTexture(MegaTankEntity entity) {
+    public ResourceLocation getEntityTexture(@Nonnull MegaTankEntity entity) {
         return Tex;
     }
 }

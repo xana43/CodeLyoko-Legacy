@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 @OnlyIn(Dist.CLIENT)
 public class GuardianRenderer extends MobRenderer<GuardianEntity, MathGuardianModel> {
 
-    protected static final ResourceLocation tex = new ResourceLocation(Base.MOD_ID, "textures/entity/guardian/guardian.png");
+    private static final ResourceLocation tex = new ResourceLocation(Base.MOD_ID, "textures/entity/guardian/guardian.png");
 
     public GuardianRenderer(EntityRendererManager rendManIn) {
         super(rendManIn, new MathGuardianModel(), 1f);

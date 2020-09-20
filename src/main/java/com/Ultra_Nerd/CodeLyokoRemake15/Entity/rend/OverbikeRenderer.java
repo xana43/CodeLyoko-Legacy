@@ -15,8 +15,8 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nonnull;
 
 public class OverbikeRenderer<T extends OverbikeEntity> extends EntityRenderer<T> {
-    ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/overboard/overboard.png");
-    protected final EntityModel<T> BoardModel = new ModelOverbike<>();
+    private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/overboard/overboard.png");
+    private final EntityModel<T> BoardModel = new ModelOverbike<>();
     public OverbikeRenderer(EntityRendererManager renderManager) {
         super(renderManager);
         this.shadowSize = 1f;

@@ -14,7 +14,7 @@ import javax.annotation.Nonnull;
 @OnlyIn(Dist.CLIENT)
 public class HornetRenderer extends MobRenderer<HornetEntity, ModelHornet> {
 
-    protected static final ResourceLocation tex = new ResourceLocation(Base.MOD_ID, "textures/entity/hornet/hornetatlas.png");
+    private static final ResourceLocation tex = new ResourceLocation(Base.MOD_ID, "textures/entity/hornet/hornetatlas.png");
 
     public HornetRenderer(EntityRendererManager rendManIn) {
         super(rendManIn, new ModelHornet(), 1f);

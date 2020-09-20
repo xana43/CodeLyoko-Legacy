@@ -17,8 +17,8 @@ import net.minecraft.util.math.MathHelper;
 import javax.annotation.Nonnull;
 
 public class HoverboardRenderer<T extends HoverboardEntity> extends EntityRenderer<T> {
-    ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/hoverboard/hoverboard.png");
-    protected final EntityModel<T> BoardModel = new ModelHoverboard<>();
+    private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/hoverboard/hoverboard.png");
+    private final EntityModel<T> BoardModel = new ModelHoverboard<>();
     public HoverboardRenderer(EntityRendererManager renderManager) {
         super(renderManager);
         this.shadowSize = 1f;

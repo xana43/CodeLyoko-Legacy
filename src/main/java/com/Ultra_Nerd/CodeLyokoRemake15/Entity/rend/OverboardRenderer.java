@@ -18,8 +18,8 @@ import net.minecraft.util.math.MathHelper;
 import javax.annotation.Nonnull;
 
 public class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer<T> {
-    ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/overboard/overboarduv.png");
-    protected final EntityModel<T> BoardModel = new ModelOverboard<>();
+    private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/overboard/overboarduv.png");
+    private final EntityModel<T> BoardModel = new ModelOverboard<>();
     public OverboardRenderer(EntityRendererManager renderManager) {
         super(renderManager);
         this.shadowSize = 1f;
