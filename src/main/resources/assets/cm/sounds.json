@@ -1,21 +1,21 @@
 {
     "entity.blok.ambient":
-    
+
     {
         "category":"hostile",
         "subtitle": "entity.blok.ambient",
         "sounds":[{"name":"cm:entity/blok/ambient", "stream":false}]
     },
-    
+
      "entity.blok.hurt":
-    
+
     {
         "category":"hostile",
         "subtitle": "entity.blok.hurt",
         "sounds":[{"name":"cm:entity/blok/hurt", "stream":false}]
     },
      "entity.blok.death":
-    
+
     {
         "category":"hostile",
         "subtitle": "entity.blok.death",
@@ -105,5 +105,35 @@
         "category": "hostile",
         "subtitle": "hornet flies",
         "sounds": [{"name": "cm:entity/hornet/hornetfly","stream": false,"preload": true}]
+    },
+    "entity.megatank.hurt1":
+    {
+        "category": "hostile",
+        "subtitle": "megatank gets hurt",
+        "sounds": [{"name": "cm:entity/megatank/hurt1","stream": false,"preload": true}]
+    },
+    "entity.megatank.hurt2":
+    {
+        "category": "hostile",
+        "subtitle": "megatank gets hurt",
+        "sounds": [{"name": "cm:entity/megatank/hurt2","stream": false,"preload": true}]
+    },
+    "entity.megatank.smallfall":
+    {
+        "category": "hostile",
+        "subtitle": "megatank gets hurt by falling",
+        "sounds": [{"name": "cm:entity/megatank/smallfall","stream": false,"preload": true}]
+    },
+    "entity.megatank.bigfall":
+    {
+        "category": "hostile",
+        "subtitle": "megatank gets hurt by a bigfall",
+        "sounds": [{"name": "cm:entity/megatank/bigfall","stream": false,"preload": true}]
+    },
+    "entity.megatank.die":
+    {
+        "category": "hostile",
+        "subtitle": "megatank dies",
+        "sounds": [{"name": "cm:entity/megatank/megatankdie","stream": false,"preload": true}]
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -20,6 +21,7 @@ import software.bernie.geckolib.event.AnimationTestEvent;
 import software.bernie.geckolib.manager.EntityAnimationManager;
 
 import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
 
@@ -28,11 +30,23 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
     public MegaTankEntity(EntityType<MegaTankEntity> type, World world) {
         super(type, world);
         TankManager.addAnimationController(Tankcontroller);
+
     }
     public MegaTankEntity(World world) {
         super(ModEntities.MEGATANK.get(), world);
 
 
+    }
+
+    @Nonnull
+    @Override
+    protected ResourceLocation getLootTable() {
+        return null;
+    }
+
+    @Override
+    protected void dropExperience() {
+        super.dropExperience();
     }
 
 
@@ -44,7 +58,7 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
 
     @Override
     public boolean canSpawn(@Nonnull IWorld worldIn, @Nonnull SpawnReason spawnReasonIn) {
-        return true;
+        return spawnReasonIn != SpawnReason.CONVERSION;
     }
     @Nonnull
     @Override
@@ -62,7 +76,7 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
     protected void registerAttributes() {
         // TODO Auto-generated method stub
         super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(10D);
+        this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1D);
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20D);
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
         this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10D);
@@ -82,17 +96,33 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return super.getDeathSound();
+        return ModSounds.MEGATANKDIE.get();
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return super.getAmbientSound();
+        return null;
     }
+
+    @Nonnull
+    @Override
+    protected SoundEvent getFallSound(int heightIn) {
+        return heightIn > 4 ? ModSounds.MEGATANKBIGFALL.get() : ModSounds.MEGATANKSMALLFALL.get();
+    }
+
+
 
     @Override
     protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
-        return super.getHurtSound(damageSourceIn);
+        boolean random = new Random().nextBoolean();
+        if(random)
+        {
+            return ModSounds.MEGATANKHURT1.get();
+        }
+        else
+        {
+            return ModSounds.MEGATANKHURT2.get();
+        }
     }
 
     @Nonnull
@@ -111,7 +141,6 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
 
             return true;
         } else if (event.getEntity().isAggressive()){
-            //Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.attack", false));
             Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.open",true));
 
             return true;

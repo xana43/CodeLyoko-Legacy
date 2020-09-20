@@ -35,5 +35,10 @@ public class ModSounds  {
 	 public static final RegistryObject<SoundEvent> QUANTUMZAP = SOUNDS.register("quantum_zap", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"quantum_zap")));
 	 public static final RegistryObject<SoundEvent> THEME = SOUNDS.register("lyoko", LAZY_THEME);
 	 public static final RegistryObject<SoundEvent> MEGATANKROLL = SOUNDS.register("entity.megatank.move",() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"entity.megatank.move")));
+	 public static final RegistryObject<SoundEvent> MEGATANKHURT1 = SOUNDS.register("entity.megatank.hurt1",() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"entity.megatank.hurt1")));
+	 public static final RegistryObject<SoundEvent> MEGATANKHURT2 = SOUNDS.register("entity.megatank.hurt2",() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"entity.megatank.hurt2")));
+	 public static final RegistryObject<SoundEvent> MEGATANKBIGFALL = SOUNDS.register("entity.megatank.bigfall",() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"entity.megatank.bigfall")));
+	 public static final RegistryObject<SoundEvent> MEGATANKSMALLFALL = SOUNDS.register("entity.megatank.smallfall",() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"entity.megatank.smallfall")));
+	 public static final RegistryObject<SoundEvent> MEGATANKDIE = SOUNDS.register("entity.megatank.die",() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"entity.megatank.die")));
 	 public static final RegistryObject<SoundEvent> HORNETFLY = SOUNDS.register("entity.hornet.fly",() -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"entity.hornet.fly")));
 }
