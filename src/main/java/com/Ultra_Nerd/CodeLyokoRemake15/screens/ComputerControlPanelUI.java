@@ -3,28 +3,26 @@ package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ComputerControlPanelContainer;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.client.event.GuiScreenEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanelContainer> {
 
-    private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID,"textures/gui/towerinterface.png");
+    private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID,"textures/gui/computercontrolpanelui.png");
+    private static final ResourceLocation BUTTONTEXTURES = new ResourceLocation(Base.MOD_ID,"textures/gui/buttonatlas.png");
     private TextFieldWidget text;
-    private TextFieldWidget Accepted;
-    private byte I = 100;
+    private Widget button;
+
 
 
 
@@ -35,8 +33,8 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
         super(screenContainer, inv, titleIn);
         this.guiLeft = 0;
         this.guiTop = 0;
-        this.xSize = 200;
-        this.ySize = 141;
+        this.xSize = 190;
+        this.ySize = 143;
 
 
     }
@@ -59,7 +57,6 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
-        this.text.mouseClicked(mouseX, mouseY, mouseButton);
         return super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
@@ -68,42 +65,12 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
         this.renderBackground();
         super.render(p_render_1_, p_render_2_, p_render_3_);
         this.text.render(p_render_1_, p_render_2_, p_render_3_);
-        this.Accepted.render(p_render_1_, p_render_2_, p_render_3_);
+        this.button.renderButton(p_render_1_,p_render_2_,p_render_3_);
     }
 
-    @SubscribeEvent
-    public static void NoE(final GuiScreenEvent.KeyboardKeyEvent event) {
-        if (event.getKeyCode() == GLFW.GLFW_KEY_E) {
-            if (event.getGui() instanceof ComputerControlPanelUI) {
-                event.setCanceled(true);
-            }
-        }
-    }
 
-    @Override
-    public void tick() {
 
-        this.text.tick();
 
-        if (this.text.getText().matches("LYOKO") || this.text.getText().matches("CHIMERA") || this.text.getText().matches("EARTH")) {
-            I = 100;
-            this.Accepted.setTextColor(65280);
-            this.Accepted.setText("ACCEPTED");
-            this.text.setText("");
-            this.text.setCursorPositionZero();
-        } else if (this.text.getText().matches("XANA")) {
-            I = 100;
-            this.Accepted.setTextColor(16711680);
-            this.Accepted.setText("ACCEPTED");
-            this.text.setText("");
-            this.text.setCursorPositionZero();
-        } else {
-            I -= 1;
-            if (I == 0) {
-                this.Accepted.setText("");
-            }
-        }
-    }
 
 
     @Override
@@ -112,7 +79,7 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
         x = (this.width - this.xSize) / 2;
         y = (this.height - this.ySize) / 2;
         this.setTextField();
-
+        this.setButtons();
 
     }
 
@@ -121,32 +88,41 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
         return false;
     }
 
-    @Override
-    public boolean shouldCloseOnEsc() {
-        return false;
+
+
+    protected void setButtons()
+    {
+
+
+        this.button = new Widget(x,y,this.width/3,this.height/6,"activate") {
+            @Override
+            protected int getYImage(boolean p_getYImage_1_) {
+                return super.getYImage(p_getYImage_1_);
+
+            }
+            @Override
+            public void renderButton(int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
+                //super.renderButton(p_renderButton_1_, p_renderButton_2_, p_renderButton_3_);
+                int i = getYImage(isHovered());
+                assert minecraft != null;
+                minecraft.textureManager.bindTexture(TEXTURES);
+                FontRenderer gunship_font = minecraft.getFontResourceManager().getFontRenderer(new ResourceLocation(Base.MOD_ID + ":gunship"));
+                assert gunship_font != null;
+                int j = getFGColor();
+                drawCenteredString(gunship_font, getMessage(), x + width / 2, y + (height - 8) / 2, j | MathHelper.ceil(alpha * 255.0F) << 24);
+                blit(x, y, 0, 37 + i * 2, 103, 37);
+                blit(x, 38, 0, 46 + i * 20, width / 2, height);
+
+            }
+
+        };
+        this.button.active = true;
+        this.addButton(this.button);
+        this.button.visible = true;
+
+
     }
 
-
-    @Override
-    public boolean keyPressed(int Key, int p_keyPressed_2_, int p_keyPressed_3_) {
-
-
-        if (Key == 8) {
-            this.text.deleteFromCursor(1);
-        }
-        this.text.keyPressed(Key, p_keyPressed_2_, p_keyPressed_3_);
-        this.Accepted.keyPressed(Key, p_keyPressed_2_, p_keyPressed_3_);
-        return super.keyPressed(Key, p_keyPressed_2_, p_keyPressed_3_);
-    }
-
-    @Override
-    public boolean charTyped(char key, int Keynum) {
-        float rand = 1f + new Random().nextFloat() * (4 - 1);
-        this.text.charTyped(Character.toUpperCase(key), Keynum);
-        this.playerInventory.player.playSound(ModSounds.GUISOUND.get(), 1, rand);
-        return super.charTyped(key, Keynum);
-
-    }
 
 
     protected void setTextField() {
@@ -154,32 +130,16 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
         int ty = this.height / 2;
         FontRenderer gunship_font = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation(Base.MOD_ID + ":gunship"));
         assert gunship_font != null;
-        this.text = new TextFieldWidget(gunship_font, tx - 70, ty - 10, 200, 33, I18n.format("gui.cm.interface_input"));
-        this.text.setMaxStringLength(7);
+        this.text = new TextFieldWidget(gunship_font, x, ty + 40, this.width, 23, I18n.format("gui.cm.computer_input_main"));
         this.text.setEnableBackgroundDrawing(false);
         this.text.setVisible(true);
         this.text.setTextColor(16777215);
-        this.text.setFocused2(true);
-        this.text.setEnabled(true);
-        this.text.setCursorPositionZero();
-        this.text.setCanLoseFocus(false);
-        this.text.active = true;
-        this.text.canWrite();
-        int tx2 = this.width / 2;
-        int ty2 = this.height / 2;
-        FontRenderer gunship_font2 = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation(Base.MOD_ID + ":gunship"));
-        assert gunship_font2 != null;
-        this.Accepted = new TextFieldWidget(gunship_font, tx2 - 95, ty2 + 20, 200, 33, I18n.format("gui.cm.indicator"));
-        this.Accepted.setMaxStringLength(8);
-        this.Accepted.setEnableBackgroundDrawing(false);
-        this.Accepted.setVisible(true);
-        this.Accepted.setTextColor(65280);
-        this.Accepted.setFocused2(false);
-        this.Accepted.setEnabled(true);
-        this.Accepted.setCursorPositionZero();
-        this.Accepted.setCanLoseFocus(true);
-        this.Accepted.canWrite();
-        this.Accepted.active = true;
+        this.text.setText("in-active");
+
+
+
+
+
 
     }
 

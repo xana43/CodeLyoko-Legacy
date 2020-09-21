@@ -20,7 +20,7 @@ public class CustomCarthadgeSky implements SkyRenderHandler {
     private final ResourceLocation texturelocation;
     public CustomCarthadgeSky() {
 
-        texturelocation = new ResourceLocation(Base.MOD_ID,"textures/skies/sector5sky.png");
+        texturelocation = new ResourceLocation(Base.MOD_ID,"textures/skies/sector5/sector5sky.png");
 
     }
 
