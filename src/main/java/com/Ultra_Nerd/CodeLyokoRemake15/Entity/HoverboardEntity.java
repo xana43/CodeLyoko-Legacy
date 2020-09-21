@@ -31,7 +31,7 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
 
         recalculateSize();
     }
-
+    
     @Override
     public boolean canPassengerSteer() {
         return true;
