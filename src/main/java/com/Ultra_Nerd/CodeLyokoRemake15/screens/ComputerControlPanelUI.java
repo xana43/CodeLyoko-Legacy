@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ComputerControlPanelContainer;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -22,7 +23,7 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
     private static final ResourceLocation BUTTONTEXTURES = new ResourceLocation(Base.MOD_ID,"textures/gui/buttonatlas.png");
     private TextFieldWidget text;
     private Widget button;
-
+    private boolean CompActive;
 
 
 
@@ -55,9 +56,12 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
         super.setFocused(p_setFocused_1_);
     }
 
+
+
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
         return super.mouseClicked(mouseX, mouseY, mouseButton);
+
     }
 
     @Override
@@ -100,12 +104,33 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
                 return super.getYImage(p_getYImage_1_);
 
             }
+
+            @Override
+            public void onClick(double p_onClick_1_, double p_onClick_3_) {
+                super.onClick(p_onClick_1_, p_onClick_3_);
+
+                CompActive = !CompActive;
+                if(!CompActive) {
+
+                        minecraft.player.playSound(ModSounds.QUANTUMZAP.get(), 1, 1);
+
+                } else
+                {
+
+                        minecraft.player.playSound(ModSounds.QUANTUMZAP.get(), 1, 1);
+
+                }
+            }
+
+
+
             @Override
             public void renderButton(int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
                 //super.renderButton(p_renderButton_1_, p_renderButton_2_, p_renderButton_3_);
                 int i = getYImage(isHovered());
                 assert minecraft != null;
-                minecraft.textureManager.bindTexture(TEXTURES);
+                minecraft.textureManager.bindTexture(BUTTONTEXTURES);
+
                 FontRenderer gunship_font = minecraft.getFontResourceManager().getFontRenderer(new ResourceLocation(Base.MOD_ID + ":gunship"));
                 assert gunship_font != null;
                 int j = getFGColor();
@@ -123,7 +148,28 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
 
     }
 
+    @Override
+    public void tick() {
+        super.tick();
+        if (CompActive) {
+            this.button.setMessage("de-activate");
+        }
+        else
+        {
+            this.button.setMessage("activate");
+        }
 
+        if(CompActive)
+        {
+            this.text.setText("Active");
+            this.text.setTextColor(0x008000);
+        }
+        else
+        {
+            this.text.setText("in-active");
+            this.text.setTextColor(0xda2c43);
+        }
+    }
 
     protected void setTextField() {
         int tx = this.width / 2;
@@ -133,7 +179,7 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
         this.text = new TextFieldWidget(gunship_font, x, ty + 40, this.width, 23, I18n.format("gui.cm.computer_input_main"));
         this.text.setEnableBackgroundDrawing(false);
         this.text.setVisible(true);
-        this.text.setTextColor(16777215);
+        this.text.setTextColor(0xda2c43);
         this.text.setText("in-active");
 
 
@@ -147,8 +193,11 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         this.minecraft.getTextureManager().bindTexture(TEXTURES);
-
         this.blit(x, y, 0, 0, this.xSize, this.ySize);
+        if(CompActive)
+        {
+            this.blit(x,y + 15,0,144,this.xSize,this.ySize - 35);
+        }
     }
 
 
