@@ -33,6 +33,11 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
     }
 
     @Override
+    public boolean canPassengerSteer() {
+        return true;
+    }
+
+    @Override
     public boolean canUpdate() {
         return true;
     }

@@ -136,6 +136,11 @@ public class OverboardEntity extends Entity implements IForgeEntity {
     }
 
     @Override
+    public boolean canPassengerSteer() {
+        return true;
+    }
+
+    @Override
     public boolean processInitialInteract(@Nonnull PlayerEntity player, @Nonnull Hand hand) {
         if (super.processInitialInteract(player, hand)) {
             return true;
