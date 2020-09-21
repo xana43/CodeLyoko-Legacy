@@ -89,6 +89,8 @@ public class ClientModEventSubscriber {
         ScreenManager.<TowerInterfaceContainer, TowerGUI>registerFactory(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);
         ScreenManager.<QuantumChipletContainer, QuantumChipletScreen>registerFactory(ModContainerTypes.QUANTUM_CHIPLET_CONTAINER.get(), QuantumChipletScreen::new);
         ScreenManager.<ContainerElectroplate, ElectroplatingScreen>registerFactory(ModContainerTypes.ELECTROPLATING_CONTAINER.get(), ElectroplatingScreen::new);
+        ScreenManager.<ComputerControlPanelContainer,ComputerControlPanelUI>registerFactory(ModContainerTypes.COMPUTER_CONTROL_PANEL_CONTAINER.get(),
+                ComputerControlPanelUI::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.BLOK.get(), RendBlok::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LASER.get(), RendLaser::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FAN.get(), RendFan::new);

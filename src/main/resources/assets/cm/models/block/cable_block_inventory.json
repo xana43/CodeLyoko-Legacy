@@ -1,5 +1,9 @@
 {
-    "parent": "block/cable_block_post"
+    "parent": "block/cube_all",
+    "textures": {
+    "all": "cm:block/cable_sheath"
+
+    }
 
 
 }

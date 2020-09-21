@@ -20,12 +20,12 @@ public class OverbikeEntity extends Entity {
     }
 
     @Override
-    protected void readAdditional(CompoundNBT compound) {
+    protected void readAdditional(@Nonnull CompoundNBT compound) {
 
     }
 
     @Override
-    protected void writeAdditional(CompoundNBT compound) {
+    protected void writeAdditional(@Nonnull CompoundNBT compound) {
 
     }
 

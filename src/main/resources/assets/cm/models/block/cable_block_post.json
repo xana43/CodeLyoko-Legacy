@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/fence_post",
 	"textures": {
-		"0": "cm:block/cable_sheath"
+		"0": "cm:block/cable_sheath",
+		"particle": "cm:block/cable_sheath"
 	},
 	"elements": [
 		{

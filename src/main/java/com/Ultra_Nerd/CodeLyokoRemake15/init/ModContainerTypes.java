@@ -25,5 +25,6 @@ public class ModContainerTypes {
             "quantum_chiplet_container",() -> IForgeContainerType.create(QuantumChipletContainer::new));
     public static final RegistryObject<ContainerType<ContainerElectroplate>> ELECTROPLATING_CONTAINER = CONTAINER_TYPES
             .register("electroplating_container", () -> IForgeContainerType.create(ContainerElectroplate::new));
-
+    public static final RegistryObject<ContainerType<ComputerControlPanelContainer>> COMPUTER_CONTROL_PANEL_CONTAINER = CONTAINER_TYPES.register(
+            "computer_control_panel_container",() -> IForgeContainerType.create(ComputerControlPanelContainer::new));
 }
