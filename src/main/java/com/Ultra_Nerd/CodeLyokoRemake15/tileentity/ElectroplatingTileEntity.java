@@ -50,7 +50,7 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
     private boolean once = false;
     private final int maxSmeltTime = 1000;
     public int currentTime;
-    private CustomItemHandler inventory;
+    private final CustomItemHandler inventory;
 
     public ElectroplatingTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);

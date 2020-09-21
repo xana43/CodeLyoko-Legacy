@@ -30,10 +30,7 @@ public class TowerStructure extends Structure<NoFeatureConfig> {
         ChunkPos pos = this.getStartPositionForPosition(generatorIn,randIn,chunkX,chunkZ,0,0);
         if(chunkX == pos.x && chunkZ == pos.z)
         {
-            if(generatorIn.hasStructure(biomeIn,this))
-            {
-                return true;
-            }
+            return generatorIn.hasStructure(biomeIn, this);
         }
         return false;
     }

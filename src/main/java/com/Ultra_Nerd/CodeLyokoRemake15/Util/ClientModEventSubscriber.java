@@ -48,10 +48,11 @@ public class ClientModEventSubscriber {
 
         ModItems.RAW_POLYCARBONATE.get().addPropertyOverride(new ResourceLocation(Base.MOD_ID, "quantity"), (stack, world, entityin) -> {
 
-            if(stack.getCount()>0 && stack.getCount()<65)
+            if(stack.getCount()>0 && stack.getCount()<65) {
                 return stack.getCount()/100f;
-            else
+            } else {
                 return 0f;
+            }
         });
         ModItems.SILICON_WAFER.get().addPropertyOverride(new ResourceLocation(Base.MOD_ID, "quality"), (stack, world, entityin) -> {
             switch (stack.getDamage()) {

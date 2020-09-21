@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.particles;
 
-import net.minecraft.client.particle.*;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.particles.IParticleData;
+import net.minecraft.client.particle.IAnimatedSprite;
+import net.minecraft.client.particle.IParticleRenderType;
+import net.minecraft.client.particle.SpriteTexturedParticle;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -45,6 +45,7 @@ public class TowerParticle extends SpriteTexturedParticle {
         return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
+    @Override
     public void tick() {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;

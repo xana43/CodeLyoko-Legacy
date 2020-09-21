@@ -62,6 +62,7 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
         return super.getCapability(capability, facing);
     }
 
+    @Override
     @Nonnull
     public ITextComponent getDisplayName() {
         return new TranslationTextComponent("container.electric_flouride_infuser");

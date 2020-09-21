@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class Sector5Provider extends BiomeProvider {
 
-    private Random rand;
+    private final Random rand;
     protected Sector5Provider() {
         super(List);
         rand = new Random();

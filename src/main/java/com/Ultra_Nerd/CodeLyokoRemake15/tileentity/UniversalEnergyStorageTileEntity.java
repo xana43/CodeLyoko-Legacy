@@ -18,9 +18,9 @@ public class UniversalEnergyStorageTileEntity extends TileEntity {
     public UniversalEnergyStorageTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
-    private CapabilityEnergy energy = new CapabilityEnergy();
+    private final CapabilityEnergy energy = new CapabilityEnergy();
 
-    private EG store = new EG(90000);
+    private final EG store = new EG(90000);
     public int UNIRF = store.getEnergyStored();
     private String name;
 

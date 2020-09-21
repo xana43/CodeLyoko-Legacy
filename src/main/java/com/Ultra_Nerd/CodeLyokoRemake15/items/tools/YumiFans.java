@@ -70,20 +70,21 @@ public class YumiFans extends TridentItem {
     }
 
     @Override
-    public boolean hasEffect(ItemStack stack) {
+    public boolean hasEffect(@Nonnull ItemStack stack) {
         return false;
     }
 
 
+    @Nonnull
     @Override
-    public UseAction getUseAction(ItemStack stack) {
+    public UseAction getUseAction(@Nonnull ItemStack stack) {
         return UseAction.BLOCK;
     }
 
 
 
     @Override
-    public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         if(!stack.isEnchanted())
         {
             stack.addEnchantment(Enchantments.LOYALTY,Enchantments.LOYALTY.getMaxLevel());

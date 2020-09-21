@@ -74,6 +74,7 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
         this.customName = customName;
     }
 
+    @Override
     @Nonnull
     public ITextComponent getDisplayName() {
         return this.hasCustomName() ? new StringTextComponent(this.customName) : new TranslationTextComponent("container.flouride_infuser");

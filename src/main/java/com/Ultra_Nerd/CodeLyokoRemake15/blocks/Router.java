@@ -87,8 +87,9 @@ public class Router extends Block {
         this.setDefaultState(this.stateContainer.getBaseState().with(ROUTER_DIRECTION, Direction.NORTH).with(ROUTER_ACTIVE,false));
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
         switch (state.get(ROUTER_DIRECTION))
         {
             case NORTH: return N;
@@ -104,7 +105,7 @@ public class Router extends Block {
         return this.getDefaultState().with(ROUTER_DIRECTION, context.getPlacementHorizontalFacing().getOpposite());
     }
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void fillStateContainer(@Nonnull StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
         builder.add(ROUTER_ACTIVE).add(ROUTER_DIRECTION);
     }

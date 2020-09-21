@@ -58,7 +58,7 @@ public class GuardianEntity extends FlyingEntity implements IMob, IRangedAttackM
     }
 
     @Override
-    public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
+    public void attackEntityWithRangedAttack(@Nonnull LivingEntity target, float distanceFactor) {
 
     }
 }

@@ -49,7 +49,7 @@ public class AelitaArmorElytra extends ArmorItem {
 
 
     @Override
-    public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
         if (entityIn instanceof PlayerEntity || !worldIn.isRemote) {
             PlayerEntity player = (PlayerEntity) entityIn;

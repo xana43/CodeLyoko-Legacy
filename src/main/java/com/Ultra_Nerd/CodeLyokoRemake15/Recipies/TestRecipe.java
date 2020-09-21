@@ -9,6 +9,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
+import javax.annotation.Nonnull;
+
 public class TestRecipe implements ICustomRecipes {
 
 private final ResourceLocation id;
@@ -30,31 +32,36 @@ this.output = output;
     }
 
     @Override
-    public boolean matches(RecipeWrapper inv, World worldIn) {
+    public boolean matches(RecipeWrapper inv, @Nonnull World worldIn) {
         return this.input.test(inv.getStackInSlot(0));
     }
 
+    @Nonnull
     @Override
-    public ItemStack getCraftingResult(RecipeWrapper inv) {
+    public ItemStack getCraftingResult(@Nonnull RecipeWrapper inv) {
         return this.output;
     }
 
+    @Nonnull
     @Override
     public ItemStack getRecipeOutput() {
         return this
                 .output;
     }
 
+    @Nonnull
     @Override
     public ResourceLocation getId() {
         return this.id;
     }
 
+    @Nonnull
     @Override
     public IRecipeSerializer<?> getSerializer() {
         return ModRecipes.TEST_RECEPIE.get();
     }
 
+    @Nonnull
     @Override
     public NonNullList<Ingredient> getIngredients() {
         return NonNullList.from(null,this.input);

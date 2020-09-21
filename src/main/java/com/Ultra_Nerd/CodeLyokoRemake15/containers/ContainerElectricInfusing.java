@@ -87,7 +87,7 @@ public class ContainerElectricInfusing extends Container {
     }
 
     @Override
-    public void addListener(IContainerListener listener) {
+    public void addListener(@Nonnull IContainerListener listener) {
         if (!this.listeners.contains(listener)) {
             this.listeners.add(listener);
             listener.sendAllContents(this, this.getInventory());
@@ -96,7 +96,7 @@ public class ContainerElectricInfusing extends Container {
     }
 
     @Override
-    public void removeListener(IContainerListener listener) {
+    public void removeListener(@Nonnull IContainerListener listener) {
         this.listeners.remove(listener);
     }
 

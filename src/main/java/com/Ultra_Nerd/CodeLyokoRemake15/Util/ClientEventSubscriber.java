@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage.Sector5Dimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
@@ -18,7 +19,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = Base.MOD_ID,bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ClientEventSubscriber {
 
-    private static int[] timer = new int[] {131000, 140000,103000,0,0,0,0};
+    private static int[] timer = new int[] {131000, 140000,103000,144000,0,0,0};
 
 
 
@@ -38,6 +39,12 @@ public class ClientEventSubscriber {
             }
             else if(player.world.dimension instanceof OceanDimension && Minecraft.getInstance().player != null) {
                 Minecraft.getInstance().player.playSound(ModSounds.OCEAN.get(),1f,1f);
+                Minecraft.getInstance().getMusicTicker().stop();
+            }
+            else if(player.world.dimension instanceof Sector5Dimension && Minecraft.getInstance().player != null)
+            {
+
+                Minecraft.getInstance().player.playSound(ModSounds.SECTOR5.get(),1f,1f);
                 Minecraft.getInstance().getMusicTicker().stop();
             }
             else if(player.world.dimension instanceof OverworldDimension && Minecraft.getInstance().player != null)
@@ -79,12 +86,16 @@ public class ClientEventSubscriber {
             timer[1] = 140000;
 
             Minecraft.getInstance().player.playSound(null,0,0);
+            Minecraft.getInstance().getMusicTicker().tick();
         }
         if (event.player.world.dimension instanceof OceanDimension && event.phase == TickEvent.Phase.END) {
             if (timer[2]-- <= 0 && Minecraft.getInstance().player != null) {
-                timer[2] = 103000;
-                Minecraft.getInstance().player.playSound(ModSounds.OCEAN.get(), 1f, 1f);
-                Minecraft.getInstance().getMusicTicker().stop();
+
+                    timer[2] = 103000;
+
+                    Minecraft.getInstance().player.playSound(ModSounds.OCEAN.get(), 1f, 1f);
+                    Minecraft.getInstance().getMusicTicker().stop();
+
             }
 
         }
@@ -93,6 +104,24 @@ public class ClientEventSubscriber {
             timer[2] = 103000;
 
             Minecraft.getInstance().player.playSound(null,0,0);
+            Minecraft.getInstance().getMusicTicker().tick();
+        }
+        if(event.player.world.dimension instanceof Sector5Dimension && event.phase == TickEvent.Phase.END)
+        {
+            if(timer[3]-- <= 0 && Minecraft.getInstance().player != null)
+            {
+
+                    timer[3] = 144000;
+                    Minecraft.getInstance().player.playSound(ModSounds.SECTOR5.get(),1,1);
+                    Minecraft.getInstance().getMusicTicker().stop();
+
+            }
+        }
+        else if(!(event.player.world.dimension instanceof Sector5Dimension) && Minecraft.getInstance().player != null )
+        {
+            timer[3] = 144000;
+            Minecraft.getInstance().player.playSound(null,0,0);
+            Minecraft.getInstance().getMusicTicker().tick();
         }
 
     }

@@ -21,6 +21,7 @@ import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -40,7 +41,7 @@ public class TowerParts {
     }
 
     public static class Part extends TemplateStructurePiece{
-        private ResourceLocation resourceLocation;
+        private final ResourceLocation resourceLocation;
         private Rotation rotation;
 
         public Part(TemplateManager templateManagerIn, ResourceLocation resourceLocationIn, BlockPos pos,
@@ -70,15 +71,15 @@ public class TowerParts {
         }
 
         @Override
-        protected void readAdditional(CompoundNBT tagCompound) {
+        protected void readAdditional(@Nonnull CompoundNBT tagCompound) {
             super.readAdditional(tagCompound);
             tagCompound.putString("Template", this.resourceLocation.toString());
             tagCompound.putString("Rot", this.rotation.name());
         }
 
         @Override
-        protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand,
-                                        MutableBoundingBox sbb) {
+        protected void handleDataMarker(@Nonnull String function, @Nonnull BlockPos pos, @Nonnull IWorld worldIn, @Nonnull Random rand,
+                                        @Nonnull MutableBoundingBox sbb) {
             if ("chest".equals(function)) {
                 worldIn.setBlockState(pos, Blocks.CHEST.getDefaultState(), 2);
                 TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -91,8 +92,8 @@ public class TowerParts {
         // create
 
         @Override
-        public boolean create(IWorld worldIn, ChunkGenerator<?> generator, Random randomIn,
-                                      MutableBoundingBox structureBoundingBoxIn, ChunkPos chunkPos) {
+        public boolean create(@Nonnull IWorld worldIn, @Nonnull ChunkGenerator<?> generator, @Nonnull Random randomIn,
+                              @Nonnull MutableBoundingBox structureBoundingBoxIn, @Nonnull ChunkPos chunkPos) {
             PlacementSettings placementsettings = (new PlacementSettings()).setRotation(this.rotation)
                     .setMirror(Mirror.NONE);
             BlockPos blockpos = TowerParts.offset.get(this.resourceLocation);

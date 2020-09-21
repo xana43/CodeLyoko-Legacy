@@ -35,15 +35,21 @@
     },
     "forestsector":
     {
-        "cetegory":"music",
+        "category":"music",
         "subtitle":"forest sector ambiance",
         "sounds":[{"name":"cm:music/forest/forestsector", "stream":true,"preload": true}]
     },
     "icesector":
     {
-        "cetegory":"music",
+        "category":"music",
         "subtitle":"ice sector ambiance",
         "sounds":[{"name":"cm:music/ice/icesector", "stream":true,"preload": true}]
+    },
+    "sector5":
+    {
+        "category": "music",
+        "subtitle": "sector5 ambiance",
+        "sounds": [{"name": "cm:music/sector5/sector5_alt","stream": true,"preload": true}]
     },
     "armor_equip_warrior":
     {
