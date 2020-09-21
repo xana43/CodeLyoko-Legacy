@@ -18,6 +18,8 @@ public class LaptopClass extends Item {
         super(properties);
     }
 
+
+
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         if(!(Minecraft.getInstance().currentScreen instanceof LaptopGUI) && stack.getDamage() != 0)

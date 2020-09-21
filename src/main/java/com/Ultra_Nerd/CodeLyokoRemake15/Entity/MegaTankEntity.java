@@ -77,10 +77,10 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
         // TODO Auto-generated method stub
         super.registerAttributes();
         this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1D);
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20D);
+        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40D);
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
         this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10D);
-        this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10D);
+        this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(20D);
         this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
     }
 

@@ -15,6 +15,7 @@ public class LyokoMountain extends Biome {
         this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.ACACIA_TREE.withConfiguration(DigitalMountainTree.DIGITAL_TREE_MOUNATIN_CONFIG)
                 .withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(1, 0.1f, 0))));
 
+
     }
 
 

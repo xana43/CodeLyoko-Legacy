@@ -11,7 +11,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class LaptopGUI extends Screen {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(Base.MOD_ID,"textures/gui/towerinterface.png");
-    private int x,y;
+    private int x,y,xSize,ySize;
     public LaptopGUI(ITextComponent titleIn) {
         super(titleIn);
 
@@ -20,8 +20,11 @@ public class LaptopGUI extends Screen {
 
     @Override
     protected void init() {
-        x = this.height / 2;
-        y = this.width / 2;
+        xSize = 200;
+        ySize = 141;
+        x = (this.width - xSize) / 2;
+        y = (this.height - ySize) / 2;
+
         super.init();
     }
 
@@ -32,10 +35,11 @@ public class LaptopGUI extends Screen {
 
     @Override
     public void render(int p_render_1_, int p_render_2_, float p_render_3_) {
-this.blit(x,y,x,y,this.height,this.width);
+        super.render(p_render_1_, p_render_2_, p_render_3_);
 
         assert this.minecraft != null;
         this.minecraft.textureManager.bindTexture(TEXTURE);
-        super.render(p_render_1_, p_render_2_, p_render_3_);
+        this.blit(x,y,0,0,this.xSize,this.ySize);
+
     }
 }

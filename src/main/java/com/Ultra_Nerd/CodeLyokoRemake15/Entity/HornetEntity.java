@@ -40,7 +40,9 @@ public class HornetEntity extends PhantomEntity implements IAnimatedEntity,IRang
         if (this.world.isRemote) {
             float f = MathHelper.cos((float)(this.getEntityId() * 3 + this.ticksExisted) * 0.13F + (float)Math.PI);
             float f1 = MathHelper.cos((float)(this.getEntityId() * 3 + this.ticksExisted + 1) * 0.13F + (float)Math.PI);
-            if(this.isAlive()) this.world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), ModSounds.HORNETFLY.get(), this.getSoundCategory(), 0.95F + this.rand.nextFloat() * 0.05F, 0.95F + this.rand.nextFloat() * 0.05F, true);
+            if(this.isAlive()) {
+                this.world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), ModSounds.HORNETFLY.get(), this.getSoundCategory(), 0.95F + this.rand.nextFloat() * 0.05F, 0.95F + this.rand.nextFloat() * 0.05F, true);
+            }
 
 
             int i = this.getPhantomSize();
