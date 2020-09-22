@@ -37,6 +37,7 @@ public class DigitalOceanGenerator extends ChunkGenerator<OceanGenSettings> {
         for (x = 0; x < 16; x++) {
             for (z = 0; z < 16; z++) {
                 chunk.setBlockState(pos.setPos(x, 0, z), bedrock, false);
+                chunk.setBlockState(pos.setPos(x, 255, z), bedrock, false);
             }
         }
 

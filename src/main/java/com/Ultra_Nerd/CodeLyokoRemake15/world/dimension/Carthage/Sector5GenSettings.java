@@ -29,4 +29,6 @@ public class Sector5GenSettings extends GenerationSettings {
     public BlockState getDefaultFluid() {
         return ModFluids.DIGITAL_SEA_BLOCK.get().getDefaultState();
     }
+
+
 }

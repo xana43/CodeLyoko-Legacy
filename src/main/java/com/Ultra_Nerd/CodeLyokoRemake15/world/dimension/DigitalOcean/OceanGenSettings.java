@@ -29,4 +29,9 @@ public class OceanGenSettings extends GenerationSettings {
     public BlockState getDefaultFluid() {
         return Blocks.BEDROCK.getDefaultState();
     }
+
+    @Override
+    public int getBedrockRoofHeight() {
+        return 255;
+    }
 }

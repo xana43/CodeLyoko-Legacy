@@ -2,12 +2,13 @@ package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.carthage.CustomCarthadgeSky;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.generators.Sector5Generator;
-import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.border.WorldBorder;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.client.IRenderHandler;
@@ -32,10 +33,9 @@ public class Sector5Dimension extends Dimension {
         return new Sector5Generator(world, new Sector5Provider(), new Sector5GenSettings());
     }
 
-    @Nullable
     @Override
-    public MusicTicker.MusicType getMusicType() {
-        return null;
+    public void resetRainAndThunder() {
+        super.resetRainAndThunder();
     }
 
     @Override
@@ -46,6 +46,24 @@ public class Sector5Dimension extends Dimension {
         return this.world.getGroundAboveSeaLevel(blockpos).getMaterial().blocksMovement() ? blockpos : null;*/
         return SPAWN;
     }
+
+    @Nonnull
+    @Override
+    public WorldBorder createWorldBorder() {
+        return super.createWorldBorder();
+    }
+
+    @Override
+    public void setSpawnPoint(BlockPos pos) {
+        super.setSpawnPoint(SPAWN);
+    }
+
+    @Override
+    public void setWeatherRenderer(@Nonnull IRenderHandler renderer) {
+        super.setWeatherRenderer(null);
+    }
+
+
 
     @Override
     public BlockPos getSpawnCoordinate() {
@@ -81,6 +99,16 @@ public class Sector5Dimension extends Dimension {
 
     @Override
     public boolean canRespawnHere() {
+        return false;
+    }
+
+    @Override
+    public boolean canDoLightning(Chunk chunk) {
+        return false;
+    }
+
+    @Override
+    public boolean canDoRainSnowIce(Chunk chunk) {
         return false;
     }
 

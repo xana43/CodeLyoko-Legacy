@@ -41,5 +41,8 @@ public class DigitalSeaBlock extends FlowingFluidBlock {
         return true;
     }
 
-
+    @Override
+    public boolean propagatesSkylightDown(@Nonnull BlockState state, @Nonnull IBlockReader reader, @Nonnull BlockPos pos) {
+        return true;
+    }
 }
