@@ -30,22 +30,17 @@ public class ClientEventSubscriber {
         {
             PlayerEntity player = (PlayerEntity)event.getEntity();
             if(player.world.dimension instanceof ForestDimension && Minecraft.getInstance().player != null) {
-                Minecraft.getInstance().player.playSound(ModSounds.FOREST.get(),1f,1f);
-                Minecraft.getInstance().getMusicTicker().stop();
+                timer[0] = 0;
             }
             else if(player.world.dimension instanceof IceDimension && Minecraft.getInstance().player != null) {
-                Minecraft.getInstance().player.playSound(ModSounds.ICE.get(),1f,1f);
-                Minecraft.getInstance().getMusicTicker().stop();
+               timer[1] = 0;
             }
             else if(player.world.dimension instanceof OceanDimension && Minecraft.getInstance().player != null) {
-                Minecraft.getInstance().player.playSound(ModSounds.OCEAN.get(),1f,1f);
-                Minecraft.getInstance().getMusicTicker().stop();
+                timer[2] = 0;
             }
             else if(player.world.dimension instanceof Sector5Dimension && Minecraft.getInstance().player != null)
             {
-
-                Minecraft.getInstance().player.playSound(ModSounds.SECTOR5.get(),1f,1f);
-                Minecraft.getInstance().getMusicTicker().stop();
+                timer[3] = 0;
             }
             else if(player.world.dimension instanceof OverworldDimension && Minecraft.getInstance().player != null)
             {
@@ -62,10 +57,10 @@ public class ClientEventSubscriber {
             if (timer[0]-- <= 0 && Minecraft.getInstance().player != null) {
                 timer[0] = 131000;
                 Minecraft.getInstance().player.playSound(ModSounds.FOREST.get(), 1f, 1f);
-                Minecraft.getInstance().getMusicTicker().stop();
+
 
             }
-
+            Minecraft.getInstance().getMusicTicker().stop();
         }
         else if(!(event.player.world.dimension instanceof ForestDimension) && Minecraft.getInstance().player != null)
         {
@@ -77,9 +72,9 @@ public class ClientEventSubscriber {
             if (timer[1]-- <= 0 && Minecraft.getInstance().player != null) {
                 timer[1] = 140000;
                 Minecraft.getInstance().player.playSound(ModSounds.ICE.get(), 1f, 1f);
-                Minecraft.getInstance().getMusicTicker().stop();
-            }
 
+            }
+            Minecraft.getInstance().getMusicTicker().stop();
         }
         else if(!(event.player.world.dimension instanceof IceDimension) && Minecraft.getInstance().player != null)
         {
@@ -95,10 +90,10 @@ public class ClientEventSubscriber {
                     timer[2] = 103000;
 
                     Minecraft.getInstance().player.playSound(ModSounds.OCEAN.get(), 1f, 1f);
-                    Minecraft.getInstance().getMusicTicker().stop();
+
 
             }
-
+            Minecraft.getInstance().getMusicTicker().stop();
         }
         else if(!(event.player.world.dimension instanceof OceanDimension) && Minecraft.getInstance().player != null)
         {
@@ -114,9 +109,10 @@ public class ClientEventSubscriber {
 
                     timer[3] = 144000;
                     Minecraft.getInstance().player.playSound(ModSounds.SECTOR5.get(),1,1);
-                    Minecraft.getInstance().getMusicTicker().stop();
+
 
             }
+            Minecraft.getInstance().getMusicTicker().stop();
         }
         else if(!(event.player.world.dimension instanceof Sector5Dimension) && Minecraft.getInstance().player != null )
         {
