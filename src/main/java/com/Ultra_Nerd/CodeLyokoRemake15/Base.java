@@ -75,7 +75,7 @@ public class Base
 		MinecraftForge.EVENT_BUS.register(this);
 		
 	}
-
+	
 	@SubscribeEvent
 	public void onRegisterEnties(final RegistryEvent.Register<EntityType<?>> event){
 		BlokItem.initEgg();

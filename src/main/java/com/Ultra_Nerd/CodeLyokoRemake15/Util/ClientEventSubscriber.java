@@ -63,6 +63,7 @@ public class ClientEventSubscriber {
                 timer[0] = 131000;
                 Minecraft.getInstance().player.playSound(ModSounds.FOREST.get(), 1f, 1f);
                 Minecraft.getInstance().getMusicTicker().stop();
+
             }
 
         }

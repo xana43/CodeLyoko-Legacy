@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.carthage.CustomCarthadgeSky;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.generators.Sector5Generator;
+import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -31,7 +32,11 @@ public class Sector5Dimension extends Dimension {
         return new Sector5Generator(world, new Sector5Provider(), new Sector5GenSettings());
     }
 
-
+    @Nullable
+    @Override
+    public MusicTicker.MusicType getMusicType() {
+        return null;
+    }
 
     @Override
     @Nullable
