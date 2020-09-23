@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = Base.MOD_ID,bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ClientEventSubscriber {
 
-    private static int[] timer = new int[] {131000, 140000,103000,144000,0,0,0};
+    private static final int[] timer = new int[] {131000, 140000,103000,144000,0,0,0};
 
 
 
@@ -68,18 +68,21 @@ public class ClientEventSubscriber {
 
             Minecraft.getInstance().player.playSound(null,0,0);
         }
-        if (event.player.world.dimension instanceof IceDimension && event.phase == TickEvent.Phase.END) {
+        if (event.player.world.dimension instanceof IceDimension) {
+            if(event.phase == TickEvent.Phase.END)
+            {
             if (timer[1]-- <= 0 && Minecraft.getInstance().player != null) {
-                timer[1] = 140000;
+                timer[1] = 3240;
                 Minecraft.getInstance().player.playSound(ModSounds.ICE.get(), 1f, 1f);
 
+            }
             }
             Minecraft.getInstance().getMusicTicker().stop();
         }
         else if(!(event.player.world.dimension instanceof IceDimension) && Minecraft.getInstance().player != null)
         {
 
-            timer[1] = 140000;
+            timer[1] = 3240;
 
             Minecraft.getInstance().player.playSound(null,0,0);
             Minecraft.getInstance().getMusicTicker().tick();
