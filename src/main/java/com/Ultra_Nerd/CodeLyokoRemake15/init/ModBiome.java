@@ -101,6 +101,21 @@ public class ModBiome {
                     .temperature(1)
 
     ));
+    public static final RegistryObject<Biome> FRONTIER = BIOMES.register("digital_frontier",() -> new LyokoFrontier(
+            new Biome.Builder()
+            .precipitation(RainType.NONE)
+            .downfall(0)
+            .surfaceBuilder(SurfaceBuilder.DEFAULT,new SurfaceBuilderConfig(ModBlocks.FRONTIER_BLOCK.get().getDefaultState(),
+                    ModBlocks.FRONTIER_BLOCK.get().getDefaultState(),ModBlocks.FRONTIER_BLOCK.get().getDefaultState()))
+            .parent(null)
+            .waterColor(0xFFF700)
+            .waterFogColor(0xFFF700)
+            .scale(20)
+            .depth(20)
+            .category(Category.NONE)
+            .temperature(0)
+
+    ));
 
     public static void regbio() {
         initBiome(OCEAN.get(), Type.MODIFIED, Type.OCEAN, Type.WATER);
@@ -109,6 +124,7 @@ public class ModBiome {
         initBiome(DESERT.get(), Type.SPARSE, Type.SPARSE, Type.DRY, Type.SANDY);
         initBiome(ICE.get(), Type.DRY, Type.COLD, Type.DEAD, Type.SNOWY);
         initBiome(MOUNTAIN.get(), Type.HILLS, Type.MODIFIED, Type.MOUNTAIN);
+        initBiome(FRONTIER.get(),Type.END,Type.DEAD,Type.RARE,Type.MAGICAL,Type.SPOOKY,Type.VOID);
     }
 
     private static void initBiome(Biome biome, Type... types) {

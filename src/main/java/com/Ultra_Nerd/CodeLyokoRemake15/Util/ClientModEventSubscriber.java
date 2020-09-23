@@ -93,6 +93,7 @@ public class ClientModEventSubscriber {
         RenderTypeLookup.setRenderLayer(ModBlocks.FALSE_WATER.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.PROJECTOR_FOCUS.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.LYOKO_CORE.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.FRONTIER_BLOCK.get(), RenderType.getCutoutMipped());
         //registers the screens and entities
         ScreenManager.<ContainerInfusing, InfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
         ScreenManager.<ContainerElectricInfusing, ElectricInfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_ELECTRIC_INFUSING.get(), ElectricInfusingChamberScreen::new);

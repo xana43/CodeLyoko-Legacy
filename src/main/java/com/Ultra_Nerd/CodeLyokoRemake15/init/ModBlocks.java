@@ -70,6 +70,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> FLUORITE_BLOCK = BLOCKS.register("fluorite_block", () -> new Block(Block.Properties.create(Material.SAND).hardnessAndResistance(-1, 10).sound(SoundType.SAND).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> FLUORITE_ORE = BLOCKS.register("fluorite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> FALSE_WATER = BLOCKS.register("false_water",() -> new Block(Block.Properties.from(Blocks.WATER)));
+    public static final RegistryObject<Block> FRONTIER_BLOCK = BLOCKS.register("frontier_block",() -> new Block(Block.Properties.from(Blocks.BEDROCK)));
     public static final RegistryObject<Block> GUMMITE_ORE = BLOCKS.register("gummite_ore",() -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(3).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> HOLOPROJECTOR = BLOCKS.register("holoprojector", HologramProjectorBlock::new);
     public static final RegistryObject<Block> LYOKO_CORE = BLOCKS.register("lyoko_core",() -> new LyokoCore(Block.Properties.from(Blocks.DRAGON_EGG).notSolid()));

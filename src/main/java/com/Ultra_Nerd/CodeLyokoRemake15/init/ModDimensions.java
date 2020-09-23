@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage.Sector5ModDimen
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertModDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanModDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestModDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Frontier.FrontierModDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceModDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainModDimension;
 import net.minecraftforge.common.ModDimension;
@@ -23,4 +24,5 @@ public class ModDimensions {
     public static final RegistryObject<ModDimension> OCEAN_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("digital_ocean", OceanModDimension::new);
     public static final RegistryObject<ModDimension> ICE_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("ice_sector", IceModDimension::new);
     public static final RegistryObject<ModDimension> DESERT_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("desert_sector", DesertModDimension::new);
+    public static final RegistryObject<ModDimension> FRONTIER_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("frontier", FrontierModDimension::new);
 }

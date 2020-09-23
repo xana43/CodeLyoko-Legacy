@@ -50,6 +50,10 @@ public class ForgeEventSubscriber {
         if (DimensionType.byName(ModDimensionTypes.DimensionTypeDesert) == null) {
             DimensionManager.registerDimension(ModDimensionTypes.DimensionTypeDesert, ModDimensions.DESERT_DIMENSION.get(), null, true);
         }
+        if (DimensionType.byName(ModDimensionTypes.DimensionTypeFrontier) == null)
+        {
+            DimensionManager.registerDimension(ModDimensionTypes.DimensionTypeFrontier,ModDimensions.FRONTIER_DIMENSION.get(),null,true);
+        }
         Base.Log.info("All Dimensions loaded");
     }
 }
