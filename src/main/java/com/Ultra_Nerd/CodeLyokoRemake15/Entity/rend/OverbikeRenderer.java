@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nonnull;
 
 public class OverbikeRenderer<T extends OverbikeEntity> extends EntityRenderer<T> {
-    private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/overboard/overboard.png");
+    private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/overbike/overbiketexture.png");
     private final EntityModel<T> BoardModel = new ModelOverbike<T>();
     public OverbikeRenderer(EntityRendererManager renderManager) {
         super(renderManager);
@@ -27,7 +27,7 @@ public class OverbikeRenderer<T extends OverbikeEntity> extends EntityRenderer<T
     public void render(@Nonnull T entityIn, float entityYaw, float partialTicks, @Nonnull MatrixStack matrixStackIn, @Nonnull IRenderTypeBuffer bufferIn, int packedLightIn) {
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.push();
-        matrixStackIn.scale(-.5F, -.25F, .5F);
+        matrixStackIn.scale(-.5F, -.5F, .5F);
         matrixStackIn.translate(0,-1.5f,0);
         this.BoardModel.setRotationAngles(entityIn,0,0,0,0,0);
         IVertexBuilder vertexBuilder = bufferIn.getBuffer(this.BoardModel.getRenderType(this.getEntityTexture(entityIn)));

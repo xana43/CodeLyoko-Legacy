@@ -6,17 +6,42 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 
-public class OverbikeEntity extends Entity {
+public class OverbikeEntity extends Entity  {
+
     public OverbikeEntity(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
+        this.doBlockCollisions();
+        this.canBeCollidedWith();
+        this.canBePushed();
+        this.canPassengerSteer();
+
     }
 
 
+
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        Vec3d vec3d = this.getMotion();
+        double d0 = this.getPosX() + vec3d.x;
+        double d1 = this.getPosY() + vec3d.y;
+        double d2 = this.getPosZ() + vec3d.z;
+            Vec3d motion = this.getMotion();
+            this.setMotion(motion.x, motion.y - this.getGravity(),motion.z);
+        this.setPosition(d0, d1, d2);
+    }
+    private double getGravity()
+    {
+        return 0.5D;
+    }
     @Override
     public boolean processInitialInteract(@Nonnull PlayerEntity player, @Nonnull Hand hand) {
         if (super.processInitialInteract(player, hand)) {
@@ -36,23 +61,11 @@ public class OverbikeEntity extends Entity {
     }
 
 
-    @Override
-    public boolean canPassengerSteer() {
-        return true;
-    }
+
+
 
     @Override
-    public boolean canBeCollidedWith() {
-        return true;
-    }
-
-    @Override
-    public boolean canBePushed() {
-        return true;
-    }
-
-    @Override
-    protected boolean canBeRidden(Entity entityIn) {
+    protected boolean canBeRidden(@Nonnull Entity entityIn) {
         return true;
     }
 
