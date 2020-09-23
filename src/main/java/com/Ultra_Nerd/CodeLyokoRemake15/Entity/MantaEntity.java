@@ -25,6 +25,12 @@ public class MantaEntity extends PhantomEntity implements IAnimatedEntity, IRang
     }
 
     @Override
+    protected void registerGoals() {
+        super.registerGoals();
+
+    }
+
+    @Override
     protected boolean isInDaylight() {
         return false;
     }

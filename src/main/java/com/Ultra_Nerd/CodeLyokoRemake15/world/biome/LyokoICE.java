@@ -32,4 +32,5 @@ public class LyokoICE extends Biome {
 	public int getSkyColor() {
 		return 0x000033;
 	}
+
 }
