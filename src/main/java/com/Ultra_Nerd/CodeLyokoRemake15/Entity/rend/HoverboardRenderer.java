@@ -13,9 +13,11 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
-
+@OnlyIn(Dist.CLIENT)
 public class HoverboardRenderer<T extends HoverboardEntity> extends EntityRenderer<T> {
     private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/hoverboard/hoverboard.png");
     private final EntityModel<T> BoardModel = new ModelHoverboard<>();

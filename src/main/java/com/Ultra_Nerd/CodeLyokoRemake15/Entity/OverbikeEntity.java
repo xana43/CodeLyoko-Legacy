@@ -15,6 +15,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class OverbikeEntity extends Entity  {
+    private final AxisAlignedBB axisAlignedBB = new AxisAlignedBB(this.getPosX() - this.getWidth(),this.getPosY() - this.getHeight(),
+            this.getPosZ() - this.getWidth(),this.getPosX() + getWidth(),this.getPosY() + this.getHeight(),this.getPosZ() + this.getWidth());
 
     public OverbikeEntity(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
@@ -24,28 +26,28 @@ public class OverbikeEntity extends Entity  {
         this.canBePushed();
         this.canPassengerSteer();
         this.recalculateSize();
-        this.getCollisionBoundingBox();
-
+        this.setBoundingBox(axisAlignedBB);
     }
 
 
     @Nullable
     @Override
     public AxisAlignedBB getCollisionBox(@Nonnull Entity entityIn) {
-        return this.getCollisionBoundingBox();
+        return axisAlignedBB;
     }
 
     @Nullable
     @Override
     public AxisAlignedBB getCollisionBoundingBox() {
-        return new AxisAlignedBB(this.getPosX(),this.getPosY(),this.getPosZ(),this.getPosX() + this.getWidth(), this.getPosY() + this.getWidth(), this.getPosZ() + this.getWidth());
-
+        return axisAlignedBB;
     }
 
     @Override
     protected void doBlockCollisions() {
         super.doBlockCollisions();
     }
+
+
 
     @Override
     public float getCollisionBorderSize() {

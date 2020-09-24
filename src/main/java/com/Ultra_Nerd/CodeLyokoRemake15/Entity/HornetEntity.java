@@ -7,7 +7,6 @@ import net.minecraft.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.IPacket;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
@@ -37,21 +36,17 @@ public class HornetEntity extends PhantomEntity implements IAnimatedEntity,IRang
     @Override
     public void tick() {
         super.tick();
-        if (this.world.isRemote) {
-            float f = MathHelper.cos((float)(this.getEntityId() * 3 + this.ticksExisted) * 0.13F + (float)Math.PI);
-            float f1 = MathHelper.cos((float)(this.getEntityId() * 3 + this.ticksExisted + 1) * 0.13F + (float)Math.PI);
+
+
             if(this.isAlive()) {
                 this.world.playSound(this.getPosX(), this.getPosY(), this.getPosZ(), ModSounds.HORNETFLY.get(), this.getSoundCategory(), 0.95F + this.rand.nextFloat() * 0.05F, 0.95F + this.rand.nextFloat() * 0.05F, true);
             }
 
 
-            int i = this.getPhantomSize();
-            float f2 = MathHelper.cos(this.rotationYaw * ((float)Math.PI / 180F)) * (1.3F + 0.21F * (float)i);
-            float f3 = MathHelper.sin(this.rotationYaw * ((float)Math.PI / 180F)) * (1.3F + 0.21F * (float)i);
-            float f4 = (0.3F + f * 0.45F) * ((float)i * 0.2F + 1.0F);
-            this.world.addParticle(ParticleTypes.MYCELIUM, this.getPosX() + (double)f2, this.getPosY() + (double)f4, this.getPosZ() + (double)f3, 0.0D, 0.0D, 0.0D);
-            this.world.addParticle(ParticleTypes.MYCELIUM, this.getPosX() - (double)f2, this.getPosY() + (double)f4, this.getPosZ() - (double)f3, 0.0D, 0.0D, 0.0D);
-        }
+
+
+
+
 
     }
     @Override

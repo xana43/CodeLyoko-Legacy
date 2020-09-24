@@ -26,7 +26,7 @@ public class KankrelatEntity extends SkeletonEntity implements IAnimatedEntity {
     {
         if(event.isWalking())
         {
-            controller.setAnimation(new AnimationBuilder().addAnimation("animation.ModelKanKrelat.walk"));
+            controller.setAnimation(new AnimationBuilder().addAnimation("animation.ModelKankrelat.walk"));
             return true;
         }
         else {

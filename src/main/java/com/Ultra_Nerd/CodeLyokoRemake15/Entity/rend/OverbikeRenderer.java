@@ -11,9 +11,11 @@ import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
-
+@OnlyIn(Dist.CLIENT)
 public class OverbikeRenderer<T extends OverbikeEntity> extends EntityRenderer<T> {
     private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/overbike/overbiketexture.png");
     private final EntityModel<T> BoardModel = new ModelOverbike<T>();

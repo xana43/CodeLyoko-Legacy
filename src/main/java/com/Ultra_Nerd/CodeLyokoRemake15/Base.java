@@ -6,7 +6,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LiquidHelium;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LyokoCore;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.SeaPylon;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.BlokItem;
+import com.Ultra_Nerd.CodeLyokoRemake15.items.CustomMobEggs;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen.ModOreGen;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen.StructGen;
 import net.minecraft.block.FlowingFluidBlock;
@@ -78,7 +78,7 @@ public class Base
 	
 	@SubscribeEvent
 	public void onRegisterEnties(final RegistryEvent.Register<EntityType<?>> event){
-		BlokItem.initEgg();
+		CustomMobEggs.initEgg();
 	}
 
 	@SubscribeEvent

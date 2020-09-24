@@ -21,17 +21,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class BlokItem extends SpawnEggItem {
-    protected static final List<BlokItem> UNADDED = new ArrayList<BlokItem>();
+public class CustomMobEggs extends SpawnEggItem {
+    protected static final List<CustomMobEggs> UNADDED = new ArrayList<CustomMobEggs>();
     private final Lazy<? extends EntityType<?>> supplier;
 
-    public BlokItem(final NonNullSupplier<? extends EntityType<?>> type, final int PrimaaryColor, final int Secondary, final Item.Properties properties) {
+    public CustomMobEggs(final NonNullSupplier<? extends EntityType<?>> type, final int PrimaaryColor, final int Secondary, final Item.Properties properties) {
         super(null, PrimaaryColor, Secondary, properties);
         this.supplier = Lazy.of(type::get);
         UNADDED.add(this);
     }
 
-    public BlokItem(final RegistryObject<? extends EntityType<?>> type, final int PrimaaryColor, final int Secondary, final Item.Properties properties) {
+    public CustomMobEggs(final RegistryObject<? extends EntityType<?>> type, final int PrimaaryColor, final int Secondary, final Item.Properties properties) {
         super(null, PrimaaryColor, Secondary, properties);
         this.supplier = Lazy.of(type::get);
         UNADDED.add(this);
