@@ -6,25 +6,51 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class OverbikeEntity extends Entity  {
 
     public OverbikeEntity(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
+
         this.doBlockCollisions();
         this.canBeCollidedWith();
         this.canBePushed();
         this.canPassengerSteer();
+        this.recalculateSize();
+        this.getCollisionBoundingBox();
 
     }
 
 
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBox(@Nonnull Entity entityIn) {
+        return this.getCollisionBoundingBox();
+    }
 
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox() {
+        return new AxisAlignedBB(this.getPosX(),this.getPosY(),this.getPosZ(),this.getPosX() + this.getWidth(), this.getPosY() + this.getWidth(), this.getPosZ() + this.getWidth());
+
+    }
+
+    @Override
+    protected void doBlockCollisions() {
+        super.doBlockCollisions();
+    }
+
+    @Override
+    public float getCollisionBorderSize() {
+        return 4;
+    }
 
     @Override
     public void tick() {
