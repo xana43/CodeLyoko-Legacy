@@ -40,4 +40,10 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<ComputerControlPanelTileEntity>> COMPUTER_CONTROL_PLANEL_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("computer_control_panel_tile_entity",() -> TileEntityType.Builder.create(ComputerControlPanelTileEntity::new
             ,ModBlocks.COMPUTER_TOWER_CONTROL_PANEL.get()).build(null));
+    public static final RegistryObject<TileEntityType<CableTE>> CABLE_TILE_ENTITY = TILE_ENTITY_TYPES.register(
+            "cable_tile_entity",() -> TileEntityType.Builder.create(CableTE::new,
+                    ModBlocks.CABLE_BLOCK.get()).build(null));
+    public static final RegistryObject<TileEntityType<RouterTE>> ROUTER_TILE_ENTITY =
+            TILE_ENTITY_TYPES.register("router_tile_entity",() -> TileEntityType.Builder.create(RouterTE::new,
+                    ModBlocks.ROUTER.get()).build(null));
 }

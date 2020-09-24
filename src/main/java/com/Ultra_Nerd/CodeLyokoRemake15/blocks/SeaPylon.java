@@ -30,6 +30,7 @@ public class SeaPylon extends Block {
                 .notSolid()
 
 
+
         );
 
     }

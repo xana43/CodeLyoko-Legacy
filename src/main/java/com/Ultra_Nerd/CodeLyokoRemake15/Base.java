@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelSkid;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LiquidHelium;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LyokoCore;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.SeaPylon;
@@ -18,11 +17,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
@@ -70,7 +66,6 @@ public class Base
 		ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
 		ModDimensions.MOD_DIMENSION_DEFERRED_REGISTER.register(ModBus);
 		ModWorldFeatures.FEATURES.register(ModBus);
-		ModBus.addListener(this::onbake);
 		instance = this;
 		MinecraftForge.EVENT_BUS.register(this);
 		
@@ -198,11 +193,7 @@ CompoundNBT existing;
 		}
 	};
 
-	public void onbake(final ModelRegistryEvent event)
-	{
-		ModelLoaderRegistry.registerLoader(new ResourceLocation(Base.MOD_ID, "test"), new ModelSkid() {
-		});
-	}
+
 
 	
 }
