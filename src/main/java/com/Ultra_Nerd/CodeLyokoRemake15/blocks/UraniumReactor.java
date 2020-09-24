@@ -19,15 +19,6 @@ public class UraniumReactor extends Block{
 		// TODO Auto-generated constructor stub
 	}
 	/*
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if(!worldIn.isRemote)
-		{
-			playerIn.openGui(Base.instance, Conf.URANIUM, worldIn, pos.getX(), pos.getY(), pos.getZ());
-		}
-		return true;
-	}
 	
 	@Override
 	public boolean hasTileEntity(IBlockState state) {
