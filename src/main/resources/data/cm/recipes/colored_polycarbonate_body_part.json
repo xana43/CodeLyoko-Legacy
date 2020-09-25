@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    
+    "ingredients": [
+        {
+            "item": "cm:molten_polycarbonate_concentrate"
+        },
+        {
+            "item": "cm:polycarbonate_crystalline_dye"
+        }
+
+    ],
+    
+    "result":
+    {
+        "item": "cm:colored_polycarbonate_body_part",
+        "count": 1
+    }
+}

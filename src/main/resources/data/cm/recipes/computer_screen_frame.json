@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "CCC",
+        "CSC",
+        "CCC"
+    ],
+    
+    "key":
+    {
+        "C":
+        {
+            "item": "minecraft:iron_block"
+        },
+        "S":
+        {
+            "item": "minecraft:iron_bars"
+        }
+
+        
+    },
+    
+    "result":
+    {
+        "item": "cm:computer_screen_frame",
+        "count": 1
+    }
+}

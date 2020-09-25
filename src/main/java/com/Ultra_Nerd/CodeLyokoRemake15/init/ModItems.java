@@ -96,10 +96,11 @@ public class ModItems {
     public static final RegistryObject<Item> KEY_SPRING = ITEMS.register("key_spring", ItemBase::new);
     public static final RegistryObject<Item> MEGABIT = ITEMS.register("megabit", ItemBase::new);
     public static final RegistryObject<Item> MEGABYTE = ITEMS.register("megabyte", ItemBase::new);
-    public static final RegistryObject<Item> MOLTEN_POLYCARBONATE_CONCENTRATE = ITEMS.register("molten_polycarbonate_concentrate", ItemBase::new);
+    public static final RegistryObject<Item> MOLTEN_POLYCARBONATE_CONCENTRATE = ITEMS.register("molten_polycarbonate_concentrate", () -> new Polycarbonate(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> PETABIT = ITEMS.register("petabit", ItemBase::new);
     public static final RegistryObject<Item> PETABYTE = ITEMS.register("petabyte", ItemBase::new);
     public static final RegistryObject<Item> POLYCARBONATE_CRYSTALLINE_DYE = ITEMS.register("polycarbonate_crystalline_dye", ItemBase::new);
+    public static final RegistryObject<Item> COLD_POLYCARBONATE_CONCENTRATE = ITEMS.register("cold_polycarbonate_concentrate", ItemBase::new);
     public static final RegistryObject<Item> QUBIT = ITEMS.register("qubit", ItemBase::new);
     public static final RegistryObject<Item> QUBYTE = ITEMS.register("qubyte", ItemBase::new);
     public static final RegistryObject<Item> RAW_SILICADUST = ITEMS.register("raw_silicadust", ItemBase::new);
