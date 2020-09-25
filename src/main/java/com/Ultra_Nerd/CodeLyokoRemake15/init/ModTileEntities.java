@@ -46,4 +46,7 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<RouterTE>> ROUTER_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("router_tile_entity",() -> TileEntityType.Builder.create(RouterTE::new,
                     ModBlocks.ROUTER.get()).build(null));
+    public static final RegistryObject<TileEntityType<ComputerInterfaceTE>> COMPUTER_INTERFACE_TILE_ENTITY =
+            TILE_ENTITY_TYPES.register("computer_interface_tile_entity", () -> TileEntityType.Builder.create(ComputerInterfaceTE::new,
+                    ModBlocks.COMPUTER_KEYBOARD.get()).build(null));
 }

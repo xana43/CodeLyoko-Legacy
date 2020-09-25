@@ -24,9 +24,9 @@ import javax.annotation.Nullable;
 
 public class ComputerControlPanelTileEntity extends TileEntity implements INamedContainerProvider, ITickableTileEntity {
 
-    @Nullable // May be accessed before onLoad
+     // May be accessed before onLoad
     @OnlyIn(Dist.CLIENT)
-    public ComputerControlPanelTileEntity anInterface;
+
     protected int PlayersPresent;
 
     public ComputerControlPanelTileEntity(TileEntityType<?> tileEntityTypeIn) {

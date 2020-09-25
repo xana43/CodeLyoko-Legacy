@@ -89,7 +89,7 @@ public class ClientModEventSubscriber {
         RenderTypeLookup.setRenderLayer(ModBlocks.UV_FOCUS.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.QUANTUM_STEEL_BLOCK.get(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(ModBlocks.PROJECTOR_FOCUS.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.HOLOPROJECTOR.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ModBlocks.HOLOPROJECTOR.get(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(ModBlocks.FALSE_WATER.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.PROJECTOR_FOCUS.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.LYOKO_CORE.get(), RenderType.getTranslucent());
