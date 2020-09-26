@@ -125,6 +125,10 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.k-4u.nl"
     }
+    maven {
+        // location of the maven that hosts IE files
+        url "https://maven.blamejared.com/"
+    }
 
 }
 
@@ -136,6 +140,8 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.15.2-31.2.41'
     implementation fg.deobf('software.bernie.geckolib:forge-1.15.2-geckolib:2.0.0')
     /* minecraft dependency is here */
+    compileOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${ie_version}")
+    runtimeOnly fg.deobf("blusunrize.immersiveengineering:ImmersiveEngineering:${ie_version}")
 
     // compile against the JEI API but do not include it at runtime
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")

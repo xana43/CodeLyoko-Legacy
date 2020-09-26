@@ -1,12 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
-import net.minecraft.tileentity.ITickableTileEntity;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
+import net.minecraft.world.World;
+import vazkii.patchouli.api.IMultiblock;
 
-public class TestTE extends TileEntity implements ITickableTileEntity {
+import javax.annotation.Nullable;
+import java.util.Collection;
+
+public class TestTE extends TileEntity implements IMultiblock {
     private boolean testonce = false;
     public TestTE(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
@@ -16,34 +24,70 @@ public class TestTE extends TileEntity implements ITickableTileEntity {
         this(ModTileEntities.TEST_TILE_ENTITY.get());
     }
     private BlockPos core = this.pos;
+
+
+
     @Override
-    public void tick() {
-/*
-        if(!CheckStructure() && ! testonce)
-        {
-            CheckStructure();
-            testonce = true;
-        }
-        Base.Log.info("formed");
+    public IMultiblock offset(int i, int i1, int i2) {
+        return null;
+    }
 
+    @Override
+    public IMultiblock offsetView(int i, int i1, int i2) {
+        return null;
+    }
 
- */
+    @Override
+    public IMultiblock setSymmetrical(boolean b) {
+        return null;
+    }
+
+    @Override
+    public IMultiblock setId(ResourceLocation resourceLocation) {
+        return null;
+    }
+
+    @Override
+    public boolean isSymmetrical() {
+        return false;
+    }
+
+    @Override
+    public ResourceLocation getID() {
+        return null;
+    }
+
+    @Override
+    public void place(World world, BlockPos blockPos, Rotation rotation) {
 
     }
 
-/*    private boolean CheckStructure()
-    {
-        int x;
-        if(x++ < 5)
-        {
-
-        }
-
-
-
+    @Override
+    public Pair<BlockPos, Collection<SimulateResult>> simulate(World world, BlockPos blockPos, Rotation rotation, boolean b) {
+        return null;
     }
 
- */
+    @Nullable
+    @Override
+    public Rotation validate(World world, BlockPos blockPos) {
+        return null;
+    }
+
+    @Override
+    public boolean validate(World world, BlockPos blockPos, Rotation rotation) {
+        return false;
+    }
+
+    @Override
+    public boolean test(World world, BlockPos blockPos, int i, int i1, int i2, Rotation rotation) {
+        return false;
+    }
+
+    @Override
+    public Vec3i getSize() {
+        return null;
+    }
+
 
 
 

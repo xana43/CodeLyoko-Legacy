@@ -17,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
@@ -35,14 +36,17 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import vazkii.patchouli.api.IMultiblock;
 
+import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Mod("cm")
 @Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Bus.MOD)
 public class Base
 {
-
+	public static final Map<ResourceLocation, IMultiblock> MULTIBLOCK_MAP = new ConcurrentHashMap<>();
 	public static final Logger Log = LogManager.getLogger();
 	public static boolean XANA = false;
 	public static final String MOD_ID = "cm";
@@ -68,9 +72,21 @@ public class Base
 		ModWorldFeatures.FEATURES.register(ModBus);
 		instance = this;
 		MinecraftForge.EVENT_BUS.register(this);
-		
+
 	}
-	
+	public static IMultiblock registerMultiBlocks(ResourceLocation resourceLocation,IMultiblock multiblock)
+	{
+		IMultiblock MultiBlocks = MULTIBLOCK_MAP.put(resourceLocation,multiblock);
+		if(MultiBlocks != null)
+		{
+			throw new IllegalArgumentException("Multiblock" + resourceLocation + "already registered");
+		}
+		else
+		{
+			return multiblock.setId(resourceLocation);
+		}
+	}
+
 	@SubscribeEvent
 	public void onRegisterEnties(final RegistryEvent.Register<EntityType<?>> event){
 		CustomMobEggs.initEgg();
