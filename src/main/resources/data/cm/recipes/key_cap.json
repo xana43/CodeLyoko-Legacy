@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "PPP",
+        "PAP",
+        "AAA"
+    ],
+    
+    "key":
+    {
+        "P":
+        {
+            "item": "cm:molten_polycarbonate_concentrate"
+        },
+        
+        "A":
+        {
+            "item":"minecraft:air"
+        }
+        
+    },
+    
+    "result":
+    {
+        "item": "cm:key_cap",
+        "count": 1
+    }
+}

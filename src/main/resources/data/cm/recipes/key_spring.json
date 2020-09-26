@@ -1,0 +1,30 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "III",
+        "AIA",
+        "IAA"
+    ],
+    
+    "key":
+    {
+        "I":
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        
+        "A":
+        {
+            "item":"minecraft:air"
+        }
+        
+    },
+    
+    "result":
+    {
+        "item": "cm:key_spring",
+        "count": 1
+    }
+}
