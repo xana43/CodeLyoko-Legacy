@@ -46,7 +46,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Bus.MOD)
 public class Base
 {
-	public static final Map<ResourceLocation, IMultiblock> MULTIBLOCK_MAP = new ConcurrentHashMap<>();
+
 	public static final Logger Log = LogManager.getLogger();
 	public static boolean XANA = false;
 	public static final String MOD_ID = "cm";
@@ -74,19 +74,21 @@ public class Base
 		MinecraftForge.EVENT_BUS.register(this);
 
 	}
+
+	public static final Map<ResourceLocation, IMultiblock> MULTIBLOCK_MAP = new ConcurrentHashMap<>();
 	public static IMultiblock registerMultiBlocks(ResourceLocation resourceLocation,IMultiblock multiblock)
 	{
 		IMultiblock MultiBlocks = MULTIBLOCK_MAP.put(resourceLocation,multiblock);
 		if(MultiBlocks != null)
 		{
-			throw new IllegalArgumentException("Multiblock" + resourceLocation + "already registered");
+			throw new IllegalArgumentException("Multiblock " + resourceLocation + " already registered");
 		}
 		else
 		{
+			Base.Log.info(resourceLocation);
 			return multiblock.setId(resourceLocation);
 		}
 	}
-
 	@SubscribeEvent
 	public void onRegisterEnties(final RegistryEvent.Register<EntityType<?>> event){
 		CustomMobEggs.initEgg();

@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.tileentity.TileEntity;
@@ -15,9 +16,10 @@ import javax.annotation.Nullable;
 import java.util.Collection;
 
 public class TestTE extends TileEntity implements IMultiblock {
-    private boolean testonce = false;
+    private final ResourceLocation ID = new ResourceLocation(Base.MOD_ID,"test");
     public TestTE(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
+        Base.registerMultiBlocks(ID,this);
     }
     public TestTE()
     {
@@ -54,7 +56,7 @@ public class TestTE extends TileEntity implements IMultiblock {
 
     @Override
     public ResourceLocation getID() {
-        return null;
+        return ID;
     }
 
     @Override
