@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.*;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test.TestTE;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -49,4 +50,7 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<ComputerInterfaceTE>> COMPUTER_INTERFACE_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("computer_interface_tile_entity", () -> TileEntityType.Builder.create(ComputerInterfaceTE::new,
                     ModBlocks.COMPUTER_KEYBOARD.get()).build(null));
+    public static final RegistryObject<TileEntityType<TestTE>> TEST_TILE_ENTITY =
+            TILE_ENTITY_TYPES.register("test_tile_entity", () -> TileEntityType.Builder.create(TestTE::new,
+                    ModBlocks.BLOCK_PATTERN.get()).build(null));
 }

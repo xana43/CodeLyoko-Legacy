@@ -7,6 +7,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.ElectricFluoride
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.saplings.DigitalMountainSapling;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.saplings.DigitalSapling;
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tests.BlockPatternTest;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tests.TestBlockPortal;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.DigitalForestTree;
@@ -25,6 +26,7 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Base.MOD_ID);
     //for testing blocks
     public static final RegistryObject<TestBlockPortal> PORTAL_BLOCK = BLOCKS.register("portal_block", () -> new TestBlockPortal(Block.Properties.from(Blocks.NETHER_PORTAL)));
+    public static final RegistryObject<Block> BLOCK_PATTERN = BLOCKS.register("block_pattern", () -> new BlockPatternTest(Block.Properties.from(Blocks.IRON_BLOCK)));
     //for blocks
     public static final RegistryObject<Block> ARCHITECTURE_WORK_STATION = BLOCKS.register("architecture_work_station",() -> new ArchitectureWorkstation(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> ANTI_MARABUNTA = BLOCKS.register("anti_marabunta", AntiMarabunta::new);
