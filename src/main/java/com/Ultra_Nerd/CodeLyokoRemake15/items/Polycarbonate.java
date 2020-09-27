@@ -12,9 +12,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Polycarbonate extends Item {
     private static int timer;
-
+    private static ItemStack instance;
     public Polycarbonate(Properties properties) {
         super(properties);
+        instance = this.getDefaultInstance();
         timer = ThreadLocalRandom.current().nextInt(100,1000);
 
     }
@@ -22,7 +23,7 @@ public class Polycarbonate extends Item {
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
-        if(timer-- <= 0 && entityIn instanceof PlayerEntity)
+        if(timer-- <= 0 && entityIn instanceof PlayerEntity && instance == this.getDefaultInstance())
         {
             PlayerEntity playerEntity = (PlayerEntity)entityIn;
             ItemStack stack1 = new ItemStack(ModItems.COLD_POLYCARBONATE_CONCENTRATE.get());

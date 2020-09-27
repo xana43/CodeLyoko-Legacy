@@ -25,14 +25,14 @@ public class CustomMobEggs extends SpawnEggItem {
     protected static final List<CustomMobEggs> UNADDED = new ArrayList<CustomMobEggs>();
     private final Lazy<? extends EntityType<?>> supplier;
 
-    public CustomMobEggs(final NonNullSupplier<? extends EntityType<?>> type, final int PrimaaryColor, final int Secondary, final Item.Properties properties) {
-        super(null, PrimaaryColor, Secondary, properties);
+    public CustomMobEggs(final NonNullSupplier<? extends EntityType<?>> type, final int PrimaryColor, final int Secondary, final Item.Properties properties) {
+        super(null, PrimaryColor, Secondary, properties);
         this.supplier = Lazy.of(type::get);
         UNADDED.add(this);
     }
 
-    public CustomMobEggs(final RegistryObject<? extends EntityType<?>> type, final int PrimaaryColor, final int Secondary, final Item.Properties properties) {
-        super(null, PrimaaryColor, Secondary, properties);
+    public CustomMobEggs(final RegistryObject<? extends EntityType<?>> type, final int PrimaryColor, final int Secondary, final Item.Properties properties) {
+        super(null, PrimaryColor, Secondary, properties);
         this.supplier = Lazy.of(type::get);
         UNADDED.add(this);
     }
