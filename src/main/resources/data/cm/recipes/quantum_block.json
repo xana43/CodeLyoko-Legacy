@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "FFF",
+        "FFF",
+        "FFF"
+    ],
+    
+    "key":
+    {
+        "F":
+        {
+            "item": "cm:solid_quantum"
+        }
+
+
+        
+    },
+    
+    "result":
+    {
+        "item": "cm:quantum_block",
+        "count": 1
+    }
+}

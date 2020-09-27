@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "FFF",
+        "FFF",
+        "FFF"
+    ],
+    
+    "key":
+    {
+        "F":
+        {
+            "item": "cm:fluoride"
+        }
+
+
+        
+    },
+    
+    "result":
+    {
+        "item": "cm:fluorite_block",
+        "count": 1
+    }
+}

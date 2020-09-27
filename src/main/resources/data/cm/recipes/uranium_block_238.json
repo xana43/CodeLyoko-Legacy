@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "FFF",
+        "FFF",
+        "FFF"
+    ],
+    
+    "key":
+    {
+        "F":
+        {
+            "item": "cm:uranium_isotope238"
+        }
+
+
+        
+    },
+    
+    "result":
+    {
+        "item": "cm:uranium_block_238",
+        "count": 1
+    }
+}
