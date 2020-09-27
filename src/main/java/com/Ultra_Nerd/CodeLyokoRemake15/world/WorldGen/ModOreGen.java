@@ -15,7 +15,7 @@ public class ModOreGen {
 
     public static void genOre() {
         for (Biome biome : ForgeRegistries.BIOMES) {
-            //coffinite
+            //coffinite, uraninite, gummite,torbernite
             if (biome == Biomes.BADLANDS || biome == Biomes.BADLANDS_PLATEAU || biome == Biomes.ERODED_BADLANDS
                     || biome == Biomes.MODIFIED_BADLANDS_PLATEAU || biome == Biomes.MODIFIED_WOODED_BADLANDS_PLATEAU
                     || biome == Biomes.WOODED_BADLANDS_PLATEAU || biome == Biomes.SWAMP || biome == Biomes.SWAMP_HILLS
@@ -28,7 +28,23 @@ public class ModOreGen {
                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE
                         .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
                                 ModBlocks.COFFINITE_ORE.get().getDefaultState(), 10)).withPlacement(customC));
+                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,Feature.ORE.withConfiguration(new OreFeatureConfig(
+                        OreFeatureConfig.FillerBlockType.NATURAL_STONE,ModBlocks.URANINITE_ORE.get().getDefaultState(),10)).withPlacement(customC));
+                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,Feature.ORE.withConfiguration(new OreFeatureConfig(
+                        OreFeatureConfig.FillerBlockType.NATURAL_STONE,ModBlocks.GUMMITE_ORE.get().getDefaultState(),5)).withPlacement(customC));
+                if(biome.isHighHumidity())
+                {
+                    biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,Feature.ORE.withConfiguration(new OreFeatureConfig(
+                            OreFeatureConfig.FillerBlockType.NATURAL_STONE,ModBlocks.TORBERNITE_ORE.get().getDefaultState(),5)).withPlacement(customC));
+                    biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,Feature.ORE.withConfiguration(new OreFeatureConfig(
+                            OreFeatureConfig.FillerBlockType.NATURAL_STONE,ModBlocks.AUTUNITE_ORE.get().getDefaultState(),5)).withPlacement(customC));
+                }
+                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,Feature.ORE.withConfiguration(new OreFeatureConfig(
+                        OreFeatureConfig.FillerBlockType.NATURAL_STONE,ModBlocks.METATORBERNITE_ORE.get().getDefaultState(),5)).withPlacement(customC));
+                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,Feature.ORE.withConfiguration(new OreFeatureConfig(
+                        OreFeatureConfig.FillerBlockType.NATURAL_STONE,ModBlocks.METAAUTUNITE_ORE.get().getDefaultState(),5)).withPlacement(customC));
             }
+
 
             //carnotite
             if (biome == Biomes.DESERT || biome == Biomes.DESERT_HILLS || biome == Biomes.SAVANNA ||
@@ -46,7 +62,7 @@ public class ModOreGen {
                         .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
                                 ModBlocks.TYUYAMUNITE_ORE.get().getDefaultState(), 3)).withPlacement(custom));
 
-            } else if (biome != Biomes.MOUNTAINS || biome != Biomes.MOUNTAIN_EDGE) {
+            } else {
                 ConfiguredPlacement custom2 = Placement.COUNT_RANGE.configure(new CountRangeConfig(4, 14, 14, 20));
                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE
                         .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.
