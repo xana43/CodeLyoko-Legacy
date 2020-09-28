@@ -116,6 +116,20 @@ public class ModBiome {
             .temperature(0)
 
     ));
+    public static final RegistryObject<Biome> VOLCANO = BIOMES.register("volcano", () -> new LyokoVolcano(new Biome.Builder()
+    .precipitation(RainType.NONE)
+    .temperature(Integer.MAX_VALUE)
+    .category(Category.NETHER)
+            .waterFogColor(90)
+            .waterColor(90)
+            .parent(null)
+            .surfaceBuilder(SurfaceBuilder.DEFAULT,new SurfaceBuilderConfig(ModBlocks.VOLCANO_GROUND.get().getDefaultState(),
+                    ModBlocks.VOLCANO_GROUND.get().getDefaultState(),ModBlocks.VOLCANO_GROUND.get().getDefaultState()))
+            .downfall(0)
+            .scale(200)
+            .depth(200)
+    ));
+
 
     public static void regbio() {
         initBiome(OCEAN.get(), Type.MODIFIED, Type.OCEAN, Type.WATER);
@@ -125,6 +139,7 @@ public class ModBiome {
         initBiome(ICE.get(), Type.DRY, Type.COLD, Type.DEAD, Type.SNOWY);
         initBiome(MOUNTAIN.get(), Type.HILLS, Type.MODIFIED, Type.MOUNTAIN);
         initBiome(FRONTIER.get(),Type.END,Type.DEAD,Type.RARE,Type.MAGICAL,Type.SPOOKY,Type.VOID);
+        initBiome(VOLCANO.get(),Type.SPOOKY,Type.DEAD,Type.HOT,Type.MODIFIED,Type.NETHER);
     }
 
     private static void initBiome(Biome biome, Type... types) {

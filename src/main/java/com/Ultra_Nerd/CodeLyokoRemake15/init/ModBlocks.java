@@ -117,5 +117,5 @@ public class ModBlocks {
     public static final RegistryObject<Block> UV_MACHINE = BLOCKS.register("uv_machine", () -> new Block(Block.Properties.from(Blocks.ANVIL)));
     public static final RegistryObject<Block> UV_FOCUS = BLOCKS.register("uv_focus",() -> new UVFocusBlock(Block.Properties.from(Blocks.GLASS).notSolid()));
     public static final RegistryObject<Block> UV_LIGHT = BLOCKS.register("uv_light",() -> new Block(Block.Properties.from(Blocks.GLOWSTONE)));
-    
+    public static final RegistryObject<Block> VOLCANO_GROUND = BLOCKS.register("volcano_ground", () -> new Block(Block.Properties.from(Blocks.IRON_BLOCK)));
  }

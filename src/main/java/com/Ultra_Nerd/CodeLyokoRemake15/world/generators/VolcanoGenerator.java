@@ -1,16 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.generators;
 
-
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainGenSettings;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoGenSettings;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.NoiseChunkGenerator;
 
 import javax.annotation.Nonnull;
 
-public class MounatainGenerator extends NoiseChunkGenerator<MountainGenSettings> {
+public class VolcanoGenerator extends NoiseChunkGenerator<VolcanoGenSettings> {
 
-    public MounatainGenerator(IWorld worldIn, BiomeProvider biomeProviderIn, MountainGenSettings settingsIn) {
+    public VolcanoGenerator(IWorld worldIn, BiomeProvider biomeProviderIn, VolcanoGenSettings settingsIn) {
         super(worldIn, biomeProviderIn, 8, 4, 128, settingsIn, true);
         //this.spawnPoint = settingsIn.getSpawnPos();
     }

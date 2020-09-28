@@ -8,6 +8,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestModDi
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Frontier.FrontierModDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceModDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainModDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoModDimension;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -25,4 +26,5 @@ public class ModDimensions {
     public static final RegistryObject<ModDimension> ICE_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("ice_sector", IceModDimension::new);
     public static final RegistryObject<ModDimension> DESERT_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("desert_sector", DesertModDimension::new);
     public static final RegistryObject<ModDimension> FRONTIER_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("frontier", FrontierModDimension::new);
+    public static final RegistryObject<ModDimension> VOLCANO_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("volcano", VolcanoModDimension::new);
 }

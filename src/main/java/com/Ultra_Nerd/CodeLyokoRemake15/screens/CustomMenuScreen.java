@@ -219,8 +219,8 @@ public class CustomMenuScreen extends Screen{
                 this.blit(j + 155, 30, 0, 45, 155, 44);
             }
 
-            this.minecraft.getTextureManager().bindTexture(MINECRAFT_TITLE_EDITION);
-            blit(j + 88, 67, 0.0F, 0.0F, 98, 14, 128, 16);
+            //this.minecraft.getTextureManager().bindTexture(MINECRAFT_TITLE_EDITION);
+            //blit(j + 88, 67, 0.0F, 0.0F, 98, 14, 128, 16);
             //net.minecraftforge.client.ForgeHooksClient.renderMainMenu(this, this.font, this.width, this.height);
             if (this.splashText != null) {
                 RenderSystem.pushMatrix();

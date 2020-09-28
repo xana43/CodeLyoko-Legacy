@@ -18,7 +18,7 @@ public class PlayerHealthCustom {
         if(this.getEntity() instanceof PlayerEntity)
         {
             PlayerEntity player = (PlayerEntity)this.getEntity();
-            if (player.world.dimension instanceof ForestDimension || player.world.dimension instanceof MountainDimension ||
+            if (player.world.dimension instanceof ForestDimension || player.world.dimension instanceof VolcanoDimension ||
                     player.world.dimension instanceof IceDimension || player.world.dimension instanceof Sector5Dimension) {
 
                if(player.getHealth() != 1) {

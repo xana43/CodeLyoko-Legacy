@@ -7,6 +7,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimens
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoDimension;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -44,7 +45,8 @@ public class AelitaArmorElytra extends ArmorItem {
     private boolean checkDim(PlayerEntity player) {
         return player.world.dimension instanceof ForestDimension || player.world.dimension instanceof IceDimension ||
                 player.world.dimension instanceof DesertDimension || player.world.dimension instanceof MountainDimension
-                || player.world.dimension instanceof Sector5Dimension || player.world.dimension instanceof OceanDimension;
+                || player.world.dimension instanceof Sector5Dimension || player.world.dimension instanceof OceanDimension || player.world.dimension
+                instanceof VolcanoDimension;
     }
 
 
