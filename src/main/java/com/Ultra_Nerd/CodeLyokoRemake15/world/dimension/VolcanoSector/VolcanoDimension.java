@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.world.generators.VolcanoGenerator;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
@@ -65,6 +66,11 @@ public class VolcanoDimension extends Dimension {
 
     @Override
     public boolean doesXZShowFog(int x, int z) {
+        return false;
+    }
+
+    @Override
+    public boolean canMineBlock(PlayerEntity player, BlockPos pos) {
         return false;
     }
 }
