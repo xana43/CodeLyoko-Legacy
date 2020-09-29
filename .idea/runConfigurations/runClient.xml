@@ -8,9 +8,9 @@
     <module name="codelyoko-1.15.main"/>
     <envs>
       <env name="MOD_CLASSES" value="examplemod%%$PROJECT_DIR$\build\resources\main;examplemod%%$PROJECT_DIR$\build\classes\java\main"/>
-      <env name="MCP_MAPPINGS" value="snapshot_20200925-1.15.1"/>
+      <env name="MCP_MAPPINGS" value="snapshot_20200926-1.15.1"/>
       <env name="MCP_VERSION" value="20200515.085601"/>
-      <env name="FORGE_VERSION" value="31.2.41"/>
+      <env name="FORGE_VERSION" value="31.2.43"/>
       <env name="assetIndex" value="1.15"/>
       <env name="assetDirectory" value="C:\Users\jwoon\.gradle\caches\forge_gradle\assets"/>
       <env name="nativesDirectory" value="$PROJECT_DIR$\build\natives"/>
