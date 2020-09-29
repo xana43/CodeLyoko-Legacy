@@ -36,6 +36,10 @@ public class CustomVolcanoSky implements SkyRenderHandler {
         BufferBuilder bufferBuilder = tessellator.getBuffer();
         for(int i = 0; i < 6; ++i) {
             matrixStack.push();
+            if(i == 0)
+            {
+                matrixStack.scale(10,10,10);
+            }
             if (i == 1) {
                 mc.textureManager.bindTexture(sky1);
                 matrixStack.rotate(Vector3f.XP.rotationDegrees(90.0F));
@@ -51,6 +55,7 @@ public class CustomVolcanoSky implements SkyRenderHandler {
             if (i == 3) {
                 mc.textureManager.bindTexture(skytop);
                 matrixStack.rotate(Vector3f.XP.rotationDegrees(180.0F));
+                matrixStack.scale(10,10,10);
             }
 
             if (i == 4) {
@@ -68,8 +73,8 @@ public class CustomVolcanoSky implements SkyRenderHandler {
             Matrix4f matrix4f = matrixStack.getLast().getMatrix();
             bufferBuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
             bufferBuilder.pos(matrix4f, -100.0F, -100.0F, -100.0F).tex(0.0F, 0.0F).color(40, 40, 40, 255).endVertex();
-            bufferBuilder.pos(matrix4f, -100.0F, -100.0F, 100.0F).tex(0.0F, 1.0F).color(40, 40, 40, 255).endVertex();
-            bufferBuilder.pos(matrix4f, 100.0F, -100.0F, 100.0F).tex(1.0F, 1.0F).color(40, 40, 40, 255).endVertex();
+            bufferBuilder.pos(matrix4f, -100.0F, -90.0F, 100.0F).tex(0.0F, 1.0F).color(40, 40, 40, 255).endVertex();
+            bufferBuilder.pos(matrix4f, 100.0F, -90.0F, 100.0F).tex(1.0F, 1.0F).color(40, 40, 40, 255).endVertex();
             bufferBuilder.pos(matrix4f, 100.0F, -100.0F, -100.0F).tex(1.0F, 0.0F).color(40, 40, 40, 255).endVertex();
             tessellator.draw();
             matrixStack.pop();
