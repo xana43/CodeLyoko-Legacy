@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -19,8 +20,10 @@ public class VolcanoDimension extends Dimension {
     private static final CustomVolcanoSky customVolcanoSky = new CustomVolcanoSky();
 
     public VolcanoDimension(World world, DimensionType type) {
-        super(world, type, 0.0f);
+        super(world, type, 0f);
         this.setSkyRenderer(customVolcanoSky);
+        this.getLightBrightness(1);
+
     }
 
     @Nonnull
@@ -31,6 +34,20 @@ public class VolcanoDimension extends Dimension {
 
     }
 
+    @Override
+    public boolean isSkyColored() {
+        return true;
+    }
+
+    @Override
+    public boolean canDoLightning(Chunk chunk) {
+        return true;
+    }
+
+    @Override
+    public float getLightBrightness(int p_227174_1_) {
+        return 1;
+    }
 
     @Nullable
     @Override
