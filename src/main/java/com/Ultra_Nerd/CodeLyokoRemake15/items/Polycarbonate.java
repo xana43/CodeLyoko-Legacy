@@ -13,23 +13,23 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Polycarbonate extends Item {
     private static int timer;
     private static ItemStack instance;
+
     public Polycarbonate(Properties properties) {
         super(properties);
         instance = this.getDefaultInstance();
-        timer = ThreadLocalRandom.current().nextInt(100,1000);
+        timer = ThreadLocalRandom.current().nextInt(100, 1000);
 
     }
 
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
-        if(timer-- <= 0 && entityIn instanceof PlayerEntity && instance == this.getDefaultInstance())
-        {
-            PlayerEntity playerEntity = (PlayerEntity)entityIn;
+        if (timer-- <= 0 && entityIn instanceof PlayerEntity && instance == this.getDefaultInstance()) {
+            PlayerEntity playerEntity = (PlayerEntity) entityIn;
             ItemStack stack1 = new ItemStack(ModItems.COLD_POLYCARBONATE_CONCENTRATE.get());
             stack1.setCount(stack.getCount());
-            playerEntity.inventory.setInventorySlotContents(itemSlot,stack1);
-            timer = ThreadLocalRandom.current().nextInt(100,1000);
+            playerEntity.inventory.setInventorySlotContents(itemSlot, stack1);
+            timer = ThreadLocalRandom.current().nextInt(100, 1000);
         }
     }
 }

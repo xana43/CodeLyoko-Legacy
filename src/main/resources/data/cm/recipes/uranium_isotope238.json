@@ -1,17 +1,12 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    
-    "ingredients": [
-        {
-            "item": "cm:uranium_block_238"
-        }
-
-
-    ],
-    
-    "result":
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-        "item": "cm:uranium_isotope238",
-        "count": 9
+      "item": "cm:uranium_block_238"
     }
+  ],
+  "result": {
+    "item": "cm:uranium_isotope238",
+    "count": 9
+  }
 }

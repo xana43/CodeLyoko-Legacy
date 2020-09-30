@@ -19,12 +19,11 @@ import javax.annotation.Nullable;
 
 public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanelContainer> {
 
-    private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID,"textures/gui/computercontrolpanelui.png");
-    private static final ResourceLocation BUTTONTEXTURES = new ResourceLocation(Base.MOD_ID,"textures/gui/buttonatlas.png");
+    private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/computercontrolpanelui.png");
+    private static final ResourceLocation BUTTONTEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/buttonatlas.png");
     private TextFieldWidget text;
     private Widget button;
     private boolean CompActive;
-
 
 
     int x, y;
@@ -57,7 +56,6 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
     }
 
 
-
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
         return super.mouseClicked(mouseX, mouseY, mouseButton);
@@ -69,12 +67,8 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
         this.renderBackground();
         super.render(p_render_1_, p_render_2_, p_render_3_);
         this.text.render(p_render_1_, p_render_2_, p_render_3_);
-        this.button.renderButton(p_render_1_,p_render_2_,p_render_3_);
+        this.button.renderButton(p_render_1_, p_render_2_, p_render_3_);
     }
-
-
-
-
 
 
     @Override
@@ -93,12 +87,10 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
     }
 
 
-
-    protected void setButtons()
-    {
+    protected void setButtons() {
 
 
-        this.button = new Widget(x,y,this.width/3,this.height/6,"activate") {
+        this.button = new Widget(x, y, this.width / 3, this.height / 6, "activate") {
             @Override
             protected int getYImage(boolean p_getYImage_1_) {
                 return super.getYImage(p_getYImage_1_);
@@ -110,18 +102,16 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
                 super.onClick(p_onClick_1_, p_onClick_3_);
 
                 CompActive = !CompActive;
-                if(!CompActive) {
+                if (!CompActive) {
 
-                        minecraft.player.playSound(ModSounds.QUANTUMZAP.get(), 1, 1);
+                    minecraft.player.playSound(ModSounds.QUANTUMZAP.get(), 1, 1);
 
-                } else
-                {
+                } else {
 
-                        minecraft.player.playSound(ModSounds.QUANTUMZAP.get(), 1, 1);
+                    minecraft.player.playSound(ModSounds.QUANTUMZAP.get(), 1, 1);
 
                 }
             }
-
 
 
             @Override
@@ -153,19 +143,14 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
         super.tick();
         if (CompActive) {
             this.button.setMessage("de-activate");
-        }
-        else
-        {
+        } else {
             this.button.setMessage("activate");
         }
 
-        if(CompActive)
-        {
+        if (CompActive) {
             this.text.setText("Active");
             this.text.setTextColor(0x008000);
-        }
-        else
-        {
+        } else {
             this.text.setText("in-active");
             this.text.setTextColor(0xda2c43);
         }
@@ -183,10 +168,6 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
         this.text.setText("in-active");
 
 
-
-
-
-
     }
 
 
@@ -194,9 +175,8 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         this.minecraft.getTextureManager().bindTexture(TEXTURES);
         this.blit(x, y, 0, 0, this.xSize, this.ySize);
-        if(CompActive)
-        {
-            this.blit(x,y + 15,0,144,this.xSize,this.ySize - 35);
+        if (CompActive) {
+            this.blit(x, y + 15, 0, 144, this.xSize, this.ySize - 35);
         }
     }
 

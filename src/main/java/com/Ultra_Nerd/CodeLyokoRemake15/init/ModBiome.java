@@ -101,30 +101,30 @@ public class ModBiome {
                     .temperature(1)
 
     ));
-    public static final RegistryObject<Biome> FRONTIER = BIOMES.register("digital_frontier",() -> new LyokoFrontier(
+    public static final RegistryObject<Biome> FRONTIER = BIOMES.register("digital_frontier", () -> new LyokoFrontier(
             new Biome.Builder()
-            .precipitation(RainType.NONE)
-            .downfall(0)
-            .surfaceBuilder(SurfaceBuilder.DEFAULT,new SurfaceBuilderConfig(ModBlocks.FRONTIER_BLOCK.get().getDefaultState(),
-                    ModBlocks.FRONTIER_BLOCK.get().getDefaultState(),ModBlocks.FRONTIER_BLOCK.get().getDefaultState()))
-            .parent(null)
-            .waterColor(0xFFF700)
-            .waterFogColor(0xFFF700)
-            .scale(20)
-            .depth(20)
-            .category(Category.NONE)
-            .temperature(0)
+                    .precipitation(RainType.NONE)
+                    .downfall(0)
+                    .surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(ModBlocks.FRONTIER_BLOCK.get().getDefaultState(),
+                            ModBlocks.FRONTIER_BLOCK.get().getDefaultState(), ModBlocks.FRONTIER_BLOCK.get().getDefaultState()))
+                    .parent(null)
+                    .waterColor(0xFFF700)
+                    .waterFogColor(0xFFF700)
+                    .scale(20)
+                    .depth(20)
+                    .category(Category.NONE)
+                    .temperature(0)
 
     ));
     public static final RegistryObject<Biome> VOLCANO = BIOMES.register("volcano", () -> new LyokoVolcano(new Biome.Builder()
-    .precipitation(RainType.NONE)
-    .temperature(Integer.MAX_VALUE)
-    .category(Category.NETHER)
+            .precipitation(RainType.NONE)
+            .temperature(Integer.MAX_VALUE)
+            .category(Category.NETHER)
             .waterFogColor(90)
             .waterColor(90)
             .parent(null)
-            .surfaceBuilder(SurfaceBuilder.DEFAULT,new SurfaceBuilderConfig(ModBlocks.VOLCANO_GROUND.get().getDefaultState(),
-                    ModBlocks.VOLCANO_GROUND.get().getDefaultState(),ModBlocks.VOLCANO_GROUND.get().getDefaultState()))
+            .surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(ModBlocks.VOLCANO_GROUND.get().getDefaultState(),
+                    ModBlocks.VOLCANO_GROUND.get().getDefaultState(), ModBlocks.VOLCANO_GROUND.get().getDefaultState()))
             .downfall(0)
             .scale(200)
             .depth(200)
@@ -138,8 +138,8 @@ public class ModBiome {
         initBiome(DESERT.get(), Type.SPARSE, Type.SPARSE, Type.DRY, Type.SANDY);
         initBiome(ICE.get(), Type.DRY, Type.COLD, Type.DEAD, Type.SNOWY);
         initBiome(MOUNTAIN.get(), Type.HILLS, Type.MODIFIED, Type.MOUNTAIN);
-        initBiome(FRONTIER.get(),Type.END,Type.DEAD,Type.RARE,Type.MAGICAL,Type.SPOOKY,Type.VOID);
-        initBiome(VOLCANO.get(),Type.SPOOKY,Type.DEAD,Type.HOT,Type.MODIFIED,Type.NETHER);
+        initBiome(FRONTIER.get(), Type.END, Type.DEAD, Type.RARE, Type.MAGICAL, Type.SPOOKY, Type.VOID);
+        initBiome(VOLCANO.get(), Type.SPOOKY, Type.DEAD, Type.HOT, Type.MODIFIED, Type.NETHER);
     }
 
     private static void initBiome(Biome biome, Type... types) {

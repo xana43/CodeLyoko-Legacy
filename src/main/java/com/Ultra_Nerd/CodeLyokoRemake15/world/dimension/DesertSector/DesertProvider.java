@@ -14,6 +14,7 @@ public class DesertProvider extends BiomeProvider {
         super(List);
 
     }
+
     private static final Set<Biome> List = ImmutableSet.of(ModBiome.DESERT.get());
 
     @Nonnull

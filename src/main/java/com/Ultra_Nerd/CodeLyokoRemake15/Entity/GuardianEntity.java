@@ -32,7 +32,7 @@ public class GuardianEntity extends FlyingEntity implements IMob, IRangedAttackM
         super.registerGoals();
         this.goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true, true));
-        this.targetSelector.addGoal(1, new TargetGoal(this,true,true) {
+        this.targetSelector.addGoal(1, new TargetGoal(this, true, true) {
             @Override
             public boolean shouldExecute() {
                 return true;
@@ -45,7 +45,7 @@ public class GuardianEntity extends FlyingEntity implements IMob, IRangedAttackM
     @Override
     protected void registerAttributes() {
         super.registerAttributes();
-     //   this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
+        //   this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
         this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);

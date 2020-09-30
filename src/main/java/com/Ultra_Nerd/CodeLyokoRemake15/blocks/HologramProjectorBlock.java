@@ -55,13 +55,11 @@ public class HologramProjectorBlock extends Block {
     }
 
 
-
     @Override
     public boolean hasTileEntity(BlockState state) {
         // TODO Auto-generated method stub
         return true;
     }
-
 
 
 }

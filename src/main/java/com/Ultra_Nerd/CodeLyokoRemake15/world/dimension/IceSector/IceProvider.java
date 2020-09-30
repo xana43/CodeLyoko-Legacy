@@ -13,6 +13,7 @@ public class IceProvider extends BiomeProvider {
         super(List);
 
     }
+
     private static final Set<Biome> List = ImmutableSet.of(ModBiome.ICE.get());
 
     @Nonnull

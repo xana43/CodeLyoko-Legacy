@@ -8,12 +8,11 @@ import net.minecraft.world.gen.GenerationSettings;
 import javax.annotation.Nonnull;
 
 public class ForestGenSettings extends GenerationSettings {
-    public byte BiomeSize(){
+    public byte BiomeSize() {
         return 4;
     }
 
-    public byte getBiomID()
-    {
+    public byte getBiomID() {
         return 90;
     }
 

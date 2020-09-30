@@ -54,7 +54,7 @@ public class Sector5Generator extends ChunkGenerator<Sector5GenSettings> {
                 int innerHeightSpawn = (int) (Math.sqrt(Math.pow(23, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
                 createSphere(chunk, stone, pos, x, z, heightSpawn, innerHeightSpawn);
                 for (int h = 0; h < heightSpawn; h++) {
-                    if ((realZ==-1 || realZ==0 || realZ==1) && realX>11) {
+                    if ((realZ == -1 || realZ == 0 || realZ == 1) && realX > 11) {
                         chunk.setBlockState(pos.setPos(realX, h + 128, realZ), Blocks.AIR.getDefaultState(), false);
                         //chunk.setBlockState(pos.setPos(x, 127 - h, z), Blocks.AIR.getDefaultState(), false);
                     }

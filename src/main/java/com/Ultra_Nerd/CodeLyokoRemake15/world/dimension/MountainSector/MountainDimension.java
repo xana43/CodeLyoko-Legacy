@@ -23,7 +23,7 @@ public class MountainDimension extends Dimension {
     @Nonnull
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
-        return new MounatainGenerator(world,new MountainProvider(),new MountainGenSettings());
+        return new MounatainGenerator(world, new MountainProvider(), new MountainGenSettings());
     }
 
     @Nullable
@@ -51,7 +51,7 @@ public class MountainDimension extends Dimension {
     @Nonnull
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
-        return new Vec3d(0.53,0.81,0.92);
+        return new Vec3d(0.53, 0.81, 0.92);
     }
 
     @Override

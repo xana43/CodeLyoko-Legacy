@@ -25,9 +25,9 @@ public class TestBlockPortal extends Block implements ITeleporter {
     @Override
     public void onEntityCollision(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         super.onEntityCollision(state, worldIn, pos, entityIn);
-        if(entityIn instanceof PlayerEntity) {
+        if (entityIn instanceof PlayerEntity) {
             if (!entityIn.getPositionVec().equals(new Vec3d(0, 128, 0))) {
-                entityIn.changeDimension((DimensionManager.registerOrGetDimension(ModDimensionTypes.DimensionTypeCarthage, ModDimensions.SECTOR_5.get(),null,true)),this);
+                entityIn.changeDimension((DimensionManager.registerOrGetDimension(ModDimensionTypes.DimensionTypeCarthage, ModDimensions.SECTOR_5.get(), null, true)), this);
 
                 entityIn.setPosition(0, 128, 0);
             }

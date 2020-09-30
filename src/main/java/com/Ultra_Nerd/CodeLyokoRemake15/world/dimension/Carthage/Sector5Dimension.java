@@ -64,7 +64,6 @@ public class Sector5Dimension extends Dimension {
     }
 
 
-
     @Override
     public BlockPos getSpawnCoordinate() {
         return SPAWN;

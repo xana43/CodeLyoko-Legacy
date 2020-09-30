@@ -26,15 +26,14 @@ public class TowerBottomBlock extends Block {
         Iterable<BlockPos> blockList = BlockPos.getAllInBoxMutable(pos.getX() - 7, pos.getY(), pos.getZ() - 7, pos.getX() + 7, pos.getY() + 32, pos.getZ() + 7);
         for (BlockPos blockPos : blockList) {
             if (worldIn.getBlockState(blockPos).getBlock() == ModBlocks.TOWER_BLUE.get()) {
-                if(entityIn instanceof PlayerEntity)
-                    entityIn.setPositionAndUpdate(blockPos.getX()+0.5, blockPos.getY()+1.0, blockPos.getZ()+0.5);
+                if (entityIn instanceof PlayerEntity)
+                    entityIn.setPositionAndUpdate(blockPos.getX() + 0.5, blockPos.getY() + 1.0, blockPos.getZ() + 0.5);
 //                EnderTeleportEvent event = new EnderTeleportEvent((LivingEntity) entityIn, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 0.0f);
 
             }
         }
-        if(!(entityIn instanceof PlayerEntity))
-        {
-            entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD,Integer.MAX_VALUE);
+        if (!(entityIn instanceof PlayerEntity)) {
+            entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
         }
         super.onEntityWalk(worldIn, pos, entityIn);
     }
@@ -42,9 +41,8 @@ public class TowerBottomBlock extends Block {
     @Override
     public void onEntityCollision(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         super.onEntityCollision(state, worldIn, pos, entityIn);
-        if(!(entityIn instanceof PlayerEntity))
-        {
-            entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD,Integer.MAX_VALUE);
+        if (!(entityIn instanceof PlayerEntity)) {
+            entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
         }
     }
 

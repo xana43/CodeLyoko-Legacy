@@ -20,9 +20,9 @@ public class RendFan extends EntityRenderer<EntityFan> {
     public RendFan(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);
     }
-    private static final ResourceLocation Fan = new ResourceLocation(Base.MOD_ID,"textures/entity/projectiles/fan/fan.png");
-    private final ModelFan FanModel = new ModelFan();
 
+    private static final ResourceLocation Fan = new ResourceLocation(Base.MOD_ID, "textures/entity/projectiles/fan/fan.png");
+    private final ModelFan FanModel = new ModelFan();
 
 
     @Override

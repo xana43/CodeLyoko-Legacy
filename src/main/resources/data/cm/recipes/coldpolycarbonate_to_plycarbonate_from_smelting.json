@@ -1,15 +1,9 @@
 {
-  "type":"minecraft:blasting",
-  "ingredient":
-  {
-    "item":"cm:cold_polycarbonate_concentrate"
-
-
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "cm:cold_polycarbonate_concentrate"
   },
-  "result":"cm:molten_polycarbonate_concentrate",
-  "experience":5.0,
+  "result": "cm:molten_polycarbonate_concentrate",
+  "experience": 5.0,
   "cookingtime": 300
-
-
-
 }

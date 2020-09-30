@@ -1,25 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-
-  "pattern":
-  [
+  "pattern": [
     "   ",
     "III",
     "   "
   ],
-
-  "key":
-  {
-    "I":
-    {
+  "key": {
+    "I": {
       "item": "minecraft:iron_ingot"
     }
-
-
   },
-
-  "result":
-  {
+  "result": {
     "item": "cm:integrated_heat_spreader",
     "count": 1
   }

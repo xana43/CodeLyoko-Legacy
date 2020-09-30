@@ -5,19 +5,19 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
 
-public class UraniumReactor extends Block{
+public class UraniumReactor extends Block {
 
-	public UraniumReactor() {
-		super(Block.Properties.create(Material.IRON)
+    public UraniumReactor() {
+        super(Block.Properties.create(Material.IRON)
 
-				.hardnessAndResistance(6, 10)
-				.sound(SoundType.METAL)
-				.lightValue(0)
-				.harvestLevel(2)
-				.harvestTool(ToolType.PICKAXE));
+                .hardnessAndResistance(6, 10)
+                .sound(SoundType.METAL)
+                .lightValue(0)
+                .harvestLevel(2)
+                .harvestTool(ToolType.PICKAXE));
 
-		// TODO Auto-generated constructor stub
-	}
+        // TODO Auto-generated constructor stub
+    }
 	/*
 	
 	@Override
@@ -40,5 +40,5 @@ public class UraniumReactor extends Block{
 		super.breakBlock(worldIn, pos, state);
 	}
 	*/
-	
+
 }

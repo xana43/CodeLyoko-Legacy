@@ -1,25 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-
-  "pattern":
-  [
+  "pattern": [
     "III",
     "III",
     "   "
   ],
-
-  "key":
-  {
-    "I":
-    {
+  "key": {
+    "I": {
       "item": "minecraft:iron_block"
     }
-
-
   },
-
-  "result":
-  {
+  "result": {
     "item": "cm:integrated_heat_spreader",
     "count": 35
   }

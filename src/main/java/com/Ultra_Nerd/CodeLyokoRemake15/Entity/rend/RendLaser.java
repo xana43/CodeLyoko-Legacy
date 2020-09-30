@@ -20,6 +20,7 @@ import javax.annotation.Nonnull;
 @OnlyIn(Dist.CLIENT)
 public class RendLaser<T extends EntityLaser> extends EntityRenderer<T> {
     private final ModelLaserArrow<T> laserArrow = new ModelLaserArrow<>();
+
     public RendLaser(EntityRendererManager rendManIn) {
         super(rendManIn);
 
@@ -30,7 +31,7 @@ public class RendLaser<T extends EntityLaser> extends EntityRenderer<T> {
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.push();
         IVertexBuilder ivertexbuilder = bufferIn.getBuffer(this.laserArrow.getRenderType(this.getEntityTexture(entityIn)));
-        this.laserArrow.render(matrixStackIn,ivertexbuilder,packedLightIn, OverlayTexture.NO_OVERLAY,1,1,1,1);
+        this.laserArrow.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         matrixStackIn.rotate(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationYaw, entityIn.rotationYaw) - 90.0F));
         matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationPitch, entityIn.rotationPitch)));
         int i = 0;
@@ -43,7 +44,7 @@ public class RendLaser<T extends EntityLaser> extends EntityRenderer<T> {
         float f6 = 0.15625F;
         float f7 = 0.3125F;
         float f8 = 0.05625F;
-        float f9 = (float)entityIn.arrowShake - partialTicks;
+        float f9 = (float) entityIn.arrowShake - partialTicks;
         if (f9 > 0.0F) {
             float f10 = -MathHelper.sin(f9 * 3.0F) * f9;
             matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(f10));
@@ -54,12 +55,9 @@ public class RendLaser<T extends EntityLaser> extends EntityRenderer<T> {
         //matrixStackIn.translate(-4.0D, 0.0D, 0.0D);
 
 
-
         matrixStackIn.pop();
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
     }
-
-
 
 
     @Nonnull

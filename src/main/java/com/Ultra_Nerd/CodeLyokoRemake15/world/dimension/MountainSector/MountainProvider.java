@@ -12,10 +12,12 @@ import java.util.Set;
 public class MountainProvider extends BiomeProvider {
 
     private Random rand;
+
     protected MountainProvider() {
         super(List);
         rand = new Random();
     }
+
     private static final Set<Biome> List = ImmutableSet.of(ModBiome.MOUNTAIN.get());
 
     @Nonnull

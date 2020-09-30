@@ -1,15 +1,9 @@
 {
-  "type":"minecraft:blasting",
-  "ingredient":
-  {
-
-    "item":"cm:uraninite_ore"
-
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "cm:uraninite_ore"
   },
-  "result":"cm:uranium_dioxide",
-  "experience":5.0,
+  "result": "cm:uranium_dioxide",
+  "experience": 5.0,
   "cookingtime": 300
-
-
-
 }

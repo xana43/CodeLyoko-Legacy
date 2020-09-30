@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.commands;
 
-public class Modteleportcommand  {
+public class Modteleportcommand {
 
 	/*
 	private final ArrayList<String> coms = Lists.newArrayList(ref.MOD_ID, "tp", "tpdim","tpdimension","teleporteddimension", "teleport");

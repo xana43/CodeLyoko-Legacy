@@ -44,7 +44,6 @@ public class FluorideInfuser extends Block {
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(INFUSING, false));
 
 
-
     }
 
     @Nonnull
@@ -91,7 +90,7 @@ public class FluorideInfuser extends Block {
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder.add(DirectionProperty.create("facing", Direction.Plane.HORIZONTAL))
-        .add(INFUSING));
+                .add(INFUSING));
     }
 
     @Nullable

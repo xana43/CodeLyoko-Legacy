@@ -30,7 +30,7 @@ public class ArchitectureWorkstation extends Block {
     public ArchitectureWorkstation(Properties properties) {
         super(properties);
 
-        this.setDefaultState(this.stateContainer.getBaseState().with(ComputerStation,Direction.NORTH).with(on,false));
+        this.setDefaultState(this.stateContainer.getBaseState().with(ComputerStation, Direction.NORTH).with(on, false));
     }
 
     @Override
@@ -41,14 +41,14 @@ public class ArchitectureWorkstation extends Block {
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         // TODO Auto-generated method stub
-        return this.getDefaultState().with(ComputerStation, context.getPlacementHorizontalFacing().getOpposite()).with(on,false);
+        return this.getDefaultState().with(ComputerStation, context.getPlacementHorizontalFacing().getOpposite()).with(on, false);
     }
 
     //mod compatiability
     @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(ComputerStation,rot.rotate(state.get(ComputerStation)));
+        return state.with(ComputerStation, rot.rotate(state.get(ComputerStation)));
     }
 
     @Nonnull
@@ -60,18 +60,17 @@ public class ArchitectureWorkstation extends Block {
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
-        switch(state.get(ComputerStation))
-        {
+        switch (state.get(ComputerStation)) {
             case NORTH:
                 return shapeN;
             case SOUTH:
                 return shapeS;
             case EAST:
-                return  shapeE;
+                return shapeE;
             case WEST:
                 return shapeW;
             default:
-                return  shapeN;
+                return shapeN;
         }
     }
 }

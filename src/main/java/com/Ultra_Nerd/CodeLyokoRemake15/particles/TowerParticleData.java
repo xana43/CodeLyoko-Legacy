@@ -12,14 +12,14 @@ import javax.annotation.Nonnull;
 import java.util.Locale;
 
 public class TowerParticleData implements IParticleData {
-    private final float red,green,blue,alpha;
-    public static final TowerParticleData TOWER_PARTICLE_2 = new TowerParticleData(.125f,.25f,1.f,1.f);
+    private final float red, green, blue, alpha;
+    public static final TowerParticleData TOWER_PARTICLE_2 = new TowerParticleData(.125f, .25f, 1.f, 1.f);
 
     public TowerParticleData(float r, float g, float b, float a) {
-        red=r;
-        green=g;
-        blue=b;
-        alpha=a;
+        red = r;
+        green = g;
+        blue = b;
+        alpha = a;
     }
 
     @Nonnull

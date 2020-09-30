@@ -10,8 +10,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class LaptopGUI extends Screen {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Base.MOD_ID,"textures/gui/towerinterface.png");
-    private int x,y,xSize,ySize;
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Base.MOD_ID, "textures/gui/towerinterface.png");
+    private int x, y, xSize, ySize;
+
     public LaptopGUI(ITextComponent titleIn) {
         super(titleIn);
 
@@ -39,7 +40,7 @@ public class LaptopGUI extends Screen {
 
         assert this.minecraft != null;
         this.minecraft.textureManager.bindTexture(TEXTURE);
-        this.blit(x,y,0,0,this.xSize,this.ySize);
+        this.blit(x, y, 0, 0, this.xSize, this.ySize);
 
     }
 }

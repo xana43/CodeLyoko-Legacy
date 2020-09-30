@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
 
 public class VolcanoDimension extends Dimension {
     private static final CustomVolcanoSky customVolcanoSky = new CustomVolcanoSky();
+
     public VolcanoDimension(World world, DimensionType type) {
         super(world, type, 0.0f);
         this.setSkyRenderer(customVolcanoSky);
@@ -25,11 +26,10 @@ public class VolcanoDimension extends Dimension {
     @Nonnull
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
-        return new VolcanoGenerator(world,new VolcanoProvider(),new VolcanoGenSettings());
+        return new VolcanoGenerator(world, new VolcanoProvider(), new VolcanoGenSettings());
 
 
     }
-
 
 
     @Nullable

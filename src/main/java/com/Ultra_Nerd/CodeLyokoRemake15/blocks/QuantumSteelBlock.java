@@ -17,7 +17,7 @@ public class QuantumSteelBlock extends Block {
 
     public QuantumSteelBlock(Properties properties) {
         super(properties);
-        this.setDefaultState(this.getStateContainer().getBaseState().with(formed,false));
+        this.setDefaultState(this.getStateContainer().getBaseState().with(formed, false));
     }
 
     @Override
@@ -33,7 +33,7 @@ public class QuantumSteelBlock extends Block {
     @Nonnull
     @Override
     public BlockRenderType getRenderType(@Nonnull BlockState state) {
-        if(state.get(formed)) {
+        if (state.get(formed)) {
             return BlockRenderType.INVISIBLE;
         } else {
             return BlockRenderType.MODEL;

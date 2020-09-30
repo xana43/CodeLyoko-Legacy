@@ -17,10 +17,10 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Base.MOD_ID);
     //for spawn eggs
     public static final RegistryObject<CustomMobEggs> BLOK_SPAWN_EGG = ITEMS.register("blok_spawn_egg", () -> new CustomMobEggs(ModEntities.BLOK, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<CustomMobEggs> HORNET_SPAWN_EGG = ITEMS.register("hornet_spawn_egg",() -> new CustomMobEggs(ModEntities.HORNET,1,1,new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<CustomMobEggs> MANTA_SPAWN_EGG = ITEMS.register("manta_spawn_egg", () -> new CustomMobEggs(ModEntities.MANTA,1,1,new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<CustomMobEggs> MEGATANK_SPAWN_EGG = ITEMS.register("megatank_spawn_egg", () -> new CustomMobEggs(ModEntities.MEGATANK,1,1,new Item.Properties().group(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<CustomMobEggs> KANKRELAT_SPAWN_EGG = ITEMS.register("kankrelat_spawn_egg", () -> new CustomMobEggs(ModEntities.KANKRELAT,1,1,new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<CustomMobEggs> HORNET_SPAWN_EGG = ITEMS.register("hornet_spawn_egg", () -> new CustomMobEggs(ModEntities.HORNET, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<CustomMobEggs> MANTA_SPAWN_EGG = ITEMS.register("manta_spawn_egg", () -> new CustomMobEggs(ModEntities.MANTA, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<CustomMobEggs> MEGATANK_SPAWN_EGG = ITEMS.register("megatank_spawn_egg", () -> new CustomMobEggs(ModEntities.MEGATANK, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<CustomMobEggs> KANKRELAT_SPAWN_EGG = ITEMS.register("kankrelat_spawn_egg", () -> new CustomMobEggs(ModEntities.KANKRELAT, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
     //for items
     public static final RegistryObject<Item> APU_PACKAGE_ARM = ITEMS.register("apu_package_arm", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> APU_PACKAGE_x86 = ITEMS.register("apu_package_x86", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));

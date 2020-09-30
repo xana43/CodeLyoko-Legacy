@@ -36,7 +36,6 @@ public class MindHelm extends ArmorItem {
     }
 
 
-
     @Override
     public boolean isDamageable() {
         return false;

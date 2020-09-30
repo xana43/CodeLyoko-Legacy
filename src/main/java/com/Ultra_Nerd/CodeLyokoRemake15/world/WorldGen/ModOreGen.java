@@ -28,21 +28,20 @@ public class ModOreGen {
                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE
                         .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
                                 ModBlocks.COFFINITE_ORE.get().getDefaultState(), 10)).withPlacement(customC));
-                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,Feature.ORE.withConfiguration(new OreFeatureConfig(
-                        OreFeatureConfig.FillerBlockType.NATURAL_STONE,ModBlocks.URANINITE_ORE.get().getDefaultState(),10)).withPlacement(customC));
-                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,Feature.ORE.withConfiguration(new OreFeatureConfig(
-                        OreFeatureConfig.FillerBlockType.NATURAL_STONE,ModBlocks.GUMMITE_ORE.get().getDefaultState(),5)).withPlacement(customC));
-                if(biome.isHighHumidity())
-                {
-                    biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,Feature.ORE.withConfiguration(new OreFeatureConfig(
-                            OreFeatureConfig.FillerBlockType.NATURAL_STONE,ModBlocks.TORBERNITE_ORE.get().getDefaultState(),5)).withPlacement(customC));
-                    biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,Feature.ORE.withConfiguration(new OreFeatureConfig(
-                            OreFeatureConfig.FillerBlockType.NATURAL_STONE,ModBlocks.AUTUNITE_ORE.get().getDefaultState(),5)).withPlacement(customC));
+                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(
+                        OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.URANINITE_ORE.get().getDefaultState(), 10)).withPlacement(customC));
+                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(
+                        OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.GUMMITE_ORE.get().getDefaultState(), 5)).withPlacement(customC));
+                if (biome.isHighHumidity()) {
+                    biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(
+                            OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.TORBERNITE_ORE.get().getDefaultState(), 5)).withPlacement(customC));
+                    biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(
+                            OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.AUTUNITE_ORE.get().getDefaultState(), 5)).withPlacement(customC));
                 }
-                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,Feature.ORE.withConfiguration(new OreFeatureConfig(
-                        OreFeatureConfig.FillerBlockType.NATURAL_STONE,ModBlocks.METATORBERNITE_ORE.get().getDefaultState(),5)).withPlacement(customC));
-                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,Feature.ORE.withConfiguration(new OreFeatureConfig(
-                        OreFeatureConfig.FillerBlockType.NATURAL_STONE,ModBlocks.METAAUTUNITE_ORE.get().getDefaultState(),5)).withPlacement(customC));
+                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(
+                        OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.METATORBERNITE_ORE.get().getDefaultState(), 5)).withPlacement(customC));
+                biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(
+                        OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.METAAUTUNITE_ORE.get().getDefaultState(), 5)).withPlacement(customC));
             }
 
 

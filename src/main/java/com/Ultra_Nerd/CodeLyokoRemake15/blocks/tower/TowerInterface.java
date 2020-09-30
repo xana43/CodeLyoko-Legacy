@@ -40,6 +40,7 @@ public class TowerInterface extends Block {
     public boolean canCreatureSpawn(BlockState state, IBlockReader world, BlockPos pos, EntitySpawnPlacementRegistry.PlacementType type, @Nullable EntityType<?> entityType) {
         return false;
     }
+
     public TowerInterface() {
         super(Block.Properties.create(Material.DRAGON_EGG)
 

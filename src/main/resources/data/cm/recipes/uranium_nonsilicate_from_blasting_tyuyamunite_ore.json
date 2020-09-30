@@ -1,14 +1,9 @@
 {
-  "type":"minecraft:blasting",
-  "ingredient":
-  {
-    "item":"cm:tyuyamunite_ore"
-
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "cm:tyuyamunite_ore"
   },
-  "result":"cm:uranium_dioxide",
-  "experience":5.0,
+  "result": "cm:uranium_dioxide",
+  "experience": 5.0,
   "cookingtime": 300
-
-
-
 }

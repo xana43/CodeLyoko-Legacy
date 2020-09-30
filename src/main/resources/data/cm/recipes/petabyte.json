@@ -1,30 +1,20 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
-    [
-        "MMM",
-        "MBM",
-        "MMM"
-    ],
-    
-    "key":
-    {
-        "B":
-        {
-            "item": "cm:terabyte"
-        },
-        
-        "M":
-        {
-            "item": "cm:petabit"
-        }
-        
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MBM",
+    "MMM"
+  ],
+  "key": {
+    "B": {
+      "item": "cm:terabyte"
     },
-    
-    "result":
-    {
-        "item": "cm:petabyte",
-        "count": 1
+    "M": {
+      "item": "cm:petabit"
     }
+  },
+  "result": {
+    "item": "cm:petabyte",
+    "count": 1
+  }
 }

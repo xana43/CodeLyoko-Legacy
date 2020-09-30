@@ -6,20 +6,16 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class CustomItemHandler extends ItemStackHandler {
-    public CustomItemHandler(int size, ItemStack... stacks)
-    {
+    public CustomItemHandler(int size, ItemStack... stacks) {
         super(size);
-        for(int i = 0; i < stacks.length; i++)
-        {
-            this.stacks.set(i,stacks[i]);
+        for (int i = 0; i < stacks.length; i++) {
+            this.stacks.set(i, stacks[i]);
         }
     }
 
-    public void clear()
-    {
-        for(int i = 0; i < this.getSlots(); i++)
-        {
-            this.stacks.set(i,ItemStack.EMPTY);
+    public void clear() {
+        for (int i = 0; i < this.getSlots(); i++) {
+            this.stacks.set(i, ItemStack.EMPTY);
             this.onContentsChanged(i);
         }
     }

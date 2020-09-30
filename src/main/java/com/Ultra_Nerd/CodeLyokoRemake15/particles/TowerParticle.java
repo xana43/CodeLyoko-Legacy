@@ -20,10 +20,10 @@ public class TowerParticle extends SpriteTexturedParticle {
         super(world, x, y, z, speedX, speedY, speedZ);
         this.sprite = sprites;
 
-        setColor(tint.getRed()/255.0F, tint.getGreen()/255.0F, tint.getBlue()/255.0F);
+        setColor(tint.getRed() / 255.0F, tint.getGreen() / 255.0F, tint.getBlue() / 255.0F);
 
         final float PARTICLE_SCALE_FOR_ONE_METRE = 0.5F; //  if the particleScale is 0.5, the texture will be rendered as 1 metre high
-        particleScale = PARTICLE_SCALE_FOR_ONE_METRE * (float)0.25; // sets the rendering size of the particle for a TexturedParticle.
+        particleScale = PARTICLE_SCALE_FOR_ONE_METRE * (float) 0.25; // sets the rendering size of the particle for a TexturedParticle.
 
         maxAge = 100;  // lifetime in ticks: 100 ticks = 5 seconds
         this.selectSpriteWithAge(sprites);
@@ -56,17 +56,16 @@ public class TowerParticle extends SpriteTexturedParticle {
             this.selectSpriteWithAge(this.sprite);
             this.motionY += 0.004D;
             this.move(this.motionX, this.motionY, this.motionZ);
-            this.motionX *= (double)0.9F;
-            this.motionY *= (double)0.9F;
-            this.motionZ *= (double)0.9F;
+            this.motionX *= (double) 0.9F;
+            this.motionY *= (double) 0.9F;
+            this.motionZ *= (double) 0.9F;
             if (this.onGround) {
-                this.motionX *= (double)0.7F;
-                this.motionZ *= (double)0.7F;
+                this.motionX *= (double) 0.7F;
+                this.motionZ *= (double) 0.7F;
             }
 
         }
     }
-
 
 
 }

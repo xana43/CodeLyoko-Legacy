@@ -91,7 +91,7 @@ public class CableBlock extends FenceBlock {
                 for (int z = -1; z < 2; z++) {
                     BlockState surrounding = worldIn.getBlockState(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
                     if (surrounding.getBlock() instanceof CableBlock) {
-                        around=surrounding;
+                        around = surrounding;
                         if (counter < 2) {
                             counter++;
                             CABLE_LISTS.get(((CableBlock) surrounding.getBlock()).startOfCable).addLast(this);

@@ -21,7 +21,7 @@ import java.util.Random;
 
 public class TowerGUI extends ContainerScreen<TowerInterfaceContainer> {
 
-    private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID,"textures/gui/towerinterface.png");
+    private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/towerinterface.png");
     private TextFieldWidget text;
     private TextFieldWidget Accepted;
     private byte I = 100;

@@ -19,15 +19,17 @@ public class ModRecipes {
     public static final IRecipeType<ICustomRecipes> TYPE = registerType(ICustomRecipes.RECIPE_TYPE);
 
 
-    private static class RegistryType<T extends IRecipe<?>> implements IRecipeType<T>{
+    private static class RegistryType<T extends IRecipe<?>> implements IRecipeType<T> {
         @Override
         public String toString() {
             return Registry.RECIPE_TYPE.getKey(this).toString();
         }
     }
+
     private static <T extends IRecipeType> T registerType(ResourceLocation recipeType) {
-        return (T) Registry.register(Registry.RECIPE_TYPE,recipeType,new RegistryType<>());
+        return (T) Registry.register(Registry.RECIPE_TYPE, recipeType, new RegistryType<>());
     }
+
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZER_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Base.MOD_ID);
-    public static final RegistryObject<IRecipeSerializer<?>> TEST_RECEPIE = RECIPE_SERIALIZER_DEFERRED_REGISTER.register("recipes",() -> TEST_RECIPE_I_RECIPE_SERIALIZER);
+    public static final RegistryObject<IRecipeSerializer<?>> TEST_RECEPIE = RECIPE_SERIALIZER_DEFERRED_REGISTER.register("recipes", () -> TEST_RECIPE_I_RECIPE_SERIALIZER);
 }

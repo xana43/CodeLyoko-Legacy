@@ -1,31 +1,20 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
-    [
-        "AFA",
-        "F F",
-        "AFA"
-    ],
-    
-    "key":
-    {
-        "F":
-        {
-            "item": "cm:titanium_ingot"
-        },
-        "A":
-        {
-            "item": "minecraft:iron_bars"
-        }
-
-
-        
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AFA",
+    "F F",
+    "AFA"
+  ],
+  "key": {
+    "F": {
+      "item": "cm:titanium_ingot"
     },
-    
-    "result":
-    {
-        "item": "cm:scanner_base",
-        "count": 1
+    "A": {
+      "item": "minecraft:iron_bars"
     }
+  },
+  "result": {
+    "item": "cm:scanner_base",
+    "count": 1
+  }
 }

@@ -24,6 +24,7 @@ public class YumiFans extends TridentItem {
         super(builder);
 
     }
+
     @Override
     public void onPlayerStoppedUsing(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof PlayerEntity) {
@@ -37,7 +38,7 @@ public class YumiFans extends TridentItem {
                 if (playerentity.abilities.isCreativeMode) {
                     fan.pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
                 }
-                if(!worldIn.isRemote) {
+                if (!worldIn.isRemote) {
                     worldIn.addEntity(fan);
                 }
                 worldIn.playMovingSound(playerentity, fan, SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
@@ -82,13 +83,11 @@ public class YumiFans extends TridentItem {
     }
 
 
-
     @Override
     public void inventoryTick(ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
-        if(!stack.isEnchanted())
-        {
-            stack.addEnchantment(Enchantments.LOYALTY,Enchantments.LOYALTY.getMaxLevel());
-            stack.addEnchantment(Enchantments.SHARPNESS,Enchantments.SHARPNESS.getMaxLevel());
+        if (!stack.isEnchanted()) {
+            stack.addEnchantment(Enchantments.LOYALTY, Enchantments.LOYALTY.getMaxLevel());
+            stack.addEnchantment(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());
         }
     }
 }

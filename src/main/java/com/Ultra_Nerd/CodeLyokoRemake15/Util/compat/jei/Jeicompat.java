@@ -17,6 +17,4 @@ public class Jeicompat implements IModPlugin {
     }
 
 
-
-
 }

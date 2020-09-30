@@ -1,34 +1,23 @@
 {
-    "type": "minecraft:crafting_shaped",
-    
-    "pattern":
-    [
-        "FFF",
-        "GEG",
-        "FFF"
-    ],
-    
-    "key":
-    {
-        "G":
-        {
-            "item": "minecraft:glass"
-        },
-
-        "F":
-        {
-            "item": "cm:computer_screen_frame"
-        },
-        "E":
-        {
-            "item": "minecraft:redstone"
-        }
-        
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "GEG",
+    "FFF"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
     },
-    
-    "result":
-    {
-        "item": "cm:computer_screen",
-        "count": 1
+    "F": {
+      "item": "cm:computer_screen_frame"
+    },
+    "E": {
+      "item": "minecraft:redstone"
     }
+  },
+  "result": {
+    "item": "cm:computer_screen",
+    "count": 1
+  }
 }

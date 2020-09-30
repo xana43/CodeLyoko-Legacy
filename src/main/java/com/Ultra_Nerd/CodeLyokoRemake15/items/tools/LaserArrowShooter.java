@@ -55,8 +55,8 @@ public class LaserArrowShooter extends BowItem {
                 player.world.dimension instanceof VolcanoDimension;
     }
 
-	@Nonnull
-	@Override
+    @Nonnull
+    @Override
     public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, PlayerEntity playerIn, @Nonnull Hand handIn) {
         ItemStack item = playerIn.getHeldItem(handIn);
         Count = 100;

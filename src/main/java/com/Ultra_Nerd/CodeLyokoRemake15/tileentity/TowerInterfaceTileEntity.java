@@ -36,8 +36,6 @@ public class TowerInterfaceTileEntity extends TileEntity implements INamedContai
     }
 
 
-
-
     @Override
     public AxisAlignedBB getRenderBoundingBox() {
         // This, combined with isGlobalRenderer in the TileEntityRenderer makes it so that the
@@ -83,7 +81,6 @@ public class TowerInterfaceTileEntity extends TileEntity implements INamedContai
     }
 
 
-
     @Override
     public boolean receiveClientEvent(int id, int type) {
         if (id == 1) {
@@ -93,7 +90,6 @@ public class TowerInterfaceTileEntity extends TileEntity implements INamedContai
             return super.receiveClientEvent(id, type);
         }
     }
-
 
 
 }

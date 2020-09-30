@@ -17,10 +17,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
+
 @OnlyIn(Dist.CLIENT)
 public class HoverboardRenderer<T extends HoverboardEntity> extends EntityRenderer<T> {
-    private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/hoverboard/hoverboard.png");
+    private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID, "textures/entity/hoverboard/hoverboard.png");
     private final EntityModel<T> BoardModel = new ModelHoverboard<>();
+
     public HoverboardRenderer(EntityRendererManager renderManager) {
         super(renderManager);
         this.shadowSize = 1f;
@@ -32,13 +34,13 @@ public class HoverboardRenderer<T extends HoverboardEntity> extends EntityRender
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.push();
         matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
-        matrixStackIn.translate(0,-1.5f,0);
-        if(entityIn.getRidingEntity() != null) {
+        matrixStackIn.translate(0, -1.5f, 0);
+        if (entityIn.getRidingEntity() != null) {
             matrixStackIn.rotate(Vector3f.YP.rotation(MathHelper.clamp(entityIn.getRidingEntity().rotationYaw, 0, 90)));
         }
-        this.BoardModel.setRotationAngles(entityIn,0,0,0,0,0);
+        this.BoardModel.setRotationAngles(entityIn, 0, 0, 0, 0, 0);
         IVertexBuilder vertexBuilder = bufferIn.getBuffer(this.BoardModel.getRenderType(this.getEntityTexture(entityIn)));
-        this.BoardModel.render(matrixStackIn,vertexBuilder,packedLightIn, OverlayTexture.NO_OVERLAY,1,1,1,1);
+        this.BoardModel.render(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         matrixStackIn.pop();
     }
 

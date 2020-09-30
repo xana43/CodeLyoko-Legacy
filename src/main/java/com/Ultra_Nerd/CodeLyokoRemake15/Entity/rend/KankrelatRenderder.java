@@ -10,10 +10,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
+
 @OnlyIn(Dist.CLIENT)
 public class KankrelatRenderder extends MobRenderer<KankrelatEntity, ModelKankrelat> {
 
-    private static final ResourceLocation Tex = new ResourceLocation(Base.MOD_ID,"textures/entity/kankrelat/kankrelattemplate.png");
+    private static final ResourceLocation Tex = new ResourceLocation(Base.MOD_ID, "textures/entity/kankrelat/kankrelattemplate.png");
+
     public KankrelatRenderder(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new ModelKankrelat(), 0.5f);
     }
