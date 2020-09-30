@@ -8,7 +8,6 @@ import net.minecraft.world.gen.NoiseChunkGenerator;
 import javax.annotation.Nonnull;
 
 public class DesertGenerator extends NoiseChunkGenerator<DesertGenSettings> {
-
     public DesertGenerator(IWorld worldIn, BiomeProvider biomeProviderIn, DesertGenSettings settingsIn) {
         super(worldIn, biomeProviderIn, 8, 4, 128, settingsIn, true);
 
