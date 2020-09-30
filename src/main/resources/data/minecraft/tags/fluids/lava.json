@@ -1,0 +1,9 @@
+{
+  "replace" : false,
+  "values": [
+    "cm:digital_lava_block",
+    "cm:digital_lava_still",
+    "cm:digital_lava_flowing"
+
+  ]
+}

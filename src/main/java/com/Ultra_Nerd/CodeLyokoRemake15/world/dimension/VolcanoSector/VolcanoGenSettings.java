@@ -26,6 +26,6 @@ public class VolcanoGenSettings extends GenerationSettings {
     @Nonnull
     @Override
     public BlockState getDefaultFluid() {
-        return ModFluids.DIGITAL_SEA_BLOCK.get().getDefaultState();
+        return ModFluids.DIGITAL_LAVA_BLOCK.get().getDefaultState();
     }
 }
