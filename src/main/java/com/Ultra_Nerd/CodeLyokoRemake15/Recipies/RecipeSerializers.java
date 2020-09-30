@@ -16,23 +16,23 @@ public class RecipeSerializers extends ForgeRegistryEntry<IRecipeSerializer<?>> 
     @Nonnull
     @Override
     public TestRecipe read(@Nonnull ResourceLocation recipeId, @Nonnull JsonObject json) {
-        ItemStack output = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json,"output"),true);
-        Ingredient Input = Ingredient.deserialize(JSONUtils.getJsonObject(json,"input"));
-        return new TestRecipe(recipeId,Input,output);
+        ItemStack output = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "output"), true);
+        Ingredient Input = Ingredient.deserialize(JSONUtils.getJsonObject(json, "input"));
+        return new TestRecipe(recipeId, Input, output);
     }
 
 
     @Override
     public TestRecipe read(@Nonnull ResourceLocation recipeId, PacketBuffer buffer) {
-       ItemStack output = buffer.readItemStack();
-       Ingredient input = Ingredient.read(buffer);
-        return new TestRecipe(recipeId,input,output);
+        ItemStack output = buffer.readItemStack();
+        Ingredient input = Ingredient.read(buffer);
+        return new TestRecipe(recipeId, input, output);
     }
 
     @Override
     public void write(@Nonnull PacketBuffer buffer, TestRecipe recipe) {
-Ingredient input = recipe.getIngredients().get(0);
-input.write(buffer);
-buffer.writeItemStack(recipe.getRecipeOutput(),false);
+        Ingredient input = recipe.getIngredients().get(0);
+        input.write(buffer);
+        buffer.writeItemStack(recipe.getRecipeOutput(), false);
     }
 }

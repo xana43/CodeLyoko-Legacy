@@ -24,6 +24,8 @@ import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
 public class Router extends Block {
+    public static final DirectionProperty ROUTER_DIRECTION = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty ROUTER_ACTIVE = BooleanProperty.create("ractive");
     private static final VoxelShape N = Stream.of(
             Block.makeCuboidShape(14, 1, 8, 15, 3, 9),
             Block.makeCuboidShape(0, 0, 0, 16, 3, 8),
@@ -37,7 +39,9 @@ public class Router extends Block {
             Block.makeCuboidShape(8, 1, 8, 9, 2, 9),
             Block.makeCuboidShape(10, 1, 8, 11, 2, 9),
             Block.makeCuboidShape(12, 1, 8, 13, 2, 9)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
     private static final VoxelShape S = Stream.of(
             Block.makeCuboidShape(1.75, 1, 7.25, 2.75, 3, 8.25),
             Block.makeCuboidShape(0.75, 0, 8.25, 16.75, 3, 16.25),
@@ -51,7 +55,9 @@ public class Router extends Block {
             Block.makeCuboidShape(7.75, 1, 7.25, 8.75, 2, 8.25),
             Block.makeCuboidShape(5.75, 1, 7.25, 6.75, 2, 8.25),
             Block.makeCuboidShape(3.75, 1, 7.25, 4.75, 2, 8.25)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
     private static final VoxelShape E = Stream.of(
             Block.makeCuboidShape(7.5, 1, 13.75, 8.5, 3, 14.75),
             Block.makeCuboidShape(8.5, 0, -0.25, 16.5, 3, 15.75),
@@ -65,7 +71,9 @@ public class Router extends Block {
             Block.makeCuboidShape(7.5, 1, 7.75, 8.5, 2, 8.75),
             Block.makeCuboidShape(7.5, 1, 9.75, 8.5, 2, 10.75),
             Block.makeCuboidShape(7.5, 1, 11.75, 8.5, 2, 12.75)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
     private static final VoxelShape W = Stream.of(
             Block.makeCuboidShape(8.25, 1, 1.5, 9.25, 3, 2.5),
             Block.makeCuboidShape(0.25, 0, 0.5, 8.25, 3, 16.5),
@@ -79,15 +87,13 @@ public class Router extends Block {
             Block.makeCuboidShape(8.25, 1, 7.5, 9.25, 2, 8.5),
             Block.makeCuboidShape(8.25, 1, 5.5, 9.25, 2, 6.5),
             Block.makeCuboidShape(8.25, 1, 3.5, 9.25, 2, 4.5)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-
-
-    public static final DirectionProperty ROUTER_DIRECTION = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty ROUTER_ACTIVE = BooleanProperty.create("ractive");
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
 
     public Router(Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(ROUTER_DIRECTION, Direction.NORTH).with(ROUTER_ACTIVE,false));
+        this.setDefaultState(this.stateContainer.getBaseState().with(ROUTER_DIRECTION, Direction.NORTH).with(ROUTER_ACTIVE, false));
     }
 
     @Override
@@ -104,20 +110,26 @@ public class Router extends Block {
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
-        switch (state.get(ROUTER_DIRECTION))
-        {
-            case NORTH: return N;
-            case SOUTH: return S;
-            case EAST: return E;
-            case WEST: return W;
-            default: return N;
+        switch (state.get(ROUTER_DIRECTION)) {
+            case NORTH:
+                return N;
+            case SOUTH:
+                return S;
+            case EAST:
+                return E;
+            case WEST:
+                return W;
+            default:
+                return N;
         }
     }
+
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         // TODO Auto-generated method stub
         return this.getDefaultState().with(ROUTER_DIRECTION, context.getPlacementHorizontalFacing().getOpposite());
     }
+
     @Override
     protected void fillStateContainer(@Nonnull StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);

@@ -30,7 +30,6 @@ public class SeaPylon extends Block {
                 .notSolid()
 
 
-
         );
 
     }
@@ -52,14 +51,14 @@ public class SeaPylon extends Block {
     }
 
     //mod compatiability
-	@Nonnull
-	@Override
+    @Nonnull
+    @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.with(DIRPYLON, rot.rotate(state.get(DIRPYLON)));
     }
 
-	@Nonnull
-	@Override
+    @Nonnull
+    @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(DIRPYLON)));
     }

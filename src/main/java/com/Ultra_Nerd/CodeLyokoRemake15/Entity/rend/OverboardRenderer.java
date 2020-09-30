@@ -18,10 +18,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
+
 @OnlyIn(Dist.CLIENT)
 public class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer<T> {
-    private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/overboard/overboarduv.png");
+    private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID, "textures/entity/overboard/overboarduv.png");
     private final EntityModel<T> BoardModel = new ModelOverboard<>();
+
     public OverboardRenderer(EntityRendererManager renderManager) {
         super(renderManager);
         this.shadowSize = 1f;
@@ -33,12 +35,12 @@ public class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.push();
         matrixStackIn.scale(-2F, -2F, 2.0F);
-        matrixStackIn.translate(0,-1.5f,0);
+        matrixStackIn.translate(0, -1.5f, 0);
         assert Minecraft.getInstance().player != null;
-        matrixStackIn.rotate(Vector3f.YP.rotation(MathHelper.clamp(Minecraft.getInstance().player.rotationYaw,0,90)));
-        this.BoardModel.setRotationAngles(entityIn,0,0,0,0,0);
+        matrixStackIn.rotate(Vector3f.YP.rotation(MathHelper.clamp(Minecraft.getInstance().player.rotationYaw, 0, 90)));
+        this.BoardModel.setRotationAngles(entityIn, 0, 0, 0, 0, 0);
         IVertexBuilder vertexBuilder = bufferIn.getBuffer(this.BoardModel.getRenderType(this.getEntityTexture(entityIn)));
-        this.BoardModel.render(matrixStackIn,vertexBuilder,packedLightIn, OverlayTexture.NO_OVERLAY,1,1,1,1);
+        this.BoardModel.render(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         matrixStackIn.pop();
     }
 

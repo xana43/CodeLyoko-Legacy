@@ -44,174 +44,146 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Mod("cm")
 @Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Bus.MOD)
-public class Base
-{
+public class Base {
 
-	public static final Logger Log = LogManager.getLogger();
-	public static boolean XANA = false;
-	public static final String MOD_ID = "cm";
-	public static Base instance;
-	public static int random = 1000;
-	public Base()
-	{
+    public static final Logger Log = LogManager.getLogger();
+    public static final String MOD_ID = "cm";
+    public static final Map<ResourceLocation, IMultiblock> MULTIBLOCK_MAP = new ConcurrentHashMap<>();
+    public static final ItemGroup LYOKO_BLOCKS = new ItemGroup("lyoko_blocks") {
 
-		final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
-		ModBus.addListener(this::setup);
-		ModBus.addListener(this::dostuff);
-		ModParticles.PARTICLES.register(ModBus);
-		ModSounds.SOUNDS.register(ModBus);
-		ModItems.ITEMS.register(ModBus);
-		ModFluids.LIQUIDS.register(ModBus);
-		ModBlocks.BLOCKS.register(ModBus);
-		ModEntities.Entities.register(ModBus);
-		ModRecipes.RECIPE_SERIALIZER_DEFERRED_REGISTER.register(ModBus);
-		ModBiome.BIOMES.register(ModBus);
-		ModContainerTypes.CONTAINER_TYPES.register(ModBus);
-		ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
-		ModDimensions.MOD_DIMENSION_DEFERRED_REGISTER.register(ModBus);
-		ModWorldFeatures.FEATURES.register(ModBus);
-		instance = this;
-		MinecraftForge.EVENT_BUS.register(this);
+        @Override
+        public ItemStack createIcon() {
+            // TODO Auto-generated method stub
+            return new ItemStack(ModBlocks.TOWER_INTERFACE.get());
+        }
+    };
+    public static final ItemGroup LYOKO_ARMOR = new ItemGroup("lyoko_armor") {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(ModItems.WILLIAM_CHESTPLATE.get());
+        }
+    };
+    public static final ItemGroup LYOKO_WEAPONS = new ItemGroup("lyoko_weapons") {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(ModItems.LASER_ARROWSHOOTER.get());
+        }
+    };
+    public static final ItemGroup LYOKO_ITEMS = new ItemGroup("lyoko_items") {
 
-	}
+        @Override
+        public ItemStack createIcon() {
+            // TODO Auto-generated method stub
+            return new ItemStack(ModItems.BIT.get());
+        }
+    };
+    private static final String nbt = "firstjoin";
+    public static boolean XANA = false;
+    public static Base instance;
+    public static int random = 1000;
 
-	public static final Map<ResourceLocation, IMultiblock> MULTIBLOCK_MAP = new ConcurrentHashMap<>();
-	public static IMultiblock registerMultiBlocks(ResourceLocation resourceLocation,IMultiblock multiblock)
-	{
-		IMultiblock MultiBlocks = MULTIBLOCK_MAP.put(resourceLocation,multiblock);
-		if(MultiBlocks != null)
-		{
-			throw new IllegalArgumentException("Multiblock " + resourceLocation + " already registered");
-		}
-		else
-		{
-			Base.Log.info(resourceLocation);
-			return multiblock.setId(resourceLocation);
-		}
-	}
-	@SubscribeEvent
-	public void onRegisterEnties(final RegistryEvent.Register<EntityType<?>> event){
-		CustomMobEggs.initEgg();
-	}
+    public Base() {
 
-	@SubscribeEvent
-	public void tickPast(final TickEvent event)
-	{
+        final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ModBus.addListener(this::setup);
+        ModBus.addListener(this::dostuff);
+        ModParticles.PARTICLES.register(ModBus);
+        ModSounds.SOUNDS.register(ModBus);
+        ModItems.ITEMS.register(ModBus);
+        ModFluids.LIQUIDS.register(ModBus);
+        ModBlocks.BLOCKS.register(ModBus);
+        ModEntities.Entities.register(ModBus);
+        ModRecipes.RECIPE_SERIALIZER_DEFERRED_REGISTER.register(ModBus);
+        ModBiome.BIOMES.register(ModBus);
+        ModContainerTypes.CONTAINER_TYPES.register(ModBus);
+        ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
+        ModDimensions.MOD_DIMENSION_DEFERRED_REGISTER.register(ModBus);
+        ModWorldFeatures.FEATURES.register(ModBus);
+        instance = this;
+        MinecraftForge.EVENT_BUS.register(this);
 
-		if((event.phase == TickEvent.Phase.START || event.phase == TickEvent.Phase.END) && Minecraft.getInstance().world != null)
-		{
-			random--;
+    }
 
-			//Base.Log.debug(random);
-			if(random == 0 && !XANA)
-			{
-				random = new Random().nextInt(1000);
-				assert Minecraft.getInstance().player != null;
-				Minecraft.getInstance().player.sendMessage(new StringTextComponent("xana is attacking"));
-				XANA = true;
-			}
+    public static IMultiblock registerMultiBlocks(ResourceLocation resourceLocation, IMultiblock multiblock) {
+        IMultiblock MultiBlocks = MULTIBLOCK_MAP.put(resourceLocation, multiblock);
+        if (MultiBlocks != null) {
+            throw new IllegalArgumentException("Multiblock " + resourceLocation + " already registered");
+        } else {
+            Base.Log.info(resourceLocation);
+            return multiblock.setId(resourceLocation);
+        }
+    }
 
+    @SubscribeEvent
+    public static void onItemInit(final RegistryEvent.Register<Item> Items) {
+        final IForgeRegistry<Item> registry = Items.getRegistry();
 
-		}
-	}
-	private void setup(final FMLCommonSetupEvent event)
-	{
-		DeferredWorkQueue.runLater(ModOreGen::genOre);
-		DeferredWorkQueue.runLater(StructGen::genStruct);
-	}
-private static final String nbt = "firstjoin";
-	@SubscribeEvent
-	public void PlayerSetup(final EntityJoinWorldEvent event)
-	{
-		random = 1000;
-		if(event.getEntity() instanceof PlayerEntity) {
-CompoundNBT tag = event.getEntity().getPersistentData();
-CompoundNBT existing;
-			PlayerEntity player = (PlayerEntity)event.getEntity();
-			if(!tag.contains(PlayerEntity.PERSISTED_NBT_TAG))
-			{
-				tag.put(PlayerEntity.PERSISTED_NBT_TAG,(existing = new CompoundNBT()));
-			}
-			else
-			{
-				existing = tag.getCompound(PlayerEntity.PERSISTED_NBT_TAG);
-			}
+        ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof FlowingFluidBlock) &&
+                !(block.get() instanceof LiquidHelium) && !(block.get() instanceof SeaPylon) && !(block.get() instanceof LyokoCore)).map(RegistryObject::get).forEach(block ->
+        {
+            final Item.Properties itemsettings = new Item.Properties().group(LYOKO_BLOCKS);
+            final BlockItem Itemblocks = new BlockItem(block, itemsettings);
+            Itemblocks.setRegistryName(block.getRegistryName());
+            registry.register(Itemblocks);
+        });
+        Log.debug("Inventory blocks registered");
+    }
 
-			if(!existing.contains(nbt))
-			{
-				existing.putBoolean(nbt,true);
-			player.inventory.add(0, new ItemStack(ModItems.STORY_BOOK.get(), 1));
-			}
-		}
-	}
+    @SubscribeEvent
+    public static void onRegisterBiome(final RegistryEvent.Register<Biome> event) {
+        ModBiome.regbio();
+    }
 
+    @SubscribeEvent
+    public void onRegisterEnties(final RegistryEvent.Register<EntityType<?>> event) {
+        CustomMobEggs.initEgg();
+    }
 
+    @SubscribeEvent
+    public void tickPast(final TickEvent event) {
 
+        if ((event.phase == TickEvent.Phase.START || event.phase == TickEvent.Phase.END) && Minecraft.getInstance().world != null) {
+            random--;
 
-
-
-
-
-	private void dostuff(final FMLClientSetupEvent event)
-	{
-	}
-	
-	@SubscribeEvent
-	public static void onItemInit(final RegistryEvent.Register<Item> Items)
-	{
-		final IForgeRegistry<Item> registry = Items.getRegistry();
-		
-		ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof FlowingFluidBlock) &&
-				!(block.get() instanceof LiquidHelium) && !(block.get() instanceof SeaPylon) && !(block.get() instanceof LyokoCore)).map(RegistryObject::get).forEach(block->
-		{
-			final Item.Properties itemsettings = new Item.Properties().group(LYOKO_BLOCKS);
-			final BlockItem Itemblocks = new BlockItem(block,itemsettings);
-			Itemblocks.setRegistryName(block.getRegistryName());
-			registry.register(Itemblocks);
-		});
-		Log.debug("Inventory blocks registered");
-	}
-	
-	@SubscribeEvent
-	public static void onRegisterBiome(final RegistryEvent.Register<Biome> event)
-	{
-		ModBiome.regbio();
-	}
-	
-	public static final ItemGroup LYOKO_BLOCKS = new ItemGroup("lyoko_blocks") {
-		
-		@Override
-		public ItemStack createIcon() {
-			// TODO Auto-generated method stub
-			return new ItemStack(ModBlocks.TOWER_INTERFACE.get());
-		}
-	};
+            //Base.Log.debug(random);
+            if (random == 0 && !XANA) {
+                random = new Random().nextInt(1000);
+                assert Minecraft.getInstance().player != null;
+                Minecraft.getInstance().player.sendMessage(new StringTextComponent("xana is attacking"));
+                XANA = true;
+            }
 
 
-	public static final ItemGroup LYOKO_ARMOR = new ItemGroup("lyoko_armor") {
-		@Override
-		public ItemStack createIcon() {
-			return new ItemStack(ModItems.WILLIAM_CHESTPLATE.get());
-		}
-	};
+        }
+    }
 
-	public static final ItemGroup LYOKO_WEAPONS = new ItemGroup("lyoko_weapons") {
-		@Override
-		public ItemStack createIcon() {
-			return new ItemStack(ModItems.LASER_ARROWSHOOTER.get());
-		}
-	};
+    private void setup(final FMLCommonSetupEvent event) {
+        DeferredWorkQueue.runLater(ModOreGen::genOre);
+        DeferredWorkQueue.runLater(StructGen::genStruct);
+    }
 
-	public static final ItemGroup LYOKO_ITEMS = new ItemGroup("lyoko_items") {
+    @SubscribeEvent
+    public void PlayerSetup(final EntityJoinWorldEvent event) {
+        random = 1000;
+        if (event.getEntity() instanceof PlayerEntity) {
+            CompoundNBT tag = event.getEntity().getPersistentData();
+            CompoundNBT existing;
+            PlayerEntity player = (PlayerEntity) event.getEntity();
+            if (!tag.contains(PlayerEntity.PERSISTED_NBT_TAG)) {
+                tag.put(PlayerEntity.PERSISTED_NBT_TAG, (existing = new CompoundNBT()));
+            } else {
+                existing = tag.getCompound(PlayerEntity.PERSISTED_NBT_TAG);
+            }
 
-		@Override
-		public ItemStack createIcon() {
-			// TODO Auto-generated method stub
-			return new ItemStack(ModItems.BIT.get());
-		}
-	};
+            if (!existing.contains(nbt)) {
+                existing.putBoolean(nbt, true);
+                player.inventory.add(0, new ItemStack(ModItems.STORY_BOOK.get(), 1));
+            }
+        }
+    }
+
+    private void dostuff(final FMLClientSetupEvent event) {
+    }
 
 
-
-	
 }

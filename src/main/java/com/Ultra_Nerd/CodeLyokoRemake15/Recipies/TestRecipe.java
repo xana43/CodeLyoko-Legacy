@@ -13,17 +13,15 @@ import javax.annotation.Nonnull;
 
 public class TestRecipe implements ICustomRecipes {
 
-private final ResourceLocation id;
-private Ingredient input;
-private final ItemStack output;
+    private final ResourceLocation id;
+    private final ItemStack output;
+    private final Ingredient input;
 
-    public TestRecipe(ResourceLocation id,Ingredient Input, ItemStack output)
-    {
-this.id = id;
-this.input = Input;
-this.output = output;
+    public TestRecipe(ResourceLocation id, Ingredient Input, ItemStack output) {
+        this.id = id;
+        this.input = Input;
+        this.output = output;
     }
-
 
 
     @Override
@@ -64,6 +62,6 @@ this.output = output;
     @Nonnull
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return NonNullList.from(null,this.input);
+        return NonNullList.from(null, this.input);
     }
 }
