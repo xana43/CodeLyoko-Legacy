@@ -1,7 +1,6 @@
 {
-  "variants": {
-    "": {
-      "model": "cm:block/black_void"
-    }
+  "variants":
+  {
+    "": {"model":"cm:block/black_void"}
   }
 }

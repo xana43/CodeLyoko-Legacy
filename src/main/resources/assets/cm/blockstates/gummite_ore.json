@@ -1,7 +1,5 @@
 {
-  "variants": {
-    "": {
-      "model": "cm:block/gummite_ore"
+    "variants": {
+        "": { "model": "cm:block/gummite_ore" }
     }
-  }
 }

@@ -1,7 +1,5 @@
 {
   "variants": {
-    "": {
-      "model": "cm:block/cathodepart"
-    }
+    "": {"model": "cm:block/cathodepart"}
   }
 }

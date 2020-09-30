@@ -1,7 +1,5 @@
 {
-  "variants": {
-    "": {
-      "model": "cm:block/computer_screen"
+    "variants": {
+        "": { "model": "cm:block/computer_screen" }
     }
-  }
 }

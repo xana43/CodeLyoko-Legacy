@@ -1,7 +1,5 @@
 {
-  "variants": {
-    "": {
-      "model": "cm:block/saleeite_ore"
+    "variants": {
+        "": { "model": "cm:block/saleeite_ore" }
     }
-  }
 }

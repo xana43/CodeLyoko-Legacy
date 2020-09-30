@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "cm:item/terabit"
-  }
+   "parent": "item/generated",
+   "textures": {
+       "layer0": "cm:item/terabit"
+   }
 }

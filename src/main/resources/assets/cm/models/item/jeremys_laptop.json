@@ -1,23 +1,9 @@
 {
-  "parent": "item/generated",
+   "parent": "item/generated",
+
   "overrides": [
-    {
-      "predicate": {
-        "cm:state": 0.0
-      },
-      "model": "cm:item/laptop/laptop_open"
-    },
-    {
-      "predicate": {
-        "cm:state": 0.1
-      },
-      "model": "cm:item/laptop/laptop_closed"
-    },
-    {
-      "predicate": {
-        "cm:state": 0.2
-      },
-      "model": "cm:item/laptop/laptop_open"
-    }
-  ]
+    {"predicate":  {"cm:state": 0.0}, "model": "cm:item/laptop/laptop_open"},
+    {"predicate": {"cm:state": 0.1},"model": "cm:item/laptop/laptop_closed"},
+    {"predicate": {"cm:state": 0.2},"model": "cm:item/laptop/laptop_open"}
+    ]
 }

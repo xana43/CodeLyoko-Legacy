@@ -1,7 +1,5 @@
 {
   "variants": {
-    "": {
-      "model": "cm:block/anodepart"
-    }
+    "": {"model": "cm:block/anodepart"}
   }
 }

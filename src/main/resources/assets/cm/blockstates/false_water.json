@@ -1,7 +1,6 @@
 {
-  "variants": {
-    "": {
-      "model": "cm:block/digital_ocean"
+
+    "variants":{
+       "": {"model": "cm:block/digital_ocean"}
     }
-  }
 }

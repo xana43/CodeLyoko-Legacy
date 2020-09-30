@@ -1,6 +1,6 @@
 {
-  "loader": "forge:obj",
-  "model": "cm:models/item/zweihander.obj",
-  "flip-v": true,
-  "ambientocclusion": true
+	"loader": "forge:obj",
+	"model": "cm:models/item/zweihander.obj",
+	"flip-v": true,
+	"ambientocclusion": true
 }

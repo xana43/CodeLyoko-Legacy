@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "cm:item/uranium_melt"
-  }
+   "parent": "item/generated",
+   "textures": {
+       "layer0": "cm:item/uranium_melt"
+   }
 }

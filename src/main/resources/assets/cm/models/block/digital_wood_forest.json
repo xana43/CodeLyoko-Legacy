@@ -1,7 +1,8 @@
 {
-  "parent": "block/cube_all",
-  "textures": {
-    "particle": "cm:block/digital_wood",
-    "all": "cm:block/digital_wood"
-  }
+   "parent": "block/cube_all",
+   "textures": {
+    "particle":"cm:block/digital_wood",
+       "all": "cm:block/digital_wood"
+       
+   }
 }

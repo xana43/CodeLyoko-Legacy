@@ -1,7 +1,5 @@
 {
-  "variants": {
-    "": {
-      "model": "cm:block/transparent"
+    "variants": {
+        "": { "model": "cm:block/transparent" }
     }
-  }
 }
