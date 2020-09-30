@@ -39,6 +39,7 @@ public class CustomVolcanoSky implements SkyRenderHandler {
         for (int i = 0; i < 6; ++i) {
             matrixStack.push();
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (i == 0) {
                 matrixStack.scale(10, 10, 10);
 =======
@@ -54,6 +55,8 @@ public class CustomVolcanoSky implements SkyRenderHandler {
                     matrixStack.rotate(Vector3f.YP.rotationDegrees(0));
                 }
 =======
+=======
+>>>>>>> parent of b13df97... tried to move the skybox upwards to show the texture better
             if (i == 1) {
                 mc.textureManager.bindTexture(sky1);
                 matrixStack.rotate(Vector3f.XP.rotationDegrees(90.0F));
