@@ -15,16 +15,16 @@ import net.minecraftforge.client.IRenderHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ForestDimension extends Dimension {
+public class ForestDimension extends Dimension  {
 
     public ForestDimension(World world, DimensionType type) {
-        super(world, type, 0.0f);
+        super(world,type,0.0f);
     }
 
     @Nonnull
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
-        return new ForestGenerator(world, new ForestProvider(), new ForestGenSettings());
+        return new ForestGenerator(world,new ForestProvider(),new ForestGenSettings());
     }
 
     @Nonnull
@@ -90,7 +90,7 @@ public class ForestDimension extends Dimension {
     @Nonnull
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
-        return new Vec3d(0.9f, 1, 0.6F);
+        return new Vec3d(0.9f,1,0.6F);
     }
 
     @Override
@@ -115,6 +115,6 @@ public class ForestDimension extends Dimension {
 
     @Override
     public void setAllowedSpawnTypes(boolean allowHostile, boolean allowPeaceful) {
-        super.setAllowedSpawnTypes(true, false);
+        super.setAllowedSpawnTypes(true,false);
     }
 }

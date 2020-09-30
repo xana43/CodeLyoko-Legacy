@@ -43,8 +43,9 @@ public class TowerEnter extends Block {
     @Override
     public void onEntityCollision(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         super.onEntityCollision(state, worldIn, pos, entityIn);
-        if (!(entityIn instanceof PlayerEntity)) {
-            entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
+        if(!(entityIn instanceof PlayerEntity))
+        {
+            entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD,Integer.MAX_VALUE);
         }
     }
 
@@ -61,24 +62,22 @@ public class TowerEnter extends Block {
     }
 
     //mod compatiability
-    @Nonnull
-    @Override
+	@Nonnull
+	@Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.with(DIRTOWER2, rot.rotate(state.get(DIRTOWER2)));
     }
 
-    @Nonnull
-    @Override
+	@Nonnull
+	@Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(DIRTOWER2)));
     }
-
     //
     @Override
     public boolean canCreatureSpawn(BlockState state, IBlockReader world, BlockPos pos, EntitySpawnPlacementRegistry.PlacementType type, @Nullable EntityType<?> entityType) {
         return false;
     }
-
     @Override
     public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
         // TODO Auto-generated method stub

@@ -15,28 +15,37 @@ public class CreatureSpawn {
 
 
     @SubscribeEvent
-    public static void SpawnInWorld(FMLLoadCompleteEvent loaded) {
-        for (Biome biomes : ForgeRegistries.BIOMES) {
-            if (biomes == ModBiome.DESERT.get()) {
+    public static void SpawnInWorld(FMLLoadCompleteEvent loaded)
+    {
+        for(Biome biomes : ForgeRegistries.BIOMES)
+        {
+            if(biomes == ModBiome.DESERT.get())
+            {
                 biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.BLOK.get(),
-                        8, 1, 3));
+                        8,1,3));
                 biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.MEGATANK.get(),
-                        4, 1, 2));
-            } else if (biomes == ModBiome.FOREST.get()) {
+                        4,1,2));
+            }
+            else if( biomes == ModBiome.FOREST.get())
+            {
                 biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.BLOK.get(),
-                        8, 2, 2));
+                        8,2,2));
                 biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.MEGATANK.get(),
-                        4, 1, 2));
-            } else if (biomes == ModBiome.ICE.get()) {
+                        4,1,2));
+            }
+            else if(biomes == ModBiome.ICE.get())
+            {
                 biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.BLOK.get(),
-                        8, 2, 2));
+                        8,2,2));
                 biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.MEGATANK.get(),
-                        4, 1, 2));
-            } else if (biomes == ModBiome.MOUNTAIN.get()) {
+                        4,1,2));
+            }
+            else if(biomes == ModBiome.MOUNTAIN.get())
+            {
                 biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.BLOK.get(),
-                        8, 2, 2));
+                        8,2,2));
                 biomes.getSpawns(EntityClassification.MONSTER).add(new Biome.SpawnListEntry(ModEntities.MEGATANK.get(),
-                        4, 1, 2));
+                        4,1,2));
             }
 
         }

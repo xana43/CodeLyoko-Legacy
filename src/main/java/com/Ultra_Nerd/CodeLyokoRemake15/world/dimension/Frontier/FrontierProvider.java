@@ -10,11 +10,11 @@ import java.util.Set;
 
 public class FrontierProvider extends BiomeProvider {
 
-    private static final Set<Biome> List = ImmutableSet.of(ModBiome.FRONTIER.get());
-
     protected FrontierProvider() {
         super(List);
     }
+
+    private static final Set<Biome> List = ImmutableSet.of(ModBiome.FRONTIER.get());
 
     @Nonnull
     @Override

@@ -27,8 +27,9 @@ public class TowerStructure extends Structure<NoFeatureConfig> {
 
     @Override
     public boolean canBeGenerated(@Nonnull BiomeManager biomeManagerIn, @Nonnull ChunkGenerator<?> generatorIn, @Nonnull Random randIn, int chunkX, int chunkZ, @Nonnull Biome biomeIn) {
-        ChunkPos pos = this.getStartPositionForPosition(generatorIn, randIn, chunkX, chunkZ, 0, 0);
-        if (chunkX == pos.x && chunkZ == pos.z) {
+        ChunkPos pos = this.getStartPositionForPosition(generatorIn,randIn,chunkX,chunkZ,0,0);
+        if(chunkX == pos.x && chunkZ == pos.z)
+        {
             return generatorIn.hasStructure(biomeIn, this);
         }
         return false;
@@ -45,7 +46,6 @@ public class TowerStructure extends Structure<NoFeatureConfig> {
     public String getStructureName() {
         return Base.MOD_ID + ":tower";
     }
-
     //depreciated
     @Override
     public int getSize() {
@@ -69,14 +69,15 @@ public class TowerStructure extends Structure<NoFeatureConfig> {
         validChunkZ = validChunkZ * maxDistance;
         validChunkX = validChunkX + random.nextInt(maxDistance - minDistance);
         validChunkZ = validChunkZ + random.nextInt(maxDistance - minDistance);
-        return new ChunkPos(validChunkX, validChunkZ);
+        return new ChunkPos(validChunkX,validChunkZ);
     }
 
     protected int getSeedModifier() {
         return 234592323;
     }
 
-    public static class Start extends StructureStart {
+    public static class Start extends StructureStart
+    {
 
         public Start(Structure<?> structure, int chunkX, int chunkZ, MutableBoundingBox boundingBox, int reference, long seed) {
             super(structure, chunkX, chunkZ, boundingBox, reference, seed);
@@ -86,12 +87,12 @@ public class TowerStructure extends Structure<NoFeatureConfig> {
         public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManagerIn, int chunkX, int chunkZ, @Nonnull Biome biomeIn) {
             Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
 
-            int x = (chunkX << 4) + 7;
-            int z = (chunkZ << 4) + 7;
-            int y = generator.getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG);
-            BlockPos pos = new BlockPos(x, y, z);
+            int x = (chunkX << 4)+7;
+            int z = (chunkZ << 4)+7;
+            int y = generator.getHeight(x,z, Heightmap.Type.WORLD_SURFACE_WG);
+            BlockPos pos = new BlockPos(x,y,z);
 
-            TowerParts.Start(templateManagerIn, pos, rotation, this.components, this.rand);
+            TowerParts.Start(templateManagerIn,pos,rotation,this.components,this.rand);
             this.recalculateStructureSize();
             Base.Log.info("a tower has spawned at: " + pos);
 

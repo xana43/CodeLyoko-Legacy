@@ -44,6 +44,20 @@ public class FluorideInfuser extends Block {
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(INFUSING, false));
 
 
+
+    }
+
+    @Nonnull
+    @Override
+    public ActionResultType onBlockActivated(@Nonnull BlockState state, World worldIn, @Nonnull BlockPos pos,
+                                             @Nonnull PlayerEntity player, @Nonnull Hand handIn, @Nonnull BlockRayTraceResult hit) {
+        if (!worldIn.isRemote) {
+            final TileEntity tileEntity = worldIn.getTileEntity(pos);
+            if (tileEntity instanceof InfusingChamberTileEntity) {
+                NetworkHooks.openGui((ServerPlayerEntity) player, (InfusingChamberTileEntity) tileEntity, pos);
+            }
+        }
+        return ActionResultType.SUCCESS;
     }
 
     public static void setState(boolean act, World worldIn, BlockPos pos) {
@@ -62,19 +76,6 @@ public class FluorideInfuser extends Block {
         }
     }
 
-    @Nonnull
-    @Override
-    public ActionResultType onBlockActivated(@Nonnull BlockState state, World worldIn, @Nonnull BlockPos pos,
-                                             @Nonnull PlayerEntity player, @Nonnull Hand handIn, @Nonnull BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            final TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity instanceof InfusingChamberTileEntity) {
-                NetworkHooks.openGui((ServerPlayerEntity) player, (InfusingChamberTileEntity) tileEntity, pos);
-            }
-        }
-        return ActionResultType.SUCCESS;
-    }
-
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
@@ -90,7 +91,7 @@ public class FluorideInfuser extends Block {
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder.add(DirectionProperty.create("facing", Direction.Plane.HORIZONTAL))
-                .add(INFUSING));
+        .add(INFUSING));
     }
 
     @Nullable

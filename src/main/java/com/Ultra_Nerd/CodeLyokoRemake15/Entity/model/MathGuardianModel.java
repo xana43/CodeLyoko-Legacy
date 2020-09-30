@@ -20,7 +20,7 @@ public class MathGuardianModel extends EntityModel<GuardianEntity> {
             for (float z = -32.F; z <= 32.F; z++) {
                 //if (Math.pow(x, 2.F) + Math.pow(y - 32F, 2F) + Math.pow(z, 2.F) - Math.pow(32.F, 2.F) == 0F)
                 float y = (float) Math.sqrt(Math.pow(32, 2) - Math.pow(z, 2) - Math.pow(x, 2));
-                guardian.setTextureOffset(0, 0).addBox(x, y - 32, z, 1, -2 * y, 1, false);
+                guardian.setTextureOffset(0, 0).addBox(x, y - 32, z, 1, -2*y, 1, false);
                 //guardian.setTextureOffset(0, 0).addBox(x,  -y, z, 1, y, 1, false);
 
             }

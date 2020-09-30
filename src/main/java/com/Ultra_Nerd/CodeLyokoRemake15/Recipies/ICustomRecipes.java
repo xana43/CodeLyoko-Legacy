@@ -17,12 +17,14 @@ public interface ICustomRecipes extends IRecipe<RecipeWrapper> {
 
     @Nonnull
     @Override
-    default IRecipeType<?> getType() {
+    default IRecipeType<?> getType()
+    {
         return Registry.RECIPE_TYPE.getValue(RECIPE_TYPE).get();
     }
 
     @Override
-    default boolean canFit(int width, int height) {
+    default boolean canFit(int width, int height)
+    {
         return false;
     }
 

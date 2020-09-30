@@ -38,16 +38,17 @@ public class StoryBook extends WrittenBookItem {
     @Nonnull
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nonnull PlayerEntity playerIn, @Nonnull Hand handIn) {
-        if (!worldIn.isRemote) {
-            Minecraft.getInstance().displayGuiScreen(new StoryBookGUI());
-        }
+       if(!worldIn.isRemote) {
+           Minecraft.getInstance().displayGuiScreen(new StoryBookGUI());
+       }
 
 
-        ItemStack stack = playerIn.getHeldItem(handIn);
-        playerIn.openBook(stack, handIn);
+       ItemStack stack = playerIn.getHeldItem(handIn);
+       playerIn.openBook(stack,handIn);
         playerIn.sendMessage(new StringTextComponent("doesn't work properly yet"));
-        return new ActionResult<>(ActionResultType.SUCCESS, playerIn.getHeldItem(handIn));
+        return new ActionResult<>(ActionResultType.SUCCESS,playerIn.getHeldItem(handIn));
     }
+
 
 
     @Override

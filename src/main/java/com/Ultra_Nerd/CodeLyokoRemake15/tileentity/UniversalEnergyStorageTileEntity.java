@@ -15,13 +15,15 @@ import javax.annotation.Nullable;
 
 
 public class UniversalEnergyStorageTileEntity extends TileEntity {
-    private final CapabilityEnergy energy = new CapabilityEnergy();
-    private final EG store = new EG(90000);
-    public int UNIRF = store.getEnergyStored();
-    private String name;
     public UniversalEnergyStorageTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
+    private final CapabilityEnergy energy = new CapabilityEnergy();
+
+    private final EG store = new EG(90000);
+    public int UNIRF = store.getEnergyStored();
+    private String name;
+
 
     @Override
     public void updateContainingBlockInfo() {
@@ -32,17 +34,21 @@ public class UniversalEnergyStorageTileEntity extends TileEntity {
     }
 
 
+
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityEnergy.ENERGY) return LazyOptional.of(() -> (T) this.energy);
-        return super.getCapability(cap, side);
+        if(cap == CapabilityEnergy.ENERGY) return LazyOptional.of(() -> (T)this.energy);
+            return super.getCapability(cap,side);
 
     }
 
 
-    @Nonnull
-    @Override
+
+
+
+	@Nonnull
+	@Override
     public CompoundNBT write(@Nonnull CompoundNBT compound) {
         // TODO Auto-generated method stub
         super.write(compound);

@@ -4,9 +4,10 @@ import net.minecraft.world.biome.Biome;
 
 public class LyokoOcean extends Biome {
 
-    public LyokoOcean(Builder biomeBuilder) {
-        super(biomeBuilder);
-    }
+	public LyokoOcean(Builder biomeBuilder) {
+		super(biomeBuilder);
+	}
 
-
+	
+	
 }

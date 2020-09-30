@@ -16,13 +16,13 @@ import javax.annotation.Nullable;
 public class OceanDimension extends Dimension {
 
     public OceanDimension(World world, DimensionType type) {
-        super(world, type, 0);
+       super(world,type,0);
     }
 
     @Nonnull
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
-        return new DigitalOceanGenerator(world, new OceanProvider(), new OceanGenSettings());
+        return new DigitalOceanGenerator(world,new OceanProvider(),new OceanGenSettings());
     }
 
     @Nullable
@@ -50,7 +50,7 @@ public class OceanDimension extends Dimension {
     @Nonnull
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
-        return new Vec3d(0, 0.2, 1);
+        return new Vec3d(0,0.2,1);
     }
 
     @Override

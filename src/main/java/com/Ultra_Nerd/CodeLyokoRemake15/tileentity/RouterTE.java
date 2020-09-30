@@ -9,8 +9,8 @@ public class RouterTE extends TileEntity implements ITickableTileEntity {
     public RouterTE(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
-
-    public RouterTE() {
+    public RouterTE()
+    {
         this(ModTileEntities.ROUTER_TILE_ENTITY.get());
     }
 

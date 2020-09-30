@@ -13,35 +13,36 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-public enum LyokoArmorMaterial implements IArmorMaterial {
+public enum  LyokoArmorMaterial implements IArmorMaterial {
 
 
-    WARRIOR(Base.MOD_ID + ":william", 33, new byte[]{15, 19, 20, 15}, 420, ModSounds.LAZY_WARRIOR.get(), 10F, () -> {
+
+    WARRIOR(Base.MOD_ID + ":william",33 , new byte[]{15,19,20,15}, 420 , ModSounds.LAZY_WARRIOR.get(), 10F, () -> {
         return Ingredient.fromItems(ModItems.PETABYTE.get());
     }),
-    BLANKHELM(Base.MOD_ID + ":blank", 5, new byte[]{15, 19, 20, 15}, 0, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 10F, () -> {
+    BLANKHELM(Base.MOD_ID + ":blank",5 , new byte[]{15,19,20,15}, 0 , SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 10F, () -> {
         return Ingredient.fromItems(ModItems.PETABYTE.get());
     }),
-    FELNINE(Base.MOD_ID + ":odd", 25, new byte[]{4, 7, 9, 4}, 420, ModSounds.LAZY_FELINE.get(), 0F, () -> {
+    FELNINE(Base.MOD_ID + ":odd",25 , new byte[]{4,7,9,4}, 420 , ModSounds.LAZY_FELINE.get(), 0F, () -> {
         return Ingredient.fromItems(ModItems.GIGABYTE.get());
     }),
-    NINJA(Base.MOD_ID + ":yumi", 24, new byte[]{1, 4, 7, 2}, 420, ModSounds.LAZY_NINJA.get(), 0F, () -> {
+    NINJA(Base.MOD_ID + ":yumi",24 , new byte[]{1,4,7,2}, 420 , ModSounds.LAZY_NINJA.get(), 0F, () -> {
         return Ingredient.fromItems(ModItems.MEGABYTE.get());
     }),
-    SAMURAI(Base.MOD_ID + ":ulrich", 30, new byte[]{3, 6, 8, 3}, 420, ModSounds.LAZY_SAMURAI.get(), 10F, () -> {
+    SAMURAI(Base.MOD_ID + ":ulrich",30 , new byte[]{3,6,8,3}, 420 , ModSounds.LAZY_SAMURAI.get(), 10F, () -> {
         return Ingredient.fromItems(ModItems.GIGABYTE.get());
     }),
-    GUARDIAN(Base.MOD_ID + ":aelita", 23, new byte[]{5, 8, 10, 5}, 420, ModSounds.LAZY_GUARDIAN.get(), 10F, () -> {
+    GUARDIAN(Base.MOD_ID + ":aelita",23 , new byte[]{5,8,10,5}, 420 , ModSounds.LAZY_GUARDIAN.get(), 10F, () -> {
         return Ingredient.fromItems(ModItems.TERABYTE.get());
     }),
-    ARCHER(Base.MOD_ID + ":jeremy", 15, new byte[]{2, 4, 5, 2}, 420, ModSounds.LAZY_ARCHER.get(), 5, () -> {
+    ARCHER(Base.MOD_ID + ":jeremy",15,new byte[]{2,4,5,2},420, ModSounds.LAZY_ARCHER.get(),5 , () -> {
         return Ingredient.fromItems(ModItems.GIGABIT.get());
     }),
-    LINKER(Base.MOD_ID + ":linker", 10, new byte[]{1, 3, 4, 1}, 9000, null, 4, () -> {
+    LINKER(Base.MOD_ID + ":linker",10,new byte[]{1,3,4,1},9000,null,4,() -> {
         return Ingredient.fromItems(ModItems.MOLTEN_POLYCARBONATE_CONCENTRATE.get());
     });
 
-    private static final byte[] MAX_DAMAGE_ARRAY = new byte[]{16, 16, 16, 16};
+    private static final byte[] MAX_DAMAGE_ARRAY = new byte[] {16,16,16,16};
     private final String name;
     private final int maxDamageFactor;
     private final byte[] damageReduction;
@@ -51,7 +52,8 @@ public enum LyokoArmorMaterial implements IArmorMaterial {
     private final LazyValue<Ingredient> redigitizeMaterial;
 
     LyokoArmorMaterial(String nameIn, int maxDamageFactor, byte[] damageReduction, int enchant, SoundEvent soundsIn,
-                       float toughnessIn, Supplier<Ingredient> redigitizeMaterialIn) {
+                       float toughnessIn, Supplier<Ingredient> redigitizeMaterialIn)
+    {
         this.name = nameIn;
         this.damageReduction = damageReduction;
         this.enchant = enchant;

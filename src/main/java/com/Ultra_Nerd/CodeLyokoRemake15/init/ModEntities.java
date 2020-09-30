@@ -30,27 +30,27 @@ public class ModEntities {
                             new ResourceLocation(Base.MOD_ID, "hornet").toString()
                     ));
     public static final RegistryObject<EntityType<MegaTankEntity>> MEGATANK = Entities.register("megatank", () ->
-            EntityType.Builder.<MegaTankEntity>create(MegaTankEntity::new, EntityClassification.MONSTER).size(3, 3)
-                    .build(new ResourceLocation(Base.MOD_ID, "megatank").toString()));
-    public static final RegistryObject<EntityType<MantaEntity>> MANTA = Entities.register("manta", () ->
-            EntityType.Builder.create(MantaEntity::new, EntityClassification.MONSTER).size(3, 3)
-                    .build(new ResourceLocation(Base.MOD_ID, "manta").toString()));
-    public static final RegistryObject<EntityType<EntitySkid>> SKID = Entities.register("skidbladnir", () ->
-            EntityType.Builder.<EntitySkid>create(EntitySkid::new, EntityClassification.AMBIENT).size(1, 1)
-                    .build(new ResourceLocation(Base.MOD_ID, "skid").toString()));
-    public static final RegistryObject<EntityType<KankrelatEntity>> KANKRELAT = Entities.register("kankrelat", () ->
-            EntityType.Builder.create(KankrelatEntity::new, EntityClassification.MONSTER).size(1, 1)
-                    .build(new ResourceLocation(Base.MOD_ID, "kankrelat").toString()));
+            EntityType.Builder.<MegaTankEntity>create(MegaTankEntity::new,EntityClassification.MONSTER).size(3,3)
+    .build(new ResourceLocation(Base.MOD_ID,"megatank").toString()));
+    public static final RegistryObject<EntityType<MantaEntity>> MANTA = Entities.register("manta",() ->
+            EntityType.Builder.<MantaEntity>create(MantaEntity::new,EntityClassification.MONSTER).size(3,3)
+    .build(new ResourceLocation(Base.MOD_ID,"manta").toString()));
+    public static final RegistryObject<EntityType<EntitySkid>> SKID = Entities.register("skidbladnir",() ->
+            EntityType.Builder.<EntitySkid>create(EntitySkid::new,EntityClassification.AMBIENT).size(1,1)
+    .build(new ResourceLocation(Base.MOD_ID,"skid").toString()));
+    public static final RegistryObject<EntityType<KankrelatEntity>> KANKRELAT = Entities.register("kankrelat",() ->
+            EntityType.Builder.<KankrelatEntity>create(KankrelatEntity::new,EntityClassification.MONSTER).size(1,1)
+    .build(new ResourceLocation(Base.MOD_ID,"kankrelat").toString()));
     public static final RegistryObject<EntityType<HoverboardEntity>> HOVERBOARD = Entities.register("hoverboard", () ->
-            EntityType.Builder.create(HoverboardEntity::new, EntityClassification.MISC).size(1, 1)
-                    .build(new ResourceLocation(Base.MOD_ID, "hoverboard").toString()));
-    public static final RegistryObject<EntityType<OverboardEntity>> OVERBOARD = Entities.register("overboard", () ->
-            EntityType.Builder.create(OverboardEntity::new, EntityClassification.MISC).size(2, 1)
-                    .build(new ResourceLocation(Base.MOD_ID, "overboard").toString()));
-    public static final RegistryObject<EntityType<OverbikeEntity>> OVERBIKE = Entities.register("overbike", () ->
-            EntityType.Builder.create(OverbikeEntity::new, EntityClassification.MISC).size(2, 1)
-                    .build(new ResourceLocation(Base.MOD_ID, "overbike").toString()));
-    public static final RegistryObject<EntityType<GuardianEntity>> GUARDIAN = Entities.register("guardian", () ->
-            EntityType.Builder.create(GuardianEntity::new, EntityClassification.MONSTER).size(8, 8)
-                    .build(new ResourceLocation(Base.MOD_ID, "guardian").toString()));
+            EntityType.Builder.<HoverboardEntity>create(HoverboardEntity::new,EntityClassification.MISC).size(1,1)
+    .build(new ResourceLocation(Base.MOD_ID,"hoverboard").toString()));
+    public static final RegistryObject<EntityType<OverboardEntity>> OVERBOARD = Entities.register("overboard",() ->
+            EntityType.Builder.<OverboardEntity>create(OverboardEntity::new,EntityClassification.MISC).size(2,1)
+    .build(new ResourceLocation(Base.MOD_ID,"overboard").toString()));
+    public static final RegistryObject<EntityType<OverbikeEntity>> OVERBIKE = Entities.register("overbike",() ->
+            EntityType.Builder.<OverbikeEntity>create(OverbikeEntity::new,EntityClassification.MISC).size(2,1)
+                    .build(new ResourceLocation(Base.MOD_ID,"overbike").toString()));
+    public static final RegistryObject<EntityType<GuardianEntity>> GUARDIAN = Entities.register("guardian",() ->
+            EntityType.Builder.<GuardianEntity>create(GuardianEntity::new,EntityClassification.MONSTER).size(8,8)
+    .build(new ResourceLocation(Base.MOD_ID,"guardian").toString()));
 }

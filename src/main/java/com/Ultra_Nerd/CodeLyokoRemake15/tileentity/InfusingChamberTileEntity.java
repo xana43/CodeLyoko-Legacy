@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FluorideInfuser;
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
@@ -53,35 +53,6 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
         super(tileEntityTypeIn);
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public static boolean isBurning(InfusingChamberTileEntity te) {
-        return te.getField(0) > 0;
-    }
-
-    public static int getItemBurnTime(ItemStack fuel) {
-        if (!fuel.isEmpty()) {
-            Item item = fuel.getItem();
-
-            if (item instanceof BlockItem && Block.getBlockFromItem(item) != Blocks.AIR) {
-                Block block = Block.getBlockFromItem(item);
-
-
-                if (block == ModBlocks.FLUORITE_BLOCK.get()) return 40000;
-            }
-
-
-            if (item == ModItems.FLUORIDE.get()) return 20000;
-
-
-        }
-        return 0;
-    }
-
-    public static boolean isItemFuel(ItemStack fuel) {
-
-        return getItemBurnTime(fuel) > 0;
-    }
-
     public boolean hasCapability(Capability<?> capability, Direction facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
     }
@@ -116,7 +87,7 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
         this.burnTime = compound.getInt("BurnTime");
         this.cookTime = compound.getInt("CookTime");
         this.totalCookTime = compound.getInt("CookTimeTotal");
-        this.currentBurnTime = getItemBurnTime(this.handler.getStackInSlot(2));
+        this.currentBurnTime = getItemBurnTime((ItemStack) this.handler.getStackInSlot(2));
 
         if (compound.contains("CustomName", 8)) this.setCustomName(compound.getString("CustomName"));
     }
@@ -137,6 +108,12 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
     public boolean isBurning() {
         return this.burnTime > 0;
     }
+
+    @OnlyIn(Dist.CLIENT)
+    public static boolean isBurning(InfusingChamberTileEntity te) {
+        return te.getField(0) > 0;
+    }
+
 
     @Override
     public void tick() {
@@ -194,19 +171,43 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
     }
 
     private boolean canSmelt() {
-        if (this.handler.getStackInSlot(0).isEmpty() || this.handler.getStackInSlot(1).isEmpty())
+        if (((ItemStack) this.handler.getStackInSlot(0)).isEmpty() || ((ItemStack) this.handler.getStackInSlot(1)).isEmpty())
             return false;
         else {
-            ItemStack result = FlourideInfusionResult.getInstance().getInfusingResult(this.handler.getStackInSlot(0), this.handler.getStackInSlot(1));
+            ItemStack result = FlourideInfusionResult.getInstance().getInfusingResult((ItemStack) this.handler.getStackInSlot(0), (ItemStack) this.handler.getStackInSlot(1));
             if (result.isEmpty()) return false;
             else {
-                ItemStack output = this.handler.getStackInSlot(3);
+                ItemStack output = (ItemStack) this.handler.getStackInSlot(3);
                 if (output.isEmpty()) return true;
                 if (!output.isItemEqual(result)) return false;
                 int res = output.getCount() + result.getCount();
                 return res <= 64 && res <= output.getMaxStackSize();
             }
         }
+    }
+
+    public static int getItemBurnTime(ItemStack fuel) {
+        if (!fuel.isEmpty()) {
+            Item item = fuel.getItem();
+
+            if (item instanceof BlockItem && Block.getBlockFromItem(item) != Blocks.AIR) {
+                Block block = Block.getBlockFromItem(item);
+
+
+                if (block == ModBlocks.FLUORITE_BLOCK.get()) return 40000;
+            }
+
+
+            if (item == ModItems.FLUORIDE.get()) return 20000;
+
+
+        }
+        return 0;
+    }
+
+    public static boolean isItemFuel(ItemStack fuel) {
+
+        return getItemBurnTime(fuel) > 0;
     }
 
     public boolean isUsableByPlayer(PlayerEntity player) {

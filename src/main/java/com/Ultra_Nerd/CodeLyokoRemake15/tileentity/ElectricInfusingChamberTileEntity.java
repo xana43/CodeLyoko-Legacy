@@ -27,12 +27,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ElectricInfusingChamberTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
-    private final EG internal = new EG(90000);
     public ItemStackHandler handler = new ItemStackHandler(3);
-    public int ENER = internal.getEnergyStored();
+    private final EG internal = new EG(90000);
     private String customName;
     private ItemStack smelting = ItemStack.EMPTY;
+
+
     private int cookTime;
+    public int ENER = internal.getEnergyStored();
 
     public ElectricInfusingChamberTileEntity() {
         this(ModTileEntities.ELECTRIC_INFUSING_CHAMBER_TILE_ENTITY.get());
@@ -45,7 +47,11 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
     public boolean hasCapability(Capability<?> capability, Direction facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return true;
-        } else return capability == CapabilityEnergy.ENERGY;
+        } else if (capability == CapabilityEnergy.ENERGY) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Nonnull

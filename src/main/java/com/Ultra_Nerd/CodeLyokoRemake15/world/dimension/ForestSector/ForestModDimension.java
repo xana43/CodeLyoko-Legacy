@@ -9,9 +9,9 @@ import java.util.function.BiFunction;
 
 public class ForestModDimension extends ModDimension {
 
-    @Override
-    public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
-        return ForestDimension::new;
-    }
+	@Override
+	public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
+		return ForestDimension::new;
+	}
 
 }

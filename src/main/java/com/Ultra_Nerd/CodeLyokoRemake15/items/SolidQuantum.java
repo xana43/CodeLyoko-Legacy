@@ -17,27 +17,28 @@ public class SolidQuantum extends Item {
     }
 
 
+
     @Override
     public boolean isDamageable() {
         return false;
     }
+@SubscribeEvent
+public void ItemInvulnerable(ItemExpireEvent event)
+{if(event.getEntityItem().getItem().getItem() == this)
+    {
 
-    @SubscribeEvent
-    public void ItemInvulnerable(ItemExpireEvent event) {
-        if (event.getEntityItem().getItem().getItem() == this) {
+        event.getEntityItem().isInvulnerableTo(DamageSource.LAVA);
 
-            event.getEntityItem().isInvulnerableTo(DamageSource.LAVA);
-
-        }
     }
-
+}
     @SubscribeEvent
-    public void ItemInvulnerable2(ItemEvent event) {
-        if (event.getEntityItem().getItem().getItem() == this) {
+    public void ItemInvulnerable2(ItemEvent event)
+    {if(event.getEntityItem().getItem().getItem() == this)
+    {
 
-            event.getEntityItem().isInvulnerableTo(DamageSource.LAVA);
+        event.getEntityItem().isInvulnerableTo(DamageSource.LAVA);
 
-        }
+    }
     }
 
 }

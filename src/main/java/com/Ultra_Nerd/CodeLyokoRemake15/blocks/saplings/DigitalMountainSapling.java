@@ -24,7 +24,7 @@ import java.util.function.Supplier;
 public class DigitalMountainSapling extends BushBlock implements IGrowable {
 
     public static final IntegerProperty PROGRESS_MOUNTAIN = BlockStateProperties.STAGE_0_1;
-    protected static final VoxelShape shape = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D);
+    protected static final VoxelShape shape = Block.makeCuboidShape(2.0D,0.0D,2.0D,14.0D,12.0D,14.0D);
     private final Supplier<Tree> tree;
 
     public DigitalMountainSapling(Supplier<Tree> TreeStruct, Properties properties) {
@@ -39,13 +39,16 @@ public class DigitalMountainSapling extends BushBlock implements IGrowable {
     }
 
 
+
     @Override
     public void tick(@Nonnull BlockState state, @Nonnull ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
         super.tick(state, worldIn, pos, rand);
-        if (!worldIn.isAreaLoaded(pos, 1)) {
+        if(!worldIn.isAreaLoaded(pos,1))
+        {
             return;
         }
-        if (rand.nextInt(9) == 0) {
+        if(rand.nextInt(9) == 0)
+        {
             this.grow(worldIn, pos, state, rand);
         }
     }
@@ -56,17 +59,23 @@ public class DigitalMountainSapling extends BushBlock implements IGrowable {
     }
 
 
-    public void grow(ServerWorld world, BlockPos pos, BlockState state, Random rand) {
-        if (state.get(PROGRESS_MOUNTAIN) == 0) {
-            world.setBlockState(pos, state.cycle(PROGRESS_MOUNTAIN), 4);
+    public void grow(ServerWorld world, BlockPos pos, BlockState state, Random rand)
+    {
+        if(state.get(PROGRESS_MOUNTAIN) == 0)
+        {
+            world.setBlockState(pos,state.cycle(PROGRESS_MOUNTAIN),4);
 
-        } else {
-            if (!ForgeEventFactory.saplingGrowTree(world, rand, pos)) {
+        }
+        else
+        {
+            if(!ForgeEventFactory.saplingGrowTree(world,rand,pos))
+            {
                 return;
             }
-            this.tree.get().place(world, world.getChunkProvider().getChunkGenerator(), pos, state, rand);
+            this.tree.get().place(world,world.getChunkProvider().getChunkGenerator(),pos,state,rand);
         }
     }
+
 
 
     @Override
@@ -81,7 +90,7 @@ public class DigitalMountainSapling extends BushBlock implements IGrowable {
 
     @Override
     public void grow(@Nonnull ServerWorld worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull BlockState state) {
-        this.grow(worldIn, pos, state, rand);
+        this.grow(worldIn,pos,state,rand);
     }
 
     @Override

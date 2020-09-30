@@ -3,10 +3,11 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
-public class ComputerReactorTileEntity extends TileEntity {
-    public ComputerReactorTileEntity(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
-    }
+public class ComputerReactorTileEntity extends TileEntity
+{
+	public ComputerReactorTileEntity(TileEntityType<?> tileEntityTypeIn) {
+		super(tileEntityTypeIn);
+	}
 	/*
 	public ItemStackHandler handle = new ItemStackHandler(1);
 	private EG store = new EG(1000000000);

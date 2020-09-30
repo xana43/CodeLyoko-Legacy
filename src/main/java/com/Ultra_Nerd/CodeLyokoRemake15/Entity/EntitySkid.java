@@ -11,27 +11,27 @@ import javax.annotation.Nonnull;
 public class EntitySkid extends BoatEntity {
 
 
-    public EntitySkid(World worldIn, double x, double y, double z) {
-        super(worldIn, x, y, z);
+	public EntitySkid(World worldIn, double x, double y, double z) {
+		super(worldIn, x, y, z);
 
-    }
+	}
 
-    public EntitySkid(EntityType<EntitySkid> entitySkidEntityType, World world) {
-        super(entitySkidEntityType, world);
-    }
+	public EntitySkid(EntityType<EntitySkid> entitySkidEntityType, World world) {
+		super(entitySkidEntityType,world);
+	}
+	@Nonnull
+	@Override
+	public IPacket<?> createSpawnPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
 
-    @Nonnull
-    @Override
-    public IPacket<?> createSpawnPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
 
+	@Override
+	public void setDamageTaken(float damageTaken) {
 
-    @Override
-    public void setDamageTaken(float damageTaken) {
-
-        super.setDamageTaken(0);
-    }
-
+		super.setDamageTaken(0);
+	}
+	
+	
 
 }

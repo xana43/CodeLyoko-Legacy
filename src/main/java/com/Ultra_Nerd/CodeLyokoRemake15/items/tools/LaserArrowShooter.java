@@ -29,11 +29,6 @@ public class LaserArrowShooter extends BowItem {
     private byte Count = 100;
 
 
-    public LaserArrowShooter(Properties builder) {
-        super(builder);
-        // TODO Auto-generated constructor stub
-    }
-
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         if (!worldIn.isRemote()) {
@@ -47,6 +42,12 @@ public class LaserArrowShooter extends BowItem {
         }
     }
 
+    public LaserArrowShooter(Properties builder) {
+        super(builder);
+        // TODO Auto-generated constructor stub
+    }
+
+
     private boolean checkDim(PlayerEntity player) {
         return player.world.dimension instanceof ForestDimension || player.world.dimension instanceof IceDimension ||
                 player.world.dimension instanceof DesertDimension || player.world.dimension instanceof MountainDimension
@@ -54,8 +55,8 @@ public class LaserArrowShooter extends BowItem {
                 player.world.dimension instanceof VolcanoDimension;
     }
 
-    @Nonnull
-    @Override
+	@Nonnull
+	@Override
     public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, PlayerEntity playerIn, @Nonnull Hand handIn) {
         ItemStack item = playerIn.getHeldItem(handIn);
         Count = 100;

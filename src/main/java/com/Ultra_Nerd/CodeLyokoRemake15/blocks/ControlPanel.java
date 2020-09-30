@@ -257,13 +257,13 @@ public class ControlPanel extends Block {
     public ActionResultType onBlockActivated(@Nonnull BlockState state, World worldIn, @Nonnull BlockPos pos, @Nonnull PlayerEntity player,
                                              @Nonnull Hand handIn, @Nonnull BlockRayTraceResult result) {
         if (!worldIn.isRemote) {
-            if (this.getExtendedState(state, worldIn, pos).get(ScreenOn)) {
+            if(this.getExtendedState(state,worldIn,pos).get(ScreenOn)) {
                 TileEntity panel = worldIn.getTileEntity(pos);
                 if (panel instanceof ComputerControlPanelTileEntity) {
                     NetworkHooks.openGui((ServerPlayerEntity) player, (ComputerControlPanelTileEntity) panel, pos);
                     return ActionResultType.SUCCESS;
                 }
-            }
+           }
         }
         return ActionResultType.FAIL;
     }

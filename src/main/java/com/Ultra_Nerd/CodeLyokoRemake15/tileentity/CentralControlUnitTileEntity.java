@@ -10,7 +10,6 @@ public class CentralControlUnitTileEntity extends TileEntity implements ITickabl
     public CentralControlUnitTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
-
     public CentralControlUnitTileEntity() {
         this(ModTileEntities.CENTRAL_CONTROL_UNIT_TILE_ENTITY.get());
     }

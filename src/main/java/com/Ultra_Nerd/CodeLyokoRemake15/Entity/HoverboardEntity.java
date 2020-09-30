@@ -20,19 +20,18 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class HoverboardEntity extends Entity implements IForgeEntity {
-    private final AxisAlignedBB axisAlignedBB = this.getBoundingBox();
     private float Vel = 0;
     private float WDown = 0;
     private float QDown = 0;
     private float ZDown = 0;
-
+    private final AxisAlignedBB axisAlignedBB = this.getBoundingBox();
     public HoverboardEntity(EntityType<? extends HoverboardEntity> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
-        this.setBoundingBox(new AxisAlignedBB(axisAlignedBB.minX, axisAlignedBB.minY, axisAlignedBB.minZ, axisAlignedBB.maxX, axisAlignedBB.maxY, axisAlignedBB.maxZ));
+        this.setBoundingBox(new AxisAlignedBB(axisAlignedBB.minX,axisAlignedBB.minY,axisAlignedBB.minZ,axisAlignedBB.maxX,axisAlignedBB.maxY,axisAlignedBB.maxZ));
 
         recalculateSize();
     }
-
+    
     @Override
     public boolean canPassengerSteer() {
         return true;
@@ -59,66 +58,84 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
         super.tick();
 
 
-        if (this.isBeingRidden()) {
-            if (this.getRidingEntity() != null) {
+        if(this.isBeingRidden()) {
+            if(this.getRidingEntity() != null) {
                 assert Minecraft.getInstance().player != null;
                 setRotation(Minecraft.getInstance().player.rotationYaw, 0);
             }
-            if (KeyBoardAccess.Q()) {
+            if(KeyBoardAccess.Q())
+            {
                 QDown += 0.0000001f;
 
-                this.move(MoverType.PLAYER, new Vec3d(0, this.getUpVector(10).y + QDown, 0));
-            } else if (KeyBoardAccess.Z()) {
+                this.move(MoverType.PLAYER, new Vec3d(0,this.getUpVector(10).y + QDown,0));
+            }
+            else if(KeyBoardAccess.Z())
+            {
 
-                ZDown += 0.0000001f;
-                this.move(MoverType.PLAYER, new Vec3d(0, -(this.getUpVector(10).getY() + ZDown), 0));
+                    ZDown += 0.0000001f;
+                    this.move(MoverType.PLAYER, new Vec3d(0,-(this.getUpVector(10).getY() + ZDown),0));
 
             }
-            if (!KeyBoardAccess.Z()) {
+            if(!KeyBoardAccess.Z())
+            {
                 ZDown = 0;
             }
-            if (!KeyBoardAccess.Q()) {
+            if(!KeyBoardAccess.Q())
+            {
                 QDown = 0;
             }
 
 
-            // rotateTowards(this.rider.cameraYaw,this.rider.rotationPitch);
-            if (KeyBoardAccess.w()) {
+           // rotateTowards(this.rider.cameraYaw,this.rider.rotationPitch);
+            if(KeyBoardAccess.w()) {
                 WDown += 0.00001f;
-                if (this.getRidingEntity() != null) {
+                if(this.getRidingEntity() != null) {
                     if (Vel < 5 && !this.getRidingEntity().isSprinting()) {
                         Vel += Math.pow(0.0001f, WDown);
 
-                    } else if (Vel < 7 && this.getRidingEntity().isSprinting()) {
+                    }
+                    else if(Vel < 7 && this.getRidingEntity().isSprinting())
+                    {
                         Vel += Math.pow(0.001f, WDown);
-                    } else if (Vel >= 5) {
+                    }
+                    else if (Vel >= 5) {
                         Vel = 5;
                     }
                 }
 
-                this.move(MoverType.PLAYER, new Vec3d(this.getForward().x, this.getForward().y, this.getForward().z + Vel));
-            } else if (Vel != 0 && (!KeyBoardAccess.w() || !KeyBoardAccess.S())) {
-                if (Vel > 0) {
+                this.move(MoverType.PLAYER, new Vec3d(this.getForward().x,this.getForward().y,this.getForward().z + Vel));
+            }
+            else if(Vel != 0 && (!KeyBoardAccess.w() || !KeyBoardAccess.S()))
+            {
+                if(Vel > 0) {
                     Vel -= 0.0001f;
-                } else if (Vel < 0) {
+                }
+                else if(Vel < 0)
+                {
                     Vel += 0.0001f;
                 }
                 WDown = 0;
-                this.move(MoverType.PLAYER, new Vec3d(this.getForward().x, this.getForward().y, this.getForward().z + Vel));
+                this.move(MoverType.PLAYER, new Vec3d(this.getForward().x,this.getForward().y,this.getForward().z + Vel));
             }
-            if (KeyBoardAccess.S()) {
-                if (Vel > -3) {
-                    Vel -= Math.pow(0.0001f, WDown);
+            if(KeyBoardAccess.S())
+            {
+                if(Vel > -3)
+                {
+                    Vel -= Math.pow(0.0001f,WDown);
                 }
-                if (Vel < -3) {
+                if(Vel < -3)
+                {
                     Vel = -3;
                 }
 
             }
 
 
-        } else if (!this.isBeingRidden()) {
-            Vel = 0;
+
+        }
+        else if(!this.isBeingRidden())
+        {
+           Vel = 0;
             /*
             if(Vel != 0) {
                 Vel -= 0.5f;
@@ -126,8 +143,10 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
             */
 
 
+
         }
-    }
+        }
+
 
 
     @Override
@@ -172,7 +191,7 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
     @Override
     protected void recenterBoundingBox() {
         super.recenterBoundingBox();
-        this.setPosition(this.getPosX(), this.getPosY(), this.getPosZ());
+        this.setPosition(this.getPosX(),this.getPosY(),this.getPosZ());
     }
 
     @Nullable

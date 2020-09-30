@@ -21,12 +21,14 @@ import java.util.Random;
 
 public class TowerGUI extends ContainerScreen<TowerInterfaceContainer> {
 
-    private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/towerinterface.png");
-    //private TowerInterfaceTileEntity tileentity;
-    int x, y;
+    private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID,"textures/gui/towerinterface.png");
     private TextFieldWidget text;
     private TextFieldWidget Accepted;
     private byte I = 100;
+
+
+    //private TowerInterfaceTileEntity tileentity;
+    int x, y;
 
 
     public TowerGUI(TowerInterfaceContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
@@ -39,15 +41,6 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer> {
 
     }
 
-    @SubscribeEvent
-    public static void NoE(final GuiScreenEvent.KeyboardKeyEvent event) {
-        if (event.getKeyCode() == GLFW.GLFW_KEY_E) {
-            if (event.getGui() instanceof TowerGUI) {
-                event.setCanceled(true);
-            }
-        }
-    }
-
     @Override
     public boolean isMouseOver(double p_isMouseOver_1_, double p_isMouseOver_3_) {
         return false;
@@ -57,6 +50,7 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer> {
     public boolean changeFocus(boolean p_changeFocus_1_) {
         return false;
     }
+
 
     @Override
     public void setFocused(@Nullable IGuiEventListener p_setFocused_1_) {
@@ -75,6 +69,15 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer> {
         super.render(p_render_1_, p_render_2_, p_render_3_);
         this.text.render(p_render_1_, p_render_2_, p_render_3_);
         this.Accepted.render(p_render_1_, p_render_2_, p_render_3_);
+    }
+
+    @SubscribeEvent
+    public static void NoE(final GuiScreenEvent.KeyboardKeyEvent event) {
+        if (event.getKeyCode() == GLFW.GLFW_KEY_E) {
+            if (event.getGui() instanceof TowerGUI) {
+                event.setCanceled(true);
+            }
+        }
     }
 
     @Override

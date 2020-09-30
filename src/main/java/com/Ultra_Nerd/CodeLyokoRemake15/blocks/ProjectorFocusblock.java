@@ -47,9 +47,7 @@ public class ProjectorFocusblock extends Block {
             Block.makeCuboidShape(4, 0, 1, 12, 16, 2),
             Block.makeCuboidShape(1, 0, 3, 2, 16, 4),
             Block.makeCuboidShape(0, 0, 4, 1, 16, 12)
-    ).reduce((v1, v2) -> {
-        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-    }).get();
+    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
     public ProjectorFocusblock() {
         super(Properties.create(Material.GLASS)
@@ -90,6 +88,11 @@ public class ProjectorFocusblock extends Block {
             return BlockRenderType.MODEL;
         }
     }
+
+
+
+
+
 
 
 }

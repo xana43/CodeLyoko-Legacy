@@ -18,8 +18,8 @@ import javax.annotation.Nullable;
 
 public class Sector5Dimension extends Dimension {
 
-    public static final BlockPos SPAWN = new BlockPos(0, 128, 0);
     private static CustomCarthadgeSky carthadgeSky = null;
+    public static final BlockPos SPAWN = new BlockPos(0, 128, 0);
 
     public Sector5Dimension(World world, DimensionType type) {
         super(world, type, 0.0f);
@@ -62,6 +62,7 @@ public class Sector5Dimension extends Dimension {
     public void setWeatherRenderer(@Nonnull IRenderHandler renderer) {
         super.setWeatherRenderer(null);
     }
+
 
 
     @Override

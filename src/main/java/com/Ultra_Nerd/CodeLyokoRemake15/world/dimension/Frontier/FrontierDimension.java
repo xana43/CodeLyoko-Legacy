@@ -16,13 +16,13 @@ import javax.annotation.Nullable;
 public class FrontierDimension extends Dimension {
 
     public FrontierDimension(World world, DimensionType type) {
-        super(world, type, 0);
+       super(world,type,0);
     }
 
     @Nonnull
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
-        return new FrontierGenerator(world, new FrontierProvider(), new FrontierGenSettings());
+        return new FrontierGenerator(world,new FrontierProvider(),new FrontierGenSettings());
     }
 
     @Nullable
@@ -50,7 +50,7 @@ public class FrontierDimension extends Dimension {
     @Nonnull
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
-        return new Vec3d(1, 0.97, 0);
+        return new Vec3d(1,0.97,0);
     }
 
     @Override

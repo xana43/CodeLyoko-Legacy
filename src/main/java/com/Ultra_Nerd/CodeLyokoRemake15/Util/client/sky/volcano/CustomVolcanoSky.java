@@ -13,7 +13,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.SkyRenderHandler;
-
 @OnlyIn(Dist.CLIENT)
 public class CustomVolcanoSky implements SkyRenderHandler {
 
@@ -21,26 +20,31 @@ public class CustomVolcanoSky implements SkyRenderHandler {
     private static ResourceLocation sky1 = null;
     private static ResourceLocation sky2 = null;
     private static ResourceLocation skytop = null;
-
     public CustomVolcanoSky() {
 
-        sky1 = new ResourceLocation(Base.MOD_ID, "textures/skies/volcano/sky1.png");
-        sky2 = new ResourceLocation(Base.MOD_ID, "textures/skies/volcano/sky2.png");
-        skytop = new ResourceLocation(Base.MOD_ID, "textures/skies/volcano/dark.png");
+        sky1 = new ResourceLocation(Base.MOD_ID,"textures/skies/volcano/sky1.png");
+        sky2 = new ResourceLocation(Base.MOD_ID,"textures/skies/volcano/sky2.png");
+        skytop = new ResourceLocation(Base.MOD_ID,"textures/skies/volcano/dark.png");
     }
 
 
     @Override
     public void render(int ticks, float partialTicks, MatrixStack matrixStack, ClientWorld world, Minecraft mc) {
-        // mc.textureManager.bindTexture(texturelocation);
+       // mc.textureManager.bindTexture(texturelocation);
         mc.textureManager.bindTexture(skytop);
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuffer();
-        for (int i = 0; i < 6; ++i) {
+        for(int i = 0; i < 6; ++i) {
             matrixStack.push();
+<<<<<<< HEAD
 <<<<<<< HEAD
             if (i == 0) {
                 matrixStack.scale(10, 10, 10);
+=======
+            if(i == 0)
+            {
+                matrixStack.scale(10,10,10);
+>>>>>>> parent of a7c362f... reformatted all code using intellij's reformat tool
             }
 =======
 >>>>>>> parent of b13df97... tried to move the skybox upwards to show the texture better
@@ -60,9 +64,13 @@ public class CustomVolcanoSky implements SkyRenderHandler {
                 mc.textureManager.bindTexture(skytop);
                 matrixStack.rotate(Vector3f.XP.rotationDegrees(180.0F));
 <<<<<<< HEAD
+<<<<<<< HEAD
                 matrixStack.scale(10, 10, 10);
 =======
 >>>>>>> parent of b13df97... tried to move the skybox upwards to show the texture better
+=======
+                matrixStack.scale(10,10,10);
+>>>>>>> parent of a7c362f... reformatted all code using intellij's reformat tool
             }
 
             if (i == 4) {

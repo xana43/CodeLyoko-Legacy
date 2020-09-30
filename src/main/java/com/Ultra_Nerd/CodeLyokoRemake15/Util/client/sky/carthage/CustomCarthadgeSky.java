@@ -13,16 +13,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.SkyRenderHandler;
-
 @OnlyIn(Dist.CLIENT)
 public class CustomCarthadgeSky implements SkyRenderHandler {
 
 
     private final ResourceLocation texturelocation;
-
     public CustomCarthadgeSky() {
 
-        texturelocation = new ResourceLocation(Base.MOD_ID, "textures/skies/sector5/sector5sky.png");
+        texturelocation = new ResourceLocation(Base.MOD_ID,"textures/skies/sector5/sector5sky.png");
 
     }
 
@@ -32,7 +30,7 @@ public class CustomCarthadgeSky implements SkyRenderHandler {
         mc.textureManager.bindTexture(texturelocation);
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuffer();
-        for (int i = 0; i < 6; ++i) {
+        for(int i = 0; i < 6; ++i) {
             matrixStack.push();
             if (i == 1) {
                 matrixStack.rotate(Vector3f.XP.rotationDegrees(90.0F));

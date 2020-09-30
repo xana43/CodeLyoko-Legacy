@@ -17,13 +17,12 @@ import java.util.List;
 
 public class BlisterCopper extends Item {
     private short I = 500;
-
     public BlisterCopper(Properties properties) {
         super(properties);
     }
 
     @Override
-    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<ITextComponent> tooltip, @Nonnull ITooltipFlag flagIn) {
+    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn,@Nonnull List<ITextComponent> tooltip,@Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         tooltip.add(new StringTextComponent("this form of copper is usable, but it oxidizes quickly back to cuprous oxide, use electroplating to keep it stable"));
 
@@ -35,24 +34,25 @@ public class BlisterCopper extends Item {
     }
 
     @Override
-    public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(@Nonnull ItemStack stack,@Nonnull World worldIn,@Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
 
-        if (!worldIn.isRemote) {
-            Base.Log.debug(I);
-            if (I-- == 0) {
-                if (stack.getDamage() != 60) {
+            if(!worldIn.isRemote) {
+                Base.Log.debug(I);
+                if (I-- == 0  ) {
+                    if(stack.getDamage() != 60) {
 
-                    stack.setDamage(stack.getDamage() + 1);
+                        stack.setDamage(stack.getDamage() + 1);
 
-                    I = 500;
+                        I = 500;
+                    }
+                }
+                if(stack.getDamage() == 60)
+                {
+                    PlayerEntity playerEntity = (PlayerEntity)entityIn;
+                    playerEntity.inventory.setInventorySlotContents(itemSlot,new ItemStack(ModItems.CUPROUS_OXIDE.get()));
+
                 }
             }
-            if (stack.getDamage() == 60) {
-                PlayerEntity playerEntity = (PlayerEntity) entityIn;
-                playerEntity.inventory.setInventorySlotContents(itemSlot, new ItemStack(ModItems.CUPROUS_OXIDE.get()));
-
-            }
-        }
 
 
     }

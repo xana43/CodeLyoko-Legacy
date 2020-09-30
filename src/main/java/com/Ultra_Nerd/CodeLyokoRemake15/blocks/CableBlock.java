@@ -24,9 +24,10 @@ import java.util.Map;
 public class CableBlock extends FenceBlock {
 
     private final static Map<CableBlock, LinkedList<CableBlock>> CABLE_LISTS = new HashMap<>();
+    private CableBlock startOfCable;
+
     private final VoxelShape[] shape;
     private final VoxelShape mainShape = Block.makeCuboidShape(1, 0, 1, 15, 14, 15);
-    private CableBlock startOfCable;
 
     public CableBlock(Properties properties) {
         super(properties);
@@ -90,7 +91,7 @@ public class CableBlock extends FenceBlock {
                 for (int z = -1; z < 2; z++) {
                     BlockState surrounding = worldIn.getBlockState(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
                     if (surrounding.getBlock() instanceof CableBlock) {
-                        around = surrounding;
+                        around=surrounding;
                         if (counter < 2) {
                             counter++;
                             CABLE_LISTS.get(((CableBlock) surrounding.getBlock()).startOfCable).addLast(this);

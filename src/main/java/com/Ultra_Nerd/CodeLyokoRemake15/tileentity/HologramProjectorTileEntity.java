@@ -19,7 +19,6 @@ public class HologramProjectorTileEntity extends TileEntity implements ITickable
     //private int x, y, z;
     //boolean once = false;
     //private List<BlockState> stateList;
-    private BlockPos focus;
 
     public HologramProjectorTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
@@ -28,6 +27,9 @@ public class HologramProjectorTileEntity extends TileEntity implements ITickable
     public HologramProjectorTileEntity() {
         this(ModTileEntities.HOLOGRAM_TILE_ENTITY.get());
     }
+
+    private BlockPos focus;
+
 
     @Override
     public void tick() {

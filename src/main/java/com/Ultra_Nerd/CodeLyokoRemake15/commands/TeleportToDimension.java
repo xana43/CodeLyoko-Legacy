@@ -3,10 +3,11 @@ package com.Ultra_Nerd.CodeLyokoRemake15.commands;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.server.ServerWorld;
 
-public class TeleportToDimension extends Teleporter {
-    public TeleportToDimension(ServerWorld worldIn) {
-        super(worldIn);
-    }
+public class TeleportToDimension extends Teleporter
+{
+	public TeleportToDimension(ServerWorld worldIn) {
+		super(worldIn);
+	}
 /*
 	private final WorldServer world;
 	private double x,y,z;

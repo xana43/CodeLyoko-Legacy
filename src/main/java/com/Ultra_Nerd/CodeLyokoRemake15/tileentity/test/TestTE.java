@@ -16,17 +16,18 @@ import javax.annotation.Nullable;
 import java.util.Collection;
 
 public class TestTE extends TileEntity implements IMultiblock {
-    private final ResourceLocation ID = new ResourceLocation(Base.MOD_ID, "test");
-    private final BlockPos core = this.pos;
-
+    private final ResourceLocation ID = new ResourceLocation(Base.MOD_ID,"test");
     public TestTE(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
-        Base.registerMultiBlocks(ID, this);
+        Base.registerMultiBlocks(ID,this);
     }
-
-    public TestTE() {
+    public TestTE()
+    {
         this(ModTileEntities.TEST_TILE_ENTITY.get());
     }
+    private BlockPos core = this.pos;
+
+
 
     @Override
     public IMultiblock offset(int i, int i1, int i2) {
@@ -88,6 +89,8 @@ public class TestTE extends TileEntity implements IMultiblock {
     public Vec3i getSize() {
         return null;
     }
+
+
 
 
 }

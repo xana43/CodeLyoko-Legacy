@@ -15,12 +15,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
-
 @OnlyIn(Dist.CLIENT)
 public class OverbikeRenderer<T extends OverbikeEntity> extends EntityRenderer<T> {
-    private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID, "textures/entity/overbike/overbiketexture.png");
+    private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID,"textures/entity/overbike/overbiketexture.png");
     private final EntityModel<T> BoardModel = new ModelOverbike<T>();
-
     public OverbikeRenderer(EntityRendererManager renderManager) {
         super(renderManager);
         this.shadowSize = 1f;
@@ -32,10 +30,10 @@ public class OverbikeRenderer<T extends OverbikeEntity> extends EntityRenderer<T
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.push();
         matrixStackIn.scale(-.5F, -.5F, .5F);
-        matrixStackIn.translate(0, -1.5f, 0);
-        this.BoardModel.setRotationAngles(entityIn, 0, 0, 0, 0, 0);
+        matrixStackIn.translate(0,-1.5f,0);
+        this.BoardModel.setRotationAngles(entityIn,0,0,0,0,0);
         IVertexBuilder vertexBuilder = bufferIn.getBuffer(this.BoardModel.getRenderType(this.getEntityTexture(entityIn)));
-        this.BoardModel.render(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        this.BoardModel.render(matrixStackIn,vertexBuilder,packedLightIn, OverlayTexture.NO_OVERLAY,1,1,1,1);
         matrixStackIn.pop();
     }
 

@@ -10,11 +10,11 @@ import java.util.Set;
 
 public class OceanProvider extends BiomeProvider {
 
-    private static final Set<Biome> List = ImmutableSet.of(ModBiome.OCEAN.get());
-
     protected OceanProvider() {
         super(List);
     }
+
+    private static final Set<Biome> List = ImmutableSet.of(ModBiome.OCEAN.get());
 
     @Nonnull
     @Override

@@ -13,8 +13,12 @@ import java.util.Map.Entry;
 public class FlourideInfusionResult {
 
     private static final FlourideInfusionResult INSTANCE = new FlourideInfusionResult();
-    private final Table<ItemStack, ItemStack, ItemStack> smeltingList = HashBasedTable.create();
-    private final Map<ItemStack, Float> experienceList = Maps.newHashMap();
+    private final Table<ItemStack, ItemStack, ItemStack> smeltingList = HashBasedTable.<ItemStack, ItemStack, ItemStack>create();
+    private final Map<ItemStack, Float> experienceList = Maps.<ItemStack, Float>newHashMap();
+
+    public static FlourideInfusionResult getInstance() {
+        return INSTANCE;
+    }
 
     private FlourideInfusionResult() {
         addRefiningRecipe(new ItemStack(ModItems.URANIUM_DIOXIDE.get()), new ItemStack(ModItems.FLUORIDE.get()),
@@ -23,9 +27,6 @@ public class FlourideInfusionResult {
                 new ItemStack(ModItems.URANIUM_ISOTOPE238.get()), 1f);
     }
 
-    public static FlourideInfusionResult getInstance() {
-        return INSTANCE;
-    }
 
     public void addRefiningRecipe(ItemStack input1, ItemStack input2, ItemStack result, float experience) {
         if (getInfusingResult(input1, input2) != ItemStack.EMPTY) return;

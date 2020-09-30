@@ -14,8 +14,6 @@ import net.minecraft.util.math.BlockPos;
 public class ScannerTileEntity extends TileEntity implements ITickableTileEntity {
 
 
-    private boolean once = false;
-
     public ScannerTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
@@ -24,13 +22,15 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
         this(ModTileEntities.SCANNER_TILE_ENTITY.get());
     }
 
+    private boolean once = false;
+
     @Override
     public void tick() {
-        if (checkStructure() && !once) {
+        if(checkStructure() && !once) {
             activateStructure();
-            once = true;
-        } else if (!checkStructure()) {
-            once = false;
+            once=true;
+        } else if(!checkStructure()) {
+            once=false;
             deactivateStructure();
         }
     }
@@ -69,13 +69,13 @@ public class ScannerTileEntity extends TileEntity implements ITickableTileEntity
         if (getWorld().getBlockState(this.getPos()).getBlock() == ModBlocks.SCANNER_BASE.get()) {
             getWorld().setBlockState(this.getPos(), getWorld().getBlockState(this.getPos()).with(Scanner.Scanner, false));
         }
-        if (getWorld().getBlockState(h1).getBlock() == ModBlocks.SCANNER_FRAME.get()) {
+        if (getWorld().getBlockState(h1).getBlock()==ModBlocks.SCANNER_FRAME.get()){
             getWorld().setBlockState(h1, getWorld().getBlockState(h1).with(ScannerFrame.ScannerFrameInvis, false));
         }
-        if (getWorld().getBlockState(h2).getBlock() == ModBlocks.SCANNER_FRAME.get()) {
+        if (getWorld().getBlockState(h2).getBlock()==ModBlocks.SCANNER_FRAME.get()){
             getWorld().setBlockState(h2, getWorld().getBlockState(h2).with(ScannerFrame.ScannerFrameInvis, false));
         }
-        if (getWorld().getBlockState(h3).getBlock() == ModBlocks.SCANNER_TOP.get()) {
+        if (getWorld().getBlockState(h3).getBlock()==ModBlocks.SCANNER_TOP.get()){
             getWorld().setBlockState(h3, getWorld().getBlockState(h3).with(ScannerTop.scannerFormedTop, false));
         }
     }

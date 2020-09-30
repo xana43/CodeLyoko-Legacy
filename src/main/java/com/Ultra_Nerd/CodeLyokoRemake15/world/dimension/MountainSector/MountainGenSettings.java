@@ -9,11 +9,12 @@ import javax.annotation.Nonnull;
 
 public class MountainGenSettings extends GenerationSettings {
 
-    public byte BiomeSize() {
+    public byte BiomeSize(){
         return 4;
     }
 
-    public byte getBiomID() {
+    public byte getBiomID()
+    {
         return 127;
     }
 

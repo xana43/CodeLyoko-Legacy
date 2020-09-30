@@ -10,12 +10,11 @@ import java.util.Set;
 
 public class DesertProvider extends BiomeProvider {
 
-    private static final Set<Biome> List = ImmutableSet.of(ModBiome.DESERT.get());
-
     protected DesertProvider() {
         super(List);
 
     }
+    private static final Set<Biome> List = ImmutableSet.of(ModBiome.DESERT.get());
 
     @Nonnull
     @Override

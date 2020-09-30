@@ -27,25 +27,25 @@ import java.util.Map;
 import java.util.Random;
 
 public class TowerParts {
-    private static final ResourceLocation PART1 = new ResourceLocation(Base.MOD_ID, "tower_new_bellow");
-    private static final ResourceLocation PART2 = new ResourceLocation(Base.MOD_ID, "tower_new_top");
-    private static final Map<ResourceLocation, BlockPos> offset = ImmutableMap.of(PART1, new BlockPos(0, -14, 0), PART2, new BlockPos(0, 0, 0));
-
-    public static void Start(TemplateManager manager, BlockPos pos, Rotation rotation, List<StructurePiece> pieces, Random rand) {
+    private static final ResourceLocation PART1 = new ResourceLocation(Base.MOD_ID,"tower_new_bellow");
+    private static final ResourceLocation PART2 = new ResourceLocation(Base.MOD_ID,"tower_new_top");
+    private static final Map<ResourceLocation, BlockPos> offset = ImmutableMap.of(PART1,new BlockPos(0,-14,0),PART2,new BlockPos(0,0,0));
+    public static void Start(TemplateManager manager, BlockPos pos, Rotation rotation, List<StructurePiece> pieces, Random rand)
+    {
         int x = pos.getX();
         int z = pos.getZ();
-        BlockPos rotoff = new BlockPos(0, 0, 0).rotate(rotation);
-        BlockPos blockPos = rotoff.add(x, pos.getY(), z);
-        pieces.add(new TowerParts.Part(manager, PART1, blockPos, rotation));
-        pieces.add(new TowerParts.Part(manager, PART2, blockPos, rotation));
+        BlockPos rotoff = new BlockPos(0,0,0).rotate(rotation);
+        BlockPos blockPos = rotoff.add(x,pos.getY(),z);
+        pieces.add(new TowerParts.Part(manager,PART1,blockPos,rotation));
+        pieces.add(new TowerParts.Part(manager,PART2,blockPos,rotation));
     }
 
-    public static class Part extends TemplateStructurePiece {
+    public static class Part extends TemplateStructurePiece{
         private final ResourceLocation resourceLocation;
-        private final Rotation rotation;
+        private Rotation rotation;
 
         public Part(TemplateManager templateManagerIn, ResourceLocation resourceLocationIn, BlockPos pos,
-                    Rotation rotationIn) {
+                     Rotation rotationIn) {
             super(ModWorldFeatures.TOWER_PART, 0);
             this.resourceLocation = resourceLocationIn;
             BlockPos blockpos = TowerParts.offset.get(resourceLocation);

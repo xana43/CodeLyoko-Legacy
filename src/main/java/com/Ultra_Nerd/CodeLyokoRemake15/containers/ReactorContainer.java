@@ -8,17 +8,18 @@ import net.minecraft.inventory.container.ContainerType;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ReactorContainer extends Container {
-    public ReactorContainer(@Nullable ContainerType<?> type, int id) {
-        super(type, id);
-    }
+public class ReactorContainer extends Container
+{
+	public ReactorContainer(@Nullable ContainerType<?> type, int id) {
+		super(type, id);
+	}
 
-    @Override
-    public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
-        return false;
-    }
-    //protected ReactorContainer(Properties builder) {
-    //	super(builder);
+	@Override
+	public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
+		return false;
+	}
+	//protected ReactorContainer(Properties builder) {
+	//	super(builder);
 //	}
 
 	/*

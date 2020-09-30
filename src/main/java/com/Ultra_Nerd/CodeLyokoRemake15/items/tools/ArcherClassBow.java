@@ -20,24 +20,22 @@ import java.util.function.Predicate;
 
 public class ArcherClassBow extends BowItem {
     private static final Predicate<ItemStack> AMMO = (item) -> item.equals(ItemStack.EMPTY, false);
-
     public ArcherClassBow(Properties builder) {
         super(builder);
     }
+    @Override
+    public int getUseDuration(@Nonnull ItemStack stack) {
+        return 9000;
+    }
 
     public static float getArrowVelocity(int charge) {
-        float f = (float) charge / 5.0F;
+        float f = (float)charge / 5.0F;
         f = (f * f + f * 2.0F) / 3.0F;
         if (f > 1.0F) {
             f = 1.0F;
         }
 
         return f;
-    }
-
-    @Override
-    public int getUseDuration(@Nonnull ItemStack stack) {
-        return 9000;
     }
 
     @Nonnull
@@ -74,7 +72,7 @@ public class ArcherClassBow extends BowItem {
                     worldIn.addEntity(abstractarrowentity);
                 }
 
-                worldIn.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), ModSounds.LASERARROW.get(), SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                worldIn.playSound((PlayerEntity) null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), ModSounds.LASERARROW.get(), SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
                 playerentity.addStat(Stats.ITEM_USED.get(this));
             }
@@ -89,7 +87,7 @@ public class ArcherClassBow extends BowItem {
         if (playerIn.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() != ModItems.JEREMY_CHESTPLATE.get() &&
                 playerIn.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() != ModItems.JEREMY_LEGGINGS.get() &&
                 playerIn.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() != ModItems.JEREMY_BOOTS.get()
-                && heldItem.getDamage() >= heldItem.getMaxDamage()) {
+        && heldItem.getDamage() >= heldItem.getMaxDamage()) {
 
 
             return ActionResult.resultFail(heldItem);

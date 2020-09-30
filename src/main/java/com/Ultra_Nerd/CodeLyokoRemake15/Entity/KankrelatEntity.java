@@ -15,19 +15,21 @@ import javax.annotation.Nonnull;
 
 public class KankrelatEntity extends SkeletonEntity implements IAnimatedEntity {
 
-    private final EntityAnimationController controller = new EntityAnimationController(this, "kankrelatcontroller", 20, this::animationPred);
+    private final EntityAnimationController controller = new EntityAnimationController(this,"kankrelatcontroller",20,this::animationPred);
     private final EntityAnimationManager manager = new EntityAnimationManager();
-
     public KankrelatEntity(EntityType<? extends KankrelatEntity> type, World world) {
         super(type, world);
         manager.addAnimationController(controller);
     }
 
-    private <E extends KankrelatEntity> boolean animationPred(AnimationTestEvent<E> event) {
-        if (event.isWalking()) {
+    private <E extends KankrelatEntity> boolean animationPred(AnimationTestEvent<E> event)
+    {
+        if(event.isWalking())
+        {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.ModelKankrelat.walk"));
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }

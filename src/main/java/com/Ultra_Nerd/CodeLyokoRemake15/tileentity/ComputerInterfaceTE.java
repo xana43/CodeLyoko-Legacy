@@ -9,8 +9,8 @@ public class ComputerInterfaceTE extends TileEntity implements ITickableTileEnti
     public ComputerInterfaceTE(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
-
-    public ComputerInterfaceTE() {
+    public ComputerInterfaceTE()
+    {
         this(ModTileEntities.COMPUTER_INTERFACE_TILE_ENTITY.get());
     }
 

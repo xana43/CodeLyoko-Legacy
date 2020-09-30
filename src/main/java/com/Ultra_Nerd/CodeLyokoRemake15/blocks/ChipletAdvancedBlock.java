@@ -47,10 +47,7 @@ public class ChipletAdvancedBlock extends Block {
             Block.makeCuboidShape(15, 14, 1, 16, 15, 15),
             Block.makeCuboidShape(0, 14, 0, 16, 15, 1),
             Block.makeCuboidShape(0, 14, 15, 16, 15, 16)
-    ).reduce((v1, v2) -> {
-        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-    }).get();
-
+    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
     public ChipletAdvancedBlock(Properties properties) {
         super(properties);
     }

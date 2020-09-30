@@ -10,9 +10,10 @@ public class FunctionalVariableReferenceHolder extends IntReferenceHolder {
     private final IntSupplier getter;
     private final IntConsumer setter;
 
-    public FunctionalVariableReferenceHolder(final IntSupplier getter, final IntConsumer setter) {
-        this.setter = setter;
-        this.getter = getter;
+    public FunctionalVariableReferenceHolder(final IntSupplier getter, final IntConsumer setter)
+    {
+this.setter = setter;
+this.getter = getter;
     }
 
     @Override
@@ -22,6 +23,6 @@ public class FunctionalVariableReferenceHolder extends IntReferenceHolder {
 
     @Override
     public void set(int p_221494_1_) {
-        this.setter.accept(p_221494_1_);
+    this.setter.accept(p_221494_1_);
     }
 }

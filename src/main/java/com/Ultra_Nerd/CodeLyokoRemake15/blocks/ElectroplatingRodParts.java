@@ -20,9 +20,7 @@ public class ElectroplatingRodParts extends Block {
             Block.makeCuboidShape(7, 0, 10, 9, 16, 11),
             Block.makeCuboidShape(5, 0, 7, 6, 16, 9),
             Block.makeCuboidShape(10, 0, 7, 11, 16, 9)
-    ).reduce((v1, v2) -> {
-        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-    }).get();
+    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
     public ElectroplatingRodParts(Properties properties) {
         super(properties);

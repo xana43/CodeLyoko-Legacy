@@ -18,10 +18,10 @@ import javax.annotation.Nullable;
 import java.util.Locale;
 
 public class ColoredParticle extends SpriteTexturedParticle {
-    private double posX, posY, posZ;
+    private double posX,posY,posZ;
 
     public ColoredParticle(World world, double x, double y, double z, double xspeed, double yspeed, double zspeed, ColoredParticleData data, IAnimatedSprite sprite) {
-        super(world, x, y, z, xspeed, yspeed, zspeed);
+        super(world,x,y,z,xspeed,yspeed,zspeed);
         this.motionX = xspeed;
         this.motionY = yspeed;
         this.motionZ = zspeed;
@@ -41,9 +41,12 @@ public class ColoredParticle extends SpriteTexturedParticle {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
-        if (this.age++ >= this.maxAge) {
+        if(this.age++ >= this.maxAge)
+        {
             this.setExpired();
-        } else {
+        }
+        else
+        {
             float f = (float) this.age / (float) this.maxAge;
             float f1 = -1 + f * f * 2.0F;
             float f2 = 1.0F - f1;
@@ -58,27 +61,26 @@ public class ColoredParticle extends SpriteTexturedParticle {
     public IParticleRenderType getRenderType() {
         return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
-
     @OnlyIn(Dist.CLIENT)
-    public static class Factory implements IParticleFactory<ColoredParticleData> {
+    public static class Factory implements IParticleFactory<ColoredParticleData>
+    {
         private final IAnimatedSprite ss;
-
-        public Factory(IAnimatedSprite spriteIn) {
+        public Factory(IAnimatedSprite spriteIn)
+        {
             this.ss = spriteIn;
         }
 
         @Nullable
         @Override
         public Particle makeParticle(@Nonnull ColoredParticleData typeIn, @Nonnull World worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            ColoredParticle part = new ColoredParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, typeIn, ss);
+            ColoredParticle part = new ColoredParticle(worldIn,x,y,z,xSpeed,ySpeed,zSpeed,typeIn,ss);
             part.selectSpriteRandomly(ss);
             return part;
         }
     }
-
     public static class ColoredParticleData implements IParticleData {
-        public static final ColoredParticleData TOWER_PARTICLE = new ColoredParticleData(0.125f, 0.25f, 1, 1);
-        public static final IParticleData.IDeserializer<ColoredParticleData> DESERIALIZE = new IParticleData.IDeserializer<ColoredParticleData>() {
+        public static final ColoredParticleData TOWER_PARTICLE = new ColoredParticleData(0.125f,0.25f,1,1);
+        public static final IParticleData.IDeserializer<ColoredParticleData> DESERIALIZE = new IParticleData.IDeserializer<ColoredParticleData>(){
             @Override
             public ColoredParticleData deserialize(@Nonnull ParticleType<ColoredParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
                 reader.expect(' ');
@@ -89,17 +91,17 @@ public class ColoredParticle extends SpriteTexturedParticle {
                 float blue = (float) reader.readDouble();
                 reader.expect(' ');
                 float alpha = (float) reader.readDouble();
-                return new ColoredParticleData(red, green, blue, alpha);
+                return new ColoredParticleData(red,green,blue,alpha);
             }
 
             @Override
             public ColoredParticleData read(@Nonnull ParticleType<ColoredParticleData> particleTypeIn, PacketBuffer buffer) {
-                return new ColoredParticleData(buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
+                return new ColoredParticleData(buffer.readFloat(),buffer.readFloat(),buffer.readFloat(),buffer.readFloat());
             }
         };
-        private final float red, green, blue, alpha;
-
-        public ColoredParticleData(float redIn, float greenIn, float blueIn, float alphaIn) {
+        private final float red,green,blue,alpha;
+        public ColoredParticleData(float redIn,float greenIn,float blueIn, float alphaIn)
+        {
             this.red = redIn;
             this.green = greenIn;
             this.blue = blueIn;
@@ -117,7 +119,7 @@ public class ColoredParticle extends SpriteTexturedParticle {
         @Nonnull
         @Override
         public String getParameters() {
-            return String.format(Locale.ROOT, "%s %.2f,%.2f,%.2f,%.2f", Registry.PARTICLE_TYPE.getKey(this.getType()), this.red, this.green, this.blue, this.alpha);
+            return String.format(Locale.ROOT,"%s %.2f,%.2f,%.2f,%.2f", Registry.PARTICLE_TYPE.getKey(this.getType()),this.red,this.green,this.blue,this.alpha);
         }
 
         @Nonnull
@@ -125,22 +127,18 @@ public class ColoredParticle extends SpriteTexturedParticle {
         public ParticleType<?> getType() {
             return ModParticles.TOWER_PARTICLE.get();
         }
-
         @OnlyIn(Dist.CLIENT)
         public float getAlpha() {
             return this.alpha;
         }
-
         @OnlyIn(Dist.CLIENT)
         public float getRed() {
             return this.red;
         }
-
         @OnlyIn(Dist.CLIENT)
         public float getGreen() {
             return this.green;
         }
-
         @OnlyIn(Dist.CLIENT)
         public float getBlue() {
             return this.blue;

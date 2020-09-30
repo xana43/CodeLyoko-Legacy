@@ -17,11 +17,13 @@ import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
 public class RendFan extends EntityRenderer<EntityFan> {
-    private static final ResourceLocation Fan = new ResourceLocation(Base.MOD_ID, "textures/entity/projectiles/fan/fan.png");
-    private final ModelFan FanModel = new ModelFan();
     public RendFan(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);
     }
+    private static final ResourceLocation Fan = new ResourceLocation(Base.MOD_ID,"textures/entity/projectiles/fan/fan.png");
+    private final ModelFan FanModel = new ModelFan();
+
+
 
     @Override
     public void render(@Nonnull EntityFan entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, @Nonnull IRenderTypeBuffer bufferIn, int packedLightIn) {

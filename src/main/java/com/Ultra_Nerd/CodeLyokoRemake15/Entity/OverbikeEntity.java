@@ -14,9 +14,9 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class OverbikeEntity extends Entity {
-    private final AxisAlignedBB axisAlignedBB = new AxisAlignedBB(this.getPosX() - this.getWidth(), this.getPosY() - this.getHeight(),
-            this.getPosZ() - this.getWidth(), this.getPosX() + getWidth(), this.getPosY() + this.getHeight(), this.getPosZ() + this.getWidth());
+public class OverbikeEntity extends Entity  {
+    private final AxisAlignedBB axisAlignedBB = new AxisAlignedBB(this.getPosX() - this.getWidth(),this.getPosY() - this.getHeight(),
+            this.getPosZ() - this.getWidth(),this.getPosX() + getWidth(),this.getPosY() + this.getHeight(),this.getPosZ() + this.getWidth());
 
     public OverbikeEntity(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
@@ -48,6 +48,7 @@ public class OverbikeEntity extends Entity {
     }
 
 
+
     @Override
     public float getCollisionBorderSize() {
         return 4;
@@ -61,15 +62,14 @@ public class OverbikeEntity extends Entity {
         double d0 = this.getPosX() + vec3d.x;
         double d1 = this.getPosY() + vec3d.y;
         double d2 = this.getPosZ() + vec3d.z;
-        Vec3d motion = this.getMotion();
-        this.setMotion(motion.x, motion.y - this.getGravity(), motion.z);
+            Vec3d motion = this.getMotion();
+            this.setMotion(motion.x, motion.y - this.getGravity(),motion.z);
         this.setPosition(d0, d1, d2);
     }
-
-    private double getGravity() {
+    private double getGravity()
+    {
         return 0.5D;
     }
-
     @Override
     public boolean processInitialInteract(@Nonnull PlayerEntity player, @Nonnull Hand hand) {
         if (super.processInitialInteract(player, hand)) {
@@ -87,6 +87,9 @@ public class OverbikeEntity extends Entity {
             return true;
         }
     }
+
+
+
 
 
     @Override
@@ -108,6 +111,7 @@ public class OverbikeEntity extends Entity {
     protected void writeAdditional(@Nonnull CompoundNBT compound) {
 
     }
+
 
 
     @Nonnull

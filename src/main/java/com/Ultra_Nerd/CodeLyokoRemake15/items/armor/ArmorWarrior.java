@@ -17,8 +17,8 @@ import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 
 public class ArmorWarrior extends ArmorItem {
-    private final int damage;
     private byte I = 0;
+    private final int damage;
 
     public ArmorWarrior(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
         super(materialIn, slot, builder);

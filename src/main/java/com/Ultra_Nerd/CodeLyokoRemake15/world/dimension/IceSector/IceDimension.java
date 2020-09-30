@@ -20,7 +20,7 @@ public class IceDimension extends Dimension {
     @Nonnull
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
-        return new IceGenerator(world, new IceProvider(), new IceGenSettings());
+        return new IceGenerator(world,new IceProvider(),new IceGenSettings());
     }
 
     @Nullable
@@ -48,7 +48,7 @@ public class IceDimension extends Dimension {
     @Nonnull
     @Override
     public Vec3d getFogColor(float celestialAngle, float partialTicks) {
-        return new Vec3d(0.15, 0.06, 1.864);
+        return new Vec3d(0.15,0.06,1.864);
     }
 
     @Override

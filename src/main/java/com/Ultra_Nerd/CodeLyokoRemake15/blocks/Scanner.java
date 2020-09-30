@@ -27,9 +27,8 @@ import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
 public class Scanner extends Block {
-    public static final DirectionProperty directionProperty = HorizontalBlock.HORIZONTAL_FACING;
-    private static final VoxelShape blockShape = Block.makeCuboidShape(0, 0, 0, 16, 16, 16);
     public static BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
+    public static final DirectionProperty directionProperty = HorizontalBlock.HORIZONTAL_FACING;
     private final VoxelShape shapeS = Stream.of(
             Block.makeCuboidShape(2, 0, -2, 14, 1, 18),
             Block.makeCuboidShape(-4, 0, 5, -3, 15.3, 11),
@@ -73,9 +72,7 @@ public class Scanner extends Block {
             Block.makeCuboidShape(14, 0, 17, 15, 15.3, 18),
             Block.makeCuboidShape(-2, 0, 14, -1, 15.3, 15),
             Block.makeCuboidShape(17, 0, 1, 18, 15.3, 2)
-    ).reduce((v1, v2) -> {
-        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-    }).get();
+    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
     private final VoxelShape shapeN = Stream.of(
             Block.makeCuboidShape(2, 0, -2.4523809523809526, 14, 1, 17.54761904761905),
             Block.makeCuboidShape(19, 0, 4.5476190476190474, 20, 15.3, 10.547619047619047),
@@ -119,9 +116,7 @@ public class Scanner extends Block {
             Block.makeCuboidShape(1, 0, -2.4523809523809526, 2, 15.3, -1.4523809523809526),
             Block.makeCuboidShape(17, 0, 0.5476190476190474, 18, 15.3, 1.5476190476190474),
             Block.makeCuboidShape(-2.0000000000000018, 0, 13.547619047619047, -1.0000000000000018, 15.3, 14.547619047619047)
-    ).reduce((v1, v2) -> {
-        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-    }).get();
+    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
     private final VoxelShape shapeW = Stream.of(
             Block.makeCuboidShape(-2.2261904761904763, 0, 1.7738095238095237, 17.773809523809526, 1, 13.773809523809524),
             Block.makeCuboidShape(4.773809523809524, 0, -4.226190476190476, 10.773809523809524, 15.3, -3.2261904761904763),
@@ -165,9 +160,7 @@ public class Scanner extends Block {
             Block.makeCuboidShape(-2.2261904761904763, 0, 13.773809523809524, -1.2261904761904763, 15.3, 14.773809523809524),
             Block.makeCuboidShape(0.7738095238095237, 0, -2.2261904761904763, 1.7738095238095237, 15.3, -1.2261904761904763),
             Block.makeCuboidShape(13.773809523809524, 0, 16.773809523809526, 14.773809523809524, 15.3, 17.773809523809526)
-    ).reduce((v1, v2) -> {
-        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-    }).get();
+    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
     private final VoxelShape shapeE = Stream.of(
             Block.makeCuboidShape(-1.7738095238095273, 0, 1.7738095238095237, 18.226190476190474, 1, 13.773809523809524),
             Block.makeCuboidShape(5.226190476190476, 0, 18.773809523809526, 11.226190476190476, 15.3, 19.773809523809526),
@@ -211,9 +204,9 @@ public class Scanner extends Block {
             Block.makeCuboidShape(17.226190476190474, 0, 0.7738095238095237, 18.226190476190474, 15.3, 1.7738095238095237),
             Block.makeCuboidShape(14.226190476190476, 0, 16.773809523809526, 15.226190476190476, 15.3, 17.773809523809526),
             Block.makeCuboidShape(1.2261904761904763, 0, -2.226190476190478, 2.2261904761904763, 15.3, -1.226190476190478)
-    ).reduce((v1, v2) -> {
-        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-    }).get();
+    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+
+    private static final VoxelShape blockShape = Block.makeCuboidShape(0,0,0,16,16,16);
 
     public Scanner() {
         super(Block.Properties.create(Material.ROCK)
@@ -224,24 +217,25 @@ public class Scanner extends Block {
                 .harvestLevel(2)
                 .harvestTool(ToolType.PICKAXE)
         );
-        this.setDefaultState(this.getDefaultState().with(Scanner, false).with(directionProperty, Direction.NORTH));
+        this.setDefaultState(this.getDefaultState().with(Scanner,false).with(directionProperty, Direction.NORTH));
     }
 
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
-        if (state.get(Scanner)) {
-            switch (state.get(directionProperty)) {
+        if(state.get(Scanner)) {
+            switch(state.get(directionProperty))
+            {
                 case NORTH:
                     return shapeN;
                 case SOUTH:
                     return shapeS;
                 case EAST:
-                    return shapeE;
+                    return  shapeE;
                 case WEST:
                     return shapeW;
                 default:
-                    return shapeN;
+                    return  shapeN;
             }
         } else {
             return blockShape;
@@ -252,14 +246,14 @@ public class Scanner extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(directionProperty, context.getPlacementHorizontalFacing());
+        return this.getDefaultState().with(directionProperty,context.getPlacementHorizontalFacing());
     }
 
     //mod compatiability
     @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(directionProperty, rot.rotate(state.get(directionProperty)));
+        return state.with(directionProperty,rot.rotate(state.get(directionProperty)));
     }
 
 

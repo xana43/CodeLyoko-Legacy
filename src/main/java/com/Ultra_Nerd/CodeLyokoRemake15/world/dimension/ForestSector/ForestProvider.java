@@ -11,13 +11,14 @@ import java.util.Set;
 
 public class ForestProvider extends BiomeProvider {
 
-    private static final Set<Biome> List = ImmutableSet.of(ModBiome.FOREST.get());
-    private final Random rand;
+    private Random rand;
 
     protected ForestProvider() {
         super(List);
         rand = new Random();
     }
+
+    private static final Set<Biome> List = ImmutableSet.of(ModBiome.FOREST.get());
 
     @Nonnull
     @Override

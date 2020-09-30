@@ -8,29 +8,29 @@ import javax.annotation.Nonnull;
 
 public class LyokoICE extends Biome {
 
-    public LyokoICE(Builder biomeBuilder) {
-        super(biomeBuilder);
-    }
+	public LyokoICE(Builder biomeBuilder) {
+		super(biomeBuilder);
+	}
 
 
-    @Override
-    public boolean doesWaterFreeze(@Nonnull IWorldReader worldIn, @Nonnull BlockPos pos) {
-        return false;
-    }
+	@Override
+	public boolean doesWaterFreeze(@Nonnull IWorldReader worldIn, @Nonnull BlockPos pos) {
+		return false;
+	}
 
-    @Override
-    public boolean doesWaterFreeze(@Nonnull IWorldReader worldIn, @Nonnull BlockPos water, boolean mustBeAtEdge) {
-        return false;
-    }
+	@Override
+	public boolean doesWaterFreeze(@Nonnull IWorldReader worldIn, @Nonnull BlockPos water, boolean mustBeAtEdge) {
+		return false;
+	}
 
-    @Override
-    public boolean doesSnowGenerate(@Nonnull IWorldReader worldIn, @Nonnull BlockPos pos) {
-        return false;
-    }
+	@Override
+	public boolean doesSnowGenerate(@Nonnull IWorldReader worldIn, @Nonnull BlockPos pos) {
+		return false;
+	}
 
-    @Override
-    public int getSkyColor() {
-        return 0x000033;
-    }
+	@Override
+	public int getSkyColor() {
+		return 0x000033;
+	}
 
 }

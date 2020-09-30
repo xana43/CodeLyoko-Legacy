@@ -752,9 +752,7 @@ public class CoolingBlock extends Block {
             Block.makeCuboidShape(-13, 0, -9, -9, 32, -7),
             Block.makeCuboidShape(-13, 0, 7, -9, 32, 9),
             Block.makeCuboidShape(-13, 0, 23, -9, 32, 25)
-    ).reduce((v1, v2) -> {
-        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
-    }).get();
+    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
 
     public CoolingBlock(Properties properties) {
         super(properties);
