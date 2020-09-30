@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/marabunta" }
+  "variants": {
+    "": {
+      "model": "cm:block/marabunta"
     }
+  }
 }

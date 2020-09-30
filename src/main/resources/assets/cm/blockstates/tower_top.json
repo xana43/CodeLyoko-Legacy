@@ -1,8 +1,7 @@
 {
-"variants":
-  {
-  "":{"model":"cm:block/tower_top"}
-
- 
+  "variants": {
+    "": {
+      "model": "cm:block/tower_top"
+    }
   }
 }

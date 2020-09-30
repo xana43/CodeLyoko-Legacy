@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/tower_blue" }
+  "variants": {
+    "": {
+      "model": "cm:block/tower_blue"
     }
+  }
 }

@@ -1,12 +1,12 @@
 {
-   "parent": "block/cube_all",
-   "textures": {
-       "particle": "cm:block/tower_block",
-       "up":"cm:block/tower_block",
-       "down":"cm:block/dark",
-       "north":"cm:block/tower_block",
-       "south":"cm:block/tower_block",
-       "east":"cm:block/tower_block",
-       "west":"cm:block/tower_block"
-   }
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "cm:block/tower_block",
+    "up": "cm:block/tower_block",
+    "down": "cm:block/dark",
+    "north": "cm:block/tower_block",
+    "south": "cm:block/tower_block",
+    "east": "cm:block/tower_block",
+    "west": "cm:block/tower_block"
+  }
 }

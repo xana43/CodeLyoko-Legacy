@@ -1,9 +1,8 @@
 {
-   "parent": "block/cube_all",
-   "textures": {
-    "particle":"cm:block/dd",
-       "all": "cm:block/dd",
-      "blur": true
-       
-   }
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "cm:block/dd",
+    "all": "cm:block/dd",
+    "blur": true
+  }
 }

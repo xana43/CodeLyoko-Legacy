@@ -1,14 +1,12 @@
 {
-   "parent":"block/orientable",
-   "textures": {
-       "particle":"cm:block/flouride_infuser_side",
-       "north":"cm:block/flouride_infuser_side",
-       "down":"cm:block/flouride_infuser_side",
-       "up":"cm:block/flouride_infuser_front_off",
-       "south":"cm:block/flouride_infuser_side",
-       "east":"cm:block/flouride_infuser_side",
-       "west":"cm:block/flouride_infuser_side"
-       
-       
-   }
+  "parent": "block/orientable",
+  "textures": {
+    "particle": "cm:block/flouride_infuser_side",
+    "north": "cm:block/flouride_infuser_side",
+    "down": "cm:block/flouride_infuser_side",
+    "up": "cm:block/flouride_infuser_front_off",
+    "south": "cm:block/flouride_infuser_side",
+    "east": "cm:block/flouride_infuser_side",
+    "west": "cm:block/flouride_infuser_side"
+  }
 }

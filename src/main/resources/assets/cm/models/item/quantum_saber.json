@@ -1,6 +1,6 @@
 {
-   "parent": "item/handheld",
-   "textures": {
-       "layer0": "cm:item/quantum_saber"
-   }
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "cm:item/quantum_saber"
+  }
 }

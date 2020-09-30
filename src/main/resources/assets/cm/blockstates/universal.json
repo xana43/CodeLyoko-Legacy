@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/universal" }
+  "variants": {
+    "": {
+      "model": "cm:block/universal"
     }
+  }
 }

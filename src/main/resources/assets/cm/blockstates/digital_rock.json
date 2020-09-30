@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/digital_rock" }
+  "variants": {
+    "": {
+      "model": "cm:block/digital_rock"
     }
+  }
 }

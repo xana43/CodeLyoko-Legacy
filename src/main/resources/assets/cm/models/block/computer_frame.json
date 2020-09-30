@@ -1,9 +1,7 @@
 {
-    "ambientocclusion":"true",
-   "parent": "block/cube_all",
-   "textures": {
-       "all": "cm:block/computer_frame"
-       
-      
-   }
+  "ambientocclusion": "true",
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "cm:block/computer_frame"
+  }
 }

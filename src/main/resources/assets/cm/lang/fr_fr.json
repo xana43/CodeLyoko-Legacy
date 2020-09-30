@@ -88,7 +88,6 @@
   "block.cm.uv_focus": "Lentille de focus pour machine UV",
   "block.cm.uv_light": "Lampe UV",
   "block.cm.uv_machine": "Machine UV",
-
   "_comment_2": "items",
   "item.cm.aelita_boots": "Bottes d'Aelita",
   "item.cm.aelita_chestplate": "Plastron d'Aelita",
@@ -236,27 +235,22 @@
   "item.cm.yumi_leggings": "Les jambières de Yumi",
   "item.cm.yumi_traditional_fans": "Les éventails traditionnels de Yumi",
   "item.cm.zweihander": "Le sabre du guerrier du passé",
-
   "_comment_3": "itemgroups",
   "itemGroup.lyoko_armor": "Code Lyoko: Legacy - Armures",
   "itemGroup.lyoko_blocks": "Code Lyoko: Legacy - Blocs",
   "itemGroup.lyoko_items": "Code Lyoko: Legacy - Items",
   "itemGroup.lyoko_weapons": "Code Lyoko: Legacy - Armes",
-
   "_comment_4": "special blocks",
   "death.attack.block.cm.digital_ocean": "%s a été dévirtualisée, décomposée et balayée par le courant numérique",
   "death.attack.block.cm.marabunta": "%s a été rongé par la Marabounta",
-
   "_comment_5": "Containers",
   "container.Reactor": "Réacteur intégré",
   "container.electric_fluoride_infuser": "Infuseur de fluorure électrique",
   "container.fluoride_infuser": "Infuseur de fluorure",
-
   "_comment_6": "GUIs",
   "gui.cm.indicator": "",
   "gui.cm.interface_input": "Entrer Code",
   "gui.cm.story_screen": "Ecran d'histoire",
-
   "_comment_7": "Entities",
   "entity.cm.blok": "Blok",
   "entity.cm.fan": "Thrown Fan",
@@ -264,5 +258,4 @@
   "entity.cm.laser": "Flèche laser",
   "entity.cm.manta": "Manta",
   "entity.cm.megatank": "Mega Tank"
-
-  }
+}

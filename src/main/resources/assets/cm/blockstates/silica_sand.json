@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/silica_sand" }
+  "variants": {
+    "": {
+      "model": "cm:block/silica_sand"
     }
+  }
 }

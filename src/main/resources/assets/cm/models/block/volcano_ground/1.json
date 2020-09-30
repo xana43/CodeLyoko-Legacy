@@ -1,11 +1,11 @@
 {
-   "parent": "block/cube_all",
-   "textures": {
-       "up": "cm:block/volcano_top_2",
-       "down": "cm:block/volcano_top_2",
-       "north": "cm:block/volcano_side_1",
-       "south": "cm:block/volcano_side_2",
-       "east": "cm:block/volcano_side_3",
-       "west": "cm:block/volcano_side_2"
-   }
+  "parent": "block/cube_all",
+  "textures": {
+    "up": "cm:block/volcano_top_2",
+    "down": "cm:block/volcano_top_2",
+    "north": "cm:block/volcano_side_1",
+    "south": "cm:block/volcano_side_2",
+    "east": "cm:block/volcano_side_3",
+    "west": "cm:block/volcano_side_2"
+  }
 }

@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/digital_sand" }
+  "variants": {
+    "": {
+      "model": "cm:block/digital_sand"
     }
+  }
 }

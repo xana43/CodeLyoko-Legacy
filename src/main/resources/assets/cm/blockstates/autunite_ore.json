@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/autunite_ore" }
+  "variants": {
+    "": {
+      "model": "cm:block/autunite_ore"
     }
+  }
 }

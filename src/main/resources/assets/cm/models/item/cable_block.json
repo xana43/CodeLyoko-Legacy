@@ -1,4 +1,3 @@
 {
-   "parent": "cm:block/cable_block_inventory"
-
+  "parent": "cm:block/cable_block_inventory"
 }

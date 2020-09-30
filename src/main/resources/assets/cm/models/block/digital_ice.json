@@ -1,8 +1,7 @@
 {
-   "parent": "block/cube_all",
-   "textures": {
-    "particle":"cm:block/dice",
-      "all":"cm:block/dice"
-       
-   }
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "cm:block/dice",
+    "all": "cm:block/dice"
+  }
 }

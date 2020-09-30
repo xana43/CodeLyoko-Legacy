@@ -1,4 +1,3 @@
 {
-   "parent": "cm:block/digital_ocean"
-
+  "parent": "cm:block/digital_ocean"
 }

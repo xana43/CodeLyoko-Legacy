@@ -1,6 +1,7 @@
 {
-
-  "variants":{
-    "": {"model": "cm:block/uv_focus"}
+  "variants": {
+    "": {
+      "model": "cm:block/uv_focus"
+    }
   }
 }

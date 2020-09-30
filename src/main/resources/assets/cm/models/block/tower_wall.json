@@ -1,12 +1,12 @@
 {
-   "parent": "block/orientable",
-   "textures": {
-       "particle": "cm:block/tower_block",
-       "up":"cm:block/tower_block",
-       "down":"cm:block/tower_block",
-       "north":"cm:block/tower_wall",
-       "south":"cm:block/tower_block",
-       "east":"cm:block/tower_block",
-       "west":"cm:block/tower_block"
-   }
+  "parent": "block/orientable",
+  "textures": {
+    "particle": "cm:block/tower_block",
+    "up": "cm:block/tower_block",
+    "down": "cm:block/tower_block",
+    "north": "cm:block/tower_wall",
+    "south": "cm:block/tower_block",
+    "east": "cm:block/tower_block",
+    "west": "cm:block/tower_block"
+  }
 }

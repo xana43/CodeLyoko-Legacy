@@ -3,7 +3,10 @@
     {
       "type": "ttf",
       "file": "cm:gunship.ttf",
-      "shift": [0, 0],
+      "shift": [
+        0,
+        0
+      ],
       "size": 20,
       "oversample": 2.0
     }
