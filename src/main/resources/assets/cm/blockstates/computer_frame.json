@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/computer_frame" }
+  "variants": {
+    "": {
+      "model": "cm:block/computer_frame"
     }
+  }
 }

@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": {"model":"cm:block/franzchiplet"}
+    "": {
+      "model": "cm:block/franzchiplet"
+    }
   }
 }

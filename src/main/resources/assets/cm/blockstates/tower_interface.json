@@ -1,10 +1,19 @@
 {
-"variants":
-  {
-  "facing=north":{"model":"cm:block/tower_interface"},
-  "facing=east":{"model":"cm:block/tower_interface", "y": 90},
-  "facing=south":{"model":"cm:block/tower_interface", "y": 180},
-  "facing=west":{"model":"cm:block/tower_interface", "y" : 270}
- 
+  "variants": {
+    "facing=north": {
+      "model": "cm:block/tower_interface"
+    },
+    "facing=east": {
+      "model": "cm:block/tower_interface",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "cm:block/tower_interface",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "cm:block/tower_interface",
+      "y": 270
+    }
   }
 }

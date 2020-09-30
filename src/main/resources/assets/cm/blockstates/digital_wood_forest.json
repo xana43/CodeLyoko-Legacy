@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/digital_wood_forest" }
+  "variants": {
+    "": {
+      "model": "cm:block/digital_wood_forest"
     }
+  }
 }

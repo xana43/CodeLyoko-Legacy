@@ -1,6 +1,7 @@
 {
-
-    "variants":{
-       "": {"model": "cm:block/liquid_helium"}
+  "variants": {
+    "": {
+      "model": "cm:block/liquid_helium"
     }
+  }
 }

@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/quantum_block" }
+  "variants": {
+    "": {
+      "model": "cm:block/quantum_block"
     }
+  }
 }

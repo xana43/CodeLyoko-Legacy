@@ -1,6 +1,7 @@
 {
-
-  "variants":{
-    "": {"model": "cm:block/uranium_waste"}
+  "variants": {
+    "": {
+      "model": "cm:block/uranium_waste"
+    }
   }
 }

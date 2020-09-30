@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": {"model":"cm:block/computer_liquid_circulator"}
+    "": {
+      "model": "cm:block/computer_liquid_circulator"
+    }
   }
 }

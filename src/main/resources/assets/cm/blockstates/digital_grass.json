@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/digital_grass" }
+  "variants": {
+    "": {
+      "model": "cm:block/digital_grass"
     }
+  }
 }

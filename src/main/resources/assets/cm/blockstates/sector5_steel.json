@@ -1,5 +1,7 @@
 {
   "variants": {
-"": {"model": "cm:block/sector5steel"}
+    "": {
+      "model": "cm:block/sector5steel"
+    }
   }
 }

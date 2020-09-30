@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": {"model": "cm:block/uranium_canister"}
+    "": {
+      "model": "cm:block/uranium_canister"
+    }
   }
 }

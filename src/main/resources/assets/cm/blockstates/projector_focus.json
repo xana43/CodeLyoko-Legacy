@@ -1,8 +1,10 @@
 {
-
-    "variants": 
-    {
-        "validfocus=false":{"model": "cm:block/projector_focus"},
-        "validfocus=true":{"model":"cm:block/transparent"}
+  "variants": {
+    "validfocus=false": {
+      "model": "cm:block/projector_focus"
+    },
+    "validfocus=true": {
+      "model": "cm:block/transparent"
     }
+  }
 }

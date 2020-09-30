@@ -1,6 +1,7 @@
 {
-  "variants":
-  {
-    "": {"model": "cm:block/computer_cooling_block"}
+  "variants": {
+    "": {
+      "model": "cm:block/computer_cooling_block"
+    }
   }
 }

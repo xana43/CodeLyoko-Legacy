@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/tyuyamunite_ore" }
+  "variants": {
+    "": {
+      "model": "cm:block/tyuyamunite_ore"
     }
+  }
 }

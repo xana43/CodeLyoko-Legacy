@@ -1,145 +1,252 @@
 {
-    "entity.blok.ambient":
-
-    {
-        "category":"hostile",
-        "subtitle": "entity.blok.ambient",
-        "sounds":[{"name":"cm:entity/blok/ambient", "stream":false}]
-    },
-
-     "entity.blok.hurt":
-
-    {
-        "category":"hostile",
-        "subtitle": "entity.blok.hurt",
-        "sounds":[{"name":"cm:entity/blok/hurt", "stream":false}]
-    },
-     "entity.blok.death":
-
-    {
-        "category":"hostile",
-        "subtitle": "entity.blok.death",
-        "sounds":[{"name":"cm:entity/blok/death", "stream":false}]
-    },
-    "lyoko":
-    {
-        "category":"record",
-        "subtitle":"play.CodeLyokoTheme",
-        "sounds":[{"name":"cm:records/lyoko", "stream":true,"preload": true}]
-    },
-    "laser":
-    {
-        "category":"player",
-        "subtitle":"laser fire",
-        "sounds": [{"name":"cm:items/laser","stream":false,"preload": true}]
-    },
-    "forestsector":
-    {
-        "category":"music",
-        "subtitle":"forest sector ambiance",
-        "sounds":[{"name":"cm:music/forest/forestsector", "stream":true,"preload": true}]
-    },
-    "icesector":
-    {
-        "category":"music",
-        "subtitle":"ice sector ambiance",
-        "sounds":[{"name":"cm:music/ice/icesector", "stream":true,"preload": true}]
-    },
-    "sector5":
-    {
-        "category": "music",
-        "subtitle": "sector5 ambiance",
-        "sounds": [{"name": "cm:music/sector5/sector5_alt","stream": true,"preload": true}]
-    },
-    "armor_equip_warrior":
-    {
-        "category":"player",
-        "subtitle": "digital armor equip: Warrior Type",
-        "sounds": [{"name": "cm:events/armor_digital_equip_warrior","stream": false,"preload": true}]
-
-    },
-    "armor_equip_feline":
-    {
-      "category": "player",
-        "subtitle": "digital armor equip: Feline Type",
-        "sounds": [{"name": "cm:events/armor_digital_equip_feline","stream": false,"preload": true}]
-    },
-    "armor_equip_guardian":
-    {
-        "category": "player",
-        "subtitle": "digital armor equip: Guardian Type",
-        "sounds": [{"name": "cm:events/armor_digital_equip_guardian","stream": false,"preload": true}]
-    },
-    "armor_equip_ninja":
-    {
-        "category": "player",
-        "subtitle": "digital armor equip: Ninja Type",
-        "sounds": [{"name": "cm:events/armor_digital_equip_ninja","stream": false,"preload": true}]
-    },
-    "armor_equip_samurai":
-    {
-        "category": "player",
-        "subtitle": "digital armor equip: Samurai Type",
-        "sounds": [{"name": "cm:events/armor_digital_equip_samurai","stream": false,"preload": true}]
-    },
-    "gui":
-    {
-        "category": "neutral",
-        "subtitle": "player type on tower console",
-        "sounds":[{"name": "cm:events/user_type_in_interface","stream": false,"preload": true}]
-    },
-    "quantum_zap":
-    {
-        "category": "block",
-        "subtitle": "quantum chiplet zapping away",
-        "sounds": [{"name" :  "cm:events/quantumchipletactive","steam":  false, "preload": true}]
-    },
-    "digital_ocean":
-    {
-        "category": "music",
-        "subtitle": "digital ocean ambiance",
-        "sounds": [{"name": "cm:music/sea/digital_sea","stream": true,"preload": true}]
-    },
-    "entity.megatank.move":
-    {
-        "category": "hostile",
-        "subtitle": "megatank rolls",
-        "sounds": [{"name": "cm:entity/megatank/tankrolling","stream": false,"preload": true}]
-    },
-    "entity.hornet.fly":
-    {
-        "category": "hostile",
-        "subtitle": "hornet flies",
-        "sounds": [{"name": "cm:entity/hornet/hornetfly","stream": false,"preload": true}]
-    },
-    "entity.megatank.hurt1":
-    {
-        "category": "hostile",
-        "subtitle": "megatank gets hurt",
-        "sounds": [{"name": "cm:entity/megatank/hurt1","stream": false,"preload": true}]
-    },
-    "entity.megatank.hurt2":
-    {
-        "category": "hostile",
-        "subtitle": "megatank gets hurt",
-        "sounds": [{"name": "cm:entity/megatank/hurt2","stream": false,"preload": true}]
-    },
-    "entity.megatank.smallfall":
-    {
-        "category": "hostile",
-        "subtitle": "megatank gets hurt by falling",
-        "sounds": [{"name": "cm:entity/megatank/smallfall","stream": false,"preload": true}]
-    },
-    "entity.megatank.bigfall":
-    {
-        "category": "hostile",
-        "subtitle": "megatank gets hurt by a bigfall",
-        "sounds": [{"name": "cm:entity/megatank/bigfall","stream": false,"preload": true}]
-    },
-    "entity.megatank.die":
-    {
-        "category": "hostile",
-        "subtitle": "megatank dies",
-        "sounds": [{"name": "cm:entity/megatank/megatankdie","stream": false,"preload": true}]
-    }
+  "entity.blok.ambient": {
+    "category": "hostile",
+    "subtitle": "entity.blok.ambient",
+    "sounds": [
+      {
+        "name": "cm:entity/blok/ambient",
+        "stream": false
+      }
+    ]
+  },
+  "entity.blok.hurt": {
+    "category": "hostile",
+    "subtitle": "entity.blok.hurt",
+    "sounds": [
+      {
+        "name": "cm:entity/blok/hurt",
+        "stream": false
+      }
+    ]
+  },
+  "entity.blok.death": {
+    "category": "hostile",
+    "subtitle": "entity.blok.death",
+    "sounds": [
+      {
+        "name": "cm:entity/blok/death",
+        "stream": false
+      }
+    ]
+  },
+  "lyoko": {
+    "category": "record",
+    "subtitle": "play.CodeLyokoTheme",
+    "sounds": [
+      {
+        "name": "cm:records/lyoko",
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "laser": {
+    "category": "player",
+    "subtitle": "laser fire",
+    "sounds": [
+      {
+        "name": "cm:items/laser",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "forestsector": {
+    "category": "music",
+    "subtitle": "forest sector ambiance",
+    "sounds": [
+      {
+        "name": "cm:music/forest/forestsector",
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "icesector": {
+    "category": "music",
+    "subtitle": "ice sector ambiance",
+    "sounds": [
+      {
+        "name": "cm:music/ice/icesector",
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "sector5": {
+    "category": "music",
+    "subtitle": "sector5 ambiance",
+    "sounds": [
+      {
+        "name": "cm:music/sector5/sector5_alt",
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "armor_equip_warrior": {
+    "category": "player",
+    "subtitle": "digital armor equip: Warrior Type",
+    "sounds": [
+      {
+        "name": "cm:events/armor_digital_equip_warrior",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "armor_equip_feline": {
+    "category": "player",
+    "subtitle": "digital armor equip: Feline Type",
+    "sounds": [
+      {
+        "name": "cm:events/armor_digital_equip_feline",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "armor_equip_guardian": {
+    "category": "player",
+    "subtitle": "digital armor equip: Guardian Type",
+    "sounds": [
+      {
+        "name": "cm:events/armor_digital_equip_guardian",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "armor_equip_ninja": {
+    "category": "player",
+    "subtitle": "digital armor equip: Ninja Type",
+    "sounds": [
+      {
+        "name": "cm:events/armor_digital_equip_ninja",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "armor_equip_samurai": {
+    "category": "player",
+    "subtitle": "digital armor equip: Samurai Type",
+    "sounds": [
+      {
+        "name": "cm:events/armor_digital_equip_samurai",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "gui": {
+    "category": "neutral",
+    "subtitle": "player type on tower console",
+    "sounds": [
+      {
+        "name": "cm:events/user_type_in_interface",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "quantum_zap": {
+    "category": "block",
+    "subtitle": "quantum chiplet zapping away",
+    "sounds": [
+      {
+        "name": "cm:events/quantumchipletactive",
+        "steam": false,
+        "preload": true
+      }
+    ]
+  },
+  "digital_ocean": {
+    "category": "music",
+    "subtitle": "digital ocean ambiance",
+    "sounds": [
+      {
+        "name": "cm:music/sea/digital_sea",
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "entity.megatank.move": {
+    "category": "hostile",
+    "subtitle": "megatank rolls",
+    "sounds": [
+      {
+        "name": "cm:entity/megatank/tankrolling",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "entity.hornet.fly": {
+    "category": "hostile",
+    "subtitle": "hornet flies",
+    "sounds": [
+      {
+        "name": "cm:entity/hornet/hornetfly",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "entity.megatank.hurt1": {
+    "category": "hostile",
+    "subtitle": "megatank gets hurt",
+    "sounds": [
+      {
+        "name": "cm:entity/megatank/hurt1",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "entity.megatank.hurt2": {
+    "category": "hostile",
+    "subtitle": "megatank gets hurt",
+    "sounds": [
+      {
+        "name": "cm:entity/megatank/hurt2",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "entity.megatank.smallfall": {
+    "category": "hostile",
+    "subtitle": "megatank gets hurt by falling",
+    "sounds": [
+      {
+        "name": "cm:entity/megatank/smallfall",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "entity.megatank.bigfall": {
+    "category": "hostile",
+    "subtitle": "megatank gets hurt by a bigfall",
+    "sounds": [
+      {
+        "name": "cm:entity/megatank/bigfall",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "entity.megatank.die": {
+    "category": "hostile",
+    "subtitle": "megatank dies",
+    "sounds": [
+      {
+        "name": "cm:entity/megatank/megatankdie",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  }
 }

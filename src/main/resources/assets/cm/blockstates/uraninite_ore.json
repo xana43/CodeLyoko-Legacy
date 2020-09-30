@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/uraninite_ore" }
+  "variants": {
+    "": {
+      "model": "cm:block/uraninite_ore"
     }
+  }
 }

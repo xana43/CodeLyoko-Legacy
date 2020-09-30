@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/digital_darkness" }
+  "variants": {
+    "": {
+      "model": "cm:block/digital_darkness"
     }
+  }
 }

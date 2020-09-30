@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": {"model": "cm:block/digital_wood_mountain"}
+    "": {
+      "model": "cm:block/digital_wood_mountain"
+    }
   }
 }

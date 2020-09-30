@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": {"model": "cm:block/electroplating_anode"}
+    "": {
+      "model": "cm:block/electroplating_anode"
+    }
   }
 }

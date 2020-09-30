@@ -1,7 +1,10 @@
 {
-    "variants": 
-    {
-        "valid=false":{"model": "cm:block/holoprojector"},
-        "valid=true":{"model":"cm:block/holo"}
+  "variants": {
+    "valid=false": {
+      "model": "cm:block/holoprojector"
+    },
+    "valid=true": {
+      "model": "cm:block/holo"
     }
+  }
 }

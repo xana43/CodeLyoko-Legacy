@@ -38,8 +38,6 @@ public class CustomVolcanoSky implements SkyRenderHandler {
         BufferBuilder bufferBuilder = tessellator.getBuffer();
         for (int i = 0; i < 6; ++i) {
             matrixStack.push();
-<<<<<<<HEAD
-                    <<<<<<<HEAD
             if (i == 0) {
                 matrixStack.scale(10, 10, 10);
 =======

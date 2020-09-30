@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "cm:block/titanium" }
+  "variants": {
+    "": {
+      "model": "cm:block/titanium"
     }
+  }
 }
