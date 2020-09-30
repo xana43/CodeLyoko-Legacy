@@ -55,7 +55,6 @@ public class LiquidHeliumFluid extends ForgeFlowingFluid {
     }
 
 
-
     @Nonnull
     @Override
     public Fluid getFlowingFluid() {

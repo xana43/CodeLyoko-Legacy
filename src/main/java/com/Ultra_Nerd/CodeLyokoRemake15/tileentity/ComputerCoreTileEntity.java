@@ -3,11 +3,10 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
-public class ComputerCoreTileEntity extends TileEntity
-{
-	public ComputerCoreTileEntity(TileEntityType<?> tileEntityTypeIn) {
-		super(tileEntityTypeIn);
-	}
+public class ComputerCoreTileEntity extends TileEntity {
+    public ComputerCoreTileEntity(TileEntityType<?> tileEntityTypeIn) {
+        super(tileEntityTypeIn);
+    }
 	/*
 	private EG storage = new EG(1000000000, 1000000000);
 	@Override

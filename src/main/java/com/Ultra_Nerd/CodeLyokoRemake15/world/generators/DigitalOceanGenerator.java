@@ -22,7 +22,8 @@ public class DigitalOceanGenerator extends ChunkGenerator<OceanGenSettings> {
         super(worldIn, biomeProviderIn, settingsIn);
 
     }
-//TODO:Generate digital sea roof
+
+    //TODO:Generate digital sea roof
     @Override
     public void generateSurface(@Nonnull WorldGenRegion p_225551_1_, @Nonnull IChunk chunk) {
         BlockState bedrock = Blocks.BEDROCK.getDefaultState();

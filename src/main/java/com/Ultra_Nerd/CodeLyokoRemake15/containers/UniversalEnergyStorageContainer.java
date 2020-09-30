@@ -8,14 +8,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class UniversalEnergyStorageContainer extends Container {
-	protected UniversalEnergyStorageContainer(@Nullable ContainerType<?> type, int id) {
-		super(type, id);
-	}
+    protected UniversalEnergyStorageContainer(@Nullable ContainerType<?> type, int id) {
+        super(type, id);
+    }
 
-	@Override
-	public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
-		return false;
-	}
+    @Override
+    public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
+        return false;
+    }
 
    /*
 	private final UniversalEnergyStorageTileEntity TE;

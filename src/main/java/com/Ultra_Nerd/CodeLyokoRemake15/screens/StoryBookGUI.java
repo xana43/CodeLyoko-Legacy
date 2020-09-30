@@ -18,7 +18,7 @@ public class StoryBookGUI extends ReadBookScreen {
     private static final int BUTTON_NEXT = 0;
     private static final int BUTTON_PREV = 1;
     private TextFieldWidget story;
-    private int pageIndex = 0;
+    private final int pageIndex = 0;
 
 
     public StoryBookGUI() {

@@ -23,10 +23,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class EntityFan extends TridentEntity implements IAnimatedEntity {
+    private final EntityAnimationManager manager = new EntityAnimationManager();
+    private final EntityAnimationController controller = new EntityAnimationController(this, "fancontroller", 20, this::animationpred);
     private boolean dealtDamage;
     private ItemStack thrownStack = new ItemStack(ModItems.YUMI_TRADITONAL_FANS.get());
-    private final EntityAnimationManager manager = new EntityAnimationManager();
-    private final EntityAnimationController controller = new EntityAnimationController(this,"fancontroller",20,this::animationpred);
+
     public EntityFan(EntityType<? extends TridentEntity> type, World worldIn) {
         super(type, worldIn);
     }
@@ -74,8 +75,8 @@ public class EntityFan extends TridentEntity implements IAnimatedEntity {
 
     private <E extends EntityFan> boolean animationpred(AnimationTestEvent<E> event) {
 
-           controller.setAnimation(new AnimationBuilder().addAnimation("animation.fan.spin",true));
-           return true;
+        controller.setAnimation(new AnimationBuilder().addAnimation("animation.fan.spin", true));
+        return true;
 
 
     }

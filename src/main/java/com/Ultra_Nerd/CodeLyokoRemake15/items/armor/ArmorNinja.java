@@ -20,10 +20,10 @@ public class ArmorNinja extends ArmorItem {
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
 
 
-          RayTraceResult trace = rayTrace(world,player, RayTraceContext.FluidMode.NONE);
-          BlockPos pos = new BlockPos(trace.getHitVec().getX(),trace.getHitVec().getY(),trace.getHitVec().getZ());
-          Block test = world.getWorld().getBlockState(pos).getBlock();
-          
+        RayTraceResult trace = rayTrace(world, player, RayTraceContext.FluidMode.NONE);
+        BlockPos pos = new BlockPos(trace.getHitVec().getX(), trace.getHitVec().getY(), trace.getHitVec().getZ());
+        Block test = world.getWorld().getBlockState(pos).getBlock();
+
 
     }
 }

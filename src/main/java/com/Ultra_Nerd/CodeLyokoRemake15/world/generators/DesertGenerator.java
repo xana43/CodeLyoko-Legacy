@@ -38,7 +38,7 @@ public class DesertGenerator extends NoiseChunkGenerator<DesertGenSettings> {
 
     @Override
     protected double func_222551_g() {
-        return (double) ((int) super.func_222551_g() / 2);
+        return (int) super.func_222551_g() / 2;
     }
 
     @Override

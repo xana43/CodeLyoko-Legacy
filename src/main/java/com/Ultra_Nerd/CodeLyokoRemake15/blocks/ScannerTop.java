@@ -67,8 +67,10 @@ public class ScannerTop extends Block {
             Block.makeCuboidShape(-3, 14.25, 5, -2, 15.25, 11),
             Block.makeCuboidShape(11, 14.25, -3, 14, 15.25, -2),
             Block.makeCuboidShape(2, 14.25, -3, 5, 15.25, -2)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
-    private static final VoxelShape shapeN =Stream.of(
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
+    private static final VoxelShape shapeN = Stream.of(
             Block.makeCuboidShape(19, 0, 4.54762, 20, 15.3, 10.547620000000002),
             Block.makeCuboidShape(-4, 0, 4.54762, -3, 15.3, 10.547620000000002),
             Block.makeCuboidShape(4.999999999999999, 0, -4.452379999999999, 11, 15.3, -3.452379999999999),
@@ -111,7 +113,9 @@ public class ScannerTop extends Block {
             Block.makeCuboidShape(18, 14.25, 4.54762, 19, 15.25, 10.547620000000002),
             Block.makeCuboidShape(1.9999999999999991, 14.25, 17.547620000000002, 4.999999999999999, 15.25, 18.547620000000002),
             Block.makeCuboidShape(11, 14.25, 17.547620000000002, 14, 15.25, 18.547620000000002)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
     private static final VoxelShape shapeW = Stream.of(
             Block.makeCuboidShape(4.77381, 0, -4.22619, 10.773810000000001, 15.3, -3.22619),
             Block.makeCuboidShape(4.77381, 0, 18.77381, 10.773810000000001, 15.3, 19.77381),
@@ -155,7 +159,9 @@ public class ScannerTop extends Block {
             Block.makeCuboidShape(4.77381, 14.25, -3.22619, 10.773810000000001, 15.25, -2.22619),
             Block.makeCuboidShape(17.77381, 14.25, 10.773810000000001, 18.77381, 15.25, 13.773810000000001),
             Block.makeCuboidShape(17.77381, 14.25, 1.77381, 18.77381, 15.25, 4.77381)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
 
     private static final VoxelShape shapeE = Stream.of(
             Block.makeCuboidShape(5.226189999999998, 0, 18.77381, 11.226189999999999, 15.3, 19.77381),
@@ -200,9 +206,11 @@ public class ScannerTop extends Block {
             Block.makeCuboidShape(5.226189999999998, 14.25, 17.77381, 11.226189999999999, 15.25, 18.77381),
             Block.makeCuboidShape(-2.773810000000001, 14.25, 1.7738099999999992, -1.773810000000001, 15.25, 4.773809999999999),
             Block.makeCuboidShape(-2.773810000000001, 14.25, 10.773810000000001, -1.773810000000001, 15.25, 13.773810000000001)
-    ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);}).get();
+    ).reduce((v1, v2) -> {
+        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+    }).get();
 
-    private static final VoxelShape blockShape = Block.makeCuboidShape(0,0,0,16,16,16);
+    private static final VoxelShape blockShape = Block.makeCuboidShape(0, 0, 0, 16, 16, 16);
 
 
     public ScannerTop(Properties properties) {
@@ -210,17 +218,18 @@ public class ScannerTop extends Block {
 
         this.setDefaultState(this.getDefaultState().with(directionPropertyTop, Direction.NORTH).with(scannerFormedTop, false));
     }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(directionPropertyTop,context.getPlacementHorizontalFacing());
+        return this.getDefaultState().with(directionPropertyTop, context.getPlacementHorizontalFacing());
     }
 
     //mod compatiability
     @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(directionPropertyTop,rot.rotate(state.get(directionPropertyTop)));
+        return state.with(directionPropertyTop, rot.rotate(state.get(directionPropertyTop)));
     }
 
     @Nonnull
@@ -237,7 +246,7 @@ public class ScannerTop extends Block {
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
-        if(state.get(scannerFormedTop)) {
+        if (state.get(scannerFormedTop)) {
             switch (state.get(directionPropertyTop)) {
                 case NORTH:
                     return shapeN;

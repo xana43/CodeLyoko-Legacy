@@ -27,7 +27,9 @@ import javax.annotation.Nullable;
 
 public class ElectricFluorideInfuser extends Block {
 
+    public static final BooleanProperty INFUSING = BooleanProperty.create("infusing");
     public static DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+
 
     public ElectricFluorideInfuser() {
         super(Block.Properties.create(Material.IRON)
@@ -44,8 +46,20 @@ public class ElectricFluorideInfuser extends Block {
         // TODO Auto-generated constructor stub
     }
 
-
-    public static final BooleanProperty INFUSING = BooleanProperty.create("infusing");
+    public static void setState(boolean act, World worldIn, BlockPos pos) {
+        BlockState state = worldIn.getBlockState(pos);
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        if (act)
+            worldIn.setBlockState(pos, ModBlocks.ELECTRIC_FLUORIDE_INFUSER.get().getDefaultState()
+                    .with(FACING, state.get(FACING)).with(INFUSING, true), 3);
+        else
+            worldIn.setBlockState(pos, ModBlocks.ELECTRIC_FLUORIDE_INFUSER.get().getDefaultState()
+                    .with(FACING, state.get(FACING)).with(INFUSING, false), 3);
+        if (tileentity != null) {
+            tileentity.validate();
+            worldIn.setTileEntity(pos, tileentity);
+        }
+    }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
@@ -63,21 +77,6 @@ public class ElectricFluorideInfuser extends Block {
             }
         }
         return ActionResultType.SUCCESS;
-    }
-
-    public static void setState(boolean act, World worldIn, BlockPos pos) {
-        BlockState state = worldIn.getBlockState(pos);
-        TileEntity tileentity = worldIn.getTileEntity(pos);
-        if (act)
-            worldIn.setBlockState(pos, ModBlocks.ELECTRIC_FLUORIDE_INFUSER.get().getDefaultState()
-                    .with(FACING, state.get(FACING)).with(INFUSING, true), 3);
-        else
-            worldIn.setBlockState(pos, ModBlocks.ELECTRIC_FLUORIDE_INFUSER.get().getDefaultState()
-                    .with(FACING, state.get(FACING)).with(INFUSING, false), 3);
-        if (tileentity != null) {
-            tileentity.validate();
-            worldIn.setTileEntity(pos, tileentity);
-        }
     }
 
     @Nullable

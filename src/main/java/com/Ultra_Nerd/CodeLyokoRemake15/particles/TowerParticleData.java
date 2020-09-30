@@ -12,14 +12,33 @@ import javax.annotation.Nonnull;
 import java.util.Locale;
 
 public class TowerParticleData implements IParticleData {
-    private final float red,green,blue,alpha;
-    public static final TowerParticleData TOWER_PARTICLE_2 = new TowerParticleData(.125f,.25f,1.f,1.f);
+    public static final TowerParticleData TOWER_PARTICLE_2 = new TowerParticleData(.125f, .25f, 1.f, 1.f);
+    public static final IParticleData.IDeserializer<TowerParticleData> DESERIALIZE = new IParticleData.IDeserializer<TowerParticleData>() {
+        @Override
+        public TowerParticleData deserialize(@Nonnull ParticleType<TowerParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+            reader.expect(' ');
+            float red = (float) reader.readDouble();
+            reader.expect(' ');
+            float green = (float) reader.readDouble();
+            reader.expect(' ');
+            float blue = (float) reader.readDouble();
+            reader.expect(' ');
+            float alpha = (float) reader.readDouble();
+            return new TowerParticleData(red, green, blue, alpha);
+        }
+
+        @Override
+        public TowerParticleData read(@Nonnull ParticleType<TowerParticleData> particleTypeIn, PacketBuffer buffer) {
+            return new TowerParticleData(buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
+        }
+    };
+    private final float red, green, blue, alpha;
 
     public TowerParticleData(float r, float g, float b, float a) {
-        red=r;
-        green=g;
-        blue=b;
-        alpha=a;
+        red = r;
+        green = g;
+        blue = b;
+        alpha = a;
     }
 
     @Nonnull
@@ -41,25 +60,5 @@ public class TowerParticleData implements IParticleData {
     public String getParameters() {
         return String.format(Locale.ROOT, "%s %.2f,%.2f,%.2f,%.2f", Registry.PARTICLE_TYPE.getKey(this.getType()), this.red, this.green, this.blue, this.alpha);
     }
-
-    public static final IParticleData.IDeserializer<TowerParticleData> DESERIALIZE = new IParticleData.IDeserializer<TowerParticleData>() {
-        @Override
-        public TowerParticleData deserialize(@Nonnull ParticleType<TowerParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
-            reader.expect(' ');
-            float red = (float) reader.readDouble();
-            reader.expect(' ');
-            float green = (float) reader.readDouble();
-            reader.expect(' ');
-            float blue = (float) reader.readDouble();
-            reader.expect(' ');
-            float alpha = (float) reader.readDouble();
-            return new TowerParticleData(red, green, blue, alpha);
-        }
-
-        @Override
-        public TowerParticleData read(@Nonnull ParticleType<TowerParticleData> particleTypeIn, PacketBuffer buffer) {
-            return new TowerParticleData(buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
-        }
-    };
 
 }

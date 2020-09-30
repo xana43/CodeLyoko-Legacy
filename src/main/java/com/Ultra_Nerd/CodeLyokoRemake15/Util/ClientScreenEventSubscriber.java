@@ -11,29 +11,24 @@ import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
+
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = Base.MOD_ID,bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ClientScreenEventSubscriber {
 
 
-
     @SubscribeEvent
-    public static void NoE(final GuiScreenEvent.KeyboardKeyEvent event)
-    {
-        if(event.getKeyCode() == GLFW.GLFW_KEY_E)
-        {
-            if(event.getGui() instanceof TowerGUI)
-            {
+    public static void NoE(final GuiScreenEvent.KeyboardKeyEvent event) {
+        if (event.getKeyCode() == GLFW.GLFW_KEY_E) {
+            if (event.getGui() instanceof TowerGUI) {
                 event.setCanceled(true);
             }
         }
     }
 
     @SubscribeEvent
-    public static void CustomMainMenu(final GuiOpenEvent event)
-    {
-        if(event.getGui() instanceof MainMenuScreen)
-        {
+    public static void CustomMainMenu(final GuiOpenEvent event) {
+        if (event.getGui() instanceof MainMenuScreen) {
             event.setGui(new CustomMenuScreen(true));
             //event.setCanceled(true);
         }

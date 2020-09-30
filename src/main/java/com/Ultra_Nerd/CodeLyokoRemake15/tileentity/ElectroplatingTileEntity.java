@@ -47,10 +47,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ElectroplatingTileEntity extends TileEntity implements ITickable, INamedContainerProvider {
-    private boolean once = false;
     private final int maxSmeltTime = 1000;
-    public int currentTime;
     private final CustomItemHandler inventory;
+    public int currentTime;
+    private boolean once = false;
 
     public ElectroplatingTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
@@ -59,21 +59,6 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
 
     public ElectroplatingTileEntity() {
         this(ModTileEntities.ELECTROPLATING_TILE_ENTITY.get());
-    }
-
-    @Nullable
-    private TestRecipe getRecipe(ItemStack stack) {
-        if (stack == null) {
-            return null;
-        }
-        Set<IRecipe<?>> recipes = findRecipesByType(ModRecipes.TYPE, this.world);
-        for (IRecipe<?> Recipe : recipes) {
-            TestRecipe recipe = (TestRecipe) Recipe;
-            if (recipe.matches(new RecipeWrapper(this.inventory), this.world)) {
-                return recipe;
-            }
-        }
-        return null;
     }
 
     public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> type, World world) {
@@ -100,6 +85,29 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
             });
         }
         return inputs;
+    }
+
+    private static void activate() {
+
+    }
+
+    private static void deactivate() {
+
+    }
+
+    @Nullable
+    private TestRecipe getRecipe(ItemStack stack) {
+        if (stack == null) {
+            return null;
+        }
+        Set<IRecipe<?>> recipes = findRecipesByType(ModRecipes.TYPE, this.world);
+        for (IRecipe<?> Recipe : recipes) {
+            TestRecipe recipe = (TestRecipe) Recipe;
+            if (recipe.matches(new RecipeWrapper(this.inventory), this.world)) {
+                return recipe;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -142,7 +150,6 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
         return null;
     }
 
-
     @Nullable
     @Override
     public Container createMenu(final int windowID, @Nonnull final PlayerInventory playerInv, @Nonnull final PlayerEntity playerIn) {
@@ -152,7 +159,7 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
     @Override
     public void read(@Nonnull CompoundNBT compound) {
         super.read(compound);
-        NonNullList<ItemStack> inv = NonNullList.<ItemStack>withSize(this.inventory.getSlots(), ItemStack.EMPTY);
+        NonNullList<ItemStack> inv = NonNullList.withSize(this.inventory.getSlots(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(compound, inv);
         this.inventory.setNonNullList(inv);
         this.currentTime = compound.getInt("currentElectroTime");
@@ -229,14 +236,6 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
         }
         Base.Log.debug("dead");
         return false;
-    }
-
-    private static void activate() {
-
-    }
-
-    private static void deactivate() {
-
     }
 
 

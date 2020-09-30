@@ -22,8 +22,8 @@ import java.util.Objects;
 public class ContainerElectroplate extends Container {
 
     private final IWorldPosCallable canInteractWithCallable;
-    public FunctionalVariableReferenceHolder currentTime;
     private final ElectroplatingTileEntity tileEntity;
+    public FunctionalVariableReferenceHolder currentTime;
 
     public ContainerElectroplate(final int WindowID, final PlayerInventory plinv, final ElectroplatingTileEntity tile) {
         super(ModContainerTypes.ELECTROPLATING_CONTAINER.get(), WindowID);
@@ -63,10 +63,6 @@ public class ContainerElectroplate extends Container {
         this(WindowID, plinv, getTileEntity(plinv, data));
     }
 
-    public ElectroplatingTileEntity getTileEntity() {
-        return this.tileEntity;
-    }
-
     private static ElectroplatingTileEntity getTileEntity(PlayerInventory playerInven, PacketBuffer data) {
         Objects.requireNonNull(playerInven, "playerInventory cannot be null!");
         Objects.requireNonNull(data, "data cannot be null!");
@@ -74,6 +70,10 @@ public class ContainerElectroplate extends Container {
         if (tileAtPos instanceof ElectroplatingTileEntity)
             return (ElectroplatingTileEntity) tileAtPos;
         throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
+    }
+
+    public ElectroplatingTileEntity getTileEntity() {
+        return this.tileEntity;
     }
 
     @Override

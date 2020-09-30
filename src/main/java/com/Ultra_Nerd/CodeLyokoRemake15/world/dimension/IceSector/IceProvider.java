@@ -9,11 +9,12 @@ import javax.annotation.Nonnull;
 import java.util.Set;
 
 public class IceProvider extends BiomeProvider {
+    private static final Set<Biome> List = ImmutableSet.of(ModBiome.ICE.get());
+
     protected IceProvider() {
         super(List);
 
     }
-    private static final Set<Biome> List = ImmutableSet.of(ModBiome.ICE.get());
 
     @Nonnull
     @Override

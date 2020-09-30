@@ -26,6 +26,7 @@ import java.util.Objects;
 public class ContainerInfusing extends Container {
     public final InfusingChamberTileEntity tileentity;
     private int cookTime, totalCookTime, burnTime, currentBurnTime;
+
     protected ContainerInfusing(@Nullable ContainerType<?> type, int id, InfusingChamberTileEntity tileentity) {
         super(type, id);
         this.tileentity = tileentity;

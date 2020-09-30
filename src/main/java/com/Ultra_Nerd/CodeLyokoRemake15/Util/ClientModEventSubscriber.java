@@ -27,13 +27,12 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class ClientModEventSubscriber {
     @SubscribeEvent
-    public static void portalevent(BlockEvent.PortalSpawnEvent event)
-    {
-        if(event.getWorld().getDimension() instanceof Sector5Dimension)
-        {
+    public static void portalevent(BlockEvent.PortalSpawnEvent event) {
+        if (event.getWorld().getDimension() instanceof Sector5Dimension) {
             event.setCanceled(true);
         }
     }
+
     @SubscribeEvent
     public static void registerParticles(ParticleFactoryRegisterEvent event) {
         Minecraft.getInstance().particles.registerFactory(ModParticles.TOWER_PARTICLE.get(), ColoredParticle.Factory::new);
@@ -57,8 +56,8 @@ public class ClientModEventSubscriber {
 
         ModItems.RAW_POLYCARBONATE.get().addPropertyOverride(new ResourceLocation(Base.MOD_ID, "quantity"), (stack, world, entityin) -> {
 
-            if(stack.getCount()>0 && stack.getCount()<65) {
-                return stack.getCount()/100f;
+            if (stack.getCount() > 0 && stack.getCount() < 65) {
+                return stack.getCount() / 100f;
             } else {
                 return 0f;
             }
@@ -95,12 +94,12 @@ public class ClientModEventSubscriber {
         RenderTypeLookup.setRenderLayer(ModBlocks.LYOKO_CORE.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.FRONTIER_BLOCK.get(), RenderType.getCutoutMipped());
         //registers the screens and entities
-        ScreenManager.<ContainerInfusing, InfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
-        ScreenManager.<ContainerElectricInfusing, ElectricInfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_ELECTRIC_INFUSING.get(), ElectricInfusingChamberScreen::new);
-        ScreenManager.<TowerInterfaceContainer, TowerGUI>registerFactory(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);
-        ScreenManager.<QuantumChipletContainer, QuantumChipletScreen>registerFactory(ModContainerTypes.QUANTUM_CHIPLET_CONTAINER.get(), QuantumChipletScreen::new);
-        ScreenManager.<ContainerElectroplate, ElectroplatingScreen>registerFactory(ModContainerTypes.ELECTROPLATING_CONTAINER.get(), ElectroplatingScreen::new);
-        ScreenManager.<ComputerControlPanelContainer,ComputerControlPanelUI>registerFactory(ModContainerTypes.COMPUTER_CONTROL_PANEL_CONTAINER.get(),
+        ScreenManager.registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
+        ScreenManager.registerFactory(ModContainerTypes.CONTAINER_ELECTRIC_INFUSING.get(), ElectricInfusingChamberScreen::new);
+        ScreenManager.registerFactory(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);
+        ScreenManager.registerFactory(ModContainerTypes.QUANTUM_CHIPLET_CONTAINER.get(), QuantumChipletScreen::new);
+        ScreenManager.registerFactory(ModContainerTypes.ELECTROPLATING_CONTAINER.get(), ElectroplatingScreen::new);
+        ScreenManager.registerFactory(ModContainerTypes.COMPUTER_CONTROL_PANEL_CONTAINER.get(),
                 ComputerControlPanelUI::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.BLOK.get(), RendBlok::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LASER.get(), RendLaser::new);
@@ -108,10 +107,10 @@ public class ClientModEventSubscriber {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.HORNET.get(), HornetRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.MEGATANK.get(), MegaTankRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.MANTA.get(), MantaRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SKID.get(),RendSkid::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SKID.get(), RendSkid::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.KANKRELAT.get(), KankrelatRenderder::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.HOVERBOARD.get(), HoverboardRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.OVERBOARD.get(),OverboardRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.OVERBOARD.get(), OverboardRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.GUARDIAN.get(), GuardianRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.OVERBIKE.get(), OverbikeRenderer::new);
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get(), QuantumChipletRenderer::new);

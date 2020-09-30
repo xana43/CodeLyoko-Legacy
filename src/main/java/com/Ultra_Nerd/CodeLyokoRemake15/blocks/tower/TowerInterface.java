@@ -36,10 +36,6 @@ public class TowerInterface extends Block {
     private static final VoxelShape SHAPE_E = Block.makeCuboidShape(4, 9, 1, 13, 9.1, 15);
     private static final VoxelShape SHAPE_W = Block.makeCuboidShape(4, 9, 1, 13, 9.1, 15);
 
-    @Override
-    public boolean canCreatureSpawn(BlockState state, IBlockReader world, BlockPos pos, EntitySpawnPlacementRegistry.PlacementType type, @Nullable EntityType<?> entityType) {
-        return false;
-    }
     public TowerInterface() {
         super(Block.Properties.create(Material.DRAGON_EGG)
 
@@ -50,6 +46,11 @@ public class TowerInterface extends Block {
         );
         this.setDefaultState(this.stateContainer.getBaseState().with(DIRINTERFACE, Direction.NORTH));
 
+    }
+
+    @Override
+    public boolean canCreatureSpawn(BlockState state, IBlockReader world, BlockPos pos, EntitySpawnPlacementRegistry.PlacementType type, @Nullable EntityType<?> entityType) {
+        return false;
     }
 
     @Override

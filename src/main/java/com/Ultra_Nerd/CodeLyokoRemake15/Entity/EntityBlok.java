@@ -24,18 +24,22 @@ public class EntityBlok extends SkeletonEntity implements IAnimatedEntity {
 
 
     private static final EntityAnimationManager manager = new EntityAnimationManager();
-    private final EntityAnimationController controller = new EntityAnimationController(this,"blokcontroller",20,this::pred);
+    private final EntityAnimationController controller = new EntityAnimationController(this, "blokcontroller", 20, this::pred);
+
     public EntityBlok(World world) {
         super(ModEntities.BLOK.get(), world);
         manager.addAnimationController(controller);
     }
 
 
+    public EntityBlok(EntityType<? extends SkeletonEntity> type, World world) {
+        super(type, world);
+        // TODO Auto-generated constructor stub
+    }
 
     private <E extends EntityBlok> boolean pred(AnimationTestEvent<E> event) {
         return false;
     }
-
 
     @Nonnull
     @Override
@@ -46,12 +50,6 @@ public class EntityBlok extends SkeletonEntity implements IAnimatedEntity {
     @Override
     protected boolean isInDaylight() {
         return false;
-    }
-
-
-    public EntityBlok(EntityType<? extends SkeletonEntity> type, World world) {
-        super(type, world);
-        // TODO Auto-generated constructor stub
     }
 
     @Override

@@ -9,10 +9,11 @@ public class CableTE extends TileEntity implements ITickableTileEntity {
     public CableTE(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
-    public CableTE()
-    {
+
+    public CableTE() {
         this(ModTileEntities.CABLE_TILE_ENTITY.get());
     }
+
     @Override
     public void tick() {
 

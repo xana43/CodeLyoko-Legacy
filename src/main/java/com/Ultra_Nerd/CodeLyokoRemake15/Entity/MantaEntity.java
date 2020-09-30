@@ -18,7 +18,8 @@ import javax.annotation.Nonnull;
 
 public class MantaEntity extends PhantomEntity implements IAnimatedEntity, IRangedAttackMob {
     private final EntityAnimationManager manager = new EntityAnimationManager();
-    private final EntityAnimationController controller = new EntityAnimationController(this,"mantamovecontroller",20,this::animationPred);
+    private final EntityAnimationController controller = new EntityAnimationController(this, "mantamovecontroller", 20, this::animationPred);
+
     public MantaEntity(EntityType<? extends MantaEntity> type, World worldIn) {
         super(type, worldIn);
         manager.addAnimationController(controller);
@@ -40,6 +41,7 @@ public class MantaEntity extends PhantomEntity implements IAnimatedEntity, IRang
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
+
     @Override
     public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
 
@@ -47,11 +49,12 @@ public class MantaEntity extends PhantomEntity implements IAnimatedEntity, IRang
         double d0 = target.getPosX() - this.getPosX();
         double d1 = target.getPosYHeight(0.3333333333333333D) - laser.getPosY();
         double d2 = target.getPosZ() - this.getPosZ();
-        double d3 = (double) MathHelper.sqrt(d0 * d0 + d2 * d2);
-        laser.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, (float)(14 - this.world.getDifficulty().getId() * 4));
+        double d3 = MathHelper.sqrt(d0 * d0 + d2 * d2);
+        laser.shoot(d0, d1 + d3 * (double) 0.2F, d2, 1.6F, (float) (14 - this.world.getDifficulty().getId() * 4));
         this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
         this.world.addEntity(laser);
     }
+
     @Override
     public EntityAnimationManager getAnimationManager() {
         return manager;
@@ -59,7 +62,7 @@ public class MantaEntity extends PhantomEntity implements IAnimatedEntity, IRang
 
 
     private <E extends MantaEntity> boolean animationPred(AnimationTestEvent<E> event) {
-       return false;
+        return false;
     }
 
 }

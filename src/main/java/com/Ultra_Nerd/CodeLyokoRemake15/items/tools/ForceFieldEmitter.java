@@ -26,19 +26,19 @@ public class ForceFieldEmitter extends BowItem {
         super(builder);
     }
 
-    @Override
-    public int getUseDuration(@Nonnull ItemStack stack) {
-        return 18000;
-    }
-
     public static float getArrowVelocity(int charge) {
-        float f = (float)charge / 5.0F;
+        float f = (float) charge / 5.0F;
         f = (f * f + f * 2.0F) / 3.0F;
         if (f > 1.0F) {
             f = 1.0F;
         }
 
         return f;
+    }
+
+    @Override
+    public int getUseDuration(@Nonnull ItemStack stack) {
+        return 18000;
     }
 
     @Nonnull
@@ -75,7 +75,7 @@ public class ForceFieldEmitter extends BowItem {
                     worldIn.addEntity(abstractarrowentity);
                 }
 
-                worldIn.playSound((PlayerEntity) null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), ModSounds.LASERARROW.get(), SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                worldIn.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), ModSounds.LASERARROW.get(), SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
                 playerentity.addStat(Stats.ITEM_USED.get(this));
             }

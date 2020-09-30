@@ -18,8 +18,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class ArmorFeline extends ArmorItem {
-    private byte I = 0;
     private final int damage;
+    private byte I = 0;
 
     public ArmorFeline(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
         super(materialIn, slot, builder);

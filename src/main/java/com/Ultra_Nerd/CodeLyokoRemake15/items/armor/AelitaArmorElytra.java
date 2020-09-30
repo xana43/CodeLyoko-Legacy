@@ -77,6 +77,7 @@ public class AelitaArmorElytra extends ArmorItem {
             }
         }
     }
+
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
         if (!checkDim(player)) {
@@ -92,10 +93,8 @@ public class AelitaArmorElytra extends ArmorItem {
             if (player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.AELITA_BOOTS.get()) {
                 player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).setCount(0);
             }
-            for(int I = 0; I < player.inventory.getSizeInventory(); I++)
-            {
-                if(player.inventory.getStackInSlot(I).getItem() == ModItems.FORCE_FIELD_EMITTER.get())
-                {
+            for (int I = 0; I < player.inventory.getSizeInventory(); I++) {
+                if (player.inventory.getStackInSlot(I).getItem() == ModItems.FORCE_FIELD_EMITTER.get()) {
                     player.inventory.setInventorySlotContents(I, ItemStack.EMPTY);
                 }
             }
@@ -103,7 +102,7 @@ public class AelitaArmorElytra extends ArmorItem {
             if (player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get() &&
                     player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() == ModItems.AELITA_LEGGINGS.get() &&
                     player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.AELITA_BOOTS.get()) {
-                if(player.inventory.getStackInSlot(EquipmentSlotType.MAINHAND.getIndex()).getItem() != ModItems.FORCE_FIELD_EMITTER.get()) {
+                if (player.inventory.getStackInSlot(EquipmentSlotType.MAINHAND.getIndex()).getItem() != ModItems.FORCE_FIELD_EMITTER.get()) {
                     player.inventory.add(EquipmentSlotType.MAINHAND.getSlotIndex(), new ItemStack(ModItems.FORCE_FIELD_EMITTER.get(), 1));
                 }
             }

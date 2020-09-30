@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 
 public class ComputerControlPanelTileEntity extends TileEntity implements INamedContainerProvider, ITickableTileEntity {
 
-     // May be accessed before onLoad
+    // May be accessed before onLoad
     @OnlyIn(Dist.CLIENT)
 
     protected int PlayersPresent;
@@ -36,8 +36,6 @@ public class ComputerControlPanelTileEntity extends TileEntity implements INamed
     public ComputerControlPanelTileEntity() {
         this(ModTileEntities.COMPUTER_CONTROL_PLANEL_TILE_ENTITY.get());
     }
-
-
 
 
     @Override
@@ -85,7 +83,6 @@ public class ComputerControlPanelTileEntity extends TileEntity implements INamed
     }
 
 
-
     @Override
     public boolean receiveClientEvent(int id, int type) {
         if (id == 1) {
@@ -95,7 +92,6 @@ public class ComputerControlPanelTileEntity extends TileEntity implements INamed
             return super.receiveClientEvent(id, type);
         }
     }
-
 
 
     @Override

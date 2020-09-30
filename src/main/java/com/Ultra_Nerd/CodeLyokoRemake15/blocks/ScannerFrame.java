@@ -24,6 +24,7 @@ import java.util.stream.Stream;
 
 public class ScannerFrame extends Block {
     public static final DirectionProperty directionPropertyFrame = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty ScannerFrameInvis = BooleanProperty.create("scanner_frame_invis");
     private static final VoxelShape shapeS = Stream.of(
             Block.makeCuboidShape(-4, 0, 5, -3, 15.3, 11),
             Block.makeCuboidShape(19, 0, 5, 20, 15.3, 11),
@@ -148,11 +149,7 @@ public class ScannerFrame extends Block {
     ).reduce((v1, v2) -> {
         return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
     }).get();
-
-    private static final VoxelShape blockShape = Block.makeCuboidShape(0,0,0,16,16,16);
-
-
-    public static final BooleanProperty ScannerFrameInvis = BooleanProperty.create("scanner_frame_invis");
+    private static final VoxelShape blockShape = Block.makeCuboidShape(0, 0, 0, 16, 16, 16);
 
     public ScannerFrame(Properties properties) {
         super(properties);
@@ -164,14 +161,14 @@ public class ScannerFrame extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(directionPropertyFrame,context.getPlacementHorizontalFacing());
+        return this.getDefaultState().with(directionPropertyFrame, context.getPlacementHorizontalFacing());
     }
 
     //mod compatiability
     @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(directionPropertyFrame,rot.rotate(state.get(directionPropertyFrame)));
+        return state.with(directionPropertyFrame, rot.rotate(state.get(directionPropertyFrame)));
     }
 
     @Nonnull
@@ -183,7 +180,7 @@ public class ScannerFrame extends Block {
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
-        if(state.get(ScannerFrameInvis)) {
+        if (state.get(ScannerFrameInvis)) {
             switch (state.get(directionPropertyFrame)) {
                 case NORTH:
                     return shapeN;

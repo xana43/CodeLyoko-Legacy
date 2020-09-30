@@ -38,10 +38,12 @@ public class TowerWallCorner extends Block {
         );
 
     }
+
     @Override
     public boolean canCreatureSpawn(BlockState state, IBlockReader world, BlockPos pos, EntitySpawnPlacementRegistry.PlacementType type, @Nullable EntityType<?> entityType) {
         return false;
     }
+
     @Override
     public int getLightValue(@Nonnull BlockState state) {
         return 5;

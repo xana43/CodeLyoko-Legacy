@@ -26,7 +26,7 @@ public class DigitalSeaBlock extends FlowingFluidBlock {
 
     @Override
     public void onEntityCollision(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
-        if(!(entityIn instanceof MantaEntity)) {
+        if (!(entityIn instanceof MantaEntity)) {
             entityIn.attackEntityFrom(new DamageSource(this.getTranslationKey()), Byte.MAX_VALUE);
         }
     }

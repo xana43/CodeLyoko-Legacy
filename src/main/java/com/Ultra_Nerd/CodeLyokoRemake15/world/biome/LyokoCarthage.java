@@ -4,17 +4,17 @@ import net.minecraft.world.biome.Biome;
 
 public class LyokoCarthage extends Biome {
 
-	public LyokoCarthage(Builder biomeBuilder) {
-		super(biomeBuilder);
-		
-		// TODO Auto-generated constructor stub
-	}
+    public LyokoCarthage(Builder biomeBuilder) {
+        super(biomeBuilder);
 
-	@Override
-	public int getSkyColor() {
-		// TODO Auto-generated method stub
-		return 72;
-	}
+        // TODO Auto-generated constructor stub
+    }
+
+    @Override
+    public int getSkyColor() {
+        // TODO Auto-generated method stub
+        return 72;
+    }
 
 
 }

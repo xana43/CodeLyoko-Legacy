@@ -9,7 +9,4 @@ public class QuantumCore extends Block {
     }
 
 
-
-
-
 }

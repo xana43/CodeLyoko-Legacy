@@ -20,15 +20,14 @@ import java.util.Locale;
 public class ModWorldFeatures {
 
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Base.MOD_ID);
+    //Main Features
+    public static final RegistryObject<TowerStructure> TOWER = FEATURES.register("tower", () -> new TowerStructure(
+            NoFeatureConfig::deserialize));
     //Feature parts
     public static IStructurePieceType TOWER_PART = TowerParts.Part::new;
-    //Main Features
-    public static final RegistryObject<TowerStructure> TOWER = FEATURES.register("tower",() -> new TowerStructure(
-            NoFeatureConfig::deserialize));
 
     @SubscribeEvent
-    public static void RegisterBits(RegistryEvent.Register<Feature<?>> event)
-    {
-        Registry.register(Registry.STRUCTURE_PIECE,"TOWER".toLowerCase(Locale.ROOT),TOWER_PART);
+    public static void RegisterBits(RegistryEvent.Register<Feature<?>> event) {
+        Registry.register(Registry.STRUCTURE_PIECE, "TOWER".toLowerCase(Locale.ROOT), TOWER_PART);
     }
 }

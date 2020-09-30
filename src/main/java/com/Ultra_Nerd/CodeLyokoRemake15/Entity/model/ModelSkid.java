@@ -36,11 +36,12 @@ public class ModelSkid implements IMultipartModelGeometry<OBJModel>, IModelGeome
 
     private final OBJLoader loader = new OBJLoader();
     private final OBJModel objModel;
-    public  IBakedModel bakedModel;
+    public IBakedModel bakedModel;
+
     public ModelSkid() {
 
-        objModel = loader.loadModel(new OBJModel.ModelSettings(new ResourceLocation(Base.MOD_ID,"models/entities/skid/skid.obj"),false,true,
-                true,false,null));
+        objModel = loader.loadModel(new OBJModel.ModelSettings(new ResourceLocation(Base.MOD_ID, "models/entities/skid/skid.obj"), false, true,
+                true, false, null));
         bakedModel = this.getBakedModel();
     }
 
@@ -62,17 +63,17 @@ public class ModelSkid implements IMultipartModelGeometry<OBJModel>, IModelGeome
 
     @Override
     public Collection<Material> getTextures(IModelConfiguration owner, Function<ResourceLocation, IUnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
-        return this.objModel.getTextures(owner,modelGetter,missingTextureErrors);
+        return this.objModel.getTextures(owner, modelGetter, missingTextureErrors);
     }
 
     @Override
     public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
-        return this.objModel.bake(owner,bakery,spriteGetter,modelTransform,overrides,modelLocation);
+        return this.objModel.bake(owner, bakery, spriteGetter, modelTransform, overrides, modelLocation);
     }
 
     @Override
     public void addQuads(IModelConfiguration owner, IModelBuilder<?> modelBuilder, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, IModelTransform modelTransform, ResourceLocation modelLocation) {
-        this.objModel.addQuads(owner,modelBuilder,bakery,spriteGetter,modelTransform,modelLocation);
+        this.objModel.addQuads(owner, modelBuilder, bakery, spriteGetter, modelTransform, modelLocation);
     }
 
     @Nonnull
@@ -89,9 +90,8 @@ public class ModelSkid implements IMultipartModelGeometry<OBJModel>, IModelGeome
     @Nonnull
     @Override
     public OBJModel read(@Nonnull JsonDeserializationContext deserializationContext, @Nonnull JsonObject modelContents) {
-        return this.loader.read(deserializationContext,modelContents);
+        return this.loader.read(deserializationContext, modelContents);
     }
-
 
 
     @Nonnull
@@ -154,8 +154,6 @@ public class ModelSkid implements IMultipartModelGeometry<OBJModel>, IModelGeome
     }
 
     */
-
-
 
 
 }
