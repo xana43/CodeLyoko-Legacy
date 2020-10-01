@@ -5,6 +5,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,6 +18,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ZweihanderWeapon extends SwordItem {
     private final float attackdamage;
@@ -27,6 +29,11 @@ public class ZweihanderWeapon extends SwordItem {
         super(tier, attackDamageIn, attackSpeedIn, builder);
         this.attackspeed = attackSpeedIn;
         this.attackdamage = (float) attackDamageIn + tier.getAttackDamage();
+    }
+
+    @Override
+    public boolean isShield(ItemStack stack, @Nullable LivingEntity entity) {
+        return true;
     }
 
     @Override
