@@ -15,6 +15,8 @@ public class ModItems {
 
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Base.MOD_ID);
+    //for test items
+    public static final RegistryObject<Item> TEST_MULTIPLAYER_PHONE = ITEMS.register("test_multiplayer_phone", () -> new MultiplayerPhone(new Item.Properties().group(Base.LYOKO_ITEMS)));
     //for spawn eggs
     public static final RegistryObject<CustomMobEggs> BLOK_SPAWN_EGG = ITEMS.register("blok_spawn_egg", () -> new CustomMobEggs(ModEntities.BLOK, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<CustomMobEggs> HORNET_SPAWN_EGG = ITEMS.register("hornet_spawn_egg", () -> new CustomMobEggs(ModEntities.HORNET, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
