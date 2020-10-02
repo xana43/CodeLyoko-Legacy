@@ -21,6 +21,12 @@ public class ModItems {
     public static final RegistryObject<CustomMobEggs> MANTA_SPAWN_EGG = ITEMS.register("manta_spawn_egg", () -> new CustomMobEggs(ModEntities.MANTA, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<CustomMobEggs> MEGATANK_SPAWN_EGG = ITEMS.register("megatank_spawn_egg", () -> new CustomMobEggs(ModEntities.MEGATANK, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<CustomMobEggs> KANKRELAT_SPAWN_EGG = ITEMS.register("kankrelat_spawn_egg", () -> new CustomMobEggs(ModEntities.KANKRELAT, 1, 1, new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<CustomMobEggs> GUARDIAN_SPAWN_EGG = ITEMS.register("guardian_spawn_egg", () -> new CustomMobEggs(ModEntities.GUARDIAN,1,1,new Item.Properties().group(Base.LYOKO_ITEMS)));
+    //for spawn items
+    public static final RegistryObject<CustomMobEggs> HOVERBOARD_SPAWN_ITEM = ITEMS.register("hoverboard_spawn_item", () -> new CustomMobEggs(ModEntities.HOVERBOARD,1,1,new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<CustomMobEggs> OVERBOARD_SPAWN_ITEM = ITEMS.register("overboard_spawn_item",() -> new CustomMobEggs(ModEntities.OVERBOARD,1,1,new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<CustomMobEggs> OVERBIKE_SPAWN_ITEM = ITEMS.register("overbike_spawn_item", () -> new CustomMobEggs(ModEntities.OVERBIKE,1,1,new Item.Properties().group(Base.LYOKO_ITEMS)));
+    public static final RegistryObject<CustomMobEggs> SKID_SPAWN_ITEM = ITEMS.register("skid_spawn_item", () -> new CustomMobEggs(ModEntities.SKID,1,1,new Item.Properties().group(Base.LYOKO_ITEMS)));
     //for items
     public static final RegistryObject<Item> APU_PACKAGE_ARM = ITEMS.register("apu_package_arm", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> APU_PACKAGE_x86 = ITEMS.register("apu_package_x86", () -> new ComputerItem(new Item.Properties().group(Base.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
