@@ -1,6 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.enums.LyokoArmorMaterial;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.enums.LyokoTiers;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.*;

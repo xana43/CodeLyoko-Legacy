@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 public class MultiplayerPhone extends Item {
-    private static Minecraft mc = null;
+    private Minecraft mc = null;
     public MultiplayerPhone(Properties properties) {
         super(properties);
         mc = Minecraft.getInstance();
@@ -26,6 +26,16 @@ public class MultiplayerPhone extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, @Nonnull PlayerEntity playerIn, @Nonnull Hand handIn) {
         if (worldIn.getPlayers().size() > 1) {
+            assert this.mc.player != null;
+            this.mc.player.sendMessage(new StringTextComponent("you sent a message"));
+            PlayerEntity[] playerEntities = (PlayerEntity[]) worldIn.getPlayers().toArray();
+            for(PlayerEntity playerEntity : playerEntities)
+            {
+                if(playerEntity != this.mc.player)
+                {
+                    playerEntity.sendMessage(new StringTextComponent("Xana attack repoirted by %s"));
+                }
+            }
             return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
         } else
         {

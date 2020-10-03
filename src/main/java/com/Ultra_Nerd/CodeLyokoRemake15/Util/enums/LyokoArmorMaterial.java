@@ -1,6 +1,8 @@
-package com.Ultra_Nerd.CodeLyokoRemake15.init;
+package com.Ultra_Nerd.CodeLyokoRemake15.Util.enums;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.crafting.Ingredient;

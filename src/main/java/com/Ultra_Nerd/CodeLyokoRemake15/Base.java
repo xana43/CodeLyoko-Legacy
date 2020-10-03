@@ -85,8 +85,8 @@ public class Base {
     public Base() {
 
         final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
-        ModBus.addListener(this::setup);
-        ModBus.addListener(this::dostuff);
+        ModBus.addListener(this::commonSetup);
+        ModBus.addListener(this::clientSetup);
         ModParticles.PARTICLES.register(ModBus);
         ModSounds.SOUNDS.register(ModBus);
         ModItems.ITEMS.register(ModBus);
@@ -157,7 +157,7 @@ public class Base {
         }
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
+    private void commonSetup(final FMLCommonSetupEvent event) {
         DeferredWorkQueue.runLater(ModOreGen::genOre);
         DeferredWorkQueue.runLater(StructGen::genStruct);
     }
@@ -182,7 +182,7 @@ public class Base {
         }
     }
 
-    private void dostuff(final FMLClientSetupEvent event) {
+    private void clientSetup(final FMLClientSetupEvent event) {
     }
 
 

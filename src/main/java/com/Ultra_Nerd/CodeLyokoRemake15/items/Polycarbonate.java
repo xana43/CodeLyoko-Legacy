@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -30,6 +31,10 @@ public class Polycarbonate extends Item {
             stack1.setCount(stack.getCount());
             playerEntity.inventory.setInventorySlotContents(itemSlot, stack1);
             timer = ThreadLocalRandom.current().nextInt(100, 1000);
+        }
+        if(isSelected && entityIn instanceof PlayerEntity)
+        {
+            entityIn.attackEntityFrom(new DamageSource(this.getTranslationKey()),0.2f);
         }
     }
 }
