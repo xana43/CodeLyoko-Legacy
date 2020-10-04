@@ -26,8 +26,8 @@ public class PlayerHealthCustom {
     private static boolean once = false;
     public PlayerHealthCustom()
     {
-     Prevfood = Minecraft.getInstance().player.getFoodStats().getFoodLevel();
-     PrevSaturation = Minecraft.getInstance().player.getFoodStats().getSaturationLevel();
+     Prevfood = 20;
+     PrevSaturation = 20;
     }
 /*
     @SubscribeEvent
@@ -90,8 +90,8 @@ public class PlayerHealthCustom {
             renderEvent.setCanceled(true);
             GL11.glPushMatrix();
             Minecraft.getInstance().getTextureManager().bindTexture(HEALTH_TEX);
-            Minecraft.getInstance().ingameGUI.blit(6, 1,0, 0,30,254);
-            Minecraft.getInstance().ingameGUI.blit(12, scaleH / scaleH,34, 0,58, (int) ((12.7) * Minecraft.getInstance().player.getHealth()));
+            Minecraft.getInstance().ingameGUI.blit(6, 1,0, 0,33,254);
+            Minecraft.getInstance().ingameGUI.blit(12, scaleH / scaleH,62, 0,25, (int) ((12.7) * Minecraft.getInstance().player.getHealth()));
             GL11.glPopMatrix();
 
         }
