@@ -28,7 +28,7 @@ public class ElectroplatingScreen extends ContainerScreen<ContainerElectroplate>
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        String tn = "Electroplating machine";
+        String tn = this.tileEntity.getDisplayName().getUnformattedComponentText();
         this.font.drawString(tn, (this.xSize / 2.f - this.font.getStringWidth(tn) / 2.f), 5, 4210752);
         this.font.drawString(this.player.getDisplayName().getUnformattedComponentText(), 122, this.ySize - 96 + 2, 4210752);
         //this.font.drawString(Integer.toString(this.tileEntity.getENER()), 100, 72, 4210752);

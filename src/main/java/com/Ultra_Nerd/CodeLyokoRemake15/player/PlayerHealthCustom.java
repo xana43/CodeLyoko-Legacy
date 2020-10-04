@@ -1,45 +1,58 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.player;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage.Sector5Dimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoDimension;
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.lwjgl.opengl.GL11;
+@OnlyIn(Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class PlayerHealthCustom {
 
-/*
-    public PlayerHealthCustom(World worldIn, GameProfile gameProfileIn) {
-        super(worldIn, gameProfileIn);
-    }
-
-    @Override
-    protected boolean isPlayer() {
-        return true;
-    }
 
 
-    @Override
-    public void tick() {
-        if(this.getEntity() instanceof PlayerEntity)
+    @SubscribeEvent
+    public static void PlayerHealthRender(final RenderGameOverlayEvent renderEvent)
+    {
+        if(renderEvent.getType() == RenderGameOverlayEvent.ElementType.HEALTH &&(Minecraft.getInstance().player.world.dimension instanceof ForestDimension
+                ||Minecraft.getInstance().player.world.dimension instanceof VolcanoDimension || Minecraft.getInstance().player.world.dimension instanceof Sector5Dimension
+                || Minecraft.getInstance().player.world.dimension instanceof MountainDimension
+                || Minecraft.getInstance().player.world.dimension instanceof IceDimension || Minecraft.getInstance().player.world.dimension instanceof DesertDimension
+                || Minecraft.getInstance().player.world.dimension instanceof OceanDimension))
         {
-            PlayerEntity player = (PlayerEntity)this.getEntity();
-            if (player.world.dimension instanceof ForestDimension || player.world.dimension instanceof VolcanoDimension ||
-                    player.world.dimension instanceof IceDimension || player.world.dimension instanceof Sector5Dimension) {
-
-               if(player.getHealth() != 1) {
-                   player.setGameType(GameType.ADVENTURE);
-                   player.setHealth(1);
-               }
-            }
+            GL11.glPushMatrix();
+            Minecraft.getInstance().ingameGUI.drawString(Minecraft.getInstance().fontRenderer,"test",4,4,0xFFFFFF);
+            GL11.glPopMatrix();
 
         }
+        if(renderEvent.getType() == RenderGameOverlayEvent.ElementType.FOOD&&(Minecraft.getInstance().player.world.dimension instanceof ForestDimension
+                ||Minecraft.getInstance().player.world.dimension instanceof VolcanoDimension || Minecraft.getInstance().player.world.dimension instanceof Sector5Dimension
+                || Minecraft.getInstance().player.world.dimension instanceof MountainDimension
+                || Minecraft.getInstance().player.world.dimension instanceof IceDimension || Minecraft.getInstance().player.world.dimension instanceof DesertDimension
+                || Minecraft.getInstance().player.world.dimension instanceof OceanDimension))
+        {
+            renderEvent.setCanceled(true);
+        }
+        if(renderEvent.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE&&(Minecraft.getInstance().player.world.dimension instanceof ForestDimension
+                ||Minecraft.getInstance().player.world.dimension instanceof VolcanoDimension || Minecraft.getInstance().player.world.dimension instanceof Sector5Dimension
+                || Minecraft.getInstance().player.world.dimension instanceof MountainDimension
+                || Minecraft.getInstance().player.world.dimension instanceof IceDimension || Minecraft.getInstance().player.world.dimension instanceof DesertDimension
+                || Minecraft.getInstance().player.world.dimension instanceof OceanDimension))
+        {
+            renderEvent.setCanceled(true);
+        }
+
     }
 
 
-    @Override
-    public boolean isSpectator() {
-        return false;
-    }
-
-    @Override
-    public boolean isCreative() {
-        return false;
-    }
-
- */
 }
