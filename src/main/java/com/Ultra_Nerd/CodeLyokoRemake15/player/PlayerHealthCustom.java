@@ -13,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.opengl.GL11;
@@ -22,7 +23,7 @@ public class PlayerHealthCustom {
     private static int Prevfood;
     private static float PrevSaturation;
     private static final ResourceLocation HEALTH_TEX = new ResourceLocation(Base.MOD_ID,"textures/gui/lyoko_health_bar.png");
-
+    private static boolean once = false;
     public PlayerHealthCustom()
     {
      Prevfood = Minecraft.getInstance().player.getFoodStats().getFoodLevel();
@@ -44,6 +45,34 @@ public class PlayerHealthCustom {
         }
     }
 */
+    @SubscribeEvent
+    public static void removehunger(final PlayerEvent event)
+    {
+        if(event.getPlayer().world.dimension instanceof ForestDimension
+                ||event.getPlayer().world.dimension instanceof VolcanoDimension || event.getPlayer().world.dimension instanceof Sector5Dimension
+                ||event.getPlayer().world.dimension instanceof MountainDimension
+                || event.getPlayer().world.dimension instanceof IceDimension || event.getPlayer().world.dimension instanceof DesertDimension
+                || event.getPlayer().world.dimension instanceof OceanDimension) {
+            event.getPlayer().getFoodStats().setFoodLevel(20);
+            event.getPlayer().getFoodStats().setFoodSaturationLevel(20);
+            Base.Log.info("true");
+            once = false;
+        }
+        else if (!once)
+        {
+
+            event.getPlayer().getFoodStats().setFoodSaturationLevel(PrevSaturation);
+            event.getPlayer().getFoodStats().setFoodLevel(Prevfood);
+
+            once = true;
+        }
+        else
+        {
+            PrevSaturation = event.getPlayer().getFoodStats().getSaturationLevel();
+            Prevfood = event.getPlayer().getFoodStats().getFoodLevel();
+        }
+
+    }
 
     @SubscribeEvent
     public static void PlayerHealthRender(final RenderGameOverlayEvent renderEvent)
@@ -61,8 +90,8 @@ public class PlayerHealthCustom {
             renderEvent.setCanceled(true);
             GL11.glPushMatrix();
             Minecraft.getInstance().getTextureManager().bindTexture(HEALTH_TEX);
-            Minecraft.getInstance().ingameGUI.blit(6,1,0, 0,30,254);
-            Minecraft.getInstance().ingameGUI.blit(12, 1,34, 0,58, (int) (12.7 * Minecraft.getInstance().player.getHealth()));
+            Minecraft.getInstance().ingameGUI.blit(6, 1,0, 0,30,254);
+            Minecraft.getInstance().ingameGUI.blit(12, scaleH / scaleH,34, 0,58, (int) ((12.7) * Minecraft.getInstance().player.getHealth()));
             GL11.glPopMatrix();
 
         }
@@ -72,9 +101,6 @@ public class PlayerHealthCustom {
                 || Minecraft.getInstance().player.world.dimension instanceof IceDimension || Minecraft.getInstance().player.world.dimension instanceof DesertDimension
                 || Minecraft.getInstance().player.world.dimension instanceof OceanDimension))
         {
-            Minecraft.getInstance().player.getFoodStats().setFoodLevel(20);
-            Minecraft.getInstance().player.getFoodStats().setFoodSaturationLevel(20);
-            Minecraft.getInstance().player.getFoodStats().addExhaustion(-1);
             renderEvent.setCanceled(true);
         }
         if(renderEvent.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE&&(Minecraft.getInstance().player.world.dimension instanceof ForestDimension
