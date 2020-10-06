@@ -13,9 +13,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -49,15 +49,10 @@ public class PlayerDeathCustom {
                     || playerEntity.world.dimension instanceof MountainDimension) {
 
                 playerEntity.world.playSound(null,playerEntity.getPosition(),ModSounds.DEVIRTUALIZATION.get(), SoundCategory.PLAYERS,1,1);
-                Base.Log.info("dead");
+                Minecraft.getInstance().getSoundHandler().stop(SoundEvents.ENTITY_PLAYER_DEATH.getRegistryName(),null);
             }
         }
 
     }
-    @SubscribeEvent
-    public static void PlayerNormalDeathStop(final SoundLoadEvent event)
-    {
 
-     
-    }
 }
