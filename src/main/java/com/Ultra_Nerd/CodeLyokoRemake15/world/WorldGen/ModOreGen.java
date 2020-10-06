@@ -15,6 +15,15 @@ public class ModOreGen {
 
     public static void genOre() {
         for (Biome biome : ForgeRegistries.BIOMES) {
+            //for silica sand
+            if(biome == Biomes.BEACH || biome == Biomes.DESERT || biome ==  Biomes.DESERT_HILLS || biome == Biomes.DESERT_LAKES || biome == Biomes.ERODED_BADLANDS
+                || biome == Biomes.GRAVELLY_MOUNTAINS || biome == Biomes.MODIFIED_GRAVELLY_MOUNTAINS)
+            {
+                ConfiguredPlacement customC = Placement.COUNT_RANGE.configure(new CountRangeConfig(4, 10, 3, 30));
+                biome.addFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, Feature.ORE
+                        .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
+                                ModBlocks.SILICA_SAND.get().getDefaultState(), 10)).withPlacement(customC));
+            }
             //coffinite, uraninite, gummite,torbernite
             if (biome == Biomes.BADLANDS || biome == Biomes.BADLANDS_PLATEAU || biome == Biomes.ERODED_BADLANDS
                     || biome == Biomes.MODIFIED_BADLANDS_PLATEAU || biome == Biomes.MODIFIED_WOODED_BADLANDS_PLATEAU
