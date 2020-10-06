@@ -147,7 +147,7 @@ public class Base {
 
             //Base.Log.debug(random);
             if (random == 0 && !XANA) {
-                random = new Random().nextInt(1000);
+                random = new Random().nextInt(40000);
                 assert Minecraft.getInstance().player != null;
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("xana is attacking"));
                 XANA = true;

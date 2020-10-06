@@ -248,5 +248,16 @@
         "preload": true
       }
     ]
+  },
+  "player.devertualization": {
+    "category": "players",
+    "subtitle": "player devertualize",
+    "sounds": [
+      {
+        "name": "cm:events/player_devertualize",
+        "stream": true,
+        "preload": true
+      }
+    ]
   }
 }

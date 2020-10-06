@@ -42,4 +42,5 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> MEGATANKDIE = SOUNDS.register("entity.megatank.die", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID, "entity.megatank.die")));
     public static final RegistryObject<SoundEvent> HORNETFLY = SOUNDS.register("entity.hornet.fly", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID, "entity.hornet.fly")));
     public static final RegistryObject<SoundEvent> SECTOR5 = SOUNDS.register("sector5", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID, "sector5")));
+    public static final RegistryObject<SoundEvent> DEVIRTUALIZATION = SOUNDS.register("devertualization", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID,"player.devertualization")));
 }
