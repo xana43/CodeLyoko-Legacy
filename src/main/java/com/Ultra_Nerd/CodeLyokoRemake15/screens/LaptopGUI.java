@@ -10,7 +10,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class LaptopGUI extends Screen {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Base.MOD_ID, "textures/gui/towerinterface.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Base.MOD_ID, "textures/gui/laptopguibase.png");
     private int x, y, xSize, ySize;
 
     public LaptopGUI(ITextComponent titleIn) {
@@ -21,8 +21,8 @@ public class LaptopGUI extends Screen {
 
     @Override
     protected void init() {
-        xSize = 200;
-        ySize = 141;
+        xSize = 1280;
+        ySize = 720;
         x = (this.width - xSize) / 2;
         y = (this.height - ySize) / 2;
 
