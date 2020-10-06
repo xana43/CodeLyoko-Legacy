@@ -27,4 +27,7 @@ public class ModContainerTypes {
             .register("electroplating_container", () -> IForgeContainerType.create(ContainerElectroplate::new));
     public static final RegistryObject<ContainerType<ComputerControlPanelContainer>> COMPUTER_CONTROL_PANEL_CONTAINER = CONTAINER_TYPES.register(
             "computer_control_panel_container", () -> IForgeContainerType.create(ComputerControlPanelContainer::new));
+    public static final RegistryObject<ContainerType<ComputerInterfaceContainer>> COMPUTER_INTERFACE_CONTAINER = CONTAINER_TYPES.register(
+            "computer_interface_container",() -> IForgeContainerType.create(ComputerInterfaceContainer::new)
+    );
 }
