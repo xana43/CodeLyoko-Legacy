@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.player;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.screens.TowerGUI;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage.Sector5Dimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimension;
@@ -79,11 +80,13 @@ public class PlayerHealthCustom {
             int scaleW = renderEvent.getWindow().getScaledWidth();
             int scaleH = renderEvent.getWindow().getHeight();
             renderEvent.setCanceled(true);
-            GL11.glPushMatrix();
-            Minecraft.getInstance().getTextureManager().bindTexture(HEALTH_TEX);
-            Minecraft.getInstance().ingameGUI.blit(6, 1, 0, 0, 33, 254);
-            Minecraft.getInstance().ingameGUI.blit(12, scaleH / scaleH, 62, 0, 25, (int) ((12.7) * Minecraft.getInstance().player.getHealth()));
-            GL11.glPopMatrix();
+            if(!(Minecraft.getInstance().currentScreen instanceof TowerGUI)) {
+                GL11.glPushMatrix();
+                Minecraft.getInstance().getTextureManager().bindTexture(HEALTH_TEX);
+                Minecraft.getInstance().ingameGUI.blit(6, 1, 0, 0, 33, 254);
+                Minecraft.getInstance().ingameGUI.blit(12, scaleH / scaleH, 62, 0, 25, (int) ((12.7) * Minecraft.getInstance().player.getHealth()));
+                GL11.glPopMatrix();
+            }
 
         }
         if (renderEvent.getType() == RenderGameOverlayEvent.ElementType.FOOD && (Minecraft.getInstance().player.world.dimension instanceof ForestDimension

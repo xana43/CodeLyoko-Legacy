@@ -39,7 +39,7 @@ ordering = "NONE"
 side = "BOTH"
 [[dependencies.cm]]
 modId = "patchouli"
-mandatory = false
+mandatory = true
 versionRange = "[1.15.2-1.2-35.2,)"
 ordering = "NONE"
 side = "BOTH"
