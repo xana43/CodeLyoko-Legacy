@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.player;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.screens.TowerGUI;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage.Sector5Dimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimension;
@@ -10,6 +9,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoDimension;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -80,7 +80,7 @@ public class PlayerHealthCustom {
             int scaleW = renderEvent.getWindow().getScaledWidth();
             int scaleH = renderEvent.getWindow().getHeight();
             renderEvent.setCanceled(true);
-            if(!(Minecraft.getInstance().currentScreen instanceof TowerGUI)) {
+            if(!(Minecraft.getInstance().currentScreen instanceof ContainerScreen)) {
                 GL11.glPushMatrix();
                 Minecraft.getInstance().getTextureManager().bindTexture(HEALTH_TEX);
                 Minecraft.getInstance().ingameGUI.blit(6, 1, 0, 0, 33, 254);

@@ -18,13 +18,12 @@ import javax.annotation.Nullable;
 
 public class Sector5Dimension extends Dimension {
 
-    private static CustomCarthadgeSky carthadgeSky = null;
+
     public static final BlockPos SPAWN = new BlockPos(0, 128, 0);
 
     public Sector5Dimension(World world, DimensionType type) {
         super(world, type, 0.0f);
-        carthadgeSky = new CustomCarthadgeSky();
-        this.setSkyRenderer(carthadgeSky);
+        this.setSkyRenderer(new CustomCarthadgeSky());
     }
 
     @Nonnull
@@ -116,10 +115,4 @@ public class Sector5Dimension extends Dimension {
         return false;
     }
 
-
-    @Nullable
-    @Override
-    public IRenderHandler getSkyRenderer() {
-        return carthadgeSky;
-    }
 }

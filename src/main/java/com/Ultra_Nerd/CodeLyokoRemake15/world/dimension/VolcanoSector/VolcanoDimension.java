@@ -17,11 +17,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class VolcanoDimension extends Dimension {
-    private static final CustomVolcanoSky customVolcanoSky = new CustomVolcanoSky();
-
     public VolcanoDimension(World world, DimensionType type) {
         super(world, type, 0f);
-        this.setSkyRenderer(customVolcanoSky);
+        this.setSkyRenderer(new CustomVolcanoSky());
         this.getLightBrightness(1);
 
     }

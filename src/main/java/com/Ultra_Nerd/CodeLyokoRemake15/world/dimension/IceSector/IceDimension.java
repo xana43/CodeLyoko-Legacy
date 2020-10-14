@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.ice.CustomIceSky;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.generators.IceGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -15,6 +16,7 @@ import javax.annotation.Nullable;
 public class IceDimension extends Dimension {
     public IceDimension(World p_i225788_1_, DimensionType p_i225788_2_) {
         super(p_i225788_1_, p_i225788_2_, 0);
+        this.setSkyRenderer(new CustomIceSky());
     }
 
     @Nonnull
