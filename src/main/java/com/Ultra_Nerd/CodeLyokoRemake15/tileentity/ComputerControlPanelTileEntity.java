@@ -34,7 +34,7 @@ public class ComputerControlPanelTileEntity extends TileEntity implements INamed
     }
 
     public ComputerControlPanelTileEntity() {
-        this(ModTileEntities.COMPUTER_CONTROL_PLANEL_TILE_ENTITY.get());
+        this(ModTileEntities.COMPUTER_CONTROL_PANEL_TILE_ENTITY.get());
     }
 
 

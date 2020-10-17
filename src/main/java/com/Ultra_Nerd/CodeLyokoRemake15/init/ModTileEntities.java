@@ -38,11 +38,11 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<ElectroplatingTileEntity>> ELECTROPLATING_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("electroplating_tile_entity", () -> TileEntityType.Builder.create(ElectroplatingTileEntity::new
                     , ModBlocks.ELECTROPLATING_MACHINE.get()).build(null));
-    public static final RegistryObject<TileEntityType<ComputerControlPanelTileEntity>> COMPUTER_CONTROL_PLANEL_TILE_ENTITY =
+    public static final RegistryObject<TileEntityType<ComputerControlPanelTileEntity>> COMPUTER_CONTROL_PANEL_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("computer_control_panel_tile_entity", () -> TileEntityType.Builder.create(ComputerControlPanelTileEntity::new
                     , ModBlocks.COMPUTER_TOWER_CONTROL_PANEL.get()).build(null));
-    public static final RegistryObject<TileEntityType<CableTE>> CABLE_TILE_ENTITY = TILE_ENTITY_TYPES.register(
-            "cable_tile_entity", () -> TileEntityType.Builder.create(CableTE::new,
+    public static final RegistryObject<TileEntityType<CableTileEntity>> CABLE_TILE_ENTITY = TILE_ENTITY_TYPES.register(
+            "cable_tile_entity", () -> TileEntityType.Builder.create(CableTileEntity::new,
                     ModBlocks.CABLE_BLOCK.get()).build(null));
     public static final RegistryObject<TileEntityType<RouterTE>> ROUTER_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("router_tile_entity", () -> TileEntityType.Builder.create(RouterTE::new,

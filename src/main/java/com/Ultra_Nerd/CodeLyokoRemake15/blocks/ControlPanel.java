@@ -197,7 +197,7 @@ public class ControlPanel extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return ModTileEntities.COMPUTER_CONTROL_PLANEL_TILE_ENTITY.get().create();
+        return ModTileEntities.COMPUTER_CONTROL_PANEL_TILE_ENTITY.get().create();
     }
 
     @Nonnull

@@ -31,10 +31,10 @@ public class TowerInterface extends Block {
 
     public static final DirectionProperty DIRINTERFACE = BlockStateProperties.HORIZONTAL_FACING;
 
-    private static final VoxelShape SHAPE_N = Block.makeCuboidShape(1, 9, 3, 15, 9.1, 12);
-    private static final VoxelShape SHAPE_S = Block.makeCuboidShape(1, 9, 3, 15, 9.1, 12);
-    private static final VoxelShape SHAPE_E = Block.makeCuboidShape(4, 9, 1, 13, 9.1, 15);
-    private static final VoxelShape SHAPE_W = Block.makeCuboidShape(4, 9, 1, 13, 9.1, 15);
+    private static final VoxelShape SHAPE_N = Block.makeCuboidShape(1, 1, 9, 15, 15, 9.1);
+    private static final VoxelShape SHAPE_S = Block.makeCuboidShape(1, 1, 9, 15, 15, 9.1);
+    private static final VoxelShape SHAPE_E = Block.makeCuboidShape(9, 1, 1, 9.1, 15, 15);
+    private static final VoxelShape SHAPE_W = Block.makeCuboidShape(9, 1, 1, 9.1, 15, 15);
 
     @Override
     public boolean canCreatureSpawn(BlockState state, IBlockReader world, BlockPos pos, EntitySpawnPlacementRegistry.PlacementType type, @Nullable EntityType<?> entityType) {
