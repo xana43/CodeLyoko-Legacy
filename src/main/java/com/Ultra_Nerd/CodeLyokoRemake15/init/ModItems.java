@@ -133,8 +133,6 @@ public class ModItems {
     public static final RegistryObject<Item> URANIUM_MELT = ITEMS.register("uranium_melt", ItemBase::new);
     public static final RegistryObject<Item> URANIUM_ISOTOPE238 = ITEMS.register("uranium_isotope238", ItemBase::new);
     public static final RegistryObject<Item> URANIUM_ISOTOPE235 = ITEMS.register("uranium_isotope235", ItemBase::new);
-
-
     //for tools
     public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().group(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> TRUSTTY_SCREWDRIVER = ITEMS.register("trusty_screwdriver", () -> new TrustyScrewDriverItem(new Item.Properties().group(Base.LYOKO_ITEMS)));
@@ -148,7 +146,6 @@ public class ModItems {
     public static final RegistryObject<SwordItem> ZWEIHANDER = ITEMS.register("zweihander", () -> new ZweihanderWeapon(LyokoTiers.LyokoWarrior, 60, -3.9f, new Item.Properties().group(Base.LYOKO_WEAPONS)));
     public static final RegistryObject<BowItem> FORCE_FIELD_EMITTER = ITEMS.register("force_field_emitter", () -> new ForceFieldEmitter(new Item.Properties().group(Base.LYOKO_WEAPONS).rarity(Rarity.EPIC)));
     public static final RegistryObject<BowItem> ARCHER_BOW = ITEMS.register("archer_bow", () -> new ArcherClassBow(new Item.Properties().group(Base.LYOKO_WEAPONS).maxDamage(40)));
-
     //for armor
     public static final RegistryObject<ArmorItem> AELITA_CHESTPLATE = ITEMS.register("aelita_chestplate", () -> new AelitaArmorElytra(LyokoArmorMaterial.GUARDIAN, EquipmentSlotType.CHEST, new Item.Properties().group(Base.LYOKO_ARMOR)));
     public static final RegistryObject<ArmorItem> AELITA_LEGGINGS = ITEMS.register("aelita_leggings", () -> new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlotType.LEGS, new Item.Properties().group(Base.LYOKO_ARMOR)));
@@ -174,4 +171,5 @@ public class ModItems {
     public static final RegistryObject<ArmorItem> JEREMY_BOOTS = ITEMS.register("jeremy_boots", () -> new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlotType.FEET, new Item.Properties().group(Base.LYOKO_ARMOR)));
     //for buckets
     public static final RegistryObject<BucketItem> LIQUID_HELIUM_BUCKET = ITEMS.register("liquid_helium_bucket", () -> new BucketItem(ModFluids.STILL_LIQUID_HELIUM, new Item.Properties().group(Base.LYOKO_ITEMS).maxStackSize(1)));
+
 }

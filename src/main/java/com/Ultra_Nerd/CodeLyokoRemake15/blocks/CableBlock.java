@@ -24,7 +24,6 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CableBlock extends FenceBlock {
 
@@ -84,7 +83,7 @@ public class CableBlock extends FenceBlock {
     @Override
     public boolean isTransparent(@Nonnull BlockState state) {
         // TODO Auto-generated method stub
-        return true;
+        return false;
     }
 
     @Override
