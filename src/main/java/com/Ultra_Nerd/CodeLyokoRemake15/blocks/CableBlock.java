@@ -93,69 +93,27 @@ public class CableBlock extends FenceBlock {
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
                 for (int z = -1; z < 2; z++) {
-                    TileEntity surrounding = worldIn.getTileEntity(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
-                    if (surrounding instanceof CableTileEntity) {
-                        if (CableTileEntity.CONNECTIONS.containsKey(surrounding)) {
-                            CableTileEntity.CONNECTIONS.get(surrounding).add(worldIn.getTileEntity(pos));
-                            CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                    if (!(x == 0 && y == 0 && z == 0)) {
+                        TileEntity surrounding = worldIn.getTileEntity(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
+                        if (surrounding instanceof CableTileEntity) {
+                            if (CableTileEntity.CONNECTIONS.containsKey(surrounding)) {
+                                CableTileEntity.CONNECTIONS.get(surrounding).add(worldIn.getTileEntity(pos));
+                                CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                            }
                         }
-                    }
-                    if (surrounding instanceof ScannerTileEntity) {
-                        CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
-                        thisTE.connectToScanner();
-                    }
-                    if (surrounding instanceof ComputerControlPanelTileEntity) {
-                        CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
-                        thisTE.connectToComp();
+                        if (surrounding instanceof ScannerTileEntity) {
+                            CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                            thisTE.connectToScanner();
+                        }
+                        if (surrounding instanceof ComputerControlPanelTileEntity) {
+                            CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                            thisTE.connectToComp();
+                        }
                     }
                 }
             }
         }
     }
 
-    @Override
-    public void onBlockAdded(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull BlockState oldState, boolean isMoving) {
-
-        //int counter = 0;
-        //BlockState around;
-        CableTileEntity thisTE = (CableTileEntity) worldIn.getTileEntity(pos);
-        CableTileEntity.CONNECTIONS.put(thisTE, new ArrayList<>());
-        for (int x = -1; x < 2; x++) {
-            for (int y = -1; y < 2; y++) {
-                for (int z = -1; z < 2; z++) {
-                    TileEntity surrounding = worldIn.getTileEntity(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
-                    if (surrounding instanceof CableTileEntity) {
-                        if (CableTileEntity.CONNECTIONS.containsKey(surrounding)) {
-                            CableTileEntity.CONNECTIONS.get(surrounding).add(worldIn.getTileEntity(pos));
-                            CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
-                        }
-                    }
-                    if (surrounding instanceof ScannerTileEntity) {
-                        CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
-                        thisTE.connectToScanner();
-                    }
-                    if (surrounding instanceof ComputerControlPanelTileEntity) {
-                        CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
-                        thisTE.connectToComp();
-                    }
-                }
-            }
-        }
-
-    }
-
-    @Override
-    public void onPlayerDestroy(@Nonnull IWorld worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state) {
-        CableTileEntity thisTE = (CableTileEntity) worldIn.getTileEntity(pos);
-        ArrayList<TileEntity> toDisconnect = CableTileEntity.CONNECTIONS.get(thisTE);
-        thisTE.disconnectToComp();
-        thisTE.disconnectToScanner();
-        CableTileEntity.CONNECTIONS.remove(thisTE);
-        for (TileEntity te : toDisconnect) {
-            if(te instanceof CableTileEntity) {
-                CableTileEntity.CONNECTIONS.get(te).remove(thisTE);
-            }
-        }
-    }
 
 }

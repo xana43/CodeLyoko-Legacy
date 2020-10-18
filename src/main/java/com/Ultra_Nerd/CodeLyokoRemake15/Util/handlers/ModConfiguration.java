@@ -1,7 +1,54 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers;
 
-public class Conf {
-	
+import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.CableTileEntity;
+import com.google.gson.Gson;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.config.ModConfig;
+import org.apache.commons.lang3.tuple.Pair;
+
+@Mod.EventBusSubscriber(bus= Bus.MOD, modid = Base.MOD_ID)
+public class ModConfiguration {
+
+    protected static final Gson gson = new Gson();
+
+    public static class Common {
+
+        //private final String data = gson.toJson(CableTileEntity.CONNECTIONS);
+
+        public Common(ForgeConfigSpec.Builder builder) {
+            builder.comment("Code Lyoko : Legacy \n Mod configuration")
+                    .push("CL:L");
+            /*builder.comment(data)
+                    .translation("cm.cable_network")
+                    .worldRestart();*/
+            builder.pop();
+        }
+    }
+
+    public static final ForgeConfigSpec COMMON_SPEC;
+    public static final Common COMMON;
+    static {
+        final Pair<Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Common::new);
+        COMMON_SPEC = specPair.getRight();
+        COMMON = specPair.getLeft();
+    }
+
+    @SubscribeEvent
+    public static void onLoad(final ModConfig.Loading event) {
+        //gson.fromJson();
+    }
+
+    @SubscribeEvent
+    public static void onFileChange(final ModConfig.Reloading event) {
+
+    }
+}
+
+
 /*
 	public static Configuration conf;
 	public static int SKID = 5678546;
@@ -18,7 +65,7 @@ public class Conf {
 	public static int ELEINFUSING = 124879;
 	public static int ENTITY_LARROW = 3406743;
 	public static boolean spawnLyokoOverWorld = false;
-	
+
 	public static void fil(File file)
 	{
 		conf = new Configuration(file);
@@ -41,7 +88,7 @@ public class Conf {
 		spawnLyokoOverWorld = conf.getBoolean("Spawnall the sectors in the overworld", cat, false, "this allows you to spawn the forest sector in the overworld");
 		conf.save();
 	}
-	
+
 	public static void RegisCon(FMLPreInitializationEvent event)
 	{
 		Base.conf = new File(event.getModConfigurationDirectory() + "/" + ref.MOD_ID);
@@ -50,4 +97,3 @@ public class Conf {
 	}
 
  */
-}

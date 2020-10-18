@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15;
 
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.ModConfiguration;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LiquidHelium;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LyokoCore;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.SeaPylon;
@@ -27,9 +28,11 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -101,7 +104,7 @@ public class Base {
         ModWorldFeatures.FEATURES.register(ModBus);
         instance = this;
         MinecraftForge.EVENT_BUS.register(this);
-
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfiguration.COMMON_SPEC, "code_lyoko_legagy.toml");
     }
 
     public static IMultiblock registerMultiBlocks(ResourceLocation resourceLocation, IMultiblock multiblock) {
