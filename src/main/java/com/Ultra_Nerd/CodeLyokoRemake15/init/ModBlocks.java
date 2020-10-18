@@ -32,7 +32,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> AUTUNITE_ORE = BLOCKS.register("autunite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3, 2).sound(SoundType.STONE).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> BLACK_VOID = BLOCKS.register("black_void", BlackVoid::new);
     public static final RegistryObject<Block> BORNITE_ORE = BLOCKS.register("bornite_ore", () -> new Block(Block.Properties.from(Blocks.IRON_ORE)));
-    public static final RegistryObject<Block> CABLE_BLOCK = BLOCKS.register("cable_block", () -> new CableBlock(Block.Properties.from(Blocks.ACACIA_FENCE)));
+    public static final RegistryObject<Block> CABLE_BLOCK = BLOCKS.register("cable_block", () -> new CableBlock(Block.Properties.from(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> CHALCOPYRITE_ORE = BLOCKS.register("chalcopyrite_ore", () -> new Block(Block.Properties.from(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> COVELLITE_ORE = BLOCKS.register("covellite_ore", () -> new Block(Block.Properties.from(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> CHALCOCITE_ORE = BLOCKS.register("chalcocite_ore", () -> new Block(Block.Properties.from(Blocks.IRON_ORE)));
