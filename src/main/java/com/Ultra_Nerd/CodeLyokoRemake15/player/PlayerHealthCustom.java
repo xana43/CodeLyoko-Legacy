@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage.Sector5Dimensio
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Frontier.FrontierDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoDimension;
@@ -51,23 +52,25 @@ public class PlayerHealthCustom {
 
     @SubscribeEvent
     public static void removehunger(final PlayerEvent event) {
-        if (event.getPlayer().world.dimension instanceof ForestDimension
-                || event.getPlayer().world.dimension instanceof VolcanoDimension || event.getPlayer().world.dimension instanceof Sector5Dimension
-                || event.getPlayer().world.dimension instanceof MountainDimension
-                || event.getPlayer().world.dimension instanceof IceDimension || event.getPlayer().world.dimension instanceof DesertDimension
-                || event.getPlayer().world.dimension instanceof OceanDimension) {
-            event.getPlayer().getFoodStats().setFoodLevel(20);
-            event.getPlayer().getFoodStats().setFoodSaturationLevel(20);
-            once = false;
-        } else if (!once) {
-            event.getPlayer().getFoodStats().setFoodSaturationLevel(PrevSaturation);
-            event.getPlayer().getFoodStats().setFoodLevel(Prevfood);
-            once = true;
-        } else {
-            PrevSaturation = event.getPlayer().getFoodStats().getSaturationLevel();
-            Prevfood = event.getPlayer().getFoodStats().getFoodLevel();
+        if (event.getPlayer() != null) {
+            if (event.getPlayer().world.dimension instanceof ForestDimension
+                    || event.getPlayer().world.dimension instanceof VolcanoDimension || event.getPlayer().world.dimension instanceof Sector5Dimension
+                    || event.getPlayer().world.dimension instanceof MountainDimension
+                    || event.getPlayer().world.dimension instanceof IceDimension || event.getPlayer().world.dimension instanceof DesertDimension
+                    || event.getPlayer().world.dimension instanceof OceanDimension
+                    || event.getPlayer().world.dimension instanceof FrontierDimension) {
+                event.getPlayer().getFoodStats().setFoodLevel(20);
+                event.getPlayer().getFoodStats().setFoodSaturationLevel(20);
+                once = false;
+            } else if (!once) {
+                event.getPlayer().getFoodStats().setFoodSaturationLevel(PrevSaturation);
+                event.getPlayer().getFoodStats().setFoodLevel(Prevfood);
+                once = true;
+            } else {
+                PrevSaturation = event.getPlayer().getFoodStats().getSaturationLevel();
+                Prevfood = event.getPlayer().getFoodStats().getFoodLevel();
+            }
         }
-
     }
 
     @SubscribeEvent
@@ -76,7 +79,8 @@ public class PlayerHealthCustom {
                 || Minecraft.getInstance().player.world.dimension instanceof VolcanoDimension || Minecraft.getInstance().player.world.dimension instanceof Sector5Dimension
                 || Minecraft.getInstance().player.world.dimension instanceof MountainDimension
                 || Minecraft.getInstance().player.world.dimension instanceof IceDimension || Minecraft.getInstance().player.world.dimension instanceof DesertDimension
-                || Minecraft.getInstance().player.world.dimension instanceof OceanDimension)) {
+                || Minecraft.getInstance().player.world.dimension instanceof OceanDimension
+                || Minecraft.getInstance().player.world.dimension instanceof FrontierDimension)) {
             int scaleW = renderEvent.getWindow().getScaledWidth();
             int scaleH = renderEvent.getWindow().getHeight();
             renderEvent.setCanceled(true);
