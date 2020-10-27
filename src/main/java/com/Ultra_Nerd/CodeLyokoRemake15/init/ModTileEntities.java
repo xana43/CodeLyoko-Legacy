@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.*;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test.DataTransferInterfaceTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test.TestTE;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
@@ -53,4 +54,7 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<TestTE>> TEST_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("test_tile_entity", () -> TileEntityType.Builder.create(TestTE::new,
                     ModBlocks.BLOCK_PATTERN.get()).build(null));
+    public static final RegistryObject<TileEntityType<DataTransferInterfaceTileEntity>> DATA_TRANSFER_INTERFACE_TILE_ENTITY =
+            TILE_ENTITY_TYPES.register("data_transfer_interface_tile_entity", () -> TileEntityType.Builder.create(DataTransferInterfaceTileEntity::new,
+                    ModBlocks.DATA_TRANSFER_INTERFACE.get()).build(null));
 }

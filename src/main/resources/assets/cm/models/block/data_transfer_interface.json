@@ -1,0 +1,6 @@
+{
+  "parent": "cube/all",
+  "textures": {
+    "all": "cm:block/tower_wall"
+  }
+}
