@@ -116,6 +116,8 @@ public class ClientModEventSubscriber {
         ScreenManager.<ContainerElectroplate, ElectroplatingScreen>registerFactory(ModContainerTypes.ELECTROPLATING_CONTAINER.get(), ElectroplatingScreen::new);
         ScreenManager.<ComputerControlPanelContainer, ComputerControlPanelUI>registerFactory(ModContainerTypes.COMPUTER_CONTROL_PANEL_CONTAINER.get(),
                 ComputerControlPanelUI::new);
+        ScreenManager.<DataTransferInterfaceContainer, DataTransferInterfaceUI>registerFactory(ModContainerTypes.DATA_TRANSFER_INTERFACE_CONTAINER.get(),
+                DataTransferInterfaceUI::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.BLOK.get(), RendBlok::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LASER.get(), RendLaser::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FAN.get(), RendFan::new);

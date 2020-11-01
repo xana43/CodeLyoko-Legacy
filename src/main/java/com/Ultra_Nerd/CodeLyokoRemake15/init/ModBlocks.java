@@ -8,6 +8,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.saplings.DigitalMountainSapling;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.saplings.DigitalSapling;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tests.BlockPatternTest;
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tests.DataTransferInterface;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tests.TestBlockPortal;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.DigitalForestTree;
@@ -49,7 +50,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> COMPUTER_TOWER_CONTROL_PANEL = BLOCKS.register("computer_tower_control_panel", ControlPanel::new);
     public static final RegistryObject<Block> COFFINITE_ORE = BLOCKS.register("coffinite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> CARNOTITE_ORE = BLOCKS.register("carnotite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
-    public static final RegistryObject<Block> DATA_TRANSFER_INTERFACE = BLOCKS.register("data_transfer_interface", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(-1)));
+    public static final RegistryObject<Block> DATA_TRANSFER_INTERFACE = BLOCKS.register("data_transfer_interface", DataTransferInterface::new);
     public static final RegistryObject<Block> DIGITAL_SEA_PYLON = BLOCKS.register("digital_sea_pylon", SeaPylon::new);
     public static final RegistryObject<Block> DIGITAL_GRASS = BLOCKS.register("digital_grass", () -> new Block(Block.Properties.from(Blocks.GRASS_BLOCK)));
     public static final RegistryObject<Block> DIGITAL_DIRT = BLOCKS.register("digital_dirt", () -> new Block(Block.Properties.from(Blocks.DIRT)));

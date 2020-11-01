@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.containers.DataTransferInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,6 +32,6 @@ public class DataTransferInterfaceTileEntity extends TileEntity implements IName
 
     @Override
     public Container createMenu(int windowIn, @Nonnull PlayerInventory playerInventory, @Nonnull PlayerEntity playerEntity) {
-        return null;
+        return new DataTransferInterfaceContainer(windowIn, playerInventory, this);
     }
 }

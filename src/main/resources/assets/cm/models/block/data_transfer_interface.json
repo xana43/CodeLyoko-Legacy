@@ -1,5 +1,5 @@
 {
-  "parent": "cube/all",
+  "parent": "block/cube_all",
   "textures": {
     "all": "cm:block/tower_wall"
   }
