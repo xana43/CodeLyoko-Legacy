@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -53,6 +54,8 @@ public class CableTileEntity extends TileEntity implements ITickableTileEntity {
     public void disconnectToComp() {
         this.connectedToComp = false;
     }
+
+
 
     @Override
     public void tick() {

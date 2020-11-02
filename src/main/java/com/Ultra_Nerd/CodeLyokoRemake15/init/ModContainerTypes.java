@@ -30,4 +30,8 @@ public class ModContainerTypes {
     public static final RegistryObject<ContainerType<ComputerInterfaceContainer>> COMPUTER_INTERFACE_CONTAINER = CONTAINER_TYPES.register(
             "computer_interface_container",() -> IForgeContainerType.create(ComputerInterfaceContainer::new)
     );
+    public static final RegistryObject<ContainerType<DataTransferInterfaceContainer>> DATA_TRANSFER_INTERFACE_CONTAINER = CONTAINER_TYPES.register(
+            "data_transfer_interface_container", () -> IForgeContainerType.create(DataTransferInterfaceContainer::new)
+    );
+
 }

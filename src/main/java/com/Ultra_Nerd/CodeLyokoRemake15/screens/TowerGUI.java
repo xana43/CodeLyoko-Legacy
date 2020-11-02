@@ -64,11 +64,11 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer> {
     }
 
     @Override
-    public void render(int p_render_1_, int p_render_2_, float p_render_3_) {
+    public void render(int mouseX, int mouseY, float partialTicks) {
         this.renderBackground();
-        super.render(p_render_1_, p_render_2_, p_render_3_);
-        this.text.render(p_render_1_, p_render_2_, p_render_3_);
-        this.Accepted.render(p_render_1_, p_render_2_, p_render_3_);
+        super.render(mouseX, mouseY, partialTicks);
+        this.text.render(mouseX, mouseY, partialTicks);
+        this.Accepted.render(mouseX, mouseY, partialTicks);
     }
 
     @SubscribeEvent
