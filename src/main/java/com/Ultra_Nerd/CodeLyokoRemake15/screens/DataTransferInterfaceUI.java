@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.DataTransferInterfaceContainer;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.ToggleWidget;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -45,15 +44,17 @@ public class DataTransferInterfaceUI extends ContainerScreen<DataTransferInterfa
     private void setButtonCarthage() {
         int tx = this.width / 2;
         int ty = this.height / 2;
+        assert this.minecraft != null;
+        this.minecraft.getTextureManager().bindTexture(GUI_TEX);
         FontRenderer gunship_font = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation("cm:gunship"));
         this.buttonCarthage = new Button(tx,ty,41,41, "Carthage", (input) -> {});
-        this.buttonCarthage.blit(x,y, 128,0,41,41);
+        this.buttonCarthage.blit(x,y,128,0,41,41);
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+        assert this.minecraft != null;
         this.minecraft.getTextureManager().bindTexture(GUI_TEX);
-
         this.blit(x, y, 0, 0, this.xSize, this.ySize);
     }
 }
