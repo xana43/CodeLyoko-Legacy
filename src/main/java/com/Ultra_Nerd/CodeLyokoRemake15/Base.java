@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15;
 
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.ModConfiguration;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LiquidHelium;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LyokoCore;
@@ -52,41 +53,43 @@ public class Base {
     public static final Logger Log = LogManager.getLogger();
     public static final String MOD_ID = "cm";
     public static final Map<ResourceLocation, IMultiblock> MULTIBLOCK_MAP = new ConcurrentHashMap<>();
-    public static final ItemGroup LYOKO_BLOCKS = new ItemGroup("lyoko_blocks") {
 
+    public static final ItemGroup LYOKO_BLOCKS = new ItemGroup("lyoko_blocks") {
         @Override
         public ItemStack createIcon() {
             // TODO Auto-generated method stub
             return new ItemStack(ModBlocks.TOWER_INTERFACE.get());
         }
     };
+
     public static final ItemGroup LYOKO_ARMOR = new ItemGroup("lyoko_armor") {
         @Override
         public ItemStack createIcon() {
             return new ItemStack(ModItems.WILLIAM_CHESTPLATE.get());
         }
     };
+
     public static final ItemGroup LYOKO_WEAPONS = new ItemGroup("lyoko_weapons") {
         @Override
         public ItemStack createIcon() {
             return new ItemStack(ModItems.LASER_ARROWSHOOTER.get());
         }
     };
-    public static final ItemGroup LYOKO_ITEMS = new ItemGroup("lyoko_items") {
 
+    public static final ItemGroup LYOKO_ITEMS = new ItemGroup("lyoko_items") {
         @Override
         public ItemStack createIcon() {
             // TODO Auto-generated method stub
             return new ItemStack(ModItems.BIT.get());
         }
     };
-    private static final String nbt = "firstjoin";
+
+    private static final String nbt = "first_join";
     public static boolean XANA = false;
     public static Base instance;
     public static int random = 1000;
 
     public Base() {
-
         final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
         ModBus.addListener(this::commonSetup);
         ModBus.addListener(this::clientSetup);
@@ -144,10 +147,8 @@ public class Base {
 
     @SubscribeEvent
     public void tickPast(final TickEvent event) {
-
         if ((event.phase == TickEvent.Phase.START || event.phase == TickEvent.Phase.END) && Minecraft.getInstance().world != null) {
             random--;
-
             //Base.Log.debug(random);
             if (random == 0 && !XANA) {
                 random = new Random().nextInt(40000);
@@ -155,14 +156,13 @@ public class Base {
                 Minecraft.getInstance().player.sendMessage(new StringTextComponent("xana is attacking"));
                 XANA = true;
             }
-
-
         }
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         DeferredWorkQueue.runLater(ModOreGen::genOre);
         DeferredWorkQueue.runLater(StructGen::genStruct);
+        PacketHandler.init();
     }
 
     @SubscribeEvent

@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensionTypes;
@@ -12,10 +13,13 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.ITeleporter;
+import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -56,9 +60,4 @@ public class DataTransferInterfaceContainer extends Container implements ITelepo
         return dataTransferInterfaceTileEntity;
     }
 
-    @OnlyIn(Dist.DEDICATED_SERVER)
-    public void teleportPlayer() {
-        ((ServerPlayerEntity) this.playerEntity).changeDimension(DimensionManager.registerOrGetDimension(ModDimensionTypes.DimensionTypeCarthage, ModDimensions.SECTOR_5.get(), null, true), this);
-        this.playerEntity.setPositionAndUpdate(0, 130, 0);
-    }
 }

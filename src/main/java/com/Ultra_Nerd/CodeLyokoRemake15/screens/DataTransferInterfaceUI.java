@@ -1,5 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.DataTransferInterfaceMessage;
+import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.DataTransferInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensionTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
@@ -61,7 +63,7 @@ public class DataTransferInterfaceUI extends ContainerScreen<DataTransferInterfa
         buttonMountain.render(mouseX, mouseY, partialTicks);
         buttonMountain.drawCenteredString(gunship_font, buttonMountain.getMessage(), x + 46, y + 15, buttonMountain.getFGColor());
         sendButton.render(mouseX, mouseY, partialTicks);
-        sendButton.drawCenteredString(gunship_font, sendButton.getMessage(), x + 112, y + 15, sendButton.getFGColor());
+        sendButton.drawCenteredString(gunship_font, sendButton.getMessage(), x + 15, y + 112, sendButton.getFGColor());
         xCoord.render(mouseX, mouseY, partialTicks);
         yCoord.render(mouseX, mouseY, partialTicks);
         zCoord.render(mouseX, mouseY, partialTicks);
@@ -110,6 +112,7 @@ public class DataTransferInterfaceUI extends ContainerScreen<DataTransferInterfa
         int ty = this.height / 2;
         this.buttonForest = new ImageButton(x, y + 31, 30, 30, 128, 0, 31, GUI_TEX, 256, 256, (input) -> {
         }, "F");
+        buttonForest.setFGColor(0x1d5e18);
     }
 
     private void setButtonMountain() {
@@ -117,6 +120,7 @@ public class DataTransferInterfaceUI extends ContainerScreen<DataTransferInterfa
         int ty = this.height / 2;
         this.buttonMountain = new ImageButton(x + 31, y, 30, 30, 128, 0, 31, GUI_TEX, 256, 256, (input) -> {
         }, "M");
+        buttonMountain.setFGColor(0x824391);
     }
 
     private void setButtonIce() {
@@ -124,6 +128,7 @@ public class DataTransferInterfaceUI extends ContainerScreen<DataTransferInterfa
         int ty = this.height / 2;
         this.buttonIce = new ImageButton(x + 31, y + 62, 30, 30, 128, 0, 31, GUI_TEX, 256, 256, (input) -> {
         }, "I");
+        buttonIce.setFGColor(0x37b8a2);
     }
 
     private void setButtonDesert() {
@@ -131,6 +136,7 @@ public class DataTransferInterfaceUI extends ContainerScreen<DataTransferInterfa
         int ty = this.height / 2;
         this.buttonDesert = new ImageButton(x + 62, y + 31, 30, 30, 128, 0, 31, GUI_TEX, 256, 256, (input) -> {
         }, "D");
+        buttonDesert.setFGColor(0xcf8838);
     }
 
     private void setXCoord() {
@@ -177,7 +183,7 @@ public class DataTransferInterfaceUI extends ContainerScreen<DataTransferInterfa
 
     private void setSendButton() {
         this.sendButton = new ImageButton(x + 4, y + 104, 120, 16, 0, 128, 17, GUI_TEX, 256, 256, (input) -> {
-            this.container.teleportPlayer();
+            PacketHandler.INSTANCE.sendToServer(new DataTransferInterfaceMessage(0x101010, 0, 180,0));
         }, "Send !");
 
     }
