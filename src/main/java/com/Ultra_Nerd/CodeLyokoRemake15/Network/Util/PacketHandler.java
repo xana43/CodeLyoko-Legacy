@@ -17,8 +17,8 @@ public class PacketHandler {
     );
 
     public static void init() {
-        DataTransferInterfaceMessage message = new DataTransferInterfaceMessage();
-        INSTANCE.registerMessage(nextId++,DataTransferInterfaceMessage.class, message::encode, message::decode, message::handle);
+        INSTANCE.registerMessage(nextId++,DataTransferInterfaceMessage.class, DataTransferInterfaceMessage::encode,
+                DataTransferInterfaceMessage::decode, DataTransferInterfaceMessage::handle);
     }
 
 

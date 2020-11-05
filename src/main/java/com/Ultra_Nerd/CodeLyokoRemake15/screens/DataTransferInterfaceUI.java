@@ -34,6 +34,8 @@ public class DataTransferInterfaceUI extends ContainerScreen<DataTransferInterfa
     private TextFieldWidget yCoord;
     private TextFieldWidget zCoord;
 
+    private int territory;
+
     int x, y;
 
 
@@ -102,7 +104,9 @@ public class DataTransferInterfaceUI extends ContainerScreen<DataTransferInterfa
     private void setButtonCarthage() {
         int tx = this.width / 2;
         int ty = this.height / 2;
-        this.buttonCarthage = new ImageButton(x + 31, y + 31, 30, 30, 128, 0, 31, GUI_TEX, 256, 256, (input) -> {
+        this.buttonCarthage = new ImageButton(x + 31, y + 31, 30, 30, 128, 0, 31, GUI_TEX,
+                256, 256, (input) -> {
+            territory = 0x101010; //CARTHAGE Code
         }, "C");
         buttonCarthage.setFGColor(0x1122FF);
     }
@@ -110,32 +114,32 @@ public class DataTransferInterfaceUI extends ContainerScreen<DataTransferInterfa
     private void setButtonForest() {
         int tx = this.width / 2;
         int ty = this.height / 2;
-        this.buttonForest = new ImageButton(x, y + 31, 30, 30, 128, 0, 31, GUI_TEX, 256, 256, (input) -> {
-        }, "F");
+        this.buttonForest = new ImageButton(x, y + 31, 30, 30, 128, 0, 31, GUI_TEX,
+                256, 256, (input) -> territory = 0x333333, "F");
         buttonForest.setFGColor(0x1d5e18);
     }
 
     private void setButtonMountain() {
         int tx = this.width / 2;
         int ty = this.height / 2;
-        this.buttonMountain = new ImageButton(x + 31, y, 30, 30, 128, 0, 31, GUI_TEX, 256, 256, (input) -> {
-        }, "M");
+        this.buttonMountain = new ImageButton(x + 31, y, 30, 30, 128, 0, 31, GUI_TEX,
+                256, 256, (input) -> territory = 0x111111, "M");
         buttonMountain.setFGColor(0x824391);
     }
 
     private void setButtonIce() {
         int tx = this.width / 2;
         int ty = this.height / 2;
-        this.buttonIce = new ImageButton(x + 31, y + 62, 30, 30, 128, 0, 31, GUI_TEX, 256, 256, (input) -> {
-        }, "I");
+        this.buttonIce = new ImageButton(x + 31, y + 62, 30, 30, 128, 0, 31, GUI_TEX,
+                256, 256, (input) -> territory = 0x444444, "I");
         buttonIce.setFGColor(0x37b8a2);
     }
 
     private void setButtonDesert() {
         int tx = this.width / 2;
         int ty = this.height / 2;
-        this.buttonDesert = new ImageButton(x + 62, y + 31, 30, 30, 128, 0, 31, GUI_TEX, 256, 256, (input) -> {
-        }, "D");
+        this.buttonDesert = new ImageButton(x + 62, y + 31, 30, 30, 128, 0, 31, GUI_TEX,
+                256, 256, (input) -> territory = 0x222222, "D");
         buttonDesert.setFGColor(0xcf8838);
     }
 
@@ -182,8 +186,16 @@ public class DataTransferInterfaceUI extends ContainerScreen<DataTransferInterfa
     }
 
     private void setSendButton() {
-        this.sendButton = new ImageButton(x + 4, y + 104, 120, 16, 0, 128, 17, GUI_TEX, 256, 256, (input) -> {
-            PacketHandler.INSTANCE.sendToServer(new DataTransferInterfaceMessage(0x101010, 0, 180,0));
+        this.sendButton = new ImageButton(x + 4, y + 104, 120, 16, 0, 128, 17, GUI_TEX,
+                256, 256, (input) -> {
+            int xCoord = 0, yCoord = 80, zCoord = 0;
+            if(this.xCoord.getText().length() > 0)
+                xCoord = Integer.parseInt(this.xCoord.getText());
+            if(this.yCoord.getText().length() > 0)
+                yCoord = Integer.parseInt(this.yCoord.getText());
+            if(this.zCoord.getText().length() > 0)
+                zCoord = Integer.parseInt(this.zCoord.getText());
+            PacketHandler.INSTANCE.sendToServer(new DataTransferInterfaceMessage(territory, xCoord, yCoord, zCoord));
         }, "Send !");
 
     }
