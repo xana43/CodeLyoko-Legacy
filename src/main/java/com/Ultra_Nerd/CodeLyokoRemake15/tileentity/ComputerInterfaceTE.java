@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -37,24 +38,35 @@ public class ComputerInterfaceTE extends TileEntity implements ITickableTileEnti
     {
 
         BlockState[] l1_1 = new BlockState[5],l2_1 = new BlockState[5];
-
+        Block[] screen_blocks1,screen_blocks2,frame_blocks1,frame_blocks2;
 
         for(int i = 0; i < l1_1.length;i++)
         {
 
+            if(world != null) {
+                l1_1[i] = world.getBlockState(new BlockPos((this.pos.getX() - 2) + i, this.pos.getY() + 1, this.pos.getZ()));
+                l2_1[i] = world.getBlockState(new BlockPos((this.pos.getX() - 2) + i, this.pos.getY() + 2, this.pos.getZ()));
+                if(l1_1[4] != null) {
+                    if (l1_1[0].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get()
+                            && l1_1[4].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get()
+                            && l1_1[1].getBlock() == ModBlocks.COMPUTER_SCREEN.get()
+                            && l1_1[2].getBlock() == ModBlocks.COMPUTER_SCREEN.get()
+                            && l1_1[3].getBlock() == ModBlocks.COMPUTER_SCREEN.get()
+                            && l2_1[0].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get()
+                            && l2_1[4].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get()
+                            && l2_1[1].getBlock() == ModBlocks.COMPUTER_SCREEN.get()
+                            && l2_1[2].getBlock() == ModBlocks.COMPUTER_SCREEN.get()
+                            && l2_1[3].getBlock() == ModBlocks.COMPUTER_SCREEN.get()) {
+                        screen = true;
+                    }
+                }
+                else
+                {screen = false;
+                }
 
-            assert world != null;
-            l1_1[i] = world.getBlockState(new BlockPos((this.pos.getX() - 2) + i,this.pos.getY() + 1,this.pos.getZ()));
-            l2_1[i] = world.getBlockState(new BlockPos((this.pos.getX() - 2) + i,this.pos.getY() + 2,this.pos.getZ()));
-            if(l1_1[0].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get() &&
-            l1_1[4].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get()&& l2_1[0].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get() &&
-                    l2_1[4].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get()
-            && l1_1[i].getBlock() == ModBlocks.COMPUTER_SCREEN.get() && l2_1[i].getBlock() == ModBlocks.COMPUTER_SCREEN.get())
-            {
-                screen = true;
             }
-
         }
+
         return screen;
 
 
