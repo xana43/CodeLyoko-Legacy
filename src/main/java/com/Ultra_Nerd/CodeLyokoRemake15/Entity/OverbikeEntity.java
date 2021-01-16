@@ -15,8 +15,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class OverbikeEntity extends Entity {
-    private final AxisAlignedBB axisAlignedBB = new AxisAlignedBB(this.getPosX() - this.getWidth(), this.getPosY() - this.getHeight(),
-            this.getPosZ() - this.getWidth(), this.getPosX() + getWidth(), this.getPosY() + this.getHeight(), this.getPosZ() + this.getWidth());
+
 
     public OverbikeEntity(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
@@ -26,20 +25,19 @@ public class OverbikeEntity extends Entity {
         this.canBePushed();
         this.canPassengerSteer();
         this.recalculateSize();
-        this.setBoundingBox(axisAlignedBB);
+        this.getCollisionBox(this);
+        this.applyEntityCollision(this);
     }
 
-
-    @Nullable
     @Override
-    public AxisAlignedBB getCollisionBox(@Nonnull Entity entityIn) {
-        return axisAlignedBB;
+    public boolean hasNoGravity() {
+        return false;
     }
 
     @Nullable
     @Override
     public AxisAlignedBB getCollisionBoundingBox() {
-        return axisAlignedBB;
+        return this.getBoundingBox();
     }
 
     @Override
@@ -47,10 +45,9 @@ public class OverbikeEntity extends Entity {
         super.doBlockCollisions();
     }
 
-
     @Override
-    public float getCollisionBorderSize() {
-        return 4;
+    public void applyEntityCollision(@Nonnull Entity entityIn) {
+        super.applyEntityCollision(entityIn);
     }
 
     @Override
@@ -62,12 +59,14 @@ public class OverbikeEntity extends Entity {
         double d1 = this.getPosY() + vec3d.y;
         double d2 = this.getPosZ() + vec3d.z;
         Vec3d motion = this.getMotion();
-        this.setMotion(motion.x, motion.y - this.getGravity(), motion.z);
-        this.setPosition(d0, d1, d2);
+        if (!this.onGround) {
+            this.setMotion(motion.x, motion.y - this.getGravity(), motion.z);
+            this.setPosition(d0, d1, d2);
+        }
     }
 
     private double getGravity() {
-        return 0.5D;
+        return 0.05D;
     }
 
     @Override
