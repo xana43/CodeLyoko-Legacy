@@ -28,7 +28,7 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer> {
 
 
     //private TowerInterfaceTileEntity tileentity;
-    int x, y;
+    private int x, y;
 
 
     public TowerGUI(TowerInterfaceContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {

@@ -62,6 +62,6 @@ public class UraniumCanister extends Block {
 
     @Override
     public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
-        return true;
+        return false;
     }
 }
