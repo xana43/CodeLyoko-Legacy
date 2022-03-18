@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.CableTileEntity;
 import com.google.gson.Gson;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.carthage.CustomCarthadgeSky;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.generators.Sector5Generator;
+import net.minecraft.core.BlockPos;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -11,6 +12,9 @@ import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.border.WorldBorder;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraftforge.client.IRenderHandler;
 
 import javax.annotation.Nonnull;

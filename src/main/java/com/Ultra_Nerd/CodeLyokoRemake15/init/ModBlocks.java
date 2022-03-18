@@ -13,12 +13,14 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tests.TestBlockPortal;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.DigitalForestTree;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.DigitalMountainTree;
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolType;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlocks {
 
@@ -28,9 +30,9 @@ public class ModBlocks {
     public static final RegistryObject<TestBlockPortal> PORTAL_BLOCK = BLOCKS.register("portal_block", () -> new TestBlockPortal(Block.Properties.from(Blocks.NETHER_PORTAL)));
     public static final RegistryObject<Block> BLOCK_PATTERN = BLOCKS.register("block_pattern", () -> new BlockPatternTest(Block.Properties.from(Blocks.IRON_BLOCK)));
     //for blocks
-    public static final RegistryObject<Block> ARCHITECTURE_WORK_STATION = BLOCKS.register("architecture_work_station", () -> new ArchitectureWorkstation(Block.Properties.from(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> ARCHITECTURE_WORK_STATION = BLOCKS.register("architecture_work_station", () -> new ArchitectureWorkstation(Block.Properties.of(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> ANTI_MARABUNTA = BLOCKS.register("anti_marabunta", AntiMarabunta::new);
-    public static final RegistryObject<Block> AUTUNITE_ORE = BLOCKS.register("autunite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3, 2).sound(SoundType.STONE).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
+    public static final RegistryObject<Block> AUTUNITE_ORE = BLOCKS.register("autunite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> BLACK_VOID = BLOCKS.register("black_void", BlackVoid::new);
     public static final RegistryObject<Block> BORNITE_ORE = BLOCKS.register("bornite_ore", () -> new Block(Block.Properties.from(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> CABLE_BLOCK = BLOCKS.register("cable_block", () -> new CableBlock(Block.Properties.from(Blocks.IRON_BLOCK)));

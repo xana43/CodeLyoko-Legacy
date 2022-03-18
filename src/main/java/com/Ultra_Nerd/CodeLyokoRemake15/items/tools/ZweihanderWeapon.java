@@ -16,6 +16,7 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.item.SwordItem;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

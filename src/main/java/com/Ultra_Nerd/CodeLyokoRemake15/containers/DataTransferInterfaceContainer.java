@@ -1,25 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensionTypes;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test.DataTransferInterfaceTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.ITeleporter;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;

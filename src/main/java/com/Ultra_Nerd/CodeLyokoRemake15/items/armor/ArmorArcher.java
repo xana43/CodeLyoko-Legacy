@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
+import net.minecraft.world.item.ArmorItem;
 
 public class ArmorArcher extends ArmorItem {
     public ArmorArcher(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {

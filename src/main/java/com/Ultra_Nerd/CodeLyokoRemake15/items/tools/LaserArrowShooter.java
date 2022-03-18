@@ -21,6 +21,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
 

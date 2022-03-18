@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBiome;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;

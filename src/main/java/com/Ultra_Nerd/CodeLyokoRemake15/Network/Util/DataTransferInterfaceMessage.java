@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -34,7 +35,7 @@ public class DataTransferInterfaceMessage {
         return new DataTransferInterfaceMessage(array[0], array[1], array[2], array[3]);
     }
 
-    public static void handle(DataTransferInterfaceMessage msg, Supplier<Context> ctx) {
+    public static void handle(DataTransferInterfaceMessage msg, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(
                 () -> {
                     switch (msg.territory) {

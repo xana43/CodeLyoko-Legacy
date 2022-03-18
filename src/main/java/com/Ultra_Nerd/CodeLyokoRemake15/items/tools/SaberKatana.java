@@ -15,6 +15,9 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.util.Hand;
 import net.minecraft.util.HandSide;
 import net.minecraft.world.World;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tier;
 
 import javax.annotation.Nonnull;
 
@@ -23,7 +26,7 @@ public class SaberKatana extends SwordItem {
     private final float attackspeed;
     private byte timer = 127;
 
-    public SaberKatana(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
+    public SaberKatana(Tier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
         this.attackspeed = attackSpeedIn;
         this.attackdamage = (float) attackDamageIn + tier.getAttackDamage();

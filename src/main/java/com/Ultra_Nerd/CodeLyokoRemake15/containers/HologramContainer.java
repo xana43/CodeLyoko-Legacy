@@ -9,6 +9,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.world.Container;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;

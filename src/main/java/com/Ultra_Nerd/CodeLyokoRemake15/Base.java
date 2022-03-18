@@ -19,9 +19,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
@@ -54,31 +60,32 @@ public class Base {
     public static final String MOD_ID = "cm";
     public static final Map<ResourceLocation, IMultiblock> MULTIBLOCK_MAP = new ConcurrentHashMap<>();
 
-    public static final ItemGroup LYOKO_BLOCKS = new ItemGroup("lyoko_blocks") {
+    public static final CreativeModeTab LYOKO_BLOCKS = new CreativeModeTab("lyoko_blocks") {
         @Override
-        public ItemStack createIcon() {
-            // TODO Auto-generated method stub
+        public ItemStack makeIcon() {
             return new ItemStack(ModBlocks.TOWER_INTERFACE.get());
         }
+
+
     };
 
-    public static final ItemGroup LYOKO_ARMOR = new ItemGroup("lyoko_armor") {
+    public static final CreativeModeTab LYOKO_ARMOR = new CreativeModeTab("lyoko_armor") {
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(ModItems.WILLIAM_CHESTPLATE.get());
         }
     };
 
-    public static final ItemGroup LYOKO_WEAPONS = new ItemGroup("lyoko_weapons") {
+    public static final CreativeModeTab LYOKO_WEAPONS = new CreativeModeTab("lyoko_weapons") {
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(ModItems.LASER_ARROWSHOOTER.get());
         }
     };
 
-    public static final ItemGroup LYOKO_ITEMS = new ItemGroup("lyoko_items") {
+    public static final CreativeModeTab LYOKO_ITEMS = new CreativeModeTab("lyoko_items") {
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             // TODO Auto-generated method stub
             return new ItemStack(ModItems.BIT.get());
         }

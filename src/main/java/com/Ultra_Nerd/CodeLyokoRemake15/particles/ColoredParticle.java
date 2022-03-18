@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.particles;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModParticles;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;

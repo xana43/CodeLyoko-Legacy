@@ -9,6 +9,8 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.ConfiguredPlacement;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModOreGen {
@@ -16,7 +18,7 @@ public class ModOreGen {
     public static void genOre() {
         for (Biome biome : ForgeRegistries.BIOMES) {
             //for silica sand
-            if(biome == Biomes.BEACH || biome == Biomes.DESERT || biome ==  Biomes.DESERT_HILLS || biome == Biomes.DESERT_LAKES || biome == Biomes.ERODED_BADLANDS
+            if(biome == Biomes.DESERT || biome == Biomes.DESERT || biome ==  Biomes.DESERT_HILLS || biome == Biomes.DESERT_LAKES || biome == Biomes.ERODED_BADLANDS
                 || biome == Biomes.GRAVELLY_MOUNTAINS || biome == Biomes.MODIFIED_GRAVELLY_MOUNTAINS)
             {
                 ConfiguredPlacement customC = Placement.COUNT_RANGE.configure(new CountRangeConfig(4, 10, 3, 30));

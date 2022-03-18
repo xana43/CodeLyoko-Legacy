@@ -2,15 +2,15 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ToolType;
 

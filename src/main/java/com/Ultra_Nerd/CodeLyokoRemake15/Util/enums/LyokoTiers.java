@@ -4,81 +4,65 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
-public enum LyokoTiers implements IItemTier {
+public enum LyokoTiers implements Tier {
 
-    LYOKOFELINE(4, 2000, 900, 6, 90, () -> {
-        return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
-    }),
-    LyokoGuardian(4, 4000, 40, 60, 100, () -> {
-        return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
-    }),
-    LyokoNinja(4, 2000, 9000, 6, 90, () -> {
-        return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
-    }),
-    LyokoSamurai(4, 1000, 10, 25, 80, () -> {
-        return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
-    }),
-    LyokoTool(20, 250, 7.0f, 3.0f, 900, () -> {
-        return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
-    }),
-    LyokoWarrior(4, 4000, 0, 30, 9000, () -> {
-        return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
-    }),
-    LyokoArcher(4, 2500, 9200, 3, 50, () -> {
-        return Ingredient.fromItems(ModItems.SOLID_QUANTUM.get());
-    });
+    LYOKOFELINE(4, 2000, 900, 6, 90),
+    LyokoGuardian(4, 4000, 40, 60, 100),
+    LyokoNinja(4, 2000, 9000, 6, 90),
+    LyokoSamurai(4, 1000, 10, 25, 80),
+    LyokoTool(20, 250, 7.0f, 3.0f, 900),
+    LyokoWarrior(4, 4000, 0, 30, 9000),
+    LyokoArcher(4, 2500, 9200, 3, 50);
 
     private final int harvest, MaxUses, enchantability;
     private final float attackdamage, efficiency;
-    private final LazyValue<Ingredient> anvilmat;
 
-    LyokoTiers(int harvest, int MaxUses, float efficiency, float attackdamage, int enchantability, Supplier<Ingredient> anvilmat) {
+
+    LyokoTiers(int harvest, int MaxUses, float efficiency, float attackdamage, int enchantability) {
         this.harvest = harvest;
         this.MaxUses = MaxUses;
         this.efficiency = efficiency;
-        this.anvilmat = new LazyValue<>(anvilmat);
+
         this.attackdamage = attackdamage;
         this.enchantability = enchantability;
 
     }
 
 
+
+
     @Override
-    public int getMaxUses() {
-        // TODO Auto-generated method stub
+    public int getUses() {
         return this.MaxUses;
     }
 
     @Override
-    public float getEfficiency() {
-        // TODO Auto-generated method stub
+    public float getSpeed() {
         return this.efficiency;
     }
 
     @Override
-    public float getAttackDamage() {
-        // TODO Auto-generated method stub
+    public float getAttackDamageBonus() {
         return this.attackdamage;
     }
 
     @Override
-    public int getHarvestLevel() {
-        // TODO Auto-generated method stub
+    public int getLevel() {
         return this.harvest;
     }
 
     @Override
-    public int getEnchantability() {
-        // TODO Auto-generated method stub
+    public int getEnchantmentValue() {
         return this.enchantability;
     }
 
     @Override
-    public Ingredient getRepairMaterial() {
-        // TODO Auto-generated method stub
-        return this.anvilmat.getValue();
+    public Ingredient getRepairIngredient() {
+        return null;
     }
 }

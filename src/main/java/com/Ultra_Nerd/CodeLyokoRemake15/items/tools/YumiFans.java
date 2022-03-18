@@ -16,6 +16,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
+import net.minecraft.world.item.TridentItem;
 
 import javax.annotation.Nonnull;
 

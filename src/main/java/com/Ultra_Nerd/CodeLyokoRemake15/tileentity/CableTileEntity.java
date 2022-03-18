@@ -1,17 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
-import javax.annotation.Nonnull;
-import java.io.DataOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class CableTileEntity extends TileEntity implements ITickableTileEntity {
 

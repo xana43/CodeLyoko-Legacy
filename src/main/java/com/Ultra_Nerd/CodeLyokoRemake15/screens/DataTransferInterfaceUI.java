@@ -3,8 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.DataTransferInterfaceMessage;
 import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.DataTransferInterfaceContainer;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensionTypes;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -14,7 +12,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.common.DimensionManager;
 
 import java.util.Random;
 
