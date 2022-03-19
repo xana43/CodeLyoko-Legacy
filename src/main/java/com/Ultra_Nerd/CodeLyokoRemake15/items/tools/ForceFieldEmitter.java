@@ -9,16 +9,30 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.event.ForgeEventFactory;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
+import java.util.Random;
 import java.util.function.Predicate;
 
 public class ForceFieldEmitter extends BowItem {
@@ -51,9 +65,9 @@ public class ForceFieldEmitter extends BowItem {
     }
 
     @Override
-    public void onPlayerStoppedUsing(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull LivingEntity entityLiving, int timeLeft) {
-        if (entityLiving instanceof PlayerEntity) {
-            PlayerEntity playerentity = (PlayerEntity) entityLiving;
+    public void onPlayerStoppedUsing(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull LivingEntity entityLiving, int timeLeft) {
+        if (entityLiving instanceof Player) {
+            Player playerentity = (Player) entityLiving;
 
             int i = this.getUseDuration(stack) - timeLeft;
             i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, true);
@@ -62,46 +76,48 @@ public class ForceFieldEmitter extends BowItem {
 
             float f = getArrowVelocity(i);
             if (!((double) f < 0.1D)) {
-                boolean flag1 = playerentity.abilities.isCreativeMode;
-                if (!worldIn.isRemote) {
+                boolean flag1 = playerentity.isCreative();
+                if (worldIn.isClientSide) {
                     EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 
-                    las.setDamage(40);
-                    las.setPosition(playerentity.getPosX(), playerentity.getPosYEye(), playerentity.getPosZ());
-                    las.hasNoGravity();
-                    AbstractArrowEntity abstractarrowentity;
-                    abstractarrowentity = customeArrow(las);
-                    abstractarrowentity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 0.0F);
+                    las.setBaseDamage(40);
+                    las.setPos(playerentity.position().x, playerentity.getEyeY(), playerentity.position().z);
+                    las.isNoGravity();
+                    AbstractArrow abstractarrowentity;
+                    abstractarrowentity = customArrow(las);
+                    abstractarrowentity.shootFromRotation(playerentity, playerentity.getRotationVector().x, playerentity.getRotationVector().y, 0.0F, f * 3.0F, 0.0F);
                     if (f == 1.0F) {
-                        abstractarrowentity.setIsCritical(true);
+                        abstractarrowentity.setCritArrow(true);
                     }
-                    worldIn.addEntity(abstractarrowentity);
+                    worldIn.addFreshEntity(abstractarrowentity);
                 }
 
-                worldIn.playSound((PlayerEntity) null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), ModSounds.LASERARROW.get(), SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                worldIn.playSound((Player) null, playerentity.position().x, playerentity.position().y, playerentity.position().z, ModSounds.LASERARROW.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (new Random().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
-                playerentity.addStat(Stats.ITEM_USED.get(this));
+                playerentity.awardStat(Stats.ITEM_USED.get(this));
             }
 
         }
     }
 
-    @Nonnull
+
     @Override
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, PlayerEntity playerIn, @Nonnull Hand handIn) {
-        ItemStack heldItem = playerIn.getHeldItem(handIn);
-        if (playerIn.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() != ModItems.AELITA_CHESTPLATE.get() &&
-                playerIn.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() != ModItems.AELITA_LEGGINGS.get() &&
-                playerIn.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() != ModItems.AELITA_BOOTS.get()) {
-            return ActionResult.resultFail(heldItem);
+    public @NotNull InteractionResultHolder<ItemStack> use(@Nonnull Level worldIn, Player playerIn, @Nonnull InteractionHand handIn) {
+        ItemStack heldItem = playerIn.getItemInHand(handIn);
+        if (playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() != ModItems.AELITA_CHESTPLATE.get() &&
+                playerIn.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() != ModItems.AELITA_LEGGINGS.get() &&
+                playerIn.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() != ModItems.AELITA_BOOTS.get()) {
+            return InteractionResultHolder.fail(heldItem);
         }
         //boolean flag = !playerIn.findAmmo(itemstack).isEmpty();
 
-        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(heldItem, worldIn, playerIn, handIn, true);
-        if (ret != null) return ret;
+        InteractionResultHolder<ItemStack> ret = ForgeEventFactory.onArrowNock(heldItem, worldIn, playerIn, handIn, true);
+        if (ret != null) {
+            return ret;
+        }
 
-        playerIn.setActiveHand(handIn);
-        return ActionResult.resultSuccess(heldItem);
+        playerIn.setMainArm(HumanoidArm.RIGHT);
+        return InteractionResultHolder.success(heldItem);
 
     }
 }

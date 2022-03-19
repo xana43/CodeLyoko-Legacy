@@ -4,21 +4,25 @@ import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
 public class SlotFuel extends Slot {
 
-    public SlotFuel(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+    public SlotFuel(Inventory inventoryIn, int index, int xPosition, int yPosition) {
         super(inventoryIn, index, xPosition, yPosition);
 
     }
 
     @Override
-    public boolean isItemValid(@Nonnull ItemStack stack) {
-        // TODO Auto-generated method stub
+    public ItemStack safeInsert(ItemStack stack) {
         return InfusingChamberTileEntity.isItemFuel(stack);
     }
+
+
 
     @Override
     public int getItemStackLimit(@Nonnull ItemStack stack) {

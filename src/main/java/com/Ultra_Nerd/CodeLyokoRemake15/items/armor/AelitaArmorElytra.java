@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items.armor;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensionTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage.Sector5Dimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertDimension;
@@ -17,13 +18,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
 
 
 public class AelitaArmorElytra extends ArmorItem {
-    public AelitaArmorElytra(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
+    public AelitaArmorElytra(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
         super(materialIn, slot, builder);
     }
 
@@ -43,8 +49,8 @@ public class AelitaArmorElytra extends ArmorItem {
     }*/
 
 
-    private boolean checkDim(PlayerEntity player) {
-        return player.world.dimension instanceof ForestDimension || player.world.dimension instanceof IceDimension ||
+    private boolean checkDim(Player player) {
+        return player.level.dimension().registry() == ModDimensionTypes.DimensionTypeForest || player.world.dimension instanceof IceDimension ||
                 player.world.dimension instanceof DesertDimension || player.world.dimension instanceof MountainDimension
                 || player.world.dimension instanceof Sector5Dimension || player.world.dimension instanceof OceanDimension || player.world.dimension
                 instanceof VolcanoDimension;
@@ -80,10 +86,10 @@ public class AelitaArmorElytra extends ArmorItem {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+    public void onArmorTick(ItemStack stack, Level world, Player player) {
         if (!checkDim(player)) {
-            if (player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get()) {
-                player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).setCount(0);
+            if (player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get()) {
+                player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).setCount(0);
             }
             if (player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
                 player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).setCount(0);
@@ -123,10 +129,10 @@ public class AelitaArmorElytra extends ArmorItem {
                 }
                 player.onLivingFall(0, 0);
                 player.fallDistance = 0;
-            } else if (player.isElytraFlying() && !player.isAirBorne) {
+            } else if (player.isFallFlying()) {
 
                 player.fallDistance = 0;
-                player.onLivingFall(0, 0);
+                player.causeFallDamage(0, 0,null);
                 player.stopFallFlying();
             }
 

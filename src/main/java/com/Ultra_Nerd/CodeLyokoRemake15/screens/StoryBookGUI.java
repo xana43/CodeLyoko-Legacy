@@ -4,8 +4,10 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.ReadBookScreen;
+import net.minecraft.client.gui.screens.inventory.BookViewScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -13,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
-public class StoryBookGUI extends ReadBookScreen {
+public class StoryBookGUI extends BookViewScreen {
 
     private static final int BUTTON_NEXT = 0;
     private static final int BUTTON_PREV = 1;
@@ -25,7 +27,7 @@ public class StoryBookGUI extends ReadBookScreen {
         super();
     }
 
-    public StoryBookGUI(ReadBookScreen.IBookInfo iBookInfo) {
+    public StoryBookGUI(BookViewScreen.BookAccess iBookInfo) {
         super(iBookInfo);
     }
 

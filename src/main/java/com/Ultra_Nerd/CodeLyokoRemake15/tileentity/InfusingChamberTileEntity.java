@@ -8,6 +8,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.core.Direction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -16,6 +17,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -23,6 +25,12 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
@@ -81,7 +89,7 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
     }
 
     @Override
-    public void read(@Nonnull CompoundNBT compound) {
+    public void read(@Nonnull CompoundTag compound) {
         super.read(compound);
         this.handler.deserializeNBT(compound.getCompound("Inventory"));
         this.burnTime = compound.getInt("BurnTime");
@@ -94,7 +102,7 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
 
     @Nonnull
     @Override
-    public CompoundNBT write(@Nonnull CompoundNBT compound) {
+    public CompoundTag write(@Nonnull CompoundTag compound) {
         super.write(compound);
         compound.putInt("BurnTime", (short) this.burnTime);
         compound.putInt("CookTime", (short) this.cookTime);
@@ -210,8 +218,8 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
         return getItemBurnTime(fuel) > 0;
     }
 
-    public boolean isUsableByPlayer(PlayerEntity player) {
-        assert this.world != null;
+    public boolean isUsableByPlayer(Player player) {
+        assert this.level != null;
         return this.world.getTileEntity(this.pos) == this &&
                 player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
     }

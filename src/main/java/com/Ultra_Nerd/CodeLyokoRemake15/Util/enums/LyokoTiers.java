@@ -1,13 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.enums;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.LazyValue;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
-
-import java.util.function.Supplier;
 
 public enum LyokoTiers implements Tier {
 

@@ -16,6 +16,9 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ToolType;
 
@@ -26,13 +29,10 @@ public class Marabunta extends Block {
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
 
     public Marabunta() {
-        super(Block.Properties.create(Material.DRAGON_EGG)
-                .hardnessAndResistance(6, 10)
+        super(Block.Properties.of(Material.EGG)
+                .strength(6, 10)
                 .sound(SoundType.STONE)
-                .lightValue(0)
-                .harvestLevel(2)
-                .harvestTool(ToolType.PICKAXE)
-                .tickRandomly()
+
         );
     }
 

@@ -8,6 +8,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoDimension;
 import net.minecraft.block.Block;
+import net.minecraft.core.BlockPos;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
@@ -17,24 +18,27 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.BlockHitResult;
 
 public class ArmorNinja extends ArmorItem {
-    public ArmorNinja(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
+    public ArmorNinja(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
         super(materialIn, slot, builder);
     }
-    private boolean checkDim(PlayerEntity player) {
-        return player.world.dimension instanceof ForestDimension || player.world.dimension instanceof IceDimension ||
-                player.world.dimension instanceof DesertDimension || player.world.dimension instanceof MountainDimension
-                || player.world.dimension instanceof Sector5Dimension || player.world.dimension instanceof OceanDimension || player.world.dimension
-                instanceof VolcanoDimension;
-    }
+
     @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+    public void onArmorTick(ItemStack stack, Level world, Player player) {
 
 
-        RayTraceResult trace = rayTrace(world, player, RayTraceContext.FluidMode.NONE);
-        BlockPos pos = new BlockPos(trace.getHitVec().getX(), trace.getHitVec().getY(), trace.getHitVec().getZ());
-        Block test = world.getWorld().getBlockState(pos).getBlock();
+        BlockHitResult trace = new BlockHitResult(player.getLookAngle(), player.getDirection(),player.eyeBlockPosition(),false);
+        BlockPos pos = new BlockPos(trace.getBlockPos().getX(), trace.getBlockPos().getY(), trace.getBlockPos().getZ());
+        Block test = world.getBlockState(pos).getBlock();
 
 
     }

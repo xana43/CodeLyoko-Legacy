@@ -12,6 +12,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib.animation.builder.AnimationBuilder;
 import software.bernie.geckolib.animation.controller.EntityAnimationController;
@@ -22,7 +23,7 @@ import software.bernie.geckolib.manager.EntityAnimationManager;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityFan extends TridentEntity implements IAnimatedEntity {
+public class EntityFan extends ThrownTrident implements IAnimatedEntity {
     private boolean dealtDamage;
     private ItemStack thrownStack = new ItemStack(ModItems.YUMI_TRADITONAL_FANS.get());
     private final EntityAnimationManager manager = new EntityAnimationManager();

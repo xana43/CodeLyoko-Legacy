@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.level.block.Block;
@@ -19,7 +20,6 @@ import java.util.Random;
 
 public class AntiMarabunta extends Block {
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
-
     public AntiMarabunta() {
         super(Block.Properties.create(Material.DRAGON_EGG)
                 .hardnessAndResistance(6, 10)
@@ -40,8 +40,8 @@ public class AntiMarabunta extends Block {
     }
 
     @Override
-    public void tick(@Nonnull BlockState state, ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
-        if (!worldIn.isRemote) {
+    public void tick(@Nonnull BlockState state, ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
+        if (worldIn.isClientSide) {
             for (byte i = 0; i < 20; ++i) {
                 BlockPos blockpos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 

@@ -4,11 +4,13 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertGenSe
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.NoiseChunkGenerator;
+import net.minecraft.world.level.biome.BiomeSource;
+import net.minecraftforge.common.extensions.IForgeLevel;
 
 import javax.annotation.Nonnull;
 
 public class DesertGenerator extends NoiseChunkGenerator<DesertGenSettings> {
-    public DesertGenerator(IWorld worldIn, BiomeProvider biomeProviderIn, DesertGenSettings settingsIn) {
+    public DesertGenerator(net.minecraft.world.level.WorldGenLevel worldIn, BiomeSource biomeProviderIn, DesertGenSettings settingsIn) {
         super(worldIn, biomeProviderIn, 8, 4, 128, settingsIn, true);
 
     }

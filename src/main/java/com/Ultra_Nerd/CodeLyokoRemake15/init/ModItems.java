@@ -139,7 +139,7 @@ public class ModItems {
     //for tools
     public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().tab(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> TRUSTTY_SCREWDRIVER = ITEMS.register("trusty_screwdriver", () -> new TrustyScrewDriverItem(new Item.Properties().tab(Base.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> SOLDERING_IRON = ITEMS.register("soldering_iron", () -> new soldering_iron(new Item.Properties().tab(Base.LYOKO_ITEMS).maxDamage(100)));
+    public static final RegistryObject<Item> SOLDERING_IRON = ITEMS.register("soldering_iron", () -> new soldering_iron(new Item.Properties().tab(Base.LYOKO_ITEMS)));
     public static final RegistryObject<Item> JEREMY_LAPTOP = ITEMS.register("jeremys_laptop", () -> new LaptopClass(new Item.Properties().tab(Base.LYOKO_ITEMS)));
     //for weapons
     public static final RegistryObject<SwordItem> DIGITAL_SABER = ITEMS.register("digital_saber", () -> new SaberKatana(LyokoTiers.LyokoSamurai, 25, -0.9f, new Item.Properties().tab(Base.LYOKO_WEAPONS)));

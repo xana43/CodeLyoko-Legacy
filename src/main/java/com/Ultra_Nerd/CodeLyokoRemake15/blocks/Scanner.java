@@ -6,6 +6,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
@@ -20,6 +22,13 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nonnull;
@@ -28,7 +37,7 @@ import java.util.stream.Stream;
 
 public class Scanner extends Block {
     public static BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
-    public static final DirectionProperty directionProperty = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty directionProperty = HorizontalDirectionalBlock.FACING;
     private final VoxelShape shapeS = Stream.of(
             Block.makeCuboidShape(2, 0, -2, 14, 1, 18),
             Block.makeCuboidShape(-4, 0, 5, -3, 15.3, 11),

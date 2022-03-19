@@ -6,12 +6,15 @@ import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.IGuiEventListener;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.lwjgl.glfw.GLFW;
@@ -31,7 +34,7 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer> {
     private int x, y;
 
 
-    public TowerGUI(TowerInterfaceContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public TowerGUI(TowerInterfaceContainer screenContainer, Inventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         this.guiLeft = 0;
         this.guiTop = 0;
@@ -53,7 +56,7 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer> {
 
 
     @Override
-    public void setFocused(@Nullable IGuiEventListener p_setFocused_1_) {
+    public void setFocused(@Nullable GuiEventListener p_setFocused_1_) {
         super.setFocused(p_setFocused_1_);
     }
 

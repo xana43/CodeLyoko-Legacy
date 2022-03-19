@@ -16,7 +16,11 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TridentItem;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
 
@@ -26,10 +30,13 @@ public class YumiFans extends TridentItem {
 
     }
 
+
+
     @Override
-    public void onPlayerStoppedUsing(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull LivingEntity entityLiving, int timeLeft) {
-        if (entityLiving instanceof PlayerEntity) {
-            PlayerEntity playerentity = (PlayerEntity) entityLiving;
+    public void releaseUsing(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull LivingEntity entityLiving, int timeLeft) {
+        super.releaseUsing(stack,worldIn,entityLiving,timeLeft);
+        if (entityLiving instanceof Player) {
+            Player playerentity = (Player) entityLiving;
             int i = this.getUseDuration(stack) - timeLeft;
             if (i >= 10) {
 

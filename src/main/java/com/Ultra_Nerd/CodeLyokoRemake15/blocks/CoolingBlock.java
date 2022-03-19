@@ -8,12 +8,15 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 import java.util.stream.Stream;
 
 public class CoolingBlock extends Block {
     private static final VoxelShape shape = Stream.of(
+
             Block.makeCuboidShape(9, 0, 7, 13, 32, 9),
             Block.makeCuboidShape(9, 0, 23, 13, 32, 25),
             Block.makeCuboidShape(25, 0, 23, 29, 32, 25),

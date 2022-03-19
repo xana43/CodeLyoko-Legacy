@@ -16,7 +16,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModDimensions {
 
-    public static final DeferredRegister<ModDimension> MOD_DIMENSION_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.MOD_DIMENSIONS, Base.MOD_ID);
+    public static final DeferredRegister<World> MOD_DIMENSION_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.MOD, Base.MOD_ID);
 
 
     public static final RegistryObject<ModDimension> FOREST_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("forest_sector", ForestModDimension::new);

@@ -4,10 +4,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.IBooleanFunction;
@@ -17,6 +21,26 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.IPlantable;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.function.Predicate;
@@ -45,75 +69,92 @@ public class BlackVoid extends Block {
     }).get();
 
     public BlackVoid() {
-        super(Block.Properties.create(Material.STRUCTURE_VOID)
-                .hardnessAndResistance(-1, -1)
+        super(Block.Properties.of(Material.STRUCTURAL_AIR)
+                .strength(-1, -1)
                 .sound(SoundType.METAL)
-                .lightValue(-90)
+                .noDrops()
+                .explosionResistance(-1)
+
         );
     }
 
-    @Nonnull
+
+
     @Override
-    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
+    public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
         return nullshape;
     }
 
     @Override
-    public void onEntityCollision(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, Entity entityIn) {
-        entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
-        entityIn.fallDistance = Integer.MAX_VALUE;
+    public void entityInside(BlockState p_60495_, Level p_60496_, BlockPos p_60497_, Entity p_60498_) {
+        super.entityInside(p_60495_, p_60496_, p_60497_, p_60498_);
+        p_60498_.hurt(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
     }
 
     @Override
-    public void onEntityWalk(@Nonnull World worldIn, @Nonnull BlockPos pos, Entity entityIn) {
-        entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
-        entityIn.fallDistance = Integer.MAX_VALUE;
-    }
-
-    @Override
-    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
+    public boolean canEntityDestroy(BlockState state, BlockGetter level, BlockPos pos, Entity entity) {
         return false;
     }
 
     @Override
-    public boolean isReplaceable(@Nonnull BlockState state, @Nonnull BlockItemUseContext useContext) {
+    public void fallOn(Level p_152426_, BlockState p_152427_, BlockPos p_152428_, Entity p_152429_, float p_152430_) {
+        super.fallOn(p_152426_, p_152427_, p_152428_, p_152429_, p_152430_);
+        p_152429_.hurt(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+    }
+
+    @Override
+    public boolean canHarvestBlock(BlockState state, BlockGetter level, BlockPos pos, Player player) {
         return false;
     }
 
     @Override
-    public boolean canEntityDestroy(BlockState state, IBlockReader world, BlockPos pos, Entity entity) {
+    public boolean isValidSpawn(BlockState state, BlockGetter level, BlockPos pos, SpawnPlacements.Type type, EntityType<?> entityType) {
         return false;
     }
 
     @Override
-    public boolean canHarvestBlock(BlockState state, IBlockReader world, BlockPos pos, PlayerEntity player) {
+    public boolean isPossibleToRespawnInThis() {
         return false;
     }
 
     @Override
-    public boolean canBeReplacedByLeaves(BlockState state, IWorldReader world, BlockPos pos) {
+    public void updateEntityAfterFallOn(BlockGetter p_49821_, Entity p_49822_) {
+        super.updateEntityAfterFallOn(p_49821_, p_49822_);
+        p_49822_.hurt(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+    }
+
+    @Override
+    public boolean canBeReplaced(BlockState p_60535_, Fluid p_60536_) {
         return false;
     }
 
     @Override
-    public boolean isReplaceableOreGen(BlockState state, IWorldReader world, BlockPos pos, Predicate<BlockState> target) {
+    public boolean canBeReplaced(BlockState p_60470_, BlockPlaceContext p_60471_) {
         return false;
     }
 
     @Override
-    public boolean isReplaceable(@Nonnull BlockState state, @Nonnull Fluid fluidIn) {
+    public boolean canDropFromExplosion(BlockState state, BlockGetter level, BlockPos pos, Explosion explosion) {
         return false;
     }
 
-
     @Override
-    public void onFallenUpon(@Nonnull World worldIn, @Nonnull BlockPos pos, Entity entityIn, float fallDistance) {
-        entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
-        entityIn.fallDistance = Integer.MAX_VALUE;
+    public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction direction) {
+        return false;
     }
 
     @Override
-    public void onLanded(@Nonnull IBlockReader worldIn, Entity entityIn) {
-        entityIn.attackEntityFrom(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
+    public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
+        return false;
+    }
+
+    @Override
+    public boolean canSurvive(BlockState p_60525_, LevelReader p_60526_, BlockPos p_60527_) {
+        return false;
+    }
+
+    @Override
+    public boolean addLandingEffects(BlockState state1, ServerLevel level, BlockPos pos, BlockState state2, LivingEntity entity, int numberOfParticles) {
+        return entity.hurt(DamageSource.OUT_OF_WORLD,Float.MAX_VALUE);
     }
 }

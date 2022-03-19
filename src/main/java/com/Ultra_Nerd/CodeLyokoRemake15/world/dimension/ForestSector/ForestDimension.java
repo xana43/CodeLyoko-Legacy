@@ -10,14 +10,18 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.dimension.DimensionDefaults;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraftforge.client.IRenderHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.*;
 
-public class ForestDimension extends Dimension {
+public class ForestDimension extends DimensionDefaults {
 
-    public ForestDimension(World world, DimensionType type) {
+    public ForestDimension(Level world, DimensionType type) {
         super(world, type, 0.0f);
     }
 

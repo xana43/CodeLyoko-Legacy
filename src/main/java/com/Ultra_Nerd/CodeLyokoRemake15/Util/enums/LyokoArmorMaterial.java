@@ -1,24 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.enums;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.LazyValue;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import java.util.function.Supplier;
 
 public enum LyokoArmorMaterial implements ArmorMaterial {
 
@@ -71,7 +64,7 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
     }
 
     @Override
-    public SoundEvent getEquipSound() {
+    public @NotNull SoundEvent getEquipSound() {
         return this.soundEvent;
     }
 
@@ -79,6 +72,7 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
     public Ingredient getRepairIngredient() {
         return null;
     }
+
 
     @OnlyIn(Dist.CLIENT)
     @Nonnull

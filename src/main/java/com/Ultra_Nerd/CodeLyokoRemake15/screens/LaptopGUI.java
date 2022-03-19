@@ -1,7 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -13,7 +17,7 @@ public class LaptopGUI extends Screen {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Base.MOD_ID, "textures/gui/laptopguibase.png");
     private int x, y, xSize, ySize;
 
-    public LaptopGUI(ITextComponent titleIn) {
+    public LaptopGUI(TextComponent titleIn) {
         super(titleIn);
 
 
@@ -34,13 +38,14 @@ public class LaptopGUI extends Screen {
         return false;
     }
 
+
     @Override
-    public void render(int p_render_1_, int p_render_2_, float p_render_3_) {
-        super.render(p_render_1_, p_render_2_, p_render_3_);
+    public void render(PoseStack pose,int p_render_1_, int p_render_2_, float p_render_3_) {
+        super.render(pose,p_render_1_, p_render_2_, p_render_3_);
 
         assert this.minecraft != null;
-        this.minecraft.textureManager.bindTexture(TEXTURE);
-        this.blit(x, y, 0, 0, this.xSize, this.ySize);
+        this.minecraft.textureManager.bindForSetup(TEXTURE);
+        this.blit(null,x, y, 0, 0, this.xSize, this.ySize);
 
     }
 }

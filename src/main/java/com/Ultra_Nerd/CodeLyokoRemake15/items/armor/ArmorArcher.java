@@ -10,17 +10,15 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 
 public class ArmorArcher extends ArmorItem {
-    public ArmorArcher(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
+    public ArmorArcher(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
         super(materialIn, slot, builder);
     }
-    private boolean checkDim(PlayerEntity player) {
-        return player.world.dimension instanceof ForestDimension || player.world.dimension instanceof IceDimension ||
-                player.world.dimension instanceof DesertDimension || player.world.dimension instanceof MountainDimension
-                || player.world.dimension instanceof Sector5Dimension || player.world.dimension instanceof OceanDimension;
-    }
+
 
 
 }

@@ -9,10 +9,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.World;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
 
@@ -23,24 +27,26 @@ public class LaptopClass extends Item {
 
 
     @Override
-    public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
-        if (!(Minecraft.getInstance().currentScreen instanceof LaptopGUI) && stack.getDamage() != 0) {
-            stack.setDamage(0);
+    public void inventoryTick(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
+        if (!(Minecraft.getInstance().screen instanceof LaptopGUI) && stack.getDamageValue() != 0) {
+            stack.setDamageValue(0);
         }
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
     }
 
     @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nonnull PlayerEntity playerIn, @Nonnull Hand handIn) {
-        if (!worldIn.isRemote) {
-            Minecraft.getInstance().displayGuiScreen(new LaptopGUI(new StringTextComponent("test")));
+    public InteractionResultHolder<ItemStack> use(Level worldIn, @Nonnull Player playerIn, @Nonnull InteractionHand handIn) {
+        if (worldIn.isClientSide) {
+            Minecraft.getInstance().setScreen(new LaptopGUI(new StringTextComponent("test")));
         }
 
-        if (playerIn.getHeldItem(handIn).getItem() == this) {
-            playerIn.getHeldItem(handIn).getItem().setDamage(playerIn.getHeldItem(handIn).getStack(), 1);
+        if (playerIn.getItemInHand(handIn).getItem() == this) {
+            playerIn.getItemInHand(handIn).getItem().setDamage(playerIn.getItemInHand(handIn), 1);
         }
 
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return super.use(worldIn, playerIn, handIn);
     }
+
+
 }

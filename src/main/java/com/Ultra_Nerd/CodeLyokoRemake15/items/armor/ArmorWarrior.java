@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items.armor;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage.Sector5Dimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertDimension;
@@ -9,68 +10,71 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoDimension;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.getInventory().EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class ArmorWarrior extends ArmorItem {
     private byte I = 0;
     private final int damage;
 
-    public ArmorWarrior(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
+    public ArmorWarrior(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
         super(materialIn, slot, builder);
-        this.damage = materialIn.getDurability(slot);
+        this.damage = materialIn.getDurabilityForSlot(slot);
     }
 
 
-    private boolean checkDim(PlayerEntity player) {
-        return player.world.dimension instanceof ForestDimension || player.world.dimension instanceof IceDimension ||
-                player.world.dimension instanceof DesertDimension || player.world.dimension instanceof MountainDimension
-                || player.world.dimension instanceof Sector5Dimension || player.world.dimension instanceof OceanDimension || player.world.dimension
-                instanceof VolcanoDimension;
-    }
+
     @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        if (!checkDim(player)) {
-            if (player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.WILLIAM_CHESTPLATE.get()) {
-                player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).setCount(0);
-                if (player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
-                    player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).setCount(0);
+    public void onArmorTick(ItemStack stack, Level world, Player player) {
+        if (!DimensionCheck.checkDim(player)) {
+            if (player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.WILLIAM_CHESTPLATE.get()) {
+                player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).setCount(0);
+                if (player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
+                    player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).setCount(0);
                 }
             }
-            if (player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() == ModItems.WILLIAM_LEGGINGS.get()) {
-                player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).setCount(0);
-                if (player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
-                    player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).setCount(0);
+            if (player.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() == ModItems.WILLIAM_LEGGINGS.get()) {
+                player.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).setCount(0);
+                if (player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
+                    player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).setCount(0);
                 }
             }
-            if (player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.WILLIAM_BOOTS.get()) {
-                player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).setCount(0);
-                if (player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
-                    player.inventory.armorItemInSlot(EquipmentSlotType.HEAD.getIndex()).setCount(0);
+            if (player.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() == ModItems.WILLIAM_BOOTS.get()) {
+                player.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).setCount(0);
+                if (player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
+                    player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).setCount(0);
                 }
             }
         } else {
-            if (!player.getItemStackFromSlot(EquipmentSlotType.CHEST).isEmpty() &&
-                    !player.getItemStackFromSlot(EquipmentSlotType.FEET).isEmpty() &&
-                    !player.getItemStackFromSlot(EquipmentSlotType.LEGS).isEmpty()) {
+            if (!player.getItemBySlot(EquipmentSlot.CHEST).isEmpty() &&
+                    !player.getItemBySlot(EquipmentSlot.FEET).isEmpty() &&
+                    !player.getItemBySlot(EquipmentSlot.LEGS).isEmpty()) {
 
-                if (player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() == ModItems.WILLIAM_CHESTPLATE.get() && player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() == ModItems.WILLIAM_LEGGINGS.get() && player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() == ModItems.WILLIAM_BOOTS.get()) {
+                if (player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.WILLIAM_CHESTPLATE.get() && player.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() == ModItems.WILLIAM_LEGGINGS.get() && player.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() == ModItems.WILLIAM_BOOTS.get()) {
 
                     if (I++ == 1000) {
-                        if (stack.getDamage() != 0) {
+                        if (stack.getDamageValue() != 0) {
                             stack.damageItem(-1, player, null);
                         }
                         I = 0;
                     }
-                    if (player.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getDamage() < damage && player.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getDamage() < damage && player.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getDamage() < damage) {
-                        player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, -1, 1, false, false, false));
-                        player.addPotionEffect(new EffectInstance(Effects.STRENGTH, -1, 3, false, false, false));
-                        player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, -1, 2, false, false, false));
+                    if (player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getDamageValue() < damage && player.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getDamageValue() < damage && player.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getDamageValue() < damage) {
+                        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, -1, 1, false, false, false));
+                        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, -1, 3, false, false, false));
+                        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, -1, 2, false, false, false));
                     }
 
                 }

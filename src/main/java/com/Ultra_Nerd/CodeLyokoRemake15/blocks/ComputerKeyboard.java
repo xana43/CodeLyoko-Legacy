@@ -19,13 +19,19 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
 public class ComputerKeyboard extends Block {
-    public static final DirectionProperty directionProperty = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty directionProperty = HorizontalDirectionalBlock.FACING;
 
 
     private static final VoxelShape SHAPE_N = Stream.of(
@@ -318,14 +324,14 @@ public class ComputerKeyboard extends Block {
 
 
     public ComputerKeyboard() {
-        super(Block.Properties.create(Material.MISCELLANEOUS)
+        super(Block.Properties.of(Material.METAL)
 
-                .hardnessAndResistance(1, 10)
+                .strength(1, 10)
                 .sound(SoundType.METAL)
-                .lightValue(0)
-                .harvestLevel(0)
+
         );
-        this.setDefaultState(this.getStateContainer().getBaseState().with(directionProperty, Direction.NORTH));
+
+        this.registerDefaultState(this.defaultBlockState().with(directionProperty, Direction.NORTH));
     }
 
     @Override

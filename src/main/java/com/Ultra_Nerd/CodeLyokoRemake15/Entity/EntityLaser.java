@@ -5,58 +5,66 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.ICustomPacket;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 
-public class EntityLaser extends ArrowEntity {
+public class EntityLaser extends Arrow {
 
-    public EntityLaser(EntityType<? extends ArrowEntity> Laser, World world) {
+    public EntityLaser(EntityType<? extends Arrow> Laser, Level world) {
         super(Laser, world);
         // TODO Auto-generated constructor stub
     }
 
-    public EntityLaser(World worldIn, LivingEntity throwerIn) {
+    public EntityLaser(Level worldIn, LivingEntity throwerIn) {
         super(worldIn, throwerIn);
         // TODO Auto-generated constructor stub
     }
 
-    public EntityLaser(World worldIn, double x, double y, double z) {
+    public EntityLaser(Level worldIn, double x, double y, double z) {
         super(worldIn, x, y, z);
         // TODO Auto-generated constructor stub
     }
 
-    public EntityLaser(World world) {
-        super(ModEntities.LASER.get(), world);
+    public EntityLaser(Level world) {
+        super(ModEntities.LASER, world);
     }
 
     @Nonnull
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-    @Override
-    protected boolean makeFlySound() {
-        // TODO Auto-generated method stub
-        return false;
-    }
+
+
 
 
     @Override
-    public void setDamage(double damageIn) {
+    public void setBaseDamage(double damageIn) {
         // TODO Auto-generated method stub
-        super.setDamage(damageIn);
+        super.setBaseDamage(damageIn);
     }
 
     @Override
-    protected void arrowHit(@Nonnull LivingEntity live) {
-        if (!this.world.isRemote) {
-            super.arrowHit(live);
+    protected void onHitEntity(EntityHitResult live) {
+        super.onHitEntity(live);
+        if (this.level.isClientSide) {
+            super.onHitEntity(live);
         }
-
     }
+
+
 
 
 }

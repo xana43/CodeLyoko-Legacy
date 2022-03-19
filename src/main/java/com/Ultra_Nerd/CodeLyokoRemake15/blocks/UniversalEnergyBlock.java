@@ -4,19 +4,19 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolType;
 
 public class UniversalEnergyBlock extends Block {
 
     //private UniversalEnergyStorageTileEntity Text = new UniversalEnergyStorageTileEntity();
     public UniversalEnergyBlock() {
-        super(Block.Properties.create(Material.MISCELLANEOUS)
-
-                .hardnessAndResistance(3, 10)
+        super(Properties.of(Material.DECORATION)
                 .sound(SoundType.GLASS)
-                .lightValue(4)
-                .harvestLevel(2)
-                .harvestTool(ToolType.PICKAXE)
+                .requiresCorrectToolForDrops()
+
 
 
         );

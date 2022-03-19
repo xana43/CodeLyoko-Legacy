@@ -7,26 +7,33 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
 
 public class linker extends ArmorItem {
-    public linker(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
+    public linker(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
         super(materialIn, slot, builder);
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        if (stack.getDamage() < stack.getMaxDamage() - 1) {
+    public void onArmorTick(ItemStack stack, Level world, Player player) {
+        if (stack.getDamageValue() < stack.getMaxDamage() - 1) {
             stack.damageItem(1, player, null);
         }
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
 
-        if (stack.getDamage() != 0 && itemSlot != EquipmentSlotType.CHEST.getIndex()) {
-            stack.damageItem(-1, (PlayerEntity) entityIn, null);
+        if (stack.getDamageValue() != 0 && itemSlot != EquipmentSlot.CHEST.getIndex()) {
+            stack.damageItem(-1, (Player) entityIn, null);
         }
 
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);

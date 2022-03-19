@@ -1,15 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.Input;
 import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.glfw.GLFW;
 
+import javax.swing.*;
+
 @OnlyIn(Dist.CLIENT)
 public class KeyBoardAccess {
 
-    private static final long MINECRAFT = Minecraft.getInstance().getMainWindow().getHandle();
+    private static final long MINECRAFT = Minecraft.getInstance().keyboardHandler;
 
 
     public static boolean shift() {

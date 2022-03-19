@@ -9,6 +9,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.dimension.OverworldDimension;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
@@ -25,8 +26,8 @@ public class ClientEventSubscriber {
 
     @SubscribeEvent
     public static void PlayerJoinMusic(final EntityJoinWorldEvent event) {
-        if (event.getEntity() instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) event.getEntity();
+        if (event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
             if (player.world.dimension instanceof ForestDimension && Minecraft.getInstance().player != null) {
                 timer[0] = 0;
             } else if (player.world.dimension instanceof IceDimension && Minecraft.getInstance().player != null) {
@@ -44,7 +45,7 @@ public class ClientEventSubscriber {
     @SubscribeEvent
     public static void PlayerDimension(final TickEvent.PlayerTickEvent event) {
 
-        if (event.player.world.dimension instanceof ForestDimension && event.phase == TickEvent.Phase.END) {
+        if (event.player.getLevel().dimension() instanceof ForestDimension && event.phase == TickEvent.Phase.END) {
             if (timer[0]-- <= 0 && Minecraft.getInstance().player != null) {
                 timer[0] = 131000;
                 Minecraft.getInstance().player.playSound(ModSounds.FOREST.get(), 1f, 1f);

@@ -6,6 +6,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItemUseContext;
@@ -18,11 +20,24 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Random;
 
 
@@ -40,67 +55,48 @@ public class TowerWallCorner extends Block {
     }
 
     @Override
-    public boolean canCreatureSpawn(BlockState state, IBlockReader world, BlockPos pos, EntitySpawnPlacementRegistry.PlacementType type, @Nullable EntityType<?> entityType) {
+    public boolean isValidSpawn(BlockState state, BlockGetter level, BlockPos pos, SpawnPlacements.Type type, EntityType<?> entityType) {
         return false;
     }
 
     @Override
-    public int getLightValue(@Nonnull BlockState state) {
-        return 5;
-    }
-
-    @Override
-    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-        return 5;
-    }
-
-    @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(DIRTOWERC);
     }
 
+
+
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         // TODO Auto-generated method stub
-        return this.getDefaultState().with(DIRTOWERC, context.getPlacementHorizontalFacing().getOpposite());
+        return this.getStateDefinition().any().setValue(DIRTOWERC, context.getHorizontalDirection().getOpposite());
     }
 
     //mod compatiability
     @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(DIRTOWERC, rot.rotate(state.get(DIRTOWERC)));
+        return state.setValue(DIRTOWERC, rot.rotate(state.getValue(DIRTOWERC)));
     }
 
     @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(DIRTOWERC)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(DIRTOWERC)));
     }
     //
 
-    @Override
-    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean isTransparent(@Nonnull BlockState state) {
-        // TODO Auto-generated method stub
-        return true;
-    }
 
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void animateTick(@Nonnull BlockState stateIn, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
+    public void animateTick(@Nonnull BlockState stateIn, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
         super.animateTick(stateIn, worldIn, pos, rand);
         double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D);
         double d1 = (double) pos.getY() + 0.5D + (rand.nextDouble() - 0.5D);
         double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
-        if (stateIn.get(DIRTOWERC) == Direction.NORTH) {
-            if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)) == Blocks.AIR.getDefaultState()) {
+        if (stateIn.getValue(DIRTOWERC) == Direction.NORTH) {
+            if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)) == Blocks.AIR.defaultBlockState()) {
                 worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                         d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
             } else {
@@ -108,7 +104,7 @@ public class TowerWallCorner extends Block {
                         pos.getX() - 0.25f, d1, d2, 0, -1, 0);
             }
         } else if (stateIn.get(DIRTOWERC) == Direction.SOUTH) {
-            if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)) == Blocks.AIR.getDefaultState()) {
+            if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)) == Blocks.AIR.defaultBlockState()) {
                 worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                         d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
             } else {
@@ -116,7 +112,7 @@ public class TowerWallCorner extends Block {
                         pos.getX() + 1.25f, d1, d2, 0, -1, 0);
             }
         } else if (stateIn.get(DIRTOWERC) == Direction.EAST) {
-            if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ())) == Blocks.AIR.getDefaultState()) {
+            if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ())) == Blocks.AIR.defaultBlockState()) {
                 worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                         pos.getX() - 0.25f, d1, d2, 0, -1, 0);
             } else {

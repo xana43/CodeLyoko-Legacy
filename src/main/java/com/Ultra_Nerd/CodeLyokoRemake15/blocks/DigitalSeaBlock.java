@@ -11,12 +11,13 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 
-public class DigitalSeaBlock extends FlowingFluidBlock {
+public class DigitalSeaBlock extends ForgeFlowingFluid {
 
 
     public DigitalSeaBlock(Supplier<? extends FlowingFluid> supplier) {

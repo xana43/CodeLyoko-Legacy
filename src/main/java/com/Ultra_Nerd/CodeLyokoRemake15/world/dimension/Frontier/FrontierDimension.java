@@ -13,7 +13,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class FrontierDimension extends Dimension {
+public class FrontierDimension extends Dimen {
 
     public FrontierDimension(World world, DimensionType type) {
         super(world, type, 0);

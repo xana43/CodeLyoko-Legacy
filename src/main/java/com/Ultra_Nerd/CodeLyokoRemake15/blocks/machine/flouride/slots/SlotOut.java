@@ -4,15 +4,19 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
 public class SlotOut extends Slot {
 
-    private final PlayerEntity player;
+    private final Player player;
     private int rc;
 
-    public SlotOut(PlayerEntity player, IInventory inventory, int index, int x, int y) {
+    public SlotOut(Player player, Inventory inventory, int index, int x, int y) {
         super(inventory, index, x, y);
         this.player = player;
     }
@@ -26,7 +30,7 @@ public class SlotOut extends Slot {
 
     @Nonnull
     @Override
-    public ItemStack onTake(@Nonnull PlayerEntity thePlayer, @Nonnull ItemStack stack) {
+    public ItemStack onTake(@Nonnull Player thePlayer, @Nonnull ItemStack stack) {
         // TODO Auto-generated method stub
         this.onCrafting(stack);
         super.onTake(thePlayer, stack);

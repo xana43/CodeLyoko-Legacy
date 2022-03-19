@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.events;
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 public class DoubleJumpEvent {
     @SubscribeEvent
     public static void DoubleJumpEvent(InputEvent.KeyInputEvent event2) {
-        PlayerEntity Entity = Minecraft.getInstance().player;
+        Player Entity = Minecraft.getInstance().player;
 
         Minecraft minecraft = Minecraft.getInstance();
         //       byte d = 10;

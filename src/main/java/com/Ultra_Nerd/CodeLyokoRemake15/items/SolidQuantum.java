@@ -3,6 +3,8 @@ package com.Ultra_Nerd.CodeLyokoRemake15.items;
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
@@ -16,11 +18,12 @@ public class SolidQuantum extends Item {
 
     }
 
-
     @Override
-    public boolean isDamageable() {
+    public boolean isDamageable(ItemStack stack) {
         return false;
     }
+
+
 
     @SubscribeEvent
     public void ItemInvulnerable(ItemExpireEvent event) {

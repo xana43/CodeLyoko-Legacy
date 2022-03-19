@@ -19,21 +19,27 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.RegistryObject;
@@ -46,6 +52,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import vazkii.patchouli.api.IMultiblock;
 
 import java.util.Map;
@@ -58,11 +65,11 @@ public class Base {
 
     public static final Logger Log = LogManager.getLogger();
     public static final String MOD_ID = "cm";
-    public static final Map<ResourceLocation, IMultiblock> MULTIBLOCK_MAP = new ConcurrentHashMap<>();
+    public static final Map<ResourceLocation, IMultiBlock> MULTIBLOCK_MAP = new ConcurrentHashMap<>();
 
     public static final CreativeModeTab LYOKO_BLOCKS = new CreativeModeTab("lyoko_blocks") {
         @Override
-        public ItemStack makeIcon() {
+        public @NotNull ItemStack makeIcon() {
             return new ItemStack(ModBlocks.TOWER_INTERFACE.get());
         }
 
@@ -71,21 +78,21 @@ public class Base {
 
     public static final CreativeModeTab LYOKO_ARMOR = new CreativeModeTab("lyoko_armor") {
         @Override
-        public ItemStack makeIcon() {
+        public @NotNull ItemStack makeIcon() {
             return new ItemStack(ModItems.WILLIAM_CHESTPLATE.get());
         }
     };
 
     public static final CreativeModeTab LYOKO_WEAPONS = new CreativeModeTab("lyoko_weapons") {
         @Override
-        public ItemStack makeIcon() {
+        public @NotNull ItemStack makeIcon() {
             return new ItemStack(ModItems.LASER_ARROWSHOOTER.get());
         }
     };
 
     public static final CreativeModeTab LYOKO_ITEMS = new CreativeModeTab("lyoko_items") {
         @Override
-        public ItemStack makeIcon() {
+        public @NotNull ItemStack makeIcon() {
             // TODO Auto-generated method stub
             return new ItemStack(ModItems.BIT.get());
         }
@@ -131,10 +138,10 @@ public class Base {
     public static void onItemInit(final RegistryEvent.Register<Item> Items) {
         final IForgeRegistry<Item> registry = Items.getRegistry();
 
-        ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof FlowingFluidBlock) &&
+        ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof FlowingFluid) &&
                 !(block.get() instanceof LiquidHelium) && !(block.get() instanceof SeaPylon) && !(block.get() instanceof LyokoCore)).map(RegistryObject::get).forEach(block ->
         {
-            final Item.Properties itemsettings = new Item.Properties().group(LYOKO_BLOCKS);
+            final Item.Properties itemsettings = new Item.Properties().tab(LYOKO_BLOCKS);
             final BlockItem Itemblocks = new BlockItem(block, itemsettings);
             Itemblocks.setRegistryName(block.getRegistryName());
             registry.register(Itemblocks);
@@ -160,7 +167,7 @@ public class Base {
             if (random == 0 && !XANA) {
                 random = new Random().nextInt(40000);
                 assert Minecraft.getInstance().player != null;
-                Minecraft.getInstance().player.sendMessage(new StringTextComponent("xana is attacking"));
+                Minecraft.getInstance().player.sendMessage(new TextComponent("xana is attacking"));
                 XANA = true;
             }
         }
@@ -176,18 +183,18 @@ public class Base {
     public void PlayerSetup(final EntityJoinWorldEvent event) {
         random = 1000;
         if (event.getEntity() instanceof PlayerEntity) {
-            CompoundNBT tag = event.getEntity().getPersistentData();
-            CompoundNBT existing;
-            PlayerEntity player = (PlayerEntity) event.getEntity();
-            if (!tag.contains(PlayerEntity.PERSISTED_NBT_TAG)) {
-                tag.put(PlayerEntity.PERSISTED_NBT_TAG, (existing = new CompoundNBT()));
+            CompoundTag tag = event.getEntity().getPersistentData();
+            CompoundTag existing;
+            Player player = (Player) event.getEntity();
+            if (!tag.contains(Player.PERSISTED_NBT_TAG)) {
+                tag.put(Player.PERSISTED_NBT_TAG, (existing = new CompoundTag()));
             } else {
-                existing = tag.getCompound(PlayerEntity.PERSISTED_NBT_TAG);
+                existing = tag.getCompound(Player.PERSISTED_NBT_TAG);
             }
 
             if (!existing.contains(nbt)) {
                 existing.putBoolean(nbt, true);
-                player.inventory.add(0, new ItemStack(ModItems.STORY_BOOK.get(), 1));
+                player.getInventory().add(0, new ItemStack(ModItems.STORY_BOOK.get(), 1));
             }
         }
     }

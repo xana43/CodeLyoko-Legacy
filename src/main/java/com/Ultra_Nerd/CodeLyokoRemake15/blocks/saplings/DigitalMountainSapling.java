@@ -6,6 +6,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BushBlock;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.trees.Tree;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -14,8 +16,10 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.server.ServerWorld;
@@ -25,9 +29,9 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class DigitalMountainSapling extends BushBlock implements IGrowable {
+public class DigitalMountainSapling extends BushBlock {
 
-    public static final IntegerProperty PROGRESS_MOUNTAIN = BlockStateProperties.STAGE_0_1;
+    public static final IntegerProperty PROGRESS_MOUNTAIN = BlockStateProperties.STAGE;
     protected static final VoxelShape shape = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D);
     private final Supplier<Tree> tree;
 
@@ -44,7 +48,7 @@ public class DigitalMountainSapling extends BushBlock implements IGrowable {
 
 
     @Override
-    public void tick(@Nonnull BlockState state, @Nonnull ServerWorld worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
+    public void tick(@Nonnull BlockState state, @Nonnull ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
         super.tick(state, worldIn, pos, rand);
         if (!worldIn.isAreaLoaded(pos, 1)) {
             return;
@@ -60,7 +64,7 @@ public class DigitalMountainSapling extends BushBlock implements IGrowable {
     }
 
 
-    public void grow(ServerWorld world, BlockPos pos, BlockState state, Random rand) {
+    public void grow(ServerLevel world, BlockPos pos, BlockState state, Random rand) {
         if (state.get(PROGRESS_MOUNTAIN) == 0) {
             world.setBlockState(pos, state.cycle(PROGRESS_MOUNTAIN), 4);
 
@@ -84,7 +88,7 @@ public class DigitalMountainSapling extends BushBlock implements IGrowable {
     }
 
     @Override
-    public void grow(@Nonnull ServerWorld worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull BlockState state) {
+    public void grow(@Nonnull ServerLevel worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull BlockState state) {
         this.grow(worldIn, pos, state, rand);
     }
 
