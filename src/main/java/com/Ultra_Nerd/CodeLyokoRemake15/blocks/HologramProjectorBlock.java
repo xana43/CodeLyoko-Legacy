@@ -1,13 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;

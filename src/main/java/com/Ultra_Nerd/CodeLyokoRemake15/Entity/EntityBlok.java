@@ -2,34 +2,41 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
+import net.minecraft.core.BlockPos;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.monster.SkeletonEntity;
-import net.minecraft.network.IPacket;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animation.controller.EntityAnimationController;
 import software.bernie.geckolib.entity.IAnimatedEntity;
 import software.bernie.geckolib.event.AnimationTestEvent;
 import software.bernie.geckolib.manager.EntityAnimationManager;
 
 import javax.annotation.Nonnull;
+import java.util.Random;
 
-public class EntityBlok extends SkeletonEntity implements IAnimatedEntity {
+public class EntityBlok extends Skeleton implements IAnimatedEntity {
 
 
     private static final EntityAnimationManager manager = new EntityAnimationManager();
     private final EntityAnimationController controller = new EntityAnimationController(this, "blokcontroller", 20, this::pred);
 
-    public EntityBlok(World world) {
+    public EntityBlok(Level world) {
         super(ModEntities.BLOK.get(), world);
         manager.addAnimationController(controller);
     }
+
+
 
 
     private <E extends EntityBlok> boolean pred(AnimationTestEvent<E> event) {
@@ -37,27 +44,48 @@ public class EntityBlok extends SkeletonEntity implements IAnimatedEntity {
     }
 
 
-    @Nonnull
-    @Override
-    public IPacket<?> createSpawnPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
+
 
     @Override
-    protected boolean isInDaylight() {
+    protected boolean isSunBurnTick() {
         return false;
     }
 
+    @Override
+    public boolean isFreezeConverting() {
+        return false;
+    }
 
-    public EntityBlok(EntityType<? extends SkeletonEntity> type, World world) {
+    @Override
+    public boolean isOnFire() {
+        return false;
+    }
+
+    @Override
+    public void setAggressive(boolean p_21562_) {
+        super.setAggressive(true);
+    }
+
+
+
+    public EntityBlok(EntityType<? extends Skeleton> type, Level world) {
         super(type, world);
         // TODO Auto-generated constructor stub
     }
 
     @Override
-    protected boolean canBeRidden(@Nonnull Entity entityIn) {
-        // TODO Auto-generated method stub
+    protected boolean canRide(Entity p_20339_) {
         return false;
+    }
+
+    @Override
+    public void clearFire() {
+        super.clearFire();
+    }
+
+    @Override
+    public boolean curePotionEffects(ItemStack curativeItem) {
+        return true;
     }
 
     @Override
@@ -66,17 +94,15 @@ public class EntityBlok extends SkeletonEntity implements IAnimatedEntity {
         return true;
     }
 
-    @Override
-    public boolean clearActivePotions() {
-        // TODO Auto-generated method stub
-        return true;
-    }
+
 
     @Override
     protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
         // TODO Auto-generated method stub
         return ModSounds.BLOKHURT.get();
     }
+
+
 
     @Override
     protected SoundEvent getAmbientSound() {
@@ -96,24 +122,25 @@ public class EntityBlok extends SkeletonEntity implements IAnimatedEntity {
         return super.getStepSound();
     }
 
-    @Override
-    public boolean canSpawn(@Nonnull IWorld worldIn, @Nonnull SpawnReason spawnReasonIn) {
-        return true;
+
+
+    public static boolean canSpawn(EntityType<EntityBlok> entity, LevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, Random random)
+    {
+        return checkMobSpawnRules(entity,levelAccessor,spawnType,pos,random) && pos.getY() > 70;
     }
 
 
-    @Override
-    protected void registerAttributes() {
-        // TODO Auto-generated method stub
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(10D);
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
-        this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10D);
-        //this.getAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(10D);
-        this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10D);
-        this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
+    public static AttributeSupplier.@NotNull Builder createAttributes(){
+        return Mob.createMobAttributes()
+                .add(Attributes.KNOCKBACK_RESISTANCE, 10D)
+                .add(Attributes.MAX_HEALTH,10D)
+                .add(Attributes.MOVEMENT_SPEED,0.5D)
+                .add(Attributes.ATTACK_DAMAGE,10D)
+                .add(Attributes.ARMOR,10D)
+                .add(Attributes.FOLLOW_RANGE, 20D);
     }
+
+
 
     @Override
     public EntityAnimationManager getAnimationManager() {

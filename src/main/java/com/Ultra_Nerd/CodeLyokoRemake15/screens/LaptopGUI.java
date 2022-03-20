@@ -2,12 +2,9 @@ package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 

@@ -4,7 +4,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensionTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.fml.network.NetworkEvent.Context;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.Objects;

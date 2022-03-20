@@ -1,30 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage.Sector5ModDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertModDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanModDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestModDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Frontier.FrontierModDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceModDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainModDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoModDimension;
-import net.minecraftforge.common.ModDimension;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.dimension.DimensionType;
 
 public class ModDimensions {
 
-    public static final DeferredRegister<World> MOD_DIMENSION_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.MOD, Base.MOD_ID);
+    public static final ResourceKey<Level> MOD_DIMENSIONS = ResourceKey.create(Registry.DIMENSION_REGISTRY,new ResourceLocation(Base.MOD_ID,"Lyoko"));
+    public static final ResourceKey<DimensionType> MOD_DIMENSION_TYPE = ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY,new ResourceLocation(Base.MOD_ID,"LyokoType"));
 
 
-    public static final RegistryObject<ModDimension> FOREST_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("forest_sector", ForestModDimension::new);
-    public static final RegistryObject<ModDimension> SECTOR_5 = MOD_DIMENSION_DEFERRED_REGISTER.register("sector_5", Sector5ModDimension::new);
-    public static final RegistryObject<ModDimension> MOUNTAIN_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("mountain_sector", MountainModDimension::new);
-    public static final RegistryObject<ModDimension> OCEAN_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("digital_ocean", OceanModDimension::new);
-    public static final RegistryObject<ModDimension> ICE_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("ice_sector", IceModDimension::new);
-    public static final RegistryObject<ModDimension> DESERT_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("desert_sector", DesertModDimension::new);
-    public static final RegistryObject<ModDimension> FRONTIER_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("frontier", FrontierModDimension::new);
-    public static final RegistryObject<ModDimension> VOLCANO_DIMENSION = MOD_DIMENSION_DEFERRED_REGISTER.register("volcano", VolcanoModDimension::new);
+
 }

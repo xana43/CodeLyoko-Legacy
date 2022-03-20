@@ -1,12 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Recipies;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModRecipes;
+import net.minecraft.core.NonNullList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 import javax.annotation.Nonnull;
@@ -30,7 +36,7 @@ public class TestRecipe implements ICustomRecipes {
     }
 
     @Override
-    public boolean matches(RecipeWrapper inv, @Nonnull World worldIn) {
+    public boolean matches(RecipeWrapper inv, @Nonnull Level worldIn) {
         return this.input.test(inv.getStackInSlot(0));
     }
 
@@ -55,13 +61,13 @@ public class TestRecipe implements ICustomRecipes {
 
     @Nonnull
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return ModRecipes.TEST_RECEPIE.get();
     }
 
     @Nonnull
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return NonNullList.from(null, this.input);
+        return NonNullList.of(null, this.input);
     }
 }

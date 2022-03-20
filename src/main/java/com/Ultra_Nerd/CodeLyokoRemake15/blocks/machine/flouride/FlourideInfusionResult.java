@@ -5,7 +5,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Map;

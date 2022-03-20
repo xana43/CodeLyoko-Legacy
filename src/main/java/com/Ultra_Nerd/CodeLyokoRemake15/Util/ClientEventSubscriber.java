@@ -7,7 +7,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimens
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.dimension.OverworldDimension;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;

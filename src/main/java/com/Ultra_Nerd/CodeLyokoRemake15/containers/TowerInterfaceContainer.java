@@ -5,10 +5,10 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.world.Container;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;

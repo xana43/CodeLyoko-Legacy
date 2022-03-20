@@ -1,20 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.network.IPacket;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.world.World;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraftforge.network.ICustomPacket;
 import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;

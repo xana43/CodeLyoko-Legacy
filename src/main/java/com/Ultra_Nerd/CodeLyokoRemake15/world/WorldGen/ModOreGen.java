@@ -1,8 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;

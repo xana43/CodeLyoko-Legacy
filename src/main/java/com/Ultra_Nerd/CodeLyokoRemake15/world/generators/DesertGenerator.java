@@ -1,11 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.generators;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertGenSettings;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.NoiseChunkGenerator;
 import net.minecraft.world.level.biome.BiomeSource;
-import net.minecraftforge.common.extensions.IForgeLevel;
 
 import javax.annotation.Nonnull;
 

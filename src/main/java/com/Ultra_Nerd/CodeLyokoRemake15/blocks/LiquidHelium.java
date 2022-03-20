@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.core.BlockPos;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.FlowingFluid;
@@ -17,21 +18,34 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.ILightReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.MaterialColor;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-public class LiquidHelium extends FlowingFluidBlock {
+public class LiquidHelium extends LiquidBlock {
 
     public LiquidHelium(Supplier<? extends FlowingFluid> supplier) {
-        super(supplier, Block.Properties.from(Blocks.WATER).variableOpacity()
+        super(supplier, BlockBehaviour.Properties.copy(Blocks.WATER)
+                .noOcclusion()
+
 
         );
 
     }
 
     @Override
-    public void onEntityCollision(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
+    public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         if (entityIn instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity) entityIn;
             livingEntity.attackEntityFrom(new DamageSource(this.getTranslationKey()), RANDOM.nextInt(2));
@@ -42,18 +56,15 @@ public class LiquidHelium extends FlowingFluidBlock {
         }
     }
 
-    @Override
-    public Vec3d getFogColor(BlockState state, IWorldReader world, BlockPos pos, Entity entity, Vec3d originalColor, float partialTicks) {
-        return new Vec3d(1, 1, 1);
-    }
+
 
     @Override
-    public boolean shouldDisplayFluidOverlay(BlockState state, ILightReader world, BlockPos pos, IFluidState fluidState) {
+    public boolean shouldDisplayFluidOverlay(BlockState state, BlockAndTintGetter level, BlockPos pos, FluidState fluidState) {
         return true;
     }
 
     @Override
-    public void onBlockAdded(@Nonnull BlockState state, World worldIn, BlockPos pos, @Nonnull BlockState oldState, boolean isMoving) {
+    public void onPlace(@Nonnull BlockState state, Level worldIn, BlockPos pos, @Nonnull BlockState oldState, boolean isMoving) {
         //water
         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())) == Blocks.WATER.getDefaultState()) {
             worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), Blocks.BLUE_ICE.getDefaultState());
@@ -147,6 +158,6 @@ public class LiquidHelium extends FlowingFluidBlock {
             worldIn.setBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1), Blocks.SNOW.getDefaultState());
         }
 
-        super.onBlockAdded(state, worldIn, pos, oldState, isMoving);
+        super.onPlace(state, worldIn, pos, oldState, isMoving);
     }
 }

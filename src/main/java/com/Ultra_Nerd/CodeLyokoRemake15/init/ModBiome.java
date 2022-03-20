@@ -2,18 +2,18 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.*;
-import net.minecraft.block.Blocks;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.RainType;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -23,18 +23,10 @@ public class ModBiome {
 
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, Base.MOD_ID);
 
-    public static final RegistryObject<Biome> SECTOR5 = BIOMES.register("sector5", () -> new LyokoCarthage(new Biome.Builder()
-            .precipitation(RainType.NONE)
-            .waterColor(3099807)
-            .waterFogColor(3099807)
-            .surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(ModBlocks.SECTOR5_STEEL.get()
-                    .getDefaultState(), Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState()))
-            .depth(70)
-            .scale(4)
-            .temperature(10)
-            .category(null)
+    public static final RegistryObject<Biome> SECTOR5 = BIOMES.register("sector5", () -> new LyokoCarthage(new Builder
+            .precipitation(Biome.Precipitation.NONE)
             .downfall(0)
-            .parent(null)));
+            .biomeCategory(Biome.BiomeCategory.NONE));
     public static final RegistryObject<Biome> FOREST = BIOMES.register("forest_sector", () -> new LyokoForest(new Biome.Builder()
             .precipitation(RainType.NONE)
             .surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(ModBlocks.DIGITAL_GRASS.get()

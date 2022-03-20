@@ -2,41 +2,19 @@ package com.Ultra_Nerd.CodeLyokoRemake15.fluids;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.IFluidState;
-import net.minecraft.item.Item;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
@@ -45,14 +23,11 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.extensions.IForgeFluidState;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
-import net.minecraftforge.fluids.IFluidBlock;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Random;
 
 public class LiquidHeliumFluid extends ForgeFlowingFluid {
@@ -72,10 +47,14 @@ public class LiquidHeliumFluid extends ForgeFlowingFluid {
                 .color(0x868686).build(this);
     }
 
+    @Override
+    public int getAmount(FluidState p_164509_) {
+        return 0;
+    }
 
     @Override
     public boolean isSame(Fluid fluidIn) {
-        return fluidIn.equals(ModFluids.FLOWING_LIQUID_HELIUM.get()) || fluidIn.equals(ModFluids.STILL_LIQUID_HELIUM.get();
+        return fluidIn.equals(ModFluids.FLOWING_LIQUID_HELIUM.get()) || fluidIn.equals(ModFluids.STILL_LIQUID_HELIUM.get());
     }
 
     @Override
@@ -99,7 +78,7 @@ public class LiquidHeliumFluid extends ForgeFlowingFluid {
     public void animateTick(@Nonnull Level worldIn, @Nonnull BlockPos pos, FluidState state, @Nonnull Random random) {
         if (!state.isSource() && !state.getValue(FALLING)) {
             if (random.nextInt(64) == 0) {
-                worldIn.playSound(null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.WATER_AMBIENT, SoundSource.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F, false);
+                worldIn.playSound(null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.WATER_AMBIENT, SoundSource.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F);
             }
         } else if (random.nextInt(10) == 0) {
             worldIn.addParticle(ParticleTypes.UNDERWATER, (double) pos.getX() + (double) random.nextFloat(), (double) pos.getY() + (double) random.nextFloat(), (double) pos.getZ() + (double) random.nextFloat(), 0.0D, 0.0D, 0.0D);
@@ -117,11 +96,8 @@ public class LiquidHeliumFluid extends ForgeFlowingFluid {
 
 
 
-    @Override
-    protected boolean canDisplace(@Nonnull FluidState state, @Nonnull LevelReader world, @Nonnull BlockPos pos,
-                                  @Nonnull Fluid fluid, @Nonnull Direction dir) {
-        return true;
-    }
+
+
 
 
     @NotNull
@@ -191,18 +167,18 @@ public class LiquidHeliumFluid extends ForgeFlowingFluid {
         }
 
         @Override
-        protected void fillStateContainer(@Nonnull StateContainer.Builder<Fluid, IFluidState> builder) {
-            super.fillStateContainer(builder);
-            builder.add(LEVEL_1_8);
+        protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
+            super.createFluidStateDefinition(builder);
+            builder.add(LEVEL);
         }
 
         @Override
-        public int getLevel(@Nonnull IFluidState state) {
-            return state.get(LEVEL_1_8);
+        public float getHeight(FluidState p_76050_, BlockGetter p_76051_, BlockPos p_76052_) {
+            return 8;
         }
 
         @Override
-        public boolean isSource(@Nonnull IFluidState state) {
+        public boolean isSource(FluidState p_76140_) {
             return false;
         }
     }
@@ -218,13 +194,15 @@ public class LiquidHeliumFluid extends ForgeFlowingFluid {
             return super.createAttributes();
         }
 
+
+
         @Override
-        public int getLevel(@Nonnull IFluidState state) {
+        public float getHeight(FluidState p_76050_, BlockGetter p_76051_, BlockPos p_76052_) {
             return 8;
         }
 
         @Override
-        public boolean isSource(@Nonnull IFluidState state) {
+        public boolean isSource(FluidState p_76140_) {
             return true;
         }
     }

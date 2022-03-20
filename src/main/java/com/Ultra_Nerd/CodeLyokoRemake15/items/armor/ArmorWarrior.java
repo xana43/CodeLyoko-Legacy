@@ -2,21 +2,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.items.armor;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage.Sector5Dimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoDimension;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.getInventory().EquipmentSlot;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.world.World;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -67,7 +52,8 @@ public class ArmorWarrior extends ArmorItem {
 
                     if (I++ == 1000) {
                         if (stack.getDamageValue() != 0) {
-                            stack.damageItem(-1, player, null);
+                            stack.getItem().damageItem(stack,-1,null,null);
+
                         }
                         I = 0;
                     }

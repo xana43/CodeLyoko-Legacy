@@ -10,21 +10,12 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.items.CustomMobEggs;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen.ModOreGen;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen.StructGen;
-import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -33,16 +24,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.RegistryObject;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.config.ModConfig;
@@ -50,11 +42,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import vazkii.patchouli.api.IMultiblock;
-
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -65,7 +56,7 @@ public class Base {
 
     public static final Logger Log = LogManager.getLogger();
     public static final String MOD_ID = "cm";
-    public static final Map<ResourceLocation, IMultiBlock> MULTIBLOCK_MAP = new ConcurrentHashMap<>();
+    //public static final Map<ResourceLocation, IMultiBlock> MULTIBLOCK_MAP = new ConcurrentHashMap<>();
 
     public static final CreativeModeTab LYOKO_BLOCKS = new CreativeModeTab("lyoko_blocks") {
         @Override
@@ -117,14 +108,14 @@ public class Base {
         ModBiome.BIOMES.register(ModBus);
         ModContainerTypes.CONTAINER_TYPES.register(ModBus);
         ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
-        ModDimensions.MOD_DIMENSION_DEFERRED_REGISTER.register(ModBus);
+       // ModDimensions.MOD_DIMENSION_DEFERRED_REGISTER.register(ModBus);
         ModWorldFeatures.FEATURES.register(ModBus);
         instance = this;
         MinecraftForge.EVENT_BUS.register(this);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfiguration.COMMON_SPEC, "code_lyoko_legacy.toml");
     }
 
-    public static IMultiblock registerMultiBlocks(ResourceLocation resourceLocation, IMultiblock multiblock) {
+    /*public static IMultiblock registerMultiBlocks(ResourceLocation resourceLocation, IMultiblock multiblock) {
         IMultiblock MultiBlocks = MULTIBLOCK_MAP.put(resourceLocation, multiblock);
         if (MultiBlocks != null) {
             throw new IllegalArgumentException("Multiblock " + resourceLocation + " already registered");
@@ -132,6 +123,21 @@ public class Base {
             Base.Log.info(resourceLocation);
             return multiblock.setId(resourceLocation);
         }
+    }
+*/
+
+    public static VoxelShape calculateShapes(Direction to, VoxelShape shape) {
+        final VoxelShape[] buffer = { shape, Shapes.empty() };
+
+        final int times = (to.get2DDataValue() - Direction.NORTH.get2DDataValue() + 4) % 4;
+        for (int i = 0; i < times; i++) {
+            buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> buffer[1] = Shapes.or(buffer[1],
+                    Shapes.create(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX)));
+            buffer[0] = buffer[1];
+            buffer[1] = Shapes.empty();
+        }
+
+        return buffer[0];
     }
 
     @SubscribeEvent

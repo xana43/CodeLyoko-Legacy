@@ -3,8 +3,13 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 import software.bernie.geckolib.animation.builder.AnimationBuilder;
 import software.bernie.geckolib.animation.controller.EntityAnimationController;
 import software.bernie.geckolib.entity.IAnimatedEntity;
@@ -13,12 +18,12 @@ import software.bernie.geckolib.manager.EntityAnimationManager;
 
 import javax.annotation.Nonnull;
 
-public class KankrelatEntity extends SkeletonEntity implements IAnimatedEntity {
+public class KankrelatEntity extends Skeleton implements IAnimatedEntity {
 
     private final EntityAnimationController controller = new EntityAnimationController(this, "kankrelatcontroller", 20, this::animationPred);
     private final EntityAnimationManager manager = new EntityAnimationManager();
 
-    public KankrelatEntity(EntityType<? extends KankrelatEntity> type, World world) {
+    public KankrelatEntity(EntityType<? extends KankrelatEntity> type, Level world) {
         super(type, world);
         manager.addAnimationController(controller);
     }
@@ -37,9 +42,11 @@ public class KankrelatEntity extends SkeletonEntity implements IAnimatedEntity {
         return false;
     }
 
+
+
     @Nonnull
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 

@@ -4,23 +4,19 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.carthage.CustomCarthadge
 import com.Ultra_Nerd.CodeLyokoRemake15.world.generators.Sector5Generator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.dimension.Dimension;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraft.world.level.dimension.DimensionType;
-import net.minecraftforge.client.IRenderHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class Sector5Dimension extends Dimension {
+public class Sector5Dimension extends Level {
 
 
     public static final BlockPos SPAWN = new BlockPos(0, 128, 0);
@@ -37,34 +33,32 @@ public class Sector5Dimension extends Dimension {
     }
 
     @Override
-    public void resetRainAndThunder() {
-        super.resetRainAndThunder();
+    public boolean isNight() {
+        return false;
+    }
+
+
+
+    @Override
+    public boolean isRaining() {
+        return false;
     }
 
     @Override
-    @Nullable
-    public BlockPos findSpawn(@Nonnull ChunkPos chunkPosIn, boolean checkValid) {
-        /*Random random = new Random(this.world.getSeed());
-        BlockPos blockpos = new BlockPos(chunkPosIn.getXStart() + random.nextInt(15), 0, chunkPosIn.getZEnd() + random.nextInt(15));
-        return this.world.getGroundAboveSeaLevel(blockpos).getMaterial().blocksMovement() ? blockpos : null;*/
-        return SPAWN;
-    }
-
-    @Nonnull
-    @Override
-    public WorldBorder createWorldBorder() {
-        return super.createWorldBorder();
+    public @NotNull WorldBorder getWorldBorder() {
+        return super.getWorldBorder();
     }
 
     @Override
-    public void setSpawnPoint(BlockPos pos) {
+    public void setSpawnSettings(BlockPos pos) {
         super.setSpawnPoint(SPAWN);
     }
 
     @Override
-    public void setWeatherRenderer(@Nonnull IRenderHandler renderer) {
-        super.setWeatherRenderer(null);
+    public float getSunAngle(float p_46491_) {
+        return 0;
     }
+
 
 
     @Override

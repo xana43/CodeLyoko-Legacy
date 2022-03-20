@@ -2,39 +2,68 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.KeyBoardAccess;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.extensions.IForgeEntity;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class HoverboardEntity extends Entity implements IForgeEntity {
+public class HoverboardEntity extends Entity  {
     private float Vel = 0;
     private float WDown = 0;
     private float QDown = 0;
     private float ZDown = 0;
-    private final AxisAlignedBB axisAlignedBB = this.getBoundingBox();
+    private final AABB axisAlignedBB = this.getBoundingBox();
 
-    public HoverboardEntity(EntityType<? extends HoverboardEntity> entityTypeIn, World worldIn) {
+    public HoverboardEntity(EntityType<? extends HoverboardEntity> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
-        this.setBoundingBox(new AxisAlignedBB(axisAlignedBB.minX, axisAlignedBB.minY, axisAlignedBB.minZ, axisAlignedBB.maxX, axisAlignedBB.maxY, axisAlignedBB.maxZ));
+        this.setBoundingBox(new AABB(axisAlignedBB.minX, axisAlignedBB.minY, axisAlignedBB.minZ, axisAlignedBB.maxX, axisAlignedBB.maxY, axisAlignedBB.maxZ));
 
-        recalculateSize();
+
+    }
+
+
+    @Override
+    public void onPassengerTurned(Entity p_20320_) {
+        super.onPassengerTurned(p_20320_);
     }
 
     @Override
-    public boolean canPassengerSteer() {
+    protected boolean canRide(Entity p_20339_) {
+        return true;
+    }
+
+    @Override
+    public boolean showVehicleHealth() {
+        return true;
+    }
+
+    @Override
+    public boolean isVehicle() {
         return true;
     }
 
@@ -43,15 +72,9 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
         return true;
     }
 
-    @Nullable
     @Override
-    public AxisAlignedBB getCollisionBoundingBox() {
-        return this.getCollisionBox(this);
-    }
+    protected void defineSynchedData() {
 
-    @Override
-    public void setRenderYawOffset(float offset) {
-        super.setRenderYawOffset(offset);
     }
 
     @Override
@@ -60,18 +83,18 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
 
 
         if (this.isBeingRidden()) {
-            if (this.getRidingEntity() != null) {
+            if (this.getFirstPassenger() != null) {
                 assert Minecraft.getInstance().player != null;
-                setRotation(Minecraft.getInstance().player.rotationYaw, 0);
+                setRot(Minecraft.getInstance().player.getXRot(), 0);
             }
             if (KeyBoardAccess.Q()) {
                 QDown += 0.0000001f;
 
-                this.move(MoverType.PLAYER, new Vec3d(0, this.getUpVector(10).y + QDown, 0));
+                this.move(MoverType.PLAYER, new Vec3(0, this.getUpVector(10).y + QDown, 0));
             } else if (KeyBoardAccess.Z()) {
 
                 ZDown += 0.0000001f;
-                this.move(MoverType.PLAYER, new Vec3d(0, -(this.getUpVector(10).getY() + ZDown), 0));
+                this.move(MoverType.PLAYER, new Vec3(0, -(this.getUpVector(10).y + ZDown), 0));
 
             }
             if (!KeyBoardAccess.Z()) {
@@ -129,20 +152,20 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
         }
     }
 
-
     @Override
-    public boolean isLiving() {
+    public boolean isAlive() {
         return false;
     }
 
     @Override
-    public void applyEntityCollision(@Nonnull Entity entityIn) {
-        super.applyEntityCollision(this);
+    public boolean canCollideWith(Entity p_20303_) {
+        return super.canCollideWith(this);
     }
 
 
+
     @Override
-    public boolean processInitialInteract(@Nonnull PlayerEntity player, @Nonnull Hand hand) {
+    public boolean processInitialInteract(@Nonnull Player player, @Nonnull InteractionHand hand) {
         if (super.processInitialInteract(player, hand)) {
             return true;
         }
@@ -160,31 +183,43 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
     }
 
     @Override
-    public boolean hasNoGravity() {
-        return false;
+    public boolean isNoGravity() {
+        return true;
     }
+
+
 
     @Override
     public void setNoGravity(boolean noGravity) {
-        super.setNoGravity(false);
+        super.setNoGravity(true);
     }
 
     @Override
-    protected void recenterBoundingBox() {
-        super.recenterBoundingBox();
-        this.setPosition(this.getPosX(), this.getPosY(), this.getPosZ());
-    }
-
-    @Nullable
-    @Override
-    public AxisAlignedBB getCollisionBox(@Nonnull Entity entityIn) {
+    protected @NotNull AABB getBoundingBoxForPose(Pose p_20218_) {
         return axisAlignedBB;
     }
 
     @Override
-    public boolean canBePushed() {
+    public boolean isPushable() {
         return true;
     }
+
+    @Override
+    protected void readAdditionalSaveData(CompoundTag p_20052_) {
+
+    }
+
+    @Override
+    protected void addAdditionalSaveData(CompoundTag p_20139_) {
+
+    }
+
+    @Override
+    public boolean canBeRiddenInWater(Entity rider) {
+        return true;
+    }
+
+
 
     @Override
     public boolean canBeCollidedWith() {
@@ -201,36 +236,13 @@ public class HoverboardEntity extends Entity implements IForgeEntity {
         return false;
     }
 
-    @Override
-    protected boolean canBeRidden(@Nonnull Entity entityIn) {
-        return true;
-    }
 
     @Override
-    protected void registerData() {
-
-    }
-
-    @Override
-    public float getRotatedYaw(@Nonnull Rotation transformRotation) {
-        return super.getRotatedYaw(transformRotation);
-    }
-
-    @Override
-    protected void readAdditional(@Nonnull CompoundNBT compound) {
-
-    }
-
-    @Override
-    protected void writeAdditional(@Nonnull CompoundNBT compound) {
-
-    }
-
-    @Nonnull
-    @Override
-    public IPacket<?> createSpawnPacket() {
+    public @NotNull Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
+
+
 
     @Override
     public void setPacketCoordinates(double p_213312_1_, double p_213312_3_, double p_213312_5_) {

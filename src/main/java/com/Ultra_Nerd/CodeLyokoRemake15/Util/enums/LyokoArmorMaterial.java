@@ -17,7 +17,7 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
 
 
     WARRIOR(Base.MOD_ID + ":william", 33, new byte[]{15, 19, 20, 15}, 420, ModSounds.LAZY_WARRIOR.get(), 10F),
-    BLANKHELM(Base.MOD_ID + ":blank", 5, new byte[]{15, 19, 20, 15}, 0, SoundEvents.ARMOR_EQUIP_CHAIN, ),
+    BLANKHELM(Base.MOD_ID + ":blank", 5, new byte[]{15, 19, 20, 15}, 0, SoundEvents.ARMOR_EQUIP_CHAIN, 20f),
     FELNINE(Base.MOD_ID + ":odd", 25, new byte[]{4, 7, 9, 4}, 420, ModSounds.LAZY_FELINE.get(), 0F),
     NINJA(Base.MOD_ID + ":yumi", 24, new byte[]{1, 4, 7, 2}, 420, ModSounds.LAZY_NINJA.get(), 0F),
     SAMURAI(Base.MOD_ID + ":ulrich", 30, new byte[]{3, 6, 8, 3}, 420, ModSounds.LAZY_SAMURAI.get(), 10F),

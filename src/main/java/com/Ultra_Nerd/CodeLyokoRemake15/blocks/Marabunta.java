@@ -2,11 +2,8 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.DamageSource;
@@ -20,7 +17,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nonnull;
 import java.util.Random;

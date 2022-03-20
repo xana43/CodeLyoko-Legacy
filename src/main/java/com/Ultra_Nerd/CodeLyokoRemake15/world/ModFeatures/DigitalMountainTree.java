@@ -2,16 +2,15 @@ package com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.trees.Tree;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraftforge.common.IPlantable;
-import net.minecraft.world.level.levelgen.feature.Feature;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;

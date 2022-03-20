@@ -1,22 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.volcano;
 
 
-
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.*;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.Matrix4f;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.Vector3f;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.SkyRenderHandler;
+import net.minecraftforge.client.ISkyRenderHandler;
 @OnlyIn(Dist.CLIENT)
-public class CustomVolcanoSky implements SkyRenderHandler {
+public class CustomVolcanoSky implements ISkyRenderHandler {
 
 
     private static ResourceLocation sky1 = null;
@@ -31,50 +27,50 @@ public class CustomVolcanoSky implements SkyRenderHandler {
 
 
     @Override
-    public void render(int ticks, float partialTicks, MatrixStack matrixStack, ClientWorld world, Minecraft mc) {
+    public void render(int ticks, float partialTicks, PoseStack matrixStack, ClientLevel world, Minecraft mc) {
         // mc.textureManager.bindTexture(texturelocation);
-        mc.textureManager.bindTexture(skytop);
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferBuilder = tessellator.getBuffer();
+        mc.textureManager.bindForSetup(skytop);
+        Tesselator tessellator = Tesselator.getInstance();
+        BufferBuilder bufferBuilder = tessellator.getBuilder();
         for(int i = 0; i < 6; ++i) {
-            matrixStack.push();
+            matrixStack.pushPose();
             if (i == 1) {
-                mc.textureManager.bindTexture(sky1);
-                matrixStack.rotate(Vector3f.XP.rotationDegrees(90.0F));
-                matrixStack.rotate(Vector3f.YP.rotationDegrees(0));
+                mc.textureManager.bindForSetup(sky1);
+                matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
+                matrixStack.mulPose(Vector3f.YP.rotationDegrees(0));
             }
 
             if (i == 2) {
-                mc.textureManager.bindTexture(sky2);
-                matrixStack.rotate(Vector3f.XP.rotationDegrees(-90.0F));
-                matrixStack.rotate(Vector3f.YP.rotationDegrees(180));
+                mc.textureManager.bindForSetup(sky2);
+                matrixStack.mulPose(Vector3f.XP.rotationDegrees(-90.0F));
+                matrixStack.mulPose(Vector3f.YP.rotationDegrees(180));
             }
 
             if (i == 3) {
-                mc.textureManager.bindTexture(skytop);
-                matrixStack.rotate(Vector3f.XP.rotationDegrees(180.0F));
+                mc.textureManager.bindForSetup(skytop);
+                matrixStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
             }
 
             if (i == 4) {
-                mc.textureManager.bindTexture(sky2);
-                matrixStack.rotate(Vector3f.ZP.rotationDegrees(90.0F));
-                matrixStack.rotate(Vector3f.YP.rotationDegrees(-90));
+                mc.textureManager.bindForSetup(sky2);
+                matrixStack.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
+                matrixStack.mulPose(Vector3f.YP.rotationDegrees(-90));
             }
 
             if (i == 5) {
-                mc.textureManager.bindTexture(sky1);
-                matrixStack.rotate(Vector3f.ZP.rotationDegrees(-90.0F));
-                matrixStack.rotate(Vector3f.YP.rotationDegrees(90));
+                mc.textureManager.bindForSetup(sky1);
+                matrixStack.mulPose(Vector3f.ZP.rotationDegrees(-90.0F));
+                matrixStack.mulPose(Vector3f.YP.rotationDegrees(90));
             }
 
-            Matrix4f matrix4f = matrixStack.getLast().getMatrix();
-            bufferBuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-            bufferBuilder.pos(matrix4f, -100.0F, -100.0F, -100.0F).tex(0.0F, 0.0F).color(40, 40, 40, 255).endVertex();
-            bufferBuilder.pos(matrix4f, -100.0F, -100.0F, 100.0F).tex(0.0F, 1.0F).color(40, 40, 40, 255).endVertex();
-            bufferBuilder.pos(matrix4f, 100.0F, -90.0F, 100.0F).tex(1.0F, 1.0F).color(40, 40, 40, 255).endVertex();
-            bufferBuilder.pos(matrix4f, 100.0F, -90.0F, -100.0F).tex(1.0F, 0.0F).color(40, 40, 40, 255).endVertex();
-            tessellator.draw();
-            matrixStack.pop();
+            Matrix4f matrix4f = matrixStack.last().pose();
+            bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+            bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).color(40, 40, 40, 255).endVertex();
+            bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).color(40, 40, 40, 255).endVertex();
+            bufferBuilder.vertex(matrix4f, 100.0F, -90.0F, 100.0F).color(40, 40, 40, 255).endVertex();
+            bufferBuilder.vertex(matrix4f, 100.0F, -90.0F, -100.0F).color(40, 40, 40, 255).endVertex();
+            tessellator.end();
+            matrixStack.popPose();
         }
 
     }

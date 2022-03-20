@@ -4,20 +4,26 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.ice;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Matrix4f;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.ISkyRenderHandler;
 import net.minecraftforge.client.SkyRenderHandler;
 
 @OnlyIn(Dist.CLIENT)
-public class CustomIceSky implements SkyRenderHandler {
+public class CustomIceSky implements ISkyRenderHandler {
 
 
     private static ResourceLocation sky1 = null;
@@ -30,11 +36,11 @@ public class CustomIceSky implements SkyRenderHandler {
 
 
     @Override
-    public void render(int ticks, float partialTicks, MatrixStack matrixStack, ClientWorld world, Minecraft mc) {
+    public void render(int ticks, float partialTicks, PoseStack matrixStack, ClientLevel world, Minecraft mc) {
         // mc.textureManager.bindTexture(texturelocation);
-        mc.textureManager.bindTexture(skytop);
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferBuilder = tessellator.getBuffer();
+        mc.textureManager.bindForSetup(skytop);
+        Tesselator tessellator = Tesselator.getInstance();
+        BufferBuilder bufferBuilder = tessellator.getBuilder();
         for(int i = 0; i < 6; ++i) {
             matrixStack.push();
             if (i == 1) {
@@ -72,8 +78,8 @@ public class CustomIceSky implements SkyRenderHandler {
             bufferBuilder.pos(matrix4f, -100.0F, -100.0F, 100.0F).tex(0.0F, 16.0F).color(40, 40, 40, 255).endVertex();
             bufferBuilder.pos(matrix4f, 100.0F, -100.0F, 100.0F).tex(16.0F, 16.0F).color(40, 40, 40, 255).endVertex();
             bufferBuilder.pos(matrix4f, 100.0F, -100.0F, -100.0F).tex(16.0F, 0.0F).color(40, 40, 40, 255).endVertex();
-            tessellator.draw();
-            matrixStack.pop();
+            tessellator.end();
+            matrixStack.popPose();
         }
 
     }

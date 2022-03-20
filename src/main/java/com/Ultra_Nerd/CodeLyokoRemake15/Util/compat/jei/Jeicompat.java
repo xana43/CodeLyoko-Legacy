@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nonnull;
 
 @JeiPlugin
-public class Jeicompat implements IModPlugin {
+public class Jeicompat implements Plu {
 
 
     @Nonnull

@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.ResourceLocation;
 
 public class ModDimensionTypes {
     public static final ResourceLocation DimensionTypeForest = new ResourceLocation(Base.MOD_ID, "forest");

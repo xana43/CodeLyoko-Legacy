@@ -28,7 +28,7 @@ public class ClientModEventSubscriber {
 
     @SubscribeEvent
     public static void registerParticles(ParticleFactoryRegisterEvent event) {
-        Minecraft.getInstance().particles.registerFactory(ModParticles.TOWER_PARTICLE.get(), ColoredParticle.Factory::new);
+        Minecraft.getInstance().particleEngine.register(ModParticles.TOWER_PARTICLE.get(), ColoredParticle.Factory::new);
         Minecraft.getInstance().particles.registerFactory(ModParticles.TOWER_PARTICLE_2.get(), TowerParticleFactory::new);
     }
 

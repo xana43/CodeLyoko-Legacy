@@ -1,19 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import net.minecraft.item.Item;
-import net.minecraft.item.MusicDiscItem;
-import net.minecraft.item.Rarity;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.RecordItem;
 import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
 
 public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Base.MOD_ID);
@@ -27,7 +24,7 @@ public class ModSounds {
     public static final Lazy<SoundEvent> LAZY_GUARDIAN = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID, "armor_equip_guardian")));
     public static final Lazy<SoundEvent> LAZY_ARCHER = Lazy.of(() -> new SoundEvent(new ResourceLocation(Base.MOD_ID, "armor_equip_archer")));
     //for music discs
-    public static final RegistryObject<MusicDiscItem> LYOKO_DISC = ModItems.ITEMS.register("lyokodisc", () -> new MusicDiscItem((byte) 10, LAZY_THEME, new Item.Properties().group(Base.LYOKO_ITEMS).maxStackSize(1).rarity(Rarity.RARE)));
+    public static final RegistryObject<RecordItem> LYOKO_DISC = ModItems.ITEMS.register("lyokodisc", () -> new RecordItem((byte) 10, LAZY_THEME, new Item.Properties().tab(Base.LYOKO_ITEMS).stacksTo(1).rarity(Rarity.RARE)));
     //for sound events
     public static final RegistryObject<SoundEvent> BLOKAMBIENT = SOUNDS.register("entity.blok.ambient", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID, "entity.blok.ambient")));
     public static final RegistryObject<SoundEvent> BLOKHURT = SOUNDS.register("entity.blok.hurt", () -> new SoundEvent(new ResourceLocation(Base.MOD_ID, "entity.blok.hurt")));
