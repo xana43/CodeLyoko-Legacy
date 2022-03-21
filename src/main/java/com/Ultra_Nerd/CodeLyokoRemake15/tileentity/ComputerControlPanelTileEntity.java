@@ -8,28 +8,34 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.TickingBlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ComputerControlPanelTileEntity extends TileEntity implements INamedContainerProvider, ITickableTileEntity {
+public class ComputerControlPanelTileEntity extends InventoryBE implements INamedContainerProvider, TickingBlockEntityy {
 
     // May be accessed before onLoad
     @OnlyIn(Dist.CLIENT)
 
     protected int PlayersPresent;
 
-    public ComputerControlPanelTileEntity(TileEntityType<?> tileEntityTypeIn) {
+    public ComputerControlPanelTileEntity(BlockEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
 
@@ -46,6 +52,17 @@ public class ComputerControlPanelTileEntity extends TileEntity implements INamed
         return INFINITE_EXTENT_AABB;
     }
 
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        CompoundTag tag = pkt.getTag();
+    }
+
+    @Override
+    public CompoundTag getTileData() {
+        return super.getTileData();
+    }
+
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
         CompoundNBT nbtTag = new CompoundNBT();
@@ -53,11 +70,6 @@ public class ComputerControlPanelTileEntity extends TileEntity implements INamed
         return new SUpdateTileEntityPacket(getPos(), -1, nbtTag);
     }
 
-    @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        CompoundNBT tag = pkt.getNbtCompound();
-        //Handle your Data
-    }
 
     /**
      * @return display name of the interface

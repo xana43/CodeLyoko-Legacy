@@ -45,14 +45,18 @@ public class ForceFieldEmitter extends BowItem {
         return f;
     }
 
-    @Nonnull
+
     @Override
-    public Predicate<ItemStack> getInventoryAmmoPredicate() {
+    public Predicate<ItemStack> getAllSupportedProjectiles() {
         return AMMO;
     }
 
+
+
+
+
     @Override
-    public void onPlayerStoppedUsing(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull LivingEntity entityLiving, int timeLeft) {
+    public void releaseUsing(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof Player) {
             Player playerentity = (Player) entityLiving;
 

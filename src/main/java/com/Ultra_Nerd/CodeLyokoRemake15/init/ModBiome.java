@@ -1,20 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.*;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.SurfaceRuleData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biome.RainType;
-import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeGenerationSettings;
-import net.minecraft.world.level.biome.Climate;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.sounds.Music;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.SpawnData;
+import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.SurfaceSystem;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeManager;
@@ -25,9 +22,29 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModBiome {
 
-/*
+
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, Base.MOD_ID);
 
+
+
+    public static final RegistryObject<Biome> SECTOR5 = BIOMES.register("seector5",() ->
+            new Biome.BiomeBuilder()
+                    .biomeCategory(Biome.BiomeCategory.NONE)
+                    .downfall(0)
+                    .temperatureAdjustment(Biome.TemperatureModifier.NONE)
+                    .specialEffects(new BiomeSpecialEffects.Builder()
+                            .backgroundMusic(new Music(ModSounds.FOREST.get(),1,1,true))
+                            .waterColor(13827971)
+                            .fogColor(13827971)
+                            .build())
+                    .mobSpawnSettings(new MobSpawnSettings.Builder()
+                            .build())
+                    .build());
+
+
+
+
+/*
     public static final RegistryObject<Biome> SECTOR5 = BIOMES.register("sector5", () -> new Biome.BiomeBuilder()
             .biomeCategory(Biome.BiomeCategory.NONE)
             .downfall(0)
@@ -136,14 +153,7 @@ public class ModBiome {
 
 */
 
-    public  static  final ResourceKey<Biome> OCEAN = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_ocean"));
-    public  static  final ResourceKey<Biome> SECTOR5 = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"sector5"));
-    public  static  final ResourceKey<Biome> FOREST = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_forest"));
-    public  static  final ResourceKey<Biome> DESERT = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_desert"));
-    public  static  final ResourceKey<Biome> ICE = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_ice"));
-    public  static  final ResourceKey<Biome> MOUNTAIN = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_mountain"));
-    public  static  final ResourceKey<Biome> FRONTIER = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_frontier"));
-    public  static  final ResourceKey<Biome> VOLCANO = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_volcano"));
+
 
 
 
@@ -160,9 +170,9 @@ public class ModBiome {
         initBiome(VOLCANO, Type.SPOOKY, Type.DEAD, Type.HOT, Type.MODIFIED, Type.NETHER);
     }
 
-    private static void initBiome(ResourceKey<Biome> biome, Type... types) {
-        BiomeDictionary.addTypes(biome, types);
-
+    private static void initBiome(RegistryObject<Biome> biome, Type... types) {
+        //BiomeDictionary.addTypes(biome.get(), types);
+        BiomeManager.addBiome();
     }
 
 

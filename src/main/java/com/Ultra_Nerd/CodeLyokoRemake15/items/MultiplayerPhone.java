@@ -1,19 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-
-import javax.annotation.Nonnull;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class MultiplayerPhone extends Item {
-    private Minecraft mc = null;
+    private final Minecraft mc;
     public MultiplayerPhone(Properties properties) {
         super(properties);
         mc = Minecraft.getInstance();
@@ -21,29 +20,29 @@ public class MultiplayerPhone extends Item {
     }
 
 
-
-
-    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, @Nonnull PlayerEntity playerIn, @Nonnull Hand handIn) {
-        if (worldIn.getPlayers().size() > 1 && !worldIn.isRemote()) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
+        if (worldIn.players().size() > 1 && worldIn.isClientSide) {
             assert this.mc.player != null;
-            this.mc.player.sendMessage(new StringTextComponent("you sent a message"));
-            PlayerEntity thisplayer = this.mc.player;
-            PlayerEntity[] playerEntities = (PlayerEntity[]) worldIn.getPlayers().toArray();
-            for(PlayerEntity playerEntity : playerEntities)
+            Player thisplayer = this.mc.player;
+            this.mc.player.sendMessage(new TranslatableComponent("you sent a message"),thisplayer.getUUID());
+
+            Player[] playerEntities = (Player[]) worldIn.players().toArray();
+            for(Player playerEntity : playerEntities)
             {
                 if(playerEntity != this.mc.player)
                 {
-                    playerEntity.playSound(SoundEvents.BLOCK_ANVIL_LAND,1,1);
-                    playerEntity.sendMessage(new StringTextComponent("Xana attack reported by " + thisplayer.getDisplayName()));
+                    playerEntity.playSound(SoundEvents.ANVIL_LAND,1,1);
+                    playerEntity.sendMessage(new TranslatableComponent("Xana attack reported by " + thisplayer.getDisplayName()),playerEntity.getUUID());
                 }
             }
-            return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
+            return InteractionResultHolder.success(playerIn.getItemInHand(handIn));
         } else
         {
-            playerIn.sendMessage(new StringTextComponent("this isn't a multiplayer game"));
-            return ActionResult.resultPass(playerIn.getHeldItem(handIn));
+            playerIn.sendMessage(new TranslatableComponent("this isn't a multiplayer game"),playerIn.getUUID());
+            return InteractionResultHolder.pass(playerIn.getItemInHand(handIn));
         }
     }
+
+
 }

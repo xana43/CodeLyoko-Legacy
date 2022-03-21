@@ -1,25 +1,25 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
-import com.google.common.collect.ImmutableMap;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.shapes.*;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class ComputerKeyboard extends HorizontalDirectionalBlock {
@@ -345,7 +345,7 @@ public class ComputerKeyboard extends HorizontalDirectionalBlock {
     }
 
 
-/*
+
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
@@ -365,7 +365,6 @@ public class ComputerKeyboard extends HorizontalDirectionalBlock {
 
 
 
-*/
 
     @Nullable
     @Override

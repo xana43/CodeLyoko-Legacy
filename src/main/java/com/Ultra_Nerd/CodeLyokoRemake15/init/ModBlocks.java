@@ -14,11 +14,14 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.DigitalForestTree;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.DigitalMountainTree;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.ToIntFunction;
 
 public class ModBlocks {
 
@@ -39,7 +42,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> CHALCOCITE_ORE = BLOCKS.register("chalcocite_ore", () -> new Block(Block.Properties.copy(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> COMPUTER_FRAME = BLOCKS.register("computer_frame", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> CENTRAL_CONTROL_UNIT = BLOCKS.register("central_control_unit", () -> new ComputerCentralControlUnit(Block.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> COMPUTER_SCREEN = BLOCKS.register("computer_screen", () -> new Block(Block.Properties.of(Material.GLASS).strength(1, 20).sound(SoundType.GLASS).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
+    public static final RegistryObject<Block> COMPUTER_SCREEN = BLOCKS.register("computer_screen", () -> new Block(Block.Properties.of(Material.GLASS).strength(1, 20).sound(SoundType.GLASS).explosionResistance(Blocks.GLASS.getExplosionResistance())));
     public static final RegistryObject<Block> COMPUTER_SCREEN_FRAME = BLOCKS.register("computer_screen_frame", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> COMPUTER_KEYBOARD = BLOCKS.register("computer_keyboard", ComputerKeyboard::new);
     public static final RegistryObject<Block> CHIPLET_BASIC_BLOCK = BLOCKS.register("chiplet_basic_block", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)));
@@ -48,19 +51,19 @@ public class ModBlocks {
     public static final RegistryObject<Block> COMPUTER_COOLING_BLOCK = BLOCKS.register("computer_cooling_block", () -> new CoolingBlock(Block.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> COMPUTER_LIQUID_CIRCULATOR = BLOCKS.register("computer_liquid_circulator", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> COMPUTER_TOWER_CONTROL_PANEL = BLOCKS.register("computer_tower_control_panel", ControlPanel::new);
-    public static final RegistryObject<Block> COFFINITE_ORE = BLOCKS.register("coffinite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6,10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
-    public static final RegistryObject<Block> CARNOTITE_ORE = BLOCKS.register("carnotite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
+    public static final RegistryObject<Block> COFFINITE_ORE = BLOCKS.register("coffinite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(6,10).sound(SoundType.STONE).explosionResistance(Blocks.IRON_ORE.getExplosionResistance()).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> CARNOTITE_ORE = BLOCKS.register("carnotite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> DATA_TRANSFER_INTERFACE = BLOCKS.register("data_transfer_interface", DataTransferInterface::new);
     public static final RegistryObject<Block> DIGITAL_SEA_PYLON = BLOCKS.register("digital_sea_pylon", SeaPylon::new);
-    public static final RegistryObject<Block> DIGITAL_GRASS = BLOCKS.register("digital_grass", () -> new Block(Block.Properties.copy(Blocks.GRASS_BLOCK)));
-    public static final RegistryObject<Block> DIGITAL_DIRT = BLOCKS.register("digital_dirt", () -> new Block(Block.Properties.copy(Blocks.DIRT)));
+    public static final RegistryObject<Block> DIGITAL_GRASS = BLOCKS.register("digital_grass", () -> new GrassBlock(Block.Properties.copy(Blocks.GRASS_BLOCK)));
+    public static final RegistryObject<Block> DIGITAL_DIRT = BLOCKS.register("digital_dirt", () -> new GrassBlock(Block.Properties.copy(Blocks.DIRT)));
     public static final RegistryObject<Block> DIGITAL_ROCK = BLOCKS.register("digital_rock", () -> new Block(Block.Properties.copy(Blocks.STONE)));
     public static final RegistryObject<Block> DIGITAL_WOOD_FOREST = BLOCKS.register("digital_wood_forest", () -> new Block(Block.Properties.of(Material.WOOD)));
     public static final RegistryObject<Block> DIGITAL_TREE_FOREST_SAPLING = BLOCKS.register("digital_tree_forest_sapling", () -> new DigitalSapling(DigitalForestTree::new, Block.Properties.copy(Blocks.JUNGLE_SAPLING)));
     public static final RegistryObject<Block> DIGITAL_WOOD_MOUNTAIN = BLOCKS.register("digital_wood_mountain", () -> new Block(Block.Properties.of(Material.WOOD)));
     public static final RegistryObject<Block> DIGITAL_LEAF_MOUNTAIN = BLOCKS.register("digital_leaf_mountain", () -> new LeavesBlock(Block.Properties.of(Material.LEAVES)));
     public static final RegistryObject<Block> DIGITAL_MOUNTAIN_SAPPLING = BLOCKS.register("digital_mountain_sapling", () -> new DigitalMountainSapling(DigitalMountainTree::new, Block.Properties.copy(Blocks.ACACIA_SAPLING)));
-    public static final RegistryObject<Block> DIGITAL_ICE = BLOCKS.register("digital_ice", () -> new Block(Block.Properties.copy(Blocks.ICE)));
+    public static final RegistryObject<Block> DIGITAL_ICE = BLOCKS.register("digital_ice", () -> new IceBlock(Block.Properties.copy(Blocks.ICE)));
     public static final RegistryObject<Block> DIGITAL_SAND = BLOCKS.register("digital_sand", () -> new Block(Block.Properties.of(Material.SAND)));
     public static final RegistryObject<Block> DIGITAL_DARKNESS = BLOCKS.register("digital_darkness", () -> new Block(Block.Properties.of(Material.EGG)));
     public static final RegistryObject<Block> ELECTRIC_FLUORIDE_INFUSER = BLOCKS.register("electric_fluoride_infuser", ElectricFluorideInfuser::new);
@@ -72,21 +75,21 @@ public class ModBlocks {
     public static final RegistryObject<Block> CATHODE_PART = BLOCKS.register("cathodepart", () -> new ElectroplatingRodParts(Block.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> FLUORIDE_INFUSER = BLOCKS.register("fluoride_infuser", FluorideInfuser::new);
     public static final RegistryObject<Block> FLUORITE_BLOCK = BLOCKS.register("fluorite_block", () -> new Block(Block.Properties.of(Material.SAND).strength(-1, 10).sound(SoundType.SAND).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
-    public static final RegistryObject<Block> FLUORITE_ORE = BLOCKS.register("fluorite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
+    public static final RegistryObject<Block> FLUORITE_ORE = BLOCKS.register("fluorite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> FALSE_WATER = BLOCKS.register("false_water", () -> new Block(Block.Properties.copy(Blocks.WATER)));
     public static final RegistryObject<Block> FRONTIER_BLOCK = BLOCKS.register("frontier_block", () -> new Block(Block.Properties.copy(Blocks.BEDROCK)));
-    public static final RegistryObject<Block> GUMMITE_ORE = BLOCKS.register("gummite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(3, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(3).harvestTool(ToolType.PICKAXE)));
+    public static final RegistryObject<Block> GUMMITE_ORE = BLOCKS.register("gummite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(3, 10).sound(SoundType.STONE).lightValue(1).harvestLevel(3).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> HOLOPROJECTOR = BLOCKS.register("holoprojector", HologramProjectorBlock::new);
     public static final RegistryObject<Block> LYOKO_CORE = BLOCKS.register("lyoko_core", () -> new LyokoCore(Block.Properties.copy(Blocks.DRAGON_EGG).noCollission().noOcclusion().strength(-1,-1)));
     public static final RegistryObject<Block> MARABUNTA = BLOCKS.register("marabunta", Marabunta::new);
-    public static final RegistryObject<Block> METATYUYAMUNITE_ORE = BLOCKS.register("metatyuyamunite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(3, 10).sound(SoundType.STONE).lightValue(0).harvestLevel(1).harvestTool(ToolType.PICKAXE)));
-    public static final RegistryObject<Block> METATORBERNITE_ORE = BLOCKS.register("metatorbernite_ore", () -> new Block(Block.Properties.copy(METATYUYAMUNITE_ORE.get())));
-    public static final RegistryObject<Block> METAAUTUNITE_ORE = BLOCKS.register("metaautunite_ore", () -> new Block(Block.Properties.copy(AUTUNITE_ORE.get())));
+    public static final RegistryObject<Block> METATYUYAMUNITE_ORE = BLOCKS.register("metatyuyamunite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(3, 10).sound(SoundType.STONE).lightValue(0).harvestLevel(1).harvestTool(ToolType.PICKAXE)));
+    public static final RegistryObject<Block> METATORBERNITE_ORE = BLOCKS.register("metatorbernite_ore", () -> new OreBlock(Block.Properties.copy(METATYUYAMUNITE_ORE.get())));
+    public static final RegistryObject<Block> METAAUTUNITE_ORE = BLOCKS.register("metaautunite_ore", () -> new OreBlock(Block.Properties.copy(AUTUNITE_ORE.get())));
     public static final RegistryObject<Block> PROJECTOR_FOCUS = BLOCKS.register("projector_focus", ProjectorFocusblock::new);
     public static final RegistryObject<Block> QUANTUM_BLOCK = BLOCKS.register("quantum_block", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(6, 20).sound(SoundType.METAL).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> QUANTUM_CORE = BLOCKS.register("quantum_core", () -> new QuantumCore(Block.Properties.of(Material.DECORATION).strength(1, 20).sound(SoundType.GLASS).lightValue(1).harvestLevel(0)));
     public static final RegistryObject<Block> QUANTUM_STEEL_BLOCK = BLOCKS.register("quantum_steel", () -> new QuantumSteelBlock(Block.Properties.of(Material.HEAVY_METAL).strength(6, 20).sound(SoundType.METAL).lightValue(0).harvestLevel(3).harvestTool(ToolType.PICKAXE)));
-    public static final RegistryObject<Block> SALEEITE_ORE = BLOCKS.register("saleeite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
+    public static final RegistryObject<Block> SALEEITE_ORE = BLOCKS.register("saleeite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE).lightValue(0).harvestLevel(2).harvestTool(ToolType.PICKAXE)));
     public static final RegistryObject<Block> SCANNER_BASE = BLOCKS.register("scanner_base", Scanner::new);
     public static final RegistryObject<Block> SCANNER_FRAME = BLOCKS.register("scanner_frame", () -> new ScannerFrame(Block.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> SCANNER_TOP = BLOCKS.register("scanner_top", () -> new ScannerTop(Block.Properties.copy(Blocks.IRON_BLOCK)));

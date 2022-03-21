@@ -57,7 +57,7 @@ public class ArmorFeline extends ArmorItem {
 
                     if (I++ == 1000) {
                         if (stack.getDamageValue() != 0) {
-                            stack.damageItem(-1, player, null);
+                            stack.getItem().damageItem(stack,-1, player, null);
                         }
                         I = 0;
                     }

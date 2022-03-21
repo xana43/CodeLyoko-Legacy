@@ -1,26 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.Nullable;
-
-public class ComputerCentralControlUnit extends Block {
+public class ComputerCentralControlUnit extends BaseEntityBlock {
     public ComputerCentralControlUnit(Properties properties) {
         super(properties);
     }
 
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
 
-    @Nullable
+
+    @org.jetbrains.annotations.Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return ModTileEntities.CENTRAL_CONTROL_UNIT_TILE_ENTITY.get().create();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return ModTileEntities.CENTRAL_CONTROL_UNIT_TILE_ENTITY.get().create(pos,state);
     }
 }

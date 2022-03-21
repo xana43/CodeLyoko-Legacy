@@ -3,20 +3,19 @@ package com.Ultra_Nerd.CodeLyokoRemake15.items.tools;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Mth;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.function.Predicate;
@@ -43,17 +42,18 @@ public class ArcherClassBow extends BowItem {
         return f;
     }
 
-
-    public static Predicate<ItemStack> getAMMO() {
+    @Override
+    public @NotNull Predicate<ItemStack> getAllSupportedProjectiles() {
         return AMMO;
     }
 
 
+
+
     @Override
-    public void releaseUsing(ItemStack stack, Level worldIn, LivingEntity entityLiving, int timeLeft) {
+    public void releaseUsing(@NotNull ItemStack stack, @NotNull Level worldIn, @NotNull LivingEntity entityLiving, int timeLeft) {
         super.releaseUsing(stack, worldIn, entityLiving, timeLeft);
-        if (entityLiving instanceof Player && stack.getDamageValue() < stack.getMaxDamage()) {
-            Player playerentity = (Player) entityLiving;
+        if (entityLiving instanceof Player playerentity && stack.getDamageValue() < stack.getMaxDamage()) {
 
             int i = this.getUseDuration(stack) - timeLeft;
             i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, true);
@@ -80,7 +80,7 @@ public class ArcherClassBow extends BowItem {
                     worldIn.addFreshEntity(abstractarrowentity);
                 }
 
-                worldIn.playSound((Player) null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), ModSounds.LASERARROW.get(), SoundSource.PLAYERS, 1.0F, 1.0F / ((float)Math.random() * 0.4F + 1.2F) + f * 0.5F);
+                worldIn.playSound(null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), ModSounds.LASERARROW.get(), SoundSource.PLAYERS, 1.0F, 1.0F / ((float)Math.random() * 0.4F + 1.2F) + f * 0.5F);
 
                 playerentity.awardStat(Stats.ITEM_USED.get(this));
             }
@@ -92,23 +92,23 @@ public class ArcherClassBow extends BowItem {
 
     @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, PlayerEntity playerIn, @Nonnull Hand handIn) {
-        ItemStack heldItem = playerIn.getHeldItem(handIn);
-        if (playerIn.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() != ModItems.JEREMY_CHESTPLATE.get() &&
-                playerIn.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() != ModItems.JEREMY_LEGGINGS.get() &&
-                playerIn.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() != ModItems.JEREMY_BOOTS.get()
-                && heldItem.getDamage() >= heldItem.getMaxDamage()) {
+    public InteractionResultHolder<ItemStack> use(@Nonnull Level worldIn, Player playerIn, @Nonnull InteractionHand handIn) {
+        ItemStack heldItem = playerIn.getItemInHand(handIn);
+        if (playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() != ModItems.JEREMY_CHESTPLATE.get() &&
+                playerIn.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() != ModItems.JEREMY_LEGGINGS.get() &&
+                playerIn.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() != ModItems.JEREMY_BOOTS.get()
+                && heldItem.getDamageValue() >= heldItem.getMaxDamage()) {
 
 
-            return ActionResult.resultFail(heldItem);
+            return InteractionResultHolder.fail(heldItem);
         }
 
 
-        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(heldItem, worldIn, playerIn, handIn, true);
+        InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(heldItem, worldIn, playerIn, handIn, true);
         if (ret != null) return ret;
 
-        playerIn.setActiveHand(handIn);
-        return ActionResult.resultSuccess(heldItem);
+        playerIn.setMainArm(HumanoidArm.RIGHT);
+        return InteractionResultHolder.success(heldItem);
 
     }
 }

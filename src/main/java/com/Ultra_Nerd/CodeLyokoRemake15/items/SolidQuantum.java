@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;

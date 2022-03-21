@@ -1,20 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.core.BlockPos;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -24,49 +24,46 @@ public class ProjectorFocusblock extends Block {
     public static BooleanProperty VALIDFOCUS = BooleanProperty.create("validfocus");
 
     private final VoxelShape focus = Stream.of(
-            Block.makeCuboidShape(1, 0, 4, 15, 16, 12),
-            Block.makeCuboidShape(2, 0, 2, 3, 16, 3),
-            Block.makeCuboidShape(2, 0, 3, 14, 16, 4),
-            Block.makeCuboidShape(3, 0, 1, 4, 16, 2),
-            Block.makeCuboidShape(12, 0, 1, 13, 16, 2),
-            Block.makeCuboidShape(13, 0, 2, 14, 16, 3),
-            Block.makeCuboidShape(14, 0, 3, 15, 16, 4),
-            Block.makeCuboidShape(15, 0, 4, 16, 16, 12),
-            Block.makeCuboidShape(2, 0, 12, 14, 16, 13),
-            Block.makeCuboidShape(3, 0, 14, 4, 16, 15),
-            Block.makeCuboidShape(12, 0, 14, 13, 16, 15),
-            Block.makeCuboidShape(2, 0, 13, 3, 16, 14),
-            Block.makeCuboidShape(13, 0, 13, 14, 16, 14),
-            Block.makeCuboidShape(1, 0, 12, 2, 16, 13),
-            Block.makeCuboidShape(14, 0, 12, 15, 16, 13),
-            Block.makeCuboidShape(4, 0, 15, 12, 16, 16),
-            Block.makeCuboidShape(4, 0, 14, 12, 16, 15),
-            Block.makeCuboidShape(3, 0, 13, 13, 16, 14),
-            Block.makeCuboidShape(4, 0, 0, 12, 16, 1),
-            Block.makeCuboidShape(3, 0, 2, 13, 16, 3),
-            Block.makeCuboidShape(4, 0, 1, 12, 16, 2),
-            Block.makeCuboidShape(1, 0, 3, 2, 16, 4),
-            Block.makeCuboidShape(0, 0, 4, 1, 16, 12)
+            Block.box(1, 0, 4, 15, 16, 12),
+            Block.box(2, 0, 2, 3, 16, 3),
+            Block.box(2, 0, 3, 14, 16, 4),
+            Block.box(3, 0, 1, 4, 16, 2),
+            Block.box(12, 0, 1, 13, 16, 2),
+            Block.box(13, 0, 2, 14, 16, 3),
+            Block.box(14, 0, 3, 15, 16, 4),
+            Block.box(15, 0, 4, 16, 16, 12),
+            Block.box(2, 0, 12, 14, 16, 13),
+            Block.box(3, 0, 14, 4, 16, 15),
+            Block.box(12, 0, 14, 13, 16, 15),
+            Block.box(2, 0, 13, 3, 16, 14),
+            Block.box(13, 0, 13, 14, 16, 14),
+            Block.box(1, 0, 12, 2, 16, 13),
+            Block.box(14, 0, 12, 15, 16, 13),
+            Block.box(4, 0, 15, 12, 16, 16),
+            Block.box(4, 0, 14, 12, 16, 15),
+            Block.box(3, 0, 13, 13, 16, 14),
+            Block.box(4, 0, 0, 12, 16, 1),
+            Block.box(3, 0, 2, 13, 16, 3),
+            Block.box(4, 0, 1, 12, 16, 2),
+            Block.box(1, 0, 3, 2, 16, 4),
+            Block.box(0, 0, 4, 1, 16, 12)
     ).reduce((v1, v2) -> {
-        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+        return Shapes.join(v1, v2, BooleanOp.OR);
     }).get();
 
     public ProjectorFocusblock() {
-        super(Properties.create(Material.GLASS)
-                .hardnessAndResistance(6, 10)
+        super(Properties.of(Material.GLASS)
+                .strength(6, 10)
                 .sound(SoundType.GLASS)
-                .lightValue(2)
-                .harvestLevel(0)
-                .harvestTool(ToolType.PICKAXE)
-                .notSolid()
+                .noOcclusion()
         );
-        this.setDefaultState(this.getDefaultState().with(VALIDFOCUS, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(VALIDFOCUS, false));
     }
 
 
     @Nonnull
     @Override
-    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
+    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         return focus;
     }
 
@@ -80,6 +77,9 @@ public class ProjectorFocusblock extends Block {
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder.add(VALIDFOCUS));
     }
+
+
+
 
     @Nonnull
     @Override

@@ -2,22 +2,21 @@ package com.Ultra_Nerd.CodeLyokoRemake15.items.tools;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityFan;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.UseAction;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.world.World;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TridentItem;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -38,17 +37,17 @@ public class YumiFans extends TridentItem {
             if (i >= 10) {
 
                 EntityFan fan = new EntityFan(worldIn, playerentity, stack);
-                fan.setPosition(playerentity.getPosX(), playerentity.getPosYEye(), playerentity.getPosZ());
-                fan.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 2.5F * 0.5F, 0.0F);
-                if (playerentity.abilities.isCreativeMode) {
-                    fan.pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
+                fan.setPos(playerentity.getX(), playerentity.getEyeY(), playerentity.getZ());
+                fan.shootFromRotation(playerentity, playerentity.getXRot(), playerentity.getYRot(), 0.0F, 2.5F * 0.5F,0.0F);
+                if (playerentity.isCreative()) {
+                    fan.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                 }
-                if (!worldIn.isRemote) {
-                    worldIn.addEntity(fan);
+                if (worldIn.isClientSide) {
+                    worldIn.addFreshEntity(fan);
                 }
-                worldIn.playMovingSound(playerentity, fan, SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
-                if (!playerentity.abilities.isCreativeMode) {
-                    playerentity.inventory.deleteStack(stack);
+                worldIn.playSound(playerentity, fan, SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
+                if (!playerentity.isCreative()) {
+                    playerentity.getInventory().removeItem(stack);
                 }
 
 
@@ -56,43 +55,30 @@ public class YumiFans extends TridentItem {
         }
     }
 
-    @Nonnull
+
     @Override
-    public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, PlayerEntity playerIn, @Nonnull Hand handIn) {
-        ItemStack heldItem = playerIn.getHeldItem(handIn);
-        if (playerIn.inventory.armorItemInSlot(EquipmentSlotType.CHEST.getIndex()).getItem() != ModItems.YUMI_CHESTPLATE.get() &&
-                playerIn.inventory.armorItemInSlot(EquipmentSlotType.LEGS.getIndex()).getItem() != ModItems.YUMI_LEGGINGS.get() &&
-                playerIn.inventory.armorItemInSlot(EquipmentSlotType.FEET.getIndex()).getItem() != ModItems.YUMI_BOOTS.get()) {
-            return ActionResult.resultFail(heldItem);
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level worldIn, Player playerIn, @NotNull InteractionHand handIn) {
+        ItemStack heldItem = playerIn.getItemInHand(handIn);
+        if (playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() != ModItems.YUMI_CHESTPLATE.get() &&
+                playerIn.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() != ModItems.YUMI_LEGGINGS.get() &&
+                playerIn.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() != ModItems.YUMI_BOOTS.get()) {
+            return InteractionResultHolder.success(heldItem);
         }
         //boolean flag = !playerIn.findAmmo(itemstack).isEmpty();
 
-        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(heldItem, worldIn, playerIn, handIn, true);
+        InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(heldItem, worldIn, playerIn, handIn, true);
         if (ret != null) return ret;
 
-        playerIn.setActiveHand(handIn);
-        return ActionResult.resultSuccess(heldItem);
-
-    }
-
-    @Override
-    public boolean hasEffect(@Nonnull ItemStack stack) {
-        return false;
-    }
-
-
-    @Nonnull
-    @Override
-    public UseAction getUseAction(@Nonnull ItemStack stack) {
-        return UseAction.BLOCK;
+        playerIn.setMainArm(HumanoidArm.RIGHT);
+        return InteractionResultHolder.success(heldItem);
     }
 
 
     @Override
-    public void inventoryTick(ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         if (!stack.isEnchanted()) {
-            stack.addEnchantment(Enchantments.LOYALTY, Enchantments.LOYALTY.getMaxLevel());
-            stack.addEnchantment(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());
+            stack.enchant(Enchantments.LOYALTY, Enchantments.LOYALTY.getMaxLevel());
+            stack.enchant(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());
         }
     }
 }

@@ -3,30 +3,30 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.QuantumChipletContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
+import com.mojang.math.Constants;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IClearable;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.common.util.Constants;
+import net.minecraft.world.Clearable;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import javax.annotation.Nonnull;
 
-public class QuantumChipletTileEntity extends LockableTileEntity implements INamedContainerProvider, IClearable {
+public class QuantumChipletTileEntity extends InventoryBE implements INamedContainerProvider, Clearable {
 
     protected NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
 
-    public QuantumChipletTileEntity(TileEntityType<?> TileEntityIn) {
+    public QuantumChipletTileEntity(BlockEntityType<?> TileEntityIn) {
         super(TileEntityIn);
     }
 
@@ -165,5 +165,10 @@ public class QuantumChipletTileEntity extends LockableTileEntity implements INam
     @Override
     public void handleUpdateTag(CompoundNBT tag) {
         this.read(tag);
+    }
+
+    @Override
+    public void clearContent() {
+
     }
 }

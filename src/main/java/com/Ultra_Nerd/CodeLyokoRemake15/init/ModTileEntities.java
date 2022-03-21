@@ -36,7 +36,7 @@ public class ModTileEntities {
             TILE_ENTITY_TYPES.register("scanner_tile_entity", () -> BlockEntityType.Builder.create(ScannerTileEntity::new,
                     ModBlocks.SCANNER_BASE.get()).build(null));
     public static final RegistryObject<BlockEntityType<CentralControlUnitTileEntity>> CENTRAL_CONTROL_UNIT_TILE_ENTITY =
-            TILE_ENTITY_TYPES.register("central_control_unit_tile_entity", () -> BlockEntityType.Builder.create(CentralControlUnitTileEntity::new
+            TILE_ENTITY_TYPES.register("central_control_unit_tile_entity", () -> BlockEntityType.Builder.of(CentralControlUnitTileEntity::new
                     , ModBlocks.CENTRAL_CONTROL_UNIT.get()).build(null));
     public static final RegistryObject<BlockEntityType<ElectroplatingTileEntity>> ELECTROPLATING_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("electroplating_tile_entity", () -> BlockEntityType.Builder.create(ElectroplatingTileEntity::new

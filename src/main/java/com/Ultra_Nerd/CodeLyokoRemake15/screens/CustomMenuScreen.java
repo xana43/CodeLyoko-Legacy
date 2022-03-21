@@ -97,7 +97,7 @@ public class CustomMenuScreen extends TitleScreen {
 
 
     public CustomMenuScreen(boolean fadeIn) {
-        super(new TranslatableComponent("narrator.screen.title"));
+        super(fadeIn);
         this.fading = fadeIn;
         this.showTitleWronglySpelled = (double) (new Random()).nextFloat() < 1.0E-4D;
         this.realmsClient = RealmsClient.create();
@@ -122,7 +122,7 @@ public class CustomMenuScreen extends TitleScreen {
     }
 
     public static CompletableFuture<Void> loadAsync(TextureManager texMngr, Executor backgroundExecutor) {
-        return CompletableFuture.allOf(texMngr.preload(MINECRAFT_TITLE_TEXTURES, backgroundExecutor), texMngr.preload(MINECRAFT_TITLE_EDITION, backgroundExecutor), texMngr.preload(PANORAMA_OVERLAY_TEXTURES, backgroundExecutor), PANORAMA_RESOURCES.preload(texMngr, backgroundExecutor));
+        return CompletableFuture.allOf(texMngr.preload(MINECRAFT_TITLE_TEXTURES, backgroundExecutor), texMngr.preload(MINECRAFT_TITLE_EDITION, backgroundExecutor), texMngr.preload(PANORAMA_OVERLAY, backgroundExecutor), PANORAMA_RESOURCES.preload(texMngr, backgroundExecutor));
     }
 
     public boolean isPauseScreen() {
@@ -162,7 +162,7 @@ public class CustomMenuScreen extends TitleScreen {
         this.addRenderableWidget(new Button(this.width / 2 + 2, l + 72 + 12, 98, 20, new TranslatableComponent("menu.quit"), (p_96786_) -> {
             this.minecraft.stop();
         }));
-        this.addRenderableWidget(new ImageButton(this.width / 2 + 104, l + 72 + 12, 20, 20, 0, 0, 20, ACCESSIBILITY_TEXTURE, 32, 64, (p_96784_) -> {
+        this.addRenderableWidget(new ImageButton(this.width / 2 + 104, l + 72 + 12, 20, 20, 0, 0, 20, ACCESSIBILITY_TEXTURES, 32, 64, (p_96784_) -> {
             this.minecraft.setScreen(new AccessibilityOptionsScreen(this, this.minecraft.options));
         }, new TranslatableComponent("narrator.button.accessibility")));
         this.addRenderableWidget(new PlainTextButton(j, this.height - 10, i, 10, COPYRIGHT_TEXT, (p_211790_) -> {

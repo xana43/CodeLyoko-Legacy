@@ -12,6 +12,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoDim
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.event.RegisterGameTestsEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -32,7 +33,8 @@ public class ForgeEventSubscriber {
 
 
     @SubscribeEvent
-    public static void InitDims(final RegisterDimensionsEvent event) {
+    public static void InitDims(final RegisterGameTestsEvent event) {
+
         if (DimensionType.byName(ModDimensionTypes.DimensionTypeForest) == null) {
             DimensionManager.registerDimension(ModDimensionTypes.DimensionTypeForest, ModDimensions.FOREST_DIMENSION.get(), null, true);
         }

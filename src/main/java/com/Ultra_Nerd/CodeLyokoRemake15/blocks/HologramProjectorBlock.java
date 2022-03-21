@@ -3,29 +3,31 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.core.BlockPos;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class HologramProjectorBlock extends Block {
+public class HologramProjectorBlock extends BaseEntityBlock{
     public static BooleanProperty VALID = BooleanProperty.create("valid");
 
     public HologramProjectorBlock() {
-        super(Block.Properties.create(Material.IRON)
-                .hardnessAndResistance(6, 10)
+        super(Block.Properties.of(Material.METAL)
+                .strength(6, 10)
                 .sound(SoundType.METAL)
-                .lightValue(2)
-                .harvestLevel(0)
-                .harvestTool(ToolType.PICKAXE)
+
         );
         this.setDefaultState(this.getDefaultState().with(VALID, false));
 
@@ -42,24 +44,15 @@ public class HologramProjectorBlock extends Block {
         return this.getBlock().getDefaultState().with(VALID, false);
     }
 
-    @Nonnull
-    @Override
-    public BlockRenderType getRenderType(@Nonnull BlockState state) {
-        return BlockRenderType.MODEL;
-    }
 
-    @Nullable
+
+    @org.jetbrains.annotations.Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return ModTileEntities.HOLOGRAM_TILE_ENTITY.get().create();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return ModTileEntities.HOLOGRAM_TILE_ENTITY.get().create(pos, state);
     }
 
 
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        // TODO Auto-generated method stub
-        return true;
-    }
 
 
 }

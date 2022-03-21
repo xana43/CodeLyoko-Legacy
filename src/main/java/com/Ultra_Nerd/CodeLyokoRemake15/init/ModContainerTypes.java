@@ -2,21 +2,21 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.*;
-import net.minecraft.core.Holder;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.world.Container;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraft.world.level.dimension.DimensionType;
-public class ModContainerTypes {
-    public static final DeferredRegister<Container<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, Base.MOD_ID);
+import net.minecraftforge.registries.RegistryObject;
 
-    public static final RegistryObject<ContainerType<ContainerInfusing>> CONTAINER_INFUSING = CONTAINER_TYPES
-            .register("container_infusing", () -> IForgeContainerType.create(ContainerInfusing::new));
-    public static final RegistryObject<ContainerType<TowerInterfaceContainer>> TOWER_INTERFACE_CONTAINER = CONTAINER_TYPES
-            .register("tower_interface_container", () -> IForgeContainerType.create(TowerInterfaceContainer::new));
+public class ModContainerTypes {
+    public static final DeferredRegister<MenuType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, Base.MOD_ID);
+
+    public static final RegistryObject<MenuType<ContainerInfusing>> CONTAINER_INFUSING = CONTAINER_TYPES
+            .register("container_infusing", () -> new MenuType<>(ContainerInfusing::new));
+    public static final RegistryObject<MenuType<TowerInterfaceContainer>> TOWER_INTERFACE_CONTAINER = CONTAINER_TYPES
+            .register("tower_interface_container", () -> new MenuType<>(TowerInterfaceContainer::new));
     public static final RegistryObject<ContainerType<ContainerElectricInfusing>> CONTAINER_ELECTRIC_INFUSING = CONTAINER_TYPES
             .register("container_electric_infusing", () -> IForgeContainerType.create(ContainerElectricInfusing::new));
     public static final RegistryObject<ContainerType<HologramContainer>> HOLOGRAM_CONTAINER = CONTAINER_TYPES

@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
@@ -13,6 +14,10 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -40,24 +45,24 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class InfusingChamberTileEntity extends BlockEntity implements BlockEntityTicker {
+public class InfusingChamberTileEntity extends InventoryBE implements BlockEntityTicker<InfusingChamberTileEntity> {
 
 
     public ItemStackHandler handler = new ItemStackHandler(4);
     private String customName;
     private ItemStack smelting = ItemStack.EMPTY;
-
+    public static final Component TITLE = new TranslatableComponent("container." + Base.MOD_ID + ".infusing_chamber");
     private int burnTime;
     private int currentBurnTime;
     private int cookTime;
     private int totalCookTime = 400;
 
-    public InfusingChamberTileEntity() {
+   /* public InfusingChamberTileEntity() {
         this(ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get());
-    }
+    }*/
 
-    public InfusingChamberTileEntity(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
-        super(tileEntityTypeIn,pos,state);
+    public InfusingChamberTileEntity(BlockPos pos, BlockState state) {
+        super(ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get(),pos,state,4);
     }
 
     public boolean hasCapability(Capability<?> capability, Direction facing) {
@@ -88,10 +93,15 @@ public class InfusingChamberTileEntity extends BlockEntity implements BlockEntit
     }
 
 
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+
+    }
 
     @Override
-    public void read(@Nonnull CompoundTag compound) {
-        super.read(compound);
+    public void load(@Nonnull CompoundTag compound) {
+        super.load(compound);
         this.handler.deserializeNBT(compound.getCompound("Inventory"));
         this.burnTime = compound.getInt("BurnTime");
         this.cookTime = compound.getInt("CookTime");
@@ -101,17 +111,19 @@ public class InfusingChamberTileEntity extends BlockEntity implements BlockEntit
         if (compound.contains("CustomName", 8)) this.setCustomName(compound.getString("CustomName"));
     }
 
-    @Nonnull
+
+
+
     @Override
-    public CompoundTag write(@Nonnull CompoundTag compound) {
-        super.write(compound);
+    public void saveAdditional(@Nonnull CompoundTag compound) {
+        super.saveAdditional(compound);
         compound.putInt("BurnTime", (short) this.burnTime);
         compound.putInt("CookTime", (short) this.cookTime);
         compound.putInt("CookTimeTotal", (short) this.totalCookTime);
         compound.put("Inventory", this.handler.serializeNBT());
 
         if (this.hasCustomName()) compound.putString("CustomName", this.customName);
-        return compound;
+
     }
 
     public boolean isBurning() {
@@ -124,8 +136,10 @@ public class InfusingChamberTileEntity extends BlockEntity implements BlockEntit
     }
 
 
+
+
     @Override
-    public void tick(Level world, BlockPos pos, BlockState state, BlockEntity blockEntity) {
+    public void tick(Level world, BlockPos pos, BlockState state, InfusingChamberTileEntity blockEntity) {
         if (this.isBurning()) {
             --this.burnTime;
             FluorideInfuser.setState(true, world, pos);
@@ -177,6 +191,11 @@ public class InfusingChamberTileEntity extends BlockEntity implements BlockEntit
                 }
             }
         }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
     }
 
     private boolean canSmelt() {

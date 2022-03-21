@@ -1,72 +1,48 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-
-import javax.annotation.Nonnull;
-import java.util.function.Predicate;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 
 public class TransparentBlock extends Block {
 
     public TransparentBlock() {
-        super(Block.Properties.create(Material.GLASS)
-                .hardnessAndResistance(-1, -1)
+        super(Block.Properties.of(new Material.Builder(MaterialColor.NONE).nonSolid().build())
+                .strength(-1, -1)
                 .sound(SoundType.STONE)
-                .harvestLevel(-1)
-                .notSolid()
+
+
         );
 
     }
 
-    @Nonnull
     @Override
-    public BlockRenderType getRenderType(@Nonnull BlockState state) {
-        // TODO Auto-generated method stub
-        return BlockRenderType.INVISIBLE;
-    }
-
-    @Override
-    public boolean isTransparent(@Nonnull BlockState state) {
-        // TODO Auto-generated method stub
-        return true;
-    }
-
-    @Override
-    public boolean isViewBlocking(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
-        return false;
-    }
-
-
-    @Override
-    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
-        // TODO Auto-generated method stub
+    public boolean canBeReplaced(BlockState p_60470_, BlockPlaceContext p_60471_) {
         return false;
     }
 
     @Override
-    public boolean isReplaceable(@Nonnull BlockState state, @Nonnull BlockItemUseContext useContext) {
-        // TODO Auto-generated method stub
+    public boolean canBeReplaced(BlockState p_60535_, Fluid p_60536_) {
         return false;
     }
 
     @Override
-    public boolean isReplaceableOreGen(BlockState state, IWorldReader world, BlockPos pos,
-                                       Predicate<BlockState> target) {
-        // TODO Auto-generated method stub
+    public boolean canHarvestBlock(BlockState state, BlockGetter level, BlockPos pos, Player player) {
         return false;
     }
 
     @Override
-    public boolean isSideInvisible(@Nonnull BlockState state, @Nonnull BlockState adjacentBlockState, @Nonnull Direction side) {
-        // TODO Auto-generated method stub
-        return true;
+    public void fallOn(Level p_152426_, BlockState p_152427_, BlockPos p_152428_, Entity p_152429_, float p_152430_) {
+        super.fallOn(p_152426_, p_152427_, p_152428_, p_152429_, p_152430_);
+        p_152429_.fallDistance = 0;
     }
 }

@@ -3,8 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -21,7 +19,9 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.IPlantable;
 import org.jetbrains.annotations.Nullable;
@@ -31,23 +31,23 @@ import java.util.stream.Stream;
 public class BlackVoid extends Block {
 
     private static final VoxelShape nullshape = Stream.of(
-            Block.makeCuboidShape(3, 0, 3, 10, 0.5, 4),
-            Block.makeCuboidShape(3, 0, 1, 10, 0.5, 2),
-            Block.makeCuboidShape(9, 0, 1, 16, 0.5, 2),
-            Block.makeCuboidShape(5, 0, 4, 7, 0.5, 11),
-            Block.makeCuboidShape(13, 0, 4, 15, 0.5, 11),
-            Block.makeCuboidShape(5, 0, 8, 7, 0.5, 15),
-            Block.makeCuboidShape(3.150000000000001, 0, 7, 5.149999999999999, 0.5, 14),
-            Block.makeCuboidShape(0.1500000000000008, 0, 8, 2.1499999999999986, 0.5, 15),
-            Block.makeCuboidShape(7.15, 0, 7, 9.149999999999999, 0.5, 14),
-            Block.makeCuboidShape(9.924999999999997, 0, 2, 11.924999999999995, 0.5, 9),
-            Block.makeCuboidShape(0.9249999999999972, 0, 2, 2.9249999999999954, 0.5, 9),
-            Block.makeCuboidShape(11.924999999999997, 0, 6, 12.924999999999995, 0.5, 13),
-            Block.makeCuboidShape(9.024999999999991, 0, 13.024999999999999, 16.02500000000001, 0.5, 14.024999999999997),
-            Block.makeCuboidShape(9.024999999999991, 0, 15.024999999999999, 16.02500000000001, 0.5, 16.025),
-            Block.makeCuboidShape(1.5249999999999915, 0, 15.024999999999999, 8.52500000000001, 0.5, 16.025)
+            Block.box(3, 0, 3, 10, 0.5, 4),
+            Block.box(3, 0, 1, 10, 0.5, 2),
+            Block.box(9, 0, 1, 16, 0.5, 2),
+            Block.box(5, 0, 4, 7, 0.5, 11),
+            Block.box(13, 0, 4, 15, 0.5, 11),
+            Block.box(5, 0, 8, 7, 0.5, 15),
+            Block.box(3.150000000000001, 0, 7, 5.149999999999999, 0.5, 14),
+            Block.box(0.1500000000000008, 0, 8, 2.1499999999999986, 0.5, 15),
+            Block.box(7.15, 0, 7, 9.149999999999999, 0.5, 14),
+            Block.box(9.924999999999997, 0, 2, 11.924999999999995, 0.5, 9),
+            Block.box(0.9249999999999972, 0, 2, 2.9249999999999954, 0.5, 9),
+            Block.box(11.924999999999997, 0, 6, 12.924999999999995, 0.5, 13),
+            Block.box(9.024999999999991, 0, 13.024999999999999, 16.02500000000001, 0.5, 14.024999999999997),
+            Block.box(9.024999999999991, 0, 15.024999999999999, 16.02500000000001, 0.5, 16.025),
+            Block.box(1.5249999999999915, 0, 15.024999999999999, 8.52500000000001, 0.5, 16.025)
     ).reduce((v1, v2) -> {
-        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+        return Shapes.join(v1, v2, BooleanOp.OR);
     }).get();
 
     public BlackVoid() {

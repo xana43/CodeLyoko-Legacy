@@ -4,7 +4,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.CableTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerControlPanelTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ScannerTileEntity;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,10 +14,11 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -30,7 +30,7 @@ public class CableBlock extends FenceBlock {
 //    private CableBlock startOfCable;
 
     private final VoxelShape[] shape;
-    private final VoxelShape mainShape = Block.makeCuboidShape(1, 0, 1, 15, 14, 15);
+    private final VoxelShape mainShape = Block.box(1, 0, 1, 15, 14, 15);
 
     public CableBlock(Properties properties) {
         super(properties);
@@ -41,6 +41,9 @@ public class CableBlock extends FenceBlock {
     public boolean hasTileEntity(BlockState state) {
         return true;
     }
+
+
+
 
     @Nullable
     @Override

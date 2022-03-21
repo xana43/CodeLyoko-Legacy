@@ -18,7 +18,7 @@ public class linker extends ArmorItem {
     @Override
     public void onArmorTick(ItemStack stack, Level world, Player player) {
         if (stack.getDamageValue() < stack.getMaxDamage() - 1) {
-            stack.damageItem(1, player, null);
+            stack.getItem().damageItem(stack,1, player, null);
         }
     }
 
@@ -26,7 +26,7 @@ public class linker extends ArmorItem {
     public void inventoryTick(ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
 
         if (stack.getDamageValue() != 0 && itemSlot != EquipmentSlot.CHEST.getIndex()) {
-            stack.damageItem(-1, (Player) entityIn, null);
+            stack.getItem().damageItem(stack,-1, (Player) entityIn, null);
         }
 
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);

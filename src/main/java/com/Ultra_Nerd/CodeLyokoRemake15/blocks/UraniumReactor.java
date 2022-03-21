@@ -1,22 +1,33 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerReactorTileEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolType;
+import org.jetbrains.annotations.Nullable;
 
-public class UraniumReactor extends Block {
+public class UraniumReactor extends BaseEntityBlock {
 
     public UraniumReactor() {
-        super(Block.Properties.create(Material.IRON)
+        super(Block.Properties.of(Material.METAL)
 
-                .hardnessAndResistance(6, 10)
+                .strength(6, 10)
                 .sound(SoundType.METAL)
-                .lightValue(0)
-                .harvestLevel(2)
-                .harvestTool(ToolType.PICKAXE));
+
 
         // TODO Auto-generated constructor stub
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ComputerReactorTileEntity(pos,state);
     }
 	/*
 	

@@ -23,7 +23,7 @@ public class ClientScreenEventSubscriber {
     @SubscribeEvent
     public static void NoE(final ScreenEvent event) {
         if (event.getScreen().getMinecraft().keyboardHandler. == GLFW.GLFW_KEY_E) {
-            if (event.getGui() instanceof TowerGUI) {
+            if (event.getScreen() instanceof TowerGUI) {
                 event.setCanceled(true);
             }
         }

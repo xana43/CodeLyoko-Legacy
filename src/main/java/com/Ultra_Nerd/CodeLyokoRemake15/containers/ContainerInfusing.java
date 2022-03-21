@@ -4,44 +4,61 @@ package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-public class ContainerInfusing extends Container {
-    public final InfusingChamberTileEntity tileentity;
+public class ContainerInfusing extends AbstractContainerMenu {
+    public final ContainerData ContainerData;
+    private final ContainerLevelAccess containerLevelAccess;
     private int cookTime, totalCookTime, burnTime, currentBurnTime;
+    //client
+  public ContainerInfusing(int id, Inventory playerInv)
+  {
+      this(id,playerInv,new ItemStackHandler(4), BlockPos.ZERO,new SimpleContainerData(4));
+  }
 
-    protected ContainerInfusing(@Nullable ContainerType<?> type, int id, InfusingChamberTileEntity tileentity) {
-        super(type, id);
-        this.tileentity = tileentity;
-    }
+  //server
+   public ContainerInfusing(int id, Inventory playerInv, IItemHandler handler, BlockPos pos, ContainerData data)
+   {
+       super(ModContainerTypes.CONTAINER_INFUSING.get(),id);
+    this.containerLevelAccess = ContainerLevelAccess.create(playerInv.player.level,pos);
+       this.addSlot(new SlotItemHandler(handler, 0, 24, 16));
+       this.addSlot(new SlotItemHandler(handler, 1, 56, 15));
+       this.addSlot(new SlotItemHandler(handler, 2, 58, 59));
+       this.addSlot(new SlotItemHandler(handler, 3, 120, 30));
 
-    /**
-     * Useful constructor in outside classes
-     *
-     * @param windowId        the id of the container
-     * @param playerInventory the playerInv of the player using this container
-     * @param data            the data sent when this container is used.
-     */
-    public ContainerInfusing(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
-        this(windowId, playerInventory, getTileEntity(playerInventory, data));
-    }
+       for (int y = 0; y < 3; y++) {
+           for (int x = 0; x < 9; x++) {
+               this.addSlot(new Slot(playerInv, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
+           }
+       }
+
+       for (int x = 0; x < 9; x++) {
+           this.addSlot(new Slot(playerInv, x, 8 + x * 18, 142));
+       }
+       addDataSlots(data);
+
+   }
 
     /**
      * Constructor that uses super
@@ -50,54 +67,20 @@ public class ContainerInfusing extends Container {
      * @param playerInventory the playerInv of the player using this container
      * @param tileEntity      the tileEntity of this container
      */
-    public ContainerInfusing(final int windowId, final PlayerInventory playerInventory, final InfusingChamberTileEntity tileEntity) {
+    public ContainerInfusing(final int windowId, final Inventory playerInventory, final InfusingChamberTileEntity tileEntity) {
         super(ModContainerTypes.CONTAINER_INFUSING.get(), windowId);
 
         this.tileentity = tileEntity;
         IItemHandler handler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).orElse(null);
 
-        this.addSlot(new SlotItemHandler(handler, 0, 24, 16));
-        this.addSlot(new SlotItemHandler(handler, 1, 56, 15));
-        this.addSlot(new SlotItemHandler(handler, 2, 58, 59));
-        this.addSlot(new SlotItemHandler(handler, 3, 120, 30));
 
-        for (int y = 0; y < 3; y++) {
-            for (int x = 0; x < 9; x++) {
-                this.addSlot(new Slot(playerInventory, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
-            }
-        }
-
-        for (int x = 0; x < 9; x++) {
-            this.addSlot(new Slot(playerInventory, x, 8 + x * 18, 142));
-        }
     }
 
-    /**
-     * Get tileEntity from playerInv and packet
-     *
-     * @param playerInventory playerInv from which to get the world
-     * @param data            Data from which to get the pos
-     * @return the tileEntity linked to the block used
-     */
-    private static InfusingChamberTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
-        Objects.requireNonNull(playerInventory, "playerInventory cannot be null!");
-        Objects.requireNonNull(data, "data cannot be null!");
-        final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
-        if (tileAtPos instanceof InfusingChamberTileEntity)
-            return (InfusingChamberTileEntity) tileAtPos;
-        else
-            throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
-    }
+   public static MenuConstructor getServerContainer(InfusingChamberTileEntity be,BlockPos pos)
+   {
+       return (id,playerInv,player) -> new InfusingChamberTileEntity(id,playerInv,be.)
+   }
 
-    @Override
-    public void detectAndSendChanges() {
-        super.detectAndSendChanges();
-
-        this.cookTime = this.tileentity.getField(2);
-        this.burnTime = this.tileentity.getField(0);
-        this.currentBurnTime = this.tileentity.getField(1);
-        this.totalCookTime = this.tileentity.getField(3);
-    }
 
     @Override
     @OnlyIn(Dist.CLIENT)
@@ -157,4 +140,8 @@ public class ContainerInfusing extends Container {
     }
 
 
+    @Override
+    public boolean stillValid(Player p_38874_) {
+        return stillValid(this.);
+    }
 }
