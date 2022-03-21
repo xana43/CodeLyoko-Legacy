@@ -31,10 +31,10 @@ public class ModEntities {
                             new ResourceLocation(Base.MOD_ID, "hornet").toString()
                     ));
     public static final RegistryObject<EntityType<MegaTankEntity>> MEGATANK = Entities.register("megatank", () ->
-            EntityType.Builder.<MegaTankEntity>create(MegaTankEntity::new, EntityClassification.MONSTER).size(3, 3)
+            EntityType.Builder.<MegaTankEntity>.of(MegaTankEntity::new, MobCategory.MONSTER).size(3, 3)
                     .build(new ResourceLocation(Base.MOD_ID, "megatank").toString()));
     public static final RegistryObject<EntityType<MantaEntity>> MANTA = Entities.register("manta", () ->
-            EntityType.Builder.<MantaEntity>create(MantaEntity::new, EntityClassification.MONSTER).size(3, 3)
+            EntityType.Builder.<MantaEntity>of(MantaEntity::new, MobCategory.MONSTER).size(3, 3)
                     .build(new ResourceLocation(Base.MOD_ID, "manta").toString()));
     public static final RegistryObject<EntityType<EntitySkid>> SKID = Entities.register("skidbladnir", () ->
             EntityType.Builder.<EntitySkid>create(EntitySkid::new, EntityClassification.AMBIENT).size(1, 1)

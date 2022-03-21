@@ -8,12 +8,26 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animation.builder.AnimationBuilder;
 import software.bernie.geckolib.animation.controller.EntityAnimationController;
 import software.bernie.geckolib.entity.IAnimatedEntity;
@@ -23,28 +37,26 @@ import software.bernie.geckolib.manager.EntityAnimationManager;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
+public class MegaTankEntity extends Skeleton implements IAnimatedEntity {
 
     private final EntityAnimationManager TankManager = new EntityAnimationManager();
     private final EntityAnimationController Tankcontroller = new EntityAnimationController(this, "movecontroller", 20, this::animationPred);
 
-    public MegaTankEntity(EntityType<MegaTankEntity> type, World world) {
+    public MegaTankEntity(EntityType<? extends Skeleton> type, Level world) {
         super(type, world);
         TankManager.addAnimationController(Tankcontroller);
 
     }
 
-    public MegaTankEntity(World world) {
+    public MegaTankEntity(Level world) {
         super(ModEntities.MEGATANK.get(), world);
 
 
     }
 
-    @Nonnull
-    @Override
-    protected ResourceLocation getLootTable() {
-        return null;
-    }
+
+
+
 
     @Override
     protected void dropExperience() {
@@ -53,26 +65,26 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
 
 
     @Override
-    protected boolean canBeRidden(@Nonnull Entity entityIn) {
+    protected boolean canRide(@Nonnull Entity entityIn) {
         return false;
     }
 
 
-    @Override
-    public boolean canSpawn(@Nonnull IWorld worldIn, @Nonnull SpawnReason spawnReasonIn) {
-        return spawnReasonIn != SpawnReason.CONVERSION;
-    }
+
+
 
     @Nonnull
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     @Override
-    public boolean canBeHitWithPotion() {
+    public boolean canBeAffected(MobEffectInstance p_21197_) {
         return false;
     }
+
+
 
 
     @Override
@@ -92,10 +104,7 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
         return true;
     }
 
-    @Override
-    protected boolean isInDaylight() {
-        return false;
-    }
+
 
     @Override
     protected SoundEvent getDeathSound() {
@@ -107,10 +116,13 @@ public class MegaTankEntity extends SkeletonEntity implements IAnimatedEntity {
         return null;
     }
 
+
+
+
     @Nonnull
     @Override
-    protected SoundEvent getFallSound(int heightIn) {
-        return heightIn > 4 ? ModSounds.MEGATANKBIGFALL.get() : ModSounds.MEGATANKSMALLFALL.get();
+    public Fallsounds getFallSounds() {
+        return  new Fallsounds(ModSounds.MEGATANKSMALLFALL.get(),ModSounds.MEGATANKBIGFALL.get());
     }
 
 

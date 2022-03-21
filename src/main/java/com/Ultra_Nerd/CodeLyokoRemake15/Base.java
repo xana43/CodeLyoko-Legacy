@@ -23,6 +23,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -35,6 +36,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModLoadingContext;
 
+import net.minecraftforge.fml.ModLoadingStage;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.config.ModConfig;
@@ -105,7 +107,7 @@ public class Base {
         ModBlocks.BLOCKS.register(ModBus);
         ModEntities.Entities.register(ModBus);
         ModRecipes.RECIPE_SERIALIZER_DEFERRED_REGISTER.register(ModBus);
-        ModBiome.BIOMES.register(ModBus);
+        //ModBiome.BIOMES.register(ModBus);
         ModContainerTypes.CONTAINER_TYPES.register(ModBus);
         ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
        // ModDimensions.MOD_DIMENSION_DEFERRED_REGISTER.register(ModBus);
@@ -144,7 +146,7 @@ public class Base {
     public static void onItemInit(final RegistryEvent.Register<Item> Items) {
         final IForgeRegistry<Item> registry = Items.getRegistry();
 
-        ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof FlowingFluid) &&
+        ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof LiquidBlock) &&
                 !(block.get() instanceof LiquidHelium) && !(block.get() instanceof SeaPylon) && !(block.get() instanceof LyokoCore)).map(RegistryObject::get).forEach(block ->
         {
             final Item.Properties itemsettings = new Item.Properties().tab(LYOKO_BLOCKS);
@@ -173,22 +175,24 @@ public class Base {
             if (random == 0 && !XANA) {
                 random = new Random().nextInt(40000);
                 assert Minecraft.getInstance().player != null;
-                Minecraft.getInstance().player.sendMessage(new TextComponent("xana is attacking"));
+                Minecraft.getInstance().player.sendMessage(new TextComponent("xana is attacking"),Minecraft.getInstance().player.getUUID());
                 XANA = true;
             }
         }
     }
-
+    @SubscribeEvent
     private void commonSetup(final FMLCommonSetupEvent event) {
-        DeferredWorkQueue.runLater(ModOreGen::genOre);
-        DeferredWorkQueue.runLater(StructGen::genStruct);
+
+        ModOreGen.genOre();
+        StructGen.genStruct();
         PacketHandler.init();
+
     }
 
     @SubscribeEvent
     public void PlayerSetup(final EntityJoinWorldEvent event) {
         random = 1000;
-        if (event.getEntity() instanceof PlayerEntity) {
+        if (event.getEntity() instanceof Player) {
             CompoundTag tag = event.getEntity().getPersistentData();
             CompoundTag existing;
             Player player = (Player) event.getEntity();

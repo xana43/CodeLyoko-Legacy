@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.KeyBoardAccess;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;

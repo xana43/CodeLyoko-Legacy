@@ -1,19 +1,28 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.KeyBoardAccess;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.extensions.IForgeEntity;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -24,20 +33,21 @@ public class OverboardEntity extends Entity implements IForgeEntity {
     private float WDown = 0;
     private float QDown = 0;
     private float ZDown = 0;
-    private final AxisAlignedBB axisAlignedBB = this.getBoundingBox();
+    private final AABB axisAlignedBB = this.getBoundingBox();
 
-    public OverboardEntity(EntityType<? extends OverboardEntity> entityTypeIn, World worldIn) {
+    public OverboardEntity(EntityType<? extends OverboardEntity> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
-        this.setBoundingBox(new AxisAlignedBB(axisAlignedBB.minX, axisAlignedBB.minY, axisAlignedBB.minZ, axisAlignedBB.maxX, axisAlignedBB.maxY, axisAlignedBB.maxZ));
+        this.setBoundingBox(new AABB(axisAlignedBB.minX, axisAlignedBB.minY, axisAlignedBB.minZ, axisAlignedBB.maxX, axisAlignedBB.maxY, axisAlignedBB.maxZ));
 
-        recalculateSize();
+
     }
 
 
-    @Nullable
+
+
     @Override
-    public AxisAlignedBB getCollisionBoundingBox() {
-        return this.getCollisionBox(this);
+    protected void defineSynchedData() {
+
     }
 
     @Override
@@ -115,13 +125,23 @@ public class OverboardEntity extends Entity implements IForgeEntity {
         }
     }
 
+
     @Override
-    public boolean canPassengerSteer() {
-        return true;
+    public boolean hasExactlyOnePlayerPassenger() {
+        return false;
     }
 
     @Override
-    public boolean processInitialInteract(@Nonnull PlayerEntity player, @Nonnull Hand hand) {
+    protected boolean canAddPassenger(Entity p_20354_) {
+        return true;
+    }
+
+
+
+
+
+    @Override
+    public boolean processInitialInteract(@Nonnull Player player, @Nonnull Hand hand) {
         if (super.processInitialInteract(player, hand)) {
             return true;
         }
@@ -139,7 +159,7 @@ public class OverboardEntity extends Entity implements IForgeEntity {
     }
 
     @Override
-    public boolean hasNoGravity() {
+    public boolean isNoGravity() {
         return false;
     }
 
@@ -149,21 +169,28 @@ public class OverboardEntity extends Entity implements IForgeEntity {
     }
 
     @Override
-    protected void recenterBoundingBox() {
-        super.recenterBoundingBox();
-        this.setPosition(this.getPosX(), this.getPosY(), this.getPosZ());
+    protected void readAdditionalSaveData(CompoundTag p_20052_) {
+
     }
 
-    @Nullable
     @Override
-    public AxisAlignedBB getCollisionBox(@Nonnull Entity entityIn) {
+    protected void addAdditionalSaveData(CompoundTag p_20139_) {
+
+    }
+
+
+    @Override
+    protected AABB makeBoundingBox() {
         return axisAlignedBB;
     }
 
     @Override
-    public boolean canBePushed() {
+    public boolean canCollideWith(Entity p_20303_) {
         return true;
     }
+
+
+
 
     @Override
     public boolean canBeCollidedWith() {
@@ -181,28 +208,15 @@ public class OverboardEntity extends Entity implements IForgeEntity {
     }
 
     @Override
-    protected boolean canBeRidden(@Nonnull Entity entityIn) {
+    protected boolean canRide(@Nonnull Entity entityIn) {
         return true;
     }
 
-    @Override
-    protected void registerData() {
 
-    }
-
-    @Override
-    protected void readAdditional(@Nonnull CompoundNBT compound) {
-
-    }
-
-    @Override
-    protected void writeAdditional(@Nonnull CompoundNBT compound) {
-
-    }
 
     @Nonnull
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 

@@ -16,7 +16,7 @@ public class StructGen {
             //towers
             if (biome == ModBiome.DESERT.get() || biome == ModBiome.FOREST.get() || biome == ModBiome.ICE.get() || biome == ModBiome.MOUNTAIN.get() ||
                     biome == ModBiome.VOLCANO.get()) {
-                biome.addStructure(ModWorldFeatures.TOWER.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
+                biome.(ModWorldFeatures.TOWER.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
             }
             biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, ModWorldFeatures.TOWER.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG)
                     .withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));

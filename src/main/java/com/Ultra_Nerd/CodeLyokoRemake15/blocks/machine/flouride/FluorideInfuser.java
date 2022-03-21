@@ -5,31 +5,42 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.client.RenderProperties;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class FluorideInfuser extends Block {
+public class FluorideInfuser extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty INFUSING = BooleanProperty.create("infusing");
@@ -49,40 +60,44 @@ public class FluorideInfuser extends Block {
 
     }
 
+
+
     @Nonnull
     @Override
-    public ActionResultType onBlockActivated(@Nonnull BlockState state, World worldIn, @Nonnull BlockPos pos,
-                                             @Nonnull PlayerEntity player, @Nonnull Hand handIn, @Nonnull BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            final TileEntity tileEntity = worldIn.getTileEntity(pos);
+    public InteractionResult use(@Nonnull BlockState state, Level worldIn, @Nonnull BlockPos pos,
+                                             @Nonnull Player player, @Nonnull InteractionHand handIn, @Nonnull BlockHitResult hit) {
+        if (worldIn.isClientSide) {
+            final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
             if (tileEntity instanceof InfusingChamberTileEntity) {
-                NetworkHooks.openGui((ServerPlayerEntity) player, (InfusingChamberTileEntity) tileEntity, pos);
+                NetworkHooks.openGui((ServerPlayer) player, (InfusingChamberTileEntity) tileEntity, pos);
             }
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
-    public static void setState(boolean act, World worldIn, BlockPos pos) {
+
+    public static void setState(boolean act, Level worldIn, BlockPos pos) {
         BlockState state = worldIn.getBlockState(pos);
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        BlockEntity tileentity = worldIn.getBlockEntity(pos);
         if (act) {
-            worldIn.setBlockState(pos, ModBlocks.FLUORIDE_INFUSER.get().getDefaultState().with(FACING, state.get(FACING))
+            worldIn.setBlockAndUpdate(pos, ModBlocks.FLUORIDE_INFUSER.get().defaultBlockState().with(FACING, state.getValue(FACING))
                     .with(INFUSING, true), 3);
         } else {
-            worldIn.setBlockState(pos, ModBlocks.FLUORIDE_INFUSER.get().getDefaultState().with(FACING, state.get(FACING))
+            worldIn.setBlockAndUpdate(pos, ModBlocks.FLUORIDE_INFUSER.get().defaultBlockState().with(FACING, state.getValue(FACING))
                     .with(INFUSING, false), 3);
         }
         if (tileentity != null) {
-            tileentity.validate();
-            worldIn.setTileEntity(pos, tileentity);
+            worldIn.setBlockEntity(tileentity);
         }
     }
 
-    @Nullable
+    @org.jetbrains.annotations.Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get().create();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get().create(pos,state);
     }
+
+
 
     @Override
     public boolean hasTileEntity(BlockState state) {

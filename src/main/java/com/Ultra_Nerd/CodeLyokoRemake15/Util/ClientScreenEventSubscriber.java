@@ -9,6 +9,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.client.event.ScreenOpenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,8 +21,8 @@ public class ClientScreenEventSubscriber {
 
 
     @SubscribeEvent
-    public static void NoE(final GuiScreenEvent.KeyboardKeyEvent event) {
-        if (event.getKeyCode() == GLFW.GLFW_KEY_E) {
+    public static void NoE(final ScreenEvent event) {
+        if (event.getScreen().getMinecraft().keyboardHandler. == GLFW.GLFW_KEY_E) {
             if (event.getGui() instanceof TowerGUI) {
                 event.setCanceled(true);
             }

@@ -6,6 +6,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -22,8 +23,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
@@ -34,7 +40,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class InfusingChamberTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class InfusingChamberTileEntity extends BlockEntity implements BlockEntityTicker {
 
 
     public ItemStackHandler handler = new ItemStackHandler(4);
@@ -50,8 +56,8 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
         this(ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get());
     }
 
-    public InfusingChamberTileEntity(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+    public InfusingChamberTileEntity(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
+        super(tileEntityTypeIn,pos,state);
     }
 
     public boolean hasCapability(Capability<?> capability, Direction facing) {
@@ -80,6 +86,8 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
     public ITextComponent getDisplayName() {
         return this.hasCustomName() ? new StringTextComponent(this.customName) : new TranslationTextComponent("container.flouride_infuser");
     }
+
+
 
     @Override
     public void read(@Nonnull CompoundTag compound) {
@@ -117,7 +125,7 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
 
 
     @Override
-    public void tick() {
+    public void tick(Level world, BlockPos pos, BlockState state, BlockEntity blockEntity) {
         if (this.isBurning()) {
             --this.burnTime;
             FluorideInfuser.setState(true, world, pos);
@@ -180,7 +188,7 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
             else {
                 ItemStack output = (ItemStack) this.handler.getStackInSlot(3);
                 if (output.isEmpty()) return true;
-                if (!output.isItemEqual(result)) return false;
+                if (!output.equals(result)) return false;
                 int res = output.getCount() + result.getCount();
                 return res <= 64 && res <= output.getMaxStackSize();
             }
@@ -191,8 +199,8 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
         if (!fuel.isEmpty()) {
             Item item = fuel.getItem();
 
-            if (item instanceof BlockItem && Block.getBlockFromItem(item) != Blocks.AIR) {
-                Block block = Block.getBlockFromItem(item);
+            if (item instanceof BlockItem && Block.byItem(item) != Blocks.AIR) {
+                Block block = Block.byItem(item);
 
 
                 if (block == ModBlocks.FLUORITE_BLOCK.get()) return 40000;
@@ -213,8 +221,8 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
 
     public boolean isUsableByPlayer(Player player) {
         assert this.level != null;
-        return this.world.getTileEntity(this.pos) == this &&
-                player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+        return this.level.getBlockEntity(this.getBlockPos()) == this &&
+                player.distanceToSqr((double) this.getBlockPos().getX() + 0.5D, (double) this.getBlockPos().getY() + 0.5D, (double) this.getBlockPos().getZ() + 0.5D) <= 64.0D;
     }
 
     public int getField(int id) {
@@ -254,6 +262,8 @@ public class InfusingChamberTileEntity extends TileEntity implements ITickableTi
     public Container createMenu(int windowIn, @Nonnull PlayerInventory playerInventory, @Nonnull PlayerEntity playerEntity) {
         return new ContainerInfusing(windowIn, playerInventory, this);
     }
+
+
 
 
 }

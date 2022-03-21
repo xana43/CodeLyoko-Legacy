@@ -2,6 +2,10 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.biome.*;
+import net.minecraft.core.Registry;
+import net.minecraft.data.worldgen.SurfaceRuleData;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.RainType;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
@@ -13,6 +17,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,14 +25,17 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModBiome {
 
-
+/*
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, Base.MOD_ID);
 
-    public static final RegistryObject<Biome> SECTOR5 = BIOMES.register("sector5", () -> new LyokoCarthage(new Builder
-            .precipitation(Biome.Precipitation.NONE)
+    public static final RegistryObject<Biome> SECTOR5 = BIOMES.register("sector5", () -> new Biome.BiomeBuilder()
+            .biomeCategory(Biome.BiomeCategory.NONE)
             .downfall(0)
-            .biomeCategory(Biome.BiomeCategory.NONE));
-    public static final RegistryObject<Biome> FOREST = BIOMES.register("forest_sector", () -> new LyokoForest(new Biome.Builder()
+            .precipitation(Biome.Precipitation.NONE)
+            .temperatureAdjustment(Biome.TemperatureModifier.NONE)
+            .generationSettings(new BiomeGenerationSettingsBuilder(BiomeGenerationSettings.EMPTY))
+            .build());
+    public static final RegistryObject<Biome> FOREST = BIOMES.register("forest_sector", () -> new LyokoForest(new Biome.BiomeBuilder()
             .precipitation(RainType.NONE)
             .surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(ModBlocks.DIGITAL_GRASS.get()
                     .getDefaultState(), ModBlocks.DIGITAL_DIRT.get().getDefaultState(), ModBlocks.DIGITAL_DIRT.get().getDefaultState()))
@@ -126,21 +134,35 @@ public class ModBiome {
             .depth(200)
     ));
 
+*/
+
+    public  static  final ResourceKey<Biome> OCEAN = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_ocean"));
+    public  static  final ResourceKey<Biome> SECTOR5 = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"sector5"));
+    public  static  final ResourceKey<Biome> FOREST = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_forest"));
+    public  static  final ResourceKey<Biome> DESERT = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_desert"));
+    public  static  final ResourceKey<Biome> ICE = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_ice"));
+    public  static  final ResourceKey<Biome> MOUNTAIN = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_mountain"));
+    public  static  final ResourceKey<Biome> FRONTIER = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_frontier"));
+    public  static  final ResourceKey<Biome> VOLCANO = ResourceKey.create(Registry.BIOME_REGISTRY,new ResourceLocation(Base.MOD_ID,"digital_volcano"));
+
+
+
 
     public static void regbio() {
-        initBiome(OCEAN.get(), Type.MODIFIED, Type.OCEAN, Type.WATER);
-        initBiome(SECTOR5.get(), Type.DENSE, Type.END, Type.MODIFIED, Type.SPOOKY);
-        initBiome(FOREST.get(), Type.LUSH, Type.FOREST);
-        initBiome(DESERT.get(), Type.SPARSE, Type.SPARSE, Type.DRY, Type.SANDY);
-        initBiome(ICE.get(), Type.DRY, Type.COLD, Type.DEAD, Type.SNOWY);
-        initBiome(MOUNTAIN.get(), Type.HILLS, Type.MODIFIED, Type.MOUNTAIN);
-        initBiome(FRONTIER.get(), Type.END, Type.DEAD, Type.RARE, Type.MAGICAL, Type.SPOOKY, Type.VOID);
-        initBiome(VOLCANO.get(), Type.SPOOKY, Type.DEAD, Type.HOT, Type.MODIFIED, Type.NETHER);
+
+        initBiome(OCEAN, Type.MODIFIED, Type.OCEAN, Type.WATER);
+        initBiome(SECTOR5, Type.DENSE, Type.END, Type.MODIFIED, Type.SPOOKY);
+        initBiome(FOREST, Type.LUSH, Type.FOREST);
+        initBiome(DESERT, Type.SPARSE, Type.SPARSE, Type.DRY, Type.SANDY);
+        initBiome(ICE, Type.DRY, Type.COLD, Type.DEAD, Type.SNOWY);
+        initBiome(MOUNTAIN, Type.HILLS, Type.MODIFIED, Type.MOUNTAIN);
+        initBiome(FRONTIER, Type.END, Type.DEAD, Type.RARE, Type.MAGICAL, Type.SPOOKY, Type.VOID);
+        initBiome(VOLCANO, Type.SPOOKY, Type.DEAD, Type.HOT, Type.MODIFIED, Type.NETHER);
     }
 
-    private static void initBiome(Biome biome, Type... types) {
+    private static void initBiome(ResourceKey<Biome> biome, Type... types) {
         BiomeDictionary.addTypes(biome, types);
-        net.minecraftforge.common.BiomeManager.addSpawnBiome(biome);
+
     }
 
 

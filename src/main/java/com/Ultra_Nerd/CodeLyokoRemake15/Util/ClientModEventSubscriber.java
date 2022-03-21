@@ -9,12 +9,22 @@ import com.Ultra_Nerd.CodeLyokoRemake15.particles.ColoredParticle;
 import com.Ultra_Nerd.CodeLyokoRemake15.particles.TowerParticleFactory;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.ScreenEffectRenderer;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.client.event.RenderBlockOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -35,7 +45,7 @@ public class ClientModEventSubscriber {
     @SubscribeEvent
     public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
         //makes certain blocks behave properly
-        ModItems.TEST_MULTIPLAYER_PHONE.get().addPropertyOverride(new ResourceLocation(Base.MOD_ID,"message"), (stack,world,entityin) ->
+        ModItems.TEST_MULTIPLAYER_PHONE.get().overrideOtherStackedOnMe(new ResourceLocation(Base.MOD_ID,"message"), (stack, world, entityin) ->
         {
             if(stack.isEnchanted())
             {
@@ -91,8 +101,8 @@ public class ClientModEventSubscriber {
                     return 0.0f;
             }
         });
-        RenderTypeLookup.setRenderLayer(ModBlocks.TOWER_INTERFACE.get(), RenderType.getCutoutMipped());
-        RenderTypeLookup.setRenderLayer(ModFluids.DIGITAL_SEA_BLOCK.get(), RenderType.getTranslucent());
+        RenderType(ModBlocks.TOWER_INTERFACE.get(), RenderType.getCutoutMipped());
+        .setRenderLayer(ModFluids.DIGITAL_SEA_BLOCK.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModFluids.DIGITAL_OCEAN.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_DIGITAL_OCEAN.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.TRANSPARENT.get(), RenderType.getCutoutMipped());
@@ -109,7 +119,7 @@ public class ClientModEventSubscriber {
         RenderTypeLookup.setRenderLayer(ModBlocks.LYOKO_CORE.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ModBlocks.FRONTIER_BLOCK.get(), RenderType.getCutoutMipped());
         //registers the screens and entities
-        ScreenManager.<ContainerInfusing, InfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
+        Gui.<ContainerInfusing, InfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
         ScreenManager.<ContainerElectricInfusing, ElectricInfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_ELECTRIC_INFUSING.get(), ElectricInfusingChamberScreen::new);
         ScreenManager.<TowerInterfaceContainer, TowerGUI>registerFactory(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);
         ScreenManager.<QuantumChipletContainer, QuantumChipletScreen>registerFactory(ModContainerTypes.QUANTUM_CHIPLET_CONTAINER.get(), QuantumChipletScreen::new);
@@ -118,7 +128,7 @@ public class ClientModEventSubscriber {
                 ComputerControlPanelUI::new);
         ScreenManager.<DataTransferInterfaceContainer, DataTransferInterfaceUI>registerFactory(ModContainerTypes.DATA_TRANSFER_INTERFACE_CONTAINER.get(),
                 DataTransferInterfaceUI::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BLOK.get(), RendBlok::new);
+        EntityRenderers.register(ModEntities.BLOK.get(), RendBlok::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.LASER.get(), RendLaser::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FAN.get(), RendFan::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.HORNET.get(), HornetRenderer::new);

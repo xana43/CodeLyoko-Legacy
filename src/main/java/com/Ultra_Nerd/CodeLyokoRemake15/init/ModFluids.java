@@ -6,7 +6,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.DigitalSeaBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LiquidHelium;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.UraniumWaste;
 import com.Ultra_Nerd.CodeLyokoRemake15.fluids.LiquidHeliumFluid;
-import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.FlowingFluid;

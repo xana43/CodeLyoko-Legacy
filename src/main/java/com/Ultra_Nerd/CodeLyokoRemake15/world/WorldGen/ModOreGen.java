@@ -1,20 +1,37 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.placement.ConfiguredPlacement;
-import net.minecraft.world.gen.placement.CountRangeConfig;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraftforge.registries.ForgeRegistries;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.features.OreFeatures;
+import net.minecraft.data.worldgen.placement.OrePlacements;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModOreGen {
 
+    public static final List<PlacedFeature> OVERWORLD_ORES = new ArrayList<>();
+    public static final List<PlacedFeature> END_ORES = new ArrayList<>();
+    public static final List<PlacedFeature> NETHER_ORES = new ArrayList<>();
+    public static final RuleTest TEST = new BlockMatchTest(Blocks.END_STONE);
+    private static final OreConfiguration config = new OreConfiguration(
+            List.of(OreConfiguration.target(OreFeatures.STONE_ORE_REPLACEABLES,ModBlocks.SILICA_SAND.get().defaultBlockState())),1);
+
     public static void genOre() {
-        for (Biome biome : ForgeRegistries.BIOMES) {
+
+       
+
+        /*for (Biome biome : ForgeRegistries.BIOMES) {
             //for silica sand
             if(biome == Biomes.DESERT || biome == Biomes.DESERT || biome ==  Biomes.DESERT_HILLS || biome == Biomes.DESERT_LAKES || biome == Biomes.ERODED_BADLANDS
                 || biome == Biomes.GRAVELLY_MOUNTAINS || biome == Biomes.MODIFIED_GRAVELLY_MOUNTAINS)
@@ -77,7 +94,7 @@ public class ModOreGen {
                                 NATURAL_STONE, ModBlocks.METATYUYAMUNITE_ORE.get().getDefaultState(), 6))
                         .withPlacement(custom2));
             }
-        }
+        }*/
     }
 
 

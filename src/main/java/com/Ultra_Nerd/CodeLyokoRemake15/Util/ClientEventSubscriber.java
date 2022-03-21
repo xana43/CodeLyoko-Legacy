@@ -29,7 +29,7 @@ public class ClientEventSubscriber {
             Player player = (Player) event.getEntity();
             if (player.world.dimension instanceof ForestDimension && Minecraft.getInstance().player != null) {
                 timer[0] = 0;
-            } else if (player.world.dimension instanceof IceDimension && Minecraft.getInstance().player != null) {
+            } else if (player.level.dimension() instanceof IceDimension && Minecraft.getInstance().player != null) {
                 timer[1] = 0;
             } else if (player.world.dimension instanceof OceanDimension && Minecraft.getInstance().player != null) {
                 timer[2] = 0;
@@ -51,7 +51,7 @@ public class ClientEventSubscriber {
 
 
             }
-            Minecraft.getInstance().getMusicTicker().stop();
+            Minecraft.getInstance().getMusicManager().stopPlaying();
         } else if (!(event.player.world.dimension instanceof ForestDimension) && Minecraft.getInstance().player != null) {
             timer[0] = 131000;
 

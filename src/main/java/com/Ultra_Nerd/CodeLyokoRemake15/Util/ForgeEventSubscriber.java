@@ -10,6 +10,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimen
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoDimension;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.world.RegisterDimensionsEvent;

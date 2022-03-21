@@ -3,32 +3,50 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
+import net.minecraft.client.gui.components.events.ContainerEventHandler;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.core.BlockPos;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.NetworkManager;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.ContainerListener;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TowerInterfaceTileEntity extends TileEntity implements INamedContainerProvider {
+public class TowerInterfaceTileEntity extends BlockEntity {
 
     // May be accessed before onLoad
     @OnlyIn(Dist.CLIENT)
     protected int PlayersPresent;
 
-    public TowerInterfaceTileEntity(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+    public TowerInterfaceTileEntity(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
+        super(tileEntityTypeIn,pos,state);
     }
 
     public TowerInterfaceTileEntity() {
@@ -37,7 +55,7 @@ public class TowerInterfaceTileEntity extends TileEntity implements INamedContai
 
 
     @Override
-    public AxisAlignedBB getRenderBoundingBox() {
+    public AABB getRenderBoundingBox() {
         // This, combined with isGlobalRenderer in the TileEntityRenderer makes it so that the
         // render does not disappear if the player can't see the block
         // This is useful for rendering larger models or dynamically sized models
@@ -45,24 +63,30 @@ public class TowerInterfaceTileEntity extends TileEntity implements INamedContai
     }
 
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        CompoundNBT nbtTag = new CompoundNBT();
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        CompoundTag nbtTag = new CompoundTag();
         //Write your data into the nbtTag
-        return new SUpdateTileEntityPacket(getPos(), -1, nbtTag);
+        return new ClientboundBlockEntityDataPacket(getBlockPos()Pos(), -1, nbtTag);
     }
 
+
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        CompoundNBT tag = pkt.getNbtCompound();
-        //Handle your Data
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+        CompoundTag tag = pkt.getTag();
     }
+
+
+
 
     /**
      * @return display name of the interface
      */
+
+
     @Nonnull
     @Override
-    public ITextComponent getDisplayName() {
+    public TextComponent getDisplayName() {
         return new TranslationTextComponent(ModBlocks.TOWER_INTERFACE.get().getTranslationKey());
     }
 
@@ -76,7 +100,7 @@ public class TowerInterfaceTileEntity extends TileEntity implements INamedContai
      */
     @Nullable
     @Override
-    public Container createMenu(int windowIn, @Nonnull PlayerInventory playerInv, @Nonnull PlayerEntity playerEntity) {
+    public Container createMenu(int windowIn, @Nonnull Inventory playerInv, @Nonnull PlayerEntity playerEntity) {
         return new TowerInterfaceContainer(windowIn, playerInv, this);
     }
 

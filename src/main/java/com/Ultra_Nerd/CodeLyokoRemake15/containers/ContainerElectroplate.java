@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.FunctionalVariableReferenceHolder;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
