@@ -2,15 +2,14 @@ package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.components.events.GuiEventListener;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,7 +18,7 @@ import org.lwjgl.glfw.GLFW;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class TowerGUI extends ContainerScreen<TowerInterfaceContainer> {
+public class TowerGUI extends Screen {
 
     private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/towerinterface.png");
     private TextFieldWidget text;
@@ -31,7 +30,7 @@ public class TowerGUI extends ContainerScreen<TowerInterfaceContainer> {
     private int x, y;
 
 
-    public TowerGUI(TowerInterfaceContainer screenContainer, Inventory inv, ITextComponent titleIn) {
+    public TowerGUI(Screen screenContainer, Inventory inv, TextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         this.guiLeft = 0;
         this.guiTop = 0;

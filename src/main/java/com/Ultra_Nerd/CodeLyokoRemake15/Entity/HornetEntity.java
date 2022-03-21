@@ -11,32 +11,39 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.monster.Phantom;
 import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animation.builder.AnimationBuilder;
 import software.bernie.geckolib.animation.controller.EntityAnimationController;
 import software.bernie.geckolib.entity.IAnimatedEntity;
 import software.bernie.geckolib.event.AnimationTestEvent;
 import software.bernie.geckolib.manager.EntityAnimationManager;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nonnull;
 
-public class HornetEntity extends Phantom implements IAnimatedEntity, RangedAttackMob {
+public class HornetEntity extends Phantom implements IAnimatable, RangedAttackMob {
 
-    private final EntityAnimationManager manager = new EntityAnimationManager();
-    private final EntityAnimationController controller2 = new EntityAnimationController(this, "attackcontroller", 20, this::animationPred);
-    private final EntityAnimationController controller = new EntityAnimationController(this, "movecontroller", 20, this::animationPred);
+    private final AnimationFactory manager = new AnimationFactory(this);
+    private final AnimationController controller2 = new AnimationController(this, "attackcontroller", 20, this::animationPred);
+    private final AnimationController controller = new AnimationController(this, "movecontroller", 20, this::animationPred);
     private RangedAttackGoal rangedAttackGoal;
 
     public HornetEntity(EntityType<HornetEntity> hornetEntityEntityType, Level world) {
         super(hornetEntityEntityType, world);
-        manager.addAnimationController(controller);
-        manager.addAnimationController(controller2);
-    }
 
+    }
+/*
     public HornetEntity(Level world) {
         super(ModEntities.HORNET.get(), world);
 
-    }
+    }*/
 
     @Override
     public void tick() {
@@ -94,22 +101,28 @@ public class HornetEntity extends Phantom implements IAnimatedEntity, RangedAtta
 
 
     @Override
-    public EntityAnimationManager getAnimationManager() {
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(controller);
+        data.addAnimationController(controller2);
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
         return manager;
     }
 
-    private <E extends HornetEntity> boolean animationPred(AnimationTestEvent<E> event) {
-        if (event.isWalking()) {
+    private <E extends HornetEntity> PlayState animationPred(AnimationEvent<E> event) {
+        if (event.isMoving()) {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly", true));
 
-            return true;
+            return PlayState.CONTINUE;
         }
-        if (event.getEntity().getAttackTarget() instanceof PlayerEntity) {
+        if (event.getAnimatable().getTarget() instanceof Player) {
             controller2.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.attack", false));
-            return true;
+            return PlayState.CONTINUE;
         } else {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly", true));
-            return true;
+            return PlayState.CONTINUE;
         }
     }
 

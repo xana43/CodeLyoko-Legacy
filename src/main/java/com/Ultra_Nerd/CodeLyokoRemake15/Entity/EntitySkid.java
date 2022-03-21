@@ -21,7 +21,7 @@ public class EntitySkid extends Boat {
 
     }
 
-    public EntitySkid(EntityType<EntitySkid> entitySkidEntityType, Level world) {
+    public EntitySkid(EntityType<? extends Boat> entitySkidEntityType, Level world) {
         super(entitySkidEntityType, world);
     }
 

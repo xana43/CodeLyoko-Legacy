@@ -19,8 +19,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
 
@@ -30,12 +32,12 @@ public class LaserArrowShooter extends BowItem {
 
 
     @Override
-    public void inventoryTick(@Nonnull ItemStack stack, World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
-        if (!worldIn.isRemote()) {
+    public void inventoryTick(@Nonnull ItemStack stack, Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
+        if (worldIn.isClientSide) {
             Count -= 1;
             if (Count == 0) {
-                if (stack.getDamage() != 0) {
-                    stack.damageItem(-1, (PlayerEntity) entityIn, null);
+                if (stack.getDamageValue() != 0) {
+                    stack.getItem().damageItem(-1, (Player) entityIn, null);
                 }
                 Count = 100;
             }
@@ -48,12 +50,7 @@ public class LaserArrowShooter extends BowItem {
     }
 
 
-    private boolean checkDim(PlayerEntity player) {
-        return player.world.dimension instanceof ForestDimension || player.world.dimension instanceof IceDimension ||
-                player.world.dimension instanceof DesertDimension || player.world.dimension instanceof MountainDimension
-                || player.world.dimension instanceof Sector5Dimension || player.world.dimension instanceof OceanDimension ||
-                player.world.dimension instanceof VolcanoDimension;
-    }
+
 
     @Nonnull
     @Override

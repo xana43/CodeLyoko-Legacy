@@ -4,20 +4,21 @@ package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ComputerInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.IGuiEventListener;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.components.Widget;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.entity.player.Inventory;
 
 import javax.annotation.Nullable;
 
-public class ComputerInterfaceUi extends ContainerScreen<ComputerInterfaceContainer> {
+public class ComputerInterfaceUi extends AbstractContainerScreen<ComputerInterfaceContainer> {
 
     private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/computercontrolpanelui.png");
     private static final ResourceLocation BUTTONTEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/buttonatlas.png");
@@ -29,7 +30,7 @@ public class ComputerInterfaceUi extends ContainerScreen<ComputerInterfaceContai
     int x, y;
 
 
-    public ComputerInterfaceUi(ComputerInterfaceContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public ComputerInterfaceUi(ComputerInterfaceContainer screenContainer, Inventory inv, TextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         this.guiLeft = 0;
         this.guiTop = 0;
@@ -82,6 +83,11 @@ public class ComputerInterfaceUi extends ContainerScreen<ComputerInterfaceContai
     }
 
     @Override
+    protected void renderBg(PoseStack p_97787_, float p_97788_, int p_97789_, int p_97790_) {
+
+    }
+
+    @Override
     public boolean isPauseScreen() {
         return false;
     }
@@ -91,6 +97,11 @@ public class ComputerInterfaceUi extends ContainerScreen<ComputerInterfaceContai
 
 
         this.button = new Widget(x, y, this.width / 3, this.height / 6, "activate") {
+            @Override
+            public void render(PoseStack p_94669_, int p_94670_, int p_94671_, float p_94672_) {
+
+            }
+
             @Override
             protected int getYImage(boolean p_getYImage_1_) {
                 return super.getYImage(p_getYImage_1_);

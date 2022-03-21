@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.*;
-import net.minecraft.entity.EntityClassification;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -31,27 +30,27 @@ public class ModEntities {
                             new ResourceLocation(Base.MOD_ID, "hornet").toString()
                     ));
     public static final RegistryObject<EntityType<MegaTankEntity>> MEGATANK = Entities.register("megatank", () ->
-            EntityType.Builder.<MegaTankEntity>.of(MegaTankEntity::new, MobCategory.MONSTER).size(3, 3)
+            EntityType.Builder.of(MegaTankEntity::new, MobCategory.MONSTER).sized(3, 3)
                     .build(new ResourceLocation(Base.MOD_ID, "megatank").toString()));
     public static final RegistryObject<EntityType<MantaEntity>> MANTA = Entities.register("manta", () ->
-            EntityType.Builder.<MantaEntity>of(MantaEntity::new, MobCategory.MONSTER).size(3, 3)
+            EntityType.Builder.of(MantaEntity::new, MobCategory.MONSTER).sized(3, 3)
                     .build(new ResourceLocation(Base.MOD_ID, "manta").toString()));
     public static final RegistryObject<EntityType<EntitySkid>> SKID = Entities.register("skidbladnir", () ->
-            EntityType.Builder.<EntitySkid>create(EntitySkid::new, EntityClassification.AMBIENT).size(1, 1)
+            EntityType.Builder.<EntitySkid>of(EntitySkid::new, MobCategory.AMBIENT).sized(1, 1)
                     .build(new ResourceLocation(Base.MOD_ID, "skid").toString()));
     public static final RegistryObject<EntityType<KankrelatEntity>> KANKRELAT = Entities.register("kankrelat", () ->
-            EntityType.Builder.<KankrelatEntity>create(KankrelatEntity::new, EntityClassification.MONSTER).size(1, 1)
+            EntityType.Builder.of(KankrelatEntity::new, MobCategory.MONSTER).sized(1, 1)
                     .build(new ResourceLocation(Base.MOD_ID, "kankrelat").toString()));
     public static final RegistryObject<EntityType<HoverboardEntity>> HOVERBOARD = Entities.register("hoverboard", () ->
-            EntityType.Builder.<HoverboardEntity>create(HoverboardEntity::new, EntityClassification.MISC).size(1, 1)
+            EntityType.Builder.of(HoverboardEntity::new, MobCategory.MISC).sized(1, 1)
                     .build(new ResourceLocation(Base.MOD_ID, "hoverboard").toString()));
     public static final RegistryObject<EntityType<OverboardEntity>> OVERBOARD = Entities.register("overboard", () ->
-            EntityType.Builder.<OverboardEntity>create(OverboardEntity::new, EntityClassification.MISC).size(2, 1)
+            EntityType.Builder.of(OverboardEntity::new, MobCategory.MISC).sized(2, 1)
                     .build(new ResourceLocation(Base.MOD_ID, "overboard").toString()));
     public static final RegistryObject<EntityType<OverbikeEntity>> OVERBIKE = Entities.register("overbike", () ->
-            EntityType.Builder.<OverbikeEntity>create(OverbikeEntity::new, EntityClassification.MISC).size(2, 1)
+            EntityType.Builder.of(OverbikeEntity::new, MobCategory.MISC).sized(2, 1)
                     .build(new ResourceLocation(Base.MOD_ID, "overbike").toString()));
     public static final RegistryObject<EntityType<GuardianEntity>> GUARDIAN = Entities.register("guardian", () ->
-            EntityType.Builder.<GuardianEntity>create(GuardianEntity::new, EntityClassification.MONSTER).size(8, 8)
+            EntityType.Builder.of(GuardianEntity::new, MobCategory.MONSTER).sized(8, 8)
                     .build(new ResourceLocation(Base.MOD_ID, "guardian").toString()));
 }

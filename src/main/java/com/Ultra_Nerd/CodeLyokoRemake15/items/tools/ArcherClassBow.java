@@ -4,15 +4,16 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.Mth;
 import net.minecraft.world.World;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -63,25 +64,25 @@ public class ArcherClassBow extends BowItem {
 
             float f = getArrowVelocity(i);
             if (!((double) f < 0.1D)) {
-                boolean flag1 = playerentity.abilities.isCreativeMode;
+                boolean flag1 = playerentity.isCreative();
                 if (worldIn.isClientSide) {
                     EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 
-                    las.setDamage(20);
-                    las.setPosition(playerentity.getPosX(), playerentity.getPosYEye(), playerentity.getPosZ());
+                    las.setBaseDamage(20);
+                    las.setPos(playerentity.getX(), playerentity.getEyeY(), playerentity.getZ());
 
-                    AbstractArrowEntity abstractarrowentity;
-                    abstractarrowentity = customeArrow(las);
-                    abstractarrowentity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 0.0F);
+                    AbstractArrow abstractarrowentity;
+                    abstractarrowentity = customArrow(las);
+                    abstractarrowentity.shootFromRotation(playerentity, playerentity.getXRot(), playerentity.getYRot(), 0.0F, f * 3.0F, 0.0F);
                     if (f == 1.0F) {
-                        abstractarrowentity.setIsCritical(true);
+                        abstractarrowentity.setCritArrow(true);
                     }
-                    worldIn.addEntity(abstractarrowentity);
+                    worldIn.addFreshEntity(abstractarrowentity);
                 }
 
-                worldIn.playSound((PlayerEntity) null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), ModSounds.LASERARROW.get(), SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                worldIn.playSound((Player) null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), ModSounds.LASERARROW.get(), SoundSource.PLAYERS, 1.0F, 1.0F / ((float)Math.random() * 0.4F + 1.2F) + f * 0.5F);
 
-                playerentity.addStat(Stats.ITEM_USED.get(this));
+                playerentity.awardStat(Stats.ITEM_USED.get(this));
             }
 
         }

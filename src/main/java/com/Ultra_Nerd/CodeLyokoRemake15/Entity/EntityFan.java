@@ -30,23 +30,30 @@ import software.bernie.geckolib.animation.controller.EntityAnimationController;
 import software.bernie.geckolib.entity.IAnimatedEntity;
 import software.bernie.geckolib.event.AnimationTestEvent;
 import software.bernie.geckolib.manager.EntityAnimationManager;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityFan extends ThrownTrident implements IAnimatedEntity {
+public class EntityFan extends ThrownTrident implements IAnimatable {
     private boolean dealtDamage;
-    private final EntityAnimationManager manager = new EntityAnimationManager();
-    private final EntityAnimationController controller = new EntityAnimationController(this, "fancontroller", 20, this::animationpred);
-
+    private final AnimationFactory manager = new AnimationFactory(this);
+    private final AnimationController controller = new AnimationController(this, "fancontroller", 20, this::animationpred);
+    private ItemStack thrownstack;
     public EntityFan(EntityType<? extends ThrownTrident> type, Level worldIn) {
         super(type,worldIn)
     }
 
     public EntityFan(Level world, LivingEntity thrower, ItemStack thrownStackIn) {
         super(ModEntities.FAN.get(), world);
-        this.thrownStack = new ItemStack(ModItems.YUMI_TRADITONAL_FANS.get());
-        manager.addAnimationController(controller);
+        this.thrownstack = new ItemStack(ModItems.YUMI_TRADITONAL_FANS.get());
+
     }
 
 
@@ -85,19 +92,21 @@ public class EntityFan extends ThrownTrident implements IAnimatedEntity {
         super.tick();
     }
 
-    private <E extends EntityFan> boolean animationpred(AnimationTestEvent<E> event) {
+    private <E extends EntityFan> PlayState animationpred(AnimationEvent<E> event) {
 
         controller.setAnimation(new AnimationBuilder().addAnimation("animation.fan.spin", true));
-        return true;
+        return PlayState.CONTINUE;
 
 
     }
 
+    @Override
+    public AnimationFactory getFactory() {
+        return manager;
+    }
 
-
-
-
-
-
-
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(controller);
+    }
 }

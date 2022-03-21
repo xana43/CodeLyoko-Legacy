@@ -5,15 +5,18 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerInterfaceTE;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ChestMenu;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
-public class ComputerInterfaceContainer extends Container {
+public class ComputerInterfaceContainer extends AbstractContainerMenu {
     public final ComputerInterfaceTE ComputerTE;
     private final IWorldPosCallable canInteractWithCallable;
 
@@ -41,5 +44,10 @@ public class ComputerInterfaceContainer extends Container {
     @Override
     public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
         return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.COMPUTER_KEYBOARD.get());
+    }
+
+    @Override
+    public boolean stillValid(Player p_38874_) {
+        return false;
     }
 }

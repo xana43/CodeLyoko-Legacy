@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.items;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.LaptopGUI;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -31,7 +31,7 @@ public class LaptopClass extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, @Nonnull Player playerIn, @Nonnull InteractionHand handIn) {
         if (worldIn.isClientSide) {
-            Minecraft.getInstance().setScreen(new LaptopGUI(new StringTextComponent("test")));
+            Minecraft.getInstance().setScreen(new LaptopGUI(new TextComponent("Mysterious Laptop")));
         }
 
         if (playerIn.getItemInHand(handIn).getItem() == this) {

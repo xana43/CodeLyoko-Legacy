@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.Input;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
@@ -25,6 +26,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 public class HoverboardEntity extends Entity  {
     private float Vel = 0;
@@ -40,7 +42,7 @@ public class HoverboardEntity extends Entity  {
 
     }
 
-
+    private static final Input PlayerInput = new Input();
     @Override
     public void onPassengerTurned(Entity p_20320_) {
         super.onPassengerTurned(p_20320_);
@@ -81,49 +83,49 @@ public class HoverboardEntity extends Entity  {
                 assert Minecraft.getInstance().player != null;
                 setRot(Minecraft.getInstance().player.getXRot(), 0);
             }
-            if (KeyBoardAccess.Q()) {
+            if (PlayerInput.up) {
                 QDown += 0.0000001f;
 
                 this.move(MoverType.PLAYER, new Vec3(0, this.getUpVector(10).y + QDown, 0));
-            } else if (KeyBoardAccess.Z()) {
+            } else if (PlayerInput.down) {
 
                 ZDown += 0.0000001f;
                 this.move(MoverType.PLAYER, new Vec3(0, -(this.getUpVector(10).y + ZDown), 0));
 
             }
-            if (!KeyBoardAccess.Z()) {
+            if (!PlayerInput.down) {
                 ZDown = 0;
             }
-            if (!KeyBoardAccess.Q()) {
+            if (!PlayerInput.up) {
                 QDown = 0;
             }
 
 
             // rotateTowards(this.rider.cameraYaw,this.rider.rotationPitch);
-            if (KeyBoardAccess.w()) {
+            if (PlayerInput.hasForwardImpulse()) {
                 WDown += 0.00001f;
-                if (this.getRidingEntity() != null) {
-                    if (Vel < 5 && !this.getRidingEntity().isSprinting()) {
+                if (this.getFirstPassenger() != null) {
+                    if (Vel < 5 && !this.getFirstPassenger().isSprinting()) {
                         Vel += Math.pow(0.0001f, WDown);
 
-                    } else if (Vel < 7 && this.getRidingEntity().isSprinting()) {
+                    } else if (Vel < 7 && this.getFirstPassenger().isSprinting()) {
                         Vel += Math.pow(0.001f, WDown);
                     } else if (Vel >= 5) {
                         Vel = 5;
                     }
                 }
 
-                this.move(MoverType.PLAYER, new Vec3d(this.getForward().x, this.getForward().y, this.getForward().z + Vel));
-            } else if (Vel != 0 && (!KeyBoardAccess.w() || !KeyBoardAccess.S())) {
+                this.move(MoverType.PLAYER, new Vec3(this.getForward().x, this.getForward().y, this.getForward().z + Vel));
+            } else if (Vel != 0 && (!PlayerInput.hasForwardImpulse() || PlayerInput.forwardImpulse == 0)) {
                 if (Vel > 0) {
                     Vel -= 0.0001f;
                 } else if (Vel < 0) {
                     Vel += 0.0001f;
                 }
                 WDown = 0;
-                this.move(MoverType.PLAYER, new Vec3d(this.getForward().x, this.getForward().y, this.getForward().z + Vel));
+                this.move(MoverType.PLAYER, new Vec3(this.getForward().x, this.getForward().y, this.getForward().z + Vel));
             }
-            if (KeyBoardAccess.S()) {
+            if (PlayerInput.down) {
                 if (Vel > -3) {
                     Vel -= Math.pow(0.0001f, WDown);
                 }
@@ -134,7 +136,7 @@ public class HoverboardEntity extends Entity  {
             }
 
 
-        } else if (!this.isBeingRidden()) {
+        } else if (!this.hasPassenger(Entity::isAlive)) {
             Vel = 0;
             /*
             if(Vel != 0) {

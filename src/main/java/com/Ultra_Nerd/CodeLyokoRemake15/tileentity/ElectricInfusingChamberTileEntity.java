@@ -5,18 +5,19 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.ElectricFluoride
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerElectricInfusing;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
+import net.minecraft.core.Direction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.TickingBlockEntity;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -26,7 +27,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ElectricInfusingChamberTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class ElectricInfusingChamberTileEntity extends BlockEntity implements TickingBlockEntity, INamedContainerProvider {
     public ItemStackHandler handler = new ItemStackHandler(3);
     private final EG internal = new EG(90000);
     private String customName;
@@ -40,7 +41,7 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
         this(ModTileEntities.ELECTRIC_INFUSING_CHAMBER_TILE_ENTITY.get());
     }
 
-    public ElectricInfusingChamberTileEntity(TileEntityType<?> tileEntityTypeIn) {
+    public ElectricInfusingChamberTileEntity(BlockEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
 
@@ -64,7 +65,7 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
 
     @Override
     @Nonnull
-    public ITextComponent getDisplayName() {
+    public TextComponent getDisplayName() {
         return new TranslationTextComponent("container.electric_flouride_infuser");
     }
 
@@ -78,7 +79,7 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
     }
 
     @Override
-    public void read(@Nonnull CompoundNBT compound) {
+    public void read(@Nonnull CompoundTag compound) {
         super.read(compound);
         this.handler.deserializeNBT(compound.getCompound("Inventory"));
         this.cookTime = compound.getInt("CookTime");
@@ -87,9 +88,11 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
         this.ENER = compound.getInt("GuiEnergy");
     }
 
+
+
     @Nonnull
     @Override
-    public CompoundNBT write(@Nonnull CompoundNBT compound) {
+    public CompoundTag write(@Nonnull CompoundTag compound) {
         super.write(compound);
 
         compound.putInt("CookTime", (short) this.cookTime);
@@ -102,7 +105,7 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
 
     @Override
     public void tick() {
-        if (world.isBlockPowered(pos)) ENER += 100;
+        if (level.isPowered(worldPosition)) ENER += 100;
         ItemStack[] Inputs = new ItemStack[]{handler.getStackInSlot(0), handler.getStackInSlot(1)};
         if (ENER >= 80) {
             if (cookTime > 0) {
@@ -151,10 +154,10 @@ public class ElectricInfusingChamberTileEntity extends TileEntity implements ITi
     }
 
 
-    public boolean isUsableByPlayer(PlayerEntity player) {
-        assert this.world != null;
-        return this.world.getTileEntity(this.pos) == this &&
-                player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+    public boolean isUsableByPlayer(Player player) {
+        assert this.level != null;
+        return this.level.getBlockEntity(this.worldPosition) == this &&
+                player.distanceToSqr((double) this.worldPosition.getX() + 0.5D, (double) this.worldPosition.getY() + 0.5D, (double) this.worldPosition.getZ() + 0.5D) <= 64.0D;
     }
 
     public int getField(int id) {

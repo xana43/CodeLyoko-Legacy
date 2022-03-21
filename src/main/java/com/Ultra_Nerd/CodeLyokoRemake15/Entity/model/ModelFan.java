@@ -4,34 +4,28 @@
 // Blockbench plugin created by Gecko
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityFan;
-import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib.animation.model.AnimatedEntityModel;
-import software.bernie.geckolib.animation.render.AnimatedModelRenderer;
+import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class ModelFan extends AnimatedEntityModel<EntityFan> {
+public class ModelFan extends AnimatedGeoModel<EntityFan> {
 
-    private final AnimatedModelRenderer fanbody;
 
-    public ModelFan() {
-        textureWidth = 32;
-        textureHeight = 32;
-        fanbody = new AnimatedModelRenderer(this);
-        fanbody.setRotationPoint(0.0F, 23.5F, 0.0F);
-        fanbody.setTextureOffset(0, 0).addBox(-3.0F, -0.5F, -3.0F, 6.0F, 1.0F, 6.0F, 0.0F, false);
-        fanbody.setTextureOffset(0, 0).addBox(-2.0F, -0.5F, 3.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
-        fanbody.setTextureOffset(6, 6).addBox(-2.0F, -0.5F, -4.0F, 4.0F, 1.0F, 1.0F, 0.0F, false);
-        fanbody.setTextureOffset(3, 0).addBox(3.0F, -0.5F, -2.0F, 1.0F, 1.0F, 4.0F, 0.0F, false);
-        fanbody.setTextureOffset(3, 0).addBox(-4.0F, -0.5F, -2.0F, 1.0F, 1.0F, 4.0F, 0.0F, false);
-        fanbody.setModelRendererName("fanbody");
-        this.registerModelRenderer(fanbody);
-
-        this.rootBones.add(fanbody);
-    }
 
 
     @Override
-    public ResourceLocation getAnimationFileLocation() {
-        return new ResourceLocation("cm", "animations/entities/fan.json");
+    public ResourceLocation getModelLocation(EntityFan object) {
+        return null;
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(EntityFan object) {
+        return null;
+    }
+
+    @Override
+    public ResourceLocation getAnimationFileLocation(EntityFan animatable) {
+        return new ResourceLocation(Base.MOD_ID, "animations/entities/fan.json");
     }
 }

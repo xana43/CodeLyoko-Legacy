@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15;
 
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.ModConfiguration;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LiquidHelium;
@@ -27,6 +28,7 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
@@ -48,6 +50,9 @@ import net.minecraftforge.registries.RegistryObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import software.bernie.example.registry.EntityRegistry;
+import software.bernie.geckolib3.GeckoLib;
+
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -95,9 +100,14 @@ public class Base {
     public static boolean XANA = false;
     public static Base instance;
     public static int random = 1000;
-
+    @SubscribeEvent
+    private static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event)
+    {
+        event.registerEntityRenderer(ModEntities.BLOK.get(), RendBlok::new);
+    }
     public Base() {
         final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
+        GeckoLib.initialize();
         ModBus.addListener(this::commonSetup);
         ModBus.addListener(this::clientSetup);
         ModParticles.PARTICLES.register(ModBus);

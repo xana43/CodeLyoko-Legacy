@@ -10,9 +10,9 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.entity.player.Inventory;
 
 import javax.annotation.Nullable;
@@ -21,7 +21,7 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
 
     private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/computercontrolpanelui.png");
     private static final ResourceLocation BUTTONTEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/buttonatlas.png");
-    private TextFieldWidget text;
+    private Widget text;
     private Widget button;
     private boolean CompActive;
 
@@ -29,7 +29,7 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
     int x, y;
 
 
-    public ComputerControlPanelUI(ComputerControlPanelContainer screenContainer, Inventory inv, ITextComponent titleIn) {
+    public ComputerControlPanelUI(ComputerControlPanelContainer screenContainer, Inventory inv, TextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         this.guiLeft = 0;
         this.guiTop = 0;

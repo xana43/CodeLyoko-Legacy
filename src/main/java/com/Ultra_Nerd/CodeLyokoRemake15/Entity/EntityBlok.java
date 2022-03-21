@@ -1,9 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.entity.Entity;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -17,34 +15,39 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.animation.controller.EntityAnimationController;
-import software.bernie.geckolib.entity.IAnimatedEntity;
-import software.bernie.geckolib.event.AnimationTestEvent;
-import software.bernie.geckolib.manager.EntityAnimationManager;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class EntityBlok extends Skeleton implements IAnimatedEntity {
+public class EntityBlok extends Skeleton implements IAnimatable {
 
 
-    private static final EntityAnimationManager manager = new EntityAnimationManager();
-    private final EntityAnimationController controller = new EntityAnimationController(this, "blokcontroller", 20, this::pred);
-
+    private final AnimationFactory manager = new AnimationFactory(this);
+    private final AnimationController controller = new AnimationController(this, "blokcontroller", 20, this::pred);
+/*
     public EntityBlok(Level world) {
         super(ModEntities.BLOK.get(), world);
-        manager.addAnimationController(controller);
+
+    }*/
+
+
+
+
+    private <E extends EntityBlok> PlayState pred(AnimationEvent<E> event) {
+        return PlayState.STOP;
     }
 
 
-
-
-    private <E extends EntityBlok> boolean pred(AnimationTestEvent<E> event) {
-        return false;
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(controller);
     }
-
-
-
 
     @Override
     protected boolean isSunBurnTick() {
@@ -143,7 +146,7 @@ public class EntityBlok extends Skeleton implements IAnimatedEntity {
 
 
     @Override
-    public EntityAnimationManager getAnimationManager() {
+    public AnimationFactory getFactory() {
         return manager;
     }
 }

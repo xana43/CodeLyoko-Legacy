@@ -1,20 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.structures.Tower;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Dynamic;
+import com.sun.jna.Structure;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeManager;
-import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraft.world.level.biome.BiomeManager;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -78,7 +78,7 @@ public class TowerStructure extends Structure<NoFeatureConfig> {
 
     public static class Start extends StructureStart {
 
-        public Start(Structure<?> structure, int chunkX, int chunkZ, MutableBoundingBox boundingBox, int reference, long seed) {
+        public Start(Structure<?> structure, int chunkX, int chunkZ, BoundingBox boundingBox, int reference, long seed) {
             super(structure, chunkX, chunkZ, boundingBox, reference, seed);
         }
 

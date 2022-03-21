@@ -7,19 +7,19 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.HoverboardEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
 import javax.annotation.Nonnull;
 
 public class ModelHoverboard<T extends HoverboardEntity> extends EntityModel<T> {
-    private final ModelRenderer mainbody;
+    private final EntityRenderer mainbody;
     private final ModelRenderer thruster;
 
     public ModelHoverboard() {
         textureWidth = 32;
         textureHeight = 32;
-
         mainbody = new ModelRenderer(this);
         mainbody.setRotationPoint(0.0315F, 23.5192F, 1.1426F);
         mainbody.setTextureOffset(0, 12).addBox(-2.0315F, -0.5192F, -18.3281F, 4.0F, 1.0F, 12.0F, 0.0F, false);

@@ -4,12 +4,22 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -17,101 +27,81 @@ import javax.annotation.Nullable;
 public class OverbikeEntity extends Entity {
 
 
-    public OverbikeEntity(EntityType<?> entityTypeIn, World worldIn) {
+    public OverbikeEntity(EntityType<? extends Entity> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
 
-        this.doBlockCollisions();
+
         this.canBeCollidedWith();
-        this.canBePushed();
-        this.canPassengerSteer();
-        this.recalculateSize();
-        this.getCollisionBox(this);
-        this.applyEntityCollision(this);
+
+
+
     }
 
     @Override
-    public boolean hasNoGravity() {
-        return false;
-    }
+    protected void defineSynchedData() {
 
-    @Nullable
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox() {
-        return this.getBoundingBox();
     }
 
     @Override
-    protected void doBlockCollisions() {
-        super.doBlockCollisions();
-    }
-
-    @Override
-    public void applyEntityCollision(@Nonnull Entity entityIn) {
-        super.applyEntityCollision(entityIn);
+    protected boolean canRide(Entity p_20339_) {
+        return true;
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        Vec3d vec3d = this.getMotion();
-        double d0 = this.getPosX() + vec3d.x;
-        double d1 = this.getPosY() + vec3d.y;
-        double d2 = this.getPosZ() + vec3d.z;
-        Vec3d motion = this.getMotion();
+        Vec3 vec3d = this.getDeltaMovement();
+        double d0 = this.getX() + vec3d.x;
+        double d1 = this.getY() + vec3d.y;
+        double d2 = this.getZ() + vec3d.z;
+        Vec3 motion = this.getDeltaMovement();
         if (!this.onGround) {
-            this.setMotion(motion.x, motion.y - this.getGravity(), motion.z);
-            this.setPosition(d0, d1, d2);
+            this.setDeltaMovement(motion.x, motion.y - this.getGravity(), motion.z);
+            this.setPos(d0, d1, d2);
         }
+    }
+
+    @Override
+    protected void readAdditionalSaveData(CompoundTag p_20052_) {
+
+    }
+
+    @Override
+    protected void addAdditionalSaveData(CompoundTag p_20139_) {
+
     }
 
     private double getGravity() {
         return 0.05D;
     }
 
+
+
+
     @Override
-    public boolean processInitialInteract(@Nonnull PlayerEntity player, @Nonnull Hand hand) {
-        if (super.processInitialInteract(player, hand)) {
-            return true;
-        }
+    public InteractionResult interact(@Nonnull Player player, @Nonnull InteractionHand hand) {
+        super.interact(player, hand);
         if (player.isSecondaryUseActive()) {
-            return false;
-        } else if (this.isBeingRidden()) {
-            return true;
+            return InteractionResult.FAIL;
+        } else if (this.getFirstPassenger() != null) {
+            return InteractionResult.PASS;
         } else {
-            if (!this.world.isRemote) {
+            if (this.level.isClientSide) {
                 player.startRiding(this);
             }
 
-            return true;
+            return InteractionResult.PASS;
         }
     }
 
 
-    @Override
-    protected boolean canBeRidden(@Nonnull Entity entityIn) {
-        return true;
-    }
 
-    @Override
-    protected void registerData() {
-
-    }
-
-    @Override
-    protected void readAdditional(@Nonnull CompoundNBT compound) {
-
-    }
-
-    @Override
-    protected void writeAdditional(@Nonnull CompoundNBT compound) {
-
-    }
 
 
     @Nonnull
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

@@ -10,9 +10,9 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainDimension;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoDimension;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -26,16 +26,16 @@ public class PlayerDeathCustom {
 
     @SubscribeEvent
     public static void PlayerDie(final LivingDeathEvent event) {
-        if (!event.getEntity().world.isRemote() && event.getEntity() instanceof PlayerEntity) {
-            PlayerEntity playerEntity = (PlayerEntity) event.getEntity();
+        if (event.getEntity().level.isClientSide && event.getEntity() instanceof Player) {
+            Player playerEntity = (Player) event.getEntity();
             if (playerEntity.world.dimension instanceof VolcanoDimension || playerEntity.world.dimension
                     instanceof Sector5Dimension || playerEntity.world.dimension instanceof ForestDimension ||
                     playerEntity.world.dimension instanceof DesertDimension || playerEntity.world.dimension instanceof FrontierDimension
                     || playerEntity.world.dimension instanceof IceDimension
                     || playerEntity.world.dimension instanceof MountainDimension) {
 
-                playerEntity.world.playSound(null,playerEntity.getPosition(),ModSounds.DEVIRTUALIZATION.get(), SoundCategory.PLAYERS,1,1);
-                Minecraft.getInstance().getSoundHandler().stop(SoundEvents.ENTITY_PLAYER_DEATH.getRegistryName(),null);
+                playerEntity.level.playSound(null,playerEntity.blockPosition(),ModSounds.DEVIRTUALIZATION.get(), SoundSource.PLAYERS,1,1);
+                Minecraft.getInstance().getSoundManager().stop(SoundEvents.PLAYER_DEATH.getRegistryName(),null);
             }
         }
 

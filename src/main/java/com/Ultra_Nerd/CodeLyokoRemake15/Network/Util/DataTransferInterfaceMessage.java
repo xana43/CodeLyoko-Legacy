@@ -3,6 +3,8 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Network.Util;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensionTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -23,7 +25,7 @@ public class DataTransferInterfaceMessage {
         this.zCoord = zCoord;
     }
 
-    public static void encode(DataTransferInterfaceMessage msg, PacketBuffer buffer) {
+    public static void encode(DataTransferInterfaceMessage msg, buffer) {
         buffer.writeVarIntArray(new int[]{msg.territory, msg.xCoord, msg.yCoord, msg.zCoord});
     }
 

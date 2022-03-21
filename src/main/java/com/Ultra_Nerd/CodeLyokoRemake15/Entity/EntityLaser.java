@@ -29,7 +29,7 @@ public class EntityLaser extends Arrow {
     }
 
     public EntityLaser(Level world) {
-        super(ModEntities.LASER, world);
+        super(ModEntities.LASER.get(), world);
     }
 
     @Nonnull

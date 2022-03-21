@@ -24,16 +24,22 @@ import software.bernie.geckolib.animation.controller.EntityAnimationController;
 import software.bernie.geckolib.entity.IAnimatedEntity;
 import software.bernie.geckolib.event.AnimationTestEvent;
 import software.bernie.geckolib.manager.EntityAnimationManager;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nonnull;
 
-public class MantaEntity extends Phantom implements IAnimatedEntity, RangedAttackMob {
-    private final EntityAnimationManager manager = new EntityAnimationManager();
-    private final EntityAnimationController controller = new EntityAnimationController(this, "mantamovecontroller", 20, this::animationPred);
+public class MantaEntity extends Phantom implements IAnimatable, RangedAttackMob {
+    private final AnimationFactory manager = new AnimationFactory(this);
+    private final AnimationController controller = new AnimationController(this, "mantamovecontroller", 20, this::animationPred);
 
     public MantaEntity(EntityType<? extends Phantom> type, Level worldIn) {
         super(type, worldIn);
-        manager.addAnimationController(controller);
+
     }
 
     @Override
@@ -78,13 +84,17 @@ public class MantaEntity extends Phantom implements IAnimatedEntity, RangedAttac
     }
 
     @Override
-    public EntityAnimationManager getAnimationManager() {
+    public AnimationFactory getFactory() {
         return manager;
     }
 
+    @Override
+    public void registerControllers(AnimationData data) {
+    data.addAnimationController(controller);
+    }
 
-    private <E extends MantaEntity> boolean animationPred(AnimationTestEvent<E> event) {
-        return false;
+    private <E extends MantaEntity> PlayState animationPred(AnimationEvent<E> event) {
+        return PlayState.STOP;
     }
 
 }

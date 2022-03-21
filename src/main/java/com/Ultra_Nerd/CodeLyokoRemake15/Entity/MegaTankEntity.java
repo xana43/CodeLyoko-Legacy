@@ -33,26 +33,32 @@ import software.bernie.geckolib.animation.controller.EntityAnimationController;
 import software.bernie.geckolib.entity.IAnimatedEntity;
 import software.bernie.geckolib.event.AnimationTestEvent;
 import software.bernie.geckolib.manager.EntityAnimationManager;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class MegaTankEntity extends Skeleton implements IAnimatedEntity {
+public class MegaTankEntity extends Skeleton implements IAnimatable /*implements IAnimatedEntity*/ {
 
-    private final EntityAnimationManager TankManager = new EntityAnimationManager();
-    private final EntityAnimationController Tankcontroller = new EntityAnimationController(this, "movecontroller", 20, this::animationPred);
+   private final AnimationFactory TankManager = new AnimationFactory(this);
+    private final AnimationController Tankcontroller = new AnimationController(this, "movecontroller", 20, this::animationPred);
 
     public MegaTankEntity(EntityType<? extends Skeleton> type, Level world) {
         super(type, world);
-        TankManager.addAnimationController(Tankcontroller);
 
     }
-
+/*
     public MegaTankEntity(Level world) {
         super(ModEntities.MEGATANK.get(), world);
 
 
-    }
+    }*/
 
 
 
@@ -86,7 +92,7 @@ public class MegaTankEntity extends Skeleton implements IAnimatedEntity {
 
 
 
-
+/*
     @Override
     protected void registerAttributes() {
         // TODO Auto-generated method stub
@@ -97,7 +103,7 @@ public class MegaTankEntity extends Skeleton implements IAnimatedEntity {
         this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10D);
         this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(20D);
         this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
-    }
+    }*/
 
     @Override
     public boolean isSprinting() {
@@ -145,26 +151,33 @@ public class MegaTankEntity extends Skeleton implements IAnimatedEntity {
 
     }
 
-    private <E extends MegaTankEntity> boolean animationPred(AnimationTestEvent<E> event) {
+    @Override
+    public void registerControllers(AnimationData data) {
+    data.addAnimationController(Tankcontroller);
+    }
 
-        if ((event.isWalking() || event.getEntity().isSwimming()) && !event.getEntity().isAggressive()) {
+
+
+    private <E extends MegaTankEntity> PlayState animationPred(AnimationEvent<E> event) {
+
+        if ((event.isMoving() || event.getAnimatable().isSwimming()) && !event.getAnimatable().isAggressive()) {
             Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.move", true));
 
-            return true;
-        } else if (event.getEntity().isAggressive()) {
+            return PlayState.CONTINUE;
+        } else if (event.getAnimatable().isAggressive()) {
             Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.open", true));
 
-            return true;
+            return PlayState.CONTINUE;
         } else {
             Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.idle", true));
-            return true;
+            return PlayState.CONTINUE;
         }
 
 
     }
 
     @Override
-    public EntityAnimationManager getAnimationManager() {
+    public AnimationFactory getFactory() {
         return TankManager;
     }
 
