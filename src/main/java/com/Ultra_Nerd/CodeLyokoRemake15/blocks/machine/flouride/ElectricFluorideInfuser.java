@@ -2,8 +2,8 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.entity.LivingEntity;
@@ -15,7 +15,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.npc.InventoryCarrier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -23,10 +26,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.network.NetworkHooks;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -35,13 +39,11 @@ public class ElectricFluorideInfuser extends BaseEntityBlock {
     public static DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public ElectricFluorideInfuser() {
-        super(Block.Properties.create(Material.IRON)
+        super(Block.Properties.of(Material.METAL)
 
-                .hardnessAndResistance(6, 10)
+                .strength(6, 10)
                 .sound(SoundType.METAL)
-                .lightValue(1)
-                .harvestLevel(1)
-                .harvestTool(ToolType.PICKAXE)
+
         );
 
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(INFUSING, false));
@@ -138,7 +140,7 @@ public class ElectricFluorideInfuser extends BaseEntityBlock {
             TileEntity te = worldIn.getTileEntity(pos);
             if (te instanceof ElectricInfusingChamberTileEntity) {
                 assert te != null;
-                InventoryHelper.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(0)));
+                Inventory.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(0)));
                 InventoryHelper.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(1)));
                 InventoryHelper.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(2)));
                 //InventoryHelper.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(3)));

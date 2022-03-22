@@ -171,8 +171,8 @@ public class ModBiome {
     }
 
     private static void initBiome(RegistryObject<Biome> biome, Type... types) {
-        //BiomeDictionary.addTypes(biome.get(), types);
-        BiomeManager.addBiome();
+        BiomeDictionary.addTypes(biome.get(), types);
+
     }
 
 

@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
-public class ComputerCoreTileEntity extends TileEntity {
+public class ComputerCoreTileEntity extends InventoryBE {
     public ComputerCoreTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }

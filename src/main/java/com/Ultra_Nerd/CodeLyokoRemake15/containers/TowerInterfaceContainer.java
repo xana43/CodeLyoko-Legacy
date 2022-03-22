@@ -4,38 +4,35 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.core.Position;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.server.WorldStem;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.world.Container;
-import net.minecraft.world.WorldlyContainerHolder;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.storage.WorldData;
+import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Objects;
 
-public class TowerInterfaceContainer extends AbstractContainerMenu {
+public class TowerInterfaceContainer extends AbstractContainerScreen {
     public final TowerInterfaceTileEntity TowerEntity;
+    public TowerInterfaceContainer(int id, Inventory playerInv)
+    {
 
-
+        this(id,playerInv,new ItemStackHandler(4), BlockPos.ZERO,new SimpleContainerData(4));
+    }
     public TowerInterfaceContainer(final int windowid, final Inventory PInventory, final TowerInterfaceTileEntity TowerEntity) {
         super(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), windowid);
         this.TowerEntity = TowerEntity;
 
     }
-
     public TowerInterfaceContainer(final int windowid, final Inventory inven, final FriendlyByteBuf data, TowerInterfaceTileEntity towerEntity) {
         this(windowid, inven, getTowerEntity(inven, data));
     }
+
+
 
     private static TowerInterfaceTileEntity getTowerEntity(final Inventory inventory, final FriendlyByteBuf data) {
         Objects.requireNonNull(inventory, "player inventory can't be null");
@@ -52,6 +49,11 @@ public class TowerInterfaceContainer extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player p_38874_) {
         return false;
+    }
+
+    @Override
+    protected void renderBg(PoseStack p_97787_, float p_97788_, int p_97789_, int p_97790_) {
+
     }
 }
 

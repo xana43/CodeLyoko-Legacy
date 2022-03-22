@@ -17,10 +17,10 @@ public class ModContainerTypes {
             .register("container_infusing", () -> new MenuType<>(ContainerInfusing::new));
     public static final RegistryObject<MenuType<TowerInterfaceContainer>> TOWER_INTERFACE_CONTAINER = CONTAINER_TYPES
             .register("tower_interface_container", () -> new MenuType<>(TowerInterfaceContainer::new));
-    public static final RegistryObject<ContainerType<ContainerElectricInfusing>> CONTAINER_ELECTRIC_INFUSING = CONTAINER_TYPES
-            .register("container_electric_infusing", () -> IForgeContainerType.create(ContainerElectricInfusing::new));
+    public static final RegistryObject<MenuType<ContainerElectricInfusing>> CONTAINER_ELECTRIC_INFUSING = CONTAINER_TYPES
+            .register("container_electric_infusing", () -> new MenuType<>(ContainerElectricInfusing::new));
     public static final RegistryObject<ContainerType<HologramContainer>> HOLOGRAM_CONTAINER = CONTAINER_TYPES
-            .register("hologram_container", () -> IForgeContainerType.create(HologramContainer::new));
+            .register("hologram_container", () -> new MenuType<>(HologramContainer::new));
     //public static final RegistryObject<ContainerType<ReactorContainer>> COMPUTER_REACTOR_CONTAINER = CONTAINER_TYPES
     //        .register("computer_reactor_container",() -> IForgeContainerType.create(ReactorContainer::new));
     public static final RegistryObject<ContainerType<QuantumChipletContainer>> QUANTUM_CHIPLET_CONTAINER = CONTAINER_TYPES.register(

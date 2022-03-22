@@ -7,14 +7,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
-public class ComputerInterfaceTE extends BlockEntity implements TickingBlockEntity {
+public class ComputerInterfaceTE extends BlockEntity implements BlockEntityTicker<ComputerInterfaceTE> {
     public ComputerInterfaceTE(BlockEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
@@ -25,24 +27,6 @@ public class ComputerInterfaceTE extends BlockEntity implements TickingBlockEnti
         this(ModTileEntities.COMPUTER_INTERFACE_TILE_ENTITY.get());
     }
 
-    @Override
-    public void tick() {
-        if(CheckStructure() && !once)
-        {
-            Base.Log.info("computer is built");
-            once = true;
-        }
-        else if(!CheckStructure())
-        {
-
-            once = false;
-        }
-    }
-
-    @Override
-    public BlockPos getPos() {
-        return null;
-    }
 
     private boolean CheckStructure()
     {
@@ -110,5 +94,19 @@ public class ComputerInterfaceTE extends BlockEntity implements TickingBlockEnti
     @Override
     public AABB getRenderBoundingBox() {
         return super.getRenderBoundingBox();
+    }
+
+    @Override
+    public void tick(Level p_155253_, BlockPos p_155254_, BlockState p_155255_, ComputerInterfaceTE p_155256_) {
+        if(CheckStructure() && !once)
+        {
+            Base.Log.info("computer is built");
+            once = true;
+        }
+        else if(!CheckStructure())
+        {
+
+            once = false;
+        }
     }
 }

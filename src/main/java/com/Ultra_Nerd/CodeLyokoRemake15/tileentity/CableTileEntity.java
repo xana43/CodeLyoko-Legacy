@@ -1,21 +1,27 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
+import net.minecraft.core.BlockPos;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CableTileEntity extends TileEntity implements ITickableTileEntity {
+public class CableTileEntity extends BlockEntity implements BlockEntityTicker<CableTileEntity> {
 
-    public static HashMap<CableTileEntity, ArrayList<TileEntity>> CONNECTIONS = new HashMap<>();
+    public static HashMap<CableTileEntity, ArrayList<BlockEntity>> CONNECTIONS = new HashMap<>();
 
     private boolean connectedToScanner;
     private boolean connectedToComp;
 
-    public CableTileEntity(TileEntityType<?> tileEntityTypeIn) {
+    public CableTileEntity(BlockEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
 
@@ -23,14 +29,16 @@ public class CableTileEntity extends TileEntity implements ITickableTileEntity {
         this(ModTileEntities.CABLE_TILE_ENTITY.get());
     }
 
+
+
     @Override
-    public void remove() {
-        super.remove();
-        ArrayList<TileEntity> toDisconnect = CableTileEntity.CONNECTIONS.get(this);
+    public boolean isRemoved() {
+        super.setRemoved();
+        ArrayList<BlockEntity> toDisconnect = CableTileEntity.CONNECTIONS.get(this);
         this.disconnectToComp();
         this.disconnectToScanner();
         CableTileEntity.CONNECTIONS.remove(this);
-        for (TileEntity te : toDisconnect) {
+        for (BlockEntity te : toDisconnect) {
             if(te instanceof CableTileEntity) {
                 CableTileEntity.CONNECTIONS.get(te).remove(this);
             }
@@ -51,10 +59,8 @@ public class CableTileEntity extends TileEntity implements ITickableTileEntity {
     }
 
 
-
     @Override
-    public void tick() {
+    public void tick(Level p_155253_, BlockPos p_155254_, BlockState p_155255_, CableTileEntity p_155256_) {
 
     }
-
 }

@@ -18,7 +18,9 @@ public class UraniumReactor extends BaseEntityBlock {
         super(Block.Properties.of(Material.METAL)
 
                 .strength(6, 10)
-                .sound(SoundType.METAL)
+                .sound(SoundType.METAL));
+
+
 
 
         // TODO Auto-generated constructor stub

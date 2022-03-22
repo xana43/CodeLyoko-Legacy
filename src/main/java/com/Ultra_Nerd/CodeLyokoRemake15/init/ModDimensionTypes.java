@@ -12,4 +12,5 @@ public class ModDimensionTypes {
     public static final ResourceLocation DimensionTypeDesert = new ResourceLocation(Base.MOD_ID, "desert");
     public static final ResourceLocation DimensionTypeFrontier = new ResourceLocation(Base.MOD_ID, "frontier");
     public static final ResourceLocation DimensionTypeVolcano = new ResourceLocation(Base.MOD_ID, "volcano");
+
 }

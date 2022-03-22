@@ -1,14 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.math.shapes.IBooleanFunction;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -69,27 +67,19 @@ public class ProjectorFocusblock extends Block {
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(@Nonnull BlockItemUseContext context) {
-        return this.getDefaultState().with(VALIDFOCUS, false);
+    public BlockState getStateForPlacement(@Nonnull BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(VALIDFOCUS, false);
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder.add(VALIDFOCUS));
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder.add(VALIDFOCUS));
     }
 
 
 
 
-    @Nonnull
-    @Override
-    public BlockRenderType getRenderType(@Nonnull BlockState state) {
-        if (this.getDefaultState().get(VALIDFOCUS)) {
-            return BlockRenderType.INVISIBLE;
-        } else {
-            return BlockRenderType.MODEL;
-        }
-    }
+
 
 
 }
