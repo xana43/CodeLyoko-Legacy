@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
 import javax.annotation.Nonnull;
@@ -17,7 +18,7 @@ public class MathGuardianModel extends EntityModel<GuardianEntity> {
     public MathGuardianModel() {
          = 32;
         textureWidth = 32;
-        guardian = new EntityRenderer<>(this) {
+        guardian = new EntityRendererProvider<>(this) {
 
         };
         guardian.setRotationPoint(7.0F, 24.0F, -3.0F);
@@ -25,7 +26,7 @@ public class MathGuardianModel extends EntityModel<GuardianEntity> {
             for (float z = -32.F; z <= 32.F; z++) {
                 //if (Math.pow(x, 2.F) + Math.pow(y - 32F, 2F) + Math.pow(z, 2.F) - Math.pow(32.F, 2.F) == 0F)
                 float y = (float) Math.sqrt(Math.pow(32, 2) - Math.pow(z, 2) - Math.pow(x, 2));
-                guardian.setTextureOffset(0, 0).addBox(x, y - 32, z, 1, -2 * y, 1, false);
+                guardian.(0, 0).addBox(x, y - 32, z, 1, -2 * y, 1, false);
                 //guardian.setTextureOffset(0, 0).addBox(x,  -y, z, 1, y, 1, false);
 
             }

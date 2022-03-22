@@ -21,10 +21,10 @@ public class ModTileEntities {
 
     public static final RegistryObject<BlockEntityType<ElectricInfusingChamberTileEntity>> ELECTRIC_INFUSING_CHAMBER_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("electric_infusing_tile_entity",
-                    () -> BlockEntityType.Builder.create(ElectricInfusingChamberTileEntity::new,
+                    () -> BlockEntityType.Builder.of(ElectricInfusingChamberTileEntity::new,
                             ModBlocks.ELECTRIC_FLUORIDE_INFUSER.get()).build(null));
     public static final RegistryObject<BlockEntityType<TowerInterfaceTileEntity>> TOWER_INTERFACE_TILE_ENTITY =
-            TILE_ENTITY_TYPES.register("tower_interface_tile_entity", () -> BlockEntityType.Builder.create(TowerInterfaceTileEntity::new,
+            TILE_ENTITY_TYPES.register("tower_interface_tile_entity", () -> BlockEntityType.Builder.of(TowerInterfaceTileEntity::new,
                     ModBlocks.TOWER_INTERFACE.get()).build(null));
     public static final RegistryObject<BlockEntityType<HologramProjectorTileEntity>> HOLOGRAM_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("hologram_tile_entity", () -> BlockEntityType.Builder.create(HologramProjectorTileEntity::new,

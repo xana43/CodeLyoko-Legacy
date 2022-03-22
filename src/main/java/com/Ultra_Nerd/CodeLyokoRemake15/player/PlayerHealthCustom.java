@@ -1,19 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.player;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage.Sector5Dimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Frontier.FrontierDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.MountainSector.MountainDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoDimension;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -29,7 +23,7 @@ public class PlayerHealthCustom {
     private static int Prevfood;
     private static float PrevSaturation;
     private static boolean once = false;
-
+    private static final Player player = Minecraft.getInstance().player;
     public PlayerHealthCustom() {
         Prevfood = 20;
         PrevSaturation = 20;
@@ -55,12 +49,7 @@ public class PlayerHealthCustom {
     @SubscribeEvent
     public static void removehunger(final PlayerEvent event) {
         if (event.getPlayer() != null) {
-            if (event.getPlayer().level.dimension instanceof ForestDimension
-                    || event.getPlayer().world.dimension instanceof VolcanoDimension || event.getPlayer().world.dimension instanceof Sector5Dimension
-                    || event.getPlayer().world.dimension instanceof MountainDimension
-                    || event.getPlayer().world.dimension instanceof IceDimension || event.getPlayer().world.dimension instanceof DesertDimension
-                    || event.getPlayer().world.dimension instanceof OceanDimension
-                    || event.getPlayer().world.dimension instanceof FrontierDimension) {
+            if (event.getPlayer().level.dimension() != Level.END && event.getPlayer().level.dimension() != Level.NETHER && event.getPlayer().level.dimension() != Level.OVERWORLD) {
                 event.getPlayer().getFoodData().setFoodLevel(20);
                 event.getPlayer().getFoodData().setSaturation(20);
                 once = false;
@@ -74,13 +63,8 @@ public class PlayerHealthCustom {
 
     @SubscribeEvent
     public static void PlayerHealthRender(final RenderGameOverlayEvent renderEvent) {
-        if (renderEvent.getType() == RenderGameOverlayEvent.ElementType.HEALTH && (Minecraft.getInstance().player.world.dimension instanceof ForestDimension
-                || Minecraft.getInstance().player.world.dimension instanceof VolcanoDimension || Minecraft.getInstance().player.world.dimension instanceof Sector5Dimension
-                || Minecraft.getInstance().player.world.dimension instanceof MountainDimension
-                || Minecraft.getInstance().player.world.dimension instanceof IceDimension || Minecraft.getInstance().player.world.dimension instanceof DesertDimension
-                || Minecraft.getInstance().player.world.dimension instanceof OceanDimension
-                || Minecraft.getInstance().player.world.dimension instanceof FrontierDimension)) {
-            int scaleW = renderEvent.getWindow().getScaledWidth();
+        if (renderEvent.getType() == RenderGameOverlayEvent.ElementType.LAYER && DimensionCheck.playerNotInVanillaWorld(player)) {
+            int scaleW = renderEvent.getWindow().getGuiScaledWidth();
             int scaleH = renderEvent.getWindow().getHeight();
             renderEvent.setCanceled(true);
             if(!(Minecraft.getInstance().screen instanceof ContainerScreen)) {
@@ -92,18 +76,10 @@ public class PlayerHealthCustom {
             }
 
         }
-        if (renderEvent.getType() == RenderGameOverlayEvent.ElementType.ALL && (Minecraft.getInstance().player.world.dimension instanceof ForestDimension
-                || Minecraft.getInstance().player.world.dimension instanceof VolcanoDimension || Minecraft.getInstance().player.world.dimension instanceof Sector5Dimension
-                || Minecraft.getInstance().player.world.dimension instanceof MountainDimension
-                || Minecraft.getInstance().player.world.dimension instanceof IceDimension || Minecraft.getInstance().player.world.dimension instanceof DesertDimension
-                || Minecraft.getInstance().player.world.dimension instanceof OceanDimension)) {
+        if (renderEvent.getType() == RenderGameOverlayEvent.ElementType.ALL && DimensionCheck.playerNotInVanillaWorld(player)) {
             renderEvent.setCanceled(true);
         }
-        if (renderEvent.getType() == RenderGameOverlayEvent.ElementType.ALL && (Minecraft.getInstance().player.world.dimension instanceof ForestDimension
-                || Minecraft.getInstance().player.world.dimension instanceof VolcanoDimension || Minecraft.getInstance().player.world.dimension instanceof Sector5Dimension
-                || Minecraft.getInstance().player.world.dimension instanceof MountainDimension
-                || Minecraft.getInstance().player.world.dimension instanceof IceDimension || Minecraft.getInstance().player.world.dimension instanceof DesertDimension
-                || Minecraft.getInstance().player.world.dimension instanceof OceanDimension)) {
+        if (renderEvent.getType() == RenderGameOverlayEvent.ElementType.ALL && DimensionCheck.playerNotInVanillaWorld(player)) {
             renderEvent.setCanceled(true);
         }
 

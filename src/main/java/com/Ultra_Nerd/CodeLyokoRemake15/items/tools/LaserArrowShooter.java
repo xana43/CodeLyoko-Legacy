@@ -17,7 +17,7 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nonnull;
 
-import static com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck.checkDim;
+import static com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck.playerNotInVanillaWorld;
 
 
 public class LaserArrowShooter extends BowItem {
@@ -52,7 +52,7 @@ public class LaserArrowShooter extends BowItem {
         Count = 100;
 
         Vec3 aim = playerIn.getLookAngle();
-        if (item.getDamageValue() < 40 && playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get() && checkDim(playerIn)) {
+        if (item.getDamageValue() < 40 && playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get() && playerNotInVanillaWorld(playerIn)) {
             //worldIn.playSound(null,playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModItems.BIT.get(), SoundCategory.NEUTRAL, 1f, 1f);
 
 

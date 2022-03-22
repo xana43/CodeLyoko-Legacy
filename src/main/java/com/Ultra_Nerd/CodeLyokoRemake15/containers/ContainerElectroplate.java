@@ -7,24 +7,26 @@ import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectroplatingTileEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
-public class ContainerElectroplate extends Container {
+public class ContainerElectroplate extends AbstractContainerMenu {
 
     private final IWorldPosCallable canInteractWithCallable;
     public FunctionalVariableReferenceHolder currentTime;
     private final ElectroplatingTileEntity tileEntity;
 
-    public ContainerElectroplate(final int WindowID, final PlayerInventory plinv, final ElectroplatingTileEntity tile) {
+    public ContainerElectroplate(final int WindowID, final Inventory plinv, final ElectroplatingTileEntity tile) {
         super(ModContainerTypes.ELECTROPLATING_CONTAINER.get(), WindowID);
         this.tileEntity = tile;
         this.canInteractWithCallable = IWorldPosCallable.of(tile.getWorld(), tile.getPos());
@@ -124,5 +126,10 @@ public class ContainerElectroplate extends Container {
             slot.onTake(playerIn, stack1);
         }
         return stack;
+    }
+
+    @Override
+    public boolean stillValid(Player p_38874_) {
+        return false;
     }
 }

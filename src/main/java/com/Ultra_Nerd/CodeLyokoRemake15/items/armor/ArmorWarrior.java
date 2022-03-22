@@ -24,7 +24,7 @@ public class ArmorWarrior extends ArmorItem {
 
     @Override
     public void onArmorTick(ItemStack stack, Level world, Player player) {
-        if (!DimensionCheck.checkDim(player)) {
+        if (!DimensionCheck.playerNotInVanillaWorld(player)) {
             if (player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.WILLIAM_CHESTPLATE.get()) {
                 player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).setCount(0);
                 if (player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {

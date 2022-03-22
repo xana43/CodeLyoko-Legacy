@@ -2,17 +2,17 @@ package com.Ultra_Nerd.CodeLyokoRemake15.items;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.StoryBookGUI;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.WrittenBookItem;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -25,9 +25,10 @@ public class StoryBook extends WrittenBookItem {
 
     @Nonnull
     @Override
-    public ITextComponent getDisplayName(@Nonnull ItemStack stack) {
-        return new StringTextComponent("Entry 1");
+    public Component getName(@Nonnull ItemStack stack) {
+        return new TranslatableComponent("Entry 1");
     }
+
 
 
     @Override
@@ -36,31 +37,49 @@ public class StoryBook extends WrittenBookItem {
     }
 
 
+
+
+
     @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, @Nonnull PlayerEntity playerIn, @Nonnull Hand handIn) {
-        if (!worldIn.isRemote) {
-            Minecraft.getInstance().displayGuiScreen(new StoryBookGUI());
+    public InteractionResultHolder<ItemStack> use(Level worldIn, @Nonnull Player playerIn, @Nonnull InteractionHand handIn) {
+        if (worldIn.isClientSide) {
+            Minecraft.getInstance().setScreen(new StoryBookGUI());
         }
 
 
-        ItemStack stack = playerIn.getHeldItem(handIn);
-        playerIn.openBook(stack, handIn);
-        playerIn.sendMessage(new StringTextComponent("doesn't work properly yet"));
-        return new ActionResult<>(ActionResultType.SUCCESS, playerIn.getHeldItem(handIn));
+        ItemStack stack = playerIn.getItemInHand(handIn);
+        playerIn.openItemGui(stack, handIn);
+        playerIn.sendMessage(new TranslatableComponent("doesn't work properly yet"), playerIn.getUUID());
+        return new InteractionResultHolder<>(InteractionResult.SUCCESS, playerIn.getItemInHand(handIn));
     }
-
-
     @Override
-    public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<ITextComponent> tooltip, @Nonnull ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new StringTextComponent("a mysterious journal you found while traveling to this land"));
+    public void appendHoverText(@Nonnull ItemStack stack, @Nullable Level worldIn, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag flagIn) {
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        tooltip.add(new TranslatableComponent("a mysterious journal you found while traveling to this land"));
     }
 
     @Override
-    public boolean hasEffect(@Nonnull ItemStack stack) {
+    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
         return false;
     }
+
+    @Override
+    public boolean isEnchantable(ItemStack p_41456_) {
+        return false;
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return false;
+    }
+
+    @Override
+    public boolean isFoil(ItemStack p_43476_) {
+        return true;
+    }
+
+
 
 
 }

@@ -1,11 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
-import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -27,41 +24,14 @@ public class BlisterCopper extends Item {
     @Override
     public void appendHoverText(@Nonnull ItemStack stack, @Nullable Level worldIn, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new Component() {
-            @Override
-            public Style getStyle() {
-                return null;
-            }
-
-            @Override
-            public String getContents() {
-                return "this form of copper is usable, but it oxidizes quickly back to cuprous oxide, use electroplating to keep it stable";
-            }
-
-            @Override
-            public List<Component> getSiblings() {
-                return null;
-            }
-
-            @Override
-            public MutableComponent plainCopy() {
-                return null;
-            }
-
-            @Override
-            public MutableComponent copy() {
-                return null;
-            }
-
-            @Override
-            public FormattedCharSequence getVisualOrderText() {
-                return null;
-            }
-        });
+        tooltip.add(new TranslatableComponent("this form of copper is usable, but it oxidizes quickly back to cuprous oxide, use electroplating to keep it stable"));
 
     }
 
-
+    @Override
+    public boolean isFoil(ItemStack p_41453_) {
+        return true;
+    }
 
     @Override
     public boolean isDamageable(ItemStack stack) {
@@ -74,7 +44,7 @@ public class BlisterCopper extends Item {
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
 
         if (worldIn.isClientSide) {
-            Base.Log.debug(I);
+            //Base.Log.debug(I);
             if (I-- == 0) {
                 if (stack.getDamageValue() != 60) {
 

@@ -9,6 +9,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,10 +19,12 @@ import java.util.Objects;
 
 public class TowerInterfaceContainer extends AbstractContainerScreen {
     public final TowerInterfaceTileEntity TowerEntity;
-    public TowerInterfaceContainer(int id, Inventory playerInv)
+    public final ContainerData data;
+    public TowerInterfaceContainer(int id, Inventory playerInv, BlockPos pos, ContainerData data)
     {
 
-        this(id,playerInv,new ItemStackHandler(4), BlockPos.ZERO,new SimpleContainerData(4));
+        super(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(),id);
+        this.
     }
     public TowerInterfaceContainer(final int windowid, final Inventory PInventory, final TowerInterfaceTileEntity TowerEntity) {
         super(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), windowid);
@@ -31,6 +34,7 @@ public class TowerInterfaceContainer extends AbstractContainerScreen {
     public TowerInterfaceContainer(final int windowid, final Inventory inven, final FriendlyByteBuf data, TowerInterfaceTileEntity towerEntity) {
         this(windowid, inven, getTowerEntity(inven, data));
     }
+
 
 
 

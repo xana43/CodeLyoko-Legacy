@@ -27,7 +27,7 @@ public class ArmorFeline extends ArmorItem {
     @Override
     public void onArmorTick(ItemStack stack, Level world, Player player) {
 
-        if (!DimensionCheck.checkDim(player)) {
+        if (!DimensionCheck.playerNotInVanillaWorld(player)) {
             if (player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get()) {
                 player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).setCount(0);
 

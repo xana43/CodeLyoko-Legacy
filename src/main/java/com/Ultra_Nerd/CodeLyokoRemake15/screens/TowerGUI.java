@@ -41,7 +41,6 @@ public class TowerGUI extends Screen {
 
     }
 
-
     @Override
     public boolean isMouseOver(double p_isMouseOver_1_, double p_isMouseOver_3_) {
         return false;
@@ -72,6 +71,7 @@ public class TowerGUI extends Screen {
         super.render(poseStack,mouseX, mouseY, partialTicks);
         this.text.render(poseStack,mouseX, mouseY, partialTicks);
         this.Accepted.render(poseStack, mouseX, mouseY, partialTicks);
+
     }
 
     @SubscribeEvent

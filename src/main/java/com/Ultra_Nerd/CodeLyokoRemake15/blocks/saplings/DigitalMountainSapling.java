@@ -1,40 +1,35 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.saplings;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import net.minecraft.block.trees.Tree;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.ForgeEventFactory;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
-import java.util.function.Supplier;
 
-public class DigitalMountainSapling extends BushBlock {
+public class DigitalMountainSapling extends SaplingBlock  {
 
-    public static final IntegerProperty PROGRESS_MOUNTAIN = BlockStateProperties.STAGE;
-    protected static final VoxelShape shape = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D);
-    private final Supplier<Tree> tree;
 
-    public DigitalMountainSapling(Supplier<Tree> TreeStruct, Properties properties) {
-        super(properties);
-        this.tree = TreeStruct;
+
+    private final AbstractTreeGrower treeGrower;
+    public DigitalMountainSapling(AbstractTreeGrower TreeStruct, Properties properties) {
+        super(TreeStruct,properties);
+        treeGrower = TreeStruct;
     }
 
     @Nonnull
     @Override
-    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
-        return shape;
+    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+        return SHAPE;
     }
 
 
@@ -45,46 +40,34 @@ public class DigitalMountainSapling extends BushBlock {
             return;
         }
         if (rand.nextInt(9) == 0) {
-            this.grow(worldIn, pos, state, rand);
+            this.advanceTree(worldIn, pos, state, rand);
         }
     }
 
     @Override
-    protected boolean isValidGround(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
+    public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
         return state.getBlock() == ModBlocks.DIGITAL_ROCK.get();
     }
 
 
-    public void grow(ServerLevel world, BlockPos pos, BlockState state, Random rand) {
-        if (state.get(PROGRESS_MOUNTAIN) == 0) {
-            world.setBlockState(pos, state.cycle(PROGRESS_MOUNTAIN), 4);
+    @Override
+    public void advanceTree(ServerLevel world, BlockPos pos, BlockState state, Random rand) {
+        if (state.getValue(STAGE) == 0) {
+            world.setBlock(pos, state.cycle(STAGE), 4);
 
         } else {
             if (!ForgeEventFactory.saplingGrowTree(world, rand, pos)) {
                 return;
             }
-            this.tree.get().place(world, world.getChunkProvider().getChunkGenerator(), pos, state, rand);
+            this.treeGrower.growTree(world, world.getChunkSource().getGenerator(), pos, state, rand);
         }
     }
 
 
-    @Override
-    public boolean canGrow(@Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state, boolean isClient) {
-        return true;
-    }
 
-    @Override
-    public boolean canUseBonemeal(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull BlockState state) {
-        return false;
-    }
 
-    @Override
-    public void grow(@Nonnull ServerLevel worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull BlockState state) {
-        this.grow(worldIn, pos, state, rand);
-    }
 
-    @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(PROGRESS_MOUNTAIN);
-    }
+
+
+
 }

@@ -6,25 +6,30 @@ import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectroplatingTileEntity;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.entity.player.Inventory;
 
 public class ElectroplatingScreen extends ContainerScreen<ContainerElectroplate> {
     private static final ResourceLocation TEX = new ResourceLocation(Base.MOD_ID + ":textures/gui/electroplating_screen.png");
-    private PlayerInventory player;
+    private Inventory player;
     private ElectroplatingTileEntity tileEntity;
 
-    public ElectroplatingScreen(final ContainerElectroplate containerElectroplate, final PlayerInventory playerInventory, final ITextComponent title, final ElectroplatingTileEntity tileentity) {
+    public ElectroplatingScreen(final ContainerElectroplate containerElectroplate, final Inventory playerInventory, final Component title, final ElectroplatingTileEntity tileentity) {
         this(containerElectroplate, playerInventory, title);
         this.player = playerInventory;
         this.tileEntity = tileentity;
     }
 
-    public ElectroplatingScreen(final ContainerElectroplate containerElectroplate, final PlayerInventory playerInventory, final ITextComponent title) {
+    public ElectroplatingScreen(final ContainerElectroplate containerElectroplate, final Inventory playerInventory, final Component title) {
         super(containerElectroplate, playerInventory, title);
         this.tileEntity = containerElectroplate.getTileEntity();
         this.player = playerInventory;
     }
+
+
+
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
