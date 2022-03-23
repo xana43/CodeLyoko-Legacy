@@ -1,7 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower;
 
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -14,10 +12,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Material;
 
 import javax.annotation.Nonnull;
 
@@ -27,16 +27,21 @@ public class TowerEnter extends Block {
     public static final DirectionProperty DIRTOWER2 = BlockStateProperties.HORIZONTAL_FACING;
 
     public TowerEnter() {
-        super(Properties.create(Material.MISCELLANEOUS)
+        super(Properties.of(Material.BARRIER)
 
-                .hardnessAndResistance(-1, -1)
+                .strength(-1, -1)
                 .sound(SoundType.GLASS)
-                .lightValue(5)
-                .doesNotBlockMovement()
+
+                .noCollission()
 
 
         );
 
+    }
+
+    @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+        return 5;
     }
 
     @Override
@@ -59,20 +64,20 @@ public class TowerEnter extends Block {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         // TODO Auto-generated method stub
-        return this.getDefaultState().with(DIRTOWER2, context.getPlacementHorizontalFacing().getOpposite());
+        return this.defaultBlockState().setValue(DIRTOWER2, context.getHorizontalDirection().getOpposite());
     }
 
     //mod compatiability
     @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(DIRTOWER2, rot.rotate(state.get(DIRTOWER2)));
+        return state.setValue(DIRTOWER2, rot.rotate(state.getValue(DIRTOWER2)));
     }
 
     @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(DIRTOWER2)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(DIRTOWER2)));
     }
 
     //

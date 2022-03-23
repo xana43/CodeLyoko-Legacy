@@ -1,31 +1,24 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.particles;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModParticles;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.PacketDecoder;
-import net.minecraft.network.PacketListener;
-import net.minecraft.network.protocol.PacketFlow;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ParticleType;
 import net.minecraft.util.Mth;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.profiling.jfr.event.PacketEvent;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -34,7 +27,7 @@ import java.util.Random;
 
 public class ColoredParticle extends Particle implements SpriteSet {
     private double posX, posY, posZ;
-/*
+
     public ColoredParticle(ClientLevel world, double x, double y, double z, double xspeed, double yspeed, double zspeed, ColoredParticleData data) {
         super(world, x, y, z, xspeed, yspeed, zspeed);
         this.xd = xspeed;
@@ -68,10 +61,25 @@ public class ColoredParticle extends Particle implements SpriteSet {
         }
     }
 
+    @Override
+    public void render(VertexConsumer p_107261_, Camera p_107262_, float p_107263_) {
+
+    }
+
     @Nonnull
     @Override
     public ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    }
+
+    @Override
+    public TextureAtlasSprite get(int p_107966_, int p_107967_) {
+        return null;
+    }
+
+    @Override
+    public TextureAtlasSprite get(Random p_107968_) {
+        return null;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -85,8 +93,8 @@ public class ColoredParticle extends Particle implements SpriteSet {
         @Nullable
         @Override
         public Particle createParticle(@Nonnull ColoredParticleData typeIn, @Nonnull ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            ColoredParticle part = new ColoredParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, typeIn, ss);
-            part.set(ss);
+            ColoredParticle part = new ColoredParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, typeIn);
+            //part.set(ss);
             return part;
         }
 
@@ -95,10 +103,10 @@ public class ColoredParticle extends Particle implements SpriteSet {
 
     public static class ColoredParticleData implements ParticleOptions {
         public static final ColoredParticleData TOWER_PARTICLE = new ColoredParticleData(0.125f, 0.25f, 1, 1);
-        public static final ParticleOptions.Deserializer<ColoredParticleData> DESERIALIZE = new ParticleOptions().getType().getDeserializer()<ColoredParticleData>() {
+        public static final ParticleOptions.Deserializer<ColoredParticleData> DESERIALIZE = new ParticleOptions.Deserializer<>() {
 
             @Override
-            public ColoredParticleData deserialize(ParticleType<ColoredParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+            public @NotNull ColoredParticleData fromCommand(@NotNull ParticleType<ColoredParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
                 reader.expect(' ');
                 float red = (float) reader.readDouble();
                 reader.expect(' ');
@@ -112,8 +120,8 @@ public class ColoredParticle extends Particle implements SpriteSet {
 
 
             @Override
-            public ColoredParticleData read(@Nonnull ParticleType<ColoredParticleData> particleTypeIn, PacketEvent
-            buffer) {
+            public @NotNull ColoredParticleData fromNetwork(@Nonnull ParticleType<ColoredParticleData> particleTypeIn, FriendlyByteBuf
+                    buffer) {
                 return new ColoredParticleData(buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
             }
         };
@@ -167,5 +175,5 @@ public class ColoredParticle extends Particle implements SpriteSet {
         }
     }
 
- */
+
 }

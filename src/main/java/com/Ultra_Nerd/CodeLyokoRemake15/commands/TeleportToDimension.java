@@ -1,11 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.commands;
 
-import net.minecraft.world.Teleporter;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.server.commands.TeleportCommand;
+import net.minecraft.server.level.ServerLevel;
 
-public class TeleportToDimension extends Teleporter {
-    public TeleportToDimension(ServerWorld worldIn) {
-        super(worldIn);
+public class TeleportToDimension extends TeleportCommand {
+    public TeleportToDimension(ServerLevel worldIn) {
+        super();
     }
 /*
 	private final WorldServer world;

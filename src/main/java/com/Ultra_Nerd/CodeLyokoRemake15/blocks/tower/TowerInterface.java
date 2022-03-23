@@ -2,53 +2,58 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TowerInterface extends Block {
+public class TowerInterface extends BaseEntityBlock {
 
     public static final DirectionProperty DIRINTERFACE = BlockStateProperties.HORIZONTAL_FACING;
 
-    private static final VoxelShape SHAPE_N = Block.makeCuboidShape(1, 1, 9, 15, 15, 9.1);
-    private static final VoxelShape SHAPE_S = Block.makeCuboidShape(1, 1, 9, 15, 15, 9.1);
-    private static final VoxelShape SHAPE_E = Block.makeCuboidShape(9, 1, 1, 9.1, 15, 15);
-    private static final VoxelShape SHAPE_W = Block.makeCuboidShape(9, 1, 1, 9.1, 15, 15);
+    private static final VoxelShape SHAPE_N = Block.box(1, 1, 9, 15, 15, 9.1);
+    private static final VoxelShape SHAPE_S = Block.box(1, 1, 9, 15, 15, 9.1);
+    private static final VoxelShape SHAPE_E = Block.box(9, 1, 1, 9.1, 15, 15);
+    private static final VoxelShape SHAPE_W = Block.box(9, 1, 1, 9.1, 15, 15);
 
 
 
     public TowerInterface() {
-        super(Block.Properties.create(Material.DRAGON_EGG)
+        super(Block.Properties.of(Material.BARRIER)
 
-                .hardnessAndResistance(-1, -1)
-                .sound(SoundType.METAL)
-                .lightValue(5)
+                .strength(-1, -1)
+                .sound(SoundType.AMETHYST_CLUSTER)
+
 
         );
-        this.setDefaultState(this.stateContainer.getBaseState().with(DIRINTERFACE, Direction.NORTH));
+        this.registerDefaultState(this.defaultBlockState().setValue(DIRINTERFACE, Direction.NORTH));
 
+    }
+
+    @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+        return 5;
     }
 
     @Override
@@ -63,8 +68,8 @@ public class TowerInterface extends Block {
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
-        switch (state.get(DIRINTERFACE)) {
+    public VoxelShape getShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+        switch (state.getValue(DIRINTERFACE)) {
             case NORTH:
                 return SHAPE_N;
             case SOUTH:
@@ -79,9 +84,9 @@ public class TowerInterface extends Block {
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         // TODO Auto-generated method stub
-        return this.getDefaultState().with(DIRINTERFACE, context.getPlacementHorizontalFacing().getOpposite());
+        return this.defaultBlockState().setValue(DIRINTERFACE, context.getHorizontalDirection().getOpposite());
     }
 
 
@@ -90,54 +95,40 @@ public class TowerInterface extends Block {
     @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(DIRINTERFACE, rot.rotate(state.get(DIRINTERFACE)));
+        return state.setValue(DIRINTERFACE, rot.rotate(state.getValue(DIRINTERFACE)));
     }
 
     @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(DIRINTERFACE)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(DIRINTERFACE)));
     }
+
+
+
 
     //
-    @Override
-    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
-        // TODO Auto-generated method stub
-        return false;
-    }
 
-    @Override
-    public boolean isTransparent(@Nonnull BlockState state) {
-        // TODO Auto-generated method stub
-        return true;
-    }
-
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-
-    }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get().create();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get().create(pos, state);
     }
 
 
     @Nonnull
     @Override
-    public ActionResultType onBlockActivated(@Nonnull BlockState state, World worldIn, @Nonnull BlockPos pos, @Nonnull PlayerEntity player,
-                                             @Nonnull Hand handIn, @Nonnull BlockRayTraceResult result) {
-        if (!worldIn.isRemote) {
-            TileEntity Tower = worldIn.getTileEntity(pos);
+    public InteractionResult use(@Nonnull BlockState state, Level worldIn, @Nonnull BlockPos pos, @Nonnull Player player,
+                                 @Nonnull InteractionHand handIn, @Nonnull BlockHitResult result) {
+        if (worldIn.isClientSide) {
+            BlockEntity Tower = worldIn.getBlockEntity(pos);
             if (Tower instanceof TowerInterfaceTileEntity) {
-                NetworkHooks.openGui((ServerPlayerEntity) player, (TowerInterfaceTileEntity) Tower, pos);
-                return ActionResultType.SUCCESS;
+                NetworkHooks.openGui((ServerPlayer) player, (TowerInterfaceTileEntity) Tower, pos);
+                return InteractionResult.SUCCESS;
             }
         }
-        return ActionResultType.FAIL;
+        return InteractionResult.FAIL;
     }
 
 

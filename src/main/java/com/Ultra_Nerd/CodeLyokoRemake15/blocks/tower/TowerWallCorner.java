@@ -1,8 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.particles.TowerParticleData;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EntityType;
@@ -10,14 +8,12 @@ import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -30,12 +26,18 @@ public class TowerWallCorner extends Block {
     public static final DirectionProperty DIRTOWERC = BlockStateProperties.HORIZONTAL_FACING;
 
     public TowerWallCorner() {
-        super(Properties.create(Material.MISCELLANEOUS)
-                .hardnessAndResistance(-1, -1)
+        super(Properties.of(Material.BARRIER)
+                .strength(-1, -1)
                 .sound(SoundType.GLASS)
-                .lightValue(11)
+
         );
 
+    }
+
+
+    @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+        return 11;
     }
 
     @Override
@@ -87,7 +89,7 @@ public class TowerWallCorner extends Block {
                 worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                         pos.getX() - 0.25f, d1, d2, 0, -1, 0);
             }
-        } else if (stateIn.get(DIRTOWERC) == Direction.SOUTH) {
+        } else if (stateIn.getValue(DIRTOWERC) == Direction.SOUTH) {
             if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)) == Blocks.AIR.defaultBlockState()) {
                 worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                         d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
@@ -95,7 +97,7 @@ public class TowerWallCorner extends Block {
                 worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                         pos.getX() + 1.25f, d1, d2, 0, -1, 0);
             }
-        } else if (stateIn.get(DIRTOWERC) == Direction.EAST) {
+        } else if (stateIn.getValue(DIRTOWERC) == Direction.EAST) {
             if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ())) == Blocks.AIR.defaultBlockState()) {
                 worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                         pos.getX() - 0.25f, d1, d2, 0, -1, 0);
@@ -103,8 +105,8 @@ public class TowerWallCorner extends Block {
                 worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                         d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
             }
-        } else if (stateIn.get(DIRTOWERC) == Direction.WEST) {
-            if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ())) == Blocks.AIR.getDefaultState()) {
+        } else if (stateIn.getValue(DIRTOWERC) == Direction.WEST) {
+            if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ())) == Blocks.AIR.defaultBlockState()) {
                 worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                         pos.getX() + 1.25f, d1, d2, 0, -1, 0);
             } else {

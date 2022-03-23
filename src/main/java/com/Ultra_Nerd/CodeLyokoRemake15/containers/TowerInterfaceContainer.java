@@ -15,24 +15,32 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 
-public class TowerInterfaceContainer extends AbstractContainerScreen {
-    /*
+public class TowerInterfaceContainer extends AbstractContainerMenu {
+
     public final TowerInterfaceTileEntity TowerEntity;
     public final ContainerData data;
+
+
+    public TowerInterfaceContainer(@Nullable MenuType<?> Typpe, int id) {
+        super(Typpe,id);
+
+    }
+
     public TowerInterfaceContainer(int id, Inventory playerInv, BlockPos pos, ContainerData data)
     {
 
         super(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(),id);
-        this.
+        this.data = data;
     }
     public TowerInterfaceContainer(final int windowid, final Inventory PInventory, final TowerInterfaceTileEntity TowerEntity) {
         super(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), windowid);
         this.TowerEntity = TowerEntity;
 
     }
-    public TowerInterfaceContainer(final int windowid, final Inventory inven, final FriendlyByteBuf data, TowerInterfaceTileEntity towerEntity) {
+    public TowerInterfaceContainer(final int windowid, final Inventory inven, final FriendlyByteBuf data/*, TowerInterfaceTileEntity towerEntity*/) {
         this(windowid, inven, getTowerEntity(inven, data));
     }
 
@@ -56,11 +64,8 @@ public class TowerInterfaceContainer extends AbstractContainerScreen {
         return false;
     }
 
-    @Override
-    protected void renderBg(PoseStack p_97787_, float p_97788_, int p_97789_, int p_97790_) {
 
-    }
 
-     */
+
 }
 

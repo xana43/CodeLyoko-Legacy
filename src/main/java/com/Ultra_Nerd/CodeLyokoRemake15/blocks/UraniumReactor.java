@@ -1,15 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerReactorTileEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.common.ToolType;
 import org.jetbrains.annotations.Nullable;
 
 public class UraniumReactor extends BaseEntityBlock {
@@ -29,7 +27,7 @@ public class UraniumReactor extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ComputerReactorTileEntity(pos,state);
+        return ModTileEntities.REACTOR_BLOCK_ENTITY.get().create(pos,state);
     }
 	/*
 	

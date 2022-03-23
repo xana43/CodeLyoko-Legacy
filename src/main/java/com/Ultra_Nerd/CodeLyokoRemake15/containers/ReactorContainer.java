@@ -1,32 +1,44 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerReactorTileEntity;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ReactorContainer extends Container {
-    public ReactorContainer(@Nullable ContainerType<?> type, int id) {
+public class ReactorContainer extends AbstractContainerMenu implements Container {
+    public ReactorContainer(@Nullable MenuType<?> type, int id) {
         super(type, id);
     }
 
+
+
+
     @Override
-    public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
+    public boolean canInteractWith(@Nonnull Player playerIn) {
         return false;
     }
     //protected ReactorContainer(Properties builder) {
     //	super(builder);
 //	}
 
-	/*
+
 
 	private final ComputerReactorTileEntity tileentity;
 	private int energy, Fission;
 	
-	public ReactorContainer(final int windowID,final PlayerInventory player,final ComputerReactorTileEntity tileentity)
+	public ReactorContainer(final int windowID, final Inventory player, final ComputerReactorTileEntity tileentity)
 	{
 		super(ModContainerTypes.COMPUTER_REACTOR_CONTAINER.get(),windowID);
 		this.tileentity = tileentity;
@@ -110,5 +122,5 @@ public class ReactorContainer extends Container {
 		return stack;
 	}
 
-	 */
+
 }

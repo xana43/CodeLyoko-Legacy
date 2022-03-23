@@ -5,17 +5,16 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusion
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
 import com.google.common.collect.Lists;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.IContainerListener;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.core.Direction;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerListener;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -24,11 +23,11 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Objects;
 
-public class ContainerElectricInfusing extends Container {
+public class ContainerElectricInfusing extends AbstractContainerMenu implements Container {
 
 
     public final ElectricInfusingChamberTileEntity tileentity;
-    private final List<IContainerListener> listeners = Lists.newArrayList();
+    private final List<ContainerListener> listeners = Lists.newArrayList();
     //private ScriptObjectMirror listeners;
     private int cookTime, energy;
 
@@ -39,7 +38,7 @@ public class ContainerElectricInfusing extends Container {
      * @param playerInventory the playerInv of the player using this container
      * @param data            the data sent when this container is used.
      */
-    public ContainerElectricInfusing(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
+    public ContainerElectricInfusing(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
         this(windowId, playerInventory, getTileEntity(playerInventory, data));
     }
 
@@ -50,7 +49,7 @@ public class ContainerElectricInfusing extends Container {
      * @param playerInventory the playerInv of the player using this container
      * @param tileEntity      the tileEntity of this container
      */
-    public ContainerElectricInfusing(final int windowId, final PlayerInventory playerInventory, final ElectricInfusingChamberTileEntity tileEntity) {
+    public ContainerElectricInfusing(final int windowId, final Inventory playerInventory, final ElectricInfusingChamberTileEntity tileEntity) {
         super(ModContainerTypes.CONTAINER_ELECTRIC_INFUSING.get(), windowId);
         this.tileentity = tileEntity;
         IItemHandler handler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).orElse(null);
@@ -77,38 +76,42 @@ public class ContainerElectricInfusing extends Container {
      * @param data        Data from which to get the pos
      * @return the tileEntity linked to the block used
      */
-    private static ElectricInfusingChamberTileEntity getTileEntity(PlayerInventory playerInven, PacketBuffer data) {
+    private static ElectricInfusingChamberTileEntity getTileEntity(Inventory playerInven, FriendlyByteBuf data) {
         Objects.requireNonNull(playerInven, "playerInventory cannot be null!");
         Objects.requireNonNull(data, "data cannot be null!");
-        final TileEntity tileAtPos = playerInven.player.world.getTileEntity(data.readBlockPos());
+        final BlockEntity tileAtPos = playerInven.player.level.getBlockEntity(data.readBlockPos());
         if (tileAtPos instanceof ElectricInfusingChamberTileEntity)
             return (ElectricInfusingChamberTileEntity) tileAtPos;
         throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
     }
 
+
+
     @Override
-    public void addListener(@Nonnull IContainerListener listener) {
+    public void addSlotListener(@Nonnull ContainerListener listener) {
         if (!this.listeners.contains(listener)) {
             this.listeners.add(listener);
-            listener.sendAllContents(this, this.getInventory());
-            this.detectAndSendChanges();
+            //listener.sendAllContents(this, this.getInventory());
+            this.broadcastChanges();
         }
     }
 
+
     @Override
-    public void removeListener(@Nonnull IContainerListener listener) {
+    public void removeSlotListener(@Nonnull ContainerListener listener) {
         this.listeners.remove(listener);
     }
 
-    @Override
-    public void detectAndSendChanges() {
-        super.detectAndSendChanges();
 
-        for (IContainerListener listener : this.listeners) {
+    @Override
+    public void broadcastChanges() {
+        super.broadcastChanges();
+
+        for (ContainerListener listener : this.listeners) {
             if (this.energy != this.tileentity.getField(0))
-                listener.sendWindowProperty(this, 0, this.tileentity.getField(0));
+                listener.dataChanged(this, 0, this.tileentity.getField(0));
             if (this.cookTime != this.tileentity.getField(1))
-                listener.sendWindowProperty(this, 1, this.tileentity.getField(1));
+                listener.dataChanged(this, 1, this.tileentity.getField(1));
 
         }
 
@@ -116,49 +119,90 @@ public class ContainerElectricInfusing extends Container {
         this.energy = this.tileentity.getField(0);
     }
 
+
+
+/*
     @Override
     @OnlyIn(Dist.CLIENT)
     public void updateProgressBar(int id, int data) {
         this.tileentity.setField(id, data);
     }
 
+ */
+
     @Override
-    public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
+    public int getContainerSize() {
+        return 0;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public ItemStack getItem(int p_18941_) {
+        return null;
+    }
+
+    @Override
+    public ItemStack removeItem(int p_18942_, int p_18943_) {
+        return null;
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int p_18951_) {
+        return null;
+    }
+
+    @Override
+    public void setItem(int p_18944_, ItemStack p_18945_) {
+
+    }
+
+    @Override
+    public void setChanged() {
+
+    }
+
+    @Override
+    public boolean stillValid(@Nonnull Player playerIn) {
         return this.tileentity.isUsableByPlayer(playerIn);
     }
 
+
     @Nonnull
     @Override
-    public ItemStack transferStackInSlot(@Nonnull PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(@Nonnull Player playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
+        Slot slot = this.slots.get(index);
 
-        if (slot != null && slot.getHasStack()) {
-            ItemStack stack1 = slot.getStack();
+        if (slot.hasItem()) {
+            ItemStack stack1 = slot.getItem();
             stack = stack1.copy();
 
             if (index == 3) {
-                if (!this.mergeItemStack(stack1, 4, 40, true)) return ItemStack.EMPTY;
-                slot.onSlotChange(stack1, stack);
+                if (!this.moveItemStackTo(stack1, 4, 40, true)) return ItemStack.EMPTY;
+                slot.onQuickCraft(stack1, stack);
             } else if (index != 2 && index != 1 && index != 0) {
-                Slot slot1 = this.inventorySlots.get(index + 1);
+                Slot slot1 = this.slots.get(index + 1);
 
-                if (!FlourideInfusionResult.getInstance().getInfusingResult(stack1, slot1.getStack()).isEmpty()) {
-                    if (!this.mergeItemStack(stack1, 0, 2, false)) {
+                if (!FlourideInfusionResult.getInstance().getInfusingResult(stack1, slot1.getItem()).isEmpty()) {
+                    if (!this.moveItemStackTo(stack1, 0, 2, false)) {
                         return ItemStack.EMPTY;
                     } else if (index >= 4 && index < 31) {
-                        if (!this.mergeItemStack(stack1, 31, 40, false)) return ItemStack.EMPTY;
-                    } else if (index >= 31 && index < 40 && !this.mergeItemStack(stack1, 4, 31, false)) {
+                        if (!this.moveItemStackTo(stack1, 31, 40, false)) return ItemStack.EMPTY;
+                    } else if (index >= 31 && index < 40 && !this.moveItemStackTo(stack1, 4, 31, false)) {
                         return ItemStack.EMPTY;
                     }
                 }
-            } else if (!this.mergeItemStack(stack1, 4, 40, false)) {
+            } else if (!this.moveItemStackTo(stack1, 4, 40, false)) {
                 return ItemStack.EMPTY;
             }
             if (stack1.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.onSlotChanged();
+                slot.setChanged();
 
             }
             if (stack1.getCount() == stack.getCount()) return ItemStack.EMPTY;
@@ -168,4 +212,8 @@ public class ContainerElectricInfusing extends Container {
     }
 
 
+    @Override
+    public void clearContent() {
+
+    }
 }

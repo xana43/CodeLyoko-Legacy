@@ -3,15 +3,16 @@ package com.Ultra_Nerd.CodeLyokoRemake15.particles;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModParticles;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ParticleType;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.network.FriendlyByteBuf;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.Locale;
 
-public class TowerParticleData implements IParticleData {
+public class TowerParticleData implements ParticleOptions {
     private final float red, green, blue, alpha;
     public static final TowerParticleData TOWER_PARTICLE_2 = new TowerParticleData(.125f, .25f, 1.f, 1.f);
 
@@ -22,6 +23,8 @@ public class TowerParticleData implements IParticleData {
         alpha = a;
     }
 
+
+
     @Nonnull
     @Override
     public ParticleType<?> getType() {
@@ -29,7 +32,7 @@ public class TowerParticleData implements IParticleData {
     }
 
     @Override
-    public void write(@Nonnull PacketBuffer buffer) {
+    public void writeToNetwork(@Nonnull FriendlyByteBuf buffer) {
         buffer.writeFloat(red);
         buffer.writeFloat(green);
         buffer.writeFloat(blue);
@@ -38,13 +41,13 @@ public class TowerParticleData implements IParticleData {
 
     @Nonnull
     @Override
-    public String getParameters() {
+    public String writeToString() {
         return String.format(Locale.ROOT, "%s %.2f,%.2f,%.2f,%.2f", Registry.PARTICLE_TYPE.getKey(this.getType()), this.red, this.green, this.blue, this.alpha);
     }
 
-    public static final IParticleData.IDeserializer<TowerParticleData> DESERIALIZE = new IParticleData.IDeserializer<TowerParticleData>() {
+    public static final ParticleOptions.Deserializer<TowerParticleData> DESERIALIZE = new ParticleOptions.Deserializer<TowerParticleData>() {
         @Override
-        public TowerParticleData deserialize(@Nonnull ParticleType<TowerParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+        public @NotNull TowerParticleData fromCommand(@Nonnull ParticleType<TowerParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
             reader.expect(' ');
             float red = (float) reader.readDouble();
             reader.expect(' ');
@@ -57,7 +60,7 @@ public class TowerParticleData implements IParticleData {
         }
 
         @Override
-        public TowerParticleData read(@Nonnull ParticleType<TowerParticleData> particleTypeIn, PacketBuffer buffer) {
+        public @NotNull TowerParticleData fromNetwork(@Nonnull ParticleType<TowerParticleData> particleTypeIn, FriendlyByteBuf buffer) {
             return new TowerParticleData(buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
         }
     };

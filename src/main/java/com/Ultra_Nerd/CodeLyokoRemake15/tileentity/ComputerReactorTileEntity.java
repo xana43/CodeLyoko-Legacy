@@ -1,24 +1,49 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.Nameable;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityDispatcher;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
-public class ComputerReactorTileEntity extends TileEntity {
-    public ComputerReactorTileEntity(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+public class ComputerReactorTileEntity extends BlockEntity implements Nameable, BlockEntityTicker<ComputerReactorTileEntity> {
+    public ComputerReactorTileEntity(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
+        super(tileEntityTypeIn,pos,state);
     }
-	/*
+
+
+
 	public ItemStackHandler handle = new ItemStackHandler(1);
 	private EG store = new EG(1000000000);
 	private String Cust;
 	public int Fission;
 	public int energy = store.getEnergyStored();
-	
-	@Override
-	public void update() {
+
+
+
+
+    @Override
+	public void tick(Level worldIn, BlockPos pos, BlockState state, ComputerReactorTileEntity tileEntity) {
 		if(!handle.getStackInSlot(0).isEmpty() && isItemFuel(handle.getStackInSlot(0)));
 		{
-			if(handle.getStackInSlot(0).getItem() == ModItems.URANIUM_ISOTOPE238 || handle.getStackInSlot(0).getItem() == ModItems.URANIUM_ISOTOPE235)
+			if(handle.getStackInSlot(0).getItem() == ModItems.URANIUM_ISOTOPE238.get() || handle.getStackInSlot(0).getItem() == ModItems.URANIUM_ISOTOPE235.get())
 			{
 				Fission++;
 					if(Fission == 40)
@@ -45,11 +70,11 @@ public class ComputerReactorTileEntity extends TileEntity {
 	}
 
 	private int getFuelValue(ItemStack stackInSlot) {
-			if(stackInSlot.getItem() == ModItems.URANIUM_ISOTOPE235)
+			if(stackInSlot.getItem() == ModItems.URANIUM_ISOTOPE235.get())
 			{
 			return 20000;
 			}
-			else if(stackInSlot.getItem() == ModItems.URANIUM_ISOTOPE238)
+			else if(stackInSlot.getItem() == ModItems.URANIUM_ISOTOPE238.get())
 			{
 			return 10000;
 			}
@@ -62,22 +87,29 @@ public class ComputerReactorTileEntity extends TileEntity {
 		
 	}
 
-	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if(capability == CapabilityEnergy.ENERGY)
+
+
+    @Override
+	public <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, Direction facing) {
+        CapabilityDispatcher disp = getCapabilities();
+
+        if(capability == CapabilityEnergy.ENERGY)
 			{
-			return (T)this.store;
+
+			return disp == null ? LazyOptional.empty() : disp.getCapability(capability, facing);
 			}
 		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			{
-			return (T)this.handle;
+			return disp == null ? LazyOptional.empty() : disp.getCapability(capability, facing);
 			}
 		return super.getCapability(capability, facing);
 	}
-	
-	@Override
+
+
+/*
+    @Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		
+
 		if(capability == CapabilityEnergy.ENERGY) 
 		{
 			return true;
@@ -88,35 +120,45 @@ public class ComputerReactorTileEntity extends TileEntity {
 			}
 		return super.hasCapability(capability, facing);
 	}
-	
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+
+  */
+
+    @Override
+	public void saveAdditional(CompoundTag compound) {
 		// TODO Auto-generated method stub
-		super.writeToNBT(compound);
-		compound.setTag("Inventory", this.handle.serializeNBT());
-		compound.setInteger("Fission", this.Fission);
-		compound.setInteger("GUIEN", this.energy);
-		compound.setString("name", getDisplayName().toString());
+		super.saveAdditional(compound);
+		compound.put("Inventory", this.handle.serializeNBT());
+		compound.putInt("Fission", this.Fission);
+		compound.putInt("GUIEN", this.energy);
+		compound.putString("name", getDisplayName().toString());
 		this.store.WRTNBT(compound);
-		return compound;
+
 	}
 	
 	@Override
-	public void readFromNBT(NBTTagCompound compound) {
+	public void load(CompoundTag compound) {
 		// TODO Auto-generated method stub
-		super.readFromNBT(compound);
-		this.handle.deserializeNBT(compound.getCompoundTag("Inventory"));
-		this.Fission = compound.getInteger("Fission");
-		this.energy = compound.getInteger("GUIEN");
+		super.load(compound);
+		this.handle.deserializeNBT(compound.getCompound("Inventory"));
+		this.Fission = compound.getInt("Fission");
+		this.energy = compound.getInt("GUIEN");
 		this.Cust = compound.getString("name");
 		this.store.RFNBT(compound);
 		
 	}
-	@Override
-	public ITextComponent getDisplayName()
+
+    @Override
+    public Component getName() {
+        return getDisplayName();
+    }
+
+    @Override
+	public Component getDisplayName()
 	{
-		return new TextComponentTranslation("container.Reactor");
+		return new TranslatableComponent("container.Reactor");
 	}
+
+
 	public int getEnergy()
 	{
 		return this.energy;
@@ -151,10 +193,11 @@ public class ComputerReactorTileEntity extends TileEntity {
 			
 		}
 	}
-	public boolean isUsableByPlayer(EntityPlayer player) 
+	public boolean isUsableByPlayer(Player player)
 	{
-		return this.world.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
+        assert this.level != null;
+        return this.level.getBlockEntity(this.getBlockPos()) == this && player.distanceToSqr((double) this.getBlockPos().getX() + 0.5D, (double) this.getBlockPos().getY() + 0.5D, (double) this.getBlockPos().getZ() + 0.5D) <= 64.0D;
 	}
 
-	 */
+
 }

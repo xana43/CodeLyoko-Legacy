@@ -2,50 +2,47 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ComputerControlPanelContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.TickingBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ComputerControlPanelTileEntity extends InventoryBE implements INamedContainerProvider, TickingBlockEntityy {
+public class ComputerControlPanelTileEntity extends InventoryBE implements MenuProvider {
 
     // May be accessed before onLoad
     @OnlyIn(Dist.CLIENT)
 
     protected int PlayersPresent;
 
-    public ComputerControlPanelTileEntity(BlockEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+    public ComputerControlPanelTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int size) {
+        super(type,pos,state,size);
     }
-
+/*
     public ComputerControlPanelTileEntity() {
         this(ModTileEntities.COMPUTER_CONTROL_PANEL_TILE_ENTITY.get());
-    }
+    }*/
+
+
 
 
     @Override
-    public AxisAlignedBB getRenderBoundingBox() {
+    public AABB getRenderBoundingBox() {
         // This, combined with isGlobalRenderer in the TileEntityRenderer makes it so that the
         // render does not disappear if the player can't see the block
         // This is useful for rendering larger models or dynamically sized models
@@ -63,12 +60,14 @@ public class ComputerControlPanelTileEntity extends InventoryBE implements IName
         return super.getTileData();
     }
 
+
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        CompoundNBT nbtTag = new CompoundNBT();
-        //Write your data into the nbtTag
-        return new SUpdateTileEntityPacket(getPos(), -1, nbtTag);
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        CompoundTag nbtTag = new CompoundTag();
+        return super.getUpdatePacket();//new ClientGamePacketListener(getBlockPos(), -1, nbtTag);
     }
+
+
 
 
     /**
@@ -76,8 +75,8 @@ public class ComputerControlPanelTileEntity extends InventoryBE implements IName
      */
     @Nonnull
     @Override
-    public ITextComponent getDisplayName() {
-        return new TranslationTextComponent(ModBlocks.COMPUTER_TOWER_CONTROL_PANEL.get().getTranslationKey());
+    public Component getDisplayName() {
+        return new TranslatableComponent(ModBlocks.COMPUTER_TOWER_CONTROL_PANEL.get().getName().toString());
     }
 
     /**
@@ -90,18 +89,18 @@ public class ComputerControlPanelTileEntity extends InventoryBE implements IName
      */
     @Nullable
     @Override
-    public Container createMenu(int windowIn, @Nonnull PlayerInventory playerInv, @Nonnull PlayerEntity playerEntity) {
+    public AbstractContainerMenu createMenu(int windowIn, @Nonnull Inventory playerInv, @Nonnull Player playerEntity) {
         return new ComputerControlPanelContainer(windowIn, playerInv, this);
     }
 
 
     @Override
-    public boolean receiveClientEvent(int id, int type) {
+    public boolean triggerEvent(int id, int type) {
         if (id == 1) {
             this.PlayersPresent = type;
             return true;
         } else {
-            return super.receiveClientEvent(id, type);
+            return super.triggerEvent(id, type);
         }
     }
 

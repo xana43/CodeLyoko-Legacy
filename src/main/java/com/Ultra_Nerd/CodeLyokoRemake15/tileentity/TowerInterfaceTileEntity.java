@@ -2,57 +2,42 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
-import net.minecraft.client.gui.components.events.ContainerEventHandler;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.Container;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.ContainerListener;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
-public class TowerInterfaceTileEntity extends BlockEntity {
-/*
+public class TowerInterfaceTileEntity extends BlockEntity implements MenuProvider {
+
     // May be accessed before onLoad
     @OnlyIn(Dist.CLIENT)
     protected int PlayersPresent;
 
-    public TowerInterfaceTileEntity(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
+    public TowerInterfaceTileEntity(BlockEntityType<TowerInterfaceTileEntity> tileEntityTypeIn, BlockPos pos, BlockState state) {
         super(tileEntityTypeIn,pos,state);
     }
-
+/*
     public TowerInterfaceTileEntity() {
         this(ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get());
     }
+*/
+
 
 
     @Override
@@ -67,7 +52,7 @@ public class TowerInterfaceTileEntity extends BlockEntity {
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         CompoundTag nbtTag = new CompoundTag();
         //Write your data into the nbtTag
-        return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbtTag);
+        return ClientboundBlockEntityDataPacket.create(Objects.requireNonNull(Objects.requireNonNull(this.getLevel()).getBlockEntity(worldPosition)));
     }
 
 
@@ -84,11 +69,11 @@ public class TowerInterfaceTileEntity extends BlockEntity {
      * @return display name of the interface
      */
 
-/*
+
     @Nonnull
     @Override
-    public TextComponent getDisplayName() {
-        return new TranslationTextComponent(ModBlocks.TOWER_INTERFACE.get().getTranslationKey());
+    public Component getDisplayName() {
+        return new TranslatableComponent(ModBlocks.TOWER_INTERFACE.get().getName().toString());
     }
 
     /**
@@ -99,23 +84,25 @@ public class TowerInterfaceTileEntity extends BlockEntity {
      * @param playerEntity PlayerEntity of interacting player
      * @return Gui container
      */
-    /*
+
     @Nullable
     @Override
-    public Container createMenu(int windowIn, @Nonnull Inventory playerInv, @Nonnull PlayerEntity playerEntity) {
+    public AbstractContainerMenu createMenu(int windowIn, @Nonnull Inventory playerInv, @Nonnull Player playerEntity) {
         return new TowerInterfaceContainer(windowIn, playerInv, this);
     }
 
 
+
+
     @Override
-    public boolean receiveClientEvent(int id, int type) {
+    public boolean triggerEvent(int id, int type) {
         if (id == 1) {
             this.PlayersPresent = type;
             return true;
         } else {
-            return super.receiveClientEvent(id, type);
+            return super.triggerEvent(id, type);
         }
     }
-*/
+
 
 }

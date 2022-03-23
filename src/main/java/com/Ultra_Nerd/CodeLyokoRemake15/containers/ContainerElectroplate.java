@@ -1,27 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectroplatingTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.Slot;
-import net.minecraftforge.items.SlotItemHandler;
-
-import javax.annotation.Nonnull;
-import java.util.Objects;
+import net.minecraft.world.inventory.MenuType;
+import org.jetbrains.annotations.Nullable;
 
 public class ContainerElectroplate extends AbstractContainerMenu {
+    protected ContainerElectroplate(@Nullable MenuType<?> p_38851_, int p_38852_) {
+        super(p_38851_, p_38852_);
+    }
 
+    @Override
+    public boolean stillValid(Player p_38874_) {
+        return false;
+    }
+/*
     private final IWorldPosCallable canInteractWithCallable;
     public FunctionalVariableReferenceHolder currentTime;
     private final ElectroplatingTileEntity tileEntity;
@@ -49,12 +42,12 @@ public class ContainerElectroplate extends AbstractContainerMenu {
         //plater slots
         for (int inputslotsrow = 0; inputslotsrow < 5; inputslotsrow++) {
             for (int inputslotscolum = 0; inputslotscolum < 6; inputslotscolum++) {
-                this.addSlot(new SlotItemHandler(tile.getInventory(), 0/*6 + (inputslotsrow * 6)*/, (inputslotscolum * slotSizePlus2), (inputslotsrow * slotSizePlus2)));
+                this.addSlot(new SlotItemHandler(tile.getInventory(), 0/*6 + (inputslotsrow * 6)*//*, (inputslotscolum * slotSizePlus2), (inputslotsrow * slotSizePlus2)));
             }
         }
         for (int outslotsrow = 0; outslotsrow < 5; outslotsrow++) {
             for (int outslotscolum = 0; outslotscolum < 6; outslotscolum++) {
-                this.addSlot(new SlotItemHandler(tile.getInventory(), 0/*6 + (outslotsrow * 6)*/, 10 + (outslotscolum * slotSizePlus2), 10 + (outslotsrow * slotSizePlus2)));
+                this.addSlot(new SlotItemHandler(tile.getInventory(), 0/*6 + (outslotsrow * 6)*//*, 10 + (outslotscolum * slotSizePlus2), 10 + (outslotsrow * slotSizePlus2)));
             }
         }
         this.trackInt(new FunctionalVariableReferenceHolder(() -> this.tileEntity.currentTime, value -> this.tileEntity.currentTime = value));
@@ -132,4 +125,5 @@ public class ContainerElectroplate extends AbstractContainerMenu {
     public boolean stillValid(Player p_38874_) {
         return false;
     }
+    */
 }
