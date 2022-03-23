@@ -1,27 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
-import net.minecraft.block.material.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -218,15 +212,13 @@ public class Scanner extends BaseEntityBlock {
     private static final VoxelShape blockShape = Block.box(0, 0, 0, 16, 16, 16);
 
     public Scanner() {
-        super(Block.Properties.create(Material.ROCK)
+        super(Block.Properties.of(Material.METAL)
 
-                .hardnessAndResistance(10, 10)
+                .strength(10, 10)
                 .sound(SoundType.METAL)
-                .lightValue(0)
-                .harvestLevel(2)
-                .harvestTool(ToolType.PICKAXE)
+
         );
-        this.setDefaultState(this.getDefaultState().with(Scanner, false).with(directionProperty, Direction.NORTH));
+        this.registerDefaultState(this.defaultBlockState().setValue(Scanner, false).setValue(directionProperty, Direction.NORTH));
     }
 
     @org.jetbrains.annotations.Nullable
@@ -259,29 +251,29 @@ public class Scanner extends BaseEntityBlock {
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(directionProperty, context.getPlacementHorizontalFacing());
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(directionProperty, context.getHorizontalDirection());
     }
 
     //mod compatiability
     @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(directionProperty, rot.rotate(state.get(directionProperty)));
+        return state.setValue(directionProperty, rot.rotate(state.getValue(directionProperty)));
     }
 
 
     @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(directionProperty)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(directionProperty)));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(Scanner).add(directionProperty);
     }
-
+/*
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;
@@ -304,4 +296,6 @@ public class Scanner extends BaseEntityBlock {
     public boolean isTransparent(@Nonnull BlockState state) {
         return false;
     }
+
+ */
 }

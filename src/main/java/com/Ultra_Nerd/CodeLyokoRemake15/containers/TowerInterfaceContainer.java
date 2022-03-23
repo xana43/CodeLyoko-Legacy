@@ -18,6 +18,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import java.util.Objects;
 
 public class TowerInterfaceContainer extends AbstractContainerScreen {
+    /*
     public final TowerInterfaceTileEntity TowerEntity;
     public final ContainerData data;
     public TowerInterfaceContainer(int id, Inventory playerInv, BlockPos pos, ContainerData data)
@@ -59,5 +60,7 @@ public class TowerInterfaceContainer extends AbstractContainerScreen {
     protected void renderBg(PoseStack p_97787_, float p_97788_, int p_97789_, int p_97790_) {
 
     }
+
+     */
 }
 

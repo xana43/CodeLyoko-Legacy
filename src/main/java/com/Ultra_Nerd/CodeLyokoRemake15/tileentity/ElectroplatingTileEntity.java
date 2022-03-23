@@ -4,36 +4,31 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.Recipies.TestRecipe;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.CustomItemHandler;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.electroplate.ElectroplatingMachine;
-import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerElectroplate;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModRecipes;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.ITickable;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -41,69 +36,71 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class ElectroplatingTileEntity extends TileEntity implements ITickable, INamedContainerProvider {
+public class ElectroplatingTileEntity extends BlockEntity implements BlockEntityTicker<ElectroplatingTileEntity>//, INamedContainerProvider
+ {
     private boolean once = false;
     private final int maxSmeltTime = 1000;
     public int currentTime;
     private final CustomItemHandler inventory;
 
-    public ElectroplatingTileEntity(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+    public ElectroplatingTileEntity(BlockEntityType<ElectroplatingTileEntity> tileEntityTypeIn, BlockPos pos, BlockState state) {
+        super(tileEntityTypeIn,pos,state);
         this.inventory = new CustomItemHandler(2);
     }
-
-    public ElectroplatingTileEntity() {
+/*
+    public ElectroplatingTileEntity(BlockPos pos, BlockState state) {
         this(ModTileEntities.ELECTROPLATING_TILE_ENTITY.get());
-    }
+    }*/
 
-    @Nullable
+
+
+
+     @Nullable
     private TestRecipe getRecipe(ItemStack stack) {
         if (stack == null) {
             return null;
         }
-        Set<IRecipe<?>> recipes = findRecipesByType(ModRecipes.TYPE, this.world);
-        for (IRecipe<?> Recipe : recipes) {
+        Set<Recipe<?>> recipes = findRecipesByType(ModRecipes.TYPE, this.level);
+        for (net.minecraft.world.item.crafting.Recipe<?> Recipe : recipes) {
             TestRecipe recipe = (TestRecipe) Recipe;
-            if (recipe.matches(new RecipeWrapper(this.inventory), this.world)) {
+            if (recipe.matches(new RecipeWrapper(this.inventory), this.level)) {
                 return recipe;
             }
         }
         return null;
     }
 
-    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> type, World world) {
+    public static Set<Recipe<?>> findRecipesByType(RecipeType<?> type, Level world) {
         return world != null ? world.getRecipeManager().getRecipes().stream()
                 .filter(recipe -> recipe.getType() == type).collect(Collectors.toSet()) : Collections.emptySet();
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> type) {
-        ClientWorld world = Minecraft.getInstance().world;
+    public static Set<Recipe<?>> findRecipesByType(RecipeType<?> type) {
+        ClientLevel world = Minecraft.getInstance().level;
         return world != null ? world.getRecipeManager().getRecipes().stream()
                 .filter(recipe -> recipe.getType() == type).collect(Collectors.toSet()) : Collections.emptySet();
     }
 
-    public static Set<ItemStack> getInputs(IRecipeType<?> type, World world) {
+    public static Set<ItemStack> getInputs(RecipeType<?> type, Level world) {
         Set<ItemStack> inputs = new HashSet<ItemStack>();
-        Set<IRecipe<?>> recipes = findRecipesByType(type, world);
-        for (IRecipe<?> recipe : recipes) {
+        Set<Recipe<?>> recipes = findRecipesByType(type, world);
+        for (Recipe<?> recipe : recipes) {
             NonNullList<Ingredient> ingredients = recipe.getIngredients();
             ingredients.forEach(ingredient -> {
-                for (ItemStack stack : ingredient.getMatchingStacks()) {
-                    inputs.add(stack);
-                }
+                inputs.addAll(Arrays.asList(ingredient.getItems()));
             });
         }
         return inputs;
     }
 
+
+
     @Override
-    public void tick() {
+    public void tick(Level level, BlockPos pos, BlockState state, ElectroplatingTileEntity BE) {
         boolean dirty = false;
         if (CheckStruct() && !once) {
             activate();
@@ -112,15 +109,15 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
             once = false;
             deactivate();
         }
-        if (this.world != null && !this.world.isRemote) {
-            if (this.world.isBlockPowered(this.pos)) {
+        if (this.level != null && this.level.isClientSide) {
+            if (this.level.hasNeighborSignal(this.worldPosition)) {
                 if (this.getRecipe(this.inventory.getStackInSlot(0)) != null) {
                     if (this.currentTime != this.maxSmeltTime) {
-                        this.world.setBlockState(this.getPos(), this.getBlockState().with(ElectroplatingMachine.ELECTRO_ACTIVE, true));
+                        this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(ElectroplatingMachine.ELECTRO_ACTIVE, true));
                         this.currentTime++;
                         dirty = true;
                     } else {
-                        this.world.setBlockState(this.getPos(), this.getBlockState().with(ElectroplatingMachine.ELECTRO_ACTIVE, false));
+                        this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(ElectroplatingMachine.ELECTRO_ACTIVE, false));
                         this.currentTime = 0;
                         ItemStack output = this.getRecipe(this.inventory.getStackInSlot(0)).getRecipeOutput();
                         this.inventory.insertItem(1, output.copy(), false);
@@ -131,41 +128,44 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
             }
         }
         if (dirty) {
-            this.markDirty();
-            this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+            this.setChanged();
+            this.level.notify();
         }
     }
 
-    @Nonnull
-    @Override
-    public ITextComponent getDisplayName() {
-        return null;
-    }
 
 
+
+/*
     @Nullable
     @Override
     public Container createMenu(final int windowID, @Nonnull final PlayerInventory playerInv, @Nonnull final PlayerEntity playerIn) {
         return new ContainerElectroplate(windowID, playerInv, this);
     }
+*/
 
-    @Override
-    public void read(@Nonnull CompoundNBT compound) {
-        super.read(compound);
-        NonNullList<ItemStack> inv = NonNullList.<ItemStack>withSize(this.inventory.getSlots(), ItemStack.EMPTY);
-        ItemStackHelper.loadAllItems(compound, inv);
+
+     @Override
+    public void load(@Nonnull CompoundTag compound) {
+
+        super.load(compound);
+        NonNullList<ItemStack> inv = NonNullList.withSize(this.inventory.getSlots(), ItemStack.EMPTY);
+        ///(compound, inv);
         this.inventory.setNonNullList(inv);
         this.currentTime = compound.getInt("currentElectroTime");
 
     }
 
+
+
+
     @Nonnull
     @Override
-    public CompoundNBT write(@Nonnull CompoundNBT compound) {
-        super.write(compound);
-        ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
+    public void saveAdditional(@Nonnull CompoundTag compound) {
+        super.saveAdditional(compound);
+        ContainerHelper.saveAllItems(compound, this.inventory.toNonNullList());
         compound.putInt("currentElectroTime", this.currentTime);
-        return compound;
+
     }
 
     public final IItemHandlerModifiable getInventory() {
@@ -178,47 +178,65 @@ public class ElectroplatingTileEntity extends TileEntity implements ITickable, I
         return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(cap, LazyOptional.of(() -> this.inventory));
     }
 
-    @Nullable
+
+     @Override
+     public void handleUpdateTag(CompoundTag tag) {
+         this.load(tag);
+
+     }
+
+     @org.jetbrains.annotations.Nullable
+     @Override
+     public Packet<ClientGamePacketListener> getUpdatePacket() {
+         CompoundTag nbt = new CompoundTag();
+         this.saveAdditional(nbt);
+         return super.getUpdatePacket();
+
+    }
+
+
+     /*
+
+     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        CompoundNBT nbt = new CompoundNBT();
+         CompoundTag nbt = new CompoundTag();
         this.write(nbt);
         return new SUpdateTileEntityPacket(this.pos, 0, nbt);
     }
 
+      */
+
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        this.read(pkt.getNbtCompound());
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        this.load(Objects.requireNonNull(pkt.getTag()));
     }
+
 
     @Nonnull
     @Override
-    public CompoundNBT getUpdateTag() {
-        CompoundNBT nbt = new CompoundNBT();
-        this.write(nbt);
+    public CompoundTag getUpdateTag() {
+        CompoundTag nbt = new CompoundTag();
+        this.handleUpdateTag(nbt);
         return nbt;
     }
 
-    @Override
-    public void handleUpdateTag(CompoundNBT nbt) {
-        this.read(nbt);
-    }
 
     //multiblock stuff
     private boolean CheckStruct() {
 
-        if (this.getBlockState().get(ElectroplatingMachine.ELECTRO_FACING) == Direction.NORTH) {
+        if (this.getBlockState().getValue(ElectroplatingMachine.ELECTRO_FACING) == Direction.NORTH) {
             int[] locationX = {1, 2};
             int[] locationZ = {1, 2, 3};
             for (int I : locationX) {
-                if (world.getBlockState(new BlockPos(this.getPos().getX() + I, this.getPos().getY(), this.getPos().getZ()))
-                        == ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getBlock().getDefaultState()) {
-                    if (world.getBlockState(new BlockPos(this.getPos().getX() - I, this.getPos().getY(), this.getPos().getZ())) ==
-                            ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getDefaultState()) {
-                        if (world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() + I))
-                                == ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getDefaultState()) {
-                            if (world.getBlockState(new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() - I)) ==
-                                    ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().getDefaultState()) {
+                if (level.getBlockState(new BlockPos(this.worldPosition.getX() + I, this.worldPosition.getY(), this.getBlockPos().getZ()))
+                        == ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().defaultBlockState()) {
+                    if (level.getBlockState(new BlockPos(this.getBlockPos().getX() - I, this.getBlockPos().getY(), this.getBlockPos().getZ())) ==
+                            ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().defaultBlockState()) {
+                        if (level.getBlockState(new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY(), this.getBlockPos().getZ() + I))
+                                == ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().defaultBlockState()) {
+                            if (level.getBlockState(new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY(), this.getBlockPos().getZ() - I)) ==
+                                    ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().defaultBlockState()) {
                                 Base.Log.debug("foprmed");
                                 return true;
                             }

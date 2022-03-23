@@ -1,28 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import net.minecraft.core.Registry;
-import net.minecraft.data.worldgen.SurfaceRuleData;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.Music;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.SpawnData;
-import net.minecraft.world.level.biome.*;
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.SurfaceRules;
-import net.minecraft.world.level.levelgen.SurfaceSystem;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-
 public class ModBiome {
 
-
+/*
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, Base.MOD_ID);
 
 
@@ -44,7 +24,7 @@ public class ModBiome {
 
 
 
-/*
+
     public static final RegistryObject<Biome> SECTOR5 = BIOMES.register("sector5", () -> new Biome.BiomeBuilder()
             .biomeCategory(Biome.BiomeCategory.NONE)
             .downfall(0)
@@ -151,7 +131,7 @@ public class ModBiome {
             .depth(200)
     ));
 
-*/
+
 
 
 
@@ -175,5 +155,5 @@ public class ModBiome {
 
     }
 
-
+*/
 }

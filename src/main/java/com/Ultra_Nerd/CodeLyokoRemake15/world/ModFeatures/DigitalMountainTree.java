@@ -24,7 +24,7 @@ import static com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks.DIGITAL_MOUNTAIN_S
 public class DigitalMountainTree extends TreeFeature {
 
 
-
+/*
     public static final ConfiguredFeature<TreeConfiguration,Feature<TreeConfiguration>> DIGITAL_TREE_MOUNATIN_CONFIG = (new TreeConfiguration.TreeConfigurationBuilder()
             (new (ModBlocks.DIGITAL_WOOD_MOUNTAIN.get().defaultBlockState()), new SimpleBlockStateProvider(ModBlocks.DIGITAL_LEAF_MOUNTAIN.get().getDefaultState())
                     , new BlobFoliagePlacer(4, 4))).baseHeight(5)
@@ -39,4 +39,6 @@ public class DigitalMountainTree extends TreeFeature {
     public Codec<ConfiguredFeature<TreeConfiguration, Feature<TreeConfiguration>>> configuredCodec() {
         return TreeFeature.TREE.configuredCodec(DIGITAL_TREE_MOUNATIN_CONFIG);
     }
+    
+ */
 }

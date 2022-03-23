@@ -1,60 +1,57 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tests;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test.DataTransferInterfaceTileEntity;
-import net.minecraft.block.SoundType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public class DataTransferInterface extends Block {
+public class DataTransferInterface extends BaseEntityBlock {
 
     public DataTransferInterface() {
-        super(Block.Properties.create(Material.ROCK)
+        super(Block.Properties.of(Material.METAL)
 
-                .hardnessAndResistance(-1, -1)
-                .sound(SoundType.METAL)
-                .lightValue(5));
+                .strength(-1, -1)
+                .sound(SoundType.METAL));
     }
 
     public DataTransferInterface(Properties properties) {
         super(properties);
     }
 
-    @Override
-    public boolean hasTileEntity(BlockState blockState) {
-        return true;
-    }
 
-    @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return ModTileEntities.DATA_TRANSFER_INTERFACE_TILE_ENTITY.get().create();
-    }
 
     @Nonnull
     @Override
-    public ActionResultType onBlockActivated(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos,
-                                             @Nonnull PlayerEntity player, @Nonnull Hand handIn, @Nonnull BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            TileEntity dataTransfInterface = worldIn.getTileEntity(pos);
+    public InteractionResult use(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos,
+                                 @Nonnull Player player, @Nonnull InteractionHand handIn, @Nonnull BlockHitResult hit) {
+        if (worldIn.isClientSide) {
+            BlockEntity dataTransfInterface = worldIn.getBlockEntity(pos);
             if (dataTransfInterface instanceof DataTransferInterfaceTileEntity) {
-                NetworkHooks.openGui((ServerPlayerEntity) player, (DataTransferInterfaceTileEntity) dataTransfInterface, pos);
-                return ActionResultType.SUCCESS;
+                NetworkHooks.openGui((ServerPlayer) player, (DataTransferInterfaceTileEntity) dataTransfInterface, pos);
+                return InteractionResult.SUCCESS;
             }
         }
 
-        return ActionResultType.FAIL;
+        return InteractionResult.FAIL;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return null; //ModTileEntities.DATA_TRANSFER_INTERFACE_TILE_ENTITY.get().create(pos, state);
     }
 }

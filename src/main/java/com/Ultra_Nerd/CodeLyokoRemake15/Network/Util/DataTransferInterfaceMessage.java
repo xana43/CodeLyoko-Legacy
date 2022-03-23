@@ -1,23 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Network.Util;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensionTypes;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.level.dimension.DimensionType;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.network.NetworkConstants;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.filters.NetworkFilters;
-
-import java.util.Objects;
-import java.util.function.Supplier;
-
 public class DataTransferInterfaceMessage {
     private int territory, xCoord, yCoord, zCoord;
 
@@ -31,7 +13,7 @@ public class DataTransferInterfaceMessage {
         this.yCoord = yCoord;
         this.zCoord = zCoord;
     }
-
+/*
     public static void encode(DataTransferInterfaceMessage msg, buffer) {
 
         buffer.writeVarIntArray(new int[]{msg.territory, msg.xCoord, msg.yCoord, msg.zCoord});
@@ -50,11 +32,11 @@ public class DataTransferInterfaceMessage {
                     switch (msg.territory) {
                         case 0x101010: //CARTHAGE
                             Objects.requireNonNull(ctx.get().getSender()).changeDimension(DimensionType.registerBuiltin(ModDimensionTypes.DimensionTypeCarthage, ModDimensions.SECTOR_5.get(), null, true));
-                            Objects.requireNonNull(ctx.get().getSender()).setPositionAndUpdate(0, 130, 0);
+                            Objects.requireNonNull(ctx.get().getSender()).setPos(0, 130, 0);
                             break;
                         case 0x222222: //DESERT
                             Objects.requireNonNull(ctx.get().getSender()).changeDimension(DimensionManager.registerOrGetDimension(ModDimensionTypes.DimensionTypeDesert, ModDimensions.DESERT_DIMENSION.get(), null, true));
-                            Objects.requireNonNull(ctx.get().getSender()).setPositionAndUpdate(msg.xCoord, msg.yCoord, msg.zCoord);
+                            Objects.requireNonNull(ctx.get().getSender()).setPos(msg.xCoord, msg.yCoord, msg.zCoord);
                             break;
                         case 0x111111: //MOUNTAIN
                             Objects.requireNonNull(ctx.get().getSender()).changeDimension(DimensionManager.registerOrGetDimension(ModDimensionTypes.DimensionTypeMountain, ModDimensions.MOUNTAIN_DIMENSION.get(), null, true));
@@ -73,5 +55,7 @@ public class DataTransferInterfaceMessage {
         );
         ctx.get().setPacketHandled(true);
     }
+
+ */
 
 }

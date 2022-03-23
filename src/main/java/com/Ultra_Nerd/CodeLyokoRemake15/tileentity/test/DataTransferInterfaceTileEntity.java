@@ -1,22 +1,22 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.containers.DataTransferInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import javax.annotation.Nonnull;
 
-public class DataTransferInterfaceTileEntity extends TileEntity implements INamedContainerProvider {
+public class DataTransferInterfaceTileEntity extends BlockEntity implements MenuProvider {
 
-    public DataTransferInterfaceTileEntity(TileEntityType<?> tileEntityTypeIn) {
+    public DataTransferInterfaceTileEntity(BlockEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
 
@@ -26,12 +26,13 @@ public class DataTransferInterfaceTileEntity extends TileEntity implements IName
 
     @Nonnull
     @Override
-    public ITextComponent getDisplayName() {
-        return new TranslationTextComponent(ModBlocks.DATA_TRANSFER_INTERFACE.get().getTranslationKey());
+    public Component getDisplayName() {
+        return new TranslatableComponent(ModBlocks.DATA_TRANSFER_INTERFACE.get().getName().toString());
     }
 
+
     @Override
-    public Container createMenu(int windowIn, @Nonnull PlayerInventory playerInventory, @Nonnull PlayerEntity playerEntity) {
-        return new DataTransferInterfaceContainer(windowIn, playerInventory, this);
+    public AbstractContainerMenu createMenu(int windowIn, @Nonnull Inventory playerInventory, @Nonnull Player playerEntity) {
+        return null; // new DataTransferInterfaceContainer(windowIn, playerInventory, this);
     }
 }

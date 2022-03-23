@@ -2,35 +2,28 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.ItemStack;
+import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.World;
-import net.minecraft.world.entity.npc.InventoryCarrier;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.ToolType;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.network.NetworkHooks;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -46,7 +39,7 @@ public class ElectricFluorideInfuser extends BaseEntityBlock {
 
         );
 
-        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(INFUSING, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(INFUSING, false));
 
         // TODO Auto-generated constructor stub
     }
@@ -55,7 +48,7 @@ public class ElectricFluorideInfuser extends BaseEntityBlock {
     public static final BooleanProperty INFUSING = BooleanProperty.create("infusing");
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
         builder.add(INFUSING);
     }
@@ -110,19 +103,22 @@ public class ElectricFluorideInfuser extends BaseEntityBlock {
 
 
     @Override
-    public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state, LivingEntity placer, @Nonnull ItemStack stack) {
-        worldIn.setBlockState(pos, this.getDefaultState().with(FACING, placer.getHorizontalFacing().getOpposite()), 2);
+    public void setPlacedBy(Level worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state, LivingEntity placer, @Nonnull ItemStack stack) {
+        worldIn.setBlock(pos, this.defaultBlockState().setValue(FACING, placer.getDirection().getOpposite()), 2);
     }
 
-    @Nonnull
+
     @Override
-    public BlockRenderType getRenderType(@Nonnull BlockState state) {
-        return BlockRenderType.MODEL;
+    public RenderShape getRenderShape(BlockState p_49232_) {
+        return RenderShape.MODEL;
     }
+
+
 
     @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
+
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
@@ -133,17 +129,16 @@ public class ElectricFluorideInfuser extends BaseEntityBlock {
     }
 
 
-
     @Override
-    public void onReplaced(BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity te = worldIn.getTileEntity(pos);
+            BlockEntity te = worldIn.getBlockEntity(pos);
             if (te instanceof ElectricInfusingChamberTileEntity) {
                 assert te != null;
-                Inventory.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(0)));
-                InventoryHelper.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(1)));
-                InventoryHelper.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(2)));
-                //InventoryHelper.dropItems(worldIn, pos, NonNullList.from(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(3)));
+                Containers.dropContents(worldIn, pos, NonNullList.of(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(0)));
+                Containers.dropContents(worldIn, pos, NonNullList.of(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(1)));
+                Containers.dropContents(worldIn, pos, NonNullList.of(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(2)));
+                Containers.dropContents(worldIn, pos, NonNullList.of(((ElectricInfusingChamberTileEntity) te).handler.getStackInSlot(3)));
             }
         }
     }

@@ -1,17 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBiome;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModWorldFeatures;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.placement.IPlacementConfig;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraftforge.registries.ForgeRegistries;
-
 public class StructGen {
 
     public static void genStruct() {
+        /*
         for (Biome biome : ForgeRegistries.BIOMES) {
             //towers
             if (biome == ModBiome.DESERT.get() || biome == ModBiome.FOREST.get() || biome == ModBiome.ICE.get() || biome == ModBiome.MOUNTAIN.get() ||
@@ -23,6 +15,8 @@ public class StructGen {
 
 
         }
+
+         */
     }
 
 

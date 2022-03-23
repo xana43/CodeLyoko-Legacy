@@ -8,20 +8,25 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.model.ModelRenderer;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class MathGuardianModel extends EntityModel<GuardianEntity> {
+public class MathGuardianModel extends EntityModel<GuardianEntity> implements EntityRendererProvider {
+    /*
     private final EntityModel guardian;
-
+    private final int textureHeight;
+    private final int textureWidth;
+    private final EntityRenderer thisRenderer;
     public MathGuardianModel() {
-         = 32;
+        textureHeight = 32;
         textureWidth = 32;
-        guardian = new EntityRendererProvider<>(this) {
+        guardian = new EntityRenderer<GuardianEntity>(this.create(new EntityRendererProvider.Context())) {
 
         };
-        guardian.setRotationPoint(7.0F, 24.0F, -3.0F);
+        guardian(7.0F, 24.0F, -3.0F);
         for (float x = -32.F; x <= 32.F; x++) {
             for (float z = -32.F; z <= 32.F; z++) {
                 //if (Math.pow(x, 2.F) + Math.pow(y - 32F, 2F) + Math.pow(z, 2.F) - Math.pow(32.F, 2.F) == 0F)
@@ -45,4 +50,11 @@ public class MathGuardianModel extends EntityModel<GuardianEntity> {
                                float red, float green, float blue, float alpha) {
         guardian.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
+
+    @Override
+    public @NotNull EntityRenderer create(Context p_174010_) {
+        return thisRenderer;
+    }
+    *
+     */
 }

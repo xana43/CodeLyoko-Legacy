@@ -6,6 +6,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.client.gui.components.events.ContainerEventHandler;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -40,7 +41,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TowerInterfaceTileEntity extends BlockEntity {
-
+/*
     // May be accessed before onLoad
     @OnlyIn(Dist.CLIENT)
     protected int PlayersPresent;
@@ -66,7 +67,7 @@ public class TowerInterfaceTileEntity extends BlockEntity {
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         CompoundTag nbtTag = new CompoundTag();
         //Write your data into the nbtTag
-        return new ClientboundBlockEntityDataPacket(getBlockPos()Pos(), -1, nbtTag);
+        return new ClientboundBlockEntityDataPacket(getBlockPos(), -1, nbtTag);
     }
 
 
@@ -83,7 +84,7 @@ public class TowerInterfaceTileEntity extends BlockEntity {
      * @return display name of the interface
      */
 
-
+/*
     @Nonnull
     @Override
     public TextComponent getDisplayName() {
@@ -98,6 +99,7 @@ public class TowerInterfaceTileEntity extends BlockEntity {
      * @param playerEntity PlayerEntity of interacting player
      * @return Gui container
      */
+    /*
     @Nullable
     @Override
     public Container createMenu(int windowIn, @Nonnull Inventory playerInv, @Nonnull PlayerEntity playerEntity) {
@@ -114,6 +116,6 @@ public class TowerInterfaceTileEntity extends BlockEntity {
             return super.receiveClientEvent(id, type);
         }
     }
-
+*/
 
 }

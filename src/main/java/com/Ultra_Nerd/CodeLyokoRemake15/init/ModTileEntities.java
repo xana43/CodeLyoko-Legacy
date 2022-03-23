@@ -39,7 +39,7 @@ public class ModTileEntities {
             TILE_ENTITY_TYPES.register("central_control_unit_tile_entity", () -> BlockEntityType.Builder.of(CentralControlUnitTileEntity::new
                     , ModBlocks.CENTRAL_CONTROL_UNIT.get()).build(null));
     public static final RegistryObject<BlockEntityType<ElectroplatingTileEntity>> ELECTROPLATING_TILE_ENTITY =
-            TILE_ENTITY_TYPES.register("electroplating_tile_entity", () -> BlockEntityType.Builder.create(ElectroplatingTileEntity::new
+            TILE_ENTITY_TYPES.register("electroplating_tile_entity", () -> BlockEntityType.Builder.of(ElectroplatingTileEntity::new
                     , ModBlocks.ELECTROPLATING_MACHINE.get()).build(null));
     public static final RegistryObject<BlockEntityType<ComputerControlPanelTileEntity>> COMPUTER_CONTROL_PANEL_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("computer_control_panel_tile_entity", () -> BlockEntityType.Builder.create(ComputerControlPanelTileEntity::new

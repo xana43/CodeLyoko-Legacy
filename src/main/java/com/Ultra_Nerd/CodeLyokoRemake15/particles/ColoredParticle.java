@@ -34,7 +34,7 @@ import java.util.Random;
 
 public class ColoredParticle extends Particle implements SpriteSet {
     private double posX, posY, posZ;
-
+/*
     public ColoredParticle(ClientLevel world, double x, double y, double z, double xspeed, double yspeed, double zspeed, ColoredParticleData data) {
         super(world, x, y, z, xspeed, yspeed, zspeed);
         this.xd = xspeed;
@@ -166,4 +166,6 @@ public class ColoredParticle extends Particle implements SpriteSet {
             return this.blue;
         }
     }
+
+ */
 }

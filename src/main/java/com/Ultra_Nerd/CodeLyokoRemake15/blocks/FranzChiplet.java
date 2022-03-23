@@ -3,13 +3,9 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.QuantumChipletTileEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.World;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -23,7 +19,6 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
@@ -169,7 +164,7 @@ public class FranzChiplet extends BaseEntityBlock {
             BlockEntity Chiplet = worldIn.getBlockEntity(pos);
             if (Chiplet instanceof QuantumChipletTileEntity) {
 
-                NetworkHooks.openGui((ServerPlayer) player, (QuantumChipletTileEntity) Chiplet, pos);
+                //NetworkHooks.openGui((ServerPlayer) player, (QuantumChipletTileEntity) Chiplet, pos);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -177,14 +172,14 @@ public class FranzChiplet extends BaseEntityBlock {
     }
 
 
-
     @Override
-    public void onReplaced(BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity tile1 = worldIn.getTileEntity(pos);
+            BlockEntity tile1 = worldIn.getBlockEntity(pos);
             if (tile1 instanceof QuantumChipletTileEntity) {
-                InventoryHelper.dropItems(worldIn, pos, ((QuantumChipletTileEntity) tile1).getItems());
+                Containers.dropContents(worldIn, pos, ((QuantumChipletTileEntity) tile1).getItems());
             }
         }
     }
+
 }

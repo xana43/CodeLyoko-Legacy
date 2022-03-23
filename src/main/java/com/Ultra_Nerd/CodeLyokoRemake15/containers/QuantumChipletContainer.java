@@ -5,22 +5,23 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.QuantumChipletTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
 
-public class QuantumChipletContainer extends Container {
+public class QuantumChipletContainer implements Container {
     public final QuantumChipletTileEntity QuantumTE;
     private final IWorldPosCallable callable;
 
-    public QuantumChipletContainer(final int windowID, final PlayerInventory PI, final QuantumChipletTileEntity TEIN) {
+    public QuantumChipletContainer(final int windowID, final Inventory PI, final QuantumChipletTileEntity TEIN) {
         super(ModContainerTypes.QUANTUM_CHIPLET_CONTAINER.get(), windowID);
         this.QuantumTE = TEIN;
         this.callable = IWorldPosCallable.of(TEIN.getWorld(), TEIN.getPos());

@@ -28,6 +28,7 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 
 public class ContainerInfusing extends AbstractContainerMenu {
+    /*
     public final ContainerData ContainerData;
     private final ContainerLevelAccess containerLevelAccess;
     private int cookTime, totalCookTime, burnTime, currentBurnTime;
@@ -67,6 +68,7 @@ public class ContainerInfusing extends AbstractContainerMenu {
      * @param playerInventory the playerInv of the player using this container
      * @param tileEntity      the tileEntity of this container
      */
+    /*
     public ContainerInfusing(final int windowId, final Inventory playerInventory, final InfusingChamberTileEntity tileEntity) {
         super(ModContainerTypes.CONTAINER_INFUSING.get(), windowId);
 
@@ -78,7 +80,7 @@ public class ContainerInfusing extends AbstractContainerMenu {
 
    public static MenuConstructor getServerContainer(InfusingChamberTileEntity be,BlockPos pos)
    {
-       return (id,playerInv,player) -> new InfusingChamberTileEntity(id,playerInv,be.)
+       return (id,playerInv,player) -> new InfusingChamberTileEntity(id,playerInv,be);
    }
 
 
@@ -144,4 +146,5 @@ public class ContainerInfusing extends AbstractContainerMenu {
     public boolean stillValid(Player p_38874_) {
         return stillValid(this.);
     }
+    */
 }

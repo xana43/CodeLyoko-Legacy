@@ -5,128 +5,129 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectroplatingTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-public class ElectroplatingMachine extends Block {
+public class ElectroplatingMachine extends BaseEntityBlock {
 
     public static final DirectionProperty ELECTRO_FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty ELECTRO_ACTIVE = BooleanProperty.create("electro_active");
 
     public ElectroplatingMachine(Properties properties) {
         super(properties);
-        this.setDefaultState(getStateContainer().getBaseState().with(ELECTRO_FACING, Direction.NORTH).with(ELECTRO_ACTIVE, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(ELECTRO_FACING, Direction.NORTH).setValue(ELECTRO_ACTIVE, false));
     }
 
     @Override
-    protected void fillStateContainer(@Nonnull StateContainer.Builder<Block, BlockState> builder) {
-        super.fillStateContainer(builder);
+    protected void createBlockStateDefinition(@Nonnull StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
         builder.add(ELECTRO_ACTIVE).add(ELECTRO_FACING);
     }
 
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
+
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         // TODO Auto-generated method stub
-        return this.getDefaultState().with(ELECTRO_FACING, context.getPlacementHorizontalFacing().getOpposite());
+        return this.defaultBlockState().setValue(ELECTRO_FACING, context.getHorizontalDirection().getOpposite());
     }
 
 
 
-    @Override
-    public boolean isViewBlocking(@Nonnull BlockState state, @Nonnull LevelReader worldIn, @Nonnull BlockPos pos) {
-        return false;
-    }
+
 
     //mod compatiability
     @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(ELECTRO_FACING, rot.rotate(state.get(ELECTRO_FACING)));
+        return state.setValue(ELECTRO_FACING, rot.rotate(state.getValue(ELECTRO_FACING)));
     }
 
     @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(ELECTRO_FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(ELECTRO_FACING)));
     }
 
-    @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return ModTileEntities.ELECTROPLATING_TILE_ENTITY.get().create();
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.getValue(ELECTRO_ACTIVE) ? super.getLightEmission(state,level,pos) : 0;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-        return state.get(ELECTRO_ACTIVE) ? super.getLightValue(state) : 0;
-    }
-
-
-    @Override
-    public boolean hasComparatorInputOverride(@Nonnull BlockState state) {
+    public boolean hasAnalogOutputSignal(BlockState p_60457_) {
         return true;
     }
 
+
+
     @Override
-    public int getComparatorInputOverride(@Nonnull BlockState blockState, World worldIn, @Nonnull BlockPos pos) {
-        return Container.calcRedstone(worldIn.getTileEntity(pos));
+    public int getAnalogOutputSignal(@Nonnull BlockState blockState, Level worldIn, @Nonnull BlockPos pos) {
+        return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
     }
+
+
+
 
     @Nonnull
     @Override
-    public ActionResultType onBlockActivated(@Nonnull BlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos,
-                                             @Nonnull PlayerEntity player, @Nonnull Hand handIn, @Nonnull BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            TileEntity tile = worldIn.getTileEntity(pos);
+    public InteractionResult use(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos,
+                                             @Nonnull Player player, @Nonnull InteractionHand handIn, @Nonnull BlockHitResult hit) {
+        if (worldIn.isClientSide) {
+            BlockEntity tile = worldIn.getBlockEntity(pos);
             if (tile instanceof ElectroplatingTileEntity) {
-                NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tile, pos);
-                player.sendMessage(new StringTextComponent("not implemented yet"));
-                return ActionResultType.SUCCESS;
+                NetworkHooks.openGui((ServerPlayer) player, (MenuProvider) tile, pos);
+                player.sendMessage(new TextComponent("not implemented yet"),player.getUUID());
+                return InteractionResult.SUCCESS;
             }
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
+
+
+
     @Override
-    public void onReplaced(@Nonnull BlockState state, World worldIn, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
-        TileEntity tile = worldIn.getTileEntity(pos);
+    public void onRemove(@Nonnull BlockState state, Level worldIn, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+        BlockEntity tile = worldIn.getBlockEntity(pos);
         if (tile instanceof ElectroplatingTileEntity) {
             ElectroplatingTileEntity plater = (ElectroplatingTileEntity) tile;
             ((CustomItemHandler) plater.getInventory()).toNonNullList().forEach(item -> {
                 ItemEntity itemEntity = new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), item);
-                worldIn.addEntity(itemEntity);
+                worldIn.addFreshEntity(itemEntity);
             });
         }
-        if (state.hasTileEntity() && state.getBlock() != newState.getBlock()) {
-            worldIn.removeTileEntity(pos);
+        if (state.hasBlockEntity() && state.getBlock() != newState.getBlock()) {
+            worldIn.removeBlockEntity(pos);
         }
+    }
+
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
+        return ModTileEntities.ELECTROPLATING_TILE_ENTITY.get().create(p_153215_,p_153216_);
     }
 }

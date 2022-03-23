@@ -4,13 +4,10 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerControlPanelTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -25,8 +22,6 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ToolType;
-import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 import java.util.stream.Stream;
@@ -101,7 +96,7 @@ public class ControlPanel extends BaseEntityBlock {
             Block.box(15, 0, 12, 16, 0.1, 13),
             Block.box(15, 0, 13, 16, 0.05, 14)
     ).reduce((v1, v2) -> {
-        return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+        return Shapes.join(v1, v2, BooleanOp.OR);
     }).get();
     private static final VoxelShape shapeE = Stream.of(
             Block.box(13.43865901397245, -4, 0.6613409860275503, 14.43865901397245, 0.025, 1.661340986027552),
@@ -173,13 +168,11 @@ public class ControlPanel extends BaseEntityBlock {
     }).get();
 
     public ControlPanel() {
-        super(Properties.of(Material.IRON)
+        super(Properties.of(Material.METAL)
 
-                .hardnessAndResistance(10, 10)
+                .strength(10, 10)
                 .sound(SoundType.METAL)
-                .lightValue(0)
-                .harvestLevel(2)
-                .harvestTool(ToolType.PICKAXE)
+
         );
         this.registerDefaultState(this.getStateDefinition().any().setValue(PANEL, Direction.NORTH).setValue(ScreenOn, false));
     }
@@ -222,9 +215,9 @@ public class ControlPanel extends BaseEntityBlock {
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         // TODO Auto-generated method stub
-        return this.getDefaultState().with(PANEL, context.getPlacementHorizontalFacing().getOpposite());
+        return this.defaultBlockState().setValue(PANEL, context.getHorizontalDirection().getOpposite());
     }
 
     //mod compatiability
@@ -252,7 +245,8 @@ public class ControlPanel extends BaseEntityBlock {
             if (this.newBlockEntity(pos, state).getBlockState().getValue(ScreenOn)) {
                 BlockEntity panel = worldIn.getBlockEntity(pos);
                 if (panel instanceof ComputerControlPanelTileEntity) {
-                    NetworkHooks.openGui((ServerPlayer) player, (ComputerControlPanelTileEntity) panel, pos);
+
+                    //NetworkHooks.openGui((ServerPlayer) player, (ComputerControlPanelTileEntity) panel, pos);
                     return InteractionResult.SUCCESS;
                 }
             }

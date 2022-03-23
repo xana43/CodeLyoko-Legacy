@@ -5,15 +5,16 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.ElectricFluoride
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerElectricInfusing;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -27,7 +28,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ElectricInfusingChamberTileEntity extends BlockEntity implements TickingBlockEntity, INamedContainerProvider {
+public class ElectricInfusingChamberTileEntity extends BlockEntity implements TickingBlockEntity, MenuProvider {
     public ItemStackHandler handler = new ItemStackHandler(3);
     private final EG internal = new EG(90000);
     private String customName;
@@ -36,6 +37,10 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Ti
 
     private int cookTime;
     public int ENER = internal.getEnergyStored();
+
+
+
+   
 
     public ElectricInfusingChamberTileEntity() {
         this(ModTileEntities.ELECTRIC_INFUSING_CHAMBER_TILE_ENTITY.get());
@@ -65,8 +70,8 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Ti
 
     @Override
     @Nonnull
-    public TextComponent getDisplayName() {
-        return new TranslationTextComponent("container.electric_flouride_infuser");
+    public Component getDisplayName() {
+        return new TranslatableComponent("container.electric_flouride_infuser");
     }
 
 
@@ -79,8 +84,8 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Ti
     }
 
     @Override
-    public void read(@Nonnull CompoundTag compound) {
-        super.read(compound);
+    public void load(@Nonnull CompoundTag compound) {
+        super.load(compound);
         this.handler.deserializeNBT(compound.getCompound("Inventory"));
         this.cookTime = compound.getInt("CookTime");
         this.customName = compound.getString("CustomName");
@@ -89,29 +94,32 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Ti
     }
 
 
-
-    @Nonnull
     @Override
-    public CompoundTag write(@Nonnull CompoundTag compound) {
-        super.write(compound);
+    public BlockPos getPos() {
+        return this.worldPosition;
+    }
+
+    @Override
+    public void saveAdditional(@Nonnull CompoundTag compound) {
+        super.saveAdditional(compound);
 
         compound.putInt("CookTime", (short) this.cookTime);
 
         compound.put("Inventory", this.handler.serializeNBT());
         compound.putString("CustomName", getDisplayName().toString());
         compound.putInt("GuiEnergy", this.ENER);
-        return compound;
     }
 
     @Override
     public void tick() {
-        if (level.isPowered(worldPosition)) ENER += 100;
+        assert level != null;
+        if (level.hasNeighborSignal(worldPosition)) ENER += 100;
         ItemStack[] Inputs = new ItemStack[]{handler.getStackInSlot(0), handler.getStackInSlot(1)};
         if (ENER >= 80) {
             if (cookTime > 0) {
                 ENER -= 20;
                 cookTime++;
-                ElectricFluorideInfuser.setState(true, world, pos);
+                ElectricFluorideInfuser.setState(true, level, worldPosition);
                 if (cookTime == 200) {
                     if (handler.getStackInSlot(2).getCount() > 0) {
                         handler.getStackInSlot(2).grow(1);
@@ -146,7 +154,7 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Ti
             } else {
                 ItemStack output = this.handler.getStackInSlot(3);
                 if (output.isEmpty()) return true;
-                if (!output.isItemEqual(result)) return false;
+                if (!output.sameItem(result)) return false;
                 int res = output.getCount() + result.getCount();
                 return res <= 64 && res <= output.getMaxStackSize();
             }
@@ -186,7 +194,7 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Ti
 
     @Nullable
     @Override
-    public Container createMenu(int windowIn, @Nonnull PlayerInventory playerInventory, @Nonnull PlayerEntity p_createMenu_3_) {
-        return new ContainerElectricInfusing(windowIn, playerInventory, this);
+    public AbstractContainerMenu createMenu(int windowIn, @Nonnull Inventory playerInventory, @Nonnull Player p_createMenu_3_) {
+        return null; //ew ContainerElectricInfusing(windowIn, playerInventory, this);
     }
 }

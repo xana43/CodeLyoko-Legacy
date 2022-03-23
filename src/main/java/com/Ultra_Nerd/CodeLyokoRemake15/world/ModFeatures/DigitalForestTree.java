@@ -22,7 +22,7 @@ import java.util.Random;
 
 public class DigitalForestTree extends TreeFeature {
 
-
+/*
     public static final TreeFeature DIGITAL_TREE_FOREST_CONFIG = (new TreeConfiguration.TreeConfigurationBuilder(
             (new SimpleBlockStateProvider(ModBlocks.DIGITAL_WOOD_FOREST.get().getDefaultState()), new SimpleBlockStateProvider(Blocks.AIR.getDefaultState())).baseHeight(128)
             .setSapling((IPlantable) ModBlocks.DIGITAL_TREE_FOREST_SAPLING.get()).build()).;
@@ -49,4 +49,6 @@ public class DigitalForestTree extends TreeFeature {
     protected ConfiguredFeature<TreeFeatureConfiguration, ?> getTreeFeature(@Nonnull Random randomIn, boolean p_225546_2_) {
         return null;
     }
+
+ */
 }

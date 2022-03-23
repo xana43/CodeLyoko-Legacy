@@ -10,9 +10,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 
-public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> {
-
+public class InfusingChamberScreen extends ContainerScreen {
+/*
     private static final ResourceLocation TEX = new ResourceLocation(Base.MOD_ID + ":textures/gui/flouride_infuser.png");
     private Inventory player;
     private InfusingChamberTileEntity tileentity;
@@ -25,7 +27,7 @@ public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> {
 
     public InfusingChamberScreen(final ContainerInfusing interfaceContainer, final Inventory playerInventory, final Component title) {
         super(interfaceContainer, playerInventory, title);
-        this.tileentity = interfaceContainer.;
+        this.tileentity = interfaceContainer.get;
         this.player = playerInventory;
     }
 
@@ -42,10 +44,10 @@ public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> {
 
     @Override
     public void renderBackground(PoseStack stack, int whateverthisis) {
-        String tn = this.tileentity.getDisplayName().;
+        Component tn = this.tileentity.getDisplayName();
 
-        this.font.draw(stack,tn, (this.xSize / 2.f - this.font.getStringWidth(tn) / 2.f), 5, 4210752);
-        this.font.draw(stack,this.player.getDisplayName().getUnformattedComponentText(), 122, this.ySize - 96 + 2, 4210752);
+        this.font.draw(stack,tn, (this.getXSize() / 2.f - this.font.width(tn) / 2.f), 5, 4210752);
+        this.font.draw(stack,this.player.getDisplayName().getString(), 122, this.getYSize() - 96 + 2, 4210752);
 
     }
 
@@ -82,4 +84,10 @@ public class InfusingChamberScreen extends ContainerScreen<ContainerInfusing> {
     }
 
 
+    @Override
+    public boolean stillValid(Player p_38874_) {
+        return false;
+    }
+    
+ */
 }

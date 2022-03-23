@@ -1,11 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
@@ -27,8 +24,8 @@ public class ModOreGen {
     public static void genOre() {
 
        
-        final ConfiguredFeature<?,?> silicaSand = FeatureUtils.register("silica_sand",
-                Feature.ORE,);
+        //final ConfiguredFeature<?,?> silicaSand = FeatureUtils.register("silica_sand",
+          //      Feature.ORE,);
         /*for (Biome biome : ForgeRegistries.BIOMES) {
             //for silica sand
             if(biome == Biomes.DESERT || biome == Biomes.DESERT || biome ==  Biomes.DESERT_HILLS || biome == Biomes.DESERT_LAKES || biome == Biomes.ERODED_BADLANDS
