@@ -1,21 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 
-public class UniversalEnergyStorageTileEntity extends TileEntity {
-    public UniversalEnergyStorageTileEntity(TileEntityType<?> tileEntityTypeIn) {
+public class UniversalEnergyStorageTileEntity extends BlockEntity {
+    public UniversalEnergyStorageTileEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
+        super(p_155228_, p_155229_, p_155230_);
+    }
+    /*
+    public UniversalEnergyStorageTileEntity(BlockEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
 
@@ -102,6 +98,6 @@ public class UniversalEnergyStorageTileEntity extends TileEntity {
         assert this.world != null;
         return this.world.getTileEntity(pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) >= 64D;
     }
-
+*/
 
 }

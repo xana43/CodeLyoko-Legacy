@@ -1,37 +1,30 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.structures.Tower;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.mojang.serialization.Dynamic;
-import com.sun.jna.Structure;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.SharedSeedRandom;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.StructureStart;
-import net.minecraft.world.gen.feature.template.TemplateManager;
-import net.minecraft.world.level.biome.BiomeManager;
-import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import com.mojang.serialization.Codec;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
 
-import javax.annotation.Nonnull;
-import java.util.Random;
-import java.util.function.Function;
-
-public class TowerStructure extends Structure<NoFeatureConfig> {
-    public TowerStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+public class TowerStructure extends StructureFeature {
+    public TowerStructure(Codec p_197165_, PieceGeneratorSupplier p_197166_) {
+        super(p_197165_, p_197166_);
+    }
+    /*public TowerStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
         super(configFactoryIn);
     }
 
     @Override
-    public boolean canBeGenerated(@Nonnull BiomeManager biomeManagerIn, @Nonnull ChunkGenerator<?> generatorIn, @Nonnull Random randIn, int chunkX, int chunkZ, @Nonnull Biome biomeIn) {
-        ChunkPos pos = this.getStartPositionForPosition(generatorIn, randIn, chunkX, chunkZ, 0, 0);
+    public boolean canGenerate(RegistryAccess registryAccess, ChunkGenerator generatorIn, BiomeSource biomeIn, StructureManager manager, long value, ChunkPos chunkPos, FeatureConfiguration featureConfiguration, LevelHeightAccessor heightAccessor, Predicate predicate) {
+        ChunkPos pos =
         if (chunkX == pos.x && chunkZ == pos.z) {
             return generatorIn.hasStructure(biomeIn, this);
         }
         return false;
+    }
+
+
+    @Override
+    public PostPlacementProcessor getPostPlacementProcessor() {
+        return super.getPostPlacementProcessor();
     }
 
     @Nonnull
@@ -43,7 +36,7 @@ public class TowerStructure extends Structure<NoFeatureConfig> {
     @Nonnull
     @Override
     public String getStructureName() {
-        return Base.MOD_ID + ":tower";
+        return CodeLyokoMain.MOD_ID + ":tower";
     }
 
     //depreciated
@@ -93,8 +86,10 @@ public class TowerStructure extends Structure<NoFeatureConfig> {
 
             TowerParts.Start(templateManagerIn, pos, rotation, this.components, this.rand);
             this.recalculateStructureSize();
-            Base.Log.info("a tower has spawned at: " + pos);
+            CodeLyokoMain.Log.info("a tower has spawned at: " + pos);
 
         }
     }
+
+     */
 }

@@ -1,40 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.structures.Tower;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModWorldFeatures;
-import com.google.common.collect.ImmutableMap;
-import net.minecraft.block.Blocks;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tileentity.ChestTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.template.PlacementSettings;
-import net.minecraft.world.gen.feature.template.Template;
-import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.StructureFeatureManager;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.levelgen.structure.StructurePiece;
-import net.minecraft.world.level.levelgen.structure.TemplateStructurePiece;
-import net.minecraft.world.level.levelgen.structure.pieces.PiecesContainer;
-import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
-
-import javax.annotation.Nonnull;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 public class TowerParts {
-    private static final ResourceLocation PART1 = new ResourceLocation(Base.MOD_ID, "tower_new_bellow");
-    private static final ResourceLocation PART2 = new ResourceLocation(Base.MOD_ID, "tower_new_top");
+    /*
+    private static final ResourceLocation PART1 = new ResourceLocation(CodeLyokoMain.MOD_ID, "tower_new_bellow");
+    private static final ResourceLocation PART2 = new ResourceLocation(CodeLyokoMain.MOD_ID, "tower_new_top");
     private static final Map<ResourceLocation, BlockPos> offset = ImmutableMap.of(PART1, new BlockPos(0, -14, 0), PART2, new BlockPos(0, 0, 0));
 
     public static void Start(TemplateStructurePiece manager, BlockPos pos, Rotation rotation, List<StructurePiece> pieces, Random rand) {
@@ -112,4 +81,6 @@ public class TowerParts {
 
 
     }
+
+     */
 }

@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.DigitalLavaBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.DigitalSeaBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LiquidHelium;
@@ -20,16 +20,16 @@ public class ModFluids {
 
 
     //for fluids
-    public static final DeferredRegister<Fluid> LIQUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, Base.MOD_ID);
+    public static final DeferredRegister<Fluid> LIQUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, CodeLyokoMain.MOD_ID);
     //fluid resource locations
-    public static final ResourceLocation FLOWING_DIGITAL_OCEAN_RL = new ResourceLocation(Base.MOD_ID, "block/digital_flowing");
-    public static final ResourceLocation DIGITAL_OCEAN_RL = new ResourceLocation(Base.MOD_ID, "block/digital_still");
-    public static final ResourceLocation LIQUID_HELIUM_FLOWING_RL = new ResourceLocation(Base.MOD_ID, "block/liquid_helium_flow");
-    public static final ResourceLocation LIQUID_HELIUM_STILL_RL = new ResourceLocation(Base.MOD_ID, "block/liquid_helium_still");
-    public static final ResourceLocation URANIUM_STILL_RL = new ResourceLocation(Base.MOD_ID, "block/uranium_still");
-    public static final ResourceLocation URANIUM_FLOW_RL = new ResourceLocation(Base.MOD_ID, "block/uranium_flow");
-    public static final ResourceLocation DIGITAL_LAVA_STILL_RL = new ResourceLocation(Base.MOD_ID,"block/digital_still_lava");
-    public static final ResourceLocation DIGITAL_LAVA_FLOWING_RL = new ResourceLocation(Base.MOD_ID,"block/digital_flowing_lava");
+    public static final ResourceLocation FLOWING_DIGITAL_OCEAN_RL = new ResourceLocation(CodeLyokoMain.MOD_ID, "block/digital_flowing");
+    public static final ResourceLocation DIGITAL_OCEAN_RL = new ResourceLocation(CodeLyokoMain.MOD_ID, "block/digital_still");
+    public static final ResourceLocation LIQUID_HELIUM_FLOWING_RL = new ResourceLocation(CodeLyokoMain.MOD_ID, "block/liquid_helium_flow");
+    public static final ResourceLocation LIQUID_HELIUM_STILL_RL = new ResourceLocation(CodeLyokoMain.MOD_ID, "block/liquid_helium_still");
+    public static final ResourceLocation URANIUM_STILL_RL = new ResourceLocation(CodeLyokoMain.MOD_ID, "block/uranium_still");
+    public static final ResourceLocation URANIUM_FLOW_RL = new ResourceLocation(CodeLyokoMain.MOD_ID, "block/uranium_flow");
+    public static final ResourceLocation DIGITAL_LAVA_STILL_RL = new ResourceLocation(CodeLyokoMain.MOD_ID,"block/digital_still_lava");
+    public static final ResourceLocation DIGITAL_LAVA_FLOWING_RL = new ResourceLocation(CodeLyokoMain.MOD_ID,"block/digital_flowing_lava");
     //fluid declarations
     public static final RegistryObject<FlowingFluid> FLOWING_DIGITAL_OCEAN = LIQUIDS.register("flowing_digital_ocean", () -> new ForgeFlowingFluid.Flowing(ModFluids.DIGITAL_PROPERTIES));
     public static final RegistryObject<FlowingFluid> DIGITAL_OCEAN = LIQUIDS.register("digital_ocean", () -> new ForgeFlowingFluid.Source(ModFluids.DIGITAL_PROPERTIES));

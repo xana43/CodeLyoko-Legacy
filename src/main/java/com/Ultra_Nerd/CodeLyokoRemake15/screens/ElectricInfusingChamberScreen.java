@@ -1,16 +1,22 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerElectricInfusing;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectricInfusingChamberTileEntity;
-import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
 
-public class ElectricInfusingChamberScreen extends ContainerScreen<ContainerElectricInfusing> {
-    private static final ResourceLocation TEX = new ResourceLocation(Base.MOD_ID + ":textures/gui/flouride_infuser.png");
+public class ElectricInfusingChamberScreen extends AbstractContainerScreen<ContainerElectricInfusing> {
+    public ElectricInfusingChamberScreen(ContainerElectricInfusing p_97741_, Inventory p_97742_, Component p_97743_) {
+        super(p_97741_, p_97742_, p_97743_);
+    }
+
+    @Override
+    protected void renderBg(PoseStack p_97787_, float p_97788_, int p_97789_, int p_97790_) {
+
+    }
+    /*
+    private static final ResourceLocation TEX = new ResourceLocation(CodeLyokoMain.MOD_ID + ":textures/gui/flouride_infuser.png");
     private PlayerInventory player;
     private ElectricInfusingChamberTileEntity tileentity;
 
@@ -61,5 +67,7 @@ public class ElectricInfusingChamberScreen extends ContainerScreen<ContainerElec
         int i = this.tileentity.getField(1);
         return i != 0 ? i * pixels / 25 : 0;
     }
+
+     */
 
 }

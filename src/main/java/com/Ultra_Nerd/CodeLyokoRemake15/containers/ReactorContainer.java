@@ -1,20 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerReactorTileEntity;
 import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ReactorContainer extends AbstractContainerMenu implements Container {
@@ -22,9 +14,54 @@ public class ReactorContainer extends AbstractContainerMenu implements Container
         super(type, id);
     }
 
+	@Override
+	public boolean stillValid(Player p_38874_) {
+		return false;
+	}
+
+	@Override
+	public int getContainerSize() {
+		return 0;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
+	@Override
+	public ItemStack getItem(int p_18941_) {
+		return null;
+	}
+
+	@Override
+	public ItemStack removeItem(int p_18942_, int p_18943_) {
+		return null;
+	}
+
+	@Override
+	public ItemStack removeItemNoUpdate(int p_18951_) {
+		return null;
+	}
+
+	@Override
+	public void setItem(int p_18944_, ItemStack p_18945_) {
+
+	}
+
+	@Override
+	public void setChanged() {
+
+	}
+
+	@Override
+	public void clearContent() {
+
+	}
 
 
 
+/*
     @Override
     public boolean canInteractWith(@Nonnull Player playerIn) {
         return false;
@@ -42,30 +79,70 @@ public class ReactorContainer extends AbstractContainerMenu implements Container
 	{
 		super(ModContainerTypes.COMPUTER_REACTOR_CONTAINER.get(),windowID);
 		this.tileentity = tileentity;
-		IItemHandler handler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+		IItemHandler handler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).resolve().get();
 		
-		this.addSlotToContainer(new SlotItemHandler(handler, 0, 80, 33));
+		this.addSlot(new SlotItemHandler(handler, 0, 80, 33));
 		
 		for(int y = 0; y < 3; y++)
 		{
 			for(int x = 0; x < 9; x++)
 			{
-				this.addSlotToContainer(new Slot(player, x + y*9 + 9, 8 + x*18, 84 + y*18));
+				this.addSlot(new Slot(player, x + y*9 + 9, 8 + x*18, 84 + y*18));
 			}
 		}
 		
 		for(int x = 0; x < 9; x++)
 		{
-			this.addSlotToContainer(new Slot(player, x, 8 + x * 18, 142));
+			this.addSlot(new Slot(player, x, 8 + x * 18, 142));
 		}
 	}
-	
+
 	@Override
-	public boolean canInteractWith(PlayerEntity playerIn)
+	public int getContainerSize() {
+		return 0;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
+	@Override
+	public ItemStack getItem(int p_18941_) {
+		return null;
+	}
+
+	@Override
+	public ItemStack removeItem(int p_18942_, int p_18943_) {
+		return null;
+	}
+
+	@Override
+	public ItemStack removeItemNoUpdate(int p_18951_) {
+		return null;
+	}
+
+	@Override
+	public void setItem(int p_18944_, ItemStack p_18945_) {
+
+	}
+
+	@Override
+	public void setChanged() {
+
+	}
+
+	@Override
+	public boolean stillValid(Player playerIn)
 	{
 		return this.tileentity.isUsableByPlayer(playerIn);
 	}
-	
+
+	@Override
+	public void clearContent() {
+
+	}
+	/*
 	@Override
 	public void updateProgressBar(int id, int data) 
 	{
@@ -122,5 +199,5 @@ public class ReactorContainer extends AbstractContainerMenu implements Container
 		return stack;
 	}
 
-
+*/
 }

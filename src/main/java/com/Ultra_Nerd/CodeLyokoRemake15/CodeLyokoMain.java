@@ -1,18 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoRemake15;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.RendBlok;
-import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.PacketHandler;
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.ModConfiguration;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LiquidHelium;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LyokoCore;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.SeaPylon;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
-import com.Ultra_Nerd.CodeLyokoRemake15.items.CustomMobEggs;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen.ModOreGen;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen.StructGen;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.client.Minecraft;
-
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;
@@ -25,23 +21,16 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DeferredWorkQueue;
-import net.minecraftforge.fml.ModLoadingContext;
-
-import net.minecraftforge.fml.ModLoadingStage;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -50,17 +39,17 @@ import net.minecraftforge.registries.RegistryObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.example.registry.EntityRegistry;
 import software.bernie.geckolib3.GeckoLib;
 
-import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Mod("cm")
-@Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Bus.MOD)
-public class Base {
-
+@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Bus.MOD)
+public class CodeLyokoMain {
+    public static ResourceLocation CodeLyokoPrefix(String name)
+    {
+        return new ResourceLocation("cm",name);
+    }
     public static final Logger Log = LogManager.getLogger();
     public static final String MOD_ID = "cm";
     //public static final Map<ResourceLocation, IMultiBlock> MULTIBLOCK_MAP = new ConcurrentHashMap<>();
@@ -98,33 +87,37 @@ public class Base {
 
     private static final String nbt = "first_join";
     public static boolean XANA = false;
-    public static Base instance;
+    public static CodeLyokoMain instance;
     public static int random = 1000;
+   /*
     @SubscribeEvent
-    private static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event)
+    public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event)
     {
-        event.registerEntityRenderer(ModEntities.BLOK.get(), RendBlok::new);
-    }
-    public Base() {
+        //event.registerEntityRenderer(ModEntities.BLOK.get(), RendBlok::new);
+    }*/
+
+public CodeLyokoMain() {
+
         final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
         GeckoLib.initialize();
+
         ModBus.addListener(this::commonSetup);
         ModBus.addListener(this::clientSetup);
-        ModParticles.PARTICLES.register(ModBus);
+        //ModParticles.PARTICLES.register(ModBus);
         ModSounds.SOUNDS.register(ModBus);
         ModItems.ITEMS.register(ModBus);
         ModFluids.LIQUIDS.register(ModBus);
         ModBlocks.BLOCKS.register(ModBus);
-        ModEntities.Entities.register(ModBus);
-        ModRecipes.RECIPE_SERIALIZER_DEFERRED_REGISTER.register(ModBus);
+        //ModEntities.Entities.register(ModBus);
+        //ModRecipes.RECIPE_SERIALIZER_DEFERRED_REGISTER.register(ModBus);
         //ModBiome.BIOMES.register(ModBus);
-        ModContainerTypes.CONTAINER_TYPES.register(ModBus);
-        ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
+        //ModContainerTypes.CONTAINER_TYPES.register(ModBus);
+        //ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
        // ModDimensions.MOD_DIMENSION_DEFERRED_REGISTER.register(ModBus);
-        ModWorldFeatures.FEATURES.register(ModBus);
+        //ModWorldFeatures.FEATURES.register(ModBus);
         instance = this;
         MinecraftForge.EVENT_BUS.register(this);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfiguration.COMMON_SPEC, "code_lyoko_legacy.toml");
+        //ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfiguration.COMMON_SPEC, "code_lyoko_legacy.toml");
     }
 
     /*public static IMultiblock registerMultiBlocks(ResourceLocation resourceLocation, IMultiblock multiblock) {
@@ -132,7 +125,7 @@ public class Base {
         if (MultiBlocks != null) {
             throw new IllegalArgumentException("Multiblock " + resourceLocation + " already registered");
         } else {
-            Base.Log.info(resourceLocation);
+            CodeLyokoMain.Log.info(resourceLocation);
             return multiblock.setId(resourceLocation);
         }
     }
@@ -167,21 +160,23 @@ public class Base {
         Log.debug("Inventory blocks registered");
     }
 
+
+
     @SubscribeEvent
     public static void onRegisterBiome(final RegistryEvent.Register<Biome> event) {
-        ModBiome.regbio();
+       // ModBiome.regbio();
     }
 
     @SubscribeEvent
     public void onRegisterEnties(final RegistryEvent.Register<EntityType<?>> event) {
-        CustomMobEggs.initEgg();
+   //     CustomMobEggs.initEgg();
     }
 
     @SubscribeEvent
     public void tickPast(final TickEvent event) {
-        if ((event.phase == TickEvent.Phase.START || event.phase == TickEvent.Phase.END) && Minecraft.getInstance().world != null) {
+        if ((event.phase == TickEvent.Phase.START || event.phase == TickEvent.Phase.END) && Minecraft.getInstance().level != null) {
             random--;
-            //Base.Log.debug(random);
+            //CodeLyokoMain.Log.debug(random);
             if (random == 0 && !XANA) {
                 random = new Random().nextInt(40000);
                 assert Minecraft.getInstance().player != null;
@@ -191,11 +186,11 @@ public class Base {
         }
     }
     @SubscribeEvent
-    private void commonSetup(final FMLCommonSetupEvent event) {
+    public  void commonSetup(final FMLCommonSetupEvent event) {
 
-        ModOreGen.genOre();
-        StructGen.genStruct();
-        PacketHandler.init();
+        //ModOreGen.genOre();
+        //StructGen.genStruct();
+        //PacketHandler.init();
 
     }
 

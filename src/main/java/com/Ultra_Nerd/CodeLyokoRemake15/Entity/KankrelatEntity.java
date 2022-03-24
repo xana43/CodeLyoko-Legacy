@@ -1,48 +1,49 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.monster.SkeletonEntity;
-import net.minecraft.network.IPacket;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.world.World;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.network.NetworkHooks;
-import software.bernie.geckolib.animation.builder.AnimationBuilder;
-import software.bernie.geckolib.animation.controller.EntityAnimationController;
-import software.bernie.geckolib.entity.IAnimatedEntity;
-import software.bernie.geckolib.event.AnimationTestEvent;
-import software.bernie.geckolib.manager.EntityAnimationManager;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nonnull;
 
-public class KankrelatEntity extends Skeleton implements IAnimatedEntity {
+public class KankrelatEntity extends Skeleton implements IAnimatable {
 
-    private final EntityAnimationController controller = new EntityAnimationController(this, "kankrelatcontroller", 20, this::animationPred);
-    private final EntityAnimationManager manager = new EntityAnimationManager();
+    private final AnimationController<?> controller = new AnimationController<>(this, "kankrelatcontroller", 20, this::animationPred);
+    private final AnimationFactory manager = new AnimationFactory(this);
 
     public KankrelatEntity(EntityType<? extends KankrelatEntity> type, Level world) {
         super(type, world);
-        manager.addAnimationController(controller);
     }
 
-    private <E extends KankrelatEntity> boolean animationPred(AnimationTestEvent<E> event) {
-        if (event.isWalking()) {
+    private <E extends KankrelatEntity> PlayState animationPred(AnimationEvent<E> event) {
+        if (event.isMoving()) {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.ModelKankrelat.walk"));
-            return true;
+            return PlayState.CONTINUE;
         } else {
-            return false;
+            return PlayState.STOP;
         }
     }
 
+
+
     @Override
-    protected boolean isInDaylight() {
-        return false;
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(controller);
     }
 
-
+    @Override
+    public AnimationFactory getFactory() {
+        return manager;
+    }
 
     @Nonnull
     @Override
@@ -50,8 +51,5 @@ public class KankrelatEntity extends Skeleton implements IAnimatedEntity {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-    @Override
-    public EntityAnimationManager getAnimationManager() {
-        return manager;
-    }
+
 }

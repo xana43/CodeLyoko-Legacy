@@ -1,31 +1,28 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.QuantumChipletTileEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.world.Container;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
 
-public class QuantumChipletContainer implements Container {
+public class QuantumChipletContainer extends AbstractContainerMenu  {
     public final QuantumChipletTileEntity QuantumTE;
-    private final IWorldPosCallable callable;
+    //private final IWorldPosCallable callable;
 
     public QuantumChipletContainer(final int windowID, final Inventory PI, final QuantumChipletTileEntity TEIN) {
         super(ModContainerTypes.QUANTUM_CHIPLET_CONTAINER.get(), windowID);
         this.QuantumTE = TEIN;
-        this.callable = IWorldPosCallable.of(TEIN.getWorld(), TEIN.getPos());
-        this.addSlot(new Slot(TEIN, 0, 81, 36));
+        //this.callable = IWorldPosCallable.of(TEIN.getWorld(), TEIN.getPos());
+        //this.addSlot(new Slot(TEIN, 0, 81, 36));
         //main inventory
         int startX = 8;
         int startY = 84;
@@ -44,49 +41,53 @@ public class QuantumChipletContainer implements Container {
     }
 
 
-    public QuantumChipletContainer(final int windowID, final PlayerInventory PI, final PacketBuffer dat) {
+    public QuantumChipletContainer(final int windowID, final Inventory PI, final FriendlyByteBuf dat) {
         this(windowID, PI, getQuantumTE(PI, dat));
     }
 
 
-    private static QuantumChipletTileEntity getQuantumTE(final PlayerInventory PINV, final PacketBuffer dat) {
+    private static QuantumChipletTileEntity getQuantumTE(final Inventory PINV, final FriendlyByteBuf dat) {
         Objects.requireNonNull(PINV, "Player's inventory can't be null");
         Objects.requireNonNull(dat, "data can't be null");
-        final TileEntity TileAtLoc = PINV.player.world.getTileEntity(dat.readBlockPos());
+        final BlockEntity TileAtLoc = PINV.player.level.getBlockEntity(dat.readBlockPos());
         if (TileAtLoc instanceof QuantumChipletTileEntity) {
             return (QuantumChipletTileEntity) TileAtLoc;
         }
         throw new IllegalStateException("this tile entity died" + TileAtLoc);
     }
-
+/*
     @Override
     public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
         return isWithinUsableDistance(callable, playerIn, ModBlocks.CHIPLET_FRANZ_BLOCK.get());
-    }
-
+    }*/
     @Nonnull
     @Override
-    public ItemStack transferStackInSlot(@Nonnull PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(@Nonnull Player playerIn, int index) {
         ItemStack IStack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.getHasStack()) {
-            ItemStack IStack1 = slot.getStack();
+        Slot slot = this.getSlot(index);
+        if (slot.hasItem()) {
+            ItemStack IStack1 = slot.getItem();
             IStack = IStack1.copy();
             if (index < 1) {
-                if (!this.mergeItemStack(IStack1, 1, this.inventorySlots.size(), true)) {
+                if (!this.moveItemStackTo(IStack1, 1, this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
 
 
-            } else if (!this.mergeItemStack(IStack, 0, 1, false)) {
+            } else if (!this.moveItemStackTo(IStack, 0, 1, false)) {
                 return ItemStack.EMPTY;
             }
             if (IStack1.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.onSlotChanged();
+                slot.setChanged();
             }
         }
         return IStack;
+    }
+
+    @Override
+    public boolean stillValid(Player p_38874_) {
+        return false;
     }
 }

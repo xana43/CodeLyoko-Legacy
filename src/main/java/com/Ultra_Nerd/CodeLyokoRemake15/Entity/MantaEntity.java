@@ -1,37 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
-import com.google.common.graph.Network;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.PhantomEntity;
-import net.minecraft.network.IPacket;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.util.Mth;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Phantom;
 import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.animation.controller.EntityAnimationController;
-import software.bernie.geckolib.entity.IAnimatedEntity;
-import software.bernie.geckolib.event.AnimationTestEvent;
-import software.bernie.geckolib.manager.EntityAnimationManager;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import javax.annotation.Nonnull;
 
 public class MantaEntity extends Phantom implements IAnimatable, RangedAttackMob {
     private final AnimationFactory manager = new AnimationFactory(this);

@@ -44,7 +44,7 @@ public class BlisterCopper extends Item {
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
 
         if (worldIn.isClientSide) {
-            //Base.Log.debug(I);
+            //CodeLyokoMain.Log.debug(I);
             if (I-- == 0) {
                 if (stack.getDamageValue() != 60) {
 

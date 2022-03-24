@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.electroplate;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.CustomItemHandler;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectroplatingTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -128,6 +127,6 @@ public class ElectroplatingMachine extends BaseEntityBlock {
     @org.jetbrains.annotations.Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
-        return ModTileEntities.ELECTROPLATING_TILE_ENTITY.get().create(p_153215_,p_153216_);
+        return null; // ModTileEntities.ELECTROPLATING_TILE_ENTITY.get().create(p_153215_,p_153216_);
     }
 }

@@ -1,35 +1,35 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.HornetEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelHornet;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
-public class HornetRenderer extends MobRenderer<HornetEntity, ModelHornet> {
+public class HornetRenderer extends GeoEntityRenderer<HornetEntity> {
 
-    private static final ResourceLocation tex = new ResourceLocation(Base.MOD_ID, "textures/entity/hornet/hornetatlas.png");
 
-    public HornetRenderer(EntityRendererManager rendManIn) {
-        super(rendManIn, new ModelHornet(), 1f);
+//new ModelHornet(), 1f
+    public HornetRenderer(EntityRendererProvider.Context rendManIn, AnimatedGeoModel<HornetEntity> animatedGeoModel) {
+        super(rendManIn, animatedGeoModel);
     }
 
     @Override
-    protected void applyRotations(@Nonnull HornetEntity entityLiving, @Nonnull MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+    protected void applyRotations(@Nonnull HornetEntity entityLiving, @Nonnull PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
         super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
     }
 
     @Nonnull
     @Override
-    public ResourceLocation getEntityTexture(@Nonnull HornetEntity entity) {
-        return tex;
+    public ResourceLocation getTextureLocation(@Nonnull HornetEntity entity) {
+        return CodeLyokoMain.CodeLyokoPrefix("textures/entity/hornet/hornetatlas.png");
     }
 
 }

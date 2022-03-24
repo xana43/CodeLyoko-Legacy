@@ -1,37 +1,29 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.electroplate.ElectroplatingMachine;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.ElectricFluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FluorideInfuser;
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.saplings.DigitalMountainSapling;
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.saplings.DigitalSapling;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tests.BlockPatternTest;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tests.DataTransferInterface;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tests.TestBlockPortal;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower.*;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.DigitalForestTree;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.DigitalMountainTree;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.function.ToIntFunction;
-
 public class ModBlocks {
 
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Base.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CodeLyokoMain.MOD_ID);
     //for testing blocks
     public static final RegistryObject<TestBlockPortal> PORTAL_BLOCK = BLOCKS.register("portal_block", () -> new TestBlockPortal(Block.Properties.copy(Blocks.NETHER_PORTAL)));
     public static final RegistryObject<Block> BLOCK_PATTERN = BLOCKS.register("block_pattern", () -> new BlockPatternTest(Block.Properties.copy(Blocks.IRON_BLOCK)));
     //for blocks
-    public static final RegistryObject<Block> ARCHITECTURE_WORK_STATION = BLOCKS.register("architecture_work_station", () -> new ArchitectureWorkstation(Block.Properties.of(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> ARCHITECTURE_WORK_STATION = BLOCKS.register("architecture_work_station", () -> new ArchitectureWorkstation(Block.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> ANTI_MARABUNTA = BLOCKS.register("anti_marabunta", AntiMarabunta::new);
     public static final RegistryObject<Block> AUTUNITE_ORE = BLOCKS.register("autunite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> BLACK_VOID = BLOCKS.register("black_void", BlackVoid::new);
@@ -59,10 +51,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> DIGITAL_DIRT = BLOCKS.register("digital_dirt", () -> new GrassBlock(Block.Properties.copy(Blocks.DIRT)));
     public static final RegistryObject<Block> DIGITAL_ROCK = BLOCKS.register("digital_rock", () -> new Block(Block.Properties.copy(Blocks.STONE)));
     public static final RegistryObject<Block> DIGITAL_WOOD_FOREST = BLOCKS.register("digital_wood_forest", () -> new Block(Block.Properties.of(Material.WOOD)));
-    public static final RegistryObject<Block> DIGITAL_TREE_FOREST_SAPLING = BLOCKS.register("digital_tree_forest_sapling", () -> new DigitalSapling(DigitalForestTree::new, Block.Properties.copy(Blocks.JUNGLE_SAPLING)));
+    //public static final RegistryObject<Block> DIGITAL_TREE_FOREST_SAPLING = BLOCKS.register("digital_tree_forest_sapling", () -> new DigitalSapling(DigitalForestTree::new, Block.Properties.copy(Blocks.JUNGLE_SAPLING)));
     public static final RegistryObject<Block> DIGITAL_WOOD_MOUNTAIN = BLOCKS.register("digital_wood_mountain", () -> new Block(Block.Properties.of(Material.WOOD)));
     public static final RegistryObject<Block> DIGITAL_LEAF_MOUNTAIN = BLOCKS.register("digital_leaf_mountain", () -> new LeavesBlock(Block.Properties.of(Material.LEAVES)));
-    public static final RegistryObject<Block> DIGITAL_MOUNTAIN_SAPPLING = BLOCKS.register("digital_mountain_sapling", () -> new DigitalMountainSapling(DigitalMountainTree::new, Block.Properties.copy(Blocks.ACACIA_SAPLING)));
+    //public static final RegistryObject<Block> DIGITAL_MOUNTAIN_SAPPLING = BLOCKS.register("digital_mountain_sapling", () -> new DigitalMountainSapling(DigitalMountainTree::new, Block.Properties.copy(Blocks.ACACIA_SAPLING)));
     public static final RegistryObject<Block> DIGITAL_ICE = BLOCKS.register("digital_ice", () -> new IceBlock(Block.Properties.copy(Blocks.ICE)));
     public static final RegistryObject<Block> DIGITAL_SAND = BLOCKS.register("digital_sand", () -> new Block(Block.Properties.of(Material.SAND)));
     public static final RegistryObject<Block> DIGITAL_DARKNESS = BLOCKS.register("digital_darkness", () -> new Block(Block.Properties.of(Material.EGG)));

@@ -1,19 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.OverboardEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelOverboard;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Vector3f;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -21,33 +21,33 @@ import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
 public class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer<T> {
-    private static final ResourceLocation boardtexture = new ResourceLocation(Base.MOD_ID, "textures/entity/overboard/overboarduv.png");
-    private final EntityModel<T> BoardModel = new ModelOverboard<>();
 
-    public OverboardRenderer(EntityRendererManager renderManager) {
+    private final EntityModel<T> OverBoardModel = new ModelOverboard<>();
+
+    public OverboardRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager);
-        this.shadowSize = 1f;
+        this.shadowRadius = 1f;
 
     }
 
     @Override
-    public void render(@Nonnull T entityIn, float entityYaw, float partialTicks, @Nonnull MatrixStack matrixStackIn, @Nonnull IRenderTypeBuffer bufferIn, int packedLightIn) {
+    public void render(@Nonnull T entityIn, float entityYaw, float partialTicks, @Nonnull PoseStack matrixStackIn, @Nonnull MultiBufferSource bufferIn, int packedLightIn) {
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-        matrixStackIn.push();
+        matrixStackIn.pushPose();
         matrixStackIn.scale(-2F, -2F, 2.0F);
         matrixStackIn.translate(0, -1.5f, 0);
         assert Minecraft.getInstance().player != null;
-        matrixStackIn.rotate(Vector3f.YP.rotation(MathHelper.clamp(Minecraft.getInstance().player.rotationYaw, 0, 90)));
-        this.BoardModel.setRotationAngles(entityIn, 0, 0, 0, 0, 0);
-        IVertexBuilder vertexBuilder = bufferIn.getBuffer(this.BoardModel.getRenderType(this.getEntityTexture(entityIn)));
-        this.BoardModel.render(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
-        matrixStackIn.pop();
+        matrixStackIn.mulPose(Vector3f.YP.rotation(Mth.clamp(Minecraft.getInstance().player.getXRot(), 0, 90)));
+        this.OverBoardModel.setupAnim(entityIn, 0, 0, 0, 0, 0);
+        VertexConsumer vertexBuilder = bufferIn.getBuffer(this.OverBoardModel.renderType(this.getTextureLocation(entityIn)));
+        this.OverBoardModel.renderToBuffer(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        matrixStackIn.popPose();
     }
 
     @Nonnull
     @Override
-    public ResourceLocation getEntityTexture(@Nonnull OverboardEntity entity) {
-        return boardtexture;
+    public ResourceLocation getTextureLocation(@Nonnull OverboardEntity entity) {
+        return CodeLyokoMain.CodeLyokoPrefix("textures/entity/overboard/overboarduv.png");
     }
 
 

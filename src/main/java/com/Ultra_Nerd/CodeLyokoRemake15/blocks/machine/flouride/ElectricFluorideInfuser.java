@@ -87,7 +87,7 @@ public class ElectricFluorideInfuser extends BaseEntityBlock {
     @org.jetbrains.annotations.Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
-        return new ElectricInfusingChamberTileEntity();
+        return null; //new ElectricInfusingChamberTileEntity(p_153215_,p_153216_);
     }
 
 

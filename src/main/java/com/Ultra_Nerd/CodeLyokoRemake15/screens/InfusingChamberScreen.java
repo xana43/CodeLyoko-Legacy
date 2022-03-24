@@ -1,21 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerInfusing;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ChestMenu;
 
 public class InfusingChamberScreen extends ContainerScreen {
+    public InfusingChamberScreen(ChestMenu p_98409_, Inventory p_98410_, Component p_98411_) {
+        super(p_98409_, p_98410_, p_98411_);
+    }
 /*
-    private static final ResourceLocation TEX = new ResourceLocation(Base.MOD_ID + ":textures/gui/flouride_infuser.png");
+    private static final ResourceLocation TEX = new ResourceLocation(CodeLyokoMain.MOD_ID + ":textures/gui/flouride_infuser.png");
     private Inventory player;
     private InfusingChamberTileEntity tileentity;
 

@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -68,7 +68,7 @@ public class QuantumChipletTileEntity extends InventoryBE implements MenuProvide
     @Nonnull
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("container." + Base.MOD_ID + ".quantum_chiplet");
+        return new TranslatableComponent("container." + CodeLyokoMain.MOD_ID + ".quantum_chiplet");
     }
 
 

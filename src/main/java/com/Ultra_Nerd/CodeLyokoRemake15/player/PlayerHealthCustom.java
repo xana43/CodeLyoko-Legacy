@@ -1,25 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.player;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck;
-import com.mojang.blaze3d.vertex.PoseStack;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import org.lwjgl.opengl.GL11;
 
-@OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+
+//@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class PlayerHealthCustom {
-    private static final ResourceLocation HEALTH_TEX = new ResourceLocation(Base.MOD_ID, "textures/gui/lyoko_health_bar.png");
+    private static final ResourceLocation HEALTH_TEX = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/lyoko_health_bar.png");
     private static int Prevfood;
     private static float PrevSaturation;
     private static boolean once = false;
@@ -45,11 +34,11 @@ public class PlayerHealthCustom {
             }
         }
     */
-
+/*
     @SubscribeEvent
     public static void removehunger(final PlayerEvent event) {
         if (event.getPlayer() != null) {
-            if (event.getPlayer().level.dimension() != Level.END && event.getPlayer().level.dimension() != Level.NETHER && event.getPlayer().level.dimension() != Level.OVERWORLD) {
+            if (DimensionCheck.playerNotInVanillaWorld(event.getPlayer())) {
                 event.getPlayer().getFoodData().setFoodLevel(20);
                 event.getPlayer().getFoodData().setSaturation(20);
                 once = false;
@@ -84,6 +73,8 @@ public class PlayerHealthCustom {
         }
 
     }
+
+ */
 
 
 }

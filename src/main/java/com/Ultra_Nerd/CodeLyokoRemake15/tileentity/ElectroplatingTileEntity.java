@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Recipies.TestRecipe;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.CustomItemHandler;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.electroplate.ElectroplatingMachine;
@@ -119,7 +119,7 @@ public class ElectroplatingTileEntity extends BlockEntity implements BlockEntity
                     } else {
                         this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(ElectroplatingMachine.ELECTRO_ACTIVE, false));
                         this.currentTime = 0;
-                        ItemStack output = this.getRecipe(this.inventory.getStackInSlot(0)).getRecipeOutput();
+                        ItemStack output = this.getRecipe(this.inventory.getStackInSlot(0)).getResultItem();
                         this.inventory.insertItem(1, output.copy(), false);
                         this.inventory.decrStackSize(0, 1);
                         dirty = true;
@@ -237,7 +237,7 @@ public class ElectroplatingTileEntity extends BlockEntity implements BlockEntity
                                 == ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().defaultBlockState()) {
                             if (level.getBlockState(new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY(), this.getBlockPos().getZ() - I)) ==
                                     ModBlocks.ELECTROPLATING_MACHINE_FRAME.get().defaultBlockState()) {
-                                Base.Log.debug("foprmed");
+                                CodeLyokoMain.Log.debug("foprmed");
                                 return true;
                             }
                         }
@@ -245,7 +245,7 @@ public class ElectroplatingTileEntity extends BlockEntity implements BlockEntity
                 }
             }
         }
-        Base.Log.debug("dead");
+        CodeLyokoMain.Log.debug("dead");
         return false;
     }
 

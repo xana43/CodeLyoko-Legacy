@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.volcano;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
@@ -20,9 +20,9 @@ public class CustomVolcanoSky implements ISkyRenderHandler {
     private static ResourceLocation skytop = null;
     public CustomVolcanoSky() {
 
-        sky1 = new ResourceLocation(Base.MOD_ID,"textures/skies/volcano/sky1.png");
-        sky2 = new ResourceLocation(Base.MOD_ID,"textures/skies/volcano/sky2.png");
-        skytop = new ResourceLocation(Base.MOD_ID,"textures/skies/volcano/dark.png");
+        sky1 = new ResourceLocation(CodeLyokoMain.MOD_ID,"textures/skies/volcano/sky1.png");
+        sky2 = new ResourceLocation(CodeLyokoMain.MOD_ID,"textures/skies/volcano/sky2.png");
+        skytop = new ResourceLocation(CodeLyokoMain.MOD_ID,"textures/skies/volcano/dark.png");
     }
 
 

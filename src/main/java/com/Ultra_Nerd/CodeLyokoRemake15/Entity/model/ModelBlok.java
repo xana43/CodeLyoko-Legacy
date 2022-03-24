@@ -4,7 +4,7 @@
 // Blockbench plugin created by Gecko
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityBlok;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
@@ -19,7 +19,7 @@ public class ModelBlok extends AnimatedGeoModel<EntityBlok> {
 
     @Override
     public ResourceLocation getTextureLocation(EntityBlok object) {
-        return new ResourceLocation(Base.MOD_ID, "textures/entity/blok/blok.png");
+        return new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/entity/blok/blok.png");
     }
 
     @Override

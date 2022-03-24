@@ -1,54 +1,69 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.trees.BigTree;
-import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.HugeTreeFeatureConfig;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.level.block.grower.AbstractMegaTreeGrower;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
-import net.minecraftforge.common.IPlantable;
+import net.minecraft.world.level.levelgen.feature.featuresize.FeatureSize;
+import net.minecraft.world.level.levelgen.feature.featuresize.FeatureSizeType;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import java.util.OptionalInt;
 import java.util.Random;
 
 public class DigitalForestTree extends TreeFeature {
+static class size extends FeatureSize
+{
 
-/*
-    public static final TreeFeature DIGITAL_TREE_FOREST_CONFIG = (new TreeConfiguration.TreeConfigurationBuilder(
-            (new SimpleBlockStateProvider(ModBlocks.DIGITAL_WOOD_FOREST.get().getDefaultState()), new SimpleBlockStateProvider(Blocks.AIR.getDefaultState())).baseHeight(128)
-            .setSapling((IPlantable) ModBlocks.DIGITAL_TREE_FOREST_SAPLING.get()).build()).;
-
-    public DigitalForestTree(Codec<TreeConfiguration> p_67201_) {
-        super(p_67201_);
+    public size(OptionalInt p_68285_) {
+        super(p_68285_);
     }
 
-
-    @Nullable
     @Override
-    protected ConfiguredFeature<HugeTreeFeatureConfig, ?> getHugeTreeFeature(@Nonnull Random p_225547_1_) {
-        return Feature.MEGA_JUNGLE_TREE.withConfiguration(DIGITAL_TREE_FOREST_CONFIG);
-    }
-
-
-    @Override
-    public Codec<ConfiguredFeature<TreeConfiguration, Feature<TreeConfiguration>>> configuredCodec() {
-        return super.configuredCodec();
-    }
-
-    @Nullable
-    @Override
-    protected ConfiguredFeature<TreeFeatureConfiguration, ?> getTreeFeature(@Nonnull Random randomIn, boolean p_225546_2_) {
+    protected FeatureSizeType<?> type() {
         return null;
     }
 
- */
+    @Override
+    public int getSizeAtHeight(int p_68287_, int p_68288_) {
+        return 0;
+    }
+}
+/*
+    public static final TreeConfiguration DIGITAL_TREE_FOREST_CONFIG = (new TreeConfiguration.TreeConfigurationBuilder(
+            (SimpleStateProvider.simple(ModBlocks.DIGITAL_WOOD_FOREST.get().defaultBlockState())), new GiantTrunkPlacer(1, 1, 1),
+            SimpleStateProvider.simple(Blocks.AIR.defaultBlockState()), ModPlacers.DIGITAL_TREE_PLACER.get()).build();
+
+            //.setSapling((IPlantable) ModBlocks.DIGITAL_TREE_FOREST_SAPLING.get()).build());
+*/
+
+
+
+
+    public DigitalForestTree(Codec<TreeConfiguration> CODEC) {
+        super(CODEC);
+    }
+
+
+
+
+
+    @Override
+    public @NotNull Codec<ConfiguredFeature<TreeConfiguration, Feature<TreeConfiguration>>> configuredCodec() {
+        return TREE.configuredCodec();
+    }
+
+    @Override
+    public boolean place(TreeConfiguration p_204741_, WorldGenLevel p_204742_, ChunkGenerator p_204743_, Random p_204744_, BlockPos p_204745_) {
+        return super.place(p_204741_, p_204742_, p_204743_, p_204744_, p_204745_);
+    }
+
+
+
+
+
 }

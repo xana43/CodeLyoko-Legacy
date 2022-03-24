@@ -1,20 +1,27 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.GuardianEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
 
 public class MathGuardianModel extends EntityModel<GuardianEntity> implements EntityRendererProvider {
+    @Override
+    public void setupAnim(GuardianEntity p_102618_, float p_102619_, float p_102620_, float p_102621_, float p_102622_, float p_102623_) {
+
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack p_103111_, VertexConsumer p_103112_, int p_103113_, int p_103114_, float p_103115_, float p_103116_, float p_103117_, float p_103118_) {
+
+    }
+
+    @Override
+    public EntityRenderer create(Context p_174010_) {
+        return null;
+    }
     /*
     private final EntityModel guardian;
     private final int textureHeight;

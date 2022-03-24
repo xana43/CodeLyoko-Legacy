@@ -1,17 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+
 public class LaptopGUI extends Screen {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Base.MOD_ID, "textures/gui/laptopguibase.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/laptopguibase.png");
     private int x, y, xSize, ySize;
 
     public LaptopGUI(TextComponent titleIn) {

@@ -1,20 +1,62 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class UniversalEnergyStorageContainer extends Container {
-    protected UniversalEnergyStorageContainer(@Nullable ContainerType<?> type, int id) {
+public class UniversalEnergyStorageContainer extends AbstractContainerMenu implements Container {
+    protected UniversalEnergyStorageContainer(@Nullable MenuType<?> type, int id) {
         super(type, id);
     }
 
     @Override
-    public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
+    public int getContainerSize() {
+        return 0;
+    }
+
+    @Override
+    public boolean isEmpty() {
         return false;
+    }
+
+    @Override
+    public ItemStack getItem(int p_18941_) {
+        return null;
+    }
+
+    @Override
+    public ItemStack removeItem(int p_18942_, int p_18943_) {
+        return null;
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int p_18951_) {
+        return null;
+    }
+
+    @Override
+    public void setItem(int p_18944_, ItemStack p_18945_) {
+
+    }
+
+    @Override
+    public void setChanged() {
+
+    }
+
+    @Override
+    public boolean stillValid(@Nonnull Player playerIn) {
+        return false;
+    }
+
+    @Override
+    public void clearContent() {
+
     }
 
    /*

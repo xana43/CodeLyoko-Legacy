@@ -4,12 +4,12 @@
 // Blockbench plugin created by Gecko
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityFan;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class ModelFan extends AnimatedGeoModel<EntityFan> {
+public class ModelFan extends AnimatedGeoModel<EntityFan>{
 
 
 
@@ -26,6 +26,6 @@ public class ModelFan extends AnimatedGeoModel<EntityFan> {
 
     @Override
     public ResourceLocation getAnimationFileLocation(EntityFan animatable) {
-        return new ResourceLocation(Base.MOD_ID, "animations/entities/fan.json");
+        return new ResourceLocation(CodeLyokoMain.MOD_ID, "animations/entities/fan.json");
     }
 }

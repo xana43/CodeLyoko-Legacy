@@ -1,46 +1,47 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.*;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.IResourceManager;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ILightReader;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraftforge.client.extensions.IForgeBakedModel;
-import net.minecraftforge.client.model.IModelBuilder;
-import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.IModelLoader;
-import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
 import net.minecraftforge.client.model.geometry.IModelGeometryPart;
 import net.minecraftforge.client.model.geometry.IMultipartModelGeometry;
-import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.client.model.obj.OBJModel;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.*;
-import java.util.function.Function;
+import java.util.Collection;
+import java.util.Optional;
 
-public class ModelSkid implements IMultipartModelGeometry<OBJModel>, IModelGeometry<OBJModel>, IForgeBakedModel, IModelLoader<OBJModel>, IRenderTypeBuffer, IBakedModel {
+public class ModelSkid implements IMultipartModelGeometry<OBJModel>, IModelGeometry<OBJModel>, IForgeBakedModel, IModelLoader<OBJModel> {
+    @Override
+    public void onResourceManagerReload(ResourceManager p_10758_) {
 
+    }
+
+    @Override
+    public OBJModel read(JsonDeserializationContext deserializationContext, JsonObject modelContents) {
+        return null;
+    }
+
+    @Override
+    public Collection<? extends IModelGeometryPart> getParts() {
+        return null;
+    }
+
+    @Override
+    public Optional<? extends IModelGeometryPart> getPart(String name) {
+        return Optional.empty();
+    }
+/*
     private final OBJLoader loader = new OBJLoader();
     private final OBJModel objModel;
     public IBakedModel bakedModel;
 
     public ModelSkid() {
 
-        objModel = loader.loadModel(new OBJModel.ModelSettings(new ResourceLocation(Base.MOD_ID, "models/entities/skid/skid.obj"), false, true,
+        objModel = loader.loadModel(new OBJModel.ModelSettings(new ResourceLocation(CodeLyokoMain.MOD_ID, "models/entities/skid/skid.obj"), false, true,
                 true, false, null));
         bakedModel = this.getBakedModel();
     }

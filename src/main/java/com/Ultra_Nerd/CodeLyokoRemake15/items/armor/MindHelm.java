@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items.armor;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import javax.annotation.Nonnull;
 
-@Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class MindHelm extends ArmorItem {
     private static int timer = 3600000;
     private byte damage = 1;

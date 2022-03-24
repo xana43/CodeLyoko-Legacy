@@ -24,7 +24,7 @@ public class AntiMarabunta extends Block {
 
 
     public AntiMarabunta() {
-        super(Block.Properties.of(Material.EGG)
+        super(Block.Properties.of(Material.BARRIER)
                 .strength(6, 10)
                 .sound(SoundType.STONE)
                 .randomTicks()

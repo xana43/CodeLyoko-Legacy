@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -335,7 +335,7 @@ public class ComputerKeyboard extends HorizontalDirectionalBlock {
     {
         for(final Direction direction : Direction.values())
         {
-            Computer.put(direction, Base.calculateShapes(direction,shape));
+            Computer.put(direction, CodeLyokoMain.calculateShapes(direction,shape));
         }
     }
     @Override

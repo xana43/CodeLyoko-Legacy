@@ -1,25 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.SlotItemHandler;
-
-import javax.annotation.Nonnull;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import org.jetbrains.annotations.Nullable;
 
 public class ContainerInfusing extends AbstractContainerMenu {
+    protected ContainerInfusing(@Nullable MenuType<?> p_38851_, int p_38852_) {
+        super(p_38851_, p_38852_);
+    }
 
+    @Override
+    public boolean stillValid(Player p_38874_) {
+        return false;
+    }
+/*
     private final ContainerLevelAccess containerLevelAccess;
     private final BlockEntity blockEntity;
     private final ContainerData containerdata;
@@ -32,9 +28,11 @@ public class ContainerInfusing extends AbstractContainerMenu {
   }
 
   //server
+
    public ContainerInfusing(int id, Inventory playerInv, IItemHandler handler, BlockPos pos, ContainerData data)
    {
-       super(ModContainerTypes.CONTAINER_INFUSING.get(),id);
+       super(id);
+       //super(ModContainerTypes.CONTAINER_INFUSING.get(),id);
     this.containerLevelAccess = ContainerLevelAccess.create(playerInv.player.level,pos);
     this.containerdata = data;
        this.addSlot(new SlotItemHandler(handler, 0, 24, 16));
@@ -63,7 +61,7 @@ public class ContainerInfusing extends AbstractContainerMenu {
      * @param tileEntity      the tileEntity of this container
      * @param containerdata
      */
-
+/*
     public ContainerInfusing(final int windowId, final Inventory playerInventory, ContainerLevelAccess containerLevelAccess, final InfusingChamberTileEntity tileEntity, ContainerData containerdata) {
         super(ModContainerTypes.CONTAINER_INFUSING.get(), windowId);
         this.containerLevelAccess = containerLevelAccess;
@@ -96,7 +94,7 @@ public class ContainerInfusing extends AbstractContainerMenu {
  */
 
 
-
+/*
     @Nonnull
     @Override
     public ItemStack quickMoveStack(@Nonnull Player playerIn, int index) {
@@ -148,5 +146,7 @@ public class ContainerInfusing extends AbstractContainerMenu {
     public boolean stillValid(Player p_38874_) {
         return stillValid(p_38874_);
     }
+
+ */
 
 }

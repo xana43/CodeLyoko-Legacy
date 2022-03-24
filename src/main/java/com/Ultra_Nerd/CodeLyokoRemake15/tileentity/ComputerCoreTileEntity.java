@@ -1,12 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class ComputerCoreTileEntity extends InventoryBE {
-    public ComputerCoreTileEntity(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+    public ComputerCoreTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int size) {
+        super(type, pos, state, size);
     }
+    //public ComputerCoreTileEntity(BlockEntityType<?> tileEntityTypeIn) {
+   //     super(tileEntityTypeIn);
+    //}
 	/*
 	private EG storage = new EG(1000000000, 1000000000);
 	@Override

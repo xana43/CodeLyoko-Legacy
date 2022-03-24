@@ -1,26 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensionTypes;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.Carthage.Sector5Dimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DesertSector.DesertDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.DigitalOcean.OceanDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.ForestSector.ForestDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.IceSector.IceDimension;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.dimension.VolcanoSector.VolcanoDimension;
-import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.level.dimension.DimensionType;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.event.RegisterGameTestsEvent;
-import net.minecraftforge.event.world.ExplosionEvent;
-import net.minecraftforge.event.world.RegisterDimensionsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventSubscriber {
-
+/*
     @SubscribeEvent
     public static void explosions(final ExplosionEvent world) {
         if (world.getWorld().dimension instanceof ForestDimension || world.getWorld().dimension instanceof Sector5Dimension ||
@@ -59,6 +44,8 @@ public class ForgeEventSubscriber {
         if (DimensionType.byName(ModDimensionTypes.DimensionTypeVolcano) == null) {
             DimensionManager.registerDimension(ModDimensionTypes.DimensionTypeVolcano, ModDimensions.VOLCANO_DIMENSION.get(), null, true);
         }
-        Base.Log.info("All Dimensions loaded");
+        CodeLyokoMain.Log.info("All Dimensions loaded");
     }
+
+ */
 }

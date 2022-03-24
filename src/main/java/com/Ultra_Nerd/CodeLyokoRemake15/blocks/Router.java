@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -94,7 +93,7 @@ public class Router extends BaseEntityBlock {
 
     public Router(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(ROUTER_DIRECTION, Direction.NORTH).with(ROUTER_ACTIVE, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(ROUTER_DIRECTION, Direction.NORTH).setValue(ROUTER_ACTIVE, false));
     }
 
 
@@ -104,7 +103,7 @@ public class Router extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos,BlockState state) {
-        return ModTileEntities.ROUTER_TILE_ENTITY.get().create(pos, state);
+        return null; //ModTileEntities.ROUTER_TILE_ENTITY.get().create(pos, state);
     }
 
     @Nonnull

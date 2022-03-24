@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.particles.ColoredParticle;
 import com.Ultra_Nerd.CodeLyokoRemake15.particles.TowerParticleData;
 import com.mojang.serialization.Codec;
@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModParticles {
 
-    public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, Base.MOD_ID);
+    public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, CodeLyokoMain.MOD_ID);
 
     public static final RegistryObject<ParticleType<ColoredParticle.ColoredParticleData>> TOWER_PARTICLE = PARTICLES.register("tower_particle",
             () -> new ParticleType<>(false, ColoredParticle.ColoredParticleData.DESERIALIZE) {

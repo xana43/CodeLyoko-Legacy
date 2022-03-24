@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -27,7 +26,7 @@ public class UraniumReactor extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return ModTileEntities.REACTOR_BLOCK_ENTITY.get().create(pos,state);
+        return null;// ModTileEntities.REACTOR_BLOCK_ENTITY.get().create(pos,state);
     }
 	/*
 	

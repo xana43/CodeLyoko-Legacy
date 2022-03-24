@@ -4,15 +4,22 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;// Made with Blockbench 3.
 
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityLaser;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-
-import javax.annotation.Nonnull;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
 
 public class ModelLaserArrow<T extends EntityLaser> extends EntityModel<T> {
-    private final ModelRenderer main;
+    @Override
+    public void setupAnim(T p_102618_, float p_102619_, float p_102620_, float p_102621_, float p_102622_, float p_102623_) {
+
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack p_103111_, VertexConsumer p_103112_, int p_103113_, int p_103114_, float p_103115_, float p_103116_, float p_103117_, float p_103118_) {
+
+    }
+    /*
+    private final EntityRenderer<?> main;
     private final ModelRenderer arrowside1;
     private final ModelRenderer arrowside2;
 
@@ -20,7 +27,12 @@ public class ModelLaserArrow<T extends EntityLaser> extends EntityModel<T> {
         textureWidth = 4096;
         textureHeight = 4096;
 
-        main = new ModelRenderer(this);
+        main = new EntityRenderer<Entity>(this) {
+            @Override
+            public ResourceLocation getTextureLocation(Entity p_114482_) {
+                return null;
+            }
+        };
         main.setRotationPoint(-2.0F, 24.0F, -5.0F);
         main.setTextureOffset(108, 1548).addBox(1.0F, -1.0F, -3.0F, 1.0F, 1.0F, 16.0F, 0.0F, false);
 
@@ -52,4 +64,6 @@ public class ModelLaserArrow<T extends EntityLaser> extends EntityModel<T> {
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
     }
+
+     */
 }

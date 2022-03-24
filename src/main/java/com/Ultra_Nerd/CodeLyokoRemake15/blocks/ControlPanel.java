@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerControlPanelTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -189,7 +188,7 @@ public class ControlPanel extends BaseEntityBlock {
     @org.jetbrains.annotations.Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return ModTileEntities.COMPUTER_CONTROL_PANEL_TILE_ENTITY.get().create(pos, state);
+        return null; //ModTileEntities.COMPUTER_CONTROL_PANEL_TILE_ENTITY.get().create(pos, state);
     }
 
 

@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.ElectricFluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -14,9 +13,11 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.TickingBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -26,7 +27,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ElectricInfusingChamberTileEntity extends BlockEntity implements TickingBlockEntity, MenuProvider {
+public class ElectricInfusingChamberTileEntity extends BlockEntity implements BlockEntityTicker<ElectricInfusingChamberTileEntity>, MenuProvider {
     public ItemStackHandler handler = new ItemStackHandler(3);
     private final EG internal = new EG(90000);
     private String customName;
@@ -36,18 +37,20 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Ti
     private int cookTime;
     public int ENER = internal.getEnergyStored();
 
-
-
-   
-
-    public ElectricInfusingChamberTileEntity() {
-        this(ModTileEntities.ELECTRIC_INFUSING_CHAMBER_TILE_ENTITY.get());
+    public ElectricInfusingChamberTileEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
+        super(p_155228_, p_155229_, p_155230_);
     }
 
-    public ElectricInfusingChamberTileEntity(BlockEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
-    }
 
+    /*
+        public ElectricInfusingChamberTileEntity() {
+            this(ModTileEntities.ELECTRIC_INFUSING_CHAMBER_TILE_ENTITY.get());
+        }
+
+        public ElectricInfusingChamberTileEntity(BlockEntityType<?> tileEntityTypeIn) {
+            super(tileEntityTypeIn);
+        }
+    */
     public boolean hasCapability(Capability<?> capability, Direction facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return true;
@@ -93,7 +96,7 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Ti
 
 
     @Override
-    public BlockPos getPos() {
+    public BlockPos getBlockPos() {
         return this.worldPosition;
     }
 
@@ -109,7 +112,7 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Ti
     }
 
     @Override
-    public void tick() {
+    public void tick(Level worldin,BlockPos pos,BlockState state,ElectricInfusingChamberTileEntity be) {
         assert level != null;
         if (level.hasNeighborSignal(worldPosition)) ENER += 100;
         ItemStack[] Inputs = new ItemStack[]{handler.getStackInSlot(0), handler.getStackInSlot(1)};
@@ -195,4 +198,6 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Ti
     public AbstractContainerMenu createMenu(int windowIn, @Nonnull Inventory playerInventory, @Nonnull Player p_createMenu_3_) {
         return null; //ew ContainerElectricInfusing(windowIn, playerInventory, this);
     }
+
+
 }

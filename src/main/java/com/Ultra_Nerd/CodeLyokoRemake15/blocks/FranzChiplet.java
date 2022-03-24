@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.QuantumChipletTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
@@ -151,7 +150,7 @@ public class FranzChiplet extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get().create(pos, state);
+        return null;// ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get().create(pos, state);
     }
 
 

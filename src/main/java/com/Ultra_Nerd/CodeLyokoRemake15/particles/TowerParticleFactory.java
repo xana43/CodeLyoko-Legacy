@@ -1,28 +1,26 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.particles;
 
-import net.minecraft.client.particle.IAnimatedSprite;
-import net.minecraft.client.particle.IParticleFactory;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.awt.*;
 
-@OnlyIn(Dist.CLIENT)
-public class TowerParticleFactory implements IParticleFactory<TowerParticleData> {
-    private final IAnimatedSprite spriteSet;
 
-    public TowerParticleFactory(IAnimatedSprite sprite) {
+public class TowerParticleFactory implements ParticleProvider<TowerParticleData> {
+    private final SpriteSet spriteSet;
+
+    public TowerParticleFactory(SpriteSet sprite) {
         this.spriteSet = sprite;
     }
 
     @Nullable
     @Override
-    public Particle makeParticle(@Nonnull TowerParticleData typeIn, @Nonnull World worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-        return new TowerParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, new Color(.125F, .25F, 1.F, 1.F), this.spriteSet);
+    public Particle createParticle(@Nonnull TowerParticleData typeIn, @Nonnull ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        return new TowerParticle(worldIn,x,y,z,this.spriteSet,20);
     }
+
 
 }

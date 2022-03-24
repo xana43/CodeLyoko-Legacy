@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
@@ -40,7 +40,7 @@ public class InfusingChamberTileEntity extends InventoryBE implements BlockEntit
     public ItemStackHandler handler = new ItemStackHandler(4);
     private String customName;
     private ItemStack smelting = ItemStack.EMPTY;
-    public static final Component TITLE = new TranslatableComponent("container." + Base.MOD_ID + ".infusing_chamber");
+    public static final Component TITLE = new TranslatableComponent("container." + CodeLyokoMain.MOD_ID + ".infusing_chamber");
     private int burnTime;
     private int currentBurnTime;
     private int cookTime;

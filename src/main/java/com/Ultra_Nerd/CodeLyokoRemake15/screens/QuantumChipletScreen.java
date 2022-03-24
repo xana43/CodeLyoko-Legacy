@@ -1,16 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.containers.QuantumChipletContainer;
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.screens.inventory.ContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ChestMenu;
 
-public class QuantumChipletScreen extends ContainerScreen<QuantumChipletContainer> {
+public class QuantumChipletScreen extends ContainerScreen {
+    public QuantumChipletScreen(ChestMenu p_98409_, Inventory p_98410_, Component p_98411_) {
+        super(p_98409_, p_98410_, p_98411_);
+    }
 
-
+/*
     public QuantumChipletScreen(QuantumChipletContainer Container, PlayerInventory PI, ITextComponent title) {
         super(Container, PI, title);
         this.guiLeft = 0;
@@ -19,7 +19,7 @@ public class QuantumChipletScreen extends ContainerScreen<QuantumChipletContaine
         this.ySize = 166;
     }
 
-    private static final ResourceLocation BACK_TEX = new ResourceLocation(Base.MOD_ID + ":textures/gui/quantumchiplet.png");
+    private static final ResourceLocation BACK_TEX = new ResourceLocation(CodeLyokoMain.MOD_ID + ":textures/gui/quantumchiplet.png");
 
     @Override
     public void render(final int p_render_1_, final int p_render_2_, final float p_render_3_) {
@@ -43,4 +43,6 @@ public class QuantumChipletScreen extends ContainerScreen<QuantumChipletContaine
         int y = (this.height - this.ySize) / 2;
         this.blit(x, y, 0, 0, this.xSize, this.ySize);
     }
+
+ */
 }

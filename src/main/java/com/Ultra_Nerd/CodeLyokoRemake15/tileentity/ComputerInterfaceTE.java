@@ -1,8 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -12,20 +11,26 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.TickingBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 public class ComputerInterfaceTE extends BlockEntity implements BlockEntityTicker<ComputerInterfaceTE> {
-    public ComputerInterfaceTE(BlockEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
-    }
+    //public ComputerInterfaceTE(BlockEntityType<?> tileEntityTypeIn) {
+      //  super(tileEntityTypeIn);
+    //}
     boolean screen = false;
 
     private boolean once = false;
+
+    public ComputerInterfaceTE(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
+        super(p_155228_, p_155229_, p_155230_);
+    }
+    /*
     public ComputerInterfaceTE() {
         this(ModTileEntities.COMPUTER_INTERFACE_TILE_ENTITY.get());
     }
+
+     */
 
 
     private boolean CheckStructure()
@@ -37,9 +42,9 @@ public class ComputerInterfaceTE extends BlockEntity implements BlockEntityTicke
         for(int i = 0; i < l1_1.length;i++)
         {
 
-            if(world != null) {
-                l1_1[i] = world.getBlockState(new BlockPos((this.pos.getX() - 2) + i, this.pos.getY() + 1, this.pos.getZ()));
-                l2_1[i] = world.getBlockState(new BlockPos((this.pos.getX() - 2) + i, this.pos.getY() + 2, this.pos.getZ()));
+            if(level != null) {
+                l1_1[i] = level.getBlockState(new BlockPos((this.getBlockPos().getX() - 2) + i, this.getBlockPos().getY() + 1, this.getBlockPos().getZ()));
+                l2_1[i] = level.getBlockState(new BlockPos((this.getBlockPos().getX() - 2) + i, this.getBlockPos().getY() + 2, this.getBlockPos().getZ()));
                 if(l1_1[4] != null) {
                     if (l1_1[0].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get()
                             && l1_1[4].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get()
@@ -100,7 +105,7 @@ public class ComputerInterfaceTE extends BlockEntity implements BlockEntityTicke
     public void tick(Level p_155253_, BlockPos p_155254_, BlockState p_155255_, ComputerInterfaceTE p_155256_) {
         if(CheckStructure() && !once)
         {
-            Base.Log.info("computer is built");
+            CodeLyokoMain.Log.info("computer is built");
             once = true;
         }
         else if(!CheckStructure())

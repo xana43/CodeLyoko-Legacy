@@ -1,9 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -13,11 +10,6 @@ import net.minecraft.world.entity.monster.Phantom;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import software.bernie.geckolib.animation.builder.AnimationBuilder;
-import software.bernie.geckolib.animation.controller.EntityAnimationController;
-import software.bernie.geckolib.entity.IAnimatedEntity;
-import software.bernie.geckolib.event.AnimationTestEvent;
-import software.bernie.geckolib.manager.EntityAnimationManager;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -87,18 +79,17 @@ public class HornetEntity extends Phantom implements IAnimatable, RangedAttackMo
 
 
 
-
-    @Override
+/*
     protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1D);
+
+        this.getAttribute(new AttributeInstance().KNOCKBACK_RESISTANCE).setBaseValue(1D);
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D);
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
         this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10D);
         this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10D);
         this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
     }
-
+*/
 
     @Override
     public void registerControllers(AnimationData data) {

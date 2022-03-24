@@ -8,7 +8,7 @@ license = "All rights reserved"
 
 modId = "cm" #mandatory
 
-version = "${version}" #mandatory
+version = "${file.jarVersion}}" #mandatory
 
 displayName = "CodeLyoko:Legacy" #mandatory
 

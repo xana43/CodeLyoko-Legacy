@@ -4,14 +4,28 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;// Made with Blockbench 3.
 
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.OverboardEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
-import javax.annotation.Nonnull;
+public class ModelOverboard<T extends OverboardEntity> extends EntityModel<T> implements EntityRendererProvider {
+    @Override
+    public void setupAnim(T p_102618_, float p_102619_, float p_102620_, float p_102621_, float p_102622_, float p_102623_) {
 
-public class ModelOverboard<T extends OverboardEntity> extends EntityModel<T> {
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack p_103111_, VertexConsumer p_103112_, int p_103113_, int p_103114_, float p_103115_, float p_103116_, float p_103117_, float p_103118_) {
+
+    }
+
+    @Override
+    public EntityRenderer create(Context p_174010_) {
+        return null;
+    }
+    /*
     private final ModelRenderer Mainbody;
     private final ModelRenderer bb_main;
 
@@ -19,7 +33,7 @@ public class ModelOverboard<T extends OverboardEntity> extends EntityModel<T> {
         textureWidth = 32;
         textureHeight = 32;
 
-        Mainbody = new ModelRenderer(this);
+        Mainbody = new EntityRenderer<>(this);
         Mainbody.setRotationPoint(0.0F, 24.0F, 0.0F);
         Mainbody.setTextureOffset(0, 0).addBox(-3.0F, -1.0F, -4.0F, 6.0F, 1.0F, 9.0F, 0.0F, false);
         Mainbody.setTextureOffset(0, 0).addBox(-1.0F, -1.0F, -5.0F, 2.0F, 1.0F, 1.0F, 0.0F, false);
@@ -234,4 +248,6 @@ public class ModelOverboard<T extends OverboardEntity> extends EntityModel<T> {
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
     }
+
+     */
 }

@@ -3,22 +3,16 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Util.client.tileentity.renderer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.QuantumChipletTileEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.core.NonNullList;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -26,13 +20,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
-public class QuantumChipletRenderer extends BlockEntityRenderer<QuantumChipletTileEntity> {
+public class QuantumChipletRenderer extends BlockEntityRenderers implements BlockEntityRenderer<QuantumChipletTileEntity> {
 
     private float degrees;
     private int delay;
 
-    public QuantumChipletRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
-        super(rendererDispatcherIn);
+    public QuantumChipletRenderer(BlockEntityRenderDispatcher rendererDispatcherIn) {
+        super();
         degrees = 0;
         delay = 0;
     }
@@ -56,7 +50,7 @@ public class QuantumChipletRenderer extends BlockEntityRenderer<QuantumChipletTi
                         delay = 0;
                     }
                     render(stack, partialTicks, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
-                    matrixStackIn.pop();
+                    matrixStackIn.popPose();
                 }
             }
         }
@@ -64,7 +58,7 @@ public class QuantumChipletRenderer extends BlockEntityRenderer<QuantumChipletTi
 
 
     private void PlaySound(QuantumChipletTileEntity tileEntity) {
-        tileEntity.getWorld().playSound(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(), ModSounds.QUANTUMZAP.get(), SoundCategory.BLOCKS, 1, 1, true);
+        tileEntity.getLevel().playLocalSound(tileEntity.getBlockPos().getX(), tileEntity.getBlockPos().getY(), tileEntity.getBlockPos().getZ(), ModSounds.QUANTUMZAP.get(), SoundSource.BLOCKS, 1, 1, true);
     }
 
 

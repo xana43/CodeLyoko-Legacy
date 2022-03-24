@@ -1,28 +1,25 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ComputerInterfaceContainer;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.IGuiEventListener;
-import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-import javax.annotation.Nullable;
-
 public class ComputerInterfaceUi extends AbstractContainerScreen<ComputerInterfaceContainer> {
+    public ComputerInterfaceUi(ComputerInterfaceContainer p_97741_, Inventory p_97742_, Component p_97743_) {
+        super(p_97741_, p_97742_, p_97743_);
+    }
 
-    private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/computercontrolpanelui.png");
-    private static final ResourceLocation BUTTONTEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/buttonatlas.png");
-    private TextFieldWidget text;
+    @Override
+    protected void renderBg(PoseStack p_97787_, float p_97788_, int p_97789_, int p_97790_) {
+
+    }
+/*
+    private static final ResourceLocation TEXTURES = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/computercontrolpanelui.png");
+    private static final ResourceLocation BUTTONTEXTURES = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/buttonatlas.png");
+    private EditBox text;
     private Widget button;
     private boolean CompActive;
 
@@ -132,7 +129,7 @@ public class ComputerInterfaceUi extends AbstractContainerScreen<ComputerInterfa
                 assert minecraft != null;
                 minecraft.textureManager.bindTexture(BUTTONTEXTURES);
 
-                FontRenderer gunship_font = minecraft.getFontResourceManager().getFontRenderer(new ResourceLocation(Base.MOD_ID + ":gunship"));
+                FontRenderer gunship_font = minecraft.getFontResourceManager().getFontRenderer(new ResourceLocation(CodeLyokoMain.MOD_ID + ":gunship"));
                 assert gunship_font != null;
                 int j = getFGColor();
                 drawCenteredString(gunship_font, getMessage(), x + width / 2, y + (height - 8) / 2, j | MathHelper.ceil(alpha * 255.0F) << 24);
@@ -170,7 +167,7 @@ public class ComputerInterfaceUi extends AbstractContainerScreen<ComputerInterfa
     protected void setTextField() {
         int tx = this.width / 2;
         int ty = this.height / 2;
-        FontRenderer gunship_font = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation(Base.MOD_ID + ":gunship"));
+        FontRenderer gunship_font = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation(CodeLyokoMain.MOD_ID + ":gunship"));
         assert gunship_font != null;
         this.text = new TextFieldWidget(gunship_font, x, ty + 40, this.width, 23, I18n.format("gui.cm.computer_input_main"));
         this.text.setEnableBackgroundDrawing(false);
@@ -190,6 +187,8 @@ public class ComputerInterfaceUi extends AbstractContainerScreen<ComputerInterfa
             this.blit(x, y + 15, 0, 144, this.xSize, this.ySize - 35);
         }
     }
+
+ */
 
 
 }

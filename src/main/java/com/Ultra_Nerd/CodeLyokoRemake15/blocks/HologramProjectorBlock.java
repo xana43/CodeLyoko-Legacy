@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -46,7 +45,7 @@ public class HologramProjectorBlock extends BaseEntityBlock{
     @org.jetbrains.annotations.Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return ModTileEntities.HOLOGRAM_TILE_ENTITY.get().create(pos, state);
+        return null;//ModTileEntities.HOLOGRAM_TILE_ENTITY.get().create(pos, state);
     }
 
 

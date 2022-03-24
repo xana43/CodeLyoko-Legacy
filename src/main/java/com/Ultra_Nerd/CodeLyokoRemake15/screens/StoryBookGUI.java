@@ -1,21 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.BookViewScreen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+
 public class StoryBookGUI extends BookViewScreen {
-
+/*
     private static final int BUTTON_NEXT = 0;
     private static final int BUTTON_PREV = 1;
     private AbstractWidget story;
@@ -48,7 +37,7 @@ public class StoryBookGUI extends BookViewScreen {
 
         int tx = this.width / 2;
         int ty = this.height / 2;
-        FontRenderer gunship_font = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation(Base.MOD_ID + ":gunship"));
+        FontRenderer gunship_font = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation(CodeLyokoMain.MOD_ID + ":gunship"));
         assert gunship_font != null;
         this.story = new AbstractWidget(gunship_font, tx, ty, 200, 33, new TranslatableComponent("gui.cm.story_screen")) {
             @Override
@@ -82,4 +71,6 @@ public class StoryBookGUI extends BookViewScreen {
     public boolean isPauseScreen() {
         return false;
     }
+
+ */
 }

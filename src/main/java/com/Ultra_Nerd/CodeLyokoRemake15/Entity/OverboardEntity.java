@@ -1,31 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.IPacket;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.World;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.extensions.IForgeEntity;
-import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class OverboardEntity extends Entity implements IForgeEntity {
 
@@ -55,21 +44,22 @@ public class OverboardEntity extends Entity implements IForgeEntity {
         super.tick();
 
 
-        if (this.isBeingRidden()) {
-            if (this.getRidingEntity() != null) {
+        if (this.hasPassenger(Objects.requireNonNull(this.getFirstPassenger()))) {
+            if (this.getFirstPassenger() != null) {
                 assert Minecraft.getInstance().player != null;
-                setRotation(Minecraft.getInstance().player.rotationYaw, 0);
+                setRot(Minecraft.getInstance().player.getXRot(), 0);
             }
-            if (KeyBoardAccess.Q()) {
+            if (isShiftKeyDown()) {
                 QDown += 0.0000001f;
 
-                this.move(MoverType.PLAYER, new Vec3d(0, this.getUpVector(10).y + QDown, 0));
-            } else if (KeyBoardAccess.Z()) {
+                this.move(MoverType.PLAYER, new Vec3(0, this.getUpVector(10).y + QDown, 0));
+            } else if (!isShiftKeyDown()) {
 
                 ZDown += 0.0000001f;
-                this.move(MoverType.PLAYER, new Vec3d(0, -(this.getUpVector(10).getY() + ZDown), 0));
+                this.move(MoverType.PLAYER, new Vec3(0, -(this.getUpVector(10).y + ZDown), 0));
 
             }
+            /*
             if (!KeyBoardAccess.Z()) {
                 ZDown = 0;
             }
@@ -119,10 +109,11 @@ public class OverboardEntity extends Entity implements IForgeEntity {
             if(Vel != 0) {
                 Vel -= 0.5f;
             }
-            */
 
 
+*/
         }
+
     }
 
 
@@ -139,7 +130,7 @@ public class OverboardEntity extends Entity implements IForgeEntity {
 
 
 
-
+/*
     @Override
     public boolean processInitialInteract(@Nonnull Player player, @Nonnull Hand hand) {
         if (super.processInitialInteract(player, hand)) {
@@ -157,6 +148,8 @@ public class OverboardEntity extends Entity implements IForgeEntity {
             return true;
         }
     }
+
+ */
 
     @Override
     public boolean isNoGravity() {
@@ -178,6 +171,10 @@ public class OverboardEntity extends Entity implements IForgeEntity {
 
     }
 
+    @Override
+    public float rotate(Rotation p_20004_) {
+        return super.rotate(p_20004_);
+    }
 
     @Override
     protected AABB makeBoundingBox() {

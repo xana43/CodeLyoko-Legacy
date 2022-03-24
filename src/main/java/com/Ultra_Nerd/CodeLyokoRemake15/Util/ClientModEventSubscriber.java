@@ -1,10 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Base.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 
 public class ClientModEventSubscriber {
 
@@ -18,7 +18,7 @@ public class ClientModEventSubscriber {
     @SubscribeEvent
     public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
         //makes certain blocks behave properly
-        ModItems.TEST_MULTIPLAYER_PHONE.get().overrideOtherStackedOnMe(new ResourceLocation(Base.MOD_ID,"message"), (stack, world, entityin) ->
+        ModItems.TEST_MULTIPLAYER_PHONE.get().overrideOtherStackedOnMe(new ResourceLocation(CodeLyokoMain.MOD_ID,"message"), (stack, world, entityin) ->
         {
             if(stack.isEnchanted())
             {
@@ -29,7 +29,7 @@ public class ClientModEventSubscriber {
                 return 0;
             }
         });
-        ModItems.TEST_MULTIPLAYER_PHONE.get().addPropertyOverride(new ResourceLocation(Base.MOD_ID,"charge"), (stack,world,entityin) ->
+        ModItems.TEST_MULTIPLAYER_PHONE.get().addPropertyOverride(new ResourceLocation(CodeLyokoMain.MOD_ID,"charge"), (stack,world,entityin) ->
         {
             switch (stack.getDamage())
             {
@@ -41,7 +41,7 @@ public class ClientModEventSubscriber {
                     return 0;
             }
         });
-        ModItems.JEREMY_LAPTOP.get().addPropertyOverride(new ResourceLocation(Base.MOD_ID, "state"), (stack, world, entityin) -> {
+        ModItems.JEREMY_LAPTOP.get().addPropertyOverride(new ResourceLocation(CodeLyokoMain.MOD_ID, "state"), (stack, world, entityin) -> {
             switch (stack.getDamage()) {
                 case 0:
                     return 0.1f;
@@ -52,7 +52,7 @@ public class ClientModEventSubscriber {
             }
         });
 
-        ModItems.RAW_POLYCARBONATE.get().addPropertyOverride(new ResourceLocation(Base.MOD_ID, "quantity"), (stack, world, entityin) -> {
+        ModItems.RAW_POLYCARBONATE.get().addPropertyOverride(new ResourceLocation(CodeLyokoMain.MOD_ID, "quantity"), (stack, world, entityin) -> {
 
             if (stack.getCount() > 0 && stack.getCount() < 65) {
                 return stack.getCount() / 100f;
@@ -60,7 +60,7 @@ public class ClientModEventSubscriber {
                 return 0f;
             }
         });
-        ModItems.SILICON_WAFER.get().addPropertyOverride(new ResourceLocation(Base.MOD_ID, "quality"), (stack, world, entityin) -> {
+        ModItems.SILICON_WAFER.get().addPropertyOverride(new ResourceLocation(CodeLyokoMain.MOD_ID, "quality"), (stack, world, entityin) -> {
             switch (stack.getDamage()) {
                 case 1:
                     return 0.25f;

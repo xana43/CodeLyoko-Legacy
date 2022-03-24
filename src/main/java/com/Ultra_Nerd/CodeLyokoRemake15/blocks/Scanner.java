@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -224,7 +223,7 @@ public class Scanner extends BaseEntityBlock {
     @org.jetbrains.annotations.Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return  ModTileEntities.SCANNER_TILE_ENTITY.get().create(pos, state);
+        return null;// ModTileEntities.SCANNER_TILE_ENTITY.get().create(pos, state);
     }
 
     @Nonnull

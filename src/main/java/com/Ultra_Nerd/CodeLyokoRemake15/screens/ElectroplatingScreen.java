@@ -1,18 +1,22 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ContainerElectroplate;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ElectroplatingTileEntity;
-import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.gui.screens.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.entity.player.Inventory;
 
-public class ElectroplatingScreen extends ContainerScreen<ContainerElectroplate> {
-    private static final ResourceLocation TEX = new ResourceLocation(Base.MOD_ID + ":textures/gui/electroplating_screen.png");
+public class ElectroplatingScreen extends AbstractContainerScreen<ContainerElectroplate> {
+    public ElectroplatingScreen(ContainerElectroplate p_97741_, Inventory p_97742_, Component p_97743_) {
+        super(p_97741_, p_97742_, p_97743_);
+    }
+
+    @Override
+    protected void renderBg(PoseStack p_97787_, float p_97788_, int p_97789_, int p_97790_) {
+
+    }
+    /*
+    private static final ResourceLocation TEX = new ResourceLocation(CodeLyokoMain.MOD_ID + ":textures/gui/electroplating_screen.png");
     private Inventory player;
     private ElectroplatingTileEntity tileEntity;
 
@@ -46,5 +50,7 @@ public class ElectroplatingScreen extends ContainerScreen<ContainerElectroplate>
         this.blit(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 
     }
+
+     */
 
 }

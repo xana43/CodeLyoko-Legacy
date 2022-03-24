@@ -3,9 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.slots;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-
-import javax.annotation.Nonnull;
 
 public class SlotOut extends Slot {
 
@@ -17,7 +14,7 @@ public class SlotOut extends Slot {
         this.player = player;
     }
 
-
+/*
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack) {
         // TODO Auto-generated method stub
@@ -40,4 +37,6 @@ public class SlotOut extends Slot {
         if (this.getHasStack()) this.rc += Math.min(amount, this.getStack().getCount());
         return super.decrStackSize(amount);
     }
+
+ */
 }

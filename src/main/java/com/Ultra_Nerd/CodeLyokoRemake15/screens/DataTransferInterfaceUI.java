@@ -1,23 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.DataTransferInterfaceMessage;
-import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.PacketHandler;
-import com.Ultra_Nerd.CodeLyokoRemake15.containers.DataTransferInterfaceContainer;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.button.ImageButton;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-
-import java.util.Random;
+import net.minecraft.client.gui.screens.inventory.ContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ChestMenu;
 
 
-public class DataTransferInterfaceUI extends ContainerScreen<DataTransferInterfaceContainer> {
-    private static final ResourceLocation GUI_TEX = new ResourceLocation("cm:textures/gui/data_transfer_interface_gui_2.png");
+public class DataTransferInterfaceUI extends ContainerScreen {
+    public DataTransferInterfaceUI(ChestMenu p_98409_, Inventory p_98410_, Component p_98411_) {
+        super(p_98409_, p_98410_, p_98411_);
+    }
+/*    private static final ResourceLocation GUI_TEX = new ResourceLocation("cm:textures/gui/data_transfer_interface_gui_2.png");
     //
     private ImageButton buttonCarthage;
     private ImageButton buttonForest;
@@ -229,4 +222,6 @@ public class DataTransferInterfaceUI extends ContainerScreen<DataTransferInterfa
         return super.charTyped(key, Keynum);
 
     }
+
+ */
 }

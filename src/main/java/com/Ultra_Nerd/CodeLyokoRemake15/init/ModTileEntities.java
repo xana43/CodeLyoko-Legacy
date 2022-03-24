@@ -1,24 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.*;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test.DataTransferInterfaceTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test.TestTE;
-import net.minecraft.tileentity.TileEntityType;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModTileEntities {
-    public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Base.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, CodeLyokoMain.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<InfusingChamberTileEntity>> INFUSING_CHAMBER_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("infusing_chamber_tile_entity",
                     () -> BlockEntityType.Builder.of(InfusingChamberTileEntity::new,
                             ModBlocks.FLUORIDE_INFUSER.get()).build(null));
-
+/*
     public static final RegistryObject<BlockEntityType<ElectricInfusingChamberTileEntity>> ELECTRIC_INFUSING_CHAMBER_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("electric_infusing_tile_entity",
                     () -> BlockEntityType.Builder.of(ElectricInfusingChamberTileEntity::new,
@@ -62,4 +58,6 @@ public class ModTileEntities {
     public static final RegistryObject<BlockEntityType<ComputerReactorTileEntity>> REACTOR_BLOCK_ENTITY =
             TILE_ENTITY_TYPES.register("computer_reactor_tile_entity",() -> BlockEntityType.Builder.of(ComputerReactorTileEntity::new,
                     ModBlocks.URANUM_REACTOR.get()).build(null));
+
+ */
 }

@@ -2,30 +2,21 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.Input;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.IPacket;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.World;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class HoverboardEntity extends Entity  {
@@ -78,7 +69,7 @@ public class HoverboardEntity extends Entity  {
         super.tick();
 
 
-        if (this.isBeingRidden()) {
+        if (this.hasPassenger(Objects.requireNonNull(this.getFirstPassenger()))) {
             if (this.getFirstPassenger() != null) {
                 assert Minecraft.getInstance().player != null;
                 setRot(Minecraft.getInstance().player.getXRot(), 0);
@@ -158,25 +149,36 @@ public class HoverboardEntity extends Entity  {
         return super.canCollideWith(this);
     }
 
-
-
     @Override
-    public boolean processInitialInteract(@Nonnull Player player, @Nonnull InteractionHand hand) {
-        if (super.processInitialInteract(player, hand)) {
-            return true;
+    public InteractionResult interact(Player player, InteractionHand hand) {
+        if(super.interact(player, hand).consumesAction())
+        {
+            return InteractionResult.SUCCESS;
         }
-        if (player.isSecondaryUseActive()) {
-            return false;
-        } else if (this.isBeingRidden()) {
-            return true;
-        } else {
-            if (!this.world.isRemote) {
+        if(player.isSecondaryUseActive())
+        {
+            return InteractionResult.PASS;
+        }
+        else if(this.hasPassenger(Objects.requireNonNull(this.getFirstPassenger())))
+        {
+            return InteractionResult.PASS;
+        }
+        else
+        {
+            if(this.level.isClientSide)
+            {
                 player.startRiding(this);
             }
 
-            return true;
+                return InteractionResult.SUCCESS;
+
         }
+
+
+
     }
+
+
 
     @Override
     public boolean isNoGravity() {

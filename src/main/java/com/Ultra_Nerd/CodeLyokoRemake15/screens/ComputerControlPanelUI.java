@@ -1,26 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.containers.ComputerControlPanelContainer;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.components.Widget;
-import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ChestMenu;
 
-import javax.annotation.Nullable;
-
-public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanelContainer> {
-
-    private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/computercontrolpanelui.png");
-    private static final ResourceLocation BUTTONTEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/buttonatlas.png");
+public class ComputerControlPanelUI extends ContainerScreen {
+    public ComputerControlPanelUI(ChestMenu p_98409_, Inventory p_98410_, Component p_98411_) {
+        super(p_98409_, p_98410_, p_98411_);
+    }
+/*
+    private static final ResourceLocation TEXTURES = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/computercontrolpanelui.png");
+    private static final ResourceLocation BUTTONTEXTURES = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/buttonatlas.png");
     private Widget text;
     private Widget button;
     private boolean CompActive;
@@ -32,7 +24,7 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
     public ComputerControlPanelUI(ComputerControlPanelContainer screenContainer, Inventory inv, TextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         this.guiLeft = 0;
-        this.guiTop = 0;
+        this.gu = 0;
         this.xSize = 190;
         this.ySize = 143;
 
@@ -121,7 +113,7 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
                 assert minecraft != null;
                 minecraft.textureManager.bindTexture(BUTTONTEXTURES);
 
-                FontRenderer gunship_font = minecraft.getFontResourceManager().getFontRenderer(new ResourceLocation(Base.MOD_ID + ":gunship"));
+                FontRenderer gunship_font = minecraft.getFontResourceManager().getFontRenderer(new ResourceLocation(CodeLyokoMain.MOD_ID + ":gunship"));
                 assert gunship_font != null;
                 int j = getFGColor();
                 drawCenteredString(gunship_font, getMessage(), x + width / 2, y + (height - 8) / 2, j | MathHelper.ceil(alpha * 255.0F) << 24);
@@ -159,7 +151,7 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
     protected void setTextField() {
         int tx = this.width / 2;
         int ty = this.height / 2;
-        FontRenderer gunship_font = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation(Base.MOD_ID + ":gunship"));
+        FontRenderer gunship_font = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation(CodeLyokoMain.MOD_ID + ":gunship"));
         assert gunship_font != null;
         this.text = new TextFieldWidget(gunship_font, x, ty + 40, this.width, 23, I18n.format("gui.cm.computer_input_main"));
         this.text.setEnableBackgroundDrawing(false);
@@ -179,6 +171,8 @@ public class ComputerControlPanelUI extends ContainerScreen<ComputerControlPanel
             this.blit(x, y + 15, 0, 144, this.xSize, this.ySize - 35);
         }
     }
+
+ */
 
 
 }

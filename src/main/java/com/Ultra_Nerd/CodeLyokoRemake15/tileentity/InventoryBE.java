@@ -123,13 +123,13 @@ public class InventoryBE extends BlockEntity {
         return new ItemStackHandler(this.size) {
             @Override
             public ItemStack extractItem(int slot, int amount, boolean simulate) {
-                InventoryBlockEntity.this.update();
+                InventoryBE.this.update();
                 return super.extractItem(slot, amount, simulate);
             }
 
             @Override
             public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-                InventoryBlockEntity.this.update();
+                InventoryBE.this.update();
                 return super.insertItem(slot, stack, simulate);
             }
         };

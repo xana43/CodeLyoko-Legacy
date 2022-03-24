@@ -1,26 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.World;
-import vazkii.patchouli.api.IMultiblock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.Nullable;
-import java.util.Collection;
+public class TestTE extends BlockEntity {
+    public TestTE(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
+        super(p_155228_, p_155229_, p_155230_);
+    }
+    /*
+    private final ResourceLocation ID = new ResourceLocation(CodeLyokoMain.MOD_ID, "test");
 
-public class TestTE extends TileEntity implements IMultiblock {
-    private final ResourceLocation ID = new ResourceLocation(Base.MOD_ID, "test");
-
-    public TestTE(TileEntityType<?> tileEntityTypeIn) {
+    public TestTE(BlockEntity<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
-        Base.registerMultiBlocks(ID, this);
+        CodeLyokoMain.registerMultiBlocks(ID, this);
     }
 
     public TestTE() {
@@ -90,6 +84,8 @@ public class TestTE extends TileEntity implements IMultiblock {
     public Vec3i getSize() {
         return null;
     }
+
+     */
 
 
 }

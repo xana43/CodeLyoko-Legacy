@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Base;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -24,7 +24,7 @@ import java.util.Random;
 
 public class TowerGUI extends Screen {
 
-    private static final ResourceLocation TEXTURES = new ResourceLocation(Base.MOD_ID, "textures/gui/towerinterface.png");
+    private static final ResourceLocation TEXTURES = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/towerinterface.png");
     private EditBox text;
     private AbstractWidget Accepted;
     private byte I = 100;
@@ -156,7 +156,7 @@ public class TowerGUI extends Screen {
     protected void setTextField() {
         int tx = this.width / 2;
         int ty = this.height / 2;
-        Font gunship_font = new Font(resourceLocation -> new FontSet(getMinecraft().textureManager, new ResourceLocation(Base.MOD_ID + ":gunship")));
+        Font gunship_font = new Font(resourceLocation -> new FontSet(getMinecraft().textureManager, new ResourceLocation(CodeLyokoMain.MOD_ID + ":gunship")));
         this.text = new EditBox(gunship_font, tx - 70, ty - 10, 200, 33, new TranslatableComponent("gui.cm.interface_input"));
         this.text.setMaxLength(7);
         this.text.setBordered(false);

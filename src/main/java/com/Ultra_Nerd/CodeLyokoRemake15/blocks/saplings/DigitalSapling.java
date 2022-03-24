@@ -7,7 +7,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SaplingBlock;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.block.grower.AbstractMegaTreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -24,11 +24,12 @@ public class DigitalSapling extends SaplingBlock implements IPlantable {
 
     public static final IntegerProperty PROGRESSFOREST = BlockStateProperties.STAGE;
     protected static final VoxelShape shape = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D);
-    private final AbstractTreeGrower tree;
 
-    public DigitalSapling(AbstractTreeGrower TreeStruct, Properties properties) {
+    public AbstractMegaTreeGrower tree = null;
+    public DigitalSapling(AbstractMegaTreeGrower TreeStruct, Properties properties) {
         super(TreeStruct,properties);
         this.tree = TreeStruct;
+
     }
 
     @Nonnull
@@ -62,6 +63,7 @@ public class DigitalSapling extends SaplingBlock implements IPlantable {
             if (!ForgeEventFactory.saplingGrowTree(world, rand, pos)) {
                 return;
             }
+
             this.tree.growTree(world, world.getChunkSource().getGenerator(), pos, state, rand);
         }
     }

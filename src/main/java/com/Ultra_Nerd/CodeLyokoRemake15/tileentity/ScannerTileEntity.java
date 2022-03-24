@@ -4,13 +4,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.Scanner;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.ScannerFrame;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.ScannerTop;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
-import net.minecraft.block.BlockState;
 import net.minecraft.core.BlockPos;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -24,9 +18,9 @@ public class ScannerTileEntity extends BlockEntity implements BlockEntityTicker 
         super(tileEntityTypeIn,pos,state);
     }
 
-    public ScannerTileEntity() {
-        this(ModTileEntities.SCANNER_TILE_ENTITY);
-    }
+   // public ScannerTileEntity() {
+     //   this(ModTileEntities.SCANNER_TILE_ENTITY);
+   // }
 
     private boolean once = false;
 

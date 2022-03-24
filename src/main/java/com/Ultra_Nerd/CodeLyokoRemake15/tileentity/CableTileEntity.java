@@ -1,10 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -21,13 +17,19 @@ public class CableTileEntity extends BlockEntity implements BlockEntityTicker<Ca
     private boolean connectedToScanner;
     private boolean connectedToComp;
 
+    public CableTileEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
+        super(p_155228_, p_155229_, p_155230_);
+    }
+/*
     public CableTileEntity(BlockEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
 
-    public CableTileEntity() {
-        this(ModTileEntities.CABLE_TILE_ENTITY.get());
-    }
+ */
+
+    //public CableTileEntity() {
+   //     this(ModTileEntities.CABLE_TILE_ENTITY.get());
+    //}
 
 
 
@@ -43,6 +45,7 @@ public class CableTileEntity extends BlockEntity implements BlockEntityTicker<Ca
                 CableTileEntity.CONNECTIONS.get(te).remove(this);
             }
         }
+        return false;
     }
 
     public void connectToScanner() {

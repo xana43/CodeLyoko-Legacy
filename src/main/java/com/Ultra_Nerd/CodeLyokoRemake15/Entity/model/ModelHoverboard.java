@@ -5,16 +5,29 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.HoverboardEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 
-import javax.annotation.Nonnull;
+public class ModelHoverboard<T extends HoverboardEntity> extends EntityModel<T> implements EntityRendererProvider {
+    @Override
+    public void setupAnim(T p_102618_, float p_102619_, float p_102620_, float p_102621_, float p_102622_, float p_102623_) {
 
-public class ModelHoverboard<T extends HoverboardEntity> extends EntityModel<T> {
-    private final EntityRenderer mainbody;
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack p_103111_, VertexConsumer p_103112_, int p_103113_, int p_103114_, float p_103115_, float p_103116_, float p_103117_, float p_103118_) {
+
+    }
+
+    @Override
+    public EntityRenderer create(Context p_174010_) {
+        return null;
+    }
+    /*
+    private final EntityRendererProvider mainbody;
     private final ModelRenderer thruster;
 
     public ModelHoverboard() {
@@ -58,13 +71,24 @@ public class ModelHoverboard<T extends HoverboardEntity> extends EntityModel<T> 
     }
 
     @Override
+    public void setupAnim(T p_102618_, float p_102619_, float p_102620_, float p_102621_, float p_102622_, float p_102623_) {
+
+    }
+
+    @Override
     public void setRotationAngles(@Nonnull HoverboardEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         //previously the render function, render code was moved to a method below
     }
 
     @Override
-    public void render(@Nonnull MatrixStack matrixStack, @Nonnull IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        mainbody.render(matrixStack, buffer, packedLight, packedOverlay);
+    public void renderToBuffer(@Nonnull PoseStack matrixStack, @Nonnull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        mainbody(matrixStack, buffer, packedLight, packedOverlay);
     }
 
+    @Override
+    public @NotNull EntityRenderer create(Context p_174010_) {
+        return null;
+    }
+
+     */
 }

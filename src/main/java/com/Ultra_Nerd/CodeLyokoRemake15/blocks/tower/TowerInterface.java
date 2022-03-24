@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -113,7 +112,7 @@ public class TowerInterface extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get().create(pos, state);
+        return null; //ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get().create(pos, state);
     }
 
 
