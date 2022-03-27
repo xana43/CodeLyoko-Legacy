@@ -1,17 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoRemake15;
 
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.PacketHandler;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.ClientModEventSubscriber;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LiquidHelium;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LyokoCore;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.SeaPylon;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
-import net.minecraft.client.Minecraft;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -20,18 +18,16 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -41,14 +37,14 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.GeckoLib;
 
-import java.util.Random;
+import java.util.Objects;
 
 @Mod("cm")
-@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Bus.MOD)
 public class CodeLyokoMain {
+
     public static ResourceLocation CodeLyokoPrefix(String name)
     {
-        return new ResourceLocation("cm",name);
+        return new ResourceLocation(MOD_ID,name);
     }
     public static final Logger Log = LogManager.getLogger();
     public static final String MOD_ID = "cm";
@@ -97,26 +93,31 @@ public class CodeLyokoMain {
     }*/
 
 public CodeLyokoMain() {
-
+        instance = this;
         final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
         GeckoLib.initialize();
+        //ModBus.addListener(this::PlayerSetup);
 
-        ModBus.addListener(this::commonSetup);
-        ModBus.addListener(this::clientSetup);
+        ModBus.addListener(ClientModEventSubscriber::onFMLClientSetupEvent);
+
+        ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
         //ModParticles.PARTICLES.register(ModBus);
         ModSounds.SOUNDS.register(ModBus);
+        ModBlocks.BLOCKS.register(ModBus);
+    //ModBiome.BIOMES.register(ModBus);
+    //ModBiome.addBiomeTypes();
         ModItems.ITEMS.register(ModBus);
         ModFluids.LIQUIDS.register(ModBus);
-        ModBlocks.BLOCKS.register(ModBus);
-        //ModEntities.Entities.register(ModBus);
+
+
+        ModEntities.Entities.register(ModBus);
         //ModRecipes.RECIPE_SERIALIZER_DEFERRED_REGISTER.register(ModBus);
-        //ModBiome.BIOMES.register(ModBus);
-        //ModContainerTypes.CONTAINER_TYPES.register(ModBus);
-        //ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
+
+        ModContainerTypes.CONTAINER_TYPES.register(ModBus);
+    MinecraftForge.EVENT_BUS.register(this);
        // ModDimensions.MOD_DIMENSION_DEFERRED_REGISTER.register(ModBus);
         //ModWorldFeatures.FEATURES.register(ModBus);
-        instance = this;
-        MinecraftForge.EVENT_BUS.register(this);
+
         //ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfiguration.COMMON_SPEC, "code_lyoko_legacy.toml");
     }
 
@@ -145,58 +146,16 @@ public CodeLyokoMain() {
         return buffer[0];
     }
 
-    @SubscribeEvent
-    public static void onItemInit(final RegistryEvent.Register<Item> Items) {
-        final IForgeRegistry<Item> registry = Items.getRegistry();
-
-        ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof LiquidBlock) &&
-                !(block.get() instanceof LiquidHelium) && !(block.get() instanceof SeaPylon) && !(block.get() instanceof LyokoCore)).map(RegistryObject::get).forEach(block ->
-        {
-            final Item.Properties itemsettings = new Item.Properties().tab(LYOKO_BLOCKS);
-            final BlockItem Itemblocks = new BlockItem(block, itemsettings);
-            Itemblocks.setRegistryName(block.getRegistryName());
-            registry.register(Itemblocks);
-        });
-        Log.debug("Inventory blocks registered");
-    }
 
 
-
-    @SubscribeEvent
-    public static void onRegisterBiome(final RegistryEvent.Register<Biome> event) {
-       // ModBiome.regbio();
-    }
-
-    @SubscribeEvent
-    public void onRegisterEnties(final RegistryEvent.Register<EntityType<?>> event) {
-   //     CustomMobEggs.initEgg();
-    }
-
-    @SubscribeEvent
-    public void tickPast(final TickEvent event) {
-        if ((event.phase == TickEvent.Phase.START || event.phase == TickEvent.Phase.END) && Minecraft.getInstance().level != null) {
-            random--;
-            //CodeLyokoMain.Log.debug(random);
-            if (random == 0 && !XANA) {
-                random = new Random().nextInt(40000);
-                assert Minecraft.getInstance().player != null;
-                Minecraft.getInstance().player.sendMessage(new TextComponent("xana is attacking"),Minecraft.getInstance().player.getUUID());
-                XANA = true;
-            }
-        }
-    }
-    @SubscribeEvent
-    public  void commonSetup(final FMLCommonSetupEvent event) {
-
-        //ModOreGen.genOre();
-        //StructGen.genStruct();
-        //PacketHandler.init();
-
-    }
 
     @SubscribeEvent
     public void PlayerSetup(final EntityJoinWorldEvent event) {
         random = 1000;
+        if(Registry.CHUNK_GENERATOR.containsKey(CodeLyokoPrefix("carthage_chunkgen")))
+        {
+            Log.info("carthage chunkgen present");
+        }
         if (event.getEntity() instanceof Player) {
             CompoundTag tag = event.getEntity().getPersistentData();
             CompoundTag existing;
@@ -214,8 +173,89 @@ public CodeLyokoMain() {
         }
     }
 
-    private void clientSetup(final FMLClientSetupEvent event) {
+
+@Mod.EventBusSubscriber(modid = MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
+public static final class RegistryEventHandler{
+
+    @SubscribeEvent
+    public static void onRegisterBiome(final RegistryEvent.Register<Biome> event) {
+        // ModBiome.regbio();
+
     }
+
+    @SubscribeEvent
+    public static void onItemInit(final RegistryEvent.Register<Item> Items) {
+        final IForgeRegistry<Item> registry = Items.getRegistry();
+
+        ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof LiquidBlock) &&
+                !(block.get() instanceof LiquidHelium) && !(block.get() instanceof SeaPylon) && !(block.get() instanceof LyokoCore)
+                && !(block.get() instanceof AirBlock)).map(RegistryObject::get).forEach(block ->
+        {
+            final Item.Properties itemsettings = new Item.Properties().tab(LYOKO_BLOCKS);
+            final BlockItem Itemblocks = new BlockItem(block, itemsettings);
+            Itemblocks.setRegistryName(Objects.requireNonNull(block.getRegistryName()));
+            registry.register(Itemblocks);
+        });
+
+
+
+
+
+
+
+
+    }
+
+    @SubscribeEvent
+    public void onRegisterEnties(final RegistryEvent.Register<EntityType<?>> event) {
+        //     CustomMobEggs.initEgg();
+    }
+    /*
+        @SubscribeEvent
+        public void tickPast(final TickEvent event) {
+            if ((event.phase == TickEvent.Phase.START || event.phase == TickEvent.Phase.END) && Minecraft.getInstance().level != null) {
+                random--;
+                //CodeLyokoMain.Log.debug(random);
+                if (random == 0 && !XANA) {
+                    random = new Random().nextInt(40000);
+                    assert Minecraft.getInstance().player != null;
+                    Minecraft.getInstance().player.sendMessage(new TextComponent("xana is attacking"),Minecraft.getInstance().player.getUUID());
+                    XANA = true;
+                }
+            }
+        }
+
+     */
+    @SubscribeEvent
+    public static void commonSetup(final FMLCommonSetupEvent event) {
+
+
+        event.enqueueWork(() ->
+                {
+                    PacketHandler.init();
+                    ModDimensions.init();
+
+                }
+        );
+
+        //ModOreGen.genOre();
+        //StructGen.genStruct();
+
+
+    }
+
+
+
+
+
+
+
+}
+
+
+
+
+
 
 
 }

@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -13,7 +14,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
@@ -23,20 +23,19 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-public class TowerInterfaceTileEntity extends BlockEntity implements MenuProvider {
+public class TowerInterfaceTileEntity extends BlockEntity implements MenuProvider
+ {
 
     // May be accessed before onLoad
     @OnlyIn(Dist.CLIENT)
     protected int PlayersPresent;
 
-    public TowerInterfaceTileEntity(BlockEntityType<TowerInterfaceTileEntity> tileEntityTypeIn, BlockPos pos, BlockState state) {
-        super(tileEntityTypeIn,pos,state);
+    public TowerInterfaceTileEntity(BlockPos pos, BlockState state) {
+        super(ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get(), pos,state);
     }
-/*
-    public TowerInterfaceTileEntity() {
-        this(ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get());
-    }
-*/
+
+
+
 
 
 

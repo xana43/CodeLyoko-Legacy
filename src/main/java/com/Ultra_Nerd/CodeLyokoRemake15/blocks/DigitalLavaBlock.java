@@ -28,7 +28,7 @@ public class DigitalLavaBlock extends LiquidBlock {
     public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         super.entityInside(state, worldIn, pos, entityIn);
         entityIn.setRemainingFireTicks(100);
-        entityIn.hurt(new DamageSource(this.getName().toString()),Integer.MAX_VALUE);
+        entityIn.hurt(new DamageSource(this.getRegistryName().toString()),Integer.MAX_VALUE);
     }
 
     @Override

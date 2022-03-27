@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -765,5 +766,10 @@ public class CoolingBlock extends Block {
     @Override
     public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         return shape;
+    }
+
+    @Override
+    public int getSignal(BlockState pState, BlockGetter pLevel, BlockPos pPos, Direction pDirection) {
+        return super.getSignal(pState, pLevel, pPos, pDirection);
     }
 }

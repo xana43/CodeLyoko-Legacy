@@ -1,19 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.Input;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,7 +29,7 @@ public class HoverboardEntity extends Entity  {
 
     }
 
-    private static final Input PlayerInput = new Input();
+
     @Override
     public void onPassengerTurned(Entity p_20320_) {
         super.onPassengerTurned(p_20320_);
@@ -68,7 +64,7 @@ public class HoverboardEntity extends Entity  {
     public void tick() {
         super.tick();
 
-
+/*
         if (this.hasPassenger(Objects.requireNonNull(this.getFirstPassenger()))) {
             if (this.getFirstPassenger() != null) {
                 assert Minecraft.getInstance().player != null;
@@ -133,10 +129,10 @@ public class HoverboardEntity extends Entity  {
             if(Vel != 0) {
                 Vel -= 0.5f;
             }
-            */
 
 
-        }
+
+        }*/
     }
 
     @Override

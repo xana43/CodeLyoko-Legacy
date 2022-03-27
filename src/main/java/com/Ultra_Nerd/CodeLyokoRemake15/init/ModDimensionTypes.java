@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import net.minecraft.resources.ResourceLocation;
 
 public class ModDimensionTypes {
+
     public static final ResourceLocation DimensionTypeForest = new ResourceLocation(CodeLyokoMain.MOD_ID, "forest");
     public static final ResourceLocation DimensionTypeCarthage = new ResourceLocation(CodeLyokoMain.MOD_ID, "sector5");
     public static final ResourceLocation DimensionTypeMountain = new ResourceLocation(CodeLyokoMain.MOD_ID, "mountain");

@@ -25,6 +25,8 @@ public class TransparentBlock extends Block {
 
     }
 
+    
+
     @Override
     public boolean canBeReplaced(BlockState p_60470_, BlockPlaceContext p_60471_) {
         return false;

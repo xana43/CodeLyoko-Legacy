@@ -226,6 +226,27 @@ public class Scanner extends BaseEntityBlock {
         return null;// ModTileEntities.SCANNER_TILE_ENTITY.get().create(pos, state);
     }
 
+
+    @Override
+    public VoxelShape getVisualShape(BlockState state, BlockGetter p_60480_, BlockPos p_60481_, CollisionContext p_60482_) {
+        if (state.getValue(Scanner)) {
+            switch (state.getValue(directionProperty)) {
+                case NORTH:
+                    return shapeN;
+                case SOUTH:
+                    return shapeS;
+                case EAST:
+                    return shapeE;
+                case WEST:
+                    return shapeW;
+                default:
+                    return shapeN;
+            }
+        } else {
+            return blockShape;
+        }
+    }
+
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {

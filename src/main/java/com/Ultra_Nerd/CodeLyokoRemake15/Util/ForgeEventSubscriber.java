@@ -1,9 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.event.RegisterGameTestsEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+//@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventSubscriber {
 /*
     @SubscribeEvent
@@ -15,11 +16,13 @@ public class ForgeEventSubscriber {
             world.getExplosion().clearAffectedBlockPositions();
         }
     }
+    */
 
 
     @SubscribeEvent
     public static void InitDims(final RegisterGameTestsEvent event) {
 
+/*
         if (DimensionType.byName(ModDimensionTypes.DimensionTypeForest) == null) {
             DimensionManager.registerDimension(ModDimensionTypes.DimensionTypeForest, ModDimensions.FOREST_DIMENSION.get(), null, true);
         }
@@ -44,8 +47,10 @@ public class ForgeEventSubscriber {
         if (DimensionType.byName(ModDimensionTypes.DimensionTypeVolcano) == null) {
             DimensionManager.registerDimension(ModDimensionTypes.DimensionTypeVolcano, ModDimensions.VOLCANO_DIMENSION.get(), null, true);
         }
+
+ */
         CodeLyokoMain.Log.info("All Dimensions loaded");
     }
 
- */
+
 }

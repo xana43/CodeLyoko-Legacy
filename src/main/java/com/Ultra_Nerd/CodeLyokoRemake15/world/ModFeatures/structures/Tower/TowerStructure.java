@@ -8,7 +8,8 @@ public class TowerStructure extends StructureFeature {
     public TowerStructure(Codec p_197165_, PieceGeneratorSupplier p_197166_) {
         super(p_197165_, p_197166_);
     }
-    /*public TowerStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+/*
+    public TowerStructure(Function<Dynamic<?>, ? extends NoneFeatureConfiguration> configFactoryIn) {
         super(configFactoryIn);
     }
 
@@ -69,7 +70,7 @@ public class TowerStructure extends StructureFeature {
         return 234592323;
     }
 
-    public static class Start extends StructureStart {
+    public static class Start extends s {
 
         public Start(Structure<?> structure, int chunkX, int chunkZ, BoundingBox boundingBox, int reference, long seed) {
             super(structure, chunkX, chunkZ, boundingBox, reference, seed);
@@ -91,5 +92,7 @@ public class TowerStructure extends StructureFeature {
         }
     }
 
-     */
+ */
+
+
 }

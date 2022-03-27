@@ -246,9 +246,9 @@
   "itemGroup.lyoko_weapons": "Code Lyoko: Legacy - Weapons",
 
   "_comment_4": "special blocks",
-  "death.attack.block.cm.digital_ocean": "%s was de-virtualized, broken down, and swept away by the digital current",
-  "death.attack.block.cm.marabunta": "%s was eaten away by the Marabunta",
-  "death.attack.block.cm.digital_lava_block": "%s was burned by data",
+  "death.attack.cm:digital_ocean": "%s was de-virtualized, broken down, and swept away by the digital current",
+  "death.attack.cm:marabunta": "%s was eaten away by the Marabunta",
+  "death.attack.cm:digital_lava_block": "%s was burned by data",
 
   "_comment_5": "Containers",
   "container.Reactor": "Integrated Reactor",

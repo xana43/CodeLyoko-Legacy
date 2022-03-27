@@ -1,14 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -23,6 +30,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -30,7 +38,6 @@ import javax.annotation.Nullable;
 public class TowerInterface extends BaseEntityBlock {
 
     public static final DirectionProperty DIRINTERFACE = BlockStateProperties.HORIZONTAL_FACING;
-
     private static final VoxelShape SHAPE_N = Block.box(1, 1, 9, 15, 15, 9.1);
     private static final VoxelShape SHAPE_S = Block.box(1, 1, 9, 15, 15, 9.1);
     private static final VoxelShape SHAPE_E = Block.box(9, 1, 1, 9.1, 15, 15);
@@ -48,6 +55,26 @@ public class TowerInterface extends BaseEntityBlock {
         );
         this.registerDefaultState(this.defaultBlockState().setValue(DIRINTERFACE, Direction.NORTH));
 
+    }
+
+
+
+
+
+    @Override
+    public VoxelShape getVisualShape(BlockState state, BlockGetter p_60480_, BlockPos p_60481_, CollisionContext p_60482_) {
+        switch (state.getValue(DIRINTERFACE)) {
+            case NORTH:
+                return SHAPE_N;
+            case SOUTH:
+                return SHAPE_S;
+            case EAST:
+                return SHAPE_E;
+            case WEST:
+                return SHAPE_W;
+            default:
+                return SHAPE_N;
+        }
     }
 
     @Override
@@ -85,7 +112,7 @@ public class TowerInterface extends BaseEntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         // TODO Auto-generated method stub
-        return this.defaultBlockState().setValue(DIRINTERFACE, context.getHorizontalDirection().getOpposite());
+        return super.getStateForPlacement(context).setValue(DIRINTERFACE, context.getHorizontalDirection().getOpposite());
     }
 
 
@@ -112,22 +139,39 @@ public class TowerInterface extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return null; //ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get().create(pos, state);
+        return ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get().create(pos, state);
     }
+
 
 
     @Nonnull
     @Override
     public InteractionResult use(@Nonnull BlockState state, Level worldIn, @Nonnull BlockPos pos, @Nonnull Player player,
                                  @Nonnull InteractionHand handIn, @Nonnull BlockHitResult result) {
-        if (worldIn.isClientSide) {
+        if (!worldIn.isClientSide) {
             BlockEntity Tower = worldIn.getBlockEntity(pos);
             if (Tower instanceof TowerInterfaceTileEntity) {
-                NetworkHooks.openGui((ServerPlayer) player, (TowerInterfaceTileEntity) Tower, pos);
-                return InteractionResult.SUCCESS;
+                MenuProvider thisMenuProvider = new MenuProvider() {
+                    @Override
+                    public @NotNull Component getDisplayName() {
+                        return new TranslatableComponent("screen.tower.gui");
+                    }
+
+                    @Override
+                    public @NotNull AbstractContainerMenu createMenu(int id, Inventory inventory, Player player1) {
+                        return new TowerInterfaceContainer(id,pos,inventory,player1);
+                    }
+                };
+                NetworkHooks.openGui((ServerPlayer) player, thisMenuProvider, Tower.getBlockPos());
+
             }
+            else
+            {
+                throw new IllegalStateException("out provider isn't here");
+            }
+
         }
-        return InteractionResult.FAIL;
+        return InteractionResult.SUCCESS;
     }
 
 

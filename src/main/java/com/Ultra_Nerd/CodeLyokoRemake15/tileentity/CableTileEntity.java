@@ -48,6 +48,8 @@ public class CableTileEntity extends BlockEntity implements BlockEntityTicker<Ca
         return false;
     }
 
+
+
     public void connectToScanner() {
         this.connectedToScanner = true;
     }

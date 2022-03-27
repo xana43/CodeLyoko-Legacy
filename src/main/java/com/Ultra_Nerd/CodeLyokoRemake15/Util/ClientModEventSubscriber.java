@@ -1,23 +1,35 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.*;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;
+import com.Ultra_Nerd.CodeLyokoRemake15.screens.TowerGUI;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 
 public class ClientModEventSubscriber {
 
-/*
-    @SubscribeEvent
-    public static void registerParticles(ParticleFactoryRegisterEvent event) {
-        Minecraft.getInstance().particleEngine.register(ModParticles.TOWER_PARTICLE.get(), ColoredParticle.Factory::new);
-        Minecraft.getInstance().particles.registerFactory(ModParticles.TOWER_PARTICLE_2.get(), TowerParticleFactory::new);
-    }
-
+    /*
+        @SubscribeEvent
+        public static void registerParticles(ParticleFactoryRegisterEvent event) {
+            Minecraft.getInstance().particleEngine.register(ModParticles.TOWER_PARTICLE.get(), ColoredParticle.Factory::new);
+            Minecraft.getInstance().particles.registerFactory(ModParticles.TOWER_PARTICLE_2.get(), TowerParticleFactory::new);
+        }
+    */
     @SubscribeEvent
     public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
-        //makes certain blocks behave properly
+    /*    //makes certain blocks behave properly
         ModItems.TEST_MULTIPLAYER_PHONE.get().overrideOtherStackedOnMe(new ResourceLocation(CodeLyokoMain.MOD_ID,"message"), (stack, world, entityin) ->
         {
             if(stack.isEnchanted())
@@ -74,26 +86,55 @@ public class ClientModEventSubscriber {
                     return 0.0f;
             }
         });
-        RenderType(ModBlocks.TOWER_INTERFACE.get(), RenderType.getCutoutMipped());
-        RenderType(ModFluids.DIGITAL_SEA_BLOCK.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModFluids.DIGITAL_OCEAN.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_DIGITAL_OCEAN.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.TRANSPARENT.get(), RenderType.getCutoutMipped());
-        RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_LIQUID_HELIUM.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModFluids.STILL_LIQUID_HELIUM.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModFluids.LIQUID_HELIUM.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.CHIPLET_FRANZ_BLOCK.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.UV_FOCUS.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.QUANTUM_STEEL_BLOCK.get(), RenderType.getCutoutMipped());
-        RenderTypeLookup.setRenderLayer(ModBlocks.PROJECTOR_FOCUS.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.HOLOPROJECTOR.get(), RenderType.getCutoutMipped());
-        RenderTypeLookup.setRenderLayer(ModBlocks.FALSE_WATER.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.PROJECTOR_FOCUS.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.LYOKO_CORE.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(ModBlocks.FRONTIER_BLOCK.get(), RenderType.getCutoutMipped());
+
+ */
+
+        //RenderType(ModBlocks.TOWER_INTERFACE.get(), RenderType.getCutoutMipped());
+        //RenderType(ModFluids.DIGITAL_SEA_BLOCK.get(), RenderType.cutout());
+        final RenderType cutoutMipped = RenderType.cutoutMipped();
+        final RenderType cutout = RenderType.cutout();
+        final RenderType transluscent = RenderType.translucent();
+        final RenderType transluscentMovingBlock = RenderType.translucentMovingBlock();
+event.enqueueWork(()-> {
+
+    ItemBlockRenderTypes.setRenderLayer(ModFluids.DIGITAL_OCEAN.get(), transluscent);
+    ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_DIGITAL_OCEAN.get(), transluscent);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRANSPARENT.get(), cutoutMipped);
+    ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_LIQUID_HELIUM.get(), transluscent);
+    ItemBlockRenderTypes.setRenderLayer(ModFluids.STILL_LIQUID_HELIUM.get(), transluscent);
+    ItemBlockRenderTypes.setRenderLayer(ModFluids.LIQUID_HELIUM.get(), transluscent);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.CHIPLET_FRANZ_BLOCK.get(), transluscent);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.UV_FOCUS.get(), transluscent);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.QUANTUM_STEEL_BLOCK.get(), transluscent);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.PROJECTOR_FOCUS.get(), cutoutMipped);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.HOLOPROJECTOR.get(), cutoutMipped);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.FALSE_WATER.get(), transluscent);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.PROJECTOR_FOCUS.get(), transluscent);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.LYOKO_CORE.get(), transluscent);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.FRONTIER_BLOCK.get(), cutoutMipped);
+
+
+    MenuScreens.register(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);
+    EntityRenderers.register(ModEntities.BLOK.get(), RendBlok::new);
+    EntityRenderers.register(ModEntities.LASER.get(), RendLaser::new);
+    //EntityRenderers.register(ModEntities.FAN.get(), RendFan::new);
+    //EntityRenderers.register(ModEntities.HORNET.get(), HornetRenderer::new);
+    //EntityRenderers.register(ModEntities.MEGATANK.get(), MegaTankRenderer::new);
+    //EntityRenderers.register(ModEntities.MANTA.get(), MantaRenderer::new);
+    EntityRenderers.register(ModEntities.SKID.get(), RendSkid::new);
+    // EntityRenderers.register(ModEntities.KANKRELAT.get(), KankrelatRenderder::new);
+    EntityRenderers.register(ModEntities.HOVERBOARD.get(), HoverboardRenderer::new);
+    EntityRenderers.register(ModEntities.OVERBOARD.get(), OverboardRenderer::new);
+    EntityRenderers.register(ModEntities.GUARDIAN.get(), GuardianRenderer::new);
+    EntityRenderers.register(ModEntities.OVERBIKE.get(), OverbikeRenderer::new);
+    //BlockEntityRenderers.register(ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get(), QuantumChipletRenderer::new);
+});
+        /*
+
+
         //registers the screens and entities
         MenuScreens.getScreenFactory(ModContainerTypes.CONTAINER_INFUSING.get(), InfusingChamberScreen::new);
-        ScreenManager.<ContainerElectricInfusing, ElectricInfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_ELECTRIC_INFUSING.get(), ElectricInfusingChamberScreen::new);
+        ScreenManager .<ContainerElectricInfusing, ElectricInfusingChamberScreen>registerFactory(ModContainerTypes.CONTAINER_ELECTRIC_INFUSING.get(), ElectricInfusingChamberScreen::new);
         ScreenManager.<TowerInterfaceContainer, TowerGUI>registerFactory(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);
         ScreenManager.<QuantumChipletContainer, QuantumChipletScreen>registerFactory(ModContainerTypes.QUANTUM_CHIPLET_CONTAINER.get(), QuantumChipletScreen::new);
         ScreenManager.<ContainerElectroplate, ElectroplatingScreen>registerFactory(ModContainerTypes.ELECTROPLATING_CONTAINER.get(), ElectroplatingScreen::new);
@@ -101,22 +142,14 @@ public class ClientModEventSubscriber {
                 ComputerControlPanelUI::new);
         ScreenManager.<DataTransferInterfaceContainer, DataTransferInterfaceUI>registerFactory(ModContainerTypes.DATA_TRANSFER_INTERFACE_CONTAINER.get(),
                 DataTransferInterfaceUI::new);
-        EntityRenderers.register(ModEntities.BLOK.get(), RendBlok::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LASER.get(), RendLaser::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.FAN.get(), RendFan::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.HORNET.get(), HornetRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MEGATANK.get(), MegaTankRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MANTA.get(), MantaRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.SKID.get(), RendSkid::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.KANKRELAT.get(), KankrelatRenderder::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.HOVERBOARD.get(), HoverboardRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.OVERBOARD.get(), OverboardRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.GUARDIAN.get(), GuardianRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.OVERBIKE.get(), OverbikeRenderer::new);
-        ClientRegistry.bindTileEntityRenderer(ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get(), QuantumChipletRenderer::new);
+                */
+
+
+
     }
-    
- */
-
-
 }
+    
+
+
+
+

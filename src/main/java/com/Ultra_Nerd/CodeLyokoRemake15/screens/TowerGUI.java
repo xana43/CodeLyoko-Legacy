@@ -2,44 +2,59 @@ package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.font.FontSet;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.jetbrains.annotations.NotNull;
+import org.jline.utils.Log;
 import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.Random;
 
-public class TowerGUI extends Screen {
 
-    private static final ResourceLocation TEXTURES = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/towerinterface.png");
+public class TowerGUI extends AbstractContainerScreen<TowerInterfaceContainer> {
+
+    private static final ResourceLocation TEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/towerinterface.png");
     private EditBox text;
     private AbstractWidget Accepted;
+    private final Font gunship_font = new Font(resourceLocation -> new FontSet(getMinecraft().textureManager, CodeLyokoMain.CodeLyokoPrefix("gunship")));
     private byte I = 100;
-    private int ScreenX, ScreenY, x , y;
 
-    public TowerGUI(Component titleIn) {
+
+
+
+
+    public TowerGUI(TowerInterfaceContainer towerInterfaceContainer, Inventory playerInventory, Component titleIn) {
         
-        super(titleIn);
-        this.width = 200;
-        this.height = 141;
+        super(towerInterfaceContainer,playerInventory, titleIn);
+        //this.width = 200;
+        //this.height = 141;
         //private TowerInterfaceTileEntity tileentity;
-        this.ScreenX = Minecraft.getInstance().screen.width;
-        this.ScreenY = Minecraft.getInstance().screen.height;
+        this.inventoryLabelX = - 90;
+        this.inventoryLabelY = - 90;
+        this.titleLabelX = -90;
+        this.titleLabelY = -90;
 
     }
+
+
+
 
     @Override
     public boolean isMouseOver(double p_isMouseOver_1_, double p_isMouseOver_3_) {
@@ -65,6 +80,8 @@ public class TowerGUI extends Screen {
 
 
 
+
+
     @Override
     public void render(@NotNull PoseStack poseStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(poseStack);
@@ -72,30 +89,35 @@ public class TowerGUI extends Screen {
         this.text.render(poseStack,mouseX, mouseY, partialTicks);
         this.Accepted.render(poseStack, mouseX, mouseY, partialTicks);
 
+
+
     }
 
     @SubscribeEvent
-    public static void NoE(final ScreenEvent.KeyboardKeyEvent event) {
-        if (event.getKeyCode() == GLFW.GLFW_KEY_E) {
+    public static void NoE(final ScreenEvent event) {
+        if (event.getResult().ordinal() == GLFW.GLFW_KEY_E) {
             if (event.getScreen() instanceof TowerGUI) {
                 event.setCanceled(true);
             }
         }
     }
 
+
+
     @Override
-    public void tick() {
+    public void containerTick() {
 
         this.text.tick();
 
-        if (this.text.getValue().matches(new TranslatableComponent("LYOKO").toString()) || this.text.getValue().matches(new TranslatableComponent("CHIMERA").toString())
-                || this.text.getValue().matches(new TranslatableComponent("EARTH").toString())) {
+        if (this.text.getValue().toLowerCase(Locale.ROOT).matches(new TranslatableComponent("LYOKO").getContents()) || this.text.getValue().toUpperCase(Locale.ROOT).matches(new TranslatableComponent("CHIMERA").getKey())
+                || this.text.getValue().toUpperCase(Locale.ROOT).matches(new TranslatableComponent("EARTH").getKey())) {
             I = 100;
             this.Accepted.setFGColor(65280);
+            Log.debug("accepted value");
             this.Accepted.setMessage(new TranslatableComponent("ACCEPTED"));
             this.text.setMessage(new TranslatableComponent(""));
             this.text.setCursorPosition(0);
-        } else if (this.text.getValue().matches(new TranslatableComponent("XANA").toString())) {
+        } else if (this.text.getValue().matches(new TranslatableComponent("XANA").getKey())) {
             I = 100;
             this.Accepted.setFGColor(16711680);
             this.Accepted.setMessage(new TranslatableComponent("ACCEPTED"));
@@ -113,8 +135,7 @@ public class TowerGUI extends Screen {
     @Override
     public void init() {
         super.init();
-        x = (this.width - this.ScreenX) / 2;
-        y = (this.height - this.ScreenY) / 2;
+
         this.setTextField();
 
 
@@ -127,7 +148,7 @@ public class TowerGUI extends Screen {
 
     @Override
     public boolean shouldCloseOnEsc() {
-        return false;
+        return true;
     }
 
 
@@ -147,16 +168,16 @@ public class TowerGUI extends Screen {
     public boolean charTyped(char key, int Keynum) {
         float rand = 1f + new Random().nextFloat() * (4 - 1);
         this.text.charTyped(Character.toUpperCase(key), Keynum);
-        this.getMinecraft().player.playSound(ModSounds.GUISOUND.get(), 1, rand);
+        Objects.requireNonNull(this.getMinecraft().player).playSound(ModSounds.GUISOUND.get(), 1, rand);
         return super.charTyped(key, Keynum);
 
     }
 
 
     protected void setTextField() {
+
         int tx = this.width / 2;
         int ty = this.height / 2;
-        Font gunship_font = new Font(resourceLocation -> new FontSet(getMinecraft().textureManager, new ResourceLocation(CodeLyokoMain.MOD_ID + ":gunship")));
         this.text = new EditBox(gunship_font, tx - 70, ty - 10, 200, 33, new TranslatableComponent("gui.cm.interface_input"));
         this.text.setMaxLength(7);
         this.text.setBordered(false);
@@ -172,23 +193,23 @@ public class TowerGUI extends Screen {
         int ty2 = this.height / 2;
         this.Accepted = new EditBox(gunship_font, tx2 - 95, ty2 + 20, 200, 33, new TranslatableComponent("gui.cm.indicator"));
         this.Accepted.visible = true;
-        this.Accepted.clearFGColor();
         this.Accepted.setFGColor(65280);
-        this.Accepted.isFocused();
         this.Accepted.changeFocus(true);
         this.Accepted.active = true;
 
     }
 
 
+
     @Override
-    public void renderBackground(PoseStack p_96559_, int p_96560_) {
-        super.renderBackground(p_96559_, p_96560_);
-        this.minecraft.getTextureManager().bindForSetup(TEXTURES);
+    public void renderBg(PoseStack p_96559_, float tick,int mouseX, int mouseY) {
 
-        this.blit(p_96559_,x, y, 0, 0, this.ScreenX, this.ScreenY);
+        RenderSystem.setShaderTexture(0,TEXTURES);
+        int x = (this.width - this.imageWidth) /2;
+        int y = (this.height - this.imageHeight) /2;
+
+        this.blit(p_96559_,x, y, 0, 0, this.imageWidth, this.imageHeight);
     }
-
 
 
 

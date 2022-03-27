@@ -17,6 +17,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -179,6 +180,28 @@ public class ScannerFrame extends Block {
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.getRotation(state.getValue(directionPropertyFrame)));
     }
+
+    @Override
+    public @NotNull VoxelShape getVisualShape(BlockState state, BlockGetter p_60480_, BlockPos p_60481_, CollisionContext p_60482_) {
+        if (state.getValue(ScannerFrameInvis)) {
+            switch (state.getValue(directionPropertyFrame)) {
+                case NORTH:
+                    return shapeN;
+                case SOUTH:
+                    return shapeS;
+                case EAST:
+                    return shapeE;
+                case WEST:
+                    return shapeW;
+                default:
+                    return shapeN;
+            }
+        } else {
+            return blockShape;
+        }
+    }
+
+
 
     @Nonnull
     @Override

@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -79,7 +78,7 @@ public class FluorideInfuser extends BaseEntityBlock {
     @org.jetbrains.annotations.Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get().create(pos,state);
+        return null; //ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get().create(pos,state);
     }
 
 

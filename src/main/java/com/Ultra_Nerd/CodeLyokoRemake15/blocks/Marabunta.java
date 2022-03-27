@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -33,6 +32,11 @@ public class Marabunta extends Block  {
         );
     }
 
+    @Override
+    public boolean isRandomlyTicking(BlockState p_49921_) {
+        return true;
+    }
+
 
 
     @Nonnull
@@ -43,20 +47,26 @@ public class Marabunta extends Block  {
         return SHAPE;
     }
 
+
+    @Override
+    public float getFriction() {
+        return Blocks.SOUL_SAND.getFriction();
+    }
+
     /**
      * Called When an Entity Collided with the Block
      */
     @Override
     public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, Entity entityIn) {
-        entityIn.setDeltaMovement(new Vec3(0.2, 0.2, 0.2));
-        entityIn.hurt(new DamageSource(this.getName().toString()), RANDOM.nextInt(10));
+
+        entityIn.hurt(new DamageSource(this.getRegistryName().toString()), RANDOM.nextInt(10));
     }
 
 
     @Override
     public void tick(@Nonnull BlockState state, ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
         // TODO Auto-generated method stub
-        if (worldIn.isClientSide) {
+       // if (worldIn.isClientSide) {
             for (int i = 0; i < 90; ++i) {
                 BlockPos blockpos = pos.offset(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
 
@@ -70,7 +80,7 @@ public class Marabunta extends Block  {
                     worldIn.setBlockAndUpdate(blockpos, ModBlocks.MARABUNTA.get().defaultBlockState());
                 }
             }
-        }
+        //}
     }
 
 

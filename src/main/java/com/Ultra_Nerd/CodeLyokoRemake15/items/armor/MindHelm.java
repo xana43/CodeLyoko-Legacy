@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import javax.annotation.Nonnull;
 
-@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class MindHelm extends ArmorItem {
     private static int timer = 3600000;
     private byte damage = 1;
@@ -27,7 +27,7 @@ public class MindHelm extends ArmorItem {
     }
 
     @SubscribeEvent
-    public static void resting(TickEvent.PlayerTickEvent event) {
+    public void resting(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END || event.phase == TickEvent.Phase.START) {
             if (inventory && timer != 3600000) {
                 timer++;

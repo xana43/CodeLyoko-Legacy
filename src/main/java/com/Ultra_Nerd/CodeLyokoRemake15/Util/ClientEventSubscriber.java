@@ -1,12 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.common.Mod;
-
-@OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+//@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ClientEventSubscriber {
 
     private static final int[] timer = new int[]{131000, 140000, 103000, 144000, 0, 0, 0};
