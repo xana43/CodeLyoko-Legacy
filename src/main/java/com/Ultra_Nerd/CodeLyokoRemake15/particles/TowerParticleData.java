@@ -3,6 +3,8 @@ package com.Ultra_Nerd.CodeLyokoRemake15.particles;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModParticles;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
@@ -45,7 +47,17 @@ public class TowerParticleData implements ParticleOptions {
         return String.format(Locale.ROOT, "%s %.2f,%.2f,%.2f,%.2f", Registry.PARTICLE_TYPE.getKey(this.getType()), this.red, this.green, this.blue, this.alpha);
     }
 
-    public static final ParticleOptions.Deserializer<TowerParticleData> DESERIALIZE = new ParticleOptions.Deserializer<TowerParticleData>() {
+    public static Codec<TowerParticleData> towerParticleDataCodec()
+    {
+        return RecordCodecBuilder.create((instance) -> instance.group(
+                Codec.FLOAT.fieldOf("red").forGetter(o -> o.red),
+                Codec.FLOAT.fieldOf("green").forGetter(o -> o.green),
+                Codec.FLOAT.fieldOf("blue").forGetter(o -> o.blue),
+                Codec.FLOAT.fieldOf("alpha").forGetter(o -> o.alpha)).apply(instance,TowerParticleData::new));
+    }
+
+
+    public static final ParticleOptions.Deserializer<TowerParticleData> DESERIALIZE = new ParticleOptions.Deserializer<>() {
         @Override
         public @NotNull TowerParticleData fromCommand(@Nonnull ParticleType<TowerParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
             reader.expect(' ');

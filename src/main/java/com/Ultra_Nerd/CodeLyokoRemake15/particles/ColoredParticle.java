@@ -4,6 +4,8 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModParticles;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
@@ -141,7 +143,15 @@ public class ColoredParticle extends Particle implements SpriteSet {
             buffer.writeFloat(this.blue);
             buffer.writeFloat(this.alpha);
         }
-
+public static Codec<ColoredParticleData> coloredCodec()
+{
+    return RecordCodecBuilder.create((instance -> instance.group(
+            Codec.FLOAT.fieldOf("red").forGetter(o -> o.red),
+            Codec.FLOAT.fieldOf("green").forGetter(o -> o.green),
+            Codec.FLOAT.fieldOf("blue").forGetter(o -> o.blue),
+            Codec.FLOAT.fieldOf("alpha").forGetter(o -> o.alpha)
+    ).apply(instance,ColoredParticleData::new)));
+}
         @Nonnull
         @Override
         public String writeToString() {

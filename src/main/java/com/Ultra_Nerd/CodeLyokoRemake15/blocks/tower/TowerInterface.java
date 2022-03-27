@@ -55,6 +55,7 @@ public class TowerInterface extends BaseEntityBlock {
         );
         this.registerDefaultState(this.defaultBlockState().setValue(DIRINTERFACE, Direction.NORTH));
 
+
     }
 
 
@@ -84,6 +85,7 @@ public class TowerInterface extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+
         builder.add(DIRINTERFACE);
     }
 
@@ -95,18 +97,13 @@ public class TowerInterface extends BaseEntityBlock {
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
-        switch (state.getValue(DIRINTERFACE)) {
-            case NORTH:
-                return SHAPE_N;
-            case SOUTH:
-                return SHAPE_S;
-            case EAST:
-                return SHAPE_E;
-            case WEST:
-                return SHAPE_W;
-            default:
-                return SHAPE_N;
-        }
+        return switch (state.getValue(DIRINTERFACE)) {
+            case NORTH -> SHAPE_N;
+            case SOUTH -> SHAPE_S;
+            case EAST -> SHAPE_E;
+            case WEST -> SHAPE_W;
+            default -> SHAPE_N;
+        };
     }
 
     @Override
@@ -158,7 +155,7 @@ public class TowerInterface extends BaseEntityBlock {
                     }
 
                     @Override
-                    public @NotNull AbstractContainerMenu createMenu(int id, Inventory inventory, Player player1) {
+                    public @NotNull AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory, @NotNull Player player1) {
                         return new TowerInterfaceContainer(id,pos,inventory,player1);
                     }
                 };

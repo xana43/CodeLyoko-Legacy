@@ -2,16 +2,19 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.*;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
-import com.Ultra_Nerd.CodeLyokoRemake15.init.ModFluids;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
+import com.Ultra_Nerd.CodeLyokoRemake15.particles.ColoredParticle;
+import com.Ultra_Nerd.CodeLyokoRemake15.particles.TowerParticleFactory;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.TowerGUI;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -147,6 +150,17 @@ event.enqueueWork(()-> {
 
 
     }
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void registerParticleFactories(ParticleFactoryRegisterEvent event)
+    {
+        final ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
+
+        particleEngine.register(ModParticles.TOWER_PARTICLE.get(), ColoredParticle.Factory::new);
+        particleEngine.register(ModParticles.TOWER_PARTICLE_2.get(), TowerParticleFactory::new);
+
+    }
+
 }
     
 

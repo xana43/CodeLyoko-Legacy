@@ -1,16 +1,51 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.DigitalForestTree;
+import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.BendingTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class ModFeature {
 
-    public static final DeferredRegister<Feature<?>> LYOKOFEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, CodeLyokoMain.MOD_ID);
+    //public static final DeferredRegister<Feature<?>> LYOKOFEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, CodeLyokoMain.MOD_ID);
 
-    public static final RegistryObject<Feature<TreeConfiguration>> DIGITAL_FOREST_TREE = LYOKOFEATURES.register("digital_forest_tree", () -> new DigitalForestTree(TreeConfiguration.CODEC));
+    //public static final RegistryObject<Feature<TreeConfiguration>> DIGITAL_FOREST_TREE = LYOKOFEATURES.register("digital_forest_tree", () -> new DigitalForestTree(TreeConfiguration.CODEC));
+
+//configured features
+public static final Holder<ConfiguredFeature<TreeConfiguration,?>> DIGITAL_FOREST_TREE_FEATURE =
+        FeatureUtils.register("digital_forest_tree",Feature.TREE,new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBlocks.DIGITAL_WOOD_FOREST.get()),
+                new StraightTrunkPlacer(10,10,10),
+                BlockStateProvider.simple(Blocks.AIR),
+                new BlobFoliagePlacer(ConstantInt.of(0),ConstantInt.of(0),0),
+                new TwoLayersFeatureSize(Integer.MAX_VALUE,10,10)).build());
+public static final Holder<ConfiguredFeature<TreeConfiguration,?>> DIGITAL_MOUNTAIN_TREE_FEATURE =
+        FeatureUtils.register("digital_mountain_tree",Feature.TREE,new TreeConfiguration.TreeConfigurationBuilder(
+                    BlockStateProvider.simple(ModBlocks.DIGITAL_WOOD_MOUNTAIN.get()),
+                    new BendingTrunkPlacer(10,10,10,10,ConstantInt.of(10)),
+                    BlockStateProvider.simple(ModBlocks.DIGITAL_LEAF_MOUNTAIN.get()),
+                    new BlobFoliagePlacer(ConstantInt.of(5),ConstantInt.of(5),5),
+                    new TwoLayersFeatureSize(10,10,10)).build());
+
+public static final Holder<PlacedFeature> DIGITAL_FOREST_PLACED = PlacementUtils.register("forest_placed",
+        DIGITAL_FOREST_TREE_FEATURE, VegetationPlacements.treePlacement(
+                PlacementUtils.countExtra(3,0.1f,2)
+        )
+        );
+    public static final Holder<PlacedFeature> DIGITAL_MOUNTAIN_PLACED = PlacementUtils.register("mountain_placed",
+            DIGITAL_FOREST_TREE_FEATURE, VegetationPlacements.treePlacement(
+                    PlacementUtils.countExtra(3,0.1f,2)
+            )
+    );
 }

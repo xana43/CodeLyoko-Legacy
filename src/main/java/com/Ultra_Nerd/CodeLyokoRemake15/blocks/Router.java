@@ -39,9 +39,7 @@ public class Router extends BaseEntityBlock {
             Block.box(8, 1, 8, 9, 2, 9),
             Block.box(10, 1, 8, 11, 2, 9),
             Block.box(12, 1, 8, 13, 2, 9)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     private static final VoxelShape S = Stream.of(
             Block.box(1.75, 1, 7.25, 2.75, 3, 8.25),
             Block.box(0.75, 0, 8.25, 16.75, 3, 16.25),
@@ -55,9 +53,7 @@ public class Router extends BaseEntityBlock {
             Block.box(7.75, 1, 7.25, 8.75, 2, 8.25),
             Block.box(5.75, 1, 7.25, 6.75, 2, 8.25),
             Block.box(3.75, 1, 7.25, 4.75, 2, 8.25)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     private static final VoxelShape E = Stream.of(
             Block.box(7.5, 1, 13.75, 8.5, 3, 14.75),
             Block.box(8.5, 0, -0.25, 16.5, 3, 15.75),
@@ -71,9 +67,7 @@ public class Router extends BaseEntityBlock {
             Block.box(7.5, 1, 7.75, 8.5, 2, 8.75),
             Block.box(7.5, 1, 9.75, 8.5, 2, 10.75),
             Block.box(7.5, 1, 11.75, 8.5, 2, 12.75)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     private static final VoxelShape W = Stream.of(
             Block.box(8.25, 1, 1.5, 9.25, 3, 2.5),
             Block.box(0.25, 0, 0.5, 8.25, 3, 16.5),

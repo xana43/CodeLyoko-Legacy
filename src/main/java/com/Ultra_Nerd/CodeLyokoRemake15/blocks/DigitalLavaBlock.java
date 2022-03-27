@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class DigitalLavaBlock extends LiquidBlock {
@@ -28,7 +29,7 @@ public class DigitalLavaBlock extends LiquidBlock {
     public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         super.entityInside(state, worldIn, pos, entityIn);
         entityIn.setRemainingFireTicks(100);
-        entityIn.hurt(new DamageSource(this.getRegistryName().toString()),Integer.MAX_VALUE);
+        entityIn.hurt(new DamageSource(Objects.requireNonNull(this.getRegistryName()).toString()).bypassArmor().setIsFire(),Integer.MAX_VALUE);
     }
 
     @Override

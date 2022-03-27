@@ -7,6 +7,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LiquidHelium;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LyokoCore;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.SeaPylon;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
+import com.mojang.logging.LogUtils;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
@@ -32,9 +33,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
 import java.util.Objects;
@@ -46,7 +46,7 @@ public class CodeLyokoMain {
     {
         return new ResourceLocation(MOD_ID,name);
     }
-    public static final Logger Log = LogManager.getLogger();
+    public static final Logger Log = LogUtils.getLogger();
     public static final String MOD_ID = "cm";
     //public static final Map<ResourceLocation, IMultiBlock> MULTIBLOCK_MAP = new ConcurrentHashMap<>();
 
@@ -101,7 +101,7 @@ public CodeLyokoMain() {
         ModBus.addListener(ClientModEventSubscriber::onFMLClientSetupEvent);
 
         ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
-        //ModParticles.PARTICLES.register(ModBus);
+        ModParticles.PARTICLES.register(ModBus);
         ModSounds.SOUNDS.register(ModBus);
         ModBlocks.BLOCKS.register(ModBus);
     //ModBiome.BIOMES.register(ModBus);
@@ -151,6 +151,7 @@ public CodeLyokoMain() {
 
     @SubscribeEvent
     public void PlayerSetup(final EntityJoinWorldEvent event) {
+
         random = 1000;
         if(Registry.CHUNK_GENERATOR.containsKey(CodeLyokoPrefix("carthage_chunkgen")))
         {

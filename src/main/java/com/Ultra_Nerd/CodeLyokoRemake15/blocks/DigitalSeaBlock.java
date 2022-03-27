@@ -31,7 +31,7 @@ public class DigitalSeaBlock extends LiquidBlock {
     @Override
     public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         if (!(entityIn instanceof MantaEntity)) {
-            entityIn.hurt(new DamageSource(Objects.requireNonNull(this.getRegistryName()).toString()), Byte.MAX_VALUE);
+            entityIn.hurt(new DamageSource(Objects.requireNonNull(this.getRegistryName()).toString()).bypassArmor(), Byte.MAX_VALUE);
         }
     }
 

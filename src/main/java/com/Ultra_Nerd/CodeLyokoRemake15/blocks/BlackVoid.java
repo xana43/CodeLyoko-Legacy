@@ -47,9 +47,7 @@ public class BlackVoid extends Block {
             Block.box(9.024999999999991, 0, 13.024999999999999, 16.02500000000001, 0.5, 14.024999999999997),
             Block.box(9.024999999999991, 0, 15.024999999999999, 16.02500000000001, 0.5, 16.025),
             Block.box(1.5249999999999915, 0, 15.024999999999999, 8.52500000000001, 0.5, 16.025)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public BlackVoid() {
         super(Block.Properties.of(Material.STRUCTURAL_AIR)

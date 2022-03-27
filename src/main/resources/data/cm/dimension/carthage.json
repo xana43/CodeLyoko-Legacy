@@ -1,4 +1,5 @@
 {
+
   "type": "cm:carthage_type",
   "generator": {
     "type": "cm:carthage_chunkgen",
@@ -8,5 +9,7 @@
       "horizontalVariance": 8
     }
 
-  }
+
+  },
+  "type": "minecraft:overworld"
 }

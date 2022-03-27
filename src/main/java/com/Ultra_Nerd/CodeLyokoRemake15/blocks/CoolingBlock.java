@@ -754,9 +754,7 @@ public class CoolingBlock extends Block {
             Block.box(-13, 0, -9, -9, 32, -7),
             Block.box(-13, 0, 7, -9, 32, 9),
             Block.box(-13, 0, 23, -9, 32, 25)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public CoolingBlock(Properties properties) {
         super(properties);
