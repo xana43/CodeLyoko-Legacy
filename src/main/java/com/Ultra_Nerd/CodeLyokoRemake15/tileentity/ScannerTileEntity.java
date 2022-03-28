@@ -10,8 +10,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
-public class ScannerTileEntity extends BlockEntity implements BlockEntityTicker {
+import java.util.Objects;
+
+public class ScannerTileEntity extends BlockEntity implements BlockEntityTicker<ScannerTileEntity> {
 
 
     public ScannerTileEntity(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
@@ -25,7 +28,7 @@ public class ScannerTileEntity extends BlockEntity implements BlockEntityTicker 
     private boolean once = false;
 
     @Override
-    public void tick(Level p_155253_, BlockPos p_155254_, BlockState p_155255_, BlockEntity p_155256_) {
+    public void tick(@NotNull Level p_155253_, @NotNull BlockPos p_155254_, @NotNull BlockState p_155255_, @NotNull ScannerTileEntity p_155256_) {
         if (checkStructure() && !once) {
             activateStructure();
             once = true;
@@ -37,6 +40,7 @@ public class ScannerTileEntity extends BlockEntity implements BlockEntityTicker 
 
     private boolean checkStructure() {
         BlockState height1, height2, height3;
+        assert level != null;
         height1 = level.getBlockState(new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY() + 1, this.getBlockPos().getZ()));
         height2 = level.getBlockState(new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY() + 2, this.getBlockPos().getZ()));
         height3 = level.getBlockState(new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY() + 3, this.getBlockPos().getZ()));
@@ -50,7 +54,7 @@ public class ScannerTileEntity extends BlockEntity implements BlockEntityTicker 
     }
 
     private void activateStructure() {
-        getLevel().setBlockAndUpdate(this.getBlockPos(), getLevel().getBlockState(getBlockPos()).setValue(Scanner.Scanner, true));
+        Objects.requireNonNull(getLevel()).setBlockAndUpdate(this.getBlockPos(), getLevel().getBlockState(getBlockPos()).setValue(Scanner.Scanner, true));
         BlockPos h1, h2, h3;
         h1 = new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY() + 1, this.getBlockPos().getZ());
         h2 = new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY() + 2, this.getBlockPos().getZ());
@@ -66,7 +70,7 @@ public class ScannerTileEntity extends BlockEntity implements BlockEntityTicker 
         h2 = new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY() + 2, this.getBlockPos().getZ());
         h3 = new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY() + 3, this.getBlockPos().getZ());
 
-        if (getLevel().getBlockState(this.getBlockPos()).getBlock() == ModBlocks.SCANNER_BASE.get()) {
+        if (Objects.requireNonNull(getLevel()).getBlockState(this.getBlockPos()).getBlock() == ModBlocks.SCANNER_BASE.get()) {
             getLevel().setBlockAndUpdate(this.getBlockPos(), getLevel().getBlockState(this.getBlockPos()).setValue(Scanner.Scanner, false));
         }
         if (getLevel().getBlockState(h1).getBlock() == ModBlocks.SCANNER_FRAME.get()) {

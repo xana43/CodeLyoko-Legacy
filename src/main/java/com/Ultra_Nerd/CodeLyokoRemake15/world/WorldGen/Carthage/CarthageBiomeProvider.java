@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen.Carthage;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBiome;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -8,7 +9,6 @@ import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeSource;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.Climate;
 
 import java.util.Collections;
@@ -23,12 +23,12 @@ public class CarthageBiomeProvider extends BiomeSource {
     private final Holder<Biome> biomeHolder;
     public static final Codec<CarthageBiomeProvider> CARTHAGE_BIOME_PROVIDER_CODEC = RegistryOps.retrieveRegistry(Registry.BIOME_REGISTRY)
             .xmap(CarthageBiomeProvider::new,CarthageBiomeProvider::getBiomeRegistry).codec();
-    private static final List<ResourceKey<Biome>> SPAWN = Collections.singletonList(Biomes.END_BARRENS);
+    private static final List<ResourceKey<Biome>> SPAWN = Collections.singletonList(ModBiome.SECTOR_5);
     public CarthageBiomeProvider(Registry<Biome> registry)
     {
         super(getSpawnBiomes(registry));
         this.thisRegistry = registry;
-        biomeHolder = registry.getHolderOrThrow(Biomes.END_BARRENS);
+        biomeHolder = registry.getHolderOrThrow(ModBiome.SECTOR_5);
     }
 
 

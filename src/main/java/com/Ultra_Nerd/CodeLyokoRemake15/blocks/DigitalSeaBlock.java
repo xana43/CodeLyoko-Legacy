@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.MaterialColor;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -24,14 +23,14 @@ public class DigitalSeaBlock extends LiquidBlock {
 
 
     public DigitalSeaBlock(Supplier<? extends FlowingFluid> supplier) {
-        super(supplier, BlockBehaviour.Properties.copy(Blocks.WATER).noOcclusion().color(MaterialColor.WATER));
+        super(supplier, BlockBehaviour.Properties.copy(Blocks.WATER));
     }
 
 
     @Override
     public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         if (!(entityIn instanceof MantaEntity)) {
-            entityIn.hurt(new DamageSource(Objects.requireNonNull(this.getRegistryName()).toString()).bypassArmor(), Byte.MAX_VALUE);
+            entityIn.hurt(new DamageSource(Objects.requireNonNull(this.getRegistryName()).toString()).bypassArmor(), Float.MAX_VALUE);
         }
     }
 

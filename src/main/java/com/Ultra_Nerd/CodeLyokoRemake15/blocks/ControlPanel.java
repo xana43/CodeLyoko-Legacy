@@ -192,7 +192,10 @@ public class ControlPanel extends BaseEntityBlock {
     }
 
 
-
+    @Override
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
+    }
 
     @Nonnull
     @Override

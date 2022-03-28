@@ -1,17 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
-import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.Map;
 
 public class ModBiome {
 
@@ -24,28 +22,51 @@ public class ModBiome {
 
 
 
-    private static ResourceKey<Biome> makeResourceKey(String name)
+    private static ResourceKey<Biome> makeResourceKey(String name, Biome.BiomeCategory biomeCategory, int temp, Biome.TemperatureModifier temperatureModifier,BiomeSpecialEffects biomeSpecialEffects,MobSpawnSettings mobSpawnSettings)
     {
         BIOMES.register(name,() -> new Biome.BiomeBuilder()
                 .precipitation(Biome.Precipitation.NONE)
-                .biomeCategory(Biome.BiomeCategory.NONE)
-                .temperature(0)
-                .specialEffects(new BiomeSpecialEffects.Builder().fogColor(0).waterColor(0).waterFogColor(0).skyColor(0).build())
-                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
-                .temperatureAdjustment(Biome.TemperatureModifier.NONE)
+                .biomeCategory(biomeCategory)
+                .temperature(temp)
+                .temperatureAdjustment(temperatureModifier)
+                .downfall(0)
+                .specialEffects(biomeSpecialEffects)
+                .mobSpawnSettings(mobSpawnSettings)
+                .generationSettings(BiomeGenerationSettings.EMPTY)
                 .build());
         return ResourceKey.create(Registry.BIOME_REGISTRY, CodeLyokoMain.CodeLyokoPrefix(name));
     }
 
 
 
-    public static final ResourceKey<Biome> SECTOR_5 = makeResourceKey("sector5");
+    public static final ResourceKey<Biome> SECTOR_5 = makeResourceKey("sector5", Biome.BiomeCategory.NONE,0, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
+            .skyColor(2387)
+            .waterColor(2387)
+            .backgroundMusic(ModSounds.LAZY_SECTOR5.get())
+            .fogColor(2387)
+            .waterFogColor(2387)
+            .waterColor(2387).build()
+            ,MobSpawnSettings.EMPTY);
+
+    public static final ResourceKey<Biome> FOREST_SECTOR = makeResourceKey("forest", Biome.BiomeCategory.NONE,0, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
+                    .skyColor(2387)
+                    .waterColor(2387)
+                    .backgroundMusic(ModSounds.LAZY_FOREST.get())
+                    .fogColor(2387)
+                    .waterFogColor(2387)
+                    .waterColor(2387).build()
+            ,MobSpawnSettings.EMPTY);
+
+
+
+    /*
     public static final ResourceKey<Biome> FOREST_SECTOR = makeResourceKey("forest_sector");
     public static final ResourceKey<Biome> ICE_SECTOR = makeResourceKey("ice_sector");
     public static final ResourceKey<Biome> DESERT_SECTOR = makeResourceKey("desert_sector");
     public static final ResourceKey<Biome> MOUNTAIN_SECTOR = makeResourceKey("mountain_sector");
 
     public static final ResourceKey<Biome> VOLCANO_SECTOR = makeResourceKey("volcano_sector");
+    */
     public static final BiomeDictionary.Type LYOKO = BiomeDictionary.Type.getType("Lyoko");
 
 
@@ -56,26 +77,15 @@ public class ModBiome {
 
         BiomeDictionary.addTypes(SECTOR_5,LYOKO,BiomeDictionary.Type.VOID,BiomeDictionary.Type.DENSE,BiomeDictionary.Type.SPOOKY);
         BiomeDictionary.addTypes(FOREST_SECTOR,LYOKO,BiomeDictionary.Type.FOREST,BiomeDictionary.Type.LUSH,BiomeDictionary.Type.JUNGLE);
-        BiomeDictionary.addTypes(DESERT_SECTOR,LYOKO, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY);
+       /* BiomeDictionary.addTypes(DESERT_SECTOR,LYOKO, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY);
         BiomeDictionary.addTypes(ICE_SECTOR,LYOKO, BiomeDictionary.Type.COLD, BiomeDictionary.Type.MODIFIED, BiomeDictionary.Type.SNOWY,BiomeDictionary.Type.SPARSE);
         BiomeDictionary.addTypes(MOUNTAIN_SECTOR,LYOKO, BiomeDictionary.Type.MOUNTAIN,BiomeDictionary.Type.SPARSE);
         BiomeDictionary.addTypes(VOLCANO_SECTOR,LYOKO, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HOT, BiomeDictionary.Type.NETHER);
 
-    }
-
-    //for making the biomes
-    public static final Map<ResourceKey<Biome>,Biome> LYOKOBIOMES = genBiome();
-
-    private static Map<ResourceKey<Biome>,Biome> genBiome()
-    {
-        final ImmutableMap.Builder<ResourceKey<Biome>,Biome> biomes = ImmutableMap.builder();
-        return biomes.build();
-    }
-
-    private static void surfaceBiomes(ImmutableMap.Builder<ResourceKey<Biome>,Biome> biomeList)
-    {
+         */
 
     }
+
 
 /*
     public static final RegistryObject<Biome> SECTOR5 = BIOMES.register("seector5",() ->

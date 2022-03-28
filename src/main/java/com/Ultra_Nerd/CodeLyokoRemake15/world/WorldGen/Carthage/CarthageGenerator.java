@@ -58,6 +58,7 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
     public CarthageGenerator(Registry<StructureSet> structureSets, Registry<Biome> registry, CustomGenSettings settings) {
         super(structureSets,getSet(structureSets), new CarthageBiomeProvider(registry));
         this.settings = settings;
+
     }
 
 
@@ -191,8 +192,8 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
     }
 
     @Override
-    public CompletableFuture<ChunkAccess> fillFromNoise(Executor p_187748_, Blender p_187749_, StructureFeatureManager p_187750_, ChunkAccess p_187751_) {
-        return null;
+    public @NotNull CompletableFuture<ChunkAccess> fillFromNoise(@NotNull Executor p_187748_, @NotNull Blender p_187749_, @NotNull StructureFeatureManager p_187750_, @NotNull ChunkAccess p_187751_) {
+        return CompletableFuture.completedFuture(p_187751_);
     }
 
     @Override

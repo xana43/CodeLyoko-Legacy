@@ -23,6 +23,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -96,7 +97,7 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Bl
 
 
     @Override
-    public BlockPos getBlockPos() {
+    public @NotNull BlockPos getBlockPos() {
         return this.worldPosition;
     }
 
@@ -112,7 +113,7 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Bl
     }
 
     @Override
-    public void tick(Level worldin,BlockPos pos,BlockState state,ElectricInfusingChamberTileEntity be) {
+    public void tick(@NotNull Level worldin, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull ElectricInfusingChamberTileEntity be) {
         assert level != null;
         if (level.hasNeighborSignal(worldPosition)) ENER += 100;
         ItemStack[] Inputs = new ItemStack[]{handler.getStackInSlot(0), handler.getStackInSlot(1)};

@@ -6,6 +6,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 
 public class HologramProjectorTileEntity extends BlockEntity implements BlockEntityTicker<HologramProjectorTileEntity>//, INamedContainerProvider
@@ -15,7 +16,7 @@ public class HologramProjectorTileEntity extends BlockEntity implements BlockEnt
     }
 
     @Override
-    public void tick(Level p_155253_, BlockPos p_155254_, BlockState p_155255_, HologramProjectorTileEntity p_155256_) {
+    public void tick(@NotNull Level p_155253_, @NotNull BlockPos p_155254_, @NotNull BlockState p_155255_, @NotNull HologramProjectorTileEntity p_155256_) {
 
     }
     /*

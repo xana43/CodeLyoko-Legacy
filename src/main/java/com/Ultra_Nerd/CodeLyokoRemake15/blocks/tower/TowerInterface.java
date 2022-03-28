@@ -34,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class TowerInterface extends BaseEntityBlock {
 
@@ -63,19 +64,19 @@ public class TowerInterface extends BaseEntityBlock {
 
 
     @Override
-    public VoxelShape getVisualShape(BlockState state, BlockGetter p_60480_, BlockPos p_60481_, CollisionContext p_60482_) {
-        switch (state.getValue(DIRINTERFACE)) {
-            case NORTH:
-                return SHAPE_N;
-            case SOUTH:
-                return SHAPE_S;
-            case EAST:
-                return SHAPE_E;
-            case WEST:
-                return SHAPE_W;
-            default:
-                return SHAPE_N;
-        }
+    public @NotNull VoxelShape getVisualShape(BlockState state, @NotNull BlockGetter p_60480_, @NotNull BlockPos p_60481_, @NotNull CollisionContext p_60482_) {
+        return switch (state.getValue(DIRINTERFACE)) {
+            case NORTH -> SHAPE_N;
+            case SOUTH -> SHAPE_S;
+            case EAST -> SHAPE_E;
+            case WEST -> SHAPE_W;
+            default -> SHAPE_N;
+        };
+    }
+
+    @Override
+    public @NotNull RenderShape getRenderShape(@NotNull BlockState pState) {
+        return RenderShape.MODEL;
     }
 
     @Override
@@ -107,9 +108,9 @@ public class TowerInterface extends BaseEntityBlock {
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         // TODO Auto-generated method stub
-        return super.getStateForPlacement(context).setValue(DIRINTERFACE, context.getHorizontalDirection().getOpposite());
+        return Objects.requireNonNull(super.getStateForPlacement(context)).setValue(DIRINTERFACE, context.getHorizontalDirection().getOpposite());
     }
 
 

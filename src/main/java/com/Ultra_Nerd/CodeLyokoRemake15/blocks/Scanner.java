@@ -226,6 +226,10 @@ public class Scanner extends BaseEntityBlock {
         return null;// ModTileEntities.SCANNER_TILE_ENTITY.get().create(pos, state);
     }
 
+    @Override
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
+    }
 
     @Override
     public VoxelShape getVisualShape(BlockState state, BlockGetter p_60480_, BlockPos p_60481_, CollisionContext p_60482_) {

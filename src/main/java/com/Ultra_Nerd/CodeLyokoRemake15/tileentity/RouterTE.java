@@ -6,6 +6,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class RouterTE extends BlockEntity implements BlockEntityTicker<RouterTE> {
     public RouterTE(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
@@ -19,7 +20,7 @@ public class RouterTE extends BlockEntity implements BlockEntityTicker<RouterTE>
 
 
     @Override
-    public void tick(Level p_155253_, BlockPos p_155254_, BlockState p_155255_, RouterTE p_155256_) {
+    public void tick(@NotNull Level p_155253_, @NotNull BlockPos p_155254_, @NotNull BlockState p_155255_, @NotNull RouterTE p_155256_) {
 
     }
 }

@@ -15,7 +15,7 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> Entities = DeferredRegister.create(ForgeRegistries.ENTITIES, CodeLyokoMain.MOD_ID);
 
     public static final RegistryObject<EntityType<EntityBlok>> BLOK = Entities.register("blok", () ->
-            EntityType.Builder.<EntityBlok>of(EntityBlok::new, MobCategory.MONSTER).sized(2f, 2f)
+            EntityType.Builder.of(EntityBlok::new, MobCategory.MONSTER).sized(2f, 2f)
                     .build(new ResourceLocation(CodeLyokoMain.MOD_ID, "blok").toString()));
     public static final RegistryObject<EntityType<EntityLaser>> LASER = Entities.register("laser", () ->
             EntityType.Builder.<EntityLaser>of(EntityLaser::new, MobCategory.MISC).sized(1f, 1f)
@@ -25,7 +25,7 @@ public class ModEntities {
                     new ResourceLocation(CodeLyokoMain.MOD_ID, "fan").toString()
             ));
     public static final RegistryObject<EntityType<HornetEntity>> HORNET = Entities.register("hornet", () ->
-            EntityType.Builder.<HornetEntity>of(HornetEntity::new,MobCategory.MONSTER).sized(1, 1)
+            EntityType.Builder.of(HornetEntity::new,MobCategory.MONSTER).sized(1, 1)
                     .build(
                             new ResourceLocation(CodeLyokoMain.MOD_ID, "hornet").toString()
                     ));

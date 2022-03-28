@@ -31,7 +31,6 @@ public class TowerEnter extends Block {
 
                 .strength(-1, -1)
                 .sound(SoundType.GLASS)
-
                 .noCollission()
 
 

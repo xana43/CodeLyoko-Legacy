@@ -40,7 +40,7 @@ public class ComputerReactorTileEntity extends BlockEntity implements Nameable, 
 
 
     @Override
-	public void tick(Level worldIn, BlockPos pos, BlockState state, ComputerReactorTileEntity tileEntity) {
+	public void tick(@NotNull Level worldIn, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull ComputerReactorTileEntity tileEntity) {
 		if(!handle.getStackInSlot(0).isEmpty() && isItemFuel(handle.getStackInSlot(0)));
 		{
 			if(handle.getStackInSlot(0).getItem() == ModItems.URANIUM_ISOTOPE238.get() || handle.getStackInSlot(0).getItem() == ModItems.URANIUM_ISOTOPE235.get())

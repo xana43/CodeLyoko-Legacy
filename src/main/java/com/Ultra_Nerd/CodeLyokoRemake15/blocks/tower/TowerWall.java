@@ -30,7 +30,8 @@ public class TowerWall extends Block {
 
     public TowerWall() {
         super(Block.Properties.of(Material.BARRIER)
-                .strength(-1, -1)
+                .strength(-1, Integer.MAX_VALUE)
+                .noDrops()
                 .sound(SoundType.GLASS)
 
         );

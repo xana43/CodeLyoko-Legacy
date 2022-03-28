@@ -32,6 +32,7 @@ public class ClientModEventSubscriber {
     */
     @SubscribeEvent
     public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
+
     /*    //makes certain blocks behave properly
         ModItems.TEST_MULTIPLAYER_PHONE.get().overrideOtherStackedOnMe(new ResourceLocation(CodeLyokoMain.MOD_ID,"message"), (stack, world, entityin) ->
         {
@@ -92,14 +93,17 @@ public class ClientModEventSubscriber {
 
  */
 
-        //RenderType(ModBlocks.TOWER_INTERFACE.get(), RenderType.getCutoutMipped());
-        //RenderType(ModFluids.DIGITAL_SEA_BLOCK.get(), RenderType.cutout());
+
+
         final RenderType cutoutMipped = RenderType.cutoutMipped();
         final RenderType cutout = RenderType.cutout();
         final RenderType transluscent = RenderType.translucent();
         final RenderType transluscentMovingBlock = RenderType.translucentMovingBlock();
 event.enqueueWork(()-> {
 
+    ItemBlockRenderTypes.setRenderLayer(ModFluids.DIGITAL_SEA_BLOCK.get(),transluscent);
+    ItemBlockRenderTypes.setRenderLayer(ModBlocks.TOWER_INTERFACE.get(), cutoutMipped);
+    ItemBlockRenderTypes.setRenderLayer(ModFluids.DIGITAL_LAVA_BLOCK.get(), transluscent);
     ItemBlockRenderTypes.setRenderLayer(ModFluids.DIGITAL_OCEAN.get(), transluscent);
     ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_DIGITAL_OCEAN.get(), transluscent);
     ItemBlockRenderTypes.setRenderLayer(ModBlocks.TRANSPARENT.get(), cutoutMipped);

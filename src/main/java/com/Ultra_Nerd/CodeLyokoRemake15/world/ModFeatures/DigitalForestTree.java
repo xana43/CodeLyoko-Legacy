@@ -58,7 +58,7 @@ static class size extends FeatureSize
     }
 
     @Override
-    public boolean place(TreeConfiguration p_204741_, WorldGenLevel p_204742_, ChunkGenerator p_204743_, Random p_204744_, BlockPos p_204745_) {
+    public boolean place(@NotNull TreeConfiguration p_204741_, @NotNull WorldGenLevel p_204742_, @NotNull ChunkGenerator p_204743_, @NotNull Random p_204744_, @NotNull BlockPos p_204745_) {
         return super.place(p_204741_, p_204742_, p_204743_, p_204744_, p_204745_);
     }
 
