@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.world.ForgeWorldPreset;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -153,10 +154,13 @@ public CodeLyokoMain() {
     public void PlayerSetup(final EntityJoinWorldEvent event) {
 
         random = 1000;
-        if(Registry.CHUNK_GENERATOR.containsKey(CodeLyokoPrefix("carthage_chunkgen")))
+        if(Registry.BIOME_SOURCE.containsKey(CodeLyokoPrefix("carthage_biome")))
         {
-            Log.info("carthage chunkgen present");
+            Log.info("carthage biome provider present");
         }
+
+
+
         if (event.getEntity() instanceof Player) {
             CompoundTag tag = event.getEntity().getPersistentData();
             CompoundTag existing;
@@ -182,6 +186,14 @@ public static final class RegistryEventHandler{
     public static void onRegisterBiome(final RegistryEvent.Register<Biome> event) {
         // ModBiome.regbio();
 
+    }
+    @SubscribeEvent
+    public static void onDim(final RegistryEvent.Register<ForgeWorldPreset> event)
+    {
+        CodeLyokoMain.Log.debug("regisering forge world presets");
+        event.getRegistry().getEntries().forEach(resourceKeyForgeWorldPresetEntry ->
+                Log.debug(resourceKeyForgeWorldPresetEntry.toString())
+        );
     }
 
     @SubscribeEvent

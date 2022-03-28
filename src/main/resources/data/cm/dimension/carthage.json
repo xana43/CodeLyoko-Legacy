@@ -1,15 +1,27 @@
 {
-
-  "type": "cm:carthage_type",
-  "generator": {
-    "type": "cm:carthage_chunkgen",
-    "settings": {
-      "base": 10,
-      "verticalVariance": 10,
-      "horizontalVariance": 8
-    }
-
-
+  "type":{
+    "ultrawarm": false,
+    "natural": false,
+    "coordinate_scale": 1,
+    "has_skylight": true,
+    "has_ceiling": false,
+    "ambient_light": 1,
+    "piglin_safe": false,
+    "bed_works": false,
+    "respawn_anchor_works": false,
+    "has_raids": false,
+    "logical_height": 256,
+    "infiniburn": "minecraft:infiniburn_overworld",
+    "min_y": 0,
+    "height": 256
   },
-  "type": "minecraft:overworld"
+  "generator": {
+    "type": "minecraft:noise",
+    "seed": 0,
+    "settings": "minecraft:overworld",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "minecraft:plains"
+    }
+  }
 }

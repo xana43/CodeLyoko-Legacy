@@ -173,7 +173,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "CodeLyoko Legact",
+                "Specification-Title"     : "CodeLyoko Legacy",
                 "Specification-Vendor"    : "examplemodsareus",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,

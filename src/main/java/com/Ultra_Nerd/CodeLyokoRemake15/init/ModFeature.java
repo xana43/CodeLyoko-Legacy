@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -23,20 +24,23 @@ public class ModFeature {
     //public static final RegistryObject<Feature<TreeConfiguration>> DIGITAL_FOREST_TREE = LYOKOFEATURES.register("digital_forest_tree", () -> new DigitalForestTree(TreeConfiguration.CODEC));
 
 //configured features
+
+
 public static final Holder<ConfiguredFeature<TreeConfiguration,?>> DIGITAL_FOREST_TREE_FEATURE =
-        FeatureUtils.register("digital_forest_tree",Feature.TREE,new TreeConfiguration.TreeConfigurationBuilder(
+        FeatureUtils.register(CodeLyokoMain.CodeLyokoPrefix("digital_forest_tree").toString(),Feature.TREE,new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.DIGITAL_WOOD_FOREST.get()),
-                new StraightTrunkPlacer(10,10,10),
+                new StraightTrunkPlacer(319,319,319),
                 BlockStateProvider.simple(Blocks.AIR),
                 new BlobFoliagePlacer(ConstantInt.of(0),ConstantInt.of(0),0),
-                new TwoLayersFeatureSize(Integer.MAX_VALUE,10,10)).build());
+                new TwoLayersFeatureSize(81,16,16)).build());
+
 public static final Holder<ConfiguredFeature<TreeConfiguration,?>> DIGITAL_MOUNTAIN_TREE_FEATURE =
-        FeatureUtils.register("digital_mountain_tree",Feature.TREE,new TreeConfiguration.TreeConfigurationBuilder(
+        FeatureUtils.register(CodeLyokoMain.CodeLyokoPrefix("digital_mountain_tree").toString(),Feature.TREE,new TreeConfiguration.TreeConfigurationBuilder(
                     BlockStateProvider.simple(ModBlocks.DIGITAL_WOOD_MOUNTAIN.get()),
-                    new BendingTrunkPlacer(10,10,10,10,ConstantInt.of(10)),
+                    new BendingTrunkPlacer(10,10,10,10,ConstantInt.of(5)),
                     BlockStateProvider.simple(ModBlocks.DIGITAL_LEAF_MOUNTAIN.get()),
-                    new BlobFoliagePlacer(ConstantInt.of(5),ConstantInt.of(5),5),
-                    new TwoLayersFeatureSize(10,10,10)).build());
+                    new BlobFoliagePlacer(ConstantInt.of(1),ConstantInt.of(2),3),
+                    new TwoLayersFeatureSize(5,10,10)).build());
 
 public static final Holder<PlacedFeature> DIGITAL_FOREST_PLACED = PlacementUtils.register("forest_placed",
         DIGITAL_FOREST_TREE_FEATURE, VegetationPlacements.treePlacement(
