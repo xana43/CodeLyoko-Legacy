@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "com.Ultra_Nerd.CodeLyokoRemake15.mixin",
+  "refmap": "cm.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+
+  ],
+  "client": [
+    "client.DimensionEffectAccesor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+
+}

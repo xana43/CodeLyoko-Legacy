@@ -1,12 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util.client;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 
 public class DimensionCheck {
 
     public static boolean playerNotInVanillaWorld(Player player) {
-        return player.level.dimension() != Level.END && player.level.dimension() != Level.NETHER && player.level.dimension() != Level.OVERWORLD;
+        return player.level.dimension() == ModDimensions.FOREST || player.level.dimension() == ModDimensions.SECTOR5 || player.level.dimension() == ModDimensions.DESERT || player.level.dimension() == ModDimensions.ICE
+
+                || player.level.dimension() == ModDimensions.MOUNTAIN || player.level.dimension() == ModDimensions.VOLCANO;
+
+
+
+
+
     }
 
 

@@ -1,17 +1,31 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
-import net.minecraft.client.gui.screens.inventory.ContainerScreen;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.DataTransferInterfaceMessage;
+import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.PacketHandler;
+import com.Ultra_Nerd.CodeLyokoRemake15.containers.DataTransferInterfaceContainer;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.font.FontSet;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.ChestMenu;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Random;
 
 
-public class DataTransferInterfaceUI extends ContainerScreen {
-    public DataTransferInterfaceUI(ChestMenu p_98409_, Inventory p_98410_, Component p_98411_) {
-        super(p_98409_, p_98410_, p_98411_);
-    }
-/*    private static final ResourceLocation GUI_TEX = new ResourceLocation("cm:textures/gui/data_transfer_interface_gui_2.png");
-    //
+public class DataTransferInterfaceUI extends AbstractContainerScreen<DataTransferInterfaceContainer> {
+
+  private static final ResourceLocation GUI_TEX = new ResourceLocation("cm:textures/gui/data_transfer_interface_gui_2.png");
+
     private ImageButton buttonCarthage;
     private ImageButton buttonForest;
     private ImageButton buttonMountain;
@@ -19,46 +33,43 @@ public class DataTransferInterfaceUI extends ContainerScreen {
     private ImageButton buttonDesert;
 
     private ImageButton sendButton;
-
-    private TextFieldWidget xCoord;
-    private TextFieldWidget yCoord;
-    private TextFieldWidget zCoord;
+    private final Font gunship_font = new Font(resourceLocation -> new FontSet(getMinecraft().textureManager, CodeLyokoMain.CodeLyokoPrefix("gunship")));
+    private EditBox xCoord;
+    private EditBox yCoord;
+    private EditBox zCoord;
 
     private int territory;
 
     int x, y;
 
 
-    public DataTransferInterfaceUI(DataTransferInterfaceContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public DataTransferInterfaceUI(DataTransferInterfaceContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
-        this.guiLeft = 0;
-        this.guiTop = 0;
-        this.xSize = 128;
-        this.ySize = 128;
+
     }
 
     @Override
-    public void render(int mouseX, int mouseY, float partialTicks) {
-        FontRenderer gunship_font = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation("cm:gunship"));
+    public void render(@NotNull PoseStack stack, int mouseX, int mouseY, float partialTicks) {
 
-        this.renderBackground();
-        super.render(mouseX, mouseY, partialTicks);
-        buttonCarthage.render(mouseX, mouseY, partialTicks);
+
+        this.renderBg(stack,partialTicks,mouseX,mouseY);
+        super.render(stack,mouseX, mouseY, partialTicks);
+        buttonCarthage.render(stack,mouseX, mouseY, partialTicks);
         assert gunship_font != null;
-        buttonCarthage.drawCenteredString(gunship_font, buttonCarthage.getMessage(), x + 46, y + 46, buttonCarthage.getFGColor());
-        buttonDesert.render(mouseX, mouseY, partialTicks);
-        buttonDesert.drawCenteredString(gunship_font, buttonDesert.getMessage(), x + 77, y + 46, buttonDesert.getFGColor());
-        buttonIce.render(mouseX, mouseY, partialTicks);
-        buttonIce.drawCenteredString(gunship_font, buttonIce.getMessage(), x + 46, y + 77, buttonIce.getFGColor());
-        buttonForest.render(mouseX, mouseY, partialTicks);
-        buttonForest.drawCenteredString(gunship_font, buttonForest.getMessage(), x + 15, y + 46, buttonForest.getFGColor());
-        buttonMountain.render(mouseX, mouseY, partialTicks);
-        buttonMountain.drawCenteredString(gunship_font, buttonMountain.getMessage(), x + 46, y + 15, buttonMountain.getFGColor());
-        sendButton.render(mouseX, mouseY, partialTicks);
-        sendButton.drawCenteredString(gunship_font, sendButton.getMessage(), x + 15, y + 112, sendButton.getFGColor());
-        xCoord.render(mouseX, mouseY, partialTicks);
-        yCoord.render(mouseX, mouseY, partialTicks);
-        zCoord.render(mouseX, mouseY, partialTicks);
+        buttonCarthage.drawCenteredString(stack,gunship_font, buttonCarthage.getMessage(), x + 46, y + 46, buttonCarthage.getFGColor());
+        buttonDesert.render(stack,mouseX, mouseY, partialTicks);
+        buttonDesert.drawCenteredString(stack,gunship_font, buttonDesert.getMessage(), x + 77, y + 46, buttonDesert.getFGColor());
+        buttonIce.render(stack,mouseX, mouseY, partialTicks);
+        buttonIce.drawCenteredString(stack,gunship_font, buttonIce.getMessage(), x + 46, y + 77, buttonIce.getFGColor());
+        buttonForest.render(stack,mouseX, mouseY, partialTicks);
+        buttonForest.drawCenteredString(stack,gunship_font, buttonForest.getMessage(), x + 15, y + 46, buttonForest.getFGColor());
+        buttonMountain.render(stack,mouseX, mouseY, partialTicks);
+        buttonMountain.drawCenteredString(stack,gunship_font, buttonMountain.getMessage(), x + 46, y + 15, buttonMountain.getFGColor());
+        sendButton.render(stack,mouseX, mouseY, partialTicks);
+        sendButton.drawCenteredString(stack,gunship_font, sendButton.getMessage(), x + 15, y + 112, sendButton.getFGColor());
+        xCoord.render(stack,mouseX, mouseY, partialTicks);
+        yCoord.render(stack,mouseX, mouseY, partialTicks);
+        zCoord.render(stack,mouseX, mouseY, partialTicks);
     }
 
     @Override
@@ -72,20 +83,20 @@ public class DataTransferInterfaceUI extends ContainerScreen {
     @Override
     protected void init() {
         super.init();
-        this.x = (this.width - this.xSize) / 2;
-        this.y = (this.height - this.ySize) / 2;
+        this.x = (this.width - this.getXSize()) / 2;
+        this.y = (this.height - this.getYSize()) / 2;
         this.setButtonCarthage();
         this.setButtonDesert();
         this.setButtonForest();
         this.setButtonIce();
         this.setButtonMountain();
         this.setSendButton();
-        this.addButton(buttonDesert);
-        this.addButton(buttonForest);
-        this.addButton(buttonIce);
-        this.addButton(buttonMountain);
-        this.addButton(buttonCarthage);
-        this.addButton(sendButton);
+        this.addWidget(buttonDesert);
+        this.addWidget(buttonForest);
+        this.addWidget(buttonIce);
+        this.addWidget(buttonMountain);
+        this.addWidget(buttonCarthage);
+        this.addWidget(sendButton);
         this.setXCoord();
         this.setYCoord();
         this.setZCoord();
@@ -97,7 +108,7 @@ public class DataTransferInterfaceUI extends ContainerScreen {
         this.buttonCarthage = new ImageButton(x + 31, y + 31, 30, 30, 128, 0, 31, GUI_TEX,
                 256, 256, (input) -> {
             territory = 0x101010; //CARTHAGE Code
-        }, "C");
+        }, new TextComponent("C"));
         buttonCarthage.setFGColor(0x1122FF);
     }
 
@@ -105,7 +116,7 @@ public class DataTransferInterfaceUI extends ContainerScreen {
         int tx = this.width / 2;
         int ty = this.height / 2;
         this.buttonForest = new ImageButton(x, y + 31, 30, 30, 128, 0, 31, GUI_TEX,
-                256, 256, (input) -> territory = 0x333333, "F");
+                256, 256, (input) -> territory = 0x333333, new TextComponent("F"));
         buttonForest.setFGColor(0x1d5e18);
     }
 
@@ -113,7 +124,7 @@ public class DataTransferInterfaceUI extends ContainerScreen {
         int tx = this.width / 2;
         int ty = this.height / 2;
         this.buttonMountain = new ImageButton(x + 31, y, 30, 30, 128, 0, 31, GUI_TEX,
-                256, 256, (input) -> territory = 0x111111, "M");
+                256, 256, (input) -> territory = 0x111111, new TextComponent("M"));
         buttonMountain.setFGColor(0x824391);
     }
 
@@ -121,7 +132,7 @@ public class DataTransferInterfaceUI extends ContainerScreen {
         int tx = this.width / 2;
         int ty = this.height / 2;
         this.buttonIce = new ImageButton(x + 31, y + 62, 30, 30, 128, 0, 31, GUI_TEX,
-                256, 256, (input) -> territory = 0x444444, "I");
+                256, 256, (input) -> territory = 0x444444, new TextComponent("I"));
         buttonIce.setFGColor(0x37b8a2);
     }
 
@@ -129,72 +140,72 @@ public class DataTransferInterfaceUI extends ContainerScreen {
         int tx = this.width / 2;
         int ty = this.height / 2;
         this.buttonDesert = new ImageButton(x + 62, y + 31, 30, 30, 128, 0, 31, GUI_TEX,
-                256, 256, (input) -> territory = 0x222222, "D");
+                256, 256, (input) -> territory = 0x222222, new TextComponent("D"));
         buttonDesert.setFGColor(0xcf8838);
     }
 
     private void setXCoord() {
-        this.xCoord = new TextFieldWidget(this.getMinecraft().fontRenderer, x + 90, y + 10, 30, 30, I18n.format("gui.cm.interface_input"));
-        this.xCoord.setMaxStringLength(7);
-        this.xCoord.setEnableBackgroundDrawing(true);
+        this.xCoord = new EditBox(this.getMinecraft().font, x + 90, y + 10, 30, 30, new TextComponent("gui.cm.interface_input"));
+        this.xCoord.setMaxLength(7);
+        this.xCoord.setBordered(true);
         this.xCoord.setVisible(true);
         this.xCoord.setTextColor(16777215);
-        this.xCoord.setFocused2(true);
-        this.xCoord.setEnabled(true);
-        this.xCoord.setCursorPositionZero();
+        this.xCoord.setFocus(true);
+        this.xCoord.setVisible(true);
+        this.xCoord.setCursorPosition(0);
         this.xCoord.setCanLoseFocus(true);
         this.xCoord.active = true;
-        this.xCoord.canWrite();
+        //this.xCoord.setEditable(true);
+        //this.xCoord.canConsumeInput();
     }
 
     private void setYCoord() {
-        this.yCoord = new TextFieldWidget(this.getMinecraft().fontRenderer, x + 90, y + 40, 30, 30, I18n.format("gui.cm.interface_input"));
-        this.yCoord.setMaxStringLength(7);
-        this.yCoord.setEnableBackgroundDrawing(true);
+        this.yCoord = new EditBox(this.getMinecraft().font, x + 90, y + 40, 30, 30, new TranslatableComponent("gui.cm.interface_input"));
+        this.yCoord.setMaxLength(7);
+        this.yCoord.setBordered(true);
         this.yCoord.setVisible(true);
         this.yCoord.setTextColor(16777215);
-        this.yCoord.setFocused2(true);
-        this.yCoord.setEnabled(true);
-        this.yCoord.setCursorPositionZero();
+        this.yCoord.setFocus(true);
+        this.yCoord.setCursorPosition(0);
         this.yCoord.setCanLoseFocus(true);
         this.yCoord.active = true;
-        this.yCoord.canWrite();
+        //this.yCoord.canConsumeInput();
     }
 
     private void setZCoord() {
-        this.zCoord = new TextFieldWidget(this.getMinecraft().fontRenderer, x + 90, y + 70, 30, 30, I18n.format("gui.cm.interface_input"));
-        this.zCoord.setMaxStringLength(7);
-        this.zCoord.setEnableBackgroundDrawing(true);
+        this.zCoord = new EditBox(this.getMinecraft().font, x + 90, y + 70, 30, 30, new TranslatableComponent("gui.cm.interface_input"));
+        this.zCoord.setMaxLength(7);
+        this.zCoord.setBordered(true);
         this.zCoord.setVisible(true);
         this.zCoord.setTextColor(16777215);
-        this.zCoord.setFocused2(true);
-        this.zCoord.setEnabled(true);
-        this.zCoord.setCursorPositionZero();
+        this.zCoord.setFocus(true);
+        this.zCoord.setVisible(true);
+        this.zCoord.setCursorPosition(0);
         this.zCoord.setCanLoseFocus(true);
         this.zCoord.active = true;
-        this.zCoord.canWrite();
+        //this.zCoord.canWrite();
     }
 
     private void setSendButton() {
         this.sendButton = new ImageButton(x + 4, y + 104, 120, 16, 0, 128, 17, GUI_TEX,
                 256, 256, (input) -> {
             int xCoord = 0, yCoord = 80, zCoord = 0;
-            if(this.xCoord.getText().length() > 0)
-                xCoord = Integer.parseInt(this.xCoord.getText());
-            if(this.yCoord.getText().length() > 0)
-                yCoord = Integer.parseInt(this.yCoord.getText());
-            if(this.zCoord.getText().length() > 0)
-                zCoord = Integer.parseInt(this.zCoord.getText());
+            if(this.xCoord.getValue().length() > 0)
+                xCoord = Integer.parseInt(this.xCoord.getValue());
+            if(this.yCoord.getValue().length() > 0)
+                yCoord = Integer.parseInt(this.yCoord.getValue());
+            if(this.zCoord.getValue().length() > 0)
+                zCoord = Integer.parseInt(this.zCoord.getValue());
             PacketHandler.INSTANCE.sendToServer(new DataTransferInterfaceMessage(territory, xCoord, yCoord, zCoord));
-        }, "Send !");
+        }, new TextComponent("Send !"));
 
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(@NotNull PoseStack poseStack, float partialTicks, int mouseX, int mouseY) {
         assert this.minecraft != null;
-        this.minecraft.getTextureManager().bindTexture(GUI_TEX);
-        this.blit(x, y, 0, 0, this.xSize, this.ySize);
+        RenderSystem.setShaderTexture(0,GUI_TEX);
+        this.blit(poseStack,x, y, 0, 0, this.getXSize(), this.getYSize());
     }
 
     @Override
@@ -202,9 +213,9 @@ public class DataTransferInterfaceUI extends ContainerScreen {
 
 
         if (Key == 8) {
-            this.xCoord.deleteFromCursor(1);
-            this.yCoord.deleteFromCursor(1);
-            this.zCoord.deleteFromCursor(1);
+            this.xCoord.deleteChars(1);
+            this.yCoord.deleteChars(1);
+            this.zCoord.deleteChars(1);
         }
         this.xCoord.keyPressed(Key, p_keyPressed_2_, p_keyPressed_3_);
         this.yCoord.keyPressed(Key, p_keyPressed_2_, p_keyPressed_3_);
@@ -218,10 +229,12 @@ public class DataTransferInterfaceUI extends ContainerScreen {
         this.xCoord.charTyped(Character.toUpperCase(key), Keynum);
         this.yCoord.charTyped(Character.toUpperCase(key), Keynum);
         this.zCoord.charTyped(Character.toUpperCase(key), Keynum);
-        this.playerInventory.player.playSound(ModSounds.GUISOUND.get(), 1, rand);
+        assert this.minecraft != null;
+        assert this.minecraft.player != null;
+        this.minecraft.player.playSound(ModSounds.GUISOUND.get(), 1, rand);
         return super.charTyped(key, Keynum);
 
     }
 
- */
+
 }

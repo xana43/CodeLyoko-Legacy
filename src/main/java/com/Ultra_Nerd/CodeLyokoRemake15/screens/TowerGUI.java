@@ -7,7 +7,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.font.FontSet;
@@ -32,7 +31,7 @@ public class TowerGUI extends AbstractContainerScreen<TowerInterfaceContainer> {
 
     private static final ResourceLocation TEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/towerinterface.png");
     private EditBox text;
-    private AbstractWidget Accepted;
+    private EditBox Accepted;
     private final Font gunship_font = new Font(resourceLocation -> new FontSet(getMinecraft().textureManager, CodeLyokoMain.CodeLyokoPrefix("gunship")));
     private byte I = 100;
 
@@ -192,10 +191,12 @@ public class TowerGUI extends AbstractContainerScreen<TowerInterfaceContainer> {
         int tx2 = this.width / 2;
         int ty2 = this.height / 2;
         this.Accepted = new EditBox(gunship_font, tx2 - 95, ty2 + 20, 200, 33, new TranslatableComponent("gui.cm.indicator"));
+        this.Accepted.isActive();
         this.Accepted.visible = true;
+        this.Accepted.setBordered(false);
         this.Accepted.setFGColor(65280);
         this.Accepted.changeFocus(true);
-        this.Accepted.active = true;
+        this.Accepted.active = false;
 
     }
 

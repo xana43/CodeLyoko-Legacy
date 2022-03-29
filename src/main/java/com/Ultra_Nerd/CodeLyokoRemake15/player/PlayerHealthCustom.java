@@ -1,80 +1,85 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.player;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.gui.ForgeIngameGui;
+import net.minecraftforge.client.gui.OverlayRegistry;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+import java.util.Objects;
 
 
-//@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class PlayerHealthCustom {
     private static final ResourceLocation HEALTH_TEX = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/lyoko_health_bar.png");
-    private static int Prevfood;
-    private static float PrevSaturation;
-    private static boolean once = false;
-    private static final Player player = Minecraft.getInstance().player;
-    public PlayerHealthCustom() {
-        Prevfood = 20;
-        PrevSaturation = 20;
-    }
 
-    /*
-        @SubscribeEvent
-        public static void GetFood(final TickEvent.PlayerTickEvent event)
-        {
-            if(event.phase == TickEvent.Phase.START || event.phase == TickEvent.Phase.END && Minecraft.getInstance().player != null)
-            {
 
-                if(Minecraft.getInstance().player.world.dimension instanceof OverworldDimension
-                        || Minecraft.getInstance().player.world.dimension instanceof NetherDimension || Minecraft.getInstance().player.world.dimension instanceof EndDimension) {
-                    assert Minecraft.getInstance().player != null;
-                    Prevfood = Minecraft.getInstance().player.getFoodStats().getFoodLevel();
-                    PrevSaturation = Minecraft.getInstance().player.getFoodStats().getSaturationLevel();
-                }
-            }
-        }
-    */
-/*
+
+
+
+
     @SubscribeEvent
     public static void removehunger(final PlayerEvent event) {
+
         if (event.getPlayer() != null) {
             if (DimensionCheck.playerNotInVanillaWorld(event.getPlayer())) {
-                event.getPlayer().getFoodData().setFoodLevel(20);
-                event.getPlayer().getFoodData().setSaturation(20);
-                once = false;
-            } else if (!once) {
-                event.getPlayer().getFoodData().setSaturation(100);
-                event.getPlayer().getFoodData().setFoodLevel(event.getPlayer().getFoodData().getLastFoodLevel());
-                once = true;
+                event.getPlayer().getFoodData().setFoodLevel(40);
+                event.getPlayer().getFoodData().setExhaustion(0);
+                event.getPlayer().getFoodData().setSaturation(40);
+                event.getPlayer().causeFoodExhaustion(0);
+                event.getPlayer().canEat(true);
+
+
             }
         }
     }
+
 
     @SubscribeEvent
-    public static void PlayerHealthRender(final RenderGameOverlayEvent renderEvent) {
-        if (renderEvent.getType() == RenderGameOverlayEvent.ElementType.LAYER && DimensionCheck.playerNotInVanillaWorld(player)) {
-            int scaleW = renderEvent.getWindow().getGuiScaledWidth();
-            int scaleH = renderEvent.getWindow().getHeight();
-            renderEvent.setCanceled(true);
-            if(!(Minecraft.getInstance().screen instanceof ContainerScreen)) {
-                GL11.glPushMatrix();
-                Minecraft.getInstance().getTextureManager().bindForSetup(HEALTH_TEX);
-                Minecraft.getInstance().gui.blit(new PoseStack(),6, 1, 0, 0, 33, 254);
-                Minecraft.getInstance().gui.blit(new PoseStack(),12, scaleH / scaleH, 62, 0, 25, (int) ((12.7) * Minecraft.getInstance().player.getHealth()));
-                GL11.glPopMatrix();
+    public static void PlayerHealthRender(final RenderGameOverlayEvent.Post renderEvent) {
+
+        if (renderEvent.getType() == RenderGameOverlayEvent.ElementType.ALL && DimensionCheck.playerNotInVanillaWorld(Minecraft.getInstance().player != null ? Minecraft.getInstance().player : null) && Minecraft.getInstance().player != null
+        ) {
+
+            OverlayRegistry.enableOverlay(ForgeIngameGui.PLAYER_HEALTH_ELEMENT,false);
+            OverlayRegistry.enableOverlay(ForgeIngameGui.FOOD_LEVEL_ELEMENT,false);
+            if(!(Minecraft.getInstance().screen instanceof ContainerScreen) && !Minecraft.getInstance().player.isCreative() && !Minecraft.getInstance().player.isSpectator()) {
+                //renderEvent.getMatrixStack().pushPose();
+                RenderSystem.setShaderTexture(0,HEALTH_TEX);
+                Minecraft.getInstance().gui.blit(renderEvent.getMatrixStack(),6, 1, 0, 0, 33, 254);
+                Minecraft.getInstance().gui.blit(renderEvent.getMatrixStack(),12, 1, CodeLyokoMain.playerClassType.get(3).getTextureIndex() , 0, 25, (int) ((12.7) * Minecraft.getInstance().player.getHealth()));
+                //renderEvent.getMatrixStack().popPose();
             }
 
         }
-        if (renderEvent.getType() == RenderGameOverlayEvent.ElementType.ALL && DimensionCheck.playerNotInVanillaWorld(player)) {
-            renderEvent.setCanceled(true);
+        else if(!Objects.requireNonNull(OverlayRegistry.getEntry(ForgeIngameGui.PLAYER_HEALTH_ELEMENT)).isEnabled() || !Objects.requireNonNull(OverlayRegistry.getEntry(ForgeIngameGui.FOOD_LEVEL_ELEMENT)).isEnabled())
+        {
+
+            assert Minecraft.getInstance().player != null;
+            if(!DimensionCheck.playerNotInVanillaWorld(Minecraft.getInstance().player) && Minecraft.getInstance().player != null)
+            {
+                OverlayRegistry.enableOverlay(ForgeIngameGui.PLAYER_HEALTH_ELEMENT,true);
+                OverlayRegistry.enableOverlay(ForgeIngameGui.FOOD_LEVEL_ELEMENT,true);
+            }
+
         }
-        if (renderEvent.getType() == RenderGameOverlayEvent.ElementType.ALL && DimensionCheck.playerNotInVanillaWorld(player)) {
-            renderEvent.setCanceled(true);
-        }
+        
+
+
+         
+
 
     }
 
- */
+
 
 
 }

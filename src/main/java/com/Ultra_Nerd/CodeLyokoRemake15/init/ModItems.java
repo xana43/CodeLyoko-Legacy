@@ -9,6 +9,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.items.tools.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -22,17 +23,17 @@ public class ModItems {
     //for test items
     public static final RegistryObject<Item> TEST_MULTIPLAYER_PHONE = ITEMS.register("test_multiplayer_phone", () -> new MultiplayerPhone(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     //for spawn eggs
-    public static final RegistryObject<CustomMobEggs> BLOK_SPAWN_EGG = ITEMS.register("blok_spawn_egg", () -> new CustomMobEggs(ModEntities.BLOK, 1, 1, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final RegistryObject<CustomMobEggs> HORNET_SPAWN_EGG = ITEMS.register("hornet_spawn_egg", () -> new CustomMobEggs(ModEntities.HORNET, 1, 1, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final RegistryObject<CustomMobEggs> MANTA_SPAWN_EGG = ITEMS.register("manta_spawn_egg", () -> new CustomMobEggs(ModEntities.MANTA, 1, 1, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final RegistryObject<CustomMobEggs> MEGATANK_SPAWN_EGG = ITEMS.register("megatank_spawn_egg", () -> new CustomMobEggs(ModEntities.MEGATANK, 1, 1, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final RegistryObject<CustomMobEggs> KANKRELAT_SPAWN_EGG = ITEMS.register("kankrelat_spawn_egg", () -> new CustomMobEggs(ModEntities.KANKRELAT, 1, 1, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final RegistryObject<CustomMobEggs> GUARDIAN_SPAWN_EGG = ITEMS.register("guardian_spawn_egg", () -> new CustomMobEggs(ModEntities.GUARDIAN,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    public static final RegistryObject<ForgeSpawnEggItem> BLOK_SPAWN_EGG = ITEMS.register("blok_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.BLOK, 1, 1, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    public static final RegistryObject<ForgeSpawnEggItem> HORNET_SPAWN_EGG = ITEMS.register("hornet_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.HORNET, 1, 1, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    public static final RegistryObject<ForgeSpawnEggItem> MANTA_SPAWN_EGG = ITEMS.register("manta_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.MANTA, 1, 1, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    public static final RegistryObject<ForgeSpawnEggItem> MEGATANK_SPAWN_EGG = ITEMS.register("megatank_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.MEGATANK, 1, 1, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    public static final RegistryObject<ForgeSpawnEggItem> KANKRELAT_SPAWN_EGG = ITEMS.register("kankrelat_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.KANKRELAT, 1, 1, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    public static final RegistryObject<ForgeSpawnEggItem> GUARDIAN_SPAWN_EGG = ITEMS.register("guardian_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.GUARDIAN,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     //for spawn items
-    public static final RegistryObject<CustomMobEggs> HOVERBOARD_SPAWN_ITEM = ITEMS.register("hoverboard_spawn_item", () -> new CustomMobEggs(ModEntities.HOVERBOARD,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final RegistryObject<CustomMobEggs> OVERBOARD_SPAWN_ITEM = ITEMS.register("overboard_spawn_item",() -> new CustomMobEggs(ModEntities.OVERBOARD,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final RegistryObject<CustomMobEggs> OVERBIKE_SPAWN_ITEM = ITEMS.register("overbike_spawn_item", () -> new CustomMobEggs(ModEntities.OVERBIKE,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final RegistryObject<CustomMobEggs> SKID_SPAWN_ITEM = ITEMS.register("skid_spawn_item", () -> new CustomMobEggs(ModEntities.SKID,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+   // public static final RegistryObject<ForgeSpawnEggItem> HOVERBOARD_SPAWN_ITEM = ITEMS.register("hoverboard_spawn_item", () -> new ForgeSpawnEggItem(ModEntities.HOVERBOARD,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    //public static final RegistryObject<ForgeSpawnEggItem> OVERBOARD_SPAWN_ITEM = ITEMS.register("overboard_spawn_item",() -> new ForgeSpawnEggItem(ModEntities.OVERBOARD,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+   // public static final RegistryObject<ForgeSpawnEggItem> OVERBIKE_SPAWN_ITEM = ITEMS.register("overbike_spawn_item", () -> new ForgeSpawnEggItem(ModEntities.OVERBIKE,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    //public static final RegistryObject<ForgeSpawnEggItem> SKID_SPAWN_ITEM = ITEMS.register("skid_spawn_item", () -> new ForgeSpawnEggItem(ModEntities.SKID,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     //for items
     public static final RegistryObject<Item> APU_PACKAGE_ARM = ITEMS.register("apu_package_arm", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final RegistryObject<Item> APU_PACKAGE_x86 = ITEMS.register("apu_package_x86", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));

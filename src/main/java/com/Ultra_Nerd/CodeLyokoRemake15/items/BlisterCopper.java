@@ -9,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -29,7 +30,7 @@ public class BlisterCopper extends Item {
     }
 
     @Override
-    public boolean isFoil(ItemStack p_41453_) {
+    public boolean isFoil(@NotNull ItemStack p_41453_) {
         return true;
     }
 

@@ -74,7 +74,6 @@
     ]
   },
   "sector5": {
-    "category": "music",
     "subtitle": "sector5 ambiance",
     "sounds": [
       {
@@ -84,8 +83,23 @@
       }
     ]
   },
+  "desertsector": {
+    "subtitle": "desert sector ambiance",
+    "sounds": [{
+      "name": "cm:music/desert/desert_sector",
+      "stream": true,
+      "preload": true
+    }]
+  },
+  "mountainsector": {
+    "subtitle": "mountain sector ambiance",
+    "sounds":[{
+    "name": "cm:music/mountain/mountain_sector",
+      "stream": true,
+      "preload": true
+      }]
+  },
   "armor_equip_warrior": {
-    "category": "player",
     "subtitle": "digital armor equip: Warrior Type",
     "sounds": [
       {
@@ -96,7 +110,6 @@
     ]
   },
   "armor_equip_feline": {
-    "category": "player",
     "subtitle": "digital armor equip: Feline Type",
     "sounds": [
       {
@@ -107,7 +120,6 @@
     ]
   },
   "armor_equip_guardian": {
-    "category": "player",
     "subtitle": "digital armor equip: Guardian Type",
     "sounds": [
       {
@@ -118,7 +130,6 @@
     ]
   },
   "armor_equip_ninja": {
-    "category": "player",
     "subtitle": "digital armor equip: Ninja Type",
     "sounds": [
       {
@@ -129,7 +140,6 @@
     ]
   },
   "armor_equip_samurai": {
-    "category": "player",
     "subtitle": "digital armor equip: Samurai Type",
     "sounds": [
       {

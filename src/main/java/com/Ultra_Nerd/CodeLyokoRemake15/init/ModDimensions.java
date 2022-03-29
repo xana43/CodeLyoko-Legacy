@@ -1,11 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.carthage.CarthageEffects;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen.Carthage.CarthageBiomeProvider;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen.Carthage.CarthageGenerator;
+import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.dimension.DimensionType;
 
 //@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID)
 public class ModDimensions {
@@ -14,16 +17,16 @@ public class ModDimensions {
 
     //dimensions
     public static final ResourceKey<Level> SECTOR5  = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("carthage"));
+    public static final ResourceKey<DimensionType> SECTOR5_TYPE = ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("carthage_type"));
 
+    public static final ResourceKey<Level> FOREST = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("forest"));
+    public static final ResourceKey<Level> DESERT = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("desert"));
+    public static final ResourceKey<Level> ICE = ResourceKey.create(Registry.DIMENSION_REGISTRY, CodeLyokoMain.CodeLyokoPrefix("ice"));
+    public static final ResourceKey<Level> MOUNTAIN = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("mountain"));
+    public static final ResourceKey<Level> VOLCANO = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("volcano"));
+    public static final ResourceKey<Level> DIGITAL_OCEAN = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("digital_ocean"));
 
-    public static final ResourceKey<Level> FOREST = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("forest_sector"));
-    public static final ResourceKey<Level> DESERT = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("desert_sector"));
-    public static final ResourceKey<Level> ICE = ResourceKey.create(Registry.DIMENSION_REGISTRY, CodeLyokoMain.CodeLyokoPrefix("ice_sector"));
-    public static final ResourceKey<Level> MOUNTAIN = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("mountain_sector"));
-    public static final ResourceKey<Level> VOLCANO = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("volcano_sector"));
-
-
-
+    public static final DimensionSpecialEffects skytype = new CarthageEffects();
 
 
 

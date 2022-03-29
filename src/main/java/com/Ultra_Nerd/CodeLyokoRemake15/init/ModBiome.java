@@ -10,6 +10,7 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 
 public class ModBiome {
 
@@ -21,7 +22,7 @@ public class ModBiome {
 
 
 
-
+    @NotNull
     private static ResourceKey<Biome> makeResourceKey(String name, Biome.BiomeCategory biomeCategory, int temp, Biome.TemperatureModifier temperatureModifier,BiomeSpecialEffects biomeSpecialEffects,MobSpawnSettings mobSpawnSettings)
     {
         BIOMES.register(name,() -> new Biome.BiomeBuilder()
@@ -39,7 +40,7 @@ public class ModBiome {
 
 
 
-    public static final ResourceKey<Biome> SECTOR_5 = makeResourceKey("sector5", Biome.BiomeCategory.NONE,0, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
+    public static final ResourceKey<Biome> SECTOR_5 = makeResourceKey("sector5", Biome.BiomeCategory.NONE,10, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
             .skyColor(2387)
             .waterColor(2387)
             .backgroundMusic(ModSounds.LAZY_SECTOR5.get())
@@ -48,7 +49,7 @@ public class ModBiome {
             .waterColor(2387).build()
             ,MobSpawnSettings.EMPTY);
 
-    public static final ResourceKey<Biome> FOREST_SECTOR = makeResourceKey("forest", Biome.BiomeCategory.NONE,0, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
+    public static final ResourceKey<Biome> FOREST_SECTOR = makeResourceKey("forest_sector", Biome.BiomeCategory.JUNGLE,10, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
                     .skyColor(2387)
                     .waterColor(2387)
                     .backgroundMusic(ModSounds.LAZY_FOREST.get())
@@ -59,16 +60,45 @@ public class ModBiome {
 
 
 
-    /*
-    public static final ResourceKey<Biome> FOREST_SECTOR = makeResourceKey("forest_sector");
-    public static final ResourceKey<Biome> ICE_SECTOR = makeResourceKey("ice_sector");
-    public static final ResourceKey<Biome> DESERT_SECTOR = makeResourceKey("desert_sector");
-    public static final ResourceKey<Biome> MOUNTAIN_SECTOR = makeResourceKey("mountain_sector");
 
-    public static final ResourceKey<Biome> VOLCANO_SECTOR = makeResourceKey("volcano_sector");
-    */
+
+    public static final ResourceKey<Biome> ICE_SECTOR = makeResourceKey("ice_sector",Biome.BiomeCategory.ICY,-3, Biome.TemperatureModifier.FROZEN,new BiomeSpecialEffects.Builder()
+            .skyColor(2387)
+            .backgroundMusic(ModSounds.LAZY_ICE.get())
+            .fogColor(2387)
+            .waterFogColor(2387)
+            .waterColor(2387)
+            .build(),MobSpawnSettings.EMPTY);
+    public static final ResourceKey<Biome> DESERT_SECTOR = makeResourceKey("desert_sector", Biome.BiomeCategory.DESERT,38, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
+            .skyColor(12759680)
+            .backgroundMusic(ModSounds.LAZY_DESERT.get())
+            .fogColor(12759680)
+            .waterFogColor(12759680)
+            .waterColor(12759680)
+            .build(),MobSpawnSettings.EMPTY);
+    public static final ResourceKey<Biome> MOUNTAIN_SECTOR = makeResourceKey("mountain_sector", Biome.BiomeCategory.MOUNTAIN,6, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
+            .skyColor(306)
+            .backgroundMusic(ModSounds.LAZY_SECTOR5.get())
+            .fogColor(306)
+            .waterFogColor(306)
+            .waterColor(306)
+            .build(), MobSpawnSettings.EMPTY);
+
+    public static final ResourceKey<Biome> VOLCANO_SECTOR = makeResourceKey("volcano_sector", Biome.BiomeCategory.NETHER,100, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
+            .skyColor(7579)
+            .backgroundMusic(ModSounds.LAZY_ICE.get())
+            .fogColor(7579)
+            .waterFogColor(7579)
+            .waterColor(7579)
+            .build(),MobSpawnSettings.EMPTY);
+    public static final ResourceKey<Biome> DIGITAL_OCEAN = makeResourceKey("digital_ocean", Biome.BiomeCategory.OCEAN,15, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
+            .skyColor(2382)
+            .backgroundMusic(ModSounds.LAZY_OCEAN.get())
+            .fogColor(2382)
+            .waterFogColor(2382)
+            .waterColor(2382)
+            .build(),MobSpawnSettings.EMPTY);
     public static final BiomeDictionary.Type LYOKO = BiomeDictionary.Type.getType("Lyoko");
-
 
 
 
@@ -77,12 +107,12 @@ public class ModBiome {
 
         BiomeDictionary.addTypes(SECTOR_5,LYOKO,BiomeDictionary.Type.VOID,BiomeDictionary.Type.DENSE,BiomeDictionary.Type.SPOOKY);
         BiomeDictionary.addTypes(FOREST_SECTOR,LYOKO,BiomeDictionary.Type.FOREST,BiomeDictionary.Type.LUSH,BiomeDictionary.Type.JUNGLE);
-       /* BiomeDictionary.addTypes(DESERT_SECTOR,LYOKO, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY);
+        BiomeDictionary.addTypes(DESERT_SECTOR,LYOKO, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY);
         BiomeDictionary.addTypes(ICE_SECTOR,LYOKO, BiomeDictionary.Type.COLD, BiomeDictionary.Type.MODIFIED, BiomeDictionary.Type.SNOWY,BiomeDictionary.Type.SPARSE);
         BiomeDictionary.addTypes(MOUNTAIN_SECTOR,LYOKO, BiomeDictionary.Type.MOUNTAIN,BiomeDictionary.Type.SPARSE);
         BiomeDictionary.addTypes(VOLCANO_SECTOR,LYOKO, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HOT, BiomeDictionary.Type.NETHER);
+        BiomeDictionary.addTypes(DIGITAL_OCEAN,LYOKO,BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WATER, BiomeDictionary.Type.WET);
 
-         */
 
     }
 
