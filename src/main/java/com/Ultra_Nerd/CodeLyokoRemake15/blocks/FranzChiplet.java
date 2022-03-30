@@ -150,7 +150,7 @@ public class FranzChiplet extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return null;// ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get().create(pos, state);
+        return null;//ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get().create(pos, state);
     }
 
 

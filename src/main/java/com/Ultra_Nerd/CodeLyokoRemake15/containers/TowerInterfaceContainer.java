@@ -9,24 +9,19 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
 
 public class TowerInterfaceContainer extends AbstractContainerMenu {
 
-    private TowerInterfaceTileEntity TowerEntity;
+
     private BlockEntity TE2;
     private Player inplayer;
 
 
-    public TowerInterfaceContainer(@Nullable MenuType<?> Typpe, int id) {
-        super(Typpe,id);
 
-    }
 
     public TowerInterfaceContainer(int id, BlockPos pos,Inventory playerInv, Player player)
     {
@@ -38,7 +33,7 @@ public class TowerInterfaceContainer extends AbstractContainerMenu {
     }
     public TowerInterfaceContainer(final int windowid, final Inventory PInventory, final TowerInterfaceTileEntity TowerEntity) {
         super(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), windowid);
-        this.TowerEntity = TowerEntity;
+
 
     }
     public TowerInterfaceContainer(final int windowid, final Inventory inven, final FriendlyByteBuf data/*, TowerInterfaceTileEntity towerEntity*/) {

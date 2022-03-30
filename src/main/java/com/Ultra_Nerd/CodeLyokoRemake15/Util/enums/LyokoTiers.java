@@ -5,13 +5,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public enum LyokoTiers implements Tier {
 
-    LYOKOFELINE(4, 2000, 900, 6, 90),
+    LYOKOFELINE(4, 2000, 900, 8, 90),
     LyokoGuardian(4, 4000, 40, 60, 100),
-    LyokoNinja(4, 2000, 9000, 6, 90),
+    LyokoNinja(4, 2000, 9000, 8, 90),
     LyokoSamurai(4, 1000, 10, 25, 80),
     LyokoTool(20, 250, 7.0f, 3.0f, 900),
     LyokoWarrior(4, 4000, 0, 30, 9000),
-    LyokoArcher(4, 2500, 9200, 3, 50);
+    LyokoArcher(4, 2500, 9200, 8, 50);
 
     private final int harvest, MaxUses, enchantability;
     private final float attackdamage, efficiency;
@@ -21,7 +21,6 @@ public enum LyokoTiers implements Tier {
         this.harvest = harvest;
         this.MaxUses = MaxUses;
         this.efficiency = efficiency;
-
         this.attackdamage = attackdamage;
         this.enchantability = enchantability;
 

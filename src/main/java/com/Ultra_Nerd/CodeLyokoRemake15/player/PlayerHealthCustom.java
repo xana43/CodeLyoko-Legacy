@@ -6,6 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.gui.ForgeIngameGui;
@@ -22,29 +23,30 @@ public class PlayerHealthCustom {
     private static final ResourceLocation HEALTH_TEX = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/lyoko_health_bar.png");
 
 
-
-
-
-
     @SubscribeEvent
     public static void removehunger(final PlayerEvent event) {
 
         if (event.getPlayer() != null) {
-            if (DimensionCheck.playerNotInVanillaWorld(event.getPlayer())) {
+
+            if (DimensionCheck.playerNotInVanillaWorld(event.getPlayer()) && !event.getPlayer().isInvulnerable()) {
                 event.getPlayer().getFoodData().setFoodLevel(40);
                 event.getPlayer().getFoodData().setExhaustion(0);
                 event.getPlayer().getFoodData().setSaturation(40);
                 event.getPlayer().causeFoodExhaustion(0);
                 event.getPlayer().canEat(true);
+                event.getPlayer().isInvulnerableTo(DamageSource.STARVE);
+                //event.getPlayer().addEffect(new MobEffectInstance(MobEffects.SATURATION, 255,255,false,false,false));
+
 
 
             }
+
         }
     }
 
 
     @SubscribeEvent
-    public static void PlayerHealthRender(final RenderGameOverlayEvent.Post renderEvent) {
+    public static void PlayerHealthRender(final RenderGameOverlayEvent.Pre renderEvent) {
 
         if (renderEvent.getType() == RenderGameOverlayEvent.ElementType.ALL && DimensionCheck.playerNotInVanillaWorld(Minecraft.getInstance().player != null ? Minecraft.getInstance().player : null) && Minecraft.getInstance().player != null
         ) {

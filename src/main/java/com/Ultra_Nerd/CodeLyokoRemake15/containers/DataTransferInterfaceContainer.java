@@ -4,6 +4,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test.DataTransferInterfaceTileEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -19,14 +20,27 @@ public class DataTransferInterfaceContainer extends AbstractContainerMenu {
 
 
 
-    private final DataTransferInterfaceTileEntity dataTransferInterfaceTileEntity;
+    private DataTransferInterfaceTileEntity dataTransferInterfaceTileEntity;
+    private BlockEntity de2;
+    private Player thisplayer;
 
+
+    public DataTransferInterfaceContainer(int id, BlockPos pos, Inventory playerInv, Player player)
+    {
+
+        super(ModContainerTypes.DATA_TRANSFER_INTERFACE_CONTAINER.get(),id);
+        this.thisplayer = player;
+        this.de2 = player.getCommandSenderWorld().getBlockEntity(pos);
+
+    }
     public DataTransferInterfaceContainer(final int windowid, final Inventory PInventory, final DataTransferInterfaceTileEntity dataTransferInterfaceTileEntity) {
         super(ModContainerTypes.DATA_TRANSFER_INTERFACE_CONTAINER.get(), windowid);
         this.dataTransferInterfaceTileEntity = dataTransferInterfaceTileEntity;
-      //  Player playerEntity = PInventory.player;
+
 
     }
+
+
 
     public DataTransferInterfaceContainer(final int windowid, final Inventory inven, final FriendlyByteBuf data) {
         this(windowid, inven, getBlockTE(inven, data));
@@ -54,6 +68,6 @@ public class DataTransferInterfaceContainer extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(@NotNull Player pPlayer) {
-        return stillValid(ContainerLevelAccess.create(Objects.requireNonNull(dataTransferInterfaceTileEntity.getLevel()),dataTransferInterfaceTileEntity.getBlockPos()), pPlayer, ModBlocks.DATA_TRANSFER_INTERFACE.get());
+        return stillValid(ContainerLevelAccess.create(Objects.requireNonNull(de2.getLevel()),de2.getBlockPos()), thisplayer, ModBlocks.DATA_TRANSFER_INTERFACE.get());
     }
 }

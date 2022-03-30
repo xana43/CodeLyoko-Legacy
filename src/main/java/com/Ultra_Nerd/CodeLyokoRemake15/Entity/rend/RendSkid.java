@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Random;
 
 @OnlyIn(Dist.CLIENT)
-public class RendSkid extends EntityRenderer<EntitySkid> {
+public class RendSkid extends EntityRenderer<EntitySkid>{
     private final ModelSkid skid = new ModelSkid();
     IForgeBakedModel wrapper;
 
@@ -55,7 +55,7 @@ public class RendSkid extends EntityRenderer<EntitySkid> {
 
 
     @Override
-    public void render(@Nonnull EntitySkid entityIn, float entityYaw, float partialTicks, @Nonnull PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+    public void render(@Nonnull EntitySkid entityIn, float entityYaw, float partialTicks, @Nonnull PoseStack matrixStackIn, @NotNull MultiBufferSource bufferIn, int packedLightIn) {
 
         matrixStackIn.pushPose();
         matrixStackIn.popPose();

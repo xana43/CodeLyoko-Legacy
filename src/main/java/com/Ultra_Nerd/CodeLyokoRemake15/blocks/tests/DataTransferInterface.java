@@ -57,7 +57,7 @@ public class DataTransferInterface extends BaseEntityBlock {
 
                     @Override
                     public @NotNull AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory, @NotNull Player player1) {
-                        return new DataTransferInterfaceContainer(id,inventory, (DataTransferInterfaceTileEntity) Data);
+                        return new DataTransferInterfaceContainer(id,pos,inventory, player1);
                     }
                 };
                 NetworkHooks.openGui((ServerPlayer) player, thisMenuProvider, Data.getBlockPos());

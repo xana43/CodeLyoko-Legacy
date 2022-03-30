@@ -5,15 +5,20 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Entity.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
+@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEntities {
 
 
     public static final DeferredRegister<EntityType<?>> Entities = DeferredRegister.create(ForgeRegistries.ENTITIES, CodeLyokoMain.MOD_ID);
-
     public static final RegistryObject<EntityType<EntityBlok>> BLOK = Entities.register("blok", () ->
             EntityType.Builder.of(EntityBlok::new, MobCategory.MONSTER).sized(2f, 2f)
                     .build(new ResourceLocation(CodeLyokoMain.MOD_ID, "blok").toString()));
@@ -54,5 +59,15 @@ public class ModEntities {
             EntityType.Builder.of(GuardianEntity::new, MobCategory.MONSTER).sized(8, 8)
                     .build(new ResourceLocation(CodeLyokoMain.MOD_ID, "guardian").toString()));
 
+    @SubscribeEvent
+    public static void onRegisterEntities(final RegistryEvent.Register<EntityType<?>> entityTypeRegister)
+    {
 
+        SpawnPlacements.register(BLOK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE,EntityBlok::canSpawn);
+    }
+@SubscribeEvent
+    public static void registerAttributes(EntityAttributeCreationEvent event)
+{
+    event.put(BLOK.get(),EntityBlok.createMonsterAttributes().build());
+}
 }

@@ -29,9 +29,11 @@ public class ModTileEntities {
     public static final RegistryObject<BlockEntityType<HologramProjectorTileEntity>> HOLOGRAM_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("hologram_tile_entity", () -> BlockEntityType.Builder.of(HologramProjectorTileEntity::new,
                     ModBlocks.HOLOPROJECTOR.get()).build(null));
-    public static final RegistryObject<BlockEntityType<QuantumChipletTileEntity>> QUANTUM_CHIPLET_TILE_ENTITY =
-            TILE_ENTITY_TYPES.register("quantum_chiplet_tile_entity", () -> BlockEntityType.Builder.of(QuantumChipletTileEntity::new,
-                    ModBlocks.CHIPLET_FRANZ_BLOCK.get()).build(null));
+                    */
+    //public static final RegistryObject<BlockEntityType<QuantumChipletTileEntity>> QUANTUM_CHIPLET_TILE_ENTITY =
+      //      TILE_ENTITY_TYPES.register("quantum_chiplet_tile_entity", () -> BlockEntityType.Builder.of(QuantumChipletTileEntity::new,
+        //            ModBlocks.CHIPLET_FRANZ_BLOCK.get()).build(null));
+    /*
     public static final RegistryObject<BlockEntityType<ScannerTileEntity>> SCANNER_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("scanner_tile_entity", () -> BlockEntityType.Builder.of(ScannerTileEntity::new,
                     ModBlocks.SCANNER_BASE.get()).build(null));

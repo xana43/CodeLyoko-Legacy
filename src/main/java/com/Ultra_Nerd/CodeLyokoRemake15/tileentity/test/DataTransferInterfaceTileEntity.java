@@ -35,5 +35,8 @@ public class DataTransferInterfaceTileEntity extends BlockEntity implements Menu
         return new DataTransferInterfaceContainer(windowIn, playerInventory, this);
     }
 
-
+    @Override
+    public boolean triggerEvent(int pId, int pType) {
+        return true;
+    }
 }

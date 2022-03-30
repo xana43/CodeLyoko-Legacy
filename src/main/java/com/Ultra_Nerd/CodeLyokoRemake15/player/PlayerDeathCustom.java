@@ -19,14 +19,17 @@ public class PlayerDeathCustom {
     @SubscribeEvent
     public void PlayerDie(final LivingDeathEvent event)
     {
-        if (event.getEntity().level.isClientSide && event.getEntity() instanceof Player playerEntity)
+        if (event.getEntity() instanceof Player playerEntity)
         {
+
+
             if (DimensionCheck.playerNotInVanillaWorld(playerEntity))
             {
-                playerEntity.level.playSound(null,playerEntity.blockPosition(),ModSounds.DEVIRTUALIZATION.get(), SoundSource.PLAYERS,1,1);
+                Minecraft.getInstance().getSoundManager().stop(SoundEvents.PLAYER_DEATH.getLocation(), SoundSource.PLAYERS);
+                playerEntity.level.playSound(null,playerEntity.blockPosition(),ModSounds.DEVIRTUALIZATION.get(),SoundSource.PLAYERS, 1,1);
             }
-                Minecraft.getInstance().getSoundManager().stop(SoundEvents.PLAYER_DEATH.getRegistryName(),null);
-            }
+
+        }
     }
 
 

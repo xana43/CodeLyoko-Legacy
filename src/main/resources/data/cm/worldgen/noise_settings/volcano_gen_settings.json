@@ -5,7 +5,7 @@
   "ore_veins_enabled": false,
   "legacy_random_source": true,
   "default_block": {
-    "Name": "cm:digital_grass"
+    "Name": "cm:volcano_ground"
   },
   "default_fluid": {
     "Name": "cm:digital_ocean"
@@ -102,14 +102,14 @@
               "then_run": {
                 "type": "minecraft:block",
                 "result_state": {
-                  "Name": "cm:digital_grass"
+                  "Name": "cm:volcano_ground"
                 }
               }
             },
             {
               "type": "minecraft:block",
               "result_state": {
-                "Name": "cm:digital_dirt"
+                "Name": "cm:volcano_ground"
               }
             }
           ]
@@ -127,7 +127,7 @@
         "then_run": {
           "type": "minecraft:block",
           "result_state": {
-            "Name": "cm:digital_dirt"
+            "Name": "cm:volcano_ground"
           }
         }
       }

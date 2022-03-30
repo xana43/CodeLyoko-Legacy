@@ -10,9 +10,9 @@
   "coordinate_scale": 1,
   "ambient_light": 0,
   "fixed_time": 6000,
-  "logical_height": 256,
+  "logical_height": 384,
   "effects": "cm:lyoko_effects",
   "infiniburn": "#minecraft:infiniburn_overworld",
   "min_y": 0,
-  "height": 256
+  "height": 384
 }

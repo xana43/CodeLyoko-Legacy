@@ -7,6 +7,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -15,12 +16,22 @@ import org.jetbrains.annotations.NotNull;
 public class ModBiome {
 
 
+
+
+
     //Registry keys
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, CodeLyokoMain.MOD_ID);
 
 
 
-
+    public static final ResourceKey<Biome> FOREST_SECTOR = ForestResourceKey(new BiomeSpecialEffects.Builder()
+                    .skyColor(2387)
+                    .waterColor(2387)
+                    .backgroundMusic(ModSounds.LAZY_FOREST.get())
+                    .fogColor(2387)
+                    .waterFogColor(2387)
+                    .waterColor(2387).build()
+    );
 
     @NotNull
     private static ResourceKey<Biome> makeResourceKey(String name, Biome.BiomeCategory biomeCategory, int temp, Biome.TemperatureModifier temperatureModifier,BiomeSpecialEffects biomeSpecialEffects,MobSpawnSettings mobSpawnSettings)
@@ -38,9 +49,29 @@ public class ModBiome {
         return ResourceKey.create(Registry.BIOME_REGISTRY, CodeLyokoMain.CodeLyokoPrefix(name));
     }
 
+    @NotNull
+    private static ResourceKey<Biome> ForestResourceKey(BiomeSpecialEffects biomeSpecialEffects)
+    {
 
 
-    public static final ResourceKey<Biome> SECTOR_5 = makeResourceKey("sector5", Biome.BiomeCategory.NONE,10, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
+            BIOMES.register("forest_sector", () -> new Biome.BiomeBuilder()
+                    .precipitation(Biome.Precipitation.NONE)
+                    .biomeCategory(Biome.BiomeCategory.JUNGLE)
+                    .temperature(10)
+                    .temperatureAdjustment(Biome.TemperatureModifier.NONE)
+                    .downfall(0)
+                    .specialEffects(biomeSpecialEffects)
+                    .mobSpawnSettings(MobSpawnSettings.EMPTY)
+                    .generationSettings(new BiomeGenerationSettings.Builder().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                            ModFeature.DIGITAL_FOREST_PLACED).build())
+                    .build());
+
+        return ResourceKey.create(Registry.BIOME_REGISTRY, CodeLyokoMain.CodeLyokoPrefix("forest_sector"));
+    }
+
+
+
+    public static final ResourceKey<Biome> SECTOR_5 = makeResourceKey("sector5", Biome.BiomeCategory.THEEND,10, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
             .skyColor(2387)
             .waterColor(2387)
             .backgroundMusic(ModSounds.LAZY_SECTOR5.get())
@@ -49,16 +80,27 @@ public class ModBiome {
             .waterColor(2387).build()
             ,MobSpawnSettings.EMPTY);
 
-    public static final ResourceKey<Biome> FOREST_SECTOR = makeResourceKey("forest_sector", Biome.BiomeCategory.JUNGLE,10, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
-                    .skyColor(2387)
-                    .waterColor(2387)
-                    .backgroundMusic(ModSounds.LAZY_FOREST.get())
-                    .fogColor(2387)
-                    .waterFogColor(2387)
-                    .waterColor(2387).build()
-            ,MobSpawnSettings.EMPTY);
 
 
+    @NotNull
+    private static ResourceKey<Biome> MountainResourceKey(BiomeSpecialEffects biomeSpecialEffects)
+    {
+
+
+        BIOMES.register("mountain_sector", () -> new Biome.BiomeBuilder()
+                .precipitation(Biome.Precipitation.NONE)
+                .biomeCategory(Biome.BiomeCategory.MOUNTAIN)
+                .temperature(6)
+                .temperatureAdjustment(Biome.TemperatureModifier.NONE)
+                .downfall(0)
+                .specialEffects(biomeSpecialEffects)
+                .mobSpawnSettings(MobSpawnSettings.EMPTY)
+                .generationSettings(new BiomeGenerationSettings.Builder().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                        ModFeature.DIGITAL_MOUNTAIN_PLACED).build())
+                .build());
+
+        return ResourceKey.create(Registry.BIOME_REGISTRY, CodeLyokoMain.CodeLyokoPrefix("forest_sector"));
+    }
 
 
 
@@ -76,17 +118,16 @@ public class ModBiome {
             .waterFogColor(12759680)
             .waterColor(12759680)
             .build(),MobSpawnSettings.EMPTY);
-    public static final ResourceKey<Biome> MOUNTAIN_SECTOR = makeResourceKey("mountain_sector", Biome.BiomeCategory.MOUNTAIN,6, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
+    public static final ResourceKey<Biome> MOUNTAIN_SECTOR = MountainResourceKey(new BiomeSpecialEffects.Builder()
             .skyColor(306)
-            .backgroundMusic(ModSounds.LAZY_SECTOR5.get())
+            .backgroundMusic(ModSounds.LAZY_MOUNTAIN.get())
             .fogColor(306)
             .waterFogColor(306)
             .waterColor(306)
-            .build(), MobSpawnSettings.EMPTY);
-
-    public static final ResourceKey<Biome> VOLCANO_SECTOR = makeResourceKey("volcano_sector", Biome.BiomeCategory.NETHER,100, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
+            .build());
+    public static final ResourceKey<Biome> VOLCANO_SECTOR = makeResourceKey("volcano_replika", Biome.BiomeCategory.NETHER,40, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
             .skyColor(7579)
-            .backgroundMusic(ModSounds.LAZY_ICE.get())
+            .backgroundMusic(ModSounds.LAZY_VOLCANO.get())
             .fogColor(7579)
             .waterFogColor(7579)
             .waterColor(7579)
@@ -105,13 +146,14 @@ public class ModBiome {
     public static void addBiomeTypes()
     {
 
-        BiomeDictionary.addTypes(SECTOR_5,LYOKO,BiomeDictionary.Type.VOID,BiomeDictionary.Type.DENSE,BiomeDictionary.Type.SPOOKY);
+        BiomeDictionary.addTypes(SECTOR_5,LYOKO,BiomeDictionary.Type.VOID,BiomeDictionary.Type.SPOOKY);
         BiomeDictionary.addTypes(FOREST_SECTOR,LYOKO,BiomeDictionary.Type.FOREST,BiomeDictionary.Type.LUSH,BiomeDictionary.Type.JUNGLE);
         BiomeDictionary.addTypes(DESERT_SECTOR,LYOKO, BiomeDictionary.Type.DEAD, BiomeDictionary.Type.DRY, BiomeDictionary.Type.HOT, BiomeDictionary.Type.SANDY);
-        BiomeDictionary.addTypes(ICE_SECTOR,LYOKO, BiomeDictionary.Type.COLD, BiomeDictionary.Type.MODIFIED, BiomeDictionary.Type.SNOWY,BiomeDictionary.Type.SPARSE);
+        BiomeDictionary.addTypes(ICE_SECTOR,LYOKO, BiomeDictionary.Type.COLD, BiomeDictionary.Type.MODIFIED, BiomeDictionary.Type.SNOWY,BiomeDictionary.Type.DEAD);
         BiomeDictionary.addTypes(MOUNTAIN_SECTOR,LYOKO, BiomeDictionary.Type.MOUNTAIN,BiomeDictionary.Type.SPARSE);
-        BiomeDictionary.addTypes(VOLCANO_SECTOR,LYOKO, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HOT, BiomeDictionary.Type.NETHER);
-        BiomeDictionary.addTypes(DIGITAL_OCEAN,LYOKO,BiomeDictionary.Type.OCEAN, BiomeDictionary.Type.WATER, BiomeDictionary.Type.WET);
+        BiomeDictionary.addTypes(VOLCANO_SECTOR,LYOKO, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HOT, BiomeDictionary.Type.NETHER, BiomeDictionary.Type.SPOOKY);
+        BiomeDictionary.addTypes(DIGITAL_OCEAN,LYOKO, BiomeDictionary.Type.WATER, BiomeDictionary.Type.WET);
+
 
 
     }

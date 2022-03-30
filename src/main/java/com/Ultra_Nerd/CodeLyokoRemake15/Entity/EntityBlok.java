@@ -1,16 +1,28 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelBlok;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -25,8 +37,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class EntityBlok extends Skeleton implements IAnimatable {
-
+public class EntityBlok extends Monster implements IAnimatable, RangedAttackMob {
 
     private final AnimationFactory manager = new AnimationFactory(this);
     private final AnimationController controller = new AnimationController(this, "blokcontroller", 20, this::pred);
@@ -34,8 +45,15 @@ public class EntityBlok extends Skeleton implements IAnimatable {
     public EntityBlok(Level world) {
         super(ModEntities.BLOK.get(), world);
 
-    }*/
 
+    }
+
+ */
+public EntityBlok(EntityType<? extends Monster> type, Level world) {
+    super(ModEntities.BLOK.get(), world);
+    this.setAggressive(true);
+    AnimationController.addModelFetcher((AnimationController.ModelFetcher<EntityBlok>) iAnimatable -> new ModelBlok());
+}
 
 
 
@@ -54,10 +72,7 @@ public class EntityBlok extends Skeleton implements IAnimatable {
         return false;
     }
 
-    @Override
-    public boolean isFreezeConverting() {
-        return false;
-    }
+
 
     @Override
     public boolean isOnFire() {
@@ -71,13 +86,12 @@ public class EntityBlok extends Skeleton implements IAnimatable {
 
 
 
-    public EntityBlok(EntityType<? extends Skeleton> type, Level world) {
-        super(type, world);
-        // TODO Auto-generated constructor stub
-    }
+
+
+
 
     @Override
-    protected boolean canRide(Entity p_20339_) {
+    protected boolean canRide(@NotNull Entity p_20339_) {
         return false;
     }
 
@@ -87,7 +101,7 @@ public class EntityBlok extends Skeleton implements IAnimatable {
     }
 
     @Override
-    public boolean curePotionEffects(ItemStack curativeItem) {
+    public boolean curePotionEffects(@NotNull ItemStack curativeItem) {
         return true;
     }
 
@@ -119,34 +133,63 @@ public class EntityBlok extends Skeleton implements IAnimatable {
         return super.getDeathSound();
     }
 
-    @Nonnull
+
+
+
+
+
     @Override
-    protected SoundEvent getStepSound() {
-        return super.getStepSound();
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(1,new FloatGoal(this));
+        this.goalSelector.addGoal(2,new RangedAttackGoal(this,1,10,6));
+        this.goalSelector.addGoal(3,new WaterAvoidingRandomStrollGoal(this,1D));
+        this.goalSelector.addGoal(4,new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1,new NearestAttackableTargetGoal<>(this, Player.class,true));
     }
 
-
-
-    public static boolean canSpawn(EntityType<EntityBlok> entity, LevelAccessor levelAccessor, MobSpawnType spawnType, BlockPos pos, Random random)
-    {
-        return checkMobSpawnRules(entity,levelAccessor,spawnType,pos,random) && pos.getY() > 70;
-    }
-
-
-    public static AttributeSupplier.@NotNull Builder createAttributes(){
-        return Mob.createMobAttributes()
+    public static AttributeSupplier.@NotNull Builder createMonsterAttributes(){
+        return Monster.createMobAttributes()
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10D)
-                .add(Attributes.MAX_HEALTH,10D)
+                .add(Attributes.MAX_HEALTH,90D)
                 .add(Attributes.MOVEMENT_SPEED,0.5D)
                 .add(Attributes.ATTACK_DAMAGE,10D)
+                .add(Attributes.ATTACK_SPEED,4D)
                 .add(Attributes.ARMOR,10D)
                 .add(Attributes.FOLLOW_RANGE, 20D);
+
+    }
+    public static boolean canSpawn(EntityType<? extends EntityBlok> type, LevelAccessor world, MobSpawnType reason, BlockPos pos, Random rand) {
+        return Monster.checkAnyLightMonsterSpawnRules(type,world,reason,pos,rand) && (world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_ROCK.get() || world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_GRASS.get()
+                || world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_ICE.get() || world.getBlockState(pos).getBlock() == ModBlocks.VOLCANO_GROUND.get());
     }
 
-
+    @Override
+    public boolean canRiderInteract() {
+        return false;
+    }
 
     @Override
     public AnimationFactory getFactory() {
         return manager;
+    }
+
+
+    @Override
+    public void performRangedAttack(@NotNull LivingEntity pTarget, float pDistanceFactor) {
+
+        AbstractArrow abstractarrow = this.getArrow(pDistanceFactor);
+
+        double d0 = pTarget.getX() - this.getX();
+        double d1 = pTarget.getY(0.3333333333333333D) - abstractarrow.getY();
+        double d2 = pTarget.getZ() - this.getZ();
+        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+        abstractarrow.shoot(d0, d1 + d3 * (double)0.2F, d2, 4F, (float)(14 - this.level.getDifficulty().getId() * 4));
+        this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.level.addFreshEntity(abstractarrow);
+    }
+
+    protected AbstractArrow getArrow(float pDistanceFactor) {
+        return ProjectileUtil.getMobArrow(this, ItemStack.EMPTY, pDistanceFactor);
     }
 }

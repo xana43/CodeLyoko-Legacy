@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.ClientModEventSubscriber;
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.enums.LyokoArmorMaterial;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LiquidHelium;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LyokoCore;
@@ -12,21 +11,16 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.player.PlayerClassType;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -106,27 +100,28 @@ public CodeLyokoMain() {
         instance = this;
         final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
         GeckoLib.initialize();
+
         //ModBus.addListener(this::PlayerSetup);
         //ModBus.addListener(ClientModEventSubscriber::onFMLClientSetupEvent);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientModEventSubscriber::ClientSetup);
-
+        ModContainerTypes.CONTAINER_TYPES.register(ModBus);
         ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
         ModParticles.PARTICLES.register(ModBus);
         ModSounds.SOUNDS.register(ModBus);
+        ModEntities.Entities.register(ModBus);
+        ModSounds.populateMusicHashMap();
         ModBlocks.BLOCKS.register(ModBus);
-        ModBiome.BIOMES.register(ModBus);
         ModItems.ITEMS.register(ModBus);
         ModFluids.LIQUIDS.register(ModBus);
-        ModSounds.populateMusicHashMap();
-   // Log.debug(Registry.DIMENSION_REGISTRY.getRegistryName().toString());
-   // Log.debug(Registry.DIMENSION_TYPE_REGISTRY.location().toString());
+        ModBiome.BIOMES.register(ModBus);
 
-        ModEntities.Entities.register(ModBus);
+
+
+
         //ModRecipes.RECIPE_SERIALIZER_DEFERRED_REGISTER.register(ModBus);
 
-        ModContainerTypes.CONTAINER_TYPES.register(ModBus);
+
         MinecraftForge.EVENT_BUS.register(this);
-        //ModDimensions.MOD_DIMENSION_DEFERRED_REGISTER.register(ModBus);
         //ModWorldFeatures.FEATURES.register(ModBus);
 
         //ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfiguration.COMMON_SPEC, "code_lyoko_legacy.toml");
@@ -143,19 +138,7 @@ public CodeLyokoMain() {
     }
 */
 
-    public static VoxelShape calculateShapes(Direction to, VoxelShape shape) {
-        final VoxelShape[] buffer = { shape, Shapes.empty() };
 
-        final int times = (to.get2DDataValue() - Direction.NORTH.get2DDataValue() + 4) % 4;
-        for (int i = 0; i < times; i++) {
-            buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> buffer[1] = Shapes.or(buffer[1],
-                    Shapes.create(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX)));
-            buffer[0] = buffer[1];
-            buffer[1] = Shapes.empty();
-        }
-
-        return buffer[0];
-    }
 
 
 
@@ -167,13 +150,8 @@ public CodeLyokoMain() {
 
 
 
-        //makes it so that when the player re-enters the world default music doesn't play
-       ModSounds.LAZY_HASH_MAP.forEach((levelResourceKey, musicLazy) -> {
-           if(event.getWorld().dimension() == levelResourceKey)
-           {
-               Minecraft.getInstance().getMusicManager().startPlaying(musicLazy.get());
-           }
-       });
+
+
 
 
 
@@ -181,16 +159,21 @@ public CodeLyokoMain() {
 
 
         if (event.getEntity() instanceof Player player) {
-            if(DimensionCheck.playerNotInVanillaWorld(player) && !player.isCreative() && event.getWorld().isClientSide && !player.isSpectator())
-            {
-                assert Minecraft.getInstance().gameMode != null;
-                Minecraft.getInstance().gameMode.setLocalMode(GameType.ADVENTURE);
-            }
-            else if(!player.isSpectator() && !player.isCreative())
-            {
-                assert Minecraft.getInstance().gameMode != null;
-                Minecraft.getInstance().gameMode.setLocalMode(Objects.requireNonNull(event.getWorld().getServer()).getDefaultGameType());
-            }
+
+            //makes it so that when the player re-enters the world default music doesn't play
+            ModSounds.LAZY_HASH_MAP.forEach((levelResourceKey, musicLazy) -> {
+                //Log.debug(levelResourceKey.toString(),musicLazy.toString());
+                if(player.level.dimension() == levelResourceKey)
+                {
+
+                    Minecraft.getInstance().getMusicManager().startPlaying(musicLazy.get());
+
+
+
+                }
+
+            });
+
 
             CompoundTag tag = event.getEntity().getPersistentData();
             CompoundTag existing;
@@ -211,8 +194,11 @@ public CodeLyokoMain() {
 @Mod.EventBusSubscriber(modid = MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
 public static final class RegistryEventHandler{
 
+
     @SubscribeEvent
     public static void onRegisterBiome(final RegistryEvent.Register<Biome> event) {
+
+
 
         ModBiome.addBiomeTypes();
 
@@ -221,7 +207,7 @@ public static final class RegistryEventHandler{
 
     @SubscribeEvent
     public static void onItemInit(final RegistryEvent.Register<Item> Items) {
-
+        ModFeature.setConfigurations();
         final IForgeRegistry<Item> registry = Items.getRegistry();
         ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof LiquidBlock) &&
                 !(block.get() instanceof LiquidHelium) && !(block.get() instanceof SeaPylon) && !(block.get() instanceof LyokoCore)
@@ -234,10 +220,7 @@ public static final class RegistryEventHandler{
         });
     }
 
-    @SubscribeEvent
-    public void onRegisterEnties(final RegistryEvent.Register<EntityType<?>> event) {
-        //     CustomMobEggs.initEgg();
-    }
+
     /*
         @SubscribeEvent
         public void tickPast(final TickEvent event) {
@@ -256,7 +239,6 @@ public static final class RegistryEventHandler{
      */
     @SubscribeEvent
     public static void commonSetup(final FMLCommonSetupEvent event) {
-
 
         event.enqueueWork(() ->
                 {

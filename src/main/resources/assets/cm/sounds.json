@@ -1,6 +1,5 @@
 {
   "entity.blok.ambient": {
-    "category": "hostile",
     "subtitle": "entity.blok.ambient",
     "sounds": [
       {
@@ -10,7 +9,6 @@
     ]
   },
   "entity.blok.hurt": {
-    "category": "hostile",
     "subtitle": "entity.blok.hurt",
     "sounds": [
       {
@@ -20,7 +18,6 @@
     ]
   },
   "entity.blok.death": {
-    "category": "hostile",
     "subtitle": "entity.blok.death",
     "sounds": [
       {
@@ -30,7 +27,6 @@
     ]
   },
   "lyoko": {
-    "category": "record",
     "subtitle": "play.CodeLyokoTheme",
     "sounds": [
       {
@@ -41,7 +37,6 @@
     ]
   },
   "laser": {
-    "category": "player",
     "subtitle": "laser fire",
     "sounds": [
       {
@@ -52,7 +47,6 @@
     ]
   },
   "forestsector": {
-    "category": "music",
     "subtitle": "forest sector ambiance",
     "sounds": [
       {
@@ -63,7 +57,6 @@
     ]
   },
   "icesector": {
-    "category": "music",
     "subtitle": "ice sector ambiance",
     "sounds": [
       {
@@ -98,6 +91,15 @@
       "stream": true,
       "preload": true
       }]
+  },
+  "volcano_replika_music": {
+    "subtitle": "volcano replika ambiance",
+    "sounds": [{
+      "name": "cm:music/volcano/volcano",
+      "stream": true,
+      "preload": true
+
+    }]
   },
   "armor_equip_warrior": {
     "subtitle": "digital armor equip: Warrior Type",
@@ -150,7 +152,6 @@
     ]
   },
   "gui": {
-    "category": "neutral",
     "subtitle": "player type on tower console",
     "sounds": [
       {
@@ -161,7 +162,6 @@
     ]
   },
   "quantum_zap": {
-    "category": "block",
     "subtitle": "quantum chiplet zapping away",
     "sounds": [
       {
@@ -172,7 +172,6 @@
     ]
   },
   "digital_ocean": {
-    "category": "music",
     "subtitle": "digital ocean ambiance",
     "sounds": [
       {
@@ -183,7 +182,6 @@
     ]
   },
   "entity.megatank.move": {
-    "category": "hostile",
     "subtitle": "megatank rolls",
     "sounds": [
       {
@@ -194,7 +192,6 @@
     ]
   },
   "entity.hornet.fly": {
-    "category": "hostile",
     "subtitle": "hornet flies",
     "sounds": [
       {
@@ -205,7 +202,6 @@
     ]
   },
   "entity.megatank.hurt1": {
-    "category": "hostile",
     "subtitle": "megatank gets hurt",
     "sounds": [
       {
@@ -216,7 +212,6 @@
     ]
   },
   "entity.megatank.hurt2": {
-    "category": "hostile",
     "subtitle": "megatank gets hurt",
     "sounds": [
       {
@@ -227,7 +222,6 @@
     ]
   },
   "entity.megatank.smallfall": {
-    "category": "hostile",
     "subtitle": "megatank gets hurt by falling",
     "sounds": [
       {
@@ -238,7 +232,6 @@
     ]
   },
   "entity.megatank.bigfall": {
-    "category": "hostile",
     "subtitle": "megatank gets hurt by a bigfall",
     "sounds": [
       {
@@ -249,7 +242,6 @@
     ]
   },
   "entity.megatank.die": {
-    "category": "hostile",
     "subtitle": "megatank dies",
     "sounds": [
       {
@@ -260,12 +252,11 @@
     ]
   },
   "player.devertualization": {
-    "category": "players",
     "subtitle": "player devertualize",
     "sounds": [
       {
         "name": "cm:events/player_devertualize",
-        "stream": true,
+        "stream": false,
         "preload": true
       }
     ]

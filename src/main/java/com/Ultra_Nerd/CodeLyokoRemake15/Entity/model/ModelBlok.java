@@ -14,7 +14,7 @@ public class ModelBlok extends AnimatedGeoModel<EntityBlok> {
 
     @Override
     public ResourceLocation getModelLocation(EntityBlok object) {
-        return null;
+        return CodeLyokoMain.CodeLyokoPrefix("geo/blok.geo.json");
     }
 
     @Override
