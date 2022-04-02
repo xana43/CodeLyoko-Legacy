@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Util.enums;
 
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
+import org.jetbrains.annotations.NotNull;
 
 public enum LyokoTiers implements Tier {
 
@@ -55,7 +56,7 @@ public enum LyokoTiers implements Tier {
     }
 
     @Override
-    public Ingredient getRepairIngredient() {
-        return null;
+    public @NotNull Ingredient getRepairIngredient() {
+        return Ingredient.EMPTY;
     }
 }

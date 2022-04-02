@@ -11,7 +11,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -23,7 +22,6 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 public class ForceFieldEmitter extends BowItem {
-    private static final Predicate<ItemStack> AMMO = (item) -> item.equals(ItemStack.EMPTY, false);
 
 
     public ForceFieldEmitter(Properties builder) {
@@ -47,8 +45,8 @@ public class ForceFieldEmitter extends BowItem {
 
 
     @Override
-    public Predicate<ItemStack> getAllSupportedProjectiles() {
-        return AMMO;
+    public @NotNull Predicate<ItemStack> getAllSupportedProjectiles() {
+        return (item) -> item.equals(ItemStack.EMPTY,false);
     }
 
 
@@ -57,12 +55,13 @@ public class ForceFieldEmitter extends BowItem {
 
     @Override
     public void releaseUsing(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull LivingEntity entityLiving, int timeLeft) {
-        if (entityLiving instanceof Player) {
-            Player playerentity = (Player) entityLiving;
+        if (entityLiving instanceof Player playerentity) {
 
             int i = this.getUseDuration(stack) - timeLeft;
             i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, true);
-            if (i < 0) return;
+            if (i < 0) {
+                return;
+            }
 
 
             float f = getArrowVelocity(i);
@@ -73,17 +72,16 @@ public class ForceFieldEmitter extends BowItem {
 
                     las.setBaseDamage(40);
                     las.setPos(playerentity.position().x, playerentity.getEyeY(), playerentity.position().z);
-                    las.isNoGravity();
-                    AbstractArrow abstractarrowentity;
-                    abstractarrowentity = customArrow(las);
-                    abstractarrowentity.shootFromRotation(playerentity, playerentity.getRotationVector().x, playerentity.getRotationVector().y, 0.0F, f * 3.0F, 0.0F);
+                    las.setNoGravity(true);
+
+                    las.shootFromRotation(playerentity, playerentity.getRotationVector().x, playerentity.getRotationVector().y, 0.0F, f * 3.0F, 0.1F);
                     if (f == 1.0F) {
-                        abstractarrowentity.setCritArrow(true);
+                        las.setCritArrow(true);
                     }
-                    worldIn.addFreshEntity(abstractarrowentity);
+                    worldIn.addFreshEntity(las);
                 }
 
-                worldIn.playSound((Player) null, playerentity.position().x, playerentity.position().y, playerentity.position().z, ModSounds.LASERARROW.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (new Random().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                worldIn.playSound( playerentity, playerentity.blockPosition(), ModSounds.LASERARROW.get(), SoundSource.PLAYERS, 1.0F, 1.0F / (new Random().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
                 playerentity.awardStat(Stats.ITEM_USED.get(this));
             }

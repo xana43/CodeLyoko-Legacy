@@ -64,10 +64,12 @@ public class ModEntities {
     {
 
         SpawnPlacements.register(BLOK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE,EntityBlok::canSpawn);
+        SpawnPlacements.register(MEGATANK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE,MegaTankEntity::canSpawn);
     }
 @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event)
 {
     event.put(BLOK.get(),EntityBlok.createMonsterAttributes().build());
+    event.put(MEGATANK.get(),MegaTankEntity.registerAttributes().build());
 }
 }

@@ -103,6 +103,8 @@ public CodeLyokoMain() {
 
         //ModBus.addListener(this::PlayerSetup);
         //ModBus.addListener(ClientModEventSubscriber::onFMLClientSetupEvent);
+
+
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientModEventSubscriber::ClientSetup);
         ModContainerTypes.CONTAINER_TYPES.register(ModBus);
         ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
@@ -114,7 +116,7 @@ public CodeLyokoMain() {
         ModItems.ITEMS.register(ModBus);
         ModFluids.LIQUIDS.register(ModBus);
         ModBiome.BIOMES.register(ModBus);
-
+        ModFeature.LYOKOFEATURES.register(ModBus);
 
 
 
@@ -149,15 +151,6 @@ public CodeLyokoMain() {
         random = 1000;
 
 
-
-
-
-
-
-
-
-
-
         if (event.getEntity() instanceof Player player) {
 
             //makes it so that when the player re-enters the world default music doesn't play
@@ -175,6 +168,7 @@ public CodeLyokoMain() {
             });
 
 
+
             CompoundTag tag = event.getEntity().getPersistentData();
             CompoundTag existing;
             if (!tag.contains(Player.PERSISTED_NBT_TAG)) {
@@ -185,7 +179,11 @@ public CodeLyokoMain() {
 
             if (!existing.contains(nbt)) {
                 existing.putBoolean(nbt, true);
+
                 player.getInventory().add(0, new ItemStack(ModItems.STORY_BOOK.get(), 1));
+
+
+
             }
         }
     }

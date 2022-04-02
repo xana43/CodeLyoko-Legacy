@@ -17,13 +17,13 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
 public class ZweihanderWeapon extends SwordItem {
     private final float attackdamage;
     private final float attackspeed;
-    private short Count = 256;
 
     public ZweihanderWeapon(Tier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
@@ -35,7 +35,7 @@ public class ZweihanderWeapon extends SwordItem {
 
     @Override
     public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
-        return super.canDisableShield(stack, shield, entity, attacker);
+        return true;
     }
 
 
@@ -44,36 +44,33 @@ public class ZweihanderWeapon extends SwordItem {
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
-        if (stack.getDamageValue() < 3999) {
+
             Vec3 aim = player.getLookAngle();
             stack.setDamageValue(stack.getDamageValue() + 200);
             entity.setDeltaMovement(aim.x, aim.y, aim.z);
-            Count = 256;
 
-        }
 
-        return stack.getDamageValue() >= 3999;
+
+
+        return true;
 
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
-        if (stack.getDamageValue() > 4000) {
-            stack.setDamageValue(3999);
-        }
-        if (worldIn.isClientSide) {
-            Count -= 1;
-            if (Count == 0) {
-                if (stack.getDamageValue() != 0) {
-                    stack.getItem().damageItem(stack,-1, (Player) entityIn, null);
+    public boolean isFoil(ItemStack pStack) {
+        return false;
+    }
 
-                }
+    @Override
+    public boolean isDamageable(ItemStack stack) {
+        return false;
+    }
 
-                Count = 256;
-            }
-        }
-        if (entityIn instanceof Player) {
-            Player player = (Player) entityIn;
+    @Override
+    public void inventoryTick(@NotNull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
+
+
+        if (entityIn instanceof Player player) {
             ItemStack IStack = player.getItemInHand(InteractionHand.OFF_HAND);
             if (player.getItemInHand(InteractionHand.MAIN_HAND).getItem() == ModItems.ZWEIHANDER.get()) {
 
@@ -81,13 +78,10 @@ public class ZweihanderWeapon extends SwordItem {
             }
 
         }
-        if (!stack.isEnchanted() && stack.getDamageValue() < 1999) {
+        if (!stack.isEnchanted()) {
             stack.enchant(Enchantments.SWEEPING_EDGE, Enchantments.SWEEPING_EDGE.getMaxLevel());
             stack.enchant(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());
-
-        } else if (stack.getDamageValue() >= 3999) {
             stack.getEnchantmentTags().clear();
-
 
         }
     }
@@ -96,7 +90,7 @@ public class ZweihanderWeapon extends SwordItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        Multimap multimap = HashMultimap.create();
+        Multimap<Attribute,AttributeModifier> multimap = HashMultimap.create();
 
         if (slot == EquipmentSlot.MAINHAND) {
             multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackdamage, AttributeModifier.Operation.ADDITION));

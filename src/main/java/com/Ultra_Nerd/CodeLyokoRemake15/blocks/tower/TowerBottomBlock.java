@@ -9,6 +9,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class TowerBottomBlock extends Block {
 
@@ -26,9 +27,11 @@ public class TowerBottomBlock extends Block {
         }
     }
 
+
+
     @Override
-    public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
-        super.entityInside(state,worldIn,pos,entityIn);
+    public void stepOn(@NotNull Level worldIn, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull Entity entityIn) {
+        super.stepOn(worldIn,pos,state,entityIn);
         Iterable<BlockPos> blockList = BlockPos.betweenClosed(pos.getX() - 7, pos.getY(), pos.getZ() - 7, pos.getX() + 7, pos.getY() + 32, pos.getZ() + 7);
         for (BlockPos blockPos : blockList) {
             if (worldIn.getBlockState(blockPos).getBlock() == ModBlocks.TOWER_BLUE.get()) {

@@ -3,6 +3,8 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.carthage.CarthageEffects;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.ice.IceEffects;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.volcano.VolcanoEffects;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.mixin.client.DimensionEffectAccesor;
 import com.Ultra_Nerd.CodeLyokoRemake15.particles.ColoredParticle;
@@ -11,14 +13,21 @@ import com.Ultra_Nerd.CodeLyokoRemake15.screens.DataTransferInterfaceUI;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.TowerGUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.ICloudRenderHandler;
+import net.minecraftforge.client.IWeatherParticleRenderHandler;
+import net.minecraftforge.client.IWeatherRenderHandler;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public class ClientModEventSubscriber {
@@ -31,6 +40,7 @@ public static void ClientSetup()
         IEventBus ModEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ModEventBus.addListener(ClientModEventSubscriber::onFMLClientSetupEvent);
         ModEventBus.addListener(ClientModEventSubscriber::registerParticleFactories);
+
     }
 
 
@@ -48,18 +58,7 @@ public static void ClientSetup()
 
 
 
-        EntityRenderers.register(ModEntities.BLOK.get(), RendBlok::new);
-        EntityRenderers.register(ModEntities.LASER.get(), RendLaser::new);
-        //EntityRenderers.register(ModEntities.FAN.get(), RendFan::new);
-        //EntityRenderers.register(ModEntities.HORNET.get(), HornetRenderer::new);
-        //EntityRenderers.register(ModEntities.MEGATANK.get(), MegaTankRenderer::new);
-        //EntityRenderers.register(ModEntities.MANTA.get(), MantaRenderer::new);
-        EntityRenderers.register(ModEntities.SKID.get(), RendSkid::new);
-        //EntityRenderers.register(ModEntities.KANKRELAT.get(), KankrelatRenderder::new);
-        EntityRenderers.register(ModEntities.HOVERBOARD.get(), HoverboardRenderer::new);
-        EntityRenderers.register(ModEntities.OVERBOARD.get(), OverboardRenderer::new);
-        EntityRenderers.register(ModEntities.GUARDIAN.get(), GuardianRenderer::new);
-        EntityRenderers.register(ModEntities.OVERBIKE.get(), OverbikeRenderer::new);
+
         setItemProperties();
         //BlockEntityRenderers.register(ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get(), QuantumChipletRenderer::new);
 
@@ -67,7 +66,7 @@ event.enqueueWork(()-> {
 registerRenderLayers();
 registerScreens();
 registerDimensionEffects();
-
+registerEntityRenderers();
 
 
 
@@ -99,7 +98,21 @@ registerDimensionEffects();
 
 
     }
-
+    private static void registerEntityRenderers()
+    {
+        EntityRenderers.register(ModEntities.BLOK.get(), RendBlok::new);
+        EntityRenderers.register(ModEntities.LASER.get(), RendLaser::new);
+        EntityRenderers.register(ModEntities.FAN.get(), RendFan::new);
+        //EntityRenderers.register(ModEntities.HORNET.get(), HornetRenderer::new);
+        EntityRenderers.register(ModEntities.MEGATANK.get(), MegaTankRenderer::new);
+        //EntityRenderers.register(ModEntities.MANTA.get(), MantaRenderer::new);
+        EntityRenderers.register(ModEntities.SKID.get(), RendSkid::new);
+        //EntityRenderers.register(ModEntities.KANKRELAT.get(), KankrelatRenderder::new);
+        EntityRenderers.register(ModEntities.HOVERBOARD.get(), HoverboardRenderer::new);
+        EntityRenderers.register(ModEntities.OVERBOARD.get(), OverboardRenderer::new);
+        EntityRenderers.register(ModEntities.GUARDIAN.get(), GuardianRenderer::new);
+        EntityRenderers.register(ModEntities.OVERBIKE.get(), OverbikeRenderer::new);
+    }
     private static void setItemProperties()
     {
         //makes certain blocks behave properly
@@ -176,6 +189,48 @@ registerDimensionEffects();
     private static void registerDimensionEffects()
     {
         DimensionEffectAccesor.LyokoDimensionEffects().put(CodeLyokoMain.CodeLyokoPrefix("carthage_effects"),new CarthageEffects());
+        DimensionEffectAccesor.LyokoDimensionEffects().put(CodeLyokoMain.CodeLyokoPrefix("ice_effects"),new IceEffects());
+        DimensionEffectAccesor.LyokoDimensionEffects().put(CodeLyokoMain.CodeLyokoPrefix("volcano_effects"),new VolcanoEffects());
+        DimensionEffectAccesor.LyokoDimensionEffects().put(CodeLyokoMain.CodeLyokoPrefix("codelyoko_effects_general"), new DimensionSpecialEffects(Float.NaN,false,
+                DimensionSpecialEffects.SkyType.NONE,true,true) {
+            @Override
+            public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 pFogColor, float pBrightness) {
+                return pFogColor;
+            }
+
+            @Override
+            public boolean isFoggyAt(int pX, int pY) {
+                return false;
+            }
+
+            @Nullable
+            @Override
+            public ICloudRenderHandler getCloudRenderHandler() {
+                return null;
+            }
+
+            @Override
+            public boolean constantAmbientLight() {
+                return true;
+            }
+
+            @Override
+            public float[] getSunriseColor(float pTimeOfDay, float pPartialTicks) {
+                return null;
+            }
+
+            @Nullable
+            @Override
+            public IWeatherParticleRenderHandler getWeatherParticleRenderHandler() {
+                return null;
+            }
+
+            @Nullable
+            @Override
+            public IWeatherRenderHandler getWeatherRenderHandler() {
+                return null;
+            }
+        });
     }
 
     private static void registerScreens()
@@ -205,6 +260,7 @@ registerDimensionEffects();
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.LYOKO_CORE.get(), transluscent);
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.FRONTIER_BLOCK.get(), cutoutMipped);
     }
+
     public static void registerParticleFactories(ParticleFactoryRegisterEvent event)
     {
 

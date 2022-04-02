@@ -18,11 +18,10 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -37,7 +36,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class EntityBlok extends Monster implements IAnimatable, RangedAttackMob {
+public class EntityBlok extends Skeleton implements IAnimatable, RangedAttackMob {
 
     private final AnimationFactory manager = new AnimationFactory(this);
     private final AnimationController controller = new AnimationController(this, "blokcontroller", 20, this::pred);
@@ -49,7 +48,7 @@ public class EntityBlok extends Monster implements IAnimatable, RangedAttackMob 
     }
 
  */
-public EntityBlok(EntityType<? extends Monster> type, Level world) {
+public EntityBlok(EntityType<? extends Skeleton> type, Level world) {
     super(ModEntities.BLOK.get(), world);
     this.setAggressive(true);
     AnimationController.addModelFetcher((AnimationController.ModelFetcher<EntityBlok>) iAnimatable -> new ModelBlok());
@@ -149,7 +148,7 @@ public EntityBlok(EntityType<? extends Monster> type, Level world) {
     }
 
     public static AttributeSupplier.@NotNull Builder createMonsterAttributes(){
-        return Monster.createMobAttributes()
+        return Skeleton.createMobAttributes()
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10D)
                 .add(Attributes.MAX_HEALTH,90D)
                 .add(Attributes.MOVEMENT_SPEED,0.5D)
@@ -160,7 +159,7 @@ public EntityBlok(EntityType<? extends Monster> type, Level world) {
 
     }
     public static boolean canSpawn(EntityType<? extends EntityBlok> type, LevelAccessor world, MobSpawnType reason, BlockPos pos, Random rand) {
-        return Monster.checkAnyLightMonsterSpawnRules(type,world,reason,pos,rand) && (world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_ROCK.get() || world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_GRASS.get()
+        return Skeleton.checkAnyLightMonsterSpawnRules(type,world,reason,pos,rand) && (world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_ROCK.get() || world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_GRASS.get()
                 || world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_ICE.get() || world.getBlockState(pos).getBlock() == ModBlocks.VOLCANO_GROUND.get());
     }
 
@@ -178,7 +177,7 @@ public EntityBlok(EntityType<? extends Monster> type, Level world) {
     @Override
     public void performRangedAttack(@NotNull LivingEntity pTarget, float pDistanceFactor) {
 
-        AbstractArrow abstractarrow = this.getArrow(pDistanceFactor);
+        AbstractArrow abstractarrow = this.getArrow(ItemStack.EMPTY,pDistanceFactor);
 
         double d0 = pTarget.getX() - this.getX();
         double d1 = pTarget.getY(0.3333333333333333D) - abstractarrow.getY();
@@ -189,7 +188,5 @@ public EntityBlok(EntityType<? extends Monster> type, Level world) {
         this.level.addFreshEntity(abstractarrow);
     }
 
-    protected AbstractArrow getArrow(float pDistanceFactor) {
-        return ProjectileUtil.getMobArrow(this, ItemStack.EMPTY, pDistanceFactor);
-    }
+
 }

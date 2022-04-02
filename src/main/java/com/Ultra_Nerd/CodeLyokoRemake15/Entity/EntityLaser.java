@@ -39,8 +39,10 @@ public class EntityLaser extends Arrow {
     }
 
 
-
-
+    @Override
+    public void setNoGravity(boolean pNoGravity) {
+        super.setNoGravity(true);
+    }
 
     @Override
     public void setBaseDamage(double damageIn) {

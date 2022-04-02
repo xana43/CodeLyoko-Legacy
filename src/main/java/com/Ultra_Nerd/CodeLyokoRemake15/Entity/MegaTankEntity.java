@@ -1,15 +1,31 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -21,13 +37,13 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class MegaTankEntity extends Skeleton implements IAnimatable /*implements IAnimatedEntity*/ {
+public class MegaTankEntity extends Skeleton implements IAnimatable  {
 
    private final AnimationFactory TankManager = new AnimationFactory(this);
     private final AnimationController Tankcontroller = new AnimationController(this, "movecontroller", 20, this::animationPred);
 
     public MegaTankEntity(EntityType<? extends Skeleton> type, Level world) {
-        super(type, world);
+        super(ModEntities.MEGATANK.get(), world);
 
     }
 /*
@@ -62,25 +78,23 @@ public class MegaTankEntity extends Skeleton implements IAnimatable /*implements
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-    @Override
-    public boolean canBeAffected(MobEffectInstance p_21197_) {
-        return false;
-    }
 
 
 
-/*
-    @Override
-    protected void registerAttributes() {
+
+
+    public static AttributeSupplier.Builder registerAttributes() {
         // TODO Auto-generated method stub
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1D);
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10D);
-        this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(20D);
-        this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
-    }*/
+        return Skeleton.createAttributes().add(Attributes.KNOCKBACK_RESISTANCE,1D)
+                .add(Attributes.MAX_HEALTH,200D)
+                .add(Attributes.MOVEMENT_SPEED,0.5D)
+                .add(Attributes.ATTACK_SPEED,10D)
+                .add(Attributes.ARMOR,20D)
+                .add(Attributes.FOLLOW_RANGE, 20D);
+
+
+
+    }
 
     @Override
     public boolean isSprinting() {
@@ -108,6 +122,19 @@ public class MegaTankEntity extends Skeleton implements IAnimatable /*implements
         return  new Fallsounds(ModSounds.MEGATANKSMALLFALL.get(),ModSounds.MEGATANKBIGFALL.get());
     }
 
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(1,new FloatGoal(this));
+        this.goalSelector.addGoal(2,new RangedAttackGoal(this,1,10,6));
+        this.goalSelector.addGoal(3,new WaterAvoidingRandomStrollGoal(this,1D));
+        this.goalSelector.addGoal(4,new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1,new NearestAttackableTargetGoal<>(this, Player.class,true));
+    }
+
+    @Override
+    public void reassessWeaponGoal() {
+
+    }
 
     @Override
     protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
@@ -118,7 +145,10 @@ public class MegaTankEntity extends Skeleton implements IAnimatable /*implements
             return ModSounds.MEGATANKHURT2.get();
         }
     }
-
+    public static boolean canSpawn(EntityType<? extends MegaTankEntity> type, LevelAccessor world, MobSpawnType reason, BlockPos pos, Random rand) {
+        return Skeleton.checkAnyLightMonsterSpawnRules(type,world,reason,pos,rand) && (world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_ROCK.get() || world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_GRASS.get()
+                || world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_ICE.get() || world.getBlockState(pos).getBlock() == ModBlocks.VOLCANO_GROUND.get());
+    }
     @Nonnull
     @Override
     protected SoundEvent getStepSound() {
@@ -134,7 +164,19 @@ public class MegaTankEntity extends Skeleton implements IAnimatable /*implements
     }
 
 
+    @Override
+    public void performRangedAttack(@NotNull LivingEntity pTarget, float pDistanceFactor) {
 
+        AbstractArrow abstractarrow = getArrow(ItemStack.EMPTY,pDistanceFactor);
+
+        double d0 = pTarget.getX() - this.getX();
+        double d1 = pTarget.getY(0.3333333333333333D) - abstractarrow.getY();
+        double d2 = pTarget.getZ() - this.getZ();
+        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+        abstractarrow.shoot(d0, d1 + d3 * (double)0.2F, d2, 4F, (float)(14 - this.level.getDifficulty().getId() * 4));
+        this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.level.addFreshEntity(abstractarrow);
+    }
     private <E extends MegaTankEntity> PlayState animationPred(AnimationEvent<E> event) {
 
         if ((event.isMoving() || event.getAnimatable().isSwimming()) && !event.getAnimatable().isAggressive()) {

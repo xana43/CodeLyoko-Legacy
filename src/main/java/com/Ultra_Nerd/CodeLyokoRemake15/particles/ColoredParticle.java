@@ -95,9 +95,8 @@ public class ColoredParticle extends Particle implements SpriteSet {
         @Nullable
         @Override
         public Particle createParticle(@Nonnull ColoredParticleData typeIn, @Nonnull ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            ColoredParticle part = new ColoredParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, typeIn);
             //part.set(ss);
-            return part;
+            return new ColoredParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, typeIn);
         }
 
 

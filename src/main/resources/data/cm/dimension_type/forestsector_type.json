@@ -11,7 +11,7 @@
   "ambient_light": 60,
   "fixed_time": 6000,
   "logical_height": 384,
-  "effects": "cm:lyoko_effects",
+  "effects": "cm:codelyoko_effects_general",
   "infiniburn": "#minecraft:infiniburn_overworld",
   "min_y": -64,
   "height": 384

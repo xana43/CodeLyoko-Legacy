@@ -43,8 +43,7 @@ public class AelitaArmorElytra extends ArmorItem {
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
-        if (entityIn instanceof Player || worldIn.isClientSide) {
-            Player player = (Player) entityIn;
+        if (entityIn instanceof Player player) {
 
             if (!DimensionCheck.playerNotInVanillaWorld(player)) {
                 if (player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get()) {

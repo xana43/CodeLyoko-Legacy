@@ -16,12 +16,12 @@ public class ModelFan extends AnimatedGeoModel<EntityFan>{
 
     @Override
     public ResourceLocation getModelLocation(EntityFan object) {
-        return null;
+        return CodeLyokoMain.CodeLyokoPrefix("geo/fan.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(EntityFan object) {
-        return null;
+        return CodeLyokoMain.CodeLyokoPrefix("textures/entity/projectiles/fan/fan.png");
     }
 
     @Override

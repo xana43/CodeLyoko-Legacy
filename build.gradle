@@ -26,7 +26,7 @@ mixin{
 }
 
 
-version = "1"
+version = "${mod_version}" as Object
 group = 'com.Ultra_Nerd.cm' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "${modid}_forge"
 
@@ -57,7 +57,8 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-            arg "-mixin.config=" + project.getProperties().get("modid") + ".mixins.json"
+            //+ project.getProperties().get("modid") +
+            arg "-mixin.config=cm.mixins.json"
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
             // "SCAN": For mods scan.
@@ -76,6 +77,7 @@ minecraft {
             mods {
                 cm {
                     source sourceSets.main
+
                 }
             }
         }
@@ -88,7 +90,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property 'forge.enabledGameTestNamespaces', 'c,'
+            property 'forge.enabledGameTestNamespaces', 'cm,'
 
             mods {
                 cm {
@@ -133,8 +135,8 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-            arg "-mixin.config=" + project.getProperties().get("modid") + ".mixins.json"
+            args '--mod', 'cm', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'),'-mixin.config','cm.mixins.json'
+           // arg "-mixin.config=cm.mixins.json"
             mods {
                 cm {
                     source sourceSets.main
@@ -166,7 +168,7 @@ dependencies {
     // Specify the version of Minecraft to use. If this is any group other than 'net.minecraft', it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.18.2-40.0.32'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.0.35'
     implementation fg.deobf('software.bernie.geckolib:geckolib-1.18-forge:3.0.12')
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
@@ -175,6 +177,7 @@ dependencies {
 
     // Examples using mod jars from ./libs
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
+
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     // For more info...
@@ -187,11 +190,11 @@ jar {
     manifest {
         attributes([
                 "Specification-Title"     : "CodeLyoko Legacy",
-                "Specification-Vendor"    : "examplemodsareus",
+                "Specification-Vendor"    : "Xana43(Ultra_nerd), git hub contributors",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "examplemodsareus",
+                "Implementation-Vendor"   : "Xana43(Ultra_nerd), git hub contributors",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }

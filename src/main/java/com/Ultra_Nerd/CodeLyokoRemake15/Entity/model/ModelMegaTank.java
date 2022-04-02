@@ -17,7 +17,7 @@ public class ModelMegaTank extends AnimatedGeoModel<MegaTankEntity> {
 
     @Override
     public ResourceLocation getModelLocation(MegaTankEntity object) {
-        return null;
+        return CodeLyokoMain.CodeLyokoPrefix("geo/megatank.geo.json");
     }
 
     @Override

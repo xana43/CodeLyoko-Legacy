@@ -2,14 +2,54 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.carthage;
 
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.ICloudRenderHandler;
 import net.minecraftforge.client.ISkyRenderHandler;
+import net.minecraftforge.client.IWeatherParticleRenderHandler;
+import net.minecraftforge.client.IWeatherRenderHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CarthageEffects extends DimensionSpecialEffects {
-    public ISkyRenderHandler skyRenderHandler;
+
     public CarthageEffects() {
-        super(-2, false, SkyType.NONE, true, true);
+        super(Float.NaN, false, SkyType.NONE, true, true);
+    }
+
+    @Override
+    public void setCloudRenderHandler(ICloudRenderHandler cloudRenderHandler) {
+    }
+
+    @Nullable
+    @Override
+    public IWeatherRenderHandler getWeatherRenderHandler() {
+        return null;
+    }
+
+    @Override
+    public void setWeatherRenderHandler(IWeatherRenderHandler weatherRenderHandler) {
+
+    }
+
+    @Nullable
+    @Override
+    public IWeatherParticleRenderHandler getWeatherParticleRenderHandler() {
+        return null;
+    }
+
+    @Override
+    public void setWeatherParticleRenderHandler(IWeatherParticleRenderHandler weatherParticleRenderHandler) {
+
+    }
+
+    @Nullable
+    @Override
+    public ICloudRenderHandler getCloudRenderHandler() {
+        return null;
+    }
+
+    @Override
+    public float getCloudHeight() {
+        return Float.NaN;
     }
 
     @Override
@@ -32,9 +72,7 @@ public class CarthageEffects extends DimensionSpecialEffects {
     @Override
     public ISkyRenderHandler getSkyRenderHandler() {
 
-        if(skyRenderHandler == null) {
-            skyRenderHandler = new CustomCarthadgeSky();
-        }
-        return skyRenderHandler;
+
+        return new CustomCarthadgeSky();
     }
 }

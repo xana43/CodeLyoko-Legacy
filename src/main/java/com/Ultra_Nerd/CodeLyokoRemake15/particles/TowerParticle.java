@@ -19,7 +19,7 @@ public class TowerParticle extends SimpleAnimatedParticle {
         super(world, x, y, z, sprites,unknown);
         this.sprite = sprites;
 
-        setColor(255.0F,  255.0F,  255.0F);
+        setColor(0,  0,  255.0F);
 
         final float PARTICLE_SCALE_FOR_ONE_METRE = 0.5F; //  if the particleScale is 0.5, the texture will be rendered as 1 metre high
 

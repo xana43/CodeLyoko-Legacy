@@ -1,98 +1,70 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.world.ModFeatures.structures.Tower;
 
-import com.mojang.serialization.Codec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelHeightAccessor;
+import net.minecraft.world.level.NoiseColumn;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
+import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
+import net.minecraft.world.level.levelgen.structure.PostPlacementProcessor;
+import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
+import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
+import org.jetbrains.annotations.NotNull;
 
-public class TowerStructure extends StructureFeature {
-    public TowerStructure(Codec p_197165_, PieceGeneratorSupplier p_197166_) {
-        super(p_197165_, p_197166_);
-    }
-/*
-    public TowerStructure(Function<Dynamic<?>, ? extends NoneFeatureConfiguration> configFactoryIn) {
-        super(configFactoryIn);
-    }
+import java.util.Optional;
+
+public class TowerStructure extends StructureFeature<JigsawConfiguration>{
+   public TowerStructure()
+   {
+       super(JigsawConfiguration.CODEC, TowerStructure::createPiecesGenerator,PostPlacementProcessor.NONE);
+   }
 
     @Override
-    public boolean canGenerate(RegistryAccess registryAccess, ChunkGenerator generatorIn, BiomeSource biomeIn, StructureManager manager, long value, ChunkPos chunkPos, FeatureConfiguration featureConfiguration, LevelHeightAccessor heightAccessor, Predicate predicate) {
-        ChunkPos pos =
-        if (chunkX == pos.x && chunkZ == pos.z) {
-            return generatorIn.hasStructure(biomeIn, this);
+    public GenerationStep.@NotNull Decoration step() {
+        return GenerationStep.Decoration.SURFACE_STRUCTURES;
+    }
+
+
+    private static @NotNull Optional<PieceGenerator<JigsawConfiguration>> createPiecesGenerator(PieceGeneratorSupplier.Context<JigsawConfiguration> context)
+    {
+        BlockPos blockpos = context.chunkPos().getMiddleBlockPosition(0);
+        blockpos = findSuitableSpot(context,blockpos);
+        return JigsawPlacement.addPieces(context, PoolElementStructurePiece::new,blockpos,false,false);
+    }
+
+
+
+    private static BlockPos findSuitableSpot(PieceGeneratorSupplier.Context<JigsawConfiguration> context, BlockPos pos)
+    {
+        LevelHeightAccessor heightAccessor = context.heightAccessor();
+        int y = context.chunkGenerator().getBaseHeight(pos.getX(), pos.getZ(), Heightmap.Types.WORLD_SURFACE_WG,heightAccessor);
+        WorldgenRandom random = new WorldgenRandom(new LegacyRandomSource(context.seed()));
+        random.setLargeFeatureSeed(context.seed(),context.chunkPos().x,context.chunkPos().z);
+        y = random.nextIntBetweenInclusive(heightAccessor.getMinBuildHeight() +20,y - 10 );
+        NoiseColumn baseColum = context.chunkGenerator().getBaseColumn(pos.getX(), pos.getZ(), heightAccessor);
+        int yy = y;
+        int lower = heightAccessor.getMinBuildHeight() + 3;
+        while (yy > lower && !baseColum.getBlock(yy).isAir())
+        {
+            yy--;
         }
-        return false;
-    }
-
-
-    @Override
-    public PostPlacementProcessor getPostPlacementProcessor() {
-        return super.getPostPlacementProcessor();
-    }
-
-    @Nonnull
-    @Override
-    public IStartFactory getStartFactory() {
-        return TowerStructure.Start::new;
-    }
-
-    @Nonnull
-    @Override
-    public String getStructureName() {
-        return CodeLyokoMain.MOD_ID + ":tower";
-    }
-
-    //depreciated
-    @Override
-    public int getSize() {
-        return 0;
-    }
-
-    @Nonnull
-    @Override
-    protected ChunkPos getStartPositionForPosition(@Nonnull ChunkGenerator<?> chunkGenerator, @Nonnull Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
-        int maxDistance = 20;
-        int minDistance = 10;
-        int xTemp = x + maxDistance * spacingOffsetsX;
-        int ztemp = z + maxDistance * spacingOffsetsZ;
-        int xTemp2 = xTemp < 0 ? xTemp - maxDistance + 1 : xTemp;
-        int zTemp2 = ztemp < 0 ? ztemp - maxDistance + 1 : ztemp;
-        int validChunkX = xTemp2 / maxDistance;
-        int validChunkZ = zTemp2 / maxDistance;
-
-        ((SharedSeedRandom) random).setLargeFeatureSeedWithSalt(chunkGenerator.getSeed(), validChunkX, validChunkZ, this.getSeedModifier());
-        validChunkX = validChunkX * maxDistance;
-        validChunkZ = validChunkZ * maxDistance;
-        validChunkX = validChunkX + random.nextInt(maxDistance - minDistance);
-        validChunkZ = validChunkZ + random.nextInt(maxDistance - minDistance);
-        return new ChunkPos(validChunkX, validChunkZ);
-    }
-
-    protected int getSeedModifier() {
-        return 234592323;
-    }
-
-    public static class Start extends s {
-
-        public Start(Structure<?> structure, int chunkX, int chunkZ, BoundingBox boundingBox, int reference, long seed) {
-            super(structure, chunkX, chunkZ, boundingBox, reference, seed);
+        if(yy > lower)
+        {
+            while (yy > lower && baseColum.getBlock(yy).isAir())
+            {
+                yy--;
+            }
+            if(yy > lower)
+            {
+                y = yy +1;
+            }
         }
-
-        @Override
-        public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManagerIn, int chunkX, int chunkZ, @Nonnull Biome biomeIn) {
-            Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-
-            int x = (chunkX << 4) + 7;
-            int z = (chunkZ << 4) + 7;
-            int y = generator.getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG);
-            BlockPos pos = new BlockPos(x, y, z);
-
-            TowerParts.Start(templateManagerIn, pos, rotation, this.components, this.rand);
-            this.recalculateStructureSize();
-            CodeLyokoMain.Log.info("a tower has spawned at: " + pos);
-
-        }
+        return pos.atY(y);
     }
-
- */
-
 
 }

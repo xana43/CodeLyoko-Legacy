@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 public class SaberKatana extends SwordItem {
     private final float attackdamage;
     private final float attackspeed;
-    private byte timer = 127;
+
 
     public SaberKatana(Tier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
@@ -30,15 +30,14 @@ public class SaberKatana extends SwordItem {
     }
 
     @Override
-    public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
-        return stack.getDamageValue() >= stack.getMaxDamage();
+    public boolean isDamageable(ItemStack stack) {
+        return false;
     }
 
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
 
-        if (entityIn instanceof Player) {
-            Player player = (Player) entityIn;
+        if (entityIn instanceof Player player) {
             ItemStack IStack = player.getItemInHand(InteractionHand.OFF_HAND);
             if (player.getItemInHand(InteractionHand.MAIN_HAND).getItem() == ModItems.DIGITAL_SABER.get()) {
 
@@ -47,21 +46,16 @@ public class SaberKatana extends SwordItem {
             }
             player.setMainArm(HumanoidArm.RIGHT);
         }
-        if (stack.getDamageValue() >= this.getMaxDamage(stack)) {
-            stack.setDamageValue(this.getMaxDamage(stack));
-        }
 
-        if (timer-- == 0 && stack.getDamageValue() != 0) {
-            stack.getItem().damageItem(stack,-1, (Player) entityIn, null);
-            timer = 127;
-        }
+
+
 
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
     }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        Multimap multimap = HashMultimap.create();
+        Multimap<Attribute,AttributeModifier> multimap = HashMultimap.create();
 
         if (slot == EquipmentSlot.MAINHAND) {
             multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackdamage, AttributeModifier.Operation.ADDITION));

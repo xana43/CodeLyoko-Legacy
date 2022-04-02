@@ -11,7 +11,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -21,7 +20,6 @@ import javax.annotation.Nonnull;
 import java.util.function.Predicate;
 
 public class ArcherClassBow extends BowItem {
-    private static final Predicate<ItemStack> AMMO = (item) -> item.equals(ItemStack.EMPTY, false);
 
     public ArcherClassBow(Properties builder) {
         super(builder);
@@ -44,7 +42,7 @@ public class ArcherClassBow extends BowItem {
 
     @Override
     public @NotNull Predicate<ItemStack> getAllSupportedProjectiles() {
-        return AMMO;
+        return (item) -> item.equals(ItemStack.EMPTY, false);
     }
 
 
@@ -71,13 +69,12 @@ public class ArcherClassBow extends BowItem {
                     las.setBaseDamage(20);
                     las.setPos(playerentity.getX(), playerentity.getEyeY(), playerentity.getZ());
 
-                    AbstractArrow abstractarrowentity;
-                    abstractarrowentity = customArrow(las);
-                    abstractarrowentity.shootFromRotation(playerentity, playerentity.getXRot(), playerentity.getYRot(), 0.0F, f * 3.0F, 0.0F);
+
+                    las.shootFromRotation(playerentity, playerentity.getXRot(), playerentity.getYRot(), 0.0F, f * 3.0F, 0.0F);
                     if (f == 1.0F) {
-                        abstractarrowentity.setCritArrow(true);
+                        las.setCritArrow(true);
                     }
-                    worldIn.addFreshEntity(abstractarrowentity);
+                    worldIn.addFreshEntity(las);
                 }
 
                 worldIn.playSound(null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), ModSounds.LASERARROW.get(), SoundSource.PLAYERS, 1.0F, 1.0F / ((float)Math.random() * 0.4F + 1.2F) + f * 0.5F);
@@ -105,7 +102,9 @@ public class ArcherClassBow extends BowItem {
 
 
         InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(heldItem, worldIn, playerIn, handIn, true);
-        if (ret != null) return ret;
+        if (ret != null) {
+            return ret;
+        }
 
         playerIn.setMainArm(HumanoidArm.RIGHT);
         return InteractionResultHolder.success(heldItem);

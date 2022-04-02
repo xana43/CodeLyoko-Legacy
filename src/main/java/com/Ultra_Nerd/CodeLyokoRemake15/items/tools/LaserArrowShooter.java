@@ -12,36 +12,61 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-import static com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck.playerNotInVanillaWorld;
-
 
 public class LaserArrowShooter extends BowItem {
-    private byte Count = 100;
 
 
-    @Override
-    public void inventoryTick(@Nonnull ItemStack stack, Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
-        if (worldIn.isClientSide) {
-            Count -= 1;
-            if (Count == 0) {
-                if (stack.getDamageValue() != 0) {
-                    stack.getItem().damageItem(stack,-1, (Player) entityIn, null);
-                }
-                Count = 100;
-            }
-        }
-    }
+
+
 
     public LaserArrowShooter(Properties builder) {
         super(builder);
+
         // TODO Auto-generated constructor stub
     }
 
+    @Override
+    public void inventoryTick(ItemStack pStack, @NotNull Level pLevel, @NotNull Entity pEntity, int pSlotId, boolean pIsSelected) {
+        if(!pStack.isEnchanted())
+        {
+            pStack.enchant(Enchantments.INFINITY_ARROWS,Enchantments.INFINITY_ARROWS.getMaxLevel());
+            pStack.getEnchantmentTags().clear();
+
+        }
+
+    }
+
+
+    @Override
+    public boolean isFoil(@NotNull ItemStack pStack) {
+        return false;
+    }
+
+    @Override
+    public boolean isDamageable(ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public void setDamage(ItemStack stack, int damage) {
+        super.setDamage(stack, 0);
+    }
+
+    @Override
+    public boolean isDamaged(ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public boolean isRepairable(@NotNull ItemStack stack) {
+        return false;
+    }
 
 
 
@@ -49,25 +74,27 @@ public class LaserArrowShooter extends BowItem {
     @Override
     public InteractionResultHolder<ItemStack> use(@Nonnull Level worldIn, Player playerIn, @Nonnull InteractionHand handIn) {
         ItemStack item = playerIn.getItemInHand(handIn);
-        Count = 100;
 
-        Vec3 aim = playerIn.getLookAngle();
-        if (item.getDamageValue() < 40 && playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get() && playerNotInVanillaWorld(playerIn)) {
+
+
+        if (playerIn.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() == ModItems.ODD_LEGGINGS.get() &&
+                playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get()
+                && playerIn.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() == ModItems.ODD_BOOTS.get()) {
             //worldIn.playSound(null,playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModItems.BIT.get(), SoundCategory.NEUTRAL, 1f, 1f);
 
 
-            worldIn.playSound(playerIn, playerIn.getX(), playerIn.getY(), playerIn.getZ(), ModSounds.LASERARROW.get(), SoundSource.NEUTRAL, 1f, 1f);
+            worldIn.playSound(null,playerIn.blockPosition(), ModSounds.LASERARROW.get(), SoundSource.PLAYERS, 1f, 1f);
 
 
             EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 
             las.setBaseDamage(10);
-            las.isNoGravity();
+            las.setNoGravity(true);
             las.setPos(playerIn.getX(), playerIn.getEyeY(), playerIn.getZ());
-            las.shootFromRotation(playerIn, playerIn.getXRot(), playerIn.getYRot(), 0f, 10f, 0f);
-            if (worldIn.isClientSide) {
-                worldIn.addFreshEntity(las);
-            }
+            las.shootFromRotation(playerIn, playerIn.getRotationVector().x, playerIn.getRotationVector().y, (float)playerIn.getLookAngle().z, 5f, 0f);
+
+            worldIn.addFreshEntity(las);
+
 
             item.getItem().damageItem(item,1, playerIn, null);
             return new InteractionResultHolder<>(InteractionResult.PASS, item);

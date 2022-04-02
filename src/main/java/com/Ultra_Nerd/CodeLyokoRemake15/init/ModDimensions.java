@@ -1,10 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.carthage.CarthageEffects;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen.Carthage.CarthageBiomeProvider;
 import com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen.Carthage.CarthageGenerator;
-import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
@@ -26,7 +24,7 @@ public class ModDimensions {
     public static final ResourceKey<Level> VOLCANO = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("volcano"));
     public static final ResourceKey<Level> DIGITAL_OCEAN = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("digital_ocean"));
 
-    public static final DimensionSpecialEffects skytype = new CarthageEffects();
+
 
 
 
