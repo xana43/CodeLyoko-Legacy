@@ -6,6 +6,6 @@
   ,
   "config": {
     "start_pool": "cm:tower/start_pool",
-    "size": 6
+    "size": 1
   }
 }

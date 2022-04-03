@@ -33,9 +33,9 @@ public class ModFeature {
     //public static final RegistryObject<Feature<TreeConfiguration>> DIGITAL_FOREST_TREE = LYOKOFEATURES.register("digital_forest_tree", () -> new DigitalForestTree(TreeConfiguration.CODEC));
     public static Holder<ConfiguredFeature<TreeConfiguration,?>> DIGITAL_FOREST_TREE_FEATURE;
     public static Holder<ConfiguredFeature<TreeConfiguration,?>> DIGITAL_MOUNTAIN_TREE_FEATURE;
-    public static RegistryObject<?> TOWER_STRUCTURE = LYOKOFEATURES.register("tower",TowerStructure::new);
+    public static final RegistryObject<StructureFeature<?>> TOWER_STRUCTURE = LYOKOFEATURES.register("tower",TowerStructure::new);
     public static Holder<PlacedFeature> DIGITAL_FOREST_PLACED;
-    public static  Holder<PlacedFeature> DIGITAL_MOUNTAIN_PLACED;
+    public static Holder<PlacedFeature> DIGITAL_MOUNTAIN_PLACED;
 
     //configured features
 public static void setConfigurations()

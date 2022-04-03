@@ -75,6 +75,8 @@ public class ForgeEventSubscriber {
         if(Objects.equals(event.getName(), ModBiome.FOREST_SECTOR.location()) && event.getName() != null) {
 
             event.getSpawns().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.BLOK.get(), 20, 10, 22));
+
+
         }
 
     }

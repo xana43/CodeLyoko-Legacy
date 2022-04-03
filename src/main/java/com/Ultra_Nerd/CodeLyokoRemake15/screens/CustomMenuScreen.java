@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.renderer.CubeMap;
 import net.minecraft.client.renderer.PanoramaRenderer;
@@ -10,8 +9,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 
 public class CustomMenuScreen extends TitleScreen {
@@ -24,35 +21,22 @@ public class CustomMenuScreen extends TitleScreen {
     {
         super(fade);
 
+
     }
 
+
+
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return new TranslatableComponent("CodeLyoko:Legacy");
-    }
-
-    @Override
-    public Minecraft getMinecraft() {
-        return super.getMinecraft();
-    }
-
-    @Override
-    public void renderComponentTooltip(PoseStack pPoseStack, List<Component> pTooltips, int pMouseX, int pMouseY) {
-        super.renderComponentTooltip(pPoseStack, pTooltips, pMouseX, pMouseY);
-    }
-
-    @Override
-    public void renderBackground(PoseStack pPoseStack, int pVOffset) {
-        super.renderBackground(pPoseStack, pVOffset);
-
     }
 
 
 
     @Override
     public void render(@NotNull PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-
+        customRenderer.render(0.5f,1);
+        super.render(pPoseStack, pMouseX, pMouseY, Float.NaN);
 
 
     }

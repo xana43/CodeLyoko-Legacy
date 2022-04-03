@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.Map;
 
-public class TowerParts {
+public class TowerParts  {
 
     private static final ResourceLocation PART1 = new ResourceLocation(CodeLyokoMain.MOD_ID, "tower_new_bellow");
     private static final ResourceLocation PART2 = new ResourceLocation(CodeLyokoMain.MOD_ID, "tower_new_top");
@@ -55,7 +55,7 @@ public class TowerParts {
 
 
         @Override
-        protected void addAdditionalSaveData(StructurePieceSerializationContext context,@Nonnull CompoundTag tagCompound) {
+        protected void addAdditionalSaveData(StructurePieceSerializationContext context, @Nonnull CompoundTag tagCompound) {
             tagCompound.putString("Template", this.resourceLocation.toString());
             tagCompound.putString("Rot", this.rotation.name());
         }
@@ -97,6 +97,8 @@ public class TowerParts {
     }
 
  */
+
+
 
 
 }
