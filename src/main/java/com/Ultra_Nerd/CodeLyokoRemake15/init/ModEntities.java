@@ -2,6 +2,9 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.*;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.vehicle.HoverboardEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.vehicle.OverbikeEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.vehicle.OverboardEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -71,5 +74,8 @@ public class ModEntities {
 {
     event.put(BLOK.get(),EntityBlok.createMonsterAttributes().build());
     event.put(MEGATANK.get(),MegaTankEntity.registerAttributes().build());
+
 }
+
+
 }

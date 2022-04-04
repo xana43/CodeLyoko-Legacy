@@ -1,10 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerControlPanelTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -21,6 +24,8 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.stream.Stream;
@@ -188,12 +193,12 @@ public class ControlPanel extends BaseEntityBlock {
     @org.jetbrains.annotations.Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return null; //ModTileEntities.COMPUTER_CONTROL_PANEL_TILE_ENTITY.get().create(pos, state);
+        return ModTileEntities.COMPUTER_CONTROL_PANEL_TILE_ENTITY.get().create(pos, state);
     }
 
 
     @Override
-    public RenderShape getRenderShape(BlockState pState) {
+    public @NotNull RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }
 
@@ -243,17 +248,17 @@ public class ControlPanel extends BaseEntityBlock {
     @Override
     public InteractionResult use(@Nonnull BlockState state, Level worldIn, @Nonnull BlockPos pos, @Nonnull Player player,
                                              @Nonnull InteractionHand handIn, @Nonnull BlockHitResult result) {
-        if (worldIn.isClientSide) {
-            if (this.newBlockEntity(pos, state).getBlockState().getValue(ScreenOn)) {
+        if (!worldIn.isClientSide) {
+            //if (this.newBlockEntity(pos, state).getBlockState().getValue(ScreenOn)) {
                 BlockEntity panel = worldIn.getBlockEntity(pos);
                 if (panel instanceof ComputerControlPanelTileEntity) {
 
-                    //NetworkHooks.openGui((ServerPlayer) player, (ComputerControlPanelTileEntity) panel, pos);
+                    NetworkHooks.openGui((ServerPlayer) player, (MenuProvider) panel, panel.getBlockPos());
                     return InteractionResult.SUCCESS;
                 }
-            }
+           // }
         }
-        return InteractionResult.FAIL;
+        return InteractionResult.SUCCESS;
     }
 
 }

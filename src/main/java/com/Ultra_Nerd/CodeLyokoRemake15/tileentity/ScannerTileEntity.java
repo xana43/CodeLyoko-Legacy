@@ -4,37 +4,33 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.Scanner;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.ScannerFrame;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.ScannerTop;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 public class ScannerTileEntity extends BlockEntity implements BlockEntityTicker<ScannerTileEntity> {
 
 
-    public ScannerTileEntity(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
-        super(tileEntityTypeIn,pos,state);
+    public ScannerTileEntity(BlockPos pos, BlockState state) {
+        super(ModTileEntities.SCANNER_TILE_ENTITY.get(),pos,state);
     }
 
-   // public ScannerTileEntity() {
-     //   this(ModTileEntities.SCANNER_TILE_ENTITY);
-   // }
 
-    private boolean once = false;
+
 
     @Override
     public void tick(@NotNull Level p_155253_, @NotNull BlockPos p_155254_, @NotNull BlockState p_155255_, @NotNull ScannerTileEntity p_155256_) {
-        if (checkStructure() && !once) {
+
+        if (checkStructure()) {
             activateStructure();
-            once = true;
+
         } else if (!checkStructure()) {
-            once = false;
             deactivateStructure();
+
         }
     }
 
@@ -54,7 +50,7 @@ public class ScannerTileEntity extends BlockEntity implements BlockEntityTicker<
     }
 
     private void activateStructure() {
-        Objects.requireNonNull(getLevel()).setBlockAndUpdate(this.getBlockPos(), getLevel().getBlockState(getBlockPos()).setValue(Scanner.Scanner, true));
+        getLevel().setBlockAndUpdate(this.getBlockPos(), getLevel().getBlockState(getBlockPos()).setValue(Scanner.Scanner, true));
         BlockPos h1, h2, h3;
         h1 = new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY() + 1, this.getBlockPos().getZ());
         h2 = new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY() + 2, this.getBlockPos().getZ());
@@ -70,7 +66,7 @@ public class ScannerTileEntity extends BlockEntity implements BlockEntityTicker<
         h2 = new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY() + 2, this.getBlockPos().getZ());
         h3 = new BlockPos(this.getBlockPos().getX(), this.getBlockPos().getY() + 3, this.getBlockPos().getZ());
 
-        if (Objects.requireNonNull(getLevel()).getBlockState(this.getBlockPos()).getBlock() == ModBlocks.SCANNER_BASE.get()) {
+        if (getLevel().getBlockState(this.getBlockPos()).getBlock() == ModBlocks.SCANNER_BASE.get()) {
             getLevel().setBlockAndUpdate(this.getBlockPos(), getLevel().getBlockState(this.getBlockPos()).setValue(Scanner.Scanner, false));
         }
         if (getLevel().getBlockState(h1).getBlock() == ModBlocks.SCANNER_FRAME.get()) {
@@ -83,6 +79,7 @@ public class ScannerTileEntity extends BlockEntity implements BlockEntityTicker<
             getLevel().setBlockAndUpdate(h3, getLevel().getBlockState(h3).setValue(ScannerTop.scannerFormedTop, false));
         }
     }
+
 
 
 }

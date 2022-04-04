@@ -136,7 +136,7 @@ public class TowerInterface extends BaseEntityBlock {
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, BlockState state) {
         return ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get().create(pos, state);
     }
 

@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.ComputerControlPanelContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -14,24 +15,24 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ComputerControlPanelTileEntity extends InventoryBE implements MenuProvider {
+public class ComputerControlPanelTileEntity extends BlockEntity implements MenuProvider {
 
     // May be accessed before onLoad
     @OnlyIn(Dist.CLIENT)
-
     protected int PlayersPresent;
 
-    public ComputerControlPanelTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int size) {
-        super(type,pos,state,size);
+    public ComputerControlPanelTileEntity( BlockPos pos, BlockState state) {
+        super(ModTileEntities.COMPUTER_CONTROL_PANEL_TILE_ENTITY.get(),pos,state);
     }
 /*
     public ComputerControlPanelTileEntity() {
@@ -56,7 +57,7 @@ public class ComputerControlPanelTileEntity extends InventoryBE implements MenuP
     }
 
     @Override
-    public CompoundTag getTileData() {
+    public @NotNull CompoundTag getTileData() {
         return super.getTileData();
     }
 
@@ -105,8 +106,5 @@ public class ComputerControlPanelTileEntity extends InventoryBE implements MenuP
     }
 
 
-    @Override
-    public void tick() {
 
-    }
 }

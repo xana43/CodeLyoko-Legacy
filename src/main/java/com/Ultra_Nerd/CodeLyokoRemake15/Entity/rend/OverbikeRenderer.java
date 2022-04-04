@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.OverbikeEntity;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelOverbike;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.vehicle.OverbikeEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;

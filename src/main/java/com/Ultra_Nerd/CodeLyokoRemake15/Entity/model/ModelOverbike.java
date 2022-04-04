@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;// Made with Blockbench 3.
 // Paste this class into your mod and generate all required imports
 
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Entity.OverbikeEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.vehicle.OverbikeEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;

@@ -1,35 +1,48 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 
-import net.minecraft.client.gui.screens.inventory.ContainerScreen;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.containers.ComputerControlPanelContainer;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.font.FontSet;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.ChestMenu;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class ComputerControlPanelUI extends ContainerScreen {
-    public ComputerControlPanelUI(ChestMenu p_98409_, Inventory p_98410_, Component p_98411_) {
-        super(p_98409_, p_98410_, p_98411_);
-    }
-/*
+public class ComputerControlPanelUI extends AbstractContainerScreen<ComputerControlPanelContainer> {
+
+
     private static final ResourceLocation TEXTURES = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/computercontrolpanelui.png");
     private static final ResourceLocation BUTTONTEXTURES = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/buttonatlas.png");
-    private Widget text;
-    private Widget button;
+    private EditBox text;
+    private Button button;
     private boolean CompActive;
-
+    private final Font gunship_font = new Font(resourceLocation -> new FontSet(getMinecraft().textureManager, CodeLyokoMain.CodeLyokoPrefix("gunship")));
 
     int x, y;
 
 
-    public ComputerControlPanelUI(ComputerControlPanelContainer screenContainer, Inventory inv, TextComponent titleIn) {
+    public ComputerControlPanelUI(ComputerControlPanelContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
-        this.guiLeft = 0;
-        this.gu = 0;
-        this.xSize = 190;
-        this.ySize = 143;
+
+        this.inventoryLabelX = -90;
+        this.inventoryLabelY = -90;
 
 
     }
+
+
 
     @Override
     public boolean isMouseOver(double p_isMouseOver_1_, double p_isMouseOver_3_) {
@@ -55,19 +68,21 @@ public class ComputerControlPanelUI extends ContainerScreen {
     }
 
     @Override
-    public void render(int p_render_1_, int p_render_2_, float p_render_3_) {
-        this.renderBackground();
-        super.render(p_render_1_, p_render_2_, p_render_3_);
-        this.text.render(p_render_1_, p_render_2_, p_render_3_);
-        this.button.renderButton(p_render_1_, p_render_2_, p_render_3_);
+    public void render(@NotNull PoseStack stack, int p_render_1_, int p_render_2_, float p_render_3_) {
+        this.renderBackground(stack);
+        super.render(stack,p_render_1_, p_render_2_, p_render_3_);
+        this.text.render(stack,p_render_1_, p_render_2_, p_render_3_);
+        this.button.renderButton(stack,p_render_1_, p_render_2_, p_render_3_);
     }
+
+
 
 
     @Override
     public void init() {
         super.init();
-        x = (this.width - this.xSize) / 2;
-        y = (this.height - this.ySize) / 2;
+        x = (this.width - this.getXSize()) / 2;
+        y = (this.height - this.getYSize()) / 2;
         this.setTextField();
         this.setButtons();
 
@@ -82,7 +97,7 @@ public class ComputerControlPanelUI extends ContainerScreen {
     protected void setButtons() {
 
 
-        this.button = new Widget(x, y, this.width / 3, this.height / 6, "activate") {
+        this.button = new Button(x, y, this.width / 3, this.height / 6, new TranslatableComponent("activate"),Button::onPress) {
             @Override
             protected int getYImage(boolean p_getYImage_1_) {
                 return super.getYImage(p_getYImage_1_);
@@ -90,11 +105,11 @@ public class ComputerControlPanelUI extends ContainerScreen {
             }
 
             @Override
-            public void onClick(double p_onClick_1_, double p_onClick_3_) {
-                super.onClick(p_onClick_1_, p_onClick_3_);
-
+            public void onPress() {
+               //super.onPress();
                 CompActive = !CompActive;
                 if (!CompActive) {
+
 
                     minecraft.player.playSound(ModSounds.QUANTUMZAP.get(), 1, 1);
 
@@ -106,44 +121,45 @@ public class ComputerControlPanelUI extends ContainerScreen {
             }
 
 
-            @Override
-            public void renderButton(int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
-                //super.renderButton(p_renderButton_1_, p_renderButton_2_, p_renderButton_3_);
-                int i = getYImage(isHovered());
-                assert minecraft != null;
-                minecraft.textureManager.bindTexture(BUTTONTEXTURES);
 
-                FontRenderer gunship_font = minecraft.getFontResourceManager().getFontRenderer(new ResourceLocation(CodeLyokoMain.MOD_ID + ":gunship"));
-                assert gunship_font != null;
+
+            @Override
+            public void renderButton(PoseStack stack, int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
+                //super.renderButton(p_renderButton_1_, p_renderButton_2_, p_renderButton_3_);
+                int i = getYImage(isHovered);
+
+                RenderSystem.setShaderTexture(0,BUTTONTEXTURES);
+
+
+
                 int j = getFGColor();
-                drawCenteredString(gunship_font, getMessage(), x + width / 2, y + (height - 8) / 2, j | MathHelper.ceil(alpha * 255.0F) << 24);
-                blit(x, y, 0, 37 + i * 2, 103, 37);
-                blit(x, 38, 0, 46 + i * 20, width / 2, height);
+                drawCenteredString(stack,gunship_font, getMessage(), x + width / 2, y + (height - 8) / 2, j | Mth.ceil(alpha * 255.0F) << 24);
+                blit(stack,x, y, 0, 37 + i * 2, 103, 37);
+                blit(stack,x, 38, 0, 46 + i * 20, width / 2, height);
 
             }
 
         };
         this.button.active = true;
-        this.addButton(this.button);
+        this.addWidget(this.button);
         this.button.visible = true;
 
 
     }
-
     @Override
-    public void tick() {
-        super.tick();
+    public void containerTick() {
+        super.containerTick();
         if (CompActive) {
-            this.button.setMessage("de-activate");
+            this.button.setMessage(new TranslatableComponent("de-activate"));
         } else {
-            this.button.setMessage("activate");
+            this.button.setMessage(new TranslatableComponent("activate"));
         }
 
         if (CompActive) {
-            this.text.setText("Active");
+            this.text.setMessage(new TranslatableComponent("Active"));
             this.text.setTextColor(0x008000);
         } else {
-            this.text.setText("in-active");
+            this.text.setMessage(new TranslatableComponent("in-active"));
             this.text.setTextColor(0xda2c43);
         }
     }
@@ -151,28 +167,28 @@ public class ComputerControlPanelUI extends ContainerScreen {
     protected void setTextField() {
         int tx = this.width / 2;
         int ty = this.height / 2;
-        FontRenderer gunship_font = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation(CodeLyokoMain.MOD_ID + ":gunship"));
-        assert gunship_font != null;
-        this.text = new TextFieldWidget(gunship_font, x, ty + 40, this.width, 23, I18n.format("gui.cm.computer_input_main"));
-        this.text.setEnableBackgroundDrawing(false);
+        this.text = new EditBox(gunship_font, x, ty + 40, this.width, 23, new TranslatableComponent("gui.cm.computer_input_main"));
+        this.text.setBordered(false);
         this.text.setVisible(true);
         this.text.setTextColor(0xda2c43);
-        this.text.setText("in-active");
+        this.text.setMessage(new TranslatableComponent("in-active"));
+        this.text.setEditable(false);
 
 
     }
-
-
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        this.minecraft.getTextureManager().bindTexture(TEXTURES);
-        this.blit(x, y, 0, 0, this.xSize, this.ySize);
+    protected void renderBg(@NotNull PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
+        RenderSystem.setShaderTexture(0,TEXTURES);
+        this.blit(pPoseStack,x, y, 0, 0, this.getXSize(), this.getYSize());
         if (CompActive) {
-            this.blit(x, y + 15, 0, 144, this.xSize, this.ySize - 35);
+            this.blit(pPoseStack,x, y + 15, 0, 144, this.getXSize(), this.getYSize() - 35);
         }
     }
 
- */
+
+
+
+
 
 
 }

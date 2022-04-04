@@ -1,19 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.containers;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModContainerTypes;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerControlPanelTileEntity;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
-public class ComputerControlPanelContainer extends AbstractContainerMenu implements Container {
+public class ComputerControlPanelContainer extends AbstractContainerMenu  {
     public final ComputerControlPanelTileEntity ControlPanelEntity;
     //private final BlockEntityType.BlockEntitySupplier canInteractWithCallable;
 
@@ -42,48 +42,8 @@ public class ComputerControlPanelContainer extends AbstractContainerMenu impleme
 * */
     @Override
     public boolean stillValid(@Nonnull Player playerIn) {
-        return this.stillValid(playerIn);
-    }
-
-    @Override
-    public int getContainerSize() {
-        return 0;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public ItemStack getItem(int p_18941_) {
-        return null;
-    }
-
-    @Override
-    public ItemStack removeItem(int p_18942_, int p_18943_) {
-        return null;
-    }
-
-    @Override
-    public ItemStack removeItemNoUpdate(int p_18951_) {
-        return null;
-    }
-
-    @Override
-    public void setItem(int p_18944_, ItemStack p_18945_) {
-
-    }
-
-    @Override
-    public void setChanged() {
-
+        return stillValid(ContainerLevelAccess.create(Objects.requireNonNull(ControlPanelEntity.getLevel()),ControlPanelEntity.getBlockPos()), playerIn, ModBlocks.COMPUTER_TOWER_CONTROL_PANEL.get());
     }
 
 
-
-    @Override
-    public void clearContent() {
-
-    }
 }

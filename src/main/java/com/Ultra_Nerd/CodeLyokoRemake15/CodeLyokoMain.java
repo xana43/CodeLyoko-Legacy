@@ -13,6 +13,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -201,11 +203,22 @@ public static final class RegistryEventHandler{
         ModBiome.addBiomeTypes();
 
     }
+    public static DamageSource DigitaloceanDamageSource;
+    @SubscribeEvent
+    public static void test(final RegistryEvent.Register<Block> registerBlcoks)
+    {
+        registerBlcoks.getRegistry().getEntries().stream().forEach(resourceKeyBlockEntry -> {
 
-
+            if(resourceKeyBlockEntry.getValue().getRegistryName().equals(ModFluids.DIGITAL_SEA_BLOCK.get().getRegistryName()))
+            {
+                DigitaloceanDamageSource = new DamageSource(resourceKeyBlockEntry.getValue().getRegistryName().toString()).bypassArmor();
+            }
+        });
+    }
     @SubscribeEvent
     public static void onItemInit(final RegistryEvent.Register<Item> Items) {
         ModFeature.setConfigurations();
+
         final IForgeRegistry<Item> registry = Items.getRegistry();
         ModBlocks.BLOCKS.getEntries().stream().filter(block -> !(block.get() instanceof LiquidBlock) &&
                 !(block.get() instanceof LiquidHelium) && !(block.get() instanceof SeaPylon) && !(block.get() instanceof LyokoCore)

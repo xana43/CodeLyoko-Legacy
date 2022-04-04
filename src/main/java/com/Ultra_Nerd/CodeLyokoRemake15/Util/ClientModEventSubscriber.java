@@ -1,6 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelHoverboard;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.model.ModelOverboard;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.carthage.CarthageEffects;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.sky.ice.IceEffects;
@@ -9,6 +11,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.mixin.client.DimensionEffectAccesor;
 import com.Ultra_Nerd.CodeLyokoRemake15.particles.ColoredParticle;
 import com.Ultra_Nerd.CodeLyokoRemake15.particles.TowerParticleFactory;
+import com.Ultra_Nerd.CodeLyokoRemake15.screens.ComputerControlPanelUI;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.DataTransferInterfaceUI;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.TowerGUI;
 import net.minecraft.client.Minecraft;
@@ -19,10 +22,14 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.ICloudRenderHandler;
 import net.minecraftforge.client.IWeatherParticleRenderHandler;
 import net.minecraftforge.client.IWeatherRenderHandler;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.client.model.ForgeModelBakery;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -38,9 +45,14 @@ public class ClientModEventSubscriber {
 public static void ClientSetup()
     {
         IEventBus ModEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         ModEventBus.addListener(ClientModEventSubscriber::onFMLClientSetupEvent);
         ModEventBus.addListener(ClientModEventSubscriber::registerParticleFactories);
-
+        ModEventBus.addListener(ClientModEventSubscriber::registerEntityLayers);
+        forgeEventBus.addListener(LyokoControls::customInput);
+        ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_VEHICLES_UP);
+        ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_VEHICLES_DOWN);
+        ForgeModelBakery.addSpecialModel(CodeLyokoMain.CodeLyokoPrefix("entity/skid/skid"));
     }
 
 
@@ -90,14 +102,20 @@ registerEntityRenderers();
         ScreenManager.<TowerInterfaceContainer, TowerGUI>registerFactory(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);
         ScreenManager.<QuantumChipletContainer, QuantumChipletScreen>registerFactory(ModContainerTypes.QUANTUM_CHIPLET_CONTAINER.get(), QuantumChipletScreen::new);
         ScreenManager.<ContainerElectroplate, ElectroplatingScreen>registerFactory(ModContainerTypes.ELECTROPLATING_CONTAINER.get(), ElectroplatingScreen::new);
-        ScreenManager.<ComputerControlPanelContainer, ComputerControlPanelUI>registerFactory(ModContainerTypes.COMPUTER_CONTROL_PANEL_CONTAINER.get(),
-                ComputerControlPanelUI::new);
+
 
                 */
 
 
 
     }
+
+    private static void registerEntityLayers(final EntityRenderersEvent.RegisterLayerDefinitions event)
+    {
+        event.registerLayerDefinition(ModelHoverboard.LAYER_LOCATION,ModelHoverboard::createLayer);
+        event.registerLayerDefinition(ModelOverboard.LAYER_LOCATION,ModelOverboard::createBodyLayer);
+    }
+
     private static void registerEntityRenderers()
     {
         EntityRenderers.register(ModEntities.BLOK.get(), RendBlok::new);
@@ -237,6 +255,7 @@ registerEntityRenderers();
     {
         MenuScreens.register(ModContainerTypes.DATA_TRANSFER_INTERFACE_CONTAINER.get(), DataTransferInterfaceUI::new);
         MenuScreens.register(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);
+        MenuScreens.register(ModContainerTypes.COMPUTER_CONTROL_PANEL_CONTAINER.get(), ComputerControlPanelUI::new);
     }
 
     private static void registerRenderLayers()

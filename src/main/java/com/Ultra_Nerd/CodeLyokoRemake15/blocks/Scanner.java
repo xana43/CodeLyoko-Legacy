@@ -1,11 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ScannerTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -15,6 +20,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -217,13 +223,14 @@ public class Scanner extends BaseEntityBlock {
                 .sound(SoundType.METAL)
 
         );
+
         this.registerDefaultState(this.defaultBlockState().setValue(Scanner, false).setValue(directionProperty, Direction.NORTH));
     }
 
     @org.jetbrains.annotations.Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return null;// ModTileEntities.SCANNER_TILE_ENTITY.get().create(pos, state);
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+        return ModTileEntities.SCANNER_TILE_ENTITY.get().create(pos, state);
     }
 
     @Override
@@ -296,8 +303,25 @@ public class Scanner extends BaseEntityBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(Scanner).add(directionProperty);
+
+
+
     }
-/*
+
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        if(!pLevel.isClientSide)
+        {
+            return ((pLevel1, pPos, pState1, pBlockEntity) -> {
+                if(pBlockEntity instanceof ScannerTileEntity scannerTile) {
+                    scannerTile.tick(pLevel1,pPos,pState1,(ScannerTileEntity) pBlockEntity);
+                }
+            });
+        }
+        return null;
+    }
+    /*
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;

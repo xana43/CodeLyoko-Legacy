@@ -1,8 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.MantaEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -15,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 
 import javax.annotation.Nonnull;
-import java.util.Objects;
 import java.util.function.Supplier;
 
 
@@ -24,13 +24,14 @@ public class DigitalSeaBlock extends LiquidBlock {
 
     public DigitalSeaBlock(Supplier<? extends FlowingFluid> supplier) {
         super(supplier, BlockBehaviour.Properties.copy(Blocks.WATER));
+
     }
 
 
     @Override
     public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
-        if (!(entityIn instanceof MantaEntity)) {
-            entityIn.hurt(new DamageSource(Objects.requireNonNull(this.getRegistryName()).toString()).bypassArmor(), Float.MAX_VALUE);
+        if (!(entityIn instanceof MantaEntity) && !(entityIn instanceof EntitySkid)) {
+            entityIn.hurt(CodeLyokoMain.RegistryEventHandler.DigitaloceanDamageSource,Float.MAX_VALUE);
         }
     }
 

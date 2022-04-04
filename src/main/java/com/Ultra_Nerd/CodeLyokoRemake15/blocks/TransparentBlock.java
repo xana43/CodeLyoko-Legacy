@@ -18,7 +18,7 @@ public class TransparentBlock extends Block {
     public TransparentBlock() {
         super(Block.Properties.of(new Material.Builder(MaterialColor.NONE).nonSolid().build())
                 .strength(-1, -1)
-                .sound(SoundType.STONE)
+                .sound(SoundType.METAL)
 
 
         );
