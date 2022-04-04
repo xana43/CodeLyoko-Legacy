@@ -49,8 +49,8 @@ public class GuardianEntity extends FlyingMob implements RangedAttackMob {
 
 
 
-    protected void registerAttributes() {
-        //   this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
+    public void registerAttributes() {
+        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(6.0D);
         this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.5D);
         this.getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(16.0D);
         this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(30.0D);

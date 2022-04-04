@@ -9,6 +9,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LyokoCore;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.SeaPylon;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.player.PlayerClassType;
+import com.Ultra_Nerd.CodeLyokoRemake15.player.PlayerCustomGameAttributes;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -101,8 +102,9 @@ public class CodeLyokoMain {
 public CodeLyokoMain() {
         instance = this;
         final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
+        final IEventBus forgebus = MinecraftForge.EVENT_BUS;
         GeckoLib.initialize();
-
+        forgebus.addListener(PlayerCustomGameAttributes::PlayerDie);
         //ModBus.addListener(this::PlayerSetup);
         //ModBus.addListener(ClientModEventSubscriber::onFMLClientSetupEvent);
 

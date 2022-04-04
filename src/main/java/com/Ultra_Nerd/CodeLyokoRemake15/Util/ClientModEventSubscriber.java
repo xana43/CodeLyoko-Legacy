@@ -53,6 +53,7 @@ public static void ClientSetup()
         ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_VEHICLES_UP);
         ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_VEHICLES_DOWN);
         ForgeModelBakery.addSpecialModel(CodeLyokoMain.CodeLyokoPrefix("entity/skid/skid"));
+
     }
 
 

@@ -1,8 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.CustomMenuScreen;
+import com.Ultra_Nerd.CodeLyokoRemake15.screens.Devirtualized;
 import com.Ultra_Nerd.CodeLyokoRemake15.screens.TowerGUI;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.DeathScreen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ScreenEvent;
@@ -29,10 +33,18 @@ public class ClientScreenEventSubscriber {
 
 
     @SubscribeEvent
-    public static void CustomMainMenu(final ScreenOpenEvent event) {
+    public static void CustomMenus(final ScreenOpenEvent event) {
         if (event.getScreen() instanceof TitleScreen) {
             event.setScreen(new CustomMenuScreen(true));
 
+
+        }
+        if(event.getScreen() instanceof DeathScreen && Minecraft.getInstance().level != null)
+        {
+            if(DimensionCheck.worldIsNotVanilla(Minecraft.getInstance().level))
+            {
+                event.setScreen(new Devirtualized(null,Minecraft.getInstance().level.getLevelData().isHardcore()));
+            }
 
         }
     }

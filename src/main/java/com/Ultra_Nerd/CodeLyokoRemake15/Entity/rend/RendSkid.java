@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.rend;
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntitySkid;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -38,8 +39,10 @@ public class RendSkid extends EntityRenderer<EntitySkid>{
 
         matrixStackIn.pushPose();
         BakedModel SkidBladnir = Minecraft.getInstance().getModelManager().getModel(CodeLyokoMain.CodeLyokoPrefix("entity/skid/skid"));
+        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(360 - entityYaw));
         Minecraft.getInstance().getBlockRenderer().getModelRenderer().tesselateWithoutAO(entityIn.level,SkidBladnir, Blocks.AIR.defaultBlockState(),entityIn.blockPosition(),matrixStackIn,
                 bufferIn.getBuffer(RenderType.solid()), false, entityIn.level.random,new Random().nextLong(),0);
+
         matrixStackIn.popPose();
 
 

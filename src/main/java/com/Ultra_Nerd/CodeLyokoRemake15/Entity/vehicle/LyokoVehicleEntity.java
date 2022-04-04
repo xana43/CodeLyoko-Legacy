@@ -79,6 +79,10 @@ public class LyokoVehicleEntity extends Boat {
             this.setDeltaMovement(new Vec3(this.getDeltaMovement().x, this.getDeltaMovement().y + 1,this.getDeltaMovement().z));
 
         }
+        if(!movingDown && !movingUp)
+        {
+            this.setDeltaMovement(Vec3.ZERO);
+        }
     }
 
     @Override

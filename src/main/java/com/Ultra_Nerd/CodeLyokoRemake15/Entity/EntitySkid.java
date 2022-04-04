@@ -1,18 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Entity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.vehicle.LyokoVehicleEntity;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class EntitySkid extends LyokoVehicleEntity {
+public class EntitySkid extends LyokoVehicleEntity{
 
 
 
@@ -20,12 +19,23 @@ public class EntitySkid extends LyokoVehicleEntity {
         super(entitySkidEntityType, world);
 
 
-
     }
 
     @Override
-    public boolean isNoGravity() {
-        return false;
+    public boolean shouldRiderSit() {
+        return true;
+    }
+
+    @Override
+    public void dismountTo(double pX, double pY, double pZ) {
+
+    }
+
+
+
+    @Override
+    public boolean canRiderInteract() {
+        return true;
     }
 
 
@@ -45,10 +55,12 @@ public class EntitySkid extends LyokoVehicleEntity {
         return true;
     }
 
-    @Override
-    public float getWaterLevelAbove() {
-        return super.getWaterLevelAbove();
-    }
+
+
+
+
+
+
 
     @Nonnull
     @Override
@@ -56,17 +68,33 @@ public class EntitySkid extends LyokoVehicleEntity {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
+    @Override
+    public void positionRider(@NotNull Entity pPassenger) {
+        super.positionRider(pPassenger);
+        pPassenger.setPos(this.getX(),this.getY() + 7, this.getZ());
+    }
 
     @Override
-    public void baseTick() {
-        super.baseTick();
+    public void ejectPassengers() {
+        //super.ejectPassengers();
+    }
 
+
+
+    @Override
+    public void tick() {
+        super.tick();
+        this.setNoGravity(this.isUnderWater());
             getPassengers().forEach(passenger -> {
 
-                if(passenger instanceof Player)
+                if(passenger instanceof Player player)
                 {
-                    passenger.isInvulnerableTo(CodeLyokoMain.RegistryEventHandler.DigitaloceanDamageSource);
-                    passenger.isInvulnerableTo(DamageSource.DROWN);
+                    player.setAirSupply(passenger.getMaxAirSupply());
+
+
+
+
+
 
                 }
             });

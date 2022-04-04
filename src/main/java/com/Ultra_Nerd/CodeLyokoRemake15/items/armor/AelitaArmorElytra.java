@@ -4,7 +4,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -113,9 +112,9 @@ public class AelitaArmorElytra extends ArmorItem {
 
                 }
 
-                player.fallDistance = 0;
+
             } else if (player.isFallFlying()) {
-                player.isInvulnerableTo(DamageSource.FALL);
+
                 player.fallDistance = 0;
                 player.stopFallFlying();
             }

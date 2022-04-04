@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Util;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBiome;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
@@ -8,6 +9,7 @@ import com.Ultra_Nerd.CodeLyokoRemake15.init.ModEntities;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -20,6 +22,25 @@ import java.util.Objects;
 
 @Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventSubscriber {
+
+    @SubscribeEvent
+    public static void disableShiftInDigitalOcean(final EntityMountEvent event)
+    {
+      if(event.getEntity() instanceof Player player)
+      {
+          if(player.level.dimension() == ModDimensions.DIGITAL_OCEAN)
+          {
+
+              if(player.getVehicle() instanceof EntitySkid && !player.isCreative())
+              {
+                  if(event.isDismounting())
+                  {
+                      event.setCanceled(true);
+                  }
+              }
+          }
+      }
+    }
 
     @SubscribeEvent
     public static void explosions(final ExplosionEvent world) {

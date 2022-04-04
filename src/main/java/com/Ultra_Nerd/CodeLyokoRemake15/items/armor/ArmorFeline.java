@@ -4,7 +4,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -87,7 +86,7 @@ public class ArmorFeline extends ArmorItem {
 
 
                         player.fallDistance = 0;
-                        player.isInvulnerableTo(DamageSource.FALL);
+
 
 
 

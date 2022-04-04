@@ -2,15 +2,21 @@ package com.Ultra_Nerd.CodeLyokoRemake15.player;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.RenderBlockOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.client.gui.OverlayRegistry;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -19,8 +25,27 @@ import java.util.Objects;
 
 
 @Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class PlayerHealthCustom {
+public class PlayerCustomGameAttributes {
     private static final ResourceLocation HEALTH_TEX = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/lyoko_health_bar.png");
+
+
+    public static void PlayerDie(final LivingDeathEvent event)
+    {
+        if (event.getEntity() instanceof Player playerEntity)
+        {
+
+
+            if (DimensionCheck.playerNotInVanillaWorld(playerEntity))
+            {
+                Minecraft.getInstance().getSoundManager().stop(SoundEvents.PLAYER_DEATH.getLocation(), SoundSource.PLAYERS);
+                playerEntity.level.playSound(playerEntity,playerEntity.blockPosition(), ModSounds.DEVIRTUALIZATION.get(),SoundSource.PLAYERS, 1,1);
+            }
+
+        }
+    }
+
+
+
 
 
     @SubscribeEvent
@@ -34,9 +59,8 @@ public class PlayerHealthCustom {
                 event.getPlayer().getFoodData().setSaturation(40);
                 event.getPlayer().causeFoodExhaustion(0);
                 event.getPlayer().canEat(true);
-                event.getPlayer().isInvulnerableTo(DamageSource.STARVE);
-                //event.getPlayer().addEffect(new MobEffectInstance(MobEffects.SATURATION, 255,255,false,false,false));
 
+                //event.getPlayer().addEffect(new MobEffectInstance(MobEffects.SATURATION, 255,255,false,false,false));
 
 
             }
@@ -44,7 +68,28 @@ public class PlayerHealthCustom {
         }
     }
 
+    @SubscribeEvent
+    public static void removeLiquidOverlayProperties(final RenderBlockOverlayEvent event) {
+        if (DimensionCheck.playerNotInVanillaWorld(event.getPlayer()) && event.getPlayer() != null) {
+            if (event.getOverlayType() == RenderBlockOverlayEvent.OverlayType.WATER) {
+                event.setCanceled(true);
+            }
+        }
+    }
 
+
+    @SubscribeEvent
+    public static void removeLiquidFog(final EntityViewRenderEvent.RenderFogEvent event)
+    {
+        if(Minecraft.getInstance().player != null)
+        {
+            Player  thisplayer = Minecraft.getInstance().player;
+            if(DimensionCheck.playerNotInVanillaWorld(thisplayer))
+            {
+                event.setCanceled(true);
+            }
+        }
+    }
     @SubscribeEvent
     public static void PlayerHealthRender(final RenderGameOverlayEvent.Pre renderEvent) {
 
@@ -53,6 +98,8 @@ public class PlayerHealthCustom {
 
             OverlayRegistry.enableOverlay(ForgeIngameGui.PLAYER_HEALTH_ELEMENT,false);
             OverlayRegistry.enableOverlay(ForgeIngameGui.FOOD_LEVEL_ELEMENT,false);
+            OverlayRegistry.enableOverlay(ForgeIngameGui.AIR_LEVEL_ELEMENT,false);
+
             if(!(Minecraft.getInstance().screen instanceof ContainerScreen) && !Minecraft.getInstance().player.isCreative() && !Minecraft.getInstance().player.isSpectator()) {
                 //renderEvent.getMatrixStack().pushPose();
                 RenderSystem.setShaderTexture(0,HEALTH_TEX);
@@ -70,6 +117,7 @@ public class PlayerHealthCustom {
             {
                 OverlayRegistry.enableOverlay(ForgeIngameGui.PLAYER_HEALTH_ELEMENT,true);
                 OverlayRegistry.enableOverlay(ForgeIngameGui.FOOD_LEVEL_ELEMENT,true);
+                OverlayRegistry.enableOverlay(ForgeIngameGui.AIR_LEVEL_ELEMENT,true);
             }
 
         }

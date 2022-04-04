@@ -246,7 +246,7 @@
   "itemGroup.lyoko_weapons": "Code Lyoko: Legacy - Weapons",
 
   "_comment_4": "special blocks",
-  "death.attack.cm:digital_ocean": "%s was de-virtualized, broken down, and swept away by the digital current",
+  "death.attack.cm:digital_ocean": "%s was swept away by the digital current",
   "death.attack.cm:marabunta": "%s was eaten away by the Marabunta",
   "death.attack.cm:digital_lava_block": "%s was burned by data",
 
@@ -266,8 +266,12 @@
   "entity.cm.hornet": "Hornet",
   "entity.cm.laser": "Laser arrow",
   "entity.cm.manta": "Manta",
-  "entity.cm.megatank": "Mega Tank"
+  "entity.cm.megatank": "Mega Tank",
 
+
+   "_comment_8":"ScreenNames",
+   "lyoko.deathScreen.title":"De-virtualized",
+   "lyoko.deathScreen.title.hardcore":"De-virtualized forever"
 
 
 }

@@ -246,7 +246,7 @@
   "itemGroup.lyoko_weapons": "Code Lyoko: Legacy - Armes",
 
   "_comment_4": "special blocks",
-  "death.attack.block.cm.digital_ocean": "%s a été dévirtualisée, décomposée et balayée par le courant numérique",
+  "death.attack.block.cm.digital_ocean": "%s a été balayée par le courant numérique",
   "death.attack.block.cm.marabunta": "%s a été rongé par la Marabounta",
 
   "_comment_5": "Containers",

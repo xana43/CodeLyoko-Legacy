@@ -18,7 +18,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class MantaEntity extends Phantom implements IAnimatable, RangedAttackMob {
     private final AnimationFactory manager = new AnimationFactory(this);
-    private final AnimationController controller = new AnimationController(this, "mantamovecontroller", 20, this::animationPred);
+    private final AnimationController<?> controller = new AnimationController<>(this, "mantamovecontroller", 20, this::animationPred);
 
     public MantaEntity(EntityType<? extends Phantom> type, Level worldIn) {
         super(type, worldIn);

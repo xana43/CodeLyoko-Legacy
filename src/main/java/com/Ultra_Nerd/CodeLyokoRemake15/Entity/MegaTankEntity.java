@@ -40,7 +40,7 @@ import java.util.Random;
 public class MegaTankEntity extends Skeleton implements IAnimatable  {
 
    private final AnimationFactory TankManager = new AnimationFactory(this);
-    private final AnimationController Tankcontroller = new AnimationController(this, "movecontroller", 20, this::animationPred);
+    private final AnimationController<?> Tankcontroller = new AnimationController<>(this, "movecontroller", 20, this::animationPred);
 
     public MegaTankEntity(EntityType<? extends Skeleton> type, Level world) {
         super(ModEntities.MEGATANK.get(), world);

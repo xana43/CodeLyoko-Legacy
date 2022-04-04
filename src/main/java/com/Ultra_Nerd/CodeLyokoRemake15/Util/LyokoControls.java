@@ -24,8 +24,9 @@ public static final KeyMapping KEY_MAPPING_VEHICLES_DOWN = new KeyMapping(
 
 
             CustomControlServerHandler.syncToServer(
-                    event.getKey() == KEY_MAPPING_VEHICLES_UP.getKey().getValue() ? event.getAction(): 2,
-                    event.getKey() == KEY_MAPPING_VEHICLES_DOWN.getKey().getValue() ? event.getAction() : 2
+                    event.getKey() == KEY_MAPPING_VEHICLES_UP.getKey().getValue() ? event.getAction() : 0,
+                    event.getKey() == KEY_MAPPING_VEHICLES_DOWN.getKey().getValue() ? event.getAction() : 0
+
 
             );
         }
