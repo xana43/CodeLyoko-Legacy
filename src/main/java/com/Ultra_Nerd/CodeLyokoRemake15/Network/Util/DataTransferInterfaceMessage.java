@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.Network.Util;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -35,32 +36,35 @@ public class DataTransferInterfaceMessage {
     }
 
     public static void handle(DataTransferInterfaceMessage msg, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(
-                () -> {
-                    switch (msg.territory) {
-                        case 0x101010: //CARTHAGE
-                            Objects.requireNonNull(ctx.get().getSender()).changeDimension((ServerLevel) Objects.requireNonNull(RegistryAccess.BUILTIN.get().registry(Registry.DIMENSION_REGISTRY).get().get(ModDimensions.SECTOR5)));
-                            Objects.requireNonNull(ctx.get().getSender()).setPos(0, 130, 0);
-                            break;
-                        case 0x222222: //DESERT
-                            Objects.requireNonNull(ctx.get().getSender()).changeDimension((ServerLevel) Objects.requireNonNull(RegistryAccess.BUILTIN.get().registry(Registry.DIMENSION_REGISTRY).get().get(ModDimensions.DESERT)));
-                            Objects.requireNonNull(ctx.get().getSender()).setPos(msg.xCoord, msg.yCoord, msg.zCoord);
-                            break;
-                        case 0x111111: //MOUNTAIN
-                            Objects.requireNonNull(ctx.get().getSender()).changeDimension((ServerLevel) Objects.requireNonNull(RegistryAccess.BUILTIN.get().registry(Registry.DIMENSION_REGISTRY).get().get(ModDimensions.MOUNTAIN)));
-                            Objects.requireNonNull(ctx.get().getSender()).setPos(msg.xCoord, msg.yCoord, msg.zCoord);
-                            break;
-                        case 0x333333: //FOREST
-                            Objects.requireNonNull(ctx.get().getSender()).changeDimension((ServerLevel) Objects.requireNonNull(RegistryAccess.BUILTIN.get().registry(Registry.DIMENSION_REGISTRY).get().get(ModDimensions.FOREST)));
-                            Objects.requireNonNull(ctx.get().getSender()).setPos(msg.xCoord, msg.yCoord, msg.zCoord);
-                            break;
-                        case 0x444444: //ICE
-                            Objects.requireNonNull(ctx.get().getSender()).changeDimension((ServerLevel) Objects.requireNonNull(RegistryAccess.BUILTIN.get().registry(Registry.DIMENSION_REGISTRY).get().get(ModDimensions.ICE)));
-                            Objects.requireNonNull(ctx.get().getSender()).setPos(msg.xCoord, msg.yCoord, msg.zCoord);
-                            break;
+        if(RegistryAccess.BUILTIN.get().registry(Registry.DIMENSION_REGISTRY).isPresent()) {
+            ctx.get().enqueueWork(
+                    () -> {
+                        switch (msg.territory) {
+                            case 0x101010: //CARTHAGE
+                                CodeLyokoMain.Log.debug("should be sent to sector 5");
+                                (ctx.get().getSender()).changeDimension((ServerLevel) RegistryAccess.BUILTIN.get().registry(Registry.DIMENSION_REGISTRY).get().get(ModDimensions.SECTOR5));
+                                (ctx.get().getSender()).setPos(0, 130, 0);
+                                break;
+                            case 0x222222: //DESERT
+                                Objects.requireNonNull(ctx.get().getSender()).changeDimension((ServerLevel) Objects.requireNonNull(RegistryAccess.BUILTIN.get().registry(Registry.DIMENSION_REGISTRY).get().get(ModDimensions.DESERT)));
+                                Objects.requireNonNull(ctx.get().getSender()).setPos(msg.xCoord, msg.yCoord, msg.zCoord);
+                                break;
+                            case 0x111111: //MOUNTAIN
+                                Objects.requireNonNull(ctx.get().getSender()).changeDimension((ServerLevel) Objects.requireNonNull(RegistryAccess.BUILTIN.get().registry(Registry.DIMENSION_REGISTRY).get().get(ModDimensions.MOUNTAIN)));
+                                Objects.requireNonNull(ctx.get().getSender()).setPos(msg.xCoord, msg.yCoord, msg.zCoord);
+                                break;
+                            case 0x333333: //FOREST
+                                Objects.requireNonNull(ctx.get().getSender()).changeDimension((ServerLevel) Objects.requireNonNull(RegistryAccess.BUILTIN.get().registry(Registry.DIMENSION_REGISTRY).get().get(ModDimensions.FOREST)));
+                                Objects.requireNonNull(ctx.get().getSender()).setPos(msg.xCoord, msg.yCoord, msg.zCoord);
+                                break;
+                            case 0x444444: //ICE
+                                Objects.requireNonNull(ctx.get().getSender()).changeDimension((ServerLevel) Objects.requireNonNull(RegistryAccess.BUILTIN.get().registry(Registry.DIMENSION_REGISTRY).get().get(ModDimensions.ICE)));
+                                Objects.requireNonNull(ctx.get().getSender()).setPos(msg.xCoord, msg.yCoord, msg.zCoord);
+                                break;
+                        }
                     }
-                }
-        );
+            );
+        }
         ctx.get().setPacketHandled(true);
     }
 

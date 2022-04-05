@@ -1,15 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tests;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.DimensionTeleporter;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.ITeleporter;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class TestBlockPortal extends Block implements ITeleporter {
 
@@ -18,16 +20,26 @@ public class TestBlockPortal extends Block implements ITeleporter {
 
     }
 
-
     @Override
-    public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
-        super.entityInside(state, worldIn, pos, entityIn);
-        if (entityIn instanceof Player) {
-            if (!entityIn.position().equals(new Vec3(0, 128, 0))) {
-                //entityIn.changeDimension((DimensionType..registerOrGetDimension(ModDimensionTypes.DimensionTypeCarthage, ModDimensions.SECTOR_5.get(), null, true)), this);
-
-                entityIn.setPos(0, 128, 0);
+    public void entityInside(@NotNull BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull Entity pEntity) {
+        if (pEntity instanceof ServerPlayer player)
+        {
+            if(pLevel.dimension().equals(ModDimensions.SECTOR5))
+            {
+                teleportTo(player,pPos.north(),Level.OVERWORLD);
+            }
+            else
+            {
+                teleportTo(player,new BlockPos(0,128,0).north(),ModDimensions.SECTOR5);
             }
         }
     }
+
+    private void teleportTo(ServerPlayer player, BlockPos pos, ResourceKey<Level> levelResourceKey)
+    {
+        ServerLevel serverLevel = player.getServer().getLevel(levelResourceKey);
+        DimensionTeleporter.teleportPlayerToWorld(player,serverLevel,new BlockPos(pos.getX(),pos.getY(),pos.getZ()),false);
+    }
+
+
 }

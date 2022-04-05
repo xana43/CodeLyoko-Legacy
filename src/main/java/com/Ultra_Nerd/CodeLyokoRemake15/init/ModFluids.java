@@ -5,7 +5,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.DigitalLavaBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.DigitalSeaBlock;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.LiquidHelium;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.UraniumWaste;
-import com.Ultra_Nerd.CodeLyokoRemake15.fluids.LiquidHeliumFluid;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -43,7 +42,7 @@ public class ModFluids {
     public static final ForgeFlowingFluid.Properties DIGITAL_PROPERTIES = new ForgeFlowingFluid.Properties(DIGITAL_OCEAN, FLOWING_DIGITAL_OCEAN,
             FluidAttributes.builder(DIGITAL_OCEAN_RL, FLOWING_DIGITAL_OCEAN_RL).density(1)
                     .temperature(10).luminosity(10).overlay(DIGITAL_OCEAN_RL)).block(() -> ModFluids.DIGITAL_SEA_BLOCK.get());
-    public static final LiquidHeliumFluid.Properties HELIUM_PROPERTIES = new LiquidHeliumFluid.Properties(STILL_LIQUID_HELIUM, FLOWING_LIQUID_HELIUM,
+    public static final ForgeFlowingFluid.Properties HELIUM_PROPERTIES = new ForgeFlowingFluid.Properties(STILL_LIQUID_HELIUM, FLOWING_LIQUID_HELIUM,
             FluidAttributes.builder(LIQUID_HELIUM_STILL_RL, LIQUID_HELIUM_FLOWING_RL).overlay(LIQUID_HELIUM_STILL_RL).density(2).temperature(-100).viscosity(0).luminosity(0)).block(
             ()->ModFluids.LIQUID_HELIUM.get())
             .bucket(() -> ModItems.LIQUID_HELIUM_BUCKET.get()).levelDecreasePerBlock(2).slopeFindDistance(2);
