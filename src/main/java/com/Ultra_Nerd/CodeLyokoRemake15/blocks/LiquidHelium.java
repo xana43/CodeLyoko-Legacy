@@ -2,8 +2,6 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -25,16 +23,20 @@ public class LiquidHelium extends LiquidBlock {
         super(supplier, BlockBehaviour.Properties.copy(Blocks.WATER)
 
 
-
         );
 
+    }
+
+
+    @Override
+    public boolean isRandomlyTicking(BlockState pState) {
+        return true;
     }
 
     @Override
     public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         if (entityIn instanceof LivingEntity livingEntity) {
             livingEntity.hurt(new DamageSource(this.getName().toString()), RANDOM.nextInt(2));
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, -1, 6, false, false, false));
             livingEntity.moveDist = 0;
             livingEntity.isInPowderSnow = true;
 

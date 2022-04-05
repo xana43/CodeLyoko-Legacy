@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items;
 
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.item.ItemEvent;
@@ -25,7 +24,7 @@ public class SolidQuantum extends Item {
     public void ItemInvulnerable(ItemExpireEvent event) {
         if (event.getEntityItem().getItem().getItem() == this) {
 
-            event.getEntityItem().isInvulnerableTo(DamageSource.LAVA);
+            event.getEntityItem().setInvulnerable(true);
 
         }
     }
@@ -34,7 +33,7 @@ public class SolidQuantum extends Item {
     public void ItemInvulnerable2(ItemEvent event) {
         if (event.getEntityItem().getItem().getItem() == this) {
 
-            event.getEntityItem().isInvulnerableTo(DamageSource.LAVA);
+            event.getEntityItem().setInvulnerable(true);
 
         }
     }

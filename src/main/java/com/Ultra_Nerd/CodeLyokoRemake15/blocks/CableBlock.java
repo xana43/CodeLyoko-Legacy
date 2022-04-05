@@ -1,26 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.CableTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerControlPanelTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ScannerTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 
 public class CableBlock extends FenceBlock {
 
@@ -66,7 +59,7 @@ public class CableBlock extends FenceBlock {
 
 
 
-
+/*
     @Override
     public void setPlacedBy(@Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state, LivingEntity placer, @Nonnull ItemStack stack) {
         CableTileEntity thisTE = (CableTileEntity) worldIn.getBlockEntity(pos);
@@ -95,6 +88,8 @@ public class CableBlock extends FenceBlock {
             }
         }
     }
+
+ */
 
 
 }
