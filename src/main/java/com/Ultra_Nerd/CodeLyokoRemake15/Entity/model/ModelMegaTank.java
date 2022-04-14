@@ -6,27 +6,26 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.MegaTankEntity;
-
 import net.minecraft.resources.ResourceLocation;
-
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 
-public class ModelMegaTank extends AnimatedGeoModel<MegaTankEntity> {
+public final class ModelMegaTank extends AnimatedGeoModel<MegaTankEntity> {
 
 
     @Override
-    public ResourceLocation getModelLocation(MegaTankEntity object) {
+    public @NotNull ResourceLocation getModelLocation(MegaTankEntity object) {
         return CodeLyokoMain.CodeLyokoPrefix("geo/megatank.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureLocation(MegaTankEntity object) {
+    public @NotNull ResourceLocation getTextureLocation(MegaTankEntity object) {
         return new ResourceLocation(CodeLyokoMain.MOD_ID,"textures/entity/megatank/megatank.png");
     }
 
     @Override
-    public ResourceLocation getAnimationFileLocation(MegaTankEntity animatable) {
+    public @NotNull ResourceLocation getAnimationFileLocation(MegaTankEntity animatable) {
         return new ResourceLocation(CodeLyokoMain.MOD_ID,"animations/entities/megatank.json");
     }
 }

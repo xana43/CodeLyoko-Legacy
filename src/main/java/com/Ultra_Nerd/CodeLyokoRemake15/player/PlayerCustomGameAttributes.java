@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.player;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.ClientCapabilitySync;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -20,16 +21,26 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 
 @Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class PlayerCustomGameAttributes {
+public record PlayerCustomGameAttributes() {
     private static final ResourceLocation HEALTH_TEX = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/lyoko_health_bar.png");
 
 
-    public static void PlayerDie(final LivingDeathEvent event)
+
+
+
+
+
+
+
+
+    @SubscribeEvent
+    public static void PlayerDie(final @NotNull LivingDeathEvent event)
     {
         if (event.getEntity() instanceof Player playerEntity)
         {
@@ -49,8 +60,7 @@ public class PlayerCustomGameAttributes {
 
 
     @SubscribeEvent
-    public static void removehunger(final PlayerEvent event) {
-
+    public static void removeHunger(final @NotNull PlayerEvent event) {
         if (event.getPlayer() != null) {
 
             if (DimensionCheck.playerNotInVanillaWorld(event.getPlayer()) && !event.getPlayer().isInvulnerable()) {
@@ -69,7 +79,7 @@ public class PlayerCustomGameAttributes {
     }
 
     @SubscribeEvent
-    public static void removeLiquidOverlayProperties(final RenderBlockOverlayEvent event) {
+    public static void removeLiquidOverlayProperties(final @NotNull RenderBlockOverlayEvent event) {
         if (DimensionCheck.playerNotInVanillaWorld(event.getPlayer()) && event.getPlayer() != null) {
             if (event.getOverlayType() == RenderBlockOverlayEvent.OverlayType.WATER) {
                 event.setCanceled(true);
@@ -79,19 +89,18 @@ public class PlayerCustomGameAttributes {
 
 
     @SubscribeEvent
-    public static void removeLiquidFog(final EntityViewRenderEvent.RenderFogEvent event)
+    public static void removeLiquidFog(final EntityViewRenderEvent.@NotNull RenderFogEvent event)
     {
         if(Minecraft.getInstance().player != null)
         {
-            Player  thisplayer = Minecraft.getInstance().player;
-            if(DimensionCheck.playerNotInVanillaWorld(thisplayer))
+            if(DimensionCheck.playerNotInVanillaWorld(Minecraft.getInstance().player))
             {
                 event.setCanceled(true);
             }
         }
     }
     @SubscribeEvent
-    public static void PlayerHealthRender(final RenderGameOverlayEvent.Pre renderEvent) {
+    public static void playerHealthRender(final RenderGameOverlayEvent.@NotNull Pre renderEvent) {
 
         if (renderEvent.getType() == RenderGameOverlayEvent.ElementType.ALL && DimensionCheck.playerNotInVanillaWorld(Minecraft.getInstance().player != null ? Minecraft.getInstance().player : null) && Minecraft.getInstance().player != null
         ) {
@@ -104,8 +113,11 @@ public class PlayerCustomGameAttributes {
                 //renderEvent.getMatrixStack().pushPose();
                 RenderSystem.setShaderTexture(0,HEALTH_TEX);
                 Minecraft.getInstance().gui.blit(renderEvent.getMatrixStack(),6, 1, 0, 0, 33, 254);
-                Minecraft.getInstance().gui.blit(renderEvent.getMatrixStack(),12, 1, CodeLyokoMain.playerClassType.get(3).getTextureIndex() , 0, 25, (int) ((12.7) * Minecraft.getInstance().player.getHealth()));
+                if(ClientCapabilitySync.getPlayerClassType() != null) {
+                    Minecraft.getInstance().gui.blit(renderEvent.getMatrixStack(), 12, 1, ClientCapabilitySync.getPlayerClassType().getTextureIndex(), 0, 25, (int) ((12.7) * Minecraft.getInstance().player.getHealth()));
+                }
                 //renderEvent.getMatrixStack().popPose();
+
             }
 
         }

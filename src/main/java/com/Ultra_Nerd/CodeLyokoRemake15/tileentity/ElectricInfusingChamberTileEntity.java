@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.RF.EG;
+import com.Ultra_Nerd.CodeLyokoRemake15.FE.EG;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.ElectricFluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FlourideInfusionResult;
 import net.minecraft.core.BlockPos;
@@ -29,8 +29,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ElectricInfusingChamberTileEntity extends BlockEntity implements BlockEntityTicker<ElectricInfusingChamberTileEntity>, MenuProvider {
-    public ItemStackHandler handler = new ItemStackHandler(3);
-    private final EG internal = new EG(90000);
+    public @NotNull ItemStackHandler handler = new ItemStackHandler(3);
+   private final EG internal = new EG(this,90000);
     private String customName;
     private ItemStack smelting = ItemStack.EMPTY;
 
@@ -38,7 +38,7 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Bl
     private int cookTime;
     public int ENER = internal.getEnergyStored();
 
-    public ElectricInfusingChamberTileEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
+    public ElectricInfusingChamberTileEntity(@NotNull BlockEntityType<?> p_155228_, @NotNull BlockPos p_155229_, @NotNull BlockState p_155230_) {
         super(p_155228_, p_155229_, p_155230_);
     }
 
@@ -66,7 +66,7 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Bl
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, Direction facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return LazyOptional.of(() -> (T) this.handler);
-        if (capability == CapabilityEnergy.ENERGY) return LazyOptional.of(() -> (T) this.internal);
+        //if (capability == CapabilityEnergy.ENERGY) return LazyOptional.of(() -> (T) this.internal);
         return super.getCapability(capability, facing);
     }
 
@@ -91,7 +91,7 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Bl
         this.handler.deserializeNBT(compound.getCompound("Inventory"));
         this.cookTime = compound.getInt("CookTime");
         this.customName = compound.getString("CustomName");
-        this.internal.RFNBT(compound);
+        //this.internal.RFNBT(compound);
         this.ENER = compound.getInt("GuiEnergy");
     }
 
@@ -164,7 +164,7 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Bl
     }
 
 
-    public boolean isUsableByPlayer(Player player) {
+    public boolean isUsableByPlayer(@NotNull Player player) {
         assert this.level != null;
         return this.level.getBlockEntity(this.worldPosition) == this &&
                 player.distanceToSqr((double) this.worldPosition.getX() + 0.5D, (double) this.worldPosition.getY() + 0.5D, (double) this.worldPosition.getZ() + 0.5D) <= 64.0D;

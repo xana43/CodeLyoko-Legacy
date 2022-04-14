@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.*;
+import com.Ultra_Nerd.CodeLyokoRemake15.blocks.SuperCalculator.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.electroplate.ElectroplatingMachine;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.ElectricFluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.FluorideInfuser;
@@ -14,9 +15,11 @@ import com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower.*;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -24,13 +27,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-public class ModBlocks {
+public final class ModBlocks {
 
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CodeLyokoMain.MOD_ID);
-    //for testing blocks
-    public static final RegistryObject<TestBlockPortal> PORTAL_BLOCK = BLOCKS.register("portal_block", () -> new TestBlockPortal(Block.Properties.copy(Blocks.NETHER_PORTAL)));
-    public static final RegistryObject<Block> BLOCK_PATTERN = BLOCKS.register("block_pattern", () -> new BlockPatternTest(Block.Properties.copy(Blocks.IRON_BLOCK)));
+
     //for blocks
     public static final RegistryObject<Block> ARCHITECTURE_WORK_STATION = BLOCKS.register("architecture_work_station", () -> new ArchitectureWorkstation(Block.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> ANTI_MARABUNTA = BLOCKS.register("anti_marabunta", AntiMarabunta::new);
@@ -60,28 +61,40 @@ public class ModBlocks {
     public static final RegistryObject<Block> DIGITAL_DIRT = BLOCKS.register("digital_dirt", () -> new Block(Block.Properties.copy(Blocks.DIRT).strength(-1).explosionResistance(-1)));
     public static final RegistryObject<Block> DIGITAL_ROCK = BLOCKS.register("digital_rock", () -> new Block(Block.Properties.copy(Blocks.STONE).strength(-1)));
     public static final RegistryObject<Block> DIGITAL_WOOD_FOREST = BLOCKS.register("digital_wood_forest", () -> new Block(Block.Properties.of(Material.WOOD).strength(-1).explosionResistance(-1)));
-    public static final RegistryObject<Block> DIGITAL_TREE_FOREST_SAPLING = BLOCKS.register("digital_tree_forest_sapling", () -> new DigitalSapling(new AbstractTreeGrower() {
-        @Override
-        protected @NotNull Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(@NotNull Random pRandom, boolean pLargeHive) {
-            return ModFeature.DIGITAL_FOREST_TREE_FEATURE;
-        }
-    }, Block.Properties.copy(Blocks.JUNGLE_SAPLING)));
     public static final RegistryObject<Block> DIGITAL_WOOD_MOUNTAIN = BLOCKS.register("digital_wood_mountain", () -> new Block(Block.Properties.of(Material.WOOD)));
     public static final RegistryObject<Block> DIGITAL_LEAF_MOUNTAIN = BLOCKS.register("digital_leaf_mountain", () -> new LeavesBlock(Block.Properties.of(new Material.Builder(
             MaterialColor.PLANT)
 
             .build()).sound(SoundType.GRASS)
             ));
-    public static final RegistryObject<Block> DIGITAL_MOUNTAIN_SAPPLING = BLOCKS.register("digital_mountain_sapling", () -> new DigitalMountainSapling(new AbstractTreeGrower() {
-        @Override
-        protected @NotNull Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(@NotNull Random pRandom, boolean pLargeHive) {
-            return ModFeature.DIGITAL_MOUNTAIN_TREE_FEATURE;
+
+
+    public static void registerTestBlocks()
+    {
+        if(!FMLEnvironment.production)
+        {
+            BLOCKS.register("portal_block", () -> new TestBlockPortal(Block.Properties.copy(Blocks.NETHER_PORTAL)));
+            BLOCKS.register("block_pattern", () -> new BlockPatternTest(Block.Properties.copy(Blocks.IRON_BLOCK)));
+            BLOCKS.register("digital_mountain_sapling", () -> new DigitalMountainSapling(new AbstractTreeGrower() {
+                @Override
+                protected @NotNull Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(@NotNull Random pRandom, boolean pLargeHive) {
+                    return ModFeature.DIGITAL_MOUNTAIN_TREE_FEATURE;
+                }
+            }, Block.Properties.copy(Blocks.ACACIA_SAPLING)));
+
+             BLOCKS.register("digital_tree_forest_sapling", () -> new DigitalSapling(new AbstractTreeGrower() {
+            @Override
+            protected @NotNull Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(@NotNull Random pRandom, boolean pLargeHive) {
+                return ModFeature.DIGITAL_FOREST_TREE_FEATURE;
+            }
+        }, Block.Properties.copy(Blocks.JUNGLE_SAPLING)));
         }
-    }, Block.Properties.copy(Blocks.ACACIA_SAPLING)));
+    }
     public static final RegistryObject<Block> DIGITAL_ICE = BLOCKS.register("digital_ice", () -> new IceBlock(Block.Properties.copy(Blocks.ICE).strength(-1).explosionResistance(-1)));
     public static final RegistryObject<Block> DIGITAL_SAND = BLOCKS.register("digital_sand", () -> new Block(Block.Properties.of(Material.SAND)));
     public static final RegistryObject<Block> DIGITAL_DARKNESS = BLOCKS.register("digital_darkness", () -> new Block(Block.Properties.of(Material.EGG)));
     public static final RegistryObject<Block> ELECTRIC_FLUORIDE_INFUSER = BLOCKS.register("electric_fluoride_infuser", ElectricFluorideInfuser::new);
+    public static final RegistryObject<Block> EXTERNAL_ENERGY_ACCEPTOR = BLOCKS.register("external_energy_acceptor", () -> new ExternalPowerAcceptor(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> ELECTROPLATING_MACHINE = BLOCKS.register("electroplating_machine", () -> new ElectroplatingMachine(Block.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> ELECTROPLATING_MACHINE_FRAME = BLOCKS.register("electroplating_machine_frame", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> ELECTROPLATING_ANODE = BLOCKS.register("electroplating_anode", () -> new ElectroplatingRodImplements(Block.Properties.copy(Blocks.IRON_BLOCK)));
@@ -127,7 +140,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> TOWER_ENTER = BLOCKS.register("tower_enter", TowerEnter::new);
     public static final RegistryObject<Block> TITANIUM = BLOCKS.register("titanium_block", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(6, 10).sound(SoundType.METAL)));
     public static final RegistryObject<Block> TRANSPARENT = BLOCKS.register("transparent", TransparentBlock::new);
-    public static final RegistryObject<Block> URANUM_REACTOR = BLOCKS.register("computer_reactor", UraniumReactor::new);
+    public static final RegistryObject<Block> URANUM_REACTOR = BLOCKS.register("computer_reactor", ComputerIntegratedReactor::new);
     public static final RegistryObject<Block> URANINITE_ORE = BLOCKS.register("uraninite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE)));
     public static final RegistryObject<Block> URANIUM_BLOCK_238 = BLOCKS.register("uranium_block_238", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(6, 20).sound(SoundType.METAL)));
     public static final RegistryObject<Block> URANIUM_BLOCK_235 = BLOCKS.register("uranium_block_235", () -> new Block(Block.Properties.of(Material.METAL).strength(6, 20).sound(SoundType.METAL)));

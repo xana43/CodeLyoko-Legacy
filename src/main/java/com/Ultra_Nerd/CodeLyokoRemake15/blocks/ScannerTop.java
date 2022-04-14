@@ -16,12 +16,12 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
-public class ScannerTop extends Block {
+public final class ScannerTop extends Block {
     public static final DirectionProperty directionPropertyTop = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty scannerFormedTop = BooleanProperty.create("scanner_formed_top");
     private static final VoxelShape shapeS = Stream.of(
@@ -67,9 +67,7 @@ public class ScannerTop extends Block {
             Block.box(-3, 14.25, 5, -2, 15.25, 11),
             Block.box(11, 14.25, -3, 14, 15.25, -2),
             Block.box(2, 14.25, -3, 5, 15.25, -2)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     private static final VoxelShape shapeN = Stream.of(
             Block.box(19, 0, 4.54762, 20, 15.3, 10.547620000000002),
             Block.box(-4, 0, 4.54762, -3, 15.3, 10.547620000000002),
@@ -113,9 +111,7 @@ public class ScannerTop extends Block {
             Block.box(18, 14.25, 4.54762, 19, 15.25, 10.547620000000002),
             Block.box(1.9999999999999991, 14.25, 17.547620000000002, 4.999999999999999, 15.25, 18.547620000000002),
             Block.box(11, 14.25, 17.547620000000002, 14, 15.25, 18.547620000000002)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     private static final VoxelShape shapeW = Stream.of(
             Block.box(4.77381, 0, -4.22619, 10.773810000000001, 15.3, -3.22619),
             Block.box(4.77381, 0, 18.77381, 10.773810000000001, 15.3, 19.77381),
@@ -159,9 +155,7 @@ public class ScannerTop extends Block {
             Block.box(4.77381, 14.25, -3.22619, 10.773810000000001, 15.25, -2.22619),
             Block.box(17.77381, 14.25, 10.773810000000001, 18.77381, 15.25, 13.773810000000001),
             Block.box(17.77381, 14.25, 1.77381, 18.77381, 15.25, 4.77381)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     private static final VoxelShape shapeE = Stream.of(
             Block.box(5.226189999999998, 0, 18.77381, 11.226189999999999, 15.3, 19.77381),
@@ -206,46 +200,59 @@ public class ScannerTop extends Block {
             Block.box(5.226189999999998, 14.25, 17.77381, 11.226189999999999, 15.25, 18.77381),
             Block.box(-2.773810000000001, 14.25, 1.7738099999999992, -1.773810000000001, 15.25, 4.773809999999999),
             Block.box(-2.773810000000001, 14.25, 10.773810000000001, -1.773810000000001, 15.25, 13.773810000000001)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     private static final VoxelShape blockShape = Block.box(0, 0, 0, 16, 16, 16);
 
 
-    public ScannerTop(Properties properties) {
+    public ScannerTop(@NotNull Properties properties) {
         super(properties);
 
         this.registerDefaultState(this.defaultBlockState().setValue(directionPropertyTop, Direction.NORTH).setValue(scannerFormedTop, false));
     }
 
-    @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public @NotNull BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         return this.defaultBlockState().setValue(directionPropertyTop, context.getHorizontalDirection());
     }
 
     //mod compatiability
     @Nonnull
     @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
+    public BlockState rotate(@NotNull BlockState state, @NotNull Rotation rot) {
         return state.setValue(directionPropertyTop, rot.rotate(state.getValue(directionPropertyTop)));
     }
 
     @Nonnull
     @Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+    public BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirrorIn) {
         return state.rotate(mirrorIn.getRotation(state.getValue(directionPropertyTop)));
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
         builder.add(directionPropertyTop).add(scannerFormedTop);
+    }
+
+    @Override
+    public @NotNull VoxelShape getOcclusionShape(@NotNull BlockState state, BlockGetter pLevel, BlockPos pPos) {
+        switch (state.getValue(directionPropertyTop)) {
+            case NORTH:
+                return shapeN;
+            case SOUTH:
+                return shapeS;
+            case EAST:
+                return shapeE;
+            case WEST:
+                return shapeW;
+            default:
+                return shapeN;
+        }
     }
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+    public VoxelShape getShape(@NotNull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         if (state.getValue(scannerFormedTop)) {
             switch (state.getValue(directionPropertyTop)) {
                 case NORTH:

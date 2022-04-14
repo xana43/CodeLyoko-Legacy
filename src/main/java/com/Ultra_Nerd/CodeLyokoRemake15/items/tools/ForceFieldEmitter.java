@@ -21,10 +21,10 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 import java.util.function.Predicate;
 
-public class ForceFieldEmitter extends BowItem {
+public final class ForceFieldEmitter extends BowItem {
 
 
-    public ForceFieldEmitter(Properties builder) {
+    public ForceFieldEmitter(@NotNull Properties builder) {
         super(builder);
     }
 
@@ -35,7 +35,7 @@ public class ForceFieldEmitter extends BowItem {
 
     public static float getArrowVelocity(int charge) {
         float f = (float) charge / 5.0F;
-        f = (f * f + f * 2.0F) / 3.0F;
+        f = (float) ((StrictMath.pow(f,2) + f * 2.0F) / 3.0F);
         if (f > 1.0F) {
             f = 1.0F;
         }
@@ -64,11 +64,11 @@ public class ForceFieldEmitter extends BowItem {
             }
 
 
-            float f = getArrowVelocity(i);
+            final float f = getArrowVelocity(i);
             if (!((double) f < 0.1D)) {
                 boolean flag1 = playerentity.isCreative();
                 if (worldIn.isClientSide) {
-                    EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
+                    final EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 
                     las.setBaseDamage(40);
                     las.setPos(playerentity.position().x, playerentity.getEyeY(), playerentity.position().z);
@@ -91,7 +91,7 @@ public class ForceFieldEmitter extends BowItem {
 
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@Nonnull Level worldIn, Player playerIn, @Nonnull InteractionHand handIn) {
+    public @NotNull InteractionResultHolder<ItemStack> use(@Nonnull Level worldIn, @NotNull Player playerIn, @Nonnull InteractionHand handIn) {
         ItemStack heldItem = playerIn.getItemInHand(handIn);
         if (playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() != ModItems.AELITA_CHESTPLATE.get() &&
                 playerIn.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() != ModItems.AELITA_LEGGINGS.get() &&

@@ -4,10 +4,12 @@
   "refmap": "cm.refmap.json",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-
+    "Suppress"
   ],
   "client": [
-    "client.DimensionEffectAccesor"
+    "client.DimensionEffectAccesor",
+    "client.SuppressWorld"
+
   ],
   "injectors": {
     "defaultRequire": 1

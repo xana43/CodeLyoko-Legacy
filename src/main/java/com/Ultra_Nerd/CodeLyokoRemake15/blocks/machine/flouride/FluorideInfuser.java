@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -48,8 +49,8 @@ public class FluorideInfuser extends BaseEntityBlock {
 
     @Nonnull
     @Override
-    public InteractionResult use(@Nonnull BlockState state, Level worldIn, @Nonnull BlockPos pos,
-                                             @Nonnull Player player, @Nonnull InteractionHand handIn, @Nonnull BlockHitResult hit) {
+    public InteractionResult use(@Nonnull BlockState state, @NotNull Level worldIn, @Nonnull BlockPos pos,
+                                 @Nonnull Player player, @Nonnull InteractionHand handIn, @Nonnull BlockHitResult hit) {
         if (worldIn.isClientSide) {
             final BlockEntity tileEntity = worldIn.getBlockEntity(pos);
             if (tileEntity instanceof InfusingChamberTileEntity) {
@@ -60,7 +61,7 @@ public class FluorideInfuser extends BaseEntityBlock {
     }
 
 
-    public static void setState(boolean act, Level worldIn, BlockPos pos) {
+    public static void setState(boolean act, @NotNull Level worldIn, @NotNull BlockPos pos) {
         BlockState state = worldIn.getBlockState(pos);
         BlockEntity tileentity = worldIn.getBlockEntity(pos);
         if (act) {
@@ -90,39 +91,39 @@ public class FluorideInfuser extends BaseEntityBlock {
     }*/
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder.add(DirectionProperty.create("facing", Direction.Plane.HORIZONTAL))
                 .add(INFUSING));
     }
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
 
 
     @Override
-    public void setPlacedBy(Level worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state,
+    public void setPlacedBy(@NotNull Level worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state,
                             @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
         worldIn.setBlock(pos, this.defaultBlockState().setValue(FACING, placer.getDirection().getOpposite()), 2);
     }
 
 
     @Override
-    public RenderShape getRenderShape(BlockState p_49232_) {
+    public @NotNull RenderShape getRenderShape(BlockState p_49232_) {
         return RenderShape.MODEL;
     }
 
     @Override
-    public BlockState rotate(BlockState state, LevelAccessor world, BlockPos pos, Rotation direction) {
+    public @NotNull BlockState rotate(@NotNull BlockState state, LevelAccessor world, BlockPos pos, @NotNull Rotation direction) {
         return state.setValue(FACING, direction.rotate(state.getValue(FACING)));
     }
 
     @Nonnull
     @Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+    public BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirrorIn) {
         return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 

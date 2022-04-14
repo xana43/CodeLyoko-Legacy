@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public class ScannerTileEntity extends BlockEntity implements BlockEntityTicker<ScannerTileEntity> {
 
 
-    public ScannerTileEntity(BlockPos pos, BlockState state) {
+    public ScannerTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         super(ModTileEntities.SCANNER_TILE_ENTITY.get(),pos,state);
     }
 

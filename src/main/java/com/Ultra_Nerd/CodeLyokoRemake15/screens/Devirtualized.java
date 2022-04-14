@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
@@ -15,16 +16,16 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-public class Devirtualized extends Screen {
+public final class Devirtualized extends Screen {
 
     private int delayTicker;
-    private final Component causeOfDeath;
+    private final @org.jetbrains.annotations.Nullable Component causeOfDeath;
     private final boolean hardcore;
     private Component deathScore;
     private final List<Button> exitButtons = Lists.newArrayList();
 
     public Devirtualized(@javax.annotation.Nullable Component pCauseOfDeath, boolean pHardcore) {
-        super(new TranslatableComponent(pHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title"));
+        super(new TranslatableComponent(pHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title").withStyle(Style.EMPTY.withFont(CodeLyokoMain.CodeLyokoPrefix("gunship"))));
         this.causeOfDeath = pCauseOfDeath;
         this.hardcore = pHardcore;
     }
@@ -32,13 +33,13 @@ public class Devirtualized extends Screen {
     protected void init() {
         this.delayTicker = 0;
         this.exitButtons.clear();
-        this.exitButtons.add(this.addRenderableWidget(new Button(this.width / 2 - 100, this.height / 4 + 72, 200, 20, this.hardcore ? new TranslatableComponent("deathScreen.spectate") : new TranslatableComponent("deathScreen.respawn"), (p_95930_) -> {
+        this.exitButtons.add(this.addRenderableWidget(new Button((this.width >> 1) - 100, (this.height >> 2) + 72, 200, 20, this.hardcore ? new TranslatableComponent("deathScreen.spectate") : new TranslatableComponent("deathScreen.respawn"), (p_95930_) -> {
             assert this.minecraft != null;
             assert this.minecraft.player != null;
             this.minecraft.player.respawn();
-            this.minecraft.setScreen((Screen)null);
+            this.minecraft.setScreen(null);
         })));
-        this.exitButtons.add(this.addRenderableWidget(new Button(this.width / 2 - 100, this.height / 4 + 96, 200, 20, new TranslatableComponent("deathScreen.titleScreen"), (p_95925_) -> {
+        this.exitButtons.add(this.addRenderableWidget(new Button((this.width >> 1) - 100, (this.height >> 2) + 96, 200, 20, new TranslatableComponent("deathScreen.titleScreen"), (p_95925_) -> {
             if (this.hardcore) {
                 confirmResult(true);
                 this.exitToTitleScreen();
@@ -68,7 +69,7 @@ public class Devirtualized extends Screen {
             assert Objects.requireNonNull(this.minecraft).player != null;
             assert this.minecraft.player != null;
             this.minecraft.player.respawn();
-            this.minecraft.setScreen((Screen)null);
+            this.minecraft.setScreen(null);
         }
 
     }
@@ -87,14 +88,14 @@ public class Devirtualized extends Screen {
         this.fillGradient(pPoseStack, 0, 0, this.width, this.height, 1615855616, -1602211792);
         pPoseStack.pushPose();
         pPoseStack.scale(2.0F, 2.0F, 2.0F);
-        drawCenteredString(pPoseStack, this.font, this.title, this.width / 2 / 2, 30, 16777215);
+        drawCenteredString(pPoseStack, this.font, this.title, this.width >> 2, 30, 16777215);
         pPoseStack.popPose();
         if (this.causeOfDeath != null) {
-            drawCenteredString(pPoseStack, this.font, this.causeOfDeath, this.width / 2, 85, 16777215);
+            drawCenteredString(pPoseStack, this.font, this.causeOfDeath, this.width >> 1, 85, 16777215);
         }
 
-        drawCenteredString(pPoseStack, this.font, this.deathScore, this.width / 2, 100, 16777215);
-        if (this.causeOfDeath != null && pMouseY > 85 && pMouseY < 85 + 9) {
+        drawCenteredString(pPoseStack, this.font, this.deathScore, this.width >> 1, 100, 16777215);
+        if (this.causeOfDeath != null && pMouseY > 85 && pMouseY < 94) {
             Style style = this.getClickedComponentStyleAt(pMouseX);
             this.renderComponentHoverEffect(pPoseStack, style, pMouseX, pMouseY);
         }
@@ -109,15 +110,15 @@ public class Devirtualized extends Screen {
         } else {
             assert this.minecraft != null;
             int i = this.minecraft.font.width(this.causeOfDeath);
-            int j = this.width / 2 - i / 2;
-            int k = this.width / 2 + i / 2;
+            int j = (this.width >> 1) - (i  >> 1);
+            int k = (this.width >> 1) + (i >> 1);
             return p_95918_ >= j && p_95918_ <= k ? this.minecraft.font.getSplitter().componentStyleAtWidth(this.causeOfDeath, p_95918_ - j) : null;
         }
     }
 
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
-        if (this.causeOfDeath != null && pMouseY > 85.0D && pMouseY < (double)(85 + 9)) {
-            Style style = this.getClickedComponentStyleAt((int)pMouseX);
+        if (this.causeOfDeath != null && pMouseY > 85.0D && pMouseY < 94) {
+            final Style style = this.getClickedComponentStyleAt((int)pMouseX);
             if (style != null && style.getClickEvent() != null && style.getClickEvent().getAction() == ClickEvent.Action.OPEN_URL) {
                 this.handleComponentClicked(style);
                 return false;

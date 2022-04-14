@@ -12,12 +12,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
 public class DataTransferInterfaceTileEntity extends BlockEntity implements MenuProvider {
 
-    public DataTransferInterfaceTileEntity(BlockPos pos, BlockState state) {
+    public DataTransferInterfaceTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         super(ModTileEntities.DATA_TRANSFER_INTERFACE_TILE_ENTITY.get(),pos,state);
     }
 

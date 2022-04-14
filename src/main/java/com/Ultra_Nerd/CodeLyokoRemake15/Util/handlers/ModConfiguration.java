@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.NotNull;
 
 @Mod.EventBusSubscriber(bus= Bus.MOD, modid = CodeLyokoMain.MOD_ID)
 public class ModConfiguration {
@@ -18,7 +19,7 @@ public class ModConfiguration {
 
         //private final String data = gson.toJson(CableTileEntity.CONNECTIONS);
 
-        public Common(ForgeConfigSpec.Builder builder) {
+        public Common(ForgeConfigSpec.@NotNull Builder builder) {
             builder.comment("Code Lyoko : Legacy \n Mod configuration")
                     .push("CL:L");
             /*builder.comment(data)

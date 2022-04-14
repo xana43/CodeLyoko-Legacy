@@ -38,18 +38,18 @@ public class DataTransferInterface extends BaseEntityBlock {
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState pState) {
+    public @NotNull RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }
 
     @Nonnull
     @Override
-    public InteractionResult use(@Nonnull BlockState state, Level worldIn, @Nonnull BlockPos pos, @Nonnull Player player,
+    public InteractionResult use(@Nonnull BlockState state, @NotNull Level worldIn, @Nonnull BlockPos pos, @Nonnull Player player,
                                  @Nonnull InteractionHand handIn, @Nonnull BlockHitResult result) {
         if (!worldIn.isClientSide) {
-            BlockEntity Data = worldIn.getBlockEntity(pos);
+            final BlockEntity Data = worldIn.getBlockEntity(pos);
             if (Data instanceof DataTransferInterfaceTileEntity) {
-                MenuProvider thisMenuProvider = new MenuProvider() {
+                final MenuProvider thisMenuProvider = new MenuProvider() {
                     @Override
                     public @NotNull Component getDisplayName() {
                         return new TranslatableComponent("screen.transfer.gui");

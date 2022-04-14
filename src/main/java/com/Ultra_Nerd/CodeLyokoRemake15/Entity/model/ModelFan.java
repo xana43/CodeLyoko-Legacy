@@ -7,25 +7,26 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityFan;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class ModelFan extends AnimatedGeoModel<EntityFan>{
+public final class ModelFan extends AnimatedGeoModel<EntityFan>{
 
 
 
 
     @Override
-    public ResourceLocation getModelLocation(EntityFan object) {
+    public @NotNull ResourceLocation getModelLocation(EntityFan object) {
         return CodeLyokoMain.CodeLyokoPrefix("geo/fan.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureLocation(EntityFan object) {
+    public @NotNull ResourceLocation getTextureLocation(EntityFan object) {
         return CodeLyokoMain.CodeLyokoPrefix("textures/entity/projectiles/fan/fan.png");
     }
 
     @Override
-    public ResourceLocation getAnimationFileLocation(EntityFan animatable) {
+    public @NotNull ResourceLocation getAnimationFileLocation(EntityFan animatable) {
         return new ResourceLocation(CodeLyokoMain.MOD_ID, "animations/entities/fan.json");
     }
 }

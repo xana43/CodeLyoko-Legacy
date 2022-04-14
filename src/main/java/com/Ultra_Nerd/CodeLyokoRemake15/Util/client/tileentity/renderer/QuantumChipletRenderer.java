@@ -14,13 +14,12 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.NonNullList;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-@OnlyIn(Dist.CLIENT)
-public class QuantumChipletRenderer extends BlockEntityRenderers implements BlockEntityRenderer<QuantumChipletTileEntity> {
+
+public final class QuantumChipletRenderer extends BlockEntityRenderers implements BlockEntityRenderer<QuantumChipletTileEntity> {
 
     private float degrees;
     private int delay;
@@ -32,7 +31,7 @@ public class QuantumChipletRenderer extends BlockEntityRenderers implements Bloc
     }
 
     @Override
-    public void render(QuantumChipletTileEntity tileEntityIn, float partialTicks, @Nonnull PoseStack matrixStackIn,
+    public void render(@NotNull QuantumChipletTileEntity tileEntityIn, float partialTicks, @Nonnull PoseStack matrixStackIn,
                        @Nonnull MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
         NonNullList<ItemStack> items = tileEntityIn.getItems();
@@ -57,12 +56,12 @@ public class QuantumChipletRenderer extends BlockEntityRenderers implements Bloc
     }
 
 
-    private void PlaySound(QuantumChipletTileEntity tileEntity) {
+    private void PlaySound(@NotNull QuantumChipletTileEntity tileEntity) {
         tileEntity.getLevel().playLocalSound(tileEntity.getBlockPos().getX(), tileEntity.getBlockPos().getY(), tileEntity.getBlockPos().getZ(), ModSounds.QUANTUMZAP.get(), SoundSource.BLOCKS, 1, 1, true);
     }
 
 
-    public void render(ItemStack stack, float p_112308_, PoseStack matrix, MultiBufferSource buff, int lightIn, int oveerlayIn) {
+    public void render(@NotNull ItemStack stack, float p_112308_, @NotNull PoseStack matrix, @NotNull MultiBufferSource buff, int lightIn, int oveerlayIn) {
         Minecraft.getInstance().getItemRenderer().render(stack, ItemTransforms.TransformType.FIXED,false,matrix,buff,lightIn,oveerlayIn,null);
     }
 }

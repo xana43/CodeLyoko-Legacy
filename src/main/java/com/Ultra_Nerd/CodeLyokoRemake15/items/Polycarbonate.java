@@ -7,15 +7,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Polycarbonate extends Item {
+public final class Polycarbonate extends Item {
     private static int timer;
     private static ItemStack instance;
 
-    public Polycarbonate(Properties properties) {
+    public Polycarbonate(@NotNull Properties properties) {
         super(properties);
         instance = this.getDefaultInstance();
         timer = ThreadLocalRandom.current().nextInt(100, 1000);
@@ -25,9 +26,8 @@ public class Polycarbonate extends Item {
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
-        if (timer-- <= 0 && entityIn instanceof Player && instance == this.getDefaultInstance()) {
-            Player playerEntity = (Player) entityIn;
-            ItemStack stack1 = new ItemStack(ModItems.COLD_POLYCARBONATE_CONCENTRATE.get());
+        if (timer-- <= 0 && entityIn instanceof final @NotNull Player playerEntity && instance == this.getDefaultInstance()) {
+            final ItemStack stack1 = new ItemStack(ModItems.COLD_POLYCARBONATE_CONCENTRATE.get());
             stack1.setCount(stack.getCount());
             playerEntity.getInventory().setItem(itemSlot, stack1);
             timer = ThreadLocalRandom.current().nextInt(100, 1000);

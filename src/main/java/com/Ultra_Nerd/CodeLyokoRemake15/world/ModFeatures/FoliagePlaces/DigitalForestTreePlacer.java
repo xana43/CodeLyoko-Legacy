@@ -13,10 +13,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-public class DigitalForestTreePlacer extends MegaJungleFoliagePlacer {
+public final class DigitalForestTreePlacer extends MegaJungleFoliagePlacer {
 
 
-    public DigitalForestTreePlacer(IntProvider p_161454_, IntProvider p_161455_, int p_161456_) {
+    public DigitalForestTreePlacer(@NotNull IntProvider p_161454_, @NotNull IntProvider p_161455_, int p_161456_) {
         super(p_161454_, p_161455_, p_161456_);
     }
 

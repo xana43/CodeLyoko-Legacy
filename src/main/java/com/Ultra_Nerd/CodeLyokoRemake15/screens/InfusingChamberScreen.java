@@ -4,9 +4,10 @@ import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ChestMenu;
+import org.jetbrains.annotations.NotNull;
 
 public class InfusingChamberScreen extends ContainerScreen {
-    public InfusingChamberScreen(ChestMenu p_98409_, Inventory p_98410_, Component p_98411_) {
+    public InfusingChamberScreen(@NotNull ChestMenu p_98409_, @NotNull Inventory p_98410_, @NotNull Component p_98411_) {
         super(p_98409_, p_98410_, p_98411_);
     }
 /*

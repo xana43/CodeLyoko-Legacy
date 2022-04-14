@@ -7,6 +7,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
@@ -23,12 +25,12 @@ public class RecipeSerializers extends ForgeRegistryEntry<RecipeSerializer<?>> i
     }*/
 
     @Override
-    public TestRecipe fromJson(ResourceLocation p_44103_, JsonObject p_44104_) {
+    public @Nullable TestRecipe fromJson(ResourceLocation p_44103_, JsonObject p_44104_) {
         return null;
     }
 
     @Override
-    public TestRecipe fromNetwork(@Nonnull ResourceLocation recipeId, FriendlyByteBuf buffer) {
+    public TestRecipe fromNetwork(@Nonnull ResourceLocation recipeId, @NotNull FriendlyByteBuf buffer) {
         ItemStack output = buffer.readItem();
         Ingredient input = Ingredient.fromNetwork(buffer);
         return new TestRecipe(recipeId, input, output);
@@ -37,7 +39,7 @@ public class RecipeSerializers extends ForgeRegistryEntry<RecipeSerializer<?>> i
 
 
     @Override
-    public void toNetwork(@Nonnull FriendlyByteBuf buffer, TestRecipe recipe) {
+    public void toNetwork(@Nonnull FriendlyByteBuf buffer, @NotNull TestRecipe recipe) {
         Ingredient input = recipe.getIngredients().get(0);
         input.toNetwork(buffer);
         buffer.writeItemStack(recipe.getResultItem(), false);

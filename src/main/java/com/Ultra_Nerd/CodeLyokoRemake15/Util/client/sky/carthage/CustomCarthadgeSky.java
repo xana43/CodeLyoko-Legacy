@@ -12,23 +12,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ISkyRenderHandler;
+import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class CustomCarthadgeSky implements ISkyRenderHandler {
+public final record CustomCarthadgeSky() implements ISkyRenderHandler {
 
 
-    private final ResourceLocation texturelocation = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/skies/sector5/sector5sky.png");
-
-
-    public CustomCarthadgeSky() {
-
-
-
-    }
+    private static final ResourceLocation texturelocation = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/skies/sector5/sector5sky.png");
 
 
     @Override
-    public void render(int ticks, float partialTicks, PoseStack matrixStack, ClientLevel world, Minecraft mc) {
+    public void render(int ticks, float partialTicks, @NotNull PoseStack matrixStack, ClientLevel world, Minecraft mc) {
 
         RenderSystem.setShaderTexture(0,texturelocation);
         Tesselator tessellator = Tesselator.getInstance();

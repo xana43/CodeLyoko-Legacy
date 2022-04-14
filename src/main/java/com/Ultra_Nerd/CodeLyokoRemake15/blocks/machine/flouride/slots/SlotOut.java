@@ -3,13 +3,14 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks.machine.flouride.slots;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
+import org.jetbrains.annotations.NotNull;
 
 public class SlotOut extends Slot {
 
     private final Player player;
     private int rc;
 
-    public SlotOut(Player player, Inventory inventory, int index, int x, int y) {
+    public SlotOut(Player player, @NotNull Inventory inventory, int index, int x, int y) {
         super(inventory, index, x, y);
         this.player = player;
     }

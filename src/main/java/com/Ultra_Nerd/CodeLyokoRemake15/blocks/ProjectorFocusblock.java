@@ -13,15 +13,15 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
-public class ProjectorFocusblock extends Block {
-    public static BooleanProperty VALIDFOCUS = BooleanProperty.create("validfocus");
+public final class ProjectorFocusblock extends Block {
+    public static @NotNull BooleanProperty VALIDFOCUS = BooleanProperty.create("validfocus");
 
-    private final VoxelShape focus = Stream.of(
+    private static final VoxelShape focus = Stream.of(
             Block.box(1, 0, 4, 15, 16, 12),
             Block.box(2, 0, 2, 3, 16, 3),
             Block.box(2, 0, 3, 14, 16, 4),
@@ -45,9 +45,7 @@ public class ProjectorFocusblock extends Block {
             Block.box(4, 0, 1, 12, 16, 2),
             Block.box(1, 0, 3, 2, 16, 4),
             Block.box(0, 0, 4, 1, 16, 12)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public ProjectorFocusblock() {
         super(Properties.of(Material.GLASS)
@@ -65,14 +63,13 @@ public class ProjectorFocusblock extends Block {
         return focus;
     }
 
-    @Nullable
     @Override
-    public BlockState getStateForPlacement(@Nonnull BlockPlaceContext context) {
+    public @NotNull BlockState getStateForPlacement(@Nonnull BlockPlaceContext context) {
         return this.defaultBlockState().setValue(VALIDFOCUS, false);
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder.add(VALIDFOCUS));
     }
 

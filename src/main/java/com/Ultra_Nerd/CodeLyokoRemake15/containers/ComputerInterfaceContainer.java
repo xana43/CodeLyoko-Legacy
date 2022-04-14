@@ -7,10 +7,11 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class ComputerInterfaceContainer extends AbstractContainerMenu {
+public final class ComputerInterfaceContainer extends AbstractContainerMenu {
     public final ComputerInterfaceTE ComputerTE;
     //private final IWorldPosCallable canInteractWithCallable;
 
@@ -20,11 +21,11 @@ public class ComputerInterfaceContainer extends AbstractContainerMenu {
         //this.canInteractWithCallable = Provider(ComputerTE.getWorld(), ComputerTE.getPos());
     }
 
-    public ComputerInterfaceContainer(final int windowid, final Inventory inven, final FriendlyByteBuf data) {
+    public ComputerInterfaceContainer(final int windowid, final @NotNull Inventory inven, final @NotNull FriendlyByteBuf data) {
         this(windowid, inven, getIntrfaceEntity(inven, data));
     }
 
-    private static ComputerInterfaceTE getIntrfaceEntity(final Inventory inventory, final FriendlyByteBuf data) {
+    private static @NotNull ComputerInterfaceTE getIntrfaceEntity(final @NotNull Inventory inventory, final @NotNull FriendlyByteBuf data) {
         Objects.requireNonNull(inventory, "player inventory can't be null");
         Objects.requireNonNull(data, "data can't be null");
         final BlockEntity tileAtPos = inventory.player.level.getBlockEntity(data.readBlockPos());

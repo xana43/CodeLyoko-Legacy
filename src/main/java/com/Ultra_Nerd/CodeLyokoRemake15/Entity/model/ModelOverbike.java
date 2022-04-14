@@ -8,7 +8,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 
-public class ModelOverbike<T extends OverbikeEntity> extends EntityModel<T> {
+public final class ModelOverbike<T extends OverbikeEntity> extends EntityModel<T> {
     @Override
     public void setupAnim(T p_102618_, float p_102619_, float p_102620_, float p_102621_, float p_102622_, float p_102623_) {
 

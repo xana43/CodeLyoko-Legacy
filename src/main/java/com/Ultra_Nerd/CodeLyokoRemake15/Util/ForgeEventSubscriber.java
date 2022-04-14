@@ -17,14 +17,16 @@ import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 @Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ForgeEventSubscriber {
+public final class ForgeEventSubscriber {
+
 
     @SubscribeEvent
-    public static void disableShiftInDigitalOcean(final EntityMountEvent event)
+    public static void disableShiftInDigitalOcean(final @NotNull EntityMountEvent event)
     {
       if(event.getEntity() instanceof Player player)
       {
@@ -43,7 +45,7 @@ public class ForgeEventSubscriber {
     }
 
     @SubscribeEvent
-    public static void explosions(final ExplosionEvent world) {
+    public static void explosions(final @NotNull ExplosionEvent world) {
         if (world.getWorld().dimension() == ModDimensions.FOREST || world.getWorld().dimension() == ModDimensions.SECTOR5 ||
                 world.getWorld().dimension() == ModDimensions.VOLCANO || world.getWorld().dimension() == ModDimensions.DESERT ||
                 world.getWorld().dimension() == ModDimensions.ICE ||
@@ -54,7 +56,7 @@ public class ForgeEventSubscriber {
         }
     }
     @SubscribeEvent
-    public static void unbreaking(final BlockEvent.BreakEvent event)
+    public static void unbreaking(final BlockEvent.@NotNull BreakEvent event)
     {
       if(DimensionCheck.playerNotInVanillaWorld(event.getPlayer()) && !event.getPlayer().isCreative())
       {
@@ -62,7 +64,7 @@ public class ForgeEventSubscriber {
       }
     }
     @SubscribeEvent
-    public static void unbreakinglevel3(final BlockEvent.EntityPlaceEvent event)
+    public static void unbreakinglevel3(final BlockEvent.@NotNull EntityPlaceEvent event)
     {
        if(DimensionCheck.EntityNotInVanillaWorld(Objects.requireNonNull(event.getEntity())))
        {
@@ -74,7 +76,7 @@ public class ForgeEventSubscriber {
        }
     }
     @SubscribeEvent
-    public static void unbreakingLevel2(final PlayerInteractEvent.LeftClickBlock event)
+    public static void unbreakingLevel2(final PlayerInteractEvent.@NotNull LeftClickBlock event)
     {
         if(DimensionCheck.playerNotInVanillaWorld(event.getPlayer()) && !event.getPlayer().isCreative())
         {
@@ -83,7 +85,7 @@ public class ForgeEventSubscriber {
     }
 
     @SubscribeEvent
-    public static void preventBreakAnimation(final BlockEvent.BlockToolInteractEvent event)
+    public static void preventBreakAnimation(final BlockEvent.@NotNull BlockToolInteractEvent event)
     {
         if(DimensionCheck.playerNotInVanillaWorld(event.getPlayer()) && !event.getPlayer().isCreative())
         {
@@ -91,9 +93,11 @@ public class ForgeEventSubscriber {
         }
     }
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void biomeOperations(final BiomeLoadingEvent event)
+    public static void biomeOperations(final @NotNull BiomeLoadingEvent event)
     {
-        if(Objects.equals(event.getName(), ModBiome.FOREST_SECTOR.location()) && event.getName() != null) {
+        if(Objects.equals(event.getName(), ModBiome.FOREST_SECTOR.getRegistryName()) && event.getName() != null) {
+
+                CodeLyokoMain.Log.info("BiomeLoaded");
 
             event.getSpawns().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.BLOK.get(), 20, 10, 22));
 

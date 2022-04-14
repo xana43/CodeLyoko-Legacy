@@ -13,16 +13,13 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import java.util.EnumMap;
-import java.util.Map;
 
-public class ArchitectureWorkstation extends HorizontalDirectionalBlock {
+public final class ArchitectureWorkstation extends HorizontalDirectionalBlock {
 
 
     private static final BooleanProperty on = BooleanProperty.create("active");
@@ -32,14 +29,14 @@ public class ArchitectureWorkstation extends HorizontalDirectionalBlock {
     private static final VoxelShape shapeS = Block.box(4, 0, 0, 12, 16, 16);
     private static final VoxelShape shapeW = Block.box(0, 0, 4, 16, 16, 12);
 
-    public ArchitectureWorkstation(BlockBehaviour.Properties properties) {
+    public ArchitectureWorkstation(BlockBehaviour.@NotNull Properties properties) {
         super(properties);
 
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(on, false));
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(FACING).add(on);
     }
@@ -47,7 +44,7 @@ public class ArchitectureWorkstation extends HorizontalDirectionalBlock {
 
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public @NotNull BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         // TODO Auto-generated method stub
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(on, false);
     }
@@ -55,13 +52,13 @@ public class ArchitectureWorkstation extends HorizontalDirectionalBlock {
     //mod compatiability
     @Nonnull
     @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
+    public BlockState rotate(@NotNull BlockState state, @NotNull Rotation rot) {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Nonnull
     @Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+    public BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirrorIn) {
         return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 
@@ -69,7 +66,7 @@ public class ArchitectureWorkstation extends HorizontalDirectionalBlock {
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, @NotNull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+    public VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         return switch (state.getValue(FACING)) {
             case NORTH -> shapeN;
             case SOUTH -> shapeS;

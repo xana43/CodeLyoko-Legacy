@@ -37,21 +37,19 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public class ClientModEventSubscriber {
-    private static final RenderType cutoutMipped = RenderType.cutoutMipped();
-    private static final RenderType cutout = RenderType.cutout();
-    private static final RenderType transluscent = RenderType.translucent();
-    private static final RenderType transluscentMovingBlock = RenderType.translucentMovingBlock();
+public record ClientModEventSubscriber() {
+
 public static void ClientSetup()
     {
-        IEventBus ModEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+        final IEventBus ModEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        final IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         ModEventBus.addListener(ClientModEventSubscriber::onFMLClientSetupEvent);
         ModEventBus.addListener(ClientModEventSubscriber::registerParticleFactories);
         ModEventBus.addListener(ClientModEventSubscriber::registerEntityLayers);
         forgeEventBus.addListener(LyokoControls::customInput);
         ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_VEHICLES_UP);
         ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_VEHICLES_DOWN);
+        ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_CLASS_SELECT);
         ForgeModelBakery.addSpecialModel(CodeLyokoMain.CodeLyokoPrefix("entity/skid/skid"));
 
     }
@@ -59,7 +57,7 @@ public static void ClientSetup()
 
 
 
-    public static void onFMLClientSetupEvent(final FMLClientSetupEvent event) {
+    public static void onFMLClientSetupEvent(final @NotNull FMLClientSetupEvent event) {
 
 
 
@@ -80,14 +78,6 @@ registerRenderLayers();
 registerScreens();
 registerDimensionEffects();
 registerEntityRenderers();
-
-
-
-
-
-
-
-
 });
 
 
@@ -111,11 +101,15 @@ registerEntityRenderers();
 
     }
 
-    private static void registerEntityLayers(final EntityRenderersEvent.RegisterLayerDefinitions event)
+    private static void registerEntityLayers(final EntityRenderersEvent.@NotNull RegisterLayerDefinitions event)
     {
         event.registerLayerDefinition(ModelHoverboard.LAYER_LOCATION,ModelHoverboard::createLayer);
         event.registerLayerDefinition(ModelOverboard.LAYER_LOCATION,ModelOverboard::createBodyLayer);
+       // event.registerLayerDefinition(ModModelLayers.FELINE_LAYER_LOCATION_INNER,() -> LayerDefinition.create(FelineChestPlate.createBodyLayer(LayerDefinitions.INNER_ARMOR_DEFORMATION),32,32));
+        //event.registerLayerDefinition(ModModelLayers.FELINE_LAYER_LOCATION_OUTER,() -> LayerDefinition.create(FelineChestPlate.createBodyLayer(LayerDefinitions.OUTER_ARMOR_DEFORMATION),32,32));
     }
+
+
 
     private static void registerEntityRenderers()
     {
@@ -151,28 +145,18 @@ registerEntityRenderers();
 
         ItemProperties.register(ModItems.TEST_MULTIPLAYER_PHONE.get(),CodeLyokoMain.CodeLyokoPrefix("charge"),
                 (stack,world,entityin,integer) ->
-                {
-                    switch (stack.getDamageValue())
-                    {
-                        case 0:
-                            return 0.1f;
-                        case 1:
-                            return 0.2f;
-                        default:
-                            return 0;
-                    }
-                });
+                        switch (stack.getDamageValue()) {
+                            case 0 -> 0.1f;
+                            case 1 -> 0.2f;
+                            default -> 0;
+                        });
 
         ItemProperties.register(ModItems.JEREMY_LAPTOP.get(), CodeLyokoMain.CodeLyokoPrefix("state"),
-                (stack, world, entityin, integer) -> {
-                    switch (stack.getDamageValue()) {
-                        case 0:
-                            return 0.1f;
-                        case 1:
-                            return 0.2f;
-                        default:
-                            return 0;
-                    }
+                (stack, world, entityin, integer) ->
+                        switch (stack.getDamageValue()) {
+                    case 0 -> 0.1f;
+                    case 1 -> 0.2f;
+                    default -> 0;
                 });
 
         ItemProperties.register(ModItems.RAW_POLYCARBONATE.get(), CodeLyokoMain.CodeLyokoPrefix("quantity"),
@@ -187,19 +171,13 @@ registerEntityRenderers();
 
 
         ItemProperties.register(ModItems.SILICON_WAFER.get(), CodeLyokoMain.CodeLyokoPrefix("quality"),
-                (stack, world, entityin, integer) -> {
-                    switch (stack.getDamageValue()) {
-                        case 1:
-                            return 0.25f;
-                        case 2:
-                            return 0.5f;
-                        case 3:
-                            return 0.75f;
-                        case 4:
-                            return 1.0f;
-                        default:
-                            return 0.0f;
-                    }
+                (stack, world, entityin, integer) ->
+                        switch (stack.getDamageValue()) {
+                    case 1 -> 0.25f;
+                    case 2 -> 0.5f;
+                    case 3 -> 0.75f;
+                    case 4 -> 1.0f;
+                    default -> 0.0f;
                 });
     }
 
@@ -257,10 +235,17 @@ registerEntityRenderers();
         MenuScreens.register(ModContainerTypes.DATA_TRANSFER_INTERFACE_CONTAINER.get(), DataTransferInterfaceUI::new);
         MenuScreens.register(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), TowerGUI::new);
         MenuScreens.register(ModContainerTypes.COMPUTER_CONTROL_PANEL_CONTAINER.get(), ComputerControlPanelUI::new);
+
     }
+
+
 
     private static void registerRenderLayers()
     {
+        final RenderType cutoutMipped = RenderType.cutoutMipped();
+        final RenderType cutout = RenderType.cutout();
+        final RenderType transluscent = RenderType.translucent();
+        final RenderType transluscentMovingBlock = RenderType.translucentMovingBlock();
         ItemBlockRenderTypes.setRenderLayer(ModFluids.DIGITAL_SEA_BLOCK.get(),transluscent);
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.TOWER_INTERFACE.get(), cutoutMipped);
         ItemBlockRenderTypes.setRenderLayer(ModFluids.DIGITAL_LAVA_BLOCK.get(), transluscent);

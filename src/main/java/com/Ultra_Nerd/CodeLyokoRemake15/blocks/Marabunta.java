@@ -17,12 +17,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class Marabunta extends Block  {
-    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
+public final class Marabunta extends Block  {
+    private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
 
     public Marabunta() {
         super(Block.Properties.of(Material.EGG)
@@ -57,7 +58,7 @@ public class Marabunta extends Block  {
      * Called When an Entity Collided with the Block
      */
     @Override
-    public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, Entity entityIn) {
+    public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @NotNull Entity entityIn) {
 
         entityIn.hurt(new DamageSource(this.getRegistryName().toString()), RANDOM.nextInt(10));
     }
@@ -74,7 +75,7 @@ public class Marabunta extends Block  {
                     return;
                 }
                 // BlockState iblockstate = worldIn.getBlockState(blockpos.up());
-                BlockState iblockstate1 = worldIn.getBlockState(blockpos);
+              final BlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
                 if (iblockstate1.getBlock() == Blocks.COARSE_DIRT || iblockstate1.getBlock() == Blocks.DIRT_PATH || iblockstate1.getBlock() == Blocks.DIRT || iblockstate1.getBlock() == ModBlocks.DIGITAL_GRASS.get() || iblockstate1.getBlock() == ModBlocks.DIGITAL_ICE.get() || iblockstate1.getBlock() == Blocks.GRASS_BLOCK) {
                     worldIn.setBlockAndUpdate(blockpos, ModBlocks.MARABUNTA.get().defaultBlockState());

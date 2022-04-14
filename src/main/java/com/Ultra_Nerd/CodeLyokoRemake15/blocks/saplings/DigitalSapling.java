@@ -8,12 +8,13 @@ import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.IPlantable;
+import org.jetbrains.annotations.NotNull;
 
-public class DigitalSapling extends SaplingBlock {
+public final class DigitalSapling extends SaplingBlock {
 
 
 
-    public DigitalSapling(AbstractTreeGrower TreeStruct, Properties properties) {
+    public DigitalSapling(@NotNull AbstractTreeGrower TreeStruct, @NotNull Properties properties) {
         super(TreeStruct,properties);
 
 
@@ -23,7 +24,7 @@ public class DigitalSapling extends SaplingBlock {
 
 
     @Override
-    public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
+    public boolean canSustainPlant(@NotNull BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
         return state.getBlock() == ModBlocks.DIGITAL_GRASS.get();
     }
 

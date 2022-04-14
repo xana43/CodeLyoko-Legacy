@@ -26,7 +26,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.OptionalInt;
 
-public class ModFeature {
+public final class ModFeature {
 
     public static final DeferredRegister<StructureFeature<?>> LYOKOFEATURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, CodeLyokoMain.MOD_ID);
 

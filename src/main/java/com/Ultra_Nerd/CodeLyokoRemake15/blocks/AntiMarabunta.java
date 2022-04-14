@@ -2,10 +2,8 @@ package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModBlocks;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.BlockGetter;
@@ -16,12 +14,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class AntiMarabunta extends Block {
-    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
+public final class AntiMarabunta extends Block {
+    private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
 
     @Override
     public boolean isValidSpawn(BlockState state, BlockGetter level, BlockPos pos, SpawnPlacements.Type type, EntityType<?> entityType) {
@@ -43,7 +42,7 @@ public class AntiMarabunta extends Block {
     }
 
     @Override
-    public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
+    public @NotNull VoxelShape getShape(@NotNull BlockState p_60555_, @NotNull BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
         return SHAPE;
     }
 
@@ -57,8 +56,8 @@ public class AntiMarabunta extends Block {
                     return;
                 }
 
-                BlockState iblockstate = worldIn.getBlockState(blockpos.above());
-                BlockState iblockstate1 = worldIn.getBlockState(blockpos);
+                //BlockState iblockstate = worldIn.getBlockState(blockpos.above());
+                final BlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
                 if (iblockstate1.getBlock() == ModBlocks.MARABUNTA.get()) {
                     worldIn.setBlockAndUpdate(blockpos, ModBlocks.ANTI_MARABUNTA.get().defaultBlockState());
@@ -74,8 +73,8 @@ public class AntiMarabunta extends Block {
                     return;
                 }
 
-                BlockState iblockstate = worldIn.getBlockState(blockpos.above());
-                BlockState iblockstate1 = worldIn.getBlockState(blockpos);
+                //BlockState iblockstate = worldIn.getBlockState(blockpos.above());
+                final BlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
                 if (iblockstate1.getBlock() == ModBlocks.ANTI_MARABUNTA.get()) {
                     worldIn.setBlockAndUpdate(blockpos, Blocks.DIRT.defaultBlockState());

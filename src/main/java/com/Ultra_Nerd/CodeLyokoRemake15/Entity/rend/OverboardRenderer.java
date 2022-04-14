@@ -13,17 +13,16 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-@OnlyIn(Dist.CLIENT)
-public class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer<T> {
 
-    private final EntityModel<T> OverBoardModel;
+public final class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer<T> {
 
-    public OverboardRenderer(EntityRendererProvider.Context renderManager) {
+    private final @NotNull EntityModel<T> OverBoardModel;
+
+    public OverboardRenderer(EntityRendererProvider.@NotNull Context renderManager) {
         super(renderManager);
         this.shadowRadius = 1f;
         this.OverBoardModel = new ModelOverboard<>(renderManager.bakeLayer(ModelOverboard.LAYER_LOCATION));
@@ -38,7 +37,7 @@ public class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer
         matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(360 + entityYaw));
         assert Minecraft.getInstance().player != null;
         this.OverBoardModel.setupAnim(entityIn, 0, 0, 0, 0, 0);
-        VertexConsumer vertexBuilder = bufferIn.getBuffer(this.OverBoardModel.renderType(this.getTextureLocation(entityIn)));
+        final VertexConsumer vertexBuilder = bufferIn.getBuffer(this.OverBoardModel.renderType(this.getTextureLocation(entityIn)));
         this.OverBoardModel.renderToBuffer(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         matrixStackIn.popPose();
     }

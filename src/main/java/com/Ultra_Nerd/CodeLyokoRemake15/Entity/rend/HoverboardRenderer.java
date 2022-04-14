@@ -11,16 +11,15 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-@OnlyIn(Dist.CLIENT)
-public class HoverboardRenderer<T extends HoverboardEntity> extends EntityRenderer<T> {
 
-    private final ModelHoverboard <T> BoardModel;
-    public HoverboardRenderer(EntityRendererProvider.Context manager) {
+public final class HoverboardRenderer<T extends HoverboardEntity> extends EntityRenderer<T> {
+
+    private final @NotNull ModelHoverboard <T> BoardModel;
+    public HoverboardRenderer(EntityRendererProvider.@NotNull Context manager) {
         super(manager);
         this.BoardModel = new ModelHoverboard<>(manager.bakeLayer(ModelHoverboard.LAYER_LOCATION));
     }
@@ -33,7 +32,7 @@ public class HoverboardRenderer<T extends HoverboardEntity> extends EntityRender
         matrixStackIn.translate(0, -1.5f, 0);
         matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(360 + entityYaw));
         this.BoardModel.setupAnim(entityIn, 0, 0, 0, 0, 0);
-        VertexConsumer vertexBuilder = bufferIn.getBuffer(this.BoardModel.renderType(this.getTextureLocation(entityIn)));
+        final VertexConsumer vertexBuilder = bufferIn.getBuffer(this.BoardModel.renderType(this.getTextureLocation(entityIn)));
         this.BoardModel.renderToBuffer(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         matrixStackIn.popPose();
     }

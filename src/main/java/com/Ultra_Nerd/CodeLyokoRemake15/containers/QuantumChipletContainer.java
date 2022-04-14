@@ -9,6 +9,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -18,7 +19,7 @@ public class QuantumChipletContainer extends AbstractContainerMenu  {
     public final QuantumChipletTileEntity QuantumTE;
     //private final IWorldPosCallable callable;
 
-    public QuantumChipletContainer(final int windowID, final Inventory PI, final QuantumChipletTileEntity TEIN) {
+    public QuantumChipletContainer(final int windowID, final @NotNull Inventory PI, final QuantumChipletTileEntity TEIN) {
         super(ModContainerTypes.QUANTUM_CHIPLET_CONTAINER.get(), windowID);
         this.QuantumTE = TEIN;
         //this.callable = IWorldPosCallable.of(TEIN.getWorld(), TEIN.getPos());
@@ -41,12 +42,12 @@ public class QuantumChipletContainer extends AbstractContainerMenu  {
     }
 
 
-    public QuantumChipletContainer(final int windowID, final Inventory PI, final FriendlyByteBuf dat) {
+    public QuantumChipletContainer(final int windowID, final @NotNull Inventory PI, final @NotNull FriendlyByteBuf dat) {
         this(windowID, PI, getQuantumTE(PI, dat));
     }
 
 
-    private static QuantumChipletTileEntity getQuantumTE(final Inventory PINV, final FriendlyByteBuf dat) {
+    private static @NotNull QuantumChipletTileEntity getQuantumTE(final @NotNull Inventory PINV, final @NotNull FriendlyByteBuf dat) {
         Objects.requireNonNull(PINV, "Player's inventory can't be null");
         Objects.requireNonNull(dat, "data can't be null");
         final BlockEntity TileAtLoc = PINV.player.level.getBlockEntity(dat.readBlockPos());

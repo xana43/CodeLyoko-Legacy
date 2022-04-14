@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 public class RouterTE extends BlockEntity implements BlockEntityTicker<RouterTE> {
-    public RouterTE(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
+    public RouterTE(@NotNull BlockEntityType<?> tileEntityTypeIn, @NotNull BlockPos pos, @NotNull BlockState state) {
         super(tileEntityTypeIn,pos,state);
     }
 

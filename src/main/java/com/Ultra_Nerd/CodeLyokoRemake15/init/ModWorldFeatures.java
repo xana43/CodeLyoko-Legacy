@@ -10,7 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 //@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = CodeLyokoMain.MOD_ID)
-public class ModWorldFeatures {
+public final class ModWorldFeatures {
 
    public static final DeferredRegister<StructureFeature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, CodeLyokoMain.MOD_ID);
    public static final ResourceLocation RL_LYOKO_STRUCTURE_SET = CodeLyokoMain.CodeLyokoPrefix("tower");

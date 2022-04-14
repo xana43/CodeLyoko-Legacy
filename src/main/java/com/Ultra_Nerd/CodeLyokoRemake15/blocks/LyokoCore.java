@@ -6,9 +6,10 @@ import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
-public class LyokoCore extends Block {
-    public LyokoCore(Properties properties) {
+public final class LyokoCore extends Block {
+    public LyokoCore(@NotNull Properties properties) {
         super(properties);
     }
 
@@ -22,6 +23,6 @@ public class LyokoCore extends Block {
 
     @Override
     public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-        return 100;
+        return 200;
     }
 }

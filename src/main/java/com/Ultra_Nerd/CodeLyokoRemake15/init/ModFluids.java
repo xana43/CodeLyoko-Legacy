@@ -15,7 +15,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModFluids {
+public final class ModFluids {
 
 
     //for fluids
@@ -40,16 +40,15 @@ public class ModFluids {
     public static final RegistryObject<FlowingFluid> DIGITAL_LAVA_FLOWING = LIQUIDS.register("digital_lava_flowing",() -> new ForgeFlowingFluid.Flowing(ModFluids.DIGITAL_LAVA_PROPERTIES));
     //fluid properties
     public static final ForgeFlowingFluid.Properties DIGITAL_PROPERTIES = new ForgeFlowingFluid.Properties(DIGITAL_OCEAN, FLOWING_DIGITAL_OCEAN,
-            FluidAttributes.builder(DIGITAL_OCEAN_RL, FLOWING_DIGITAL_OCEAN_RL).density(1)
-                    .temperature(10).luminosity(10).overlay(DIGITAL_OCEAN_RL)).block(() -> ModFluids.DIGITAL_SEA_BLOCK.get());
+            FluidAttributes.builder(DIGITAL_OCEAN_RL, FLOWING_DIGITAL_OCEAN_RL).temperature(291).luminosity(10).overlay(DIGITAL_OCEAN_RL)).block(() -> ModFluids.DIGITAL_SEA_BLOCK.get());
     public static final ForgeFlowingFluid.Properties HELIUM_PROPERTIES = new ForgeFlowingFluid.Properties(STILL_LIQUID_HELIUM, FLOWING_LIQUID_HELIUM,
             FluidAttributes.builder(LIQUID_HELIUM_STILL_RL, LIQUID_HELIUM_FLOWING_RL).overlay(LIQUID_HELIUM_STILL_RL).density(2).temperature(-100).viscosity(0).luminosity(0)).block(
             ()->ModFluids.LIQUID_HELIUM.get())
             .bucket(() -> ModItems.LIQUID_HELIUM_BUCKET.get()).levelDecreasePerBlock(2).slopeFindDistance(2);
     public static final ForgeFlowingFluid.Properties URANIUM_PROPERTIES = new ForgeFlowingFluid.Properties(STILL_URANIUM, FLOWING_URANIUM,
-            FluidAttributes.builder(URANIUM_STILL_RL, URANIUM_FLOW_RL).density(3).viscosity(0).temperature(921378).luminosity(40).overlay(URANIUM_STILL_RL)).block(() -> ModFluids.URANIUM.get());
+            FluidAttributes.builder(URANIUM_STILL_RL, URANIUM_FLOW_RL).density(3).viscosity(0).temperature(Integer.MAX_VALUE).luminosity(Integer.MAX_VALUE).overlay(URANIUM_STILL_RL)).block(() -> ModFluids.URANIUM.get());
     public static final ForgeFlowingFluid.Properties DIGITAL_LAVA_PROPERTIES = new ForgeFlowingFluid.Properties(DIGITAL_LAVA_STILL,DIGITAL_LAVA_FLOWING,
-            FluidAttributes.builder(DIGITAL_LAVA_STILL_RL,DIGITAL_LAVA_FLOWING_RL).density(10).viscosity(20).temperature(Integer.MAX_VALUE).luminosity(90).overlay(DIGITAL_LAVA_STILL_RL))
+            FluidAttributes.builder(DIGITAL_LAVA_STILL_RL,DIGITAL_LAVA_FLOWING_RL).density(3100).viscosity(20).temperature(Integer.MAX_VALUE).luminosity(90).overlay(DIGITAL_LAVA_STILL_RL))
             .block(() -> ModFluids.DIGITAL_LAVA_BLOCK.get());
     //fluid blocks
     public static final RegistryObject<LiquidBlock> DIGITAL_SEA_BLOCK = ModBlocks.BLOCKS.register("digital_ocean", () -> new DigitalSeaBlock(DIGITAL_OCEAN));

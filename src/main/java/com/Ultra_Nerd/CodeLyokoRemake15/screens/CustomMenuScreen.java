@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 
-public class CustomMenuScreen extends TitleScreen {
+public final class CustomMenuScreen extends TitleScreen {
 
 
     public static final CubeMap PANORAMA_RESOURCES = new CubeMap(new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/skies/mainmenupanorama/sector5sky.png"));

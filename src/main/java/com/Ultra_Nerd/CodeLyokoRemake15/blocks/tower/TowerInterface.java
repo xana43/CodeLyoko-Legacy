@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks.tower;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
+import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
 import net.minecraft.core.BlockPos;
@@ -36,7 +37,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-public class TowerInterface extends BaseEntityBlock {
+public final class TowerInterface extends BaseEntityBlock {
 
     public static final DirectionProperty DIRINTERFACE = BlockStateProperties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE_N = Block.box(1, 1, 9, 15, 15, 9.1);
@@ -60,11 +61,19 @@ public class TowerInterface extends BaseEntityBlock {
     }
 
 
-
-
+    @Override
+    public VoxelShape getCollisionShape(final BlockState state, final BlockGetter pLevel, final BlockPos pPos, final CollisionContext pContext) {
+        return switch (state.getValue(DIRINTERFACE)) {
+            case NORTH -> SHAPE_N;
+            case SOUTH -> SHAPE_S;
+            case EAST -> SHAPE_E;
+            case WEST -> SHAPE_W;
+            default -> SHAPE_N;
+        };
+    }
 
     @Override
-    public @NotNull VoxelShape getVisualShape(BlockState state, @NotNull BlockGetter p_60480_, @NotNull BlockPos p_60481_, @NotNull CollisionContext p_60482_) {
+    public @NotNull VoxelShape getVisualShape(@NotNull BlockState state, @NotNull BlockGetter p_60480_, @NotNull BlockPos p_60481_, @NotNull CollisionContext p_60482_) {
         return switch (state.getValue(DIRINTERFACE)) {
             case NORTH -> SHAPE_N;
             case SOUTH -> SHAPE_S;
@@ -85,7 +94,7 @@ public class TowerInterface extends BaseEntityBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
 
         builder.add(DIRINTERFACE);
     }
@@ -97,7 +106,7 @@ public class TowerInterface extends BaseEntityBlock {
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+    public VoxelShape getShape(@NotNull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         return switch (state.getValue(DIRINTERFACE)) {
             case NORTH -> SHAPE_N;
             case SOUTH -> SHAPE_S;
@@ -108,7 +117,7 @@ public class TowerInterface extends BaseEntityBlock {
     }
 
     @Override
-    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
+    public @NotNull BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         // TODO Auto-generated method stub
         return Objects.requireNonNull(super.getStateForPlacement(context)).setValue(DIRINTERFACE, context.getHorizontalDirection().getOpposite());
     }
@@ -118,13 +127,13 @@ public class TowerInterface extends BaseEntityBlock {
     //mod compatiability
     @Nonnull
     @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
+    public BlockState rotate(@NotNull BlockState state, @NotNull Rotation rot) {
         return state.setValue(DIRINTERFACE, rot.rotate(state.getValue(DIRINTERFACE)));
     }
 
     @Nonnull
     @Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+    public BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirrorIn) {
         return state.rotate(mirrorIn.getRotation(state.getValue(DIRINTERFACE)));
     }
 
@@ -144,10 +153,11 @@ public class TowerInterface extends BaseEntityBlock {
 
     @Nonnull
     @Override
-    public InteractionResult use(@Nonnull BlockState state, Level worldIn, @Nonnull BlockPos pos, @Nonnull Player player,
-                                 @Nonnull InteractionHand handIn, @Nonnull BlockHitResult result) {
-        if (!worldIn.isClientSide) {
-            BlockEntity Tower = worldIn.getBlockEntity(pos);
+    public InteractionResult use(@Nonnull BlockState state, @NotNull Level worldIn, @Nonnull BlockPos pos, @Nonnull Player player,
+                                 @Nonnull InteractionHand handIn, @Nonnull BlockHitResult result)
+    {
+        if(!worldIn.isClientSide) {
+            final BlockEntity Tower = worldIn.getBlockEntity(pos);
             if (Tower instanceof TowerInterfaceTileEntity) {
                 MenuProvider thisMenuProvider = new MenuProvider() {
                     @Override
@@ -157,18 +167,16 @@ public class TowerInterface extends BaseEntityBlock {
 
                     @Override
                     public @NotNull AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory, @NotNull Player player1) {
-                        return new TowerInterfaceContainer(id,pos,inventory,player1);
+                        return new TowerInterfaceContainer(id, pos, inventory, player1);
                     }
                 };
                 NetworkHooks.openGui((ServerPlayer) player, thisMenuProvider, Tower.getBlockPos());
 
-            }
-            else
-            {
+            } else {
                 throw new IllegalStateException("out provider isn't here");
             }
-
         }
+        player.playSound(ModSounds.OPENTOWERGUISOUND.get(), 1,1);
         return InteractionResult.SUCCESS;
     }
 

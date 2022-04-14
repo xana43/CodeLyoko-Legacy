@@ -7,33 +7,34 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import org.jetbrains.annotations.NotNull;
 
-public class TransparentBlock extends Block {
+public final class TransparentBlock extends Block {
 
     public TransparentBlock() {
-        super(Block.Properties.of(new Material.Builder(MaterialColor.NONE).nonSolid().build())
-                .strength(-1, -1)
-                .sound(SoundType.METAL)
+        super(Block.Properties.copy(Blocks.BARRIER)
 
 
         );
 
     }
 
-    
+    @Override
+    public @NotNull RenderShape getRenderShape(@NotNull BlockState pState) {
+        return RenderShape.INVISIBLE;
+    }
 
     @Override
-    public boolean canBeReplaced(BlockState p_60470_, BlockPlaceContext p_60471_) {
+    public boolean canBeReplaced(@NotNull BlockState p_60470_, @NotNull BlockPlaceContext p_60471_) {
         return false;
     }
 
     @Override
-    public boolean canBeReplaced(BlockState p_60535_, Fluid p_60536_) {
+    public boolean canBeReplaced(@NotNull BlockState p_60535_, @NotNull Fluid p_60536_) {
         return false;
     }
 
@@ -43,7 +44,7 @@ public class TransparentBlock extends Block {
     }
 
     @Override
-    public void fallOn(Level p_152426_, BlockState p_152427_, BlockPos p_152428_, Entity p_152429_, float p_152430_) {
+    public void fallOn(@NotNull Level p_152426_, @NotNull BlockState p_152427_, @NotNull BlockPos p_152428_, @NotNull Entity p_152429_, float p_152430_) {
         super.fallOn(p_152426_, p_152427_, p_152428_, p_152429_, p_152430_);
         p_152429_.fallDistance = 0;
     }

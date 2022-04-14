@@ -8,6 +8,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
@@ -30,17 +32,17 @@ public class TestRecipe implements ICustomRecipes {
     //}
 
     @Override
-    public boolean matches(RecipeWrapper inv, @Nonnull Level worldIn) {
+    public boolean matches(@NotNull RecipeWrapper inv, @Nonnull Level worldIn) {
         return this.input.test(inv.getItem(0));
     }
 
     @Override
-    public ItemStack assemble(RecipeWrapper p_44001_) {
+    public @Nullable ItemStack assemble(RecipeWrapper p_44001_) {
         return null;
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public @Nullable ItemStack getResultItem() {
         return null;
     }
 

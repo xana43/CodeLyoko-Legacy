@@ -5,25 +5,27 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public record CustomControlServerHandler(byte upPressed, byte downPressed/*,byte upHeld,byte downHeld*/) {
+public final record CustomControlServerHandler(byte upPressed, byte downPressed) {
 
-    public static void syncToServer(int upPressed, int downPressed/*,int upHeld,int downHeld*/)
+    public static void syncToServer(final int upPressed, final int downPressed)
     {
-        PacketHandler.INSTANCE.send(PacketDistributor.SERVER.with(()->null),new CustomControlServerHandler((byte)upPressed,(byte) downPressed/*,(byte) upHeld,(byte) downHeld*/));
+        PacketHandler.INSTANCE.send(PacketDistributor.SERVER.with(()->null),new CustomControlServerHandler((byte)upPressed,(byte) downPressed));
     }
 
-    public static CustomControlServerHandler make(final FriendlyByteBuf byteBuf)
+    public static @NotNull CustomControlServerHandler make(final @NotNull FriendlyByteBuf byteBuf)
     {
-        return new CustomControlServerHandler(byteBuf.readByte(), byteBuf.readByte()/*,byteBuf.readByte(),byteBuf.readByte()*/);
+        return new CustomControlServerHandler(byteBuf.readByte(), byteBuf.readByte());
     }
 
-    public static void encapsulate(final CustomControlServerHandler pkt, final FriendlyByteBuf byteBuf)
+    public static void encapsulate(final @NotNull CustomControlServerHandler pkt, final @NotNull FriendlyByteBuf byteBuf)
     {
         byteBuf.writeByte(pkt.upPressed);
         byteBuf.writeByte(pkt.downPressed);
+
         /*
         byteBuf.writeByte(pkt.upHeld);
         byteBuf.writeByte(pkt.downHeld);
@@ -31,12 +33,12 @@ public record CustomControlServerHandler(byte upPressed, byte downPressed/*,byte
          */
     }
 
-    public static class Handler{
-        public static void handle(final CustomControlServerHandler pkt, final Supplier<NetworkEvent.Context> netContext)
+    public static final class Handler{
+        public static void handle(final @NotNull CustomControlServerHandler pkt, final @NotNull Supplier<NetworkEvent.Context> netContext)
         {
             netContext.get().enqueueWork(() -> {
 
-                ServerPlayer serverPlayer = netContext.get().getSender();
+                final ServerPlayer serverPlayer = netContext.get().getSender();
                 if(serverPlayer == null)
                 {
                     return;
@@ -64,6 +66,7 @@ public record CustomControlServerHandler(byte upPressed, byte downPressed/*,byte
 
                     }
                 }
+
 
 
             });

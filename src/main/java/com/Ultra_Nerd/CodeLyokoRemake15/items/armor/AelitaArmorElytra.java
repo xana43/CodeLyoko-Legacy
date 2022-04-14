@@ -11,12 +11,13 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
 
-public class AelitaArmorElytra extends ArmorItem {
-    public AelitaArmorElytra(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
+public final class AelitaArmorElytra extends ArmorItem {
+    public AelitaArmorElytra(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Properties builder) {
         super(materialIn, slot, builder);
     }
 
@@ -67,7 +68,7 @@ public class AelitaArmorElytra extends ArmorItem {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, Level world, Player player) {
+    public void onArmorTick(ItemStack stack, Level world, @NotNull Player player) {
         if (!DimensionCheck.playerNotInVanillaWorld(player)) {
 
 

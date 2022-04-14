@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class TowerStructure extends StructureFeature<JigsawConfiguration>{
+public final class TowerStructure extends StructureFeature<JigsawConfiguration>{
    public TowerStructure()
    {
        super(JigsawConfiguration.CODEC, TowerStructure::createPiecesGenerator,PostPlacementProcessor.NONE);
@@ -28,12 +28,12 @@ public class TowerStructure extends StructureFeature<JigsawConfiguration>{
         return GenerationStep.Decoration.TOP_LAYER_MODIFICATION;
     }
 
-    private static boolean isFeatureChunk(PieceGeneratorSupplier.Context<JigsawConfiguration> context)
+    private static boolean isFeatureChunk(PieceGeneratorSupplier.@NotNull Context<JigsawConfiguration> context)
     {
-        ChunkPos pos = context.chunkPos();
+        final ChunkPos pos = context.chunkPos();
         return  !context.chunkGenerator().hasFeatureChunkInRange(BuiltinStructureSets.JUNGLE_TEMPLES, context.seed(), pos.x, pos.z, 10);
     }
-    private static @NotNull Optional<PieceGenerator<JigsawConfiguration>> createPiecesGenerator(PieceGeneratorSupplier.Context<JigsawConfiguration> context)
+    private static @NotNull Optional<PieceGenerator<JigsawConfiguration>> createPiecesGenerator(PieceGeneratorSupplier.@NotNull Context<JigsawConfiguration> context)
     {
         if(!TowerStructure.isFeatureChunk(context))
         {
@@ -41,7 +41,7 @@ public class TowerStructure extends StructureFeature<JigsawConfiguration>{
         }
        BlockPos blockPos = context.chunkPos().getMiddleBlockPosition(0);
         int toplandY = context.chunkGenerator().getFirstFreeHeight(blockPos.getX(), blockPos.getZ(), Heightmap.Types.WORLD_SURFACE_WG,context.heightAccessor());
-        blockPos = blockPos.above(toplandY + 1);
+        blockPos = blockPos.above(toplandY >> 1);
         Optional<PieceGenerator<JigsawConfiguration>> pieceGen =
                 JigsawPlacement.addPieces(
                         context,

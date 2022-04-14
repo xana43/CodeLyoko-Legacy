@@ -37,7 +37,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-public class CarthageGenerator extends ChunkGenerator {
+public final class CarthageGenerator extends ChunkGenerator {
 
 private static final Codec<CustomGenSettings> SETTINGS_CODEC = RecordCodecBuilder.create(
         settingsInstance -> settingsInstance.group(
@@ -55,7 +55,7 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
 );
 
     private final CustomGenSettings settings;
-    public CarthageGenerator(Registry<StructureSet> structureSets, Registry<Biome> registry, CustomGenSettings settings) {
+    public CarthageGenerator(@NotNull Registry<StructureSet> structureSets, Registry<Biome> registry, CustomGenSettings settings) {
         super(structureSets,getSet(structureSets), new CarthageBiomeProvider(registry));
         this.settings = settings;
 
@@ -63,7 +63,7 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
 
 
 
-    private static Optional<HolderSet<StructureSet>> getSet(Registry<StructureSet> thisStructureRegistry)
+    private static @NotNull Optional<HolderSet<StructureSet>> getSet(@NotNull Registry<StructureSet> thisStructureRegistry)
     {
         HolderSet.Named<StructureSet> structureSetNamed = thisStructureRegistry.getOrCreateTag(TagKey.create(Registry.STRUCTURE_SET_REGISTRY,
                 ModWorldFeatures.RL_LYOKO_STRUCTURE_SET));
@@ -76,7 +76,7 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
         return ((CarthageBiomeProvider)biomeSource).getBiomeRegistry();
     }
 
-    public Registry<StructureSet> getStructRegistry()
+    public @NotNull Registry<StructureSet> getStructRegistry()
     {
         return structureSets;
     }
@@ -108,7 +108,7 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
     }
 
     @Override
-    public void buildSurface(@Nonnull WorldGenRegion p_225551_1_, StructureFeatureManager featureManager, ChunkAccess chunk) {
+    public void buildSurface(@Nonnull WorldGenRegion p_225551_1_, StructureFeatureManager featureManager, @NotNull ChunkAccess chunk) {
         BlockState bedrock = ModFluids.DIGITAL_SEA_BLOCK.get().defaultBlockState();
         BlockState stone = ModBlocks.SECTOR5_STEEL.get().defaultBlockState();
         BlockState white = ModBlocks.TOWER_WHITE.get().defaultBlockState();
@@ -128,8 +128,8 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
         }
         for (x = 0; x < 16; x++) {
             for (z = 0; z < 16; z++) {
-                int realX = chunkpos.x * 16 + x;
-                int realZ = chunkpos.z * 16 + z;
+                int realX = (chunkpos.x << 4) + x;
+                int realZ = (chunkpos.z << 4) + z;
                 int height = (int) (Math.sqrt(Math.pow(128, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
                 int innerHeight = (int) (Math.sqrt(Math.pow(126, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
                 createSphere(chunk, stone, pos, x, z, height, innerHeight);
@@ -206,7 +206,7 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
         return 0;
     }
 
-    private void createSphere(ChunkAccess chunk, BlockState stone, BlockPos.MutableBlockPos pos, int x, int z, int height, int innerHeight) {
+    private void createSphere(@NotNull ChunkAccess chunk, @NotNull BlockState stone, BlockPos.@NotNull MutableBlockPos pos, int x, int z, int height, int innerHeight) {
         for (int h = 0; h < height; h++) {
             chunk.setBlockState(pos.set(x, h + 128, z), stone, false);
             chunk.setBlockState(pos.set(x, 127 - h, z), stone, false);

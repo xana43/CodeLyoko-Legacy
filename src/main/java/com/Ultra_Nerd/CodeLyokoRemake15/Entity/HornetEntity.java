@@ -5,11 +5,14 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.monster.Phantom;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -20,14 +23,13 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nonnull;
 
-public class HornetEntity extends Phantom implements IAnimatable, RangedAttackMob {
+public final class HornetEntity extends Phantom implements IAnimatable, RangedAttackMob {
 
     private final AnimationFactory manager = new AnimationFactory(this);
-    private final AnimationController controller2 = new AnimationController(this, "attackcontroller", 20, this::animationPred);
-    private final AnimationController controller = new AnimationController(this, "movecontroller", 20, this::animationPred);
-    private RangedAttackGoal rangedAttackGoal;
+    private final AnimationController<?> controller2 = new AnimationController<>(this, "attackcontroller", 20, this::animationPred);
+    private final AnimationController<?> controller = new AnimationController<>(this, "movecontroller", 20, this::animationPred);
 
-    public HornetEntity(EntityType<HornetEntity> hornetEntityEntityType, Level world) {
+    public HornetEntity(@NotNull EntityType<HornetEntity> hornetEntityEntityType, @NotNull Level world) {
         super(hornetEntityEntityType, world);
 
     }
@@ -52,8 +54,8 @@ public class HornetEntity extends Phantom implements IAnimatable, RangedAttackMo
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.rangedAttackGoal = new RangedAttackGoal(this, 1, 1, 1);
-        this.goalSelector.addGoal(4, rangedAttackGoal);
+        final RangedAttackGoal rangedAttackGoal = new RangedAttackGoal(this, 1, 1, 10);
+        this.goalSelector.addGoal(2, rangedAttackGoal);
     }
 
 
@@ -90,19 +92,27 @@ public class HornetEntity extends Phantom implements IAnimatable, RangedAttackMo
         this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
     }
 */
-
+    public static AttributeSupplier.@NotNull Builder registerAttributes()
+    {
+        return Phantom.createMobAttributes().add(Attributes.KNOCKBACK_RESISTANCE,1D)
+                .add(Attributes.MAX_HEALTH,10D)
+                .add(Attributes.MOVEMENT_SPEED,2D)
+                .add(Attributes.ATTACK_DAMAGE,10D)
+                .add(Attributes.ARMOR, 10D)
+                .add(Attributes.FOLLOW_RANGE,20D);
+    }
     @Override
-    public void registerControllers(AnimationData data) {
+    public void registerControllers(@NotNull AnimationData data) {
         data.addAnimationController(controller);
         data.addAnimationController(controller2);
     }
 
     @Override
-    public AnimationFactory getFactory() {
+    public @NotNull AnimationFactory getFactory() {
         return manager;
     }
 
-    private <E extends HornetEntity> PlayState animationPred(AnimationEvent<E> event) {
+    private <E extends HornetEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
         if (event.isMoving()) {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly", true));
 
@@ -119,15 +129,15 @@ public class HornetEntity extends Phantom implements IAnimatable, RangedAttackMo
 
 
     @Override
-    public void performRangedAttack(LivingEntity target, float distanceFactor) {
+    public void performRangedAttack(@NotNull LivingEntity target, float distanceFactor) {
 
         EntityLaser laser = new EntityLaser(this.level, 1.0D, 1.0D, 1.0D);
         double d0 = target.getX() - this.getX();
         double d1 = target.getY(0.3333333333333333D) - laser.getY();
         double d2 = target.getZ() - this.getZ();
         double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        laser.shoot(d0, d1 + d3 * (double) 0.2F, d2, 1.6F, (float) (14 - this.level.getDifficulty().getId() * 4));
-        this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        laser.shoot(d0, d1 + d3 * (double) 0.2F, d2, 1.6F, (float) (14 - this.level.getDifficulty().getId() << 2));
+        this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
         this.level.addFreshEntity(laser);
     }
 }

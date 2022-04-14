@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -30,7 +31,7 @@ public class TowerInterfaceTileEntity extends BlockEntity implements MenuProvide
     @OnlyIn(Dist.CLIENT)
     protected int PlayersPresent;
 
-    public TowerInterfaceTileEntity(BlockPos pos, BlockState state) {
+    public TowerInterfaceTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         super(ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get(), pos,state);
     }
 
@@ -40,7 +41,7 @@ public class TowerInterfaceTileEntity extends BlockEntity implements MenuProvide
 
 
     @Override
-    public AABB getRenderBoundingBox() {
+    public @NotNull AABB getRenderBoundingBox() {
         // This, combined with isGlobalRenderer in the TileEntityRenderer makes it so that the
         // render does not disappear if the player can't see the block
         // This is useful for rendering larger models or dynamically sized models
@@ -49,14 +50,14 @@ public class TowerInterfaceTileEntity extends BlockEntity implements MenuProvide
 
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        CompoundTag nbtTag = new CompoundTag();
+        ///CompoundTag nbtTag = new CompoundTag();
         //Write your data into the nbtTag
         return ClientboundBlockEntityDataPacket.create(Objects.requireNonNull(Objects.requireNonNull(this.getLevel()).getBlockEntity(worldPosition)));
     }
 
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+    public void onDataPacket(Connection net, @NotNull ClientboundBlockEntityDataPacket pkt) {
         super.onDataPacket(net, pkt);
         CompoundTag tag = pkt.getTag();
     }

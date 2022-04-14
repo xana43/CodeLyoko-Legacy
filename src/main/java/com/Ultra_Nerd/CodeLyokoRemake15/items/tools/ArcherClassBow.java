@@ -21,7 +21,7 @@ import java.util.function.Predicate;
 
 public class ArcherClassBow extends BowItem {
 
-    public ArcherClassBow(Properties builder) {
+    public ArcherClassBow(@NotNull Properties builder) {
         super(builder);
     }
 
@@ -32,7 +32,7 @@ public class ArcherClassBow extends BowItem {
 
     public static float getArrowVelocity(int charge) {
         float f = (float) charge / 5.0F;
-        f = (f * f + f * 2.0F) / 3.0F;
+        f = (float) ((StrictMath.pow(f,2) + f * 2) / 3.0F);
         if (f > 1.0F) {
             f = 1.0F;
         }
@@ -89,7 +89,7 @@ public class ArcherClassBow extends BowItem {
 
     @Nonnull
     @Override
-    public InteractionResultHolder<ItemStack> use(@Nonnull Level worldIn, Player playerIn, @Nonnull InteractionHand handIn) {
+    public InteractionResultHolder<ItemStack> use(@Nonnull Level worldIn, @NotNull Player playerIn, @Nonnull InteractionHand handIn) {
         ItemStack heldItem = playerIn.getItemInHand(handIn);
         if (playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() != ModItems.JEREMY_CHESTPLATE.get() &&
                 playerIn.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() != ModItems.JEREMY_LEGGINGS.get() &&

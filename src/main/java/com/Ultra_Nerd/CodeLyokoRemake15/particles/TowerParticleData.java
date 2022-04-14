@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import java.util.Locale;
 
-public class TowerParticleData implements ParticleOptions {
+public final class TowerParticleData implements ParticleOptions {
     private final float red, green, blue, alpha;
     public static final TowerParticleData TOWER_PARTICLE_2 = new TowerParticleData(.125f, .25f, 1.f, 1.f);
 
@@ -59,7 +59,7 @@ public class TowerParticleData implements ParticleOptions {
 
     public static final ParticleOptions.Deserializer<TowerParticleData> DESERIALIZE = new ParticleOptions.Deserializer<>() {
         @Override
-        public @NotNull TowerParticleData fromCommand(@Nonnull ParticleType<TowerParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+        public @NotNull TowerParticleData fromCommand(@Nonnull ParticleType<TowerParticleData> particleTypeIn, @NotNull StringReader reader) throws CommandSyntaxException {
             reader.expect(' ');
             float red = (float) reader.readDouble();
             reader.expect(' ');
@@ -72,7 +72,7 @@ public class TowerParticleData implements ParticleOptions {
         }
 
         @Override
-        public @NotNull TowerParticleData fromNetwork(@Nonnull ParticleType<TowerParticleData> particleTypeIn, FriendlyByteBuf buffer) {
+        public @NotNull TowerParticleData fromNetwork(@Nonnull ParticleType<TowerParticleData> particleTypeIn, @NotNull FriendlyByteBuf buffer) {
             return new TowerParticleData(buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
         }
     };

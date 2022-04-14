@@ -18,6 +18,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -26,7 +28,7 @@ import java.util.Objects;
 public class ContainerElectricInfusing extends AbstractContainerMenu implements Container {
 
 
-    public final ElectricInfusingChamberTileEntity tileentity;
+    public final @NotNull ElectricInfusingChamberTileEntity tileentity;
     private final List<ContainerListener> listeners = Lists.newArrayList();
     //private ScriptObjectMirror listeners;
     private int cookTime, energy;
@@ -38,7 +40,7 @@ public class ContainerElectricInfusing extends AbstractContainerMenu implements 
      * @param playerInventory the playerInv of the player using this container
      * @param data            the data sent when this container is used.
      */
-    public ContainerElectricInfusing(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
+    public ContainerElectricInfusing(final int windowId, final @NotNull Inventory playerInventory, final @NotNull FriendlyByteBuf data) {
         this(windowId, playerInventory, getTileEntity(playerInventory, data));
     }
 
@@ -49,7 +51,7 @@ public class ContainerElectricInfusing extends AbstractContainerMenu implements 
      * @param playerInventory the playerInv of the player using this container
      * @param tileEntity      the tileEntity of this container
      */
-    public ContainerElectricInfusing(final int windowId, final Inventory playerInventory, final ElectricInfusingChamberTileEntity tileEntity) {
+    public ContainerElectricInfusing(final int windowId, final @NotNull Inventory playerInventory, final @NotNull ElectricInfusingChamberTileEntity tileEntity) {
         super(ModContainerTypes.CONTAINER_ELECTRIC_INFUSING.get(), windowId);
         this.tileentity = tileEntity;
         IItemHandler handler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).orElse(null);
@@ -76,7 +78,7 @@ public class ContainerElectricInfusing extends AbstractContainerMenu implements 
      * @param data        Data from which to get the pos
      * @return the tileEntity linked to the block used
      */
-    private static ElectricInfusingChamberTileEntity getTileEntity(Inventory playerInven, FriendlyByteBuf data) {
+    private static @NotNull ElectricInfusingChamberTileEntity getTileEntity(@NotNull Inventory playerInven, @NotNull FriendlyByteBuf data) {
         Objects.requireNonNull(playerInven, "playerInventory cannot be null!");
         Objects.requireNonNull(data, "data cannot be null!");
         final BlockEntity tileAtPos = playerInven.player.level.getBlockEntity(data.readBlockPos());
@@ -141,17 +143,17 @@ public class ContainerElectricInfusing extends AbstractContainerMenu implements 
     }
 
     @Override
-    public ItemStack getItem(int p_18941_) {
+    public @Nullable ItemStack getItem(int p_18941_) {
         return null;
     }
 
     @Override
-    public ItemStack removeItem(int p_18942_, int p_18943_) {
+    public @Nullable ItemStack removeItem(int p_18942_, int p_18943_) {
         return null;
     }
 
     @Override
-    public ItemStack removeItemNoUpdate(int p_18951_) {
+    public @Nullable ItemStack removeItemNoUpdate(int p_18951_) {
         return null;
     }
 

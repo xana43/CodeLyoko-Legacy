@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ModOreGen {
+public final class ModOreGen {
 
     public static final List<PlacedFeature> OVERWORLD_ORES = new ArrayList<>();
     public static final List<PlacedFeature> END_ORES = new ArrayList<>();

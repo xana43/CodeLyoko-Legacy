@@ -8,7 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModContainerTypes {
+public final class ModContainerTypes {
     public static final DeferredRegister<MenuType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, CodeLyokoMain.MOD_ID);
 
    // public static final RegistryObject<MenuType<ContainerInfusing>> CONTAINER_INFUSING = CONTAINER_TYPES

@@ -13,16 +13,15 @@ import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-@OnlyIn(Dist.CLIENT)
-public class RendLaser<T extends EntityLaser> extends ArrowRenderer<T> {
+
+public final class RendLaser<T extends EntityLaser> extends ArrowRenderer<T> {
 
 
-    public RendLaser(EntityRendererProvider.Context rendManIn) {
+    public RendLaser(EntityRendererProvider.@NotNull Context rendManIn) {
         super(rendManIn);
 
     }
@@ -51,10 +50,10 @@ public class RendLaser<T extends EntityLaser> extends ArrowRenderer<T> {
         pMatrixStack.mulPose(Vector3f.XP.rotationDegrees(45.0F));
         pMatrixStack.scale(0.05625F, 0.05625F, 0.05625F);
         pMatrixStack.translate(-4.0D, 0.0D, 0.0D);
-        VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(pEntity)));
-        PoseStack.Pose posestack$pose = pMatrixStack.last();
-        Matrix4f matrix4f = posestack$pose.pose();
-        Matrix3f matrix3f = posestack$pose.normal();
+        final VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(pEntity)));
+        final PoseStack.Pose posestack$pose = pMatrixStack.last();
+        final Matrix4f matrix4f = posestack$pose.pose();
+        final Matrix3f matrix3f = posestack$pose.normal();
         this.vertex(matrix4f, matrix3f, vertexconsumer, -7, -2, -2, 0.0F, 0.15625F, -1, 0, 0, pPackedLight);
         this.vertex(matrix4f, matrix3f, vertexconsumer, -7, -2, 2, 0.15625F, 0.15625F, -1, 0, 0, pPackedLight);
         this.vertex(matrix4f, matrix3f, vertexconsumer, -7, 2, 2, 0.15625F, 0.3125F, -1, 0, 0, pPackedLight);

@@ -1,35 +1,55 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.player;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.enums.LyokoArmorMaterial;
+import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.NotNull;
 @NotNull
-public class PlayerClassType {
+public enum PlayerClassType {
 
-    private final String name;
+    Archer("Archer",34,LyokoArmorMaterial.ARCHER,new CompoundTag()),
+    Feline("Felyne",62,LyokoArmorMaterial.FELINE, new CompoundTag()),
+    Guardian("Guardian",90,LyokoArmorMaterial.GUARDIAN, new CompoundTag()),
+    Samurai("Samurai",118,LyokoArmorMaterial.SAMURAI, new CompoundTag()),
+    Ninja("Ninja",146,LyokoArmorMaterial.NINJA, new CompoundTag()),
+    DEFAULT("null",0,LyokoArmorMaterial.LINKER,new CompoundTag());
+    private final @NotNull String name;
     private final int textureIndex;
-    private final LyokoArmorMaterial armorMaterial;
-    public PlayerClassType(@NotNull String nameIn, int TextureIntex,@NotNull LyokoArmorMaterial armorMaterial)
+    private final @NotNull LyokoArmorMaterial armorMaterial;
+    private final CompoundTag classTag;
+    PlayerClassType(@NotNull final String nameIn,final int TextureIntex,@NotNull final LyokoArmorMaterial armorMaterial, @NotNull final CompoundTag classTag)
     {
         this.name = nameIn;
         this.textureIndex = TextureIntex;
         this.armorMaterial = armorMaterial;
-
+        this.classTag = classTag;
+        setClassTag();
     }
 
-
-    public LyokoArmorMaterial getArmorMaterial() {
+    @NotNull
+    public final LyokoArmorMaterial getArmorMaterial() {
         return armorMaterial;
     }
 
     @NotNull
-    public String getClassName()
+    public final String getClassName()
     {
         return this.name;
     }
 
-    public int getTextureIndex()
+
+    public final int getTextureIndex()
     {
         return this.textureIndex;
     }
 
+    @NotNull
+    public final CompoundTag getClassTag()
+    {
+        return this.classTag;
+    }
+
+    private void setClassTag()
+    {
+        this.classTag.putString("Class",getClassName());
+    }
 }

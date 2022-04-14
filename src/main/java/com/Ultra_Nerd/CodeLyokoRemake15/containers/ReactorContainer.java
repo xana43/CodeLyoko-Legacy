@@ -30,17 +30,17 @@ public class ReactorContainer extends AbstractContainerMenu implements Container
 	}
 
 	@Override
-	public ItemStack getItem(int p_18941_) {
+	public @org.jetbrains.annotations.Nullable ItemStack getItem(int p_18941_) {
 		return null;
 	}
 
 	@Override
-	public ItemStack removeItem(int p_18942_, int p_18943_) {
+	public @org.jetbrains.annotations.Nullable ItemStack removeItem(int p_18942_, int p_18943_) {
 		return null;
 	}
 
 	@Override
-	public ItemStack removeItemNoUpdate(int p_18951_) {
+	public @org.jetbrains.annotations.Nullable ItemStack removeItemNoUpdate(int p_18951_) {
 		return null;
 	}
 

@@ -6,13 +6,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class TrustyScrewDriverItem extends Item {
-    public TrustyScrewDriverItem(Properties properties) {
+    public TrustyScrewDriverItem(@NotNull Properties properties) {
         super(properties);
     }
 

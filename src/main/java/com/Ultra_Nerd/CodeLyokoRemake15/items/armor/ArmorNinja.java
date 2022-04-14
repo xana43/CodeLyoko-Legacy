@@ -9,19 +9,20 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 
-public class ArmorNinja extends ArmorItem {
-    public ArmorNinja(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
+public final class ArmorNinja extends ArmorItem {
+    public ArmorNinja(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Properties builder) {
         super(materialIn, slot, builder);
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, Level world, Player player) {
+    public void onArmorTick(ItemStack stack, @NotNull Level world, @NotNull Player player) {
 
 
-        BlockHitResult trace = new BlockHitResult(player.getLookAngle(), player.getDirection(),player.eyeBlockPosition(),false);
-        BlockPos pos = new BlockPos(trace.getBlockPos().getX(), trace.getBlockPos().getY(), trace.getBlockPos().getZ());
-        Block test = world.getBlockState(pos).getBlock();
+        final BlockHitResult trace = new BlockHitResult(player.getLookAngle(), player.getDirection(),player.eyeBlockPosition(),false);
+        final BlockPos pos = new BlockPos(trace.getBlockPos().getX(), trace.getBlockPos().getY(), trace.getBlockPos().getZ());
+        final Block test = world.getBlockState(pos).getBlock();
 
 
     }

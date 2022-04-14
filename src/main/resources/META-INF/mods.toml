@@ -12,9 +12,9 @@ version = "${file.jarVersion}" #mandatory
 
 displayName = "CodeLyoko:Legacy" #mandatory
 
-updateJSONURL = "http://myurl.me/" #optional
+#updateJSONURL = "http://myurl.me/" #optional
 
-displayURL = "https://github.com/xana43/CodeLyoko-Legacy/issues" #optional
+displayURL = "https://github.com/xana43/CodeLyoko-Legacy" #optional
 
 logoFile = "eye-xana.png" #optional
 
@@ -32,9 +32,12 @@ modId = "geckolib3" #mandatory
 # Does this dependency have to exist - if not, ordering below must be specified
 mandatory = true #mandatory
 # The version range of the dependency
-versionRange = "[3.0.12,)" #mandatory
+versionRange = "[3.0.13,)" #mandatory
 side = "CLIENT"
 ordering="NONE"
+
+
+
 
 
 

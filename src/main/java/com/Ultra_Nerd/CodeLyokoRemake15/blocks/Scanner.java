@@ -23,13 +23,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
-public class Scanner extends BaseEntityBlock {
-    public static BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
+public final class Scanner extends BaseEntityBlock {
+    public static final BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
     public static final DirectionProperty directionProperty = HorizontalDirectionalBlock.FACING;
-    private final VoxelShape shapeS = Stream.of(
+    private static final VoxelShape shapeS = Stream.of(
             Block.box(2, 0, -2, 14, 1, 18),
             Block.box(-4, 0, 5, -3, 15.3, 11),
             Block.box(-3, 0, 5, -2, 1, 11),
@@ -72,10 +71,8 @@ public class Scanner extends BaseEntityBlock {
             Block.box(14, 0, 17, 15, 15.3, 18),
             Block.box(-2, 0, 14, -1, 15.3, 15),
             Block.box(17, 0, 1, 18, 15.3, 2)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
-    private final VoxelShape shapeN = Stream.of(
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+    private static final VoxelShape shapeN = Stream.of(
             Block.box(2, 0, -2.4523809523809526, 14, 1, 17.54761904761905),
             Block.box(19, 0, 4.5476190476190474, 20, 15.3, 10.547619047619047),
             Block.box(18, 0, 4.5476190476190474, 19, 1, 10.547619047619047),
@@ -118,10 +115,8 @@ public class Scanner extends BaseEntityBlock {
             Block.box(1, 0, -2.4523809523809526, 2, 15.3, -1.4523809523809526),
             Block.box(17, 0, 0.5476190476190474, 18, 15.3, 1.5476190476190474),
             Block.box(-2.0000000000000018, 0, 13.547619047619047, -1.0000000000000018, 15.3, 14.547619047619047)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
-    private final VoxelShape shapeW = Stream.of(
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+    private static final VoxelShape shapeW = Stream.of(
             Block.box(-2.2261904761904763, 0, 1.7738095238095237, 17.773809523809526, 1, 13.773809523809524),
             Block.box(4.773809523809524, 0, -4.226190476190476, 10.773809523809524, 15.3, -3.2261904761904763),
             Block.box(4.773809523809524, 0, -3.2261904761904763, 10.773809523809524, 1, -2.2261904761904763),
@@ -164,10 +159,8 @@ public class Scanner extends BaseEntityBlock {
             Block.box(-2.2261904761904763, 0, 13.773809523809524, -1.2261904761904763, 15.3, 14.773809523809524),
             Block.box(0.7738095238095237, 0, -2.2261904761904763, 1.7738095238095237, 15.3, -1.2261904761904763),
             Block.box(13.773809523809524, 0, 16.773809523809526, 14.773809523809524, 15.3, 17.773809523809526)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
-    private final VoxelShape shapeE = Stream.of(
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+    private static final VoxelShape shapeE = Stream.of(
             Block.box(-1.7738095238095273, 0, 1.7738095238095237, 18.226190476190474, 1, 13.773809523809524),
             Block.box(5.226190476190476, 0, 18.773809523809526, 11.226190476190476, 15.3, 19.773809523809526),
             Block.box(5.226190476190476, 0, 17.773809523809526, 11.226190476190476, 1, 18.773809523809526),
@@ -210,9 +203,7 @@ public class Scanner extends BaseEntityBlock {
             Block.box(17.226190476190474, 0, 0.7738095238095237, 18.226190476190474, 15.3, 1.7738095238095237),
             Block.box(14.226190476190476, 0, 16.773809523809526, 15.226190476190476, 15.3, 17.773809523809526),
             Block.box(1.2261904761904763, 0, -2.226190476190478, 2.2261904761904763, 15.3, -1.226190476190478)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     private static final VoxelShape blockShape = Block.box(0, 0, 0, 16, 16, 16);
 
@@ -222,9 +213,28 @@ public class Scanner extends BaseEntityBlock {
                 .strength(10, 10)
                 .sound(SoundType.METAL)
 
+
         );
 
         this.registerDefaultState(this.defaultBlockState().setValue(Scanner, false).setValue(directionProperty, Direction.NORTH));
+    }
+
+    @Override
+    public @NotNull VoxelShape getOcclusionShape(@NotNull BlockState state, BlockGetter pLevel, BlockPos pPos) {
+
+            switch (state.getValue(directionProperty)) {
+                case NORTH:
+                    return shapeN;
+                case SOUTH:
+                    return shapeS;
+                case EAST:
+                    return shapeE;
+                case WEST:
+                    return shapeW;
+                default:
+                    return shapeN;
+            }
+
     }
 
     @org.jetbrains.annotations.Nullable
@@ -234,13 +244,13 @@ public class Scanner extends BaseEntityBlock {
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState pState) {
+    public @NotNull RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }
 
     @Override
-    public VoxelShape getVisualShape(BlockState state, BlockGetter p_60480_, BlockPos p_60481_, CollisionContext p_60482_) {
-        if (state.getValue(Scanner)) {
+    public @NotNull VoxelShape getVisualShape(@NotNull BlockState state, BlockGetter p_60480_, BlockPos p_60481_, CollisionContext p_60482_) {
+
             switch (state.getValue(directionProperty)) {
                 case NORTH:
                     return shapeN;
@@ -253,14 +263,12 @@ public class Scanner extends BaseEntityBlock {
                 default:
                     return shapeN;
             }
-        } else {
-            return blockShape;
-        }
+
     }
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+    public VoxelShape getShape(@NotNull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         if (state.getValue(Scanner)) {
             switch (state.getValue(directionProperty)) {
                 case NORTH:
@@ -280,28 +288,27 @@ public class Scanner extends BaseEntityBlock {
 
     }
 
-    @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public @NotNull BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         return this.defaultBlockState().setValue(directionProperty, context.getHorizontalDirection());
     }
 
     //mod compatiability
     @Nonnull
     @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
+    public BlockState rotate(@NotNull BlockState state, @NotNull Rotation rot) {
         return state.setValue(directionProperty, rot.rotate(state.getValue(directionProperty)));
     }
 
 
     @Nonnull
     @Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+    public BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirrorIn) {
         return state.rotate(mirrorIn.getRotation(state.getValue(directionProperty)));
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
         builder.add(Scanner).add(directionProperty);
 
 
@@ -310,7 +317,7 @@ public class Scanner extends BaseEntityBlock {
 
     @org.jetbrains.annotations.Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         if(!pLevel.isClientSide)
         {
             return ((pLevel1, pPos, pState1, pBlockEntity) -> {

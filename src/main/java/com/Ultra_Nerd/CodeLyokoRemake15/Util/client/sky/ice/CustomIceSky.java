@@ -13,28 +13,25 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ISkyRenderHandler;
+import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class CustomIceSky implements ISkyRenderHandler {
+public final record CustomIceSky() implements ISkyRenderHandler {
 
 
-    private static ResourceLocation sky1 = null;
-    private static ResourceLocation skytop = null;
-    public CustomIceSky() {
+    private static final ResourceLocation sky1 = new ResourceLocation(CodeLyokoMain.MOD_ID,"textures/skies/ice/ice_sky.png");
+    private static final ResourceLocation skytop = new ResourceLocation(CodeLyokoMain.MOD_ID,"textures/skies/volcano/dark.png");
 
-        sky1 = new ResourceLocation(CodeLyokoMain.MOD_ID,"textures/skies/ice/ice_sky.png");
-        skytop = new ResourceLocation(CodeLyokoMain.MOD_ID,"textures/skies/volcano/dark.png");
-    }
 
 
     @Override
-    public void render(int ticks, float partialTicks, PoseStack matrixStack, ClientLevel world, Minecraft mc) {
+    public void render(int ticks, float partialTicks, @NotNull PoseStack matrixStack, ClientLevel world, Minecraft mc) {
         // mc.textureManager.bindTexture(texturelocation);
 
         RenderSystem.setShaderTexture(0,skytop);
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
-        Tesselator tessellator = Tesselator.getInstance();
-        BufferBuilder bufferBuilder = tessellator.getBuilder();
+        final Tesselator tessellator = Tesselator.getInstance();
+        final BufferBuilder bufferBuilder = tessellator.getBuilder();
         for(int i = 0; i < 6; ++i) {
             matrixStack.pushPose();
             if (i == 1) {
@@ -67,7 +64,7 @@ public class CustomIceSky implements ISkyRenderHandler {
                 matrixStack.mulPose(Vector3f.YP.rotationDegrees(90));
             }
 
-            Matrix4f matrix4f = matrixStack.last().pose();
+            final Matrix4f matrix4f = matrixStack.last().pose();
             bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
             bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).uv(0.0F, 0.0F).color(40, 40, 40, 255).endVertex();
             bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).uv(0.0F, 0.5F).color(40, 40, 40, 255).endVertex();

@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "tower_interface",
+	"parent": "scanner",
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "cm:block/scanner_base"

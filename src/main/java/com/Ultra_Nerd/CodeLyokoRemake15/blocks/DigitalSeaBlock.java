@@ -10,21 +10,24 @@ import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Material;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 
-public class DigitalSeaBlock extends LiquidBlock {
+public final class DigitalSeaBlock extends LiquidBlock {
 
 
-    public DigitalSeaBlock(Supplier<? extends FlowingFluid> supplier) {
-        super(supplier, LiquidBlock.Properties.of(Material.WATER).strength(-1,-1).noOcclusion().noCollission().noDrops().friction(0));
+    public DigitalSeaBlock(@NotNull Supplier<? extends FlowingFluid> supplier) {
+        super(supplier, LiquidBlock.Properties.copy(Blocks.WATER));
 
 
     }
@@ -36,6 +39,13 @@ public class DigitalSeaBlock extends LiquidBlock {
             entityIn.hurt(CodeLyokoMain.RegistryEventHandler.DigitaloceanDamageSource,Float.MAX_VALUE);
         }
     }
+
+    @Override
+    public float getFriction(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
+        return 0;
+    }
+
+
 
     @Override
     public float getFriction() {

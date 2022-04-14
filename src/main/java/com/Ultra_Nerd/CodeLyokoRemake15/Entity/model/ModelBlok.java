@@ -7,23 +7,25 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.EntityBlok;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class ModelBlok extends AnimatedGeoModel<EntityBlok> {
+public final class ModelBlok extends AnimatedGeoModel<EntityBlok> {
 
 
     @Override
-    public ResourceLocation getModelLocation(EntityBlok object) {
+    public @NotNull ResourceLocation getModelLocation(EntityBlok object) {
         return CodeLyokoMain.CodeLyokoPrefix("geo/blok.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureLocation(EntityBlok object) {
+    public @NotNull ResourceLocation getTextureLocation(EntityBlok object) {
         return new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/entity/blok/blok.png");
     }
 
     @Override
-    public ResourceLocation getAnimationFileLocation(EntityBlok animatable) {
+    public @Nullable ResourceLocation getAnimationFileLocation(EntityBlok animatable) {
         return null;
     }
 }

@@ -2,11 +2,18 @@ package com.Ultra_Nerd.CodeLyokoRemake15.items.armor;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.Models.Util.ArmorModelRenderer;
+import com.Ultra_Nerd.CodeLyokoRemake15.items.armor.Models.Util.ModModelLayers;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -15,21 +22,42 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.client.IItemRenderProperties;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
+import java.util.function.Consumer;
 
-public class ArmorFeline extends ArmorItem {
+public final class ArmorFeline extends ArmorItem {
 
 
     private final double movement_modifier;
-    public ArmorFeline(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
+    public ArmorFeline(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Properties builder) {
         super(materialIn, slot, builder);
         movement_modifier = 0.6;
 
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+    public void initializeClient(@NotNull Consumer<IItemRenderProperties> consumer) {
+       // consumer.accept(CatRenderer.INSTANCE);
+        super.initializeClient(consumer);
+    }
+
+    private static final class CatRenderer implements IItemRenderProperties
+    {
+        private static final CatRenderer INSTANCE = new CatRenderer();
+
+        @Override
+        public @NotNull HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
+            EntityModelSet modelSet = Minecraft.getInstance().getEntityModels();
+            ModelPart root = modelSet.bakeLayer(armorSlot == EquipmentSlot.CHEST ? ModModelLayers.FELINE_LAYER_LOCATION_INNER : ModModelLayers.FELINE_LAYER_LOCATION_OUTER);
+            return new ArmorModelRenderer(root);
+        }
+    }
+
+    @Override
+    public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         Multimap<Attribute,AttributeModifier> multimap = HashMultimap.create();
 
 //new AttributeModifier(UUID.fromString("46656c69-6e65-204a-756d-7020426f6f73"),"jump_modifier"
@@ -47,7 +75,7 @@ public class ArmorFeline extends ArmorItem {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, Level world, Player player) {
+    public void onArmorTick(ItemStack stack, Level world, @NotNull Player player) {
 
         if (!DimensionCheck.playerNotInVanillaWorld(player)) {
             

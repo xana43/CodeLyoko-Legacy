@@ -4,18 +4,17 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SimpleAnimatedParticle;
 import net.minecraft.client.particle.SpriteSet;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-@OnlyIn(Dist.CLIENT)
-public class TowerParticle extends SimpleAnimatedParticle {
-    private final SpriteSet sprite;
 
-    public TowerParticle(ClientLevel world, double x, double y, double z,
+public final class TowerParticle extends SimpleAnimatedParticle {
+    private final @NotNull SpriteSet sprite;
 
-                         SpriteSet sprites, float unknown) {
+    public TowerParticle(@NotNull ClientLevel world, double x, double y, double z,
+
+                         @NotNull SpriteSet sprites, float unknown) {
         super(world, x, y, z, sprites,unknown);
         this.sprite = sprites;
 

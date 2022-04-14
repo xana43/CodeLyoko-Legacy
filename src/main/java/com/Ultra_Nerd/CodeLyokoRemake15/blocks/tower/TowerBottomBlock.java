@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class TowerBottomBlock extends Block {
 
-    public TowerBottomBlock(Properties properties) {
+    public TowerBottomBlock(@NotNull Properties properties) {
         super(properties);
     }
 

@@ -11,19 +11,20 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class TowerInterfaceContainer extends AbstractContainerMenu {
+public final class TowerInterfaceContainer extends AbstractContainerMenu {
 
 
-    private BlockEntity TE2;
+    private @Nullable BlockEntity TE2;
     private Player inplayer;
 
 
 
 
-    public TowerInterfaceContainer(int id, BlockPos pos,Inventory playerInv, Player player)
+    public TowerInterfaceContainer(int id, @NotNull BlockPos pos, Inventory playerInv, @NotNull Player player)
     {
 
         super(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(),id);
@@ -36,14 +37,14 @@ public class TowerInterfaceContainer extends AbstractContainerMenu {
 
 
     }
-    public TowerInterfaceContainer(final int windowid, final Inventory inven, final FriendlyByteBuf data/*, TowerInterfaceTileEntity towerEntity*/) {
+    public TowerInterfaceContainer(final int windowid, final @NotNull Inventory inven, final @NotNull FriendlyByteBuf data/*, TowerInterfaceTileEntity towerEntity*/) {
         this(windowid, inven, getTowerEntity(inven, data));
     }
 
 
 
 
-    private static TowerInterfaceTileEntity getTowerEntity(final Inventory inventory, final FriendlyByteBuf data) {
+    private static @NotNull TowerInterfaceTileEntity getTowerEntity(final @NotNull Inventory inventory, final @NotNull FriendlyByteBuf data) {
         Objects.requireNonNull(inventory, "player inventory can't be null");
         Objects.requireNonNull(data, "data can't be null");
         final BlockEntity tileAtPos = inventory.player.level.getBlockEntity(data.readBlockPos());

@@ -15,21 +15,22 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-public class ArmorWarrior extends ArmorItem {
+public final class ArmorWarrior extends ArmorItem {
 
     private final double movement_modifier;
     private final double attack_modifier;
     private final double attack_speed;
-    public ArmorWarrior(ArmorMaterial materialIn, EquipmentSlot slot, Properties builder) {
+    public ArmorWarrior(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Properties builder) {
         super(materialIn, slot, builder);
         movement_modifier = -0.1D;
         attack_modifier = 0.7D;
         attack_speed = -0.2D;
     } @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+    public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         Multimap<Attribute,AttributeModifier> multimap = HashMultimap.create();
 
 //new AttributeModifier(UUID.fromString("46656c69-6e65-204a-756d-7020426f6f73"),"jump_modifier"
@@ -52,7 +53,7 @@ public class ArmorWarrior extends ArmorItem {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, Level world, Player player) {
+    public void onArmorTick(ItemStack stack, Level world, @NotNull Player player) {
         if (!DimensionCheck.playerNotInVanillaWorld(player)) {
             if (player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.WILLIAM_CHESTPLATE.get()) {
                 player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).setCount(0);

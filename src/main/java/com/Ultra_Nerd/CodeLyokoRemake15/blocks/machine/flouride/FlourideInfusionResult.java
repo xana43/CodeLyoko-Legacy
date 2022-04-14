@@ -6,6 +6,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -16,7 +17,7 @@ public class FlourideInfusionResult {
     private final Table<ItemStack, ItemStack, ItemStack> smeltingList = HashBasedTable.<ItemStack, ItemStack, ItemStack>create();
     private final Map<ItemStack, Float> experienceList = Maps.<ItemStack, Float>newHashMap();
 
-    public static FlourideInfusionResult getInstance() {
+    public static @NotNull FlourideInfusionResult getInstance() {
         return INSTANCE;
     }
 
@@ -28,7 +29,7 @@ public class FlourideInfusionResult {
     }
 
 
-    public void addRefiningRecipe(ItemStack input1, ItemStack input2, ItemStack result, float experience) {
+    public void addRefiningRecipe(@NotNull ItemStack input1, @NotNull ItemStack input2, ItemStack result, float experience) {
         if (getInfusingResult(input1, input2) != ItemStack.EMPTY) return;
         if (getInfusingResult(input2, input1) != ItemStack.EMPTY) return;
         this.smeltingList.put(input1, input2, result);
@@ -36,7 +37,7 @@ public class FlourideInfusionResult {
         this.experienceList.put(result, experience);
     }
 
-    public ItemStack getInfusingResult(ItemStack input1, ItemStack input2) {
+    public ItemStack getInfusingResult(@NotNull ItemStack input1, @NotNull ItemStack input2) {
         for (Entry<ItemStack, Map<ItemStack, ItemStack>> entry : this.smeltingList.columnMap().entrySet()) {
             if (this.compareItemStacks(input1, entry.getKey())) {
                 for (Entry<ItemStack, ItemStack> ent : entry.getValue().entrySet()) {
@@ -49,16 +50,16 @@ public class FlourideInfusionResult {
         return ItemStack.EMPTY;
     }
 
-    private boolean compareItemStacks(ItemStack stack1, ItemStack stack2) {
+    private boolean compareItemStacks(@NotNull ItemStack stack1, @NotNull ItemStack stack2) {
         //return stack2.equals(stack1, false);
         return stack2.getItem() == stack1.getItem(); //&& (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
     }
 
-    public Table<ItemStack, ItemStack, ItemStack> getDualSmeltingList() {
+    public @NotNull Table<ItemStack, ItemStack, ItemStack> getDualSmeltingList() {
         return this.smeltingList;
     }
 
-    public float getSinteringExperience(ItemStack stack) {
+    public float getSinteringExperience(@NotNull ItemStack stack) {
         for (Entry<ItemStack, Float> entry : this.experienceList.entrySet()) {
             if (this.compareItemStacks(stack, entry.getKey())) {
                 return entry.getValue();

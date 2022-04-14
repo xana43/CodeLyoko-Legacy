@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -35,7 +36,7 @@ public class ElectroplatingMachine extends BaseEntityBlock {
     public static final DirectionProperty ELECTRO_FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty ELECTRO_ACTIVE = BooleanProperty.create("electro_active");
 
-    public ElectroplatingMachine(Properties properties) {
+    public ElectroplatingMachine(@NotNull Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(ELECTRO_FACING, Direction.NORTH).setValue(ELECTRO_ACTIVE, false));
     }
@@ -49,7 +50,7 @@ public class ElectroplatingMachine extends BaseEntityBlock {
 
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         // TODO Auto-generated method stub
         return this.defaultBlockState().setValue(ELECTRO_FACING, context.getHorizontalDirection().getOpposite());
     }
@@ -61,18 +62,18 @@ public class ElectroplatingMachine extends BaseEntityBlock {
     //mod compatiability
     @Nonnull
     @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
+    public BlockState rotate(@NotNull BlockState state, @NotNull Rotation rot) {
         return state.setValue(ELECTRO_FACING, rot.rotate(state.getValue(ELECTRO_FACING)));
     }
 
     @Nonnull
     @Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+    public BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirrorIn) {
         return state.rotate(mirrorIn.getRotation(state.getValue(ELECTRO_FACING)));
     }
 
     @Override
-    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+    public int getLightEmission(@NotNull BlockState state, BlockGetter level, BlockPos pos) {
         return state.getValue(ELECTRO_ACTIVE) ? super.getLightEmission(state,level,pos) : 0;
     }
 
@@ -84,7 +85,7 @@ public class ElectroplatingMachine extends BaseEntityBlock {
 
 
     @Override
-    public int getAnalogOutputSignal(@Nonnull BlockState blockState, Level worldIn, @Nonnull BlockPos pos) {
+    public int getAnalogOutputSignal(@Nonnull BlockState blockState, @NotNull Level worldIn, @Nonnull BlockPos pos) {
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
     }
 
@@ -110,7 +111,7 @@ public class ElectroplatingMachine extends BaseEntityBlock {
 
 
     @Override
-    public void onRemove(@Nonnull BlockState state, Level worldIn, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
+    public void onRemove(@Nonnull BlockState state, @NotNull Level worldIn, @Nonnull BlockPos pos, @Nonnull BlockState newState, boolean isMoving) {
         BlockEntity tile = worldIn.getBlockEntity(pos);
         if (tile instanceof ElectroplatingTileEntity) {
             ElectroplatingTileEntity plater = (ElectroplatingTileEntity) tile;

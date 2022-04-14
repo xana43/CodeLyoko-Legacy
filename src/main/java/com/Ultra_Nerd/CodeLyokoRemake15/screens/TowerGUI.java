@@ -2,57 +2,43 @@ package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.TowerInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.events.GuiEventListener;
-import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraftforge.client.event.ScreenEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
-import org.jline.utils.Log;
 import org.lwjgl.glfw.GLFW;
 
-import javax.annotation.Nullable;
-import java.util.Locale;
+import java.awt.*;
 import java.util.Objects;
 import java.util.Random;
 
 
-public class TowerGUI extends AbstractContainerScreen<TowerInterfaceContainer> {
+public final class TowerGUI extends AbstractContainerScreen<TowerInterfaceContainer> {
 
     private static final ResourceLocation TEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/towerinterface.png");
     private EditBox text;
     private EditBox Accepted;
-    private final Font gunship_font = new Font(resourceLocation -> new FontSet(getMinecraft().textureManager, CodeLyokoMain.CodeLyokoPrefix("gunship")));
-    private byte I = 100;
+    private byte I = 0;
+    private int acceptedColor = 0;
 
-
-
-
-
-    public TowerGUI(TowerInterfaceContainer towerInterfaceContainer, Inventory playerInventory, Component titleIn) {
+    private static final String correctCode = "ACCEPTED";
+    public TowerGUI(@NotNull TowerInterfaceContainer towerInterfaceContainer, @NotNull Inventory playerInventory, Component tw) {
         
-        super(towerInterfaceContainer,playerInventory, titleIn);
-        //this.width = 200;
-        //this.height = 141;
-        //private TowerInterfaceTileEntity tileentity;
+        super(towerInterfaceContainer,playerInventory, TextComponent.EMPTY);
         this.inventoryLabelX = - 90;
         this.inventoryLabelY = - 90;
-        this.titleLabelX = -90;
-        this.titleLabelY = -90;
+
 
     }
-
-
 
 
     @Override
@@ -66,10 +52,6 @@ public class TowerGUI extends AbstractContainerScreen<TowerInterfaceContainer> {
     }
 
 
-    @Override
-    public void setFocused(@Nullable GuiEventListener p_setFocused_1_) {
-        super.setFocused(p_setFocused_1_);
-    }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
@@ -79,65 +61,90 @@ public class TowerGUI extends AbstractContainerScreen<TowerInterfaceContainer> {
 
 
 
-
+    int tick = 0;
 
     @Override
-    public void render(@NotNull PoseStack poseStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull PoseStack poseStack, int mouseX, int mouseY, float partialTicks)
+    {
+
         this.renderBackground(poseStack);
         super.render(poseStack,mouseX, mouseY, partialTicks);
-        this.text.render(poseStack,mouseX, mouseY, partialTicks);
-        this.Accepted.render(poseStack, mouseX, mouseY, partialTicks);
+        //this.text.render(poseStack,mouseX, mouseY, partialTicks);
+        EditBox.drawString(poseStack,font,new TextComponent(this.Accepted.getValue()).withStyle(ConstantUtil.GUNSHIP), this.Accepted.x,this.Accepted.y, acceptedColor);
+        EditBox.drawString(poseStack,font,new TextComponent(this.text.getValue()).withStyle(ConstantUtil.GUNSHIP), this.text.x,this.text.y, Color.WHITE.getRGB());
 
+        if((tick >> 3) % 2 == 0)
+        {
+            EditBox.drawString(poseStack,font,new TextComponent("|").withStyle(ConstantUtil.GUNSHIP), text.x + (this.text.getCursorPosition() * 21),this.text.y,Color.WHITE.getRGB());
 
+ //               Objects.requireNonNull(getMinecraft().player).playSound(ModSounds.CURSORBLINK.get(), 0.1f, 1f);
 
-    }
-
-    @SubscribeEvent
-    public static void NoE(final ScreenEvent event) {
-        if (event.getResult().ordinal() == GLFW.GLFW_KEY_E) {
-            if (event.getScreen() instanceof TowerGUI) {
-                event.setCanceled(true);
-            }
         }
+
+
+
+
+
+
+
+
     }
-
-
 
     @Override
     public void containerTick() {
 
         this.text.tick();
-
-        if (this.text.getValue().toLowerCase(Locale.ROOT).matches(new TranslatableComponent("LYOKO").getContents()) || this.text.getValue().toUpperCase(Locale.ROOT).matches(new TranslatableComponent("CHIMERA").getKey())
-                || this.text.getValue().toUpperCase(Locale.ROOT).matches(new TranslatableComponent("EARTH").getKey())) {
-            I = 100;
-            this.Accepted.setFGColor(65280);
-            Log.debug("accepted value");
-            this.Accepted.setMessage(new TranslatableComponent("ACCEPTED"));
-            this.text.setMessage(new TranslatableComponent(""));
-            this.text.setCursorPosition(0);
-        } else if (this.text.getValue().matches(new TranslatableComponent("XANA").getKey())) {
-            I = 100;
-            this.Accepted.setFGColor(16711680);
-            this.Accepted.setMessage(new TranslatableComponent("ACCEPTED"));
-            this.text.setMessage(new TranslatableComponent(""));
-            this.text.setCursorPosition(0);
-        } else {
-            I -= 1;
-            if (I == 0) {
-                this.Accepted.setMessage(new TranslatableComponent(""));
-            }
+        tick++;
+        I--;
+        if (I <= 0 && !this.Accepted.getValue().equals(StringUtils.EMPTY)) {
+            this.Accepted.setValue(StringUtils.EMPTY);
         }
     }
+    private void CheckField()
+    {
+        if (this.text.getValue().equalsIgnoreCase("LYOKO") || this.text.getValue().equalsIgnoreCase("CHIMERA")
+                || this.text.getValue().equalsIgnoreCase("EARTH")) {
+            I = 100;
+            acceptedColor = 65280;
+            this.Accepted.setValue(correctCode);
+            this.text.setValue(StringUtils.EMPTY);
+            this.text.setCursorPosition(0);
+            Objects.requireNonNull(this.getMinecraft().player).playSound(ModSounds.GUISOUND.get(), 1,2f);
+        } else if (this.text.getValue().equalsIgnoreCase("XANA")) {
+            I = 100;
+            acceptedColor = 16711680;
+            this.Accepted.setValue(correctCode);
+            this.text.setValue(StringUtils.EMPTY);
+            this.text.setCursorPosition(0);
+            Objects.requireNonNull(this.getMinecraft().player).playSound(ModSounds.GUISOUND.get(), 1,0.9f);
+        }
+        else
+        {
+            this.text.setValue(StringUtils.EMPTY);
+            Objects.requireNonNull(this.getMinecraft().player).playSound(ModSounds.GUISOUND.get(), 1,0.5f);
+        }
+    }
+
 
 
     @Override
     public void init() {
         super.init();
-
-        this.setTextField();
-
-
+        final int tx = this.width >> 1;
+        final int ty = this.height >> 1;
+        this.text = new EditBox(font, tx - 70, ty - 10, 200, 33, TextComponent.EMPTY);
+        this.text.setMaxLength(8);
+        this.text.setBordered(false);
+        this.text.setVisible(true);
+        this.text.setTextColor(16777215);
+        this.text.setFocus(true);
+        this.text.setEditable(true);
+        this.text.setCursorPosition(0);
+        this.text.setCanLoseFocus(false);
+        this.text.active = true;
+        this.Accepted = new EditBox(font, tx - 95, ty + 20, 200, 33, TextComponent.EMPTY);
+        this.Accepted.active = false;
+        this.Accepted.setEditable(false);
     }
 
     @Override
@@ -155,61 +162,50 @@ public class TowerGUI extends AbstractContainerScreen<TowerInterfaceContainer> {
     public boolean keyPressed(int Key, int p_keyPressed_2_, int p_keyPressed_3_) {
 
 
-        if (Key == 8) {
+        if (Key == GLFW.GLFW_KEY_BACKSPACE) {
             this.text.deleteChars(1);
+            Objects.requireNonNull(this.getMinecraft().player).playSound(ModSounds.GUISOUND.get(), 1,1f);
+        }
+        if(Key == GLFW.GLFW_KEY_ENTER)
+        {
+            CheckField();
+
         }
         this.text.keyPressed(Key, p_keyPressed_2_, p_keyPressed_3_);
-        this.Accepted.keyPressed(Key, p_keyPressed_2_, p_keyPressed_3_);
+
+        //this.Accepted.keyPressed(Key, p_keyPressed_2_, p_keyPressed_3_);
         return super.keyPressed(Key, p_keyPressed_2_, p_keyPressed_3_);
     }
 
     @Override
     public boolean charTyped(char key, int Keynum) {
-        float rand = 1f + new Random().nextFloat() * (4 - 1);
-        this.text.charTyped(Character.toUpperCase(key), Keynum);
+        float rand = new Random().nextFloat(1f,1.1f);
+
+
+        if(Character.getType(key) == Character.UPPERCASE_LETTER)
+        {
+            this.text.charTyped(key, Keynum);
+        }
+        else
+        {
+            this.text.charTyped(key^=32, Keynum);
+        }
         Objects.requireNonNull(this.getMinecraft().player).playSound(ModSounds.GUISOUND.get(), 1, rand);
-        return super.charTyped(key, Keynum);
+        return super.charTyped(key^=32, Keynum);
 
     }
 
 
-    protected void setTextField() {
 
-        int tx = this.width / 2;
-        int ty = this.height / 2;
-        this.text = new EditBox(gunship_font, tx - 70, ty - 10, 200, 33, new TranslatableComponent("gui.cm.interface_input"));
-        this.text.setMaxLength(7);
-        this.text.setBordered(false);
-        this.text.setVisible(true);
-        this.text.setTextColor(16777215);
-        this.text.setFocus(true);
-        this.text.setEditable(true);
-        this.text.setCursorPosition(0);
-        this.text.setCanLoseFocus(false);
-        this.text.active = true;
-        this.text.isActive();
-        int tx2 = this.width / 2;
-        int ty2 = this.height / 2;
-        this.Accepted = new EditBox(gunship_font, tx2 - 95, ty2 + 20, 200, 33, new TranslatableComponent("gui.cm.indicator"));
-        this.Accepted.isActive();
-        this.Accepted.visible = true;
-        this.Accepted.setBordered(false);
-        this.Accepted.setFGColor(65280);
-        this.Accepted.changeFocus(true);
-        this.Accepted.active = false;
 
-    }
 
 
 
     @Override
-    public void renderBg(PoseStack p_96559_, float tick,int mouseX, int mouseY) {
+    public void renderBg(@NotNull PoseStack p_96559_, float tick, int mouseX, int mouseY) {
 
         RenderSystem.setShaderTexture(0,TEXTURES);
-        int x = (this.width - this.imageWidth) /2;
-        int y = (this.height - this.imageHeight) /2;
-
-        this.blit(p_96559_,x, y, 0, 0, this.imageWidth, this.imageHeight);
+        this.blit(p_96559_,(this.width - 200) >> 1, (this.height - 141) >> 1, 0, 0, 200, 141);
     }
 
 

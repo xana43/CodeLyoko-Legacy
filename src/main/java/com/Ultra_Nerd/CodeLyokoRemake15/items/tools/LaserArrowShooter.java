@@ -19,20 +19,20 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 
 
-public class LaserArrowShooter extends BowItem {
+public final class LaserArrowShooter extends BowItem {
 
 
 
 
 
-    public LaserArrowShooter(Properties builder) {
+    public LaserArrowShooter(@NotNull Properties builder) {
         super(builder);
 
         // TODO Auto-generated constructor stub
     }
 
     @Override
-    public void inventoryTick(ItemStack pStack, @NotNull Level pLevel, @NotNull Entity pEntity, int pSlotId, boolean pIsSelected) {
+    public void inventoryTick(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull Entity pEntity, int pSlotId, boolean pIsSelected) {
         if(!pStack.isEnchanted())
         {
             pStack.enchant(Enchantments.INFINITY_ARROWS,Enchantments.INFINITY_ARROWS.getMaxLevel());
@@ -72,8 +72,8 @@ public class LaserArrowShooter extends BowItem {
 
     @Nonnull
     @Override
-    public InteractionResultHolder<ItemStack> use(@Nonnull Level worldIn, Player playerIn, @Nonnull InteractionHand handIn) {
-        ItemStack item = playerIn.getItemInHand(handIn);
+    public InteractionResultHolder<ItemStack> use(@Nonnull Level worldIn, @NotNull Player playerIn, @Nonnull InteractionHand handIn) {
+        final ItemStack item = playerIn.getItemInHand(handIn);
 
 
 
@@ -86,12 +86,12 @@ public class LaserArrowShooter extends BowItem {
             worldIn.playSound(null,playerIn.blockPosition(), ModSounds.LASERARROW.get(), SoundSource.PLAYERS, 1f, 1f);
 
 
-            EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
+            final EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
 
             las.setBaseDamage(10);
             las.setNoGravity(true);
             las.setPos(playerIn.getX(), playerIn.getEyeY(), playerIn.getZ());
-            las.shootFromRotation(playerIn, playerIn.getRotationVector().x, playerIn.getRotationVector().y, (float)playerIn.getLookAngle().z, 5f, 0f);
+            las.shootFromRotation(playerIn, playerIn.getRotationVector().x, playerIn.getRotationVector().y, (float)playerIn.getLookAngle().z, 5f, 0.3f);
 
             worldIn.addFreshEntity(las);
 

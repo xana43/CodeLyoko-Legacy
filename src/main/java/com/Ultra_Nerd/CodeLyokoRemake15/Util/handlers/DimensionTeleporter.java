@@ -6,15 +6,16 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.util.ITeleporter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
 public class DimensionTeleporter {
-   public static void teleportPlayerToWorld(ServerPlayer player, ServerLevel dest, BlockPos pos,boolean top)
+   public static void teleportPlayerToWorld(@NotNull ServerPlayer player, @NotNull ServerLevel dest, @NotNull BlockPos pos, boolean top)
    {
        player.changeDimension(dest, new ITeleporter() {
            @Override
-           public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destWorld, float yaw, Function<Boolean, Entity> repositionEntity) {
+           public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destWorld, float yaw, @NotNull Function<Boolean, Entity> repositionEntity) {
                entity = repositionEntity.apply(false);
                int y = pos.getY();
                if(top)

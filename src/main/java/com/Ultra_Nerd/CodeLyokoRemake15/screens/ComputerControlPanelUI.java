@@ -20,7 +20,7 @@ import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ComputerControlPanelUI extends AbstractContainerScreen<ComputerControlPanelContainer> {
+public final class ComputerControlPanelUI extends AbstractContainerScreen<ComputerControlPanelContainer> {
 
 
     private static final ResourceLocation TEXTURES = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/computercontrolpanelui.png");
@@ -33,7 +33,7 @@ public class ComputerControlPanelUI extends AbstractContainerScreen<ComputerCont
     int x, y;
 
 
-    public ComputerControlPanelUI(ComputerControlPanelContainer screenContainer, Inventory inv, Component titleIn) {
+    public ComputerControlPanelUI(@NotNull ComputerControlPanelContainer screenContainer, @NotNull Inventory inv, @NotNull Component titleIn) {
         super(screenContainer, inv, titleIn);
 
         this.inventoryLabelX = -90;
@@ -81,8 +81,8 @@ public class ComputerControlPanelUI extends AbstractContainerScreen<ComputerCont
     @Override
     public void init() {
         super.init();
-        x = (this.width - this.getXSize()) / 2;
-        y = (this.height - this.getYSize()) / 2;
+        x = (this.width - this.getXSize()) >> 1;
+        y = (this.height - this.getYSize()) >> 1;
         this.setTextField();
         this.setButtons();
 
@@ -94,10 +94,10 @@ public class ComputerControlPanelUI extends AbstractContainerScreen<ComputerCont
     }
 
 
-    protected void setButtons() {
+    private void setButtons() {
 
 
-        this.button = new Button(x, y, this.width / 3, this.height / 6, new TranslatableComponent("activate"),Button::onPress) {
+        this.button = new Button(x, y, this.width / 3, this.height >> 3, new TranslatableComponent("activate"),Button::onPress) {
             @Override
             protected int getYImage(boolean p_getYImage_1_) {
                 return super.getYImage(p_getYImage_1_);
@@ -133,9 +133,9 @@ public class ComputerControlPanelUI extends AbstractContainerScreen<ComputerCont
 
 
                 int j = getFGColor();
-                drawCenteredString(stack,gunship_font, getMessage(), x + width / 2, y + (height - 8) / 2, j | Mth.ceil(alpha * 255.0F) << 24);
-                blit(stack,x, y, 0, 37 + i * 2, 103, 37);
-                blit(stack,x, 38, 0, 46 + i * 20, width / 2, height);
+                drawCenteredString(stack,gunship_font, getMessage(), (x + width )>> 1, y + (height - 8) >> 1, j | Mth.ceil(alpha * 255.0F) << 24);
+                blit(stack,x, y, 0, (37 + i) << 1, 103, 37);
+                blit(stack,x, 38, 0, (46 + i) * 20, width >> 1, height);
 
             }
 
@@ -164,9 +164,9 @@ public class ComputerControlPanelUI extends AbstractContainerScreen<ComputerCont
         }
     }
 
-    protected void setTextField() {
-        int tx = this.width / 2;
-        int ty = this.height / 2;
+    private void setTextField() {
+        final int tx = this.width >> 1;
+        final int ty = this.height >> 1;
         this.text = new EditBox(gunship_font, x, ty + 40, this.width, 23, new TranslatableComponent("gui.cm.computer_input_main"));
         this.text.setBordered(false);
         this.text.setVisible(true);

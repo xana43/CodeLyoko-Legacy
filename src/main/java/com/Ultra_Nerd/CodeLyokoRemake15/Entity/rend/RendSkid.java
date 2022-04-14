@@ -14,19 +14,17 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-@OnlyIn(Dist.CLIENT)
-public class RendSkid extends EntityRenderer<EntitySkid>{
+
+public final class RendSkid extends EntityRenderer<EntitySkid>{
 
 
 
-    public RendSkid(EntityRendererProvider.Context renderManagerIn) {
+    public RendSkid(EntityRendererProvider.@NotNull Context renderManagerIn) {
         super(renderManagerIn);
 
 
@@ -38,7 +36,7 @@ public class RendSkid extends EntityRenderer<EntitySkid>{
     public void render(@Nonnull EntitySkid entityIn, float entityYaw, float partialTicks, @Nonnull PoseStack matrixStackIn, @NotNull MultiBufferSource bufferIn, int packedLightIn) {
 
         matrixStackIn.pushPose();
-        BakedModel SkidBladnir = Minecraft.getInstance().getModelManager().getModel(CodeLyokoMain.CodeLyokoPrefix("entity/skid/skid"));
+        final BakedModel SkidBladnir = Minecraft.getInstance().getModelManager().getModel(CodeLyokoMain.CodeLyokoPrefix("entity/skid/skid"));
         matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(360 - entityYaw));
         Minecraft.getInstance().getBlockRenderer().getModelRenderer().tesselateWithoutAO(entityIn.level,SkidBladnir, Blocks.AIR.defaultBlockState(),entityIn.blockPosition(),matrixStackIn,
                 bufferIn.getBuffer(RenderType.solid()), false, entityIn.level.random,new Random().nextLong(),0);

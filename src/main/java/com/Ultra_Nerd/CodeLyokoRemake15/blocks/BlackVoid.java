@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
-public class BlackVoid extends Block {
+public final class BlackVoid extends Block {
 
     private static final VoxelShape nullshape = Stream.of(
             Block.box(3, 0, 3, 10, 0.5, 4),
@@ -150,7 +150,7 @@ public class BlackVoid extends Block {
     }
 
     @Override
-    public boolean addLandingEffects(BlockState state1, ServerLevel level, BlockPos pos, BlockState state2, LivingEntity entity, int numberOfParticles) {
+    public boolean addLandingEffects(BlockState state1, ServerLevel level, BlockPos pos, BlockState state2, @NotNull LivingEntity entity, int numberOfParticles) {
         return entity.hurt(DamageSource.OUT_OF_WORLD,Float.MAX_VALUE);
     }
 }

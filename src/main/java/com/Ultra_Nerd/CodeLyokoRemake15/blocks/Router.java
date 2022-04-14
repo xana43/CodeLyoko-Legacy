@@ -4,10 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -18,12 +15,13 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
-public class Router extends BaseEntityBlock {
+public final class Router extends BaseEntityBlock {
     public static final DirectionProperty ROUTER_DIRECTION = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty ROUTER_ACTIVE = BooleanProperty.create("ractive");
     private static final VoxelShape N = Stream.of(
@@ -81,11 +79,9 @@ public class Router extends BaseEntityBlock {
             Block.box(8.25, 1, 7.5, 9.25, 2, 8.5),
             Block.box(8.25, 1, 5.5, 9.25, 2, 6.5),
             Block.box(8.25, 1, 3.5, 9.25, 2, 4.5)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
-    public Router(Properties properties) {
+    public Router(@NotNull Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(ROUTER_DIRECTION, Direction.NORTH).setValue(ROUTER_ACTIVE, false));
     }
@@ -102,7 +98,7 @@ public class Router extends BaseEntityBlock {
 
     @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+    public VoxelShape getShape(@NotNull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         switch (state.getValue(ROUTER_DIRECTION)) {
             case NORTH:
                 return N;
@@ -118,7 +114,14 @@ public class Router extends BaseEntityBlock {
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public @NotNull RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
+    }
+
+
+
+    @Override
+    public @NotNull BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         // TODO Auto-generated method stub
         return this.defaultBlockState().setValue(ROUTER_DIRECTION, context.getHorizontalDirection().getOpposite());
     }
@@ -132,13 +135,13 @@ public class Router extends BaseEntityBlock {
     //mod compatiability
     @Nonnull
     @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
+    public BlockState rotate(@NotNull BlockState state, @NotNull Rotation rot) {
         return state.setValue(ROUTER_DIRECTION, rot.rotate(state.getValue(ROUTER_DIRECTION)));
     }
 
     @Nonnull
     @Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+    public BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirrorIn) {
         return state.rotate(mirrorIn.getRotation(state.getValue(ROUTER_DIRECTION)));
     }
 }

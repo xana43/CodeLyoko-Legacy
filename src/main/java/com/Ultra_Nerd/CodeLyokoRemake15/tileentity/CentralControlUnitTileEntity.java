@@ -6,10 +6,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class CentralControlUnitTileEntity extends BlockEntity implements BlockEntityTicker<CentralControlUnitTileEntity> {
 
-    public CentralControlUnitTileEntity(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state) {
+    public CentralControlUnitTileEntity(@NotNull BlockEntityType<?> tileEntityTypeIn, @NotNull BlockPos pos, @NotNull BlockState state) {
         super(tileEntityTypeIn,pos,state);
     }
 

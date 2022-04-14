@@ -17,8 +17,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
+
 @Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModEntities {
+public final class ModEntities {
 
 
     public static final DeferredRegister<EntityType<?>> Entities = DeferredRegister.create(ForgeRegistries.ENTITIES, CodeLyokoMain.MOD_ID);
@@ -44,7 +46,7 @@ public class ModEntities {
             EntityType.Builder.of(MantaEntity::new, MobCategory.MONSTER).sized(3, 3)
                     .build(new ResourceLocation(CodeLyokoMain.MOD_ID, "manta").toString()));
     public static final RegistryObject<EntityType<EntitySkid>> SKID = Entities.register("skidbladnir", () ->
-            EntityType.Builder.<EntitySkid>of(EntitySkid::new, MobCategory.AMBIENT).sized(1, 1)
+            EntityType.Builder.of(EntitySkid::new, MobCategory.MISC).sized(1, 1)
                     .build(new ResourceLocation(CodeLyokoMain.MOD_ID, "skid").toString()));
     public static final RegistryObject<EntityType<KankrelatEntity>> KANKRELAT = Entities.register("kankrelat", () ->
             EntityType.Builder.of(KankrelatEntity::new, MobCategory.MONSTER).sized(1, 1)
@@ -70,10 +72,11 @@ public class ModEntities {
         SpawnPlacements.register(MEGATANK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE,MegaTankEntity::canSpawn);
     }
 @SubscribeEvent
-    public static void registerAttributes(EntityAttributeCreationEvent event)
+    public static void registerAttributes(@NotNull EntityAttributeCreationEvent event)
 {
     event.put(BLOK.get(),EntityBlok.createMonsterAttributes().build());
     event.put(MEGATANK.get(),MegaTankEntity.registerAttributes().build());
+    event.put(HORNET.get(),HornetEntity.registerAttributes().build());
 
 }
 

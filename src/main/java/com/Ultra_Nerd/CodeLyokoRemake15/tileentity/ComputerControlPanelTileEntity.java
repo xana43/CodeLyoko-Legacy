@@ -31,7 +31,7 @@ public class ComputerControlPanelTileEntity extends BlockEntity implements MenuP
     @OnlyIn(Dist.CLIENT)
     protected int PlayersPresent;
 
-    public ComputerControlPanelTileEntity( BlockPos pos, BlockState state) {
+    public ComputerControlPanelTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         super(ModTileEntities.COMPUTER_CONTROL_PANEL_TILE_ENTITY.get(),pos,state);
     }
 /*
@@ -43,7 +43,7 @@ public class ComputerControlPanelTileEntity extends BlockEntity implements MenuP
 
 
     @Override
-    public AABB getRenderBoundingBox() {
+    public @NotNull AABB getRenderBoundingBox() {
         // This, combined with isGlobalRenderer in the TileEntityRenderer makes it so that the
         // render does not disappear if the player can't see the block
         // This is useful for rendering larger models or dynamically sized models
@@ -52,7 +52,7 @@ public class ComputerControlPanelTileEntity extends BlockEntity implements MenuP
 
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+    public void onDataPacket(Connection net, @NotNull ClientboundBlockEntityDataPacket pkt) {
         CompoundTag tag = pkt.getTag();
     }
 

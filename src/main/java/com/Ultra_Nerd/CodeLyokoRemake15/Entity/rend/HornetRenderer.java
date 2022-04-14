@@ -5,19 +5,18 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Entity.HornetEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 import javax.annotation.Nonnull;
 
-@OnlyIn(Dist.CLIENT)
-public class HornetRenderer extends GeoEntityRenderer<HornetEntity> {
+
+public final class HornetRenderer extends GeoEntityRenderer<HornetEntity> {
 
 
 //new ModelHornet(), 1f
-    public HornetRenderer(EntityRendererProvider.Context rendManIn, AnimatedGeoModel<HornetEntity> animatedGeoModel) {
+    public HornetRenderer(EntityRendererProvider.@NotNull Context rendManIn, AnimatedGeoModel<HornetEntity> animatedGeoModel) {
         super(rendManIn, animatedGeoModel);
     }
 

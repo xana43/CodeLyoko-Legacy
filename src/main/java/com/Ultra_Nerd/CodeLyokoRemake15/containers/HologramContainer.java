@@ -23,17 +23,17 @@ public class HologramContainer extends AbstractContainerMenu implements Containe
     }
 
     @Override
-    public ItemStack getItem(int p_18941_) {
+    public @Nullable ItemStack getItem(int p_18941_) {
         return null;
     }
 
     @Override
-    public ItemStack removeItem(int p_18942_, int p_18943_) {
+    public @Nullable ItemStack removeItem(int p_18942_, int p_18943_) {
         return null;
     }
 
     @Override
-    public ItemStack removeItemNoUpdate(int p_18951_) {
+    public @Nullable ItemStack removeItemNoUpdate(int p_18951_) {
         return null;
     }
 

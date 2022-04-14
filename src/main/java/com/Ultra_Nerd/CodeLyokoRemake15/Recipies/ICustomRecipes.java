@@ -8,6 +8,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -32,7 +33,7 @@ public interface ICustomRecipes extends Recipe<RecipeWrapper> {
 
 
     @Override
-    default NonNullList<Ingredient> getIngredients() {
+    default @NotNull NonNullList<Ingredient> getIngredients() {
         return Recipe.super.getIngredients();
     }
 }

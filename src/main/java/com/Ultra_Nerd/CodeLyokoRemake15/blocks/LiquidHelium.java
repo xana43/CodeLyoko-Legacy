@@ -13,13 +13,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-public class LiquidHelium extends LiquidBlock {
+public final class LiquidHelium extends LiquidBlock {
 
-    public LiquidHelium(Supplier<? extends FlowingFluid> supplier) {
+    public LiquidHelium(@NotNull Supplier<? extends FlowingFluid> supplier) {
         super(supplier, BlockBehaviour.Properties.copy(Blocks.WATER)
 
 
@@ -35,8 +36,8 @@ public class LiquidHelium extends LiquidBlock {
 
     @Override
     public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
-        if (entityIn instanceof LivingEntity livingEntity) {
-            livingEntity.hurt(new DamageSource(this.getName().toString()), RANDOM.nextInt(2));
+        if (entityIn instanceof final LivingEntity livingEntity) {
+            livingEntity.hurt(DamageSource.FREEZE, RANDOM.nextInt(2));
             livingEntity.moveDist = 0;
             livingEntity.isInPowderSnow = true;
 
@@ -53,7 +54,7 @@ public class LiquidHelium extends LiquidBlock {
 
 
     @Override
-    public void onPlace(@Nonnull BlockState state, Level worldIn, BlockPos pos, @Nonnull BlockState oldState, boolean isMoving) {
+    public void onPlace(@Nonnull BlockState state, @NotNull Level worldIn, @NotNull BlockPos pos, @Nonnull BlockState oldState, boolean isMoving) {
         //water
         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())) == Blocks.WATER.defaultBlockState()) {
             worldIn.setBlockAndUpdate(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), Blocks.BLUE_ICE.defaultBlockState());

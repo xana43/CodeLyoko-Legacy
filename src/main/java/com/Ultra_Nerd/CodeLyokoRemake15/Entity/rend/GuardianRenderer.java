@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -17,7 +18,7 @@ public class GuardianRenderer extends MobRenderer<GuardianEntity, MathGuardianMo
 
 
 
-    public GuardianRenderer(EntityRendererProvider.Context rendManIn) {
+    public GuardianRenderer(EntityRendererProvider.@NotNull Context rendManIn) {
         super(rendManIn, new MathGuardianModel(), 1f);
     }
 

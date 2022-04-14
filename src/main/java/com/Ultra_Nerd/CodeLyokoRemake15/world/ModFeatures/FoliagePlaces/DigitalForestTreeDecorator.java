@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-public class DigitalForestTreeDecorator extends TreeDecorator {
+public final class DigitalForestTreeDecorator extends TreeDecorator {
     @Override
     protected @NotNull TreeDecoratorType<?> type() {
         return ModPlacers.DIGITAL_TREE_DECORATOR.get();

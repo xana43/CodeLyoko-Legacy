@@ -13,13 +13,14 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ModRecipes {
+public final class ModRecipes {
 
     public static final RecipeSerializer<TestRecipe> TEST_RECIPE_I_RECIPE_SERIALIZER = new RecipeSerializer<TestRecipe>() {
         @Override
-        public TestRecipe fromJson(ResourceLocation p_44103_, JsonObject p_44104_) {
+        public @Nullable TestRecipe fromJson(ResourceLocation p_44103_, JsonObject p_44104_) {
             return null;
         }
 
@@ -35,7 +36,7 @@ public class ModRecipes {
         }
 
         @Override
-        public RecipeSerializer<?> setRegistryName(ResourceLocation name) {
+        public @Nullable RecipeSerializer<?> setRegistryName(ResourceLocation name) {
             return null;
         }
 
@@ -46,7 +47,7 @@ public class ModRecipes {
         }
 
         @Override
-        public Class<RecipeSerializer<?>> getRegistryType() {
+        public @Nullable Class<RecipeSerializer<?>> getRegistryType() {
             return null;
         }
     };
@@ -55,12 +56,12 @@ public class ModRecipes {
 
     private static class RegistryType<T extends Recipe<?>> implements RecipeType<T> {
         @Override
-        public String toString() {
+        public @NotNull String toString() {
             return Registry.RECIPE_TYPE.getKey(this).toString();
         }
     }
 
-    private static <T extends RecipeType> T registerType(ResourceLocation recipeType) {
+    private static <T extends RecipeType> @NotNull T registerType(@NotNull ResourceLocation recipeType) {
         return (T) Registry.register(Registry.RECIPE_TYPE, recipeType, new RegistryType<>());
     }
 

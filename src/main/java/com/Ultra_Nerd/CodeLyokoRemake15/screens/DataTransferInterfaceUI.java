@@ -1,16 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.DataTransferInterfaceMessage;
 import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.PacketHandler;
+import com.Ultra_Nerd.CodeLyokoRemake15.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoRemake15.containers.DataTransferInterfaceContainer;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModSounds;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -22,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 
 
-public class DataTransferInterfaceUI extends AbstractContainerScreen<DataTransferInterfaceContainer> {
+public final class DataTransferInterfaceUI extends AbstractContainerScreen<DataTransferInterfaceContainer> {
 
   private static final ResourceLocation GUI_TEX = new ResourceLocation("cm:textures/gui/data_transfer_interface_gui_2.png");
 
@@ -33,7 +31,6 @@ public class DataTransferInterfaceUI extends AbstractContainerScreen<DataTransfe
     private ImageButton buttonDesert;
 
     private ImageButton sendButton;
-    private final Font gunship_font = new Font(resourceLocation -> new FontSet(getMinecraft().textureManager, CodeLyokoMain.CodeLyokoPrefix("gunship")));
     private EditBox xCoord;
     private EditBox yCoord;
     private EditBox zCoord;
@@ -43,7 +40,7 @@ public class DataTransferInterfaceUI extends AbstractContainerScreen<DataTransfe
     int x, y;
 
 
-    public DataTransferInterfaceUI(DataTransferInterfaceContainer screenContainer, Inventory inv, Component titleIn) {
+    public DataTransferInterfaceUI(@NotNull DataTransferInterfaceContainer screenContainer, @NotNull Inventory inv, @NotNull Component titleIn) {
         super(screenContainer, inv, titleIn);
 
     }
@@ -55,18 +52,17 @@ public class DataTransferInterfaceUI extends AbstractContainerScreen<DataTransfe
         this.renderBg(stack,partialTicks,mouseX,mouseY);
         super.render(stack,mouseX, mouseY, partialTicks);
         buttonCarthage.render(stack,mouseX, mouseY, partialTicks);
-        assert gunship_font != null;
-        drawCenteredString(stack,gunship_font, buttonCarthage.getMessage(), x + 46, y + 46, buttonCarthage.getFGColor());
+        drawCenteredString(stack,font, buttonCarthage.getMessage(), x + 46, y + 46, buttonCarthage.getFGColor());
         buttonDesert.render(stack,mouseX, mouseY, partialTicks);
-        drawCenteredString(stack,gunship_font, buttonDesert.getMessage(), x + 77, y + 46, buttonDesert.getFGColor());
+        drawCenteredString(stack,font, buttonDesert.getMessage(), x + 77, y + 46, buttonDesert.getFGColor());
         buttonIce.render(stack,mouseX, mouseY, partialTicks);
-        drawCenteredString(stack,gunship_font, buttonIce.getMessage(), x + 46, y + 77, buttonIce.getFGColor());
+        drawCenteredString(stack,font, buttonIce.getMessage(), x + 46, y + 77, buttonIce.getFGColor());
         buttonForest.render(stack,mouseX, mouseY, partialTicks);
-        drawCenteredString(stack,gunship_font, buttonForest.getMessage(), x + 15, y + 46, buttonForest.getFGColor());
+        drawCenteredString(stack,font, buttonForest.getMessage(), x + 15, y + 46, buttonForest.getFGColor());
         buttonMountain.render(stack,mouseX, mouseY, partialTicks);
-        drawCenteredString(stack,gunship_font, buttonMountain.getMessage(), x + 46, y + 15, buttonMountain.getFGColor());
+        drawCenteredString(stack,font, buttonMountain.getMessage(), x + 46, y + 15, buttonMountain.getFGColor());
         sendButton.render(stack,mouseX, mouseY, partialTicks);
-        drawCenteredString(stack,gunship_font, sendButton.getMessage(), x + 15, y + 112, sendButton.getFGColor());
+        drawCenteredString(stack,font, sendButton.getMessage(), x + 15, y + 112, sendButton.getFGColor());
         xCoord.render(stack,mouseX, mouseY, partialTicks);
         yCoord.render(stack,mouseX, mouseY, partialTicks);
         zCoord.render(stack,mouseX, mouseY, partialTicks);
@@ -83,8 +79,8 @@ public class DataTransferInterfaceUI extends AbstractContainerScreen<DataTransfe
     @Override
     protected void init() {
         super.init();
-        this.x = (this.width - this.getXSize()) / 2;
-        this.y = (this.height - this.getYSize()) / 2;
+        this.x = (this.width - this.getXSize()) >> 1;
+        this.y = (this.height - this.getYSize()) >> 1;
         this.setButtonCarthage();
         this.setButtonDesert();
         this.setButtonForest();
@@ -103,8 +99,8 @@ public class DataTransferInterfaceUI extends AbstractContainerScreen<DataTransfe
     }
 
     private void setButtonCarthage() {
-        int tx = this.width / 2;
-        int ty = this.height / 2;
+        //int tx = this.width / 2;
+       // int ty = this.height / 2;
         this.buttonCarthage = new ImageButton(x + 31, y + 31, 30, 30, 128, 0, 31, GUI_TEX,
                 256, 256, (input) -> {
             territory = 0x101010; //CARTHAGE Code
@@ -113,32 +109,32 @@ public class DataTransferInterfaceUI extends AbstractContainerScreen<DataTransfe
     }
 
     private void setButtonForest() {
-        int tx = this.width / 2;
-        int ty = this.height / 2;
+        //int tx = this.width / 2;
+        //int ty = this.height / 2;
         this.buttonForest = new ImageButton(x, y + 31, 30, 30, 128, 0, 31, GUI_TEX,
-                256, 256, (input) -> territory = 0x333333, new TextComponent("F"));
+                256, 256, (input) -> territory = 0x333333, new TextComponent("F").withStyle(ConstantUtil.GUNSHIP));
         buttonForest.setFGColor(0x1d5e18);
     }
 
     private void setButtonMountain() {
-        int tx = this.width / 2;
-        int ty = this.height / 2;
+       // int tx = this.width / 2;
+        //int ty = this.height / 2;
         this.buttonMountain = new ImageButton(x + 31, y, 30, 30, 128, 0, 31, GUI_TEX,
-                256, 256, (input) -> territory = 0x111111, new TextComponent("M"));
+                256, 256, (input) -> territory = 0x111111, new TextComponent("M").withStyle(ConstantUtil.GUNSHIP));
         buttonMountain.setFGColor(0x824391);
     }
 
     private void setButtonIce() {
-        int tx = this.width / 2;
-        int ty = this.height / 2;
+        //int tx = this.width / 2;
+        //int ty = this.height / 2;
         this.buttonIce = new ImageButton(x + 31, y + 62, 30, 30, 128, 0, 31, GUI_TEX,
                 256, 256, (input) -> territory = 0x444444, new TextComponent("I"));
         buttonIce.setFGColor(0x37b8a2);
     }
 
     private void setButtonDesert() {
-        int tx = this.width / 2;
-        int ty = this.height / 2;
+        //int tx = this.width / 2;
+        //int ty = this.height / 2;
         this.buttonDesert = new ImageButton(x + 62, y + 31, 30, 30, 128, 0, 31, GUI_TEX,
                 256, 256, (input) -> territory = 0x222222, new TextComponent("D"));
         buttonDesert.setFGColor(0xcf8838);
@@ -197,7 +193,7 @@ public class DataTransferInterfaceUI extends AbstractContainerScreen<DataTransfe
             if(this.zCoord.getValue().length() > 0)
                 zCoord = Integer.parseInt(this.zCoord.getValue());
             PacketHandler.INSTANCE.sendToServer(new DataTransferInterfaceMessage(territory, xCoord, yCoord, zCoord));
-        }, new TextComponent("Send !"));
+        }, new TextComponent("Send !").withStyle(ConstantUtil.GUNSHIP));
 
     }
 
@@ -225,7 +221,7 @@ public class DataTransferInterfaceUI extends AbstractContainerScreen<DataTransfe
 
     @Override
     public boolean charTyped(char key, int Keynum) {
-        float rand = 1f + new Random().nextFloat() * (4 - 1);
+        float rand = 1f + new Random().nextFloat() * 3;
         this.xCoord.charTyped(Character.toUpperCase(key), Keynum);
         this.yCoord.charTyped(Character.toUpperCase(key), Keynum);
         this.zCoord.charTyped(Character.toUpperCase(key), Keynum);

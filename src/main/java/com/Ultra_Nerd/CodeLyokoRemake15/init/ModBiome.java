@@ -13,7 +13,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
-public class ModBiome {
+public final class ModBiome {
 
 
 
@@ -34,7 +34,7 @@ public class ModBiome {
     );
 
     @NotNull
-    private static ResourceKey<Biome> makeResourceKey(String name, Biome.BiomeCategory biomeCategory, int temp, Biome.TemperatureModifier temperatureModifier,BiomeSpecialEffects biomeSpecialEffects,MobSpawnSettings mobSpawnSettings)
+    private static ResourceKey<Biome> makeResourceKey(String name, Biome.@NotNull BiomeCategory biomeCategory, int temp, Biome.@NotNull TemperatureModifier temperatureModifier, @NotNull BiomeSpecialEffects biomeSpecialEffects, @NotNull MobSpawnSettings mobSpawnSettings)
     {
         BIOMES.register(name,() -> new Biome.BiomeBuilder()
                 .precipitation(Biome.Precipitation.NONE)
@@ -50,7 +50,7 @@ public class ModBiome {
     }
 
     @NotNull
-    private static ResourceKey<Biome> ForestResourceKey(BiomeSpecialEffects biomeSpecialEffects)
+    private static ResourceKey<Biome> ForestResourceKey(@NotNull BiomeSpecialEffects biomeSpecialEffects)
     {
 
 
@@ -83,7 +83,7 @@ public class ModBiome {
 
 
     @NotNull
-    private static ResourceKey<Biome> MountainResourceKey(BiomeSpecialEffects biomeSpecialEffects)
+    private static ResourceKey<Biome> MountainResourceKey(@NotNull BiomeSpecialEffects biomeSpecialEffects)
     {
 
 

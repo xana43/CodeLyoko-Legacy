@@ -12,18 +12,19 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class CableBlock extends FenceBlock {
+public final class CableBlock extends FenceBlock {
 
 //    private final static Map<CableBlock, LinkedList<CableBlock>> CABLE_LISTS = new HashMap<>();
 //    private CableBlock startOfCable;
 
-    private final VoxelShape[] shape;
+    private final VoxelShape @NotNull [] shape;
     private final VoxelShape mainShape = Block.box(1, 0, 1, 15, 14, 15);
 
-    public CableBlock(Properties properties) {
+    public CableBlock(@NotNull Properties properties) {
         super(properties);
         this.shape = this.makeShapes(10, 10, 10, 10, 10);
     }
@@ -55,6 +56,8 @@ public class CableBlock extends FenceBlock {
     public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         return mainShape;
     }
+
+
 
 
 

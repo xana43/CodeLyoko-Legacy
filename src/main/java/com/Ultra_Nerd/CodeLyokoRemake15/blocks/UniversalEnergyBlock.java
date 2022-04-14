@@ -1,11 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.blocks;
 
 
-import net.minecraft.world.level.block.Block;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import org.jetbrains.annotations.Nullable;
 
-public class UniversalEnergyBlock extends Block {
+public class UniversalEnergyBlock extends BaseEntityBlock {
 
     //private UniversalEnergyStorageTileEntity Text = new UniversalEnergyStorageTileEntity();
     public UniversalEnergyBlock() {
@@ -17,6 +21,12 @@ public class UniversalEnergyBlock extends Block {
 
         );
 
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
+        return null;
     }
 	/*
   @Override

@@ -7,7 +7,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-public class OverboardEntity extends LyokoVehicleEntity  {
+public final class OverboardEntity extends LyokoVehicleEntity  {
 
 
     public OverboardEntity(EntityType<?> p_38290_, Level p_38291_) {

@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 public class LyokoVehicleEntity extends Boat {
     public boolean movingUp = false;
     public boolean movingDown = false;
-    public LyokoVehicleEntity(EntityType<? extends LyokoVehicleEntity> p_38290_, Level p_38291_) {
+    public LyokoVehicleEntity(@NotNull EntityType<? extends LyokoVehicleEntity> p_38290_, @NotNull Level p_38291_) {
         super(p_38290_, p_38291_);
 
     }

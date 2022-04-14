@@ -33,6 +33,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -44,9 +45,9 @@ public class ElectroplatingTileEntity extends BlockEntity implements BlockEntity
     private boolean once = false;
     private final int maxSmeltTime = 1000;
     public int currentTime;
-    private final CustomItemHandler inventory;
+    private final @NotNull CustomItemHandler inventory;
 
-    public ElectroplatingTileEntity(BlockEntityType<ElectroplatingTileEntity> tileEntityTypeIn, BlockPos pos, BlockState state) {
+    public ElectroplatingTileEntity(@NotNull BlockEntityType<ElectroplatingTileEntity> tileEntityTypeIn, @NotNull BlockPos pos, @NotNull BlockState state) {
         super(tileEntityTypeIn,pos,state);
         this.inventory = new CustomItemHandler(2);
     }
@@ -59,7 +60,7 @@ public class ElectroplatingTileEntity extends BlockEntity implements BlockEntity
 
 
      @Nullable
-    private TestRecipe getRecipe(ItemStack stack) {
+    private TestRecipe getRecipe(@org.jetbrains.annotations.Nullable ItemStack stack) {
         if (stack == null) {
             return null;
         }
@@ -73,19 +74,19 @@ public class ElectroplatingTileEntity extends BlockEntity implements BlockEntity
         return null;
     }
 
-    public static Set<Recipe<?>> findRecipesByType(RecipeType<?> type, Level world) {
+    public static @NotNull Set<Recipe<?>> findRecipesByType(RecipeType<?> type, @org.jetbrains.annotations.Nullable Level world) {
         return world != null ? world.getRecipeManager().getRecipes().stream()
                 .filter(recipe -> recipe.getType() == type).collect(Collectors.toSet()) : Collections.emptySet();
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static Set<Recipe<?>> findRecipesByType(RecipeType<?> type) {
+    public static @NotNull Set<Recipe<?>> findRecipesByType(RecipeType<?> type) {
         ClientLevel world = Minecraft.getInstance().level;
         return world != null ? world.getRecipeManager().getRecipes().stream()
                 .filter(recipe -> recipe.getType() == type).collect(Collectors.toSet()) : Collections.emptySet();
     }
 
-    public static Set<ItemStack> getInputs(RecipeType<?> type, Level world) {
+    public static @NotNull Set<ItemStack> getInputs(RecipeType<?> type, Level world) {
         Set<ItemStack> inputs = new HashSet<ItemStack>();
         Set<Recipe<?>> recipes = findRecipesByType(type, world);
         for (Recipe<?> recipe : recipes) {
@@ -168,7 +169,7 @@ public class ElectroplatingTileEntity extends BlockEntity implements BlockEntity
 
     }
 
-    public final IItemHandlerModifiable getInventory() {
+    public final @NotNull IItemHandlerModifiable getInventory() {
         return this.inventory;
     }
 
@@ -180,7 +181,7 @@ public class ElectroplatingTileEntity extends BlockEntity implements BlockEntity
 
 
      @Override
-     public void handleUpdateTag(CompoundTag tag) {
+     public void handleUpdateTag(@NotNull CompoundTag tag) {
          this.load(tag);
 
      }
@@ -208,7 +209,7 @@ public class ElectroplatingTileEntity extends BlockEntity implements BlockEntity
       */
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+    public void onDataPacket(Connection net, @NotNull ClientboundBlockEntityDataPacket pkt) {
         this.load(Objects.requireNonNull(pkt.getTag()));
     }
 

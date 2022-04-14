@@ -30,6 +30,8 @@ version = "${mod_version}" as Object
 group = 'com.Ultra_Nerd.cm' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "${modid}_forge"
 
+
+
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -168,8 +170,8 @@ dependencies {
     // Specify the version of Minecraft to use. If this is any group other than 'net.minecraft', it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.18.2-40.0.36'
-    implementation fg.deobf('software.bernie.geckolib:geckolib-1.18-forge:3.0.12')
+    minecraft 'net.minecraftforge:forge:1.18.2-40.0.45'
+    implementation fg.deobf('software.bernie.geckolib:geckolib-1.18-forge:3.0.13')
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
@@ -187,6 +189,7 @@ dependencies {
 
 // Example for how to get properties into the manifest for reading at runtime.
 jar {
+
     manifest {
         attributes([
                 "Specification-Title"     : "CodeLyoko Legacy",
@@ -195,9 +198,21 @@ jar {
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "Xana43(Ultra_nerd), git hub contributors",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "Signing-Fingerprint"     : project.hasProperty('signSHA1') ? project.project('signSHA1'):'unsigned'
         ])
     }
+}
+
+task sourcesJar(type:Jar,dependsOn: classes)
+{
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+build.dependsOn sourcesJar
+artifacts {
+    archives sourcesJar
 }
 
 // Example configuration to allow publishing using the maven-publish plugin
@@ -206,7 +221,10 @@ jar.finalizedBy('reobfJar')
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
 // publish.dependsOn('reobfJar')
 
+
+
 publishing {
+
     publications {
         mavenJava(MavenPublication) {
             artifact jar

@@ -27,10 +27,10 @@ import javax.annotation.Nullable;
 import java.util.Locale;
 import java.util.Random;
 
-public class ColoredParticle extends Particle implements SpriteSet {
+public final class ColoredParticle extends Particle implements SpriteSet {
     private double posX, posY, posZ;
 
-    public ColoredParticle(ClientLevel world, double x, double y, double z, double xspeed, double yspeed, double zspeed, ColoredParticleData data) {
+    public ColoredParticle(@NotNull ClientLevel world, double x, double y, double z, double xspeed, double yspeed, double zspeed, @NotNull ColoredParticleData data) {
         super(world, x, y, z, xspeed, yspeed, zspeed);
         this.xd = xspeed;
         this.yd = yspeed;
@@ -75,12 +75,12 @@ public class ColoredParticle extends Particle implements SpriteSet {
     }
 
     @Override
-    public TextureAtlasSprite get(int p_107966_, int p_107967_) {
+    public @org.jetbrains.annotations.Nullable TextureAtlasSprite get(int p_107966_, int p_107967_) {
         return null;
     }
 
     @Override
-    public TextureAtlasSprite get(Random p_107968_) {
+    public @org.jetbrains.annotations.Nullable TextureAtlasSprite get(Random p_107968_) {
         return null;
     }
 
@@ -107,7 +107,7 @@ public class ColoredParticle extends Particle implements SpriteSet {
         public static final ParticleOptions.Deserializer<ColoredParticleData> DESERIALIZE = new ParticleOptions.Deserializer<>() {
 
             @Override
-            public @NotNull ColoredParticleData fromCommand(@NotNull ParticleType<ColoredParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+            public @NotNull ColoredParticleData fromCommand(@NotNull ParticleType<ColoredParticleData> particleTypeIn, @NotNull StringReader reader) throws CommandSyntaxException {
                 reader.expect(' ');
                 float red = (float) reader.readDouble();
                 reader.expect(' ');
@@ -121,7 +121,7 @@ public class ColoredParticle extends Particle implements SpriteSet {
 
 
             @Override
-            public @NotNull ColoredParticleData fromNetwork(@Nonnull ParticleType<ColoredParticleData> particleTypeIn, FriendlyByteBuf
+            public @NotNull ColoredParticleData fromNetwork(@Nonnull ParticleType<ColoredParticleData> particleTypeIn, @NotNull FriendlyByteBuf
                     buffer) {
                 return new ColoredParticleData(buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
             }
@@ -136,7 +136,7 @@ public class ColoredParticle extends Particle implements SpriteSet {
         }
 
         @Override
-        public void writeToNetwork(FriendlyByteBuf buffer) {
+        public void writeToNetwork(@NotNull FriendlyByteBuf buffer) {
             buffer.writeFloat(this.red);
             buffer.writeFloat(this.green);
             buffer.writeFloat(this.blue);

@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.items;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -12,28 +11,27 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public class MultiplayerPhone extends Item {
-    private final Minecraft mc;
-    public MultiplayerPhone(Properties properties) {
+
+    public MultiplayerPhone(@NotNull Properties properties) {
         super(properties);
-        mc = Minecraft.getInstance();
+
 
     }
 
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level worldIn, Player playerIn, InteractionHand handIn) {
         if (worldIn.players().size() > 1 && worldIn.isClientSide) {
-            assert this.mc.player != null;
-            Player thisplayer = this.mc.player;
-            this.mc.player.sendMessage(new TranslatableComponent("you sent a message"),thisplayer.getUUID());
+
+            playerIn.sendMessage(new TranslatableComponent("you sent a message"),playerIn.getUUID());
 
             Player[] playerEntities = (Player[]) worldIn.players().toArray();
             for(Player playerEntity : playerEntities)
             {
-                if(playerEntity != this.mc.player)
+                if(playerEntity != playerIn)
                 {
                     playerEntity.playSound(SoundEvents.ANVIL_LAND,1,1);
-                    playerEntity.sendMessage(new TranslatableComponent("Xana attack reported by " + thisplayer.getDisplayName()),playerEntity.getUUID());
+                    playerEntity.sendMessage(new TranslatableComponent("Xana attack reported by " + playerIn.getDisplayName()),playerEntity.getUUID());
                 }
             }
             return InteractionResultHolder.success(playerIn.getItemInHand(handIn));

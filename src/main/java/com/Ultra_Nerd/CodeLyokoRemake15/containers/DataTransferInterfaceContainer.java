@@ -12,20 +12,21 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class DataTransferInterfaceContainer extends AbstractContainerMenu {
+public final class DataTransferInterfaceContainer extends AbstractContainerMenu {
 
 
 
 
     private DataTransferInterfaceTileEntity dataTransferInterfaceTileEntity;
-    private BlockEntity de2;
+    private @Nullable BlockEntity de2;
     private Player thisplayer;
 
 
-    public DataTransferInterfaceContainer(int id, BlockPos pos, Inventory playerInv, Player player)
+    public DataTransferInterfaceContainer(int id, @NotNull BlockPos pos, Inventory playerInv, @NotNull Player player)
     {
 
         super(ModContainerTypes.DATA_TRANSFER_INTERFACE_CONTAINER.get(),id);
@@ -42,11 +43,11 @@ public class DataTransferInterfaceContainer extends AbstractContainerMenu {
 
 
 
-    public DataTransferInterfaceContainer(final int windowid, final Inventory inven, final FriendlyByteBuf data) {
+    public DataTransferInterfaceContainer(final int windowid, final @NotNull Inventory inven, final @NotNull FriendlyByteBuf data) {
         this(windowid, inven, getBlockTE(inven, data));
     }
 
-    private static DataTransferInterfaceTileEntity getBlockTE(final Inventory inventory, final FriendlyByteBuf data) {
+    private static @NotNull DataTransferInterfaceTileEntity getBlockTE(final @NotNull Inventory inventory, final @NotNull FriendlyByteBuf data) {
         Objects.requireNonNull(inventory, "player inventory can't be null");
         Objects.requireNonNull(data, "data can't be null");
         final BlockEntity tileAtPos = inventory.player.level.getBlockEntity(data.readBlockPos());

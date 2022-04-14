@@ -15,6 +15,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class InventoryBE extends BlockEntity {
 
@@ -22,10 +24,10 @@ public class InventoryBE extends BlockEntity {
     protected int timer;
     protected boolean requiresUpdate;
 
-    public final ItemStackHandler inventory;
+    public final @NotNull ItemStackHandler inventory;
     protected LazyOptional<ItemStackHandler> handler;
 
-    public InventoryBE(BlockEntityType<?> type, BlockPos pos, BlockState state, int size) {
+    public InventoryBE(@NotNull BlockEntityType<?> type, @NotNull BlockPos pos, @NotNull BlockState state, int size) {
         super(type, pos, state);
         if (size <= 0) {
             size = 1;
@@ -43,7 +45,7 @@ public class InventoryBE extends BlockEntity {
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+    public <T> @NotNull LazyOptional<T> getCapability(@NotNull Capability<T> cap, Direction side) {
         return cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? this.handler.cast()
                 : super.getCapability(cap, side);
     }
@@ -57,7 +59,7 @@ public class InventoryBE extends BlockEntity {
     }
 
     @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
+    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
@@ -67,12 +69,12 @@ public class InventoryBE extends BlockEntity {
     }
 
     @Override
-    public void handleUpdateTag(CompoundTag tag) {
+    public void handleUpdateTag(@NotNull CompoundTag tag) {
         super.handleUpdateTag(tag);
         load(tag);
     }
 
-    public ItemStack insertItem(int slot, ItemStack stack) {
+    public ItemStack insertItem(int slot, @NotNull ItemStack stack) {
         final ItemStack copy = stack.copy();
         stack.shrink(copy.getCount());
         this.requiresUpdate = true;
@@ -92,7 +94,7 @@ public class InventoryBE extends BlockEntity {
     }
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+    public void onDataPacket(Connection net, @NotNull ClientboundBlockEntityDataPacket pkt) {
         super.onDataPacket(net, pkt);
         handleUpdateTag(pkt.getTag());
     }
@@ -119,16 +121,16 @@ public class InventoryBE extends BlockEntity {
         tag.put("Inventory", this.inventory.serializeNBT());
     }
 
-    private ItemStackHandler createInventory() {
+    private @NotNull ItemStackHandler createInventory() {
         return new ItemStackHandler(this.size) {
             @Override
-            public ItemStack extractItem(int slot, int amount, boolean simulate) {
+            public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
                 InventoryBE.this.update();
                 return super.extractItem(slot, amount, simulate);
             }
 
             @Override
-            public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+            public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
                 InventoryBE.this.update();
                 return super.insertItem(slot, stack, simulate);
             }

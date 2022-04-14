@@ -7,25 +7,27 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.MantaEntity;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class ModelManta extends AnimatedGeoModel<MantaEntity> {
+public final class ModelManta extends AnimatedGeoModel<MantaEntity> {
 
 
 
 
     @Override
-    public ResourceLocation getAnimationFileLocation(MantaEntity animated) {
+    public @NotNull ResourceLocation getAnimationFileLocation(MantaEntity animated) {
         return CodeLyokoMain.CodeLyokoPrefix("animations/entities/manta.json");
     }
 
     @Override
-    public ResourceLocation getModelLocation(MantaEntity object) {
+    public @Nullable ResourceLocation getModelLocation(MantaEntity object) {
         return null;
     }
 
     @Override
-    public ResourceLocation getTextureLocation(MantaEntity object) {
+    public @Nullable ResourceLocation getTextureLocation(MantaEntity object) {
         return null;
     }
 

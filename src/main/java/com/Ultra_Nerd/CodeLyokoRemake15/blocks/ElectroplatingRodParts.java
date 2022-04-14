@@ -8,10 +8,11 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Stream;
 
-public class ElectroplatingRodParts extends Block {
+public final class ElectroplatingRodParts extends Block {
 
     private static final VoxelShape RodPart = Stream.of(
             Block.box(6, 0, 6, 10, 16, 10),
@@ -23,12 +24,12 @@ public class ElectroplatingRodParts extends Block {
         return Shapes.join(v1, v2, BooleanOp.OR);
     }).get();
 
-    public ElectroplatingRodParts(Properties properties) {
+    public ElectroplatingRodParts(@NotNull Properties properties) {
         super(properties);
     }
 
     @Override
-    public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
+    public @NotNull VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
         return RodPart;
     }
 }

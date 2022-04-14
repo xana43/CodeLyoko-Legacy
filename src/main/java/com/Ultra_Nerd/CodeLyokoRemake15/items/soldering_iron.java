@@ -2,9 +2,10 @@ package com.Ultra_Nerd.CodeLyokoRemake15.items;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class soldering_iron extends Item {
-    public soldering_iron(Properties properties) {
+    public soldering_iron(@NotNull Properties properties) {
         super(properties);
     }
 

@@ -5,6 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -25,17 +26,17 @@ public class UniversalEnergyStorageContainer extends AbstractContainerMenu imple
     }
 
     @Override
-    public ItemStack getItem(int p_18941_) {
+    public @org.jetbrains.annotations.Nullable ItemStack getItem(int p_18941_) {
         return null;
     }
 
     @Override
-    public ItemStack removeItem(int p_18942_, int p_18943_) {
+    public @NotNull ItemStack removeItem(int p_18942_, int p_18943_) {
         return null;
     }
 
     @Override
-    public ItemStack removeItemNoUpdate(int p_18951_) {
+    public @org.jetbrains.annotations.Nullable ItemStack removeItemNoUpdate(int p_18951_) {
         return null;
     }
 

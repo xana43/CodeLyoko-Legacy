@@ -15,15 +15,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class SaberKatana extends SwordItem {
+public final class SaberKatana extends SwordItem {
     private final float attackdamage;
     private final float attackspeed;
 
 
-    public SaberKatana(Tier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
+    public SaberKatana(@NotNull Tier tier, int attackDamageIn, float attackSpeedIn, @NotNull Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
         this.attackspeed = attackSpeedIn;
         this.attackdamage = (float) attackDamageIn + tier.getAttackDamageBonus();
@@ -37,9 +38,9 @@ public class SaberKatana extends SwordItem {
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
 
-        if (entityIn instanceof Player player) {
-            ItemStack IStack = player.getItemInHand(InteractionHand.OFF_HAND);
-            if (player.getItemInHand(InteractionHand.MAIN_HAND).getItem() == ModItems.DIGITAL_SABER.get()) {
+        if (entityIn instanceof final @NotNull Player player) {
+            final ItemStack IStack = player.getItemInHand(InteractionHand.OFF_HAND);
+            if (IStack.getItem() == ModItems.DIGITAL_SABER.get()) {
 
                 player.getInventory().add(player.getInventory().getFreeSlot(), IStack);
 
@@ -54,7 +55,7 @@ public class SaberKatana extends SwordItem {
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+    public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         Multimap<Attribute,AttributeModifier> multimap = HashMultimap.create();
 
         if (slot == EquipmentSlot.MAINHAND) {

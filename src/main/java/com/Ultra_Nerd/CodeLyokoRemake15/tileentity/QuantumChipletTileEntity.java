@@ -19,6 +19,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -26,7 +27,7 @@ public class QuantumChipletTileEntity extends InventoryBE implements MenuProvide
 
     protected NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
 
-    public QuantumChipletTileEntity(BlockEntityType<?> TileEntityIn, BlockPos pos, BlockState state, int size) {
+    public QuantumChipletTileEntity(@NotNull BlockEntityType<?> TileEntityIn, @NotNull BlockPos pos, @NotNull BlockState state, int size) {
         super(TileEntityIn,pos,state,1);
     }
 /*
@@ -124,7 +125,7 @@ public class QuantumChipletTileEntity extends InventoryBE implements MenuProvide
 
 
     @Override
-    public ItemStack insertItem(int slot, ItemStack stack) {
+    public ItemStack insertItem(int slot, @NotNull ItemStack stack) {
         ItemStack Istack = this.items.get(slot);
         boolean flag = !stack.isEmpty() && stack.equals(Istack) && ItemStack.isSame(stack, Istack);
         this.items.set(slot, stack);
@@ -178,7 +179,7 @@ public class QuantumChipletTileEntity extends InventoryBE implements MenuProvide
 
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+    public void onDataPacket(Connection net, @NotNull ClientboundBlockEntityDataPacket pkt) {
         this.load(pkt.getTag());
     }
 
@@ -190,7 +191,7 @@ public class QuantumChipletTileEntity extends InventoryBE implements MenuProvide
     }
 
     @Override
-    public void handleUpdateTag(CompoundTag tag) {
+    public void handleUpdateTag(@NotNull CompoundTag tag) {
         super.handleUpdateTag(tag);
         this.load(tag);
     }

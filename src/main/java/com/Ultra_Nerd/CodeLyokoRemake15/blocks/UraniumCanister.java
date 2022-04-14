@@ -15,14 +15,15 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class UraniumCanister extends Block {
+public final class UraniumCanister extends Block {
 
-    protected static final VoxelShape shape = Block.box(3.5D, 0.0D, 3.5D, 12.0D, 15.0D, 12.0D);
+    private static final VoxelShape shape = Block.box(3.5D, 0.0D, 3.5D, 12.0D, 15.0D, 12.0D);
 
-    public UraniumCanister(Properties properties) {
+    public UraniumCanister(@NotNull Properties properties) {
         super(properties);
     }
 
@@ -33,18 +34,16 @@ public class UraniumCanister extends Block {
     }
 
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        level.setBlockAndUpdate(pos, ModFluids.URANIUM.get().defaultBlockState());
+    public boolean onDestroyedByPlayer(BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
 
-
-        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+        return level.setBlockAndUpdate(pos, ModFluids.URANIUM.get().defaultBlockState());
     }
 
 
 
     @Nonnull
     @Override
-    public InteractionResult use(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, Player player, @Nonnull InteractionHand handIn, @Nonnull BlockHitResult hit) {
+    public InteractionResult use(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @NotNull Player player, @Nonnull InteractionHand handIn, @Nonnull BlockHitResult hit) {
 
 
         if (!player.isCreative()) {

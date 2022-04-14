@@ -6,26 +6,27 @@ import com.Ultra_Nerd.CodeLyokoRemake15.world.WorldGen.Carthage.CarthageGenerato
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.dimension.DimensionType;
+import org.jetbrains.annotations.NotNull;
 
 //@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID)
-public class ModDimensions {
+public final class ModDimensions {
     //registry references
 
 
     //dimensions
-    public static final ResourceKey<Level> SECTOR5  = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("carthage"));
-    public static final ResourceKey<DimensionType> SECTOR5_TYPE = ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("carthage_type"));
-
-    public static final ResourceKey<Level> FOREST = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("forest"));
-    public static final ResourceKey<Level> DESERT = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("desert"));
-    public static final ResourceKey<Level> ICE = ResourceKey.create(Registry.DIMENSION_REGISTRY, CodeLyokoMain.CodeLyokoPrefix("ice"));
-    public static final ResourceKey<Level> MOUNTAIN = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("mountain"));
-    public static final ResourceKey<Level> VOLCANO = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("volcano"));
-    public static final ResourceKey<Level> DIGITAL_OCEAN = ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix("digital_ocean"));
+    public static final ResourceKey<Level> SECTOR5  = generateDimensionResourceKey("carthage");
+    public static final ResourceKey<Level> FOREST = generateDimensionResourceKey("forest");
+    public static final ResourceKey<Level> DESERT = generateDimensionResourceKey("desert");
+    public static final ResourceKey<Level> ICE = generateDimensionResourceKey("ice");
+    public static final ResourceKey<Level> MOUNTAIN = generateDimensionResourceKey("mountain");
+    public static final ResourceKey<Level> VOLCANO = generateDimensionResourceKey("volcano");
+    public static final ResourceKey<Level> DIGITAL_OCEAN = generateDimensionResourceKey("digital_ocean");
 
 
-
+    private static @NotNull ResourceKey<Level> generateDimensionResourceKey(String name)
+    {
+       return ResourceKey.create(Registry.DIMENSION_REGISTRY,CodeLyokoMain.CodeLyokoPrefix(name));
+    }
 
 
 

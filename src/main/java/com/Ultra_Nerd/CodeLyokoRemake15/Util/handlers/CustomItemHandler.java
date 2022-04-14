@@ -4,9 +4,10 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
-public class CustomItemHandler extends ItemStackHandler {
-    public CustomItemHandler(int size, ItemStack... stacks) {
+public final class CustomItemHandler extends ItemStackHandler {
+    public CustomItemHandler(int size, ItemStack @NotNull ... stacks) {
         super(size);
         for (int i = 0; i < stacks.length; i++) {
             this.stacks.set(i, stacks[i]);
@@ -29,7 +30,7 @@ public class CustomItemHandler extends ItemStackHandler {
         return false;
     }
 
-    public ItemStack decrStackSize(int index, int count) {
+    public @NotNull ItemStack decrStackSize(int index, int count) {
         ItemStack stack = getStackInSlot(index);
         stack.shrink(count);
         this.onContentsChanged(index);
@@ -41,7 +42,7 @@ public class CustomItemHandler extends ItemStackHandler {
         this.onContentsChanged(index);
     }
 
-    public NonNullList<ItemStack> toNonNullList() {
+    public @NotNull NonNullList<ItemStack> toNonNullList() {
         NonNullList<ItemStack> items = NonNullList.create();
         for (ItemStack stack : this.stacks) {
             items.add(stack);
@@ -49,7 +50,7 @@ public class CustomItemHandler extends ItemStackHandler {
         return items;
     }
 
-    public void setNonNullList(NonNullList<ItemStack> items) {
+    public void setNonNullList(@NotNull NonNullList<ItemStack> items) {
         if (items.size() == 0)
             return;
         if (items.size() != this.getSlots())

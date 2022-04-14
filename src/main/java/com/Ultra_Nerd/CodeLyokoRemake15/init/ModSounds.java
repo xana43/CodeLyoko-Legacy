@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 
 
-public class ModSounds {
+public final class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, CodeLyokoMain.MOD_ID);
     public static final HashMap<ResourceKey<Level>,Lazy<Music>> LAZY_HASH_MAP = new HashMap<>();
 
@@ -40,9 +40,13 @@ public class ModSounds {
     //for music discs
     public static final RegistryObject<RecordItem> LYOKO_DISC = ModItems.ITEMS.register("lyokodisc", () -> new RecordItem((byte) 10, LAZY_THEME, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).stacksTo(1).rarity(Rarity.RARE)));
     //for sound events
+
+
     public static final RegistryObject<SoundEvent> BLOKAMBIENT = SOUNDS.register("entity.blok.ambient", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "entity.blok.ambient")));
     public static final RegistryObject<SoundEvent> BLOKHURT = SOUNDS.register("entity.blok.hurt", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "entity.blok.hurt")));
     public static final RegistryObject<SoundEvent> GUISOUND = SOUNDS.register("gui", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "gui")));
+    public static final RegistryObject<SoundEvent> OPENTOWERGUISOUND = SOUNDS.register("tower_gui_sound", () -> new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("tower_gui_sound")));
+    public static final RegistryObject<SoundEvent> CURSORBLINK = SOUNDS.register("interface_cursor",() -> new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("interface_cursor")));
     public static final RegistryObject<SoundEvent> LASERARROW = SOUNDS.register("laser", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "laser")));
     public static final RegistryObject<SoundEvent> QUANTUMZAP = SOUNDS.register("quantum_zap", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "quantum_zap")));
     public static final RegistryObject<SoundEvent> MEGATANKROLL = SOUNDS.register("entity.megatank.move", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "entity.megatank.move")));
@@ -68,13 +72,13 @@ public class ModSounds {
 
     }
     //methods that streamline the Lazy sound event creation process
-    private static Lazy<Music> RegisterThemeSounds(@NotNull String registryName,@NotNull ResourceLocation location)
+    private static @NotNull Lazy<Music> RegisterThemeSounds(@NotNull String registryName, @NotNull ResourceLocation location)
     {
         SoundEvent tmpEvent = new SoundEvent(location);
         SOUNDS.register(registryName, () -> tmpEvent);
         return Lazy.of(()->new Music(tmpEvent,0,0,true));
     }
-    private static Lazy<SoundEvent> RegisterLazyDuplicateSounds(@NotNull String registryName,@NotNull ResourceLocation location)
+    private static @NotNull Lazy<SoundEvent> RegisterLazyDuplicateSounds(@NotNull String registryName, @NotNull ResourceLocation location)
     {
         SoundEvent tmpEvent = new SoundEvent(location);
         SOUNDS.register(registryName, () -> tmpEvent);

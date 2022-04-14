@@ -9,7 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModPlacers {
+public final class ModPlacers {
     public static final DeferredRegister<FoliagePlacerType<?>> placerTypes = DeferredRegister.create(ForgeRegistries.FOLIAGE_PLACER_TYPES, CodeLyokoMain.MOD_ID);
     public static final DeferredRegister<TreeDecoratorType<?>> DECORATOR_TYPE_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.TREE_DECORATOR_TYPES,CodeLyokoMain.MOD_ID);
     public static final RegistryObject<TreeDecoratorType<?>> DIGITAL_TREE_DECORATOR = DECORATOR_TYPE_DEFERRED_REGISTER.register("digital_tree_core_placer", () ->

@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class HologramProjectorTileEntity extends BlockEntity implements BlockEntityTicker<HologramProjectorTileEntity>//, INamedContainerProvider
 {
-    public HologramProjectorTileEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
+    public HologramProjectorTileEntity(@NotNull BlockEntityType<?> p_155228_, @NotNull BlockPos p_155229_, @NotNull BlockState p_155230_) {
         super(p_155228_, p_155229_, p_155230_);
     }
 

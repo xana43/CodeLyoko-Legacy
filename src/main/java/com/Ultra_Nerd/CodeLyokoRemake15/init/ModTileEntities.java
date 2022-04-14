@@ -1,17 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.init;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ComputerControlPanelTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.InfusingChamberTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.ScannerTileEntity;
-import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.TowerInterfaceTileEntity;
+import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.*;
 import com.Ultra_Nerd.CodeLyokoRemake15.tileentity.test.DataTransferInterfaceTileEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModTileEntities {
+public final class ModTileEntities {
     public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, CodeLyokoMain.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<InfusingChamberTileEntity>> INFUSING_CHAMBER_TILE_ENTITY =
@@ -67,10 +64,10 @@ public class ModTileEntities {
 
     public static final RegistryObject<BlockEntityType<DataTransferInterfaceTileEntity>> DATA_TRANSFER_INTERFACE_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("data_transfer_interface_tile_entity", () -> BlockEntityType.Builder.of(DataTransferInterfaceTileEntity::new,
-                    ModBlocks.DATA_TRANSFER_INTERFACE.get()).build(null));/*
+                    ModBlocks.DATA_TRANSFER_INTERFACE.get()).build(null));
     public static final RegistryObject<BlockEntityType<ComputerReactorTileEntity>> REACTOR_BLOCK_ENTITY =
             TILE_ENTITY_TYPES.register("computer_reactor_tile_entity",() -> BlockEntityType.Builder.of(ComputerReactorTileEntity::new,
                     ModBlocks.URANUM_REACTOR.get()).build(null));
 
- */
+
 }

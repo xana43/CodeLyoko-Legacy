@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.NotNull;
 
 public class ComputerInterfaceTE extends BlockEntity implements BlockEntityTicker<ComputerInterfaceTE> {
     //public ComputerInterfaceTE(BlockEntityType<?> tileEntityTypeIn) {
@@ -22,7 +23,7 @@ public class ComputerInterfaceTE extends BlockEntity implements BlockEntityTicke
 
     private boolean once = false;
 
-    public ComputerInterfaceTE(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
+    public ComputerInterfaceTE(@NotNull BlockEntityType<?> p_155228_, @NotNull BlockPos p_155229_, @NotNull BlockState p_155230_) {
         super(p_155228_, p_155229_, p_155230_);
     }
     /*

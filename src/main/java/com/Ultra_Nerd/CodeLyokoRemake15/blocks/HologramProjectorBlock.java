@@ -10,12 +10,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Material;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-public class HologramProjectorBlock extends BaseEntityBlock{
-    public static BooleanProperty VALID = BooleanProperty.create("valid");
+public final class HologramProjectorBlock extends BaseEntityBlock{
+    public static @NotNull BooleanProperty VALID = BooleanProperty.create("valid");
 
     public HologramProjectorBlock() {
         super(Block.Properties.of(Material.METAL)
@@ -28,15 +28,14 @@ public class HologramProjectorBlock extends BaseEntityBlock{
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder.add(BooleanProperty.create("valid")));
     }
 
 
 
-    @Nullable
     @Override
-    public BlockState getStateForPlacement(@Nonnull BlockPlaceContext context) {
+    public @NotNull BlockState getStateForPlacement(@Nonnull BlockPlaceContext context) {
         return this.defaultBlockState().setValue(VALID, false);
     }
 
@@ -44,7 +43,7 @@ public class HologramProjectorBlock extends BaseEntityBlock{
 
     @org.jetbrains.annotations.Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return null;//ModTileEntities.HOLOGRAM_TILE_ENTITY.get().create(pos, state);
     }
 

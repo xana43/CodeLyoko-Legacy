@@ -25,11 +25,11 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class YumiFans extends TridentItem {
+public final class YumiFans extends TridentItem {
     private static final float Velocity = 1f;
     private static final float FanDamage = 1f;
     private static final int thrownTime = 0;
-    public YumiFans(Properties builder) {
+    public YumiFans(@NotNull Properties builder) {
         super(builder);
 
 
@@ -41,7 +41,7 @@ public class YumiFans extends TridentItem {
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+    public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         Multimap<Attribute,AttributeModifier> multimap = HashMultimap.create();
 
         if (slot == EquipmentSlot.MAINHAND) {
@@ -58,9 +58,9 @@ public class YumiFans extends TridentItem {
             int i = this.getUseDuration(stack) - timeLeft;
             if (i >= 10) {
 
-                EntityFan fan = new EntityFan(worldIn, playerentity, stack);
+                final EntityFan fan = new EntityFan(worldIn, playerentity, stack);
                 fan.setPos(playerentity.getX(), playerentity.getEyeY(), playerentity.getZ());
-                fan.shootFromRotation(fan, playerentity.getXRot(), playerentity.getYRot(), 0.0F, 2.5F * 0.5F,0.0F);
+                fan.shootFromRotation(fan, playerentity.getXRot(), playerentity.getYRot(), 0.0F, 1.25f,0.0F);
                 fan.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                 worldIn.addFreshEntity(fan);
 
@@ -76,8 +76,8 @@ public class YumiFans extends TridentItem {
 
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level worldIn, Player playerIn, @NotNull InteractionHand handIn) {
-        ItemStack heldItem = playerIn.getItemInHand(handIn);
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level worldIn, @NotNull Player playerIn, @NotNull InteractionHand handIn) {
+        final ItemStack heldItem = playerIn.getItemInHand(handIn);
         if (playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() != ModItems.YUMI_CHESTPLATE.get() &&
                 playerIn.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() != ModItems.YUMI_LEGGINGS.get() &&
                 playerIn.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() != ModItems.YUMI_BOOTS.get()) {
@@ -96,7 +96,7 @@ public class YumiFans extends TridentItem {
 
 
     @Override
-    public void inventoryTick(ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(@NotNull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         if (!stack.isEnchanted()) {
             stack.enchant(Enchantments.LOYALTY, Enchantments.LOYALTY.getMaxLevel());
             stack.enchant(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());

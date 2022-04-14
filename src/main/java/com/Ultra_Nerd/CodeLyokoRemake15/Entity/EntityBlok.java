@@ -36,7 +36,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class EntityBlok extends Skeleton implements IAnimatable, RangedAttackMob {
+public final class EntityBlok extends Skeleton implements IAnimatable, RangedAttackMob {
 
     private final AnimationFactory manager = new AnimationFactory(this);
     private final AnimationController controller = new AnimationController(this, "blokcontroller", 20, this::pred);
@@ -48,7 +48,7 @@ public class EntityBlok extends Skeleton implements IAnimatable, RangedAttackMob
     }
 
  */
-public EntityBlok(EntityType<? extends Skeleton> type, Level world) {
+public EntityBlok(EntityType<? extends Skeleton> type, @NotNull Level world) {
     super(ModEntities.BLOK.get(), world);
     this.setAggressive(true);
     AnimationController.addModelFetcher((AnimationController.ModelFetcher<EntityBlok>) iAnimatable -> new ModelBlok());
@@ -56,13 +56,13 @@ public EntityBlok(EntityType<? extends Skeleton> type, Level world) {
 
 
 
-    private <E extends EntityBlok> PlayState pred(AnimationEvent<E> event) {
+    private <E extends EntityBlok> @NotNull PlayState pred(AnimationEvent<E> event) {
         return PlayState.STOP;
     }
 
 
     @Override
-    public void registerControllers(AnimationData data) {
+    public void registerControllers(@NotNull AnimationData data) {
         data.addAnimationController(controller);
     }
 
@@ -113,7 +113,7 @@ public EntityBlok(EntityType<? extends Skeleton> type, Level world) {
 
 
     @Override
-    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
+    protected @NotNull SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
         // TODO Auto-generated method stub
         return ModSounds.BLOKHURT.get();
     }
@@ -121,7 +121,7 @@ public EntityBlok(EntityType<? extends Skeleton> type, Level world) {
 
 
     @Override
-    protected SoundEvent getAmbientSound() {
+    protected @NotNull SoundEvent getAmbientSound() {
         // TODO Auto-generated method stub
         return ModSounds.BLOKAMBIENT.get();
     }
@@ -139,7 +139,7 @@ public EntityBlok(EntityType<? extends Skeleton> type, Level world) {
 
     @Override
     protected void registerGoals() {
-        super.registerGoals();
+        //super.registerGoals();
         this.goalSelector.addGoal(1,new FloatGoal(this));
         this.goalSelector.addGoal(2,new RangedAttackGoal(this,1,10,6));
         this.goalSelector.addGoal(3,new WaterAvoidingRandomStrollGoal(this,1D));
@@ -158,7 +158,7 @@ public EntityBlok(EntityType<? extends Skeleton> type, Level world) {
                 .add(Attributes.FOLLOW_RANGE, 20D);
 
     }
-    public static boolean canSpawn(EntityType<? extends EntityBlok> type, LevelAccessor world, MobSpawnType reason, BlockPos pos, Random rand) {
+    public static boolean canSpawn(@NotNull EntityType<? extends EntityBlok> type, @NotNull LevelAccessor world, @NotNull MobSpawnType reason, @NotNull BlockPos pos, @NotNull Random rand) {
         return Skeleton.checkAnyLightMonsterSpawnRules(type,world,reason,pos,rand) && (world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_ROCK.get() || world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_GRASS.get()
                 || world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_ICE.get() || world.getBlockState(pos).getBlock() == ModBlocks.VOLCANO_GROUND.get());
     }
@@ -169,7 +169,7 @@ public EntityBlok(EntityType<? extends Skeleton> type, Level world) {
     }
 
     @Override
-    public AnimationFactory getFactory() {
+    public @NotNull AnimationFactory getFactory() {
         return manager;
     }
 
@@ -183,8 +183,8 @@ public EntityBlok(EntityType<? extends Skeleton> type, Level world) {
         double d1 = pTarget.getY(0.3333333333333333D) - abstractarrow.getY();
         double d2 = pTarget.getZ() - this.getZ();
         double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        abstractarrow.shoot(d0, d1 + d3 * (double)0.2F, d2, 4F, (float)(14 - this.level.getDifficulty().getId() * 4));
-        this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        abstractarrow.shoot(d0, d1 + d3 * (double)0.2F, d2, 4F, (float)(14 - this.level.getDifficulty().getId() << 2));
+        this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
         this.level.addFreshEntity(abstractarrow);
     }
 

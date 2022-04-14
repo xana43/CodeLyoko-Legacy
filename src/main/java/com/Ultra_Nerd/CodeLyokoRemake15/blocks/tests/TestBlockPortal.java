@@ -4,7 +4,6 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Util.handlers.DimensionTeleporter;
 import com.Ultra_Nerd.CodeLyokoRemake15.init.ModDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -15,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class TestBlockPortal extends Block implements ITeleporter {
 
-    public TestBlockPortal(Properties properties) {
+    public TestBlockPortal(@NotNull Properties properties) {
         super(properties);
 
     }
@@ -35,10 +34,10 @@ public class TestBlockPortal extends Block implements ITeleporter {
         }
     }
 
-    private void teleportTo(ServerPlayer player, BlockPos pos, ResourceKey<Level> levelResourceKey)
+    private void teleportTo(@NotNull ServerPlayer player, @NotNull BlockPos pos, @NotNull ResourceKey<Level> levelResourceKey)
     {
-        ServerLevel serverLevel = player.getServer().getLevel(levelResourceKey);
-        DimensionTeleporter.teleportPlayerToWorld(player,serverLevel,new BlockPos(pos.getX(),pos.getY(),pos.getZ()),false);
+
+        DimensionTeleporter.teleportPlayerToWorld(player,player.getServer().getLevel(levelResourceKey),new BlockPos(pos.getX(),pos.getY(),pos.getZ()),false);
     }
 
 

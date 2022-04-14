@@ -14,12 +14,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class GuardianEntity extends FlyingMob implements RangedAttackMob {
+public final class GuardianEntity extends FlyingMob implements RangedAttackMob {
 
-    public GuardianEntity(EntityType<? extends FlyingMob> type, Level worldIn) {
+    public GuardianEntity(@NotNull EntityType<? extends FlyingMob> type, @NotNull Level worldIn) {
         super(type, worldIn);
 
     }
@@ -27,7 +28,7 @@ public class GuardianEntity extends FlyingMob implements RangedAttackMob {
 
 
     @Override
-    protected AABB getBoundingBoxForPose(Pose p_20218_) {
+    protected @NotNull AABB getBoundingBoxForPose(Pose p_20218_) {
         return super.getBoundingBoxForPose(p_20218_);
     }
 

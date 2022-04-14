@@ -18,7 +18,7 @@ import java.util.List;
 public class BlisterCopper extends Item {
     private short I = 500;
 
-    public BlisterCopper(Properties properties) {
+    public BlisterCopper(@NotNull Properties properties) {
         super(properties);
     }
 

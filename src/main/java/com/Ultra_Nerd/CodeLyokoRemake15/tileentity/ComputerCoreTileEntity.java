@@ -3,9 +3,10 @@ package com.Ultra_Nerd.CodeLyokoRemake15.tileentity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class ComputerCoreTileEntity extends InventoryBE {
-    public ComputerCoreTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int size) {
+    public ComputerCoreTileEntity(@NotNull BlockEntityType<?> type, @NotNull BlockPos pos, @NotNull BlockState state, int size) {
         super(type, pos, state, size);
     }
     //public ComputerCoreTileEntity(BlockEntityType<?> tileEntityTypeIn) {

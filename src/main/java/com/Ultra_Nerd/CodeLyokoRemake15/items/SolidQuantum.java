@@ -5,23 +5,24 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.jetbrains.annotations.NotNull;
 
 //@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class SolidQuantum extends Item {
-    public SolidQuantum(Properties properties) {
+public final class SolidQuantum extends Item {
+    public SolidQuantum(final @NotNull Properties properties) {
         super(properties);
 
     }
 
     @Override
-    public boolean isDamageable(ItemStack stack) {
+    public boolean isDamageable(final ItemStack stack) {
         return false;
     }
 
 
 
     @SubscribeEvent
-    public void ItemInvulnerable(ItemExpireEvent event) {
+    public void ItemInvulnerable(final @NotNull ItemExpireEvent event) {
         if (event.getEntityItem().getItem().getItem() == this) {
 
             event.getEntityItem().setInvulnerable(true);
@@ -30,7 +31,7 @@ public class SolidQuantum extends Item {
     }
 
     @SubscribeEvent
-    public void ItemInvulnerable2(ItemEvent event) {
+    public void ItemInvulnerable2(final @NotNull ItemEvent event) {
         if (event.getEntityItem().getItem().getItem() == this) {
 
             event.getEntityItem().setInvulnerable(true);

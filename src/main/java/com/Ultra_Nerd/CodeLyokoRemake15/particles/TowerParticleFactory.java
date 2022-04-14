@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 
-public class TowerParticleFactory implements ParticleProvider<TowerParticleData> {
+public final class TowerParticleFactory implements ParticleProvider<TowerParticleData> {
     private final SpriteSet spriteSet;
 
     public TowerParticleFactory(SpriteSet sprite) {

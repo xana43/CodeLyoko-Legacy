@@ -4,18 +4,17 @@ import com.Ultra_Nerd.CodeLyokoRemake15.Entity.vehicle.LyokoVehicleEntity;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class EntitySkid extends LyokoVehicleEntity{
+public final class EntitySkid extends LyokoVehicleEntity{
 
 
 
-    public EntitySkid(EntityType<? extends LyokoVehicleEntity> entitySkidEntityType, Level world) {
+    public EntitySkid(@NotNull EntityType<? extends LyokoVehicleEntity> entitySkidEntityType, @NotNull Level world) {
         super(entitySkidEntityType, world);
 
 
@@ -85,19 +84,10 @@ public class EntitySkid extends LyokoVehicleEntity{
     public void tick() {
         super.tick();
         this.setNoGravity(this.isUnderWater());
-            getPassengers().forEach(passenger -> {
-
-                if(passenger instanceof Player player)
-                {
-                    player.setAirSupply(passenger.getMaxAirSupply());
-
-
-
-
-
-
-                }
-            });
+          for (int i = 0; i < getPassengers().size(); i++)
+          {
+              getPassengers().get(i).setAirSupply(getPassengers().get(i).getMaxAirSupply());
+          }
 
     }
 

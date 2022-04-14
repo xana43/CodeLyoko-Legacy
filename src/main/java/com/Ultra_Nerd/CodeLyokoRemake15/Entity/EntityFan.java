@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -22,16 +23,16 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nonnull;
 
-public class EntityFan extends ThrownTrident implements IAnimatable {
+public final class EntityFan extends ThrownTrident implements IAnimatable {
     private boolean dealtDamage;
     private final AnimationFactory manager = new AnimationFactory(this);
-    private final AnimationController controller = new AnimationController(this, "fancontroller", 20, this::animationpred);
+    private final AnimationController<?> controller = new AnimationController<>(this, "fancontroller", 20, this::animationpred);
     private ItemStack thrownstack;
-    public EntityFan(EntityType<? extends ThrownTrident> type, Level worldIn) {
+    public EntityFan(@NotNull EntityType<? extends ThrownTrident> type, @NotNull Level worldIn) {
         super(type,worldIn);
     }
 
-    public EntityFan(Level world, LivingEntity thrower, ItemStack thrownStackIn) {
+    public EntityFan(@NotNull Level world, LivingEntity thrower, ItemStack thrownStackIn) {
         super(ModEntities.FAN.get(), world);
         this.thrownstack = new ItemStack(ModItems.YUMI_TRADITONAL_FANS.get());
 
@@ -73,7 +74,7 @@ public class EntityFan extends ThrownTrident implements IAnimatable {
         super.tick();
     }
 
-    private <E extends EntityFan> PlayState animationpred(AnimationEvent<E> event) {
+    private <E extends EntityFan> @NotNull PlayState animationpred(AnimationEvent<E> event) {
 
         controller.setAnimation(new AnimationBuilder().addAnimation("animation.fan.spin", true));
         return PlayState.CONTINUE;
@@ -82,12 +83,12 @@ public class EntityFan extends ThrownTrident implements IAnimatable {
     }
 
     @Override
-    public AnimationFactory getFactory() {
+    public @NotNull AnimationFactory getFactory() {
         return manager;
     }
 
     @Override
-    public void registerControllers(AnimationData data) {
+    public void registerControllers(@NotNull AnimationData data) {
         data.addAnimationController(controller);
     }
 }

@@ -7,25 +7,27 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.HornetEntity;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class ModelHornet<T extends HornetEntity> extends AnimatedGeoModel<HornetEntity> {
+public final class ModelHornet<T extends HornetEntity> extends AnimatedGeoModel<HornetEntity> {
 
 
 
 
     @Override
-    public ResourceLocation getModelLocation(HornetEntity object) {
+    public @Nullable ResourceLocation getModelLocation(HornetEntity object) {
         return null;
     }
 
     @Override
-    public ResourceLocation getTextureLocation(HornetEntity object) {
+    public @Nullable ResourceLocation getTextureLocation(HornetEntity object) {
         return null;
     }
 
     @Override
-    public ResourceLocation getAnimationFileLocation(HornetEntity animatable) {
+    public @NotNull ResourceLocation getAnimationFileLocation(HornetEntity animatable) {
         return new ResourceLocation(CodeLyokoMain.MOD_ID, "animations/entities/hornet.json");
     }
 }

@@ -7,23 +7,25 @@ package com.Ultra_Nerd.CodeLyokoRemake15.Entity.model;
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoRemake15.Entity.KankrelatEntity;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class ModelKankrelat extends AnimatedGeoModel<KankrelatEntity> {
+public final class ModelKankrelat extends AnimatedGeoModel<KankrelatEntity> {
 
 
     @Override
-    public ResourceLocation getAnimationFileLocation(KankrelatEntity animatable) {
+    public @NotNull ResourceLocation getAnimationFileLocation(KankrelatEntity animatable) {
         return CodeLyokoMain.CodeLyokoPrefix("animations/entities/kankrelat.json");
     }
 
     @Override
-    public ResourceLocation getModelLocation(KankrelatEntity object) {
+    public @Nullable ResourceLocation getModelLocation(KankrelatEntity object) {
         return null;
     }
 
     @Override
-    public ResourceLocation getTextureLocation(KankrelatEntity object) {
+    public @Nullable ResourceLocation getTextureLocation(KankrelatEntity object) {
         return null;
     }
 

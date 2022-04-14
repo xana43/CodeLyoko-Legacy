@@ -30,6 +30,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -37,7 +38,7 @@ import javax.annotation.Nullable;
 public class InfusingChamberTileEntity extends InventoryBE implements BlockEntityTicker<InfusingChamberTileEntity>, MenuProvider {
 
 
-    public ItemStackHandler handler = new ItemStackHandler(4);
+    public @NotNull ItemStackHandler handler = new ItemStackHandler(4);
     private String customName;
     private ItemStack smelting = ItemStack.EMPTY;
     public static final Component TITLE = new TranslatableComponent("container." + CodeLyokoMain.MOD_ID + ".infusing_chamber");
@@ -50,7 +51,7 @@ public class InfusingChamberTileEntity extends InventoryBE implements BlockEntit
         this(ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get());
     }*/
 
-    public InfusingChamberTileEntity(BlockPos pos, BlockState state) {
+    public InfusingChamberTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         super(ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get(),pos,state,4);
     }
 
@@ -60,7 +61,7 @@ public class InfusingChamberTileEntity extends InventoryBE implements BlockEntit
 
     @Nonnull
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+    public <T> @NotNull LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return LazyOptional.of(() -> (T) this.handler);
         }
@@ -124,7 +125,7 @@ public class InfusingChamberTileEntity extends InventoryBE implements BlockEntit
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static boolean isBurning(InfusingChamberTileEntity te) {
+    public static boolean isBurning(@NotNull InfusingChamberTileEntity te) {
         return te.getField(0) > 0;
     }
 
@@ -207,7 +208,7 @@ public class InfusingChamberTileEntity extends InventoryBE implements BlockEntit
         }
     }
 
-    public static int getItemBurnTime(ItemStack fuel) {
+    public static int getItemBurnTime(@NotNull ItemStack fuel) {
         if (!fuel.isEmpty()) {
             Item item = fuel.getItem();
 
@@ -226,12 +227,12 @@ public class InfusingChamberTileEntity extends InventoryBE implements BlockEntit
         return 0;
     }
 
-    public static boolean isItemFuel(ItemStack fuel) {
+    public static boolean isItemFuel(@NotNull ItemStack fuel) {
 
         return getItemBurnTime(fuel) > 0;
     }
 
-    public boolean isUsableByPlayer(Player player) {
+    public boolean isUsableByPlayer(@NotNull Player player) {
         assert this.level != null;
         return this.level.getBlockEntity(this.getBlockPos()) == this &&
                 player.distanceToSqr((double) this.getBlockPos().getX() + 0.5D, (double) this.getBlockPos().getY() + 0.5D, (double) this.getBlockPos().getZ() + 0.5D) <= 64.0D;

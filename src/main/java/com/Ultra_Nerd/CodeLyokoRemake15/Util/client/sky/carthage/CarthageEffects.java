@@ -9,7 +9,7 @@ import net.minecraftforge.client.IWeatherRenderHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class CarthageEffects extends DimensionSpecialEffects {
+public final class CarthageEffects extends DimensionSpecialEffects {
 
     public CarthageEffects() {
         super(Float.NaN, false, SkyType.NONE, true, true);
@@ -58,7 +58,7 @@ public class CarthageEffects extends DimensionSpecialEffects {
     }
 
     @Override
-    public float[] getSunriseColor(float pTimeOfDay, float pPartialTicks) {
+    public float @Nullable [] getSunriseColor(float pTimeOfDay, float pPartialTicks) {
         return null;
     }
 
@@ -68,9 +68,8 @@ public class CarthageEffects extends DimensionSpecialEffects {
     }
 
 
-    @Nullable
     @Override
-    public ISkyRenderHandler getSkyRenderHandler() {
+    public @NotNull ISkyRenderHandler getSkyRenderHandler() {
 
 
         return new CustomCarthadgeSky();

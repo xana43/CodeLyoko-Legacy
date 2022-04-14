@@ -26,6 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -37,12 +38,12 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class MegaTankEntity extends Skeleton implements IAnimatable  {
+public final class MegaTankEntity extends Skeleton implements IAnimatable  {
 
    private final AnimationFactory TankManager = new AnimationFactory(this);
     private final AnimationController<?> Tankcontroller = new AnimationController<>(this, "movecontroller", 20, this::animationPred);
 
-    public MegaTankEntity(EntityType<? extends Skeleton> type, Level world) {
+    public MegaTankEntity(EntityType<? extends Skeleton> type, @NotNull Level world) {
         super(ModEntities.MEGATANK.get(), world);
 
     }
@@ -83,7 +84,7 @@ public class MegaTankEntity extends Skeleton implements IAnimatable  {
 
 
 
-    public static AttributeSupplier.Builder registerAttributes() {
+    public static AttributeSupplier.@NotNull Builder registerAttributes() {
         // TODO Auto-generated method stub
         return Skeleton.createAttributes().add(Attributes.KNOCKBACK_RESISTANCE,1D)
                 .add(Attributes.MAX_HEALTH,200D)
@@ -104,12 +105,12 @@ public class MegaTankEntity extends Skeleton implements IAnimatable  {
 
 
     @Override
-    protected SoundEvent getDeathSound() {
+    protected @NotNull SoundEvent getDeathSound() {
         return ModSounds.MEGATANKDIE.get();
     }
 
     @Override
-    protected SoundEvent getAmbientSound() {
+    protected @Nullable SoundEvent getAmbientSound() {
         return null;
     }
 
@@ -137,7 +138,7 @@ public class MegaTankEntity extends Skeleton implements IAnimatable  {
     }
 
     @Override
-    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
+    protected @NotNull SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
         boolean random = new Random().nextBoolean();
         if (random) {
             return ModSounds.MEGATANKHURT1.get();
@@ -145,7 +146,7 @@ public class MegaTankEntity extends Skeleton implements IAnimatable  {
             return ModSounds.MEGATANKHURT2.get();
         }
     }
-    public static boolean canSpawn(EntityType<? extends MegaTankEntity> type, LevelAccessor world, MobSpawnType reason, BlockPos pos, Random rand) {
+    public static boolean canSpawn(@NotNull EntityType<? extends MegaTankEntity> type, @NotNull LevelAccessor world, @NotNull MobSpawnType reason, @NotNull BlockPos pos, @NotNull Random rand) {
         return Skeleton.checkAnyLightMonsterSpawnRules(type,world,reason,pos,rand) && (world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_ROCK.get() || world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_GRASS.get()
                 || world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_ICE.get() || world.getBlockState(pos).getBlock() == ModBlocks.VOLCANO_GROUND.get());
     }
@@ -159,7 +160,7 @@ public class MegaTankEntity extends Skeleton implements IAnimatable  {
     }
 
     @Override
-    public void registerControllers(AnimationData data) {
+    public void registerControllers(@NotNull AnimationData data) {
     data.addAnimationController(Tankcontroller);
     }
 
@@ -173,11 +174,11 @@ public class MegaTankEntity extends Skeleton implements IAnimatable  {
         double d1 = pTarget.getY(0.3333333333333333D) - abstractarrow.getY();
         double d2 = pTarget.getZ() - this.getZ();
         double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        abstractarrow.shoot(d0, d1 + d3 * (double)0.2F, d2, 4F, (float)(14 - this.level.getDifficulty().getId() * 4));
-        this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        abstractarrow.shoot(d0, d1 + d3 * (double)0.2F, d2, 4F, (float)(14 - this.level.getDifficulty().getId() << 2));
+        this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
         this.level.addFreshEntity(abstractarrow);
     }
-    private <E extends MegaTankEntity> PlayState animationPred(AnimationEvent<E> event) {
+    private <E extends MegaTankEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
 
         if ((event.isMoving() || event.getAnimatable().isSwimming()) && !event.getAnimatable().isAggressive()) {
             Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.move", true));
@@ -196,7 +197,7 @@ public class MegaTankEntity extends Skeleton implements IAnimatable  {
     }
 
     @Override
-    public AnimationFactory getFactory() {
+    public @NotNull AnimationFactory getFactory() {
         return TankManager;
     }
 

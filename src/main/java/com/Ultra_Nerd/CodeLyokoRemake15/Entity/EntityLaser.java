@@ -5,31 +5,33 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class EntityLaser extends Arrow {
+public final class EntityLaser extends Arrow {
 
-    public EntityLaser(EntityType<? extends Arrow> Laser, Level world) {
+    public EntityLaser(@NotNull EntityType<? extends Arrow> Laser, @NotNull Level world) {
         super(Laser, world);
         // TODO Auto-generated constructor stub
     }
 
-    public EntityLaser(Level worldIn, LivingEntity throwerIn) {
+    public EntityLaser(@NotNull Level worldIn, @NotNull LivingEntity throwerIn) {
         super(worldIn, throwerIn);
         // TODO Auto-generated constructor stub
     }
 
-    public EntityLaser(Level worldIn, double x, double y, double z) {
+    public EntityLaser(@NotNull Level worldIn, double x, double y, double z) {
         super(worldIn, x, y, z);
         // TODO Auto-generated constructor stub
     }
 
-    public EntityLaser(Level world) {
-        super(ModEntities.LASER.get(), world);
+    public EntityLaser(@NotNull Level world) {
+        this(ModEntities.LASER.get(), world);
     }
 
     @Nonnull
@@ -40,8 +42,8 @@ public class EntityLaser extends Arrow {
 
 
     @Override
-    public void setNoGravity(boolean pNoGravity) {
-        super.setNoGravity(true);
+    public boolean isNoGravity() {
+        return true;
     }
 
     @Override
@@ -53,12 +55,13 @@ public class EntityLaser extends Arrow {
     @Override
     protected void onHitEntity(EntityHitResult live) {
         super.onHitEntity(live);
-        if (this.level.isClientSide) {
-            super.onHitEntity(live);
-        }
+        this.remove(RemovalReason.DISCARDED);
     }
 
-
+    @Override
+    protected @NotNull ItemStack getPickupItem() {
+        return ItemStack.EMPTY;
+    }
 
 
 }
