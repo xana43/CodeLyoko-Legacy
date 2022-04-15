@@ -3,9 +3,10 @@ package com.Ultra_Nerd.CodeLyokoRemake15.player.Capabilities;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.ClientCapabilitySync;
 import com.Ultra_Nerd.CodeLyokoRemake15.player.PlayerClassType;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraftforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.NotNull;
 
-public final class PlayerClassCapabilityHandler implements IPlayerClassCapability
+public final class PlayerClassCapabilityHandler implements INBTSerializable<CompoundTag>
 {
    //private Player player;
     private PlayerClassType classType = PlayerClassType.DEFAULT;
@@ -16,7 +17,7 @@ public final class PlayerClassCapabilityHandler implements IPlayerClassCapabilit
 
 
 
-    @Override
+
     public void setClass(PlayerClassType type) {
 
 
@@ -26,12 +27,12 @@ public final class PlayerClassCapabilityHandler implements IPlayerClassCapabilit
 
     }
 
-    @Override
+
     public @NotNull PlayerClassType getClassType() {
         return classType;
     }
 
-    @Override
+
     public CompoundTag serializeNBT() {
         //CodeLyokoMain.Log.info("saving data");
         CompoundTag savedclass = new CompoundTag();

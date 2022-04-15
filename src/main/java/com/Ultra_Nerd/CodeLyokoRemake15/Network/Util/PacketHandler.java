@@ -20,7 +20,8 @@ public final record PacketHandler() {
                 DataTransferInterfaceMessage::decode, DataTransferInterfaceMessage::handle);
       INSTANCE.registerMessage(nextId++,CustomControlServerHandler.class,CustomControlServerHandler::encapsulate,CustomControlServerHandler::make,CustomControlServerHandler.Handler::handle);
       INSTANCE.registerMessage(nextId++,ServerSaveHandler.class,ServerSaveHandler::encapsulate,ServerSaveHandler::make,ServerSaveHandler.SaveHandleer::saveServer);
-      INSTANCE.registerMessage(nextId++,CapabilitySync.class,CapabilitySync::encapsulate,CapabilitySync::make,CapabilitySync.Handler::handle);
+      INSTANCE.registerMessage(nextId++, CapabilityPlayerClassSync.class, CapabilityPlayerClassSync::encapsulate, CapabilityPlayerClassSync::make, CapabilityPlayerClassSync.Handler::handle);
+      INSTANCE.registerMessage(nextId++,CapabilityPlayerInventorySync.class,CapabilityPlayerInventorySync::encapsulate,CapabilityPlayerInventorySync::make,CapabilityPlayerInventorySync.Handler::handle);
     }
 
 

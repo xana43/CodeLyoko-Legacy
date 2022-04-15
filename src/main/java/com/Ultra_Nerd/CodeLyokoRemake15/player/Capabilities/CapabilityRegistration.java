@@ -1,8 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.player.Capabilities;
 
-import com.Ultra_Nerd.CodeLyokoRemake15.Util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoRemake15.player.Dimension.DimensionCapabilities;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.*;
@@ -14,25 +17,23 @@ import org.jetbrains.annotations.Nullable;
 
 public final class CapabilityRegistration {
 
-    public static final Capability<IPlayerClassCapability> CLASS_CAPABILITY = CapabilityManager.get(new CapabilityToken<>(){});
-
-
+    public static final Capability<PlayerClassCapabilityHandler> CLASS_CAPABILITY = CapabilityManager.get(new CapabilityToken<>(){});
+    public static final Capability<DimensionCapabilities> INVENTORY_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});
+    private static final ResourceLocation CAPABILITY_RESOURCE_LOCATION = CodeLyokoMain.CodeLyokoPrefix("cap_class");
+    private static final ResourceLocation INVENTORY_RESOURCE_LOCATION = CodeLyokoMain.CodeLyokoPrefix("cap_inventory");
     public static void registerCaps(RegisterCapabilitiesEvent event)
     {
-        event.register(IPlayerClassCapability.class);
+        event.register(PlayerClassCapabilityHandler.class);
+        event.register(DimensionCapabilities.class);
     }
 
     public static void setCaps(AttachCapabilitiesEvent<Entity> event)
     {
-        if(event.getObject() instanceof Player player)
+        if(event.getObject() instanceof Player)
         {
-            event.addCapability(ConstantUtil.CAPABILITY_RESOURCE_LOCATION, new ICapabilitySerializable<CompoundTag>()
+            event.addCapability(CAPABILITY_RESOURCE_LOCATION, new ICapabilitySerializable<CompoundTag>()
             {
-                final LazyOptional<IPlayerClassCapability> instance = LazyOptional.of(()->{
-                   final PlayerClassCapabilityHandler capabilityHandler = new PlayerClassCapabilityHandler();
-
-                    return capabilityHandler;
-                });
+                final LazyOptional<PlayerClassCapabilityHandler> instance = LazyOptional.of(PlayerClassCapabilityHandler::new);
 
                 @Override
                 public CompoundTag serializeNBT() {
@@ -47,8 +48,31 @@ public final class CapabilityRegistration {
                 @NotNull
                 @Override
                 public <T> LazyOptional<T> getCapability(@NotNull final Capability<T> cap, @Nullable final Direction side) {
-                    return CLASS_CAPABILITY.orEmpty(cap,instance.cast());
+                    return CLASS_CAPABILITY.orEmpty(cap,instance);
                 }
+            });
+            event.addCapability(INVENTORY_RESOURCE_LOCATION, new ICapabilitySerializable<ListTag>() {
+                final LazyOptional<DimensionCapabilities> instance = LazyOptional.of(DimensionCapabilities::new);
+                @Override
+                public ListTag serializeNBT() {
+                    return instance.orElseThrow(NullPointerException::new).serializeNBT();
+                }
+
+                @Override
+                public void deserializeNBT(final ListTag nbt) {
+                    instance.orElseThrow(NullPointerException::new).deserializeNBT(nbt);
+                }
+
+                @NotNull
+                @Override
+                public <T> LazyOptional<T> getCapability(@NotNull final Capability<T> cap, @Nullable final Direction side) {
+                    return INVENTORY_CAPABILITY.orEmpty(cap,instance);
+                }
+
+
+
+
+
             });
         }
     }

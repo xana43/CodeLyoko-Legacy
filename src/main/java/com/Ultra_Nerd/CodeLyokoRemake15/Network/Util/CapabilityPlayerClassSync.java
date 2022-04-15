@@ -10,20 +10,21 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public record CapabilitySync(CompoundTag playerClassTag, PlayerClassType playerClassType) {
+public record CapabilityPlayerClassSync(CompoundTag playerClassTag, PlayerClassType playerClassType) {
 
     public static void Sync(PlayerClassType classType)
     {
-      PacketHandler.INSTANCE.sendToServer(new CapabilitySync(classType.getClassTag(),classType));
+      PacketHandler.INSTANCE.sendToServer(new CapabilityPlayerClassSync(classType.getClassTag(),classType));
     }
 
 
-    public static @NotNull CapabilitySync make(final @NotNull FriendlyByteBuf byteBuf)
+    public static @NotNull CapabilityPlayerClassSync make(final @NotNull FriendlyByteBuf byteBuf)
     {
-        return new CapabilitySync(byteBuf.readNbt(),byteBuf.readEnum(PlayerClassType.class));
+        return new CapabilityPlayerClassSync(byteBuf.readNbt(),byteBuf.readEnum(PlayerClassType.class));
+
     }
 
-    public static void encapsulate(CapabilitySync caps,FriendlyByteBuf buf)
+    public static void encapsulate(CapabilityPlayerClassSync caps, FriendlyByteBuf buf)
     {
         buf.writeNbt(caps.playerClassTag);
         buf.writeEnum(caps.playerClassType);
@@ -31,7 +32,7 @@ public record CapabilitySync(CompoundTag playerClassTag, PlayerClassType playerC
 
     public static final class Handler
     {
-        public static void handle(final CapabilitySync pky, final Supplier<NetworkEvent.Context> ctx)
+        public static void handle(final CapabilityPlayerClassSync pky, final Supplier<NetworkEvent.Context> ctx)
         {
 
             ctx.get().enqueueWork(() -> {

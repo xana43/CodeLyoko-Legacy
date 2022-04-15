@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoRemake15.screens.ClientScreens;
 
 import com.Ultra_Nerd.CodeLyokoRemake15.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.CapabilitySync;
+import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.CapabilityPlayerClassSync;
 import com.Ultra_Nerd.CodeLyokoRemake15.Network.Util.ServerSaveHandler;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoRemake15.Util.client.ClientCapabilitySync;
@@ -126,7 +126,7 @@ public final class ClassScreen extends Screen {
                 256, 256, (input) -> {
 
             PressOperation();
-            CapabilitySync.Sync(PlayerClassType.Feline);
+            CapabilityPlayerClassSync.Sync(PlayerClassType.Feline);
             IndicatorColor = Color.MAGENTA.getRGB();
 
 
@@ -140,7 +140,7 @@ public final class ClassScreen extends Screen {
         samurai =  new ImageButton(this.width >> 2, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 128, 128, (input) -> {
 
-            CapabilitySync.Sync(PlayerClassType.Samurai);
+            CapabilityPlayerClassSync.Sync(PlayerClassType.Samurai);
             IndicatorColor = 2007;
             PressOperation();
            // classIndicatorString.replace(15,ClientCapabilitySync.getPlayerClassType().getClassName().length() + 17,ClientCapabilitySync.getPlayerClassType().getClassName());
@@ -152,7 +152,7 @@ public final class ClassScreen extends Screen {
     {
         ninja =  new ImageButton((int) (this.width / 2.8f), this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {
-            CapabilitySync.Sync(PlayerClassType.Ninja);
+            CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
             IndicatorColor = 5125;
             PressOperation();}, new TextComponent("ninja"));
         ninja.setFGColor(0x1d5e18);
@@ -162,7 +162,7 @@ public final class ClassScreen extends Screen {
         guardian =  new ImageButton((int)(this.width / 2.1f), this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {PressOperation();
             IndicatorColor = 0xff369b;
-            CapabilitySync.Sync(PlayerClassType.Guardian);
+            CapabilityPlayerClassSync.Sync(PlayerClassType.Guardian);
             }, new TextComponent("guardian"));
         guardian.setFGColor(0x1d5e18);
     }
