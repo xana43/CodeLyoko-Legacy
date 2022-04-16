@@ -1,9 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.CapabilityRegistration;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -15,17 +24,22 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.gameevent.GameEventListener;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.Random;
 import java.util.stream.Stream;
 
-public final class Scanner extends BaseEntityBlock {
+public final class Scanner extends Block implements EntityBlock  {
     public static final BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
     public static final DirectionProperty directionProperty = HorizontalDirectionalBlock.FACING;
     private static final VoxelShape shapeS = Stream.of(
@@ -212,11 +226,24 @@ public final class Scanner extends BaseEntityBlock {
 
                 .strength(10, 10)
                 .sound(SoundType.METAL)
+                .randomTicks()
+
 
 
         );
 
         this.registerDefaultState(this.defaultBlockState().setValue(Scanner, false).setValue(directionProperty, Direction.NORTH));
+    }
+
+
+    @Override
+    public void randomTick(final BlockState pState, final ServerLevel pLevel, final BlockPos pPos, final Random pRandom) {
+        super.randomTick(pState, pLevel, pPos, pRandom);
+    }
+
+    @Override
+    public boolean isRandomlyTicking(final BlockState pState) {
+        return true;
     }
 
     @Override
@@ -237,11 +264,14 @@ public final class Scanner extends BaseEntityBlock {
 
     }
 
+
+
     @org.jetbrains.annotations.Nullable
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return ModTileEntities.SCANNER_TILE_ENTITY.get().create(pos, state);
     }
+
 
     @Override
     public @NotNull RenderShape getRenderShape(BlockState pState) {
@@ -288,6 +318,8 @@ public final class Scanner extends BaseEntityBlock {
 
     }
 
+
+
     @Override
     public @NotNull BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
         return this.defaultBlockState().setValue(directionProperty, context.getHorizontalDirection());
@@ -315,19 +347,136 @@ public final class Scanner extends BaseEntityBlock {
 
     }
 
-    @org.jetbrains.annotations.Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        if(!pLevel.isClientSide)
-        {
-            return ((pLevel1, pPos, pState1, pBlockEntity) -> {
-                if(pBlockEntity instanceof ScannerTileEntity scannerTile) {
-                    scannerTile.tick(pLevel1,pPos,pState1,(ScannerTileEntity) pBlockEntity);
-                }
-            });
-        }
-        return null;
+    public void animateTick(final BlockState pState, final Level pLevel, final BlockPos pPos, final Random pRandom) {
+        super.animateTick(pState, pLevel, pPos, pRandom);
     }
+
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> GameEventListener getListener(final Level pLevel, final T pBlockEntity) {
+        return EntityBlock.super.getListener(pLevel, pBlockEntity);
+    }
+
+    @Override
+    public boolean canEntityDestroy(final BlockState state, final BlockGetter level, final BlockPos pos, final Entity entity) {
+
+        return entity instanceof Player;
+
+
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final Level pLevel, final BlockState pState, final BlockEntityType<T> pBlockEntityType) {
+        return (pLevel1, pPos, pState1, pBlockEntity) -> pLevel1.getBlockEntity(pPos);
+    }
+
+    @Override
+    public boolean onDestroyedByPlayer(final BlockState state, final Level level, final BlockPos pos, final Player player, final boolean willHarvest, final FluidState fluid) {
+       if (level.getBlockEntity(pos) instanceof ScannerTileEntity scannerTile)
+       {
+           level.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.removePos(scannerTile));
+           scannerTile.invalidateStruct();
+
+
+       }
+
+        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+    }
+
+
+
+    private boolean checkStruct(final ScannerTileEntity scannerTile, BlockPos pos, ServerLevel serverLevel)
+    {
+        CodeLyokoMain.Log.info("outer");
+        if(serverLevel.getBlockState(pos.above()).getBlock() == ModBlocks.SCANNER_FRAME.get())
+        {
+            CodeLyokoMain.Log.info("first blook");
+            if(serverLevel.getBlockState(pos.above().above()).getBlock() == ModBlocks.SCANNER_TOP.get())
+            {
+                CodeLyokoMain.Log.info("second block");
+               if(scannerTile.check())
+               {
+                   //serverLevel.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.setThispos(scannerTile));
+                   return true;
+               }
+            }
+        }
+       //serverLevel.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.removePos(scannerTile));
+        return false;
+    }
+    @Override
+    public void tick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull Random pRandom) {
+
+       if(!pLevel.isClientSide) {
+           CodeLyokoMain.Log.info("ticl");
+           if (pLevel.getBlockEntity(pPos) instanceof ScannerTileEntity scannerTile) {
+               checkStruct(scannerTile, pPos, pLevel);
+
+
+           }
+       }
+        super.tick(pState, pLevel, pPos, pRandom);
+
+    }
+
+    @Override
+    public @NotNull InteractionResult use(final @NotNull BlockState pState, final Level pLevel, final @NotNull BlockPos pPos, final @NotNull Player pPlayer, final @NotNull InteractionHand pHand, final BlockHitResult pHit) {
+/*
+        if(pLevel.getBlockEntity(pPos) instanceof ScannerTileEntity scannerTile)
+        {
+            if(!pLevel.isClientSide) {
+                pPlayer.sendMessage(new TextComponent("Checking for valid placement"), pPlayer.getUUID());
+                if (scannerTile.check()) {
+
+                    if (!FMLEnvironment.production) {
+                        pPlayer.sendMessage(new TextComponent("Scanner check " + scannerTile.check()), pPlayer.getUUID());
+                    } else {
+                        pPlayer.sendMessage(new TextComponent("scanner formed"), pPlayer.getUUID());
+                    }
+                    pLevel.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.setThispos(scannerTile));
+                } else {
+                    pLevel.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.removePos(scannerTile));
+                }
+            }
+
+
+           // scannerTile.getLevel().getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.setThispos(pLevel.getBlockEntity(pPos)));
+            //CodeLyokoMain.Log.info("used");
+            return InteractionResult.SUCCESS;
+        }
+        else
+        {
+            return InteractionResult.FAIL;
+        }
+
+ */
+        if(pLevel.getBlockEntity(pPos) instanceof ScannerTileEntity tileEntity && !pLevel.isClientSide)
+        {
+            if(!pPlayer.isCreative() && pPlayer.getItemInHand(pHand).getItem() == ModItems.TRUSTTY_SCREWDRIVER.get()) {
+                checkStruct(tileEntity, pPos, (ServerLevel) pLevel);
+                return InteractionResult.SUCCESS;
+            }
+            else if(pPlayer.isCreative())
+            {
+                checkStruct(tileEntity, pPos, (ServerLevel) pLevel);
+                return InteractionResult.SUCCESS;
+
+            }
+            else
+            {
+                return InteractionResult.FAIL;
+            }
+        }
+        return InteractionResult.FAIL;
+
+
+
+    }
+
+
     /*
     @Override
     public boolean hasTileEntity(BlockState state) {

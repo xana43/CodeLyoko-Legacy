@@ -29,6 +29,7 @@ public final class ZweihanderWeapon extends SwordItem {
         super(tier, attackDamageIn, attackSpeedIn, builder);
         this.attackspeed = attackSpeedIn;
         this.attackdamage = (float) attackDamageIn + tier.getAttackDamageBonus();
+
     }
 
 
@@ -39,7 +40,10 @@ public final class ZweihanderWeapon extends SwordItem {
     }
 
 
-
+    @Override
+    public boolean onDroppedByPlayer(final ItemStack item, final Player player) {
+        return false;
+    }
 
 
     @Override
@@ -82,12 +86,16 @@ public final class ZweihanderWeapon extends SwordItem {
         if (!stack.isEnchanted()) {
             stack.enchant(Enchantments.SWEEPING_EDGE, Enchantments.SWEEPING_EDGE.getMaxLevel());
             stack.enchant(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());
-            stack.getEnchantmentTags().clear();
+            //stack.getEnchantmentTags().clear();
 
         }
     }
 
 
+    @Override
+    public int getDefaultTooltipHideFlags(@NotNull final ItemStack stack) {
+        return ItemStack.TooltipPart.ENCHANTMENTS.getMask();
+    }
 
     @Override
     public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {

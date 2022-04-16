@@ -17,7 +17,7 @@ public class ContainerInfusing extends AbstractContainerMenu {
     }
 /*
     private final ContainerLevelAccess containerLevelAccess;
-    private final BlockEntity blockEntity;
+    private final BlockEntityCapabilit blockEntity;
     private final ContainerData containerdata;
 
     private int cookTime, totalCookTime, burnTime, currentBurnTime;

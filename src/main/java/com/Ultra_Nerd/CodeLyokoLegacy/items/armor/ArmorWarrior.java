@@ -6,6 +6,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,6 +52,25 @@ public final class ArmorWarrior extends ArmorItem {
     @Override
     public boolean isDamageable(ItemStack stack) {
         return false;
+    }
+
+    @Override
+    public boolean isFoil(final @NotNull ItemStack pStack) {
+        return false;
+    }
+
+    @Override
+    public int getDefaultTooltipHideFlags(@NotNull final ItemStack stack) {
+        return ItemStack.TooltipPart.ENCHANTMENTS.getMask();
+    }
+
+    @Override
+    public void inventoryTick(final @NotNull ItemStack pStack, final @NotNull Level pLevel, final @NotNull Entity pEntity, final int pSlotId, final boolean pIsSelected) {
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+        if(!pStack.isEnchanted())
+        {
+            pStack.enchant(Enchantments.BINDING_CURSE,Enchantments.BINDING_CURSE.getMaxLevel());
+        }
     }
 
     @Override

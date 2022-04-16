@@ -2,14 +2,13 @@ package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,7 +43,9 @@ public final class AelitaArmorElytra extends ArmorItem {
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
         if (entityIn instanceof Player player) {
-
+            if(!stack.isEnchanted()) {
+                stack.enchant(Enchantments.BINDING_CURSE, Enchantments.BINDING_CURSE.getMaxLevel());
+            }
             if (!DimensionCheck.playerNotInVanillaWorld(player)) {
                 if (player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get()) {
                     player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).setCount(0);
@@ -125,32 +126,7 @@ public final class AelitaArmorElytra extends ArmorItem {
     }
 
 
-    @Nonnull
-    @Override
-    public InteractionResultHolder<ItemStack> use(@Nonnull Level worldIn, @Nonnull Player playerIn, @Nonnull InteractionHand handIn) {
-        InteractionResultHolder<ItemStack> result = super.use(worldIn, playerIn, handIn);
-        if (!DimensionCheck.playerNotInVanillaWorld(playerIn)) {
-            if (playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get()) {
-                playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).setCount(0);
-            }
-            if (playerIn.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
-                playerIn.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).setCount(0);
-            }
-            if (playerIn.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() == ModItems.AELITA_LEGGINGS.get()) {
-                playerIn.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).setCount(0);
-            }
-            if (playerIn.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() == ModItems.AELITA_BOOTS.get()) {
-                playerIn.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).setCount(0);
-            }
-        } else {
-            if (playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get() &&
-                    playerIn.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() == ModItems.AELITA_LEGGINGS.get() &&
-                    playerIn.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() == ModItems.AELITA_BOOTS.get()) {
-                playerIn.getInventory().setItem(EquipmentSlot.MAINHAND.getIndex(), new ItemStack(ModItems.FORCE_FIELD_EMITTER.get(), 1));
-            }
-        }
-        return result;
-    }
+
 
 
 }

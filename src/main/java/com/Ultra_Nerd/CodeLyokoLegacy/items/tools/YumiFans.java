@@ -50,6 +50,19 @@ public final class YumiFans extends TridentItem {
         }
         return multimap;
     }
+    @Override
+    public boolean onDroppedByPlayer(final ItemStack item, final Player player) {
+        return false;
+    }
+    @Override
+    public int getDefaultTooltipHideFlags(@NotNull final ItemStack stack) {
+        return ItemStack.TooltipPart.ENCHANTMENTS.getMask();
+    }
+
+    @Override
+    public boolean isFoil(final @NotNull ItemStack pStack) {
+        return false;
+    }
 
     @Override
     public void releaseUsing(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull LivingEntity entityLiving, int timeLeft) {

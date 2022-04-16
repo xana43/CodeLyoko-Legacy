@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -57,24 +56,20 @@ public final class ModBlocks {
     public static final RegistryObject<Block> CARNOTITE_ORE = BLOCKS.register("carnotite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE)));
     public static final RegistryObject<Block> DATA_TRANSFER_INTERFACE = BLOCKS.register("data_transfer_interface", DataTransferInterface::new);
     public static final RegistryObject<Block> DIGITAL_SEA_PYLON = BLOCKS.register("digital_sea_pylon", SeaPylon::new);
-    public static final RegistryObject<Block> DIGITAL_GRASS = BLOCKS.register("digital_grass", () -> new Block(Block.Properties.copy(Blocks.GRASS_BLOCK).strength(-1).explosionResistance(-1)));
+    public static final RegistryObject<Block> DIGITAL_GRASS = BLOCKS.register("digital_grass", () -> new Block(Block.Properties.copy(Blocks.GRASS_BLOCK).isValidSpawn((p_61031_, p_61032_, p_61033_, p_61034_) -> true).strength(-1).explosionResistance(-1)));
     public static final RegistryObject<Block> DIGITAL_DIRT = BLOCKS.register("digital_dirt", () -> new Block(Block.Properties.copy(Blocks.DIRT).strength(-1).explosionResistance(-1)));
     public static final RegistryObject<Block> DIGITAL_ROCK = BLOCKS.register("digital_rock", () -> new Block(Block.Properties.copy(Blocks.STONE).strength(-1)));
-    public static final RegistryObject<Block> DIGITAL_WOOD_FOREST = BLOCKS.register("digital_wood_forest", () -> new Block(Block.Properties.of(Material.WOOD).strength(-1).explosionResistance(-1)));
-    public static final RegistryObject<Block> DIGITAL_WOOD_MOUNTAIN = BLOCKS.register("digital_wood_mountain", () -> new Block(Block.Properties.of(Material.WOOD)));
-    public static final RegistryObject<Block> DIGITAL_LEAF_MOUNTAIN = BLOCKS.register("digital_leaf_mountain", () -> new LeavesBlock(Block.Properties.of(new Material.Builder(
-            MaterialColor.PLANT)
+    public static final RegistryObject<Block> DIGITAL_WOOD_FOREST = BLOCKS.register("digital_wood_forest", () -> new Block(Block.Properties.copy(Blocks.OAK_WOOD).strength(-1).explosionResistance(-1)));
+    public static final RegistryObject<Block> DIGITAL_WOOD_MOUNTAIN = BLOCKS.register("digital_wood_mountain", () -> new Block(Block.Properties.copy(Blocks.JUNGLE_WOOD)));
+    public static final RegistryObject<Block> DIGITAL_LEAF_MOUNTAIN = BLOCKS.register("digital_leaf_mountain", () -> new LeavesBlock(Block.Properties.copy(Blocks.JUNGLE_LEAVES)));
 
-            .build()).sound(SoundType.GRASS)
-            ));
-
-
+    public static final RegistryObject<Block> BLOCK_PATTERN = BLOCKS.register("block_pattern", () -> new BlockPatternTest(Block.Properties.copy(Blocks.IRON_BLOCK)));
     public static void registerTestBlocks()
     {
         if(!FMLEnvironment.production)
         {
             BLOCKS.register("portal_block", () -> new TestBlockPortal(Block.Properties.copy(Blocks.NETHER_PORTAL)));
-            BLOCKS.register("block_pattern", () -> new BlockPatternTest(Block.Properties.copy(Blocks.IRON_BLOCK)));
+
             BLOCKS.register("digital_mountain_sapling", () -> new DigitalMountainSapling(new AbstractTreeGrower() {
                 @Override
                 protected @NotNull Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(@NotNull Random pRandom, boolean pLargeHive) {
@@ -105,7 +100,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> FLUORITE_BLOCK = BLOCKS.register("fluorite_block", () -> new Block(Block.Properties.of(Material.SAND).strength(-1, 10).sound(SoundType.SAND)));
     public static final RegistryObject<Block> FLUORITE_ORE = BLOCKS.register("fluorite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE)));
     public static final RegistryObject<Block> FALSE_WATER = BLOCKS.register("false_water", () -> new Block(Block.Properties.copy(Blocks.WATER)));
-    public static final RegistryObject<Block> FRONTIER_BLOCK = BLOCKS.register("frontier_block", () -> new Block(Block.Properties.copy(Blocks.BEDROCK)));
+    public static final RegistryObject<Block> FRONTIER_BLOCK = BLOCKS.register("frontier_block", FrontierBlock::new);
     public static final RegistryObject<Block> GUMMITE_ORE = BLOCKS.register("gummite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(3, 10).sound(SoundType.STONE)));
     public static final RegistryObject<Block> HOLOPROJECTOR = BLOCKS.register("holoprojector", HologramProjectorBlock::new);
     public static final RegistryObject<Block> LYOKO_CORE = BLOCKS.register("lyoko_core", () -> new LyokoCore(Block.Properties.copy(Blocks.DRAGON_EGG).noCollission().noOcclusion().strength(-1,-1)));

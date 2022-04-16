@@ -13,7 +13,7 @@ public final class VolcanoEffects extends DimensionSpecialEffects {
     }
 
     @Override
-    public @NotNull Vec3 getBrightnessDependentFogColor(Vec3 pFogColor, float pBrightness) {
+    public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 pFogColor, float pBrightness) {
         return pFogColor;
     }
 
@@ -23,9 +23,8 @@ public final class VolcanoEffects extends DimensionSpecialEffects {
     }
 
 
-    @Nullable
     @Override
-    public ISkyRenderHandler getSkyRenderHandler() {
+    public @NotNull ISkyRenderHandler getSkyRenderHandler() {
         return new CustomVolcanoSky();
     }
 

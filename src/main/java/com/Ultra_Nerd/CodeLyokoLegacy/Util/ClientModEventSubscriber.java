@@ -36,6 +36,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
+
 
 public record ClientModEventSubscriber() {
 
@@ -227,6 +229,36 @@ registerEntityRenderers();
             public IWeatherRenderHandler getWeatherRenderHandler() {
                 return null;
             }
+        });
+        DimensionEffectAccesor.LyokoDimensionEffects().put(CodeLyokoMain.CodeLyokoPrefix("frontier_effects"), new DimensionSpecialEffects(Float.NaN,true,
+                DimensionSpecialEffects.SkyType.NONE,true,true) {
+            @Override
+            public @NotNull Vec3 getBrightnessDependentFogColor(final @NotNull Vec3 pFogColor, final float pBrightness) {
+                return new Vec3(Color.WHITE.getRed(),Color.WHITE.getBlue(),Color.WHITE.getGreen());
+            }
+
+            @Override
+            public boolean isFoggyAt(final int pX, final int pY) {
+                return false;
+            }
+
+            @Nullable
+            @Override
+            public IWeatherRenderHandler getWeatherRenderHandler() {
+                return null;
+            }
+
+            @Override
+            public float[] getSunriseColor(final float pTimeOfDay, final float pPartialTicks) {
+                return null;
+            }
+
+            @Nullable
+            @Override
+            public ICloudRenderHandler getCloudRenderHandler() {
+                return null;
+            }
+
         });
     }
 

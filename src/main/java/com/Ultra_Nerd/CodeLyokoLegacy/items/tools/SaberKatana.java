@@ -66,4 +66,8 @@ public final class SaberKatana extends SwordItem {
 
 
     }
+    @Override
+    public boolean onDroppedByPlayer(final ItemStack item, final Player player) {
+        return false;
+    }
 }

@@ -1,6 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.ModOreGen;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
@@ -9,9 +11,12 @@ import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
+
+import java.awt.*;
 
 public final class ModBiome {
 
@@ -22,7 +27,13 @@ public final class ModBiome {
     //Registry keys
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, CodeLyokoMain.MOD_ID);
 
-
+    public static final ResourceKey<Biome> FRONTIER = makeResourceKey("void_frontier", Biome.BiomeCategory.NONE,-243, Biome.TemperatureModifier.FROZEN,new BiomeSpecialEffects.Builder()
+            .skyColor(Color.WHITE.getRGB())
+            .waterColor(Color.WHITE.getRGB())
+            .waterFogColor(Color.WHITE.getRGB())
+            .fogColor(Color.WHITE.getRGB())
+            .backgroundMusic(null)
+            .build());
 
     public static final ResourceKey<Biome> FOREST_SECTOR = ForestResourceKey(new BiomeSpecialEffects.Builder()
                     .skyColor(2387)
@@ -34,7 +45,7 @@ public final class ModBiome {
     );
 
     @NotNull
-    private static ResourceKey<Biome> makeResourceKey(String name, Biome.@NotNull BiomeCategory biomeCategory, int temp, Biome.@NotNull TemperatureModifier temperatureModifier, @NotNull BiomeSpecialEffects biomeSpecialEffects, @NotNull MobSpawnSettings mobSpawnSettings)
+    private static ResourceKey<Biome> makeResourceKey(String name, Biome.@NotNull BiomeCategory biomeCategory, int temp, Biome.@NotNull TemperatureModifier temperatureModifier, @NotNull BiomeSpecialEffects biomeSpecialEffects)
     {
         BIOMES.register(name,() -> new Biome.BiomeBuilder()
                 .precipitation(Biome.Precipitation.NONE)
@@ -43,7 +54,7 @@ public final class ModBiome {
                 .temperatureAdjustment(temperatureModifier)
                 .downfall(0)
                 .specialEffects(biomeSpecialEffects)
-                .mobSpawnSettings(mobSpawnSettings)
+                .mobSpawnSettings(MobSpawnSettings.EMPTY)
                 .generationSettings(BiomeGenerationSettings.EMPTY)
                 .build());
         return ResourceKey.create(Registry.BIOME_REGISTRY, CodeLyokoMain.CodeLyokoPrefix(name));
@@ -61,7 +72,7 @@ public final class ModBiome {
                     .temperatureAdjustment(Biome.TemperatureModifier.NONE)
                     .downfall(0)
                     .specialEffects(biomeSpecialEffects)
-                    .mobSpawnSettings(MobSpawnSettings.EMPTY)
+                    .mobSpawnSettings(new MobSpawnSettings.Builder().build())
                     .generationSettings(new BiomeGenerationSettings.Builder().addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                             ModFeature.DIGITAL_FOREST_PLACED).build())
                     .build());
@@ -77,8 +88,7 @@ public final class ModBiome {
             .backgroundMusic(ModSounds.LAZY_SECTOR5.get())
             .fogColor(2387)
             .waterFogColor(2387)
-            .waterColor(2387).build()
-            ,MobSpawnSettings.EMPTY);
+            .waterColor(2387).build());
 
 
 
@@ -110,14 +120,14 @@ public final class ModBiome {
             .fogColor(2387)
             .waterFogColor(2387)
             .waterColor(2387)
-            .build(),MobSpawnSettings.EMPTY);
+            .build());
     public static final ResourceKey<Biome> DESERT_SECTOR = makeResourceKey("desert_sector", Biome.BiomeCategory.DESERT,38, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
             .skyColor(12759680)
             .backgroundMusic(ModSounds.LAZY_DESERT.get())
             .fogColor(12759680)
             .waterFogColor(12759680)
             .waterColor(12759680)
-            .build(),MobSpawnSettings.EMPTY);
+            .build());
     public static final ResourceKey<Biome> MOUNTAIN_SECTOR = MountainResourceKey(new BiomeSpecialEffects.Builder()
             .skyColor(306)
             .backgroundMusic(ModSounds.LAZY_MOUNTAIN.get())
@@ -131,14 +141,14 @@ public final class ModBiome {
             .fogColor(7579)
             .waterFogColor(7579)
             .waterColor(7579)
-            .build(),MobSpawnSettings.EMPTY);
+            .build());
     public static final ResourceKey<Biome> DIGITAL_OCEAN = makeResourceKey("digital_ocean", Biome.BiomeCategory.OCEAN,15, Biome.TemperatureModifier.NONE,new BiomeSpecialEffects.Builder()
             .skyColor(2382)
             .backgroundMusic(ModSounds.LAZY_OCEAN.get())
             .fogColor(2382)
             .waterFogColor(2382)
             .waterColor(2382)
-            .build(),MobSpawnSettings.EMPTY);
+            .build());
     public static final BiomeDictionary.Type LYOKO = BiomeDictionary.Type.getType("Lyoko");
 
 
@@ -155,6 +165,27 @@ public final class ModBiome {
         BiomeDictionary.addTypes(DIGITAL_OCEAN,LYOKO, BiomeDictionary.Type.WATER, BiomeDictionary.Type.WET);
 
 
+
+    }
+
+    public static void biomeOperations(final BiomeLoadingEvent event)
+    {
+       // CodeLyokoMain.Log.info(FOREST_SECTOR.getRegistryName().toString());
+        if(event.getName().equals(FOREST_SECTOR.location())) {
+
+               CodeLyokoMain.Log.info("BiomeLoaded");
+
+            event.getSpawns().addSpawn(ConstantUtil.LYOKO, new MobSpawnSettings.SpawnerData(ModEntities.BLOK.get(), 5, 1, 7));
+            event.getSpawns().creatureGenerationProbability(0.3f);
+
+
+        }
+        if(event.getCategory() != Biome.BiomeCategory.NETHER && event.getCategory() != Biome.BiomeCategory.THEEND)
+        {
+            //event.getSpawns().addSpawn(ConstantUtil.LYOKO, new MobSpawnSettings.SpawnerData(ModEntities.BLOK.get(), 5, 1, 7));
+                event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOreGen.OVERWORLD);
+
+        }
 
     }
 

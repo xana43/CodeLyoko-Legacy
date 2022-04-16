@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.HoverboardEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverbikeEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverboardEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -25,7 +26,7 @@ public final class ModEntities {
 
     public static final DeferredRegister<EntityType<?>> Entities = DeferredRegister.create(ForgeRegistries.ENTITIES, CodeLyokoMain.MOD_ID);
     public static final RegistryObject<EntityType<EntityBlok>> BLOK = Entities.register("blok", () ->
-            EntityType.Builder.of(EntityBlok::new, MobCategory.MONSTER).sized(2f, 2f)
+            EntityType.Builder.of(EntityBlok::new, ConstantUtil.LYOKO).sized(2f, 2f)
                     .build(new ResourceLocation(CodeLyokoMain.MOD_ID, "blok").toString()));
     public static final RegistryObject<EntityType<EntityLaser>> LASER = Entities.register("laser", () ->
             EntityType.Builder.<EntityLaser>of(EntityLaser::new, MobCategory.MISC).sized(1f, 1f)
@@ -68,7 +69,7 @@ public final class ModEntities {
     public static void onRegisterEntities(final RegistryEvent.Register<EntityType<?>> entityTypeRegister)
     {
 
-        SpawnPlacements.register(BLOK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE,EntityBlok::canSpawn);
+        SpawnPlacements.register(BLOK.get(), SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,EntityBlok::canSpawn);
         SpawnPlacements.register(MEGATANK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE,MegaTankEntity::canSpawn);
     }
 @SubscribeEvent

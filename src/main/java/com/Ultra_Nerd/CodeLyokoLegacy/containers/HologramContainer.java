@@ -58,7 +58,7 @@ public class HologramContainer extends AbstractContainerMenu implements Containe
     }
     /*
     private final IWorldPosCallable canInteractWithCallable;
-    private final BlockEntity te;
+    private final BlockEntityCapabilit te;
 
     public HologramContainer(int windowid, Inventory inventory, HologramProjectorTileEntity te) {
         super(ModContainerTypes.HOLOGRAM_CONTAINER.get(), windowid);
@@ -73,7 +73,7 @@ public class HologramContainer extends AbstractContainerMenu implements Containe
     private static HologramProjectorTileEntity getHoloEntity(final Inventory inventory, final FriendlyByteBuf data) {
         Objects.requireNonNull(inventory, "player inventory can't be null");
         Objects.requireNonNull(data, "data can't be null");
-        final BlockEntity tileAtPos = inventory.player.level.getBlockEntity(data.readBlockPos());
+        final BlockEntityCapabilit tileAtPos = inventory.player.level.getBlockEntity(data.readBlockPos());
         if (tileAtPos instanceof HologramProjectorTileEntity) {
             return (HologramProjectorTileEntity) tileAtPos;
         } else {

@@ -9,13 +9,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ISkyRenderHandler;
 import org.jetbrains.annotations.NotNull;
 
-@OnlyIn(Dist.CLIENT)
-public final record CustomCarthadgeSky() implements ISkyRenderHandler {
+public record CustomCarthadgeSky() implements ISkyRenderHandler {
 
 
     private static final ResourceLocation texturelocation = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/skies/sector5/sector5sky.png");
@@ -25,8 +22,8 @@ public final record CustomCarthadgeSky() implements ISkyRenderHandler {
     public void render(int ticks, float partialTicks, @NotNull PoseStack matrixStack, ClientLevel world, Minecraft mc) {
 
         RenderSystem.setShaderTexture(0,texturelocation);
-        Tesselator tessellator = Tesselator.getInstance();
-        BufferBuilder bufferBuilder = tessellator.getBuilder();
+        final Tesselator tessellator = Tesselator.getInstance();
+        final BufferBuilder bufferBuilder = tessellator.getBuilder();
 
 
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
@@ -57,7 +54,7 @@ public final record CustomCarthadgeSky() implements ISkyRenderHandler {
             if (i == 5) {
                 matrixStack.mulPose(Vector3f.ZP.rotationDegrees(-90.0F));
             }
-            Matrix4f matrix4f = matrixStack.last().pose();
+            final Matrix4f matrix4f = matrixStack.last().pose();
             bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
             bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).uv(0.0F, 0.0F).color(40, 40, 40, 255).endVertex();
             bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).uv(0.0F, 16.0F).color(40, 40, 40, 255).endVertex();

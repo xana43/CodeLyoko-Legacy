@@ -13,7 +13,7 @@ public class TestTE extends BlockEntity {
     /*
     private final ResourceLocation ID = new ResourceLocation(CodeLyokoMain.MOD_ID, "test");
 
-    public TestTE(BlockEntity<?> tileEntityTypeIn) {
+    public TestTE(BlockEntityCapabilit<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
         CodeLyokoMain.registerMultiBlocks(ID, this);
     }

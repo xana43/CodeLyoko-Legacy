@@ -14,7 +14,7 @@ import net.minecraftforge.client.ISkyRenderHandler;
 import org.jetbrains.annotations.NotNull;
 
 //@OnlyIn(Dist.CLIENT)
-public final record CustomVolcanoSky() implements ISkyRenderHandler {
+public record CustomVolcanoSky() implements ISkyRenderHandler {
 
 
     private static final ResourceLocation sky1 = new ResourceLocation(CodeLyokoMain.MOD_ID,"textures/skies/volcano/sky1.png");

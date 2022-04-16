@@ -4,8 +4,11 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.DigitalSeaBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.CapabilityRegistration;
+import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,6 +18,7 @@ import net.minecraftforge.common.util.ITeleporter;
 import net.minecraftforge.network.NetworkEvent;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -91,41 +95,51 @@ public record DataTransferInterfaceMessage(int territory, int xCoord, int yCoord
         assert MServer != null;
         ctx.get().enqueueWork(
                 () -> {
-                    switch (msg.territory) {
-                        case 0x101010: //CARTHAGE
+                    final AtomicBoolean isWarrior = new AtomicBoolean(false);
+                    sender.getCapability(CapabilityRegistration.CLASS_CAPABILITY).ifPresent(cap -> {
+                        isWarrior.set(cap.getClassType() != PlayerClassType.DEFAULT);
+                    });
+                    if(isWarrior.get()) {
+                        switch (msg.territory) {
+                            case 0x101010: //CARTHAGE
 
-                            sender.changeDimension(MServer.getLevel(ModDimensions.SECTOR5), new ITeleporter() {
-                                @Override
-                                public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destWorld, float yaw, @NotNull Function<Boolean, Entity> repositionEntity) {
-                                    entity = repositionEntity.apply(false);
-                                    entity.teleportTo(0, 130, 0);
-                                    return entity;
-                                }
+                                sender.changeDimension(MServer.getLevel(ModDimensions.SECTOR5), new ITeleporter() {
+                                    @Override
+                                    public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destWorld, float yaw, @NotNull Function<Boolean, Entity> repositionEntity) {
+                                        entity = repositionEntity.apply(false);
+                                        entity.teleportTo(0, 130, 0);
+                                        return entity;
+                                    }
 
-                                @Override
-                                public boolean playTeleportSound(ServerPlayer player, ServerLevel sourceWorld, ServerLevel destWorld) {
-                                    return false;
-                                }
+                                    @Override
+                                    public boolean playTeleportSound(ServerPlayer player, ServerLevel sourceWorld, ServerLevel destWorld) {
+                                        return false;
+                                    }
 
-                                @Override
-                                public boolean isVanilla() {
-                                    return false;
-                                }
-                            });
+                                    @Override
+                                    public boolean isVanilla() {
+                                        return false;
+                                    }
+                                });
 
-                            break;
-                        case 0x222222: //DESERT
-                            sender.changeDimension(MServer.getLevel(ModDimensions.DESERT), surfaceterritorytop);
-                            break;
-                        case 0x111111: //MOUNTAIN
-                            sender.changeDimension(MServer.getLevel(ModDimensions.MOUNTAIN), surfaceterritorytop);
-                            break;
-                        case 0x333333: //FOREST
-                            sender.changeDimension(MServer.getLevel(ModDimensions.FOREST), surfaceterritorytop);
-                            break;
-                        case 0x444444: //ICE
-                            sender.changeDimension(MServer.getLevel(ModDimensions.ICE), surfaceterritorytop);
-                            break;
+                                break;
+                            case 0x222222: //DESERT
+                                sender.changeDimension(MServer.getLevel(ModDimensions.DESERT), surfaceterritorytop);
+                                break;
+                            case 0x111111: //MOUNTAIN
+                                sender.changeDimension(MServer.getLevel(ModDimensions.MOUNTAIN), surfaceterritorytop);
+                                break;
+                            case 0x333333: //FOREST
+                                sender.changeDimension(MServer.getLevel(ModDimensions.FOREST), surfaceterritorytop);
+                                break;
+                            case 0x444444: //ICE
+                                sender.changeDimension(MServer.getLevel(ModDimensions.ICE), surfaceterritorytop);
+                                break;
+                        }
+                    }
+                    else
+                    {
+                    sender.sendMessage(new TextComponent("you are not a registered warrior"),sender.getUUID());
                     }
                 }
         );

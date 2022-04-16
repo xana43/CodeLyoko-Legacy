@@ -21,7 +21,7 @@ public final class ModDimensions {
     public static final ResourceKey<Level> MOUNTAIN = generateDimensionResourceKey("mountain");
     public static final ResourceKey<Level> VOLCANO = generateDimensionResourceKey("volcano");
     public static final ResourceKey<Level> DIGITAL_OCEAN = generateDimensionResourceKey("digital_ocean");
-
+    public static final ResourceKey<Level> FRONTIER = generateDimensionResourceKey("frontier");
 
     private static @NotNull ResourceKey<Level> generateDimensionResourceKey(String name)
     {

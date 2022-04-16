@@ -21,6 +21,8 @@ public final class ModTileEntities {
                     () -> BlockEntityType.Builder.of(ElectricInfusingChamberTileEntity::new,
                             ModBlocks.ELECTRIC_FLUORIDE_INFUSER.get()).build(null));
                             */
+
+
     public static final RegistryObject<BlockEntityType<TowerInterfaceTileEntity>> TOWER_INTERFACE_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("tower_interface_tile_entity", () -> BlockEntityType.Builder.of(TowerInterfaceTileEntity::new,
                     ModBlocks.TOWER_INTERFACE.get()).build(null));

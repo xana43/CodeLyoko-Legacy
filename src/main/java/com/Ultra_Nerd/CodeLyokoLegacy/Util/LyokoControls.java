@@ -36,7 +36,7 @@ public record LyokoControls() {
             {
                 if(event.getAction() == 1)
                 {
-                    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ClientMiscFunctions.runnableScreen(TextUtil.EMPTY_TEXT_COMPONENT, ClientMiscFunctions.Screens.CLASS));
+                    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ClientMiscFunctions.runnableScreen(ConstantUtil.EMPTY_TEXT_COMPONENT, ClientMiscFunctions.Screens.CLASS));
                 }
             }
         }

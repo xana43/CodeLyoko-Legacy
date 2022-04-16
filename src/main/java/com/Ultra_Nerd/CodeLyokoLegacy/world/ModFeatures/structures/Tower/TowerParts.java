@@ -70,7 +70,7 @@ public class TowerParts  {
                                         @Nonnull BoundingBox sbb) {
             if ("chest".equals(function)) {
                 worldIn.setBlock(pos, Blocks.CHEST.defaultBlockState(), 2);
-                BlockEntity tileentity = worldIn.getBlockEntity(pos);
+                BlockEntityCapabilit tileentity = worldIn.getBlockEntity(pos);
                 if (tileentity instanceof ChestBlockEntity) {
                     // here you can set any loot tables for the chests
                 }

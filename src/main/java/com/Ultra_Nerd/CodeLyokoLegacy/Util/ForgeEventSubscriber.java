@@ -3,18 +3,12 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Util;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.DimensionCheck;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBiome;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
@@ -92,23 +86,6 @@ public final class ForgeEventSubscriber {
             event.setCanceled(true);
         }
     }
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void biomeOperations(final @NotNull BiomeLoadingEvent event)
-    {
-        if(Objects.equals(event.getName(), ModBiome.FOREST_SECTOR.getRegistryName()) && event.getName() != null) {
-
-                CodeLyokoMain.Log.info("BiomeLoaded");
-
-            event.getSpawns().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.BLOK.get(), 20, 10, 22));
-
-
-        }
-
-    }
-
-
-
-
 
 
 }

@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.TextUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ClientMiscFunctions;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.FormattedText;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -22,15 +22,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class Entry1 extends WrittenBookItem {
-    private static final FormattedText[] textArray =   TextUtil.textArray(
-            "Entry 1: " + "\n" +
-                    "XXXX/xx/xx" + "\n" +
-                    "Jeremy Belpois" + "\n" + "xx:00" + "\n" +
-                    "I'm not sure what happened, X.A.N.A. was defeated years ago" + "\n" +
-                    "but this time he's done it, he's managed to destroy the world as we know it" +"δ" +
-                    "I survived because I tried to save everyone by putting  them in lyoko" + "\n" +
-                    "I'm not sure how long I have to be here, hopefully someone finds this, " +
-                    "and finds the hidden instructions to rebuild the super calculator and reset this mess");
     public Entry1(@NotNull Properties builder) {
         super(builder);
     }
@@ -48,7 +39,7 @@ public class Entry1 extends WrittenBookItem {
         if(pLevel.isClientSide)
         {
            // CodeLyokoMain.Log.info("client");
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ClientMiscFunctions.runnableScreen(textArray,TextUtil.textArrayLengthToPage(textArray)));
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ClientMiscFunctions.runnableScreen(TextUtil.textArray(ConstantUtil.StoryEntry.Entry1),TextUtil.textArrayLengthToPage(TextUtil.textArray(ConstantUtil.StoryEntry.Entry1))));
         }
         return super.use(pLevel, pPlayer, pHand);
     }

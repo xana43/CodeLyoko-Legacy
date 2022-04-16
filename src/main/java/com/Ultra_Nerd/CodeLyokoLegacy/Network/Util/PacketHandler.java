@@ -13,6 +13,7 @@ public final record PacketHandler() {
             () -> NET_VERSION,
             NET_VERSION::equals,
             NET_VERSION::equals
+
     );
 
     public static void init() {
@@ -21,7 +22,7 @@ public final record PacketHandler() {
       INSTANCE.registerMessage(nextId++,CustomControlServerHandler.class,CustomControlServerHandler::encapsulate,CustomControlServerHandler::make,CustomControlServerHandler.Handler::handle);
       INSTANCE.registerMessage(nextId++,ServerSaveHandler.class,ServerSaveHandler::encapsulate,ServerSaveHandler::make,ServerSaveHandler.SaveHandleer::saveServer);
       INSTANCE.registerMessage(nextId++, CapabilityPlayerClassSync.class, CapabilityPlayerClassSync::encapsulate, CapabilityPlayerClassSync::make, CapabilityPlayerClassSync.Handler::handle);
-      INSTANCE.registerMessage(nextId++,CapabilityPlayerInventorySync.class,CapabilityPlayerInventorySync::encapsulate,CapabilityPlayerInventorySync::make,CapabilityPlayerInventorySync.Handler::handle);
+      INSTANCE.registerMessage(nextId++,ReturnToScanner.class,ReturnToScanner::encap,ReturnToScanner::make,ReturnToScanner.Handler::handle);
     }
 
 

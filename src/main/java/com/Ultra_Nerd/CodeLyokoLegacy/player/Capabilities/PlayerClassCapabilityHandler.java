@@ -59,6 +59,10 @@ public final class PlayerClassCapabilityHandler implements INBTSerializable<Comp
             this.setClass(PlayerClassType.Samurai);
 
         }
+        else if(nbt.get(indentifier).equals(PlayerClassType.Guardian.getClassTag()))
+        {
+            this.setClass(PlayerClassType.Ninja);
+        }
 
     }
 

@@ -12,6 +12,7 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.IItemRenderProperties;
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +37,7 @@ public final class ArmorFeline extends ArmorItem {
     public ArmorFeline(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Properties builder) {
         super(materialIn, slot, builder);
         movement_modifier = 0.6;
+
 
     }
 
@@ -70,8 +73,29 @@ public final class ArmorFeline extends ArmorItem {
     }
 
     @Override
+    public boolean isFoil(final @NotNull ItemStack pStack) {
+        return false;
+    }
+
+
+
+    @Override
     public boolean isDamageable(ItemStack stack) {
         return false;
+    }
+
+    @Override
+    public int getDefaultTooltipHideFlags(@NotNull final ItemStack stack) {
+        return ItemStack.TooltipPart.ENCHANTMENTS.getMask();
+    }
+
+    @Override
+    public void inventoryTick(final ItemStack stack, final Level pLevel, final Entity pEntity, final int pSlotId, final boolean pIsSelected) {
+        super.inventoryTick(stack, pLevel, pEntity, pSlotId, pIsSelected);
+        if(!stack.isEnchanted()) {
+
+            stack.enchant(Enchantments.BINDING_CURSE,Enchantments.BINDING_CURSE.getMaxLevel());
+        }
     }
 
     @Override
@@ -99,15 +123,12 @@ public final class ArmorFeline extends ArmorItem {
                 }
             }
         } else {
-            if (!player.getItemBySlot(EquipmentSlot.CHEST).isEmpty() &&
-                    !player.getItemBySlot(EquipmentSlot.FEET).isEmpty() &&
-                    !player.getItemBySlot(EquipmentSlot.LEGS).isEmpty())
-            {
-
-                if (player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get() && player.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() == ModItems.ODD_LEGGINGS.get() && player.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() == ModItems.ODD_BOOTS.get()) {
 
 
-
+            if(!stack.isEnchanted()) {
+                //preventRemoval(stack);
+                stack.enchant(Enchantments.BINDING_CURSE,Enchantments.BINDING_CURSE.getMaxLevel());
+            }
                          player.addEffect(new MobEffectInstance(MobEffects.JUMP, -1, 3, false, false, false));
 
 
@@ -119,10 +140,10 @@ public final class ArmorFeline extends ArmorItem {
 
 
 
-                }
 
 
-            }
+
+
         }
     }
 

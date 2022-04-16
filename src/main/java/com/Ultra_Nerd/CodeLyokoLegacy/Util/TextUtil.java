@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util;
 
-import io.netty.util.internal.StringUtil;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.network.chat.TextComponent;
 import org.jetbrains.annotations.NotNull;
@@ -8,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 public final class TextUtil {
 
-    public static final TextComponent EMPTY_TEXT_COMPONENT = new TextComponent(StringUtil.EMPTY_STRING);
     private static final FormattedText[] pages = new FormattedText[100];
     public static FormattedText @NotNull [] textArray(@NotNull String textToDenote)
     {

@@ -8,6 +8,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.LyokoCore;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SeaPylon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.CapabilityRegistration;
+import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerCustomAttributesBothOrigins;
+import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.ModOreGen;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
@@ -16,6 +18,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
@@ -92,10 +95,11 @@ public record CodeLyokoMain() {
         //event.registerEntityRenderer(ModEntities.BLOK.get(), RendBlok::new);
     }*/
 
-public CodeLyokoMain() {
+    public CodeLyokoMain {
         instance = this;
         final IEventBus ModBus = FMLJavaModLoadingContext.get().getModEventBus();
         final IEventBus forgebus = MinecraftForge.EVENT_BUS;
+
         GeckoLib.initialize();
         //forgebus.addListener(PlayerCustomGameAttributes::PlayerDie);
         //ModBus.addListener(this::PlayerSetup);
@@ -111,9 +115,11 @@ public CodeLyokoMain() {
         ModSounds.populateMusicHashMap();
         ModBlocks.BLOCKS.register(ModBus);
         ModBus.addListener(CapabilityRegistration::registerCaps);
-        forgebus.addGenericListener(Entity.class,CapabilityRegistration::setCaps);
-        if(!FMLEnvironment.production)
-        {
+        forgebus.addGenericListener(Entity.class, CapabilityRegistration::setCaps);
+        forgebus.addGenericListener(Level.class, CapabilityRegistration::setLevelCap);
+        forgebus.addListener(PlayerCustomAttributesBothOrigins::reattachCapabilities);
+        forgebus.addListener(ModBiome::biomeOperations);
+        if (!FMLEnvironment.production) {
             ModBlocks.registerTestBlocks();
         }
 
@@ -121,7 +127,6 @@ public CodeLyokoMain() {
         ModFluids.LIQUIDS.register(ModBus);
         ModBiome.BIOMES.register(ModBus);
         ModFeature.LYOKOFEATURES.register(ModBus);
-
 
 
         //ModRecipes.RECIPE_SERIALIZER_DEFERRED_REGISTER.register(ModBus);
@@ -222,7 +227,7 @@ public static final class RegistryEventHandler{
                     PacketHandler.init();
 
                     ModDimensions.init();
-
+                    ModOreGen.registerea();
 
                 }
         );

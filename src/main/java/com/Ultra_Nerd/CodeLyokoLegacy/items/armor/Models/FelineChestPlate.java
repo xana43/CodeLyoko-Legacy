@@ -16,7 +16,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.world.entity.EquipmentSlot;
 import org.jetbrains.annotations.NotNull;
 
-public class FelineChestPlate extends ArmorModelRenderer {
+public final class FelineChestPlate extends ArmorModelRenderer {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	private final @NotNull ModelPart Body;
 	private final @NotNull ModelPart RightArm;

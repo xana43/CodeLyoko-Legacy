@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.TextUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ClientMiscFunctions;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import net.minecraft.sounds.SoundSource;
@@ -29,7 +29,7 @@ public class LaptopClass extends Item {
             item.setDamageValue(1);
             if (worldIn.isClientSide) {
 
-                DistExecutor.unsafeRunWhenOn(Dist.CLIENT,() -> ClientMiscFunctions.runnableScreen(TextUtil.EMPTY_TEXT_COMPONENT, ClientMiscFunctions.Screens.LAPTOP));
+                DistExecutor.unsafeRunWhenOn(Dist.CLIENT,() -> ClientMiscFunctions.runnableScreen(ConstantUtil.EMPTY_TEXT_COMPONENT, ClientMiscFunctions.Screens.LAPTOP));
             }
             worldIn.playSound(playerIn,playerIn.blockPosition(), ModSounds.OPENTOWERGUISOUND.get(), SoundSource.BLOCKS,1,1);
         }

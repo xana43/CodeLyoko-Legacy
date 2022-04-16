@@ -1,4 +1,4 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Common;
 
-public final record CustomGenSettings(int baseHeight, float verticalVariance, float horizontalVariance) {
+public record CustomGenSettings(int baseHeight, float verticalVariance, float horizontalVariance) {
 }

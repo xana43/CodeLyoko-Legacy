@@ -36,13 +36,16 @@ public final class LaserArrowShooter extends BowItem {
         if(!pStack.isEnchanted())
         {
             pStack.enchant(Enchantments.INFINITY_ARROWS,Enchantments.INFINITY_ARROWS.getMaxLevel());
-            pStack.getEnchantmentTags().clear();
+
 
         }
 
     }
 
-
+    @Override
+    public int getDefaultTooltipHideFlags(@NotNull final ItemStack stack) {
+        return ItemStack.TooltipPart.ENCHANTMENTS.getMask();
+    }
     @Override
     public boolean isFoil(@NotNull ItemStack pStack) {
         return false;
@@ -103,5 +106,8 @@ public final class LaserArrowShooter extends BowItem {
         }
     }
 
-
+    @Override
+    public boolean onDroppedByPlayer(final ItemStack item, final Player player) {
+        return false;
+    }
 }

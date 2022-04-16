@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
@@ -14,7 +15,7 @@ public record CapabilityPlayerClassSync(CompoundTag playerClassTag, PlayerClassT
 
     public static void Sync(PlayerClassType classType)
     {
-      PacketHandler.INSTANCE.sendToServer(new CapabilityPlayerClassSync(classType.getClassTag(),classType));
+      PacketHandler.INSTANCE.send(PacketDistributor.SERVER.with(() -> null),new CapabilityPlayerClassSync(classType.getClassTag(),classType));
     }
 
 
@@ -39,7 +40,6 @@ public record CapabilityPlayerClassSync(CompoundTag playerClassTag, PlayerClassT
                 final ServerPlayer player = ctx.get().getSender();
 
                 assert player != null;
-
                 player.getCapability(CapabilityRegistration.CLASS_CAPABILITY).ifPresent(cap -> {
                     //cap.setPlayer(player);
                     cap.setClass(pky.playerClassType);

@@ -71,7 +71,7 @@ public final class CableBlock extends FenceBlock {
             for (int y = -1; y < 2; y++) {
                 for (int z = -1; z < 2; z++) {
                     if (!(x == 0 && y == 0 && z == 0)) {
-                        BlockEntity surrounding = worldIn.getBlockEntity(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
+                        BlockEntityCapabilit surrounding = worldIn.getBlockEntity(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
                         if (surrounding instanceof CableTileEntity) {
                             if (CableTileEntity.CONNECTIONS.containsKey(surrounding)) {
                                 CableTileEntity.CONNECTIONS.get(surrounding).add(worldIn.getBlockEntity(pos));

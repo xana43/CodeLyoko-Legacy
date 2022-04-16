@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
@@ -13,13 +14,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import org.jetbrains.annotations.NotNull;
 
-public final class TransparentBlock extends Block {
+public class TransparentBlock extends Block {
 
     public TransparentBlock() {
-        super(Block.Properties.copy(Blocks.BARRIER)
-
-
-        );
+        super(Block.Properties.copy(Blocks.BARRIER).randomTicks());
 
     }
 
@@ -44,8 +42,16 @@ public final class TransparentBlock extends Block {
     }
 
     @Override
-    public void fallOn(@NotNull Level p_152426_, @NotNull BlockState p_152427_, @NotNull BlockPos p_152428_, @NotNull Entity p_152429_, float p_152430_) {
-        super.fallOn(p_152426_, p_152427_, p_152428_, p_152429_, p_152430_);
-        p_152429_.fallDistance = 0;
+    public void fallOn(@NotNull Level p_152426_, @NotNull BlockState p_152427_, @NotNull BlockPos p_152428_, @NotNull Entity entity, float p_152430_) {
+        super.fallOn(p_152426_, p_152427_, p_152428_, entity, p_152430_);
+        entity.fallDistance = 0;
+
     }
+
+    @Override
+    public boolean canSurvive(final BlockState pState, final LevelReader pLevel, final BlockPos pPos) {
+        return false;
+    }
+
+
 }
