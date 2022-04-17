@@ -155,7 +155,7 @@ public final class ScannerFrame extends Block {
     public boolean onDestroyedByPlayer(final BlockState state, final Level level, final BlockPos pos, final Player player, final boolean willHarvest, final FluidState fluid) {
         if(level.getBlockEntity(pos.below()) instanceof ScannerTileEntity scannerTile)
         {
-            scannerTile.invalidateStruct();
+           // scannerTile.Invalidate();
             //level.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.removePos(scannerTile));
         }
 

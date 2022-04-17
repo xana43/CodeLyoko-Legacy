@@ -1,19 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.BlockPatternRegistry;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Scanner;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.ScannerFrame;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.ScannerTop;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
-import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
-import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
 import org.jetbrains.annotations.NotNull;
 
-public class ScannerTileEntity extends BlockEntity {
+public class ScannerTileEntity extends BlockEntity implements MasterEntity {
 
 
     public ScannerTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
@@ -24,13 +24,7 @@ public class ScannerTileEntity extends BlockEntity {
 
     }
 
-    private static final BlockPattern scannerpattern = BlockPatternBuilder.start().aisle(
-            "0T0",
-            "0s0",
-            "0m0")
-            .where('0', BlockInWorld.hasState(BlockStatePredicate.ANY)).where('s',BlockInWorld.hasState(state -> state == ModBlocks.SCANNER_FRAME.get().defaultBlockState()))
-            .where('T',BlockInWorld.hasState(state -> state == ModBlocks.SCANNER_TOP.get().defaultBlockState()))
-            .where('m',BlockInWorld.hasState(state -> state == ModBlocks.SCANNER_BASE.get().defaultBlockState())).build();
+
 
 
    // public void invalidateStruct()
@@ -38,13 +32,28 @@ public class ScannerTileEntity extends BlockEntity {
      //   deactivateStructure();
    // }
 
-
+    @Override
     public boolean check() {
-        BlockPattern.BlockPatternMatch patternMatch = scannerpattern.matches(this.level,this.worldPosition,this.level.getBlockState(this.worldPosition).getValue(Scanner.directionProperty), Direction.UP);
-        if( patternMatch!= null);
-        {
-            patternMatch.getBlock(0,1,0);
-        }
+        //scannerpattern.matches(this.level,this.worldPosition,this.level.getBlockState(this.worldPosition).getValue(Scanner.directionProperty), Direction.UP);
+       if(level != null) {
+           //String.valueOf(BlockPatternRegistry.matches(BlockPatternRegistry.scanner,this.level,this.worldPosition,this.level.getBlockState(this.worldPosition).getValue(Scanner.directionProperty),Direction.DOWN))
+           //CodeLyokoMain.Log.info(String.valueOf(BlockPatternRegistry.scanner.find(level,worldPosition)));
+           final BlockPattern.BlockPatternMatch match = BlockPatternRegistry.scanner.find(level, worldPosition);
+           if (match != null) {
+
+               //CodeLyokoMain.Log.info("pattern matched");
+                final BlockPos frame = new BlockPos(worldPosition.getX(),worldPosition.getY() + 1,worldPosition.getZ());
+                final BlockPos top = new BlockPos(worldPosition.getX(),worldPosition.getY() + 2, worldPosition.getZ());
+               level.setBlockAndUpdate(frame, level.getBlockState(frame).setValue(ScannerFrame.ScannerFrameInvis, true));
+               level.setBlockAndUpdate(top, level.getBlockState(top).setValue(ScannerTop.scannerFormedTop, true));
+               level.setBlockAndUpdate(worldPosition, level.getBlockState(worldPosition).setValue(Scanner.Scanner, true));
+               return true;
+           } else {
+
+               invalidateEntity();
+               return false;
+           }
+       }
         /*if (checkStructure()) {
             activateStructure();
 
@@ -56,8 +65,22 @@ public class ScannerTileEntity extends BlockEntity {
         return checkStructure();
 
          */
+        return false;
+    }
+    @Override
+    public void invalidateEntity()
+    {
+        assert level != null;
+        level.setBlockAndUpdate(worldPosition,level.getBlockState(worldPosition).setValue(Scanner.Scanner,false));
+        if(level.getBlockState(worldPosition.above()).getBlock() == ModBlocks.SCANNER_FRAME.get()) {
+            level.setBlockAndUpdate(worldPosition.above(), level.getBlockState(worldPosition.above()).setValue(ScannerFrame.ScannerFrameInvis, false));
+        }
+        if(level.getBlockState(worldPosition.above().above()).getBlock() == ModBlocks.SCANNER_TOP.get()) {
+            level.setBlockAndUpdate(worldPosition.above().above(), level.getBlockState(worldPosition.above().above()).setValue(ScannerTop.scannerFormedTop, false));
+        }
     }
 /*
+
     private boolean checkStructure() {
 
         assert level != null;

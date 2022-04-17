@@ -8,7 +8,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.ElectricFluorideIn
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.FluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.saplings.DigitalMountainSapling;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.saplings.DigitalSapling;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.BlockPatternTest;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.DataTransferInterface;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.TestBlockPortal;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.*;
@@ -63,13 +62,13 @@ public final class ModBlocks {
     public static final RegistryObject<Block> DIGITAL_WOOD_MOUNTAIN = BLOCKS.register("digital_wood_mountain", () -> new Block(Block.Properties.copy(Blocks.JUNGLE_WOOD)));
     public static final RegistryObject<Block> DIGITAL_LEAF_MOUNTAIN = BLOCKS.register("digital_leaf_mountain", () -> new LeavesBlock(Block.Properties.copy(Blocks.JUNGLE_LEAVES)));
 
-    public static final RegistryObject<Block> BLOCK_PATTERN = BLOCKS.register("block_pattern", () -> new BlockPatternTest(Block.Properties.copy(Blocks.IRON_BLOCK)));
+
     public static void registerTestBlocks()
     {
         if(!FMLEnvironment.production)
         {
             BLOCKS.register("portal_block", () -> new TestBlockPortal(Block.Properties.copy(Blocks.NETHER_PORTAL)));
-
+            //BLOCKS.register("block_pattern", () -> new BlockPatternTest(Block.Properties.copy(Blocks.IRON_BLOCK)));
             BLOCKS.register("digital_mountain_sapling", () -> new DigitalMountainSapling(new AbstractTreeGrower() {
                 @Override
                 protected @NotNull Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(@NotNull Random pRandom, boolean pLargeHive) {

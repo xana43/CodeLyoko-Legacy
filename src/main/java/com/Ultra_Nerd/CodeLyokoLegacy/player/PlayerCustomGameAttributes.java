@@ -34,6 +34,9 @@ import java.util.Objects;
 public record PlayerCustomGameAttributes() {
     private static final ResourceLocation HEALTH_TEX = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/lyoko_health_bar.png");
 
+
+
+
     @SubscribeEvent
     public static void PlayerDie(final @NotNull LivingDeathEvent event)
     {
@@ -43,15 +46,13 @@ public record PlayerCustomGameAttributes() {
 
             if (DimensionCheck.playerNotInVanillaWorld(playerEntity))
             {
+
                 Minecraft.getInstance().getSoundManager().stop(SoundEvents.PLAYER_DEATH.getLocation(), SoundSource.PLAYERS);
                 playerEntity.level.playSound(playerEntity,playerEntity.blockPosition(), ModSounds.DEVIRTUALIZATION.get(),SoundSource.PLAYERS, 1,1);
             }
 
         }
     }
-
-
-
 
 
     @SubscribeEvent
@@ -70,7 +71,7 @@ public record PlayerCustomGameAttributes() {
                 }
                 if(event.getPlayer().getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get())
                 {
-                    ItemStack HatItem = event.getPlayer().getInventory().getArmor(EquipmentSlot.HEAD.getIndex());
+                    final ItemStack HatItem = event.getPlayer().getInventory().getArmor(EquipmentSlot.HEAD.getIndex());
                     if(!HatItem.isEnchanted())
                     {
                         HatItem.enchant(Enchantments.BINDING_CURSE,Enchantments.BINDING_CURSE.getMaxLevel());

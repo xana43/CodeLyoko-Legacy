@@ -163,7 +163,8 @@ public final class ModBiome {
         BiomeDictionary.addTypes(MOUNTAIN_SECTOR,LYOKO, BiomeDictionary.Type.MOUNTAIN,BiomeDictionary.Type.SPARSE);
         BiomeDictionary.addTypes(VOLCANO_SECTOR,LYOKO, BiomeDictionary.Type.MOUNTAIN, BiomeDictionary.Type.HOT, BiomeDictionary.Type.NETHER, BiomeDictionary.Type.SPOOKY);
         BiomeDictionary.addTypes(DIGITAL_OCEAN,LYOKO, BiomeDictionary.Type.WATER, BiomeDictionary.Type.WET);
-
+        BiomeDictionary.addTypes(FRONTIER,BiomeDictionary.Type.getType("Unknown"),BiomeDictionary.Type.VOID,BiomeDictionary.Type.SPOOKY
+        ,BiomeDictionary.Type.DEAD);
 
 
     }
@@ -173,7 +174,7 @@ public final class ModBiome {
        // CodeLyokoMain.Log.info(FOREST_SECTOR.getRegistryName().toString());
         if(event.getName().equals(FOREST_SECTOR.location())) {
 
-               CodeLyokoMain.Log.info("BiomeLoaded");
+
 
             event.getSpawns().addSpawn(ConstantUtil.LYOKO, new MobSpawnSettings.SpawnerData(ModEntities.BLOK.get(), 5, 1, 7));
             event.getSpawns().creatureGenerationProbability(0.3f);

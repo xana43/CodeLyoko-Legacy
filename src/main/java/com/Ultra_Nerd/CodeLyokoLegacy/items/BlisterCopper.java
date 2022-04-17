@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlisterCopper extends Item {
+public final class BlisterCopper extends Item {
     private short I = 500;
 
     public BlisterCopper(@NotNull Properties properties) {

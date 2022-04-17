@@ -15,14 +15,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 public class TowerInterfaceTileEntity extends BlockEntity implements MenuProvider
  {
@@ -40,20 +38,9 @@ public class TowerInterfaceTileEntity extends BlockEntity implements MenuProvide
 
 
 
-    @Override
-    public @NotNull AABB getRenderBoundingBox() {
-        // This, combined with isGlobalRenderer in the TileEntityRenderer makes it so that the
-        // render does not disappear if the player can't see the block
-        // This is useful for rendering larger models or dynamically sized models
-        return INFINITE_EXTENT_AABB;
-    }
 
-    @Override
-    public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        ///CompoundTag nbtTag = new CompoundTag();
-        //Write your data into the nbtTag
-        return ClientboundBlockEntityDataPacket.create(Objects.requireNonNull(Objects.requireNonNull(this.getLevel()).getBlockEntity(worldPosition)));
-    }
+
+
 
 
     @Override

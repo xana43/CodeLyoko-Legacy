@@ -162,9 +162,12 @@ public class PlayerCustomAttributesBothOrigins {
             }
             else if(DimensionCheck.worldIsVanilla(event.getTo()))
             {
-                player.getInventory().clearContent();
+                //player.getInventory().clearContent();
                 player.level.getCapability(CapabilityRegistration.INVENTORY_CAPABILITY).ifPresent(cap -> cap.setPlayerInventory(player));
             }
         }
     }
+
+
+
 }

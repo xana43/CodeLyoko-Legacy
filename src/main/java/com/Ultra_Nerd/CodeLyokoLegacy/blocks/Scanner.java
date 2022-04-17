@@ -1,8 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.CapabilityRegistration;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
@@ -18,13 +15,10 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
@@ -33,13 +27,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public final class Scanner extends Block implements EntityBlock  {
+public final class Scanner extends BaseEntityBlock  {
     public static final BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
     public static final DirectionProperty directionProperty = HorizontalDirectionalBlock.FACING;
     private static final VoxelShape shapeS = Stream.of(
@@ -352,12 +345,26 @@ public final class Scanner extends Block implements EntityBlock  {
         super.animateTick(pState, pLevel, pPos, pRandom);
     }
 
-
-    @Nullable
     @Override
-    public <T extends BlockEntity> GameEventListener getListener(final Level pLevel, final T pBlockEntity) {
-        return EntityBlock.super.getListener(pLevel, pBlockEntity);
+    public void neighborChanged(final BlockState pState, final Level pLevel, final BlockPos pPos, final Block pBlock, final BlockPos pFromPos, final boolean pIsMoving) {
+        super.neighborChanged(pState, pLevel, pPos, pBlock, pFromPos, pIsMoving);
+
+        if(pLevel.getBlockEntity(pPos) instanceof ScannerTileEntity scannerTile)
+        {
+
+                //CodeLyokoMain.Log.info("check");
+                if(!pLevel.isClientSide()) {
+                    scannerTile.check();
+                }
+
+            //if(level.getBlockState(pos.above().above()).getBlock() == ModBlocks.SCANNER_TOP.get())
+            //{
+              //  scannerTile.check();
+            //}
+        }
     }
+
+
 
     @Override
     public boolean canEntityDestroy(final BlockState state, final BlockGetter level, final BlockPos pos, final Entity entity) {
@@ -367,18 +374,14 @@ public final class Scanner extends Block implements EntityBlock  {
 
     }
 
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final Level pLevel, final BlockState pState, final BlockEntityType<T> pBlockEntityType) {
-        return (pLevel1, pPos, pState1, pBlockEntity) -> pLevel1.getBlockEntity(pPos);
-    }
+
 
     @Override
     public boolean onDestroyedByPlayer(final BlockState state, final Level level, final BlockPos pos, final Player player, final boolean willHarvest, final FluidState fluid) {
        if (level.getBlockEntity(pos) instanceof ScannerTileEntity scannerTile)
        {
            level.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.removePos(scannerTile));
-           scannerTile.invalidateStruct();
+           scannerTile.invalidateEntity();
 
 
        }
@@ -388,39 +391,8 @@ public final class Scanner extends Block implements EntityBlock  {
 
 
 
-    private boolean checkStruct(final ScannerTileEntity scannerTile, BlockPos pos, ServerLevel serverLevel)
-    {
-        CodeLyokoMain.Log.info("outer");
-        if(serverLevel.getBlockState(pos.above()).getBlock() == ModBlocks.SCANNER_FRAME.get())
-        {
-            CodeLyokoMain.Log.info("first blook");
-            if(serverLevel.getBlockState(pos.above().above()).getBlock() == ModBlocks.SCANNER_TOP.get())
-            {
-                CodeLyokoMain.Log.info("second block");
-               if(scannerTile.check())
-               {
-                   //serverLevel.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.setThispos(scannerTile));
-                   return true;
-               }
-            }
-        }
-       //serverLevel.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.removePos(scannerTile));
-        return false;
-    }
-    @Override
-    public void tick(@NotNull BlockState pState, @NotNull ServerLevel pLevel, @NotNull BlockPos pPos, @NotNull Random pRandom) {
-
-       if(!pLevel.isClientSide) {
-           CodeLyokoMain.Log.info("ticl");
-           if (pLevel.getBlockEntity(pPos) instanceof ScannerTileEntity scannerTile) {
-               checkStruct(scannerTile, pPos, pLevel);
 
 
-           }
-       }
-        super.tick(pState, pLevel, pPos, pRandom);
-
-    }
 
     @Override
     public @NotNull InteractionResult use(final @NotNull BlockState pState, final Level pLevel, final @NotNull BlockPos pPos, final @NotNull Player pPlayer, final @NotNull InteractionHand pHand, final BlockHitResult pHit) {
@@ -452,7 +424,7 @@ public final class Scanner extends Block implements EntityBlock  {
             return InteractionResult.FAIL;
         }
 
- */
+
         if(pLevel.getBlockEntity(pPos) instanceof ScannerTileEntity tileEntity && !pLevel.isClientSide)
         {
             if(!pPlayer.isCreative() && pPlayer.getItemInHand(pHand).getItem() == ModItems.TRUSTTY_SCREWDRIVER.get()) {
@@ -470,6 +442,8 @@ public final class Scanner extends Block implements EntityBlock  {
                 return InteractionResult.FAIL;
             }
         }
+
+ */
         return InteractionResult.FAIL;
 
 
