@@ -12,5 +12,6 @@ public class LootTables extends LootProvider {
     @Override
     protected void addTables() {
         dataMap.put(ModBlocks.BORNITE_ORE.get(), createBlockTabe("bornite_ore",ModBlocks.BORNITE_ORE.get()));
+
     }
 }

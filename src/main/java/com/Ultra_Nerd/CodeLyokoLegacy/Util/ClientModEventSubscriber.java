@@ -43,17 +43,19 @@ public record ClientModEventSubscriber() {
 
 public static void ClientSetup()
     {
-        final IEventBus ModEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        final IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
-        ModEventBus.addListener(ClientModEventSubscriber::onFMLClientSetupEvent);
-        ModEventBus.addListener(ClientModEventSubscriber::registerParticleFactories);
-        ModEventBus.addListener(ClientModEventSubscriber::registerEntityLayers);
-        forgeEventBus.addListener(LyokoControls::customInput);
-        ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_VEHICLES_UP);
-        ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_VEHICLES_DOWN);
-        ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_CLASS_SELECT);
-        ForgeModelBakery.addSpecialModel(CodeLyokoMain.CodeLyokoPrefix("entity/skid/skid"));
-
+        //for data generation
+        if(Minecraft.getInstance() != null) {
+            final IEventBus ModEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+            final IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+            ModEventBus.addListener(ClientModEventSubscriber::onFMLClientSetupEvent);
+            ModEventBus.addListener(ClientModEventSubscriber::registerParticleFactories);
+            ModEventBus.addListener(ClientModEventSubscriber::registerEntityLayers);
+            forgeEventBus.addListener(LyokoControls::customInput);
+            ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_VEHICLES_UP);
+            ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_VEHICLES_DOWN);
+            ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_CLASS_SELECT);
+            ForgeModelBakery.addSpecialModel(CodeLyokoMain.CodeLyokoPrefix("entity/skid/skid"));
+        }
     }
 
 

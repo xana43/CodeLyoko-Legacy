@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.Nullable;
 
-public class UniversalEnergyBlock extends BaseEntityBlock {
+public final class UniversalEnergyBlock extends BaseEntityBlock {
 
     //private UniversalEnergyStorageTileEntity Text = new UniversalEnergyStorageTileEntity();
     public UniversalEnergyBlock() {

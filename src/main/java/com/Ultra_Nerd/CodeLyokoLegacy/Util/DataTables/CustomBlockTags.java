@@ -24,8 +24,7 @@ public final class CustomBlockTags extends BlockTagsProvider {
                 .add(ModBlocks.BORNITE_ORE.get());
         tag(Tags.Blocks.ORES)
                 .add(ModBlocks.BORNITE_ORE.get());
-        tag(CustomTags.CODELYOKO_URANIUM_ORE)
-                .add(ModBlocks.BORNITE_ORE.get());
+
 
     }
 

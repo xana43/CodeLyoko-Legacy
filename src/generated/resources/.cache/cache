@@ -1,0 +1,7 @@
+6ecdc0d0b1b000850fb83b1e74ca3cb8d4f3a182 assets/cm/blockstates/bornite_ore.json
+6da4c31dbce47c3489f334b24dc1706aa31b198b assets/cm/models/block/bornite_ore.json
+65b3aec1cd8a6640f2f0c28bef9ea684964fb94f assets/cm/models/item/bornite_ore.json
+67145f649e695e1c925b9bbf22c6be60f47f376c data/cm/loot_tables/blocks/bornite_ore.json
+ebbcca6f6664481076b8746cf8559906e7781073 data/forge/tags/blocks/ores.json
+ebbcca6f6664481076b8746cf8559906e7781073 data/minecraft/tags/blocks/mineable/pickaxe.json
+ebbcca6f6664481076b8746cf8559906e7781073 data/minecraft/tags/blocks/needs_iron_tool.json

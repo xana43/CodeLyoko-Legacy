@@ -36,7 +36,16 @@ public final class BlockPatternRegistry {
          .where('0',BlockInWorld.hasState(BlockStatePredicate.ANY)).build();
 
  public static final BlockPattern SuperCalculatorScreen = BlockPatternBuilder.start().aisle(
-         ""
- ).build();
+         "1000001",
+         "1000001",
+         "1000001"
+ ).aisle(
+         "2211122",
+         "2211122",
+         "2211122"
+ )
+         .where('0',BlockInWorld.hasState(BlockStatePredicate.ANY))
+         .where('1',BlockInWorld.hasState(state -> state.getBlock() == ModBlocks.COMPUTER_SCREEN.get()))
+         .where('2',BlockInWorld.hasState(state -> state.getBlock() == ModBlocks.COMPUTER_SCREEN_CONNECTOR.get())).build();
 
 }

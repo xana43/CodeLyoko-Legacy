@@ -1,12 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MultiBlockPartCallback;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.RenderShape;
@@ -16,7 +17,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import java.util.stream.Stream;
 
-public final class ScannerFrame extends Block {
+public final class ScannerFrame extends Block implements MultiBlockPartCallback {
     public static final DirectionProperty directionPropertyFrame = BlockStateProperties.HORIZONTAL_FACING;
     private static final VoxelShape shapeS = Stream.of(
             Block.box(-4, 0, 5, -3, 15.3, 11),
@@ -151,17 +151,29 @@ public final class ScannerFrame extends Block {
     public static final BooleanProperty ScannerFrameInvis = BooleanProperty.create("scanner_frame_invis");
 
 
+
     @Override
-    public boolean onDestroyedByPlayer(final BlockState state, final Level level, final BlockPos pos, final Player player, final boolean willHarvest, final FluidState fluid) {
-        if(level.getBlockEntity(pos.below()) instanceof ScannerTileEntity scannerTile)
+    public void destroy(final LevelAccessor pLevel, final BlockPos pPos, final BlockState pState) {
+        super.destroy(pLevel, pPos, pState);
+        final BlockPos masterpos = new BlockPos(pPos.getX(),pPos.getY() - 1, pPos.getZ());
+
+        if(pLevel.getBlockEntity(masterpos) instanceof MasterEntity masterEntity)
         {
-           // scannerTile.Invalidate();
+
+            masterEntity.invalidateEntity();
             //level.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.removePos(scannerTile));
         }
-
-
-        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
+
+    @Override
+    public void onPlace(final BlockState pState, final Level pLevel, final @NotNull BlockPos pPos, final @NotNull BlockState pOldState, final boolean pIsMoving) {
+        super.onPlace(pState, pLevel, pPos, pOldState, pIsMoving);
+        this.checkAreaNegative(pLevel,1,2,1,pPos);
+    }
+
+
+
+
 
     public ScannerFrame(@NotNull Properties properties) {
         super(properties);

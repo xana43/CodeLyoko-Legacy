@@ -33,7 +33,7 @@ public class ScannerTileEntity extends BlockEntity implements MasterEntity {
    // }
 
     @Override
-    public boolean check() {
+    public void check() {
         //scannerpattern.matches(this.level,this.worldPosition,this.level.getBlockState(this.worldPosition).getValue(Scanner.directionProperty), Direction.UP);
        if(level != null) {
            //String.valueOf(BlockPatternRegistry.matches(BlockPatternRegistry.scanner,this.level,this.worldPosition,this.level.getBlockState(this.worldPosition).getValue(Scanner.directionProperty),Direction.DOWN))
@@ -49,11 +49,9 @@ public class ScannerTileEntity extends BlockEntity implements MasterEntity {
                level.setBlockAndUpdate(frame, level.getBlockState(frame).setValue(ScannerFrame.ScannerFrameInvis, true));
                level.setBlockAndUpdate(top, level.getBlockState(top).setValue(ScannerTop.scannerFormedTop, true));
                level.setBlockAndUpdate(worldPosition, level.getBlockState(worldPosition).setValue(Scanner.Scanner, true));
-               return true;
            } else {
 
                invalidateEntity();
-               return false;
            }
        }
         /*if (checkStructure()) {
@@ -67,18 +65,19 @@ public class ScannerTileEntity extends BlockEntity implements MasterEntity {
         return checkStructure();
 
          */
-        return false;
     }
     @Override
     public void invalidateEntity()
     {
         assert level != null;
+        final BlockPos frame = new BlockPos(worldPosition.getX(),worldPosition.getY() + 1,worldPosition.getZ());
+        final BlockPos top = new BlockPos(worldPosition.getX(),worldPosition.getY() + 2,worldPosition.getZ());
         level.setBlockAndUpdate(worldPosition,level.getBlockState(worldPosition).setValue(Scanner.Scanner,false));
-        if(level.getBlockState(worldPosition.above()).getBlock() == ModBlocks.SCANNER_FRAME.get()) {
-            level.setBlockAndUpdate(worldPosition.above(), level.getBlockState(worldPosition.above()).setValue(ScannerFrame.ScannerFrameInvis, false));
+        if(level.getBlockState(frame).getBlock() == ModBlocks.SCANNER_FRAME.get()) {
+            level.setBlockAndUpdate(frame, level.getBlockState(frame).setValue(ScannerFrame.ScannerFrameInvis, false));
         }
-        if(level.getBlockState(worldPosition.above().above()).getBlock() == ModBlocks.SCANNER_TOP.get()) {
-            level.setBlockAndUpdate(worldPosition.above().above(), level.getBlockState(worldPosition.above().above()).setValue(ScannerTop.scannerFormedTop, false));
+        if(level.getBlockState(top).getBlock() == ModBlocks.SCANNER_TOP.get()) {
+            level.setBlockAndUpdate(top, level.getBlockState(top).setValue(ScannerTop.scannerFormedTop, false));
         }
     }
 /*

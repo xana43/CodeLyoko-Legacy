@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.CapabilityRegistration;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -345,24 +344,7 @@ public final class Scanner extends BaseEntityBlock  {
         super.animateTick(pState, pLevel, pPos, pRandom);
     }
 
-    @Override
-    public void neighborChanged(final BlockState pState, final Level pLevel, final BlockPos pPos, final Block pBlock, final BlockPos pFromPos, final boolean pIsMoving) {
-        super.neighborChanged(pState, pLevel, pPos, pBlock, pFromPos, pIsMoving);
 
-        if(pLevel.getBlockEntity(pPos) instanceof ScannerTileEntity scannerTile)
-        {
-
-                //CodeLyokoMain.Log.info("check");
-                if(!pLevel.isClientSide()) {
-                    scannerTile.check();
-                }
-
-            //if(level.getBlockState(pos.above().above()).getBlock() == ModBlocks.SCANNER_TOP.get())
-            //{
-              //  scannerTile.check();
-            //}
-        }
-    }
 
 
 
@@ -380,7 +362,7 @@ public final class Scanner extends BaseEntityBlock  {
     public boolean onDestroyedByPlayer(final BlockState state, final Level level, final BlockPos pos, final Player player, final boolean willHarvest, final FluidState fluid) {
        if (level.getBlockEntity(pos) instanceof ScannerTileEntity scannerTile)
        {
-           level.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.removePos(scannerTile));
+
            scannerTile.invalidateEntity();
 
 

@@ -1,7 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.DataProviders;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.BlockStateSimple;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.CustomBlockTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.ItemModelGenerator;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.LootTables;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,15 +18,11 @@ public class Generator {
     {
         final DataGenerator generator = event.getGenerator();
         CodeLyokoMain.Log.info("gather data");
-        if(event.includeServer())
-        {
-            generator.addProvider(new LootTables(generator));
-            generator.addProvider(new CustomBlockTags(generator,event.getExistingFileHelper()));
-        }
-        if(event.includeClient())
-        {
+        generator.addProvider(new LootTables(generator));
+        generator.addProvider(new CustomBlockTags(generator,event.getExistingFileHelper()));
+        generator.addProvider(new BlockStateSimple(generator,event.getExistingFileHelper()));
+        generator.addProvider(new ItemModelGenerator(generator,event.getExistingFileHelper()));
 
-        }
     }
 
 }

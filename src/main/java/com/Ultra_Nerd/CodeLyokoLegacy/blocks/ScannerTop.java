@@ -1,12 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MultiBlockPartCallback;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
@@ -15,7 +17,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -25,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import java.util.stream.Stream;
 
-public final class ScannerTop extends Block {
+public final class ScannerTop extends Block implements MultiBlockPartCallback {
     public static final DirectionProperty directionPropertyTop = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty scannerFormedTop = BooleanProperty.create("scanner_formed_top");
     private static final VoxelShape shapeS = Stream.of(
@@ -215,14 +216,26 @@ public final class ScannerTop extends Block {
         this.registerDefaultState(this.defaultBlockState().setValue(directionPropertyTop, Direction.NORTH).setValue(scannerFormedTop, false));
     }
 
+
+
     @Override
-    public boolean onDestroyedByPlayer(final BlockState state, final Level level, final BlockPos pos, final Player player, final boolean willHarvest, final FluidState fluid) {
-        if(level.getBlockEntity(pos.below().below()) instanceof ScannerTileEntity scannerTile)
+    public void destroy(final @NotNull LevelAccessor pLevel, final @NotNull BlockPos pos, final @NotNull BlockState pState) {
+        super.destroy(pLevel, pos, pState);
+
+        if(pLevel.getBlockEntity(new BlockPos(pos.getX(), pos.getY() - 2, pos.getZ())) instanceof MasterEntity masterEntity)
         {
-            //scannerTile.Invalidate();
+            CodeLyokoMain.Log.info("should invalidate, Source = "  + this.getRegistryName());
+            masterEntity.invalidateEntity();
             //level.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.removePos(scannerTile));
         }
-        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+    }
+
+
+
+    @Override
+    public void onPlace(final @NotNull BlockState pState, final @NotNull Level pLevel, final @NotNull BlockPos pPos, final @NotNull BlockState pOldState, final boolean pIsMoving) {
+        super.onPlace(pState, pLevel, pPos, pOldState, pIsMoving);
+        this.checkAreaNegative(pLevel,1,3,1,pPos);
     }
 
     @Override
