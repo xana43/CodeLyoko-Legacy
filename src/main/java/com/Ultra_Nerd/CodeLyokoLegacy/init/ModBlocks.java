@@ -37,6 +37,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> BLACK_VOID = BLOCKS.register("black_void", BlackVoid::new);
     public static final RegistryObject<Block> BORNITE_ORE = BLOCKS.register("bornite_ore", () -> new Block(Block.Properties.copy(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> CABLE_BLOCK = BLOCKS.register("cable_block", () -> new CableBlock(Block.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> COMPUTER_SCREEN_CONNECTOR = BLOCKS.register("computer_screen_connector", () -> new SuperComputerSideScreenConnector(BlockBehaviour.Properties.copy(Blocks.IRON_BARS)));
     public static final RegistryObject<Block> CHALCOPYRITE_ORE = BLOCKS.register("chalcopyrite_ore", () -> new Block(Block.Properties.copy(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> COVELLITE_ORE = BLOCKS.register("covellite_ore", () -> new Block(Block.Properties.copy(Blocks.IRON_ORE)));
     public static final RegistryObject<Block> CHALCOCITE_ORE = BLOCKS.register("chalcocite_ore", () -> new Block(Block.Properties.copy(Blocks.IRON_ORE)));

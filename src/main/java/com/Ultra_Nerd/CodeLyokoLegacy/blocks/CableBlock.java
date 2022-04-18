@@ -1,6 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -37,6 +39,20 @@ public final class CableBlock extends FenceBlock {
         return ModTileEntities.CABLE_TILE_ENTITY.get().create();
     }
 */
+    private boolean sameState(BlockState state)
+    {
+        return state.getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get() || state.getBlock() == ModBlocks.COMPUTER_SCREEN.get() || state.getBlock() == ModBlocks.COMPUTER_SCREEN_CONNECTOR.get();
+    }
+
+    @Override
+    public boolean connectsTo(final BlockState pState, final boolean pIsSideSolid, final Direction pDirection) {
+        //return super.connectsTo(pState, pIsSideSolid, pDirection);
+        //final Block block = pState.getBlock();
+        final boolean valid = this.sameState(pState);
+        return  !isExceptionForConnection(pState) && (pIsSideSolid || valid);
+
+    }
+
     @Nonnull
     @Override
     public VoxelShape getCollisionShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {

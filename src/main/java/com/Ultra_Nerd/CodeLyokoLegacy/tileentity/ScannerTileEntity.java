@@ -39,6 +39,8 @@ public class ScannerTileEntity extends BlockEntity implements MasterEntity {
            //String.valueOf(BlockPatternRegistry.matches(BlockPatternRegistry.scanner,this.level,this.worldPosition,this.level.getBlockState(this.worldPosition).getValue(Scanner.directionProperty),Direction.DOWN))
            //CodeLyokoMain.Log.info(String.valueOf(BlockPatternRegistry.scanner.find(level,worldPosition)));
            final BlockPattern.BlockPatternMatch match = BlockPatternRegistry.scanner.find(level, worldPosition);
+
+
            if (match != null) {
 
                //CodeLyokoMain.Log.info("pattern matched");
