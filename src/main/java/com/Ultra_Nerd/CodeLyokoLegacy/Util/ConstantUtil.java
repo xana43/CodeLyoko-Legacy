@@ -1,9 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ClientMiscFunctions;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoArmorMaterial;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoTiers;
 import io.netty.util.internal.StringUtil;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
@@ -11,9 +8,7 @@ import net.minecraft.world.entity.MobCategory;
 
 public record ConstantUtil() {
 
-    public static final LyokoArmorMaterial[] LYOKO_ARMOR_MATERIALS_VALUES = LyokoArmorMaterial.values();
-    public static final LyokoTiers[] LYOKO_TIERS_VALUES = LyokoTiers.values();
-    public static final ClientMiscFunctions.Screens[] CLIENT_SCREEN_VALUES = ClientMiscFunctions.Screens.values();
+
     public static final Style GUNSHIP = Style.EMPTY.withFont(CodeLyokoMain.CodeLyokoPrefix("gunship"));
     public static final Style HUD = Style.EMPTY.withFont(CodeLyokoMain.CodeLyokoPrefix("lyoko_hud_font"));
     public static final MobCategory LYOKO = MobCategory.create("lyoko","lyoko",10,false,false,128);
@@ -41,7 +36,7 @@ public record ConstantUtil() {
                                 "xxxx/xx/xx" + n +
                                 "Jeremy Belpois" + n + "xx:00" + n +
                         "copper, iron, gold, uranium, steel. The basic ingredients for all things tech. well Uranium is" +
-                        n + "part of the reactor's functionality" + page + "encloused is the recipe for a basic component of a computer";
+                        n + "part of the reactor's functionality" + page + "enclosed is the recipe for a basic component of a computer";
 
 
 

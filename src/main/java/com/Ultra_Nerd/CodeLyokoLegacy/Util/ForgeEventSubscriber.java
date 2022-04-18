@@ -79,12 +79,14 @@ public final class ForgeEventSubscriber {
     }
 
     @SubscribeEvent
-    public static void preventBreakAnimation(final BlockEvent.@NotNull BlockToolInteractEvent event)
+    public static void preventBreakAnimation(final BlockEvent.@NotNull BlockToolModificationEvent event)
     {
-        if(DimensionCheck.playerNotInVanillaWorld(event.getPlayer()) && !event.getPlayer().isCreative())
-        {
-            event.setCanceled(true);
-        }
+
+            if (DimensionCheck.playerNotInVanillaWorld(event.getPlayer()) && !event.getPlayer().isCreative()) {
+                event.setCanceled(true);
+            }
+
+
     }
 
 
