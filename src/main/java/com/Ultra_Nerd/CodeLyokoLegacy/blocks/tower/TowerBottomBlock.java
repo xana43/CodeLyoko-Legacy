@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public class TowerBottomBlock extends Block {
+public final class TowerBottomBlock extends Block {
 
     public TowerBottomBlock(@NotNull Properties properties) {
         super(properties);

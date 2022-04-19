@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 
-public class TowerGeneric extends Block {
+public final class TowerGeneric extends Block {
     public TowerGeneric() {
         super(Block.Properties.of(Material.BARRIER).strength(-1, -1).sound(SoundType.GLASS));
     }

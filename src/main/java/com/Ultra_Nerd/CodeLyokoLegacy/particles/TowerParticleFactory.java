@@ -19,7 +19,10 @@ public final class TowerParticleFactory implements ParticleProvider<TowerParticl
     @Nullable
     @Override
     public Particle createParticle(@Nonnull TowerParticleData typeIn, @Nonnull ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-        return new TowerParticle(worldIn,x,y,z,this.spriteSet,20);
+        final TowerParticle particle = new TowerParticle(worldIn,x,y,z);
+
+        particle.pickSprite(this.spriteSet);
+        return particle;
     }
 
 

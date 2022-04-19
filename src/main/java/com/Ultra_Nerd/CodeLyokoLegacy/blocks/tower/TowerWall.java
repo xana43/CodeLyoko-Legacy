@@ -95,6 +95,7 @@ public class TowerWall extends Block {
         if (stateIn.getValue(DIRTOWER) == Direction.NORTH) {
             worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                     d0, d1, pos.getZ() + 1.25f, 0, 0, 0);
+
         } else if (stateIn.getValue(DIRTOWER) == Direction.SOUTH) {
             worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
                     d0, d1, pos.getZ() - 0.25f, 0, 0, 0);

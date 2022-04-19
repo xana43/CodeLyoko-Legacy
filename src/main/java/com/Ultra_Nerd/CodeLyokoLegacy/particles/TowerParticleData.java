@@ -49,6 +49,7 @@ public final class TowerParticleData implements ParticleOptions {
 
     public static Codec<TowerParticleData> towerParticleDataCodec()
     {
+
         return RecordCodecBuilder.create((instance) -> instance.group(
                 Codec.FLOAT.fieldOf("red").forGetter(o -> o.red),
                 Codec.FLOAT.fieldOf("green").forGetter(o -> o.green),
@@ -58,16 +59,17 @@ public final class TowerParticleData implements ParticleOptions {
 
 
     public static final ParticleOptions.Deserializer<TowerParticleData> DESERIALIZE = new ParticleOptions.Deserializer<>() {
+
         @Override
         public @NotNull TowerParticleData fromCommand(@Nonnull ParticleType<TowerParticleData> particleTypeIn, @NotNull StringReader reader) throws CommandSyntaxException {
-            reader.expect(' ');
-            float red = (float) reader.readDouble();
-            reader.expect(' ');
-            float green = (float) reader.readDouble();
-            reader.expect(' ');
-            float blue = (float) reader.readDouble();
-            reader.expect(' ');
-            float alpha = (float) reader.readDouble();
+            reader.skipWhitespace();
+            float red = reader.readFloat();
+            reader.skipWhitespace();
+            float green = reader.readFloat();
+            reader.skipWhitespace();
+            float blue = reader.readFloat();
+            reader.skipWhitespace();
+            float alpha = reader.readFloat();
             return new TowerParticleData(red, green, blue, alpha);
         }
 
@@ -76,5 +78,7 @@ public final class TowerParticleData implements ParticleOptions {
             return new TowerParticleData(buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
         }
     };
+
+
 
 }

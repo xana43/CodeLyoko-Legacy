@@ -306,6 +306,7 @@ registerEntityRenderers();
         Minecraft.getInstance().particleEngine.register(ModParticles.TOWER_PARTICLE.get(), ColoredParticle.Factory::new);
         Minecraft.getInstance().particleEngine.register(ModParticles.TOWER_PARTICLE_2.get(), TowerParticleFactory::new);
 
+
     }
 
 }

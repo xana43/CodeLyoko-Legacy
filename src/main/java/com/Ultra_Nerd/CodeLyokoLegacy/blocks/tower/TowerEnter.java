@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 
 
-public class TowerEnter extends Block {
+public final class TowerEnter extends Block {
 
     public static final DirectionProperty DIRTOWER2 = BlockStateProperties.HORIZONTAL_FACING;
 

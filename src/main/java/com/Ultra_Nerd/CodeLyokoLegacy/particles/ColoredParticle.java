@@ -8,11 +8,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleProvider;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.SpriteSet;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.particle.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
@@ -25,9 +21,8 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Locale;
-import java.util.Random;
 
-public final class ColoredParticle extends Particle implements SpriteSet {
+public final class ColoredParticle extends TextureSheetParticle {
     private double posX, posY, posZ;
 
     public ColoredParticle(@NotNull ClientLevel world, double x, double y, double z, double xspeed, double yspeed, double zspeed, @NotNull ColoredParticleData data) {
@@ -74,22 +69,12 @@ public final class ColoredParticle extends Particle implements SpriteSet {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    @Override
-    public @org.jetbrains.annotations.Nullable TextureAtlasSprite get(int p_107966_, int p_107967_) {
-        return null;
-    }
-
-    @Override
-    public @org.jetbrains.annotations.Nullable TextureAtlasSprite get(Random p_107968_) {
-        return null;
-    }
 
     @OnlyIn(Dist.CLIENT)
     public static class Factory implements ParticleProvider<ColoredParticleData> {
-        private final SpriteSet ss;
-
-        public Factory(SpriteSet spriteIn) {
-            this.ss = spriteIn;
+        private final SpriteSet spriteSet;
+        public Factory(SpriteSet spriteSet) {
+            this.spriteSet = spriteSet;
         }
 
         @Nullable

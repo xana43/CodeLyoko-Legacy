@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
-public class TowerBaseCorner extends TowerWallCorner {
+public final class TowerBaseCorner extends TowerWallCorner {
 
 
     @Override
