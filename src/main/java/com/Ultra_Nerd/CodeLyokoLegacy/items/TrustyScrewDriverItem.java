@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class TrustyScrewDriverItem extends Item {
+public final class TrustyScrewDriverItem extends Item {
     public TrustyScrewDriverItem(@NotNull Properties properties) {
         super(properties);
     }

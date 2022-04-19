@@ -1,10 +1,11 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
+package com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.LyokoVehicleEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,10 +28,17 @@ public final class EntitySkid extends LyokoVehicleEntity{
 
     @Override
     public void dismountTo(double pX, double pY, double pZ) {
+        if(level.dimension() != ModDimensions.DIGITAL_OCEAN)
+        {
+            super.dismountTo(pX,pY,pZ);
+        }
 
     }
 
-
+    @Override
+    public void setDeltaMovement(final Vec3 pMotion) {
+        super.setDeltaMovement(pMotion.add(16,16,16));
+    }
 
     @Override
     public boolean canRiderInteract() {

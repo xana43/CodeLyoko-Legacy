@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.HoverboardEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverbikeEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverboardEntity;

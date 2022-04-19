@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 public class LyokoVehicleEntity extends Boat {
     public boolean movingUp = false;
     public boolean movingDown = false;
+
     public LyokoVehicleEntity(@NotNull EntityType<? extends LyokoVehicleEntity> p_38290_, @NotNull Level p_38291_) {
         super(p_38290_, p_38291_);
 
@@ -72,7 +73,7 @@ public class LyokoVehicleEntity extends Boat {
         if(movingDown)
         {
 
-            this.getDeltaMovement().add(0,-0.2D,0);
+            this.setDeltaMovement(this.getDeltaMovement().x,this.getDeltaMovement().y - 1,this.getDeltaMovement().z);
         }
         if(movingUp)
         {

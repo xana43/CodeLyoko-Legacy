@@ -4,7 +4,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 public final class OverboardEntity extends LyokoVehicleEntity  {
@@ -17,6 +16,13 @@ public final class OverboardEntity extends LyokoVehicleEntity  {
 
     }
 
+
+
+    @Override
+    protected float getBlockSpeedFactor() {
+        return 10;
+    }
+
     @Override
     public boolean isNoGravity() {
         return true;
@@ -27,10 +33,13 @@ public final class OverboardEntity extends LyokoVehicleEntity  {
         return true;
     }
 
+
+
+
     @Override
     public void positionRider(@NotNull Entity pPassenger) {
         super.positionRider(pPassenger);
-        pPassenger.setPos(new Vec3(this.getX(),this.getY() + 0.5f,this.getZ()));
+        pPassenger.setPos(this.getX(),this.getY() + 0.5f,this.getZ());
     }
 
 

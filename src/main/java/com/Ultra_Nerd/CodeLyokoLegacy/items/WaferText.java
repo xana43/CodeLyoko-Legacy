@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class WaferText extends Item {
+public final class WaferText extends Item {
     public WaferText(@NotNull Properties properties) {
         super(properties);
     }

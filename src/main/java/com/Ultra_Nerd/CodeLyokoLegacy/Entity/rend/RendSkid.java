@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntitySkid;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;

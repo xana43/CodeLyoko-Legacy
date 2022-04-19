@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MantaEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntitySkid;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import net.minecraft.world.entity.player.Player;

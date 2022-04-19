@@ -4,6 +4,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoArmorMaterial;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoTiers;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.SpawnItems.HoverBoardItem;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.SpawnItems.OverBoardItem;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.*;
 import net.minecraft.ChatFormatting;
@@ -30,11 +32,13 @@ public final class ModItems {
     public static final RegistryObject<ForgeSpawnEggItem> KANKRELAT_SPAWN_EGG = ITEMS.register("kankrelat_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.KANKRELAT, 1, 1, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final RegistryObject<ForgeSpawnEggItem> GUARDIAN_SPAWN_EGG = ITEMS.register("guardian_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.GUARDIAN,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     //for spawn items
-   // public static final RegistryObject<ForgeSpawnEggItem> HOVERBOARD_SPAWN_ITEM = ITEMS.register("hoverboard_spawn_item", () -> new ForgeSpawnEggItem(ModEntities.HOVERBOARD,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    //public static final RegistryObject<ForgeSpawnEggItem> HOVERBOARD_SPAWN_ITEM = ITEMS.register("hoverboard_spawn_item", () -> new ForgeSpawnEggItem(ModEntities.HOVERBOARD,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     //public static final RegistryObject<ForgeSpawnEggItem> OVERBOARD_SPAWN_ITEM = ITEMS.register("overboard_spawn_item",() -> new ForgeSpawnEggItem(ModEntities.OVERBOARD,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
    // public static final RegistryObject<ForgeSpawnEggItem> OVERBIKE_SPAWN_ITEM = ITEMS.register("overbike_spawn_item", () -> new ForgeSpawnEggItem(ModEntities.OVERBIKE,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     //public static final RegistryObject<ForgeSpawnEggItem> SKID_SPAWN_ITEM = ITEMS.register("skid_spawn_item", () -> new ForgeSpawnEggItem(ModEntities.SKID,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    //for items
+    public static final RegistryObject<Item> HOVERBOARD_SPAWN_ITEM = ITEMS.register("hoverboard_spawn_item", () -> new HoverBoardItem(new Item.Properties().setNoRepair().stacksTo(1).tab(CodeLyokoMain.LYOKO_ITEMS)));
+    public static final RegistryObject<Item> OVERBOARD_SPAWN_ITEM = ITEMS.register("overboard_spawn_item",() -> new OverBoardItem(new Item.Properties().setNoRepair().tab(CodeLyokoMain.LYOKO_ITEMS).stacksTo(1)));
+     //for items
     public static final RegistryObject<Item> APU_PACKAGE_ARM = ITEMS.register("apu_package_arm", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final RegistryObject<Item> APU_PACKAGE_x86 = ITEMS.register("apu_package_x86", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> APU_PACKAGE_ASIC = ITEMS.register("apu_package_asic", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.RARE)));
