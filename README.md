@@ -26,6 +26,7 @@ there's not really any hard and fast rules besides a few programming conventions
    2. **ALLWAYS** try to document code when possible
    3. obviously make sure there are no errors in the IDE or otherwise
    4. prefer inline declaration if possible to avoid the need for local variables 
+   5. if classes aren't inherited by anything always add the final keyword 
 
 The only other thing I can think of is prefer the use of IDEA Intellij over Eclipse,
 the project files included/the gradle runs etc. are already primed for Intelli, it's possible to use it in eclipse but you'd have to do
