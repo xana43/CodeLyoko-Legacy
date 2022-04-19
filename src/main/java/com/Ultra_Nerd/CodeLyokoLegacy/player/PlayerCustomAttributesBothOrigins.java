@@ -9,9 +9,12 @@ import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.CapabilityRegistration
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -101,6 +104,28 @@ public class PlayerCustomAttributesBothOrigins {
 
 
  }
+    @SubscribeEvent
+    public static void DestroyItemEntityOnDropInLyoko(final LivingDropsEvent event)
+    {
+        if(DimensionCheck.EntityNotInVanillaWorld(event.getEntity()))
+        {
+
+            event.setCanceled(true);
+        }
+    }
+    @SubscribeEvent
+    public static void PreventAllDrops(final EntityEvent.EntityConstructing event)
+    {
+            if(DimensionCheck.EntityNotInVanillaWorld(event.getEntity())){
+
+                if(event.getEntity() instanceof ItemEntity)
+                {
+                    if(!event.getEntity().level.isClientSide) {
+                        event.getEntity().discard();
+                    }
+                }
+            }
+    }
     @SubscribeEvent
     public static void DTick(final @NotNull PlayerEvent.PlayerChangedDimensionEvent event)
     {

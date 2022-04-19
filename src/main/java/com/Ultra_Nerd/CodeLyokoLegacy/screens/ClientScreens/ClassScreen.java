@@ -169,7 +169,7 @@ public final class ClassScreen extends Screen {
     private void setWarrior()
     {
         warrior =  new ImageButton((this.width >> 1) + 40 , this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> PressOperation(), new TextComponent("warrior"));
+                256, 256, (input) -> PressOperation(), new TextComponent("warrior").withStyle(ConstantUtil.HUD));
         warrior.setFGColor(0x1d5e18);
     }
 
