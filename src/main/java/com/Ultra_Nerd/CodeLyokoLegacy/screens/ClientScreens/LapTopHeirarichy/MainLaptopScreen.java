@@ -1,9 +1,9 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens;
+package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.LapTopHeirarichy;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TextComponent;
@@ -13,14 +13,14 @@ import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
 
-public final class LaptopGUI extends Screen {
+public final class MainLaptopScreen extends Screen {
 
     private static final ResourceLocation TEXTURE = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase.png");
     private int x, y;
     private static final int xSize = 1280, ySize = 720;
     private ImageButton imageButton;
 
-    public LaptopGUI(@NotNull TextComponent titleIn) {
+    public MainLaptopScreen(@NotNull TextComponent titleIn) {
         super(titleIn);
 
 
@@ -53,15 +53,20 @@ public final class LaptopGUI extends Screen {
     protected void init() {
         x = (this.width - xSize) >> 1;
         y = (this.height - ySize) >> 1;
-        imageButton =  new ImageButton(this.width >> 1, this.height >> 1, 30, 30, 128, 0, 31, TEXTURE,
-                256, 256, Button::onPress, new TextComponent("Test"));
-        imageButton.setFGColor(0x1d5e18);
 
-        this.addRenderableWidget(imageButton);
+        setImageButton();
+        this.addWidget(imageButton);
         super.init();
     }
 
+    private void setImageButton()
+    {
+        imageButton =  new ImageButton(this.width >> 1, this.height >> 1, 30, 30, 128, 0, 31, TEXTURE,
+                256, 256, press ->{
 
+        }, new TextComponent("Test").withStyle(ConstantUtil.GUNSHIP));
+        imageButton.setFGColor(0x1d5e18);
+    }
 
 
     @Override
