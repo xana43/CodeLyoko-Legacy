@@ -25,11 +25,11 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ComputerControlPanelTileEntity extends BlockEntity implements MenuProvider {
+public final class ComputerControlPanelTileEntity extends BlockEntity implements MenuProvider {
 
     // May be accessed before onLoad
     @OnlyIn(Dist.CLIENT)
-    protected int PlayersPresent;
+    private int PlayersPresent;
 
     public ComputerControlPanelTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         super(ModTileEntities.COMPUTER_CONTROL_PANEL_TILE_ENTITY.get(),pos,state);

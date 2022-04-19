@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.stream.Stream;
 
-public class FranzChiplet extends BaseEntityBlock {
+public final class FranzChiplet extends BaseEntityBlock {
     private final static VoxelShape shape = Stream.of(
             Block.box(4, 4, 0, 5, 5, 1),
             Block.box(0, 0, 0, 4, 16, 2),
@@ -133,9 +133,7 @@ public class FranzChiplet extends BaseEntityBlock {
             Block.box(5, 4, 15, 11, 5, 16),
             Block.box(4, 4, 15, 5, 5, 16),
             Block.box(5, 4, 0, 11, 5, 1)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public FranzChiplet() {
         super(Block.Properties.copy(Blocks.IRON_BLOCK));

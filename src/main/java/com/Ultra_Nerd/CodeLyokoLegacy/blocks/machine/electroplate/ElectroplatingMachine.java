@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class ElectroplatingMachine extends BaseEntityBlock {
+public final class ElectroplatingMachine extends BaseEntityBlock {
 
     public static final DirectionProperty ELECTRO_FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty ELECTRO_ACTIVE = BooleanProperty.create("electro_active");

@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public  enum LyokoArmorMaterial implements ArmorMaterial {
+public enum LyokoArmorMaterial implements ArmorMaterial {
 
 
     WARRIOR(CodeLyokoMain.MOD_ID + ":william", 33, new byte[]{15, 19, 20, 15}, 420, ModSounds.LAZY_WARRIOR.get(), 10F),

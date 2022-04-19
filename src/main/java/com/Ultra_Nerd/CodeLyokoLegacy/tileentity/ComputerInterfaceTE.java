@@ -1,21 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
-public class ComputerInterfaceTE extends BlockEntity implements BlockEntityTicker<ComputerInterfaceTE> {
+public final class ComputerInterfaceTE extends BlockEntity  {
     //public ComputerInterfaceTE(BlockEntityType<?> tileEntityTypeIn) {
       //  super(tileEntityTypeIn);
     //}
@@ -102,17 +99,5 @@ public class ComputerInterfaceTE extends BlockEntity implements BlockEntityTicke
         return super.getRenderBoundingBox();
     }
 
-    @Override
-    public void tick(Level p_155253_, BlockPos p_155254_, BlockState p_155255_, ComputerInterfaceTE p_155256_) {
-        if(CheckStructure() && !once)
-        {
-            CodeLyokoMain.Log.info("computer is built");
-            once = true;
-        }
-        else if(!CheckStructure())
-        {
 
-            once = false;
-        }
-    }
 }

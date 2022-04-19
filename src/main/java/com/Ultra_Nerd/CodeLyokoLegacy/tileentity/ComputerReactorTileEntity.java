@@ -10,9 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
@@ -20,11 +18,11 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import org.jetbrains.annotations.NotNull;
 
-public class ComputerReactorTileEntity extends InventoryBE implements BlockEntityTicker<ComputerReactorTileEntity> {
+public final class ComputerReactorTileEntity extends InventoryBE  {
 
 
 
-	public static final Component thisTitle = new TranslatableComponent("container." + CodeLyokoMain.MOD_ID, ".computer_reactor");
+	private static final Component thisTitle = new TranslatableComponent("container." + CodeLyokoMain.MOD_ID, ".computer_reactor");
 	public final @NotNull EG thisStoreage;
 	private int progess,totalProgress = 0,capacity = 4000,maxEnergyTake = 200;
 	private LazyOptional<EG> energy;
@@ -125,8 +123,5 @@ public class ComputerReactorTileEntity extends InventoryBE implements BlockEntit
 	}
 
 
-	@Override
-	public void tick(Level pLevel, BlockPos pPos, BlockState pState, @NotNull ComputerReactorTileEntity pBlockEntity) {
-		pBlockEntity.tick();
-	}
+
 }

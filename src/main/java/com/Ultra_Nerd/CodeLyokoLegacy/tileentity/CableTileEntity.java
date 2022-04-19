@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CableTileEntity extends BlockEntity implements BlockEntityTicker<CableTileEntity>, IEnergyStorage {
+public final class CableTileEntity extends BlockEntity implements BlockEntityTicker<CableTileEntity>, IEnergyStorage {
 
     public static @NotNull HashMap<CableTileEntity, ArrayList<BlockEntity>> CONNECTIONS = new HashMap<>();
 

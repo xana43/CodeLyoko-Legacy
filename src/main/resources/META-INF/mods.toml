@@ -32,7 +32,7 @@ modId = "geckolib3" #mandatory
 # Does this dependency have to exist - if not, ordering below must be specified
 mandatory = true #mandatory
 # The version range of the dependency
-versionRange = "[3.0.13,)" #mandatory
+versionRange = "[3.0.15,)" #mandatory
 side = "CLIENT"
 ordering="NONE"
 

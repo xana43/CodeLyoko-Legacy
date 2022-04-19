@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ExternalPowerAcceptor extends BaseEntityBlock {
+public final class ExternalPowerAcceptor extends BaseEntityBlock {
     public ExternalPowerAcceptor(@NotNull Properties p_49224_) {
         super(p_49224_);
     }

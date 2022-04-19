@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ElectricFluorideInfuser extends BaseEntityBlock {
+public final class ElectricFluorideInfuser extends BaseEntityBlock {
 
     public static @NotNull DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 

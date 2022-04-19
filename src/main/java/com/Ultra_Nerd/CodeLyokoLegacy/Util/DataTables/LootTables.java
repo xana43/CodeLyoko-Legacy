@@ -4,7 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.DataProviders.LootProvider
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import net.minecraft.data.DataGenerator;
 
-public class LootTables extends LootProvider {
+public final class LootTables extends LootProvider {
     public LootTables(final DataGenerator pGenerator) {
         super(pGenerator);
     }

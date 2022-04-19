@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import java.util.stream.Stream;
 
-public class ControlPanel extends BaseEntityBlock {
+public final class ControlPanel extends BaseEntityBlock {
 
     public static final DirectionProperty PANEL = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty ScreenOn = BooleanProperty.create("screen_on");

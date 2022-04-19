@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public class ComputerCentralControlUnit extends BaseEntityBlock {
+public final class ComputerCentralControlUnit extends BaseEntityBlock {
     public ComputerCentralControlUnit(@NotNull Properties properties) {
         super(properties);
     }

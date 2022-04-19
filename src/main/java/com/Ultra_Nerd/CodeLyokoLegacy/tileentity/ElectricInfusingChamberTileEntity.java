@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ElectricInfusingChamberTileEntity extends BlockEntity implements BlockEntityTicker<ElectricInfusingChamberTileEntity>, MenuProvider {
+public final class ElectricInfusingChamberTileEntity extends BlockEntity implements BlockEntityTicker<ElectricInfusingChamberTileEntity>,MenuProvider {
     public @NotNull ItemStackHandler handler = new ItemStackHandler(3);
    private final EG internal = new EG(this,90000);
     private String customName;
@@ -111,6 +111,8 @@ public class ElectricInfusingChamberTileEntity extends BlockEntity implements Bl
         compound.putString("CustomName", getDisplayName().toString());
         compound.putInt("GuiEnergy", this.ENER);
     }
+
+
 
     @Override
     public void tick(@NotNull Level worldin, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull ElectricInfusingChamberTileEntity be) {

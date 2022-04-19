@@ -18,14 +18,12 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.EnumMap;
-import java.util.Map;
 import java.util.stream.Stream;
 
-public class ComputerKeyboard extends HorizontalDirectionalBlock {
+public final class ComputerKeyboard extends HorizontalDirectionalBlock {
 
 
-    private static final Map<Direction,VoxelShape> Computer = new EnumMap<>(Direction.class);
+
 
 
 
@@ -98,9 +96,7 @@ public class ComputerKeyboard extends HorizontalDirectionalBlock {
             Block.box(3.144402985074625, 6.25309163087795, 8.42812233291787, 4.144402985074625, 7.2530916308779485, 9.42812233291787),
             Block.box(2.0694029850746256, 6.25309163087795, 8.42812233291787, 3.0694029850746256, 7.2530916308779485, 9.42812233291787),
             Block.box(0.5444029850746235, 6.25309163087795, 8.42812233291787, 1.9944029850746263, 7.2530916308779485, 9.42812233291787)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     private static final VoxelShape SHAPE_S = Stream.of(
             Block.box(0, 5.24120673250286, 3.650424514942717, 16, 6.91620673250286, 12.650424514942717),
@@ -170,9 +166,7 @@ public class ComputerKeyboard extends HorizontalDirectionalBlock {
             Block.box(11.55, 6.25309163087795, 6.009674049946579, 12.55, 7.2530916308779485, 7.009674049946579),
             Block.box(12.625, 6.25309163087795, 6.009674049946579, 13.625, 7.2530916308779485, 7.009674049946579),
             Block.box(13.7, 6.25309163087795, 6.009674049946579, 15.15, 7.2530916308779485, 7.009674049946579)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     private static final VoxelShape SHAPE_E = Stream.of(
             Block.box(3.778727816047806, 5.24120673250286, -0.43390031603046264, 12.778727816047805, 6.91620673250286, 15.566099683969536),
@@ -242,9 +236,7 @@ public class ComputerKeyboard extends HorizontalDirectionalBlock {
             Block.box(6.137977351051668, 6.25309163087795, 3.0160996839695375, 7.137977351051668, 7.2530916308779485, 4.0160996839695375),
             Block.box(6.137977351051668, 6.25309163087795, 1.9410996839695382, 7.137977351051668, 7.2530916308779485, 2.9410996839695382),
             Block.box(6.137977351051668, 6.25309163087795, 0.4160996839695361, 7.137977351051668, 7.2530916308779485, 1.866099683969539)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     private static final VoxelShape SHAPE_W = Stream.of(
             Block.box(2.9156751690268203, 5.24120673250286, -0.12830330110508648, 11.91567516902682, 6.91620673250286, 15.871696698894912),
@@ -314,9 +306,7 @@ public class ComputerKeyboard extends HorizontalDirectionalBlock {
             Block.box(8.556425634022958, 6.25309163087795, 11.421696698894912, 9.556425634022958, 7.2530916308779485, 12.421696698894912),
             Block.box(8.556425634022958, 6.25309163087795, 12.496696698894912, 9.556425634022958, 7.2530916308779485, 13.496696698894912),
             Block.box(8.556425634022958, 6.25309163087795, 13.571696698894911, 9.556425634022958, 7.2530916308779485, 15.021696698894914)
-    ).reduce((v1, v2) -> {
-        return Shapes.join(v1, v2, BooleanOp.OR);
-    }).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
 
     public ComputerKeyboard() {

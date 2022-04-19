@@ -6,7 +6,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class ItemModelGenerator extends ItemModelProvider {
+public final class ItemModelGenerator extends ItemModelProvider {
     public ItemModelGenerator(final DataGenerator generator,final ExistingFileHelper existingFileHelper) {
         super(generator, CodeLyokoMain.MOD_ID,existingFileHelper);
     }

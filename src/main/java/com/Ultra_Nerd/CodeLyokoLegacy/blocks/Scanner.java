@@ -374,8 +374,6 @@ public final class Scanner extends BaseEntityBlock  {
 
 
 
-
-
     @Override
     public @NotNull InteractionResult use(final @NotNull BlockState pState, final Level pLevel, final @NotNull BlockPos pPos, final @NotNull Player pPlayer, final @NotNull InteractionHand pHand, final BlockHitResult pHit) {
 /*

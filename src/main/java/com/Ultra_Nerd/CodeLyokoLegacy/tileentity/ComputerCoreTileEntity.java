@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public class ComputerCoreTileEntity extends InventoryBE {
+public final class ComputerCoreTileEntity extends InventoryBE {
     public ComputerCoreTileEntity(@NotNull BlockEntityType<?> type, @NotNull BlockPos pos, @NotNull BlockState state, int size) {
         super(type, pos, state, size);
     }

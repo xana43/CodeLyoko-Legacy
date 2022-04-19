@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.Nullable;
 
-public class ComputerIntegratedReactor extends BaseEntityBlock {
+public final class ComputerIntegratedReactor extends BaseEntityBlock {
 
     public ComputerIntegratedReactor() {
         super(Block.Properties.of(Material.METAL)

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
-public class DimensionTeleporter {
+public final class DimensionTeleporter {
    public static void teleportPlayerToWorld(@NotNull ServerPlayer player, @NotNull ServerLevel dest, @NotNull BlockPos pos, boolean top)
    {
        player.changeDimension(dest, new ITeleporter() {

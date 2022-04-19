@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 @NotNull
-public interface MultiBlockPartCallback {
+public interface MultiBlockPartCallback extends MultiBlockBase {
     default boolean checkArea(final @NotNull  Level level, final int xvLength, final int yvLength, final int zvLength , final @NotNull  BlockPos origin)
     {
         //this variable denotes a full block, xLength = 1 equals an offset of 0 blocks(or the current block) and xLength = 2 is an offset of 1 block

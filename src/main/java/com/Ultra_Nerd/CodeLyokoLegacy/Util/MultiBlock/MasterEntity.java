@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock;
 
-public interface MasterEntity  {
-    boolean isMaster = true;
+public interface MasterEntity extends MultiBlockBase {
     void check();
     void invalidateEntity();
+
 }

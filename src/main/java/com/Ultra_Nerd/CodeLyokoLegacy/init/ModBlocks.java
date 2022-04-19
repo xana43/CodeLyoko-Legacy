@@ -10,7 +10,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.saplings.DigitalMountainSapling;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.saplings.DigitalSapling;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.DataTransferInterface;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.TestBlockPortal;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.TestCaller;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.*;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.*;
@@ -77,7 +76,7 @@ public final class ModBlocks {
                     return ModFeature.DIGITAL_MOUNTAIN_TREE_FEATURE;
                 }
             }, Block.Properties.copy(Blocks.ACACIA_SAPLING)));
-            BLOCKS.register("test_caller", () -> new TestCaller(BlockBehaviour.Properties.copy(Blocks.BARRIER)));
+            //BLOCKS.register("test_caller", () -> new TestCaller(BlockBehaviour.Properties.copy(Blocks.BARRIER)));
 
              BLOCKS.register("digital_tree_forest_sapling", () -> new DigitalSapling(new AbstractTreeGrower() {
             @Override

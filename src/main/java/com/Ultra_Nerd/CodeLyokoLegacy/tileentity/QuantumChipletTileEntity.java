@@ -23,9 +23,9 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class QuantumChipletTileEntity extends InventoryBE implements MenuProvider, Clearable {
+public final class QuantumChipletTileEntity extends InventoryBE implements MenuProvider, Clearable {
 
-    protected NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
+    private NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
 
     public QuantumChipletTileEntity(@NotNull BlockEntityType<?> TileEntityIn, @NotNull BlockPos pos, @NotNull BlockState state, int size) {
         super(TileEntityIn,pos,state,1);

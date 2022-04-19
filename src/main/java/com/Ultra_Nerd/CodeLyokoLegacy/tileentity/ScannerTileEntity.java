@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
 import org.jetbrains.annotations.NotNull;
 
-public class ScannerTileEntity extends BlockEntity implements MasterEntity {
+public final class ScannerTileEntity extends BlockEntity implements MasterEntity {
 
 
     public ScannerTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {

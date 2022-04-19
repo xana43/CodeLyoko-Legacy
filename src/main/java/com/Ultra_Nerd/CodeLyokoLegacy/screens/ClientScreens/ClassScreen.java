@@ -23,7 +23,6 @@ public final class ClassScreen extends Screen {
     private static final int xSize = 1280,  ySize = 720;
     private static int x,y;
     private ImageButton feline,samurai,ninja,guardian,warrior;
-    private static final int classLabelLocation = 3;
     private int IndicatorColor = 0;
     public ClassScreen(final Component pTitle) {
         super(pTitle);
@@ -49,11 +48,11 @@ public final class ClassScreen extends Screen {
         drawCenteredString(pPoseStack,font,warrior.getMessage(),warrior.x + (guardian.getWidth() >> 1),warrior.y,Color.DARK_GRAY.getRGB());
         //current class
         if(ClientCapabilitySync.getPlayerClassType() != null) {
-            drawCenteredString(pPoseStack, font, new TextComponent("Current Class: ".concat(ClientCapabilitySync.getPlayerClassType().getClassName())).withStyle(ConstantUtil.HUD), this.width >> classLabelLocation, this.height >> classLabelLocation - 1, IndicatorColor);
+            drawCenteredString(pPoseStack, font, new TextComponent("Current Class: ".concat(ClientCapabilitySync.getPlayerClassType().getClassName())).withStyle(ConstantUtil.HUD), this.width >> 2, this.height >> 2, IndicatorColor);
         }
         else
         {
-            drawCenteredString(pPoseStack,font,new TextComponent("no class assigned").withStyle(ConstantUtil.HUD),this.width >> classLabelLocation, this.height >> classLabelLocation - 1,Color.WHITE.getRGB());
+            drawCenteredString(pPoseStack,font,new TextComponent("no class assigned").withStyle(ConstantUtil.HUD),this.width >> 2, this.height >> 2,Color.WHITE.getRGB());
         }
     }
 
@@ -154,16 +153,16 @@ public final class ClassScreen extends Screen {
                 256, 256, (input) -> {
             CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
             IndicatorColor = 5125;
-            PressOperation();}, new TextComponent("ninja"));
+            PressOperation();}, new TextComponent("ninja").withStyle(ConstantUtil.HUD));
         ninja.setFGColor(0x1d5e18);
     }
     private void setGuardian()
     {
         guardian =  new ImageButton((int)(this.width / 2.1f), this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {PressOperation();
-            IndicatorColor = 0xff369b;
+            IndicatorColor = 0x1d5e18;
             CapabilityPlayerClassSync.Sync(PlayerClassType.Guardian);
-            }, new TextComponent("guardian"));
+            }, new TextComponent("guardian").withStyle(ConstantUtil.HUD));
         guardian.setFGColor(0x1d5e18);
     }
 
