@@ -74,13 +74,13 @@ public final class RendLaser<T extends EntityLaser> extends ArrowRenderer<T> {
         pMatrixStack.popPose();
         super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
     }
-
+    private static final ResourceLocation LASER_ARROW_TEX = CodeLyokoMain.CodeLyokoPrefix("textures/entity/laserarrow.png");
 
     @Nonnull
     @Override
     public ResourceLocation getTextureLocation(@Nonnull EntityLaser entity) {
         // TODO Auto-generated method stub
-        return CodeLyokoMain.CodeLyokoPrefix("textures/entity/laserarrow.png");
+        return LASER_ARROW_TEX;
     }
 
 

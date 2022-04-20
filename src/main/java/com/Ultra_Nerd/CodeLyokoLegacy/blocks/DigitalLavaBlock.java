@@ -20,7 +20,7 @@ public final class DigitalLavaBlock extends LiquidBlock {
 
 
     public DigitalLavaBlock(@NotNull Supplier<? extends FlowingFluid> supplier) {
-        super(supplier, BlockBehaviour.Properties.copy(Blocks.LAVA));
+        super(supplier, BlockBehaviour.Properties.copy(Blocks.LAVA).friction(0));
     }
 
 

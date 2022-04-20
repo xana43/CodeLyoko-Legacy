@@ -20,7 +20,8 @@ public final class OverboardEntity extends LyokoVehicleEntity  {
 
     @Override
     protected float getBlockSpeedFactor() {
-        return 10;
+        return super.getBlockSpeedFactor();
+
     }
 
     @Override

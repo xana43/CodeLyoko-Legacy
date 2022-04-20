@@ -10,7 +10,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 
 import java.util.HashMap;
 
-public class BlockEntityCapabilit implements INBTSerializable<ListTag> {
+public final class BlockEntityCapabilit implements INBTSerializable<ListTag> {
 
 
     private static final HashMap<BlockState,BlockPos> posHashMap = new HashMap<>();

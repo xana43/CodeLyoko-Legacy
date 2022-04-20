@@ -56,10 +56,6 @@ public final class LaserArrowShooter extends BowItem {
         return false;
     }
 
-    @Override
-    public void setDamage(ItemStack stack, int damage) {
-        super.setDamage(stack, 0);
-    }
 
     @Override
     public boolean isDamaged(ItemStack stack) {

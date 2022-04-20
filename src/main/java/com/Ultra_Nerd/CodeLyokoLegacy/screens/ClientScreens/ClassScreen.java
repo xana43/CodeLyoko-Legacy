@@ -19,9 +19,9 @@ import java.awt.*;
 
 public final class ClassScreen extends Screen {
 
-    private static final ResourceLocation textures = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase.png");
-    private static final int xSize = 1280,  ySize = 720;
-    private static int x,y;
+    private static final ResourceLocation textures = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase_pot.png");
+    private static final int xSize = 1024,  ySize = 1024;
+    private static int x/*,y*/;
     private ImageButton feline,samurai,ninja,guardian,warrior;
     private int IndicatorColor = 0;
     public ClassScreen(final Component pTitle) {
@@ -67,7 +67,7 @@ public final class ClassScreen extends Screen {
     protected void init() {
         super.init();
         x = (this.width - xSize) >> 1;
-        y = (this.height - ySize) >> 1;
+        //y = (this.height - ySize) >> 1;
         setFeline();
         setSamurai();
         setNinja();
@@ -136,7 +136,7 @@ public final class ClassScreen extends Screen {
 
     private void setSamurai()
     {
-        samurai =  new ImageButton(this.width >> 2, this.height >> 1, 30, 30, 128, 0, 31, textures,
+        samurai =  new ImageButton((int) (this.width / 3f), this.height >> 1, 30, 30, 128, 0, 31, textures,
                 128, 128, (input) -> {
 
             CapabilityPlayerClassSync.Sync(PlayerClassType.Samurai);
@@ -149,7 +149,7 @@ public final class ClassScreen extends Screen {
 
     private void setNinja()
     {
-        ninja =  new ImageButton((int) (this.width / 2.8f), this.height >> 1, 30, 30, 128, 0, 31, textures,
+        ninja =  new ImageButton(this.width >> 1, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {
             CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
             IndicatorColor = 5125;
@@ -158,7 +158,7 @@ public final class ClassScreen extends Screen {
     }
     private void setGuardian()
     {
-        guardian =  new ImageButton((int)(this.width / 2.1f), this.height >> 1, 30, 30, 128, 0, 31, textures,
+        guardian =  new ImageButton((this.width >> 1) + 80, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {PressOperation();
             IndicatorColor = 0x1d5e18;
             CapabilityPlayerClassSync.Sync(PlayerClassType.Guardian);
@@ -168,7 +168,7 @@ public final class ClassScreen extends Screen {
 
     private void setWarrior()
     {
-        warrior =  new ImageButton((this.width >> 1) + 40 , this.height >> 1, 30, 30, 128, 0, 31, textures,
+        warrior =  new ImageButton((this.width >> 1) + 150 , this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> PressOperation(), new TextComponent("warrior").withStyle(ConstantUtil.HUD));
         warrior.setFGColor(0x1d5e18);
     }
@@ -178,6 +178,6 @@ public final class ClassScreen extends Screen {
     public void renderBackground(@NotNull PoseStack pPoseStack) {
         // super.renderBackground(pPoseStack);
         RenderSystem.setShaderTexture(0,textures);
-        blit(pPoseStack,x, y,  0,  -60, xSize, ySize,(-(this.width - xSize) >> 1) , (-(this.height - ySize)));
+        blit(pPoseStack,x, 0,  0,  0, xSize, ySize);
     }
 }

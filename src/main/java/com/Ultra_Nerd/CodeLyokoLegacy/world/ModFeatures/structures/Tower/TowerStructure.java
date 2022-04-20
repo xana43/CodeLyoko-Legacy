@@ -39,7 +39,7 @@ public final class TowerStructure extends StructureFeature<JigsawConfiguration>{
         {
             return Optional.empty();
         }
-       BlockPos blockPos = context.chunkPos().getMiddleBlockPosition(0);
+       BlockPos blockPos = context.chunkPos().getMiddleBlockPosition(-10);
         int toplandY = context.chunkGenerator().getFirstFreeHeight(blockPos.getX(), blockPos.getZ(), Heightmap.Types.WORLD_SURFACE_WG,context.heightAccessor());
         blockPos = blockPos.above(toplandY >> 1);
         Optional<PieceGenerator<JigsawConfiguration>> pieceGen =

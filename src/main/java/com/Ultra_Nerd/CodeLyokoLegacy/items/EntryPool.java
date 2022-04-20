@@ -1,4 +1,4 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
-public class EntryPool {
+public final class EntryPool {
 }

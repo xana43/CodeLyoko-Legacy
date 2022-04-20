@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import java.util.function.Predicate;
 
-public class ArcherClassBow extends BowItem {
+public final class ArcherClassBow extends BowItem {
 
     public ArcherClassBow(@NotNull Properties builder) {
         super(builder);

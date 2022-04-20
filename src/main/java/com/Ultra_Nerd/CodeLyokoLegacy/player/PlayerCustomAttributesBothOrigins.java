@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
 @Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class PlayerCustomAttributesBothOrigins {
+public final class PlayerCustomAttributesBothOrigins {
 
     @SubscribeEvent
     public static void PlayerSetup(final @NotNull EntityJoinWorldEvent event) {

@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public final record CustomControlServerHandler(byte upPressed, byte downPressed) {
+public record CustomControlServerHandler(byte upPressed, byte downPressed) {
 
     public static void syncToServer(final int upPressed, final int downPressed)
     {

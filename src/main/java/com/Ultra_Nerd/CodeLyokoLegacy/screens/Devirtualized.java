@@ -44,7 +44,7 @@ public final class Devirtualized extends Screen {
                 confirmResult(true);
                 this.exitToTitleScreen();
             } else {
-                ConfirmScreen confirmscreen = new ConfirmScreen(this::confirmResult, new TranslatableComponent("deathScreen.quit.confirm"), TextComponent.EMPTY, new TranslatableComponent("deathScreen.titleScreen"), new TranslatableComponent("deathScreen.respawn"));
+                final ConfirmScreen confirmscreen = new ConfirmScreen(this::confirmResult, new TranslatableComponent("deathScreen.quit.confirm"), TextComponent.EMPTY, new TranslatableComponent("deathScreen.titleScreen"), new TranslatableComponent("deathScreen.respawn"));
                 assert this.minecraft != null;
                 this.minecraft.setScreen(confirmscreen);
                 confirmscreen.setDelay(20);
@@ -109,9 +109,9 @@ public final class Devirtualized extends Screen {
             return null;
         } else {
             assert this.minecraft != null;
-            int i = this.minecraft.font.width(this.causeOfDeath);
-            int j = (this.width >> 1) - (i  >> 1);
-            int k = (this.width >> 1) + (i >> 1);
+            final int i = this.minecraft.font.width(this.causeOfDeath);
+            final int j = (this.width >> 1) - (i  >> 1);
+            final int k = (this.width >> 1) + (i >> 1);
             return p_95918_ >= j && p_95918_ <= k ? this.minecraft.font.getSplitter().componentStyleAtWidth(this.causeOfDeath, p_95918_ - j) : null;
         }
     }

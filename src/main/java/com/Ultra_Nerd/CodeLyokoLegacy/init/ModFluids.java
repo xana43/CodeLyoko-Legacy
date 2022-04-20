@@ -48,7 +48,7 @@ public final class ModFluids {
     public static final ForgeFlowingFluid.Properties URANIUM_PROPERTIES = new ForgeFlowingFluid.Properties(STILL_URANIUM, FLOWING_URANIUM,
             FluidAttributes.builder(URANIUM_STILL_RL, URANIUM_FLOW_RL).density(3).viscosity(0).temperature(Integer.MAX_VALUE).luminosity(Integer.MAX_VALUE).overlay(URANIUM_STILL_RL)).block(() -> ModFluids.URANIUM.get());
     public static final ForgeFlowingFluid.Properties DIGITAL_LAVA_PROPERTIES = new ForgeFlowingFluid.Properties(DIGITAL_LAVA_STILL,DIGITAL_LAVA_FLOWING,
-            FluidAttributes.builder(DIGITAL_LAVA_STILL_RL,DIGITAL_LAVA_FLOWING_RL).density(3100).viscosity(20).temperature(Integer.MAX_VALUE).luminosity(90).overlay(DIGITAL_LAVA_STILL_RL))
+            FluidAttributes.builder(DIGITAL_LAVA_STILL_RL,DIGITAL_LAVA_FLOWING_RL).density(3100).viscosity(20).temperature(Integer.MAX_VALUE).luminosity(Integer.MAX_VALUE).overlay(DIGITAL_LAVA_STILL_RL))
             .block(() -> ModFluids.DIGITAL_LAVA_BLOCK.get());
     //fluid blocks
     public static final RegistryObject<LiquidBlock> DIGITAL_SEA_BLOCK = ModBlocks.BLOCKS.register("digital_ocean", () -> new DigitalSeaBlock(DIGITAL_OCEAN));

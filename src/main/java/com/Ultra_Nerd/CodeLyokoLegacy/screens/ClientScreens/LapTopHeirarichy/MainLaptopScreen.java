@@ -15,9 +15,9 @@ import org.lwjgl.glfw.GLFW;
 
 public final class MainLaptopScreen extends Screen {
 
-    private static final ResourceLocation TEXTURE = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase.png");
-    private int x, y;
-    private static final int xSize = 1280, ySize = 720;
+    private static final ResourceLocation TEXTURE = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase_pot.png");
+    private int x/*, y*/;
+    private static final int xSize = 1024, ySize = 1024;
     private ImageButton imageButton;
 
     public MainLaptopScreen(@NotNull TextComponent titleIn) {
@@ -52,7 +52,7 @@ public final class MainLaptopScreen extends Screen {
     @Override
     protected void init() {
         x = (this.width - xSize) >> 1;
-        y = (this.height - ySize) >> 1;
+        //y = (this.height - ySize) >> 1;
 
         setImageButton();
         this.addWidget(imageButton);
@@ -78,7 +78,7 @@ public final class MainLaptopScreen extends Screen {
     public void renderBackground(@NotNull PoseStack pPoseStack) {
        // super.renderBackground(pPoseStack);
         RenderSystem.setShaderTexture(0,TEXTURE);
-        this.blit(pPoseStack,x, y, 0, 0, xSize, ySize);
+        this.blit(pPoseStack,x, 0, 0, 0, xSize, ySize);
     }
 
     @Override

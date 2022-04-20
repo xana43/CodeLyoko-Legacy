@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 
-public class UniversalEnergyStorageTileEntity extends BlockEntity {
+public final class UniversalEnergyStorageTileEntity extends BlockEntity {
     public UniversalEnergyStorageTileEntity(@NotNull BlockEntityType<?> p_155228_, @NotNull BlockPos p_155229_, @NotNull BlockState p_155230_) {
         super(p_155228_, p_155229_, p_155230_);
     }

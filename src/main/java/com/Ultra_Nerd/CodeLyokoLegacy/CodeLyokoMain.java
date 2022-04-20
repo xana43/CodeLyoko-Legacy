@@ -107,6 +107,7 @@ public record CodeLyokoMain() {
 
 
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientModEventSubscriber::ClientSetup);
+
         ModContainerTypes.CONTAINER_TYPES.register(ModBus);
         ModTileEntities.TILE_ENTITY_TYPES.register(ModBus);
         ModParticles.PARTICLES.register(ModBus);

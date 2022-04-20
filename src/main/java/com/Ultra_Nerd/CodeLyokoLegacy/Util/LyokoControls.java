@@ -28,8 +28,8 @@ public record LyokoControls() {
 
 
                 CustomControlServerHandler.syncToServer(
-                        event.getKey() == KEY_MAPPING_VEHICLES_UP.getKey().getValue() ? event.getAction() : 1,
-                        event.getKey() == KEY_MAPPING_VEHICLES_DOWN.getKey().getValue() ? event.getAction() : 1
+                        event.getKey() == KEY_MAPPING_VEHICLES_UP.getKey().getValue() ? event.getAction() : 0,
+                        event.getKey() == KEY_MAPPING_VEHICLES_DOWN.getKey().getValue() ? event.getAction() : 0
                 );
             }
             if(event.getKey() == KEY_MAPPING_CLASS_SELECT.getKey().getValue() && Minecraft.getInstance().player.level.isClientSide)

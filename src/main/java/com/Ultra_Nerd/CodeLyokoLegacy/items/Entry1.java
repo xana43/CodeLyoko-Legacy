@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class Entry1 extends WrittenBookItem {
+public final class Entry1 extends WrittenBookItem {
     public Entry1(@NotNull Properties builder) {
         super(builder);
     }

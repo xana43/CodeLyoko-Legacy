@@ -37,7 +37,7 @@ public final class LiquidHelium extends LiquidBlock {
     @Override
     public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         if (entityIn instanceof final LivingEntity livingEntity) {
-            livingEntity.hurt(DamageSource.FREEZE, RANDOM.nextInt(2));
+            livingEntity.hurt(DamageSource.FREEZE, RANDOM.nextInt(3));
             livingEntity.moveDist = 0;
             livingEntity.isInPowderSnow = true;
 

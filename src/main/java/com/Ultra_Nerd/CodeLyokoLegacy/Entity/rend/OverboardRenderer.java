@@ -22,6 +22,9 @@ public final class OverboardRenderer<T extends OverboardEntity> extends EntityRe
 
     private final @NotNull EntityModel<T> OverBoardModel;
 
+
+
+
     public OverboardRenderer(EntityRendererProvider.@NotNull Context renderManager) {
         super(renderManager);
         this.shadowRadius = 1f;
@@ -41,11 +44,11 @@ public final class OverboardRenderer<T extends OverboardEntity> extends EntityRe
         this.OverBoardModel.renderToBuffer(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         matrixStackIn.popPose();
     }
-
+private static final ResourceLocation OVERBOARD_TEX = CodeLyokoMain.CodeLyokoPrefix("textures/entity/overboard/overboarduv.png");
     @Nonnull
     @Override
     public ResourceLocation getTextureLocation(@Nonnull OverboardEntity entity) {
-        return CodeLyokoMain.CodeLyokoPrefix("textures/entity/overboard/overboarduv.png");
+        return OVERBOARD_TEX;
     }
 
 

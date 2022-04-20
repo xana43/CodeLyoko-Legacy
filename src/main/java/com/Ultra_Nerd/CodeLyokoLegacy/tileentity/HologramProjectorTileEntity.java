@@ -1,24 +1,30 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 
-public class HologramProjectorTileEntity extends BlockEntity implements BlockEntityTicker<HologramProjectorTileEntity>//, INamedContainerProvider
+public final class HologramProjectorTileEntity extends BlockEntity implements MasterEntity //implements BlockEntityTicker<HologramProjectorTileEntity>//, INamedContainerProvider
 {
     public HologramProjectorTileEntity(@NotNull BlockEntityType<?> p_155228_, @NotNull BlockPos p_155229_, @NotNull BlockState p_155230_) {
         super(p_155228_, p_155229_, p_155230_);
     }
 
     @Override
-    public void tick(@NotNull Level p_155253_, @NotNull BlockPos p_155254_, @NotNull BlockState p_155255_, @NotNull HologramProjectorTileEntity p_155256_) {
+    public void check() {
 
     }
+
+    @Override
+    public void invalidateEntity() {
+
+    }
+
+
     /*
     private boolean once = false;
     //private boolean invalid_block = false;

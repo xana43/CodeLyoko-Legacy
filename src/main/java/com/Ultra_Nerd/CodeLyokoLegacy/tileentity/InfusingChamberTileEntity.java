@@ -35,7 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class InfusingChamberTileEntity extends InventoryBE implements BlockEntityTicker<InfusingChamberTileEntity>, MenuProvider {
+public final class InfusingChamberTileEntity extends InventoryBE implements BlockEntityTicker<InfusingChamberTileEntity>, MenuProvider {
 
 
     public @NotNull ItemStackHandler handler = new ItemStackHandler(4);

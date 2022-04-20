@@ -27,7 +27,7 @@ public final class DigitalSeaBlock extends LiquidBlock {
 
 
     public DigitalSeaBlock(@NotNull Supplier<? extends FlowingFluid> supplier) {
-        super(supplier, LiquidBlock.Properties.copy(Blocks.WATER));
+        super(supplier, LiquidBlock.Properties.copy(Blocks.WATER).friction(0));
 
 
     }

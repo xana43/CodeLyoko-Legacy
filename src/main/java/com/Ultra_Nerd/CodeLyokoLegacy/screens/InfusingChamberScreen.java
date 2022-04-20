@@ -6,7 +6,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ChestMenu;
 import org.jetbrains.annotations.NotNull;
 
-public class InfusingChamberScreen extends ContainerScreen {
+public final class InfusingChamberScreen extends ContainerScreen {
     public InfusingChamberScreen(@NotNull ChestMenu p_98409_, @NotNull Inventory p_98410_, @NotNull Component p_98411_) {
         super(p_98409_, p_98410_, p_98411_);
     }

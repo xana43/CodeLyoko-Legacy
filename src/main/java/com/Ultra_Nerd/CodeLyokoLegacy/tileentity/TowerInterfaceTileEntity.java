@@ -20,14 +20,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-public class TowerInterfaceTileEntity extends BlockEntity implements MenuProvider
+public final class TowerInterfaceTileEntity extends BlockEntity implements MenuProvider
  {
 
     // May be accessed before onLoad
     @OnlyIn(Dist.CLIENT)
-    protected int PlayersPresent;
+    private int PlayersPresent;
 
     public TowerInterfaceTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         super(ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.get(), pos,state);
@@ -72,9 +71,8 @@ public class TowerInterfaceTileEntity extends BlockEntity implements MenuProvide
      * @return Gui container
      */
 
-    @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int windowIn, @Nonnull Inventory playerInv, @Nonnull Player playerEntity) {
+    public @NotNull AbstractContainerMenu createMenu(int windowIn, @Nonnull Inventory playerInv, @Nonnull Player playerEntity) {
         return new TowerInterfaceContainer(windowIn, playerInv, this);
     }
 

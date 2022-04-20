@@ -1,8 +1,8 @@
 {
     "loader": "forge:obj",
     "model": "cm:models/entity/skid/skid.obj",
-    "detectCullableFaces": false,
-    "diffuseLighting": false,
+    "detectCullableFaces": true,
+    "diffuseLighting": true,
     "flip-v": true,
     "ambientToFullbright": false
 }

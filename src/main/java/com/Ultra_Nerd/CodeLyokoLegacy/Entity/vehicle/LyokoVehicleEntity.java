@@ -8,7 +8,6 @@ import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,10 +21,7 @@ public class LyokoVehicleEntity extends Boat {
     }
 
 
-    @Override
-    protected float getBlockSpeedFactor() {
-        return super.getBlockSpeedFactor() * 1.1f;
-    }
+
     @Nullable
     @Override
     protected SoundEvent getPaddleSound() {
@@ -40,7 +36,7 @@ public class LyokoVehicleEntity extends Boat {
 
     @Override
     public float getGroundFriction() {
-        return 0;
+        return -10;
     }
 
     @Override
@@ -73,17 +69,14 @@ public class LyokoVehicleEntity extends Boat {
         if(movingDown)
         {
 
-            this.setDeltaMovement(this.getDeltaMovement().x,this.getDeltaMovement().y - 1,this.getDeltaMovement().z);
+            this.setDeltaMovement(getDeltaMovement().subtract(0,1,0));
         }
         if(movingUp)
         {
-            this.setDeltaMovement(new Vec3(this.getDeltaMovement().x, this.getDeltaMovement().y + 1,this.getDeltaMovement().z));
+            this.setDeltaMovement(getDeltaMovement().add(0,1,0));
 
         }
-        if(!movingDown && !movingUp)
-        {
-            this.setDeltaMovement(Vec3.ZERO);
-        }
+
     }
 
     @Override

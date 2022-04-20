@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class LaptopClass extends Item {
+public final class LaptopClass extends Item {
     public LaptopClass(@NotNull Properties properties) {
         super(properties);
     }

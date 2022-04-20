@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public class MultiplayerPhone extends Item {
+public final class MultiplayerPhone extends Item {
 
     public MultiplayerPhone(@NotNull Properties properties) {
         super(properties);

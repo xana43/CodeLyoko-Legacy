@@ -23,7 +23,7 @@ public final class HoverboardRenderer<T extends HoverboardEntity> extends Entity
         super(manager);
         this.BoardModel = new ModelHoverboard<>(manager.bakeLayer(ModelHoverboard.LAYER_LOCATION));
     }
-
+   private static final ResourceLocation HoverboardTex = CodeLyokoMain.CodeLyokoPrefix("textures/entity/hoverboard/hoverboard.png");
     @Override
     public void render(@Nonnull T entityIn, float entityYaw, float partialTicks, @Nonnull PoseStack matrixStackIn, @Nonnull MultiBufferSource bufferIn, int packedLightIn) {
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
@@ -40,7 +40,7 @@ public final class HoverboardRenderer<T extends HoverboardEntity> extends Entity
     @Nonnull
     @Override
     public ResourceLocation getTextureLocation(@Nonnull HoverboardEntity entity) {
-        return CodeLyokoMain.CodeLyokoPrefix("textures/entity/hoverboard/hoverboard.png");
+        return HoverboardTex;
     }
 
 

@@ -179,7 +179,7 @@ public final class TowerGUI extends AbstractContainerScreen<TowerInterfaceContai
 
     @Override
     public boolean charTyped(char key, int Keynum) {
-        float rand = new Random().nextFloat(1f,1.1f);
+
 
 
         if(Character.getType(key) == Character.UPPERCASE_LETTER)
@@ -190,7 +190,7 @@ public final class TowerGUI extends AbstractContainerScreen<TowerInterfaceContai
         {
             this.text.charTyped(key^=32, Keynum);
         }
-        Objects.requireNonNull(this.getMinecraft().player).playSound(ModSounds.GUISOUND.get(), 1, rand);
+        Objects.requireNonNull(this.getMinecraft().player).playSound(ModSounds.GUISOUND.get(), 1, new Random().nextFloat(1f,1.1f));
         return super.charTyped(key^=32, Keynum);
 
     }

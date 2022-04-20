@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 
-public class ReactorGUI //extends ContainerScreen<ReactorContainer>
+public final class ReactorGUI //extends ContainerScreen<ReactorContainer>
 {
 	/*
 	private static final ResourceLocation TEXTURES = new ResourceLocation(ref.MOD_ID + ":textures/gui/Reactor.png");

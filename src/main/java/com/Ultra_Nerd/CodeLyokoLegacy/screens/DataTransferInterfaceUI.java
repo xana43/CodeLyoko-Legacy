@@ -221,13 +221,13 @@ public final class DataTransferInterfaceUI extends AbstractContainerScreen<DataT
 
     @Override
     public boolean charTyped(char key, int Keynum) {
-        float rand = 1f + new Random().nextFloat() * 3;
+
         this.xCoord.charTyped(Character.toUpperCase(key), Keynum);
         this.yCoord.charTyped(Character.toUpperCase(key), Keynum);
         this.zCoord.charTyped(Character.toUpperCase(key), Keynum);
         assert this.minecraft != null;
         assert this.minecraft.player != null;
-        this.minecraft.player.playSound(ModSounds.GUISOUND.get(), 1, rand);
+        this.minecraft.player.playSound(ModSounds.GUISOUND.get(), 1, 1f + new Random().nextFloat() * 3);
         return super.charTyped(key, Keynum);
 
     }

@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.ITeleporter;
 import org.jetbrains.annotations.NotNull;
 
-public class TestBlockPortal extends Block implements ITeleporter {
+public final class TestBlockPortal extends Block implements ITeleporter {
 
     public TestBlockPortal(@NotNull Properties properties) {
         super(properties);

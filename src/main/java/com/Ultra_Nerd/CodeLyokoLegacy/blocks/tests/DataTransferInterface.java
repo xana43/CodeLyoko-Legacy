@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public class DataTransferInterface extends BaseEntityBlock {
+public final class DataTransferInterface extends BaseEntityBlock {
 
     public DataTransferInterface() {
         super(Block.Properties.of(Material.METAL)

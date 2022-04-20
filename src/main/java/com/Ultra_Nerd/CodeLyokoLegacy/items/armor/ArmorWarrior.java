@@ -23,12 +23,12 @@ import java.util.UUID;
 
 public final class ArmorWarrior extends ArmorItem {
 
-    private final double movement_modifier;
+    private static final double movement_modifier = -0.1D;
     private final double attack_modifier;
     private final double attack_speed;
     public ArmorWarrior(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Properties builder) {
         super(materialIn, slot, builder);
-        movement_modifier = -0.1D;
+
         attack_modifier = 0.7D;
         attack_speed = -0.2D;
     } @Override
@@ -98,9 +98,9 @@ public final class ArmorWarrior extends ArmorItem {
             if (!player.getItemBySlot(EquipmentSlot.CHEST).isEmpty() &&
                     !player.getItemBySlot(EquipmentSlot.FEET).isEmpty() &&
                     !player.getItemBySlot(EquipmentSlot.LEGS).isEmpty()) {
-
+            if(player.getEffect(MobEffects.DAMAGE_RESISTANCE) == null) {
                 player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, -1, 2, false, false, false));
-
+            }
 
             }
         }

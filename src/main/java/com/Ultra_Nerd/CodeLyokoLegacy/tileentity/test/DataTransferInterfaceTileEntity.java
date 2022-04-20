@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public class DataTransferInterfaceTileEntity extends BlockEntity implements MenuProvider {
+public final class DataTransferInterfaceTileEntity extends BlockEntity implements MenuProvider {
 
     public DataTransferInterfaceTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         super(ModTileEntities.DATA_TRANSFER_INTERFACE_TILE_ENTITY.get(),pos,state);

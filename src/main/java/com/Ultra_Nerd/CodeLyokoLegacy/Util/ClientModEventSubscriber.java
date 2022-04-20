@@ -14,12 +14,12 @@ import com.Ultra_Nerd.CodeLyokoLegacy.particles.TowerParticleFactory;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ComputerControlPanelUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.DataTransferInterfaceUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TowerGUI;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.ClientRegistry;
@@ -47,6 +47,7 @@ public static void ClientSetup()
         if(Minecraft.getInstance() != null) {
             final IEventBus ModEventBus = FMLJavaModLoadingContext.get().getModEventBus();
             final IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+            ModEventBus.addListener(ClientModEventSubscriber::registerBlockEntityRenderers);
             ModEventBus.addListener(ClientModEventSubscriber::onFMLClientSetupEvent);
             ModEventBus.addListener(ClientModEventSubscriber::registerParticleFactories);
             ModEventBus.addListener(ClientModEventSubscriber::registerEntityLayers);
@@ -55,6 +56,8 @@ public static void ClientSetup()
             ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_VEHICLES_DOWN);
             ClientRegistry.registerKeyBinding(LyokoControls.KEY_MAPPING_CLASS_SELECT);
             ForgeModelBakery.addSpecialModel(CodeLyokoMain.CodeLyokoPrefix("entity/skid/skid"));
+            ForgeModelBakery.addSpecialModel(CodeLyokoMain.CodeLyokoPrefix("block/lyoko_core"));
+
         }
     }
 
@@ -63,25 +66,15 @@ public static void ClientSetup()
 
     public static void onFMLClientSetupEvent(final @NotNull FMLClientSetupEvent event) {
 
-
-
-
-
-
-
-
-
-
-
-
         setItemProperties();
+
         //BlockEntityRenderers.register(ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get(), QuantumChipletRenderer::new);
 
 event.enqueueWork(()-> {
 registerRenderLayers();
 registerScreens();
 registerDimensionEffects();
-registerEntityRenderers();
+//registerEntityRenderers();
 });
 
 
@@ -105,6 +98,10 @@ registerEntityRenderers();
 
     }
 
+
+
+
+
     private static void registerEntityLayers(final EntityRenderersEvent.@NotNull RegisterLayerDefinitions event)
     {
         event.registerLayerDefinition(ModelHoverboard.LAYER_LOCATION,ModelHoverboard::createLayer);
@@ -114,22 +111,30 @@ registerEntityRenderers();
     }
 
 
-
-    private static void registerEntityRenderers()
+    private static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
-        EntityRenderers.register(ModEntities.BLOK.get(), RendBlok::new);
-        EntityRenderers.register(ModEntities.LASER.get(), RendLaser::new);
-        EntityRenderers.register(ModEntities.FAN.get(), RendFan::new);
+        event.registerBlockEntityRenderer(ModTileEntities.LYOKO_CORE.get(), CoreOfLyoko::new);
+        event.registerEntityRenderer(ModEntities.BLOK.get(), RendBlok::new);
+        event.registerEntityRenderer(ModEntities.LASER.get(), RendLaser::new);
+        event.registerEntityRenderer(ModEntities.FAN.get(), RendFan::new);
         //EntityRenderers.register(ModEntities.HORNET.get(), HornetRenderer::new);
-        EntityRenderers.register(ModEntities.MEGATANK.get(), MegaTankRenderer::new);
+        event.registerEntityRenderer(ModEntities.MEGATANK.get(), MegaTankRenderer::new);
         //EntityRenderers.register(ModEntities.MANTA.get(), MantaRenderer::new);
-        EntityRenderers.register(ModEntities.SKID.get(), RendSkid::new);
+        event.registerEntityRenderer(ModEntities.SKID.get(), RendSkid::new);
         //EntityRenderers.register(ModEntities.KANKRELAT.get(), KankrelatRenderder::new);
-        EntityRenderers.register(ModEntities.HOVERBOARD.get(), HoverboardRenderer::new);
-        EntityRenderers.register(ModEntities.OVERBOARD.get(), OverboardRenderer::new);
-        EntityRenderers.register(ModEntities.GUARDIAN.get(), GuardianRenderer::new);
-        EntityRenderers.register(ModEntities.OVERBIKE.get(), OverbikeRenderer::new);
+        event.registerEntityRenderer(ModEntities.HOVERBOARD.get(), HoverboardRenderer::new);
+        event.registerEntityRenderer(ModEntities.OVERBOARD.get(), OverboardRenderer::new);
+        event.registerEntityRenderer(ModEntities.GUARDIAN.get(), GuardianRenderer::new);
+        event.registerEntityRenderer(ModEntities.OVERBIKE.get(), OverbikeRenderer::new);
     }
+   /* private static void registerEntityRenderers()
+    {
+
+
+
+    }
+
+    */
     private static void setItemProperties()
     {
         //makes certain blocks behave properly

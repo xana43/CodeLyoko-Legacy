@@ -33,10 +33,10 @@ import java.util.function.Consumer;
 public final class ArmorFeline extends ArmorItem {
 
 
-    private final double movement_modifier;
+    private static final double movement_modifier = 0.6;
     public ArmorFeline(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Properties builder) {
         super(materialIn, slot, builder);
-        movement_modifier = 0.6;
+
 
 
     }
@@ -97,7 +97,7 @@ public final class ArmorFeline extends ArmorItem {
             stack.enchant(Enchantments.BINDING_CURSE,Enchantments.BINDING_CURSE.getMaxLevel());
         }
     }
-
+private static final MobEffectInstance JUMPEFFECT = new MobEffectInstance(MobEffects.JUMP, -1, 3, false, false, false);
     @Override
     public void onArmorTick(ItemStack stack, Level world, @NotNull Player player) {
 
@@ -129,7 +129,9 @@ public final class ArmorFeline extends ArmorItem {
                 //preventRemoval(stack);
                 stack.enchant(Enchantments.BINDING_CURSE,Enchantments.BINDING_CURSE.getMaxLevel());
             }
-                         player.addEffect(new MobEffectInstance(MobEffects.JUMP, -1, 3, false, false, false));
+            if(player.getEffect(MobEffects.JUMP) == null) {
+                player.addEffect(JUMPEFFECT);
+            }
 
 
 

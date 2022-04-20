@@ -22,7 +22,8 @@ public final class ModTileEntities {
                             ModBlocks.ELECTRIC_FLUORIDE_INFUSER.get()).build(null));
                             */
 
-
+    public static final RegistryObject<BlockEntityType<LyokoCoreBE>> LYOKO_CORE = TILE_ENTITY_TYPES.register("lyoko_core",() -> BlockEntityType.Builder.of
+            (LyokoCoreBE::new,ModBlocks.LYOKO_CORE.get()).build(null));
     public static final RegistryObject<BlockEntityType<TowerInterfaceTileEntity>> TOWER_INTERFACE_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("tower_interface_tile_entity", () -> BlockEntityType.Builder.of(TowerInterfaceTileEntity::new,
                     ModBlocks.TOWER_INTERFACE.get()).build(null));

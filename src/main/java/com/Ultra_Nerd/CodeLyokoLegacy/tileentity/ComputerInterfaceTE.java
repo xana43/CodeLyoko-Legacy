@@ -1,18 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
-public final class ComputerInterfaceTE extends BlockEntity  {
+public final class ComputerInterfaceTE extends BlockEntity implements MasterEntity {
     //public ComputerInterfaceTE(BlockEntityType<?> tileEntityTypeIn) {
       //  super(tileEntityTypeIn);
     //}
@@ -30,74 +25,13 @@ public final class ComputerInterfaceTE extends BlockEntity  {
 
      */
 
-
-    private boolean CheckStructure()
-    {
-
-        BlockState[] l1_1 = new BlockState[5],l2_1 = new BlockState[5];
-        Block[] screen_blocks1,screen_blocks2,frame_blocks1,frame_blocks2;
-
-        for(int i = 0; i < l1_1.length;i++)
-        {
-
-            if(level != null) {
-                l1_1[i] = level.getBlockState(new BlockPos((this.getBlockPos().getX() - 2) + i, this.getBlockPos().getY() + 1, this.getBlockPos().getZ()));
-                l2_1[i] = level.getBlockState(new BlockPos((this.getBlockPos().getX() - 2) + i, this.getBlockPos().getY() + 2, this.getBlockPos().getZ()));
-                if(l1_1[4] != null) {
-                    if (l1_1[0].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get()
-                            && l1_1[4].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get()
-                            && l1_1[1].getBlock() == ModBlocks.COMPUTER_SCREEN.get()
-                            && l1_1[2].getBlock() == ModBlocks.COMPUTER_SCREEN.get()
-                            && l1_1[3].getBlock() == ModBlocks.COMPUTER_SCREEN.get()
-                            && l2_1[0].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get()
-                            && l2_1[4].getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get()
-                            && l2_1[1].getBlock() == ModBlocks.COMPUTER_SCREEN.get()
-                            && l2_1[2].getBlock() == ModBlocks.COMPUTER_SCREEN.get()
-                            && l2_1[3].getBlock() == ModBlocks.COMPUTER_SCREEN.get()) {
-                        screen = true;
-                    }
-                }
-                else
-                {screen = false;
-                }
-
-            }
-        }
-
-        return screen;
-
+    @Override
+    public void check() {
 
     }
 
     @Override
-    public void deserializeNBT(CompoundTag nbt) {
-        super.deserializeNBT(nbt);
+    public void invalidateEntity() {
+
     }
-
-    @Override
-    public CompoundTag serializeNBT() {
-        return super.serializeNBT();
-    }
-
-    @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        super.onDataPacket(net, pkt);
-    }
-
-    @Override
-    public void handleUpdateTag(CompoundTag tag) {
-        super.handleUpdateTag(tag);
-    }
-
-    @Override
-    public void onLoad() {
-        super.onLoad();
-    }
-
-    @Override
-    public AABB getRenderBoundingBox() {
-        return super.getRenderBoundingBox();
-    }
-
-
 }

@@ -7,7 +7,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-public class HologramContainer extends AbstractContainerMenu implements Container {
+public final class HologramContainer extends AbstractContainerMenu implements Container {
     protected HologramContainer(@Nullable MenuType<?> p_38851_, int p_38852_) {
         super(p_38851_, p_38852_);
     }
