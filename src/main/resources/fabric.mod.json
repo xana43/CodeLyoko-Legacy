@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "modid",
+  "version": "${version}",
+
+  "name": "CodeLyokoLegacy",
+  "description": "this is the fabric version of CodeLyokoLegacy",
+  "authors": [
+    "Everyone who has contributed"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/xana43/CodeLyoko-Legacy"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "eye-xana.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain"
+    ]
+  },
+  "mixins": [
+    "cm.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
