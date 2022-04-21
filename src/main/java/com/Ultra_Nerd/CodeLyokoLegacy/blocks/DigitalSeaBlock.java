@@ -1,38 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MantaEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.FluidState;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
-import java.util.function.Supplier;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FluidBlock;
+import net.minecraft.fluid.FlowableFluid;
 
 
-public final class DigitalSeaBlock extends LiquidBlock {
+public final class DigitalSeaBlock extends FluidBlock {
 
 
-    public DigitalSeaBlock(@NotNull Supplier<? extends FlowingFluid> supplier) {
-        super(supplier, LiquidBlock.Properties.copy(Blocks.WATER).friction(0));
-
-
+    public DigitalSeaBlock(final FlowableFluid fluid) {
+        super(fluid, FabricBlockSettings.copy(Blocks.WATER));
     }
-
-
+/*
     @Override
     public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         if (!(entityIn instanceof MantaEntity) && !(entityIn instanceof EntitySkid) && !(entityIn.getVehicle() instanceof EntitySkid)) {
@@ -76,4 +56,6 @@ public final class DigitalSeaBlock extends LiquidBlock {
     public boolean propagatesSkylightDown(@Nonnull BlockState state, @Nonnull BlockGetter reader, @Nonnull BlockPos pos) {
         return true;
     }
+
+ */
 }

@@ -1,37 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.DimensionCheck;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.Level;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.UUID;
 
 public final class ArmorWarrior extends ArmorItem {
 
     private static final double movement_modifier = -0.1D;
     private final double attack_modifier;
     private final double attack_speed;
-    public ArmorWarrior(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Properties builder) {
+    public ArmorWarrior(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);
 
         attack_modifier = 0.7D;
         attack_speed = -0.2D;
-    } @Override
+    } /*@Override
     public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         Multimap<Attribute,AttributeModifier> multimap = HashMultimap.create();
 
@@ -105,6 +89,7 @@ public final class ArmorWarrior extends ArmorItem {
             }
         }
     }
+    */
 
 
 }

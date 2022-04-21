@@ -1,15 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.GuardianEntity;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import org.jetbrains.annotations.Nullable;
-
-public class MathGuardianModel extends EntityModel<GuardianEntity> implements EntityRendererProvider {
-    @Override
+public class MathGuardianModel /*extends EntityModel<GuardianEntity> implements EntityRendererProvider*/ {
+    /*@Override
     public void setupAnim(GuardianEntity p_102618_, float p_102619_, float p_102620_, float p_102621_, float p_102622_, float p_102623_) {
 
     }

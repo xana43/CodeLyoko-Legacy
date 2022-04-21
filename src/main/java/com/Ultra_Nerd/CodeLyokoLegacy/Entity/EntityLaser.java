@@ -1,20 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
-
-public final class EntityLaser extends Arrow {
-
+public final class EntityLaser extends ArrowEntity {
+    public EntityLaser(final EntityType<? extends ArrowEntity> entityType, final World world) {
+        super(entityType, world);
+    }
+/*
     public EntityLaser(@NotNull EntityType<? extends Arrow> Laser, @NotNull Level world) {
         super(Laser, world);
         // TODO Auto-generated constructor stub
@@ -62,6 +56,8 @@ public final class EntityLaser extends Arrow {
     protected @NotNull ItemStack getPickupItem() {
         return ItemStack.EMPTY;
     }
+
+ */
 
 
 }

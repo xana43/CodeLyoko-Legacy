@@ -1,23 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelOverbike;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverbikeEntity;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.util.Identifier;
 
 
 public final class OverbikeRenderer<T extends OverbikeEntity> extends EntityRenderer<T> {
+    protected OverbikeRenderer(final EntityRendererFactory.Context ctx) {
+        super(ctx);
+    }
 
+    @Override
+    public Identifier getTexture(final T entity) {
+        return null;
+    }
+/*
     private final EntityModel<T> BikeModel = new ModelOverbike<T>();
 
     public OverbikeRenderer(EntityRendererProvider.@NotNull Context renderManager) {
@@ -43,6 +41,8 @@ public final class OverbikeRenderer<T extends OverbikeEntity> extends EntityRend
     public ResourceLocation getTextureLocation(@Nonnull OverbikeEntity entity) {
         return CodeLyokoMain.CodeLyokoPrefix("textures/entity/overbike/overbiketexture.png");
     }
+
+ */
 
 
 }

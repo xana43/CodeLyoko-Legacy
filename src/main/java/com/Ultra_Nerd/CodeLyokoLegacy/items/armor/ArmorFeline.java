@@ -1,45 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.DimensionCheck;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.Models.Util.ArmorModelRenderer;
-import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.Models.Util.ModModelLayers;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.UUID;
-import java.util.function.Consumer;
 
 public final class ArmorFeline extends ArmorItem {
 
 
     private static final double movement_modifier = 0.6;
-    public ArmorFeline(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Properties builder) {
+    public ArmorFeline(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);
 
 
 
-    }
+    }/*
 
     @Override
     public void initializeClient(@NotNull Consumer<IItemRenderProperties> consumer) {
@@ -148,6 +123,7 @@ private static final MobEffectInstance JUMPEFFECT = new MobEffectInstance(MobEff
 
         }
     }
+    */
 
 
 }

@@ -1,19 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import java.util.stream.Stream;
+import net.minecraft.block.Block;
 
 public final class ChipletAdvancedBlock extends Block {
+    public ChipletAdvancedBlock(final Settings settings) {
+        super(settings);
+    }
+    /*
     private static final VoxelShape shape = Stream.of(
             Block.box(1, 0, 1, 15, 16, 15),
             Block.box(0, 2, 1, 1, 3, 15),
@@ -61,4 +54,6 @@ public final class ChipletAdvancedBlock extends Block {
     public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         return shape;
     }
+
+     */
 }

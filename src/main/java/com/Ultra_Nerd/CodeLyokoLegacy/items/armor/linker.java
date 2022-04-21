@@ -1,21 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-
 public final class linker extends ArmorItem {
-    public linker(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Properties builder) {
+    public linker(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);
     }
-
+/*
     @Override
     public void onArmorTick(@NotNull ItemStack stack, Level world, Player player) {
         if (stack.getDamageValue() < stack.getMaxDamage() - 1) {
@@ -32,4 +26,6 @@ public final class linker extends ArmorItem {
 
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
     }
+
+ */
 }

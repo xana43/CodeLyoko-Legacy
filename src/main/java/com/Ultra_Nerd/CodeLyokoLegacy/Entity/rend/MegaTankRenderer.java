@@ -2,17 +2,17 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelMegaTank;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
-import javax.annotation.Nonnull;
 
-
-public final class MegaTankRenderer extends GeoEntityRenderer<MegaTankEntity> {
-    public MegaTankRenderer(EntityRendererProvider.@NotNull Context renderManager) {
+public final class MegaTankRenderer /*extends GeoEntityRenderer<MegaTankEntity>*/
+{/*
+    public MegaTankRenderer(final EntityRendererFactory.Context ctx, final AnimatedGeoModel<MegaTankEntity> modelProvider) {
+        super(ctx, modelProvider);
+    }
+  /*  public MegaTankRenderer(EntityRendererProvider.@NotNull Context renderManager) {
         super(renderManager, new ModelMegaTank());
     }
 
@@ -23,6 +23,8 @@ public final class MegaTankRenderer extends GeoEntityRenderer<MegaTankEntity> {
     protected void applyRotations(@Nonnull MegaTankEntity entityLiving, @Nonnull PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
         super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
     }
+
+   */
 
 
 }

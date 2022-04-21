@@ -1,19 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.entity.LevelEntityGetter;
-
-import java.util.Random;
-
 public final class FrontierBlock extends TransparentBlock{
 
-
+/*
 
 
     private static int DamangeTime = 10000;
@@ -47,4 +36,6 @@ public final class FrontierBlock extends TransparentBlock{
             DamangeTime = 10000;
         }
     }
+
+ */
 }

@@ -1,31 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.QuantumChipletTileEntity;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import java.util.stream.Stream;
+public final class FranzChiplet extends Block implements BlockEntityProvider {
+    public FranzChiplet(final Settings settings) {
+        super(settings);
+    }
 
-public final class FranzChiplet extends BaseEntityBlock {
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
+    }
+    /*
     private final static VoxelShape shape = Stream.of(
             Block.box(4, 4, 0, 5, 5, 1),
             Block.box(0, 0, 0, 4, 16, 2),
@@ -182,5 +174,7 @@ public final class FranzChiplet extends BaseEntityBlock {
             }
         }
     }
+
+     */
 
 }

@@ -1,38 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.electroplate;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers.CustomItemHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ElectroplatingTileEntity;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
+public final class ElectroplatingMachine extends Block implements BlockEntityProvider {
+    public ElectroplatingMachine(final Settings settings) {
+        super(settings);
+    }
 
-public final class ElectroplatingMachine extends BaseEntityBlock {
-
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
+    }
+/*
     public static final DirectionProperty ELECTRO_FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty ELECTRO_ACTIVE = BooleanProperty.create("electro_active");
 
@@ -130,4 +115,12 @@ public final class ElectroplatingMachine extends BaseEntityBlock {
     public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
         return null; // ModTileEntities.ELECTROPLATING_TILE_ENTITY.get().create(p_153215_,p_153216_);
     }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
+    }
+
+ */
 }

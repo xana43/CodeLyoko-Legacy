@@ -1,27 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.DimensionCheck;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.world.World;
 
-public class LyokoVehicleEntity extends Boat {
+public class LyokoVehicleEntity extends BoatEntity {
     public boolean movingUp = false;
     public boolean movingDown = false;
 
-    public LyokoVehicleEntity(@NotNull EntityType<? extends LyokoVehicleEntity> p_38290_, @NotNull Level p_38291_) {
-        super(p_38290_, p_38291_);
-
+    public LyokoVehicleEntity(final EntityType<? extends BoatEntity> entityType, final World world) {
+        super(entityType, world);
     }
 
-
-
+/*
     @Nullable
     @Override
     protected SoundEvent getPaddleSound() {
@@ -89,6 +80,8 @@ public class LyokoVehicleEntity extends Boat {
         this.movement();
 
     }
+
+ */
 
 
 

@@ -1,29 +1,27 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LyokoCoreBE;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Quaternion;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
+import net.minecraft.client.render.block.entity.BlockEntityRenderer;
+import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.util.ModelIdentifier;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.Quaternion;
 
 public final class CoreOfLyoko implements BlockEntityRenderer<LyokoCoreBE> {
 
-    private final BlockEntityRendererProvider.Context context;
+    private final BlockEntityRenderDispatcher context;
     private float x, y, z;
     private static final BakedModel lyokoCore;
 
     static
     {
-        lyokoCore = Minecraft.getInstance().getModelManager().getModel(CodeLyokoMain.CodeLyokoPrefix("block/lyoko_core"));
+        lyokoCore = MinecraftClient.getInstance().getBakedModelManager().getModel(new ModelIdentifier("cm:block/lyoko_core"));
     }
 
-    public CoreOfLyoko( BlockEntityRendererProvider.Context context)
+    public CoreOfLyoko( BlockEntityRenderDispatcher context)
     {
         this.context = context;
 
@@ -31,14 +29,14 @@ public final class CoreOfLyoko implements BlockEntityRenderer<LyokoCoreBE> {
 
 
     @Override
-    public void render(final LyokoCoreBE pBlockEntity, final float pPartialTick, final PoseStack pPoseStack, final MultiBufferSource pBufferSource, final int pPackedLight, final int pPackedOverlay) {
+    public void render(final LyokoCoreBE pBlockEntity, final float pPartialTick, final MatrixStack pPoseStack, final VertexConsumerProvider pBufferSource, final int pPackedLight, final int pPackedOverlay) {
 
 
 
 
         //blockRenderDispatcher.renderSingleBlock(ModBlocks.LYOKO_CORE.get().defaultBlockState(),pPoseStack,pBufferSource,pPackedOverlay,pPackedOverlay, EmptyModelData.INSTANCE);
         //this.context.getBlockRenderDispatcher().renderSingleBlock(ModBlocks.LYOKO_CORE.get().defaultBlockState(),pPoseStack,pBufferSource,pPackedLight,pPackedOverlay, EmptyModelData.INSTANCE);
-        pPoseStack.pushPose();
+        pPoseStack.push();
 
 
        //pPoseStack.mulPose(new Quaternion(0,y++,0,true));
@@ -49,15 +47,15 @@ public final class CoreOfLyoko implements BlockEntityRenderer<LyokoCoreBE> {
         pPoseStack.translate(0.5,0.5,0.5);
         //this.context.getBlockRenderDispatcher().getModelRenderer().tesselateWithAO(pBlockEntity.getLevel(), lyokoCore, Blocks.AIR.defaultBlockState(), pBlockEntity.getBlockPos(), pPoseStack, pBufferSource.getBuffer(RenderType.translucent()), false,
           //      pBlockEntity.getLevel().random, new Random().nextLong(), 0);
-        pPoseStack.mulPose(new Quaternion(0,y+=2,0,true));
+        pPoseStack.multiply(new Quaternion(0,y+=2,0,true));
         pPoseStack.translate(-0.5,-0.5,-0.5);
-        this.context.getBlockRenderDispatcher().getModelRenderer().tesselateWithoutAO(pBlockEntity.getLevel(), lyokoCore, Blocks.AIR.defaultBlockState(), pBlockEntity.getBlockPos(), pPoseStack, pBufferSource.getBuffer(RenderType.translucent()), false,
-                pBlockEntity.getLevel().random, 0, 0);
+        this.context.render(pBlockEntity,pPartialTick,pPoseStack,pBufferSource);
 
 
 //}
-        pPoseStack.popPose();
+        pPoseStack.pop();
     }
+
 
 
 }

@@ -4,19 +4,17 @@ package com.Ultra_Nerd.CodeLyokoLegacy.items.armor.Models;// Made with Blockbenc
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.Models.Util.ArmorModelRenderer;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.client.model.ModelPart;
 import org.jetbrains.annotations.NotNull;
 
 public final class FelineChestPlate extends ArmorModelRenderer {
+	public FelineChestPlate(final ModelPart root, final boolean thinArms) {
+		super(root, thinArms);
+	}
+
+
+
+	/*
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	private final @NotNull ModelPart Body;
 	private final @NotNull ModelPart RightArm;
@@ -91,4 +89,6 @@ public final class FelineChestPlate extends ArmorModelRenderer {
 			this.RightArm.visible = true;
 		}
 	}
+
+	 */
 }

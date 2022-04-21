@@ -1,17 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.containers;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModContainerTypes;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerInterfaceTE;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
-
-public final class ComputerInterfaceContainer extends AbstractContainerMenu {
+public final class ComputerInterfaceContainer /*extends AbstractContainerMenu*/ {
+    /*
     public final ComputerInterfaceTE ComputerTE;
     //private final IWorldPosCallable canInteractWithCallable;
 
@@ -39,10 +29,11 @@ public final class ComputerInterfaceContainer extends AbstractContainerMenu {
     @Override
     public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
         return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.COMPUTER_KEYBOARD.get());
-    }*/
+    }
 
     @Override
     public boolean stillValid(Player p_38874_) {
         return true;
     }
+    */
 }

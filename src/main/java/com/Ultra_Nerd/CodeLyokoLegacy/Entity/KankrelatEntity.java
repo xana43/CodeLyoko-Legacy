@@ -1,10 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -14,16 +9,21 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nonnull;
+import java.rmi.Remote;
+import java.rmi.server.Operation;
+import java.rmi.server.RemoteCall;
+import java.rmi.server.Skeleton;
 
-public final class KankrelatEntity extends Skeleton implements IAnimatable {
+public final class KankrelatEntity implements IAnimatable, Skeleton {
 
     private final AnimationController<?> controller = new AnimationController<>(this, "kankrelatcontroller", 20, this::animationPred);
     private final AnimationFactory manager = new AnimationFactory(this);
-
+/*
     public KankrelatEntity(@NotNull EntityType<? extends KankrelatEntity> type, @NotNull Level world) {
         super(type, world);
     }
+
+ */
 
     private <E extends KankrelatEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
         if (event.isMoving()) {
@@ -46,11 +46,23 @@ public final class KankrelatEntity extends Skeleton implements IAnimatable {
         return manager;
     }
 
+    @Override
+    public void dispatch(final Remote obj, final RemoteCall theCall, final int opnum, final long hash) throws Exception {
+
+    }
+
+    @Override
+    public Operation[] getOperations() {
+        return new Operation[0];
+    }
+/*
     @Nonnull
     @Override
     public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
+
+ */
 
 
 }

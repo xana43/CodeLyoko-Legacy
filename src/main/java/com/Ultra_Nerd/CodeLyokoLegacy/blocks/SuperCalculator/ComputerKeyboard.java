@@ -1,33 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.HorizontalFacingBlock;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.stream.Stream;
-
-public final class ComputerKeyboard extends HorizontalDirectionalBlock {
+public final class ComputerKeyboard extends HorizontalFacingBlock {
+    protected ComputerKeyboard(final Settings settings) {
+        super(settings);
+    }
 
 
 
 
 
 
-
+/*
     private static final VoxelShape SHAPE_N = Stream.of(
             Block.box(-0.3055970149253753, 5.24120673250286, 2.787371867921733, 15.694402985074625, 6.91620673250286, 11.787371867921731),
             Block.box(10.244402985074625, 6.387147486637496, 9.99899916689835, 11.244402985074625, 7.262147486637496, 10.99899916689835),
@@ -356,6 +341,8 @@ public final class ComputerKeyboard extends HorizontalDirectionalBlock {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 
     }
+
+ */
 
 
 

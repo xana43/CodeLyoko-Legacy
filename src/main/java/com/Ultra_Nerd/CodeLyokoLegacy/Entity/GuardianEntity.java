@@ -1,25 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.FlyingMob;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.TargetGoal;
-import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
-import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.RangedAttackMob;
+import net.minecraft.entity.mob.FlyingEntity;
+import net.minecraft.world.World;
 
-import javax.annotation.Nonnull;
+public final class GuardianEntity extends FlyingEntity implements RangedAttackMob {
+    protected GuardianEntity(final EntityType<? extends FlyingEntity> entityType, final World world) {
+        super(entityType, world);
+    }
 
-public final class GuardianEntity extends FlyingMob implements RangedAttackMob {
+    @Override
+    public void attack(final LivingEntity target, final float pullProgress) {
 
+    }
+/*
     public GuardianEntity(@NotNull EntityType<? extends FlyingMob> type, @NotNull Level worldIn) {
         super(type, worldIn);
 
@@ -69,4 +65,6 @@ public final class GuardianEntity extends FlyingMob implements RangedAttackMob {
     public void performRangedAttack(LivingEntity p_33317_, float p_33318_) {
 
     }
+
+ */
 }

@@ -3,20 +3,23 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;// Made with Blockbench 4.2.
 // Paste this class into your mod and generate all required imports
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverboardEntity;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.*;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.util.math.MatrixStack;
 
 public final class ModelOverboard<T extends OverboardEntity> extends EntityModel<T> {
+	@Override
+	public void setAngles(final T entity, final float limbAngle, final float limbDistance, final float animationProgress, final float headYaw, final float headPitch) {
+
+	}
+
+	@Override
+	public void render(final MatrixStack matrices, final VertexConsumer vertices, final int light, final int overlay, final float red, final float green, final float blue, final float alpha) {
+
+	}
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(CodeLyokoMain.CodeLyokoPrefix("overboard"), "main");
+/*	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(CodeLyokoMain.CodeLyokoPrefix("overboard"), "main");
 	private final @NotNull ModelPart Mainbody;
 
 	public ModelOverboard(@NotNull ModelPart root) {
@@ -232,4 +235,6 @@ public final class ModelOverboard<T extends OverboardEntity> extends EntityModel
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		Mainbody.render(poseStack, buffer, packedLight, packedOverlay);
 	}
+
+ */
 }

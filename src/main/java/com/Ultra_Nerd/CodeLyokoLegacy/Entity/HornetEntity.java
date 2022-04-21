@@ -1,17 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
-import net.minecraft.world.entity.monster.Phantom;
-import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.RangedAttackMob;
+import net.minecraft.entity.mob.PhantomEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -21,14 +16,30 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nonnull;
-
-public final class HornetEntity extends Phantom implements IAnimatable, RangedAttackMob {
-
+public final class HornetEntity extends PhantomEntity implements IAnimatable, RangedAttackMob {
     private final AnimationFactory manager = new AnimationFactory(this);
     private final AnimationController<?> controller2 = new AnimationController<>(this, "attackcontroller", 20, this::animationPred);
     private final AnimationController<?> controller = new AnimationController<>(this, "movecontroller", 20, this::animationPred);
 
+    public HornetEntity(final EntityType<? extends PhantomEntity> entityType, final World world) {
+        super(entityType, world);
+    }
+
+    @Override
+    public void attack(final LivingEntity target, final float pullProgress) {
+
+    }
+
+    @Override
+    public void registerControllers(final AnimationData animationData) {
+
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return null;
+    }
+/*
     public HornetEntity(@NotNull EntityType<HornetEntity> hornetEntityEntityType, @NotNull Level world) {
         super(hornetEntityEntityType, world);
 
@@ -38,7 +49,7 @@ public final class HornetEntity extends Phantom implements IAnimatable, RangedAt
         super(ModEntities.HORNET.get(), world);
 
     }*/
-
+/*
     @Override
     public void tick() {
         super.tick();
@@ -92,6 +103,7 @@ public final class HornetEntity extends Phantom implements IAnimatable, RangedAt
         this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20D);
     }
 */
+    /*
     public static AttributeSupplier.@NotNull Builder registerAttributes()
     {
         return Phantom.createMobAttributes().add(Attributes.KNOCKBACK_RESISTANCE,1D)
@@ -111,14 +123,14 @@ public final class HornetEntity extends Phantom implements IAnimatable, RangedAt
     public @NotNull AnimationFactory getFactory() {
         return manager;
     }
-
+*/
     private <E extends HornetEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
         if (event.isMoving()) {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly", true));
 
             return PlayState.CONTINUE;
         }
-        if (event.getAnimatable().getTarget() instanceof Player) {
+        if (event.getAnimatable().getTarget() instanceof PlayerEntity) {
             controller2.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.attack", false));
             return PlayState.CONTINUE;
         } else {
@@ -126,7 +138,7 @@ public final class HornetEntity extends Phantom implements IAnimatable, RangedAt
             return PlayState.CONTINUE;
         }
     }
-
+/*
 
     @Override
     public void performRangedAttack(@NotNull LivingEntity target, float distanceFactor) {
@@ -140,4 +152,11 @@ public final class HornetEntity extends Phantom implements IAnimatable, RangedAt
         this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
         this.level.addFreshEntity(laser);
     }
+
+    @Override
+    public void attack(final LivingEntity target, final float pullProgress) {
+
+    }
+
+     */
 }

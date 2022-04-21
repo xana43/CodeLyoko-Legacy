@@ -1,31 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.TextUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ClientMiscFunctions;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.WrittenBookItem;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
+import net.minecraft.item.WrittenBookItem;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.List;
-
 public final class Entry1 extends WrittenBookItem {
-    public Entry1(@NotNull Properties builder) {
+    public Entry1(@NotNull Settings builder) {
         super(builder);
     }
-
+/*
     @Nonnull
     @Override
     public Component getName(@Nonnull ItemStack stack) {
@@ -69,6 +51,8 @@ public final class Entry1 extends WrittenBookItem {
     public boolean isFoil(ItemStack p_43476_) {
         return false;
     }
+
+ */
 
 
 

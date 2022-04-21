@@ -1,25 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityLaser;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.ArrowRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
 
 
-public final class RendLaser<T extends EntityLaser> extends ArrowRenderer<T> {
-
+public final class RendLaser<T extends EntityLaser> /*extends ArrowRenderer<T>*/ {
+/*
 
     public RendLaser(EntityRendererProvider.@NotNull Context rendManIn) {
         super(rendManIn);
@@ -82,6 +67,8 @@ public final class RendLaser<T extends EntityLaser> extends ArrowRenderer<T> {
         // TODO Auto-generated method stub
         return LASER_ARROW_TEX;
     }
+
+ */
 
 
 }

@@ -1,23 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.DigitalLavaBlock;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.DigitalSeaBlock;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.LiquidHelium;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.UraniumWaste;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidAttributes;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-
 public final class ModFluids {
 
-
+/*
     //for fluids
     public static final DeferredRegister<Fluid> LIQUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, CodeLyokoMain.MOD_ID);
     //fluid resource locations
@@ -55,4 +40,6 @@ public final class ModFluids {
     public static final RegistryObject<LiquidBlock> URANIUM = ModBlocks.BLOCKS.register("uranium_waste", () -> new UraniumWaste(STILL_URANIUM));
     public static final RegistryObject<LiquidBlock> LIQUID_HELIUM = ModBlocks.BLOCKS.register("liquid_helium", () -> new LiquidHelium(STILL_LIQUID_HELIUM));
     public static final RegistryObject<LiquidBlock> DIGITAL_LAVA_BLOCK = ModBlocks.BLOCKS.register("digital_lava_block", () -> new DigitalLavaBlock(DIGITAL_LAVA_STILL));
+
+ */
 }

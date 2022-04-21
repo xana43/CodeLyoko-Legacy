@@ -1,20 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import java.util.stream.Stream;
+import net.minecraft.block.Block;
 
 public final class CoolingBlock extends Block {
+    public CoolingBlock(final Settings settings) {
+        super(settings);
+    }
+    /*
     private static final VoxelShape shape = Stream.of(
 
             Block.box(9, 0, 7, 13, 32, 9),
@@ -771,4 +763,6 @@ public final class CoolingBlock extends Block {
     public int getSignal(BlockState pState, BlockGetter pLevel, BlockPos pPos, Direction pDirection) {
         return super.getSignal(pState, pLevel, pPos, pDirection);
     }
+
+     */
 }

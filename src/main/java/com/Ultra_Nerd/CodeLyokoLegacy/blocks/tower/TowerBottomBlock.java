@@ -1,18 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.Block;
 
 public final class TowerBottomBlock extends Block {
-
+    public TowerBottomBlock(final Settings settings) {
+        super(settings);
+    }
+/*
     public TowerBottomBlock(@NotNull Properties properties) {
         super(properties);
     }
@@ -45,6 +39,8 @@ public final class TowerBottomBlock extends Block {
             entityIn.hurt(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
         }
     }
+
+ */
 
 
 }

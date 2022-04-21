@@ -1,12 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.slots;
 
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.Slot;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.screen.slot.Slot;
 
 public class SlotOut extends Slot {
-
+    public SlotOut(final Inventory inventory, final int index, final int x, final int y) {
+        super(inventory, index, x, y);
+    }
+/*
     private final Player player;
     private int rc;
 

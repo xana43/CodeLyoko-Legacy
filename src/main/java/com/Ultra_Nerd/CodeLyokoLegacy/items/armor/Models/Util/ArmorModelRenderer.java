@@ -1,15 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor.Models.Util;
 
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.decoration.ArmorStand;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.entity.LivingEntity;
 
-public class ArmorModelRenderer extends HumanoidModel<LivingEntity> {
-    public ArmorModelRenderer(@NotNull ModelPart pRoot) {
-        super(pRoot);
+public class ArmorModelRenderer extends PlayerEntityModel<LivingEntity> {
+    public ArmorModelRenderer(final ModelPart root, final boolean thinArms) {
+        super(root, thinArms);
     }
+    /*
     @Override
     public void setupAnim(@NotNull LivingEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         // [VanillaCopy] ModelArmorStandArmor
@@ -41,4 +40,6 @@ public class ArmorModelRenderer extends HumanoidModel<LivingEntity> {
             super.setupAnim(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
     }
+
+     */
 }

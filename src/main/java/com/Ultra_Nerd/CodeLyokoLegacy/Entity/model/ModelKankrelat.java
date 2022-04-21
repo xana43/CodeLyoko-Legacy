@@ -4,16 +4,27 @@
 // Blockbench plugin created by Gecko
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.KankrelatEntity;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public final class ModelKankrelat extends AnimatedGeoModel<KankrelatEntity> {
+    @Override
+    public Identifier getModelLocation(final KankrelatEntity object) {
+        return null;
+    }
 
+    @Override
+    public Identifier getTextureLocation(final KankrelatEntity object) {
+        return null;
+    }
 
+    @Override
+    public Identifier getAnimationFileLocation(final KankrelatEntity animatable) {
+        return null;
+    }
+
+    /*
     @Override
     public @NotNull ResourceLocation getAnimationFileLocation(KankrelatEntity animatable) {
         return CodeLyokoMain.CodeLyokoPrefix("animations/entities/kankrelat.json");
@@ -28,6 +39,8 @@ public final class ModelKankrelat extends AnimatedGeoModel<KankrelatEntity> {
     public @Nullable ResourceLocation getTextureLocation(KankrelatEntity object) {
         return null;
     }
+
+     */
 
 
 }

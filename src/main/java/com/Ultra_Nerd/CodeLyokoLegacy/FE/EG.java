@@ -1,10 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.FE;
 
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.energy.EnergyStorage;
-
-public class EG extends EnergyStorage {
-
+public class EG/* extends EnergyStorage*/ {
+/*
     private final BlockEntity BE;
     public EG(BlockEntity be,int capacity) {
         super(capacity);
@@ -42,4 +39,6 @@ public class EG extends EnergyStorage {
         this.BE.setChanged();
         return super.receiveEnergy(maxReceive, simulate);
     }
+
+ */
 }

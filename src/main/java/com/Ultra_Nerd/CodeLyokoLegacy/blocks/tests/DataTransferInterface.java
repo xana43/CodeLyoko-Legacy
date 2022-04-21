@@ -1,35 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.containers.DataTransferInterfaceContainer;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.DataTransferInterfaceTileEntity;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
+public final class DataTransferInterface extends Block implements BlockEntityProvider {
+    public DataTransferInterface(final Settings settings) {
+        super(settings);
+    }
 
-public final class DataTransferInterface extends BaseEntityBlock {
-
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
+    }
+/*
     public DataTransferInterface() {
         super(Block.Properties.of(Material.METAL)
 
@@ -78,4 +66,12 @@ public final class DataTransferInterface extends BaseEntityBlock {
     public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         return ModTileEntities.DATA_TRANSFER_INTERFACE_TILE_ENTITY.get().create(pos, state);
     }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
+    }
+
+ */
 }

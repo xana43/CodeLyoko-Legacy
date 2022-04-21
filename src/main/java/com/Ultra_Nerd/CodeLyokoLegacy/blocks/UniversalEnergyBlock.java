@@ -1,16 +1,24 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
-public final class UniversalEnergyBlock extends BaseEntityBlock {
+public final class UniversalEnergyBlock extends Block implements BlockEntityProvider {
+    public UniversalEnergyBlock(final Settings settings) {
+        super(settings);
+    }
 
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
+    }
+/*
     //private UniversalEnergyStorageTileEntity Text = new UniversalEnergyStorageTileEntity();
     public UniversalEnergyBlock() {
         super(Properties.of(Material.DECORATION)

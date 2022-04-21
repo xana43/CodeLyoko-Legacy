@@ -1,30 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.tools;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.ToolMaterial;
 
 public final class ZweihanderWeapon extends SwordItem {
-    private final float attackdamage;
-    private final float attackspeed;
-
+    public ZweihanderWeapon(final ToolMaterial toolMaterial, final int attackDamage, final float attackSpeed, final Settings settings) {
+        super(toolMaterial, attackDamage, attackSpeed, settings);
+    }
+    // private final float attackdamage;
+    //private final float attackspeed;
+/*
     public ZweihanderWeapon(@NotNull Tier tier, int attackDamageIn, float attackSpeedIn, @NotNull Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
         this.attackspeed = attackSpeedIn;
@@ -109,4 +94,6 @@ public final class ZweihanderWeapon extends SwordItem {
 
 
     }
+
+ */
 }

@@ -1,28 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.Block;
 
-import javax.annotation.Nonnull;
-import java.util.Random;
-
-public final class Marabunta extends Block  {
+public final class Marabunta extends Block {
+    public Marabunta(final Settings settings) {
+        super(settings);
+    }
+    /*
     private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
 
     public Marabunta() {
@@ -56,7 +41,7 @@ public final class Marabunta extends Block  {
 
     /**
      * Called When an Entity Collided with the Block
-     */
+
     @Override
     public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @NotNull Entity entityIn) {
 
@@ -89,4 +74,6 @@ public final class Marabunta extends Block  {
     public boolean isValidSpawn(BlockState state, BlockGetter level, BlockPos pos, SpawnPlacements.Type type, EntityType<?> entityType) {
         return false;
     }
+
+     */
 }

@@ -1,38 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import java.util.Random;
-import java.util.stream.Stream;
+public final class Scanner extends Block implements BlockEntityProvider {
+    public Scanner(final Settings settings) {
+        super(settings);
+    }
 
-public final class Scanner extends BaseEntityBlock  {
-    public static final BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
+    }
+   /* public static final BooleanProperty Scanner = BooleanProperty.create("scanner_formed");
     public static final DirectionProperty directionProperty = HorizontalDirectionalBlock.FACING;
     private static final VoxelShape shapeS = Stream.of(
             Block.box(2, 0, -2, 14, 1, 18),
@@ -423,7 +408,7 @@ public final class Scanner extends BaseEntityBlock  {
             }
         }
 
- */
+
         return InteractionResult.FAIL;
 
 

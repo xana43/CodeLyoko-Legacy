@@ -1,17 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.containers;
 
-import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-public class UniversalEnergyStorageContainer extends AbstractContainerMenu implements Container {
-    protected UniversalEnergyStorageContainer(@Nullable MenuType<?> type, int id) {
+public class UniversalEnergyStorageContainer /*extends AbstractContainerMenu implements Container*/ {
+   /* protected UniversalEnergyStorageContainer(@Nullable MenuType<?> type, int id) {
         super(type, id);
     }
 

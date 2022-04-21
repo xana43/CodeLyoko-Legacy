@@ -1,13 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.containers;
 
 
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.MenuType;
-import org.jetbrains.annotations.Nullable;
-
-public class ContainerInfusing extends AbstractContainerMenu {
-    protected ContainerInfusing(@Nullable MenuType<?> p_38851_, int p_38852_) {
+public class ContainerInfusing /*extends AbstractContainerMenu*/ {
+    /*protected ContainerInfusing(@Nullable MenuType<?> p_38851_, int p_38852_) {
         super(p_38851_, p_38852_);
     }
 

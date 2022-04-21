@@ -1,29 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.tools;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.ToolMaterial;
 
 public final class SaberKatana extends SwordItem {
-    private final float attackdamage;
-    private final float attackspeed;
+   // private final float attackdamage;
+    //private final float attackspeed;
 
+    public SaberKatana(final ToolMaterial toolMaterial, final int attackDamage, final float attackSpeed, final Settings settings) {
+        super(toolMaterial, attackDamage, attackSpeed, settings);
+    }
 
+/*
     public SaberKatana(@NotNull Tier tier, int attackDamageIn, float attackSpeedIn, @NotNull Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
         this.attackspeed = attackSpeedIn;
@@ -70,4 +58,6 @@ public final class SaberKatana extends SwordItem {
     public boolean onDroppedByPlayer(final ItemStack item, final Player player) {
         return false;
     }
+
+ */
 }

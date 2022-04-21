@@ -1,33 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.FluidBlock;
+import net.minecraft.fluid.FlowableFluid;
 
-import javax.annotation.Nonnull;
-import java.util.function.Supplier;
-
-public final class LiquidHelium extends LiquidBlock {
-
-    public LiquidHelium(@NotNull Supplier<? extends FlowingFluid> supplier) {
-        super(supplier, BlockBehaviour.Properties.copy(Blocks.WATER)
-
-
-        );
-
+public final class LiquidHelium extends FluidBlock {
+    public LiquidHelium(final FlowableFluid fluid, final Settings settings) {
+        super(fluid, settings);
     }
 
+  /*
 
     @Override
     public boolean isRandomlyTicking(BlockState pState) {
@@ -150,4 +131,6 @@ public final class LiquidHelium extends LiquidBlock {
 
         super.onPlace(state, worldIn, pos, oldState, isMoving);
     }
+
+   */
 }

@@ -1,23 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHoverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.HoverboardEntity;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.util.Identifier;
 
 
 public final class HoverboardRenderer<T extends HoverboardEntity> extends EntityRenderer<T> {
+    protected HoverboardRenderer(final EntityRendererFactory.Context ctx) {
+        super(ctx);
+    }
 
+    @Override
+    public Identifier getTexture(final T entity) {
+        return null;
+    }
+/*
     private final @NotNull ModelHoverboard <T> BoardModel;
     public HoverboardRenderer(EntityRendererProvider.@NotNull Context manager) {
         super(manager);
@@ -42,6 +40,8 @@ public final class HoverboardRenderer<T extends HoverboardEntity> extends Entity
     public ResourceLocation getTextureLocation(@Nonnull HoverboardEntity entity) {
         return HoverboardTex;
     }
+
+ */
 
 
 }

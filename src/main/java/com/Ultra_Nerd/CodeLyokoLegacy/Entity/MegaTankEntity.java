@@ -1,48 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nonnull;
-import java.util.Random;
+import java.rmi.Remote;
+import java.rmi.server.Operation;
+import java.rmi.server.RemoteCall;
+import java.rmi.server.Skeleton;
 
-public final class MegaTankEntity extends Skeleton implements IAnimatable  {
+public final class MegaTankEntity implements IAnimatable, Skeleton {
 
    private final AnimationFactory TankManager = new AnimationFactory(this);
-    private final AnimationController<?> Tankcontroller = new AnimationController<>(this, "movecontroller", 20, this::animationPred);
-
+    //private final AnimationController<?> Tankcontroller = new AnimationController<>(this, "movecontroller", 20, this::animationPred);
+/*
     public MegaTankEntity(EntityType<? extends Skeleton> type, @NotNull Level world) {
         super(ModEntities.MEGATANK.get(), world);
 
@@ -56,7 +28,7 @@ public final class MegaTankEntity extends Skeleton implements IAnimatable  {
 
 
 
-
+/*
 
     @Override
     protected void dropExperience() {
@@ -158,13 +130,28 @@ public final class MegaTankEntity extends Skeleton implements IAnimatable  {
         return ModSounds.MEGATANKROLL.get();
 
     }
-
+*/
     @Override
     public void registerControllers(@NotNull AnimationData data) {
-    data.addAnimationController(Tankcontroller);
+   // data.addAnimationController(Tankcontroller);
     }
 
+    @Override
+    public AnimationFactory getFactory() {
+        return null;
+    }
 
+    @Override
+    public void dispatch(final Remote obj, final RemoteCall theCall, final int opnum, final long hash) throws Exception {
+
+    }
+
+    @Override
+    public Operation[] getOperations() {
+        return new Operation[0];
+    }
+
+/*
     @Override
     public void performRangedAttack(@NotNull LivingEntity pTarget, float pDistanceFactor) {
 
@@ -178,9 +165,12 @@ public final class MegaTankEntity extends Skeleton implements IAnimatable  {
         this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
         this.level.addFreshEntity(abstractarrow);
     }
+
+ */
+    /*
     private <E extends MegaTankEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
 
-        if ((event.isMoving() || event.getAnimatable().isSwimming()) && !event.getAnimatable().isAggressive()) {
+        if ((event.isMoving() || event.getAnimatable().isSwimming()) && !event.getAnimatable().ag) {
             Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.move", true));
 
             return PlayState.CONTINUE;
@@ -200,6 +190,8 @@ public final class MegaTankEntity extends Skeleton implements IAnimatable  {
     public @NotNull AnimationFactory getFactory() {
         return TankManager;
     }
+
+     */
 
 
 }

@@ -1,32 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MultiBlockPartCallback;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import java.util.stream.Stream;
+import net.minecraft.block.Block;
 
 public final class ScannerFrame extends Block implements MultiBlockPartCallback {
+    public ScannerFrame(final Settings settings) {
+        super(settings);
+    }
+    /*
     public static final DirectionProperty directionPropertyFrame = BlockStateProperties.HORIZONTAL_FACING;
     private static final VoxelShape shapeS = Stream.of(
             Block.box(-4, 0, 5, -3, 15.3, 11),
@@ -266,6 +247,8 @@ public final class ScannerFrame extends Block implements MultiBlockPartCallback 
     public @NotNull RenderShape getRenderShape(BlockState p_60550_) {
         return RenderShape.MODEL;
     }
+
+     */
 
 
 }

@@ -1,22 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.containers;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModContainerTypes;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.QuantumChipletTileEntity;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import java.util.Objects;
-
-
-public class QuantumChipletContainer extends AbstractContainerMenu  {
-    public final QuantumChipletTileEntity QuantumTE;
+public class QuantumChipletContainer/* extends AbstractContainerMenu*/  {
+    /*public final QuantumChipletTileEntity QuantumTE;
     //private final IWorldPosCallable callable;
 
     public QuantumChipletContainer(final int windowID, final @NotNull Inventory PI, final QuantumChipletTileEntity TEIN) {
@@ -61,7 +46,7 @@ public class QuantumChipletContainer extends AbstractContainerMenu  {
     public boolean canInteractWith(@Nonnull PlayerEntity playerIn) {
         return isWithinUsableDistance(callable, playerIn, ModBlocks.CHIPLET_FRANZ_BLOCK.get());
     }*/
-    @Nonnull
+ /*   @Nonnull
     @Override
     public ItemStack quickMoveStack(@Nonnull Player playerIn, int index) {
         ItemStack IStack = ItemStack.EMPTY;
@@ -91,4 +76,6 @@ public class QuantumChipletContainer extends AbstractContainerMenu  {
     public boolean stillValid(Player p_38874_) {
         return false;
     }
+
+  */
 }

@@ -1,22 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.Material;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
+public final class HologramProjectorBlock extends Block implements BlockEntityProvider {
+    //public static @NotNull BooleanProperty VALID = BooleanProperty.create("valid");
 
-public final class HologramProjectorBlock extends BaseEntityBlock{
-    public static @NotNull BooleanProperty VALID = BooleanProperty.create("valid");
-
+    public HologramProjectorBlock(final Settings settings) {
+        super(settings);
+    }
+/*
     public HologramProjectorBlock() {
         super(Block.Properties.of(Material.METAL)
                 .strength(6, 10)
@@ -47,7 +44,12 @@ public final class HologramProjectorBlock extends BaseEntityBlock{
         return null;//ModTileEntities.HOLOGRAM_TILE_ENTITY.get().create(pos, state);
     }
 
+ */
 
 
-
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
+    }
 }

@@ -1,22 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.containers;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModContainerTypes;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.TowerInterfaceTileEntity;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
-
-public final class TowerInterfaceContainer extends AbstractContainerMenu {
-
+public final class TowerInterfaceContainer /*extends AbstractContainerMenu*/ {
+/*
 
     private @Nullable BlockEntity TE2;
     private Player inplayer;
@@ -37,8 +22,8 @@ public final class TowerInterfaceContainer extends AbstractContainerMenu {
 
 
     }
-    public TowerInterfaceContainer(final int windowid, final @NotNull Inventory inven, final @NotNull FriendlyByteBuf data/*, TowerInterfaceTileEntity towerEntity*/) {
-        this(windowid, inven, getTowerEntity(inven, data));
+    public TowerInterfaceContainer(final int windowid, final @NotNull Inventory inven, final @NotNull FriendlyByteBuf data/*, TowerInterfaceTileEntity towerEntity*///) //{
+  /*      this(windowid, inven, getTowerEntity(inven, data));
     }
 
 
@@ -60,6 +45,8 @@ public final class TowerInterfaceContainer extends AbstractContainerMenu {
     public boolean stillValid(@NotNull Player p_38874_) {
         return stillValid(ContainerLevelAccess.create(Objects.requireNonNull(TE2.getLevel()),TE2.getBlockPos()), inplayer, ModBlocks.TOWER_INTERFACE.get());
     }
+
+   */
 
 
 

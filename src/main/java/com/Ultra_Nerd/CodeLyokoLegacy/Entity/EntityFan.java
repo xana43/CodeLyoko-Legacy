@@ -1,30 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ThrownTrident;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import javax.annotation.Nonnull;
-
-public final class EntityFan extends ThrownTrident implements IAnimatable {
-    private boolean dealtDamage;
+public final class EntityFan /*extends ThrownTrident implements IAnimatable*/ {
+    /*private boolean dealtDamage;
     private final AnimationFactory manager = new AnimationFactory(this);
     private final AnimationController<?> controller = new AnimationController<>(this, "fancontroller", 20, this::animationpred);
     private ItemStack thrownstack;
@@ -91,4 +68,6 @@ public final class EntityFan extends ThrownTrident implements IAnimatable {
     public void registerControllers(@NotNull AnimationData data) {
         data.addAnimationController(controller);
     }
+
+     */
 }

@@ -1,45 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.tools;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityFan;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TridentItem;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.Level;
+import net.minecraft.item.TridentItem;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
 
 public final class YumiFans extends TridentItem {
     private static final float Velocity = 1f;
     private static final float FanDamage = 1f;
     private static final int thrownTime = 0;
-    public YumiFans(@NotNull Properties builder) {
+    public YumiFans(@NotNull Settings builder) {
         super(builder);
 
 
     }
 
     @Override
-    public boolean isDamageable(ItemStack stack) {
+    public boolean isDamageable() {
         return false;
     }
-
+/*
     @Override
     public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         Multimap<Attribute,AttributeModifier> multimap = HashMultimap.create();
@@ -116,4 +94,6 @@ public final class YumiFans extends TridentItem {
             stack.getEnchantmentTags().clear();
         }
     }
+
+ */
 }

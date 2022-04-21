@@ -1,30 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.SpawnItems;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.DimensionCheck;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.item.Item;
 
 public final class OverBoardItem extends Item {
-    public OverBoardItem(final Properties pProperties) {
+    public OverBoardItem(final Settings pProperties) {
         super(pProperties);
     }
 
     @Override
-    public boolean isDamageable(final ItemStack stack) {
+    public boolean isDamageable() {
         return false;
     }
-
+/*
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(final @NotNull Level pLevel, final @NotNull Player pPlayer, final @NotNull InteractionHand pUsedHand) {
         if(DimensionCheck.playerNotInVanillaWorld(pPlayer))
@@ -39,4 +26,6 @@ public final class OverBoardItem extends Item {
 
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
     }
+
+ */
 }

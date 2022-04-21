@@ -1,21 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.world.World;
 
 public final class EntitySkid extends LyokoVehicleEntity{
+    public EntitySkid(final EntityType<? extends BoatEntity> entityType, final World world) {
+        super(entityType, world);
+    }
 
 
-
+/*
     public EntitySkid(@NotNull EntityType<? extends LyokoVehicleEntity> entitySkidEntityType, @NotNull Level world) {
         super(entitySkidEntityType, world);
 
@@ -104,6 +99,8 @@ public final class EntitySkid extends LyokoVehicleEntity{
           }
 
     }
+
+ */
 
 
 

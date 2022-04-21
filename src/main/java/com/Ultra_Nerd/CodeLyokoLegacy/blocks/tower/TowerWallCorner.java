@@ -1,29 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.particles.TowerParticleData;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.Material;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import java.util.Random;
+import net.minecraft.block.Block;
 
 
 public class TowerWallCorner extends Block {
-
+    public TowerWallCorner(final Settings settings) {
+        super(settings);
+    }
+/*
     public static final DirectionProperty DIRTOWERC = BlockStateProperties.HORIZONTAL_FACING;
 
     public TowerWallCorner() {
@@ -116,4 +100,6 @@ public class TowerWallCorner extends Block {
             }
         }
     }
+
+ */
 }

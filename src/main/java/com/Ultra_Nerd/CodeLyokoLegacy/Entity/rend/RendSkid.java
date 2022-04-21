@@ -1,26 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.culling.Frustum;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.level.block.Blocks;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.util.Identifier;
 
 
-public final class RendSkid extends EntityRenderer<EntitySkid>{
+public final class RendSkid extends EntityRenderer<EntitySkid> {
+    protected RendSkid(final EntityRendererFactory.Context ctx) {
+        super(ctx);
+    }
 
+    @Override
+    public Identifier getTexture(final EntitySkid entity) {
+        return null;
+    }
+/*
 
     private  static final BakedModel SkidBladnir;
 
@@ -62,6 +57,8 @@ public final class RendSkid extends EntityRenderer<EntitySkid>{
     public ResourceLocation getTextureLocation(@Nonnull EntitySkid entity) {
         return InventoryMenu.BLOCK_ATLAS;
     }
+
+ */
 
 
 }

@@ -1,21 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HornetEntity;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
-import javax.annotation.Nonnull;
-
 
 public final class HornetRenderer extends GeoEntityRenderer<HornetEntity> {
+    public HornetRenderer(final EntityRendererFactory.Context ctx, final AnimatedGeoModel<HornetEntity> modelProvider) {
+        super(ctx, modelProvider);
+    }
 
 
 //new ModelHornet(), 1f
+    /*
     public HornetRenderer(EntityRendererProvider.@NotNull Context rendManIn, AnimatedGeoModel<HornetEntity> animatedGeoModel) {
         super(rendManIn, animatedGeoModel);
     }
@@ -29,6 +27,6 @@ public final class HornetRenderer extends GeoEntityRenderer<HornetEntity> {
     @Override
     public ResourceLocation getTextureLocation(@Nonnull HornetEntity entity) {
         return CodeLyokoMain.CodeLyokoPrefix("textures/entity/hornet/hornetatlas.png");
-    }
+    }*/
 
 }

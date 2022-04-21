@@ -1,25 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FlowingFluid;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.FluidBlock;
+import net.minecraft.fluid.FlowableFluid;
 
-import javax.annotation.Nonnull;
-import java.util.function.Supplier;
+public final class UraniumWaste extends FluidBlock {
+    public UraniumWaste(final FlowableFluid fluid, final Settings settings) {
+        super(fluid, settings);
+    }
 
-public final class UraniumWaste extends LiquidBlock {
-
-
+/*
     public UraniumWaste(@NotNull Supplier<? extends FlowingFluid> supplier) {
         super(supplier, BlockBehaviour.Properties.copy(Blocks.LAVA)
 
@@ -52,4 +41,6 @@ public final class UraniumWaste extends LiquidBlock {
             }
         }
     }
+
+ */
 }

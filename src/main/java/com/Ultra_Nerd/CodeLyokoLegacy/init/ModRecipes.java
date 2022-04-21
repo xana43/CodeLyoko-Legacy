@@ -1,23 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.ICustomRecipes;
-import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.TestRecipe;
-import com.google.gson.JsonObject;
-import net.minecraft.core.Registry;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 public final class ModRecipes {
-
+/*
     public static final RecipeSerializer<TestRecipe> TEST_RECIPE_I_RECIPE_SERIALIZER = new RecipeSerializer<TestRecipe>() {
         @Override
         public @Nullable TestRecipe fromJson(ResourceLocation p_44103_, JsonObject p_44104_) {
@@ -67,4 +51,6 @@ public final class ModRecipes {
 
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZER_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, CodeLyokoMain.MOD_ID);
     public static final RegistryObject<RecipeSerializer<?>> TEST_RECEPIE = RECIPE_SERIALIZER_DEFERRED_REGISTER.register("recipes", () -> TEST_RECIPE_I_RECIPE_SERIALIZER);
+
+ */
 }

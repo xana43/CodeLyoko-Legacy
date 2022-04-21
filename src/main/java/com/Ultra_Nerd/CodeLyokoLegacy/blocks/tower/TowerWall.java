@@ -1,32 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.particles.TowerParticleData;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.Material;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import java.util.Random;
+import net.minecraft.block.Block;
 
 
 public class TowerWall extends Block {
-
+    public TowerWall(final Settings settings) {
+        super(settings);
+    }
+/*
     public static final DirectionProperty DIRTOWER = BlockStateProperties.HORIZONTAL_FACING;
 
     public TowerWall() {
@@ -107,4 +88,6 @@ public class TowerWall extends Block {
                     pos.getX() + 1.25f, d1, d2, 0, 0, 0);
         }
     }
+
+ */
 }

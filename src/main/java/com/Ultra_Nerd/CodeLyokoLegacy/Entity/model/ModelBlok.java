@@ -6,27 +6,27 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public final class ModelBlok extends AnimatedGeoModel<EntityBlok> {
 
-private static final ResourceLocation BlokModelLocation = CodeLyokoMain.CodeLyokoPrefix("geo/blok.geo.json");
-private static final ResourceLocation BlokTextureLocation = CodeLyokoMain.CodeLyokoPrefix("textures/entity/blok/blok.png");
+private static final Identifier BlokModelLocation = CodeLyokoMain.CodeLyokoPrefix("geo/blok.geo.json");
+private static final Identifier BlokTextureLocation = CodeLyokoMain.CodeLyokoPrefix("textures/entity/blok/blok.png");
+
+
     @Override
-    public @NotNull ResourceLocation getModelLocation(EntityBlok object) {
-        return BlokModelLocation;
+    public Identifier getModelLocation(final EntityBlok object) {
+        return null;
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(EntityBlok object) {
-        return BlokTextureLocation;
+    public Identifier getTextureLocation(final EntityBlok object) {
+        return null;
     }
 
     @Override
-    public @Nullable ResourceLocation getAnimationFileLocation(EntityBlok animatable) {
+    public Identifier getAnimationFileLocation(final EntityBlok animatable) {
         return null;
     }
 }

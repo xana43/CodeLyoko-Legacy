@@ -4,20 +4,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 // Paste this class into your mod and generate all required imports
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.HoverboardEntity;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.*;
-import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-
-public final class ModelHoverboard<T extends HoverboardEntity> extends EntityModel<T> {
+public final class ModelHoverboard<T extends HoverboardEntity> /*extends EntityModel<T>*/ {
+    /*
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(CodeLyokoMain.CodeLyokoPrefix("hoverboard"),"main");
     private final @NotNull ModelPart mainbody;
 
@@ -82,6 +72,8 @@ public final class ModelHoverboard<T extends HoverboardEntity> extends EntityMod
     public void renderToBuffer(@Nonnull PoseStack matrixStack, @Nonnull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         mainbody.render(matrixStack, buffer, packedLight, packedOverlay);
     }
+
+     */
 
 
 

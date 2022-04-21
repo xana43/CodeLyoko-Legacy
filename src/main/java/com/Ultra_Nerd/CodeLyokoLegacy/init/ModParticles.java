@@ -1,17 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.particles.ColoredParticle;
-import com.Ultra_Nerd.CodeLyokoLegacy.particles.TowerParticleData;
-import com.mojang.serialization.Codec;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.NotNull;
-
 public final class ModParticles {
-
+/*
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, CodeLyokoMain.MOD_ID);
 
     public static final RegistryObject<ParticleType<ColoredParticle.ColoredParticleData>> TOWER_PARTICLE = PARTICLES.register("tower_particle",
@@ -29,5 +19,7 @@ public final class ModParticles {
                     return TowerParticleData.towerParticleDataCodec();
                 }
             });
+
+ */
 
 }

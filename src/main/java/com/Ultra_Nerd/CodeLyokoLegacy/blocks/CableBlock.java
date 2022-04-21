@@ -1,22 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FenceBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.block.Block;
+import net.minecraft.block.FenceBlock;
+import net.minecraft.util.shape.VoxelShape;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
 
 public final class CableBlock extends FenceBlock {
 
@@ -24,11 +11,11 @@ public final class CableBlock extends FenceBlock {
 //    private CableBlock startOfCable;
 
     private final VoxelShape @NotNull [] shape;
-    private final VoxelShape mainShape = Block.box(1, 0, 1, 15, 14, 15);
+    private final VoxelShape mainShape = Block.createCuboidShape(1, 0, 1, 15, 14, 15);
 
-    public CableBlock(@NotNull Properties properties) {
+    public CableBlock(@NotNull Settings properties) {
         super(properties);
-        this.shape = this.makeShapes(10, 10, 10, 10, 10);
+        this.shape = this.createShapes(10, 10, 10, 10, 10);
     }
 
 /*
@@ -38,14 +25,16 @@ public final class CableBlock extends FenceBlock {
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return ModTileEntities.CABLE_TILE_ENTITY.get().create();
     }
-*/
+
     private boolean sameState(BlockState state)
     {
         return state.getBlock() == ModBlocks.COMPUTER_SCREEN_FRAME.get() || state.getBlock() == ModBlocks.COMPUTER_SCREEN.get() || state.getBlock() == ModBlocks.COMPUTER_SCREEN_CONNECTOR.get();
     }
 
+
+
     @Override
-    public boolean connectsTo(final BlockState pState, final boolean pIsSideSolid, final Direction pDirection) {
+    public boolean canConnect(final BlockState pState, final boolean pIsSideSolid, final Direction pDirection) {
         //return super.connectsTo(pState, pIsSideSolid, pDirection);
         //final Block block = pState.getBlock();
         final boolean valid = this.sameState(pState);
@@ -53,25 +42,19 @@ public final class CableBlock extends FenceBlock {
 
     }
 
-    @Nonnull
+
     @Override
-    public VoxelShape getCollisionShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+    public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         return mainShape;
     }
 
 
 
-    @Nonnull
-    @Override
-    public InteractionResult use(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand handIn, @Nonnull BlockHitResult hit) {
-        return InteractionResult.PASS;
-    }
 
-    @Nonnull
-    @Override
-    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
-        return mainShape;
-    }
+
+
+
+
 
 
 

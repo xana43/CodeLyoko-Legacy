@@ -1,25 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelOverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverboardEntity;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.util.Identifier;
 
 
 public final class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer<T> {
+    protected OverboardRenderer(final EntityRendererFactory.Context ctx) {
+        super(ctx);
+    }
 
+    @Override
+    public Identifier getTexture(final T entity) {
+        return null;
+    }
+/*
     private final @NotNull EntityModel<T> OverBoardModel;
 
 
@@ -50,6 +46,8 @@ private static final ResourceLocation OVERBOARD_TEX = CodeLyokoMain.CodeLyokoPre
     public ResourceLocation getTextureLocation(@Nonnull OverboardEntity entity) {
         return OVERBOARD_TEX;
     }
+
+ */
 
 
 }

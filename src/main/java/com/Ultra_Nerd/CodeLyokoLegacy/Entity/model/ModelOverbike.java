@@ -4,18 +4,28 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;// Made with Blockbench 3.6.
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverbikeEntity;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.util.math.MatrixStack;
 
 public final class ModelOverbike<T extends OverbikeEntity> extends EntityModel<T> {
-    @Override
+   /* @Override
     public void setupAnim(T p_102618_, float p_102619_, float p_102620_, float p_102621_, float p_102622_, float p_102623_) {
 
     }
 
     @Override
     public void renderToBuffer(PoseStack p_103111_, VertexConsumer p_103112_, int p_103113_, int p_103114_, float p_103115_, float p_103116_, float p_103117_, float p_103118_) {
+
+    }*/
+
+    @Override
+    public void setAngles(final T entity, final float limbAngle, final float limbDistance, final float animationProgress, final float headYaw, final float headPitch) {
+
+    }
+
+    @Override
+    public void render(final MatrixStack matrices, final VertexConsumer vertices, final int light, final int overlay, final float red, final float green, final float blue, final float alpha) {
 
     }
     /*

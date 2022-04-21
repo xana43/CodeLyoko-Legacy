@@ -1,17 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin.client;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import net.minecraft.client.renderer.DimensionSpecialEffects;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
-
-@Mixin(DimensionSpecialEffects.class)
+//@Mixin(DimensionSpecialEffects.class)
 public interface DimensionEffectAccesor {
-    @Accessor("EFFECTS")
+  /*  @Accessor("EFFECTS")
     static @NotNull Object2ObjectMap<ResourceLocation,DimensionSpecialEffects> LyokoDimensionEffects()
     {
         throw new UnsupportedOperationException();
     }
+
+   */
 }

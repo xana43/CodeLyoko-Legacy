@@ -1,25 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
+import net.minecraft.block.Block;
 
 
 public final class SeaPylon extends Block {
-
+    public SeaPylon(final Settings settings) {
+        super(settings);
+    }
+/*
     public static final DirectionProperty DIRPYLON = BlockStateProperties.HORIZONTAL_FACING;
 
     public SeaPylon() {
@@ -69,6 +57,8 @@ public final class SeaPylon extends Block {
         return state.rotate(mirrorIn.getRotation(state.getValue(DIRPYLON)));
     }
     //
+
+ */
 
 
 

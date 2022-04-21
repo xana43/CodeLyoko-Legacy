@@ -1,11 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -20,13 +18,15 @@ public class FlourideInfusionResult {
     public static @NotNull FlourideInfusionResult getInstance() {
         return INSTANCE;
     }
-
+/*
     private FlourideInfusionResult() {
         addRefiningRecipe(new ItemStack(ModItems.URANIUM_DIOXIDE.get()), new ItemStack(ModItems.FLUORIDE.get()),
                 new ItemStack(ModItems.URANIUM_ISOTOPE238.get()), 5.0F);
         addRefiningRecipe(new ItemStack(ModItems.URANIUM_MELT.get()), new ItemStack(ModBlocks.FLUORITE_BLOCK.get()),
                 new ItemStack(ModItems.URANIUM_ISOTOPE238.get()), 1f);
     }
+
+ */
 
 
     public void addRefiningRecipe(@NotNull ItemStack input1, @NotNull ItemStack input2, ItemStack result, float experience) {

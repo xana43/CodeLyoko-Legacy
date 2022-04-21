@@ -1,30 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.HoverboardEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverbikeEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverboardEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import org.jetbrains.annotations.NotNull;
-
-
 public final class ModEntities {
 
-
+/*
     public static final DeferredRegister<EntityType<?>> Entities = DeferredRegister.create(ForgeRegistries.ENTITIES, CodeLyokoMain.MOD_ID);
     public static final RegistryObject<EntityType<EntityBlok>> BLOK = Entities.register("blok", () ->
             EntityType.Builder.of(EntityBlok::new, ConstantUtil.LYOKO).sized(2f, 2f)
@@ -81,6 +59,8 @@ public final class ModEntities {
     event.put(HORNET.get(),HornetEntity.registerAttributes().build());
 
 }
+
+ */
 
 
 }

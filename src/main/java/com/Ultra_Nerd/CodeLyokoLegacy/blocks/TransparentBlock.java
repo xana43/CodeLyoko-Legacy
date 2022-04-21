@@ -1,31 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
-import org.jetbrains.annotations.NotNull;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 
 public class TransparentBlock extends Block {
 
     public TransparentBlock() {
-        super(Block.Properties.copy(Blocks.BARRIER).randomTicks());
+        super(FabricBlockSettings.copy(Blocks.BARRIER).ticksRandomly());
 
     }
 
     @Override
-    public @NotNull RenderShape getRenderShape(@NotNull BlockState pState) {
-        return RenderShape.INVISIBLE;
+    public BlockRenderType getRenderType(final BlockState state) {
+        return BlockRenderType.INVISIBLE;
     }
-
+/*
     @Override
     public boolean canBeReplaced(@NotNull BlockState p_60470_, @NotNull BlockPlaceContext p_60471_) {
         return false;
@@ -51,7 +43,9 @@ public class TransparentBlock extends Block {
     @Override
     public boolean canSurvive(final BlockState pState, final LevelReader pLevel, final BlockPos pPos) {
         return false;
-    }
+    }\
+
+ */
 
 
 }

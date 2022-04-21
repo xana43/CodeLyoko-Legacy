@@ -1,24 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.item.Item;
 import org.jetbrains.annotations.NotNull;
 
 public final class MultiplayerPhone extends Item {
 
-    public MultiplayerPhone(@NotNull Properties properties) {
+    public MultiplayerPhone(@NotNull Settings properties) {
         super(properties);
 
 
     }
 
-
+/*
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level worldIn, Player playerIn, InteractionHand handIn) {
         if (worldIn.players().size() > 1 && worldIn.isClientSide) {
@@ -41,6 +34,8 @@ public final class MultiplayerPhone extends Item {
             return InteractionResultHolder.pass(playerIn.getItemInHand(handIn));
         }
     }
+
+ */
 
 
 }

@@ -1,16 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
-public final class ComputerIntegratedReactor extends BaseEntityBlock {
+public final class ComputerIntegratedReactor extends Block implements BlockEntityProvider {
+    public ComputerIntegratedReactor(final Settings settings) {
+        super(settings);
+    }
 
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
+    }
+/*
     public ComputerIntegratedReactor() {
         super(Block.Properties.of(Material.METAL)
 

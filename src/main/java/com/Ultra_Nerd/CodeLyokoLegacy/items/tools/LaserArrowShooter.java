@@ -1,22 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.tools;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityLaser;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.Level;
+import net.minecraft.item.BowItem;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
 
 
 public final class LaserArrowShooter extends BowItem {
@@ -25,12 +10,12 @@ public final class LaserArrowShooter extends BowItem {
 
 
 
-    public LaserArrowShooter(@NotNull Properties builder) {
+    public LaserArrowShooter(@NotNull Settings builder) {
         super(builder);
 
         // TODO Auto-generated constructor stub
     }
-
+/*
     @Override
     public void inventoryTick(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull Entity pEntity, int pSlotId, boolean pIsSelected) {
         if(!pStack.isEnchanted())
@@ -106,4 +91,6 @@ public final class LaserArrowShooter extends BowItem {
     public boolean onDroppedByPlayer(final ItemStack item, final Player player) {
         return false;
     }
+
+ */
 }

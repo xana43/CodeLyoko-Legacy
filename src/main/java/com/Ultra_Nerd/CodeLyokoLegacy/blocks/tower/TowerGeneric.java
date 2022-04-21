@@ -1,15 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.block.Block;
 
 public final class TowerGeneric extends Block {
+    public TowerGeneric(final Settings settings) {
+        super(settings);
+    }
+    /*
     public TowerGeneric() {
         super(Block.Properties.of(Material.BARRIER).strength(-1, -1).sound(SoundType.GLASS));
     }
@@ -23,4 +20,6 @@ public final class TowerGeneric extends Block {
     public boolean isValidSpawn(BlockState state, BlockGetter level, BlockPos pos, SpawnPlacements.Type type, EntityType<?> entityType) {
         return false;
     }
+
+     */
 }

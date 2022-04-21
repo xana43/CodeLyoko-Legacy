@@ -1,12 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import net.minecraft.world.level.block.Block;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.Block;
 
 public final class UVFocusBlock extends Block {
-    public UVFocusBlock(@NotNull Properties properties) {
-        super(properties);
+    public UVFocusBlock(final Settings settings) {
+        super(settings);
     }
+    //public UVFocusBlock(@NotNull Properties properties) {
+    //    super(properties);
+    //}
 
 
 }

@@ -1,18 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.Item;
 import org.jetbrains.annotations.NotNull;
 
 public final class soldering_iron extends Item {
-    public soldering_iron(@NotNull Properties properties) {
+    public soldering_iron(@NotNull Settings properties) {
         super(properties);
     }
 
 
 
     @Override
-    public boolean isDamageable(ItemStack stack) {
+    public boolean isDamageable() {
         return true;
     }
 }

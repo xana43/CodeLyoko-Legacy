@@ -1,15 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.slots;
 
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.screen.slot.Slot;
 
 public class SlotFuel extends Slot {
-
+    public SlotFuel(final Inventory inventory, final int index, final int x, final int y) {
+        super(inventory, index, x, y);
+    }
+/*
     public SlotFuel(@NotNull Inventory inventoryIn, int index, int xPosition, int yPosition) {
         super(inventoryIn, index, xPosition, yPosition);
 
@@ -27,6 +25,8 @@ public class SlotFuel extends Slot {
         // TODO Auto-generated method stub
         return super.getMaxStackSize(stack);
     }
+
+ */
 
 
 }

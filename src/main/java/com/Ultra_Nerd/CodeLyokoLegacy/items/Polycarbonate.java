@@ -1,28 +1,22 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class Polycarbonate extends Item {
     private static int timer;
     private static ItemStack instance;
 
-    public Polycarbonate(@NotNull Properties properties) {
+    public Polycarbonate(@NotNull Settings properties) {
         super(properties);
-        instance = this.getDefaultInstance();
+        //instance = this.getDefaultInstance();
         timer = ThreadLocalRandom.current().nextInt(100, 1000);
 
     }
-
+/*
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
@@ -37,4 +31,6 @@ public final class Polycarbonate extends Item {
             entityIn.hurt(new DamageSource(this.getRegistryName().toString()),0.2f);
         }
     }
+
+ */
 }

@@ -4,16 +4,28 @@
 // Blockbench plugin created by Gecko
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 
 public final class ModelMegaTank extends AnimatedGeoModel<MegaTankEntity> {
+    @Override
+    public Identifier getModelLocation(final MegaTankEntity object) {
+        return null;
+    }
 
+    @Override
+    public Identifier getTextureLocation(final MegaTankEntity object) {
+        return null;
+    }
 
+    @Override
+    public Identifier getAnimationFileLocation(final MegaTankEntity animatable) {
+        return null;
+    }
+
+/*
     @Override
     public @NotNull ResourceLocation getModelLocation(MegaTankEntity object) {
         return CodeLyokoMain.CodeLyokoPrefix("geo/megatank.geo.json");
@@ -28,4 +40,6 @@ public final class ModelMegaTank extends AnimatedGeoModel<MegaTankEntity> {
     public @NotNull ResourceLocation getAnimationFileLocation(MegaTankEntity animatable) {
         return new ResourceLocation(CodeLyokoMain.MOD_ID,"animations/entities/megatank.json");
     }
+
+ */
 }

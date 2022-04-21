@@ -1,28 +1,25 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 
 public final class TrustyScrewDriverItem extends Item {
-    public TrustyScrewDriverItem(@NotNull Properties properties) {
+    public TrustyScrewDriverItem(@NotNull Settings properties) {
         super(properties);
     }
 
 
-
-
     @Override
-    public void appendHoverText(@Nonnull ItemStack stack, @Nullable Level worldIn, @Nonnull List<Component> tooltip, @Nonnull TooltipFlag flagIn) {
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        tooltip.add(new TranslatableComponent("the most reliable screw driver ever" + "\n" + "don't drop the parts to admire it"));
+    public void appendTooltip(final ItemStack stack, @org.jetbrains.annotations.Nullable final World world, final List<Text> tooltip, final TooltipContext context) {
+        super.appendTooltip(stack, world, tooltip, context);
+        tooltip.add(Text.of("the most reliable screw driver ever" + "\n" + "don't drop the parts to admire it"));
     }
+
+
 }

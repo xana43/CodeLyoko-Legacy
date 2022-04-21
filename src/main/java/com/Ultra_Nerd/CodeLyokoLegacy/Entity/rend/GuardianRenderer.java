@@ -1,19 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.GuardianEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.MathGuardianModel;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-
-
-public final class GuardianRenderer extends MobRenderer<GuardianEntity, MathGuardianModel> {
-
+public final class GuardianRenderer /*extends MobRenderer<GuardianEntity, MathGuardianModel>*/ {
+/*
 
 
     public GuardianRenderer(EntityRendererProvider.@NotNull Context rendManIn) {
@@ -30,5 +18,7 @@ public final class GuardianRenderer extends MobRenderer<GuardianEntity, MathGuar
     public ResourceLocation getTextureLocation(@Nonnull GuardianEntity entity) {
         return CodeLyokoMain.CodeLyokoPrefix("textures/entity/guardian/guardian.png");
     }
+
+ */
 
 }

@@ -1,39 +1,42 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelBlok;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
-import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.RangedAttackMob;
 import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nonnull;
-import java.util.Random;
+import java.rmi.Remote;
+import java.rmi.server.Operation;
+import java.rmi.server.RemoteCall;
+import java.rmi.server.Skeleton;
 
-public final class EntityBlok extends Skeleton implements IAnimatable, RangedAttackMob {
+public final class EntityBlok implements IAnimatable, RangedAttackMob, Skeleton {
+    @Override
+    public void dispatch(final Remote obj, final RemoteCall theCall, final int opnum, final long hash) throws Exception {
 
+    }
+
+    @Override
+    public Operation[] getOperations() {
+        return new Operation[0];
+    }
+
+    @Override
+    public void attack(final LivingEntity target, final float pullProgress) {
+
+    }
+
+    @Override
+    public void registerControllers(final AnimationData animationData) {
+
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return null;
+    }
+/*
     private final AnimationFactory manager = new AnimationFactory(this);
     private final AnimationController controller = new AnimationController(this, "blokcontroller", 20, this::pred);
 /*
@@ -44,7 +47,7 @@ public final class EntityBlok extends Skeleton implements IAnimatable, RangedAtt
     }
 
  */
-public EntityBlok(EntityType<? extends Skeleton> type, @NotNull Level world) {
+/*public EntityBlok(EntityType<? extends Skeleton> type, @NotNull Level world) {
     super(ModEntities.BLOK.get(), world);
     this.setAggressive(true);
     AnimationController.addModelFetcher((AnimationController.ModelFetcher<EntityBlok>) iAnimatable -> new ModelBlok());
@@ -162,9 +165,9 @@ public EntityBlok(EntityType<? extends Skeleton> type, @NotNull Level world) {
         }
 
         */
-        return Mob.checkMobSpawnRules(type, world, reason, pos, rand)/* && (world.getBlockState(pos.below()).getBlock() == ModBlocks.DIGITAL_ROCK.get() || world.getBlockState(pos.below()).getBlock() == ModBlocks.DIGITAL_GRASS.get()
-                || world.getBlockState(pos.below()).getBlock() == ModBlocks.DIGITAL_ICE.get() || world.getBlockState(pos.below()).getBlock() == ModBlocks.VOLCANO_GROUND.get())*/;
-    }
+   //     return Mob.checkMobSpawnRules(type, world, reason, pos, rand)/* && (world.getBlockState(pos.below()).getBlock() == ModBlocks.DIGITAL_ROCK.get() || world.getBlockState(pos.below()).getBlock() == ModBlocks.DIGITAL_GRASS.get()
+     //           || world.getBlockState(pos.below()).getBlock() == ModBlocks.DIGITAL_ICE.get() || world.getBlockState(pos.below()).getBlock() == ModBlocks.VOLCANO_GROUND.get())*/;
+    /*}
 
     @Override
     public boolean canRiderInteract() {
@@ -190,6 +193,8 @@ public EntityBlok(EntityType<? extends Skeleton> type, @NotNull Level world) {
         this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
         this.level.addFreshEntity(abstractarrow);
     }
+
+     */
 
 
 }
