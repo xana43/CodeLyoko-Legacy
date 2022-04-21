@@ -1,39 +1,36 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 
+import net.minecraft.block.Block;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public final class ArchitectureWorkstation extends HorizontalDirectionalBlock {
+public final class ArchitectureWorkstation extends HorizontalFacingBlock {
 
 
-    private static final BooleanProperty on = BooleanProperty.create("active");
+    private static final BooleanProperty on = BooleanProperty.of("active");
 
-    private static final VoxelShape shapeN = Block.box(4, 0, 0, 12, 16, 16);
-    private static final VoxelShape shapeE = Block.box(0, 0, 4, 16, 16, 12);
-    private static final VoxelShape shapeS = Block.box(4, 0, 0, 12, 16, 16);
-    private static final VoxelShape shapeW = Block.box(0, 0, 4, 16, 16, 12);
+    private static final VoxelShape shapeN = Block.createCuboidShape(4, 0, 0, 12, 16, 16);
+    private static final VoxelShape shapeE = Block.createCuboidShape(0, 0, 4, 16, 16, 12);
+    private static final VoxelShape shapeS = Block.createCuboidShape(4, 0, 0, 12, 16, 16);
+    private static final VoxelShape shapeW = Block.createCuboidShape(0, 0, 4, 16, 16, 12);
 
-    public ArchitectureWorkstation(BlockBehaviour.@NotNull Properties properties) {
-        super(properties);
-
-        this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(on, false));
+    public ArchitectureWorkstation(final Settings settings) {
+        super(settings);
     }
+
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {

@@ -8,7 +8,9 @@ import com.Ultra_Nerd.CodeLyokoLegacy.items.SpawnItems.HoverBoardItem;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.SpawnItems.OverBoardItem;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.*;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.ChatFormatting;
+import net.minecraft.item.Item;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -16,10 +18,19 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public final class ModItems {
 
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CodeLyokoMain.MOD_ID);
+    //public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CodeLyokoMain.MOD_ID);
+    public static final Map<String,Item> ITEM_MAP = new HashMap<>();
+    public static void addItemsToRegistry()
+    {
+            ITEM_MAP.put("apu_pagage_arm",APU_PACKAGE_ARM);
+            ITEM_MAP.put("bit",BIT);
+    }
     //for block items
     //public static final RegistryObject<BlockItem> ANTI_MARABUNTA = ITEMS.register("anti_marabunta",() -> new BlockItem(ModBlocks.ANTI_MARABUNTA.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
     //for test items
@@ -39,7 +50,8 @@ public final class ModItems {
     public static final RegistryObject<Item> HOVERBOARD_SPAWN_ITEM = ITEMS.register("hoverboard_spawn_item", () -> new HoverBoardItem(new Item.Properties().setNoRepair().stacksTo(1).tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final RegistryObject<Item> OVERBOARD_SPAWN_ITEM = ITEMS.register("overboard_spawn_item",() -> new OverBoardItem(new Item.Properties().setNoRepair().tab(CodeLyokoMain.LYOKO_ITEMS).stacksTo(1)));
      //for items
-    public static final RegistryObject<Item> APU_PACKAGE_ARM = ITEMS.register("apu_package_arm", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    public static final Item APU_PACKAGE_ARM = new ComputerItem(new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM));
+    //public static final RegistryObject<Item> APU_PACKAGE_ARM = ITEMS.register("apu_package_arm", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final RegistryObject<Item> APU_PACKAGE_x86 = ITEMS.register("apu_package_x86", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> APU_PACKAGE_ASIC = ITEMS.register("apu_package_asic", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> APU_PACKAGE_RISC = ITEMS.register("apu_package_risc", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.EPIC)));
@@ -102,7 +114,7 @@ public final class ModItems {
     public static final RegistryObject<Item> COMPUTER_FULLTOWER_FAN_HEATSINK = ITEMS.register("computer_fulltower_fan_heatsink", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> COMPUTER_FLUID_HEAT_TRANSFER_PLATE = ITEMS.register("computer_fluid_heat_transfer_plate", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("franz_hopper", ChatFormatting.DARK_PURPLE))));
     public static final RegistryObject<Item> COLORED_POLYCARBONATE_BODY_PART = ITEMS.register("colored_polycarbonate_body_part", PropertyLessItem::new);
-    public static final RegistryObject<Item> BIT = ITEMS.register("bit", PropertyLessItem::new);
+    public static final Item BIT =  new PropertyLessItem();
     public static final RegistryObject<Item> BYTE = ITEMS.register("byte", PropertyLessItem::new);
     public static final RegistryObject<Item> FLUORIDE = ITEMS.register("fluoride", () -> new FluorideItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final RegistryObject<Item> GIGABIT = ITEMS.register("gigabit", PropertyLessItem::new);

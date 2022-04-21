@@ -2,90 +2,89 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
+import com.google.common.collect.ImmutableMap;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.*;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
+import java.util.function.Function;
 
 public final class AntiMarabunta extends Block {
-    private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
+    private static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
 
     @Override
-    public boolean isValidSpawn(BlockState state, BlockGetter level, BlockPos pos, SpawnPlacements.Type type, EntityType<?> entityType) {
-        return true;
+    public boolean canMobSpawnInside() {
+        return super.canMobSpawnInside();
     }
+
+
 
     public AntiMarabunta() {
-        super(Block.Properties.of(Material.BARRIER)
-                .strength(6, 10)
-                .sound(SoundType.STONE)
-                .randomTicks()
-
-        );
+        super(FabricBlockSettings.of(Material.BARRIER).strength(6,10).sounds(BlockSoundGroup.STONE).ticksRandomly());
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState p_49921_) {
+    public void randomTick(final BlockState state, final ServerWorld worldIn, final BlockPos pos, final Random rand) {
+        super.randomTick(state, worldIn, pos, rand);
+        for (byte i = 0; i < 20; ++i) {
+            BlockPos blockpos = pos.offset(Direction.random(rand),rand.nextInt(3) - 1);
+
+            if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isChunkLoaded(blockpos)) {
+                return;
+            }
+
+            //BlockState iblockstate = worldIn.getBlockState(blockpos.above());
+            final BlockState iblockstate1 = worldIn.getBlockState(blockpos);
+
+            if (iblockstate1.getBlock() == ModBlocks.MARABUNTA) {
+                worldIn.setBlockState(blockpos, ModBlocks.ANTI_MARABUNTA.getDefaultState());
+            }
+
+
+        }
+
+        for (byte i = 0; i < 1; ++i) {
+            BlockPos blockpos = pos.offset(Direction.random(rand),rand.nextInt(3) - 1);
+
+            if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isChunkLoaded(blockpos)) {
+                return;
+            }
+
+            //BlockState iblockstate = worldIn.getBlockState(blockpos.above());
+            final BlockState iblockstate1 = worldIn.getBlockState(blockpos);
+
+            if (iblockstate1.getBlock() == ModBlocks.ANTI_MARABUNTA) {
+                worldIn.setBlockState(blockpos, Blocks.DIRT.getDefaultState());
+            }
+
+
+        }
+
+    }
+
+    @Override
+    public boolean hasRandomTicks(final BlockState state) {
         return true;
     }
 
     @Override
-    public @NotNull VoxelShape getShape(@NotNull BlockState p_60555_, @NotNull BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
-        return SHAPE;
+    protected ImmutableMap<BlockState, VoxelShape> getShapesForStates(final Function<BlockState, VoxelShape> stateToShape) {
+        return  ImmutableMap.<BlockState, VoxelShape>builder().put(this.getDefaultState(),SHAPE).build();
     }
 
-    @Override
-    public void tick(@Nonnull BlockState state, ServerLevel worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
-        //if (worldIn.isClientSide) {
-            for (byte i = 0; i < 20; ++i) {
-                BlockPos blockpos = pos.offset(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
-
-                if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isLoaded(blockpos)) {
-                    return;
-                }
-
-                //BlockState iblockstate = worldIn.getBlockState(blockpos.above());
-                final BlockState iblockstate1 = worldIn.getBlockState(blockpos);
-
-                if (iblockstate1.getBlock() == ModBlocks.MARABUNTA.get()) {
-                    worldIn.setBlockAndUpdate(blockpos, ModBlocks.ANTI_MARABUNTA.get().defaultBlockState());
-                }
 
 
-            }
-
-            for (byte i = 0; i < 1; ++i) {
-                BlockPos blockpos = pos.offset(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
-
-                if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isLoaded(blockpos)) {
-                    return;
-                }
-
-                //BlockState iblockstate = worldIn.getBlockState(blockpos.above());
-                final BlockState iblockstate1 = worldIn.getBlockState(blockpos);
-
-                if (iblockstate1.getBlock() == ModBlocks.ANTI_MARABUNTA.get()) {
-                    worldIn.setBlockAndUpdate(blockpos, Blocks.DIRT.defaultBlockState());
-                }
 
 
-            }
 
 
-        //}
-    }
+
 
 
 }

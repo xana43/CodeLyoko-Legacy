@@ -11,7 +11,11 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.saplings.DigitalSapling;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.DataTransferInterface;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.TestBlockPortal;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.*;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.core.Holder;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -23,16 +27,27 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public final class ModBlocks {
 
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CodeLyokoMain.MOD_ID);
+
+    public static final Map<String,Block> BLOCK_MAP = new HashMap<>();
+
+    public static void addBlocksToRegistry()
+    {
+        BLOCK_MAP.put("architecture_work_station",ARCHITECTURE_WORK_STATION);
+        BLOCK_MAP.put("anti_marabunta",ANTI_MARABUNTA);
+        BLOCK_MAP.put("tower_interface",TOWER_INTERFACE);
+    }
 
     //for blocks
-    public static final RegistryObject<Block> ARCHITECTURE_WORK_STATION = BLOCKS.register("architecture_work_station", () -> new ArchitectureWorkstation(Block.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> ANTI_MARABUNTA = BLOCKS.register("anti_marabunta", AntiMarabunta::new);
+    public static final Block ARCHITECTURE_WORK_STATION = new ArchitectureWorkstation(FabricBlockSettings.copy(Blocks.IRON_BLOCK));
+    //public static final RegistryObject<Block> ARCHITECTURE_WORK_STATION = BLOCKS.register("architecture_work_station", () -> new ArchitectureWorkstation(Block.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final Block ANTI_MARABUNTA = new AntiMarabunta();
     public static final RegistryObject<Block> AUTUNITE_ORE = BLOCKS.register("autunite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> BLACK_VOID = BLOCKS.register("black_void", BlackVoid::new);
     public static final RegistryObject<Block> BORNITE_ORE = BLOCKS.register("bornite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(1f).requiresCorrectToolForDrops()));
@@ -123,7 +138,7 @@ public final class ModBlocks {
     public static final RegistryObject<Block> SECTOR5_STEEL = BLOCKS.register("sector5_steel", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(-1, -1)));
     public static final RegistryObject<Block> ROUTER = BLOCKS.register("router", () -> new Router(Block.Properties.copy(Blocks.DRAGON_EGG)));
     public static final RegistryObject<Block> TOWER_WHITE = BLOCKS.register("tower_white", TowerGeneric::new);
-    public static final RegistryObject<Block> TOWER_INTERFACE = BLOCKS.register("tower_interface", TowerInterface::new);
+    public static final Block TOWER_INTERFACE = new TowerInterface();
     public static final RegistryObject<Block> TOWER_BASE = BLOCKS.register("tower_base", TowerBase::new);
     public static final RegistryObject<Block> TOWER_WALL = BLOCKS.register("tower_wall", TowerWall::new);
     public static final RegistryObject<Block> TOWER_BLUE = BLOCKS.register("tower_blue", TowerGeneric::new);
