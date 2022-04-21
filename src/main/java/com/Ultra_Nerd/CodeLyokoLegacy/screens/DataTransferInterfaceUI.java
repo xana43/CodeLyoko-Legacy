@@ -1,27 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.DataTransferInterfaceMessage;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.containers.DataTransferInterfaceContainer;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Inventory;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Random;
-
-
-public final class DataTransferInterfaceUI extends AbstractContainerScreen<DataTransferInterfaceContainer> {
-
+public final class DataTransferInterfaceUI /*extends AbstractContainerScreen<DataTransferInterfaceContainer>*/ {
+/*
   private static final ResourceLocation GUI_TEX = new ResourceLocation("cm:textures/gui/data_transfer_interface_gui_2.png");
 
     private ImageButton buttonCarthage;
@@ -231,6 +211,8 @@ public final class DataTransferInterfaceUI extends AbstractContainerScreen<DataT
         return super.charTyped(key, Keynum);
 
     }
+
+ */
 
 
 }

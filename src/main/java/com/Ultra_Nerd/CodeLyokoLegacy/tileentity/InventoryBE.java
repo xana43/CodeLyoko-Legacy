@@ -1,25 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.util.math.BlockPos;
 
 public class InventoryBE extends BlockEntity {
-
+    public InventoryBE(final BlockEntityType<?> type, final BlockPos pos, final BlockState state) {
+        super(type, pos, state);
+    }
+/*
     public final int size;
     protected int timer;
     protected boolean requiresUpdate;
@@ -136,4 +126,6 @@ public class InventoryBE extends BlockEntity {
             }
         };
     }
+
+ */
 }

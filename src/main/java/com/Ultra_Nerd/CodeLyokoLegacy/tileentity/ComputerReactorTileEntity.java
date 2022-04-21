@@ -1,27 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.FE.EG;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.util.math.BlockPos;
 
 public final class ComputerReactorTileEntity extends InventoryBE  {
+	public ComputerReactorTileEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state) {
+		super(type, pos, state);
+	}
 
 
-
+/*
 	private static final Component thisTitle = new TranslatableComponent("container." + CodeLyokoMain.MOD_ID, ".computer_reactor");
 	public final @NotNull EG thisStoreage;
 	private int progess,totalProgress = 0,capacity = 4000,maxEnergyTake = 200;
@@ -121,6 +110,8 @@ public final class ComputerReactorTileEntity extends InventoryBE  {
 	{
 		return new EG(this,this.capacity,0,this.maxEnergyTake);
 	}
+
+ */
 
 
 

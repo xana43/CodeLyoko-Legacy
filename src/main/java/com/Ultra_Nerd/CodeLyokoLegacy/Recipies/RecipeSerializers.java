@@ -1,18 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Recipies;
 
-import com.google.gson.JsonObject;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraftforge.registries.ForgeRegistryEntry;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
-
-public class RecipeSerializers extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<TestRecipe> {
+public class RecipeSerializers /*extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<TestRecipe>*/ {
 
 
 /*
@@ -22,7 +10,7 @@ public class RecipeSerializers extends ForgeRegistryEntry<RecipeSerializer<?>> i
         ItemStack output = CraftingHelper.getItemStack(GetJSongetJsonObject(json, "output"), true);
         Ingredient Input = Ingredient.fromJson(JSONUtils.getJsonObject(json, "input"));
         return new TestRecipe(recipeId, Input, output);
-    }*/
+    }
 
     @Override
     public @Nullable TestRecipe fromJson(ResourceLocation p_44103_, JsonObject p_44104_) {
@@ -44,4 +32,6 @@ public class RecipeSerializers extends ForgeRegistryEntry<RecipeSerializer<?>> i
         input.toNetwork(buffer);
         buffer.writeItemStack(recipe.getResultItem(), false);
     }
+
+ */
 }

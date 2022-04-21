@@ -1,44 +1,98 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModWorldFeatures;
-import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Common.CustomGenSettings;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.RegistryOps;
-import net.minecraft.server.level.WorldGenRegion;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.LevelHeightAccessor;
-import net.minecraft.world.level.NoiseColumn;
-import net.minecraft.world.level.StructureFeatureManager;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeManager;
-import net.minecraft.world.level.biome.Climate;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.DensityFunctions;
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.blending.Blender;
-import net.minecraft.world.level.levelgen.structure.StructureSet;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.structure.StructureSet;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntryList;
+import net.minecraft.world.ChunkRegion;
+import net.minecraft.world.HeightLimitView;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.biome.source.BiomeAccess;
+import net.minecraft.world.biome.source.BiomeSource;
+import net.minecraft.world.biome.source.util.MultiNoiseUtil;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.StructureAccessor;
+import net.minecraft.world.gen.chunk.Blender;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.chunk.VerticalBlockSample;
 
-import javax.annotation.Nonnull;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 public final class CarthageGenerator extends ChunkGenerator {
+    public CarthageGenerator(final Registry<StructureSet> registry, final Optional<RegistryEntryList<StructureSet>> optional, final BiomeSource biomeSource) {
+        super(registry, optional, biomeSource);
+    }
 
+    @Override
+    protected Codec<? extends ChunkGenerator> getCodec() {
+        return null;
+    }
+
+    @Override
+    public ChunkGenerator withSeed(final long seed) {
+        return null;
+    }
+
+    @Override
+    public MultiNoiseUtil.MultiNoiseSampler getMultiNoiseSampler() {
+        return null;
+    }
+
+    @Override
+    public void carve(final ChunkRegion chunkRegion, final long seed, final BiomeAccess biomeAccess, final StructureAccessor structureAccessor, final Chunk chunk, final GenerationStep.Carver generationStep) {
+
+    }
+
+    @Override
+    public void buildSurface(final ChunkRegion region, final StructureAccessor structures, final Chunk chunk) {
+
+    }
+
+    @Override
+    public void populateEntities(final ChunkRegion region) {
+
+    }
+
+    @Override
+    public int getWorldHeight() {
+        return 0;
+    }
+
+    @Override
+    public CompletableFuture<Chunk> populateNoise(final Executor executor, final Blender blender, final StructureAccessor structureAccessor, final Chunk chunk) {
+        return null;
+    }
+
+    @Override
+    public int getSeaLevel() {
+        return 0;
+    }
+
+    @Override
+    public int getMinimumY() {
+        return 0;
+    }
+
+    @Override
+    public int getHeight(final int x, final int z, final Heightmap.Type heightmap, final HeightLimitView world) {
+        return 0;
+    }
+
+    @Override
+    public VerticalBlockSample getColumnSample(final int x, final int z, final HeightLimitView world) {
+        return null;
+    }
+
+    @Override
+    public void getDebugHudText(final List<String> text, final BlockPos pos) {
+
+    }
+/*
 private static final Codec<CustomGenSettings> SETTINGS_CODEC = RecordCodecBuilder.create(
         settingsInstance -> settingsInstance.group(
                 Codec.INT.fieldOf("base").forGetter(CustomGenSettings::baseHeight),
@@ -250,6 +304,8 @@ private int getHeightAt(int baseHeight,float vertialVariance, float horizontalVa
     public void addDebugScreenInfo(List<String> p_208054_, BlockPos p_208055_) {
 
     }
+
+ */
 
 
 }

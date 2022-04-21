@@ -1,12 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens;
 
-import net.minecraft.client.gui.screens.inventory.BookViewScreen;
-import net.minecraft.network.chat.FormattedText;
-import org.jetbrains.annotations.NotNull;
-
-
-public final class StoryBookGUI extends BookViewScreen {
-
+public final class StoryBookGUI /*extends BookViewScreen*/ {
+/*
     public StoryBookGUI(FormattedText[] story, int AmountOfPages) {
         super(new BookAccess() {
             @Override
@@ -31,6 +26,8 @@ public final class StoryBookGUI extends BookViewScreen {
     public boolean isPauseScreen() {
         return false;
     }
+
+ */
 
 
 }

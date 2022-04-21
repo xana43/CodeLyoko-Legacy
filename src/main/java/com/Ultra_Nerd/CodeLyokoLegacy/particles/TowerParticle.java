@@ -1,18 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.particles;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.Camera;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.ParticleRenderType;
-import net.minecraft.client.particle.TextureSheetParticle;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-
-
-public final class TowerParticle extends TextureSheetParticle {
-
+public final class TowerParticle  {
+/*
 
 
     TowerParticle(final ClientLevel p_108323_, final double p_108324_, final double p_108325_, final double p_108326_) {
@@ -70,6 +59,8 @@ public final class TowerParticle extends TextureSheetParticle {
 
         }
     }
+
+ */
 
 
 }

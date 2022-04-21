@@ -1,13 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util;
 
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.PacketDistributor;
-
-import java.util.function.Supplier;
-
 public record ServerSaveHandler(boolean saveall) {
+    /*
     public static void send(final boolean save)
     {
         PacketHandler.INSTANCE.send(PacketDistributor.SERVER.with(() -> null),new ServerSaveHandler(save));
@@ -51,4 +45,6 @@ public record ServerSaveHandler(boolean saveall) {
             ctx.get().setPacketHandled(true);
         }
     }
+
+     */
 }

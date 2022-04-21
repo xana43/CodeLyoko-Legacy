@@ -1,19 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.ModFeatures.FoliagePlaces;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModPlacers;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.valueproviders.IntProvider;
-import net.minecraft.world.level.LevelSimulatedReader;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaJungleFoliagePlacer;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Random;
-import java.util.function.BiConsumer;
-
-public final class DigitalForestTreePlacer extends MegaJungleFoliagePlacer {
+public final class DigitalForestTreePlacer /*extends MegaJungleFoliagePlacer*/ {
+    /*
 
 
     public DigitalForestTreePlacer(@NotNull IntProvider p_161454_, @NotNull IntProvider p_161455_, int p_161456_) {
@@ -40,4 +28,6 @@ public final class DigitalForestTreePlacer extends MegaJungleFoliagePlacer {
     protected boolean shouldSkipLocation(Random p_68562_, int p_68563_, int p_68564_, int p_68565_, int p_68566_, boolean p_68567_) {
         return false;
     }
+
+     */
 }

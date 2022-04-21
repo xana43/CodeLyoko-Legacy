@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "cm:block/lyoko_core" }
+        "": { "model": "cm:block/core_of_lyoko" }
     }
 }

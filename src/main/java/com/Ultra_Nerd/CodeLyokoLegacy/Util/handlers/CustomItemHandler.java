@@ -1,12 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers;
 
-import net.minecraft.core.NonNullList;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
-
-public final class CustomItemHandler extends ItemStackHandler {
+public final class CustomItemHandler /*extends ItemStackHandler*/ {
+    /*
     public CustomItemHandler(int size, ItemStack @NotNull ... stacks) {
         super(size);
         for (int i = 0; i < stacks.length; i++) {
@@ -64,4 +59,6 @@ public final class CustomItemHandler extends ItemStackHandler {
     public String toString() {
         return this.stacks.toString();
     }
+
+     */
 }

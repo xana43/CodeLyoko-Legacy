@@ -1,20 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Recipies;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModRecipes;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
-
 public class TestRecipe implements ICustomRecipes {
-
+/*
     private final ResourceLocation id;
     private final ItemStack output;
     private final Ingredient input;
@@ -76,4 +63,6 @@ public class TestRecipe implements ICustomRecipes {
     public NonNullList<Ingredient> getIngredients() {
         return NonNullList.of(null, this.input);
     }
+
+ */
 }

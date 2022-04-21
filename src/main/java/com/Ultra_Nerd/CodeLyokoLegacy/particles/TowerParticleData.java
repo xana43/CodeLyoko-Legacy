@@ -1,20 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.particles;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
-import com.mojang.brigadier.StringReader;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.network.FriendlyByteBuf;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import java.util.Locale;
-
-public final class TowerParticleData implements ParticleOptions {
+public final class TowerParticleData  {
+    /*
     private final float red, green, blue, alpha;
     public static final TowerParticleData TOWER_PARTICLE_2 = new TowerParticleData(.125f, .25f, 1.f, 1.f);
 
@@ -78,6 +65,8 @@ public final class TowerParticleData implements ParticleOptions {
             return new TowerParticleData(buffer.readFloat(), buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
         }
     };
+
+     */
 
 
 

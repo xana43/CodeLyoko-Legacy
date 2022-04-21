@@ -1,29 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.Clearable;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-
-public final class QuantumChipletTileEntity extends InventoryBE implements MenuProvider, Clearable {
+public final class QuantumChipletTileEntity /*extends InventoryBE implements MenuProvider, Clearable*/ {
+    /*
 
     private NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
 
@@ -34,7 +12,7 @@ public final class QuantumChipletTileEntity extends InventoryBE implements MenuP
     public QuantumChipletTileEntity() {
         this(ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get());
     }*/
-
+/*
     @Override
     public void load(@Nonnull CompoundTag compound) {
         super.load(compound);
@@ -123,7 +101,7 @@ public final class QuantumChipletTileEntity extends InventoryBE implements MenuP
         return ItemStackHelper.getAndRemove(this.items, index);
     }*/
 
-
+/*
     @Override
     public ItemStack insertItem(int slot, @NotNull ItemStack stack) {
         ItemStack Istack = this.items.get(slot);
@@ -157,7 +135,7 @@ public final class QuantumChipletTileEntity extends InventoryBE implements MenuP
 
 
 */
-
+/*
 
     @Override
     public void setRemoved() {
@@ -202,6 +180,8 @@ public final class QuantumChipletTileEntity extends InventoryBE implements MenuP
     public void clearContent() {
 
     }
+
+ */
 
 
 

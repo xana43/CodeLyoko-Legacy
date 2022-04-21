@@ -1,18 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.LyokoVehicleEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.CustomControlServerHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ClientMiscFunctions;
-import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.fml.DistExecutor;
-import org.jetbrains.annotations.NotNull;
-import org.lwjgl.glfw.GLFW;
-
 public record LyokoControls() {
+    /*
     private static final String lyokoCategory = "key.categories." + CodeLyokoMain.MOD_ID;
     public static final KeyMapping KEY_MAPPING_VEHICLES_DOWN = new KeyMapping(
         "key."+ CodeLyokoMain.MOD_ID + ".vehicle_down", GLFW.GLFW_KEY_Z,lyokoCategory);
@@ -41,5 +30,7 @@ public record LyokoControls() {
             }
         }
     }
+
+     */
 
 }

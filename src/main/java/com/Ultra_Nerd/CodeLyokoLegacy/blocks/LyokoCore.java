@@ -1,19 +1,26 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class LyokoCore extends Block implements BlockEntityProvider {
+public final class LyokoCore extends BlockWithEntity {
 
 
     public LyokoCore(final Settings settings) {
         super(settings);
     }
-/*
+
+    @Override
+    public BlockRenderType getRenderType(final BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    /*
     @Override
     public boolean isValidSpawn(BlockState state, BlockGetter level, BlockPos pos, SpawnPlacements.Type type, EntityType<?> entityType) {
         return false;
@@ -41,6 +48,6 @@ public final class LyokoCore extends Block implements BlockEntityProvider {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return null;
+        return ModTileEntities.LYOKO_CORE.instantiate(pos, state);
     }
 }

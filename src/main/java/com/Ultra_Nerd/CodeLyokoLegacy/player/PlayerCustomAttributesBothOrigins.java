@@ -1,28 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.CapabilityPlayerClassSync;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.DimensionCheck;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.CapabilityRegistration;
-import net.minecraft.client.Minecraft;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.EntityEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import org.jetbrains.annotations.NotNull;
-
-@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+//@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class PlayerCustomAttributesBothOrigins {
-
+/*
     @SubscribeEvent
     public static void PlayerSetup(final @NotNull EntityJoinWorldEvent event) {
       /*  if(!FMLEnvironment.production)
@@ -33,7 +13,7 @@ public final class PlayerCustomAttributesBothOrigins {
             }
         }
 
-       */
+
         CodeLyokoMain.random = 1000;
         final String nbt = "first_join";
         //TODO: create xana attack feature
@@ -192,6 +172,8 @@ public final class PlayerCustomAttributesBothOrigins {
             }
         }
     }
+
+ */
 
 
 

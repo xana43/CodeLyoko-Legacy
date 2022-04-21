@@ -1,27 +1,35 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LyokoCoreBE;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.scoreboard.ScoreboardCriterion;
 import net.minecraft.util.math.Quaternion;
 
-public final class CoreOfLyoko implements BlockEntityRenderer<LyokoCoreBE> {
+import java.util.Random;
 
-    private final BlockEntityRenderDispatcher context;
+public final class CoreOfLyoko<T extends BlockEntity> implements BlockEntityRenderer<T> {
+
+    private final BlockEntityRendererFactory.Context context;
     private float x, y, z;
-    private static final BakedModel lyokoCore;
+    //private static final BakedModel lyokoCore;
 
     static
     {
-        lyokoCore = MinecraftClient.getInstance().getBakedModelManager().getModel(new ModelIdentifier("cm:block/lyoko_core"));
+       // lyokoCore = MinecraftClient.getInstance().getBakedModelManager().getModel(new ModelIdentifier("cm:block/lyoko_core"));
     }
 
-    public CoreOfLyoko( BlockEntityRenderDispatcher context)
+    public CoreOfLyoko( BlockEntityRendererFactory.Context context)
     {
         this.context = context;
 
@@ -29,7 +37,7 @@ public final class CoreOfLyoko implements BlockEntityRenderer<LyokoCoreBE> {
 
 
     @Override
-    public void render(final LyokoCoreBE pBlockEntity, final float pPartialTick, final MatrixStack pPoseStack, final VertexConsumerProvider pBufferSource, final int pPackedLight, final int pPackedOverlay) {
+    public void render(final T pBlockEntity, final float pPartialTick, final MatrixStack pPoseStack, final VertexConsumerProvider pBufferSource, final int pPackedLight, final int pPackedOverlay) {
 
 
 
@@ -45,12 +53,12 @@ public final class CoreOfLyoko implements BlockEntityRenderer<LyokoCoreBE> {
 
         //CodeLyokoMain.Log.info("should render");
         pPoseStack.translate(0.5,0.5,0.5);
-        //this.context.getBlockRenderDispatcher().getModelRenderer().tesselateWithAO(pBlockEntity.getLevel(), lyokoCore, Blocks.AIR.defaultBlockState(), pBlockEntity.getBlockPos(), pPoseStack, pBufferSource.getBuffer(RenderType.translucent()), false,
-          //      pBlockEntity.getLevel().random, new Random().nextLong(), 0);
+        //this.context.getRenderManager().getModelRenderer().render(pBlockEntity.getWorld(), lyokoCore, Blocks.AIR.getDefaultState(), pBlockEntity.getPos(), pPoseStack, pBufferSource.getBuffer(RenderLayer.getTranslucent()), false,
+           //     pBlockEntity.getWorld().getRandom(), new Random().nextLong(), 0);
+        MinecraftClient.getInstance().getBlockEntityRenderDispatcher().get(pBlockEntity);
         pPoseStack.multiply(new Quaternion(0,y+=2,0,true));
         pPoseStack.translate(-0.5,-0.5,-0.5);
-        this.context.render(pBlockEntity,pPartialTick,pPoseStack,pBufferSource);
-
+        //
 
 //}
         pPoseStack.pop();

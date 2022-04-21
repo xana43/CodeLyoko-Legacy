@@ -1,27 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.containers.ComputerControlPanelContainer;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.events.GuiEventListener;
-import net.minecraft.client.gui.font.FontSet;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Inventory;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-public final class ComputerControlPanelUI extends AbstractContainerScreen<ComputerControlPanelContainer> {
-
+public final class ComputerControlPanelUI /*extends AbstractContainerScreen<ComputerControlPanelContainer>*/ {
+/*
 
     private static final ResourceLocation TEXTURES = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/computercontrolpanelui.png");
     private static final ResourceLocation BUTTONTEXTURES = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/buttonatlas.png");
@@ -184,6 +165,8 @@ public final class ComputerControlPanelUI extends AbstractContainerScreen<Comput
             this.blit(pPoseStack,x, y + 15, 0, 144, this.getXSize(), this.getYSize() - 35);
         }
     }
+
+ */
 
 
 

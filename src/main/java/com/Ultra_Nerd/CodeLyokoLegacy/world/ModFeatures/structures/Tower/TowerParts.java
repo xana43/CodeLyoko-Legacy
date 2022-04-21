@@ -1,14 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.ModFeatures.structures.Tower;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.google.common.collect.ImmutableMap;
-import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
-
-import java.util.Map;
-
 public class TowerParts  {
-
+/*
     private static final ResourceLocation PART1 = new ResourceLocation(CodeLyokoMain.MOD_ID, "tower_new_bellow");
     private static final ResourceLocation PART2 = new ResourceLocation(CodeLyokoMain.MOD_ID, "tower_new_top");
     private static final Map<ResourceLocation, BlockPos> offset = ImmutableMap.of(PART1, new BlockPos(0, -14, 0), PART2, new BlockPos(0, 0, 0));

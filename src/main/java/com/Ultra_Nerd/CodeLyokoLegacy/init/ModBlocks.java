@@ -33,6 +33,7 @@ public final class ModBlocks {
         BLOCK_MAP.put("computer_screen_connector",COMPUTER_SCREEN_CONNECTOR);
         BLOCK_MAP.put("chalcopyrite_ore",CHALCOPYRITE_ORE);
         BLOCK_MAP.put("tower_interface",TOWER_INTERFACE);
+        BLOCK_MAP.put("lyoko_core",LYOKO_CORE);
     }
 
     //for blocks
@@ -110,7 +111,10 @@ public final class ModBlocks {
     public static final RegistryObject<Block> FRONTIER_BLOCK = BLOCKS.register("frontier_block", FrontierBlock::new);
     public static final RegistryObject<Block> GUMMITE_ORE = BLOCKS.register("gummite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(3, 10).sound(SoundType.STONE)));
     public static final RegistryObject<Block> HOLOPROJECTOR = BLOCKS.register("holoprojector", HologramProjectorBlock::new);
-    public static final Block LYOKO_CORE = BLOCKS.register("lyoko_core", () -> new LyokoCore(Block.Properties.copy(Blocks.DRAGON_EGG).noCollission().noOcclusion().strength(-1,-1)));
+   */
+    public static final Block LYOKO_CORE = new LyokoCore(FabricBlockSettings.copy(Blocks.DRAGON_EGG).noCollision().strength(-1,-1));
+
+    /*
     public static final RegistryObject<Block> MARABUNTA = BLOCKS.register("marabunta", Marabunta::new);
     public static final RegistryObject<Block> METATYUYAMUNITE_ORE = BLOCKS.register("metatyuyamunite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(3, 10).sound(SoundType.STONE)));
     public static final RegistryObject<Block> METATORBERNITE_ORE = BLOCKS.register("metatorbernite_ore", () -> new OreBlock(Block.Properties.copy(METATYUYAMUNITE_ORE.get())));

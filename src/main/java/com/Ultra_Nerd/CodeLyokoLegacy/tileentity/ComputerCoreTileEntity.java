@@ -1,14 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.util.math.BlockPos;
 
 public final class ComputerCoreTileEntity extends InventoryBE {
-    public ComputerCoreTileEntity(@NotNull BlockEntityType<?> type, @NotNull BlockPos pos, @NotNull BlockState state, int size) {
-        super(type, pos, state, size);
+    public ComputerCoreTileEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state) {
+        super(type, pos, state);
     }
+
     //public ComputerCoreTileEntity(BlockEntityType<?> tileEntityTypeIn) {
    //     super(tileEntityTypeIn);
     //}

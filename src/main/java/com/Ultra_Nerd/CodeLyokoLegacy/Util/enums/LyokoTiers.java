@@ -1,10 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.enums;
 
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.item.ToolMaterial;
+import net.minecraft.recipe.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
-public enum LyokoTiers implements Tier {
+public enum LyokoTiers implements ToolMaterial {
 
     LYOKOFELINE(4, 2000, 900, 8),
     LyokoGuardian(4, 4000, 40, 60),
@@ -31,27 +31,27 @@ public enum LyokoTiers implements Tier {
 
 
     @Override
-    public int getUses() {
+    public int getDurability() {
         return this.MaxUses;
     }
 
     @Override
-    public float getSpeed() {
+    public float getMiningSpeedMultiplier() {
         return this.efficiency;
     }
 
     @Override
-    public float getAttackDamageBonus() {
+    public float getAttackDamage() {
         return this.attackdamage;
     }
 
     @Override
-    public int getLevel() {
+    public int getMiningLevel() {
         return this.harvest;
     }
 
     @Override
-    public int getEnchantmentValue() {
+    public int getEnchantability() {
         return 0;
     }
 

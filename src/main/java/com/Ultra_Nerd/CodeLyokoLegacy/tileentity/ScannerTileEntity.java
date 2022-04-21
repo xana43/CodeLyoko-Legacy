@@ -1,21 +1,27 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.BlockPatternRegistry;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Scanner;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.ScannerFrame;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.ScannerTop;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.pattern.BlockPattern;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.util.math.BlockPos;
 
 public final class ScannerTileEntity extends BlockEntity implements MasterEntity {
+    public ScannerTileEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state) {
+        super(type, pos, state);
+    }
 
+    @Override
+    public void check() {
 
+    }
+
+    @Override
+    public void invalidateEntity() {
+
+    }
+
+    /*
     public ScannerTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         super(ModTileEntities.SCANNER_TILE_ENTITY.get(), pos, state);
 
@@ -65,7 +71,7 @@ public final class ScannerTileEntity extends BlockEntity implements MasterEntity
         return checkStructure();
 
          */
-    }
+    /*}
     @Override
     public void invalidateEntity()
     {

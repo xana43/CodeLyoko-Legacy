@@ -1,28 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.particles;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.brigadier.StringReader;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.Camera;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.*;
-import net.minecraft.core.Registry;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.Locale;
-
-public final class ColoredParticle extends TextureSheetParticle {
+public final class ColoredParticle {
+    /*
     private double posX, posY, posZ;
 
     public ColoredParticle(@NotNull ClientLevel world, double x, double y, double z, double xspeed, double yspeed, double zspeed, @NotNull ColoredParticleData data) {
@@ -168,6 +147,8 @@ public static Codec<ColoredParticleData> coloredCodec()
             return this.blue;
         }
     }
+
+     */
 
 
 }

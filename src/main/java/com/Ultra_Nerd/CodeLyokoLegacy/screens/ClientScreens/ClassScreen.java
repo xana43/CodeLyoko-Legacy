@@ -1,58 +1,47 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.CapabilityPlayerClassSync;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ServerSaveHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ClientCapabilitySync;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-
-import java.awt.*;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.text.Text;
 
 public final class ClassScreen extends Screen {
-
-    private static final ResourceLocation textures = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase_pot.png");
-    private static final int xSize = 1024,  ySize = 1024;
-    private static int x/*,y*/;
-    private ImageButton feline,samurai,ninja,guardian,warrior;
-    private int IndicatorColor = 0;
-    public ClassScreen(final Component pTitle) {
-        super(pTitle);
+    protected ClassScreen(final Text title) {
+        super(title);
     }
+/*
+    private static final Identifier textures = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase_pot.png");
+    private static final int xSize = 1024,  ySize = 1024;
+    private static int x/*,y;
+    private ButtonWidget feline,samurai,ninja,guardian,warrior;
+    private int IndicatorColor = 0;
+    private TextRenderer textRenderer;
+
     @Override
-    public void render(final @NotNull PoseStack pPoseStack, final int pMouseX, final int pMouseY, final float pPartialTick) {
+    public void render(final @NotNull MatrixStack pPoseStack, final int pMouseX, final int pMouseY, final float pPartialTick) {
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
         this.renderBackground(pPoseStack);
         //feline option
         feline.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredString(pPoseStack,font, feline.getMessage(), feline.x + (feline.getWidth() >> 1), feline.y,Color.MAGENTA.getRGB());
+
+        drawCenteredText(pPoseStack,font, feline.getMessage(), feline.x + (feline.getWidth() >> 1), feline.y,Color.MAGENTA.getRGB());
         //samurai option
         samurai.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredString(pPoseStack,font,samurai.getMessage(),samurai.x + (samurai.getWidth() >> 1),samurai.y,2007);
+        drawCenteredText(pPoseStack,font,samurai.getMessage(),samurai.x + (samurai.getWidth() >> 1),samurai.y,2007);
         //ninja option
         ninja.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredString(pPoseStack,font,ninja.getMessage(),ninja.x + (ninja.getWidth() >> 1),ninja.y, 5125);
+        drawCenteredText(pPoseStack,font,ninja.getMessage(),ninja.x + (ninja.getWidth() >> 1),ninja.y, 5125);
         //guardian option
         guardian.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredString(pPoseStack,font,guardian.getMessage(),guardian.x + (guardian.getWidth() >> 1),guardian.y,0xff369b);
+        drawCenteredText(pPoseStack,font,guardian.getMessage(),guardian.x + (guardian.getWidth() >> 1),guardian.y,0xff369b);
         //warrior option
         warrior.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredString(pPoseStack,font,warrior.getMessage(),warrior.x + (guardian.getWidth() >> 1),warrior.y,Color.DARK_GRAY.getRGB());
+        drawCenteredText(pPoseStack,font,warrior.getMessage(),warrior.x + (guardian.getWidth() >> 1),warrior.y,Color.DARK_GRAY.getRGB());
         //current class
         if(ClientCapabilitySync.getPlayerClassType() != null) {
-            drawCenteredString(pPoseStack, font, new TextComponent("Current Class: ".concat(ClientCapabilitySync.getPlayerClassType().getClassName())).withStyle(ConstantUtil.HUD), this.width >> 2, this.height >> 2, IndicatorColor);
+            drawCenteredText(pPoseStack, font, new TextComponent("Current Class: ".concat(ClientCapabilitySync.getPlayerClassType().getClassName())).withStyle(ConstantUtil.HUD), this.width >> 2, this.height >> 2, IndicatorColor);
         }
         else
         {
-            drawCenteredString(pPoseStack,font,new TextComponent("no class assigned").withStyle(ConstantUtil.HUD),this.width >> 2, this.height >> 2,Color.WHITE.getRGB());
+            drawCenteredText(pPoseStack,font,new TextComponent("no class assigned").withStyle(ConstantUtil.HUD),this.width >> 2, this.height >> 2,Color.WHITE.getRGB());
         }
     }
 
@@ -65,6 +54,7 @@ public final class ClassScreen extends Screen {
 
 
     protected void init() {
+        textRenderer = this.client.textRenderer;
         super.init();
         x = (this.width - xSize) >> 1;
         //y = (this.height - ySize) >> 1;
@@ -73,11 +63,11 @@ public final class ClassScreen extends Screen {
         setNinja();
         setGuardian();
         setWarrior();
-        addWidget(feline);
-        addWidget(samurai);
-        addWidget(ninja);
-        addWidget(guardian);
-        addWidget(warrior);
+        addDrawable(feline);
+        addDrawable(samurai);
+        addDrawable(ninja);
+        addDrawable(guardian);
+        addDrawable(warrior);
         if(ClientCapabilitySync.getPlayerClassType() != null) {
 
             switch (ClientCapabilitySync.getPlayerClassType().getClassName()) {
@@ -180,4 +170,6 @@ public final class ClassScreen extends Screen {
         RenderSystem.setShaderTexture(0,textures);
         blit(pPoseStack,x, 0,  0,  0, xSize, ySize);
     }
+
+ */
 }

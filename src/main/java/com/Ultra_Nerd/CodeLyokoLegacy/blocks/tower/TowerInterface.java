@@ -34,10 +34,16 @@ public final class TowerInterface extends Block implements BlockEntityProvider {
 
     public TowerInterface() {
         super(FabricBlockSettings.of(Material.BARRIER).strength(-1,-1).sounds(BlockSoundGroup.AMETHYST_CLUSTER)
+
         );
         //this.registerDefaultState(this.defaultBlockState().setValue(DIRINTERFACE, Direction.NORTH));
-        this.setDefaultState(this.getDefaultState().with(DIRINTERFACE,Direction.NORTH));
+        this.setDefaultState(this.getStateManager().getDefaultState().with(DIRINTERFACE,Direction.NORTH));
+       // this.getDefaultState().with(DIRINTERFACE,Direction.NORTH);
+    }
 
+    @Override
+    protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder.add(DIRINTERFACE));
     }
 
     @Override

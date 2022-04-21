@@ -1,16 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.util.INBTSerializable;
-
-import java.util.HashMap;
-
-public final class BlockEntityCapabilit implements INBTSerializable<ListTag> {
+public final class BlockEntityCapabilit /*implements INBTSerializable<NbtList>*/ {
+    /*
 
 
     private static final HashMap<BlockState,BlockPos> posHashMap = new HashMap<>();
@@ -69,4 +60,6 @@ public final class BlockEntityCapabilit implements INBTSerializable<ListTag> {
             posHashMap.replace(entityType,blockpos);
         }
     }
+
+     */
 }

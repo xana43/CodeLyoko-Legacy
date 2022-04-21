@@ -1,15 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.particles;
 
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleProvider;
-import net.minecraft.client.particle.SpriteSet;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-
-public final class TowerParticleFactory implements ParticleProvider<TowerParticleData> {
+public final class TowerParticleFactory  {
+    /*
     private final SpriteSet spriteSet;
 
     public TowerParticleFactory(SpriteSet sprite) {
@@ -25,5 +17,6 @@ public final class TowerParticleFactory implements ParticleProvider<TowerParticl
         return particle;
     }
 
+     */
 
 }

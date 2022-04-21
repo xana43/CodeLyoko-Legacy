@@ -1,47 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.TestRecipe;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers.CustomItemHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.electroplate.ElectroplatingMachine;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModRecipes;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.*;
-import java.util.stream.Collectors;
-
-public class ElectroplatingTileEntity extends BlockEntity implements BlockEntityTicker<ElectroplatingTileEntity>//, INamedContainerProvider
+public class ElectroplatingTileEntity /*extends BlockEntity implements BlockEntityTicker<ElectroplatingTileEntity>//, INamedContainerProvider*/
  {
+     /*
     private boolean once = false;
     private final int maxSmeltTime = 1000;
     public int currentTime;
@@ -56,7 +17,7 @@ public class ElectroplatingTileEntity extends BlockEntity implements BlockEntity
         this(ModTileEntities.ELECTROPLATING_TILE_ENTITY.get());
     }*/
 
-
+/*
 
 
      @Nullable
@@ -144,7 +105,7 @@ public class ElectroplatingTileEntity extends BlockEntity implements BlockEntity
         return new ContainerElectroplate(windowID, playerInv, this);
     }
 */
-
+/*
 
      @Override
     public void load(@Nonnull CompoundTag compound) {
@@ -207,7 +168,7 @@ public class ElectroplatingTileEntity extends BlockEntity implements BlockEntity
     }
 
       */
-
+/*
     @Override
     public void onDataPacket(Connection net, @NotNull ClientboundBlockEntityDataPacket pkt) {
         this.load(Objects.requireNonNull(pkt.getTag()));
@@ -257,6 +218,8 @@ public class ElectroplatingTileEntity extends BlockEntity implements BlockEntity
     private static void deactivate() {
 
     }
+
+ */
 
 
 }

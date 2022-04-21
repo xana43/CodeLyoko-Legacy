@@ -1,43 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.FlourideInfusionResult;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.FluorideInfuser;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
+public final class InfusingChamberTileEntity /*extends InventoryBE implements BlockEntityTicker<InfusingChamberTileEntity>, MenuProvider*/ {
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-public final class InfusingChamberTileEntity extends InventoryBE implements BlockEntityTicker<InfusingChamberTileEntity>, MenuProvider {
-
-
+/*
     public @NotNull ItemStackHandler handler = new ItemStackHandler(4);
     private String customName;
     private ItemStack smelting = ItemStack.EMPTY;
@@ -50,7 +15,7 @@ public final class InfusingChamberTileEntity extends InventoryBE implements Bloc
    /* public InfusingChamberTileEntity() {
         this(ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get());
     }*/
-
+/*
     public InfusingChamberTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         super(ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get(),pos,state,4);
     }
@@ -275,6 +240,8 @@ public final class InfusingChamberTileEntity extends InventoryBE implements Bloc
     public AbstractContainerMenu createMenu(int windowIn, @Nonnull Inventory playerInventory, @Nonnull Player playerEntity) {
         return null;// new ContainerInfusing(windowIn, playerInventory, this);
     }
+
+ */
 
 
 

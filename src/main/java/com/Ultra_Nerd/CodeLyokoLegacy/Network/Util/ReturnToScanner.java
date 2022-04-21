@@ -1,21 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.ITeleporter;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.PacketDistributor;
-
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 public record ReturnToScanner(int x, int y, int z) {
+    /*
     public static void materialize(Player player)
     {
         PacketHandler.INSTANCE.send(PacketDistributor.SERVER.with(() -> null),new ReturnToScanner(player.getBlockX(),player.getBlockY(),player.getBlockZ()));
@@ -63,5 +49,7 @@ public record ReturnToScanner(int x, int y, int z) {
             });
         }
     }
+
+     */
 
 }

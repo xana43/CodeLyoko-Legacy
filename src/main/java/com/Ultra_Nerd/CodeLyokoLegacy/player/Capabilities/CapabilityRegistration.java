@@ -1,24 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.BlockEntityCapabilit;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.Dimension.DimensionCapabilities;
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.common.capabilities.*;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-
 public final class CapabilityRegistration {
-
+/*
     public static final Capability<PlayerClassCapabilityHandler> CLASS_CAPABILITY = CapabilityManager.get(new CapabilityToken<>(){});
     public static final Capability<DimensionCapabilities> INVENTORY_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});
     public static final Capability<BlockEntityCapabilit> BLOCK_ENTITY_CAP = CapabilityManager.get(new CapabilityToken<>(){});
@@ -104,6 +87,8 @@ public final class CapabilityRegistration {
 
         }
     }
+
+ */
 
 
 

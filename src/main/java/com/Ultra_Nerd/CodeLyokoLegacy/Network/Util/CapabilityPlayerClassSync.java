@@ -1,18 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.CapabilityRegistration;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.PacketDistributor;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.nbt.NbtCompound;
 
-import java.util.function.Supplier;
-
-public record CapabilityPlayerClassSync(CompoundTag playerClassTag, PlayerClassType playerClassType) {
-
+public record CapabilityPlayerClassSync(NbtCompound playerClassTag, PlayerClassType playerClassType) {
+/*
     public static void Sync(PlayerClassType classType)
     {
       PacketHandler.INSTANCE.send(PacketDistributor.SERVER.with(() -> null),new CapabilityPlayerClassSync(classType.getClassTag(),classType));
@@ -57,5 +49,7 @@ public record CapabilityPlayerClassSync(CompoundTag playerClassTag, PlayerClassT
             ctx.get().setPacketHandled(true);
         }
     }
+
+ */
 
 }

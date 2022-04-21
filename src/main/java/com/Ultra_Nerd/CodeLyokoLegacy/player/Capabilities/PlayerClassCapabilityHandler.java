@@ -1,13 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ClientCapabilitySync;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.common.util.INBTSerializable;
-import org.jetbrains.annotations.NotNull;
-
-public final class PlayerClassCapabilityHandler implements INBTSerializable<CompoundTag>
+public final class PlayerClassCapabilityHandler //implements INBTSerializable<CompoundTag>
 {
+    /*
    //private Player player;
     private PlayerClassType classType = PlayerClassType.DEFAULT;
     //@Override
@@ -65,6 +60,8 @@ public final class PlayerClassCapabilityHandler implements INBTSerializable<Comp
         }
 
     }
+
+     */
 
 
 }

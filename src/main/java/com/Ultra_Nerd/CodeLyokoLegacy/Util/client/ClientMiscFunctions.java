@@ -1,14 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.client;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.LapTopHeirarichy.MainLaptopScreen;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.StoryBookGUI;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.FormattedText;
-import net.minecraft.network.chat.TextComponent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 public final class ClientMiscFunctions {
 
     public enum Screens {
@@ -17,6 +8,9 @@ public final class ClientMiscFunctions {
         LAPTOP_1,
         CLASS
     }
+    /*
+
+
     public static @NotNull Runnable runnableScreen(final FormattedText[] texts, final int length)
     {
         return () -> Minecraft.getInstance().setScreen(new StoryBookGUI(texts,length));
@@ -40,5 +34,7 @@ public final class ClientMiscFunctions {
         }
 
     }
+
+     */
 
 }

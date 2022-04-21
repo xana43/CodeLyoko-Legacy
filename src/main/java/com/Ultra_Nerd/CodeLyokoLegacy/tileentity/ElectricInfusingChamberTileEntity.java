@@ -1,34 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.FE.EG;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.ElectricFluorideInfuser;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.FlourideInfusionResult;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-public final class ElectricInfusingChamberTileEntity extends BlockEntity implements BlockEntityTicker<ElectricInfusingChamberTileEntity>,MenuProvider {
+public final class ElectricInfusingChamberTileEntity /*extends BlockEntity implements BlockEntityTicker<ElectricInfusingChamberTileEntity>,MenuProvider*/ {
+    /*
     public @NotNull ItemStackHandler handler = new ItemStackHandler(3);
    private final EG internal = new EG(this,90000);
     private String customName;
@@ -52,6 +25,7 @@ public final class ElectricInfusingChamberTileEntity extends BlockEntity impleme
             super(tileEntityTypeIn);
         }
     */
+    /*
     public boolean hasCapability(Capability<?> capability, Direction facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return true;
@@ -201,6 +175,8 @@ public final class ElectricInfusingChamberTileEntity extends BlockEntity impleme
     public AbstractContainerMenu createMenu(int windowIn, @Nonnull Inventory playerInventory, @Nonnull Player p_createMenu_3_) {
         return null; //ew ContainerElectricInfusing(windowIn, playerInventory, this);
     }
+
+     */
 
 
 }

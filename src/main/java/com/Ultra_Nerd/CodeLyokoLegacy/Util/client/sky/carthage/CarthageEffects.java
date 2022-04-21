@@ -1,15 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage;
 
-import net.minecraft.client.renderer.DimensionSpecialEffects;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.ICloudRenderHandler;
-import net.minecraftforge.client.ISkyRenderHandler;
-import net.minecraftforge.client.IWeatherParticleRenderHandler;
-import net.minecraftforge.client.IWeatherRenderHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-public final class CarthageEffects extends DimensionSpecialEffects {
+public final class CarthageEffects /*extends DimensionSpecialEffects*/ {
+    /*
 
     public CarthageEffects() {
         super(Float.NaN, false, SkyType.NONE, true, true);
@@ -74,4 +66,6 @@ public final class CarthageEffects extends DimensionSpecialEffects {
 
         return new CustomCarthadgeSky();
     }
+
+     */
 }

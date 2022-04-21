@@ -1,29 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.DigitalSeaBlock;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.CapabilityRegistration;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.util.ITeleporter;
-import net.minecraftforge.network.NetworkEvent;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 public record DataTransferInterfaceMessage(int territory, int xCoord, int yCoord, int zCoord) {
-
+/*
 
     public static void encode(@NotNull DataTransferInterfaceMessage msg, @NotNull FriendlyByteBuf buffer) {
 
@@ -147,6 +125,8 @@ public record DataTransferInterfaceMessage(int territory, int xCoord, int yCoord
         ctx.get().setPacketHandled(true);
 
     }
+
+ */
 
 
 }

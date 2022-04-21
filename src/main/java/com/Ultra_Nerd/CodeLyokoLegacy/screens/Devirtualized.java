@@ -1,31 +1,26 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.ConfirmScreen;
-import net.minecraft.client.gui.screens.GenericDirtMessageScreen;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.TitleScreen;
-import net.minecraft.network.chat.*;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.text.Text;
 
-import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.List;
-import java.util.Objects;
 
 public final class Devirtualized extends Screen {
 
     private int delayTicker;
-    private final @org.jetbrains.annotations.Nullable Component causeOfDeath;
-    private final boolean hardcore;
-    private Component deathScore;
+   // private final @org.jetbrains.annotations.Nullable Text causeOfDeath;
+    //private final boolean hardcore;
+    private Text deathScore;
     private final List<Button> exitButtons = Lists.newArrayList();
 
+    protected Devirtualized(final Text title) {
+        super(title);
+    }
+/*
     public Devirtualized(@javax.annotation.Nullable Component pCauseOfDeath, boolean pHardcore) {
-        super(new TranslatableComponent(pHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title").withStyle(Style.EMPTY.withFont(CodeLyokoMain.CodeLyokoPrefix("gunship"))));
+        super(new Text(pHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title").withStyle(Style.EMPTY.withFont(CodeLyokoMain.CodeLyokoPrefix("gunship"))));
         this.causeOfDeath = pCauseOfDeath;
         this.hardcore = pHardcore;
     }
@@ -142,5 +137,7 @@ public final class Devirtualized extends Screen {
         }
 
     }
+
+ */
 
 }

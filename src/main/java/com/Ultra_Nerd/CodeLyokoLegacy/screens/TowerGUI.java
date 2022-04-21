@@ -1,28 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.containers.TowerInterfaceContainer;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Inventory;
-import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.NotNull;
-import org.lwjgl.glfw.GLFW;
-
-import java.awt.*;
-import java.util.Objects;
-import java.util.Random;
-
-
-public final class TowerGUI extends AbstractContainerScreen<TowerInterfaceContainer> {
+public final class TowerGUI /*extends AbstractContainerScreen<TowerInterfaceContainer>*/ {
+    /*
 
     private static final ResourceLocation TEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/towerinterface.png");
     private EditBox text;
@@ -207,6 +187,8 @@ public final class TowerGUI extends AbstractContainerScreen<TowerInterfaceContai
         RenderSystem.setShaderTexture(0,TEXTURES);
         this.blit(p_96559_,(this.width - 200) >> 1, (this.height - 141) >> 1, 0, 0, 200, 141);
     }
+
+     */
 
 
 

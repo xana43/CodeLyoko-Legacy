@@ -1,18 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import io.netty.util.internal.StringUtil;
-import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.world.entity.MobCategory;
+import net.minecraft.text.Style;
+import net.minecraft.util.Identifier;
 
 public record ConstantUtil() {
 
 
     public static final Style GUNSHIP = Style.EMPTY.withFont(CodeLyokoMain.CodeLyokoPrefix("gunship"));
     public static final Style HUD = Style.EMPTY.withFont(CodeLyokoMain.CodeLyokoPrefix("lyoko_hud_font"));
-    public static final MobCategory LYOKO = MobCategory.create("lyoko","lyoko",10,false,false,128);
-    public static final TextComponent EMPTY_TEXT_COMPONENT = new TextComponent(StringUtil.EMPTY_STRING);
+    //public static final EntityCa LYOKO = MobCategory.create("lyoko","lyoko",10,false,false,128);
+   public static final Identifier ChannelID = CodeLyokoMain.CodeLyokoPrefix("LyokoPacket");
 
     public record StoryEntry()
     {

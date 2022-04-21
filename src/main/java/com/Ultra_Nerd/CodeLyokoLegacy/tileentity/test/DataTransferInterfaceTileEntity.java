@@ -1,23 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.containers.DataTransferInterfaceContainer;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.util.math.BlockPos;
 
-import javax.annotation.Nonnull;
-
-public final class DataTransferInterfaceTileEntity extends BlockEntity implements MenuProvider {
-
+public final class DataTransferInterfaceTileEntity extends BlockEntity /*implements MenuProvider*/ {
+    public DataTransferInterfaceTileEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state) {
+        super(type, pos, state);
+    }
+/*
     public DataTransferInterfaceTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
         super(ModTileEntities.DATA_TRANSFER_INTERFACE_TILE_ENTITY.get(),pos,state);
     }
@@ -40,4 +32,6 @@ public final class DataTransferInterfaceTileEntity extends BlockEntity implement
     public boolean triggerEvent(int pId, int pType) {
         return true;
     }
+
+ */
 }

@@ -1,20 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.volcano;
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.ISkyRenderHandler;
-import org.jetbrains.annotations.NotNull;
-
 //@OnlyIn(Dist.CLIENT)
-public record CustomVolcanoSky() implements ISkyRenderHandler {
+public record CustomVolcanoSky() /*implements ISkyRenderHandler*/ {
+    /*
 
 
     private static final ResourceLocation sky1 = new ResourceLocation(CodeLyokoMain.MOD_ID,"textures/skies/volcano/sky1.png");
@@ -76,4 +65,6 @@ public record CustomVolcanoSky() implements ISkyRenderHandler {
         }
 
     }
+
+     */
 }

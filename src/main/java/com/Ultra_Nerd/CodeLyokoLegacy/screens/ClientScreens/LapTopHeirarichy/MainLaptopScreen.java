@@ -1,31 +1,28 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.LapTopHeirarichy;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.glfw.GLFW;
 
 
 public final class MainLaptopScreen extends Screen {
 
-    private static final ResourceLocation TEXTURE = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase_pot.png");
+    private static final Identifier TEXTURE = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase_pot.png");
     private int x/*, y*/;
     private static final int xSize = 1024, ySize = 1024;
-    private ImageButton imageButton;
+    private ButtonWidget imageButton;
 
-    public MainLaptopScreen(@NotNull TextComponent titleIn) {
+    public MainLaptopScreen(@NotNull Text titleIn) {
         super(titleIn);
 
 
     }
-
+/*
 
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
@@ -40,11 +37,13 @@ public final class MainLaptopScreen extends Screen {
         return false;
     }
 
+ */
+
 
 
     @Override
     public boolean shouldCloseOnEsc() {
-        return false;
+        return true;
     }
 
 
@@ -55,38 +54,33 @@ public final class MainLaptopScreen extends Screen {
         //y = (this.height - ySize) >> 1;
 
         setImageButton();
-        this.addWidget(imageButton);
+        this.addDrawable(imageButton);
         super.init();
     }
 
     private void setImageButton()
     {
-        imageButton =  new ImageButton(this.width >> 1, this.height >> 1, 30, 30, 128, 0, 31, TEXTURE,
-                256, 256, press ->{
-
-        }, new TextComponent("Test").withStyle(ConstantUtil.GUNSHIP));
-        imageButton.setFGColor(0x1d5e18);
+        imageButton =  new ButtonWidget(this.width >> 1, this.height >> 1, 30, 30// 0, 31, TEXTURE,
+                /*256, 256*/,Text.of("Test"), (button) -> {});
+        //imageButton.(0x1d5e18);
     }
 
 
-    @Override
-    public boolean isPauseScreen() {
-        return false;
-    }
+
 
     @Override
-    public void renderBackground(@NotNull PoseStack pPoseStack) {
+    public void renderBackground(@NotNull MatrixStack pPoseStack) {
        // super.renderBackground(pPoseStack);
         RenderSystem.setShaderTexture(0,TEXTURE);
-        this.blit(pPoseStack,x, 0, 0, 0, xSize, ySize);
+        this.drawTexture(pPoseStack,x, 0, 0, 0, xSize, ySize);
     }
 
     @Override
-    public void render(@NotNull PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    public void render(@NotNull MatrixStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         this.renderBackground(pPoseStack);
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 
         this.imageButton.render(pPoseStack,pMouseX,pMouseY,pPartialTick);
-        drawCenteredString(pPoseStack,font,imageButton.getMessage(),imageButton.x,imageButton.y,0x1d5e18);
+        drawCenteredText(pPoseStack,this.client.textRenderer,imageButton.getMessage(),imageButton.x,imageButton.y,0x1d5e18);
     }
 }

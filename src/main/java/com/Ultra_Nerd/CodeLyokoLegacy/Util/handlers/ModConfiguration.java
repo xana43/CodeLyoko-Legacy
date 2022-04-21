@@ -1,18 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.google.gson.Gson;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
-import org.apache.commons.lang3.tuple.Pair;
-import org.jetbrains.annotations.NotNull;
-
-@Mod.EventBusSubscriber(bus= Bus.MOD, modid = CodeLyokoMain.MOD_ID)
+//@Mod.EventBusSubscriber(bus= Bus.MOD, modid = CodeLyokoMain.MOD_ID)
 public class ModConfiguration {
-
+/*
     protected static final Gson gson = new Gson();
 
     public static class Common {
@@ -24,7 +14,7 @@ public class ModConfiguration {
                     .push("CL:L");
             /*builder.comment(data)
                     .translation("cm.cable_network")
-                    .worldRestart();*/
+                    .worldRestart();
             builder.pop();
         }
     }
@@ -99,3 +89,4 @@ public class ModConfiguration {
 	}
 
  */
+}

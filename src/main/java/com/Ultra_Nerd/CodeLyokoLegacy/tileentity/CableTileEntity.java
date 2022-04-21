@@ -1,18 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.energy.IEnergyStorage;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
-public final class CableTileEntity extends BlockEntity implements BlockEntityTicker<CableTileEntity>, IEnergyStorage {
+public final class CableTileEntity /*extends BlockEntity implements BlockEntityTicker<CableTileEntity>, IEnergyStorage*/ {
+    /*
 
     public static @NotNull HashMap<CableTileEntity, ArrayList<BlockEntity>> CONNECTIONS = new HashMap<>();
 
@@ -33,7 +22,7 @@ public final class CableTileEntity extends BlockEntity implements BlockEntityTic
    //     this(ModTileEntities.CABLE_TILE_ENTITY.get());
     //}
 
-
+/*
 
     @Override
     public boolean isRemoved() {
@@ -100,4 +89,6 @@ public final class CableTileEntity extends BlockEntity implements BlockEntityTic
     public boolean canReceive() {
         return false;
     }
+
+ */
 }

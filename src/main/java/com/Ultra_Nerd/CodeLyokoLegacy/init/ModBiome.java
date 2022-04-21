@@ -1,9 +1,42 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeEffects;
+import net.minecraft.world.biome.GenerationSettings;
+import net.minecraft.world.biome.SpawnSettings;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public final class ModBiome {
 
 
 
+
+    public static final Map<String,Biome> BIOME_MAP = new HashMap<>();
+    public static void loadBiomes()
+    {
+        BIOME_MAP.put("forest_sector",FOREST_SECTOR);
+    }
+    /*Forest Sector*/
+       // private static final SurfaceBuilder FOREST_CARVER = new SurfaceBuilder(null,ModBlocks.BORNITE_ORE.getDefaultState(), 0,0,null);
+        public static final Biome FOREST_SECTOR  = buildForest();
+        private static Biome buildForest()
+        {
+            SpawnSettings.Builder forestSpawns = new SpawnSettings.Builder();
+            GenerationSettings.Builder forestGensettings = new GenerationSettings.Builder();
+
+            return (new Biome.Builder())
+                    .category(Biome.Category.FOREST)
+                    .precipitation(Biome.Precipitation.NONE)
+                    .downfall(0)
+                    .effects(new BiomeEffects.Builder().waterColor(2387).fogColor(2387).waterFogColor(2387)
+                            .skyColor(2387).build())
+                    .spawnSettings(forestSpawns.build())
+                    .generationSettings(forestGensettings.build())
+                    .temperature(3)
+                    .build();
+        }
 
 /*
     //Registry keys

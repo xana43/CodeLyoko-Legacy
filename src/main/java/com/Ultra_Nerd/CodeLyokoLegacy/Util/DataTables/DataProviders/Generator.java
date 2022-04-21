@@ -1,18 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.DataProviders;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.BlockStateSimple;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.CustomBlockTags;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.ItemModelGenerator;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.LootTables;
-import net.minecraft.data.DataGenerator;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
-
-@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
+//@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class Generator {
-
+/*
     @SubscribeEvent
     public static void genData(GatherDataEvent event)
     {
@@ -24,5 +14,7 @@ public final class Generator {
         generator.addProvider(new ItemModelGenerator(generator,event.getExistingFileHelper()));
 
     }
+
+ */
 
 }

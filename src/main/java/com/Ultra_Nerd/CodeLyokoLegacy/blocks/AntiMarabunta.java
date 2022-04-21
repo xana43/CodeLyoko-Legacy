@@ -42,9 +42,9 @@ public final class AntiMarabunta extends Block {
             //BlockState iblockstate = worldIn.getBlockState(blockpos.above());
             final BlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-            if (iblockstate1.getBlock() == ModBlocks.MARABUNTA) {
-                worldIn.setBlockState(blockpos, ModBlocks.ANTI_MARABUNTA.getDefaultState());
-            }
+            //if (iblockstate1.getBlock() == ModBlocks.MARABUNTA) {
+              //  worldIn.setBlockState(blockpos, ModBlocks.ANTI_MARABUNTA.getDefaultState());
+            //}
 
 
         }

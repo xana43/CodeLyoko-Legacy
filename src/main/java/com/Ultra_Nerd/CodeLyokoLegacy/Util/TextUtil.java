@@ -1,12 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util;
 
-import net.minecraft.network.chat.FormattedText;
-import net.minecraft.network.chat.TextComponent;
-import org.jetbrains.annotations.NotNull;
-
-
 public final class TextUtil {
-
+/*
     private static final FormattedText[] pages = new FormattedText[100];
     public static FormattedText @NotNull [] textArray(@NotNull String textToDenote)
     {
@@ -29,5 +24,7 @@ public final class TextUtil {
         }
         return length;
     }
+
+ */
    
 }

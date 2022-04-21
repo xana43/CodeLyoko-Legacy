@@ -1,6 +1,34 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import net.minecraft.client.sound.Sound;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Lazy;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public final class ModSounds {
+
+    public static final List<SoundEvent> SOUNDS = new ArrayList<>();
+    public static void createSounds()
+    {
+        SOUNDS.add(LAZY_WARRIOR);
+        SOUNDS.add(LAZY_FELINE);
+        SOUNDS.add(LAZY_NINJA);
+        SOUNDS.add(LAZY_SAMURAI);
+        SOUNDS.add(LAZY_GUARDIAN);
+        SOUNDS.add(LAZY_ARCHER);
+
+    }
+
+    public static final SoundEvent LAZY_WARRIOR = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_warrior"));
+    public static final SoundEvent LAZY_FELINE = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_feline"));
+    public static final SoundEvent LAZY_NINJA = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_ninja"));
+    public static final SoundEvent LAZY_SAMURAI = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_samurai"));
+    public static final SoundEvent LAZY_GUARDIAN = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_guardian"));
+    public static final SoundEvent LAZY_ARCHER = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_archer"));
+
 /*
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, CodeLyokoMain.MOD_ID);
     public static final HashMap<ResourceKey<Level>,Lazy<Music>> LAZY_HASH_MAP = new HashMap<>();

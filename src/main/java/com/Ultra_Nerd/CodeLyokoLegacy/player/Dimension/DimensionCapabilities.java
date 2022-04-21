@@ -1,15 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player.Dimension;
 
-import net.minecraft.nbt.ListTag;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.util.INBTSerializable;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
-import java.util.UUID;
-
-public final class DimensionCapabilities implements INBTSerializable<ListTag>
+public final class DimensionCapabilities //implements INBTSerializable<ListTag>
 {
+    /*
     private static final HashMap<UUID,ListTag> playermap = new HashMap<>();
 
 
@@ -47,4 +40,6 @@ public final class DimensionCapabilities implements INBTSerializable<ListTag>
                 playermap.replace(uuid,nbt);
             }
     }
+
+     */
 }

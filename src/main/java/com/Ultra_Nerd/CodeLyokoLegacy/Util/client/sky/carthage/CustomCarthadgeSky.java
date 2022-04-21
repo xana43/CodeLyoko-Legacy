@@ -1,18 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.ISkyRenderHandler;
-import org.jetbrains.annotations.NotNull;
-
-public record CustomCarthadgeSky() implements ISkyRenderHandler {
+public record CustomCarthadgeSky() /*implements ISkyRenderHandler*/ {
+    /*
 
 
     private static final ResourceLocation texturelocation = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/skies/sector5/sector5sky.png");
@@ -67,4 +56,6 @@ public record CustomCarthadgeSky() implements ISkyRenderHandler {
 
 
     }
+
+     */
 }

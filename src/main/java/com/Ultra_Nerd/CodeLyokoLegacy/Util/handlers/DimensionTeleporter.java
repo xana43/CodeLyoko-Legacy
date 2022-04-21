@@ -1,16 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraftforge.common.util.ITeleporter;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Function;
-
 public final class DimensionTeleporter {
+    /*
    public static void teleportPlayerToWorld(@NotNull ServerPlayer player, @NotNull ServerLevel dest, @NotNull BlockPos pos, boolean top)
    {
        player.changeDimension(dest, new ITeleporter() {
@@ -27,4 +18,6 @@ public final class DimensionTeleporter {
            }
        });
    }
+
+     */
 }

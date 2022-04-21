@@ -91,5 +91,10 @@
       <option name="name" value="UserLocalRemappedMods" />
       <option name="url" value="file:/$PROJECT_DIR$/../../../CodeLyoko%201.18.2/CodeLyoko-Fabric/CodeLyoko-Legacy-FABRIC/.gradle/loom-cache/remapped_mods/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="https://hephaestus.dev/release" />
+    </remote-repository>
   </component>
 </project>

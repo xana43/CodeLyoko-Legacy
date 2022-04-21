@@ -1,25 +1,35 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBiome;
 import com.mojang.serialization.Codec;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.resources.RegistryOps;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeSource;
-import net.minecraft.world.level.biome.Climate;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.source.BiomeSource;
+import net.minecraft.world.biome.source.util.MultiNoiseUtil;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class CarthageBiomeProvider extends BiomeSource {
+    protected CarthageBiomeProvider(final Stream<RegistryEntry<Biome>> biomeStream) {
+        super(biomeStream);
+    }
+
+    @Override
+    protected Codec<? extends BiomeSource> getCodec() {
+        return null;
+    }
+
+    @Override
+    public BiomeSource withSeed(final long seed) {
+        return null;
+    }
+
+    @Override
+    public RegistryEntry<Biome> getBiome(final int x, final int y, final int z, final MultiNoiseUtil.MultiNoiseSampler noise) {
+        return null;
+    }
 
 
-
+/*
     private final @NotNull Registry<Biome> thisRegistry;
     private final @NotNull Holder<Biome> biomeHolder;
     public static final Codec<CarthageBiomeProvider> CARTHAGE_BIOME_PROVIDER_CODEC = RegistryOps.retrieveRegistry(Registry.BIOME_REGISTRY)
@@ -59,4 +69,6 @@ public final class CarthageBiomeProvider extends BiomeSource {
     public @NotNull Holder<Biome> getNoiseBiome(int p_204238_, int p_204239_, int p_204240_, Climate.Sampler p_204241_) {
         return biomeHolder;
     }
+
+ */
 }

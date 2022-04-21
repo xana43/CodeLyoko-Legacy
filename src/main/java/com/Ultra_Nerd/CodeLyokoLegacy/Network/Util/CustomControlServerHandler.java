@@ -1,16 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.LyokoVehicleEntity;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.PacketDistributor;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Supplier;
-
 public record CustomControlServerHandler(byte upPressed, byte downPressed) {
-
+/*
     public static void syncToServer(final int upPressed, final int downPressed)
     {
         PacketHandler.INSTANCE.send(PacketDistributor.SERVER.with(()->null),new CustomControlServerHandler((byte)upPressed,(byte) downPressed));
@@ -30,7 +21,7 @@ public record CustomControlServerHandler(byte upPressed, byte downPressed) {
         byteBuf.writeByte(pkt.upHeld);
         byteBuf.writeByte(pkt.downHeld);
 
-         */
+
     }
 
     public static final class Handler{
@@ -73,5 +64,7 @@ public record CustomControlServerHandler(byte upPressed, byte downPressed) {
             netContext.get().setPacketHandled(true);
         }
     }
+
+ */
 
 }

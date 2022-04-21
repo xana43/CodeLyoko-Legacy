@@ -1,46 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHoverboard;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelOverboard;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage.CarthageEffects;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice.IceEffects;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.volcano.VolcanoEffects;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.mixin.client.DimensionEffectAccesor;
-import com.Ultra_Nerd.CodeLyokoLegacy.particles.ColoredParticle;
-import com.Ultra_Nerd.CodeLyokoLegacy.particles.TowerParticleFactory;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ComputerControlPanelUI;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.DataTransferInterfaceUI;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.TowerGUI;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.DimensionSpecialEffects;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.client.ClientRegistry;
-import net.minecraftforge.client.ICloudRenderHandler;
-import net.minecraftforge.client.IWeatherParticleRenderHandler;
-import net.minecraftforge.client.IWeatherRenderHandler;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
-import net.minecraftforge.client.model.ForgeModelBakery;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.awt.*;
-
-
 public record ClientModEventSubscriber() {
-
+/*
 public static void ClientSetup()
     {
         //for data generation
@@ -81,7 +42,7 @@ registerDimensionEffects();
 
 
 
-        /*
+
 
 
         //registers the screens and entities
@@ -92,7 +53,7 @@ registerDimensionEffects();
         ScreenManager.<ContainerElectroplate, ElectroplatingScreen>registerFactory(ModContainerTypes.ELECTROPLATING_CONTAINER.get(), ElectroplatingScreen::new);
 
 
-                */
+
 
 
 
@@ -134,7 +95,7 @@ registerDimensionEffects();
 
     }
 
-    */
+
     private static void setItemProperties()
     {
         //makes certain blocks behave properly
@@ -313,6 +274,8 @@ registerDimensionEffects();
 
 
     }
+
+ */
 
 }
     

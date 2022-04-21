@@ -1,14 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.client;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
-
 public final class DimensionCheck {
-
+/*
     public static boolean playerNotInVanillaWorld(@NotNull Player player) {
         return player.level.dimension() == ModDimensions.FOREST || player.level.dimension() == ModDimensions.SECTOR5 || player.level.dimension() == ModDimensions.DESERT || player.level.dimension() == ModDimensions.ICE
 
@@ -21,7 +14,7 @@ public final class DimensionCheck {
     }
 
     public static boolean EntityNotInVanillaWorld(@NotNull Entity entity) {
-        return entity.level.dimension() == ModDimensions.FOREST || entity.level.dimension() == ModDimensions.SECTOR5 || entity.level.dimension() == ModDimensions.DESERT || entity.level.dimension() == ModDimensions.ICE
+        return entity.world.getDimension() == ModDimensions.FOREST || entity.level.dimension() == ModDimensions.SECTOR5 || entity.level.dimension() == ModDimensions.DESERT || entity.level.dimension() == ModDimensions.ICE
 
                 || entity.level.dimension() == ModDimensions.MOUNTAIN || entity.level.dimension() == ModDimensions.VOLCANO || entity.level.dimension() == ModDimensions.DIGITAL_OCEAN || entity.level.dimension() == ModDimensions.FRONTIER;
 
@@ -54,6 +47,8 @@ public final class DimensionCheck {
     {
         return level == Level.END  || level == Level.OVERWORLD || level == Level.NETHER;
     }
+
+ */
 
 
 

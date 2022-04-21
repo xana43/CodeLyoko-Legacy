@@ -1,29 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.containers.TowerInterfaceContainer;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.util.math.BlockPos;
 
-import javax.annotation.Nonnull;
-
-public final class TowerInterfaceTileEntity extends BlockEntity implements MenuProvider
+public final class TowerInterfaceTileEntity extends BlockEntity //implements MenuProvider
  {
-
+     public TowerInterfaceTileEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state) {
+         super(type, pos, state);
+     }
+/*
     // May be accessed before onLoad
     @OnlyIn(Dist.CLIENT)
     private int PlayersPresent;
@@ -55,7 +42,7 @@ public final class TowerInterfaceTileEntity extends BlockEntity implements MenuP
      * @return display name of the interface
      */
 
-
+/*
     @Nonnull
     @Override
     public Component getDisplayName() {
@@ -70,7 +57,7 @@ public final class TowerInterfaceTileEntity extends BlockEntity implements MenuP
      * @param playerEntity PlayerEntity of interacting player
      * @return Gui container
      */
-
+/*
     @Override
     public @NotNull AbstractContainerMenu createMenu(int windowIn, @Nonnull Inventory playerInv, @Nonnull Player playerEntity) {
         return new TowerInterfaceContainer(windowIn, playerInv, this);
@@ -88,6 +75,8 @@ public final class TowerInterfaceTileEntity extends BlockEntity implements MenuP
             return super.triggerEvent(id, type);
         }
     }
+
+ */
 
 
 }
