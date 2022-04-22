@@ -1,12 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
+import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import org.jetbrains.annotations.NotNull;
 
 
-public final class AelitaArmorElytra extends ArmorItem {
+public final class AelitaArmorElytra extends ArmorItem implements FabricElytraItem {
     public AelitaArmorElytra(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);
     }

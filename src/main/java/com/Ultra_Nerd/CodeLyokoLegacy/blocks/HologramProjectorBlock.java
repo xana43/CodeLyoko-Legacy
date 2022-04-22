@@ -1,29 +1,30 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
 public final class HologramProjectorBlock extends Block implements BlockEntityProvider {
     //public static @NotNull BooleanProperty VALID = BooleanProperty.create("valid");
 
-    public HologramProjectorBlock(final Settings settings) {
-        super(settings);
-    }
-/*
+
+
     public HologramProjectorBlock() {
-        super(Block.Properties.of(Material.METAL)
+        super(FabricBlockSettings.of(Material.METAL)
                 .strength(6, 10)
-                .sound(SoundType.METAL)
+                .sounds(BlockSoundGroup.METAL)
 
         );
-        this.registerDefaultState(this.defaultBlockState().setValue(VALID, false));
+        //this.registerDefaultState(this.defaultBlockState().setValue(VALID, false));
 
     }
-
+/*
     @Override
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder.add(BooleanProperty.create("valid")));

@@ -1,6 +1,26 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
+import com.google.common.collect.ImmutableMap;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
+
 public final class ModEntities {
+  //entity type
+    public static final EntityType<EntityBlok> BLOK = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER,EntityBlok::new).dimensions(EntityDimensions.fixed(2f,2f)).build();
+    public static final ImmutableMap<String,EntityType<?>> ENTITY_TYPE_HASH_MAP = ImmutableMap.<String,EntityType<?>>builder()
+            .put("blok",BLOK)
+
+
+            .build();
+//entityRenderer
+
+
+
+
+
 
 /*
     public static final DeferredRegister<EntityType<?>> Entities = DeferredRegister.create(ForgeRegistries.ENTITIES, CodeLyokoMain.MOD_ID);

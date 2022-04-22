@@ -17,12 +17,12 @@ private static final Identifier BlokTextureLocation = CodeLyokoMain.CodeLyokoPre
 
     @Override
     public Identifier getModelLocation(final EntityBlok object) {
-        return null;
+        return BlokModelLocation;
     }
 
     @Override
     public Identifier getTextureLocation(final EntityBlok object) {
-        return null;
+        return BlokTextureLocation;
     }
 
     @Override

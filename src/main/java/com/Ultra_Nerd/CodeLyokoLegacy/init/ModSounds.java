@@ -19,6 +19,9 @@ public final class ModSounds {
         SOUNDS.add(LAZY_SAMURAI);
         SOUNDS.add(LAZY_GUARDIAN);
         SOUNDS.add(LAZY_ARCHER);
+        SOUNDS.add(BLOKAMBIENT);
+        SOUNDS.add(BLOKHURT);
+        SOUNDS.add(SECTOR5);
 
     }
 
@@ -28,6 +31,9 @@ public final class ModSounds {
     public static final SoundEvent LAZY_SAMURAI = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_samurai"));
     public static final SoundEvent LAZY_GUARDIAN = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_guardian"));
     public static final SoundEvent LAZY_ARCHER = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_archer"));
+    public static final SoundEvent SECTOR5 = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("sector5"));
+    public static final SoundEvent BLOKAMBIENT = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.blok.ambient"));
+    public static final SoundEvent BLOKHURT = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.blok.hurt"));
 
 /*
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, CodeLyokoMain.MOD_ID);

@@ -1,39 +1,46 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.InfusingChamberTileEntity;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class FluorideInfuser extends Block implements BlockEntityProvider {
-    public FluorideInfuser(final Settings settings) {
-        super(settings);
-    }
+import javax.annotation.Nonnull;
+
+public class FluorideInfuser extends BlockWithEntity  {
+
 
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
         return null;
     }
-/*
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    public static final BooleanProperty INFUSING = BooleanProperty.create("infusing");
+
+    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+    public static final BooleanProperty INFUSING = BooleanProperty.of("infusing");
 
     public FluorideInfuser() {
-        super(Block.Properties.of(Material.METAL)
+        super(FabricBlockSettings.of(Material.METAL)
 
                 .strength(6, 10)
-                .sound(SoundType.METAL)
+                .sounds(BlockSoundGroup.METAL)
 
         );
 
-        this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(INFUSING, false));
+  //      this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(INFUSING, false));
 
 
     }
-
+/*
 
 
     @Nonnull

@@ -1,39 +1,44 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ElectricInfusingChamberTileEntity;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class ElectricFluorideInfuser extends Block implements BlockEntityProvider {
-    public ElectricFluorideInfuser(final Settings settings) {
-        super(settings);
-    }
+import javax.annotation.Nonnull;
+
+public final class ElectricFluorideInfuser extends BlockWithEntity {
+
 
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
         return null;
     }
-/*
-    public static @NotNull DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+
+    public static @NotNull DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
     public ElectricFluorideInfuser() {
-        super(Block.Properties.of(Material.METAL)
+        super(FabricBlockSettings.copy(Blocks.IRON_BLOCK)
 
-                .strength(6, 10)
-                .sound(SoundType.METAL)
+
 
         );
 
-        this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(INFUSING, false));
+        //this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(INFUSING, false));
 
         // TODO Auto-generated constructor stub
     }
 
-
+/*
     public static final BooleanProperty INFUSING = BooleanProperty.create("infusing");
 
     @Override

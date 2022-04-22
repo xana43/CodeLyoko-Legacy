@@ -1,10 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoArmorMaterial;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.ComputerItem;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.PropertyLessItem;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.*;
+import com.google.common.collect.ImmutableMap;
+import com.sun.jna.Memory;
+import com.sun.jna.Pointer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.util.Arm;
 import net.minecraft.util.Rarity;
 
 import java.util.HashMap;
@@ -14,18 +23,8 @@ public final class ModItems {
 
 
     //public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CodeLyokoMain.MOD_ID);
-    public static final Map<String,Item> ITEM_MAP = new HashMap<>();
-    public static void addItemsToRegistry()
-    {
-            ITEM_MAP.put("apu_package_arm",APU_PACKAGE_ARM);
-            ITEM_MAP.put("apu_package_x86",APU_PACKAGE_x86);
-            ITEM_MAP.put("apu_package_asic",APU_PACKAGE_ASIC);
-            ITEM_MAP.put("apu_package_risc",APU_PACKAGE_RISC);
-            ITEM_MAP.put("apu_die_arm",APU_DIE_ARM);
-            ITEM_MAP.put("apu_die_x86",APU_DIE_x86);
-            ITEM_MAP.put("apu_die_asic",APU_DIE_ASIC);
-            ITEM_MAP.put("bit",BIT);
-    }
+
+
     private static final FabricItemSettings BaseSettings = new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM);
     //for block items
     //public static final RegistryObject<BlockItem> ANTI_MARABUNTA = ITEMS.register("anti_marabunta",() -> new BlockItem(ModBlocks.ANTI_MARABUNTA.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
@@ -161,30 +160,68 @@ public final class ModItems {
     public static final RegistryObject<SwordItem> ZWEIHANDER = ITEMS.register("zweihander", () -> new ZweihanderWeapon(LyokoTiers.LyokoWarrior, 60, -3.9f, new Item.Properties().tab(CodeLyokoMain.LYOKO_WEAPONS)));
     public static final RegistryObject<BowItem> FORCE_FIELD_EMITTER = ITEMS.register("force_field_emitter", () -> new ForceFieldEmitter(new Item.Properties().tab(CodeLyokoMain.LYOKO_WEAPONS).rarity(Rarity.EPIC)));
     public static final RegistryObject<BowItem> ARCHER_BOW = ITEMS.register("archer_bow", () -> new ArcherClassBow(new Item.Properties().tab(CodeLyokoMain.LYOKO_WEAPONS).durability(40)));
-    //for armor
-    public static final RegistryObject<ArmorItem> AELITA_CHESTPLATE = ITEMS.register("aelita_chestplate", () -> new AelitaArmorElytra(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.CHEST, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> AELITA_LEGGINGS = ITEMS.register("aelita_leggings", () -> new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.LEGS, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> AELITA_BOOTS = ITEMS.register("aelita_boots", () -> new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.FEET, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> ODD_CHESTPLATE = ITEMS.register("odd_chestplate", () -> new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.CHEST, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> ODD_LEGGINGS = ITEMS.register("odd_leggings", () -> new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.LEGS, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> ODD_BOOTS = ITEMS.register("odd_boots", () -> new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.FEET, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> ULRICH_HEADBAND = ITEMS.register("ulrich_headband", () -> new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.HEAD, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> ULRICH_CHESTPLATE = ITEMS.register("ulrich_chestplate", () -> new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.CHEST, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> ULRICH_LEGGINGS = ITEMS.register("ulrich_leggings", () -> new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.LEGS, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> ULRICH_BOOTS = ITEMS.register("ulrich_boots", () -> new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.FEET, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> BLANKHELMET = ITEMS.register("blank_helmet", () -> new ArmorItem(LyokoArmorMaterial.BLANKHELM, EquipmentSlot.HEAD, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR).setNoRepair()));
-    public static final RegistryObject<ArmorItem> WILLIAM_CHESTPLATE = ITEMS.register("william_chestplate", () -> new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.CHEST, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> WILLIAM_LEGGINGS = ITEMS.register("william_leggings", () -> new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.LEGS, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> WILLIAM_BOOTS = ITEMS.register("william_boots", () -> new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.FEET, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> YUMI_CHESTPLATE = ITEMS.register("yumi_chestplate", () -> new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.CHEST, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> YUMI_LEGGINGS = ITEMS.register("yumi_leggings", () -> new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.LEGS, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> YUMI_BOOTS = ITEMS.register("yumi_boots", () -> new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.FEET, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> MIND_HELMET = ITEMS.register("mind_helmet", () -> new MindHelm(LyokoArmorMaterial.BLANKHELM, EquipmentSlot.HEAD, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR).rarity(Rarity.EPIC)));
-    public static final RegistryObject<ArmorItem> LINKER = ITEMS.register("linker", () -> new linker(LyokoArmorMaterial.LINKER, EquipmentSlot.CHEST, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR).rarity(Rarity.EPIC)));
-    public static final RegistryObject<ArmorItem> JEREMY_CHESTPLATE = ITEMS.register("jeremy_chestplate", () -> new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.CHEST, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> JEREMY_LEGGINGS = ITEMS.register("jeremy_leggings", () -> new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.LEGS, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
-    public static final RegistryObject<ArmorItem> JEREMY_BOOTS = ITEMS.register("jeremy_boots", () -> new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.FEET, new Item.Properties().tab(CodeLyokoMain.LYOKO_ARMOR)));
+*/    //for armor
+    private static final FabricItemSettings ArmorGroup = new FabricItemSettings().group(CodeLyokoMain.LYOKO_ARMOR);
+    public static final ArmorItem AELITA_CHESTPLATE = new AelitaArmorElytra(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.CHEST, ArmorGroup);
+    public static final ArmorItem AELITA_LEGGINGS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.LEGS, ArmorGroup);
+    public static final ArmorItem AELITA_BOOTS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.FEET, ArmorGroup);
+
+    public static final ArmorItem ODD_CHESTPLATE = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.CHEST, ArmorGroup);
+    public static final ArmorItem ODD_LEGGINGS = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.LEGS, ArmorGroup);
+    public static final ArmorItem ODD_BOOTS = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.FEET, ArmorGroup);
+    public static final ArmorItem ULRICH_HEADBAND = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.HEAD, ArmorGroup);
+    public static final ArmorItem ULRICH_CHESTPLATE = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.CHEST, ArmorGroup);
+    public static final ArmorItem ULRICH_LEGGINGS = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.LEGS, ArmorGroup);
+    public static final ArmorItem ULRICH_BOOTS = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.FEET, ArmorGroup);
+    public static final ArmorItem BLANKHELMET = new ArmorItem(LyokoArmorMaterial.BLANKHELM, EquipmentSlot.HEAD, ArmorGroup);
+    public static final ArmorItem WILLIAM_CHESTPLATE = new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.CHEST, ArmorGroup);
+    public static final ArmorItem WILLIAM_LEGGINGS = new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.LEGS, ArmorGroup);
+    public static final ArmorItem WILLIAM_BOOTS = new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.FEET, ArmorGroup);
+    public static final ArmorItem YUMI_CHESTPLATE = new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.CHEST, ArmorGroup);
+    public static final ArmorItem YUMI_LEGGINGS = new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.LEGS, ArmorGroup);
+    public static final ArmorItem YUMI_BOOTS = new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.FEET, ArmorGroup);
+    public static final ArmorItem MIND_HELMET = new MindHelm(LyokoArmorMaterial.BLANKHELM, EquipmentSlot.HEAD, ArmorGroup.rarity(Rarity.EPIC));
+    public static final ArmorItem LINKER = new linker(LyokoArmorMaterial.LINKER, EquipmentSlot.CHEST, ArmorGroup.rarity(Rarity.EPIC));
+    public static final ArmorItem JEREMY_CHESTPLATE = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.CHEST, ArmorGroup);
+    public static final ArmorItem JEREMY_LEGGINGS = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.LEGS, ArmorGroup);
+    public static final ArmorItem JEREMY_BOOTS = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.FEET, ArmorGroup);
     //for buckets
-    public static final RegistryObject<BucketItem> LIQUID_HELIUM_BUCKET = ITEMS.register("liquid_helium_bucket", () -> new BucketItem(() -> ModFluids.STILL_LIQUID_HELIUM.get(), new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).stacksTo(1)));
-*/
+   // public static final RegistryObject<BucketItem> LIQUID_HELIUM_BUCKET = ITEMS.register("liquid_helium_bucket", () -> new BucketItem(() -> ModFluids.STILL_LIQUID_HELIUM.get(), new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).stacksTo(1)));
+
+
+    public static final ImmutableMap<String,Item> ITEM_MAP = ImmutableMap.<String,Item>builder()
+
+//Items
+           .put("apu_package_arm",APU_PACKAGE_ARM)
+           .put("apu_package_x86",APU_PACKAGE_x86)
+           .put("apu_package_asic",APU_PACKAGE_ASIC)
+           .put("apu_package_risc",APU_PACKAGE_RISC)
+           .put("apu_die_arm",APU_DIE_ARM)
+           .put("apu_die_x86",APU_DIE_x86)
+           .put("apu_die_asic",APU_DIE_ASIC)
+           .put("bit",BIT)
+           //armor
+           .put("aelita_chestplate",AELITA_CHESTPLATE)
+           .put("aelita_leggings",AELITA_LEGGINGS)
+            .put("aelita_boots",AELITA_BOOTS)
+            .put("odd_chestplate",ODD_CHESTPLATE)
+            .put("odd_leggings",ODD_LEGGINGS)
+            .put("odd_boots",ODD_BOOTS)
+            .put("ulrich_headband",ULRICH_HEADBAND)
+            .put("ulrich_chestplate",ULRICH_CHESTPLATE)
+            .put("ulrich_leggings",ULRICH_LEGGINGS)
+            .put("ulrich_boots",ULRICH_BOOTS)
+            .put("blank_helmet",BLANKHELMET)
+            .put("william_chestplate",WILLIAM_CHESTPLATE)
+            .put("william_leggings",WILLIAM_LEGGINGS)
+            .put("william_boots",WILLIAM_BOOTS)
+            .put("yumi_chestplate",YUMI_CHESTPLATE)
+            .put("yumi_leggings",YUMI_LEGGINGS)
+            .put("yumi_boots",YUMI_BOOTS)
+            .put("mind_helmet",MIND_HELMET)
+            .put("linker",LINKER)
+            .put("jeremy_chestplate",JEREMY_CHESTPLATE)
+            .put("jeremy_leggings",JEREMY_LEGGINGS)
+            .put("jeremy_boots",JEREMY_BOOTS)
+           .build();
 }

@@ -2,9 +2,17 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
+import org.jetbrains.annotations.Nullable;
 
 public final class ArchitectureWorkstation extends HorizontalFacingBlock {
 
@@ -20,40 +28,21 @@ public final class ArchitectureWorkstation extends HorizontalFacingBlock {
         super(settings);
     }
 
-/*
     @Override
-    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(FACING).add(on);
+    protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder.add(FACING).add(on));
+    }
+
+    @Nullable
+    @Override
+    public BlockState getPlacementState(final ItemPlacementContext ctx) {
+        return this.getDefaultState().with(FACING,ctx.getPlayerFacing().getOpposite()).with(on,false);
     }
 
 
-
     @Override
-    public @NotNull BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
-        // TODO Auto-generated method stub
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(on, false);
-    }
-
-    //mod compatiability
-    @Nonnull
-    @Override
-    public BlockState rotate(@NotNull BlockState state, @NotNull Rotation rot) {
-        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
-    }
-
-    @Nonnull
-    @Override
-    public BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirrorIn) {
-        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
-    }
-
-
-
-    @Nonnull
-    @Override
-    public VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
-        return switch (state.getValue(FACING)) {
+    public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
+        return switch (state.get(FACING)) {
             case NORTH -> shapeN;
             case SOUTH -> shapeS;
             case EAST -> shapeE;
@@ -63,5 +52,5 @@ public final class ArchitectureWorkstation extends HorizontalFacingBlock {
         };
     }
 
- */
+
 }
