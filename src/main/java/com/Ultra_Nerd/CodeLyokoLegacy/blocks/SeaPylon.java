@@ -1,21 +1,27 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import net.minecraft.block.Block;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.*;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
+import org.jetbrains.annotations.Nullable;
 
 
 public final class SeaPylon extends Block {
-    public SeaPylon(final Settings settings) {
-        super(settings);
-    }
-/*
-    public static final DirectionProperty DIRPYLON = BlockStateProperties.HORIZONTAL_FACING;
+
+
+    public static final DirectionProperty DIRPYLON = HorizontalFacingBlock.FACING;
 
     public SeaPylon() {
-        super(Properties.of(new Material.Builder(MaterialColor.METAL).build())
+        super(FabricBlockSettings.of(new Material.Builder(MapColor.GRAY).build())
 
                 .strength(-1, -1)
-                .sound(SoundType.GLASS)
-                .noOcclusion()
+                .sounds(BlockSoundGroup.GLASS)
+                .nonOpaque()
 
 
 
@@ -24,41 +30,28 @@ public final class SeaPylon extends Block {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
-        builder.add(DIRPYLON);
+    protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder.add(DIRPYLON));
     }
 
 
 
-
     @Override
-    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+    public float getAmbientOcclusionLightLevel(final BlockState state, final BlockView world, final BlockPos pos) {
         return 5;
     }
 
-
-
+    @Nullable
     @Override
-    public @NotNull BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
-        // TODO Auto-generated method stub
-        return this.defaultBlockState().setValue(DIRPYLON, context.getHorizontalDirection().getOpposite());
+    public BlockState getPlacementState(final ItemPlacementContext ctx) {
+        return this.getDefaultState().with(DIRPYLON,ctx.getPlayerLookDirection().getOpposite());
     }
 
-    //mod compatiability
-    @Nonnull
-    @Override
-    public BlockState rotate(@NotNull BlockState state, @NotNull Rotation rot) {
-        return state.setValue(DIRPYLON, rot.rotate(state.getValue(DIRPYLON)));
-    }
 
-    @Nonnull
-    @Override
-    public BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirrorIn) {
-        return state.rotate(mirrorIn.getRotation(state.getValue(DIRPYLON)));
-    }
-    //
 
- */
+
+
+
 
 
 

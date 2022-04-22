@@ -1,13 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
+import com.Ultra_Nerd.CodeLyokoLegacy.containers.DataTransferInterfaceContainer;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.DataTransferInterfaceTileEntity;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class DataTransferInterface extends Block implements BlockEntityProvider {
+import javax.annotation.Nonnull;
+
+public final class DataTransferInterface extends BlockWithEntity {
     public DataTransferInterface(final Settings settings) {
         super(settings);
     }
@@ -17,19 +25,21 @@ public final class DataTransferInterface extends Block implements BlockEntityPro
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
         return null;
     }
-/*
+
     public DataTransferInterface() {
-        super(Block.Properties.of(Material.METAL)
+        super(FabricBlockSettings.of(Material.METAL)
 
                 .strength(-1, -1)
-                .sound(SoundType.METAL));
+                .sounds(BlockSoundGroup.METAL));
     }
 
     @Override
-    public @NotNull RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
+    public BlockRenderType getRenderType(final BlockState state) {
+        return BlockRenderType.MODEL;
     }
 
+
+/*
     @Nonnull
     @Override
     public InteractionResult use(@Nonnull BlockState state, @NotNull Level worldIn, @Nonnull BlockPos pos, @Nonnull Player player,

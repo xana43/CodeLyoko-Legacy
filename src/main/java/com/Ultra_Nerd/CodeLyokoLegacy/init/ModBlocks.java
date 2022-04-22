@@ -1,12 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.DataTransferInterface;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.TowerInterface;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.OreBlock;
+import net.minecraft.block.*;
+import net.minecraft.sound.BlockSoundGroup;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ public final class ModBlocks {
 
     public static final Map<String,Block> BLOCK_MAP = new HashMap<>(200);
 
-    private static AbstractBlock.Settings Quicsettings(AbstractBlock block)
+    private static AbstractBlock.Settings QuickCopy(AbstractBlock block)
     {
         return FabricBlockSettings.copy(block);
     }
@@ -32,8 +32,32 @@ public final class ModBlocks {
         BLOCK_MAP.put("cable_block",CABLE_BLOCK);
         BLOCK_MAP.put("computer_screen_connector",COMPUTER_SCREEN_CONNECTOR);
         BLOCK_MAP.put("chalcopyrite_ore",CHALCOPYRITE_ORE);
+        BLOCK_MAP.put("covellite_ore",COVELLITE_ORE);
+        BLOCK_MAP.put("chalcocite_ore",CHALCOCITE_ORE);
+        BLOCK_MAP.put("computer_frame",COMPUTER_FRAME);
+        BLOCK_MAP.put("central_control_unit",CENTRAL_CONTROL_UNIT);
+        BLOCK_MAP.put("computer_screen",COMPUTER_SCREEN);
+        BLOCK_MAP.put("computer_screen_frame",COMPUTER_SCREEN_FRAME);
+        BLOCK_MAP.put("computer_keyboard",COMPUTER_KEYBOARD);
+        BLOCK_MAP.put("chiplet_basic_block",CHIPLET_BASIC_BLOCK);
+        BLOCK_MAP.put("chiplet_advanced_block",CHIPLET_ADVANCED_BLOCK);
+        BLOCK_MAP.put("chiplet_franz_block",CHIPLET_FRANZ_BLOCK);
+        BLOCK_MAP.put("computer_cooling_block",COMPUTER_COOLING_BLOCK);
+        BLOCK_MAP.put("computer_liquid_circulator",COMPUTER_LIQUID_CIRCULATOR);
+        BLOCK_MAP.put("computer_tower_control_panel",COMPUTER_TOWER_CONTROL_PANEL);
+        BLOCK_MAP.put("coffinite_ore",COFFINITE_ORE);
+        BLOCK_MAP.put("carnotite_ore",CARNOTITE_ORE);
+        BLOCK_MAP.put("data_transfer_interface",DATA_TRANSFER_INTERFACE);
+        BLOCK_MAP.put("digital_sea_pylon",DIGITAL_SEA_PYLON);
+        BLOCK_MAP.put("digital_grass",DIGITAL_GRASS);
+        BLOCK_MAP.put("digital_dirt",DIGITAL_DIRT);
+        BLOCK_MAP.put("digital_rock",DIGITAL_ROCK);
+        BLOCK_MAP.put("digital_wood_forest",DIGITAL_WOOD_FOREST);
+        BLOCK_MAP.put("digital_wood_mountain",DIGITAL_WOOD_MOUNTAIN);
+        BLOCK_MAP.put("digital_leaf_mountain",DIGITAL_LEAF_MOUNTAIN);
         BLOCK_MAP.put("tower_interface",TOWER_INTERFACE);
         BLOCK_MAP.put("lyoko_core",LYOKO_CORE);
+
     }
 
     //for blocks
@@ -44,33 +68,33 @@ public final class ModBlocks {
     public static final Block BLACK_VOID = new BlackVoid();
     public static final Block BORNITE_ORE = new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE));
     public static final Block CABLE_BLOCK = new CableBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK));
-    public static final Block COMPUTER_SCREEN_CONNECTOR = new SuperComputerSideScreenConnector(Quicsettings(Blocks.IRON_BARS));//BLOCKS.register("computer_screen_connector", () -> new SuperComputerSideScreenConnector(BlockBehaviour.Properties.copy(Blocks.IRON_BARS)));
-    public static final Block CHALCOPYRITE_ORE = new OreBlock(Quicsettings(Blocks.IRON_ORE));//BLOCKS.register("chalcopyrite_ore", () -> new Block(Block.Properties.copy(Blocks.IRON_ORE)));
-  /*  public static final Block COVELLITE_ORE = BLOCKS.register("covellite_ore", () -> new Block(Block.Properties.copy(Blocks.IRON_ORE)));
-    public static final Block CHALCOCITE_ORE = BLOCKS.register("chalcocite_ore", () -> new Block(Block.Properties.copy(Blocks.IRON_ORE)));
-    public static final Block COMPUTER_FRAME = BLOCKS.register("computer_frame", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final Block CENTRAL_CONTROL_UNIT = BLOCKS.register("central_control_unit", () -> new ComputerCentralControlUnit(Block.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final Block COMPUTER_SCREEN = BLOCKS.register("computer_screen", () -> new Block(Block.Properties.of(Material.GLASS).strength(1, 20).sound(SoundType.GLASS).explosionResistance(Blocks.GLASS.getExplosionResistance())));
-    public static final RegistryObject<Block> COMPUTER_SCREEN_FRAME = BLOCKS.register("computer_screen_frame", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> COMPUTER_KEYBOARD = BLOCKS.register("computer_keyboard", ComputerKeyboard::new);
-    public static final RegistryObject<Block> CHIPLET_BASIC_BLOCK = BLOCKS.register("chiplet_basic_block", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> CHIPLET_ADVANCED_BLOCK = BLOCKS.register("chiplet_advanced_block", () -> new ChipletAdvancedBlock(Block.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> CHIPLET_FRANZ_BLOCK = BLOCKS.register("chiplet_franz_block", FranzChiplet::new);
-    public static final RegistryObject<Block> COMPUTER_COOLING_BLOCK = BLOCKS.register("computer_cooling_block", () -> new CoolingBlock(Block.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> COMPUTER_LIQUID_CIRCULATOR = BLOCKS.register("computer_liquid_circulator", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> COMPUTER_TOWER_CONTROL_PANEL = BLOCKS.register("computer_tower_control_panel", ControlPanel::new);
-    public static final RegistryObject<Block> COFFINITE_ORE = BLOCKS.register("coffinite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(6,10).sound(SoundType.STONE).explosionResistance(Blocks.IRON_ORE.getExplosionResistance()).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> CARNOTITE_ORE = BLOCKS.register("carnotite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE)));
-    public static final RegistryObject<Block> DATA_TRANSFER_INTERFACE = BLOCKS.register("data_transfer_interface", DataTransferInterface::new);
-    public static final RegistryObject<Block> DIGITAL_SEA_PYLON = BLOCKS.register("digital_sea_pylon", SeaPylon::new);
-    public static final RegistryObject<Block> DIGITAL_GRASS = BLOCKS.register("digital_grass", () -> new Block(Block.Properties.copy(Blocks.GRASS_BLOCK).isValidSpawn((p_61031_, p_61032_, p_61033_, p_61034_) -> true).strength(-1).explosionResistance(-1)));
-    public static final RegistryObject<Block> DIGITAL_DIRT = BLOCKS.register("digital_dirt", () -> new Block(Block.Properties.copy(Blocks.DIRT).strength(-1).explosionResistance(-1)));
-    public static final Block DIGITAL_ROCK = BLOCKS.register("digital_rock", () -> new Block(Block.Properties.copy(Blocks.STONE).strength(-1)));
-    public static final RegistryObject<Block> DIGITAL_WOOD_FOREST = BLOCKS.register("digital_wood_forest", () -> new Block(Block.Properties.copy(Blocks.OAK_WOOD).strength(-1).explosionResistance(-1)));
-    public static final RegistryObject<Block> DIGITAL_WOOD_MOUNTAIN = BLOCKS.register("digital_wood_mountain", () -> new Block(Block.Properties.copy(Blocks.JUNGLE_WOOD)));
-    public static final RegistryObject<Block> DIGITAL_LEAF_MOUNTAIN = BLOCKS.register("digital_leaf_mountain", () -> new LeavesBlock(Block.Properties.copy(Blocks.JUNGLE_LEAVES)));
+    public static final Block COMPUTER_SCREEN_CONNECTOR = new SuperComputerSideScreenConnector(QuickCopy(Blocks.IRON_BARS));//BLOCKS.register("computer_screen_connector", () -> new SuperComputerSideScreenConnector(BlockBehaviour.Properties.copy(Blocks.IRON_BARS)));
+    public static final Block CHALCOPYRITE_ORE = new OreBlock(QuickCopy(Blocks.IRON_ORE));//BLOCKS.register("chalcopyrite_ore", () -> new Block(Block.Properties.copy(Blocks.IRON_ORE)));
+    public static final Block COVELLITE_ORE = new OreBlock(QuickCopy(Blocks.IRON_ORE));
+    public static final Block CHALCOCITE_ORE = new OreBlock(QuickCopy(Blocks.IRON_ORE));
+    public static final Block COMPUTER_FRAME = new Block(QuickCopy(Blocks.IRON_BLOCK));
+    public static final Block CENTRAL_CONTROL_UNIT = new ComputerCentralControlUnit(QuickCopy(Blocks.IRON_BLOCK));
+    public static final Block COMPUTER_SCREEN = new Block(FabricBlockSettings.of(Material.GLASS).strength(1, Blocks.GLASS.getBlastResistance()).sounds(BlockSoundGroup.GLASS));
+    public static final Block COMPUTER_SCREEN_FRAME = new Block(QuickCopy(Blocks.IRON_BLOCK));
+    public static final Block COMPUTER_KEYBOARD = new ComputerKeyboard();
+    public static final Block CHIPLET_BASIC_BLOCK = new Block(QuickCopy(Blocks.IRON_BLOCK));
+    public static final Block CHIPLET_ADVANCED_BLOCK = new ChipletAdvancedBlock(QuickCopy(Blocks.IRON_BLOCK));
+    public static final Block CHIPLET_FRANZ_BLOCK = new FranzChiplet(QuickCopy(Blocks.IRON_BLOCK));
+    public static final Block COMPUTER_COOLING_BLOCK = new CoolingBlock(QuickCopy(Blocks.IRON_BLOCK));
+    public static final Block COMPUTER_LIQUID_CIRCULATOR = new Block(QuickCopy(Blocks.IRON_BLOCK));
+    public static final Block COMPUTER_TOWER_CONTROL_PANEL = new ControlPanel();
+    public static final Block COFFINITE_ORE = new OreBlock(QuickCopy(Blocks.IRON_ORE));
+    public static final Block CARNOTITE_ORE = new OreBlock(QuickCopy(Blocks.DIAMOND_ORE));
+    public static final Block DATA_TRANSFER_INTERFACE = new DataTransferInterface();
+    public static final Block DIGITAL_SEA_PYLON = new SeaPylon();
+    public static final Block DIGITAL_GRASS = new Block(QuickCopy(Blocks.GRASS_BLOCK).allowsSpawning((state, world, pos, type) -> true).strength(-1,-1));
+    public static final Block DIGITAL_DIRT = new Block(QuickCopy(Blocks.DIRT).strength(-1,-1));
+    public static final Block DIGITAL_ROCK = new Block(QuickCopy(Blocks.STONE).strength(-1,-1));
+    public static final Block DIGITAL_WOOD_FOREST = new Block(QuickCopy(Blocks.OAK_WOOD).strength(-1,-1));
+    public static final Block DIGITAL_WOOD_MOUNTAIN = new Block(QuickCopy(Blocks.JUNGLE_WOOD));
+    public static final Block DIGITAL_LEAF_MOUNTAIN = new LeavesBlock(QuickCopy(Blocks.JUNGLE_LEAVES));
 
-
+/*
     public static void registerTestBlocks()
     {
         if(!FMLEnvironment.production)
@@ -93,6 +117,8 @@ public final class ModBlocks {
         }, Block.Properties.copy(Blocks.JUNGLE_SAPLING)));
         }
     }
+    */
+    /*
     public static final RegistryObject<Block> DIGITAL_ICE = BLOCKS.register("digital_ice", () -> new IceBlock(Block.Properties.copy(Blocks.ICE).strength(-1).explosionResistance(-1)));
     public static final RegistryObject<Block> DIGITAL_SAND = BLOCKS.register("digital_sand", () -> new Block(Block.Properties.of(Material.SAND)));
     public static final RegistryObject<Block> DIGITAL_DARKNESS = BLOCKS.register("digital_darkness", () -> new Block(Block.Properties.of(Material.EGG)));
