@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 public final class CoreOfLyoko implements BlockEntityRenderer<LyokoCoreBE> {
 
     private final BlockEntityRendererProvider.Context context;
-    private float x, y, z;
+    private static float y;
     private static final BakedModel lyokoCore;
 
     static
@@ -49,7 +49,7 @@ public final class CoreOfLyoko implements BlockEntityRenderer<LyokoCoreBE> {
         pPoseStack.translate(0.5,0.5,0.5);
         //this.context.getBlockRenderDispatcher().getModelRenderer().tesselateWithAO(pBlockEntity.getLevel(), lyokoCore, Blocks.AIR.defaultBlockState(), pBlockEntity.getBlockPos(), pPoseStack, pBufferSource.getBuffer(RenderType.translucent()), false,
           //      pBlockEntity.getLevel().random, new Random().nextLong(), 0);
-        pPoseStack.mulPose(new Quaternion(0,y+=3,0,true));
+        pPoseStack.mulPose(new Quaternion(0,y+=5,0,true));
         pPoseStack.translate(-0.5,-0.5,-0.5);
         this.context.getBlockRenderDispatcher().getModelRenderer().tesselateWithoutAO(pBlockEntity.getLevel(), lyokoCore, Blocks.AIR.defaultBlockState(), pBlockEntity.getBlockPos(), pPoseStack, pBufferSource.getBuffer(RenderType.translucent()), false,
                 pBlockEntity.getLevel().random, 0, 0);
