@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
-public final class HologramProjectorBlock extends BaseEntityBlock{
+public final class HologramProjectorBlock extends BaseEntityBlock {
     public static @NotNull BooleanProperty VALID = BooleanProperty.create("valid");
 
     public HologramProjectorBlock() {
@@ -44,7 +45,7 @@ public final class HologramProjectorBlock extends BaseEntityBlock{
     @org.jetbrains.annotations.Nullable
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return null;//ModTileEntities.HOLOGRAM_TILE_ENTITY.get().create(pos, state);
+        return ModTileEntities.HOLOGRAM_TILE_ENTITY.get().create(pos, state);
     }
 
 

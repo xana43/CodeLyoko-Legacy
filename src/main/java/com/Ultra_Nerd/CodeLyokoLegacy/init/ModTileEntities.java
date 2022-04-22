@@ -27,11 +27,11 @@ public final class ModTileEntities {
     public static final RegistryObject<BlockEntityType<TowerInterfaceTileEntity>> TOWER_INTERFACE_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("tower_interface_tile_entity", () -> BlockEntityType.Builder.of(TowerInterfaceTileEntity::new,
                     ModBlocks.TOWER_INTERFACE.get()).build(null));
-    /*
+
     public static final RegistryObject<BlockEntityType<HologramProjectorTileEntity>> HOLOGRAM_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("hologram_tile_entity", () -> BlockEntityType.Builder.of(HologramProjectorTileEntity::new,
                     ModBlocks.HOLOPROJECTOR.get()).build(null));
-                    */
+
     //public static final RegistryObject<BlockEntityType<QuantumChipletTileEntity>> QUANTUM_CHIPLET_TILE_ENTITY =
       //      TILE_ENTITY_TYPES.register("quantum_chiplet_tile_entity", () -> BlockEntityType.Builder.of(QuantumChipletTileEntity::new,
         //            ModBlocks.CHIPLET_FRANZ_BLOCK.get()).build(null));

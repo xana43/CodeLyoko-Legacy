@@ -1,17 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
 
 
 public final class HologramProjectorTileEntity extends BlockEntity implements MasterEntity //implements BlockEntityTicker<HologramProjectorTileEntity>//, INamedContainerProvider
 {
-    public HologramProjectorTileEntity(@NotNull BlockEntityType<?> p_155228_, @NotNull BlockPos p_155229_, @NotNull BlockState p_155230_) {
-        super(p_155228_, p_155229_, p_155230_);
+
+    public HologramProjectorTileEntity(final BlockPos pWorldPosition, final BlockState pBlockState) {
+        super(ModTileEntities.HOLOGRAM_TILE_ENTITY.get(), pWorldPosition, pBlockState);
     }
 
     @Override
