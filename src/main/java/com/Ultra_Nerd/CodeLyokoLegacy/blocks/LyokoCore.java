@@ -21,15 +21,14 @@ public final class LyokoCore extends BlockWithEntity {
         return BlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 
+
+
     @Override
     public boolean canMobSpawnInside() {
         return false;
     }
 
-    @Override
-    public float getAmbientOcclusionLightLevel(final BlockState state, final BlockView world, final BlockPos pos) {
-        return Float.MAX_VALUE;
-    }
+
 
     /*
     @Override

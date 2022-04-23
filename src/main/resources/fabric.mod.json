@@ -22,7 +22,7 @@
       "com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain"
     ],
     "client":[
-    "com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoClient"
+        "com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoClient"
     ]
   },
   "mixins": [
@@ -37,6 +37,6 @@
     "geckolib3":">=3.0.38"
   },
   "suggests": {
-    "another-mod": "*"
+    "phosphor":">=0.8.1"
   }
 }

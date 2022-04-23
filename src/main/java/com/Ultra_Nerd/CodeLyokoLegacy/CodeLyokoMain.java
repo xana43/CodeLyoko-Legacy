@@ -4,6 +4,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.mojang.logging.LogUtils;
+import dev.monarkhes.myron.api.Myron;
+import dev.monarkhes.myron.impl.client.model.MyronBakedModel;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -25,7 +27,7 @@ import software.bernie.geckolib3.GeckoLib;
 
 
 public record CodeLyokoMain() implements ModInitializer {
-    private static final Logger LOG = LogUtils.getLogger();
+    public static final Logger LOG = LogUtils.getLogger();
     public static final String MOD_ID = "cm";
     public static final ItemGroup LYOKO_ITEM = FabricItemGroupBuilder.build(new Identifier(MOD_ID,"lyoko_items"),() -> new ItemStack(ModItems.BIT));
     public static final ItemGroup LYOKO_BLOCKS = FabricItemGroupBuilder.build(new Identifier(MOD_ID,"lyoko_blocks"), () -> new ItemStack(ModBlocks.TOWER_INTERFACE));
@@ -40,11 +42,12 @@ public record CodeLyokoMain() implements ModInitializer {
     @Override
     public void onInitialize() {
         GeckoLib.initialize();
+
         //Registration
         ModBlocks.BLOCK_MAP.forEach((s, block) -> {
 
             Registry.register(Registry.BLOCK,new Identifier(MOD_ID,s),block);
-            LOG.info(String.valueOf(block));
+            //LOG.info(String.valueOf(block));
             if(block != ModBlocks.LYOKO_CORE && block != ModBlocks.DIGITAL_OCEAN_BLOCK && block != ModBlocks.DIGITAL_LAVA_BLOCK) {
                 Registry.register(Registry.ITEM, new Identifier(MOD_ID, s), new BlockItem(block, new FabricItemSettings().group(LYOKO_BLOCKS)));
             }

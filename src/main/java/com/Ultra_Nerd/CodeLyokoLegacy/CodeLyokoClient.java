@@ -16,7 +16,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         //Renderers
-        BlockEntityRendererRegistry.register(ModTileEntities.LYOKO_CORE, context -> new CoreOfLyoko<>());
+
+        BlockEntityRendererRegistry.register(ModTileEntities.LYOKO_CORE, context -> new CoreOfLyoko());
         EntityRendererRegistry.register(ModEntities.BLOK, RendBlok::new);
 
     }
