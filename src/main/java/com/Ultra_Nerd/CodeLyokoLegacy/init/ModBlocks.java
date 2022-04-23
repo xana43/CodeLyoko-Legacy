@@ -1,6 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.DigitalLavaBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.DigitalSeaBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.electroplate.ElectroplatingMachine;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.ElectricFluorideInfuser;
@@ -11,9 +13,6 @@ import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.sound.BlockSoundGroup;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public final class ModBlocks {
 
@@ -149,7 +148,8 @@ public final class ModBlocks {
     public static final RegistryObject<Block> VOLCANO_GROUND = BLOCKS.register("volcano_ground", () -> new Block(Block.Properties.copyOf(Blocks.STONE)));
 
    */
-
+    public static final Block DIGITAL_OCEAN_BLOCK = new DigitalSeaBlock();
+    public static final Block DIGITAL_LAVA_BLOCK = new DigitalLavaBlock();
     public static final ImmutableMap<String,Block> BLOCK_MAP = ImmutableMap.<String,Block>builder()
             .put("architecture_work_station",ARCHITECTURE_WORK_STATION)
             .put("anti_marabunta",ANTI_MARABUNTA)
@@ -202,6 +202,9 @@ public final class ModBlocks {
             .put("holoprojector",HOLOPROJECTOR)
             .put("tower_interface",TOWER_INTERFACE)
             .put("lyoko_core",LYOKO_CORE)
+            //fluidblocks
+            .put("digital_ocean",DIGITAL_OCEAN_BLOCK)
+            .put("digital_lava",DIGITAL_LAVA_BLOCK)
             .build();
 
 }

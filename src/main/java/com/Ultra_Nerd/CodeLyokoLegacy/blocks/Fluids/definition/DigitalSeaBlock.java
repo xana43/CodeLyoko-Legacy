@@ -1,18 +1,41 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
+package com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.DamageSources.LyokoDamage;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.EntityDamageSource;
+import net.minecraft.entity.damage.ProjectileDamageSource;
 import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.predicate.entity.DamageSourcePredicate;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 
 public final class DigitalSeaBlock extends FluidBlock {
 
 
-    public DigitalSeaBlock(final FlowableFluid fluid) {
-        super(fluid, FabricBlockSettings.copy(Blocks.WATER));
+    public DigitalSeaBlock() {
+        super(ModFluids.STILL_DIGITAL_OCEAN, FabricBlockSettings.copy(Blocks.WATER));
     }
-/*
+
+    @Override
+    public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
+        super.onEntityCollision(state, world, pos, entity);
+        if(!(entity instanceof EntitySkid))
+        {
+            entity.damage(new LyokoDamage(this.getTranslationKey()).setBypassesArmor().setNeutral(),Float.MAX_VALUE);
+        }
+    }
+
+
+
+    /*
     @Override
     public void entityInside(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Entity entityIn) {
         if (!(entityIn instanceof MantaEntity) && !(entityIn instanceof EntitySkid) && !(entityIn.getVehicle() instanceof EntitySkid)) {

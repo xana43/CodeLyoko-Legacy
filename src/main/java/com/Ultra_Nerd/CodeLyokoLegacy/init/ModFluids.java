@@ -1,6 +1,32 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.DigitalLAVA;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.DigitalOcean;
+import com.google.common.collect.ImmutableMap;
+import net.minecraft.block.BlockState;
+import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+
 public final class ModFluids {
+
+//fluid definition
+    public static final FlowableFluid STILL_DIGITAL_OCEAN = new DigitalOcean.Still();
+    public static final FlowableFluid FLOWING_DIGITAL_OCEAN = new DigitalOcean.Flowing();
+    public static final FlowableFluid STILL_DIGITAL_LAVA = new DigitalLAVA.Still();
+    public static final FlowableFluid FLOWING_DIGITAL_LAVA = new DigitalLAVA.Flowing();
+    public static final ImmutableMap<String, Fluid> FLUID_IMMUTABLE_MAP = ImmutableMap.<String, Fluid>builder()
+            .put("digital_ocean", STILL_DIGITAL_OCEAN)
+            .put("digital_ocean_flowing",FLOWING_DIGITAL_OCEAN)
+            .put("digital_lava",STILL_DIGITAL_LAVA)
+            .put("digital_lava_flowing",FLOWING_DIGITAL_LAVA)
+            .build();
+
 
 /*
     //for fluids
