@@ -40,6 +40,7 @@ public record CodeLyokoMain() implements ModInitializer {
     @Override
     public void onInitialize() {
         GeckoLib.initialize();
+        //Registration
         ModBlocks.BLOCK_MAP.forEach((s, block) -> {
 
             Registry.register(Registry.BLOCK,new Identifier(MOD_ID,s),block);
@@ -53,13 +54,16 @@ public record CodeLyokoMain() implements ModInitializer {
         ModSounds.SOUNDS.forEach(soundEvent -> Registry.register(Registry.SOUND_EVENT,soundEvent.getId(),soundEvent));
         ModBiome.BIOME_MAP.forEach((s, biome) -> Registry.register(BuiltinRegistries.BIOME,CodeLyokoPrefix(s),biome));
         ModEntities.ENTITY_TYPE_HASH_MAP.forEach((s, entityType) -> Registry.register(Registry.ENTITY_TYPE,CodeLyokoPrefix(s),entityType));
-
         ModFluids.FLUID_IMMUTABLE_MAP.forEach((s, fluid) ->
                 Registry.register(Registry.FLUID,CodeLyokoPrefix(s),fluid));
+        //Attribute Registration
+        FabricDefaultAttributeRegistry.register(ModEntities.BLOK, EntityBlok.createMonsterAttributes());
+        //Custom Sprites
+        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
+            registry.register(CodeLyokoPrefix("block/digital_flowing"));
+            registry.register(CodeLyokoPrefix("block/digital_flowing_lava"));
+        });
 
-
-        RegisterAttributes();
-        RegisterCustomSprites();
         FluidRenderRegistry();
     }
 
@@ -74,17 +78,7 @@ public record CodeLyokoMain() implements ModInitializer {
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(),ModFluids.FLOWING_DIGITAL_LAVA,ModFluids.STILL_DIGITAL_LAVA);
 
     }
-    private static void RegisterCustomSprites()
-    {
-        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
-            registry.register(CodeLyokoPrefix("block/digital_flowing"));
-            registry.register(CodeLyokoPrefix("block/digital_flowing_lava"));
-        });
-    }
-    private static void RegisterAttributes()
-    {
-        FabricDefaultAttributeRegistry.register(ModEntities.BLOK, EntityBlok.createMonsterAttributes());
-    }
+
 
 
 

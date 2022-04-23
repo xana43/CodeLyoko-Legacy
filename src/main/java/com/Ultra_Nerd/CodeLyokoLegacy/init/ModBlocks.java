@@ -8,6 +8,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.electroplate.Electroplating
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.ElectricFluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.FluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.DataTransferInterface;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.TowerGeneric;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.TowerInterface;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -103,9 +104,9 @@ public final class ModBlocks {
 
     public static final Block LYOKO_CORE = new LyokoCore(FabricBlockSettings.copyOf(Blocks.DRAGON_EGG).noCollision().strength(-1,-1));
 
-    /*
-    public static final RegistryObject<Block> MARABUNTA = BLOCKS.register("marabunta", Marabunta::new);
-    public static final RegistryObject<Block> METATYUYAMUNITE_ORE = BLOCKS.register("metatyuyamunite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(3, 10).sound(SoundType.STONE)));
+
+    public static final Block MARABUNTA = new Marabunta();
+    /*public static final RegistryObject<Block> METATYUYAMUNITE_ORE = BLOCKS.register("metatyuyamunite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(3, 10).sound(SoundType.STONE)));
     public static final RegistryObject<Block> METATORBERNITE_ORE = BLOCKS.register("metatorbernite_ore", () -> new OreBlock(Block.Properties.copyOf(METATYUYAMUNITE_ORE.get())));
     public static final RegistryObject<Block> METAAUTUNITE_ORE = BLOCKS.register("metaautunite_ore", () -> new OreBlock(Block.Properties.copyOf(AUTUNITE_ORE.get())));
     public static final RegistryObject<Block> PROJECTOR_FOCUS = BLOCKS.register("projector_focus", ProjectorFocusblock::new);
@@ -202,6 +203,7 @@ public final class ModBlocks {
             .put("holoprojector",HOLOPROJECTOR)
             .put("tower_interface",TOWER_INTERFACE)
             .put("lyoko_core",LYOKO_CORE)
+            .put("marabunta",MARABUNTA)
             //fluidblocks
             .put("digital_ocean",DIGITAL_OCEAN_BLOCK)
             .put("digital_lava",DIGITAL_LAVA_BLOCK)

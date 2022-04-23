@@ -3,18 +3,15 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.DigitalLAVA;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.DigitalOcean;
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.block.BlockState;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
 
 public final class ModFluids {
-
+//TODO: add back to tags .json when they have been registered
+//"cm:still_uranium",
+//"cm:flowing_uranium",
+//"cm:still_liquid_helium",
+//"cm:flowing_liquid_helium"
 //fluid definition
     public static final FlowableFluid STILL_DIGITAL_OCEAN = new DigitalOcean.Still();
     public static final FlowableFluid FLOWING_DIGITAL_OCEAN = new DigitalOcean.Flowing();

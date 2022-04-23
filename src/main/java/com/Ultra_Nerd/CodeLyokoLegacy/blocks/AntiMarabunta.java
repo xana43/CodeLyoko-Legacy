@@ -32,7 +32,7 @@ public final class AntiMarabunta extends Block {
     @Override
     public void randomTick(final BlockState state, final ServerWorld worldIn, final BlockPos pos, final Random rand) {
         super.randomTick(state, worldIn, pos, rand);
-        for (byte i = 0; i < 20; ++i) {
+        for (byte i = 0; i < 30; ++i) {
             BlockPos blockpos = pos.offset(Direction.random(rand),rand.nextInt(3) - 1);
 
             if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isChunkLoaded(blockpos)) {
@@ -42,9 +42,9 @@ public final class AntiMarabunta extends Block {
             //BlockState iblockstate = worldIn.getBlockState(blockpos.above());
             final BlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-            //if (iblockstate1.getBlock() == ModBlocks.MARABUNTA) {
-              //  worldIn.setBlockState(blockpos, ModBlocks.ANTI_MARABUNTA.getDefaultState());
-            //}
+            if (iblockstate1.getBlock() == ModBlocks.MARABUNTA) {
+                worldIn.setBlockState(blockpos, ModBlocks.ANTI_MARABUNTA.getDefaultState());
+            }
 
 
         }

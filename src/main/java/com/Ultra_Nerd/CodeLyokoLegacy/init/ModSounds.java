@@ -23,6 +23,8 @@ public final class ModSounds {
     public static final SoundEvent SECTOR5 = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("sector5"));
     public static final SoundEvent BLOKAMBIENT = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.blok.ambient"));
     public static final SoundEvent BLOKHURT = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.blok.hurt"));
+    public static final SoundEvent GUI = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("gui"));
+    public static final SoundEvent LASERARROW = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("laser"));
     public static final List<SoundEvent> SOUNDS = List.of(
             LAZY_WARRIOR,
             LAZY_FELINE,
@@ -31,8 +33,9 @@ public final class ModSounds {
             SECTOR5,
             BLOKAMBIENT,
             BLOKHURT,
-            LAZY_ARCHER
-
+            LAZY_ARCHER,
+            GUI,
+            LASERARROW
             );
 /*
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, CodeLyokoMain.MOD_ID);

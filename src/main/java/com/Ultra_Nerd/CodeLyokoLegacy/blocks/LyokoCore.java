@@ -5,6 +5,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,6 +19,16 @@ public final class LyokoCore extends BlockWithEntity {
     @Override
     public BlockRenderType getRenderType(final BlockState state) {
         return BlockRenderType.ENTITYBLOCK_ANIMATED;
+    }
+
+    @Override
+    public boolean canMobSpawnInside() {
+        return false;
+    }
+
+    @Override
+    public float getAmbientOcclusionLightLevel(final BlockState state, final BlockView world, final BlockPos pos) {
+        return Float.MAX_VALUE;
     }
 
     /*
