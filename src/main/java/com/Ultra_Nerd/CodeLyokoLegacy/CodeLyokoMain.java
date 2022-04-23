@@ -30,21 +30,14 @@ public record CodeLyokoMain() implements ModInitializer {
         return new Identifier(MOD_ID,name);
     }
 
-    public CodeLyokoMain
-    {
 
-
-        ModTileEntities.registerBlockEntities();
-        ModSounds.createSounds();
-        ModBiome.loadBiomes();
-
-    }
     @Override
     public void onInitialize() {
         GeckoLib.initialize();
         ModBlocks.BLOCK_MAP.forEach((s, block) -> {
-            LOG.info(String.valueOf(block));
+
             Registry.register(Registry.BLOCK,new Identifier(MOD_ID,s),block);
+            LOG.info(String.valueOf(block));
             if(block != ModBlocks.LYOKO_CORE) {
                 Registry.register(Registry.ITEM, new Identifier(MOD_ID, s), new BlockItem(block, new FabricItemSettings().group(LYOKO_BLOCKS)));
             }

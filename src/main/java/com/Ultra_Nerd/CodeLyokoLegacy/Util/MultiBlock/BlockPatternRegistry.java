@@ -1,5 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import net.minecraft.block.pattern.BlockPattern;
+import net.minecraft.block.pattern.BlockPatternBuilder;
+import net.minecraft.block.pattern.CachedBlockPosition;
+import net.minecraft.predicate.block.BlockStatePredicate;
+
 public final class BlockPatternRegistry {
 
 
@@ -41,8 +47,8 @@ public final class BlockPatternRegistry {
          .where('0',BlockInWorld.hasState(BlockStatePredicate.ANY))
          .where('1',BlockInWorld.hasState(state -> state.getBlock() == ModBlocks.COMPUTER_SCREEN.get()))
          .where('2',BlockInWorld.hasState(state -> state.getBlock() == ModBlocks.COMPUTER_SCREEN_CONNECTOR.get())).build();
-         */
 
+*/
 }
 
 

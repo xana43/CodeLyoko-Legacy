@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LyokoCoreBE;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.TowerInterfaceTileEntity;
+import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
 
@@ -10,13 +11,10 @@ import java.util.Map;
 
 public final class ModTileEntities {
 
-    public static final Map<String, BlockEntityType<?>> BLOCKENTITY_MAP = new HashMap<>();
 
 
-    public static void registerBlockEntities()
-    {
-       BLOCKENTITY_MAP.put("lyoko_core", LYOKO_CORE);
-    }
+
+
 /*
     public static final RegistryObject<BlockEntityType<InfusingChamberTileEntity>> INFUSING_CHAMBER_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("infusing_chamber_tile_entity",
@@ -30,6 +28,11 @@ public final class ModTileEntities {
 
 */
     public static final BlockEntityType<LyokoCoreBE> LYOKO_CORE = FabricBlockEntityTypeBuilder.create(LyokoCoreBE::new,ModBlocks.LYOKO_CORE).build();
+    public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String,BlockEntityType<?>>builder()
+
+            .put("lyoko_core",LYOKO_CORE)
+
+            .build();
   //  public static final RegistryObject<BlockEntityType<TowerInterfaceTileEntity>> TOWER_INTERFACE_TILE_ENTITY =
     //        TILE_ENTITY_TYPES.register("tower_interface_tile_entity", () -> BlockEntityType.Builder.of(TowerInterfaceTileEntity::new,
       //              ModBlocks.TOWER_INTERFACE.get()).build(null));

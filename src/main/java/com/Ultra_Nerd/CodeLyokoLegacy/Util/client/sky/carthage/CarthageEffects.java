@@ -1,6 +1,22 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage;
 
-public final class CarthageEffects /*extends DimensionSpecialEffects*/ {
+import net.minecraft.client.render.DimensionEffects;
+import net.minecraft.util.math.Vec3d;
+
+public final class CarthageEffects extends DimensionEffects/*extends DimensionSpecialEffects*/ {
+    public CarthageEffects() {
+        super(Float.NaN, false, SkyType.NONE, true, false);
+    }
+
+    @Override
+    public Vec3d adjustFogColor(final Vec3d color, final float sunHeight) {
+        return null;
+    }
+
+    @Override
+    public boolean useThickFog(final int camX, final int camY) {
+        return false;
+    }
     /*
 
     public CarthageEffects() {

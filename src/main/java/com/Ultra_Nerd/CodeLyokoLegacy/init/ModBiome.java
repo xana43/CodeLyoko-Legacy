@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
@@ -13,11 +14,8 @@ public final class ModBiome {
 
 
 
-    public static final Map<String,Biome> BIOME_MAP = new HashMap<>();
-    public static void loadBiomes()
-    {
-        BIOME_MAP.put("forest_sector",FOREST_SECTOR);
-    }
+
+
     /*Forest Sector*/
        // private static final SurfaceBuilder FOREST_CARVER = new SurfaceBuilder(null,ModBlocks.BORNITE_ORE.getDefaultState(), 0,0,null);
         public static final Biome FOREST_SECTOR  = buildForest();
@@ -37,7 +35,12 @@ public final class ModBiome {
                     .temperature(3)
                     .build();
         }
+    public static final ImmutableMap<String,Biome> BIOME_MAP = ImmutableMap.<String, Biome>builder()
+            .put("forest_sector",FOREST_SECTOR)
 
+
+
+            .build();
 /*
     //Registry keys
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, CodeLyokoMain.MOD_ID);

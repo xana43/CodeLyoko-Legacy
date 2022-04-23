@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
@@ -12,7 +13,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import org.jetbrains.annotations.Nullable;
 
-public final class TowerInterface extends Block implements BlockEntityProvider {
+public final class TowerInterface extends BlockWithEntity {
 
     public static final DirectionProperty DIRINTERFACE = HorizontalFacingBlock.FACING;
     private static final VoxelShape SHAPE_N = Block.createCuboidShape(1, 1, 9, 15, 15, 9.1);
@@ -47,8 +48,14 @@ public final class TowerInterface extends Block implements BlockEntityProvider {
     }
 
     @Override
-    public StateManager<Block, BlockState> getStateManager() {
-        return super.getStateManager();
+    public BlockRenderType getRenderType(final BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Nullable
+    @Override
+    public BlockState getPlacementState(final ItemPlacementContext ctx) {
+        return this.getDefaultState().with(DIRINTERFACE,ctx.getPlayerFacing().getOpposite());
     }
 
     @Nullable

@@ -13,6 +13,8 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.MusicDiscItem;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Rarity;
 
@@ -223,5 +225,14 @@ public final class ModItems {
             .put("jeremy_chestplate",JEREMY_CHESTPLATE)
             .put("jeremy_leggings",JEREMY_LEGGINGS)
             .put("jeremy_boots",JEREMY_BOOTS)
+            .put("lyokodisc",new LyokoDisc())
            .build();
+
+    private static final class LyokoDisc extends MusicDiscItem
+    {
+
+        public LyokoDisc() {
+            super(0, new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("lyoko")), new Settings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
+        }
+    }
 }
