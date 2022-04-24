@@ -2,18 +2,19 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoArmorMaterial;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoTiers;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.ComputerItem;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.LaptopClass;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.PropertyLessItem;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.soldering_iron;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.*;
 import com.google.common.collect.ImmutableMap;
 import com.sun.jna.Memory;
 import com.sun.jna.Pointer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.MusicDiscItem;
+import net.minecraft.item.*;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Rarity;
@@ -47,10 +48,10 @@ public final class ModItems {
     //public static final RegistryObject<Item> HOVERBOARD_SPAWN_ITEM = ITEMS.register("hoverboard_spawn_item", () -> new HoverBoardItem(new Item.Properties().setNoRepair().stacksTo(1).tab(CodeLyokoMain.LYOKO_ITEMS)));
     //public static final RegistryObject<Item> OVERBOARD_SPAWN_ITEM = ITEMS.register("overboard_spawn_item",() -> new OverBoardItem(new Item.Properties().setNoRepair().tab(CodeLyokoMain.LYOKO_ITEMS).stacksTo(1)));
      //for items
-    public static final Item APU_PACKAGE_ARM = new ComputerItem(new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM));
+    public static final Item APU_PACKAGE_ARM = new ComputerItem(BaseSettings);
     //public static final RegistryObject<Item> APU_PACKAGE_ARM = ITEMS.register("apu_package_arm", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final Item APU_PACKAGE_x86 = new ComputerItem(new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM).rarity(Rarity.UNCOMMON));//ITEMS.register("", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
-    public static final Item APU_PACKAGE_ASIC = new ComputerItem(new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM).rarity(Rarity.RARE));//ITEMS.register("apu_package_asic", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.RARE)));
+    public static final Item APU_PACKAGE_x86 = new ComputerItem(BaseSettings.rarity(Rarity.UNCOMMON));//ITEMS.register("", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
+    public static final Item APU_PACKAGE_ASIC = new ComputerItem(BaseSettings.rarity(Rarity.RARE));//ITEMS.register("apu_package_asic", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.RARE)));
     public static final Item APU_PACKAGE_RISC = new ComputerItem(BaseSettings.rarity(Rarity.EPIC));//ITEMS.register("apu_package_risc", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.EPIC)));
     public static final Item APU_DIE_ARM = new ComputerItem(BaseSettings);//ITEMS.register("apu_die_arm", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final Item APU_DIE_x86 = new ComputerItem(BaseSettings.rarity(Rarity.COMMON));//ITEMS.register("apu_die_x86", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
@@ -153,16 +154,17 @@ public final class ModItems {
     public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final RegistryObject<Item> TRUSTTY_SCREWDRIVER = ITEMS.register("trusty_screwdriver", () -> new TrustyScrewDriverItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final RegistryObject<Item> SOLDERING_IRON = ITEMS.register("soldering_iron", () -> new soldering_iron(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> JEREMY_LAPTOP = ITEMS.register("jeremys_laptop", () -> new LaptopClass(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+*/    public static final Item JEREMY_LAPTOP = new LaptopClass(new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM));
     //for weapons
-    public static final RegistryObject<SwordItem> DIGITAL_SABER = ITEMS.register("digital_saber", () -> new SaberKatana(LyokoTiers.LyokoSamurai, 25, -0.9f, new Item.Properties().tab(CodeLyokoMain.LYOKO_WEAPONS)));
-    public static final RegistryObject<BowItem> LASER_ARROWSHOOTER = ITEMS.register("laser_arrowshooter", () -> new LaserArrowShooter(new Item.Properties().tab(CodeLyokoMain.LYOKO_WEAPONS).durability(40).setNoRepair()));
-    public static final RegistryObject<SwordItem> QUANTUM_SABER = ITEMS.register("quantum_saber", () -> new SwordItem(LyokoTiers.LyokoTool, 15, 2, new Item.Properties().tab(CodeLyokoMain.LYOKO_WEAPONS).durability(50).rarity(Rarity.EPIC)));
-    public static final RegistryObject<TridentItem> YUMI_TRADITONAL_FANS = ITEMS.register("yumi_traditional_fans", () -> new YumiFans(new Item.Properties().tab(CodeLyokoMain.LYOKO_WEAPONS).durability(20).setNoRepair()));
-    public static final RegistryObject<SwordItem> ZWEIHANDER = ITEMS.register("zweihander", () -> new ZweihanderWeapon(LyokoTiers.LyokoWarrior, 60, -3.9f, new Item.Properties().tab(CodeLyokoMain.LYOKO_WEAPONS)));
-    public static final RegistryObject<BowItem> FORCE_FIELD_EMITTER = ITEMS.register("force_field_emitter", () -> new ForceFieldEmitter(new Item.Properties().tab(CodeLyokoMain.LYOKO_WEAPONS).rarity(Rarity.EPIC)));
-    public static final RegistryObject<BowItem> ARCHER_BOW = ITEMS.register("archer_bow", () -> new ArcherClassBow(new Item.Properties().tab(CodeLyokoMain.LYOKO_WEAPONS).durability(40)));
-*/    //for armor
+    private static final FabricItemSettings WEAPONS = new FabricItemSettings().group(CodeLyokoMain.LYOKO_WEAPONS);
+    public static final SwordItem DIGITAL_SABER = new SaberKatana(LyokoTiers.LyokoSamurai, 25, -0.9f, WEAPONS);
+    public static final BowItem LASER_ARROWSHOOTER = new LaserArrowShooter(WEAPONS);
+    public static final SwordItem QUANTUM_SABER = new SwordItem(LyokoTiers.LyokoTool, 15, 2, WEAPONS.rarity(Rarity.EPIC));
+    public static final TridentItem YUMI_TRADITONAL_FANS = new YumiFans(WEAPONS);
+    public static final SwordItem ZWEIHANDER = new ZweihanderWeapon(LyokoTiers.LyokoWarrior, 60, -3.9f, WEAPONS);
+    public static final BowItem FORCE_FIELD_EMITTER = new ForceFieldEmitter(WEAPONS.rarity(Rarity.EPIC));
+    public static final BowItem ARCHER_BOW = new ArcherClassBow(WEAPONS);
+  //for armor
     private static final FabricItemSettings ArmorGroup = new FabricItemSettings().group(CodeLyokoMain.LYOKO_ARMOR);
     public static final ArmorItem AELITA_CHESTPLATE = new AelitaArmorElytra(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.CHEST, ArmorGroup);
     public static final ArmorItem AELITA_LEGGINGS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.LEGS, ArmorGroup);
@@ -202,6 +204,16 @@ public final class ModItems {
            .put("apu_die_x86",APU_DIE_x86)
            .put("apu_die_asic",APU_DIE_ASIC)
            .put("bit",BIT)
+            //tools
+            .put("jeremys_laptop",JEREMY_LAPTOP)
+            //weapons
+            .put("digital_saber",DIGITAL_SABER)
+            .put("laser_arrowshooter",LASER_ARROWSHOOTER)
+            .put("quantum_saber",QUANTUM_SABER)
+            .put("yumi_traditional_fans",YUMI_TRADITONAL_FANS)
+            .put("zweihander",ZWEIHANDER)
+            .put("force_field_emitter",FORCE_FIELD_EMITTER)
+            .put("archer_bow",ARCHER_BOW)
            //armor
            .put("aelita_chestplate",AELITA_CHESTPLATE)
            .put("aelita_leggings",AELITA_LEGGINGS)

@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -45,7 +46,7 @@ public final class EntityBlok extends SkeletonEntity implements IAnimatable, Ran
 
     @Override
     public void attack(final LivingEntity target, final float pullProgress) {
-        ArrowEntity abstractarrow = (ArrowEntity) this.createArrowProjectile(ItemStack.EMPTY,50);
+        ArrowEntity abstractarrow = new EntityLaser(this.world,this);
 
         double d0 = target.getX() - this.getX();
         double d1 = target.getBodyY(0.3333333333333333D) - abstractarrow.getY();
@@ -59,7 +60,7 @@ public final class EntityBlok extends SkeletonEntity implements IAnimatable, Ran
 
 
     private final AnimationFactory manager = new AnimationFactory(this);
-    private final AnimationController controller = new AnimationController(this, "blokcontroller", 20, this::pred);
+    private final AnimationController<EntityBlok> controller = new AnimationController<>(this, "blokcontroller", 20, this::pred);
 
 
 

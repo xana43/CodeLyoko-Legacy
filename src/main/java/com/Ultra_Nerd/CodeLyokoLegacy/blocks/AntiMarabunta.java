@@ -33,7 +33,7 @@ public final class AntiMarabunta extends Block {
     public void randomTick(final BlockState state, final ServerWorld worldIn, final BlockPos pos, final Random rand) {
         super.randomTick(state, worldIn, pos, rand);
         for (byte i = 0; i < 30; ++i) {
-            BlockPos blockpos = pos.offset(Direction.random(rand),rand.nextInt(3) - 1);
+            final BlockPos blockpos = pos.offset(Direction.random(rand),rand.nextInt(3) - 1);
 
             if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isChunkLoaded(blockpos)) {
                 return;
@@ -50,7 +50,7 @@ public final class AntiMarabunta extends Block {
         }
 
         for (byte i = 0; i < 1; ++i) {
-            BlockPos blockpos = pos.offset(Direction.random(rand),rand.nextInt(3) - 1);
+            final BlockPos blockpos = pos.offset(Direction.random(rand),rand.nextInt(3) - 1);
 
             if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isChunkLoaded(blockpos)) {
                 return;
@@ -74,17 +74,7 @@ public final class AntiMarabunta extends Block {
     }
 
     @Override
-    protected ImmutableMap<BlockState, VoxelShape> getShapesForStates(final Function<BlockState, VoxelShape> stateToShape) {
-        return  ImmutableMap.<BlockState, VoxelShape>builder().put(this.getDefaultState(),SHAPE).build();
+    public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
+        return SHAPE;
     }
-
-
-
-
-
-
-
-
-
-
 }

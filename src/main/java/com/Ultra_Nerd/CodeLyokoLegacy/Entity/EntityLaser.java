@@ -1,63 +1,70 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
+import net.minecraft.client.render.entity.ArrowEntityRenderer;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
-public final class EntityLaser extends ArrowEntity {
+
+public final class EntityLaser extends ArrowEntity
+{
+    @Override
+    protected float getDragInWater() {
+        return 0;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        this.setVelocity(this.getVelocity());
+    }
+
+    public EntityLaser(final World world, final double x, final double y, final double z) {
+        super(world, x, y, z);
+        this.shake = 0;
+
+    }
+
+
+
     public EntityLaser(final EntityType<? extends ArrowEntity> entityType, final World world) {
         super(entityType, world);
-    }
-/*
-    public EntityLaser(@NotNull EntityType<? extends Arrow> Laser, @NotNull Level world) {
-        super(Laser, world);
-        // TODO Auto-generated constructor stub
+        this.shake = 0;
     }
 
-    public EntityLaser(@NotNull Level worldIn, @NotNull LivingEntity throwerIn) {
-        super(worldIn, throwerIn);
-        // TODO Auto-generated constructor stub
-    }
+     public EntityLaser(final World world,final LivingEntity owner)
+     {
+         super(world,owner);
+         this.shake = 0;
+     }
 
-    public EntityLaser(@NotNull Level worldIn, double x, double y, double z) {
-        super(worldIn, x, y, z);
-        // TODO Auto-generated constructor stub
-    }
-
-    public EntityLaser(@NotNull Level world) {
-        this(ModEntities.LASER.get(), world);
-    }
-
-    @Nonnull
-    @Override
-    public Packet<?> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
 
 
     @Override
-    public boolean isNoGravity() {
-        return true;
+    protected void onEntityHit(final EntityHitResult entityHitResult) {
+        super.onEntityHit(entityHitResult);
+        entityHitResult.getEntity().damage(DamageSource.arrow(this,this.getOwner()),0);
+
     }
 
     @Override
-    public void setBaseDamage(double damageIn) {
-        // TODO Auto-generated method stub
-        super.setBaseDamage(damageIn);
+    protected void onBlockHit(final BlockHitResult blockHitResult) {
+        super.onBlockHit(blockHitResult);
+        if(!world.isClient) {
+            this.kill();
+        }
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult live) {
-        super.onHitEntity(live);
-        this.remove(RemovalReason.DISCARDED);
+    protected void onCollision(final HitResult hitResult) {
+        super.onCollision(hitResult);
+
+
     }
-
-    @Override
-    protected @NotNull ItemStack getPickupItem() {
-        return ItemStack.EMPTY;
-    }
-
- */
-
-
 }

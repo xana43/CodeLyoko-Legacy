@@ -33,9 +33,12 @@ public final class CoreOfLyoko implements BlockEntityRenderer<LyokoCoreBE> {
     private static float  y;
 
 
-    private static final BakedModel lyokoCore = Myron.getModel(CodeLyokoMain.CodeLyokoPrefix("models/block/core_of_lyoko"));
+    private static final BakedModel lyokoCore;
 
-
+    static
+    {
+        lyokoCore = Myron.getModel(CodeLyokoMain.CodeLyokoPrefix("models/block/core_of_lyoko"));
+    }
 
     @Override
     public void render(final LyokoCoreBE entity, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {

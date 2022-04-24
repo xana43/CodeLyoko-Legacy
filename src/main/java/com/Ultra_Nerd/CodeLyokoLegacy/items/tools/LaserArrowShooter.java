@@ -1,7 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.tools;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityLaser;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.BowItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 
 public final class LaserArrowShooter extends BowItem {
@@ -15,18 +31,68 @@ public final class LaserArrowShooter extends BowItem {
 
         // TODO Auto-generated constructor stub
     }
-/*
+
     @Override
-    public void inventoryTick(@NotNull ItemStack pStack, @NotNull Level pLevel, @NotNull Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if(!pStack.isEnchanted())
+    public boolean isDamageable() {
+        return false;
+    }
+
+    @Override
+    public boolean hasGlint(final ItemStack stack) {
+        return false;
+    }
+
+
+
+
+    @Override
+    public void inventoryTick(@NotNull ItemStack pStack, @NotNull World pLevel, @NotNull Entity pEntity, int pSlotId, boolean pIsSelected) {
+        if(!pStack.hasEnchantments())
         {
-            pStack.enchant(Enchantments.INFINITY_ARROWS,Enchantments.INFINITY_ARROWS.getMaxLevel());
+            pStack.addEnchantment(Enchantments.INFINITY,Enchantments.INFINITY.getMaxLevel());
 
 
         }
 
     }
 
+    @Override
+    public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
+        final ItemStack item = user.getStackInHand(hand);
+
+
+/*
+        if (user.getInventory().armor.get(EquipmentSlot.LEGS.getEntitySlotId()).getItem() == ModItems.ODD_LEGGINGS &&
+                playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get()
+                && playerIn.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() == ModItems.ODD_BOOTS.get()) {
+            //worldIn.playSound(null,playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModItems.BIT.get(), SoundCategory.NEUTRAL, 1f, 1f);
+*/
+            if(!world.isClient()) {
+                world.playSound(null, user.getBlockPos(), ModSounds.LASERARROW, SoundCategory.PLAYERS, 1f, 1f);
+
+
+                final EntityLaser las = new EntityLaser(world, user);
+
+                //las.(10);
+                las.setNoGravity(true);
+                las.setPos(user.getX(),user.getEyeY(),user.getZ());
+                las.setVelocity(user,user.getPitch(),user.getYaw(),0, 11.44f, 0);
+                world.spawnEntity(las);
+            }
+            item.decrement(0);
+
+            //item.getItem().damageItem(item,1, playerIn, null);
+            return TypedActionResult.pass(item);
+        //} else {
+        //    return new InteractionResultHolder<>(InteractionResult.FAIL, item);
+        //}
+    }
+
+    @Override
+    public ItemStack finishUsing(final ItemStack stack, final World world, final LivingEntity user) {
+        return null;
+    }
+/*
     @Override
     public int getDefaultTooltipHideFlags(@NotNull final ItemStack stack) {
         return ItemStack.TooltipPart.ENCHANTMENTS.getMask();
@@ -57,34 +123,7 @@ public final class LaserArrowShooter extends BowItem {
     @Nonnull
     @Override
     public InteractionResultHolder<ItemStack> use(@Nonnull Level worldIn, @NotNull Player playerIn, @Nonnull InteractionHand handIn) {
-        final ItemStack item = playerIn.getItemInHand(handIn);
 
-
-
-        if (playerIn.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() == ModItems.ODD_LEGGINGS.get() &&
-                playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get()
-                && playerIn.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() == ModItems.ODD_BOOTS.get()) {
-            //worldIn.playSound(null,playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModItems.BIT.get(), SoundCategory.NEUTRAL, 1f, 1f);
-
-
-            worldIn.playSound(null,playerIn.blockPosition(), ModSounds.LASERARROW.get(), SoundSource.PLAYERS, 1f, 1f);
-
-
-            final EntityLaser las = new EntityLaser(worldIn, 1.0D, 1.0D, 1.0D);
-
-            las.setBaseDamage(10);
-            las.setNoGravity(true);
-            las.setPos(playerIn.getX(), playerIn.getEyeY(), playerIn.getZ());
-            las.shootFromRotation(playerIn, playerIn.getRotationVector().x, playerIn.getRotationVector().y, (float)playerIn.getLookAngle().z, 5f, 0.3f);
-
-            worldIn.addFreshEntity(las);
-
-
-            item.getItem().damageItem(item,1, playerIn, null);
-            return new InteractionResultHolder<>(InteractionResult.PASS, item);
-        } else {
-            return new InteractionResultHolder<>(InteractionResult.FAIL, item);
-        }
     }
 
     @Override

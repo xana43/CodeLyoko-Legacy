@@ -34,9 +34,11 @@
     "fabric": "*",
     "minecraft": "1.18.x",
     "java": ">=17",
-    "geckolib3":">=3.0.38"
+    "geckolib3":">=3.0.38",
+    "myron":">=1.6.3"
   },
   "suggests": {
-    "phosphor":">=0.8.1"
+    "starlight":">=1.0.2",
+    "ferritecore":">=4.2.0"
   }
 }
