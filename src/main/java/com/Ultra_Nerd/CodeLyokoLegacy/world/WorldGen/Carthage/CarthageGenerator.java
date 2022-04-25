@@ -1,29 +1,49 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModWorldFeatures;
+import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Common.CustomGenSettings;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.client.render.chunk.ChunkBuilder;
 import net.minecraft.structure.StructureSet;
+import net.minecraft.tag.TagKey;
+import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntryList;
-import net.minecraft.world.ChunkRegion;
-import net.minecraft.world.HeightLimitView;
-import net.minecraft.world.Heightmap;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.ChunkProvider;
+import net.minecraft.world.chunk.WorldChunk;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.Blender;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
+import net.minecraft.world.gen.densityfunction.DensityFunctions;
+import net.minecraft.world.storage.ChunkDataAccess;
+import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-public final class CarthageGenerator extends ChunkGenerator {
+public final class CarthageGenerator extends ChunkGenerator{
+
+
     public CarthageGenerator(final Registry<StructureSet> registry, final Optional<RegistryEntryList<StructureSet>> optional, final BiomeSource biomeSource) {
         super(registry, optional, biomeSource);
     }
@@ -50,14 +70,90 @@ public final class CarthageGenerator extends ChunkGenerator {
 
     @Override
     public void buildSurface(final ChunkRegion region, final StructureAccessor structures, final Chunk chunk) {
+        BlockState bedrock = ModBlocks.DIGITAL_OCEAN_BLOCK.getDefaultState();
+        BlockState stone = ModBlocks.SECTOR5_STEEL.getDefaultState();
+        BlockState white = ModBlocks.TOWER_WHITE.getDefaultState();
+        BlockState blue = ModBlocks.TOWER_BLUE.getDefaultState();
+        ChunkPos chunkpos = chunk.getPos();
 
+        BlockPos.Mutable pos = new BlockPos.Mutable();
+
+
+        int x;
+        int z;
+
+        for (x = 0; x < 16; x++) {
+            for (z = 0; z < 16; z++) {
+                chunk.setBlockState(pos.set(x, 0, z), bedrock, false);
+            }
+        }
+        for (x = 0; x < 16; x++) {
+            for (z = 0; z < 16; z++) {
+                int realX = (chunkpos.x << 4) + x;
+                int realZ = (chunkpos.z << 4) + z;
+                int height = (int) (Math.sqrt(Math.pow(128, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
+                int innerHeight = (int) (Math.sqrt(Math.pow(126, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
+                createSphere(chunk, stone, pos, x, z, height, innerHeight);
+
+                int heightSpawn = (int) (Math.sqrt(Math.pow(25, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
+                int innerHeightSpawn = (int) (Math.sqrt(Math.pow(23, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
+                createSphere(chunk, stone, pos, x, z, heightSpawn, innerHeightSpawn);
+                for (int h = 0; h < heightSpawn; h++) {
+                    if ((realZ == -1 || realZ == 0 || realZ == 1) && realX > 11) {
+                        chunk.setBlockState(pos.set(realX, h + 128, realZ), Blocks.AIR.getDefaultState(), false);
+                        //chunk.setBlockState(pos.setPos(x, 127 - h, z), Blocks.AIR.getDefaultState(), false);
+                    }
+                }
+
+                double disc = Math.pow(realX, 2) + Math.pow(realZ, 2);
+                if (disc <= Math.pow(23, 2)) {
+                    chunk.setBlockState(pos.set(realX, 127, realZ), blue, false);
+                }
+                if ((realX >= -23 && realX <= -12) || (realX >= 12 && realX <= 23)) {
+                    if (realZ == 0) {
+                        chunk.setBlockState(pos.set(realX, 127, realZ), white, false);
+
+                    } else if (realZ == -1) {
+                        chunk.setBlockState(pos.set(realX, 127, realZ), white, false);
+
+                    } else if (realZ == 1) {
+                        chunk.setBlockState(pos.set(realX, 127, realZ), white, false);
+                    }
+                }
+
+                if (disc <= Math.pow(12, 2)) {
+                    chunk.setBlockState(pos.set(realX, 127, realZ), white, false);
+                }
+                if (disc <= Math.pow(10, 2)) {
+                    chunk.setBlockState(pos.set(realX, 127, realZ), blue, false);
+                }
+                if (disc <= Math.pow(7, 2)) {
+                    chunk.setBlockState(pos.set(realX, 127, realZ), white, false);
+                }
+                if (disc <= Math.pow(4, 2)) {
+                    chunk.setBlockState(pos.set(realX, 127, realZ), blue, false);
+                }
+                if (disc <= Math.pow(1, 2)) {
+                    chunk.setBlockState(pos.set(realX, 127, realZ), white, false);
+                }
+            }
+        }
     }
 
     @Override
     public void populateEntities(final ChunkRegion region) {
 
     }
-
+    private void createSphere(@NotNull Chunk chunk, @NotNull BlockState stone, BlockPos.@NotNull Mutable pos, int x, int z, int height, int innerHeight) {
+        for (int h = 0; h < height; h++) {
+            chunk.setBlockState(pos.set(x, h + 128, z), stone, false);
+            chunk.setBlockState(pos.set(x, 127 - h, z), stone, false);
+        }
+        for (int y = 0; y < innerHeight; y++) {
+            chunk.setBlockState(pos.set(x, y + 128, z), Blocks.AIR.getDefaultState(), false);
+            chunk.setBlockState(pos.set(x, 127 - y, z), Blocks.AIR.getDefaultState(), false);
+        }
+    }
     @Override
     public int getWorldHeight() {
         return 0;
@@ -92,8 +188,10 @@ public final class CarthageGenerator extends ChunkGenerator {
     public void getDebugHudText(final List<String> text, final BlockPos pos) {
 
     }
-/*
-private static final Codec<CustomGenSettings> SETTINGS_CODEC = RecordCodecBuilder.create(
+
+   /*
+
+    private static final Codec<CustomGenSettings> SETTINGS_CODEC = RecordCodecBuilder.create(
         settingsInstance -> settingsInstance.group(
                 Codec.INT.fieldOf("base").forGetter(CustomGenSettings::baseHeight),
                 Codec.FLOAT.fieldOf("verticalvariance").forGetter(CustomGenSettings::verticalVariance),
@@ -102,12 +200,12 @@ private static final Codec<CustomGenSettings> SETTINGS_CODEC = RecordCodecBuilde
 public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCodecBuilder.create(
         carthageGeneratorInstance ->
                 carthageGeneratorInstance.group(
-                        RegistryOps.retrieveRegistry(Registry.STRUCTURE_SET_REGISTRY).forGetter(CarthageGenerator::getStructRegistry),
-                        RegistryOps.retrieveRegistry(Registry.BIOME_REGISTRY).forGetter(CarthageGenerator::getThisBiomeRegistry),
+                        RegistryOps.createRegistryCodec(Registry.STRUCTURE_FEATURE_KEY).forGetter(CarthageGenerator::getStructRegistry),
+                        RegistryOps.createRegistryCodec(Registry.BIOME_KEY).forGetter(CarthageGenerator::getThisBiomeRegistry),
                         SETTINGS_CODEC.fieldOf("settings").forGetter(CarthageGenerator::getCarthageSettings)
                 ).apply(carthageGeneratorInstance,CarthageGenerator::new)
 );
-
+/*
     private final CustomGenSettings settings;
     public CarthageGenerator(@NotNull Registry<StructureSet> structureSets, Registry<Biome> registry, CustomGenSettings settings) {
         super(structureSets,getSet(structureSets), new CarthageBiomeProvider(registry));
@@ -153,7 +251,7 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
     @Override
     public Climate.@NotNull Sampler climateSampler() {
         return new Climate.Sampler(DensityFunctions.constant(0.0),DensityFunctions.constant(0.0),DensityFunctions.constant(0.0),
-                DensityFunctions.constant(0.0),DensityFunctions.constant(0.0), DensityFunctions.constant(0.0),Collections.emptyList());
+                DensityFunctions.constant(0.0),DensityFunctions.constant(0.0), DensityFunctions.constant(0.0), Collections.emptyList());
     }
 
     @Override

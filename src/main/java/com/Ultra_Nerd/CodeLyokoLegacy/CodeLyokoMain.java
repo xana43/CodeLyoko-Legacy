@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
@@ -13,16 +14,23 @@ import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.entity.EntityRenderers;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.texture.TextureManager;
+import net.minecraft.client.world.GeneratorType;
+import net.minecraft.datafixer.fix.StructuresToConfiguredStructuresFix;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
+import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
+
+import java.util.Collections;
+import java.util.Optional;
 
 
 public record CodeLyokoMain() implements ModInitializer {

@@ -8,8 +8,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.electroplate.Electroplating
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.ElectricFluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.FluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.DataTransferInterface;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.TowerGeneric;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.TowerInterface;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.*;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
@@ -106,29 +105,29 @@ public final class ModBlocks {
 
 
     public static final Block MARABUNTA = new Marabunta();
-    /*public static final RegistryObject<Block> METATYUYAMUNITE_ORE = BLOCKS.register("metatyuyamunite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(3, 10).sound(SoundType.STONE)));
-    public static final RegistryObject<Block> METATORBERNITE_ORE = BLOCKS.register("metatorbernite_ore", () -> new OreBlock(Block.Properties.copyOf(METATYUYAMUNITE_ORE.get())));
-    public static final RegistryObject<Block> METAAUTUNITE_ORE = BLOCKS.register("metaautunite_ore", () -> new OreBlock(Block.Properties.copyOf(AUTUNITE_ORE.get())));
-    public static final RegistryObject<Block> PROJECTOR_FOCUS = BLOCKS.register("projector_focus", ProjectorFocusblock::new);
-    public static final RegistryObject<Block> QUANTUM_BLOCK = BLOCKS.register("quantum_block", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(6, 20).sound(SoundType.METAL)));
-    public static final RegistryObject<Block> QUANTUM_CORE = BLOCKS.register("quantum_core", () -> new QuantumCore(Block.Properties.of(Material.DECORATION).strength(1, 20).sound(SoundType.GLASS)));
-    public static final RegistryObject<Block> QUANTUM_STEEL_BLOCK = BLOCKS.register("quantum_steel", () -> new QuantumSteelBlock(Block.Properties.of(Material.HEAVY_METAL).strength(6, 20).sound(SoundType.METAL)));
-    public static final RegistryObject<Block> SALEEITE_ORE = BLOCKS.register("saleeite_ore", () -> new OreBlock(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE)));
-    public static final RegistryObject<Block> SCANNER_BASE = BLOCKS.register("scanner_base", Scanner::new);
-    public static final RegistryObject<Block> SCANNER_FRAME = BLOCKS.register("scanner_frame", () -> new ScannerFrame(Block.Properties.copyOf(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> SCANNER_TOP = BLOCKS.register("scanner_top", () -> new ScannerTop(Block.Properties.copyOf(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> STORAGE = BLOCKS.register("universal", UniversalEnergyBlock::new);
-    public static final RegistryObject<Block> SKLODOWSKITE_ORE = BLOCKS.register("sklodowskite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(4, 4).sound(SoundType.STONE)));
-    public static final RegistryObject<Block> SILICA_SAND = BLOCKS.register("silica_sand", () -> new SandBlock(0xFFFFFF, Block.Properties.copyOf(Blocks.SAND)));
-    public static final RegistryObject<Block> SECTOR5_STEEL = BLOCKS.register("sector5_steel", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(-1, -1)));
-    public static final RegistryObject<Block> ROUTER = BLOCKS.register("router", () -> new Router(Block.Properties.copyOf(Blocks.DRAGON_EGG)));
-    public static final RegistryObject<Block> TOWER_WHITE = BLOCKS.register("tower_white", TowerGeneric::new);
-    */
+    public static final Block METATYUYAMUNITE_ORE = new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE));
+    public static final Block METATORBERNITE_ORE = new OreBlock(FabricBlockSettings.copy(METATYUYAMUNITE_ORE));
+    public static final Block METAAUTUNITE_ORE = new OreBlock(FabricBlockSettings.copy(AUTUNITE_ORE));
+    public static final Block PROJECTOR_FOCUS = new ProjectorFocusblock();
+    public static final Block QUANTUM_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(8,20));
+    public static final Block QUANTUM_CORE =  new QuantumCore(FabricBlockSettings.of(Material.PORTAL));
+    public static final Block QUANTUM_STEEL_BLOCK = new QuantumSteelBlock(FabricBlockSettings.of(Material.METAL).strength(6, 20).sounds(BlockSoundGroup.METAL));
+    public static final Block SALEEITE_ORE = new OreBlock(FabricBlockSettings.of(Material.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE));
+    public static final Block SCANNER_BASE = new Scanner();
+    //public static final Block SCANNER_FRAME = BLOCKS.register("scanner_frame", () -> new ScannerFrame(Block.Properties.copyOf(Blocks.IRON_BLOCK)));
+    //public static final Block SCANNER_TOP = BLOCKS.register("scanner_top", () -> new ScannerTop(Block.Properties.copyOf(Blocks.IRON_BLOCK)));
+    //public static final Block STORAGE = BLOCKS.register("universal", UniversalEnergyBlock::new);
+    public static final Block SKLODOWSKITE_ORE = new Block(FabricBlockSettings.of(Material.STONE).strength(4, 4).sounds(BlockSoundGroup.STONE));
+    public static final Block SILICA_SAND = new SandBlock(0xFFFFFF, FabricBlockSettings.copy(Blocks.SAND));
+    public static final Block SECTOR5_STEEL = new Block(FabricBlockSettings.of(Material.METAL).strength(-1, -1));
+    public static final Block ROUTER = new Router(FabricBlockSettings.copy(Blocks.DRAGON_EGG));
+    public static final Block TOWER_WHITE = new TowerGeneric();
+
     public static final Block TOWER_INTERFACE = new TowerInterface();
-    /*public static final RegistryObject<Block> TOWER_BASE = BLOCKS.register("tower_base", TowerBase::new);
-    public static final RegistryObject<Block> TOWER_WALL = BLOCKS.register("tower_wall", TowerWall::new);
-    public static final RegistryObject<Block> TOWER_BLUE = BLOCKS.register("tower_blue", TowerGeneric::new);
-    public static final RegistryObject<Block> TOWER_TOP = BLOCKS.register("tower_top", () -> new Block(Block.Properties.copyOf(Blocks.IRON_BLOCK).sound(SoundType.GLASS)));
+    public static final Block TOWER_BASE = new TowerBase();
+    public static final Block TOWER_WALL = new TowerWall();
+    public static final Block TOWER_BLUE = new TowerGeneric();
+    /*public static final RegistryObject<Block> TOWER_TOP = BLOCKS.register("tower_top", () -> new Block(Block.Properties.copyOf(Blocks.IRON_BLOCK).sound(SoundType.GLASS)));
     public static final RegistryObject<Block> TOWER_WALL_CORNER = BLOCKS.register("tower_wall_corner", TowerWallCorner::new);
     public static final RegistryObject<Block> TOWER_BASE_CORNER = BLOCKS.register("tower_base_corner", TowerBaseCorner::new);
     public static final RegistryObject<TowerBottomBlock> TOWER_BOTTOM = BLOCKS.register("tower_bottom", () -> new TowerBottomBlock(Block.Properties.copyOf(Blocks.IRON_BLOCK).sound(SoundType.GLASS)));
@@ -147,8 +146,8 @@ public final class ModBlocks {
     public static final RegistryObject<Block> UV_FOCUS = BLOCKS.register("uv_focus", () -> new UVFocusBlock(Block.Properties.copyOf(Blocks.GLASS)));
     public static final RegistryObject<Block> UV_LIGHT = BLOCKS.register("uv_light", () -> new Block(Block.Properties.copyOf(Blocks.GLOWSTONE)));
     public static final RegistryObject<Block> VOLCANO_GROUND = BLOCKS.register("volcano_ground", () -> new Block(Block.Properties.copyOf(Blocks.STONE)));
+*/
 
-   */
     public static final Block DIGITAL_OCEAN_BLOCK = new DigitalSeaBlock();
     public static final Block DIGITAL_LAVA_BLOCK = new DigitalLavaBlock();
     public static final ImmutableMap<String,Block> BLOCK_MAP = ImmutableMap.<String,Block>builder()
@@ -201,9 +200,26 @@ public final class ModBlocks {
             .put("frontier_block",FRONTIER_BLOCK)
             .put("gummite_ore",GUMMITE_ORE)
             .put("holoprojector",HOLOPROJECTOR)
-            .put("tower_interface",TOWER_INTERFACE)
             .put("lyoko_core",LYOKO_CORE)
             .put("marabunta",MARABUNTA)
+            .put("metatyuyamunite_ore",METATYUYAMUNITE_ORE)
+            .put("metatorbernite_ore",METATORBERNITE_ORE)
+            .put("metaautunite_ore",METAAUTUNITE_ORE)
+            .put("projector_focus",PROJECTOR_FOCUS)
+            .put("quantum_block",QUANTUM_BLOCK)
+            .put("quantum_core",QUANTUM_CORE)
+            .put("quantum_steel",QUANTUM_STEEL_BLOCK)
+            .put("saleeite_ore",SALEEITE_ORE)
+            .put("scanner_base",SCANNER_BASE)
+            .put("sklodowskite_ore",SKLODOWSKITE_ORE)
+            .put("silica_sand",SILICA_SAND)
+            .put("sector5_steel",SECTOR5_STEEL)
+            .put("router",ROUTER)
+            .put("tower_interface",TOWER_INTERFACE)
+            .put("tower_white",TOWER_WHITE)
+            .put("tower_base",TOWER_BASE)
+            .put("tower_wall",TOWER_WALL)
+            .put("tower_blue",TOWER_BLUE)
             //fluidblocks
             .put("digital_ocean",DIGITAL_OCEAN_BLOCK)
             .put("digital_lava",DIGITAL_LAVA_BLOCK)

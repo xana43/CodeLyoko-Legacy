@@ -35,9 +35,26 @@ public final class ModBiome {
                     .temperature(3)
                     .build();
         }
+        //Desert Sector
+    public static final Biome DESERT_SECTOR = buildDesert();
+        private static Biome buildDesert()
+        {
+            SpawnSettings.Builder desertSpawns = new SpawnSettings.Builder();
+            GenerationSettings.Builder desertGen = new GenerationSettings.Builder();
+            return (new Biome.Builder())
+                    .category(Biome.Category.DESERT)
+                    .precipitation(Biome.Precipitation.NONE)
+                    .downfall(0)
+                    .effects(new BiomeEffects.Builder().waterFogColor(12759680).fogColor(12759680).waterColor(12759680).skyColor(12759680).build())
+                    .spawnSettings(desertSpawns.build())
+                    .generationSettings(desertGen.build())
+                    .temperature(38)
+                    .temperatureModifier(Biome.TemperatureModifier.NONE)
+                    .build();
+        }
     public static final ImmutableMap<String,Biome> BIOME_MAP = ImmutableMap.<String, Biome>builder()
             .put("forest_sector",FOREST_SECTOR)
-
+            .put("desert_sector",DESERT_SECTOR)
 
 
             .build();

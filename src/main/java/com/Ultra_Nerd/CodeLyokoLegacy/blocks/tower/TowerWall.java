@@ -1,71 +1,56 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.Material;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.DirectionProperty;
+import org.jetbrains.annotations.Nullable;
 
 
 public class TowerWall extends Block {
-    public TowerWall(final Settings settings) {
-        super(settings);
-    }
-/*
-    public static final DirectionProperty DIRTOWER = BlockStateProperties.HORIZONTAL_FACING;
+
+    public static final DirectionProperty DIRTOWER = HorizontalFacingBlock.FACING;
 
     public TowerWall() {
-        super(Block.Properties.of(Material.BARRIER)
-                .strength(-1, Integer.MAX_VALUE)
-                .noDrops()
-                .sound(SoundType.GLASS)
+        super(FabricBlockSettings.of(Material.BARRIER)
+                .strength(-1, -1)
+                .dropsNothing()
+                .sounds(BlockSoundGroup.GLASS)
+                .luminance(250)
 
         );
 
     }
 
-
     @Override
-    public boolean isValidSpawn(BlockState state, BlockGetter level, BlockPos pos, SpawnPlacements.Type type, EntityType<?> entityType) {
+    public boolean canMobSpawnInside() {
         return false;
     }
 
-
-
     @Override
-    public int getLightBlock(BlockState p_60585_, BlockGetter p_60586_, BlockPos p_60587_) {
-        return 5;
+    protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder.add(DIRTOWER));
     }
 
+    @Nullable
     @Override
-    public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
-        return 5;
+    public BlockState getPlacementState(final ItemPlacementContext ctx) {
+        return this.getDefaultState().with(DIRTOWER,ctx.getPlayerFacing().getOpposite());
     }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
-        builder.add(DIRTOWER);
-    }
 
-    @Override
-    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
-        // TODO Auto-generated method stub
-        return this.defaultBlockState().setValue(DIRTOWER, context.getHorizontalDirection().getOpposite());
-    }
 
     //mod compatiability
-    @Nonnull
-    @Override
-    public BlockState rotate(@NotNull BlockState state, @NotNull Rotation rot) {
-        return state.setValue(DIRTOWER, rot.rotate(state.getValue(DIRTOWER)));
-    }
-
-    @Nonnull
-    @Override
-    public BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirrorIn) {
-        return state.rotate(mirrorIn.getRotation(state.getValue(DIRTOWER)));
-    }
-    //
 
 
 
 
+/*
     @OnlyIn(Dist.CLIENT)
     @Override
     public void animateTick(@Nonnull BlockState stateIn, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
