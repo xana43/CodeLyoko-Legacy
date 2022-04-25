@@ -3,34 +3,20 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.client.render.TexturedRenderLayers;
-import net.minecraft.client.render.entity.EntityRenderers;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.texture.TextureManager;
-import net.minecraft.client.world.GeneratorType;
-import net.minecraft.datafixer.fix.StructuresToConfiguredStructuresFix;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.DynamicRegistryManager;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.util.registry.RegistryEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
-
-import java.util.Collections;
-import java.util.Optional;
 
 
 public record CodeLyokoMain() implements ModInitializer {
@@ -46,7 +32,10 @@ public record CodeLyokoMain() implements ModInitializer {
         return new Identifier(MOD_ID,name);
     }
 
-
+private static <T>RegistryEntry<T> getEntry(Registry<T> reg,T value)
+{
+    return reg.getEntry(reg.getKey(value).orElseThrow()).orElseThrow();
+}
     @Override
     public void onInitialize() {
         GeckoLib.initialize();
@@ -72,14 +61,12 @@ public record CodeLyokoMain() implements ModInitializer {
         ModEntities.ENTITY_TYPE_HASH_MAP.forEach((s, entityType) -> Registry.register(Registry.ENTITY_TYPE,CodeLyokoPrefix(s),entityType));
         ModFluids.FLUID_IMMUTABLE_MAP.forEach((s, fluid) ->
                 Registry.register(Registry.FLUID,CodeLyokoPrefix(s),fluid));
+
+        ModParticles.PARTICLE_TYPE_IMMUTABLE_MAP.forEach((s, defaultParticleType) -> Registry.register(Registry.PARTICLE_TYPE,CodeLyokoPrefix(s),defaultParticleType));
+
         //Attribute Registration
         FabricDefaultAttributeRegistry.register(ModEntities.BLOK, EntityBlok.createMonsterAttributes());
-        //Custom Sprites
-        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
-            registry.register(CodeLyokoPrefix("block/digital_flowing"));
-            registry.register(CodeLyokoPrefix("block/digital_flowing_lava"));
-            registry.register(CodeLyokoPrefix("entity/laserarrow"));
-        });
+
 
 
 

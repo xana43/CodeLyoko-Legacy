@@ -1,6 +1,31 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.google.common.collect.ImmutableMap;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
+
 public final class ModFeature {
+
+    private static final TreeFeatureConfig.Builder FOREST_TREE = new TreeFeatureConfig.Builder(
+            BlockStateProvider.of(ModBlocks.DIGITAL_WOOD_FOREST),
+            new StraightTrunkPlacer(8,3,0),
+            BlockStateProvider.of(Blocks.AIR),
+            new BlobFoliagePlacer(ConstantIntProvider.create(2),ConstantIntProvider.create(4),1),
+            new TwoLayersFeatureSize(1,0,1)
+    );
+
+
+
+
+    public static final ImmutableMap<String,TreeFeatureConfig.Builder> CONFIGURED_TREE_IMMUTABLE_MAP = ImmutableMap.<String, TreeFeatureConfig.Builder>builder()
+            .put("lyoko_forest_tree",FOREST_TREE)
+
+            .build();
 /*
     public static final DeferredRegister<StructureFeature<?>> LYOKOFEATURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, CodeLyokoMain.MOD_ID);
 

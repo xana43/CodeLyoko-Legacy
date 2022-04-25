@@ -1,21 +1,34 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.LyokoVehicleEntity;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 
 public final class TowerEnter extends Block {
-    public TowerEnter(final Settings settings) {
-        super(settings);
-    }
-/*
-    public static final DirectionProperty DIRTOWER2 = BlockStateProperties.HORIZONTAL_FACING;
+
+
+    public static final DirectionProperty DIRTOWER2 = HorizontalFacingBlock.FACING;
 
     public TowerEnter() {
-        super(Properties.of(Material.BARRIER)
+        super(FabricBlockSettings.of(Material.BARRIER)
 
                 .strength(-1, -1)
-                .sound(SoundType.GLASS)
-                .noCollission()
+                .sounds(BlockSoundGroup.GLASS)
+                .noCollision().luminance(60)
 
 
         );
@@ -23,55 +36,37 @@ public final class TowerEnter extends Block {
     }
 
     @Override
-    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-        return 5;
-    }
-
-    @Override
-    public void entityInside(BlockState p_60495_, Level p_60496_, BlockPos p_60497_, Entity p_60498_) {
-        super.entityInside(p_60495_, p_60496_, p_60497_, p_60498_);
-        if(!(p_60498_ instanceof Player))
+    public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
+        super.onEntityCollision(state, world, pos, entity);
+        if(!(entity instanceof PlayerEntity) && !(entity instanceof LyokoVehicleEntity))
         {
-            p_60498_.hurt(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+          entity.damage(DamageSource.OUT_OF_WORLD,Float.MAX_VALUE);
         }
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
-        builder.add(DIRTOWER2);
+    protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder.add(DIRTOWER2));
     }
 
 
-
-
+    @Nullable
     @Override
-    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
-        // TODO Auto-generated method stub
-        return this.defaultBlockState().setValue(DIRTOWER2, context.getHorizontalDirection().getOpposite());
+    public BlockState getPlacementState(final ItemPlacementContext ctx) {
+        return this.getDefaultState().with(DIRTOWER2,ctx.getPlayerFacing().getOpposite());
     }
 
-    //mod compatiability
-    @Nonnull
     @Override
-    public BlockState rotate(@NotNull BlockState state, @NotNull Rotation rot) {
-        return state.setValue(DIRTOWER2, rot.rotate(state.getValue(DIRTOWER2)));
-    }
-
-    @Nonnull
-    @Override
-    public BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirrorIn) {
-        return state.rotate(mirrorIn.getRotation(state.getValue(DIRTOWER2)));
+    public boolean canMobSpawnInside() {
+        return false;
     }
 
     //
 
 
-    @Override
-    public boolean isValidSpawn(BlockState state, BlockGetter level, BlockPos pos, SpawnPlacements.Type type, EntityType<?> entityType) {
-        return false;
-    }
 
- */
+
+
 
 
 

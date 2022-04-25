@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util.client;
+package com.Ultra_Nerd.CodeLyokoLegacy.Util;
 
 public final class DimensionCheck {
 /*

@@ -1,16 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
-public final class HologramProjectorBlock extends Block implements BlockEntityProvider {
+public final class HologramProjectorBlock extends BlockWithEntity {
     //public static @NotNull BooleanProperty VALID = BooleanProperty.create("valid");
 
 

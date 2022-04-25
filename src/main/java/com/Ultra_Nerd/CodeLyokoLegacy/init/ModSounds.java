@@ -2,8 +2,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import net.minecraft.client.sound.Sound;
+import net.minecraft.sound.MusicSound;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Lazy;
+import org.lwjgl.system.CallbackI;
 import org.spongepowered.include.com.google.common.collect.ImmutableCollection;
 
 import java.util.ArrayList;
@@ -25,6 +27,13 @@ public final class ModSounds {
     public static final SoundEvent BLOKHURT = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.blok.hurt"));
     public static final SoundEvent GUI = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("gui"));
     public static final SoundEvent LASERARROW = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("laser"));
+    public static final SoundEvent ICE = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("icesector"));
+    public static final SoundEvent DESERT = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("desertsector"));
+    public static final SoundEvent FOREST = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("forestsector"));
+    public static final SoundEvent MOUNTAIN = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("mountainsector"));
+    public static final SoundEvent OCEAN = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("digital_ocean"));
+    public static final SoundEvent VOLCANO = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("volcano_replika_music"));
+
     public static final List<SoundEvent> SOUNDS = List.of(
             LAZY_WARRIOR,
             LAZY_FELINE,
@@ -35,7 +44,13 @@ public final class ModSounds {
             BLOKHURT,
             LAZY_ARCHER,
             GUI,
-            LASERARROW
+            LASERARROW,
+            ICE,
+            DESERT,
+            FOREST,
+            MOUNTAIN,
+            OCEAN,
+            VOLCANO
             );
 /*
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, CodeLyokoMain.MOD_ID);

@@ -1,13 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.entity.boss.BossBar;
+import net.minecraft.sound.MusicSound;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public final class ModBiome {
 
@@ -52,11 +51,94 @@ public final class ModBiome {
                     .temperatureModifier(Biome.TemperatureModifier.NONE)
                     .build();
         }
+
+    public static final Biome ICE_SECTOR = buildIce();
+        private static Biome buildIce()
+        {
+            SpawnSettings.Builder iceSpawns = new SpawnSettings.Builder();
+            GenerationSettings.Builder iceGenBuilder = new GenerationSettings.Builder();
+            return (new Biome.Builder())
+                    .category(Biome.Category.ICY)
+                    .precipitation(Biome.Precipitation.SNOW)
+                    .downfall(0)
+                    .effects(new BiomeEffects.Builder().music(new MusicSound(ModSounds.ICE,0,0,true)).skyColor(2387).waterColor(2387).waterFogColor(2387).fogColor(2387).build())
+                    .spawnSettings(iceSpawns.build())
+                    .generationSettings(iceGenBuilder.build())
+                    .temperatureModifier(Biome.TemperatureModifier.FROZEN)
+                    .temperature(-3)
+                    .build();
+        }
+    public static final Biome DIGITAL_OCEAN = buildOcean();
+        private static Biome buildOcean()
+        {
+            SpawnSettings.Builder oceanSpawns = new SpawnSettings.Builder();
+            GenerationSettings.Builder ocenGen = new GenerationSettings.Builder();
+            return (new Biome.Builder())
+                    .category(Biome.Category.OCEAN)
+                    .precipitation(Biome.Precipitation.NONE)
+                    .downfall(0)
+                    .temperature(13)
+                    .temperatureModifier(Biome.TemperatureModifier.NONE)
+                    .effects(new BiomeEffects.Builder().music(new MusicSound(ModSounds.OCEAN,0,0,true)).skyColor(2382).waterColor(2382).waterFogColor(2382).fogColor(2382).build())
+                    .generationSettings(ocenGen.build())
+                    .spawnSettings(oceanSpawns.build())
+                    .build();
+        }
+    public static final Biome MOUNTAIN_SECTOR = buildMountain();
+        private static Biome buildMountain()
+        {
+            final SpawnSettings.Builder mountainSpawns = new SpawnSettings.Builder();
+            final GenerationSettings.Builder mountainGen = new GenerationSettings.Builder();
+            return (new Biome.Builder())
+                    .category(Biome.Category.MOUNTAIN)
+                    .precipitation(Biome.Precipitation.NONE)
+                    .temperature(2)
+                    .downfall(0)
+                    .temperatureModifier(Biome.TemperatureModifier.NONE)
+                    .effects(new BiomeEffects.Builder().music(new MusicSound(ModSounds.MOUNTAIN,0,0,true)).waterFogColor(1).waterColor(1).fogColor(1).skyColor(1).build())
+                    .generationSettings(mountainGen.build())
+                    .spawnSettings(mountainSpawns.build())
+                    .build();
+        }
+    public static final Biome FRONTEIR = buildFrontier();
+        private static Biome buildFrontier()
+        {
+            final SpawnSettings.Builder frontierSpawn = new SpawnSettings.Builder();
+            final GenerationSettings.Builder frontierGen = new GenerationSettings.Builder();
+            return (new Biome.Builder())
+                    .category(Biome.Category.NONE)
+                    .downfall(0)
+                    .temperature(-243)
+                    .temperatureModifier(Biome.TemperatureModifier.FROZEN)
+                    .effects(new BiomeEffects.Builder().skyColor(16777215).waterColor(16777215).waterFogColor(16777215).fogColor(16777215).build())
+                    .spawnSettings(frontierSpawn.build())
+                    .precipitation(Biome.Precipitation.NONE)
+                    .generationSettings(frontierGen.build())
+                    .build();
+        }
+    public static final Biome VOLCANO = buildVolcano();
+        private static Biome buildVolcano()
+        {
+            SpawnSettings.Builder volcanoSpawn = new SpawnSettings.Builder();
+            GenerationSettings.Builder volcanoGen = new GenerationSettings.Builder();
+            return (new Biome.Builder())
+                    .category(Biome.Category.NETHER)
+                    .downfall(0)
+                    .precipitation(Biome.Precipitation.NONE)
+                    .temperature(46)
+                    .effects(new BiomeEffects.Builder().fogColor(7579).music(new MusicSound(ModSounds.VOLCANO, 0 ,0, true)).waterFogColor(7579).skyColor(7579).waterColor(7579).build())
+                    .spawnSettings(volcanoSpawn.build())
+                    .generationSettings(volcanoGen.build())
+                    .build();
+        }
     public static final ImmutableMap<String,Biome> BIOME_MAP = ImmutableMap.<String, Biome>builder()
             .put("forest_sector",FOREST_SECTOR)
             .put("desert_sector",DESERT_SECTOR)
-
-
+            .put("ice_sector",ICE_SECTOR)
+            .put("digital_ocean",DIGITAL_OCEAN)
+            .put("mountain_sector",MOUNTAIN_SECTOR)
+            .put("void_frontier",FRONTEIR)
+            .put("volcano_replika",VOLCANO)
             .build();
 /*
     //Registry keys

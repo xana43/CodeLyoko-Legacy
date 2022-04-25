@@ -1,5 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
+import com.Ultra_Nerd.CodeLyokoLegacy.particles.TowerParticleData;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -9,7 +11,12 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Random;
 
 
 public class TowerWall extends Block {
@@ -43,6 +50,26 @@ public class TowerWall extends Block {
         return this.getDefaultState().with(DIRTOWER,ctx.getPlayerFacing().getOpposite());
     }
 
+    @Override
+    public void randomDisplayTick(final BlockState state, final World world, final BlockPos pos, final Random rand) {
+        super.randomDisplayTick(state, world, pos, rand);
+        final double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D);
+        final double d1 = (double) pos.getY() + 0.5D + (rand.nextDouble() - 0.5D);
+        final double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
+        switch (state.get(DIRTOWER))
+        {
+            case NORTH ->  world.addParticle(ModParticles.TOWER_PARTICLE,
+                    d0, d1, pos.getZ() + 1.25f, 0, 0, 0);
+            case SOUTH ->  world.addParticle(ModParticles.TOWER_PARTICLE,
+                    d0, d1, pos.getZ() - 0.25f, 0, 0, 0);
+            case EAST -> world.addParticle(ModParticles.TOWER_PARTICLE,
+                    pos.getX() - 0.25f, d1, d2, 0, 0, 0);
+            case WEST ->  world.addParticle(ModParticles.TOWER_PARTICLE,
+                    pos.getX() + 1.25f, d1, d2, 0, 0, 0);
+
+        }
+
+    }
 
 
     //mod compatiability
@@ -55,23 +82,7 @@ public class TowerWall extends Block {
     @Override
     public void animateTick(@Nonnull BlockState stateIn, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
         super.animateTick(stateIn, worldIn, pos, rand);
-        double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D);
-        double d1 = (double) pos.getY() + 0.5D + (rand.nextDouble() - 0.5D);
-        double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
-        if (stateIn.getValue(DIRTOWER) == Direction.NORTH) {
-            worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
-                    d0, d1, pos.getZ() + 1.25f, 0, 0, 0);
 
-        } else if (stateIn.getValue(DIRTOWER) == Direction.SOUTH) {
-            worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
-                    d0, d1, pos.getZ() - 0.25f, 0, 0, 0);
-        } else if (stateIn.getValue(DIRTOWER) == Direction.EAST) {
-            worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
-                    pos.getX() - 0.25f, d1, d2, 0, 0, 0);
-        } else if (stateIn.getValue(DIRTOWER) == Direction.WEST) {
-            worldIn.addParticle(TowerParticleData.TOWER_PARTICLE_2,
-                    pos.getX() + 1.25f, d1, d2, 0, 0, 0);
-        }
     }
 
  */

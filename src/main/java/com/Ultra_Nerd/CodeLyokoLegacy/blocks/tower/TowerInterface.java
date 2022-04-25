@@ -34,9 +34,7 @@ public final class TowerInterface extends BlockWithEntity {
     }
 
     public TowerInterface() {
-        super(FabricBlockSettings.of(Material.BARRIER).strength(-1,-1).sounds(BlockSoundGroup.AMETHYST_CLUSTER)
-
-        );
+        super(FabricBlockSettings.of(Material.BARRIER).strength(-1,-1).sounds(BlockSoundGroup.AMETHYST_CLUSTER).luminance(80));
         //this.registerDefaultState(this.defaultBlockState().setValue(DIRINTERFACE, Direction.NORTH));
         this.setDefaultState(this.getStateManager().getDefaultState().with(DIRINTERFACE,Direction.NORTH));
        // this.getDefaultState().with(DIRINTERFACE,Direction.NORTH);

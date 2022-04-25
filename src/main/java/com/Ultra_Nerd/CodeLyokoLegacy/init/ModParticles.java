@@ -1,25 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.google.common.collect.ImmutableMap;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.particle.DefaultParticleType;
+
 public final class ModParticles {
-/*
-    public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, CodeLyokoMain.MOD_ID);
+public static final DefaultParticleType TOWER_PARTICLE = FabricParticleTypes.simple();
 
-    public static final RegistryObject<ParticleType<ColoredParticle.ColoredParticleData>> TOWER_PARTICLE = PARTICLES.register("tower_particle",
-            () -> new ParticleType<>(false, ColoredParticle.ColoredParticleData.DESERIALIZE) {
-                @Override
-                public @NotNull Codec<ColoredParticle.ColoredParticleData> codec() {
-                    return ColoredParticle.ColoredParticleData.coloredCodec();
-                }
-            });
-
-    public static final RegistryObject<ParticleType<TowerParticleData>> TOWER_PARTICLE_2 = PARTICLES.register("tower_particle_2",
-            () -> new ParticleType<>(false, TowerParticleData.DESERIALIZE) {
-                @Override
-                public @NotNull Codec<TowerParticleData> codec() {
-                    return TowerParticleData.towerParticleDataCodec();
-                }
-            });
-
- */
+public static final ImmutableMap<String,DefaultParticleType> PARTICLE_TYPE_IMMUTABLE_MAP = ImmutableMap.<String, DefaultParticleType>builder()
+        .put("tower_particle",TOWER_PARTICLE)
+        .build();
 
 }

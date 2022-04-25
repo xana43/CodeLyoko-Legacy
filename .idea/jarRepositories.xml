@@ -96,5 +96,20 @@
       <option name="name" value="maven2" />
       <option name="url" value="https://hephaestus.dev/release" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="Nexus Repository Manager" />
+      <option name="name" value="Nexus Repository Manager" />
+      <option name="url" value="https://oss.sonatype.org/content/repositories/snapshots" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Ladysnake Mods" />
+      <option name="name" value="Ladysnake Mods" />
+      <option name="url" value="https://ladysnake.jfrog.io/artifactory/mods" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="https://redgrapefruit09.github.io/maven" />
+    </remote-repository>
   </component>
 </project>

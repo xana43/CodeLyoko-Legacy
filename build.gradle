@@ -16,8 +16,23 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+	//gekolib
 	maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+	//Locki
+	maven {
+		name = "Ladysnake Mods"
+		url = "https://ladysnake.jfrog.io/artifactory/mods"
+		content {
+			includeGroup 'io.github.ladysnake'
+			includeGroupByRegex '(dev|io\\.github)\\.onyxstudios.*'
+		}
+	}
+	maven {
+		name = "Nexus Repository Manager"
+		url = 'https://oss.sonatype.org/content/repositories/snapshots'
+	}
 
+	//myron
 	maven { url = "https://hephaestus.dev/release" }
 }
 
@@ -32,6 +47,11 @@ dependencies {
 	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.18:3.0.38'
 	modImplementation "dev.monarkhes:myron:${project.myron_version}"
 	include "dev.monarkhes:myron:${project.myron_version}"
+	modImplementation "io.github.ladysnake:locki:${locki_version}"
+	include "io.github.ladysnake:locki:${locki_version}"
+	include "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cca_version}"
+	include "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cca_version}"
+
 
 }
 
