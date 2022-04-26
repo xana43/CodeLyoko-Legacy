@@ -127,11 +127,11 @@ public final class ModBlocks {
     public static final Block TOWER_BASE = new TowerBase();
     public static final Block TOWER_WALL = new TowerWall();
     public static final Block TOWER_BLUE = new TowerGeneric();
-    /*public static final RegistryObject<Block> TOWER_TOP = BLOCKS.register("tower_top", () -> new Block(Block.Properties.copyOf(Blocks.IRON_BLOCK).sound(SoundType.GLASS)));
-    public static final RegistryObject<Block> TOWER_WALL_CORNER = BLOCKS.register("tower_wall_corner", TowerWallCorner::new);
-    public static final RegistryObject<Block> TOWER_BASE_CORNER = BLOCKS.register("tower_base_corner", TowerBaseCorner::new);
-    public static final RegistryObject<TowerBottomBlock> TOWER_BOTTOM = BLOCKS.register("tower_bottom", () -> new TowerBottomBlock(Block.Properties.copyOf(Blocks.IRON_BLOCK).sound(SoundType.GLASS)));
-    public static final RegistryObject<Block> TYUYAMUNITE_ORE = BLOCKS.register("tyuyamunite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE)));
+    public static final Block TOWER_TOP = new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK).strength(-1,-1).sounds(BlockSoundGroup.GLASS));
+    public static final Block TOWER_WALL_CORNER = new TowerWallCorner();
+    public static final Block TOWER_BASE_CORNER = new TowerWallCorner();
+    public static final Block TOWER_BOTTOM = new TowerBottomBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.GLASS));
+    /*public static final RegistryObject<Block> TYUYAMUNITE_ORE = BLOCKS.register("tyuyamunite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE)));
     public static final RegistryObject<Block> TORBERNITE_ORE = BLOCKS.register("torbernite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE)));
     public static final RegistryObject<Block> TOWER_ENTER = BLOCKS.register("tower_enter", TowerEnter::new);
     public static final RegistryObject<Block> TITANIUM = BLOCKS.register("titanium_block", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(6, 10).sound(SoundType.METAL)));
@@ -219,6 +219,10 @@ public final class ModBlocks {
             .put("tower_base",TOWER_BASE)
             .put("tower_wall",TOWER_WALL)
             .put("tower_blue",TOWER_BLUE)
+            .put("tower_top",TOWER_TOP)
+            .put("tower_wall_corner",TOWER_WALL_CORNER)
+            .put("tower_base_corner",TOWER_BASE_CORNER)
+            .put("tower_bottom",TOWER_BOTTOM)
             //fluidblocks
             .put("digital_ocean",DIGITAL_OCEAN_BLOCK)
             .put("digital_lava",DIGITAL_LAVA_BLOCK)

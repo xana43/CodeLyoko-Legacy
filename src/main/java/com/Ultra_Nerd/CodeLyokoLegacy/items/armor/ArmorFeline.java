@@ -1,9 +1,31 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.Models.Util.ArmorModelRenderer;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.Models.Util.ModModelLayers;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import net.minecraft.client.item.TooltipData;
+import net.minecraft.client.model.ModelPart;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
+import java.util.UUID;
 
 public final class ArmorFeline extends ArmorItem {
 
@@ -14,8 +36,8 @@ public final class ArmorFeline extends ArmorItem {
 
 
 
-    }/*
-
+    }
+/*
     @Override
     public void initializeClient(@NotNull Consumer<IItemRenderProperties> consumer) {
        // consumer.accept(CatRenderer.INSTANCE);
@@ -33,86 +55,97 @@ public final class ArmorFeline extends ArmorItem {
             return new ArmorModelRenderer(root);
         }
     }
+    */
 
     @Override
-    public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        Multimap<Attribute,AttributeModifier> multimap = HashMultimap.create();
-
-//new AttributeModifier(UUID.fromString("46656c69-6e65-204a-756d-7020426f6f73"),"jump_modifier"
+    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(final ItemStack stack, final EquipmentSlot slot) {
+        Multimap<EntityAttribute,EntityAttributeModifier> multimap = HashMultimap.create();
         if(slot == EquipmentSlot.FEET)
         {
-            multimap.put(Attributes.MOVEMENT_SPEED,new AttributeModifier(UUID.fromString("91AEAA56-376B-4498-935B-2F7F68070635"),"speed_modifier",movement_modifier, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            multimap.put(EntityAttributes.GENERIC_MOVEMENT_SPEED,new EntityAttributeModifier(UUID.fromString("91AEAA56-376B-4498-935B-2F7F68070635"),"speed_modifier",movement_modifier, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
             //multimap.put(Attributes);
         }
+
+
         return multimap;
     }
 
     @Override
-    public boolean isFoil(final @NotNull ItemStack pStack) {
+    public boolean hasGlint(final ItemStack stack) {
+
         return false;
     }
 
 
 
     @Override
-    public boolean isDamageable(ItemStack stack) {
+    public boolean isDamageable() {
         return false;
     }
 
-    @Override
-    public int getDefaultTooltipHideFlags(@NotNull final ItemStack stack) {
-        return ItemStack.TooltipPart.ENCHANTMENTS.getMask();
-    }
+
+
+
+
 
     @Override
-    public void inventoryTick(final ItemStack stack, final Level pLevel, final Entity pEntity, final int pSlotId, final boolean pIsSelected) {
+    public void inventoryTick(final ItemStack stack, final World pLevel, final Entity pEntity, final int pSlotId, final boolean pIsSelected) {
         super.inventoryTick(stack, pLevel, pEntity, pSlotId, pIsSelected);
-        if(!stack.isEnchanted()) {
+        stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
+        if(!stack.hasEnchantments()) {
 
-            stack.enchant(Enchantments.BINDING_CURSE,Enchantments.BINDING_CURSE.getMaxLevel());
+            stack.addEnchantment(Enchantments.BINDING_CURSE,Enchantments.BINDING_CURSE.getMaxLevel());
+        }
+        if(pEntity instanceof PlayerEntity player)
+        {
+            this.onArmorTick(stack,pLevel,player);
         }
     }
-private static final MobEffectInstance JUMPEFFECT = new MobEffectInstance(MobEffects.JUMP, -1, 3, false, false, false);
-    @Override
-    public void onArmorTick(ItemStack stack, Level world, @NotNull Player player) {
+
+
+
+
+
+private static final StatusEffectInstance JUMPEFFECT = new StatusEffectInstance(StatusEffects.JUMP_BOOST, -1, 3, false, false, false);
+
+
+
+
+
+
+    public void onArmorTick(ItemStack stack, World world, @NotNull PlayerEntity player) {
 
         if (!DimensionCheck.playerNotInVanillaWorld(player)) {
-            
-            if (player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.ODD_CHESTPLATE.get()) {
-                player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).setCount(0);
 
-                if (player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
-                    player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).setCount(0);
+            if (player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).getItem() == ModItems.ODD_CHESTPLATE) {
+                player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).setCount(0);
+
+                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).getItem() == ModItems.BLANKHELMET) {
+                    player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
                 }
             }
-            if (player.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() == ModItems.ODD_LEGGINGS.get()) {
-                player.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).setCount(0);
-                if (player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
-                    player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).setCount(0);
+            if (player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).getItem() == ModItems.ODD_LEGGINGS) {
+                player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).setCount(0);
+                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).getItem() == ModItems.BLANKHELMET) {
+                    player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
                 }
             }
-            if (player.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() == ModItems.ODD_BOOTS.get()) {
-                player.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).setCount(0);
-                if (player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
-                    player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).setCount(0);
+            if (player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).getItem() == ModItems.ODD_BOOTS) {
+                player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).setCount(0);
+                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).getItem() == ModItems.BLANKHELMET) {
+                    player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
                 }
             }
         } else {
 
+            if(player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).getItem() == ModItems.ODD_BOOTS && player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).getItem() == ModItems.ODD_LEGGINGS) {
+                if (!player.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
+                    player.addStatusEffect(JUMPEFFECT);
+                }
 
-            if(!stack.isEnchanted()) {
-                //preventRemoval(stack);
-                stack.enchant(Enchantments.BINDING_CURSE,Enchantments.BINDING_CURSE.getMaxLevel());
+
+                player.fallDistance = 0;
             }
-            if(player.getEffect(MobEffects.JUMP) == null) {
-                player.addEffect(JUMPEFFECT);
-            }
-
-
-
-
-                        player.fallDistance = 0;
-
 
 
 
@@ -123,7 +156,7 @@ private static final MobEffectInstance JUMPEFFECT = new MobEffectInstance(MobEff
 
         }
     }
-    */
+
 
 
 }

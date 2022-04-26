@@ -38,7 +38,7 @@ public final class TowerBottomBlock extends Block {
             }
         }
         if (!(entity instanceof PlayerEntity) && !(entity instanceof LyokoVehicleEntity)) {
-            entity.hurt(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
+            entity.damage(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
         }
     }
 

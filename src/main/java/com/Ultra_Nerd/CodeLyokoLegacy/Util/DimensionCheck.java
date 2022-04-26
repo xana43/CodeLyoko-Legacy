@@ -1,11 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util;
 
-public final class DimensionCheck {
-/*
-    public static boolean playerNotInVanillaWorld(@NotNull Player player) {
-        return player.level.dimension() == ModDimensions.FOREST || player.level.dimension() == ModDimensions.SECTOR5 || player.level.dimension() == ModDimensions.DESERT || player.level.dimension() == ModDimensions.ICE
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
-                || player.level.dimension() == ModDimensions.MOUNTAIN || player.level.dimension() == ModDimensions.VOLCANO || player.level.dimension() == ModDimensions.DIGITAL_OCEAN || player.level.dimension() == ModDimensions.FRONTIER;
+public final class DimensionCheck {
+
+    public static boolean playerNotInVanillaWorld(@NotNull PlayerEntity player) {
+        return player.world.getRegistryKey() == ModDimensions.forestSectorWorld || player.world.getRegistryKey() == ModDimensions.carthage || player.world.getRegistryKey() == ModDimensions.desertSectorWorld || player.world.getRegistryKey() == ModDimensions.iceSectorWorld
+
+                || player.world.getRegistryKey() == ModDimensions.mountainSectorWorld || player.world.getRegistryKey() == ModDimensions.volcanoWorld || player.world.getRegistryKey() == ModDimensions.digitalOceanWorld || player.world.getRegistryKey() == ModDimensions.frontierWorld;
 
 
 
@@ -14,41 +21,40 @@ public final class DimensionCheck {
     }
 
     public static boolean EntityNotInVanillaWorld(@NotNull Entity entity) {
-        return entity.world.getDimension() == ModDimensions.FOREST || entity.level.dimension() == ModDimensions.SECTOR5 || entity.level.dimension() == ModDimensions.DESERT || entity.level.dimension() == ModDimensions.ICE
+        return entity.world.getRegistryKey() == ModDimensions.forestSectorWorld || entity.world.getRegistryKey() == ModDimensions.carthage || entity.world.getRegistryKey() == ModDimensions.desertSectorWorld || entity.world.getRegistryKey() == ModDimensions.iceSectorWorld
 
-                || entity.level.dimension() == ModDimensions.MOUNTAIN || entity.level.dimension() == ModDimensions.VOLCANO || entity.level.dimension() == ModDimensions.DIGITAL_OCEAN || entity.level.dimension() == ModDimensions.FRONTIER;
-
-
-
-
-
-    }
-
-    public static boolean worldIsNotVanilla(@NotNull Level level) {
-        return level.dimension() == ModDimensions.FOREST || level.dimension() == ModDimensions.SECTOR5 || level.dimension() == ModDimensions.DESERT || level.dimension() == ModDimensions.ICE
-
-                || level.dimension() == ModDimensions.MOUNTAIN || level.dimension() == ModDimensions.VOLCANO || level.dimension() == ModDimensions.DIGITAL_OCEAN || level.dimension() == ModDimensions.FRONTIER;
+                || entity.world.getRegistryKey() == ModDimensions.mountainSectorWorld || entity.world.getRegistryKey() == ModDimensions.volcanoWorld || entity.world.getRegistryKey() == ModDimensions.digitalOceanWorld || entity.world.getRegistryKey() == ModDimensions.frontierWorld;
 
 
 
 
 
     }
-    public static boolean playerInVanilla(Entity player)
+
+    public static boolean worldIsNotVanilla(@NotNull World level) {
+        return level.getRegistryKey() == ModDimensions.forestSectorWorld || level.getRegistryKey() == ModDimensions.carthage || level.getRegistryKey() == ModDimensions.desertSectorWorld || level.getRegistryKey() == ModDimensions.iceSectorWorld
+                || level.getRegistryKey() == ModDimensions.mountainSectorWorld || level.getRegistryKey() == ModDimensions.volcanoWorld || level.getRegistryKey() == ModDimensions.digitalOceanWorld || level.getRegistryKey() == ModDimensions.frontierWorld;
+
+
+
+
+
+    }
+    public static boolean playerInVanilla(PlayerEntity player)
     {
-        return player.level.dimension() == Level.OVERWORLD || player.level.dimension() == Level.NETHER || player.level.dimension() == Level.END;
+        return player.world.getRegistryKey() == World.OVERWORLD || player.world.getRegistryKey() == World.NETHER || player.world.getRegistryKey() == World.END;
     }
 
-    public static boolean worldIsVanilla(Level level)
+    public static boolean worldIsVanilla(World level)
     {
-        return level.dimension() == Level.END  || level.dimension() == Level.OVERWORLD || level.dimension() == Level.NETHER;
+        return level.getRegistryKey() == World.END  || level.getRegistryKey() == World.OVERWORLD || level.getRegistryKey() == World.NETHER;
     }
-    public static boolean worldIsVanilla(ResourceKey<Level> level)
+    public static boolean worldIsVanilla(RegistryKey<World> level)
     {
-        return level == Level.END  || level == Level.OVERWORLD || level == Level.NETHER;
+        return level == World.END  || level == World.OVERWORLD || level == World.NETHER;
     }
 
- */
+
 
 
 

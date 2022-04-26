@@ -1,14 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionOptions;
 import net.minecraft.world.dimension.DimensionType;
-
-import java.awt.*;
 
 //@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID)
 public final class ModDimensions {
@@ -37,7 +33,7 @@ public final class ModDimensions {
     public static final RegistryKey<DimensionType> mountainSectorType = RegistryKey.of(Registry.DIMENSION_TYPE_KEY,CodeLyokoMain.CodeLyokoPrefix("mountainsector_type"));
 
     //digital ocean
-    public static final RegistryKey<World> digiralOceanWorld = RegistryKey.of(Registry.WORLD_KEY,RegistryKey.of(Registry.DIMENSION_KEY,CodeLyokoMain.CodeLyokoPrefix("digital_ocean")).getValue());
+    public static final RegistryKey<World> digitalOceanWorld = RegistryKey.of(Registry.WORLD_KEY,RegistryKey.of(Registry.DIMENSION_KEY,CodeLyokoMain.CodeLyokoPrefix("digital_ocean")).getValue());
     public static final RegistryKey<DimensionType> digitalOceanType = RegistryKey.of(Registry.DIMENSION_TYPE_KEY,CodeLyokoMain.CodeLyokoPrefix("digital_ocean_type"));
 
     //volcano sector
