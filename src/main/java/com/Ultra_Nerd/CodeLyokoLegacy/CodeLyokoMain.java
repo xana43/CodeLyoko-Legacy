@@ -9,20 +9,33 @@ import io.github.ladysnake.locki.InventoryLock;
 import io.github.ladysnake.locki.Locki;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.world.WorldTickCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.world.PersistentState;
+import net.minecraft.world.PersistentStateManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
@@ -46,6 +59,9 @@ private static <T>RegistryEntry<T> getEntry(Registry<T> reg,T value)
 {
     return reg.getEntry(reg.getKey(value).orElseThrow()).orElseThrow();
 }
+
+
+private static final String nbt = "first_join";
     @Override
     public void onInitialize() {
         GeckoLib.initialize();
@@ -87,7 +103,9 @@ private static <T>RegistryEntry<T> getEntry(Registry<T> reg,T value)
 
         });
 
-
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+            handler.player.getInventory().setStack(handler.player.getInventory().getEmptySlot(),ItemStack.EMPTY);
+        });
         ServerTickEvents.START_WORLD_TICK.register(world -> world.getPlayers().forEach(serverPlayerEntity -> {
 
             if(DimensionCheck.playerNotInVanillaWorld(serverPlayerEntity))

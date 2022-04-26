@@ -14,7 +14,10 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientLoginConnectionEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientLoginNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
@@ -59,17 +62,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
         });
         //client events
-        ClientTickEvents.START_CLIENT_TICK.register(client -> {
 
-if(client.player != null) {
-
-    if (DimensionCheck.playerNotInVanillaWorld(client.player)) {
-
-
-
-    }
-}
-        });
         registerParticle();
     }
     private static void registerParticle()
