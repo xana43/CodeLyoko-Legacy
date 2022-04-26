@@ -2,14 +2,23 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import io.github.ladysnake.locki.DefaultInventoryNodes;
+import io.github.ladysnake.locki.InventoryLock;
+import io.github.ladysnake.locki.Locki;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
+import net.fabricmc.fabric.api.event.world.WorldTickCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -20,6 +29,7 @@ import software.bernie.geckolib3.GeckoLib;
 
 
 public record CodeLyokoMain() implements ModInitializer {
+    public static final InventoryLock LYOKO_LOCK = Locki.registerLock(CodeLyokoPrefix("lyoko_lock"));
     public static final String MOD_ID = "cm";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
 
@@ -66,6 +76,33 @@ private static <T>RegistryEntry<T> getEntry(Registry<T> reg,T value)
 
         //Attribute Registration
         FabricDefaultAttributeRegistry.register(ModEntities.BLOK, EntityBlok.createMonsterAttributes());
+        //events
+        AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
+
+            if(DimensionCheck.playerNotInVanillaWorld(player))
+            {
+                return ActionResult.FAIL;
+            }
+            return ActionResult.PASS;
+
+        });
+
+
+        ServerTickEvents.START_WORLD_TICK.register(world -> world.getPlayers().forEach(serverPlayerEntity -> {
+
+            if(DimensionCheck.playerNotInVanillaWorld(serverPlayerEntity))
+            {
+                serverPlayerEntity.getHungerManager().setExhaustion(0);
+                serverPlayerEntity.getHungerManager().setSaturationLevel(5);
+                CodeLyokoMain.LYOKO_LOCK.lock(serverPlayerEntity, DefaultInventoryNodes.CRAFTING);
+                //CodeLyokoMain.LYOKO_LOCK.lock(serverPlayerEntity, DefaultInventoryNodes.MAIN_INVENTORY);
+            } else if (CodeLyokoMain.LYOKO_LOCK.isLocking(serverPlayerEntity,DefaultInventoryNodes.CRAFTING) /*&& CodeLyokoMain.LYOKO_LOCK.isLocking(serverPlayerEntity,DefaultInventoryNodes.MAIN_INVENTORY)*/) {
+                CodeLyokoMain.LYOKO_LOCK.unlock(serverPlayerEntity,DefaultInventoryNodes.CRAFTING);
+                //CodeLyokoMain.LYOKO_LOCK.unlock(serverPlayerEntity,DefaultInventoryNodes.MAIN_INVENTORY);
+            }
+
+
+        }));
 
 
 

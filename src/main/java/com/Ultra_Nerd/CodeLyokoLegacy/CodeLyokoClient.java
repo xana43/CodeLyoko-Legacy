@@ -3,25 +3,31 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.LaserRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
+import io.github.ladysnake.locki.DefaultInventoryNodes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.particle.SpellParticle;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.texture.TextureManager;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.screen.PlayerScreenHandler;
@@ -51,6 +57,18 @@ public record CodeLyokoClient() implements ClientModInitializer {
             registry.register(CodeLyokoMain.CodeLyokoPrefix("entity/laserarrow"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("particle/tower_particle_2"));
 
+        });
+        //client events
+        ClientTickEvents.START_CLIENT_TICK.register(client -> {
+
+if(client.player != null) {
+
+    if (DimensionCheck.playerNotInVanillaWorld(client.player)) {
+
+
+
+    }
+}
         });
         registerParticle();
     }
