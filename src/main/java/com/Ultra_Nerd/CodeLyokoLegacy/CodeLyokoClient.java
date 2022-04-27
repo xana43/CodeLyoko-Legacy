@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.LaserRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage.CustomCarthadgeSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice.CustomIceSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.volcano.CustomVolcanoSky;
@@ -12,6 +13,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
@@ -22,10 +24,14 @@ import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.hud.PlayerListHud;
+import net.minecraft.client.gui.screen.BackupPromptScreen;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.particle.SpellParticle;
+import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.resource.ClientBuiltinResourcePackProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.screen.PlayerScreenHandler;
@@ -83,7 +89,16 @@ public record CodeLyokoClient() implements ClientModInitializer {
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.mountainSectorWorld,new CustomCarthadgeSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.iceSectorWorld,new CustomIceSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld,new CustomVolcanoSky());
+        ClientTickEvents.START_CLIENT_TICK.register(CodeLyokoClient::dimensionHud);
+    }
+    private static void dimensionHud(final MinecraftClient client)
+    {
+        if(client.player != null) {
+            if (DimensionCheck.playerNotInVanillaWorld(client.player)) {
+                BackgroundRenderer.applyFog(client.gameRenderer.getCamera(), null, Float.NaN, false);
 
+            }
+        }
     }
     private static void registerParticle()
     {
