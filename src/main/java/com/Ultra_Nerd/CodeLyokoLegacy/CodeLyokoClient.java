@@ -3,6 +3,9 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.LaserRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage.CustomCarthadgeSky;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice.CustomIceSky;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.volcano.CustomVolcanoSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
 import net.fabricmc.api.ClientModInitializer;
@@ -13,12 +16,15 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.particle.SpellParticle;
+import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -26,6 +32,7 @@ import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -53,6 +60,30 @@ public record CodeLyokoClient() implements ClientModInitializer {
         //client events
         registerItemPredicates();
         registerParticle();
+
+
+        DimensionEffectsAccessor.getIdentifierMap().put(CodeLyokoMain.CodeLyokoPrefix("codelyoko_effects_general"), new DimensionEffects(Float.NaN,false, DimensionEffects.SkyType.NONE,true,false) {
+            @Override
+            public Vec3d adjustFogColor(final Vec3d color, final float sunHeight) {
+                return new Vec3d(0,0,0);
+            }
+
+            @Override
+            public boolean useThickFog(final int camX, final int camY) {
+                return false;
+            }
+
+            @Override
+            public float @Nullable [] getFogColorOverride(final float skyAngle, final float tickDelta) {
+                return null;
+            }
+
+
+        });
+        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.mountainSectorWorld,new CustomCarthadgeSky());
+        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.iceSectorWorld,new CustomIceSky());
+        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld,new CustomVolcanoSky());
+
     }
     private static void registerParticle()
     {
@@ -139,11 +170,11 @@ public record CodeLyokoClient() implements ClientModInitializer {
                         return 0f;
                     }
                 });
+*/
 
-
-        ItemProperties.register(ModItems.SILICON_WAFER.get(), CodeLyokoMain.CodeLyokoPrefix("quality"),
+        ModelPredicateProviderRegistry.register(ModItems.SILICON_WAFER, CodeLyokoMain.CodeLyokoPrefix("quality"),
                 (stack, world, entityin, integer) ->
-                        switch (stack.getDamageValue()) {
+                        switch (stack.getDamage()) {
                             case 1 -> 0.25f;
                             case 2 -> 0.5f;
                             case 3 -> 0.75f;
@@ -151,6 +182,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
                             default -> 0.0f;
                         });
 
- */
+
     }
 }

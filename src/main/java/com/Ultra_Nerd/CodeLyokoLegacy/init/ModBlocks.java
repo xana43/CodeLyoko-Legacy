@@ -131,21 +131,21 @@ public final class ModBlocks {
     public static final Block TOWER_WALL_CORNER = new TowerWallCorner();
     public static final Block TOWER_BASE_CORNER = new TowerWallCorner();
     public static final Block TOWER_BOTTOM = new TowerBottomBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.GLASS));
-    /*public static final RegistryObject<Block> TYUYAMUNITE_ORE = BLOCKS.register("tyuyamunite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE)));
-    public static final RegistryObject<Block> TORBERNITE_ORE = BLOCKS.register("torbernite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE)));
-    public static final RegistryObject<Block> TOWER_ENTER = BLOCKS.register("tower_enter", TowerEnter::new);
-    public static final RegistryObject<Block> TITANIUM = BLOCKS.register("titanium_block", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(6, 10).sound(SoundType.METAL)));
-    public static final RegistryObject<Block> URANUM_REACTOR = BLOCKS.register("computer_reactor", ComputerIntegratedReactor::new);
-    public static final RegistryObject<Block> URANINITE_ORE = BLOCKS.register("uraninite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE)));
-    public static final RegistryObject<Block> URANIUM_BLOCK_238 = BLOCKS.register("uranium_block_238", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(6, 20).sound(SoundType.METAL)));
-    public static final RegistryObject<Block> URANIUM_BLOCK_235 = BLOCKS.register("uranium_block_235", () -> new Block(Block.Properties.of(Material.METAL).strength(6, 20).sound(SoundType.METAL)));
-    public static final RegistryObject<Block> URANIUM_CANISTER = BLOCKS.register("uranium_canister", () -> new UraniumCanister(Block.Properties.of(Material.EGG).requiresCorrectToolForDrops().strength(5, 5)));
-    public static final RegistryObject<Block> URANOPHANE_ORE = BLOCKS.register("uranophane_ore", () -> new Block(Block.Properties.of(Material.STONE).sound(SoundType.STONE).strength(4, 4)));
-    public static final RegistryObject<Block> UV_MACHINE = BLOCKS.register("uv_machine", () -> new Block(Block.Properties.copyOf(Blocks.ANVIL)));
-    public static final RegistryObject<Block> UV_FOCUS = BLOCKS.register("uv_focus", () -> new UVFocusBlock(Block.Properties.copyOf(Blocks.GLASS)));
-    public static final RegistryObject<Block> UV_LIGHT = BLOCKS.register("uv_light", () -> new Block(Block.Properties.copyOf(Blocks.GLOWSTONE)));
-    public static final RegistryObject<Block> VOLCANO_GROUND = BLOCKS.register("volcano_ground", () -> new Block(Block.Properties.copyOf(Blocks.STONE)));
-*/
+    public static final Block TYUYAMUNITE_ORE = new OreBlock(FabricBlockSettings.of(Material.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE));
+    public static final Block TORBERNITE_ORE = new OreBlock(FabricBlockSettings.of(Material.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE));
+    public static final Block TOWER_ENTER = new TowerEnter();
+   /* public static final Block TITANIUM = BLOCKS.register("titanium_block", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(6, 10).sound(SoundType.METAL)));
+    public static final Block URANUM_REACTOR = BLOCKS.register("computer_reactor", ComputerIntegratedReactor::new);
+    public static final Block URANINITE_ORE = BLOCKS.register("uraninite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE)));
+    public static final Block URANIUM_BLOCK_238 = BLOCKS.register("uranium_block_238", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(6, 20).sound(SoundType.METAL)));
+    public static final Block URANIUM_BLOCK_235 = BLOCKS.register("uranium_block_235", () -> new Block(Block.Properties.of(Material.METAL).strength(6, 20).sound(SoundType.METAL)));
+    public static final Block URANIUM_CANISTER = BLOCKS.register("uranium_canister", () -> new UraniumCanister(Block.Properties.of(Material.EGG).requiresCorrectToolForDrops().strength(5, 5)));
+    public static final Block URANOPHANE_ORE = BLOCKS.register("uranophane_ore", () -> new Block(Block.Properties.of(Material.STONE).sound(SoundType.STONE).strength(4, 4)));
+    public static final Block UV_MACHINE = BLOCKS.register("uv_machine", () -> new Block(Block.Properties.copyOf(Blocks.ANVIL)));
+    public static final Block UV_FOCUS = BLOCKS.register("uv_focus", () -> new UVFocusBlock(Block.Properties.copyOf(Blocks.GLASS)));
+    public static final Block UV_LIGHT = BLOCKS.register("uv_light", () -> new Block(Block.Properties.copyOf(Blocks.GLOWSTONE)));
+    */public static final Block VOLCANO_GROUND = new Block(FabricBlockSettings.copyOf(Blocks.STONE));
+
 
     public static final Block DIGITAL_OCEAN_BLOCK = new DigitalSeaBlock();
     public static final Block DIGITAL_LAVA_BLOCK = new DigitalLavaBlock();
@@ -223,6 +223,11 @@ public final class ModBlocks {
             .put("tower_wall_corner",TOWER_WALL_CORNER)
             .put("tower_base_corner",TOWER_BASE_CORNER)
             .put("tower_bottom",TOWER_BOTTOM)
+            .put("tyuyamunite_ore",TYUYAMUNITE_ORE)
+            .put("torbernite_ore",TORBERNITE_ORE)
+            .put("tower_enter",TOWER_ENTER)
+            //other blocks here
+            .put("volcano_ground",VOLCANO_GROUND)
             //fluidblocks
             .put("digital_ocean",DIGITAL_OCEAN_BLOCK)
             .put("digital_lava",DIGITAL_LAVA_BLOCK)

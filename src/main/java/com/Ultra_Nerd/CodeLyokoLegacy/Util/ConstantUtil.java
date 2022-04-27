@@ -10,8 +10,8 @@ public record ConstantUtil() {
     public static final Style GUNSHIP = Style.EMPTY.withFont(CodeLyokoMain.CodeLyokoPrefix("gunship"));
     public static final Style HUD = Style.EMPTY.withFont(CodeLyokoMain.CodeLyokoPrefix("lyoko_hud_font"));
     //public static final EntityCa LYOKO = MobCategory.create("lyoko","lyoko",10,false,false,128);
-   public static final Identifier ChannelID = CodeLyokoMain.CodeLyokoPrefix("LyokoPacket");
-
+   public static final Identifier ChannelID = CodeLyokoMain.CodeLyokoPrefix("lyokopacket");
+    public static final Identifier skytop = CodeLyokoMain.CodeLyokoPrefix("textures/skies/volcano/dark.png");
     public record StoryEntry()
     {
         private static final String n = System.lineSeparator();

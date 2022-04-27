@@ -1,66 +1,79 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice;
 
 
-public record CustomIceSky() /*implements ISkyRenderHandler*/ {
-    /*
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
+import net.minecraft.client.render.*;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3f;
+@Environment(EnvType.CLIENT)
+public record CustomIceSky() implements DimensionRenderingRegistry.SkyRenderer {
 
 
-    private static final ResourceLocation sky1 = new ResourceLocation(CodeLyokoMain.MOD_ID,"textures/skies/ice/ice_sky.png");
-    private static final ResourceLocation skytop = new ResourceLocation(CodeLyokoMain.MOD_ID,"textures/skies/volcano/dark.png");
+
+    private static final Identifier sky1 = CodeLyokoMain.CodeLyokoPrefix("textures/skies/ice/ice_sky.png");
+    private static final Identifier skytop = CodeLyokoMain.CodeLyokoPrefix("textures/skies/volcano/dark.png");
 
 
 
     @Override
-    public void render(int ticks, float partialTicks, @NotNull PoseStack matrixStack, ClientLevel world, Minecraft mc) {
+    public void render(WorldRenderContext context) {
         // mc.textureManager.bindTexture(texturelocation);
 
         RenderSystem.setShaderTexture(0,skytop);
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
-        final Tesselator tessellator = Tesselator.getInstance();
-        final BufferBuilder bufferBuilder = tessellator.getBuilder();
+        final Tessellator tessellator = Tessellator.getInstance();
+        final BufferBuilder bufferBuilder = tessellator.getBuffer();
+        final MatrixStack matrixStack = context.matrixStack();
         for(int i = 0; i < 6; ++i) {
-            matrixStack.pushPose();
+            matrixStack.push();
             if (i == 1) {
                 RenderSystem.setShaderTexture(0,sky1);
-                matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
-                matrixStack.mulPose(Vector3f.YP.rotationDegrees(0));
+                matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
+                matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(0));
             }
 
             if (i == 2) {
                 RenderSystem.setShaderTexture(0,sky1);
-                matrixStack.mulPose(Vector3f.XP.rotationDegrees(-90.0F));
-                matrixStack.mulPose(Vector3f.YP.rotationDegrees(180));
+                matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
+                matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180));
 
             }
 
             if (i == 3) {
                 RenderSystem.setShaderTexture(0,skytop);
-                matrixStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
+                matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
             }
 
             if (i == 4) {
                 RenderSystem.setShaderTexture(0,sky1);
-                matrixStack.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
-                matrixStack.mulPose(Vector3f.YP.rotationDegrees(-90));
+                matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0F));
+                matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-90));
             }
 
             if (i == 5) {
                 RenderSystem.setShaderTexture(0,sky1);
-                matrixStack.mulPose(Vector3f.ZP.rotationDegrees(-90.0F));
-                matrixStack.mulPose(Vector3f.YP.rotationDegrees(90));
+                matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
+                matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90));
             }
 
-            final Matrix4f matrix4f = matrixStack.last().pose();
-            bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
-            bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).uv(0.0F, 0.0F).color(40, 40, 40, 255).endVertex();
-            bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).uv(0.0F, 0.5F).color(40, 40, 40, 255).endVertex();
-            bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).uv(16.0F, 0.5F).color(40, 40, 40, 255).endVertex();
-            bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).uv(16.0F, 0.0F).color(40, 40, 40, 255).endVertex();
-            tessellator.end();
-            matrixStack.popPose();
+            final Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
+            bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
+            bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();
+            bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 0.5F).color(40, 40, 40, 255).next();
+            bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 0.5F).color(40, 40, 40, 255).next();
+            bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255).next();
+            tessellator.draw();
+            matrixStack.pop();
         }
 
     }
 
-     */
+
 }

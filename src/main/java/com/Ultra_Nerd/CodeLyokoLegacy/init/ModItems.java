@@ -136,22 +136,22 @@ public final class ModItems {
     public static final RegistryObject<Item> SOLID_QUANTUM = ITEMS.register("solid_quantum", PropertyLessItem::new);
     public static final RegistryObject<Item> SOLDER_BLOB = ITEMS.register("solder_blob", PropertyLessItem::new);
 */    public static final WrittenBookItem STORY_BOOK = new Entry1(BaseSettings.maxCount(1));
-   /* public static final RegistryObject<Item> SILICON_WAFER = ITEMS.register("silicon_wafer", () -> new WaferText(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).durability(4)));
-    public static final RegistryObject<Item> URANIUM_SILICATE = ITEMS.register("uranium_silicate", PropertyLessItem::new);
-    public static final RegistryObject<Item> URANIUM_SILICON_PLATE = ITEMS.register("uranium_silicon_plate", PropertyLessItem::new);
-    public static final RegistryObject<Item> TRIURANIUM_OCTAOXIDE = ITEMS.register("triuranium_octaoxide", PropertyLessItem::new);
-    public static final RegistryObject<Item> TERABIT = ITEMS.register("terabit", PropertyLessItem::new);
-    public static final RegistryObject<Item> TERABYTE = ITEMS.register("terabyte", PropertyLessItem::new);
-    public static final RegistryObject<Item> TITANIUM_INGOT = ITEMS.register("titanium_ingot", PropertyLessItem::new);
-    public static final RegistryObject<Item> URANIUM_DIOXIDE = ITEMS.register("uranium_dioxide", PropertyLessItem::new);
-    public static final RegistryObject<Item> URANIUM_MELT = ITEMS.register("uranium_melt", PropertyLessItem::new);
-    public static final RegistryObject<Item> URANIUM_ISOTOPE238 = ITEMS.register("uranium_isotope238", PropertyLessItem::new);
-    public static final RegistryObject<Item> URANIUM_ISOTOPE235 = ITEMS.register("uranium_isotope235", PropertyLessItem::new);
+    public static final Item SILICON_WAFER = new WaferText(BaseSettings.maxDamage(4));
+    public static final Item URANIUM_SILICATE = new PropertyLessItem();
+    public static final Item URANIUM_SILICON_PLATE = new PropertyLessItem();
+    public static final Item TRIURANIUM_OCTAOXIDE = new PropertyLessItem();
+    public static final Item TERABIT = new PropertyLessItem();
+    public static final Item TERABYTE = new PropertyLessItem();
+    public static final Item TITANIUM_INGOT = new PropertyLessItem();
+    public static final Item URANIUM_DIOXIDE = new PropertyLessItem();
+    public static final Item URANIUM_MELT = new PropertyLessItem();
+    public static final Item URANIUM_ISOTOPE238 = new PropertyLessItem();
+    public static final Item URANIUM_ISOTOPE235 = new PropertyLessItem();
     //for tools
-    public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> TRUSTTY_SCREWDRIVER = ITEMS.register("trusty_screwdriver", () -> new TrustyScrewDriverItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final RegistryObject<Item> SOLDERING_IRON = ITEMS.register("soldering_iron", () -> new soldering_iron(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    */public static final Item JEREMY_LAPTOP = new LaptopClass(new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM));
+   // public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    //public static final RegistryObject<Item> TRUSTTY_SCREWDRIVER = ITEMS.register("trusty_screwdriver", () -> new TrustyScrewDriverItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    //public static final RegistryObject<Item> SOLDERING_IRON = ITEMS.register("soldering_iron", () -> new soldering_iron(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    public static final Item JEREMY_LAPTOP = new LaptopClass(new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM));
     //for weapons
     private static final FabricItemSettings WEAPONS = new FabricItemSettings().group(CodeLyokoMain.LYOKO_WEAPONS);
     public static final SwordItem DIGITAL_SABER = new SaberKatana(LyokoTiers.LyokoSamurai, 25, -0.9f, WEAPONS);
@@ -200,8 +200,20 @@ public final class ModItems {
            .put("apu_die_arm",APU_DIE_ARM)
            .put("apu_die_x86",APU_DIE_x86)
            .put("apu_die_asic",APU_DIE_ASIC)
+            //other computer components
            .put("bit",BIT)
             .put("story_book",STORY_BOOK)
+            .put("silicon_wafer",SILICON_WAFER)
+            .put("uranium_silicate",URANIUM_SILICATE)
+            .put("uranium_silicon_plate",URANIUM_SILICON_PLATE)
+            .put("triuranium_octaoxide",TRIURANIUM_OCTAOXIDE)
+            .put("terabit",TERABIT)
+            .put("terabyte",TERABYTE)
+            .put("titanium_ingot",TITANIUM_INGOT)
+            .put("uranium_dioxide",URANIUM_DIOXIDE)
+            .put("uranium_melt",URANIUM_MELT)
+            .put("uranium_isotope238",URANIUM_ISOTOPE238)
+            .put("uranium_isotope235",URANIUM_ISOTOPE235)
             //tools
             .put("jeremys_laptop",JEREMY_LAPTOP)
             //weapons

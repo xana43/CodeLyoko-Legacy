@@ -5,6 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
