@@ -1,10 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
+import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
+import net.fabricmc.fabric.impl.datagen.FabricDataGenHelper;
 import net.minecraft.nbt.NbtCompound;
+import org.spongepowered.asm.mixin.FabricUtil;
 
 public record CapabilityPlayerClassSync(NbtCompound playerClassTag, PlayerClassType playerClassType) {
-/*
+
+
+    /*
     public static void Sync(PlayerClassType classType)
     {
       PacketHandler.INSTANCE.send(PacketDistributor.SERVER.with(() -> null),new CapabilityPlayerClassSync(classType.getClassTag(),classType));

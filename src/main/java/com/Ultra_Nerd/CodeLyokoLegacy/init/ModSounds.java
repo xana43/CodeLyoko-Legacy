@@ -33,8 +33,10 @@ public final class ModSounds {
     public static final SoundEvent MOUNTAIN = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("mountainsector"));
     public static final SoundEvent OCEAN = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("digital_ocean"));
     public static final SoundEvent VOLCANO = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("volcano_replika_music"));
+    public static final SoundEvent OPENTOWERGUISOUND = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("tower_gui_sound"));
 
     public static final List<SoundEvent> SOUNDS = List.of(
+            OPENTOWERGUISOUND,
             LAZY_WARRIOR,
             LAZY_FELINE,
             LAZY_NINJA,

@@ -1,7 +1,30 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens;
 
-public final class StoryBookGUI /*extends BookViewScreen*/ {
-/*
+import net.minecraft.client.gui.screen.ingame.BookScreen;
+import net.minecraft.text.StringVisitable;
+
+public final class StoryBookGUI extends BookScreen {
+
+    public StoryBookGUI(StringVisitable[] story,int pages)
+    {
+        super(new Contents() {
+            @Override
+            public int getPageCount() {
+                return pages;
+            }
+
+            @Override
+            public StringVisitable getPageUnchecked(final int index) {
+                return story[index];
+            }
+        });
+    }
+
+    @Override
+    public boolean shouldPause() {
+        return false;
+    }
+    /*
     public StoryBookGUI(FormattedText[] story, int AmountOfPages) {
         super(new BookAccess() {
             @Override

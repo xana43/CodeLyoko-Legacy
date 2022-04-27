@@ -1,7 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 
-public final class TowerGUI /*extends AbstractContainerScreen<TowerInterfaceContainer>*/ {
+import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.screen.GenericContainerScreenHandler;
+import net.minecraft.text.Text;
+
+public final class TowerGUI extends GenericContainerScreen/*extends AbstractContainerScreen<TowerInterfaceContainer>*/ {
+    public TowerGUI(final GenericContainerScreenHandler handler, final PlayerInventory inventory, final Text title) {
+        super(handler, inventory, title);
+    }
     /*
 
     private static final ResourceLocation TEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/towerinterface.png");

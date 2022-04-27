@@ -3,11 +3,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoArmorMaterial;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoTiers;
-import com.Ultra_Nerd.CodeLyokoLegacy.items.ComputerItem;
-import com.Ultra_Nerd.CodeLyokoLegacy.items.LaptopClass;
-import com.Ultra_Nerd.CodeLyokoLegacy.items.PropertyLessItem;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.items.soldering_iron;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.*;
 import com.google.common.collect.ImmutableMap;
 import com.sun.jna.Memory;
@@ -138,8 +135,8 @@ public final class ModItems {
     public static final RegistryObject<Item> RAW_POLYCARBONATE = ITEMS.register("raw_polycarbonate", PropertyLessItem::new);
     public static final RegistryObject<Item> SOLID_QUANTUM = ITEMS.register("solid_quantum", PropertyLessItem::new);
     public static final RegistryObject<Item> SOLDER_BLOB = ITEMS.register("solder_blob", PropertyLessItem::new);
-    public static final RegistryObject<WrittenBookItem> STORY_BOOK = ITEMS.register("story_book", () -> new Entry1(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).stacksTo(1)));
-    public static final RegistryObject<Item> SILICON_WAFER = ITEMS.register("silicon_wafer", () -> new WaferText(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).durability(4)));
+*/    public static final WrittenBookItem STORY_BOOK = new Entry1(BaseSettings.maxCount(1));
+   /* public static final RegistryObject<Item> SILICON_WAFER = ITEMS.register("silicon_wafer", () -> new WaferText(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).durability(4)));
     public static final RegistryObject<Item> URANIUM_SILICATE = ITEMS.register("uranium_silicate", PropertyLessItem::new);
     public static final RegistryObject<Item> URANIUM_SILICON_PLATE = ITEMS.register("uranium_silicon_plate", PropertyLessItem::new);
     public static final RegistryObject<Item> TRIURANIUM_OCTAOXIDE = ITEMS.register("triuranium_octaoxide", PropertyLessItem::new);
@@ -154,7 +151,7 @@ public final class ModItems {
     public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final RegistryObject<Item> TRUSTTY_SCREWDRIVER = ITEMS.register("trusty_screwdriver", () -> new TrustyScrewDriverItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final RegistryObject<Item> SOLDERING_IRON = ITEMS.register("soldering_iron", () -> new soldering_iron(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-*/    public static final Item JEREMY_LAPTOP = new LaptopClass(new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM));
+    */public static final Item JEREMY_LAPTOP = new LaptopClass(new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM));
     //for weapons
     private static final FabricItemSettings WEAPONS = new FabricItemSettings().group(CodeLyokoMain.LYOKO_WEAPONS);
     public static final SwordItem DIGITAL_SABER = new SaberKatana(LyokoTiers.LyokoSamurai, 25, -0.9f, WEAPONS);
@@ -204,6 +201,7 @@ public final class ModItems {
            .put("apu_die_x86",APU_DIE_x86)
            .put("apu_die_asic",APU_DIE_ASIC)
            .put("bit",BIT)
+            .put("story_book",STORY_BOOK)
             //tools
             .put("jeremys_laptop",JEREMY_LAPTOP)
             //weapons

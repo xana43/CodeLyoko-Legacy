@@ -2,23 +2,25 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.LapTopHeirarichy;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
+import org.spongepowered.asm.mixin.FabricUtil;
 
 
 public final class MainLaptopScreen extends Screen {
 
     private static final Identifier TEXTURE = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase_pot.png");
-    private int x/*, y*/;
+    private static int x/*, y*/;
     private static final int xSize = 1024, ySize = 1024;
     private ButtonWidget imageButton;
 
-    public MainLaptopScreen(@NotNull Text titleIn) {
-        super(titleIn);
+    public MainLaptopScreen() {
+        super(Text.of(""));
 
 
     }

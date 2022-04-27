@@ -1,13 +1,37 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.TextUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.StoryBookGUI;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.WrittenBookItem;
+import net.minecraft.text.StringVisitable;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 public final class Entry1 extends WrittenBookItem {
     public Entry1(@NotNull Settings builder) {
         super(builder);
     }
-/*
+
+
+
+    private static final StringVisitable[] entry = TextUtil.textArray(ConstantUtil.StoryEntry.Entry1);
+
+    @Override
+    public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
+        if(world.isClient)
+        {
+            MinecraftClient.getInstance().setScreen(new StoryBookGUI(entry, TextUtil.textArrayLengthToPage(entry)));
+        }
+        return super.use(world, user, hand);
+    }
+
+    /*
     @Nonnull
     @Override
     public Component getName(@Nonnull ItemStack stack) {
