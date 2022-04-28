@@ -131,6 +131,25 @@ public final class ModBiome {
                     .generationSettings(volcanoGen.build())
                     .build();
         }
+
+
+        public static final Biome SECTOR_5 = buildSector5();
+            private static Biome buildSector5()
+            {
+                SpawnSettings.Builder sector5Spawn = new SpawnSettings.Builder();
+                GenerationSettings.Builder sector5Gen = new GenerationSettings.Builder();
+                return (new Biome.Builder())
+                        .category(Biome.Category.NONE)
+                        .downfall(0)
+                        .precipitation(Biome.Precipitation.NONE)
+                        .temperature(13)
+                        .effects(new BiomeEffects.Builder().music(new MusicSound(ModSounds.SECTOR5,0,0,true)).fogColor(2387)
+                                .waterColor(2387).waterFogColor(2387).skyColor(2387).build())
+                        .spawnSettings(sector5Spawn.build())
+                        .generationSettings(sector5Gen.build())
+                        .build();
+            }
+
     public static final ImmutableMap<String,Biome> BIOME_MAP = ImmutableMap.<String, Biome>builder()
             .put("forest_sector",FOREST_SECTOR)
             .put("desert_sector",DESERT_SECTOR)
@@ -140,6 +159,10 @@ public final class ModBiome {
             .put("void_frontier",FRONTEIR)
             .put("volcano_replika",VOLCANO)
             .build();
+
+
+
+
 /*
     //Registry keys
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, CodeLyokoMain.MOD_ID);

@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoLegacy.mixin.GeneratorTypeAccessor;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageBiomeProvider;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
 import io.github.ladysnake.locki.DefaultInventoryNodes;
 import io.github.ladysnake.locki.InventoryLock;
@@ -16,17 +17,12 @@ import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.client.world.GeneratorType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.DynamicRegistryManager;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.util.registry.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
@@ -51,17 +47,13 @@ private static <T>RegistryEntry<T> getEntry(Registry<T> reg,T value)
     return reg.getEntry(reg.getKey(value).orElseThrow()).orElseThrow();
 }
 
-private static final GeneratorType carthage = new GeneratorType("carthage") {
-    @Override
-    protected ChunkGenerator getChunkGenerator(final DynamicRegistryManager registryManager, final long seed) {
-        return new CarthageGenerator(registryManager.get(Registry.STRUCTURE_SET_KEY),null,null,null);
-    }
-};
+
 private static final String nbt = "first_join";
     @Override
     public void onInitialize() {
         GeckoLib.initialize();
-
+        Registry.register(Registry.CHUNK_GENERATOR,CodeLyokoPrefix("carthage_gen"), CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
+        Registry.register(Registry.BIOME_SOURCE,CodeLyokoPrefix("carthage_biome"), CarthageBiomeProvider.CODEC);
         //Registration
         ModBlocks.BLOCK_MAP.forEach((s, block) -> {
 
@@ -85,7 +77,7 @@ private static final String nbt = "first_join";
                 Registry.register(Registry.FLUID,CodeLyokoPrefix(s),fluid));
 
         ModParticles.PARTICLE_TYPE_IMMUTABLE_MAP.forEach((s, defaultParticleType) -> Registry.register(Registry.PARTICLE_TYPE,CodeLyokoPrefix(s),defaultParticleType));
-        GeneratorTypeAccessor.getValues().add(carthage);
+        //GeneratorTypeAccessor.getValues().add(carthage);
         //Attribute Registration
         FabricDefaultAttributeRegistry.register(ModEntities.BLOK, EntityBlok.createMonsterAttributes());
         //events
