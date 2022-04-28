@@ -97,3 +97,6 @@ publishing {
 		// retrieving dependencies.
 	}
 }
+loom{
+	accessWidenerPath = file("src/main/java/com/Ultra_Nerd/CodeLyokoLegacy/Util/LyokoAccessWidener.accesswidener")
+}

@@ -44,9 +44,11 @@ import java.util.concurrent.Executor;
 public final class CarthageGenerator extends ChunkGenerator{
 
 
-    public CarthageGenerator(final Registry<StructureSet> registry, final Optional<RegistryEntryList<StructureSet>> optional, final BiomeSource biomeSource) {
+    public CarthageGenerator(final Registry<StructureSet> registry, final Optional<RegistryEntryList<StructureSet>> optional, final BiomeSource biomeSource,final CustomGenSettings settings) {
         super(registry, optional, biomeSource);
+
     }
+
 
     @Override
     protected Codec<? extends ChunkGenerator> getCodec() {
@@ -67,6 +69,11 @@ public final class CarthageGenerator extends ChunkGenerator{
     public void carve(final ChunkRegion chunkRegion, final long seed, final BiomeAccess biomeAccess, final StructureAccessor structureAccessor, final Chunk chunk, final GenerationStep.Carver generationStep) {
 
     }
+
+
+
+
+
 
     @Override
     public void buildSurface(final ChunkRegion region, final StructureAccessor structures, final Chunk chunk) {
