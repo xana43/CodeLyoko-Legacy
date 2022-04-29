@@ -9,6 +9,9 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice.CustomIceSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.volcano.CustomVolcanoSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
+import com.mojang.blaze3d.systems.RenderSystem;
+import io.github.ladysnake.locki.impl.mixin.PlayerScreenHandlerAccessor;
+import io.github.ladysnake.locki.impl.mixin.client.InGameHudMixin;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -17,28 +20,38 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.fabricmc.fabric.api.renderer.v1.Renderer;
+import net.fabricmc.fabric.api.renderer.v1.RendererAccess;
+import net.fabricmc.fabric.api.renderer.v1.material.RenderMaterial;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
+import net.fabricmc.fabric.mixin.client.rendering.MixinInGameHud;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.gui.hud.InGameOverlayRenderer;
 import net.minecraft.client.gui.hud.PlayerListHud;
 import net.minecraft.client.gui.screen.BackupPromptScreen;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.particle.EmotionParticle;
 import net.minecraft.client.particle.SpellParticle;
-import net.minecraft.client.render.BackgroundRenderer;
-import net.minecraft.client.render.DimensionEffects;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.*;
 import net.minecraft.client.resource.ClientBuiltinResourcePackProvider;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.screen.PlayerScreenHandler;
+import net.minecraft.server.dedicated.gui.PlayerStatsGui;
+import net.minecraft.sound.MusicSound;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib3.util.RenderUtils;
 
 import java.util.UUID;
 
@@ -65,9 +78,9 @@ public record CodeLyokoClient() implements ClientModInitializer {
         });
         //client events
         registerItemPredicates();
-        registerParticle();
 
 
+        //effect registry
         DimensionEffectsAccessor.getIdentifierMap().put(CodeLyokoMain.CodeLyokoPrefix("codelyoko_effects_general"), new DimensionEffects(Float.NaN,false, DimensionEffects.SkyType.NONE,true,false) {
             @Override
             public Vec3d adjustFogColor(final Vec3d color, final float sunHeight) {
@@ -89,21 +102,32 @@ public record CodeLyokoClient() implements ClientModInitializer {
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.mountainSectorWorld,new CustomCarthadgeSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.iceSectorWorld,new CustomIceSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld,new CustomVolcanoSky());
-        ClientTickEvents.START_CLIENT_TICK.register(CodeLyokoClient::dimensionHud);
-    }
-    private static void dimensionHud(final MinecraftClient client)
-    {
-        if(client.player != null) {
-            if (DimensionCheck.playerNotInVanillaWorld(client.player)) {
-                BackgroundRenderer.applyFog(client.gameRenderer.getCamera(), null, Float.NaN, false);
-
-            }
-        }
-    }
-    private static void registerParticle()
-    {
         ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE, SpellParticle.DefaultFactory::new);
+        //custom hud
+        HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
+            final MinecraftClient mc = MinecraftClient.getInstance();
+            final Identifier LYOKOHEALTH = CodeLyokoMain.CodeLyokoPrefix("textures/gui/lyoko_health_bar.png");
+            if(mc != null) {
+                if(mc.player != null) {
+                    if(DimensionCheck.playerNotInVanillaWorld(mc.player)) {
+                        RenderSystem.setShaderTexture(0, LYOKOHEALTH);
+                        matrixStack.push();
+
+                        mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 7) - 2, mc.getWindow().getScaledHeight() >> 11, 0, 0, 33, 254);
+                        mc.inGameHud.drawTexture(matrixStack,(mc.getWindow().getScaledWidth() >> 6) - 1,(mc.getWindow().getScaledHeight() >> 11),90,0,25,(int) ((12.7) * mc.player.getHealth()));
+
+                        matrixStack.pop();
+                    }
+                }
+            }
+        });
+
     }
+
+
+
+
+
     public void receiveEntityPacket() {
         ClientSidePacketRegistry.INSTANCE.register(PacketID, (ctx, byteBuf) -> {
             final EntityType<?> et = Registry.ENTITY_TYPE.get(byteBuf.readVarInt());

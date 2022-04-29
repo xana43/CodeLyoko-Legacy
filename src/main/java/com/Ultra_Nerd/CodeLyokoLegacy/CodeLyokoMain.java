@@ -2,30 +2,52 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ServerSaveHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoLegacy.mixin.GeneratorTypeAccessor;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageBiomeProvider;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
-import io.github.ladysnake.locki.DefaultInventoryNodes;
-import io.github.ladysnake.locki.InventoryLock;
-import io.github.ladysnake.locki.Locki;
+import com.mojang.datafixers.DataFix;
+import dev.onyxstudios.cca.api.v3.entity.PlayerSyncCallback;
+import io.github.ladysnake.locki.*;
+import io.github.ladysnake.locki.impl.InventoryLockArgumentType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.loader.impl.util.log.Log;
+import net.minecraft.entity.ai.brain.Memory;
+import net.minecraft.entity.ai.brain.MemoryModuleType;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandler;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.map.MapState;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.WorldSavePath;
 import net.minecraft.util.registry.*;
+import net.minecraft.world.PersistentState;
+import net.minecraft.world.PersistentStateManager;
+import net.minecraft.world.event.GameEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public record CodeLyokoMain() implements ModInitializer {
@@ -48,12 +70,11 @@ private static <T>RegistryEntry<T> getEntry(Registry<T> reg,T value)
 }
 
 
-private static final String nbt = "first_join";
+
     @Override
     public void onInitialize() {
         GeckoLib.initialize();
-        Registry.register(Registry.CHUNK_GENERATOR,CodeLyokoPrefix("carthage_gen"), CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
-        Registry.register(Registry.BIOME_SOURCE,CodeLyokoPrefix("carthage_biome"), CarthageBiomeProvider.CODEC);
+
         //Registration
         ModBlocks.BLOCK_MAP.forEach((s, block) -> {
 
@@ -91,8 +112,35 @@ private static final String nbt = "first_join";
 
         });
 
+
+        Registry.register(Registry.CHUNK_GENERATOR,CodeLyokoPrefix("carthage_chunkgen"), CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
+        Registry.register(Registry.BIOME_SOURCE,CodeLyokoPrefix("carthage_biome"), CarthageBiomeProvider.CARTHAGE_BIOME_PROVIDER_CODEC);
+        SetupFunctions();
+    }
+    private static final TrackedData<NbtCompound> peristent = DataTracker.registerData(ServerPlayerEntity.class,TrackedDataHandlerRegistry.NBT_COMPOUND);
+
+    private static void SetupFunctions(){
+
+        final String nbtdat = "first_join";
+        final AtomicReference<NbtCompound> t = new AtomicReference<>(new NbtCompound());
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-            handler.player.getInventory().setStack(handler.player.getInventory().getEmptySlot(),ItemStack.EMPTY);
+            handler.player.getDataTracker().startTracking(peristent,t.getAcquire());
+            if(!handler.player.getDataTracker().get(peristent).contains(nbtdat))
+            {
+                handler.player.getDataTracker().get(peristent).putBoolean(nbtdat,true);
+                handler.player.getInventory().setStack(handler.player.getInventory().getEmptySlot(),new ItemStack(ModItems.STORY_BOOK));
+
+            }
+            else
+            {
+
+                t.set(handler.player.getDataTracker().get(peristent));
+            }
+
+
+
+
+
         });
         ServerTickEvents.START_WORLD_TICK.register(world -> world.getPlayers().forEach(serverPlayerEntity -> {
 
@@ -100,7 +148,9 @@ private static final String nbt = "first_join";
             {
                 serverPlayerEntity.getHungerManager().setExhaustion(0);
                 serverPlayerEntity.getHungerManager().setSaturationLevel(5);
+
                 CodeLyokoMain.LYOKO_LOCK.lock(serverPlayerEntity, DefaultInventoryNodes.CRAFTING);
+
                 //CodeLyokoMain.LYOKO_LOCK.lock(serverPlayerEntity, DefaultInventoryNodes.MAIN_INVENTORY);
             } else if (CodeLyokoMain.LYOKO_LOCK.isLocking(serverPlayerEntity,DefaultInventoryNodes.CRAFTING) /*&& CodeLyokoMain.LYOKO_LOCK.isLocking(serverPlayerEntity,DefaultInventoryNodes.MAIN_INVENTORY)*/) {
                 CodeLyokoMain.LYOKO_LOCK.unlock(serverPlayerEntity,DefaultInventoryNodes.CRAFTING);
@@ -109,8 +159,6 @@ private static final String nbt = "first_join";
 
 
         }));
-
-
     }
 
 

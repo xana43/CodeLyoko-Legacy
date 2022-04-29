@@ -18,6 +18,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryEntryList;
 import net.minecraft.world.*;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
 import net.minecraft.world.chunk.Chunk;
@@ -51,16 +52,17 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
         carthageGeneratorInstance ->
                 carthageGeneratorInstance.group(
                         RegistryOps.createRegistryCodec(Registry.STRUCTURE_SET_KEY).forGetter(CarthageGenerator::getStructRegistry),
+                        RegistryOps.createRegistryCodec(Registry.BIOME_KEY).forGetter(CarthageGenerator::getThisBiomeRegistry),
                         SETTINGS_CODEC.fieldOf("settings").forGetter(CarthageGenerator::getCarthageSettings)
                 ).apply(carthageGeneratorInstance,CarthageGenerator::new)
 );
 
     private final CustomGenSettings settings;
-    private final Registry<StructureSet> structureSets;
-    public CarthageGenerator(@NotNull Registry<StructureSet> structureSets, CustomGenSettings settings) {
-        super(structureSets,getSet(structureSets), new CarthageBiomeProvider(BuiltinRegistries.BIOME));
+    //private final Registry<StructureSet> structureSets;
+    public CarthageGenerator(@NotNull Registry<StructureSet> structureSets, Registry<Biome> registry, CustomGenSettings settings) {
+        super(structureSets,getSet(structureSets), new CarthageBiomeProvider(registry));
         this.settings = settings;
-        this.structureSets = structureSets;
+        //this.structureSets = structureSets;
 
     }
 
@@ -69,16 +71,19 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
     private static @NotNull Optional<RegistryEntryList<StructureSet>> getSet(@NotNull Registry<StructureSet> thisStructureRegistry)
     {
         RegistryEntryList.Named<StructureSet> structureSetNamed = thisStructureRegistry.getOrCreateEntryList(TagKey.of(Registry.STRUCTURE_SET_KEY,
-                CodeLyokoMain.CodeLyokoPrefix("carthage_chunkgen")));
+                CodeLyokoMain.CodeLyokoPrefix("carthage_chunkgen_struct")));
         return Optional.of(structureSetNamed);
     }
 
-
+    public Registry<Biome> getThisBiomeRegistry()
+    {
+        return ((CarthageBiomeProvider)biomeSource).getBiomeRegistry();
+    }
 
 
     public @NotNull Registry<StructureSet> getStructRegistry()
     {
-        return structureSets;
+        return field_37053;
     }
 
     public CustomGenSettings getCarthageSettings()
@@ -95,7 +100,7 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
 
     @Override
     public @NotNull ChunkGenerator withSeed(long p_62156_) {
-        return new CarthageGenerator(getStructRegistry(),settings);
+        return new CarthageGenerator(getStructRegistry(),getThisBiomeRegistry(),settings);
     }
 
     @Override

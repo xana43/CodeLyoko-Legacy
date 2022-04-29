@@ -98,5 +98,5 @@ publishing {
 	}
 }
 loom{
-	accessWidenerPath = file("src/main/java/com/Ultra_Nerd/CodeLyokoLegacy/Util/LyokoAccessWidener.accesswidener")
+	accessWidenerPath = file("src/main/resources/LyokoAccessWidener.accesswidener")
 }

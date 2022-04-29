@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBiome;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.dynamic.RegistryOps;
@@ -14,31 +15,31 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public final class CarthageBiomeProvider extends BiomeSource {
     private final @NotNull Registry<Biome> thisRegistry;
     private final @NotNull RegistryEntry<Biome> biomeHolder;
-    public static final Codec<CarthageBiomeProvider> CARTHAGE_BIOME_PROVIDER_CODEC = RegistryOps.createRegistryCodec(Registry.BIOME_KEY)
+    public static final Codec<CarthageBiomeProvider> CARTHAGE_BIOME_PROVIDER_CODEC = RegistryOps.createRegistryCodec(BuiltinRegistries.BIOME.getKey())
             .xmap(CarthageBiomeProvider::new,CarthageBiomeProvider::getBiomeRegistry).codec();
-    private static final List<RegistryKey<Biome>> SPAWN = Collections.singletonList(RegistryKey.of(Registry.BIOME_KEY,RegistryEntry.of(ModBiome.SECTOR_5).getKey().orElseThrow().getValue()));
+    private static final List<RegistryKey<Biome>> SPAWN = Collections.singletonList(RegistryKey.of(Registry.BIOME_KEY, ModBiome.RegisteredBiomes.SECTOR5.getIdentifier()));
 
 
     public CarthageBiomeProvider(@NotNull Registry<Biome> registry)
     {
-        super((Stream<RegistryEntry<Biome>>) getSpawnBiomes(registry));
+        super(getSpawnBiomes(registry));
         this.thisRegistry = registry;
-        this.biomeHolder = registry.getEntry(RegistryKey.of(Registry.BIOME_KEY,RegistryEntry.of(ModBiome.SECTOR_5).getKey().orElseThrow().getValue())).get();
+        this.biomeHolder = registry.getOrCreateEntry(RegistryKey.of(registry.getKey(),ModBiome.RegisteredBiomes.SECTOR5.getIdentifier()));
     }
 
 
-    public static List<Optional<RegistryEntry<Biome>>> getSpawnBiomes(@NotNull Registry<Biome> registry)
+    public static List<RegistryEntry<Biome>> getSpawnBiomes(@NotNull Registry<Biome> registry)
     {
-        return SPAWN.stream().map(b -> registry
-                .getEntry(RegistryKey.of(BuiltinRegistries.BIOME.getKey(), b.getValue()))).collect(Collectors.toList());
+
+        return SPAWN.stream().map(registry::getOrCreateEntry).collect(Collectors.toList());
     }
+
+
 
     public @NotNull Registry<Biome> getBiomeRegistry()
     {

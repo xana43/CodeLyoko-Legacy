@@ -1,12 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.entity.boss.BossBar;
 import net.minecraft.sound.MusicSound;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public final class ModBiome {
 
@@ -17,7 +20,7 @@ public final class ModBiome {
 
     /*Forest Sector*/
        // private static final SurfaceBuilder FOREST_CARVER = new SurfaceBuilder(null,ModBlocks.BORNITE_ORE.getDefaultState(), 0,0,null);
-        public static final Biome FOREST_SECTOR  = buildForest();
+        private static final Biome FOREST_SECTOR  = buildForest();
         private static Biome buildForest()
         {
             SpawnSettings.Builder forestSpawns = new SpawnSettings.Builder();
@@ -35,7 +38,7 @@ public final class ModBiome {
                     .build();
         }
         //Desert Sector
-    public static final Biome DESERT_SECTOR = buildDesert();
+    private static final Biome DESERT_SECTOR = buildDesert();
         private static Biome buildDesert()
         {
             SpawnSettings.Builder desertSpawns = new SpawnSettings.Builder();
@@ -52,7 +55,7 @@ public final class ModBiome {
                     .build();
         }
 
-    public static final Biome ICE_SECTOR = buildIce();
+    private static final Biome ICE_SECTOR = buildIce();
         private static Biome buildIce()
         {
             SpawnSettings.Builder iceSpawns = new SpawnSettings.Builder();
@@ -68,7 +71,7 @@ public final class ModBiome {
                     .temperature(-3)
                     .build();
         }
-    public static final Biome DIGITAL_OCEAN = buildOcean();
+    private static final Biome DIGITAL_OCEAN = buildOcean();
         private static Biome buildOcean()
         {
             SpawnSettings.Builder oceanSpawns = new SpawnSettings.Builder();
@@ -84,7 +87,7 @@ public final class ModBiome {
                     .spawnSettings(oceanSpawns.build())
                     .build();
         }
-    public static final Biome MOUNTAIN_SECTOR = buildMountain();
+    private static final Biome MOUNTAIN_SECTOR = buildMountain();
         private static Biome buildMountain()
         {
             final SpawnSettings.Builder mountainSpawns = new SpawnSettings.Builder();
@@ -100,23 +103,18 @@ public final class ModBiome {
                     .spawnSettings(mountainSpawns.build())
                     .build();
         }
-    public static final Biome FRONTEIR = buildFrontier();
-        private static Biome buildFrontier()
-        {
-            final SpawnSettings.Builder frontierSpawn = new SpawnSettings.Builder();
-            final GenerationSettings.Builder frontierGen = new GenerationSettings.Builder();
-            return (new Biome.Builder())
-                    .category(Biome.Category.NONE)
-                    .downfall(0)
-                    .temperature(-243)
-                    .temperatureModifier(Biome.TemperatureModifier.FROZEN)
-                    .effects(new BiomeEffects.Builder().skyColor(16777215).waterColor(16777215).waterFogColor(16777215).fogColor(16777215).build())
-                    .spawnSettings(frontierSpawn.build())
-                    .precipitation(Biome.Precipitation.NONE)
-                    .generationSettings(frontierGen.build())
-                    .build();
-        }
-    public static final Biome VOLCANO = buildVolcano();
+    private static final Biome FRONTEIR = new Biome.Builder()
+            .category(Biome.Category.NONE)
+            .downfall(0)
+            .temperature(-243)
+            .temperatureModifier(Biome.TemperatureModifier.FROZEN)
+            .effects(new BiomeEffects.Builder().skyColor(16777215).waterColor(16777215).waterFogColor(16777215).fogColor(16777215).build())
+            .spawnSettings(new SpawnSettings.Builder().build())
+            .precipitation(Biome.Precipitation.NONE)
+            .generationSettings(new GenerationSettings.Builder().build())
+            .build();
+
+    private static final Biome VOLCANO = buildVolcano();
         private static Biome buildVolcano()
         {
             SpawnSettings.Builder volcanoSpawn = new SpawnSettings.Builder();
@@ -133,7 +131,7 @@ public final class ModBiome {
         }
 
 
-        public static final Biome SECTOR_5 = buildSector5();
+        private static final Biome SECTOR_5 = buildSector5();
             private static Biome buildSector5()
             {
                 SpawnSettings.Builder sector5Spawn = new SpawnSettings.Builder();
@@ -151,6 +149,7 @@ public final class ModBiome {
             }
 
     public static final ImmutableMap<String,Biome> BIOME_MAP = ImmutableMap.<String, Biome>builder()
+            .put("sector5",SECTOR_5)
             .put("forest_sector",FOREST_SECTOR)
             .put("desert_sector",DESERT_SECTOR)
             .put("ice_sector",ICE_SECTOR)
@@ -158,9 +157,47 @@ public final class ModBiome {
             .put("mountain_sector",MOUNTAIN_SECTOR)
             .put("void_frontier",FRONTEIR)
             .put("volcano_replika",VOLCANO)
+
             .build();
 
 
+
+    public enum RegisteredBiomes
+    {
+
+
+        SECTOR5(ModBiome.SECTOR_5),
+        FOREST_SECTOR(ModBiome.FOREST_SECTOR),
+        DESERT_SECTOR(ModBiome.DESERT_SECTOR),
+        ICE_SECTOR(ModBiome.ICE_SECTOR),
+        DIGITAL_OCEAN(ModBiome.DIGITAL_OCEAN),
+        MOUNTAIN_SECTOR(ModBiome.MOUNTAIN_SECTOR),
+        FRONTIER(ModBiome.FRONTEIR),
+        VOLCANO(ModBiome.VOLCANO);
+
+        private final Identifier BiomeLocation;
+        RegisteredBiomes(Biome biomeToIdentify)
+        {
+            this.BiomeLocation =   identiferOfBiome(biomeToIdentify);
+
+        }
+        public final Identifier getIdentifier(){return BiomeLocation;}
+        private static Identifier identiferOfBiome(Biome biome)
+        {
+            final AtomicReference<Identifier> output = new AtomicReference<Identifier>();
+            BIOME_MAP.forEach((s, biome1) -> {
+
+                if(biome == biome1)
+                {
+                    output.set(CodeLyokoMain.CodeLyokoPrefix(s));
+                }
+            });
+
+            return output.get();
+
+        }
+
+    }
 
 
 /*

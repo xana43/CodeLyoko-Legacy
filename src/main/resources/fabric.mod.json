@@ -23,6 +23,9 @@
     ],
     "client":[
         "com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoClient"
+    ],
+    "server":[
+        "com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoServer"
     ]
   },
   "mixins": [
