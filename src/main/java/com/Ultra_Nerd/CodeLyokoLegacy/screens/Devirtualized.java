@@ -1,143 +1,148 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.google.common.collect.Lists;
+import net.minecraft.client.gui.screen.ConfirmScreen;
+import net.minecraft.client.gui.screen.SaveLevelScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.*;
+import net.minecraft.util.Formatting;
+import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public final class Devirtualized extends Screen {
 
-    private int delayTicker;
-   // private final @org.jetbrains.annotations.Nullable Text causeOfDeath;
-    //private final boolean hardcore;
-    private Text deathScore;
-    private final List<Button> exitButtons = Lists.newArrayList();
 
-    protected Devirtualized(final Text title) {
-        super(title);
-    }
-/*
-    public Devirtualized(@javax.annotation.Nullable Component pCauseOfDeath, boolean pHardcore) {
-        super(new Text(pHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title").withStyle(Style.EMPTY.withFont(CodeLyokoMain.CodeLyokoPrefix("gunship"))));
-        this.causeOfDeath = pCauseOfDeath;
-        this.hardcore = pHardcore;
+
+
+    private int ticksSinceDeath;
+    private final Text message;
+    private final boolean isHardcore;
+    private Text scoreText;
+    private final List<ButtonWidget> buttons = Lists.newArrayList();
+
+    public Devirtualized(@Nullable Text message, boolean isHardcore) {
+        super(new TranslatableText(isHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title"));
+        this.message = message;
+        this.isHardcore = isHardcore;
     }
 
     protected void init() {
-        this.delayTicker = 0;
-        this.exitButtons.clear();
-        this.exitButtons.add(this.addRenderableWidget(new Button((this.width >> 1) - 100, (this.height >> 2) + 72, 200, 20, this.hardcore ? new TranslatableComponent("deathScreen.spectate") : new TranslatableComponent("deathScreen.respawn"), (p_95930_) -> {
-            assert this.minecraft != null;
-            assert this.minecraft.player != null;
-            this.minecraft.player.respawn();
-            this.minecraft.setScreen(null);
+        this.ticksSinceDeath = 0;
+        this.buttons.clear();
+        this.buttons.add((ButtonWidget)this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height / 4 + 72, 200, 20, this.isHardcore ? new TranslatableText("deathScreen.spectate") : new TranslatableText("deathScreen.respawn"), (button) -> {
+            this.client.player.requestRespawn();
+            this.client.setScreen((Screen)null);
         })));
-        this.exitButtons.add(this.addRenderableWidget(new Button((this.width >> 1) - 100, (this.height >> 2) + 96, 200, 20, new TranslatableComponent("deathScreen.titleScreen"), (p_95925_) -> {
-            if (this.hardcore) {
-                confirmResult(true);
-                this.exitToTitleScreen();
+        this.buttons.add((ButtonWidget)this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height / 4 + 96, 200, 20, new TranslatableText("deathScreen.titleScreen"), (button) -> {
+            if (this.isHardcore) {
+                this.quitLevel();
             } else {
-                final ConfirmScreen confirmscreen = new ConfirmScreen(this::confirmResult, new TranslatableComponent("deathScreen.quit.confirm"), TextComponent.EMPTY, new TranslatableComponent("deathScreen.titleScreen"), new TranslatableComponent("deathScreen.respawn"));
-                assert this.minecraft != null;
-                this.minecraft.setScreen(confirmscreen);
-                confirmscreen.setDelay(20);
+                ConfirmScreen confirmScreen = new ConfirmScreen(this::onConfirmQuit, new TranslatableText("deathScreen.quit.confirm"), LiteralText.EMPTY, new TranslatableText("deathScreen.titleScreen"), new TranslatableText("deathScreen.respawn"));
+                this.client.setScreen(confirmScreen);
+                confirmScreen.disableButtons(20);
             }
         })));
 
-        for(Button button : this.exitButtons) {
-            button.active = false;
+        ButtonWidget buttonWidget;
+        for(Iterator var1 = this.buttons.iterator(); var1.hasNext(); buttonWidget.active = false) {
+            buttonWidget = (ButtonWidget)var1.next();
         }
 
-        this.deathScore = (new TranslatableComponent("deathScreen.score")).append(": ").append((new TextComponent(Integer.toString(this.minecraft.player.getScore()))).withStyle(ChatFormatting.YELLOW));
+        this.scoreText = (new TranslatableText("deathScreen.score")).append(": ").append((new LiteralText(Integer.toString(this.client.player.getScore()))).formatted(Formatting.YELLOW));
     }
 
     public boolean shouldCloseOnEsc() {
         return false;
     }
 
-    private void confirmResult(boolean p_95932_) {
-        if (p_95932_) {
-            this.exitToTitleScreen();
+    private void onConfirmQuit(boolean quit) {
+        if (quit) {
+            this.quitLevel();
         } else {
-            assert Objects.requireNonNull(this.minecraft).player != null;
-            assert this.minecraft.player != null;
-            this.minecraft.player.respawn();
-            this.minecraft.setScreen(null);
+            this.client.player.requestRespawn();
+            this.client.setScreen((Screen)null);
         }
 
     }
 
-    private void exitToTitleScreen() {
-        assert this.minecraft != null;
-        if (this.minecraft.level != null) {
-            this.minecraft.level.disconnect();
+    private void quitLevel() {
+        if (this.client.world != null) {
+            this.client.world.disconnect();
         }
 
-        this.minecraft.clearLevel(new GenericDirtMessageScreen(new TranslatableComponent("menu.savingLevel")));
-        this.minecraft.setScreen(new TitleScreen());
+        this.client.disconnect(new SaveLevelScreen(new TranslatableText("menu.savingLevel")));
+        this.client.setScreen(new TitleScreen());
     }
 
-    public void render(@NotNull PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        this.fillGradient(pPoseStack, 0, 0, this.width, this.height, 1615855616, -1602211792);
-        pPoseStack.pushPose();
-        pPoseStack.scale(2.0F, 2.0F, 2.0F);
-        drawCenteredString(pPoseStack, this.font, this.title, this.width >> 2, 30, 16777215);
-        pPoseStack.popPose();
-        if (this.causeOfDeath != null) {
-            drawCenteredString(pPoseStack, this.font, this.causeOfDeath, this.width >> 1, 85, 16777215);
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        this.fillGradient(matrices, 0, 0, this.width, this.height, 1615855616, -1602211792);
+        matrices.push();
+        matrices.scale(2.0F, 2.0F, 2.0F);
+        drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2 / 2, 30, 16777215);
+        matrices.pop();
+        if (this.message != null) {
+            drawCenteredText(matrices, this.textRenderer, this.message, this.width / 2, 85, 16777215);
         }
 
-        drawCenteredString(pPoseStack, this.font, this.deathScore, this.width >> 1, 100, 16777215);
-        if (this.causeOfDeath != null && pMouseY > 85 && pMouseY < 94) {
-            Style style = this.getClickedComponentStyleAt(pMouseX);
-            this.renderComponentHoverEffect(pPoseStack, style, pMouseX, pMouseY);
-        }
-
-        super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-    }
-
-    @Nullable
-    private Style getClickedComponentStyleAt(int p_95918_) {
-        if (this.causeOfDeath == null) {
-            return null;
-        } else {
-            assert this.minecraft != null;
-            final int i = this.minecraft.font.width(this.causeOfDeath);
-            final int j = (this.width >> 1) - (i  >> 1);
-            final int k = (this.width >> 1) + (i >> 1);
-            return p_95918_ >= j && p_95918_ <= k ? this.minecraft.font.getSplitter().componentStyleAtWidth(this.causeOfDeath, p_95918_ - j) : null;
-        }
-    }
-
-    public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
-        if (this.causeOfDeath != null && pMouseY > 85.0D && pMouseY < 94) {
-            final Style style = this.getClickedComponentStyleAt((int)pMouseX);
-            if (style != null && style.getClickEvent() != null && style.getClickEvent().getAction() == ClickEvent.Action.OPEN_URL) {
-                this.handleComponentClicked(style);
-                return false;
+        drawCenteredText(matrices, this.textRenderer, this.scoreText, this.width / 2, 100, 16777215);
+        if (this.message != null && mouseY > 85) {
+            Objects.requireNonNull(this.textRenderer);
+            if (mouseY < 85 + 9) {
+                Style style = this.getTextComponentUnderMouse(mouseX);
+                this.renderTextHoverEffect(matrices, style, mouseX, mouseY);
             }
         }
 
-        return super.mouseClicked(pMouseX, pMouseY, pButton);
+        super.render(matrices, mouseX, mouseY, delta);
     }
 
-    public boolean isPauseScreen() {
+    @Nullable
+    private Style getTextComponentUnderMouse(int mouseX) {
+        if (this.message == null) {
+            return null;
+        } else {
+            int i = this.client.textRenderer.getWidth(this.message);
+            int j = this.width / 2 - i / 2;
+            int k = this.width / 2 + i / 2;
+            return mouseX >= j && mouseX <= k ? this.client.textRenderer.getTextHandler().getStyleAt(this.message, mouseX - j) : null;
+        }
+    }
+
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (this.message != null && mouseY > 85.0) {
+            Objects.requireNonNull(this.textRenderer);
+            if (mouseY < (double)(85 + 9)) {
+                Style style = this.getTextComponentUnderMouse((int)mouseX);
+                if (style != null && style.getClickEvent() != null && style.getClickEvent().getAction() == ClickEvent.Action.OPEN_URL) {
+                    this.handleTextClick(style);
+                    return false;
+                }
+            }
+        }
+
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    public boolean shouldPause() {
         return false;
     }
 
     public void tick() {
         super.tick();
-        ++this.delayTicker;
-        if (this.delayTicker == 20) {
-            for(Button button : this.exitButtons) {
-                button.active = true;
+        ++this.ticksSinceDeath;
+        ButtonWidget buttonWidget;
+        if (this.ticksSinceDeath == 20) {
+            for(Iterator var1 = this.buttons.iterator(); var1.hasNext(); buttonWidget.active = true) {
+                buttonWidget = (ButtonWidget)var1.next();
             }
         }
 
     }
-
- */
-
 }

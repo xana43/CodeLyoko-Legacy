@@ -2,47 +2,41 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ServerSaveHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
-import com.Ultra_Nerd.CodeLyokoLegacy.mixin.GeneratorTypeAccessor;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageBiomeProvider;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
-import com.mojang.datafixers.DataFix;
-import dev.onyxstudios.cca.api.v3.entity.PlayerSyncCallback;
-import io.github.ladysnake.locki.*;
-import io.github.ladysnake.locki.impl.InventoryLockArgumentType;
+import io.github.ladysnake.locki.DefaultInventoryNodes;
+import io.github.ladysnake.locki.InventoryLock;
+import io.github.ladysnake.locki.Locki;
+import io.github.ladysnake.locki.impl.mixin.PlayerScreenHandlerAccessor;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.loader.impl.util.log.Log;
-import net.minecraft.entity.ai.brain.Memory;
-import net.minecraft.entity.ai.brain.MemoryModuleType;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandler;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.map.MapState;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.WorldSavePath;
-import net.minecraft.util.registry.*;
-import net.minecraft.world.PersistentState;
-import net.minecraft.world.PersistentStateManager;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.util.registry.BuiltinRegistries;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
@@ -63,12 +57,6 @@ public record CodeLyokoMain() implements ModInitializer {
     {
         return new Identifier(MOD_ID,name);
     }
-
-private static <T>RegistryEntry<T> getEntry(Registry<T> reg,T value)
-{
-    return reg.getEntry(reg.getKey(value).orElseThrow()).orElseThrow();
-}
-
 
 
     @Override
@@ -104,7 +92,7 @@ private static <T>RegistryEntry<T> getEntry(Registry<T> reg,T value)
         //events
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
 
-            if(DimensionCheck.playerNotInVanillaWorld(player))
+            if(DimensionCheck.playerNotInVanillaWorld(player) && !player.isCreative())
             {
                 return ActionResult.FAIL;
             }
@@ -148,9 +136,11 @@ private static <T>RegistryEntry<T> getEntry(Registry<T> reg,T value)
             {
                 serverPlayerEntity.getHungerManager().setExhaustion(0);
                 serverPlayerEntity.getHungerManager().setSaturationLevel(5);
-
                 CodeLyokoMain.LYOKO_LOCK.lock(serverPlayerEntity, DefaultInventoryNodes.CRAFTING);
+                if(serverPlayerEntity.isDead())
+                {
 
+                }
                 //CodeLyokoMain.LYOKO_LOCK.lock(serverPlayerEntity, DefaultInventoryNodes.MAIN_INVENTORY);
             } else if (CodeLyokoMain.LYOKO_LOCK.isLocking(serverPlayerEntity,DefaultInventoryNodes.CRAFTING) /*&& CodeLyokoMain.LYOKO_LOCK.isLocking(serverPlayerEntity,DefaultInventoryNodes.MAIN_INVENTORY)*/) {
                 CodeLyokoMain.LYOKO_LOCK.unlock(serverPlayerEntity,DefaultInventoryNodes.CRAFTING);
@@ -159,6 +149,18 @@ private static <T>RegistryEntry<T> getEntry(Registry<T> reg,T value)
 
 
         }));
+        ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
+            if(entity instanceof ItemEntity itemEntity)
+            {
+                if(DimensionCheck.worldIsNotVanilla(world))
+                {
+                    itemEntity.kill();
+                }
+            }
+
+
+        });
+
     }
 
 

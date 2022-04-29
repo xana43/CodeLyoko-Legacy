@@ -8,65 +8,50 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage.CustomCarthadgeSk
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice.CustomIceSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.volcano.CustomVolcanoSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.mixin.HUD;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.github.ladysnake.locki.impl.mixin.PlayerScreenHandlerAccessor;
-import io.github.ladysnake.locki.impl.mixin.client.InGameHudMixin;
+import io.github.ladysnake.locki.impl.mixin.PlayerInventoryMixin;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.particle.v1.FabricSpriteProvider;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
+import net.fabricmc.fabric.api.client.screen.v1.Screens;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
-import net.fabricmc.fabric.api.renderer.v1.Renderer;
-import net.fabricmc.fabric.api.renderer.v1.RendererAccess;
-import net.fabricmc.fabric.api.renderer.v1.material.RenderMaterial;
-import net.fabricmc.fabric.impl.client.rendering.RenderingCallbackInvoker;
+import net.fabricmc.fabric.api.transfer.v1.item.PlayerInventoryStorage;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
-import net.fabricmc.fabric.mixin.client.rendering.MixinInGameHud;
-import net.fabricmc.loader.impl.gui.FabricGuiEntry;
+import net.fabricmc.fabric.mixin.screen.ScreenAccessor;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.Drawable;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.Mouse;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.gui.hud.InGameOverlayRenderer;
-import net.minecraft.client.gui.hud.PlayerListHud;
-import net.minecraft.client.gui.screen.BackupPromptScreen;
-import net.minecraft.client.gui.screen.Overlay;
+import net.minecraft.client.gui.screen.DeathScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.particle.EmotionParticle;
 import net.minecraft.client.particle.SpellParticle;
-import net.minecraft.client.render.*;
-import net.minecraft.client.render.model.SpriteAtlasManager;
-import net.minecraft.client.resource.ClientBuiltinResourcePackProvider;
-import net.minecraft.client.texture.Sprite;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.render.DimensionEffects;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.PlayerScreenHandler;
-import net.minecraft.server.dedicated.gui.PlayerStatsGui;
-import net.minecraft.sound.MusicSound;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.util.RenderUtils;
 
 import java.util.UUID;
 
 @Environment(EnvType.CLIENT)
 public record CodeLyokoClient() implements ClientModInitializer {
+
     public static final Identifier PacketID = CodeLyokoMain.CodeLyokoPrefix("spawn_packet");
     @Override
     public void onInitializeClient() {
@@ -109,21 +94,22 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
 
         });
-        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.mountainSectorWorld,new CustomCarthadgeSky());
+        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.carthage,new CustomCarthadgeSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.iceSectorWorld,new CustomIceSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld,new CustomVolcanoSky());
         ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE, SpellParticle.DefaultFactory::new);
         //custom hud
+
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
             final MinecraftClient mc = MinecraftClient.getInstance();
             final Identifier LYOKOHEALTH = CodeLyokoMain.CodeLyokoPrefix("textures/gui/lyoko_health_bar.png");
-            if(mc != null) {
+            //if(mc != null) {
                 if(mc.player != null) {
                     if(DimensionCheck.playerNotInVanillaWorld(mc.player)) {
                         RenderSystem.setShaderTexture(0, LYOKOHEALTH);
                         matrixStack.push();
 
-                        if(!mc.player.isCreative()) {
+                        if(!mc.player.isCreative() && !mc.player.isSpectator()) {
 
 
                             mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 7) - 2, mc.getWindow().getScaledHeight() >> 11, 0, 0, 33, 254);
@@ -134,8 +120,9 @@ public record CodeLyokoClient() implements ClientModInitializer {
                         matrixStack.pop();
                     }
                 }
-            }
+           // }
         });
+
 
     }
 
