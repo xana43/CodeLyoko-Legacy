@@ -14,7 +14,7 @@ public record ConstantUtil() {
     public static final Identifier skytop = CodeLyokoMain.CodeLyokoPrefix("textures/skies/volcano/dark.png");
     public record StoryEntry()
     {
-        private static final String n = System.lineSeparator();
+        private static final String n = "\n";
         private static final String page = "δ";
         public static final String Entry1 =
                 "Entry 1: " + n +

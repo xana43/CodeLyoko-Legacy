@@ -8,40 +8,33 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage.CustomCarthadgeSk
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice.CustomIceSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.volcano.CustomVolcanoSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.github.ladysnake.locki.impl.mixin.PlayerInventoryMixin;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
-import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
-import net.fabricmc.fabric.api.client.screen.v1.Screens;
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
-import net.fabricmc.fabric.api.transfer.v1.item.PlayerInventoryStorage;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
-import net.fabricmc.fabric.mixin.screen.ScreenAccessor;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.Mouse;
-import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.gui.screen.DeathScreen;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.particle.SpellParticle;
 import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.PlayerScreenHandler;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
@@ -99,19 +92,30 @@ public record CodeLyokoClient() implements ClientModInitializer {
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld,new CustomVolcanoSky());
         ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE, SpellParticle.DefaultFactory::new);
         //custom hud
+        ClientTickEvents.START_CLIENT_TICK.register(client -> {
+
+if(client.player != null) {
+    if(DimensionCheck.playerNotInVanillaWorld(client.player)) {
+        if (client.currentScreen instanceof DeathScreen) {
+
+            client.setScreen(new Devirtualized(null, client.player.getServer().isHardcore()));
+        }
+    }
+}
+
+        });
+
+
 
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
             final MinecraftClient mc = MinecraftClient.getInstance();
-            final Identifier LYOKOHEALTH = CodeLyokoMain.CodeLyokoPrefix("textures/gui/lyoko_health_bar.png");
             //if(mc != null) {
                 if(mc.player != null) {
                     if(DimensionCheck.playerNotInVanillaWorld(mc.player)) {
-                        RenderSystem.setShaderTexture(0, LYOKOHEALTH);
+                        RenderSystem.setShaderTexture(0, CodeLyokoMain.CodeLyokoPrefix("textures/gui/lyoko_health_bar.png"));
                         matrixStack.push();
 
                         if(!mc.player.isCreative() && !mc.player.isSpectator()) {
-
-
                             mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 7) - 2, mc.getWindow().getScaledHeight() >> 11, 0, 0, 33, 254);
                             mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 6) - 1, (mc.getWindow().getScaledHeight() >> 11), 90, 0, 25, (int) ((12.7) * mc.player.getHealth()));
 
