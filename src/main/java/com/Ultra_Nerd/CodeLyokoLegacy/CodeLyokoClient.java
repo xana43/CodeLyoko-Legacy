@@ -8,6 +8,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage.CustomCarthadgeSk
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice.CustomIceSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.volcano.CustomVolcanoSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.mixin.HUD;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.ladysnake.locki.impl.mixin.PlayerScreenHandlerAccessor;
@@ -17,6 +18,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.particle.v1.FabricSpriteProvider;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
@@ -26,23 +28,31 @@ import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.fabric.api.renderer.v1.Renderer;
 import net.fabricmc.fabric.api.renderer.v1.RendererAccess;
 import net.fabricmc.fabric.api.renderer.v1.material.RenderMaterial;
+import net.fabricmc.fabric.impl.client.rendering.RenderingCallbackInvoker;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
 import net.fabricmc.fabric.mixin.client.rendering.MixinInGameHud;
+import net.fabricmc.loader.impl.gui.FabricGuiEntry;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.Drawable;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.gui.hud.InGameOverlayRenderer;
 import net.minecraft.client.gui.hud.PlayerListHud;
 import net.minecraft.client.gui.screen.BackupPromptScreen;
+import net.minecraft.client.gui.screen.Overlay;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.particle.EmotionParticle;
 import net.minecraft.client.particle.SpellParticle;
 import net.minecraft.client.render.*;
+import net.minecraft.client.render.model.SpriteAtlasManager;
 import net.minecraft.client.resource.ClientBuiltinResourcePackProvider;
+import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerAbilities;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.server.dedicated.gui.PlayerStatsGui;
 import net.minecraft.sound.MusicSound;
@@ -113,8 +123,13 @@ public record CodeLyokoClient() implements ClientModInitializer {
                         RenderSystem.setShaderTexture(0, LYOKOHEALTH);
                         matrixStack.push();
 
-                        mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 7) - 2, mc.getWindow().getScaledHeight() >> 11, 0, 0, 33, 254);
-                        mc.inGameHud.drawTexture(matrixStack,(mc.getWindow().getScaledWidth() >> 6) - 1,(mc.getWindow().getScaledHeight() >> 11),90,0,25,(int) ((12.7) * mc.player.getHealth()));
+                        if(!mc.player.isCreative()) {
+
+
+                            mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 7) - 2, mc.getWindow().getScaledHeight() >> 11, 0, 0, 33, 254);
+                            mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 6) - 1, (mc.getWindow().getScaledHeight() >> 11), 90, 0, 25, (int) ((12.7) * mc.player.getHealth()));
+
+                        }
 
                         matrixStack.pop();
                     }
