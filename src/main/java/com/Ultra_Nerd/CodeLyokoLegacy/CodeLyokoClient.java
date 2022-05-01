@@ -8,6 +8,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage.CustomCarthadgeSk
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice.CustomIceSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.volcano.CustomVolcanoSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -16,6 +17,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
@@ -29,9 +31,11 @@ import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DeathScreen;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.particle.SpellParticle;
 import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.screen.PlayerScreenHandler;
@@ -39,15 +43,30 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
+import org.lwjgl.glfw.GLFW;
 
+import javax.swing.text.JTextComponent;
 import java.util.UUID;
 
 @Environment(EnvType.CLIENT)
 public record CodeLyokoClient() implements ClientModInitializer {
 
     public static final Identifier PacketID = CodeLyokoMain.CodeLyokoPrefix("spawn_packet");
+    //keybinds
+    private static KeyBinding classCreenBinding;
+    private static final String keyCategory = "category." + CodeLyokoMain.MOD_ID+".lyoko_controls";
     @Override
     public void onInitializeClient() {
+        //set key bindings
+        classCreenBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key." + CodeLyokoMain.MOD_ID + ".class",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_RIGHT_ALT,
+                keyCategory
+
+
+
+        ));
         //Renderers
 
         BlockEntityRendererRegistry.register(ModTileEntities.LYOKO_CORE, context -> new CoreOfLyoko());
@@ -101,8 +120,14 @@ if(client.player != null) {
             client.setScreen(new Devirtualized(null, client.player.getServer().isHardcore()));
         }
     }
+    if(DimensionCheck.playerInVanilla(client.player))
+    {
+        if(classCreenBinding.isPressed())
+        {
+            client.setScreen(new ClassScreen());
+        }
+    }
 }
-
         });
 
 

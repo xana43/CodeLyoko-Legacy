@@ -1,19 +1,37 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.TexturedButtonWidget;
+import net.minecraft.client.sound.PositionedSoundInstance;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.ColorHelper;
+import org.jetbrains.annotations.NotNull;
+
+
+
 
 public final class ClassScreen extends Screen {
-    protected ClassScreen(final Text title) {
-        super(title);
-    }
-/*
+
+
     private static final Identifier textures = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase_pot.png");
     private static final int xSize = 1024,  ySize = 1024;
-    private static int x/*,y;
-    private ButtonWidget feline,samurai,ninja,guardian,warrior;
+    private static int x,y;
+    private TexturedButtonWidget feline,samurai,ninja,guardian,warrior;
     private int IndicatorColor = 0;
-    private TextRenderer textRenderer;
+    private static TextRenderer textRenderer;
+
+    public ClassScreen() {
+        super(Text.of(""));
+    }
 
     @Override
     public void render(final @NotNull MatrixStack pPoseStack, final int pMouseX, final int pMouseY, final float pPartialTick) {
@@ -22,20 +40,21 @@ public final class ClassScreen extends Screen {
         //feline option
         feline.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 
-        drawCenteredText(pPoseStack,font, feline.getMessage(), feline.x + (feline.getWidth() >> 1), feline.y,Color.MAGENTA.getRGB());
+        drawCenteredText(pPoseStack,textRenderer, feline.getMessage(), feline.x + (feline.getWidth() >> 1), feline.y, colors);
         //samurai option
         samurai.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack,font,samurai.getMessage(),samurai.x + (samurai.getWidth() >> 1),samurai.y,2007);
+        drawCenteredText(pPoseStack,textRenderer,samurai.getMessage(),samurai.x + (samurai.getWidth() >> 1),samurai.y,2007);
         //ninja option
         ninja.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack,font,ninja.getMessage(),ninja.x + (ninja.getWidth() >> 1),ninja.y, 5125);
+        drawCenteredText(pPoseStack,textRenderer,ninja.getMessage(),ninja.x + (ninja.getWidth() >> 1),ninja.y, 5125);
         //guardian option
         guardian.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack,font,guardian.getMessage(),guardian.x + (guardian.getWidth() >> 1),guardian.y,0xff369b);
+        drawCenteredText(pPoseStack,textRenderer,guardian.getMessage(),guardian.x + (guardian.getWidth() >> 1),guardian.y,0xff369b);
         //warrior option
         warrior.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack,font,warrior.getMessage(),warrior.x + (guardian.getWidth() >> 1),warrior.y,Color.DARK_GRAY.getRGB());
+        drawCenteredText(pPoseStack,textRenderer,warrior.getMessage(),warrior.x + (guardian.getWidth() >> 1),warrior.y,0xa9a9a9);
         //current class
+        /*
         if(ClientCapabilitySync.getPlayerClassType() != null) {
             drawCenteredText(pPoseStack, font, new TextComponent("Current Class: ".concat(ClientCapabilitySync.getPlayerClassType().getClassName())).withStyle(ConstantUtil.HUD), this.width >> 2, this.height >> 2, IndicatorColor);
         }
@@ -43,19 +62,22 @@ public final class ClassScreen extends Screen {
         {
             drawCenteredText(pPoseStack,font,new TextComponent("no class assigned").withStyle(ConstantUtil.HUD),this.width >> 2, this.height >> 2,Color.WHITE.getRGB());
         }
+
+         */
     }
 
+
+
     @Override
-    public boolean isPauseScreen() {
+    public boolean shouldPause() {
         return false;
     }
 
-
-
-
     protected void init() {
-        textRenderer = this.client.textRenderer;
         super.init();
+        assert this.client != null;
+        textRenderer = this.client.textRenderer;
+
         x = (this.width - xSize) >> 1;
         //y = (this.height - ySize) >> 1;
         setFeline();
@@ -68,6 +90,9 @@ public final class ClassScreen extends Screen {
         addDrawable(ninja);
         addDrawable(guardian);
         addDrawable(warrior);
+
+
+        /*
         if(ClientCapabilitySync.getPlayerClassType() != null) {
 
             switch (ClientCapabilitySync.getPlayerClassType().getClassName()) {
@@ -78,98 +103,98 @@ public final class ClassScreen extends Screen {
             }
         }
 
+         */
+
     }
 
+    @Override
+    public boolean mouseClicked(final double mouseX, final double mouseY, final int button) {
+        feline.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(mouseX, mouseY, button);
+
+    }
 
     private void PressOperation()
     {
-
-        assert minecraft != null;
-        assert minecraft.player != null;
-
-
-
-
-
-
-
-        assert minecraft != null;
-        if (minecraft.getSingleplayerServer() != null) {
-            if(minecraft.getSingleplayerServer().isSingleplayer()) {
-                minecraft.getSingleplayerServer().getPlayerList().saveAll();
+        if(this.client != null)
+        {
+            if(this.client.player != null)
+            {
+                if(this.client.player.getServer() != null)
+                {
+                    this.client.player.getServer().saveAll(false,true,true);
+                }
             }
         }
 
-        assert minecraft.level != null;
-        if(minecraft.getCurrentServer() != null && minecraft.player != null) {
-
-            ServerSaveHandler.send(false);
-
-        }
     }
-
+ private static final int colors = ColorHelper.Argb.getArgb(1,255,0,255);
 //set buttons for each class
     private void setFeline()
     {
-        feline =  new ImageButton(this.width >> 3, this.height >> 1, 30, 30, 128, 0, 31, textures,
+        feline =  new TexturedButtonWidget(this.width >> 3, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {
 
             PressOperation();
-            CapabilityPlayerClassSync.Sync(PlayerClassType.Feline);
-            IndicatorColor = Color.MAGENTA.getRGB();
+            //CapabilityPlayerClassSync.Sync(PlayerClassType.Feline);
+            IndicatorColor = colors;
+            assert this.client != null;
+            assert this.client.player != null;
+            this.client.player.playSound(ModSounds.GUI,1,6);
 
 
 
-            }, new TextComponent("feline").withStyle(ConstantUtil.HUD));
-        feline.setFGColor(0x1d5e18);
+
+            }, Text.of("feline").getWithStyle(ConstantUtil.HUD.withColor(colors)).get(0));
+
     }
 
     private void setSamurai()
     {
-        samurai =  new ImageButton((int) (this.width / 3f), this.height >> 1, 30, 30, 128, 0, 31, textures,
+        samurai =  new TexturedButtonWidget((int) (this.width / 3f), this.height >> 1, 30, 30, 128, 0, 31, textures,
                 128, 128, (input) -> {
 
-            CapabilityPlayerClassSync.Sync(PlayerClassType.Samurai);
+            //CapabilityPlayerClassSync.Sync(PlayerClassType.Samurai);
             IndicatorColor = 2007;
             PressOperation();
            // classIndicatorString.replace(15,ClientCapabilitySync.getPlayerClassType().getClassName().length() + 17,ClientCapabilitySync.getPlayerClassType().getClassName());
-            }, new TextComponent("samurai").withStyle(ConstantUtil.HUD));
-        samurai.setFGColor(0x1d5e18);
+            }, Text.of("samurai").getWithStyle(ConstantUtil.HUD.withColor(2007)).get(0));
+
     }
 
     private void setNinja()
     {
-        ninja =  new ImageButton(this.width >> 1, this.height >> 1, 30, 30, 128, 0, 31, textures,
+        ninja =  new TexturedButtonWidget(this.width >> 1, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {
-            CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
+            //CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
             IndicatorColor = 5125;
-            PressOperation();}, new TextComponent("ninja").withStyle(ConstantUtil.HUD));
-        ninja.setFGColor(0x1d5e18);
+            PressOperation();}, Text.of("ninja").getWithStyle(ConstantUtil.HUD.withColor(5125)).get(0));
+
     }
     private void setGuardian()
     {
-        guardian =  new ImageButton((this.width >> 1) + 80, this.height >> 1, 30, 30, 128, 0, 31, textures,
+        guardian =  new TexturedButtonWidget((this.width >> 1) + 80, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {PressOperation();
             IndicatorColor = 0x1d5e18;
-            CapabilityPlayerClassSync.Sync(PlayerClassType.Guardian);
-            }, new TextComponent("guardian").withStyle(ConstantUtil.HUD));
-        guardian.setFGColor(0x1d5e18);
+            //CapabilityPlayerClassSync.Sync(PlayerClassType.Guardian);
+            }, Text.of("guardian").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
+
     }
 
     private void setWarrior()
     {
-        warrior =  new ImageButton((this.width >> 1) + 150 , this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> PressOperation(), new TextComponent("warrior").withStyle(ConstantUtil.HUD));
-        warrior.setFGColor(0x1d5e18);
+        warrior =  new TexturedButtonWidget((this.width >> 1) + 150 , this.height >> 1, 30, 30, 128, 0, 31, textures,
+                256, 256, (input) -> PressOperation(), Text.of("warrior").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
+
     }
 
 
     @Override
-    public void renderBackground(@NotNull PoseStack pPoseStack) {
+    public void renderBackground(@NotNull MatrixStack pPoseStack) {
         // super.renderBackground(pPoseStack);
         RenderSystem.setShaderTexture(0,textures);
-        blit(pPoseStack,x, 0,  0,  0, xSize, ySize);
+        drawTexture(pPoseStack,x, 0,  0,  0, xSize, ySize);
     }
 
- */
+
 }
