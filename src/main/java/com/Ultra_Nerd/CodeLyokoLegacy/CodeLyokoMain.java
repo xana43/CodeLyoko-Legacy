@@ -71,12 +71,7 @@ public record CodeLyokoMain() implements ModInitializer {
     {
         return new Identifier(MOD_ID,name);
     }
-    public static final PersistentState persistantState = new PersistentState() {
-        @Override
-        public NbtCompound writeNbt(final NbtCompound nbt) {
-            return nbt;
-        }
-    };
+
 
     @Override
     public void onInitialize() {
@@ -156,13 +151,12 @@ public record CodeLyokoMain() implements ModInitializer {
                 serverPlayerEntity.getHungerManager().setExhaustion(0);
                 serverPlayerEntity.getHungerManager().setSaturationLevel(5);
                 CodeLyokoMain.LYOKO_LOCK.lock(serverPlayerEntity, DefaultInventoryNodes.CRAFTING);
-
                 //CodeLyokoMain.LYOKO_LOCK.lock(serverPlayerEntity, DefaultInventoryNodes.MAIN_INVENTORY);
             } else if (CodeLyokoMain.LYOKO_LOCK.isLocking(serverPlayerEntity,DefaultInventoryNodes.CRAFTING) /*&& CodeLyokoMain.LYOKO_LOCK.isLocking(serverPlayerEntity,DefaultInventoryNodes.MAIN_INVENTORY)*/) {
                 CodeLyokoMain.LYOKO_LOCK.unlock(serverPlayerEntity,DefaultInventoryNodes.CRAFTING);
                 //CodeLyokoMain.LYOKO_LOCK.unlock(serverPlayerEntity,DefaultInventoryNodes.MAIN_INVENTORY);
             }
-        world.getPersistentStateManager().set("playerClass",persistantState);
+
 
         }));
 

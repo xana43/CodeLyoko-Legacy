@@ -1,14 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoCardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.mojang.blaze3d.systems.RenderSystem;
+import dev.onyxstudios.cca.internal.entity.CardinalComponentsEntity;
+import dev.onyxstudios.cca.internal.entity.CardinalEntityInternals;
+import dev.onyxstudios.cca.mixin.entity.common.MixinEntity;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -63,7 +69,7 @@ public final class ClassScreen extends Screen {
 
          */
     }
-private static final NbtCompound pClass = new NbtCompound();
+
 
 
     @Override
@@ -112,14 +118,19 @@ private static final NbtCompound pClass = new NbtCompound();
 
     }
 
-    private void PressOperation(String Key,int ID)
+    private void PressOperation(int ID)
     {
         if(this.client != null)
         {
             if(this.client.player != null)
             {
-                pClass.putUuid(Key,client.player.getUuid());
-                CodeLyokoMain.persistantState.writeNbt(pClass);
+
+
+
+                    final NbtCompound tmp = new NbtCompound();
+                    CodeLyokoCardinalData.pclass.get(this.client.player).setPlayerMap(ID);
+                    CodeLyokoCardinalData.pclass.get(this.client.player).writeToNbt(tmp);
+                    CodeLyokoMain.LOG.info(String.valueOf(tmp));
 
 
             }
@@ -133,7 +144,7 @@ private static final NbtCompound pClass = new NbtCompound();
         feline =  new TexturedButtonWidget(this.width >> 3, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {
 
-            PressOperation("feline",0);
+            PressOperation(0);
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Feline);
             IndicatorColor = colors;
             assert this.client != null;
@@ -155,7 +166,7 @@ private static final NbtCompound pClass = new NbtCompound();
 
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Samurai);
             IndicatorColor = 2007;
-            PressOperation("samurai",1);
+            PressOperation(1);
            // classIndicatorString.replace(15,ClientCapabilitySync.getPlayerClassType().getClassName().length() + 17,ClientCapabilitySync.getPlayerClassType().getClassName());
             }, Text.of("samurai").getWithStyle(ConstantUtil.HUD.withColor(2007)).get(0));
 
@@ -167,14 +178,14 @@ private static final NbtCompound pClass = new NbtCompound();
                 256, 256, (input) -> {
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
             IndicatorColor = 5125;
-            PressOperation("ninja",2);
+            PressOperation(2);
             }, Text.of("ninja").getWithStyle(ConstantUtil.HUD.withColor(5125)).get(0));
 
     }
     private void setGuardian()
     {
         guardian =  new TexturedButtonWidget((this.width >> 1) + 80, this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> {PressOperation("guardian",3);
+                256, 256, (input) -> {PressOperation(3);
             IndicatorColor = 0x1d5e18;
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Guardian);
             }, Text.of("guardian").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
@@ -184,7 +195,7 @@ private static final NbtCompound pClass = new NbtCompound();
     private void setWarrior()
     {
         warrior =  new TexturedButtonWidget((this.width >> 1) + 150 , this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> PressOperation("warrior",4), Text.of("warrior").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
+                256, 256, (input) -> PressOperation(4), Text.of("warrior").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
 
     }
 
