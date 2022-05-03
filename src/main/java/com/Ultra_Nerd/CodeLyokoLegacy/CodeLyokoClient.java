@@ -38,6 +38,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
@@ -114,6 +115,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
 
 if(client.player != null) {
+
     if(DimensionCheck.playerNotInVanillaWorld(client.player)) {
         if (client.currentScreen instanceof DeathScreen) {
 

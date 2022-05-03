@@ -18,6 +18,7 @@ import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -42,11 +43,13 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.screen.ScreenHandlerFactory;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.PersistentState;
 import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +71,12 @@ public record CodeLyokoMain() implements ModInitializer {
     {
         return new Identifier(MOD_ID,name);
     }
-
+    public static final PersistentState persistantState = new PersistentState() {
+        @Override
+        public NbtCompound writeNbt(final NbtCompound nbt) {
+            return nbt;
+        }
+    };
 
     @Override
     public void onInitialize() {
@@ -154,9 +162,10 @@ public record CodeLyokoMain() implements ModInitializer {
                 CodeLyokoMain.LYOKO_LOCK.unlock(serverPlayerEntity,DefaultInventoryNodes.CRAFTING);
                 //CodeLyokoMain.LYOKO_LOCK.unlock(serverPlayerEntity,DefaultInventoryNodes.MAIN_INVENTORY);
             }
-
+        world.getPersistentStateManager().set("playerClass",persistantState);
 
         }));
+
         ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
             if(entity instanceof ItemEntity itemEntity)
             {

@@ -7,10 +7,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
-import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -65,7 +63,7 @@ public final class ClassScreen extends Screen {
 
          */
     }
-
+private static final NbtCompound pClass = new NbtCompound();
 
 
     @Override
@@ -114,16 +112,16 @@ public final class ClassScreen extends Screen {
 
     }
 
-    private void PressOperation()
+    private void PressOperation(String Key,int ID)
     {
         if(this.client != null)
         {
             if(this.client.player != null)
             {
-                if(this.client.player.getServer() != null)
-                {
-                    this.client.player.getServer().saveAll(false,true,true);
-                }
+                pClass.putUuid(Key,client.player.getUuid());
+                CodeLyokoMain.persistantState.writeNbt(pClass);
+
+
             }
         }
 
@@ -135,12 +133,13 @@ public final class ClassScreen extends Screen {
         feline =  new TexturedButtonWidget(this.width >> 3, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {
 
-            PressOperation();
+            PressOperation("feline",0);
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Feline);
             IndicatorColor = colors;
             assert this.client != null;
             assert this.client.player != null;
             this.client.player.playSound(ModSounds.GUI,1,6);
+
 
 
 
@@ -156,7 +155,7 @@ public final class ClassScreen extends Screen {
 
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Samurai);
             IndicatorColor = 2007;
-            PressOperation();
+            PressOperation("samurai",1);
            // classIndicatorString.replace(15,ClientCapabilitySync.getPlayerClassType().getClassName().length() + 17,ClientCapabilitySync.getPlayerClassType().getClassName());
             }, Text.of("samurai").getWithStyle(ConstantUtil.HUD.withColor(2007)).get(0));
 
@@ -168,13 +167,14 @@ public final class ClassScreen extends Screen {
                 256, 256, (input) -> {
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
             IndicatorColor = 5125;
-            PressOperation();}, Text.of("ninja").getWithStyle(ConstantUtil.HUD.withColor(5125)).get(0));
+            PressOperation("ninja",2);
+            }, Text.of("ninja").getWithStyle(ConstantUtil.HUD.withColor(5125)).get(0));
 
     }
     private void setGuardian()
     {
         guardian =  new TexturedButtonWidget((this.width >> 1) + 80, this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> {PressOperation();
+                256, 256, (input) -> {PressOperation("guardian",3);
             IndicatorColor = 0x1d5e18;
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Guardian);
             }, Text.of("guardian").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
@@ -184,7 +184,7 @@ public final class ClassScreen extends Screen {
     private void setWarrior()
     {
         warrior =  new TexturedButtonWidget((this.width >> 1) + 150 , this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> PressOperation(), Text.of("warrior").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
+                256, 256, (input) -> PressOperation("warrior",4), Text.of("warrior").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
 
     }
 
