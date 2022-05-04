@@ -2,25 +2,20 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.mixin.PlayerNbtImpl;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
-import com.Ultra_Nerd.CodeLyokoLegacy.mixin.util.PlayerNBTMixin;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.fabricmc.fabric.mixin.dimension.ServerPlayerEntityMixin;
-import net.fabricmc.fabric.mixin.item.group.client.MixinCreativePlayerInventoryGui;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import org.jetbrains.annotations.NotNull;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 
-public final class ClassScreen extends Screen implements PlayerNBTMixin {
+public final class ClassScreen extends Screen {
 
 
     private static final Identifier textures = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase_pot.png");
@@ -114,7 +109,7 @@ public final class ClassScreen extends Screen implements PlayerNBTMixin {
         return super.mouseClicked(mouseX, mouseY, button);
 
     }
-    private int ClassID;
+
  private static final int colors = ColorHelper.Argb.getArgb(1,255,0,255);
 //set buttons for each class
     private void setFeline()
@@ -122,7 +117,9 @@ public final class ClassScreen extends Screen implements PlayerNBTMixin {
         feline =  new TexturedButtonWidget(this.width >> 3, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {
 
-            ClassID = 0;
+
+                PlayerNbtImpl.ClassID = 0;
+
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Feline);
             IndicatorColor = colors;
             assert this.client != null;
@@ -144,7 +141,7 @@ public final class ClassScreen extends Screen implements PlayerNBTMixin {
 
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Samurai);
             IndicatorColor = 2007;
-            ClassID =1;
+            //ClassID =1;
            // classIndicatorString.replace(15,ClientCapabilitySync.getPlayerClassType().getClassName().length() + 17,ClientCapabilitySync.getPlayerClassType().getClassName());
             }, Text.of("samurai").getWithStyle(ConstantUtil.HUD.withColor(2007)).get(0));
 
@@ -156,7 +153,7 @@ public final class ClassScreen extends Screen implements PlayerNBTMixin {
                 256, 256, (input) -> {
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
             IndicatorColor = 5125;
-            ClassID = 2;
+            //ClassID = 2;
             }, Text.of("ninja").getWithStyle(ConstantUtil.HUD.withColor(5125)).get(0));
 
     }
@@ -164,7 +161,7 @@ public final class ClassScreen extends Screen implements PlayerNBTMixin {
     {
         guardian =  new TexturedButtonWidget((this.width >> 1) + 80, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {
-            ClassID = 3;
+            //ClassID = 3;
             IndicatorColor = 0x1d5e18;
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Guardian);
             }, Text.of("guardian").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
@@ -174,7 +171,7 @@ public final class ClassScreen extends Screen implements PlayerNBTMixin {
     private void setWarrior()
     {
         warrior =  new TexturedButtonWidget((this.width >> 1) + 150 , this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> ClassID = 4, Text.of("warrior").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
+                256, 256, (input) -> PlayerNbtImpl.ClassID = 4, Text.of("warrior").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
 
     }
 
@@ -185,6 +182,11 @@ public final class ClassScreen extends Screen implements PlayerNBTMixin {
         RenderSystem.setShaderTexture(0,textures);
         drawTexture(pPoseStack,x, 0,  0,  0, xSize, ySize);
     }
+
+
+
+
+
 /*
 
     @Override
@@ -200,4 +202,6 @@ public final class ClassScreen extends Screen implements PlayerNBTMixin {
     }
 
  */
+
+
 }
