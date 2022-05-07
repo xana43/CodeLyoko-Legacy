@@ -114,8 +114,8 @@ public final class ModBlocks {
     public static final Block QUANTUM_STEEL_BLOCK = new QuantumSteelBlock(FabricBlockSettings.of(Material.METAL).strength(6, 20).sounds(BlockSoundGroup.METAL));
     public static final Block SALEEITE_ORE = new OreBlock(FabricBlockSettings.of(Material.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE));
     public static final Block SCANNER_BASE = new Scanner();
-    //public static final Block SCANNER_FRAME = BLOCKS.register("scanner_frame", () -> new ScannerFrame(Block.Properties.copyOf(Blocks.IRON_BLOCK)));
-    //public static final Block SCANNER_TOP = BLOCKS.register("scanner_top", () -> new ScannerTop(Block.Properties.copyOf(Blocks.IRON_BLOCK)));
+    public static final Block SCANNER_FRAME = new ScannerFrame(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
+    public static final Block SCANNER_TOP = new ScannerTop(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
     //public static final Block STORAGE = BLOCKS.register("universal", UniversalEnergyBlock::new);
     public static final Block SKLODOWSKITE_ORE = new Block(FabricBlockSettings.of(Material.STONE).strength(4, 4).sounds(BlockSoundGroup.STONE));
     public static final Block SILICA_SAND = new SandBlock(0xFFFFFF, FabricBlockSettings.copy(Blocks.SAND));
@@ -210,6 +210,8 @@ public final class ModBlocks {
             .put("quantum_steel",QUANTUM_STEEL_BLOCK)
             .put("saleeite_ore",SALEEITE_ORE)
             .put("scanner_base",SCANNER_BASE)
+            .put("scanner_frame",SCANNER_FRAME)
+            .put("scanner_top",SCANNER_TOP)
             .put("sklodowskite_ore",SKLODOWSKITE_ORE)
             .put("silica_sand",SILICA_SAND)
             .put("sector5_steel",SECTOR5_STEEL)

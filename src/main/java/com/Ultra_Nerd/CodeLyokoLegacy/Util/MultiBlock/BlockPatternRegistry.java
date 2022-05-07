@@ -9,17 +9,17 @@ import net.minecraft.predicate.block.BlockStatePredicate;
 public final class BlockPatternRegistry {
 
 
-/*
+
  public static final BlockPattern scanner = BlockPatternBuilder.start().aisle(
          "010",
          "020",
          "030")
-         .where('1', CachedBlockPosition.matchesBlockState(state -> state.getBlock() == ModBlocks.SCANNER_TOP.get()))
-         .where('2',BlockInWorld.hasState(state -> state.getBlock()==ModBlocks.SCANNER_FRAME.get()))
-         .where('3',BlockInWorld.hasState(state -> state.getBlock()==ModBlocks.SCANNER_BASE.get()))
-         .where('0', BlockInWorld.hasState(BlockStatePredicate.ANY)).build();
+         .where('1', CachedBlockPosition.matchesBlockState(state -> state.getBlock() == ModBlocks.SCANNER_TOP))
+         .where('2', CachedBlockPosition.matchesBlockState(state -> state.getBlock()==ModBlocks.SCANNER_FRAME))
+         .where('3', CachedBlockPosition.matchesBlockState(state -> state.getBlock()==ModBlocks.SCANNER_BASE))
+         .where('0', CachedBlockPosition.matchesBlockState(BlockStatePredicate.ANY)).build();
 
-
+/*
 
  public static final BlockPattern HoloProjector = BlockPatternBuilder.start().aisle(
          "010",
@@ -31,7 +31,7 @@ public final class BlockPatternRegistry {
                  ).aisle(
                          "010",
                          "111"
-         ).where('1',BlockInWorld.hasState(state -> state.getBlock() == ModBlocks.QUANTUM_STEEL_BLOCK.get()))
+         ).where('1',CachedBlockPosition.matchesBlockState(state -> state.getBlock() == ModBlocks.QUANTUM_STEEL_BLOCK))
          .where('2',BlockInWorld.hasState(state -> state.getBlock() == ModBlocks.HOLOPROJECTOR.get()))
          .where('0',BlockInWorld.hasState(BlockStatePredicate.ANY)).build();
 
@@ -48,7 +48,9 @@ public final class BlockPatternRegistry {
          .where('1',BlockInWorld.hasState(state -> state.getBlock() == ModBlocks.COMPUTER_SCREEN.get()))
          .where('2',BlockInWorld.hasState(state -> state.getBlock() == ModBlocks.COMPUTER_SCREEN_CONNECTOR.get())).build();
 
-*/
+ */
+
+
 }
 
 

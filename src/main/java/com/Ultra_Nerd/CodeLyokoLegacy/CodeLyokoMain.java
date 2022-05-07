@@ -14,8 +14,10 @@ import io.github.ladysnake.locki.impl.mixin.PlayerScreenHandlerAccessor;
 import io.github.ladysnake.locki.impl.mixin.client.HandledScreenMixin;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
@@ -23,7 +25,12 @@ import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.kyrptonaught.customportalapi.CustomPortalBlock;
+import net.kyrptonaught.customportalapi.api.CustomPortalBuilder;
+import net.kyrptonaught.customportalapi.portal.PortalIgnitionSource;
+import net.minecraft.advancement.criterion.ChangedDimensionCriterion;
 import net.minecraft.advancement.criterion.OnKilledCriterion;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.Attachment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -79,6 +86,7 @@ public record CodeLyokoMain() implements ModInitializer {
         GeckoLib.initialize();
 
         //Registration
+
         ModBlocks.BLOCK_MAP.forEach((s, block) -> {
 
             Registry.register(Registry.BLOCK,new Identifier(MOD_ID,s),block);

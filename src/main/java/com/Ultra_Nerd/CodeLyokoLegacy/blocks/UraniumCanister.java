@@ -1,47 +1,65 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.item.ItemStack;
+import net.minecraft.stat.Stat;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
 
 public final class UraniumCanister extends Block {
-    public UraniumCanister(final Settings settings) {
-        super(settings);
-    }
-/*
+
     private static final VoxelShape shape = Block.box(3.5D, 0.0D, 3.5D, 12.0D, 15.0D, 12.0D);
 
-    public UraniumCanister(@NotNull Properties properties) {
+    public UraniumCanister(@NotNull Settings properties) {
         super(properties);
     }
 
-    @Nonnull
+
     @Override
-    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+    public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         return shape;
     }
 
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-
-        return level.setBlockAndUpdate(pos, ModFluids.URANIUM.get().defaultBlockState());
+    public void afterBreak(final World world, final PlayerEntity player, final BlockPos pos, final BlockState state, @Nullable final BlockEntity blockEntity, final ItemStack stack) {
+        super.afterBreak(world, player, pos, state, blockEntity, stack);
+        world.setBlockState(pos, ModBlocks.DIGITAL_OCEAN_BLOCK.getDefaultState());
     }
 
-
-
-    @Nonnull
     @Override
-    public InteractionResult use(@Nonnull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @NotNull Player player, @Nonnull InteractionHand handIn, @Nonnull BlockHitResult hit) {
-
-
-        if (!player.isCreative()) {
-            player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 100, 2, false, false, false));
-            player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 4000, 255, false, false, false));
-            player.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 1, false, true, false));
+    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+        if(!player.isCreative())
+        {
+            player.addStatusEffect(new StatusEffectInstance(StatusEffects.HUNGER,100,2,false,false,false));
+            player.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA,255,255,false,false,false));
+            player.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,100,1,false,true,false));
         }
-
-        return InteractionResult.SUCCESS;
+        return ActionResult.SUCCESS;
     }
 
- */
+
+
+
 
 
 }

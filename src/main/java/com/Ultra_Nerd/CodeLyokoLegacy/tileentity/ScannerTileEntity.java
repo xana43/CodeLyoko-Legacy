@@ -1,9 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.BlockPatternRegistry;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Scanner;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.ScannerFrame;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.ScannerTop;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.util.math.BlockPos;
 
 public final class ScannerTileEntity extends BlockEntity implements MasterEntity {
@@ -11,15 +17,9 @@ public final class ScannerTileEntity extends BlockEntity implements MasterEntity
         super(type, pos, state);
     }
 
-    @Override
-    public void check() {
 
-    }
 
-    @Override
-    public void invalidateEntity() {
 
-    }
 
     /*
     public ScannerTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
@@ -30,36 +30,36 @@ public final class ScannerTileEntity extends BlockEntity implements MasterEntity
 
     }
 
+     */
 
 
-
-   // public void invalidateStruct()
-   // {
-     //   deactivateStructure();
-   // }
+    // public void invalidateStruct()
+    // {
+    //   deactivateStructure();
+    // }
 
     @Override
     public void check() {
         //scannerpattern.matches(this.level,this.worldPosition,this.level.getBlockState(this.worldPosition).getValue(Scanner.directionProperty), Direction.UP);
-       if(level != null) {
-           //String.valueOf(BlockPatternRegistry.matches(BlockPatternRegistry.scanner,this.level,this.worldPosition,this.level.getBlockState(this.worldPosition).getValue(Scanner.directionProperty),Direction.DOWN))
-           //CodeLyokoMain.Log.info(String.valueOf(BlockPatternRegistry.scanner.find(level,worldPosition)));
-           final BlockPattern.BlockPatternMatch match = BlockPatternRegistry.scanner.find(level, worldPosition);
+        if (world != null) {
+            //String.valueOf(BlockPatternRegistry.matches(BlockPatternRegistry.scanner,this.level,this.worldPosition,this.level.getBlockState(this.worldPosition).getValue(Scanner.directionProperty),Direction.DOWN))
+            //CodeLyokoMain.Log.info(String.valueOf(BlockPatternRegistry.scanner.find(level,worldPosition)));
+            final BlockPattern.Result match = BlockPatternRegistry.scanner.searchAround(world, pos);
 
 
-           if (match != null) {
+            if (match != null) {
 
-               //CodeLyokoMain.Log.info("pattern matched");
-                final BlockPos frame = new BlockPos(worldPosition.getX(),worldPosition.getY() + 1,worldPosition.getZ());
-                final BlockPos top = new BlockPos(worldPosition.getX(),worldPosition.getY() + 2, worldPosition.getZ());
-               level.setBlockAndUpdate(frame, level.getBlockState(frame).setValue(ScannerFrame.ScannerFrameInvis, true));
-               level.setBlockAndUpdate(top, level.getBlockState(top).setValue(ScannerTop.scannerFormedTop, true));
-               level.setBlockAndUpdate(worldPosition, level.getBlockState(worldPosition).setValue(Scanner.Scanner, true));
-           } else {
+                //CodeLyokoMain.Log.info("pattern matched");
+                final BlockPos frame = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
+                final BlockPos top = new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ());
+                world.setBlockState(frame, world.getBlockState(frame).with(ScannerFrame.ScannerFrameInvis, true));
+                world.setBlockState(top, world.getBlockState(top).with(ScannerTop.scannerFormedTop, true));
+                world.setBlockState(pos, world.getBlockState(pos).with(Scanner.Scanner, true));
+            } else {
 
-               invalidateEntity();
-           }
-       }
+                invalidateEntity();
+            }
+        }
         /*if (checkStructure()) {
             activateStructure();
 
@@ -71,19 +71,19 @@ public final class ScannerTileEntity extends BlockEntity implements MasterEntity
         return checkStructure();
 
          */
-    /*}
+    }
     @Override
     public void invalidateEntity()
     {
-        assert level != null;
-        final BlockPos frame = new BlockPos(worldPosition.getX(),worldPosition.getY() + 1,worldPosition.getZ());
-        final BlockPos top = new BlockPos(worldPosition.getX(),worldPosition.getY() + 2,worldPosition.getZ());
-        level.setBlockAndUpdate(worldPosition,level.getBlockState(worldPosition).setValue(Scanner.Scanner,false));
-        if(level.getBlockState(frame).getBlock() == ModBlocks.SCANNER_FRAME.get()) {
-            level.setBlockAndUpdate(frame, level.getBlockState(frame).setValue(ScannerFrame.ScannerFrameInvis, false));
+        assert world != null;
+        final BlockPos frame = new BlockPos(pos.getX(),pos.getY() + 1,pos.getZ());
+        final BlockPos top = new BlockPos(pos.getX(),pos.getY() + 2,pos.getZ());
+        world.setBlockState(pos,world.getBlockState(pos).with(Scanner.Scanner,false));
+        if(world.getBlockState(frame).getBlock() == ModBlocks.SCANNER_FRAME) {
+            world.setBlockState(frame, world.getBlockState(frame).with(ScannerFrame.ScannerFrameInvis, false));
         }
-        if(level.getBlockState(top).getBlock() == ModBlocks.SCANNER_TOP.get()) {
-            level.setBlockAndUpdate(top, level.getBlockState(top).setValue(ScannerTop.scannerFormedTop, false));
+        if(world.getBlockState(top).getBlock() == ModBlocks.SCANNER_TOP) {
+            world.setBlockState(top, world.getBlockState(top).with(ScannerTop.scannerFormedTop, false));
         }
     }
 /*

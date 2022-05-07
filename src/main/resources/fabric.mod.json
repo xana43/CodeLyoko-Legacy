@@ -51,7 +51,8 @@
   "accessWidener": "LyokoAccessWidener.accessWidener",
   "custom":{
   "cardinal-components": [
-              "cm:lyoko_class"
+              "cm:lyoko_class",
+              "cm:temp_inventory"
           ]
     }
 }

@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
+import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -19,6 +20,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public final class Scanner extends BlockWithEntity {
@@ -238,8 +240,11 @@ public final class Scanner extends BlockWithEntity {
         return BlockRenderType.MODEL;
     }
 
+
+
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
+
         if (state.get(Scanner)) {
             return switch (state.get(directionProperty)) {
                 case NORTH -> shapeN;

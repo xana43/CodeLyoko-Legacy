@@ -10,6 +10,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class CardinalData implements EntityComponentInitializer {
+
+
+
+
     public static class LyokoClass{
         public static final ComponentKey<PlayerClassComponent> LYOKOCLASS = ComponentRegistry.getOrCreate(CodeLyokoMain.CodeLyokoPrefix("lyoko_class"),PlayerClassComponent.class);
 
