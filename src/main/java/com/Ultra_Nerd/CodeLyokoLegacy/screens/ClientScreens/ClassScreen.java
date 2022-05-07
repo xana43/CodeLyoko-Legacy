@@ -1,10 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.mixin.PlayerNbtImpl;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
@@ -13,6 +14,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 
 public final class ClassScreen extends Screen {
@@ -27,6 +30,10 @@ public final class ClassScreen extends Screen {
 
     public ClassScreen() {
         super(Text.of(""));
+    }
+    private void drawClassIndicator(Text classname, MatrixStack pPoseStack)
+    {
+        drawCenteredText(pPoseStack, textRenderer, classname.getWithStyle(ConstantUtil.HUD).get(0), this.width >> 2, this.height >> 2, IndicatorColor);
     }
 
     @Override
@@ -50,6 +57,18 @@ public final class ClassScreen extends Screen {
         warrior.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
         drawCenteredText(pPoseStack,textRenderer,warrior.getMessage(),warrior.x + (guardian.getWidth() >> 1),warrior.y,0xa9a9a9);
         //current class
+        if(IndicatorColor != 0) {
+            switch (CardinalData.LyokoClass.getLyokoClass(this.client.player)) {
+                case 0 -> drawClassIndicator(Text.of("Current Class: Feline"),pPoseStack);
+                case 1 -> drawClassIndicator(Text.of("Current Class: Samurai"),pPoseStack);
+                case 2 -> drawClassIndicator(Text.of("current class: Ninja"), pPoseStack);
+                case 3 -> drawClassIndicator(Text.of("Current Class: Guardian"),pPoseStack);
+            }
+        }
+        else
+        {
+            drawCenteredText(pPoseStack,textRenderer,Text.of("no class assigned").getWithStyle(ConstantUtil.HUD).get(0),this.width >> 2, this.height >> 2, IndicatorColor);
+        }
         /*
         if(ClientCapabilitySync.getPlayerClassType() != null) {
             drawCenteredText(pPoseStack, font, new TextComponent("Current Class: ".concat(ClientCapabilitySync.getPlayerClassType().getClassName())).withStyle(ConstantUtil.HUD), this.width >> 2, this.height >> 2, IndicatorColor);
@@ -86,7 +105,13 @@ public final class ClassScreen extends Screen {
         addDrawable(ninja);
         addDrawable(guardian);
         addDrawable(warrior);
-
+        switch (CardinalData.LyokoClass.getLyokoClass(this.client.player))
+        {
+            case 0 -> IndicatorColor = colors;
+            case 1 -> IndicatorColor = 2007;
+            case 2 -> IndicatorColor = 5125;
+            case 3 -> IndicatorColor =  0x1d5e18;
+        }
 
         /*
         if(ClientCapabilitySync.getPlayerClassType() != null) {
@@ -106,10 +131,31 @@ public final class ClassScreen extends Screen {
     @Override
     public boolean mouseClicked(final double mouseX, final double mouseY, final int button) {
         feline.mouseClicked(mouseX, mouseY, button);
+        samurai.mouseClicked(mouseX, mouseY, button);
+        ninja.mouseClicked(mouseX, mouseY, button);
+        guardian.mouseClicked(mouseX, mouseY, button);
+        warrior.mouseClicked(mouseX, mouseY, button);
         return super.mouseClicked(mouseX, mouseY, button);
 
     }
+private static void save(MinecraftClient client){
+        if(client != null){
 
+            if(client.player != null)
+            {
+                if(client.player.getServer() != null && !Objects.requireNonNull(client.getServer()).isSingleplayer())
+                {
+                    client.player.getServer().save(false,false,false);
+                    CodeLyokoMain.LOG.info("Saving Server");
+                }
+                else if(client.getServer() != null && client.getServer().isSingleplayer())
+                {
+                    client.getServer().save(false,false,false);
+                    CodeLyokoMain.LOG.info("saving client");
+                }
+            }
+        }
+}
  private static final int colors = ColorHelper.Argb.getArgb(1,255,0,255);
 //set buttons for each class
     private void setFeline()
@@ -118,14 +164,15 @@ public final class ClassScreen extends Screen {
                 256, 256, (input) -> {
 
 
-                PlayerNbtImpl.ClassID = 0;
+            //((PlayerEXT) this.client.player).setClass(0);
 
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Feline);
-            IndicatorColor = colors;
+
             assert this.client != null;
             assert this.client.player != null;
             this.client.player.playSound(ModSounds.GUI,1,6);
-
+            CardinalData.LyokoClass.setLyokoclass(this.client.player,0);
+            save(this.client);
 
 
 
@@ -140,7 +187,10 @@ public final class ClassScreen extends Screen {
                 128, 128, (input) -> {
 
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Samurai);
-            IndicatorColor = 2007;
+
+            CardinalData.LyokoClass.setLyokoclass(this.client.player,1);
+            this.client.player.playSound(ModSounds.GUI,1,6);
+            save(this.client);
             //ClassID =1;
            // classIndicatorString.replace(15,ClientCapabilitySync.getPlayerClassType().getClassName().length() + 17,ClientCapabilitySync.getPlayerClassType().getClassName());
             }, Text.of("samurai").getWithStyle(ConstantUtil.HUD.withColor(2007)).get(0));
@@ -152,7 +202,8 @@ public final class ClassScreen extends Screen {
         ninja =  new TexturedButtonWidget(this.width >> 1, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
-            IndicatorColor = 5125;
+            CardinalData.LyokoClass.setLyokoclass(this.client.player,2);
+            this.client.player.playSound(ModSounds.GUI,1,6);
             //ClassID = 2;
             }, Text.of("ninja").getWithStyle(ConstantUtil.HUD.withColor(5125)).get(0));
 
@@ -162,7 +213,6 @@ public final class ClassScreen extends Screen {
         guardian =  new TexturedButtonWidget((this.width >> 1) + 80, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {
             //ClassID = 3;
-            IndicatorColor = 0x1d5e18;
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Guardian);
             }, Text.of("guardian").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
 
@@ -171,7 +221,7 @@ public final class ClassScreen extends Screen {
     private void setWarrior()
     {
         warrior =  new TexturedButtonWidget((this.width >> 1) + 150 , this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> PlayerNbtImpl.ClassID = 4, Text.of("warrior").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
+                256, 256, (input) ->{} /*((PlayerEXT)this.client.player).setClass(4)*/, Text.of("warrior").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
 
     }
 

@@ -26,7 +26,10 @@
     ],
     "server":[
         "com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoServer"
-    ]
+    ],
+    "cardinal-components": [
+                "com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData"
+            ]
   },
   "mixins": [
     "cm.mixins.json"
@@ -45,5 +48,10 @@
     "starlight":">=1.0.2",
     "ferritecore":">=4.2.0"
   },
-  "accessWidener": "LyokoAccessWidener.accessWidener"
+  "accessWidener": "LyokoAccessWidener.accessWidener",
+  "custom":{
+  "cardinal-components": [
+              "cm:lyoko_class"
+          ]
+    }
 }

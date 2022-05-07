@@ -3,11 +3,13 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.LaserRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage.CustomCarthadgeSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice.CustomIceSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.volcano.CustomVolcanoSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
@@ -144,7 +146,16 @@ if(client.player != null) {
 
                         if(!mc.player.isCreative() && !mc.player.isSpectator()) {
                             mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 7) - 2, mc.getWindow().getScaledHeight() >> 11, 0, 0, 33, 254);
-                            mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 6) - 1, (mc.getWindow().getScaledHeight() >> 11), 90, 0, 25, (int) ((12.7) * mc.player.getHealth()));
+                            int texV = 0;
+                            switch (CardinalData.LyokoClass.getLyokoClass(mc.player))
+                            {
+                                case 0 -> texV = PlayerClassType.Feline.getTextureIndex();
+                                case 1 -> texV = PlayerClassType.Samurai.getTextureIndex();
+                                case 2 -> texV = PlayerClassType.Ninja.getTextureIndex();
+                                case 3 -> texV = PlayerClassType.Guardian.getTextureIndex();
+
+                            }
+                            mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 6) - 1, (mc.getWindow().getScaledHeight() >> 11), texV, 0, 25, (int) ((12.7) * mc.player.getHealth()));
 
                         }
 
