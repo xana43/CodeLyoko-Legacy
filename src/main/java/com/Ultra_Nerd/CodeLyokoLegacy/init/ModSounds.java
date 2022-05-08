@@ -34,7 +34,15 @@ public final class ModSounds {
     public static final SoundEvent OCEAN = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("digital_ocean"));
     public static final SoundEvent VOLCANO = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("volcano_replika_music"));
     public static final SoundEvent OPENTOWERGUISOUND = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("tower_gui_sound"));
-
+    public static final SoundEvent SWORDDRAW = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("lyoko.weapon.sword.draw"));
+    public static final SoundEvent SWORDSLASH = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("lyoko.weapon.sword.slash"));
+    public static final SoundEvent MEGATANKROLL = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.move"));
+    public static final SoundEvent MEGATANKHURT1 = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.hurt1"));
+    public static final SoundEvent MEGATANKHURT2 = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.hurt2"));
+    public static final SoundEvent MEGATANKBIGFALL = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.bigfall"));
+    public static final SoundEvent MEGATANKSMALLFALL = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.smallfall"));
+    public static final SoundEvent MEGATANKDIE = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix( "entity.megatank.die"));
+    public static final SoundEvent CURSORBLINK = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("interface_cursor"));
     public static final SoundEvent[] SOUNDS = new SoundEvent[]{
             OPENTOWERGUISOUND,
             LAZY_WARRIOR,
@@ -52,7 +60,16 @@ public final class ModSounds {
             FOREST,
             MOUNTAIN,
             OCEAN,
-            VOLCANO
+            VOLCANO,
+            SWORDDRAW,
+            SWORDSLASH,
+            MEGATANKROLL,
+            MEGATANKHURT1,
+            MEGATANKHURT2,
+            MEGATANKDIE,
+            MEGATANKSMALLFALL,
+            MEGATANKBIGFALL,
+            CURSORBLINK
 
     };
 
@@ -84,7 +101,7 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> BLOKHURT = SOUNDS.register("entity.blok.hurt", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "entity.blok.hurt")));
     public static final RegistryObject<SoundEvent> GUISOUND = SOUNDS.register("gui", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "gui")));
     public static final RegistryObject<SoundEvent> OPENTOWERGUISOUND = SOUNDS.register("tower_gui_sound", () -> new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("tower_gui_sound")));
-    public static final RegistryObject<SoundEvent> CURSORBLINK = SOUNDS.register("interface_cursor",() -> new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("interface_cursor")));
+
     public static final RegistryObject<SoundEvent> LASERARROW = SOUNDS.register("laser", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "laser")));
     public static final RegistryObject<SoundEvent> QUANTUMZAP = SOUNDS.register("quantum_zap", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "quantum_zap")));
     public static final RegistryObject<SoundEvent> MEGATANKROLL = SOUNDS.register("entity.megatank.move", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "entity.megatank.move")));

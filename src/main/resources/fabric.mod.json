@@ -48,7 +48,8 @@
     "starlight":">=1.0.2",
     "ferritecore":">=4.2.0"
   },
-  "accessWidener": "LyokoAccessWidener.accessWidener",
+  "accessWidener":"LyokoAccessWidener.accessWidener",
+
   "custom":{
   "cardinal-components": [
               "cm:lyoko_class",

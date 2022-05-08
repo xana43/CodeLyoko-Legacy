@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "InventoryScreenDropDisable",
-    "ItemDropMixin"
+    "ItemDropMixin",
+    "PlayerAttackMixin",
+
   ],
   "client": [
     "HUD"

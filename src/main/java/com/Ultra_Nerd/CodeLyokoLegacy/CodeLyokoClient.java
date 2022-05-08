@@ -40,16 +40,14 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
-import javax.swing.text.JTextComponent;
 import java.util.UUID;
 
 @Environment(EnvType.CLIENT)
@@ -245,12 +243,12 @@ if(client.player != null) {
                             default -> 0;
                         });
         ModelPredicateProviderRegistry.register(ModItems.DIGITAL_SABER,CodeLyokoMain.CodeLyokoPrefix("blocking"),(stack, world, entity, seed) -> {
-            if (stack.getUseAction() == UseAction.BLOCK) {
-                return 1;
-            }
 
-
-            return 0;
+           if(entity == null)
+           {
+               return 0;
+           }
+           return entity.isUsingItem() && entity.getActiveItem() == stack ? 1:0;
         });
 /*
         ItemProperties.register(ModItems.RAW_POLYCARBONATE.get(), CodeLyokoMain.CodeLyokoPrefix("quantity"),

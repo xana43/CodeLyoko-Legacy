@@ -277,5 +277,22 @@
         "preload": true
       }
     ]
+  },
+  "lyoko.weapon.sword.draw":{
+    "subtitle":"weapon.lyoko.draw",
+    "sounds":[{
+        "name":"cm:items/swords/sword_draw_effect",
+        "steam":false,
+        "preload":true
+    }]
+  },
+  "lyoko.weapon.sword.slash":
+  {
+    "subtitle":"weapon.lyoko.slash",
+    "sounds":[{
+        "name":"cm:items/swords/sword_slash_effect",
+        "stream":false,
+        "preload":true
+    }]
   }
 }

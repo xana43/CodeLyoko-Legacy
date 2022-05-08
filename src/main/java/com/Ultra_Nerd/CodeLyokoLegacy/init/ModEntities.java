@@ -1,7 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityLaser;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -15,10 +17,12 @@ public final class ModEntities {
   //entity type
     public static final EntityType<EntityBlok> BLOK = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER,EntityBlok::new).dimensions(EntityDimensions.fixed(2f,2f)).build();
     public static final EntityType<EntityLaser> LASER_ENTITY_TYPE = FabricEntityTypeBuilder.<EntityLaser>create(SpawnGroup.MISC,EntityLaser::new).build();
+  public static final EntityType<MegaTankEntity> MEGATANK = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER,MegaTankEntity::new).build();
+
     public static final ImmutableMap<String,EntityType<?>> ENTITY_TYPE_HASH_MAP = ImmutableMap.<String,EntityType<?>>builder()
             .put("blok",BLOK)
             .put("laser",LASER_ENTITY_TYPE)
-
+            .put("megatank",MEGATANK)
             .build();
 //entityRenderer
 
@@ -44,9 +48,7 @@ public final class ModEntities {
                     .build(
                             new ResourceLocation(CodeLyokoMain.MOD_ID, "hornet").toString()
                     ));
-    public static final RegistryObject<EntityType<MegaTankEntity>> MEGATANK = Entities.register("megatank", () ->
-            EntityType.Builder.of(MegaTankEntity::new, MobCategory.MONSTER).sized(3, 3)
-                    .build(new ResourceLocation(CodeLyokoMain.MOD_ID, "megatank").toString()));
+
     public static final RegistryObject<EntityType<MantaEntity>> MANTA = Entities.register("manta", () ->
             EntityType.Builder.of(MantaEntity::new, MobCategory.MONSTER).sized(3, 3)
                     .build(new ResourceLocation(CodeLyokoMain.MOD_ID, "manta").toString()));

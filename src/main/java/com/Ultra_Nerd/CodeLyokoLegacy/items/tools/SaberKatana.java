@@ -1,35 +1,50 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.tools;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import io.github.ladysnake.locki.DefaultInventoryNodes;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.client.util.SelectionManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShieldItem;
+import net.minecraft.item.Items;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.screen.slot.Slot;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.ClickType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class SaberKatana extends SwordItem {
     private final float attackdamage;
     private final float attackspeed;
-
+    private boolean selectedOnce;
     public SaberKatana(final ToolMaterial toolMaterial, final int attackDamage, final float attackSpeed, final Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
         this.attackspeed = attackSpeed;
         this.attackdamage = attackDamage + toolMaterial.getAttackDamage();
 
+
+
     }
+
+
+
+
 
     @Override
     public int getMaxUseTime(final ItemStack stack) {
@@ -40,8 +55,10 @@ public final class SaberKatana extends SwordItem {
     @Override
     public UseAction getUseAction(final ItemStack stack) {
 
+
         return UseAction.BLOCK;
     }
+
 
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(final ItemStack stack, final EquipmentSlot slot) {
@@ -55,25 +72,30 @@ public final class SaberKatana extends SwordItem {
 
     }
 
-    @Override
-    public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
-        ItemStack itemStack = user.getStackInHand(hand);
-        user.setCurrentHand(hand);
-        return TypedActionResult.consume(itemStack);
-    }
+
 
     @Override
     public void inventoryTick(final ItemStack stack, final World world, final Entity entity, final int slot, final boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
-        if(selected)
+        if(selected && !selectedOnce)
         {
-            if(entity instanceof  PlayerEntity player)
-            {
-                player.setCurrentHand(Hand.MAIN_HAND);
-
-
-            }
+            entity.playSound(ModSounds.SWORDDRAW,1,1);
+            selectedOnce = true;
+        } else if (!selected) {
+            selectedOnce = false;
         }
+    }
+
+    @Override
+    public SoundEvent getEquipSound() {
+        return ModSounds.SWORDDRAW;
+    }
+
+    @Override
+    public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
+        user.setCurrentHand(hand);
+
+        return TypedActionResult.pass(user.getStackInHand(hand));
     }
 
     @Override
