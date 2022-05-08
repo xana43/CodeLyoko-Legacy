@@ -28,7 +28,7 @@ import javax.annotation.Nonnull;
 
 public final class UraniumCanister extends Block {
 
-    private static final VoxelShape shape = Block.box(3.5D, 0.0D, 3.5D, 12.0D, 15.0D, 12.0D);
+    private static final VoxelShape shape = Block.createCuboidShape(3.5D, 0.0D, 3.5D, 12.0D, 15.0D, 12.0D);
 
     public UraniumCanister(@NotNull Settings properties) {
         super(properties);

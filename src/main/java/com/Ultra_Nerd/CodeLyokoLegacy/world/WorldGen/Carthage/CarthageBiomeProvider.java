@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBiome;
 import com.mojang.serialization.Codec;
 import net.minecraft.util.dynamic.RegistryOps;

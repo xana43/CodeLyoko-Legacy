@@ -38,11 +38,11 @@ public final class Devirtualized extends Screen {
     protected void init() {
         this.ticksSinceDeath = 0;
         this.buttons.clear();
-        this.buttons.add((ButtonWidget)this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height / 4 + 72, 200, 20, this.isHardcore ? new TranslatableText("deathScreen.spectate") : new TranslatableText("deathScreen.respawn"), (button) -> {
+        this.buttons.add(this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height / 4 + 72, 200, 20, this.isHardcore ? new TranslatableText("deathScreen.spectate") : new TranslatableText("deathScreen.respawn"), (button) -> {
             this.client.player.requestRespawn();
-            this.client.setScreen((Screen)null);
+            this.client.setScreen(null);
         })));
-        this.buttons.add((ButtonWidget)this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height / 4 + 96, 200, 20, new TranslatableText("deathScreen.titleScreen"), (button) -> {
+        this.buttons.add(this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height / 4 + 96, 200, 20, new TranslatableText("deathScreen.titleScreen"), (button) -> {
             if (this.isHardcore) {
                 this.quitLevel();
             } else {
@@ -69,7 +69,7 @@ public final class Devirtualized extends Screen {
             this.quitLevel();
         } else {
             this.client.player.requestRespawn();
-            this.client.setScreen((Screen)null);
+            this.client.setScreen(null);
         }
 
     }

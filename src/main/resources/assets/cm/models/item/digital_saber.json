@@ -1,5 +1,7 @@
 {
-  "loader": "forge:obj",
-  "model": "cm:models/item/digital_saber.obj",
-  "ambientocclusion": true
+    "parent":"builtin/entity",
+    "overrides": [
+            {"predicate": {"cm:blocking": 1},"model":"cm:item/saber/digital_saber_blocking"},
+            {"predicate": {"cm:blocking": 0},"model":"cm:item/saber/digital_saber_normal"}
+ ]
 }

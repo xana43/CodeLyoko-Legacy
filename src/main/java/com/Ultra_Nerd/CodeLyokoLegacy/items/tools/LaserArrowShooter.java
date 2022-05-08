@@ -87,6 +87,7 @@ public final class LaserArrowShooter extends BowItem {
 
                 //las.(10);
                 las.setNoGravity(true);
+                las.shake =0;
                 las.setPos(user.getX(),user.getEyeY(),user.getZ());
                 las.setVelocity(user,user.getPitch(),user.getYaw(),0, 11.44f, 0);
                 world.spawnEntity(las);

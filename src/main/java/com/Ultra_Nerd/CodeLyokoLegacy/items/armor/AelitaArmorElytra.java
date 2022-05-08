@@ -7,7 +7,7 @@ import net.minecraft.item.ArmorMaterial;
 import org.jetbrains.annotations.NotNull;
 
 
-public final class AelitaArmorElytra extends ArmorItem implements FabricElytraItem {
+public final class AelitaArmorElytra extends LyokoArmor implements FabricElytraItem {
     public AelitaArmorElytra(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);
     }

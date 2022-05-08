@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens;
 
 import net.minecraft.client.gui.screen.ingame.BookScreen;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.StringVisitable;
 
 public final class StoryBookGUI extends BookScreen {
@@ -24,6 +25,12 @@ public final class StoryBookGUI extends BookScreen {
     public boolean shouldPause() {
         return false;
     }
+
+    @Override
+    protected void init() {
+        super.init();
+    }
+
     /*
     public StoryBookGUI(FormattedText[] story, int AmountOfPages) {
         super(new BookAccess() {

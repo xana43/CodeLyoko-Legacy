@@ -5,7 +5,7 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import org.jetbrains.annotations.NotNull;
 
-public final class ArmorNinja extends ArmorItem {
+public final class ArmorNinja extends LyokoArmor {
     public ArmorNinja(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);
     }

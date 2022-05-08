@@ -43,6 +43,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
@@ -243,6 +244,14 @@ if(client.player != null) {
                             case 1 -> 0.2f;
                             default -> 0;
                         });
+        ModelPredicateProviderRegistry.register(ModItems.DIGITAL_SABER,CodeLyokoMain.CodeLyokoPrefix("blocking"),(stack, world, entity, seed) -> {
+            if (stack.getUseAction() == UseAction.BLOCK) {
+                return 1;
+            }
+
+
+            return 0;
+        });
 /*
         ItemProperties.register(ModItems.RAW_POLYCARBONATE.get(), CodeLyokoMain.CodeLyokoPrefix("quantity"),
                 (stack, world, entityin,integer) -> {

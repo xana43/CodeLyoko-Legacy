@@ -1,6 +1,6 @@
 # Blender v2.83.1 OBJ File: 'KatanaMinecraft.blend'
 # www.blender.org
-mtllib digital_saber.mtl
+mtllib digital_saber_normal.mtl
 o Katana
 v 0.480971 0.474721 0.524994
 v 0.481468 0.475017 0.521600

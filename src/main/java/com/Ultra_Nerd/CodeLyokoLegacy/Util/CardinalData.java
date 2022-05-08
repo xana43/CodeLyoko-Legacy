@@ -9,7 +9,7 @@ import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.NotNull;
 
-public class CardinalData implements EntityComponentInitializer {
+public final class CardinalData implements EntityComponentInitializer {
 
 
 

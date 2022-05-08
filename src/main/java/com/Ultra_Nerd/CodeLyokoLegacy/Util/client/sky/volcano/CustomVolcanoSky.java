@@ -13,6 +13,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3f;
+import org.lwjgl.system.CallbackI;
 
 //@OnlyIn(Dist.CLIENT)
 @Environment(EnvType.CLIENT)
@@ -36,37 +37,37 @@ public record CustomVolcanoSky() implements DimensionRenderingRegistry.SkyRender
         final MatrixStack matrixStack = ctx.matrixStack();
         for(int i = 0; i < 6; ++i) {
             matrixStack.push();
-            if (i == 1) {
-                RenderSystem.setShaderTexture(0,sky1);
-                matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
-                matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(0));
+            switch (i)
+            {
+                case 1 -> {
+                    RenderSystem.setShaderTexture(0,sky1);
+                    matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
+                    matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(0));
+                    }
+                case 2 -> {
+                    RenderSystem.setShaderTexture(0,sky2);
+                    matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
+                    matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180));
+                    }
+                case 3 -> {
+                    RenderSystem.setShaderTexture(0,ConstantUtil.skytop);
+                    matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
+
+
+                    matrixStack.translate(0,50,0);
+                    }
+                case 4 ->{
+                    RenderSystem.setShaderTexture(0,sky2);
+                    matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0F));
+                    matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-90));
+                    }
+                case 5 ->{
+                    RenderSystem.setShaderTexture(0,sky1);
+                    matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
+                    matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90));
+                     }
             }
 
-            if (i == 2) {
-                RenderSystem.setShaderTexture(0,sky2);
-                matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
-                matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180));
-            }
-
-            if (i == 3) {
-                RenderSystem.setShaderTexture(0,ConstantUtil.skytop);
-                matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
-
-
-                matrixStack.translate(0,50,0);
-            }
-
-            if (i == 4) {
-                RenderSystem.setShaderTexture(0,sky2);
-                matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0F));
-                matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-90));
-            }
-
-            if (i == 5) {
-                RenderSystem.setShaderTexture(0,sky1);
-                matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
-                matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90));
-            }
 
             final Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
             bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);

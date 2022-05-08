@@ -98,10 +98,10 @@ public record CodeLyokoMain() implements ModInitializer {
         ModItems.ITEM_MAP.forEach((s, item) -> Registry.register(Registry.ITEM,new Identifier(MOD_ID,s),item));
         ModTileEntities.BLOCKENTITY_MAP.forEach((s, blockEntityType) -> Registry.register(Registry.BLOCK_ENTITY_TYPE,CodeLyokoPrefix(s),blockEntityType));
         //ModSounds.SOUNDS.forEach(soundEvent -> Registry.register(Registry.SOUND_EVENT,soundEvent.getId(),soundEvent));
-        final int size = ModSounds.SOUNDS.size();
+        final int size = ModSounds.SOUNDS.length;
         for(int i =0; i < size; i++)
         {
-            Registry.register(Registry.SOUND_EVENT, ModSounds.SOUNDS.get(i).getId(),ModSounds.SOUNDS.get(i));
+            Registry.register(Registry.SOUND_EVENT, ModSounds.SOUNDS[i].getId(),ModSounds.SOUNDS[i]);
         }
         ModBiome.BIOME_MAP.forEach((s, biome) -> Registry.register(BuiltinRegistries.BIOME,CodeLyokoPrefix(s),biome));
         ModEntities.ENTITY_TYPE_HASH_MAP.forEach((s, entityType) -> Registry.register(Registry.ENTITY_TYPE,CodeLyokoPrefix(s),entityType));

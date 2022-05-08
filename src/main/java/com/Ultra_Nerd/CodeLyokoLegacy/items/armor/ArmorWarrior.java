@@ -5,16 +5,15 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import org.jetbrains.annotations.NotNull;
 
-public final class ArmorWarrior extends ArmorItem {
+public final class ArmorWarrior extends LyokoArmor {
 
     private static final double movement_modifier = -0.1D;
-    private final double attack_modifier;
-    private final double attack_speed;
+    private static final double attack_modifier = 0.7D;
+    private static final double attack_speed = -0.2D;
     public ArmorWarrior(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);
 
-        attack_modifier = 0.7D;
-        attack_speed = -0.2D;
+
     } /*@Override
     public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         Multimap<Attribute,AttributeModifier> multimap = HashMultimap.create();

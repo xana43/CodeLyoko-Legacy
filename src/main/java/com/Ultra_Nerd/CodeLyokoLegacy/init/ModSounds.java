@@ -35,7 +35,7 @@ public final class ModSounds {
     public static final SoundEvent VOLCANO = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("volcano_replika_music"));
     public static final SoundEvent OPENTOWERGUISOUND = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("tower_gui_sound"));
 
-    public static final List<SoundEvent> SOUNDS = List.of(
+    public static final SoundEvent[] SOUNDS = new SoundEvent[]{
             OPENTOWERGUISOUND,
             LAZY_WARRIOR,
             LAZY_FELINE,
@@ -53,7 +53,9 @@ public final class ModSounds {
             MOUNTAIN,
             OCEAN,
             VOLCANO
-            );
+
+    };
+
 /*
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, CodeLyokoMain.MOD_ID);
     public static final HashMap<ResourceKey<Level>,Lazy<Music>> LAZY_HASH_MAP = new HashMap<>();

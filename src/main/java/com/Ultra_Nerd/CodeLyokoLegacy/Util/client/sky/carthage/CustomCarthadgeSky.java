@@ -35,30 +35,16 @@ public record CustomCarthadgeSky() implements DimensionRenderingRegistry.SkyRend
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
         for (int i = 0; i < 6; ++i) {
             matrixStack.push();
-            if(i == 0)
+            switch (i)
             {
-                matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(0.0F));
-            }
-            if (i == 1) {
-                matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
-
-            }
-
-            if (i == 2) {
-                matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
+                case 0 -> matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(0.0F));
+                case 1 -> matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
+                case 2 -> matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
+                case 3 -> matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
+                case 4 -> matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0F));
+                case 5 -> matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
             }
 
-            if (i == 3) {
-                matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
-            }
-
-            if (i == 4) {
-                matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0F));
-            }
-
-            if (i == 5) {
-                matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
-            }
             final Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
             bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
             bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();

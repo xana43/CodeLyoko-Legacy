@@ -23,10 +23,10 @@ public final class ClassScreen extends Screen {
 
     private static final Identifier textures = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase_pot.png");
     private static final int xSize = 1024,  ySize = 1024;
-    private static int x,y;
+    private static int x;
     private TexturedButtonWidget feline,samurai,ninja,guardian,warrior;
     private int IndicatorColor = 0;
-    private static TextRenderer textRenderer;
+
 
     public ClassScreen() {
         super(Text.of(""));
@@ -91,7 +91,7 @@ public final class ClassScreen extends Screen {
     protected void init() {
         super.init();
         assert this.client != null;
-        textRenderer = this.client.textRenderer;
+
 
         x = (this.width - xSize) >> 1;
         //y = (this.height - ySize) >> 1;
@@ -110,7 +110,7 @@ public final class ClassScreen extends Screen {
             case 0 -> IndicatorColor = colors;
             case 1 -> IndicatorColor = 2007;
             case 2 -> IndicatorColor = 5125;
-            case 3 -> IndicatorColor =  0x1d5e18;
+            case 3 -> IndicatorColor = 0x1d5e18;
         }
 
         /*

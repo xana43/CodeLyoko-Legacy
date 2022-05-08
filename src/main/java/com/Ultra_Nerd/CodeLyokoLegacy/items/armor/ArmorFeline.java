@@ -21,6 +21,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 import java.util.UUID;
 
-public final class ArmorFeline extends ArmorItem {
+public final class ArmorFeline extends LyokoArmor {
 
 
     private static final double movement_modifier = 0.6;
@@ -92,15 +93,8 @@ public final class ArmorFeline extends ArmorItem {
     @Override
     public void inventoryTick(final ItemStack stack, final World pLevel, final Entity pEntity, final int pSlotId, final boolean pIsSelected) {
         super.inventoryTick(stack, pLevel, pEntity, pSlotId, pIsSelected);
-        stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
-        if(!stack.hasEnchantments()) {
 
-            stack.addEnchantment(Enchantments.BINDING_CURSE,Enchantments.BINDING_CURSE.getMaxLevel());
-        }
-        if(pEntity instanceof PlayerEntity player)
-        {
-            this.onArmorTick(stack,pLevel,player);
-        }
+
     }
 
 
@@ -110,35 +104,10 @@ public final class ArmorFeline extends ArmorItem {
 private static final StatusEffectInstance JUMPEFFECT = new StatusEffectInstance(StatusEffects.JUMP_BOOST, -1, 3, false, false, false);
 
 
-
-
-
-
-    public void onArmorTick(ItemStack stack, World world, @NotNull PlayerEntity player) {
-
-        if (!DimensionCheck.playerNotInVanillaWorld(player)) {
-
-            if (player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).getItem() == ModItems.ODD_CHESTPLATE) {
-                player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).setCount(0);
-
-                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).getItem() == ModItems.BLANKHELMET) {
-                    player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
-                }
-            }
-            if (player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).getItem() == ModItems.ODD_LEGGINGS) {
-                player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).setCount(0);
-                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).getItem() == ModItems.BLANKHELMET) {
-                    player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
-                }
-            }
-            if (player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).getItem() == ModItems.ODD_BOOTS) {
-                player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).setCount(0);
-                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).getItem() == ModItems.BLANKHELMET) {
-                    player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
-                }
-            }
-        } else {
-
+    @Override
+    protected boolean onArmorTick(final PlayerEntity player, final Item armorItem) {
+        if(super.onArmorTick(player,this))
+        {
             if(player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).getItem() == ModItems.ODD_BOOTS && player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).getItem() == ModItems.ODD_LEGGINGS) {
                 if (!player.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
                     player.addStatusEffect(JUMPEFFECT);
@@ -147,16 +116,11 @@ private static final StatusEffectInstance JUMPEFFECT = new StatusEffectInstance(
 
                 player.fallDistance = 0;
             }
-
-
-
-
-
-
-
-
         }
+        return super.onArmorTick(player, this);
     }
+
+
 
 
 
