@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 
 
 public final class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer<T> {
-    protected OverboardRenderer(final EntityRendererFactory.Context ctx) {
+    private OverboardRenderer(final EntityRendererFactory.Context ctx) {
         super(ctx);
     }
 

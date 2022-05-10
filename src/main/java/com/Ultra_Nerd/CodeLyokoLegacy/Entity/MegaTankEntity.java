@@ -1,20 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelMegaTank;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.RangedAttackMob;
+import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -44,26 +45,47 @@ import java.util.Random;
 public final class MegaTankEntity extends SkeletonEntity implements IAnimatable {
 
    private final AnimationFactory TankManager = new AnimationFactory(this);
-    private final AnimationController<?> Tankcontroller = new AnimationController<>(this, "movecontroller", 20, this::animationPred);
 
-    public MegaTankEntity(EntityType<? extends AbstractSkeletonEntity> type, @NotNull World world) {
-        super(ModEntities.MEGATANK, world);
-        this.setAttacking(true);
+
+    public MegaTankEntity(EntityType<? extends SkeletonEntity> type, @NotNull World world) {
+        super(type, world);
+
         AnimationController.addModelFetcher((AnimationController.ModelFetcher<MegaTankEntity>) animated -> new ModelMegaTank());
+
 
     }
 
 
-   // abstract SoundEvent getStepSound();
+    @Override
+    protected boolean isAffectedByDaylight() {
+        return false;
+    }
+
+    @Override
+    protected void playStepSound(final BlockPos pos, final BlockState state) {
+            this.playSound(getStepSound(),0.15f,1);
+    }
+
+    @Override
+    public boolean isUndead() {
+        return false;
+    }
 
 
 
+    // abstract SoundEvent getStepSound();
 
+
+    //@Override
+  private static SoundEvent getStepSound()
+  {
+      return ModSounds.MEGATANKROLL;
+  }
 
 
     public static DefaultAttributeContainer.@NotNull Builder registerAttributes() {
         // TODO Auto-generated method stub
-        return SkeletonEntity.createAbstractSkeletonAttributes()
+        return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,1D)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH,200D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,0.5D)
@@ -106,7 +128,20 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
     @Override
     protected void initGoals() {
         this.goalSelector.add(1,new SwimGoal(this));
-        this.goalSelector.add(2,new ProjectileAttackGoal(this,1,10,6));
+        this.goalSelector.add(2,new ProjectileAttackGoal(this,1,10,6){
+            @Override
+            public void start() {
+                super.start();
+                MegaTankEntity.this.setAttacking(true);
+            }
+
+            @Override
+            public void stop() {
+                super.stop();
+                MegaTankEntity.this.setAttacking(false);
+            }
+
+        });
         this.goalSelector.add(3,new WanderAroundGoal(this,1D));
         this.goalSelector.add(4,new LookAroundGoal(this));
         this.targetSelector.add(1,new ActiveTargetGoal<>(this, PlayerEntity.class,true));
@@ -133,7 +168,7 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
 
     @Override
     public void registerControllers(@NotNull AnimationData data) {
-   data.addAnimationController(Tankcontroller);
+   data.addAnimationController(new AnimationController<>(this, "movecontroller", 0, this::animationPred));
     }
 
     @Override
@@ -141,10 +176,11 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
         //super.attack(target, pullProgress);
         final EntityLaser abstractarrow = new EntityLaser(this.world,this);
 
-        double d0 = target.getX() - this.getX();
-        double d1 = target.getBodyY(0.3333333333333333D) - abstractarrow.getY();
-        double d2 = target.getZ() - this.getZ();
-        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+        final double d0 = target.getX() - this.getX();
+        final double d1 = target.getBodyY(0.3333333333333333D) - abstractarrow.getY();
+        final double d2 = target.getZ() - this.getZ();
+        final double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+
         abstractarrow.setVelocity(d0, d1 + d3 * (double)0.2F, d2, 4F, (float)(14 - this.world.getDifficulty().getId() << 2));
         this.playSound(ModSounds.LASERARROW, 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
         if(!this.world.isClient) {
@@ -154,24 +190,27 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
 
 
 
-
-
     private <E extends MegaTankEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
 
-        if ((event.isMoving() || event.getAnimatable().isSwimming()) && !event.getAnimatable().isAttacking()) {
-            Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.move", true));
 
-            return PlayState.CONTINUE;
+        //CodeLyokoMain.LOG.info("attacking " + event.getAnimatable().isAttacking());
+        if (event.isMoving() && !event.getAnimatable().isAttacking()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.move", true));
+            //CodeLyokoMain.LOG.info("moving");
         } else if (event.getAnimatable().isAttacking()) {
-            Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.open", true));
 
-            return PlayState.CONTINUE;
-        } else {
-            Tankcontroller.setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.idle", true));
-            return PlayState.CONTINUE;
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.open", true));
+            //CodeLyokoMain.LOG.info("attacking");
+        } else{
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.idle", true));
+            //CodeLyokoMain.LOG.info("not moving");
+
+
         }
 
 
+
+        return PlayState.CONTINUE;
     }
 
     @Override

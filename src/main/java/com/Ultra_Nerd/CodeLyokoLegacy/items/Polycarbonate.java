@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public final class Polycarbonate extends Item {
+public final class  Polycarbonate extends Item {
     private static int timer;
     private static ItemStack instance;
 

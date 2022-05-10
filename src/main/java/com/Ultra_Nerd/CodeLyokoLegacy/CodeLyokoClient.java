@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.LaserRenderer;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.MegaTankRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
@@ -71,8 +72,9 @@ public record CodeLyokoClient() implements ClientModInitializer {
         ));
         //Renderers
 
-        BlockEntityRendererRegistry.register(ModTileEntities.LYOKO_CORE, context -> new CoreOfLyoko());
+        BlockEntityRendererRegistry.register(ModTileEntities.LYOKO_CORE, CoreOfLyoko::new);
         EntityRendererRegistry.register(ModEntities.BLOK, RendBlok::new);
+        EntityRendererRegistry.register(ModEntities.MEGATANK, MegaTankRenderer::new);
         EntityRendererRegistry.register(ModEntities.LASER_ENTITY_TYPE, LaserRenderer::new);
         receiveEntityPacket();
         FluidRenderRegistry();

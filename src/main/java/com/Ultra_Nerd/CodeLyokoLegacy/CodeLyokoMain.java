@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
@@ -112,6 +113,7 @@ public record CodeLyokoMain() implements ModInitializer {
         //GeneratorTypeAccessor.getValues().add(carthage);
         //Attribute Registration
         FabricDefaultAttributeRegistry.register(ModEntities.BLOK, EntityBlok.createMonsterAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.MEGATANK, MegaTankEntity.registerAttributes());
         //events
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
 

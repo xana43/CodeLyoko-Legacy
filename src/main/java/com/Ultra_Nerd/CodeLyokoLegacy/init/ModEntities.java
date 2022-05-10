@@ -1,23 +1,24 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
 import com.google.common.collect.ImmutableMap;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.util.Pair;
+import org.checkerframework.checker.units.qual.K;
+
+import java.security.KeyPair;
 
 public final class ModEntities {
   //entity type
-    public static final EntityType<EntityBlok> BLOK = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER,EntityBlok::new).dimensions(EntityDimensions.fixed(2f,2f)).build();
+    public static final EntityType<EntityBlok> BLOK = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER,EntityBlok::new).dimensions(EntityDimensions.fixed(2f,2f)).fireImmune().build();
     public static final EntityType<EntityLaser> LASER_ENTITY_TYPE = FabricEntityTypeBuilder.<EntityLaser>create(SpawnGroup.MISC,EntityLaser::new).build();
-  public static final EntityType<MegaTankEntity> MEGATANK = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER,MegaTankEntity::new).build();
+  public static final EntityType<MegaTankEntity> MEGATANK = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER,MegaTankEntity::new).dimensions(EntityDimensions.fixed(1,1)).fireImmune()
+          .build();
 
     public static final ImmutableMap<String,EntityType<?>> ENTITY_TYPE_HASH_MAP = ImmutableMap.<String,EntityType<?>>builder()
             .put("blok",BLOK)

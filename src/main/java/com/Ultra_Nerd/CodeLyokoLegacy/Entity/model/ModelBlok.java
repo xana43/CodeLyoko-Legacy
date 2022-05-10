@@ -11,18 +11,17 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public final class ModelBlok extends AnimatedGeoModel<EntityBlok> {
 
-private static final Identifier BlokModelLocation = CodeLyokoMain.CodeLyokoPrefix("geo/blok.geo.json");
-private static final Identifier BlokTextureLocation = CodeLyokoMain.CodeLyokoPrefix("textures/entity/blok/blok.png");
+
 
 
     @Override
     public Identifier getModelLocation(final EntityBlok object) {
-        return BlokModelLocation;
+        return CodeLyokoMain.CodeLyokoPrefix("geo/blok.geo.json");
     }
 
     @Override
     public Identifier getTextureLocation(final EntityBlok object) {
-        return BlokTextureLocation;
+        return CodeLyokoMain.CodeLyokoPrefix("textures/entity/blok/blok.png");
     }
 
     @Override

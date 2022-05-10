@@ -6,7 +6,7 @@
   "mixins": [
     "InventoryScreenDropDisable",
     "ItemDropMixin",
-    "PlayerAttackMixin",
+    "PlayerAttackMixin"
 
   ],
   "client": [

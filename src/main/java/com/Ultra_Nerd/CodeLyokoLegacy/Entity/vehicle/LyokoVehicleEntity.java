@@ -1,8 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class LyokoVehicleEntity extends BoatEntity {
     public boolean movingUp = false;
@@ -10,24 +18,42 @@ public class LyokoVehicleEntity extends BoatEntity {
 
     public LyokoVehicleEntity(final EntityType<? extends BoatEntity> entityType, final World world) {
         super(entityType, world);
+
     }
 
-/*
+
+
     @Nullable
     @Override
-    protected SoundEvent getPaddleSound() {
+    public Entity getVehicle() {
+        return this;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getPaddleSoundEvent() {
         return null;
     }
 
     @Override
-    public void setPaddleState(boolean pLeft, boolean pRight) {
-        super.setPaddleState(false, false);
+    public void updatePassengerPosition(final Entity passenger) {
+        passenger.setPose(EntityPose.STANDING);
+        super.updatePassengerPosition(passenger);
+    }
+
+
+
+
+
+    @Override
+    public void setPaddleMovings(final boolean leftMoving, final boolean rightMoving) {
+        super.setPaddleMovings(false,false);
     }
 
 
     @Override
-    public float getGroundFriction() {
-        return -10;
+    public boolean canBeRiddenInWater() {
+        return false;
     }
 
     @Override
@@ -35,36 +61,26 @@ public class LyokoVehicleEntity extends BoatEntity {
         return null;
     }
 
-    @Override
-    public boolean isVehicle() {
-        return true;
-    }
 
     @Override
-    public boolean canBeRiddenInWater(Entity rider) {
-        return false;
+    public Item asItem() {
+        return null;
     }
 
-    @Override
-    public @NotNull Item getDropItem() {
-        return ItemStack.EMPTY.getItem();
-    }
 
-    @Override
-    public boolean shouldRiderSit() {
-        return false;
-    }
+
+
 
     protected void movement()
     {
         if(movingDown)
         {
 
-            this.setDeltaMovement(getDeltaMovement().subtract(0,1,0));
+            this.addVelocity(getVelocity().x,getVelocity().y - 1, getVelocity().z);
         }
         if(movingUp)
         {
-            this.setDeltaMovement(getDeltaMovement().add(0,1,0));
+            this.addVelocity(getVelocity().x,getVelocity().y + 1, getVelocity().z);
 
         }
 
@@ -81,7 +97,7 @@ public class LyokoVehicleEntity extends BoatEntity {
 
     }
 
- */
+
 
 
 
