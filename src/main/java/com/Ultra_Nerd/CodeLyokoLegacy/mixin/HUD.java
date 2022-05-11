@@ -50,19 +50,18 @@ public abstract class HUD {
             {
 
                ci.cancel();
-                PlayerEntity playerEntity = this.getCameraPlayer();
+                final PlayerEntity playerEntity = this.getCameraPlayer();
                 int i = MathHelper.ceil(playerEntity.getHealth());
                 int j = this.renderHealthValue;
                 float f = Math.max((float)playerEntity.getAttributeValue(EntityAttributes.GENERIC_MAX_HEALTH), (float)Math.max(j, i));
                 int u = playerEntity.getArmor();
-                int m = this.scaledWidth / 2 - 91;
+                int m = (this.scaledWidth >> 1) - 91;
                 int o = this.scaledHeight - 39;
                 int p = MathHelper.ceil(playerEntity.getAbsorptionAmount());
                 int q = MathHelper.ceil((f + (float)p) / 2.0F / 10.0F);
                 int r = Math.max(10 - (q - 2), 3);
                 int s = o - (q - 1) * r - 10;
-                int t = o - 10;
-                int v = -1;
+
                 this.client.getProfiler().push("armor");
 
                 int x;

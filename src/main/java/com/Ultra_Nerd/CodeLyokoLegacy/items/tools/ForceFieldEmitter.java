@@ -3,7 +3,9 @@ package com.Ultra_Nerd.CodeLyokoLegacy.items.tools;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.event.EventFactory;
+import net.fabricmc.fabric.impl.client.indigo.renderer.accessor.AccessItemRenderer;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,7 +26,7 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 import java.util.function.Predicate;
 
-public final class ForceFieldEmitter extends BowItem {
+public final class ForceFieldEmitter extends BowItem{
 
 
     public ForceFieldEmitter(final Settings settings) {
@@ -49,19 +51,25 @@ public final class ForceFieldEmitter extends BowItem {
         return itemStack -> itemStack.equals(ItemStack.EMPTY);
     }
 
+    @Override
+    public void usageTick(final World world, final LivingEntity user, final ItemStack stack, final int remainingUseTicks) {
+        super.usageTick(world, user, stack, remainingUseTicks);
+        publicUseTicks = remainingUseTicks;
+    }
+
+    public int publicUseTicks;
 
     @Override
     public void onStoppedUsing(final ItemStack stack, final World world, final LivingEntity user, final int remainingUseTicks) {
         if (user instanceof PlayerEntity playerentity) {
 
-            int i = this.getMaxUseTime(stack) - remainingUseTicks;
+            final int i = this.getMaxUseTime(stack) - remainingUseTicks;
             //i = (stack, worldIn, playerentity, i, true);
-
+            publicUseTicks = getMaxUseTime(stack) - 1;
 
 
             final float f = getPullProgress(i);
             if (!((double) f < 0.1D)) {
-                boolean flag1 = playerentity.isCreative();
                 if (!world.isClient()) {
                     final EntityLaser las = new EntityLaser(world,user);
 

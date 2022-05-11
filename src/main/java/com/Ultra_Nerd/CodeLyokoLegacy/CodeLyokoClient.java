@@ -6,10 +6,12 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.itemRenderers.ForceFieldEmitterRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage.CustomCarthadgeSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice.CustomIceSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.volcano.CustomVolcanoSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
@@ -24,10 +26,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
@@ -35,13 +34,11 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DeathScreen;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.particle.SpellParticle;
 import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
@@ -58,6 +55,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
     //keybinds
     private static KeyBinding classCreenBinding;
     private static final String keyCategory = "category." + CodeLyokoMain.MOD_ID+".lyoko_controls";
+
     @Override
     public void onInitializeClient() {
         //set key bindings
@@ -84,6 +82,9 @@ public record CodeLyokoClient() implements ClientModInitializer {
             registry.register(CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing_lava"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("entity/laserarrow"));
+            registry.register(CodeLyokoMain.CodeLyokoPrefix("item/force_field_emitter_model_center"));
+            registry.register(CodeLyokoMain.CodeLyokoPrefix("item/force_field_emitter_model_shell"));
+            registry.register(CodeLyokoMain.CodeLyokoPrefix("block/dice"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("particle/tower_particle_2"));
 
         });
@@ -95,14 +96,13 @@ public record CodeLyokoClient() implements ClientModInitializer {
         DimensionEffectsAccessor.getIdentifierMap().put(CodeLyokoMain.CodeLyokoPrefix("codelyoko_effects_general"), new DimensionEffects(Float.NaN,false, DimensionEffects.SkyType.NONE,true,false) {
             @Override
             public Vec3d adjustFogColor(final Vec3d color, final float sunHeight) {
-                return new Vec3d(0,0,0);
+                return Vec3d.ZERO;
             }
 
             @Override
             public boolean useThickFog(final int camX, final int camY) {
                 return false;
             }
-
             @Override
             public float @Nullable [] getFogColorOverride(final float skyAngle, final float tickDelta) {
                 return null;
@@ -110,19 +110,33 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
 
         });
+
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.carthage,new CustomCarthadgeSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.iceSectorWorld,new CustomIceSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld,new CustomVolcanoSky());
-        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE, SpellParticle.DefaultFactory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE, LyokoParticle.TowerParticleNeutral::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_XANA,LyokoParticle.TowerParticleXana::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_JEREMY,LyokoParticle.TowerParticleJeremy::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_FRANZ,LyokoParticle.TowerParticleFranz::new);
         //custom hud
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
 
+
 if(client.player != null) {
+
 
     if(DimensionCheck.playerNotInVanillaWorld(client.player)) {
         if (client.currentScreen instanceof DeathScreen) {
 
-            client.setScreen(new Devirtualized(null, client.player.getServer().isHardcore()));
+            if(client.getServer().isSingleplayer())
+            {
+                client.setScreen(new Devirtualized(null,client.getServer().isHardcore()));
+
+            }
+            else
+            {
+                client.setScreen(new Devirtualized(null,client.player.getServer().isHardcore()));
+            }
         }
     }
     if(DimensionCheck.playerInVanilla(client.player))
@@ -135,7 +149,7 @@ if(client.player != null) {
 }
         });
 
-
+        BuiltinItemRendererRegistry.INSTANCE.register(ModItems.FORCE_FIELD_EMITTER, new ForceFieldEmitterRenderer());
 
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
             final MinecraftClient mc = MinecraftClient.getInstance();
@@ -156,7 +170,7 @@ if(client.player != null) {
                                 case 3 -> texV = PlayerClassType.Guardian.getTextureIndex();
 
                             }
-                            mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 6) - 1, (mc.getWindow().getScaledHeight() >> 11), texV, 0, 25, (int) ((12.7) * mc.player.getHealth()));
+                            mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 6) - 1, (mc.getWindow().getScaledHeight() >> 11), texV, 0, 25, (int) ((12.7f) * mc.player.getHealth()));
 
                         }
 
@@ -270,7 +284,7 @@ if(client.player != null) {
                             case 1 -> 0.25f;
                             case 2 -> 0.5f;
                             case 3 -> 0.75f;
-                            case 4 -> 1.0f;
+                            case 4 -> 1;
                             default -> 0.0f;
                         });
 

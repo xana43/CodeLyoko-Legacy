@@ -5,8 +5,12 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.HitResult;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -24,7 +28,18 @@ public abstract class PlayerAttackMixin {
         if(mc != null) {
             if(mc.player != null) {
                 if (mc.player.getEquippedStack(EquipmentSlot.MAINHAND).getItem() == ModItems.DIGITAL_SABER && mc.options.attackKey.isPressed()) {
-                    mc.player.playSound(ModSounds.SWORDSLASH, SoundCategory.PLAYERS,1,1);
+                    assert mc.crosshairTarget != null;
+                    switch (mc.crosshairTarget.getType())
+                    {
+                        case MISS -> mc.player.playSound(ModSounds.SWORDSLASH, SoundCategory.PLAYERS, 1, 1);
+                        case BLOCK -> {
+                        }
+                        case ENTITY -> {
+                        }
+
+                    }
+
+
                 }
             }
         }

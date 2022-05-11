@@ -10,8 +10,11 @@ import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector2f;
 import net.minecraft.client.util.math.Vector3d;
+import net.minecraft.util.CubicSampler;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3f;
 import org.jetbrains.annotations.NotNull;
 @Environment(EnvType.CLIENT)
@@ -35,6 +38,7 @@ public record CustomCarthadgeSky() implements DimensionRenderingRegistry.SkyRend
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
         for (int i = 0; i < 6; ++i) {
             matrixStack.push();
+
             switch (i)
             {
                 case 0 -> matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(0.0F));

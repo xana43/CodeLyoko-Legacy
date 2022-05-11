@@ -172,7 +172,7 @@ public record CodeLyokoMain() implements ModInitializer {
         }));
 
         ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
-            if(entity instanceof ItemEntity itemEntity)
+            if(entity instanceof final ItemEntity itemEntity)
             {
                 if(DimensionCheck.worldIsNotVanilla(world))
                 {

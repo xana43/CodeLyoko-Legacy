@@ -20,7 +20,7 @@ public record PacketHandler() {
         {
             throw new IllegalStateException("can't be called on client");
         }
-        PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
+       final PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
         byteBuf.writeVarInt(Registry.ENTITY_TYPE.getRawId(e.getType()));
         byteBuf.writeUuid(e.getUuid());
         byteBuf.writeVarInt(e.getId());

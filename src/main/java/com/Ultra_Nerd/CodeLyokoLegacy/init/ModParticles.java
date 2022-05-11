@@ -1,14 +1,25 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ParticleUTIL.DefaultLyokoParticleType;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.particle.DefaultParticleType;
 
 public final class ModParticles {
-public static final DefaultParticleType TOWER_PARTICLE = FabricParticleTypes.simple();
+    private static DefaultLyokoParticleType Simple(final boolean alwaysShow)
+    {
+        return new DefaultLyokoParticleType(alwaysShow);
+    }
+public static final DefaultLyokoParticleType TOWER_PARTICLE = Simple(true);
+    public static final DefaultLyokoParticleType TOWER_PARTICLE_XANA = Simple(false);
+    public static final DefaultLyokoParticleType TOWER_PARTICLE_JEREMY = Simple(false);
+    public static final DefaultLyokoParticleType TOWER_PARTICLE_FRANZ = Simple(false);
 
-public static final ImmutableMap<String,DefaultParticleType> PARTICLE_TYPE_IMMUTABLE_MAP = ImmutableMap.<String, DefaultParticleType>builder()
+public static final ImmutableMap<String,DefaultLyokoParticleType> PARTICLE_TYPE_IMMUTABLE_MAP = ImmutableMap.<String, DefaultLyokoParticleType>builder()
         .put("tower_particle",TOWER_PARTICLE)
+        .put("tower_particle_xana",TOWER_PARTICLE_XANA)
+        .put("tower_particle_jeremy",TOWER_PARTICLE_JEREMY)
+        .put("tower_particle_franz",TOWER_PARTICLE_FRANZ)
         .build();
 
 }

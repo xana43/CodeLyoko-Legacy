@@ -65,8 +65,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd A:\\CodeLyoko 1.18.2\\CodeLyoko-Legacy\\CodelyokoMod\\src\\main\\resources\\assets\\cm\\textures\\block\\holo.png
-map_d A:\\CodeLyoko 1.18.2\\CodeLyoko-Legacy\\CodelyokoMod\\src\\main\\resources\\assets\\cm\\textures\\block\\holo.png
+map_Kd A:\\CodeLyoko 1.18.2\\CodeLyoko-Fabric\\CodeLyoko-Legacy-FABRIC\\CodelyokoMod\\src\\main\\resources\\assets\\cm\\textures\\block\\holo.png
+map_d A:\\CodeLyoko 1.18.2\\CodeLyoko-Fabric\\CodeLyoko-Legacy-FABRIC\\CodelyokoMod\\src\\main\\resources\\assets\\cm\\textures\\block\\holo.png
 
 newmtl shell.001
 Ns 299.999989
@@ -77,5 +77,5 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd A:\\CodeLyoko 1.18.2\\CodeLyoko-Legacy\\CodelyokoMod\\src\\main\\resources\\assets\\cm\\textures\\block\\holo.png
-map_d A:\\CodeLyoko 1.18.2\\CodeLyoko-Legacy\\CodelyokoMod\\src\\main\\resources\\assets\\cm\\textures\\block\\holo.png
+map_Kd A:\\CodeLyoko 1.18.2\\CodeLyoko-Fabric\\CodeLyoko-Legacy-FABRIC\\CodelyokoMod\\src\\main\\resources\\assets\\cm\\textures\\block\\holo.png
+map_d A:\\CodeLyoko 1.18.2\\CodeLyoko-Fabric\\CodeLyoko-Legacy-FABRIC\\CodelyokoMod\\src\\main\\resources\\assets\\cm\\textures\\block\\holo.png
