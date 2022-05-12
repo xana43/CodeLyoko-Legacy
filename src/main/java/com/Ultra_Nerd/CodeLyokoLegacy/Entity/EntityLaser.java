@@ -1,15 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.render.entity.ArrowEntityRenderer;
-import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -73,7 +71,7 @@ public final class EntityLaser extends ArrowEntity
      }
      public void setLifetime(final int seconds)
      {
-         this.lifetime = seconds * 20;
+         this.lifetime = MethodUtil.TickConversion.secondsToTicks(seconds);
      }
      public int getLifetime(final boolean ticks)
      {
@@ -84,7 +82,7 @@ public final class EntityLaser extends ArrowEntity
          else
 
          {
-             return lifetime / 20;
+             return MethodUtil.TickConversion.tickToSeconds(lifetime);
          }
      }
 

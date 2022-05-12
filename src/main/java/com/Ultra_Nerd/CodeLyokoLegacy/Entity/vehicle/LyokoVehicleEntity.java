@@ -1,12 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -89,7 +88,7 @@ public class LyokoVehicleEntity extends BoatEntity {
     @Override
     public void tick() {
         super.tick();
-        if(!DimensionCheck.EntityNotInVanillaWorld(this))
+        if(!MethodUtil.DimensionCheck.EntityNotInVanillaWorld(this))
         {
             this.remove(RemovalReason.DISCARDED);
         }

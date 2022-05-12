@@ -30,7 +30,7 @@ public record PacketHandler() {
         return ServerPlayNetworking.createS2CPacket(packetID,byteBuf);
     }
 
-    public static final class PacketBufUtil {
+    public record PacketBufUtil() {
 
         /**
          * Packs a floating-point angle into a {@code byte}.

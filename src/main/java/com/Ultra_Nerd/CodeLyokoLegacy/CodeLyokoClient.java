@@ -5,7 +5,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.MegaTankRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.itemRenderers.ForceFieldEmitterRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage.CustomCarthadgeSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice.CustomIceSky;
@@ -120,7 +120,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
 if(client.player != null) {
 
 
-    if(DimensionCheck.playerNotInVanillaWorld(client.player)) {
+    if(MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
         if (client.currentScreen instanceof DeathScreen) {
 
             if(client.getServer().isSingleplayer())
@@ -134,7 +134,7 @@ if(client.player != null) {
             }
         }
     }
-    if(DimensionCheck.playerInVanilla(client.player))
+    if(MethodUtil.DimensionCheck.playerInVanilla(client.player))
     {
         if(classCreenBinding.isPressed())
         {
@@ -157,7 +157,7 @@ if(client.player != null) {
             final MinecraftClient mc = MinecraftClient.getInstance();
             //if(mc != null) {
             if(mc.player != null) {
-                if(DimensionCheck.playerNotInVanillaWorld(mc.player)) {
+                if(MethodUtil.DimensionCheck.playerNotInVanillaWorld(mc.player)) {
                     RenderSystem.setShaderTexture(0, CodeLyokoMain.CodeLyokoPrefix("textures/gui/lyoko_health_bar.png"));
                     matrixStack.push();
 

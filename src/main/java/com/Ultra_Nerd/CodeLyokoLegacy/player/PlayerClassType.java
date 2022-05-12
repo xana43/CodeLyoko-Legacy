@@ -1,7 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoArmorMaterial;
-import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
 @NotNull
 public enum PlayerClassType {
@@ -10,8 +8,8 @@ public enum PlayerClassType {
     Feline("Felyne",62/*,LyokoArmorMaterial.FELINE, new NbtCompound()*/),
     Guardian("Guardian",90/*,LyokoArmorMaterial.GUARDIAN, new NbtCompound()*/),
     Samurai("Samurai",118/*,LyokoArmorMaterial.SAMURAI, new NbtCompound()*/),
-    Ninja("Ninja",146/*,LyokoArmorMaterial.NINJA, new NbtCompound()*/),
-    DEFAULT("null",0/*,LyokoArmorMaterial.LINKER,new NbtCompound()*/);
+    Ninja("Ninja",146/*,LyokoArmorMaterial.NINJA, new NbtCompound()*/);
+    //DEFAULT("null",0/*,LyokoArmorMaterial.LINKER,new NbtCompound()*/);
     private final @NotNull String name;
     private final int textureIndex;
     //private final @NotNull LyokoArmorMaterial armorMaterial;

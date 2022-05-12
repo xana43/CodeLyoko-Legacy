@@ -116,13 +116,13 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
 
     @Override
     public void buildSurface(@Nonnull ChunkRegion p_225551_1_, StructureAccessor featureManager, @NotNull Chunk chunk) {
-        BlockState bedrock = ModBlocks.DIGITAL_OCEAN_BLOCK.getDefaultState();
-        BlockState stone = ModBlocks.SECTOR5_STEEL.getDefaultState();
-        BlockState white = ModBlocks.TOWER_WHITE.getDefaultState();
-        BlockState blue = ModBlocks.TOWER_BLUE.getDefaultState();
-        ChunkPos chunkpos = chunk.getPos();
+        final BlockState bedrock = ModBlocks.DIGITAL_OCEAN_BLOCK.getDefaultState();
+        final BlockState stone = ModBlocks.SECTOR5_STEEL.getDefaultState();
+        final BlockState white = ModBlocks.TOWER_WHITE.getDefaultState();
+        final BlockState blue = ModBlocks.TOWER_BLUE.getDefaultState();
+        final ChunkPos chunkpos = chunk.getPos();
 
-        BlockPos.Mutable pos = new BlockPos.Mutable();
+        final BlockPos.Mutable pos = new BlockPos.Mutable();
 
 
         int x;
@@ -135,14 +135,14 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
         }
         for (x = 0; x < 16; x++) {
             for (z = 0; z < 16; z++) {
-                int realX = (chunkpos.x << 4) + x;
-                int realZ = (chunkpos.z << 4) + z;
-                int height = (int) (Math.sqrt(Math.pow(128, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
-                int innerHeight = (int) (Math.sqrt(Math.pow(126, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
+                final int realX = (chunkpos.x << 4) + x;
+                final int realZ = (chunkpos.z << 4) + z;
+                final int height = (int) (Math.sqrt(Math.pow(128, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
+                final int innerHeight = (int) (Math.sqrt(Math.pow(126, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
                 createSphere(chunk, stone, pos, x, z, height, innerHeight);
 
-                int heightSpawn = (int) (Math.sqrt(Math.pow(25, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
-                int innerHeightSpawn = (int) (Math.sqrt(Math.pow(23, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
+                final int heightSpawn = (int) (Math.sqrt(Math.pow(25, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
+                final int innerHeightSpawn = (int) (Math.sqrt(Math.pow(23, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
                 createSphere(chunk, stone, pos, x, z, heightSpawn, innerHeightSpawn);
                 for (int h = 0; h < heightSpawn; h++) {
                     if ((realZ == -1 || realZ == 0 || realZ == 1) && realX > 11) {
@@ -151,7 +151,7 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
                     }
                 }
 
-                double disc = Math.pow(realX, 2) + Math.pow(realZ, 2);
+                final double disc = Math.pow(realX, 2) + Math.pow(realZ, 2);
                 if (disc <= Math.pow(23, 2)) {
                     chunk.setBlockState(pos.set(realX, 127, realZ), blue, false);
                 }
@@ -241,9 +241,9 @@ private int getHeightAt(int baseHeight,float vertialVariance, float horizontalVa
 
     @Override
     public int getHeightOnGround(final int x, final int z, final Heightmap.Type heightmap, final HeightLimitView world) {
-        int baseHeight = settings.baseHeight();
-        float verticalVariance = settings.verticalVariance();
-        float horizontalVariance = settings.horizontalVariance();
+        final int baseHeight = settings.baseHeight();
+        final float verticalVariance = settings.verticalVariance();
+        final float horizontalVariance = settings.horizontalVariance();
 
         return getHeightAt(baseHeight,verticalVariance,horizontalVariance,x,z);
     }
@@ -255,9 +255,9 @@ private int getHeightAt(int baseHeight,float vertialVariance, float horizontalVa
 
     @Override
     public VerticalBlockSample getColumnSample(final int x, final int z, final HeightLimitView world) {
-        int y = getHeightOnGround(x,z, Heightmap.Type.WORLD_SURFACE_WG,world);
-        BlockState none = Blocks.AIR.getDefaultState();
-        BlockState[] states = new BlockState[y];
+        final int y = getHeightOnGround(x,z, Heightmap.Type.WORLD_SURFACE_WG,world);
+        final BlockState none = Blocks.AIR.getDefaultState();
+        final BlockState[] states = new BlockState[y];
         for(int i = 1; i < y; i++)
         {
             states[i] = none;

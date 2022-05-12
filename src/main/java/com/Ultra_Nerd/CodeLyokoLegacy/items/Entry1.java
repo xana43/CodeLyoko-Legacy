@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.TextUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.StoryBookGUI;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
@@ -30,13 +30,13 @@ public final class Entry1 extends WrittenBookItem {
         tooltip.add(new TranslatableText("lyoko.story.entry"));
     }
 
-    private static final StringVisitable[] entry = TextUtil.textArray(ConstantUtil.StoryEntry.Entry1);
+    private static final StringVisitable[] entry = MethodUtil.TextUtil.textArray(ConstantUtil.StoryEntry.Entry1);
 
     @Override
     public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
         if(world.isClient)
         {
-            MinecraftClient.getInstance().setScreen(new StoryBookGUI(entry, TextUtil.textArrayLengthToPage(entry)));
+            MinecraftClient.getInstance().setScreen(new StoryBookGUI(entry, MethodUtil.TextUtil.textArrayLengthToPage(entry)));
         }
         return super.use(world, user, hand);
     }

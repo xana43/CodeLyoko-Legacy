@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
@@ -35,7 +35,7 @@ public abstract class HUD {
     @Inject(method = "renderHealthBar",at = @At(value = "HEAD"),cancellable = true)
     public void disableHealth(final MatrixStack matrices, final PlayerEntity player, final int x, final int y, final int lines, final int regeneratingHeartIndex, final float maxHealth, final int lastHealth, final int health, final int absorption, final boolean blinking, final CallbackInfo ci)
     {
-        if(DimensionCheck.playerNotInVanillaWorld(player))
+        if(MethodUtil.DimensionCheck.playerNotInVanillaWorld(player))
         {
             ci.cancel();
 
@@ -46,21 +46,21 @@ public abstract class HUD {
     {
         if(client.player != null)
         {
-            if(DimensionCheck.playerNotInVanillaWorld(client.player))
+            if(MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player))
             {
 
                ci.cancel();
                 final PlayerEntity playerEntity = this.getCameraPlayer();
-                int i = MathHelper.ceil(playerEntity.getHealth());
-                int j = this.renderHealthValue;
-                float f = Math.max((float)playerEntity.getAttributeValue(EntityAttributes.GENERIC_MAX_HEALTH), (float)Math.max(j, i));
-                int u = playerEntity.getArmor();
-                int m = (this.scaledWidth >> 1) - 91;
-                int o = this.scaledHeight - 39;
-                int p = MathHelper.ceil(playerEntity.getAbsorptionAmount());
-                int q = MathHelper.ceil((f + (float)p) / 2.0F / 10.0F);
-                int r = Math.max(10 - (q - 2), 3);
-                int s = o - (q - 1) * r - 10;
+                final int i = MathHelper.ceil(playerEntity.getHealth());
+                final int j = this.renderHealthValue;
+                final float f = Math.max((float)playerEntity.getAttributeValue(EntityAttributes.GENERIC_MAX_HEALTH), (float)Math.max(j, i));
+                final int u = playerEntity.getArmor();
+                final int m = (this.scaledWidth >> 1) - 91;
+                final int o = this.scaledHeight - 39;
+                final int p = MathHelper.ceil(playerEntity.getAbsorptionAmount());
+                final int q = MathHelper.ceil((f + (float)p) / 2.0F / 10.0F);
+                final int r = Math.max(10 - (q - 2), 3);
+                final int s = o - (q - 1) * r - 10;
 
                 this.client.getProfiler().push("armor");
 
@@ -90,7 +90,7 @@ public abstract class HUD {
     public void test(final MatrixStack matrices, final CallbackInfo ci)
     {
         if(client.player != null) {
-            if (DimensionCheck.playerNotInVanillaWorld(client.player)) {
+            if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
                 ci.cancel();
             }
         }

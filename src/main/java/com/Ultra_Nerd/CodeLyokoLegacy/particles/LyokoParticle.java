@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.particles;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ParticleUTIL.DefaultLyokoParticleType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.renderer.v1.model.SpriteFinder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.particle.*;
@@ -58,39 +59,25 @@ public final class LyokoParticle extends SpriteBillboardParticle {
         final ClientPlayerEntity clientPlayerEntity = minecraftClient.player;
         return clientPlayerEntity != null && clientPlayerEntity.getEyePos().squaredDistanceTo(this.x, this.y, this.z) <= 9.0 && minecraftClient.options.getPerspective().isFirstPerson() && clientPlayerEntity.isUsingSpyglass();
     }
-    private static final float[][] towerColors = {
-            /*Neutral Color*/ {0.01960784314f,0.76470588235f,0.9f},
-            /*Xana Color*/    {0.86274509804f,0.07843137255f,0.235429411765f},
-            /*Jeremy color*/  {0.07058823529f,0.8f}
-    };
+
 
     @Environment(EnvType.CLIENT)
-    public static final class TowerParticleJeremy implements ParticleFactory<DefaultLyokoParticleType>
+    public record TowerParticleJeremy(SpriteProvider spriteProvider) implements ParticleFactory<DefaultLyokoParticleType>
     {
-        private final SpriteProvider spriteProvider;
-        public TowerParticleJeremy(SpriteProvider provider)
-        {
-            this.spriteProvider = provider;
-        }
-
         @Override
         public @NotNull Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
             final LyokoParticle lyokoParticle = new LyokoParticle(world,x,y,z,velocityX,velocityY,velocityZ,spriteProvider);
             lyokoParticle.velocityMultiplier = 0.8f;
-            lyokoParticle.setColor(towerColors[2][0],towerColors[2][1],towerColors[2][0]);
+            lyokoParticle.setColor(0.07058823529f,0.8f,0.07058823529f);
             lyokoParticle.setAlpha(1);
 
             return lyokoParticle;
         }
     }
     @Environment(EnvType.CLIENT)
-    public static final class TowerParticleFranz implements ParticleFactory<DefaultLyokoParticleType>
+    public record TowerParticleFranz(SpriteProvider spriteProvider) implements ParticleFactory<DefaultLyokoParticleType>
     {
-        private final SpriteProvider spriteProvider;
-        public TowerParticleFranz(SpriteProvider provider)
-        {
-            this.spriteProvider = provider;
-        }
+
 
         @Override
         public @NotNull Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
@@ -103,19 +90,14 @@ public final class LyokoParticle extends SpriteBillboardParticle {
         }
     }
     @Environment(EnvType.CLIENT)
-    public static final class TowerParticleNeutral implements ParticleFactory<DefaultLyokoParticleType>
+    public record TowerParticleNeutral(SpriteProvider spriteProvider) implements ParticleFactory<DefaultLyokoParticleType>
     {
-        private final SpriteProvider spriteProvider;
-        public TowerParticleNeutral(final SpriteProvider provider)
-        {
-            this.spriteProvider = provider;
-        }
 
         @Override
         public @NotNull Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
             final LyokoParticle lyokoParticle = new LyokoParticle(world,x,y,z,velocityX,velocityY,velocityZ,spriteProvider);
             lyokoParticle.velocityMultiplier = 0.8f;
-            lyokoParticle.setColor(towerColors[0][0],towerColors[0][1],towerColors[0][2]);
+            lyokoParticle.setColor(0.01960784314f,0.76470588235f,0.9f);
             lyokoParticle.setAlpha(1);
 
             return lyokoParticle;
@@ -123,19 +105,15 @@ public final class LyokoParticle extends SpriteBillboardParticle {
     }
 
     @Environment(EnvType.CLIENT)
-    public static final class TowerParticleXana implements ParticleFactory<DefaultLyokoParticleType>
+    public record TowerParticleXana(SpriteProvider spriteProvider) implements ParticleFactory<DefaultLyokoParticleType>
     {
-        private final SpriteProvider spriteProvider;
-        public TowerParticleXana(final SpriteProvider provider)
-        {
-            this.spriteProvider = provider;
-        }
+
 
         @Override
         public @NotNull Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
             final LyokoParticle lyokoParticle = new LyokoParticle(world,x,y,z,velocityX,velocityY,velocityZ,spriteProvider);
             lyokoParticle.velocityMultiplier = 0.8f;
-            lyokoParticle.setColor(towerColors[1][0],towerColors[1][1],towerColors[1][2]);
+            lyokoParticle.setColor(0.86274509804f,0.07843137255f,0.235429411765f);
             lyokoParticle.setAlpha(1);
 
             return lyokoParticle;
@@ -143,13 +121,9 @@ public final class LyokoParticle extends SpriteBillboardParticle {
     }
 
     @Environment(EnvType.CLIENT)
-    public static final class DefaultLyokoParticle implements ParticleFactory<DefaultParticleType>
+    public record DefaultLyokoParticle(SpriteProvider provider) implements ParticleFactory<DefaultParticleType>
     {
-        private final SpriteProvider provider;
-        public DefaultLyokoParticle(final SpriteProvider provider)
-        {
-            this.provider = provider;
-        }
+
 
 
         @Override

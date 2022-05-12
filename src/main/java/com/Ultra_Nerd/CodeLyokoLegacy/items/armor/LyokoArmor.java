@@ -1,8 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DimensionCheck;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -43,14 +42,14 @@ public class LyokoArmor extends ArmorItem {
             stack.addEnchantment(Enchantments.BINDING_CURSE,Enchantments.BINDING_CURSE.getMaxLevel());
             stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
         }
-        if(entity instanceof PlayerEntity player)
+        if(entity instanceof final PlayerEntity player)
         {
             onArmorTick(player,stack.getItem());
         }
     }
-    protected boolean onArmorTick(PlayerEntity player, Item armorItem)
+    protected boolean onArmorTick(final PlayerEntity player,final Item armorItem)
     {
-        if(!DimensionCheck.playerNotInVanillaWorld(player)) {
+        if(!MethodUtil.DimensionCheck.playerNotInVanillaWorld(player)) {
             if (player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).getItem() == armorItem) {
                 player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).setCount(0);
 

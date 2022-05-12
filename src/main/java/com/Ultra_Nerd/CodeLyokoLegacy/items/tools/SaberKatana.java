@@ -3,6 +3,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.items.tools;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -72,6 +74,12 @@ public final class SaberKatana extends SwordItem {
             selectedOnce = true;
         } else if (!selected) {
             selectedOnce = false;
+        }
+        if(!stack.hasEnchantments())
+        {
+            stack.addEnchantment(Enchantments.SWEEPING,Enchantments.SWEEPING.getMaxLevel());
+            stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
+
         }
     }
 
