@@ -47,7 +47,7 @@ public final class EntityBlok extends SkeletonEntity implements IAnimatable {
 
     @Override
     public void attack(final LivingEntity target, final float pullProgress) {
-        final ArrowEntity abstractarrow = new EntityLaser(this.world,this);
+        final ArrowEntity abstractarrow = new EntityLaser(this.world,this,20);
 
         final double d0 = target.getX() - this.getX();
         final double d1 = target.getBodyY(0.3333333333333333D) - abstractarrow.getY();
@@ -60,7 +60,7 @@ public final class EntityBlok extends SkeletonEntity implements IAnimatable {
 
 
 
-    private final AnimationFactory manager = new AnimationFactory(this);
+
 
 
 
@@ -163,7 +163,7 @@ private static SoundEvent getStepSound()
 
     @Override
     public @NotNull AnimationFactory getFactory() {
-        return manager;
+        return new AnimationFactory(this);
     }
 
 

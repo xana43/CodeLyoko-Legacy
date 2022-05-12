@@ -16,16 +16,21 @@ import net.minecraft.world.World;
 
 public final class EntityLaser extends ArrowEntity
 {
+
+
     @Override
     protected float getDragInWater() {
         return 0;
     }
 
+
+    private int lifetime;
     @Override
     public void tick() {
         super.tick();
         this.setVelocity(this.getVelocity());
         this.shake = 0;
+        destroyAtTheEndOfLife();
 
     }
 
@@ -33,15 +38,15 @@ public final class EntityLaser extends ArrowEntity
     public void slowMovement(final BlockState state, final Vec3d multiplier) {
 
     }
-
     @Override
     public void setShotFromCrossbow(final boolean shotFromCrossbow) {
         super.setShotFromCrossbow(true);
     }
 
-    public EntityLaser(final World world, final double x, final double y, final double z) {
+    public EntityLaser(final World world, final double x, final double y, final double z, final int lifetime) {
         super(world, x, y, z);
         this.shake = 0;
+        setLifetime(lifetime);
 
     }
 
@@ -50,14 +55,49 @@ public final class EntityLaser extends ArrowEntity
     public EntityLaser(final EntityType<? extends ArrowEntity> entityType, final World world) {
         super(entityType, world);
         this.shake = 0;
+
     }
 
-     public EntityLaser(final World world,final LivingEntity owner)
+
+/**
+    instantiates a new laser entity with just the world and the owner USE WITH A CALL SITE VELOCITY AND DIRECTION IMPLEMENTATION
+    @param world the world this entity is being instantiated in
+    @param owner the entity that spawned this entity
+    @param lifetime the lifetime of the entity IN SECONDS (used to clean up when the entity is just floating in the air due to drag)
+ */
+     public EntityLaser(final World world,final LivingEntity owner, final int lifetime)
      {
          super(world,owner);
          this.shake = 0;
-
+         this.setLifetime(lifetime);
      }
+     public void setLifetime(final int seconds)
+     {
+         this.lifetime = seconds * 20;
+     }
+     public int getLifetime(final boolean ticks)
+     {
+         if(ticks)
+         {
+             return lifetime;
+         }
+         else
+
+         {
+             return lifetime / 20;
+         }
+     }
+
+
+
+private void destroyAtTheEndOfLife()
+{
+    lifetime--;
+    if(lifetime <= 0)
+    {
+        this.kill();
+    }
+}
 
 
 

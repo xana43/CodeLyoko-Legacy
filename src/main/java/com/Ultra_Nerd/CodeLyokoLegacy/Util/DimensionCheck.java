@@ -7,7 +7,7 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-public final class DimensionCheck {
+public record DimensionCheck() {
 
     public static boolean playerNotInVanillaWorld(@NotNull PlayerEntity player) {
         return player.world.getRegistryKey() == ModDimensions.forestSectorWorld || player.world.getRegistryKey() == ModDimensions.carthage || player.world.getRegistryKey() == ModDimensions.desertSectorWorld || player.world.getRegistryKey() == ModDimensions.iceSectorWorld

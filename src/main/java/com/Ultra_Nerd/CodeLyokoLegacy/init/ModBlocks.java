@@ -14,7 +14,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.sound.BlockSoundGroup;
 
-public final class ModBlocks {
+public record ModBlocks() {
 
 
 

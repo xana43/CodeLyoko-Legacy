@@ -72,18 +72,7 @@ public final class ArmorFeline extends LyokoArmor {
         return multimap;
     }
 
-    @Override
-    public boolean hasGlint(final ItemStack stack) {
 
-        return false;
-    }
-
-
-
-    @Override
-    public boolean isDamageable() {
-        return false;
-    }
 
 
 

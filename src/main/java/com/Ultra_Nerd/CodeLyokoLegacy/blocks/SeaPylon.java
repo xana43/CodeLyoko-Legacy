@@ -34,7 +34,10 @@ public final class SeaPylon extends Block {
         super.appendProperties(builder.add(DIRPYLON));
     }
 
-
+    @Override
+    public BlockRenderType getRenderType(final BlockState state) {
+        return BlockRenderType.MODEL;
+    }
 
     @Override
     public float getAmbientOcclusionLightLevel(final BlockState state, final BlockView world, final BlockPos pos) {
@@ -44,7 +47,7 @@ public final class SeaPylon extends Block {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(DIRPYLON,ctx.getPlayerLookDirection().getOpposite());
+        return this.getDefaultState().with(DIRPYLON,ctx.getPlayerFacing().getOpposite());
     }
 
 

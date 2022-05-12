@@ -174,7 +174,7 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
     @Override
     public void attack(final LivingEntity target, final float pullProgress) {
         //super.attack(target, pullProgress);
-        final EntityLaser abstractarrow = new EntityLaser(this.world,this);
+        final EntityLaser abstractarrow = new EntityLaser(this.world,this,20);
 
         final double d0 = target.getX() - this.getX();
         final double d1 = target.getBodyY(0.3333333333333333D) - abstractarrow.getY();

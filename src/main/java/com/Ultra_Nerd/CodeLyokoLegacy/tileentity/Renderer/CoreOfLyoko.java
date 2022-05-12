@@ -35,14 +35,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.Random;
 
-public final class CoreOfLyoko implements BlockEntityRenderer<LyokoCoreBE> {
+public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements BlockEntityRenderer<LyokoCoreBE> {
 
     private static int  y;
-    private final BlockEntityRendererFactory.Context context;
-    public CoreOfLyoko(BlockEntityRendererFactory.Context ctx)
-    {
-        this.context = ctx;
-    }
+
     private static final BakedModel lyokoCore = Myron.getModel(CodeLyokoMain.CodeLyokoPrefix("models/block/core_of_lyoko"));
 
     @Override

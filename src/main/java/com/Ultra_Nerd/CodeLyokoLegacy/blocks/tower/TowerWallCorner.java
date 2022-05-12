@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 
-public class TowerWallCorner extends Block {
+public final class TowerWallCorner extends Block {
 
 
     public static final DirectionProperty DIRTOWERC = HorizontalFacingBlock.FACING;

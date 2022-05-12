@@ -15,6 +15,7 @@ public final class DefaultLyokoParticleType extends ParticleType<DefaultLyokoPar
 
 
     public DefaultLyokoParticleType(final boolean alwaysShow) {
+
         super(alwaysShow, new Factory<>() {
             @Override
             public DefaultLyokoParticleType read(final ParticleType<DefaultLyokoParticleType> type, final StringReader reader) {

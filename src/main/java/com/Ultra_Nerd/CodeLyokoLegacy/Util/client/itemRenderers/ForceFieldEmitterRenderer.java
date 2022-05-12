@@ -8,11 +8,12 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 
-public final class ForceFieldEmitterRenderer implements BuiltinItemRendererRegistry.DynamicItemRenderer {
+public record ForceFieldEmitterRenderer() implements BuiltinItemRendererRegistry.DynamicItemRenderer {
 
     @Override
     public void render(final ItemStack stack, final ModelTransformation.Mode mode, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {
@@ -27,7 +28,10 @@ public final class ForceFieldEmitterRenderer implements BuiltinItemRendererRegis
 
         }
         if(mc != null) {
-            mc.getBlockRenderManager().getModelRenderer().render(matrices.peek(), vertexConsumers.getBuffer(RenderLayer.getSolid()), Blocks.AIR.getDefaultState(), Myron.getModel(CodeLyokoMain.CodeLyokoPrefix("models/item/force_field_model")), 1, 1, 1, light, overlay);
+            final BakedModel forceField = Myron.getModel(CodeLyokoMain.CodeLyokoPrefix("models/item/force_field_model"));
+
+            mc.getBlockRenderManager().getModelRenderer().render(matrices.peek(), vertexConsumers.getBuffer(RenderLayer.getSolid()), Blocks.AIR.getDefaultState(), forceField, 1, 1, 1, light, overlay);
+
         }
         matrices.pop();
     }

@@ -9,7 +9,7 @@ import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
-public final class ModFeature {
+public record ModFeature() {
 
     private static final TreeFeatureConfig.Builder FOREST_TREE = new TreeFeatureConfig.Builder(
             BlockStateProvider.of(ModBlocks.DIGITAL_WOOD_FOREST),

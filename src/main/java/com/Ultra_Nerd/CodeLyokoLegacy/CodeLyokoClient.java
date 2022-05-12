@@ -71,9 +71,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         //Renderers
 
         BlockEntityRendererRegistry.register(ModTileEntities.LYOKO_CORE, CoreOfLyoko::new);
-        EntityRendererRegistry.register(ModEntities.BLOK, RendBlok::new);
-        EntityRendererRegistry.register(ModEntities.MEGATANK, MegaTankRenderer::new);
-        EntityRendererRegistry.register(ModEntities.LASER_ENTITY_TYPE, LaserRenderer::new);
+        registerEntityRenderers();
         receiveEntityPacket();
         FluidRenderRegistry();
 
@@ -114,10 +112,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.carthage,new CustomCarthadgeSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.iceSectorWorld,new CustomIceSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld,new CustomVolcanoSky());
-        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE, LyokoParticle.TowerParticleNeutral::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_XANA,LyokoParticle.TowerParticleXana::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_JEREMY,LyokoParticle.TowerParticleJeremy::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_FRANZ,LyokoParticle.TowerParticleFranz::new);
+
         //custom hud
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
 
@@ -151,43 +146,59 @@ if(client.player != null) {
 
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.FORCE_FIELD_EMITTER, new ForceFieldEmitterRenderer());
 
+
+    clientEvents();
+    registerParticles();
+    }
+
+    private static void clientEvents()
+    {
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
             final MinecraftClient mc = MinecraftClient.getInstance();
             //if(mc != null) {
-                if(mc.player != null) {
-                    if(DimensionCheck.playerNotInVanillaWorld(mc.player)) {
-                        RenderSystem.setShaderTexture(0, CodeLyokoMain.CodeLyokoPrefix("textures/gui/lyoko_health_bar.png"));
-                        matrixStack.push();
+            if(mc.player != null) {
+                if(DimensionCheck.playerNotInVanillaWorld(mc.player)) {
+                    RenderSystem.setShaderTexture(0, CodeLyokoMain.CodeLyokoPrefix("textures/gui/lyoko_health_bar.png"));
+                    matrixStack.push();
 
-                        if(!mc.player.isCreative() && !mc.player.isSpectator()) {
-                            mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 7) - 2, mc.getWindow().getScaledHeight() >> 11, 0, 0, 33, 254);
-                            int texV = 0;
-                            switch (CardinalData.LyokoClass.getLyokoClass(mc.player))
-                            {
-                                case 0 -> texV = PlayerClassType.Feline.getTextureIndex();
-                                case 1 -> texV = PlayerClassType.Samurai.getTextureIndex();
-                                case 2 -> texV = PlayerClassType.Ninja.getTextureIndex();
-                                case 3 -> texV = PlayerClassType.Guardian.getTextureIndex();
-
-                            }
-                            mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 6) - 1, (mc.getWindow().getScaledHeight() >> 11), texV, 0, 25, (int) ((12.7f) * mc.player.getHealth()));
+                    if(!mc.player.isCreative() && !mc.player.isSpectator()) {
+                        mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 7) - 2, mc.getWindow().getScaledHeight() >> 11, 0, 0, 33, 254);
+                        int texV = 0;
+                        switch (CardinalData.LyokoClass.getLyokoClass(mc.player))
+                        {
+                            case 0 -> texV = PlayerClassType.Feline.getTextureIndex();
+                            case 1 -> texV = PlayerClassType.Samurai.getTextureIndex();
+                            case 2 -> texV = PlayerClassType.Ninja.getTextureIndex();
+                            case 3 -> texV = PlayerClassType.Guardian.getTextureIndex();
 
                         }
+                        mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 6) - 1, (mc.getWindow().getScaledHeight() >> 11), texV, 0, 25, (int) ((12.7f) * mc.player.getHealth()));
 
-                        matrixStack.pop();
                     }
+
+                    matrixStack.pop();
                 }
-           // }
+            }
+            // }
         });
-
-
     }
 
+    private static void registerParticles()
+    {
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE, LyokoParticle.TowerParticleNeutral::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_XANA,LyokoParticle.TowerParticleXana::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_JEREMY,LyokoParticle.TowerParticleJeremy::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_FRANZ,LyokoParticle.TowerParticleFranz::new);
+    }
 
+    private static void registerEntityRenderers()
+    {
+        EntityRendererRegistry.register(ModEntities.BLOK, RendBlok::new);
+        EntityRendererRegistry.register(ModEntities.MEGATANK, MegaTankRenderer::new);
+        EntityRendererRegistry.register(ModEntities.LASER_ENTITY_TYPE, LaserRenderer::new);
+    }
 
-
-
-    public void receiveEntityPacket() {
+    public static void receiveEntityPacket() {
         ClientSidePacketRegistry.INSTANCE.register(PacketID, (ctx, byteBuf) -> {
             final EntityType<?> et = Registry.ENTITY_TYPE.get(byteBuf.readVarInt());
             final UUID uuid = byteBuf.readUuid();
@@ -220,6 +231,7 @@ if(client.player != null) {
         ));
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(),ModFluids.STILL_DIGITAL_OCEAN,ModFluids.FLOWING_DIGITAL_OCEAN);
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(),ModFluids.FLOWING_DIGITAL_LAVA,ModFluids.STILL_DIGITAL_LAVA);
+
 
     }
 

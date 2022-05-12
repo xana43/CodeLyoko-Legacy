@@ -20,6 +20,21 @@ public class LyokoArmor extends ArmorItem {
     }
 
     @Override
+    public boolean isDamageable() {
+        return false;
+    }
+
+    @Override
+    public boolean canRepair(final ItemStack stack, final ItemStack ingredient) {
+        return false;
+    }
+
+    @Override
+    public boolean hasGlint(final ItemStack stack) {
+        return false;
+    }
+
+    @Override
     public void inventoryTick(final ItemStack stack, final World world, final Entity entity, final int slot, final boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
 

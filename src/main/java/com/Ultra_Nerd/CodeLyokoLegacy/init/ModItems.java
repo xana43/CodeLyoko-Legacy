@@ -19,7 +19,7 @@ import net.minecraft.util.Rarity;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class ModItems {
+public record ModItems() {
 
 
     //public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CodeLyokoMain.MOD_ID);

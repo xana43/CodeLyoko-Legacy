@@ -6,7 +6,7 @@ import net.minecraft.block.pattern.BlockPatternBuilder;
 import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.predicate.block.BlockStatePredicate;
 
-public final class BlockPatternRegistry {
+public record BlockPatternRegistry() {
 
 
 

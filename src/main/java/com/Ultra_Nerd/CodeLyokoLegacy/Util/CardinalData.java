@@ -9,12 +9,12 @@ import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.NotNull;
 
-public final class CardinalData implements EntityComponentInitializer {
+public record CardinalData() implements EntityComponentInitializer {
 
 
 
 
-    public static class LyokoClass{
+    public record LyokoClass(){
         public static final ComponentKey<PlayerClassComponent> LYOKOCLASS = ComponentRegistry.getOrCreate(CodeLyokoMain.CodeLyokoPrefix("lyoko_class"),PlayerClassComponent.class);
 
         public static int getLyokoClass(final PlayerEntity player)

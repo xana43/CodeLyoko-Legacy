@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 
 //@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID)
-public final class ModDimensions {
+public record ModDimensions() {
 
 
 

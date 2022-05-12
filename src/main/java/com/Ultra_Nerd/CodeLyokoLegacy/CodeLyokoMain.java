@@ -81,13 +81,8 @@ public record CodeLyokoMain() implements ModInitializer {
         return new Identifier(MOD_ID,name);
     }
 
-
-    @Override
-    public void onInitialize() {
-        GeckoLib.initialize();
-
-        //Registration
-
+    private static void generalRegistration()
+    {
         ModBlocks.BLOCK_MAP.forEach((s, block) -> {
 
             Registry.register(Registry.BLOCK,new Identifier(MOD_ID,s),block);
@@ -110,11 +105,36 @@ public record CodeLyokoMain() implements ModInitializer {
                 Registry.register(Registry.FLUID,CodeLyokoPrefix(s),fluid));
 
         ModParticles.PARTICLE_TYPE_IMMUTABLE_MAP.forEach((s, defaultParticleType) -> Registry.register(Registry.PARTICLE_TYPE,CodeLyokoPrefix(s),defaultParticleType));
+        Registry.register(Registry.CHUNK_GENERATOR,CodeLyokoPrefix("carthage_chunkgen"), CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
+        Registry.register(Registry.BIOME_SOURCE,CodeLyokoPrefix("carthage_biome"), CarthageBiomeProvider.CARTHAGE_BIOME_PROVIDER_CODEC);
+    }
+
+    @Override
+    public void onInitialize() {
+        GeckoLib.initialize();
+
+        //Registration
+
+        generalRegistration();
         //GeneratorTypeAccessor.getValues().add(carthage);
         //Attribute Registration
+
+        //events
+
+
+
+
+        SetupFunctions();
+        registerDefaultAttributes();
+    }
+    private static void registerDefaultAttributes()
+    {
         FabricDefaultAttributeRegistry.register(ModEntities.BLOK, EntityBlok.createMonsterAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.MEGATANK, MegaTankEntity.registerAttributes());
-        //events
+    }
+    private static final TrackedData<NbtCompound> peristent = DataTracker.registerData(ServerPlayerEntity.class,TrackedDataHandlerRegistry.NBT_COMPOUND);
+
+    private static void SetupFunctions(){
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
 
             if(DimensionCheck.playerNotInVanillaWorld(player) && !player.isCreative())
@@ -124,16 +144,6 @@ public record CodeLyokoMain() implements ModInitializer {
             return ActionResult.PASS;
 
         });
-
-
-        Registry.register(Registry.CHUNK_GENERATOR,CodeLyokoPrefix("carthage_chunkgen"), CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
-        Registry.register(Registry.BIOME_SOURCE,CodeLyokoPrefix("carthage_biome"), CarthageBiomeProvider.CARTHAGE_BIOME_PROVIDER_CODEC);
-        SetupFunctions();
-    }
-    private static final TrackedData<NbtCompound> peristent = DataTracker.registerData(ServerPlayerEntity.class,TrackedDataHandlerRegistry.NBT_COMPOUND);
-
-    private static void SetupFunctions(){
-
         final String nbtdat = "first_join";
         final AtomicReference<NbtCompound> t = new AtomicReference<>(new NbtCompound());
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {

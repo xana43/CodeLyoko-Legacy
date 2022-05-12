@@ -11,7 +11,7 @@ import net.minecraft.world.biome.SpawnSettings;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-public final class ModBiome {
+public record ModBiome() {
 
 
 

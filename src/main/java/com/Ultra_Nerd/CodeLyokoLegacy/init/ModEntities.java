@@ -13,7 +13,7 @@ import org.checkerframework.checker.units.qual.K;
 
 import java.security.KeyPair;
 
-public final class ModEntities {
+public record ModEntities() {
   //entity type
     public static final EntityType<EntityBlok> BLOK = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER,EntityBlok::new).dimensions(EntityDimensions.fixed(2f,2f)).fireImmune().build();
     public static final EntityType<EntityLaser> LASER_ENTITY_TYPE = FabricEntityTypeBuilder.<EntityLaser>create(SpawnGroup.MISC,EntityLaser::new).build();

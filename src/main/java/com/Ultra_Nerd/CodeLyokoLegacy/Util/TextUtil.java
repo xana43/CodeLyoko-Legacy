@@ -4,7 +4,7 @@ import net.minecraft.text.StringVisitable;
 import net.minecraft.text.TranslatableText;
 import org.jetbrains.annotations.NotNull;
 
-public final class TextUtil {
+public record TextUtil() {
 
 
 
@@ -25,7 +25,8 @@ public final class TextUtil {
     public static int textArrayLengthToPage(StringVisitable @NotNull [] formattedTexts)
     {
         int length = 0;
-        for (StringVisitable formattedText : formattedTexts) {
+
+        for (final StringVisitable formattedText : formattedTexts) {
             if (formattedText != null) {
                 length++;
             }

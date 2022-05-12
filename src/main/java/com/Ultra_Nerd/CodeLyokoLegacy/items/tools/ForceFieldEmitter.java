@@ -36,7 +36,7 @@ public final class ForceFieldEmitter extends BowItem{
 
     @Override
     public int getMaxUseTime(final ItemStack stack) {
-        return 18000;
+        return 72000;
     }
 
 
@@ -57,7 +57,7 @@ public final class ForceFieldEmitter extends BowItem{
         publicUseTicks = remainingUseTicks;
     }
 
-    public int publicUseTicks;
+    public int publicUseTicks = 0;
 
     @Override
     public void onStoppedUsing(final ItemStack stack, final World world, final LivingEntity user, final int remainingUseTicks) {
@@ -71,7 +71,7 @@ public final class ForceFieldEmitter extends BowItem{
             final float f = getPullProgress(i);
             if (!((double) f < 0.1D)) {
                 if (!world.isClient()) {
-                    final EntityLaser las = new EntityLaser(world,user);
+                    final EntityLaser las = new EntityLaser(world,user,20);
 
                     las.setDamage(40);
                     las.setPos(playerentity.getBlockPos().getX(), playerentity.getEyeY(), playerentity.getBlockPos().getZ());
@@ -99,7 +99,7 @@ public final class ForceFieldEmitter extends BowItem{
 
     @Override
     public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
-        ItemStack heldItem = user.getStackInHand(hand);
+        final ItemStack heldItem = user.getStackInHand(hand);
         if (user.getInventory().armor.get(EquipmentSlot.CHEST.getEntitySlotId()).getItem() != ModItems.AELITA_CHESTPLATE &&
                 user.getInventory().armor.get(EquipmentSlot.LEGS.getEntitySlotId()).getItem() != ModItems.AELITA_LEGGINGS &&
                 user.getInventory().armor.get(EquipmentSlot.FEET.getEntitySlotId()).getItem() != ModItems.AELITA_BOOTS) {

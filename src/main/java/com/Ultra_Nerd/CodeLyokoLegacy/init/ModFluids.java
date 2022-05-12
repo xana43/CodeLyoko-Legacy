@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 
-public final class ModFluids {
+public record ModFluids() {
 //TODO: add back to tags .json when they have been registered
 //"cm:still_uranium",
 //"cm:flowing_uranium",

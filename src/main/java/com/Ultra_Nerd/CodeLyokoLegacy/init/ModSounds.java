@@ -11,7 +11,7 @@ import org.spongepowered.include.com.google.common.collect.ImmutableCollection;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ModSounds {
+public record ModSounds() {
 
 
 

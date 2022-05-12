@@ -17,7 +17,7 @@ import net.minecraft.server.ServerMetadata;
 import net.minecraft.world.PersistentState;
 import net.minecraft.world.PersistentStateManager;
 @Environment(EnvType.SERVER)
-public final class CodeLyokoServer implements DedicatedServerModInitializer {
+public record CodeLyokoServer() implements DedicatedServerModInitializer {
     @Override
     public void onInitializeServer() {
 

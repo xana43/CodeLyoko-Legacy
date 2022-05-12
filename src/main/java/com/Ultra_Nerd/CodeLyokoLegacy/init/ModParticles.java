@@ -5,7 +5,8 @@ import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.particle.DefaultParticleType;
 
-public final class ModParticles {
+public record ModParticles() {
+
     private static DefaultLyokoParticleType Simple(final boolean alwaysShow)
     {
         return new DefaultLyokoParticleType(alwaysShow);

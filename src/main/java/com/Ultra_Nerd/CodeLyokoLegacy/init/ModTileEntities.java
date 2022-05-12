@@ -9,7 +9,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class ModTileEntities {
+public record ModTileEntities() {
 
 
 
