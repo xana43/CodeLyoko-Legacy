@@ -43,7 +43,7 @@ public final class UraniumCanister extends Block {
     @Override
     public void afterBreak(final World world, final PlayerEntity player, final BlockPos pos, final BlockState state, @Nullable final BlockEntity blockEntity, final ItemStack stack) {
         super.afterBreak(world, player, pos, state, blockEntity, stack);
-        world.setBlockState(pos, ModBlocks.DIGITAL_OCEAN_BLOCK.getDefaultState());
+        world.setBlockState(pos, ModBlocks.URANIUM_WASTE_BLOCK.getDefaultState());
     }
 
     @Override

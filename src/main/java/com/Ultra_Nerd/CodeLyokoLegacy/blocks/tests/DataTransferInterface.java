@@ -1,19 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.containers.DataTransferInterfaceContainer;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.DataTransferInterfaceTileEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
 
 public final class DataTransferInterface extends BlockWithEntity {
     public DataTransferInterface(final Settings settings) {

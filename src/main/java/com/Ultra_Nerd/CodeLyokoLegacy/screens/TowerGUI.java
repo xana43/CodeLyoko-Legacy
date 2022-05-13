@@ -1,32 +1,54 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TowerInterfaceScreenHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
+import com.mojang.blaze3d.systems.RenderSystem;
+import io.netty.util.internal.StringUtil;
+import net.minecraft.client.font.FontStorage;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.widget.PressableTextWidget;
+import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.GenericContainerScreenHandler;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Identifier;
+import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.lwjgl.glfw.GLFW;
 
-public final class TowerGUI extends GenericContainerScreen/*extends AbstractContainerScreen<TowerInterfaceContainer>*/ {
-    public TowerGUI(final GenericContainerScreenHandler handler, final PlayerInventory inventory, final Text title) {
+import java.awt.*;
+import java.util.Objects;
+import java.util.Random;
+
+public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
+    public TowerGUI(final TowerInterfaceScreenHandler handler, final PlayerInventory inventory, final Text title) {
         super(handler, inventory, title);
-    }
-    /*
+        this.playerInventoryTitleX = 0;
 
-    private static final ResourceLocation TEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/towerinterface.png");
-    private EditBox text;
-    private EditBox Accepted;
+    }
+
+
+
+
+
+    private static final Identifier TEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/towerinterface.png");
+    private TextFieldWidget text;
+    private TextFieldWidget Accepted;
     private byte I = 0;
     private int acceptedColor = 0;
 
-    private static final String correctCode = "ACCEPTED";
-    public TowerGUI(@NotNull TowerInterfaceContainer towerInterfaceContainer, @NotNull Inventory playerInventory, Component tw) {
-        
-        super(towerInterfaceContainer,playerInventory, TextComponent.EMPTY);
-        this.inventoryLabelX = - 90;
-        this.inventoryLabelY = - 90;
 
 
-    }
 
 
     @Override
@@ -51,21 +73,29 @@ public final class TowerGUI extends GenericContainerScreen/*extends AbstractCont
 
     int tick = 0;
 
+
+
     @Override
-    public void render(@NotNull PoseStack poseStack, int mouseX, int mouseY, float partialTicks)
+    public void render(@NotNull MatrixStack poseStack, int mouseX, int mouseY, float partialTicks)
     {
 
         this.renderBackground(poseStack);
+
         super.render(poseStack,mouseX, mouseY, partialTicks);
         //this.text.render(poseStack,mouseX, mouseY, partialTicks);
-        EditBox.drawString(poseStack,font,new TextComponent(this.Accepted.getValue()).withStyle(ConstantUtil.GUNSHIP), this.Accepted.x,this.Accepted.y, acceptedColor);
-        EditBox.drawString(poseStack,font,new TextComponent(this.text.getValue()).withStyle(ConstantUtil.GUNSHIP), this.text.x,this.text.y, Color.WHITE.getRGB());
-
-        if((tick >> 3) % 2 == 0)
+        final var AcceptedText = Text.of(this.Accepted.getText()).getWithStyle(ConstantUtil.GUNSHIP);
+        final var CodeEnterTest = Text.of(this.text.getText()).getWithStyle(ConstantUtil.GUNSHIP);
+        if(AcceptedText.size() >= 1) {
+            PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer, AcceptedText.get(0), this.Accepted.x, this.Accepted.y, acceptedColor);
+        }
+        if(CodeEnterTest.size() >= 1) {
+            PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer, CodeEnterTest.get(0), this.text.x, this.text.y, Color.WHITE.getRGB());
+        }
+        if((tick >> 2) % 5 == 0)
         {
-            EditBox.drawString(poseStack,font,new TextComponent("|").withStyle(ConstantUtil.GUNSHIP), text.x + (this.text.getCursorPosition() * 21),this.text.y,Color.WHITE.getRGB());
+            PressableTextWidget.drawTextWithShadow(poseStack,this.textRenderer, Text.of("|").getWithStyle(ConstantUtil.GUNSHIP).get(0), text.x + (this.text.getCursor() * 21),this.text.y,Color.WHITE.getRGB());
 
- //               Objects.requireNonNull(getMinecraft().player).playSound(ModSounds.CURSORBLINK.get(), 0.1f, 1f);
+                Objects.requireNonNull(client.player).playSound(ModSounds.CURSORBLINK, 0.1f, 1f);
 
         }
 
@@ -79,37 +109,40 @@ public final class TowerGUI extends GenericContainerScreen/*extends AbstractCont
     }
 
     @Override
-    public void containerTick() {
-
+    protected void handledScreenTick() {
         this.text.tick();
         tick++;
         I--;
-        if (I <= 0 && !this.Accepted.getValue().equals(StringUtils.EMPTY)) {
-            this.Accepted.setValue(StringUtils.EMPTY);
+        if (I <= 0 && this.Accepted.getText().length() != 0) {
+            this.Accepted.setText(StringUtils.EMPTY);
         }
     }
+
+
     private void CheckField()
     {
-        if (this.text.getValue().equalsIgnoreCase("LYOKO") || this.text.getValue().equalsIgnoreCase("CHIMERA")
-                || this.text.getValue().equalsIgnoreCase("EARTH")) {
+        final String correctCode = "ACCEPTED";
+
+        if (this.text.getText().equalsIgnoreCase("LYOKO") || this.text.getText().equalsIgnoreCase("CHIMERA")
+                || this.text.getText().equalsIgnoreCase("EARTH")) {
             I = 100;
             acceptedColor = 65280;
-            this.Accepted.setValue(correctCode);
-            this.text.setValue(StringUtils.EMPTY);
-            this.text.setCursorPosition(0);
-            Objects.requireNonNull(this.getMinecraft().player).playSound(ModSounds.GUISOUND.get(), 1,2f);
-        } else if (this.text.getValue().equalsIgnoreCase("XANA")) {
+            this.Accepted.setText(correctCode);
+            this.text.setText(StringUtils.EMPTY);
+            this.text.setCursor(0);
+            Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1,2f);
+        } else if (this.text.getText().equalsIgnoreCase("XANA")) {
             I = 100;
             acceptedColor = 16711680;
-            this.Accepted.setValue(correctCode);
-            this.text.setValue(StringUtils.EMPTY);
-            this.text.setCursorPosition(0);
-            Objects.requireNonNull(this.getMinecraft().player).playSound(ModSounds.GUISOUND.get(), 1,0.9f);
+            this.Accepted.setText(correctCode);
+            this.text.setText(StringUtils.EMPTY);
+            this.text.setCursor(0);
+            Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1,0.9f);
         }
         else
         {
-            this.text.setValue(StringUtils.EMPTY);
-            Objects.requireNonNull(this.getMinecraft().player).playSound(ModSounds.GUISOUND.get(), 1,0.5f);
+            this.text.setText(StringUtils.EMPTY);
+            Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1,0.5f);
         }
     }
 
@@ -120,25 +153,27 @@ public final class TowerGUI extends GenericContainerScreen/*extends AbstractCont
         super.init();
         final int tx = this.width >> 1;
         final int ty = this.height >> 1;
-        this.text = new EditBox(font, tx - 70, ty - 10, 200, 33, TextComponent.EMPTY);
+        this.text = new TextFieldWidget(this.textRenderer, tx - 70, ty - 10, 200, 33, LiteralText.EMPTY);
         this.text.setMaxLength(8);
-        this.text.setBordered(false);
+        this.text.setDrawsBackground(false);
         this.text.setVisible(true);
-        this.text.setTextColor(16777215);
-        this.text.setFocus(true);
+        this.text.setEditableColor(16777215);
+        this.text.setTextFieldFocused(true);
         this.text.setEditable(true);
-        this.text.setCursorPosition(0);
-        this.text.setCanLoseFocus(false);
+        this.text.setCursor(0);
+        this.text.setFocusUnlocked(false);
         this.text.active = true;
-        this.Accepted = new EditBox(font, tx - 95, ty + 20, 200, 33, TextComponent.EMPTY);
+        this.Accepted = new TextFieldWidget(this.textRenderer, tx - 95, ty + 20, 200, 33, LiteralText.EMPTY);
         this.Accepted.active = false;
         this.Accepted.setEditable(false);
     }
 
     @Override
-    public boolean isPauseScreen() {
+    public boolean shouldPause() {
         return false;
     }
+
+
 
     @Override
     public boolean shouldCloseOnEsc() {
@@ -149,16 +184,12 @@ public final class TowerGUI extends GenericContainerScreen/*extends AbstractCont
     @Override
     public boolean keyPressed(int Key, int p_keyPressed_2_, int p_keyPressed_3_) {
 
-
-        if (Key == GLFW.GLFW_KEY_BACKSPACE) {
-            this.text.deleteChars(1);
-            Objects.requireNonNull(this.getMinecraft().player).playSound(ModSounds.GUISOUND.get(), 1,1f);
-        }
-        if(Key == GLFW.GLFW_KEY_ENTER)
+        switch (Key)
         {
-            CheckField();
-
+            case GLFW.GLFW_KEY_BACKSPACE ->  this.text.eraseCharacters(1);
+            case GLFW.GLFW_KEY_ENTER -> CheckField();
         }
+
         this.text.keyPressed(Key, p_keyPressed_2_, p_keyPressed_3_);
 
         //this.Accepted.keyPressed(Key, p_keyPressed_2_, p_keyPressed_3_);
@@ -166,7 +197,7 @@ public final class TowerGUI extends GenericContainerScreen/*extends AbstractCont
     }
 
     @Override
-    public boolean charTyped(char key, int Keynum) {
+    public boolean charTyped(char key, final int Keynum) {
 
 
 
@@ -178,7 +209,7 @@ public final class TowerGUI extends GenericContainerScreen/*extends AbstractCont
         {
             this.text.charTyped(key^=32, Keynum);
         }
-        Objects.requireNonNull(this.getMinecraft().player).playSound(ModSounds.GUISOUND.get(), 1, new Random().nextFloat(1f,1.1f));
+        Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, new Random().nextFloat(1f,1.1f));
         return super.charTyped(key^=32, Keynum);
 
     }
@@ -186,17 +217,15 @@ public final class TowerGUI extends GenericContainerScreen/*extends AbstractCont
 
 
 
-
-
-
     @Override
-    public void renderBg(@NotNull PoseStack p_96559_, float tick, int mouseX, int mouseY) {
-
+    protected void drawBackground(final MatrixStack matrices, final float delta, final int mouseX, final int mouseY) {
         RenderSystem.setShaderTexture(0,TEXTURES);
-        this.blit(p_96559_,(this.width - 200) >> 1, (this.height - 141) >> 1, 0, 0, 200, 141);
+        this.drawTexture(matrices,(this.width - 200) >> 1, (this.height - 141) >> 1, 0 ,0, 200, 141);
     }
 
-     */
+
+
+
 
 
 

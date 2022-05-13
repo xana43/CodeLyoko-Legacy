@@ -4,17 +4,33 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.InventoryProvider;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
+import org.jetbrains.annotations.Nullable;
 
-public final class ComputerControlPanelTileEntity extends BlockEntity implements InventoryProvider {
+public final class ComputerControlPanelTileEntity extends BlockEntity implements NamedScreenHandlerFactory {
     public ComputerControlPanelTileEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state) {
         super(type, pos, state);
     }
 
+
+
+
     @Override
-    public SidedInventory getInventory(final BlockState state, final WorldAccess world, final BlockPos pos) {
+    public Text getDisplayName() {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public ScreenHandler createMenu(final int syncId, final PlayerInventory inv, final PlayerEntity player) {
         return null;
     }
 /*

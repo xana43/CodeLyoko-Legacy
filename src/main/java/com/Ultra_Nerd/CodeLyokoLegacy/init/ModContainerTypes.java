@@ -6,8 +6,8 @@ public final class ModContainerTypes {
 
    // public static final RegistryObject<MenuType<ContainerInfusing>> CONTAINER_INFUSING = CONTAINER_TYPES
      //       .register("container_infusing", () -> IForgeMenuType.create(ContainerInfusing::new));
-    public static final RegistryObject<MenuType<TowerInterfaceContainer>> TOWER_INTERFACE_CONTAINER = CONTAINER_TYPES
-            .register("tower_interface_container", () -> IForgeMenuType.create(TowerInterfaceContainer::new));
+    public static final RegistryObject<MenuType<TowerInterfaceScreenHandler>> TOWER_INTERFACE_CONTAINER = CONTAINER_TYPES
+            .register("tower_interface_container", () -> IForgeMenuType.create(TowerInterfaceScreenHandler::new));
     public static final RegistryObject<MenuType<ContainerElectricInfusing>> CONTAINER_ELECTRIC_INFUSING = CONTAINER_TYPES
             .register("container_electric_infusing", () -> IForgeMenuType.create(ContainerElectricInfusing::new));
     //public static final RegistryObject<MenuType<HologramContainer>> HOLOGRAM_CONTAINER = CONTAINER_TYPES

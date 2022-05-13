@@ -1,23 +1,31 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.function.BooleanBiFunction;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
@@ -261,7 +269,7 @@ public final class Scanner extends BlockWithEntity {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(directionProperty,ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(directionProperty,ctx.getPlayerFacing());
     }
 
 
@@ -288,11 +296,30 @@ public final class Scanner extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return  null;//ModTileEntities.SCANNER_TILE_ENTITY.instantiate(pos, state);
+        return  ModTileEntities.SCANNER_TILE_ENTITY.instantiate(pos, state);
     }
 
+    @Override
+    public <T extends BlockEntity> @NotNull BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
+        return (world1, pos, state1, blockEntity) -> {
+
+            if(blockEntity instanceof  ScannerTileEntity scannerTile)
+            {
+                scannerTile.tick();
+            }
+        };
+    }
+
+    @Override
+    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+        if(world.getBlockEntity(pos) instanceof ScannerTileEntity scannerTile)
+        {
+            scannerTile.virtualizePlayer();
+        }
 
 
+        return ActionResult.SUCCESS;
+    }
 
 
 /*

@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.containers;
+package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
 
 public class ContainerInfusing /*extends AbstractContainerMenu*/ {

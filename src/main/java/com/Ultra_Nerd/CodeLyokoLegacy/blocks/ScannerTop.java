@@ -228,7 +228,6 @@ public final class ScannerTop extends Block implements MultiBlockPartCallback {
         super.onBroken(world, pos, state);
         if(world.getBlockEntity(new BlockPos(pos.getX(), pos.getY() - 2, pos.getZ())) instanceof MasterEntity masterEntity)
         {
-            CodeLyokoMain.LOG.info("should invalidate, Source = "  + this.getName());
             masterEntity.invalidateEntity();
             //level.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.removePos(scannerTile));
         }

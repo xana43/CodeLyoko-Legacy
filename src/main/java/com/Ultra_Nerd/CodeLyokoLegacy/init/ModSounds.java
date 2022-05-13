@@ -1,15 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import net.minecraft.client.sound.Sound;
-import net.minecraft.sound.MusicSound;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Lazy;
-import org.lwjgl.system.CallbackI;
-import org.spongepowered.include.com.google.common.collect.ImmutableCollection;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public record ModSounds() {
 
@@ -25,7 +17,7 @@ public record ModSounds() {
     public static final SoundEvent SECTOR5 = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("sector5"));
     public static final SoundEvent BLOKAMBIENT = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.blok.ambient"));
     public static final SoundEvent BLOKHURT = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.blok.hurt"));
-    public static final SoundEvent GUI = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("gui"));
+    public static final SoundEvent GUISOUND = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("gui"));
     public static final SoundEvent LASERARROW = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("laser"));
     public static final SoundEvent ICE = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("icesector"));
     public static final SoundEvent DESERT = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("desertsector"));
@@ -43,6 +35,8 @@ public record ModSounds() {
     public static final SoundEvent MEGATANKSMALLFALL = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.smallfall"));
     public static final SoundEvent MEGATANKDIE = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix( "entity.megatank.die"));
     public static final SoundEvent CURSORBLINK = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("interface_cursor"));
+
+    //public static final BlockSoundGroup TowerInterfaceSound = new BlockSoundGroup();
     public static final SoundEvent[] SOUNDS = new SoundEvent[]{
             OPENTOWERGUISOUND,
             LAZY_WARRIOR,
@@ -53,7 +47,7 @@ public record ModSounds() {
             BLOKAMBIENT,
             BLOKHURT,
             LAZY_ARCHER,
-            GUI,
+            GUISOUND,
             LASERARROW,
             ICE,
             DESERT,
@@ -69,7 +63,8 @@ public record ModSounds() {
             MEGATANKDIE,
             MEGATANKSMALLFALL,
             MEGATANKBIGFALL,
-            CURSORBLINK
+            CURSORBLINK,
+
 
     };
 
@@ -99,7 +94,7 @@ public record ModSounds() {
 
     public static final RegistryObject<SoundEvent> BLOKAMBIENT = SOUNDS.register("entity.blok.ambient", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "entity.blok.ambient")));
     public static final RegistryObject<SoundEvent> BLOKHURT = SOUNDS.register("entity.blok.hurt", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "entity.blok.hurt")));
-    public static final RegistryObject<SoundEvent> GUISOUND = SOUNDS.register("gui", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "gui")));
+
     public static final RegistryObject<SoundEvent> OPENTOWERGUISOUND = SOUNDS.register("tower_gui_sound", () -> new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("tower_gui_sound")));
 
     public static final RegistryObject<SoundEvent> LASERARROW = SOUNDS.register("laser", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "laser")));

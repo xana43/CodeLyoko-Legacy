@@ -1,15 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities;
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PlayerClassComponent implements PlayerComponent<PlayerClassComponent> ,AutoSyncedComponent{
+public final class PlayerClassComponent implements PlayerComponent<PlayerClassComponent> ,AutoSyncedComponent{
 
     private int classID;
     /*

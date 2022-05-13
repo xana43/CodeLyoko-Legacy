@@ -6,19 +6,69 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Scanner;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.ScannerFrame;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.ScannerTop;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.pattern.BlockPattern;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
 
 public final class ScannerTileEntity extends BlockEntity implements MasterEntity {
-    public ScannerTileEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state) {
-        super(type, pos, state);
+
+    public RegistryKey<World> destinationWorld = ModDimensions.carthage;
+    private int scanTimer = 100;
+    private boolean inScanner;
+    public ScannerTileEntity(final BlockPos pos, final BlockState state) {
+        super(ModTileEntities.SCANNER_TILE_ENTITY, pos, state);
+        //destinationWorld = ModDimensions.carthage;
     }
 
+    @Override
+    public void tick() {
+        MasterEntity.super.tick();
+        inScanner = this.world.getClosestPlayer(this.pos.getX(), this.pos.getY(), this.pos.getZ(), 1, false) != null;
+        if(inScanner)
+        {
+            scanTimer--;
+            virtualizePlayer();
+
+        }
+        else
+        {
+            scanTimer = 100;
+        }
+    }
+
+    public void virtualizePlayer()
+    {
+        if(this.world instanceof ServerWorld serverWorld) {
+
+            final MinecraftServer mcs = serverWorld.getServer();
+            final ServerWorld serverWorld1 = mcs.getWorld(destinationWorld);
+            final ServerPlayerEntity player = (ServerPlayerEntity) serverWorld.getClosestPlayer(this.pos.getX(),this.pos.getY(),this.pos.getZ(),1,false);
+
+            if(serverWorld1 != null && player != null)
+            {
+                serverWorld.getProfiler().push("portal");
+                if(scanTimer <= 0 && inScanner) {
+                    player.teleport(serverWorld1, 0, 130, 0, player.getYaw(), player.getPitch());
+                    //player.moveToWorld(serverWorld1);
+                    //player.teleport(0,130,0);
+                    serverWorld.getProfiler().pop();
+                }
+            }
 
 
+
+
+
+        }
+    }
 
 
     /*

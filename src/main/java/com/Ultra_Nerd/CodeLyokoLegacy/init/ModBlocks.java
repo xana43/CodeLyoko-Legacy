@@ -3,6 +3,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.DigitalLavaBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.DigitalSeaBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.LiquidHelium;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.UraniumWaste;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.electroplate.ElectroplatingMachine;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.ElectricFluorideInfuser;
@@ -149,6 +151,8 @@ public record ModBlocks() {
 
     public static final Block DIGITAL_OCEAN_BLOCK = new DigitalSeaBlock();
     public static final Block DIGITAL_LAVA_BLOCK = new DigitalLavaBlock();
+    public static final Block URANIUM_WASTE_BLOCK = new UraniumWaste();
+    public static final Block LIQUID_HELIUM_BLOCK = new LiquidHelium();
     public static final ImmutableMap<String,Block> BLOCK_MAP = ImmutableMap.<String,Block>builder()
             .put("architecture_work_station",ARCHITECTURE_WORK_STATION)
             .put("anti_marabunta",ANTI_MARABUNTA)
@@ -233,6 +237,8 @@ public record ModBlocks() {
             //fluidblocks
             .put("digital_ocean",DIGITAL_OCEAN_BLOCK)
             .put("digital_lava",DIGITAL_LAVA_BLOCK)
+            .put("uranium_waste",URANIUM_WASTE_BLOCK)
+            .put("liquid_helium",LIQUID_HELIUM_BLOCK)
             .build();
 
 }

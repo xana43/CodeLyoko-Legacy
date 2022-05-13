@@ -193,18 +193,13 @@ public final class ScannerFrame extends Block implements MultiBlockPartCallback 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         if (state.get(ScannerFrameInvis)) {
-            switch (state.get(directionPropertyFrame)) {
-                case NORTH:
-                    return shapeN;
-                case SOUTH:
-                    return shapeS;
-                case EAST:
-                    return shapeE;
-                case WEST:
-                    return shapeW;
-                default:
-                    return shapeN;
-            }
+            return switch (state.get(directionPropertyFrame)) {
+                case NORTH -> shapeN;
+                case SOUTH -> shapeS;
+                case EAST -> shapeE;
+                case WEST -> shapeW;
+                default -> shapeN;
+            };
         } else {
             return blockShape;
         }

@@ -15,6 +15,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.TowerGUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.ClientModInitializer;
@@ -27,11 +28,13 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DeathScreen;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.DimensionEffects;
@@ -50,7 +53,6 @@ import java.util.UUID;
 
 @Environment(EnvType.CLIENT)
 public record CodeLyokoClient() implements ClientModInitializer {
-
     public static final Identifier PacketID = CodeLyokoMain.CodeLyokoPrefix("spawn_packet");
     //keybinds
     private static KeyBinding classCreenBinding;
@@ -74,11 +76,13 @@ public record CodeLyokoClient() implements ClientModInitializer {
         registerEntityRenderers();
         receiveEntityPacket();
         FluidRenderRegistry();
-
+        HandledScreens.register(CodeLyokoMain.TOWER_INTERFACE_SCREEN_HANDLER, TowerGUI::new);
         //Custom Sprites
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
             registry.register(CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing_lava"));
+            registry.register(CodeLyokoMain.CodeLyokoPrefix("block/liquid_helium_flow"));
+            registry.register(CodeLyokoMain.CodeLyokoPrefix("block/liquid_helium_still"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("entity/laserarrow"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("item/force_field_emitter_model_center"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("item/force_field_emitter_model_shell"));
@@ -115,7 +119,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
         //custom hud
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
-
 
 if(client.player != null) {
 
@@ -229,7 +232,12 @@ if(client.player != null) {
                 CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing_lava"),
                 CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing_lava")
         ));
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_LIQUID_HELIUM,ModFluids.FLOWING_LIQUID_HELIUM,new SimpleFluidRenderHandler(
+                CodeLyokoMain.CodeLyokoPrefix("block/liquid_helium_flow"),
+                CodeLyokoMain.CodeLyokoPrefix("block/liquid_helium_still")
+        ));
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(),ModFluids.STILL_DIGITAL_OCEAN,ModFluids.FLOWING_DIGITAL_OCEAN);
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(),ModFluids.STILL_LIQUID_HELIUM,ModFluids.FLOWING_LIQUID_HELIUM);
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(),ModFluids.FLOWING_DIGITAL_LAVA,ModFluids.STILL_DIGITAL_LAVA);
 
 

@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.containers;
+package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
 public class ContainerElectroplate /*extends AbstractContainerMenu*/ {
     /*protected ContainerElectroplate(@Nullable MenuType<?> p_38851_, int p_38852_) {

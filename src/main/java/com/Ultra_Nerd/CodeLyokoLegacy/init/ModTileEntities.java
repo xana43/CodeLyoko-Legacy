@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LyokoCoreBE;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.TowerInterfaceTileEntity;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -27,15 +28,18 @@ public record ModTileEntities() {
                             ModBlocks.ELECTRIC_FLUORIDE_INFUSER.get()).build(null));
 
 */
+public static final BlockEntityType<ScannerTileEntity> SCANNER_TILE_ENTITY = FabricBlockEntityTypeBuilder.create(ScannerTileEntity::new,ModBlocks.SCANNER_BASE).build();
+
     public static final BlockEntityType<LyokoCoreBE> LYOKO_CORE = FabricBlockEntityTypeBuilder.create(LyokoCoreBE::new,ModBlocks.LYOKO_CORE).build();
+    public static final BlockEntityType<TowerInterfaceTileEntity> TOWER_INTERFACE_TILE_ENTITY = FabricBlockEntityTypeBuilder.create(TowerInterfaceTileEntity::new,ModBlocks.TOWER_INTERFACE).build();
+
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String,BlockEntityType<?>>builder()
 
             .put("lyoko_core",LYOKO_CORE)
-
+            .put("tower_interface_tile_entity",TOWER_INTERFACE_TILE_ENTITY)
+            .put("scanner_tile_entity",SCANNER_TILE_ENTITY)
             .build();
-  //  public static final RegistryObject<BlockEntityType<TowerInterfaceTileEntity>> TOWER_INTERFACE_TILE_ENTITY =
-    //        TILE_ENTITY_TYPES.register("tower_interface_tile_entity", () -> BlockEntityType.Builder.of(TowerInterfaceTileEntity::new,
-      //              ModBlocks.TOWER_INTERFACE.get()).build(null));
+  //
     /*
     public static final RegistryObject<BlockEntityType<HologramProjectorTileEntity>> HOLOGRAM_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("hologram_tile_entity", () -> BlockEntityType.Builder.of(HologramProjectorTileEntity::new,
@@ -45,9 +49,7 @@ public record ModTileEntities() {
       //      TILE_ENTITY_TYPES.register("quantum_chiplet_tile_entity", () -> BlockEntityType.Builder.of(QuantumChipletTileEntity::new,
         //            ModBlocks.CHIPLET_FRANZ_BLOCK.get()).build(null));
 
-    public static final RegistryObject<BlockEntityType<ScannerTileEntity>> SCANNER_TILE_ENTITY =
-            TILE_ENTITY_TYPES.register("scanner_tile_entity", () -> BlockEntityType.Builder.of(ScannerTileEntity::new,
-                    ModBlocks.SCANNER_BASE.get()).build(null));
+
                     /*
     public static final RegistryObject<BlockEntityType<CentralControlUnitTileEntity>> CENTRAL_CONTROL_UNIT_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("central_control_unit_tile_entity", () -> BlockEntityType.Builder.of(CentralControlUnitTileEntity::new

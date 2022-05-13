@@ -1,6 +1,21 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.containers;
+package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
-public final class TowerInterfaceContainer /*extends AbstractContainerMenu*/ {
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.screen.ScreenHandler;
+
+public final class TowerInterfaceScreenHandler extends ScreenHandler {
+
+    public TowerInterfaceScreenHandler(final int syncId, final Inventory inventory) {
+        super(CodeLyokoMain.TOWER_INTERFACE_SCREEN_HANDLER, syncId);
+
+    }
+
+    @Override
+    public boolean canUse(final PlayerEntity player) {
+        return true;
+    }
 /*
 
     private @Nullable BlockEntity TE2;
@@ -9,7 +24,7 @@ public final class TowerInterfaceContainer /*extends AbstractContainerMenu*/ {
 
 
 
-    public TowerInterfaceContainer(int id, @NotNull BlockPos pos, Inventory playerInv, @NotNull Player player)
+    public TowerInterfaceScreenHandler(int id, @NotNull BlockPos pos, Inventory playerInv, @NotNull Player player)
     {
 
         super(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(),id);
@@ -17,12 +32,12 @@ public final class TowerInterfaceContainer /*extends AbstractContainerMenu*/ {
         this.TE2 = player.getCommandSenderWorld().getBlockEntity(pos);
 
     }
-    public TowerInterfaceContainer(final int windowid, final Inventory PInventory, final TowerInterfaceTileEntity TowerEntity) {
+    public TowerInterfaceScreenHandler(final int windowid, final Inventory PInventory, final TowerInterfaceTileEntity TowerEntity) {
         super(ModContainerTypes.TOWER_INTERFACE_CONTAINER.get(), windowid);
 
 
     }
-    public TowerInterfaceContainer(final int windowid, final @NotNull Inventory inven, final @NotNull FriendlyByteBuf data/*, TowerInterfaceTileEntity towerEntity*///) //{
+    public TowerInterfaceScreenHandler(final int windowid, final @NotNull Inventory inven, final @NotNull FriendlyByteBuf data/*, TowerInterfaceTileEntity towerEntity*///) //{
   /*      this(windowid, inven, getTowerEntity(inven, data));
     }
 

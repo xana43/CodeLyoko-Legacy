@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.containers;
+package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
 public class UniversalEnergyStorageContainer /*extends AbstractContainerMenu implements Container*/ {
    /* protected UniversalEnergyStorageContainer(@Nullable MenuType<?> type, int id) {

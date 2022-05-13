@@ -6,7 +6,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
@@ -170,7 +169,7 @@ private static void save(MinecraftClient client){
 
             assert this.client != null;
             assert this.client.player != null;
-            this.client.player.playSound(ModSounds.GUI,1,6);
+            this.client.player.playSound(ModSounds.GUISOUND,1,6);
             CardinalData.LyokoClass.setLyokoclass(this.client.player,0);
             save(this.client);
 
@@ -189,7 +188,7 @@ private static void save(MinecraftClient client){
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Samurai);
 
             CardinalData.LyokoClass.setLyokoclass(this.client.player,1);
-            this.client.player.playSound(ModSounds.GUI,1,6);
+            this.client.player.playSound(ModSounds.GUISOUND,1,6);
             save(this.client);
             //ClassID =1;
            // classIndicatorString.replace(15,ClientCapabilitySync.getPlayerClassType().getClassName().length() + 17,ClientCapabilitySync.getPlayerClassType().getClassName());
@@ -203,7 +202,7 @@ private static void save(MinecraftClient client){
                 256, 256, (input) -> {
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
             CardinalData.LyokoClass.setLyokoclass(this.client.player,2);
-            this.client.player.playSound(ModSounds.GUI,1,6);
+            this.client.player.playSound(ModSounds.GUISOUND,1,6);
             //ClassID = 2;
             }, Text.of("ninja").getWithStyle(ConstantUtil.HUD.withColor(5125)).get(0));
 

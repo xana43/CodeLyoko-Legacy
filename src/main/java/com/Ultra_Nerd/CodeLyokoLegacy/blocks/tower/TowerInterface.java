@@ -1,16 +1,24 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public final class TowerInterface extends BlockWithEntity {
@@ -59,9 +67,25 @@ public final class TowerInterface extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return null;
+        return ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.instantiate(pos, state);
     }
-/*
+
+    @Override
+    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+        if(!world.isClient)
+        {
+            final NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+            if(screenHandlerFactory != null)
+            {
+                CodeLyokoMain.LOG.info("should be opening the screen");
+                player.openHandledScreen(screenHandlerFactory);
+            }
+        }
+        return ActionResult.SUCCESS;
+    }
+
+
+    /*
 
     @Override
     public VoxelShape getCollisionShape(final BlockState state, final BlockGetter pLevel, final BlockPos pPos, final CollisionContext pContext) {
@@ -161,7 +185,7 @@ public final class TowerInterface extends BlockWithEntity {
 
                     @Override
                     public @NotNull AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory, @NotNull Player player1) {
-                        return new TowerInterfaceContainer(id, pos, inventory, player1);
+                        return new TowerInterfaceScreenHandler(id, pos, inventory, player1);
                     }
                 };
                 NetworkHooks.openGui((ServerPlayer) player, thisMenuProvider, Tower.getBlockPos());

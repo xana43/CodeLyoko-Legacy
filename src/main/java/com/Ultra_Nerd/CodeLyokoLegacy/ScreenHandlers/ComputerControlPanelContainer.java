@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.containers;
+package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
 public final class ComputerControlPanelContainer /*extends Container*/  {
     /*public final ComputerControlPanelTileEntity ControlPanelEntity;
