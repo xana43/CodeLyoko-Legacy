@@ -52,7 +52,7 @@ public record CodeLyokoMain() implements ModInitializer {
     public static final ItemGroup LYOKO_BLOCKS = FabricItemGroupBuilder.build(new Identifier(MOD_ID,"lyoko_blocks"), () -> new ItemStack(ModBlocks.TOWER_INTERFACE));
     public static final ItemGroup LYOKO_ARMOR = FabricItemGroupBuilder.build(CodeLyokoPrefix("lyoko_armor"), ()->new ItemStack(ModItems.WILLIAM_CHESTPLATE));
     public static final ItemGroup LYOKO_WEAPONS = FabricItemGroupBuilder.build(CodeLyokoPrefix("lyoko_weapons"),() -> new ItemStack(ModItems.LASER_ARROWSHOOTER));
-    public static final ScreenHandlerType<TowerInterfaceScreenHandler> TOWER_INTERFACE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(CodeLyokoPrefix("tower_interface"), TowerInterfaceScreenHandler::new);
+    public static final ScreenHandlerType<TowerInterfaceScreenHandler> TOWER_INTERFACE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(CodeLyokoPrefix("tower_interface"), (syncId, inventory) -> new TowerInterfaceScreenHandler(syncId));
 
     public static Identifier CodeLyokoPrefix(String name)
     {

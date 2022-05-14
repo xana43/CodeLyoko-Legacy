@@ -99,7 +99,7 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
     }
 
     @Override
-    public @NotNull ChunkGenerator withSeed(long p_62156_) {
+    public @NotNull ChunkGenerator withSeed(long seed) {
         return new CarthageGenerator(getStructRegistry(),getThisBiomeRegistry(),settings);
     }
 
@@ -115,7 +115,7 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
 
 
     @Override
-    public void buildSurface(@Nonnull ChunkRegion p_225551_1_, StructureAccessor featureManager, @NotNull Chunk chunk) {
+    public void buildSurface(@Nonnull ChunkRegion region, StructureAccessor featureManager, @NotNull Chunk chunk) {
         final BlockState bedrock = ModBlocks.DIGITAL_OCEAN_BLOCK.getDefaultState();
         final BlockState stone = ModBlocks.SECTOR5_STEEL.getDefaultState();
         final BlockState white = ModBlocks.TOWER_WHITE.getDefaultState();

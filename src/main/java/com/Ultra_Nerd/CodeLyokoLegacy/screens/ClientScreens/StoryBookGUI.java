@@ -26,10 +26,6 @@ public final class StoryBookGUI extends BookScreen {
         return false;
     }
 
-    @Override
-    protected void init() {
-        super.init();
-    }
 
     /*
     public StoryBookGUI(FormattedText[] story, int AmountOfPages) {

@@ -7,7 +7,7 @@ import net.minecraft.screen.ScreenHandler;
 
 public final class TowerInterfaceScreenHandler extends ScreenHandler {
 
-    public TowerInterfaceScreenHandler(final int syncId, final Inventory inventory) {
+    public TowerInterfaceScreenHandler(final int syncId) {
         super(CodeLyokoMain.TOWER_INTERFACE_SCREEN_HANDLER, syncId);
 
     }

@@ -5,10 +5,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -39,11 +36,13 @@ import java.util.Random;
 public final class EntityBlok extends SkeletonEntity implements IAnimatable {
 
 
-    public EntityBlok(final EntityType<? extends SkeletonEntity> entityType, final World world) {
-        super(ModEntities.BLOK, world);
+    public EntityBlok(final EntityType<? extends EntityBlok> entityType,final World world) {
+        super(entityType, world);
 
         AnimationController.addModelFetcher((AnimationController.ModelFetcher<EntityBlok>) iAnimatable -> new ModelBlok());
     }
+
+
 
     @Override
     public void attack(final LivingEntity target, final float pullProgress) {
@@ -91,7 +90,7 @@ public final class EntityBlok extends SkeletonEntity implements IAnimatable {
     @Override
     protected void playStepSound(final BlockPos pos, final BlockState state) {
         //super.playStepSound(pos, state);
-        this.playSound(getStepSound(),0.15f,1);
+        //this.playSound(getStepSound(),0.15f,1);
     }
     @Nullable
 private static SoundEvent getStepSound()

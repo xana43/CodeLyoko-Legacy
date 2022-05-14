@@ -44,8 +44,8 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     private static final Identifier TEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/towerinterface.png");
     private TextFieldWidget text;
     private TextFieldWidget Accepted;
-    private byte I = 0;
-    private int acceptedColor = 0;
+    private byte I;
+    private int acceptedColor;
 
 
 

@@ -138,7 +138,7 @@ public final class ClassScreen extends Screen {
 
     }
 private static void save(MinecraftClient client){
-        if(client != null){
+
 
             if(client.player != null)
             {
@@ -153,7 +153,7 @@ private static void save(MinecraftClient client){
                     CodeLyokoMain.LOG.info("saving client");
                 }
             }
-        }
+
 }
  private static final int colors = ColorHelper.Argb.getArgb(1,255,0,255);
 //set buttons for each class

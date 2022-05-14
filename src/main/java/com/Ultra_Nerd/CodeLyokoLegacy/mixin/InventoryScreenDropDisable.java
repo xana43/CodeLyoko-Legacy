@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(InventoryScreen.class)
 public abstract class InventoryScreenDropDisable {
     @Inject(method = "isClickOutsideBounds",at = @At(value = "HEAD"), cancellable = true)
-    private void disabledrop(final double mouseX, final double mouseY, final int left, final int top, final int button, final CallbackInfoReturnable<Boolean> cir)
+    private void disabledrop(final CallbackInfoReturnable<Boolean> cir)
     {
         final PlayerEntity player = MinecraftClient.getInstance().player;
         if(player != null) {

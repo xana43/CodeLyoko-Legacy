@@ -13,9 +13,4 @@ public final class LyokoDamage extends DamageSource
     public DamageSource setBypassesArmor() {
         return super.setBypassesArmor();
     }
-
-    @Override
-    public DamageSource setFire() {
-        return super.setFire();
-    }
 }

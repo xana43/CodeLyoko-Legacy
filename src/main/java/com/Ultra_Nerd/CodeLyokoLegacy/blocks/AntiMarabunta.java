@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -18,10 +19,7 @@ import java.util.function.Function;
 public final class AntiMarabunta extends Block {
     private static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
 
-    @Override
-    public boolean canMobSpawnInside() {
-        return super.canMobSpawnInside();
-    }
+
 
 
 
@@ -32,10 +30,10 @@ public final class AntiMarabunta extends Block {
     @Override
     public void randomTick(final BlockState state, final ServerWorld worldIn, final BlockPos pos, final Random rand) {
         super.randomTick(state, worldIn, pos, rand);
-        for (byte i = 0; i < 30; ++i) {
+        for (byte i = 0; i < 127; ++i) {
             final BlockPos blockpos = pos.offset(Direction.random(rand),rand.nextInt(3) - 1);
 
-            if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isChunkLoaded(blockpos)) {
+            if (blockpos.getY() >= -50 && blockpos.getY() < 384 && !worldIn.isChunkLoaded(blockpos)) {
                 return;
             }
 
@@ -49,7 +47,7 @@ public final class AntiMarabunta extends Block {
 
         }
 
-        for (byte i = 0; i < 30; ++i) {
+        for (byte i = 127; i > -1; i--) {
             final BlockPos blockpos = pos.offset(Direction.random(rand),rand.nextInt(3) - 1);
 
             if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isChunkLoaded(blockpos)) {
@@ -59,7 +57,7 @@ public final class AntiMarabunta extends Block {
             //BlockState iblockstate = worldIn.getBlockState(blockpos.above());
             final BlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-            if (iblockstate1.getBlock() == ModBlocks.ANTI_MARABUNTA) {
+            if (iblockstate1.getBlock() == ModBlocks.ANTI_MARABUNTA && i == 0) {
                 worldIn.setBlockState(blockpos, Blocks.DIRT.getDefaultState());
             }
 

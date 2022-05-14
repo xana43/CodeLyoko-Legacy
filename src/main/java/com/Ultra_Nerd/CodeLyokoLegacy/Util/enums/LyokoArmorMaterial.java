@@ -31,10 +31,10 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
     private final float toughness;
 
 
-    LyokoArmorMaterial(String nameIn, int maxDamageFactor, byte[] damageReduction, int enchant, SoundEvent soundsIn,
-                       float toughnessIn) {
+    LyokoArmorMaterial(final String nameIn, final int maxDamageFactor, final byte[] damageReductionIn, final int enchant,final SoundEvent soundsIn,
+                       final float toughnessIn) {
         this.name = nameIn;
-        this.damageReduction = damageReduction;
+        this.damageReduction = damageReductionIn;
         this.enchant = enchant;
         this.soundEvent = soundsIn;
         this.toughness = toughnessIn;

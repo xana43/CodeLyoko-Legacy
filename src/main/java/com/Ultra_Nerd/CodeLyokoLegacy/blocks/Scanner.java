@@ -307,7 +307,7 @@ public final class Scanner extends BlockWithEntity {
         {
 
             scannerTile.invalidateEntity();
-           offset = 0;
+            time = 0;
 
         }
         super.onBreak(world, pos, state, player);
@@ -319,7 +319,7 @@ public final class Scanner extends BlockWithEntity {
         return  ModTileEntities.SCANNER_TILE_ENTITY.instantiate(pos, state);
     }
 
-private float offset, time;
+private float time;
 
     @Override
     public <T extends BlockEntity> @NotNull BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
@@ -329,7 +329,7 @@ private float offset, time;
             {
 
                     time+=0.01f;
-                    offset = (MathHelper.sin(time) * 1.2f) + 1.4f;
+                    final float offset = (MathHelper.sin(time) * 1.2f) + 1.4f;
 //edge case catch
                 if(time == Float.MAX_VALUE)
                 {

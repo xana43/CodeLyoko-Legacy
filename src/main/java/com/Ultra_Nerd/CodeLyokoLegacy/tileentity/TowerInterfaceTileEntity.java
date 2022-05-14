@@ -30,7 +30,7 @@ public final class TowerInterfaceTileEntity extends BlockEntity implements Named
 
      @Override
      public @NotNull ScreenHandler createMenu(final int syncId, final PlayerInventory inv, final PlayerEntity player) {
-         return new TowerInterfaceScreenHandler(syncId, null);
+         return new TowerInterfaceScreenHandler(syncId);
      }
 /*
     // May be accessed before onLoad
