@@ -1,15 +1,28 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.UniversalEnergyStorageTileEntity;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import team.reborn.energy.api.base.SimpleEnergyStorage;
+
+import java.util.Random;
 
 public final class UniversalEnergyBlock extends BlockWithEntity {
+
     public UniversalEnergyBlock(final Settings settings) {
         super(settings);
     }
@@ -17,9 +30,65 @@ public final class UniversalEnergyBlock extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return null;
+        return ModTileEntities.UNIVERSAL_ENERGY_STORAGE.instantiate(pos, state);
     }
-/*
+
+    @Override
+    public BlockRenderType getRenderType(final BlockState state) {
+        return BlockRenderType.INVISIBLE;
+    }
+
+    @Override
+    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+
+        if(!world.isClient)
+        {
+            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+            if(screenHandlerFactory != null)
+            {
+                player.openHandledScreen(screenHandlerFactory);
+            }
+        }
+        return ActionResult.SUCCESS;
+    }
+
+    @Override
+    public void randomDisplayTick(final BlockState state, final World world, final BlockPos pos, final Random random) {
+        super.randomDisplayTick(state, world, pos, random);
+
+
+
+
+
+    }
+
+    @Override
+    public void onStateReplaced(final BlockState state, final World world, final BlockPos pos, final BlockState newState, final boolean moved) {
+        if(state.getBlock() != newState.getBlock())
+        {
+            final BlockEntity be = world.getBlockEntity(pos);
+            if(be instanceof UniversalEnergyStorageTileEntity universalEnergyStorageTile)
+            {
+                universalEnergyStorageTile.simpleEnergyStorage.amount = 0;
+            }
+        }
+        super.onStateReplaced(state, world, pos, newState, moved);
+    }
+
+    @Override
+    public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
+
+
+            final BlockEntity be = world.getBlockEntity(pos);
+            if(be instanceof UniversalEnergyStorageTileEntity universalEnergyStorageTile)
+            {
+                universalEnergyStorageTile.simpleEnergyStorage.amount = 0;
+            }
+
+        super.onBreak(world, pos, state, player);
+
+    }
+    /*
     //private UniversalEnergyStorageTileEntity Text = new UniversalEnergyStorageTileEntity();
     public UniversalEnergyBlock() {
         super(Properties.of(Material.DECORATION)

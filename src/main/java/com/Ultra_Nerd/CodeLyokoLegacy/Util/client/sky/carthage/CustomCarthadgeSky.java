@@ -36,7 +36,7 @@ public record CustomCarthadgeSky() implements DimensionRenderingRegistry.SkyRend
         final MatrixStack matrixStack = context.matrixStack();
 
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
-        for (int i = 0; i < 6; ++i) {
+        for (byte i = 0; i < 6; ++i) {
             matrixStack.push();
 
             switch (i)

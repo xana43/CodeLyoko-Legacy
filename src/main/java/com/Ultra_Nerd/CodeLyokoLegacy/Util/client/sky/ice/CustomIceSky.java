@@ -31,7 +31,7 @@ public record CustomIceSky() implements DimensionRenderingRegistry.SkyRenderer {
         final Tessellator tessellator = Tessellator.getInstance();
         final BufferBuilder bufferBuilder = tessellator.getBuffer();
         final MatrixStack matrixStack = context.matrixStack();
-        for(int i = 0; i < 6; ++i) {
+        for(byte i = 0; i < 6; ++i) {
             matrixStack.push();
             switch (i)
             {

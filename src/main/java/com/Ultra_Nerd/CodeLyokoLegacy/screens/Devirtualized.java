@@ -21,7 +21,7 @@ public final class Devirtualized extends Screen {
 
 
 
-    private int ticksSinceDeath;
+    private byte ticksSinceDeath;
     private final Text message;
     private final boolean isHardcore;
     private Text scoreText;
@@ -110,9 +110,9 @@ public final class Devirtualized extends Screen {
         if (this.message == null) {
             return null;
         } else {
-            int i = this.client.textRenderer.getWidth(this.message);
-            int j = (this.width >> 1) - (i >> 1);
-            int k = (this.width >> 1) + (i >> 1);
+            final int i = this.client.textRenderer.getWidth(this.message);
+            final int j = (this.width >> 1) - (i >> 1);
+            final int k = (this.width >> 1) + (i >> 1);
             return mouseX >= j && mouseX <= k ? this.client.textRenderer.getTextHandler().getStyleAt(this.message, mouseX - j) : null;
         }
     }

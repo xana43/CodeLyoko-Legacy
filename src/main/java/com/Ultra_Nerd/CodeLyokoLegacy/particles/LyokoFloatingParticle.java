@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.particles;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ParticleUTIL.DefaultLyokoParticleType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.renderer.v1.model.SpriteFinder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.particle.*;
@@ -12,11 +11,11 @@ import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
 
-public final class LyokoParticle extends SpriteBillboardParticle {
+public final class LyokoFloatingParticle extends SpriteBillboardParticle {
 
    // private static final Random thisrandom = new Random();
     private final SpriteProvider provider;
-    private LyokoParticle(final ClientWorld clientWorld, final double d, final double e, final double f, final double velx, final double vely, final double velz, final SpriteProvider provider) {
+    private LyokoFloatingParticle(final ClientWorld clientWorld, final double d, final double e, final double f, final double velx, final double vely, final double velz, final SpriteProvider provider) {
         super(clientWorld, d, e, f, velx, vely, velz);
         this.provider = provider;
         this.velocityMultiplier = 0.96f;
@@ -66,12 +65,12 @@ public final class LyokoParticle extends SpriteBillboardParticle {
     {
         @Override
         public @NotNull Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
-            final LyokoParticle lyokoParticle = new LyokoParticle(world,x,y,z,velocityX,velocityY,velocityZ,spriteProvider);
-            lyokoParticle.velocityMultiplier = 0.8f;
-            lyokoParticle.setColor(0.07058823529f,0.8f,0.07058823529f);
-            lyokoParticle.setAlpha(1);
+            final LyokoFloatingParticle lyokoFloatingParticle = new LyokoFloatingParticle(world,x,y,z,velocityX,velocityY,velocityZ,spriteProvider);
+            lyokoFloatingParticle.velocityMultiplier = 0.8f;
+            lyokoFloatingParticle.setColor(0.07058823529f,0.8f,0.07058823529f);
+            lyokoFloatingParticle.setAlpha(1);
 
-            return lyokoParticle;
+            return lyokoFloatingParticle;
         }
     }
     @Environment(EnvType.CLIENT)
@@ -81,12 +80,12 @@ public final class LyokoParticle extends SpriteBillboardParticle {
 
         @Override
         public @NotNull Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
-            final LyokoParticle lyokoParticle = new LyokoParticle(world,x,y,z,velocityX,velocityY,velocityZ,spriteProvider);
-            lyokoParticle.velocityMultiplier = 0.8f;
-            lyokoParticle.setColor(1,1,1);
-            lyokoParticle.setAlpha(1);
+            final LyokoFloatingParticle lyokoFloatingParticle = new LyokoFloatingParticle(world,x,y,z,velocityX,velocityY,velocityZ,spriteProvider);
+            lyokoFloatingParticle.velocityMultiplier = 0.8f;
+            lyokoFloatingParticle.setColor(1,1,1);
+            lyokoFloatingParticle.setAlpha(1);
 
-            return lyokoParticle;
+            return lyokoFloatingParticle;
         }
     }
     @Environment(EnvType.CLIENT)
@@ -95,12 +94,12 @@ public final class LyokoParticle extends SpriteBillboardParticle {
 
         @Override
         public @NotNull Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
-            final LyokoParticle lyokoParticle = new LyokoParticle(world,x,y,z,velocityX,velocityY,velocityZ,spriteProvider);
-            lyokoParticle.velocityMultiplier = 0.8f;
-            lyokoParticle.setColor(0.01960784314f,0.76470588235f,0.9f);
-            lyokoParticle.setAlpha(1);
+            final LyokoFloatingParticle lyokoFloatingParticle = new LyokoFloatingParticle(world,x,y,z,velocityX,velocityY,velocityZ,spriteProvider);
+            lyokoFloatingParticle.velocityMultiplier = 0.8f;
+            lyokoFloatingParticle.setColor(0.01960784314f,0.76470588235f,0.9f);
+            lyokoFloatingParticle.setAlpha(1);
 
-            return lyokoParticle;
+            return lyokoFloatingParticle;
         }
     }
 
@@ -111,12 +110,12 @@ public final class LyokoParticle extends SpriteBillboardParticle {
 
         @Override
         public @NotNull Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
-            final LyokoParticle lyokoParticle = new LyokoParticle(world,x,y,z,velocityX,velocityY,velocityZ,spriteProvider);
-            lyokoParticle.velocityMultiplier = 0.8f;
-            lyokoParticle.setColor(0.86274509804f,0.07843137255f,0.235429411765f);
-            lyokoParticle.setAlpha(1);
+            final LyokoFloatingParticle lyokoFloatingParticle = new LyokoFloatingParticle(world,x,y,z,velocityX,velocityY,velocityZ,spriteProvider);
+            lyokoFloatingParticle.velocityMultiplier = 0.8f;
+            lyokoFloatingParticle.setColor(0.86274509804f,0.07843137255f,0.235429411765f);
+            lyokoFloatingParticle.setAlpha(1);
 
-            return lyokoParticle;
+            return lyokoFloatingParticle;
         }
     }
 
@@ -128,7 +127,7 @@ public final class LyokoParticle extends SpriteBillboardParticle {
 
         @Override
         public @NotNull Particle createParticle(final DefaultParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
-            return new LyokoParticle(world,x,y,z,velocityX,velocityY,velocityZ,provider);
+            return new LyokoFloatingParticle(world,x,y,z,velocityX,velocityY,velocityZ,provider);
         }
     }
 /*

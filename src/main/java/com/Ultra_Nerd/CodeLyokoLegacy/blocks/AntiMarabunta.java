@@ -49,7 +49,7 @@ public final class AntiMarabunta extends Block {
 
         }
 
-        for (byte i = 0; i < 1; ++i) {
+        for (byte i = 0; i < 30; ++i) {
             final BlockPos blockpos = pos.offset(Direction.random(rand),rand.nextInt(3) - 1);
 
             if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isChunkLoaded(blockpos)) {

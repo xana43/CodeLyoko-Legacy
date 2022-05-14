@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
-public class UniversalEnergyStorageContainer /*extends AbstractContainerMenu implements Container*/ {
-   /* protected UniversalEnergyStorageContainer(@Nullable MenuType<?> type, int id) {
+public class UniversalEnergyScreenHandler /*extends AbstractContainerMenu implements Container*/ {
+   /* protected UniversalEnergyScreenHandler(@Nullable MenuType<?> type, int id) {
         super(type, id);
     }
 
@@ -53,7 +53,7 @@ public class UniversalEnergyStorageContainer /*extends AbstractContainerMenu imp
    /*
 	private final UniversalEnergyStorageTileEntity TE;
 	private int ener;
-	public UniversalEnergyStorageContainer(InventoryPlayer player, UniversalEnergyStorageTileEntity store)
+	public UniversalEnergyScreenHandler(InventoryPlayer player, UniversalEnergyStorageTileEntity store)
 	{
 		this.TE = store;
 	}

@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.LaserRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.MegaTankRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.RendBlok;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.EntityPacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.itemRenderers.ForceFieldEmitterRenderer;
@@ -11,7 +11,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage.CustomCarthadgeSk
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice.CustomIceSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.volcano.CustomVolcanoSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoParticle;
+import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
+import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoRingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
@@ -28,7 +29,6 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
@@ -188,10 +188,11 @@ if(client.player != null) {
 
     private static void registerParticles()
     {
-        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE, LyokoParticle.TowerParticleNeutral::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_XANA,LyokoParticle.TowerParticleXana::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_JEREMY,LyokoParticle.TowerParticleJeremy::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_FRANZ,LyokoParticle.TowerParticleFranz::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE, LyokoFloatingParticle.TowerParticleNeutral::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_XANA, LyokoFloatingParticle.TowerParticleXana::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_JEREMY, LyokoFloatingParticle.TowerParticleJeremy::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_FRANZ, LyokoFloatingParticle.TowerParticleFranz::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.RING_PARTICLE, LyokoRingParticle.TestRingParticle::new);
     }
 
     private static void registerEntityRenderers()
@@ -206,9 +207,9 @@ if(client.player != null) {
             final EntityType<?> et = Registry.ENTITY_TYPE.get(byteBuf.readVarInt());
             final UUID uuid = byteBuf.readUuid();
             final int entityId = byteBuf.readVarInt();
-            final Vec3d pos = PacketHandler.PacketBufUtil.readVec3d(byteBuf);
-            final float pitch = PacketHandler.PacketBufUtil.readAngle(byteBuf);
-            final float yaw = PacketHandler.PacketBufUtil.readAngle(byteBuf);
+            final Vec3d pos = EntityPacketHandler.PacketBufUtil.readVec3d(byteBuf);
+            final float pitch = EntityPacketHandler.PacketBufUtil.readAngle(byteBuf);
+            final float yaw = EntityPacketHandler.PacketBufUtil.readAngle(byteBuf);
             ctx.getTaskQueue().execute(() -> {
                 if (MinecraftClient.getInstance().world == null)
                     throw new IllegalStateException("Tried to spawn entity in a null world!");

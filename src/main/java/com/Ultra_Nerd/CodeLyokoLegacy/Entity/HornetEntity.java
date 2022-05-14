@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
@@ -17,7 +16,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public final class HornetEntity extends PhantomEntity implements IAnimatable, RangedAttackMob {
-    private final AnimationFactory manager = new AnimationFactory(this);
+
     private final AnimationController<?> controller2 = new AnimationController<>(this, "attackcontroller", 20, this::animationPred);
     private final AnimationController<?> controller = new AnimationController<>(this, "movecontroller", 20, this::animationPred);
 
@@ -37,7 +36,7 @@ public final class HornetEntity extends PhantomEntity implements IAnimatable, Ra
 
     @Override
     public AnimationFactory getFactory() {
-        return null;
+        return new AnimationFactory(this);
     }
 /*
     public HornetEntity(@NotNull EntityType<HornetEntity> hornetEntityEntityType, @NotNull Level world) {

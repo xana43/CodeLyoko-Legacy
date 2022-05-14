@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.BlockPatternRegistry;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Scanner;
@@ -21,13 +22,16 @@ import net.minecraft.world.World;
 public final class ScannerTileEntity extends BlockEntity implements MasterEntity {
 
     public RegistryKey<World> destinationWorld = ModDimensions.carthage;
-    private int scanTimer = 100;
+    private int scanTimer = MethodUtil.TickConversion.secondsToTicks(9);
     private boolean inScanner;
     public ScannerTileEntity(final BlockPos pos, final BlockState state) {
         super(ModTileEntities.SCANNER_TILE_ENTITY, pos, state);
         //destinationWorld = ModDimensions.carthage;
     }
-
+    public boolean isInScanner()
+    {
+        return inScanner;
+    }
     @Override
     public void tick() {
         MasterEntity.super.tick();
@@ -40,7 +44,7 @@ public final class ScannerTileEntity extends BlockEntity implements MasterEntity
         }
         else
         {
-            scanTimer = 100;
+            scanTimer = MethodUtil.TickConversion.secondsToTicks(9);
         }
     }
 
@@ -56,11 +60,13 @@ public final class ScannerTileEntity extends BlockEntity implements MasterEntity
             {
                 serverWorld.getProfiler().push("portal");
                 if(scanTimer <= 0 && inScanner) {
-                    player.teleport(serverWorld1, 0, 130, 0, player.getYaw(), player.getPitch());
+
+                    player.teleport(serverWorld1, 0, 140, 0, player.getYaw(), player.getPitch());
                     //player.moveToWorld(serverWorld1);
                     //player.teleport(0,130,0);
-                    serverWorld.getProfiler().pop();
+
                 }
+                serverWorld.getProfiler().pop();
             }
 
 

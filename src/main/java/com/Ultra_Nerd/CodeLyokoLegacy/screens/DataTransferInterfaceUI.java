@@ -172,7 +172,7 @@ public final class DataTransferInterfaceUI /*extends AbstractContainerScreen<Dat
                 yCoord = Integer.parseInt(this.yCoord.getValue());
             if(this.zCoord.getValue().length() > 0)
                 zCoord = Integer.parseInt(this.zCoord.getValue());
-            PacketHandler.INSTANCE.sendToServer(new DataTransferInterfaceMessage(territory, xCoord, yCoord, zCoord));
+            EntityPacketHandler.INSTANCE.sendToServer(new DataTransferInterfaceMessage(territory, xCoord, yCoord, zCoord));
         }, new TextComponent("Send !").withStyle(ConstantUtil.GUNSHIP));
 
     }

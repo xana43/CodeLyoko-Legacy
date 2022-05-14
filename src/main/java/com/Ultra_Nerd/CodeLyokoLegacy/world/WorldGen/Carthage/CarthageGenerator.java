@@ -125,8 +125,8 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
         final BlockPos.Mutable pos = new BlockPos.Mutable();
 
 
-        int x;
-        int z;
+        byte x;
+        byte z;
 
         for (x = 0; x < 16; x++) {
             for (z = 0; z < 16; z++) {

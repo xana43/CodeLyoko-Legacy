@@ -1,15 +1,41 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.NotNull;
+import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 
 public final class UniversalEnergyStorageTileEntity extends BlockEntity {
-    public UniversalEnergyStorageTileEntity(@NotNull BlockEntityType<?> p_155228_, @NotNull BlockPos p_155229_, @NotNull BlockState p_155230_) {
-        super(p_155228_, p_155229_, p_155230_);
+
+    public final SimpleEnergyStorage simpleEnergyStorage = new SimpleEnergyStorage(900,10,10){
+
+
+        @Override
+        protected void onFinalCommit() {
+            markDirty();
+        }
+    };
+
+
+private static final String energykey = "lyoko_universal_energy_storeage";
+
+    public UniversalEnergyStorageTileEntity(final BlockPos pos, final BlockState state) {
+        super(ModTileEntities.UNIVERSAL_ENERGY_STORAGE, pos, state);
+    }
+
+    @Override
+    protected void writeNbt(final NbtCompound nbt) {
+        super.writeNbt(nbt);
+        nbt.putLong(energykey,simpleEnergyStorage.amount);
+    }
+
+    @Override
+    public void readNbt(final NbtCompound nbt) {
+        super.readNbt(nbt);
+        simpleEnergyStorage.amount = nbt.getLong(energykey);
     }
     /*
     public UniversalEnergyStorageTileEntity(BlockEntityType<?> tileEntityTypeIn) {

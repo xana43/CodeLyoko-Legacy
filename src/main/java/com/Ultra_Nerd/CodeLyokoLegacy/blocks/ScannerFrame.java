@@ -190,6 +190,8 @@ public final class ScannerFrame extends Block implements MultiBlockPartCallback 
         return this.getDefaultState().with(directionPropertyFrame,ctx.getPlayerFacing());
     }
 
+
+
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         if (state.get(ScannerFrameInvis)) {

@@ -169,7 +169,7 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
         final double d2 = target.getZ() - this.getZ();
         final double d3 = Math.sqrt(d0 * d0 + d2 * d2);
 
-        abstractarrow.setVelocity(d0, d1 + d3 * (double)0.2F, d2, 4F, (float)(14 - this.world.getDifficulty().getId() << 2));
+        abstractarrow.setVelocity(d0, d1 + d3 * 0.2F, d2, 4F, (14 - this.world.getDifficulty().getId() << 2));
         this.playSound(ModSounds.LASERARROW, 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
         if(!this.world.isClient) {
             this.world.spawnEntity(abstractarrow);

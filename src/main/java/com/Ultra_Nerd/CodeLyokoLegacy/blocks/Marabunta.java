@@ -58,7 +58,7 @@ public final class Marabunta extends Block {
     @Override
     public void scheduledTick(final BlockState state, final ServerWorld world, final BlockPos pos, final Random random) {
         super.scheduledTick(state, world, pos, random);
-        for (int i = 0; i < 90; ++i) {
+        for (byte i = 0; i < 90; ++i) {
             BlockPos blockpos = pos.offset(Direction.Axis.pickRandomAxis(random),random.nextInt(3) - 1);
 
             if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !world.isChunkLoaded(blockpos)) {

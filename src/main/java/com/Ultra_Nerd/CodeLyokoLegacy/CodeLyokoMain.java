@@ -38,6 +38,7 @@ import net.minecraft.util.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
+import team.reborn.energy.api.EnergyStorage;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -57,12 +58,17 @@ public record CodeLyokoMain() implements ModInitializer {
     {
         return new Identifier(MOD_ID,name);
     }
+    public static final Identifier ChannelID = CodeLyokoMain.CodeLyokoPrefix("lyokopacket");
+    private static void registerEnergyStorageBE()
+    {EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.simpleEnergyStorage, ModTileEntities.UNIVERSAL_ENERGY_STORAGE);
+    }
     @Override
     public void onInitialize() {
         GeckoLib.initialize();
         generalRegistration();
         SetupFunctions();
         registerDefaultAttributes();
+        registerEnergyStorageBE();
     }
     private static void generalRegistration()
     {

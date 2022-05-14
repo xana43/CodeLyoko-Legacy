@@ -1,16 +1,30 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
 import com.google.common.collect.ImmutableMap;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.mixin.client.particle.ParticleManagerAccessor;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.option.ParticlesMode;
+import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.resource.ResourceReloader;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.KillCommand;
+import net.minecraft.server.command.ParticleCommand;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -21,6 +35,7 @@ import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -28,6 +43,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -266,6 +282,10 @@ public final class Scanner extends BlockWithEntity {
         }
     }
 
+
+
+
+
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
@@ -287,7 +307,7 @@ public final class Scanner extends BlockWithEntity {
         {
 
             scannerTile.invalidateEntity();
-
+           offset = 0;
 
         }
         super.onBreak(world, pos, state, player);
@@ -299,27 +319,63 @@ public final class Scanner extends BlockWithEntity {
         return  ModTileEntities.SCANNER_TILE_ENTITY.instantiate(pos, state);
     }
 
+private float offset, time;
+
     @Override
     public <T extends BlockEntity> @NotNull BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
         return (world1, pos, state1, blockEntity) -> {
 
             if(blockEntity instanceof  ScannerTileEntity scannerTile)
             {
+
+                    time+=0.01f;
+                    offset = (MathHelper.sin(time) * 1.2f) + 1.4f;
+//edge case catch
+                if(time == Float.MAX_VALUE)
+                {
+                    time = 0;
+                }
+
                 scannerTile.tick();
+
+                if(state.get(Scanner) && scannerTile.isInScanner())
+                {
+                    final MinecraftClient mc =MinecraftClient.getInstance();
+
+                    switch (mc.options.particles)
+                    {
+                        case ALL ->{
+                            for(int i =0; i < 200 ; i++)
+                            {
+                                world.addImportantParticle(ModParticles.RING_PARTICLE,pos.getX(),pos.getY() + offset ,pos.getZ() + 0.5f,0,0,0);
+
+                            }
+                        }
+                        case DECREASED -> {
+                            for(byte i =0; i < 100 ; i++)
+                            {
+                                world.addParticle(ModParticles.RING_PARTICLE,pos.getX(),pos.getY() + offset,pos.getZ() + 0.5f,0,0,0);
+                            }
+
+                        }
+                        case MINIMAL -> {
+                            for(byte i =0; i < 50 ; i++)
+                            {
+                                world.addParticle(ModParticles.RING_PARTICLE,pos.getX(),pos.getY() + offset,pos.getZ() + 0.5f,0,0,0);
+                            }
+                        }
+                    }
+
+
+
+
+
+                }
             }
         };
     }
 
-    @Override
-    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
-        if(world.getBlockEntity(pos) instanceof ScannerTileEntity scannerTile)
-        {
-            scannerTile.virtualizePlayer();
-        }
 
-
-        return ActionResult.SUCCESS;
-    }
 
 
 /*
