@@ -8,7 +8,7 @@ public final class ItemModelGenerator /*extends ItemModelProvider*/ {
 
     @Override
     protected void registerModels() {
-        withExistingParent(ModBlocks.BORNITE_ORE.get().getRegistryName().getPath(),mcLoc("cm:block/carnotite_ore"));
+        withExistingParent(ModBlocks.BORNITE_ORE.get().getRegistryName().getPath(),mcLoc("cm:blocks/carnotite_ore"));
     }
 
      */

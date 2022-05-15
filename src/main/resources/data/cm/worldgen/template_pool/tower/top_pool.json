@@ -1,10 +1,10 @@
 {
-  "name": "cm:tower/start_pool",
+  "name": "cm:tower_top",
   "fallback": "minecraft:empty",
   "elements": [{
     "weight": 1,
     "element": {
-      "location": "cm:tower",
+      "location": "cm:tower_new_top",
       "processors": "minecraft:empty",
       "projection": "rigid",
       "element_type": "minecraft:single_pool_element"

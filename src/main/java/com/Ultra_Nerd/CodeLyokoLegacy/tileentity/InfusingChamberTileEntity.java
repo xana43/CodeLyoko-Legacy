@@ -178,10 +178,10 @@ public final class InfusingChamberTileEntity /*extends InventoryBE implements Bl
             Item item = fuel.getItem();
 
             if (item instanceof BlockItem && Block.byItem(item) != Blocks.AIR) {
-                Block block = Block.byItem(item);
+                Block blocks = Block.byItem(item);
 
 
-                if (block == ModBlocks.FLUORITE_BLOCK.get()) return 40000;
+                if (blocks == ModBlocks.FLUORITE_BLOCK.get()) return 40000;
             }
 
 

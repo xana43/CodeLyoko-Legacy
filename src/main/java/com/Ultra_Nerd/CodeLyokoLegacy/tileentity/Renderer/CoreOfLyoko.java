@@ -6,6 +6,10 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LyokoCoreBE;
 import dev.monarkhes.myron.api.Myron;
 import dev.monarkhes.myron.impl.client.model.MyronBakedModel;
+import dev.monarkhes.myron.impl.client.model.MyronMaterial;
+import dev.monarkhes.myron.impl.client.model.MyronUnbakedModel;
+import myron.shaded.de.javagl.obj.Obj;
+import myron.shaded.de.javagl.obj.ObjData;
 import net.fabricmc.fabric.api.client.model.ModelProviderContext;
 import net.fabricmc.fabric.api.client.model.ModelProviderException;
 import net.fabricmc.fabric.api.client.model.ModelResourceProvider;
@@ -39,7 +43,7 @@ public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements
 
     private static int  y;
 
-    private static final BakedModel lyokoCore = Myron.getModel(CodeLyokoMain.CodeLyokoPrefix("models/block/core_of_lyoko"));
+    private static final BakedModel lyokoCore = Myron.getModel(CodeLyokoMain.CodeLyokoPrefix("models/blocks/core_of_lyoko"));
 
     @Override
     public int getRenderDistance() {
@@ -69,7 +73,7 @@ public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements
 
             //MinecraftClient.getInstance().getBlockEntityRenderDispatcher().renderEntity(entity,matrices,vertexConsumers,light,overlay);
 
-                context.getRenderManager().getModelRenderer().render(entityWorld, lyokoCore, entity.getCachedState(), entity.getPos(), matrices, vertexConsumers.getBuffer(RenderLayer.getSolid()), true, entityWorld.getRandom(), 0, 0);
+                context.getRenderManager().getModelRenderer().render(entityWorld, lyokoCore, Blocks.AIR.getDefaultState(), entity.getPos(), matrices, vertexConsumers.getBuffer(RenderLayer.getTranslucentMovingBlock()), true, entityWorld.getRandom(), 0, overlay);
 
             matrices.pop();
 

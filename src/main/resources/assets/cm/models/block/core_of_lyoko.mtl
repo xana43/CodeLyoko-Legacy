@@ -9,6 +9,9 @@ Ks 0.000000 0.000000 0.000000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
+diffuse_shading false
+ambient_occlusion false
+emission true
 illum 1
 map_Kd cm:block/dice
 
@@ -20,6 +23,8 @@ Ks 0.000000 0.000000 0.000000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
+emission true
+ambient_occlusion false
 illum 1
 map_Kd cm:block/digital_sand
 
@@ -31,6 +36,9 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
+emission true
+diffuse_shading false
+ambient_occlusion false
 illum 2
 map_Kd cm:block/digital_rock
 
@@ -42,6 +50,9 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
+emission true
+diffuse_shading false
+ambient_occlusion false
 illum 2
 map_Kd cm:item/zweihander_symbol
 
@@ -53,6 +64,9 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
+emission true
+diffuse_shading false
+ambient_occlusion false
 illum 2
 map_Kd cm:block/digital_blocktop
 
@@ -65,6 +79,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
+blend_mode TRANSLUCENT
+diffuse_shading false
+ambient_occlusion false
 map_Kd cm:block/holo
 
 newmtl shell.001
@@ -75,5 +92,9 @@ Ks 0.000000 0.000000 0.000000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
+blend_mode TRANSLUCENT
+emission true
+diffuse_shading false
+ambient_occlusion false
 illum 1
 map_Kd cm:block/holo

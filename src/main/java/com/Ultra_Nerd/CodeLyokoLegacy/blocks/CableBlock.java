@@ -36,7 +36,7 @@ public final class CableBlock extends FenceBlock {
     @Override
     public boolean canConnect(final BlockState pState, final boolean pIsSideSolid, final Direction pDirection) {
         //return super.connectsTo(pState, pIsSideSolid, pDirection);
-        //final Block block = pState.getBlock();
+        //final Block blocks = pState.getBlock();
         final boolean valid = this.sameState(pState);
         return  !isExceptionForConnection(pState) && (pIsSideSolid || valid);
 

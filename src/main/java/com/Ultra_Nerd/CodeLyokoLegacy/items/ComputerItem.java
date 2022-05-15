@@ -4,6 +4,7 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public final class ComputerItem extends Item {
     public ComputerItem(final Settings settings) {
         super(settings);
     }
+
+
 
     @Override
     public void appendTooltip(final ItemStack stack, @org.jetbrains.annotations.Nullable final World world, final List<Text> tooltip, final TooltipContext context) {

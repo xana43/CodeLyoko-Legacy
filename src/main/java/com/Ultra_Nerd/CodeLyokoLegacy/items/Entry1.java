@@ -24,6 +24,7 @@ public final class Entry1 extends WrittenBookItem {
         super(builder);
     }
 
+
     @Override
     public void appendTooltip(final ItemStack stack, @Nullable final World world, final List<Text> tooltip, final TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);

@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.ScreenHandler;
@@ -8,7 +9,7 @@ import net.minecraft.screen.ScreenHandler;
 public final class TowerInterfaceScreenHandler extends ScreenHandler {
 
     public TowerInterfaceScreenHandler(final int syncId) {
-        super(CodeLyokoMain.TOWER_INTERFACE_SCREEN_HANDLER, syncId);
+        super(ModScreenHandlers.TOWER_INTERFACE_SCREEN_HANDLER, syncId);
 
     }
 

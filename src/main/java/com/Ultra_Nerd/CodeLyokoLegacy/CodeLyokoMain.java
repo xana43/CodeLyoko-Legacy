@@ -3,9 +3,9 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TowerInterfaceScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.mixin.StructyreFeatureAccessor;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageBiomeProvider;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
 import io.github.ladysnake.locki.DefaultInventoryNodes;
@@ -20,7 +20,7 @@ import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.fabricmc.fabric.impl.object.builder.FabricEntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -29,12 +29,14 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.SpawnHelper;
+import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.GenerationStep;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
@@ -44,6 +46,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 
 public record CodeLyokoMain() implements ModInitializer {
+
     public static final InventoryLock LYOKO_LOCK = Locki.registerLock(CodeLyokoPrefix("lyoko_lock"));
     public static final String MOD_ID = "cm";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
@@ -52,7 +55,7 @@ public record CodeLyokoMain() implements ModInitializer {
     public static final ItemGroup LYOKO_BLOCKS = FabricItemGroupBuilder.build(new Identifier(MOD_ID,"lyoko_blocks"), () -> new ItemStack(ModBlocks.TOWER_INTERFACE));
     public static final ItemGroup LYOKO_ARMOR = FabricItemGroupBuilder.build(CodeLyokoPrefix("lyoko_armor"), ()->new ItemStack(ModItems.WILLIAM_CHESTPLATE));
     public static final ItemGroup LYOKO_WEAPONS = FabricItemGroupBuilder.build(CodeLyokoPrefix("lyoko_weapons"),() -> new ItemStack(ModItems.LASER_ARROWSHOOTER));
-    public static final ScreenHandlerType<TowerInterfaceScreenHandler> TOWER_INTERFACE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(CodeLyokoPrefix("tower_interface"), (syncId, inventory) -> new TowerInterfaceScreenHandler(syncId));
+
 
     public static Identifier CodeLyokoPrefix(String name)
     {
@@ -72,10 +75,11 @@ public record CodeLyokoMain() implements ModInitializer {
     }
     private static void generalRegistration()
     {
+
         ModBlocks.BLOCK_MAP.forEach((s, block) -> {
 
             Registry.register(Registry.BLOCK,new Identifier(MOD_ID,s),block);
-            //LOG.info(String.valueOf(block));
+            //LOG.info(String.valueOf(blocks));
             if(block != ModBlocks.LYOKO_CORE && block != ModBlocks.DIGITAL_OCEAN_BLOCK && block != ModBlocks.DIGITAL_LAVA_BLOCK) {
                 Registry.register(Registry.ITEM, new Identifier(MOD_ID, s), new BlockItem(block, new FabricItemSettings().group(LYOKO_BLOCKS)));
             }
@@ -96,13 +100,19 @@ public record CodeLyokoMain() implements ModInitializer {
         ModParticles.PARTICLE_TYPE_IMMUTABLE_MAP.forEach((s, defaultParticleType) -> Registry.register(Registry.PARTICLE_TYPE,CodeLyokoPrefix(s),defaultParticleType));
         Registry.register(Registry.CHUNK_GENERATOR,CodeLyokoPrefix("carthage_chunkgen"), CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
         Registry.register(Registry.BIOME_SOURCE,CodeLyokoPrefix("carthage_biome"), CarthageBiomeProvider.CARTHAGE_BIOME_PROVIDER_CODEC);
+        ModScreenHandlers.screenHandlerMap.forEach((s, screenHandlerType) -> Registry.register(Registry.SCREEN_HANDLER,CodeLyokoPrefix(s),screenHandlerType));
+
+        ModStructures.structmap.forEach((s, structureFeature) -> StructyreFeatureAccessor.callRegister(MOD_ID + ":"+s,structureFeature, GenerationStep.Feature.SURFACE_STRUCTURES));
+
+
     }
 
 
     private static void registerDefaultAttributes()
     {
-        FabricDefaultAttributeRegistry.register(ModEntities.BLOK, EntityBlok.createMonsterAttributes());
+        //FabricDefaultAttributeRegistry.register(ModEntities.BLOK, EntityBlok.createMonsterAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.MEGATANK, MegaTankEntity.registerAttributes());
+
     }
     private static final TrackedData<NbtCompound> peristent = DataTracker.registerData(ServerPlayerEntity.class,TrackedDataHandlerRegistry.NBT_COMPOUND);
 

@@ -1,11 +1,11 @@
 {
-  "type": "cm:tower",
+  "type": "cm:tower_base",
   "adapt_noise": false,
   "spawn_overrides": {},
   "biomes": "#cm:has_structure/tower"
   ,
   "config": {
     "start_pool": "cm:tower/start_pool",
-    "size": 1
+    "size": 2
   }
 }

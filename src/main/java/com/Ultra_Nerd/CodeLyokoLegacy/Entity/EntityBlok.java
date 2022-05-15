@@ -1,26 +1,26 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelBlok;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
+import net.minecraft.world.biome.source.BiomeAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -145,20 +145,12 @@ private static SoundEvent getStepSound()
 
     }
 
-    public static boolean canSpawn(@NotNull EntityType<? extends EntityBlok> type, @NotNull WorldAccess world, @NotNull SpawnReason reason, @NotNull BlockPos pos, @NotNull Random rand) {
-       /* if( Mob.checkMobSpawnRules(type, world, reason, pos, rand) && (world.getBlockState(pos.below()).getBlock() == ModBlocks.DIGITAL_ROCK.get() || world.getBlockState(pos.below()).getBlock() == ModBlocks.DIGITAL_GRASS.get()
-                || world.getBlockState(pos.below()).getBlock() == ModBlocks.DIGITAL_ICE.get() || world.getBlockState(pos.below()).getBlock() == ModBlocks.VOLCANO_GROUND.get()))
-        {
-            CodeLyokoMain.Log.info("spawned");
-        }
 
-        */
-        //     return Mob.checkMobSpawnRules(type, world, reason, pos, rand)/* && (world.getBlockState(pos.below()).getBlock() == ModBlocks.DIGITAL_ROCK.get() || world.getBlockState(pos.below()).getBlock() == ModBlocks.DIGITAL_GRASS.get()
-        //           || world.getBlockState(pos.below()).getBlock() == ModBlocks.DIGITAL_ICE.get() || world.getBlockState(pos.below()).getBlock() == ModBlocks.VOLCANO_GROUND.get())*/;
-        return MobEntity.canMobSpawn(type,world,reason,pos,rand);
+
+    @Override
+    public boolean canSpawn(final WorldAccess world, final SpawnReason spawnReason) {
+        return true;
     }
-
-
 
     @Override
     public @NotNull AnimationFactory getFactory() {
@@ -166,10 +158,10 @@ private static SoundEvent getStepSound()
     }
 
 
-
-
-
+    public static boolean canSpawn(final EntityType<EntityBlok> entityBlokEntityType, final ServerWorldAccess serverWorldAccess, final SpawnReason spawnReason, final BlockPos pos, final Random random) {
+        return serverWorldAccess.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOME) && serverWorldAccess.getBlockState(pos.offset(Direction.Axis.Y, -1)).isIn(ModTags.Blocks.LYOKO_BLOCKS);
     }
+}
 
 
 

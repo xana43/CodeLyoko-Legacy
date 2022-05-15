@@ -1,6 +1,6 @@
 {
   "structures": [{
-    "structure": "cm:tower",
+    "structure": "cm:tower_base",
     "weight": 1
   }],
   "placement": {

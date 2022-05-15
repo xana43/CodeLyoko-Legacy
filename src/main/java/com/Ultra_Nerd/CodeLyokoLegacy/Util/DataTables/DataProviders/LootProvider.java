@@ -19,12 +19,12 @@ public abstract class LootProvider extends LootTableProvider {
 
 
     protected abstract void addTables();
-    protected LootTable.Builder createOriginalLootTable(String name, Block block, BlockEntityType<?> entityType)
+    protected LootTable.Builder createOriginalLootTable(String name, Block blocks, BlockEntityType<?> entityType)
     {
        final LootPool.Builder builder = LootPool.lootPool()
                 .name(name)
                 .setRolls(ConstantValue.exactly(1))
-                .add(LootItem.lootTableItem(block)
+                .add(LootItem.lootTableItem(blocks)
                         .apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY))
                         .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
                                 .copy("Info","BlockEntityTag.Info", CopyNbtFunction.MergeStrategy.REPLACE)
@@ -36,13 +36,13 @@ public abstract class LootProvider extends LootTableProvider {
         return LootTable.lootTable().withPool(builder);
     }
 
-    protected LootTable.Builder silkTable(String name, Block block, Item droppedItem, float min, float max)
+    protected LootTable.Builder silkTable(String name, Block blocks, Item droppedItem, float min, float max)
     {
        final LootPool.Builder builder = LootPool.lootPool()
                 .name(name)
                 .setRolls(ConstantValue.exactly(1))
                 .add(AlternativesEntry.alternatives(
-                        LootItem.lootTableItem(block)
+                        LootItem.lootTableItem(blocks)
                                 .when(MatchTool.toolMatches(ItemPredicate.Builder.item()
                                         .hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))))),
                         LootItem.lootTableItem(droppedItem)
@@ -65,12 +65,12 @@ public abstract class LootProvider extends LootTableProvider {
         writeToTable(pCache,tables);
 
     }
-    protected LootTable.Builder createBlockTabe(String name, Block block)
+    protected LootTable.Builder createBlockTabe(String name, Block blocks)
     {
         LootPool.Builder builder = LootPool.lootPool()
                 .name(name)
                 .setRolls(ConstantValue.exactly(1))
-                .add(LootItem.lootTableItem(block));
+                .add(LootItem.lootTableItem(blocks));
         return LootTable.lootTable().withPool(builder);
     }
     private void writeToTable(HashCache cache,HashMap<ResourceLocation,LootTable> tables)

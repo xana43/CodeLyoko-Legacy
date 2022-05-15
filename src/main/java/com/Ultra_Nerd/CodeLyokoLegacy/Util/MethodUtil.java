@@ -57,6 +57,7 @@ public record MethodUtil() {
 
 
         }
+
         public static boolean playerInVanilla(PlayerEntity player)
         {
             return player.world.getRegistryKey() == World.OVERWORLD || player.world.getRegistryKey() == World.NETHER || player.world.getRegistryKey() == World.END;

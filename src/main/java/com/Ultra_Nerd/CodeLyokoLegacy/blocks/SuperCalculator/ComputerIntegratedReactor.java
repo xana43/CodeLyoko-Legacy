@@ -1,15 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
 public final class ComputerIntegratedReactor extends Block implements BlockEntityProvider {
-    public ComputerIntegratedReactor(final Settings settings) {
-        super(settings);
+    public ComputerIntegratedReactor() {
+        super(FabricBlockSettings.of(Material.METAL).strength(6,10).sounds(BlockSoundGroup.METAL));
     }
 
     @Nullable

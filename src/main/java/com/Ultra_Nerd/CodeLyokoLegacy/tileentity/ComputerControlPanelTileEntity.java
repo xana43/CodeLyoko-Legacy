@@ -52,7 +52,7 @@ public final class ComputerControlPanelTileEntity extends BlockEntity implements
     @Override
     public @NotNull AABB getRenderBoundingBox() {
         // This, combined with isGlobalRenderer in the TileEntityRenderer makes it so that the
-        // render does not disappear if the player can't see the block
+        // render does not disappear if the player can't see the blocks
         // This is useful for rendering larger models or dynamically sized models
         return INFINITE_EXTENT_AABB;
     }

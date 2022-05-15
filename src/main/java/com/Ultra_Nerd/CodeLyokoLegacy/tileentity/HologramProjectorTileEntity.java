@@ -48,7 +48,7 @@ public final class HologramProjectorTileEntity extends BlockEntity implements Ma
         focus = new BlockPos(this.getPos().getX(), this.getPos().getY() + 1, this.getPos().getZ());
         // Validate the boolean properties to change the models
         if (checkStructure() && !once) {
-            // Projector block
+            // Projector blocks
             getWorld().setBlockState(this.getPos(), getWorld().getBlockState(getPos()).with(HologramProjectorBlock.VALID, true));
             // Lens/Focus
             getWorld().setBlockState(focus, getWorld().getBlockState(focus).with(ProjectorFocusblock.VALIDFOCUS, true));
@@ -154,7 +154,7 @@ public final class HologramProjectorTileEntity extends BlockEntity implements Ma
             return;
         }
 
-        Block block = world.getBlockState(new BlockPos(this.pos.getX() + x, this.pos.getY() + y, this.pos.getZ() + z)).getBlock();
+        Block blocks = world.getBlockState(new BlockPos(this.pos.getX() + x, this.pos.getY() + y, this.pos.getZ() + z)).getBlock();
         Block Focus = world.getBlockState(new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ())).getBlock();
 
         if (Focus != ModBlocks.PROJECTOR_FOCUS.get()) {
@@ -162,7 +162,7 @@ public final class HologramProjectorTileEntity extends BlockEntity implements Ma
         }
 
         if (y == 0 && x != 0 ^ z != 0) {
-            if (block != ModBlocks.QUANTUM_STEEL_BLOCK.get()) {
+            if (blocks != ModBlocks.QUANTUM_STEEL_BLOCK.get()) {
                 invalid_block = true;
             }
         }

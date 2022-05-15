@@ -17,14 +17,6 @@ import net.minecraft.block.*;
 import net.minecraft.sound.BlockSoundGroup;
 
 public record ModBlocks() {
-
-
-
-
-
-
-
-
     //for blocks
     public static final Block ARCHITECTURE_WORK_STATION = new ArchitectureWorkstation(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
     //public static final RegistryObject<Block> ARCHITECTURE_WORK_STATION = BLOCKS.register("architecture_work_station", () -> new ArchitectureWorkstation(Block.Properties.copyOf(Blocks.IRON_BLOCK)));
@@ -54,7 +46,7 @@ public record ModBlocks() {
     public static final Block DIGITAL_SEA_PYLON = new SeaPylon();
     public static final Block DIGITAL_GRASS = new Block(FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).allowsSpawning((state, world, pos, type) -> true).strength(-1,-1));
     public static final Block DIGITAL_DIRT = new Block(FabricBlockSettings.copyOf(Blocks.DIRT).strength(-1,-1));
-    public static final Block DIGITAL_ROCK = new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(-1,-1));
+    public static final Block DIGITAL_ROCK = new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(-1,-1).allowsSpawning((state, world, pos, type) -> true));
     public static final Block DIGITAL_WOOD_FOREST = new Block(FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(-1,-1));
     public static final Block DIGITAL_WOOD_MOUNTAIN = new Block(FabricBlockSettings.copyOf(Blocks.JUNGLE_WOOD));
     public static final Block DIGITAL_LEAF_MOUNTAIN = new LeavesBlock(FabricBlockSettings.copyOf(Blocks.JUNGLE_LEAVES));
@@ -102,10 +94,7 @@ public record ModBlocks() {
     public static final Block FRONTIER_BLOCK = new FrontierBlock();
     public static final Block GUMMITE_ORE = new OreBlock(FabricBlockSettings.of(Material.STONE).strength(3, 10).sounds(BlockSoundGroup.STONE));
     public static final Block HOLOPROJECTOR = new HologramProjectorBlock();
-
-    public static final Block LYOKO_CORE = new LyokoCore(FabricBlockSettings.copyOf(Blocks.DRAGON_EGG).noCollision().strength(-1,-1));
-
-
+    public static final Block LYOKO_CORE = new LyokoCore(FabricBlockSettings.copyOf(Blocks.DRAGON_EGG).noCollision().strength(-1,-1).luminance(Blocks.GLOWSTONE.getDefaultState().getLuminance() << 1));
     public static final Block MARABUNTA = new Marabunta();
     public static final Block METATYUYAMUNITE_ORE = new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE));
     public static final Block METATORBERNITE_ORE = new OreBlock(FabricBlockSettings.copy(METATYUYAMUNITE_ORE));
@@ -124,7 +113,6 @@ public record ModBlocks() {
     public static final Block SECTOR5_STEEL = new Block(FabricBlockSettings.of(Material.METAL).strength(-1, -1));
     public static final Block ROUTER = new Router(FabricBlockSettings.copy(Blocks.DRAGON_EGG));
     public static final Block TOWER_WHITE = new TowerGeneric();
-
     public static final Block TOWER_INTERFACE = new TowerInterface();
     public static final Block TOWER_BASE = new TowerBase();
     public static final Block TOWER_WALL = new TowerWall();
@@ -136,17 +124,19 @@ public record ModBlocks() {
     public static final Block TYUYAMUNITE_ORE = new OreBlock(FabricBlockSettings.of(Material.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE));
     public static final Block TORBERNITE_ORE = new OreBlock(FabricBlockSettings.of(Material.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE));
     public static final Block TOWER_ENTER = new TowerEnter();
-   /* public static final Block TITANIUM = BLOCKS.register("titanium_block", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(6, 10).sound(SoundType.METAL)));
-    public static final Block URANUM_REACTOR = BLOCKS.register("computer_reactor", ComputerIntegratedReactor::new);
-    public static final Block URANINITE_ORE = BLOCKS.register("uraninite_ore", () -> new Block(Block.Properties.of(Material.STONE).strength(6, 10).sound(SoundType.STONE)));
-    public static final Block URANIUM_BLOCK_238 = BLOCKS.register("uranium_block_238", () -> new Block(Block.Properties.of(Material.HEAVY_METAL).strength(6, 20).sound(SoundType.METAL)));
-    public static final Block URANIUM_BLOCK_235 = BLOCKS.register("uranium_block_235", () -> new Block(Block.Properties.of(Material.METAL).strength(6, 20).sound(SoundType.METAL)));
-    public static final Block URANIUM_CANISTER = BLOCKS.register("uranium_canister", () -> new UraniumCanister(Block.Properties.of(Material.EGG).requiresCorrectToolForDrops().strength(5, 5)));
-    public static final Block URANOPHANE_ORE = BLOCKS.register("uranophane_ore", () -> new Block(Block.Properties.of(Material.STONE).sound(SoundType.STONE).strength(4, 4)));
-    public static final Block UV_MACHINE = BLOCKS.register("uv_machine", () -> new Block(Block.Properties.copyOf(Blocks.ANVIL)));
-    public static final Block UV_FOCUS = BLOCKS.register("uv_focus", () -> new UVFocusBlock(Block.Properties.copyOf(Blocks.GLASS)));
-    public static final Block UV_LIGHT = BLOCKS.register("uv_light", () -> new Block(Block.Properties.copyOf(Blocks.GLOWSTONE)));
-    */public static final Block VOLCANO_GROUND = new Block(FabricBlockSettings.copyOf(Blocks.STONE));
+  /*  public static final Block TITANIUM = new Block(FabricBlockSettings.of(Material.METAL).strength(6, 10).sounds(BlockSoundGroup.METAL));
+    public static final Block URANUM_REACTOR = new ComputerIntegratedReactor();
+    public static final Block URANINITE_ORE = new Block(FabricBlockSettings.of(Material.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE));
+    public static final Block URANIUM_BLOCK_238 = new Block(FabricBlockSettings.of(Material.METAL).strength(6, 20).sounds(BlockSoundGroup.METAL));
+    public static final Block URANIUM_BLOCK_235 = new Block(FabricBlockSettings.of(Material.METAL).strength(6, 20).sounds(BlockSoundGroup.METAL));
+    public static final Block URANIUM_CANISTER = new UraniumCanister(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5, 5));
+    public static final Block URANOPHANE_ORE = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(4, 4));
+    public static final Block UV_MACHINE = new Block(FabricBlockSettings.copyOf(Blocks.ANVIL));
+    public static final Block UV_FOCUS = new UVFocusBlock(FabricBlockSettings.copyOf(Blocks.GLASS));
+    public static final Block UV_LIGHT = new Block(FabricBlockSettings.copyOf(Blocks.GLOWSTONE));
+
+   */
+    public static final Block VOLCANO_GROUND = new Block(FabricBlockSettings.copyOf(Blocks.STONE));
 
 
     public static final Block DIGITAL_OCEAN_BLOCK = new DigitalSeaBlock();
@@ -233,6 +223,16 @@ public record ModBlocks() {
             .put("tyuyamunite_ore",TYUYAMUNITE_ORE)
             .put("torbernite_ore",TORBERNITE_ORE)
             .put("tower_enter",TOWER_ENTER)
+            //.put("titanium_block",TITANIUM)
+            //.put("computer_reactor",URANUM_REACTOR)
+            //.put("uraninite_ore",URANINITE_ORE)
+            //.put("uranium_block_238",URANIUM_BLOCK_238)
+            //.put("uranium_block_235",URANIUM_BLOCK_235)
+            //.put("uranium_canister",URANIUM_CANISTER)
+            //.put("uranophane_ore",URANOPHANE_ORE)
+            //.put("uv_machine",UV_MACHINE)
+            //.put("uv_focus",UV_FOCUS)
+            //.put("uv_light",UV_LIGHT)
             //other blocks here
             .put("volcano_ground",VOLCANO_GROUND)
             //fluidblocks

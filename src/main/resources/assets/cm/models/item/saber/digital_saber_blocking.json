@@ -1,5 +1,5 @@
 {
-    "parent":"builtin/entity",
+
   "model": "cm:item/saber/digital_saber_blocking.obj",
   "ambientocclusion": true,
   "display":{

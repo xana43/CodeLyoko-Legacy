@@ -76,7 +76,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         registerEntityRenderers();
         receiveEntityPacket();
         FluidRenderRegistry();
-        HandledScreens.register(CodeLyokoMain.TOWER_INTERFACE_SCREEN_HANDLER, TowerGUI::new);
+        HandledScreens.register(ModScreenHandlers.TOWER_INTERFACE_SCREEN_HANDLER, TowerGUI::new);
         //Custom Sprites
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
             registry.register(CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing"));
@@ -84,9 +84,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
             registry.register(CodeLyokoMain.CodeLyokoPrefix("block/liquid_helium_flow"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("block/liquid_helium_still"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("entity/laserarrow"));
-            registry.register(CodeLyokoMain.CodeLyokoPrefix("item/force_field_emitter_model_center"));
-            registry.register(CodeLyokoMain.CodeLyokoPrefix("item/force_field_emitter_model_shell"));
-            registry.register(CodeLyokoMain.CodeLyokoPrefix("block/dice"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("particle/tower_particle_2"));
 
         });

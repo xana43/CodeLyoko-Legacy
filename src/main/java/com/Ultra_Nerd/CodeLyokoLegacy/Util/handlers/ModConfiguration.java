@@ -73,7 +73,7 @@ public class ModConfiguration {
 		INFUSING = conf.getInt("this is the GUI ID for the Flouride Infuser", cat, 2, 0, 1000000000, "Make sure this isn't conflicting with another mod");
 		URANIUM = conf.getInt("this is the ID for the Uranium Integrated reactor", cat, 190, 0, 1000000000, "Make sure this isn't conflicting with another mod");
 		ENTITY_BLOK = conf.getInt("this is the ID for the BLOK mob", cat, 5102, 0, 1000000000, "Make sure this isn't conflicting with another mod");
-		INTERFACE = conf.getInt("this is the ID for the Tower Interface", cat, 3245, 0, 1000000000, "Make sure this isn't conflicting with another mod");
+		INTERFACE = conf.getInt("this is the ID for the TowerBase Interface", cat, 3245, 0, 1000000000, "Make sure this isn't conflicting with another mod");
 		ENTITY_LARROW = conf.getInt("this is the ID for the laser arrow", cat, 3406743, 0, 1000000000, "Make sure this isn't conflicting with another mod");
 		cat = "Biome";
 		conf.addCustomCategoryComment(cat, "this allows for control over biome spawning");

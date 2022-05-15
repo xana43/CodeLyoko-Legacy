@@ -77,7 +77,6 @@ public final class TowerInterface extends BlockWithEntity {
             final NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
             if(screenHandlerFactory != null)
             {
-                CodeLyokoMain.LOG.info("should be opening the screen");
                 player.openHandledScreen(screenHandlerFactory);
             }
         }
@@ -175,12 +174,12 @@ public final class TowerInterface extends BlockWithEntity {
     /*@Override
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
         if(!world.isClient()) {
-            final BlockEntity Tower = world.getBlockEntity(pos);
-            if (Tower instanceof TowerInterfaceTileEntity) {
+            final BlockEntity TowerBase = world.getBlockEntity(pos);
+            if (TowerBase instanceof TowerInterfaceTileEntity) {
                 Menu thisMenuProvider = new MenuProvider() {
                     @Override
                     public @NotNull Component getDisplayName() {
-                        return new TranslatableComponent("screen.tower.gui");
+                        return new TranslatableComponent("screen.TowerBase.gui");
                     }
 
                     @Override
@@ -188,7 +187,7 @@ public final class TowerInterface extends BlockWithEntity {
                         return new TowerInterfaceScreenHandler(id, pos, inventory, player1);
                     }
                 };
-                NetworkHooks.openGui((ServerPlayer) player, thisMenuProvider, Tower.getBlockPos());
+                NetworkHooks.openGui((ServerPlayer) player, thisMenuProvider, TowerBase.getBlockPos());
 
             } else {
                 throw new IllegalStateException("out provider isn't here");

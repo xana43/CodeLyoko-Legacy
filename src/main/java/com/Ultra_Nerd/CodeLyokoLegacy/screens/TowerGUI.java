@@ -33,7 +33,8 @@ import java.util.Random;
 public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     public TowerGUI(final TowerInterfaceScreenHandler handler, final PlayerInventory inventory, final Text title) {
         super(handler, inventory, title);
-        this.playerInventoryTitleX = 0;
+        this.playerInventoryTitleX = 900;
+
 
     }
 

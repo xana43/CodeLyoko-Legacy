@@ -52,7 +52,7 @@ public class ContainerElectricInfusing /* extends AbstractContainerMenu implemen
      *
      * @param playerInven playerInv from which to get the world
      * @param data        Data from which to get the pos
-     * @return the tileEntity linked to the block used
+     * @return the tileEntity linked to the blocks used
      */
    /* private static @NotNull ElectricInfusingChamberTileEntity getTileEntity(@NotNull Inventory playerInven, @NotNull FriendlyByteBuf data) {
         Objects.requireNonNull(playerInven, "playerInventory cannot be null!");

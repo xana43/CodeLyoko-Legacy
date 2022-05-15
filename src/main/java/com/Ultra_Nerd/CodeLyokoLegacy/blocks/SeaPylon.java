@@ -17,11 +17,12 @@ public final class SeaPylon extends Block {
     public static final DirectionProperty DIRPYLON = HorizontalFacingBlock.FACING;
 
     public SeaPylon() {
-        super(FabricBlockSettings.of(new Material.Builder(MapColor.GRAY).build())
+        super(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
 
                 .strength(-1, -1)
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque()
+                .luminance(10)
 
 
 
@@ -34,15 +35,9 @@ public final class SeaPylon extends Block {
         super.appendProperties(builder.add(DIRPYLON));
     }
 
-    @Override
-    public BlockRenderType getRenderType(final BlockState state) {
-        return BlockRenderType.MODEL;
-    }
 
-    @Override
-    public float getAmbientOcclusionLightLevel(final BlockState state, final BlockView world, final BlockPos pos) {
-        return 5;
-    }
+
+
 
     @Nullable
     @Override

@@ -4,13 +4,13 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 public final class ModWorldFeatures {
 /*
    public static final DeferredRegister<StructureFeature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, CodeLyokoMain.MOD_ID);
-   public static final ResourceLocation RL_LYOKO_STRUCTURE_SET = CodeLyokoMain.CodeLyokoPrefix("tower");
+   public static final ResourceLocation RL_LYOKO_STRUCTURE_SET = CodeLyokoMain.CodeLyokoPrefix("TowerBase");
    public static final TagKey<StructureSet> LYOKO_STRUCTURE_SET = TagKey.create(Registry.STRUCTURE_SET_REGISTRY,RL_LYOKO_STRUCTURE_SET);
 
     //Feature parts
    public static StructurePieceType TOWER_PART = TowerParts.Part::new;
     //Main Features
-    public static final RegistryObject<TowerStructure> TOWER = FEATURES.register("tower", () -> new TowerStructure(
+    public static final RegistryObject<TowerStructure> TOWER = FEATURES.register("TowerBase", () -> new TowerStructure(
             NoFeatureConfig::deserialize));
 
     @SubscribeEvent

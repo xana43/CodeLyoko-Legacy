@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
@@ -22,7 +23,8 @@ public abstract class LiquidHeliumFluid extends LyokoFluid{
 
     @Override
     public Item getBucketItem() {
-        return null;
+        return ModItems.LIQUID_HELIUM_BUCKET;
+
     }
 
     @Override

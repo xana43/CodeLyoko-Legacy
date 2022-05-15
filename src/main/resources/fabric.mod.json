@@ -41,14 +41,17 @@
     "minecraft": "1.18.x",
     "java": ">=17",
     "geckolib3":">=3.0.38",
-    "myron":">=1.6.3"
+    "myron":">=1.6.3",
+    "cardinal-components-base": ">=4.1.4",
+    "cardinal-components-entity":">=4.1.4",
+    "team_reborn_energy": ">=2.2.0"
 
   },
   "suggests": {
     "starlight":">=1.0.2",
     "ferritecore":">=4.2.0"
   },
-  "accessWidener":"LyokoAccessWidener.accessWidener",
+  "accessWidener": "cm.accesswidener",
 
   "custom":{
   "cardinal-components": [
