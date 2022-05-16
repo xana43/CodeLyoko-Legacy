@@ -206,14 +206,14 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
     private <E extends HornetEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
         if (event.getAnimatable().isAttacking()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hornet.attack", false));
+            CodeLyokoMain.LOG.info("is attacking: " + event.getAnimatable().isAttacking() );
         }
         else if(!event.getAnimatable().isAttacking())
         {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly", true));
-        } else if (!event.getAnimatable().isAttacking() && !event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hornet.idle",true));
+            CodeLyokoMain.LOG.info("is idle");
         }
-        CodeLyokoMain.LOG.info("is attacking: " + event.getAnimatable().isAttacking() );
+
         return PlayState.CONTINUE;
     }
 

@@ -148,39 +148,6 @@
 					}
 				}
 			}
-		},
-		"animation.hornet.idle": {
-			"loop": true,
-			"animation_length": 0.08,
-			"bones": {
-				"wingL": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 40]
-						},
-						"0.04": {
-							"vector": [0, 0, -40]
-						},
-						"0.08": {
-							"vector": [0, 0, 40]
-						}
-					}
-				},
-				"wingR": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, -40]
-						},
-						"0.04": {
-							"vector": [0, 0, 40]
-						},
-						"0.08": {
-							"vector": [0, 0, -40],
-							"easing": "step"
-						}
-					}
-				}
-			}
 		}
 	},
 	"geckolib_format_version": 2

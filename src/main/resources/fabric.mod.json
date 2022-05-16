@@ -40,7 +40,7 @@
     "fabric": "*",
     "minecraft": "1.18.x",
     "java": ">=17",
-    "geckolib3":">=3.0.38",
+    "geckolib3":">=3.0.42",
     "myron":">=1.6.3",
     "cardinal-components-base": ">=4.1.4",
     "cardinal-components-entity":">=4.1.4",
