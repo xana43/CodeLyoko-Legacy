@@ -157,6 +157,10 @@ private static SoundEvent getStepSound()
         return new AnimationFactory(this);
     }
 
+    @Override
+    public void checkDespawn() {
+        super.checkDespawn();
+    }
 
     public static boolean canSpawn(final EntityType<EntityBlok> entityBlokEntityType, final ServerWorldAccess serverWorldAccess, final SpawnReason spawnReason, final BlockPos pos, final Random random) {
         return serverWorldAccess.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOME) && serverWorldAccess.getBlockState(pos.offset(Direction.Axis.Y, -1)).isIn(ModTags.Blocks.LYOKO_BLOCKS);

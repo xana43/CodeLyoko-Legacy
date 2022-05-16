@@ -4,29 +4,33 @@
 // Blockbench plugin created by Gecko
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HornetEntity;
 import net.minecraft.util.Identifier;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public final class ModelHornet<T extends HornetEntity> extends AnimatedGeoModel<HornetEntity> {
+public final class ModelHornet extends AnimatedGeoModel<HornetEntity> {
     @Override
     public Identifier getModelLocation(final HornetEntity object) {
-        return null;
+
+        return CodeLyokoMain.CodeLyokoPrefix("geo/hornet.geo.json");
     }
 
     @Override
     public Identifier getTextureLocation(final HornetEntity object) {
-        return null;
+        return CodeLyokoMain.CodeLyokoPrefix("textures/entity/hornet/hornetatlas.png");
     }
 
     @Override
     public Identifier getAnimationFileLocation(final HornetEntity animatable) {
-        return null;
+
+        return CodeLyokoMain.CodeLyokoPrefix("animations/entities/hornet.json");
     }
 
 
 
-/*
+    /*
     @Override
     public @Nullable ResourceLocation getModelLocation(HornetEntity object) {
         return null;

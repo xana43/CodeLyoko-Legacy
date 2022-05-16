@@ -35,7 +35,7 @@ public record ModSounds() {
     public static final SoundEvent MEGATANKSMALLFALL = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.smallfall"));
     public static final SoundEvent MEGATANKDIE = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix( "entity.megatank.die"));
     public static final SoundEvent CURSORBLINK = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("interface_cursor"));
-
+    public static final SoundEvent HORNETFLY = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.hornet.fly"));
     //public static final BlockSoundGroup TowerInterfaceSound = new BlockSoundGroup();
     public static final SoundEvent[] SOUNDS = new SoundEvent[]{
             OPENTOWERGUISOUND,
@@ -64,6 +64,7 @@ public record ModSounds() {
             MEGATANKSMALLFALL,
             MEGATANKBIGFALL,
             CURSORBLINK,
+            HORNETFLY
 
 
     };
@@ -105,7 +106,7 @@ public record ModSounds() {
     public static final RegistryObject<SoundEvent> MEGATANKBIGFALL = SOUNDS.register("entity.megatank.bigfall", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "entity.megatank.bigfall")));
     public static final RegistryObject<SoundEvent> MEGATANKSMALLFALL = SOUNDS.register("entity.megatank.smallfall", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "entity.megatank.smallfall")));
     public static final RegistryObject<SoundEvent> MEGATANKDIE = SOUNDS.register("entity.megatank.die", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "entity.megatank.die")));
-    public static final RegistryObject<SoundEvent> HORNETFLY = SOUNDS.register("entity.hornet.fly", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID, "entity.hornet.fly")));
+
     public static final RegistryObject<SoundEvent> DEVIRTUALIZATION = SOUNDS.register("devertualization", () -> new SoundEvent(new ResourceLocation(CodeLyokoMain.MOD_ID,"player.devertualization")));
 
     //required for the correct background music to be played in each dimension(See CodeLyokoMain.Java)

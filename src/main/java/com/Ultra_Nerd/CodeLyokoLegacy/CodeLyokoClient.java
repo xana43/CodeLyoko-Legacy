@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.LaserRenderer;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.HornetRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.MegaTankRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.EntityPacketHandler;
@@ -197,6 +198,7 @@ if(client.player != null) {
         EntityRendererRegistry.register(ModEntities.BLOK, RendBlok::new);
         EntityRendererRegistry.register(ModEntities.MEGATANK, MegaTankRenderer::new);
         EntityRendererRegistry.register(ModEntities.LASER_ENTITY_TYPE, LaserRenderer::new);
+        EntityRendererRegistry.register(ModEntities.HORNET_ENTITY_ENTITY_TYPE, HornetRenderer::new);
     }
 
     public static void receiveEntityPacket() {

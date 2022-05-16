@@ -1,14 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HornetEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHornet;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 
 public final class HornetRenderer extends GeoEntityRenderer<HornetEntity> {
-    public HornetRenderer(final EntityRendererFactory.Context ctx, final AnimatedGeoModel<HornetEntity> modelProvider) {
-        super(ctx, modelProvider);
+    public HornetRenderer(final EntityRendererFactory.Context ctx) {
+        super(ctx, new ModelHornet());
     }
 
 

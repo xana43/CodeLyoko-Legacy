@@ -11,6 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.EntityDamageSource;
 import net.minecraft.entity.damage.ProjectileDamageSource;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.predicate.entity.DamageSourcePredicate;
 import net.minecraft.util.math.BlockPos;
@@ -27,9 +28,13 @@ public final class DigitalSeaBlock extends FluidBlock {
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        if(!(entity instanceof EntitySkid))
+        if(!(entity instanceof EntitySkid) && !world.isClient)
         {
             entity.damage(new LyokoDamage(this.getTranslationKey()).setBypassesArmor().setNeutral(),Float.MAX_VALUE);
+            if(entity instanceof ArrowEntity)
+            {
+                entity.kill();
+            }
         }
     }
 

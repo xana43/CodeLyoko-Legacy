@@ -8,6 +8,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
@@ -21,7 +22,13 @@ public final class DigitalLavaBlock extends FluidBlock {
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        entity.damage(new LyokoDamage(this.getTranslationKey()).setBypassesArmor().setNeutral(),Float.MAX_VALUE);
+        if(!world.isClient) {
+            entity.damage(new LyokoDamage(this.getTranslationKey()).setBypassesArmor().setNeutral(), Float.MAX_VALUE);
+            if(entity instanceof ArrowEntity)
+            {
+                entity.kill();
+            }
+        }
     }
 
     @Override

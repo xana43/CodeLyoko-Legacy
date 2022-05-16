@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityLaser;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HornetEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -9,6 +10,7 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.server.network.SpawnLocating;
 import net.minecraft.util.Pair;
 import net.minecraft.world.Heightmap;
 import org.checkerframework.checker.units.qual.K;
@@ -23,15 +25,23 @@ public record ModEntities() {
           .defaultAttributes(EntityBlok::createMonsterAttributes)
           .dimensions(EntityDimensions.fixed(2,2))
           .spawnRestriction(SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,EntityBlok::canSpawn)
-          .dimensions(EntityDimensions.fixed(2f,2f)).fireImmune().build();
+          .fireImmune().build();
     public static final EntityType<EntityLaser> LASER_ENTITY_TYPE = FabricEntityTypeBuilder.<EntityLaser>create(SpawnGroup.MISC,EntityLaser::new).build();
   public static final EntityType<MegaTankEntity> MEGATANK = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER,MegaTankEntity::new).dimensions(EntityDimensions.fixed(1,1)).fireImmune()
+          .build();
+  public static final EntityType<HornetEntity> HORNET_ENTITY_ENTITY_TYPE = FabricEntityTypeBuilder.createMob()
+          .entityFactory(HornetEntity::new)
+          .spawnGroup(SpawnGroup.MONSTER)
+          .defaultAttributes(HornetEntity::registerAttributes)
+          .dimensions(EntityDimensions.fixed(1,1))
+          .spawnRestriction(SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,(type, world, spawnReason, pos, random) -> HornetEntity.isValidSpawn(world.getBiomeAccess(),pos,world))
           .build();
 
     public static final ImmutableMap<String,EntityType<?>> ENTITY_TYPE_HASH_MAP = ImmutableMap.<String,EntityType<?>>builder()
             .put("blok",BLOK)
             .put("laser",LASER_ENTITY_TYPE)
             .put("megatank",MEGATANK)
+            .put("hornet",HORNET_ENTITY_ENTITY_TYPE)
             .build();
 //entityRenderer
 

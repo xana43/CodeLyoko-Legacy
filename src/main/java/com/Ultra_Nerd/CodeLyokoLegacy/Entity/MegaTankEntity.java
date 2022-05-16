@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelMegaTank;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -115,6 +116,7 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
 
     @Override
     protected void initGoals() {
+
         this.goalSelector.add(1,new SwimGoal(this));
         this.goalSelector.add(2,new ProjectileAttackGoal(this,1,10,6){
             @Override
@@ -147,8 +149,7 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
         }
     }
     public static boolean canSpawn(@NotNull WorldAccess world, @NotNull SpawnReason reason, @NotNull BlockPos pos, @NotNull Random rand) {
-        return (world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_ROCK || world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_GRASS
-                || world.getBlockState(pos).getBlock() == ModBlocks.DIGITAL_ICE || world.getBlockState(pos).getBlock() == ModBlocks.VOLCANO_GROUND);
+        return world.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOME);
     }
 
 

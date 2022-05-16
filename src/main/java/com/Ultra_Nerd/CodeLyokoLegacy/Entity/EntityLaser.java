@@ -92,8 +92,9 @@ private void destroyAtTheEndOfLife()
 {
     lifetime--;
     if(lifetime <= 0)
-    {
+    {if(!world.isClient) {
         this.kill();
+    }
     }
 }
 
@@ -103,7 +104,9 @@ private void destroyAtTheEndOfLife()
     protected void onEntityHit(final EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         entityHitResult.getEntity().damage(DamageSource.arrow(this,this.getOwner()), (float) this.getDamage());
-
+        if(!world.isClient) {
+            this.kill();
+        }
     }
 
     @Override
