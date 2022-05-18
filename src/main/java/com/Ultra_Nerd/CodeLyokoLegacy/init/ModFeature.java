@@ -1,9 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
@@ -11,19 +16,22 @@ import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 public record ModFeature() {
 
-    private static final TreeFeatureConfig.Builder FOREST_TREE = new TreeFeatureConfig.Builder(
+    private static final TreeFeatureConfig.Builder FOREST_TREE_CONFIG = new TreeFeatureConfig.Builder(
             BlockStateProvider.of(ModBlocks.DIGITAL_WOOD_FOREST),
             new StraightTrunkPlacer(8,3,0),
             BlockStateProvider.of(Blocks.AIR),
             new BlobFoliagePlacer(ConstantIntProvider.create(2),ConstantIntProvider.create(4),1),
             new TwoLayersFeatureSize(1,0,1)
     );
+    private static final ConfiguredFeature<?,?> FOREST_TREE = new ConfiguredFeature<>(Feature.TREE, FOREST_TREE_CONFIG.build());
+    private static final RegistryKey<ConfiguredFeature<?, ?>> FOREST_ENTRY_CONFIGURED = getRegistryKey(CodeLyokoMain.CodeLyokoPrefix("lyoko_forest_tree"));
 
-
-
-
-    public static final ImmutableMap<String,TreeFeatureConfig.Builder> CONFIGURED_TREE_IMMUTABLE_MAP = ImmutableMap.<String, TreeFeatureConfig.Builder>builder()
-            .put("lyoko_forest_tree",FOREST_TREE)
+    private static RegistryKey<ConfiguredFeature<?,?>> getRegistryKey(final Identifier identifier)
+    {
+        return RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY,identifier);
+    }
+    public static final ImmutableMap<RegistryKey<ConfiguredFeature<?,?>>, ConfiguredFeature<?,?>> CONFIGURED_TREE_IMMUTABLE_MAP = ImmutableMap.<RegistryKey<ConfiguredFeature<?,?>>, ConfiguredFeature<?,?>>builder()
+            .put(FOREST_ENTRY_CONFIGURED,FOREST_TREE)
 
             .build();
 /*

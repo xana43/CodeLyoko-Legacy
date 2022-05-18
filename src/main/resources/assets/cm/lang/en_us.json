@@ -271,7 +271,11 @@
 
    "_comment_8":"ScreenNames",
    "lyoko.deathScreen.title":"De-virtualized",
-   "lyoko.deathScreen.title.hardcore":"De-virtualized forever"
-
+   "lyoko.deathScreen.title.hardcore":"De-virtualized forever",
+    "_comment_9": "translatable text",
+    "phone.use.singleplayer": "cannot be used in single player",
+  "phone.use.multiplayer": "you sent a distress call",
+  "phone.receive": "a distress called sent by",
+  "phone.receve2": "was received"
 
 }

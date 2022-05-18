@@ -94,7 +94,7 @@ public record MethodUtil() {
             return pages;
         }
 
-        public static int textArrayLengthToPage(StringVisitable @NotNull [] formattedTexts)
+        public static int textArrayLengthToPage(final StringVisitable @NotNull [] formattedTexts)
         {
             int length = 0;
 

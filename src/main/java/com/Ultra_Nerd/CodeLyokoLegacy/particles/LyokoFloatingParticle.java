@@ -10,7 +10,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
-
+@Environment(EnvType.CLIENT)
 public final class LyokoFloatingParticle extends SpriteBillboardParticle {
 
    // private static final Random thisrandom = new Random();

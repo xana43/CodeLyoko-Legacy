@@ -1,6 +1,12 @@
 {
   "replace": false,
   "values": [
-    "cm:digital_grass"
+    "cm:digital_grass",
+    "cm:digital_sand",
+    "cm:digital_rock",
+    "cm:digital_dirt",
+    "cm:digital_ice",
+    "cm:volcano_ground"
+
   ]
 }

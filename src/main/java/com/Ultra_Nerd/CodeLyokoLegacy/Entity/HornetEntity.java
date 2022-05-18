@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHornet;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
@@ -8,14 +7,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.RangedAttackMob;
-import net.minecraft.entity.ai.control.FlightMoveControl;
-import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.*;
-import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -28,7 +24,6 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.source.BiomeAccess;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -52,7 +47,10 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
 
     }
 
-
+    @Override
+    protected boolean hasWings() {
+        return true;
+    }
 
     @Override
     protected void fall(final double heightDifference, final boolean onGround, final BlockState landedState, final BlockPos landedPosition) {
@@ -64,36 +62,7 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
         super.tickMovement();
     }
 
-    @Override
-    public void travel(final Vec3d movementInput) {
-        //super.travel(movementInput);
-        if (this.isTouchingWater()) {
-            this.updateVelocity(0.02F, movementInput);
-            this.move(MovementType.SELF, this.getVelocity());
-            this.setVelocity(this.getVelocity().multiply(0.800000011920929));
-        } else if (this.isInLava()) {
-            this.updateVelocity(0.02F, movementInput);
-            this.move(MovementType.SELF, this.getVelocity());
-            this.setVelocity(this.getVelocity().multiply(0.5));
-        } else {
-            float f = 0.91F;
-            if (this.onGround) {
-                f = this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 1.0, this.getZ())).getBlock().getSlipperiness() * 0.91F;
-            }
 
-            float g = 0.16277137F / (f * f * f);
-            f = 0.91F;
-            if (this.onGround) {
-                f = this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 1.0, this.getZ())).getBlock().getSlipperiness() * 0.91F;
-            }
-
-            this.updateVelocity(this.onGround ? 0.1F * g : 0.02F, movementInput);
-            this.move(MovementType.SELF, this.getVelocity());
-            this.setVelocity(this.getVelocity().multiply((double)f));
-        }
-
-        this.updateLimbs(this, false);
-    }
 
     @Override
     protected boolean canAddPassenger(final Entity passenger) {
@@ -149,7 +118,7 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
         });
         this.goalSelector.add(1,new FlyGoal(this,3));
         this.goalSelector.add(3,new LookAroundGoal(this));
-
+        this.goalSelector.add(2,new LookAtEntityGoal(this,PlayerEntity.class,10,100,true));
         this.targetSelector.add(1,new ActiveTargetGoal<>(this,PlayerEntity.class,true));
     }
 
@@ -192,10 +161,13 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE,20D)
                 .add(EntityAttributes.GENERIC_FLYING_SPEED,0.10);
     }
+    private final AnimationController<?> controller = new AnimationController<>(this,"hornet_controller",0,this::attackPredicate);
+    private final AnimationController<?> controllerMove = new AnimationController<>(this,"hornet_move_controller",0,this::movePredicate);
     @Override
     public void registerControllers(@NotNull AnimationData data) {
 
-        data.addAnimationController(new AnimationController<>(this, "hornet_controller", 10, this::animationPred));
+        data.addAnimationController(controller);
+        data.addAnimationController(controllerMove);
 
     }
     @Override
@@ -203,18 +175,27 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
         return new AnimationFactory(this);
     }
 
-    private <E extends HornetEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
-        if (event.getAnimatable().isAttacking()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hornet.attack", false));
-            CodeLyokoMain.LOG.info("is attacking: " + event.getAnimatable().isAttacking() );
-        }
-        else if(!event.getAnimatable().isAttacking())
-        {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly", true));
-            CodeLyokoMain.LOG.info("is idle");
-        }
+    private <E extends HornetEntity> PlayState movePredicate(AnimationEvent<E> event)
+    {
+
+            controllerMove.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly", true));
 
         return PlayState.CONTINUE;
+    }
+
+    private <E extends HornetEntity> @NotNull PlayState attackPredicate(@NotNull AnimationEvent<E> event) {
+
+
+
+        if(event.getAnimatable().isAttacking())
+        {
+
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hornet.attack", true));
+
+        }
+        return PlayState.CONTINUE;
+
+
     }
 
 
@@ -226,7 +207,7 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
         final double d1 = target.getBodyY(0.3333333333333333D) - laser.getY();
         final double d2 = target.getZ() - this.getZ();
         final double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        laser.setVelocity(d0, d1 + d3 * (double) 0.2F, d2, 3F, (float) (14 - this.world.getDifficulty().getId() << 2));
+        laser.setVelocity(d0, d1 + d3 * (double) 0.2F, d2, 6F, (float) (14 - this.world.getDifficulty().getId() << 2));
         this.playSound(ModSounds.LASERARROW, 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
         this.world.spawnEntity(laser);
     }

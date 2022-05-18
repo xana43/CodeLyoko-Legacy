@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class TowerBase extends StructureFeature<StructurePoolFeatureConfig> {
+public final class TowerBase extends StructureFeature<StructurePoolFeatureConfig> {
 
 
     public TowerBase(Codec<StructurePoolFeatureConfig> codec)

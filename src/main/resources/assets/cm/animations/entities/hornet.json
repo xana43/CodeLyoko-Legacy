@@ -3,17 +3,17 @@
 	"animations": {
 		"animation.hornet.fly": {
 			"loop": true,
-			"animation_length": 0.08,
+			"animation_length": 0.16,
 			"bones": {
 				"wingL": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 40]
 						},
-						"0.04": {
+						"0.08": {
 							"vector": [0, 0, -40]
 						},
-						"0.08": {
+						"0.16": {
 							"vector": [0, 0, 40]
 						}
 					}
@@ -23,10 +23,10 @@
 						"0.0": {
 							"vector": [0, 0, -40]
 						},
-						"0.04": {
+						"0.08": {
 							"vector": [0, 0, 40]
 						},
-						"0.08": {
+						"0.16": {
 							"vector": [0, 0, -40],
 							"easing": "step"
 						}
@@ -35,6 +35,7 @@
 			}
 		},
 		"animation.hornet.attack": {
+			"loop": true,
 			"animation_length": 0.68,
 			"bones": {
 				"mainbody": {

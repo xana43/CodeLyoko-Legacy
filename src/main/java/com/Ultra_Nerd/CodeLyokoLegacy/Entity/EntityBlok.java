@@ -52,7 +52,7 @@ public final class EntityBlok extends SkeletonEntity implements IAnimatable {
         final double d1 = target.getBodyY(0.3333333333333333D) - abstractarrow.getY();
         final double d2 = target.getZ() - this.getZ();
         final double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        abstractarrow.setVelocity(d0, d1 + d3 * (double)0.2F, d2, 4F, (float)(14 - this.world.getDifficulty().getId() << 2));
+        abstractarrow.setVelocity(d0, d1 + d3 * 0.2D, d2, 4F, (float)(14 - this.world.getDifficulty().getId() << 2));
         //this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
         this.world.spawnEntity(abstractarrow);
     }

@@ -26,15 +26,16 @@ public record CustomVolcanoSky() implements DimensionRenderingRegistry.SkyRender
 
 
 
-
+    private static final Tessellator tessellator = Tessellator.getInstance();
+    private static final BufferBuilder bufferBuilder = tessellator.getBuffer();
     @Override
-    public void render(WorldRenderContext ctx) {
+    public void render(final WorldRenderContext ctx) {
         // mc.textureManager.bindTexture(texturelocation);
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
         RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
-        final Tessellator tessellator = Tessellator.getInstance();
-        final BufferBuilder bufferBuilder = tessellator.getBuffer();
+
         final MatrixStack matrixStack = ctx.matrixStack();
+
         for(byte i = 0; i < 6; ++i) {
             matrixStack.push();
             switch (i)

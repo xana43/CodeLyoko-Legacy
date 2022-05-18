@@ -1,5 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -14,10 +17,14 @@ import java.rmi.server.Operation;
 import java.rmi.server.RemoteCall;
 import java.rmi.server.Skeleton;
 
-public final class KankrelatEntity implements IAnimatable, Skeleton {
+public final class KankrelatEntity extends HostileEntity implements IAnimatable {
 
     private final AnimationController<?> controller = new AnimationController<>(this, "kankrelatcontroller", 20, this::animationPred);
     private final AnimationFactory manager = new AnimationFactory(this);
+
+    public KankrelatEntity(final EntityType<? extends HostileEntity> entityType, final World world) {
+        super(entityType, world);
+    }
 /*
     public KankrelatEntity(@NotNull EntityType<? extends KankrelatEntity> type, @NotNull Level world) {
         super(type, world);
@@ -27,7 +34,7 @@ public final class KankrelatEntity implements IAnimatable, Skeleton {
 
     private <E extends KankrelatEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
         if (event.isMoving()) {
-            controller.setAnimation(new AnimationBuilder().addAnimation("animation.ModelKankrelat.walk"));
+            controller.setAnimation(new AnimationBuilder().addAnimation("animation.ModelKankrelat.walk",true));
             return PlayState.CONTINUE;
         } else {
             return PlayState.STOP;
@@ -46,15 +53,7 @@ public final class KankrelatEntity implements IAnimatable, Skeleton {
         return manager;
     }
 
-    @Override
-    public void dispatch(final Remote obj, final RemoteCall theCall, final int opnum, final long hash) throws Exception {
 
-    }
-
-    @Override
-    public Operation[] getOperations() {
-        return new Operation[0];
-    }
 /*
     @Nonnull
     @Override

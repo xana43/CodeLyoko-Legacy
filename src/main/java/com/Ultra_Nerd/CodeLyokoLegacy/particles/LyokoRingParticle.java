@@ -16,8 +16,8 @@ import net.minecraft.item.Items;
 import net.minecraft.item.SwordItem;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
-
-public class LyokoRingParticle extends SpriteBillboardParticle {
+@Environment(EnvType.CLIENT)
+public final class LyokoRingParticle extends SpriteBillboardParticle {
 
 
     private final SpriteProvider provider;

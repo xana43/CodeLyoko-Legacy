@@ -64,7 +64,7 @@ public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements
 
                 final World entityWorld = entity.getWorld();
                 matrices.translate(0.5, 0.5, 0.5);
-                matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(y +=5));
+                matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(y +=6));
                 if(y == 360)
                 {
                     y = 0;

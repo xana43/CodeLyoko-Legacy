@@ -26,7 +26,7 @@ public record ModItems() {
     //for blocks items
     //public static final RegistryObject<BlockItem> ANTI_MARABUNTA = ITEMS.register("anti_marabunta",() -> new BlockItem(ModBlocks.ANTI_MARABUNTA.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
     //for test items
-    //public static final RegistryObject<Item> TEST_MULTIPLAYER_PHONE = ITEMS.register("test_multiplayer_phone", () -> new MultiplayerPhone(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    public static final Item TEST_MULTIPLAYER_PHONE = new MultiplayerPhone(BaseSettings);
     //for spawn eggs
     /*public static final RegistryObject<ForgeSpawnEggItem> BLOK_SPAWN_EGG = ITEMS.register("blok_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.BLOK, 1, 1, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final RegistryObject<ForgeSpawnEggItem> HORNET_SPAWN_EGG = ITEMS.register("hornet_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.HORNET, 1, 1, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
@@ -202,8 +202,10 @@ public record ModItems() {
 
 
     public static final ImmutableMap<String,Item> ITEM_MAP = ImmutableMap.<String,Item>builder()
-
+//testing Items
+            .put("test_multiplayer_phone",TEST_MULTIPLAYER_PHONE)
 //Items
+
            .put("apu_package_arm",APU_PACKAGE_ARM)
            .put("apu_package_x86",APU_PACKAGE_x86)
            .put("apu_package_asic",APU_PACKAGE_ASIC)

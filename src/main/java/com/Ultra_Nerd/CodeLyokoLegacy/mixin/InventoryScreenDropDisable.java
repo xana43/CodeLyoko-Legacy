@@ -4,6 +4,12 @@ package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.client.render.model.SpriteAtlasManager;
+import net.minecraft.client.texture.StatusEffectSpriteManager;
+import net.minecraft.command.argument.StatusEffectArgumentType;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -22,9 +28,12 @@ public abstract class InventoryScreenDropDisable {
         if(player != null) {
             if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(player) && !player.isCreative()) {
                 cir.cancel();
+
             }
         }
     }
+
+
 
 
 

@@ -41,6 +41,7 @@ public static final BlockEntityType<ScannerTileEntity> SCANNER_TILE_ENTITY = Fab
             .put("scanner_tile_entity",SCANNER_TILE_ENTITY)
             .put("universal_energy_tile_entity",UNIVERSAL_ENERGY_STORAGE)
             .build();
+
   //
     /*
     public static final RegistryObject<BlockEntityType<HologramProjectorTileEntity>> HOLOGRAM_TILE_ENTITY =

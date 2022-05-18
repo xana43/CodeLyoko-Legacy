@@ -15,10 +15,7 @@ import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.*;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -27,7 +24,7 @@ public record ModBiome() {
 
 
 
-    private static final SpawnSettings.Builder biomeSpawns = new SpawnSettings.Builder().spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(ModEntities.BLOK,20,2,4));
+    private static final SpawnSettings.Builder biomeSpawns = new SpawnSettings.Builder().spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(ModEntities.BLOK,10,2,4));
 
     /*Forest Sector*/
        // private static final SurfaceBuilder FOREST_CARVER = new SurfaceBuilder(null,ModBlocks.BORNITE_ORE.getDefaultState(), 0,0,null);
@@ -36,8 +33,8 @@ public record ModBiome() {
         {
 
             final GenerationSettings.Builder forestGensettings = new GenerationSettings.Builder();
-            DefaultBiomeFeatures.addMonsters(biomeSpawns,2,10,6,false);
-
+           // CodeLyokoMain.LOG.info(String.valueOf(ModFeature.FOREST_ENTRY_PLACED));
+           // forestGensettings.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModFeature.FOREST_ENTRY_PLACED);
             return (new Biome.Builder())
                     .category(Biome.Category.FOREST)
                     .precipitation(Biome.Precipitation.NONE)
@@ -55,6 +52,7 @@ public record ModBiome() {
         {
 
             GenerationSettings.Builder desertGen = new GenerationSettings.Builder();
+
             return (new Biome.Builder())
                     .category(Biome.Category.DESERT)
                     .precipitation(Biome.Precipitation.NONE)
@@ -72,6 +70,8 @@ public record ModBiome() {
         {
 
             GenerationSettings.Builder iceGenBuilder = new GenerationSettings.Builder();
+           iceGenBuilder.feature(GenerationStep.Feature.SURFACE_STRUCTURES, MiscPlacedFeatures.BLUE_ICE);
+
             return (new Biome.Builder())
                     .category(Biome.Category.ICY)
                     .precipitation(Biome.Precipitation.SNOW)
@@ -104,6 +104,7 @@ public record ModBiome() {
         {
 
             final GenerationSettings.Builder mountainGen = new GenerationSettings.Builder();
+
             return (new Biome.Builder())
                     .category(Biome.Category.MOUNTAIN)
                     .precipitation(Biome.Precipitation.NONE)
@@ -131,6 +132,7 @@ public record ModBiome() {
         {
             SpawnSettings.Builder volcanoSpawn = new SpawnSettings.Builder().spawnCost(ModEntities.BLOK,1,0);
             GenerationSettings.Builder volcanoGen = new GenerationSettings.Builder();
+            volcanoGen.feature(GenerationStep.Feature.FLUID_SPRINGS,MiscPlacedFeatures.SPRING_LAVA);
             return (new Biome.Builder())
                     .category(Biome.Category.NETHER)
                     .downfall(0)

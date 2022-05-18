@@ -1,8 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HornetEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.LaserRenderer;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHornet;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelOverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.HornetRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.MegaTankRenderer;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.OverboardRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.EntityPacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
@@ -32,23 +36,39 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DeathScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.client.model.TextureDimensions;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.render.DimensionEffects;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.*;
+import net.minecraft.client.render.block.BlockRenderManager;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.EntityRenderers;
+import net.minecraft.client.render.entity.feature.FeatureRenderer;
+import net.minecraft.client.render.entity.feature.FeatureRendererContext;
+import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.model.EntityModelPartNames;
+import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.data.client.TexturedModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.entity.EntityLookup;
+import net.minecraft.world.entity.SimpleEntityLookup;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
+import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 import java.util.UUID;
 
@@ -84,8 +104,9 @@ public record CodeLyokoClient() implements ClientModInitializer {
             registry.register(CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing_lava"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("block/liquid_helium_flow"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("block/liquid_helium_still"));
-            registry.register(CodeLyokoMain.CodeLyokoPrefix("entity/laserarrow"));
+            registry.register(CodeLyokoMain.CodeLyokoPrefix("textures/entity/laserarrow"));
             registry.register(CodeLyokoMain.CodeLyokoPrefix("particle/tower_particle_2"));
+            registry.register(CodeLyokoMain.CodeLyokoPrefix("textures/entity/hornet/hornetatlas"));
 
         });
         //client events
@@ -199,6 +220,12 @@ if(client.player != null) {
         EntityRendererRegistry.register(ModEntities.MEGATANK, MegaTankRenderer::new);
         EntityRendererRegistry.register(ModEntities.LASER_ENTITY_TYPE, LaserRenderer::new);
         EntityRendererRegistry.register(ModEntities.HORNET_ENTITY_ENTITY_TYPE, HornetRenderer::new);
+        //for entities that need layer locations
+        EntityRendererRegistry.register(ModEntities.OVERBOARD, OverboardRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(ModelOverboard.LAYER_LOCATION,ModelOverboard::createBodyLayer);
+
+
+
     }
 
     public static void receiveEntityPacket() {

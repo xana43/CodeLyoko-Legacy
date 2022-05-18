@@ -116,5 +116,10 @@
       <option name="name" value="maven3" />
       <option name="url" value="https://maven.kyrptonaught.dev" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="https://maven.florens.be" />
+    </remote-repository>
   </component>
 </project>

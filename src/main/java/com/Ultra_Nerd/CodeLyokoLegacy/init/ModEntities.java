@@ -1,9 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HornetEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverboardEntity;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -36,12 +38,18 @@ public record ModEntities() {
           .dimensions(EntityDimensions.fixed(1,1))
           .spawnRestriction(SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,(type, world, spawnReason, pos, random) -> HornetEntity.isValidSpawn(world.getBiomeAccess(),pos,world))
           .build();
+  public static final EntityType<OverboardEntity> OVERBOARD = FabricEntityTypeBuilder.<OverboardEntity>create(SpawnGroup.MISC,OverboardEntity::new)
+
+          .dimensions(EntityDimensions.fixed(2,1))
+
+          .build();
 
     public static final ImmutableMap<String,EntityType<?>> ENTITY_TYPE_HASH_MAP = ImmutableMap.<String,EntityType<?>>builder()
             .put("blok",BLOK)
             .put("laser",LASER_ENTITY_TYPE)
             .put("megatank",MEGATANK)
             .put("hornet",HORNET_ENTITY_ENTITY_TYPE)
+            .put("overboard",OVERBOARD)
             .build();
 //entityRenderer
 
@@ -80,9 +88,7 @@ public record ModEntities() {
     public static final RegistryObject<EntityType<HoverboardEntity>> HOVERBOARD = Entities.register("hoverboard", () ->
             EntityType.Builder.of(HoverboardEntity::new, MobCategory.MISC).sized(1, 1)
                     .build(new ResourceLocation(CodeLyokoMain.MOD_ID, "hoverboard").toString()));
-    public static final RegistryObject<EntityType<OverboardEntity>> OVERBOARD = Entities.register("overboard", () ->
-            EntityType.Builder.of(OverboardEntity::new, MobCategory.MISC).sized(2, 1)
-                    .build(new ResourceLocation(CodeLyokoMain.MOD_ID, "overboard").toString()));
+
     public static final RegistryObject<EntityType<OverbikeEntity>> OVERBIKE = Entities.register("overbike", () ->
             EntityType.Builder.of(OverbikeEntity::new, MobCategory.MISC).sized(2, 1)
                     .build(new ResourceLocation(CodeLyokoMain.MOD_ID, "overbike").toString()));

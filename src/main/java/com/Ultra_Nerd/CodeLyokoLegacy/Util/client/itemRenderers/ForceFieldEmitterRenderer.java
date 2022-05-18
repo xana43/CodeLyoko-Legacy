@@ -19,7 +19,7 @@ public record ForceFieldEmitterRenderer() implements BuiltinItemRendererRegistry
     public void render(final ItemStack stack, final ModelTransformation.Mode mode, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {
         matrices.push();
         final MinecraftClient mc = MinecraftClient.getInstance();
-        if(stack.getItem() instanceof ForceFieldEmitter forceFieldEmitter)
+        if(stack.getItem() instanceof final ForceFieldEmitter forceFieldEmitter)
         {
 
             final float pull = ForceFieldEmitter.getPullProgress(stack.getMaxUseTime() - forceFieldEmitter.publicUseTicks);
