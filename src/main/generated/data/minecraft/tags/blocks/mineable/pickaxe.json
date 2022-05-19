@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "cm:architecture_work_station",
+    "cm:electroplating_anode",
+    "cm:electroplating_cathode",
+    "cm:scanner_base",
+    "cm:scanner_frame",
+    "cm:scanner_top",
+    "cm:tyuyamunite_ore",
+    "cm:chiplet_advanced_block",
+    "cm:chiplet_basic_block",
+    "cm:chiplet_franz_block"
+  ]
+}

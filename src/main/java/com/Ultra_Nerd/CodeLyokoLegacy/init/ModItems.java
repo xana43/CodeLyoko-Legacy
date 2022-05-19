@@ -6,13 +6,20 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoTiers;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.mixin.util.RarityMixin;
 import com.google.common.collect.ImmutableMap;
-import com.sun.jna.platform.EnumUtils;
+import joptsimple.util.EnumConverter;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.impl.item.FabricItemInternals;
+import net.minecraft.client.world.GeneratorType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
+import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier;
+import org.apache.commons.lang3.EnumUtils;
+import org.spongepowered.asm.mixin.Mixin;
 
 public record ModItems() {
 
@@ -82,20 +89,21 @@ public record ModItems() {
     public static final Item COMPUTER_SDR_CONTROLLER = new ComputerItem(BaseSettings);
     public static final Item COMPUTER_DDR_CONTROLLER = new ComputerItem(BaseSettings);
     public static final Item COMPUTER_ECC_CONTROLLER = new ComputerItem(BaseSettings);
-    /*
-    public static final Item COMPUTER_DRAM_SDR_RAM = ITEMS.register("computer_dram_sdr_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("common_part", ChatFormatting.GRAY))));
-    public static final RegistryObject<Item> COMPUTER_DRAM_DDR_RAM = ITEMS.register("computer_dram_ddr_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("common_part", ChatFormatting.GRAY))));
-    public static final RegistryObject<Item> COMPUTER_DRAM2_DDR_RAM = ITEMS.register("computer_dram_ddr2_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("common_part", ChatFormatting.GRAY))));
-    public static final RegistryObject<Item> COMPUTER_DRAM3_DDR_RAM = ITEMS.register("computer_dram_ddr3_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> COMPUTER_DRAM4_DDR_RAM = ITEMS.register("computer_dram_ddr4_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> COMPUTER_DRAM5_DDR_RAM = ITEMS.register("computer_dram_ddr5_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> COMPUTER_SRAM_DDR_RAM = ITEMS.register("computer_sram_ddr_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.EPIC)));
-    public static final RegistryObject<Item> COMPUTER_SRAM_DDR2_RAM = ITEMS.register("computer_sram_ddr2_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("prosumer", ChatFormatting.DARK_BLUE))));
-    public static final RegistryObject<Item> COMPUTER_SRAM_DDR3_RAM = ITEMS.register("computer_sram_ddr3_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("matureprosumer", ChatFormatting.DARK_AQUA))));
-    public static final RegistryObject<Item> COMPUTER_SRAM_DDR4_RAM = ITEMS.register("computer_sram_ddr4_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("professional", ChatFormatting.DARK_GREEN))));
-    public static final RegistryObject<Item> COMPUTER_SRAM_DDR5_RAM = ITEMS.register("computer_sram_ddr5_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("professional_enthusiast", ChatFormatting.DARK_RED))));
-    public static final RegistryObject<Item> COMPUTER_SRAM_ECC_DDR_RAM = ITEMS.register("computer_sram_ecc_ddr_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("server_entrylevel", ChatFormatting.BLUE))));
-    public static final RegistryObject<Item> COMPUTER_SRAM_ECC_DDR2_RAM = ITEMS.register("computer_sram_ecc_ddr2_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("server_prosumer", ChatFormatting.AQUA))));
+
+    public static final Item COMPUTER_DRAM_SDR_RAM = new ComputerItem(BaseSettings.rarity(Rarity.RARE));
+    public static final Item COMPUTER_DRAM_DDR_RAM = new ComputerItem(BaseSettings.rarity(Rarity.COMMON));
+    public static final Item COMPUTER_DRAM2_DDR_RAM = new ComputerItem(BaseSettings.rarity(Rarity.COMMON));
+    public static final Item COMPUTER_DRAM3_DDR_RAM = new ComputerItem(BaseSettings.rarity(Rarity.COMMON));
+    public static final Item COMPUTER_DRAM4_DDR_RAM = new ComputerItem(BaseSettings.rarity(Rarity.UNCOMMON));
+    public static final Item COMPUTER_DRAM5_DDR_RAM = new ComputerItem(BaseSettings.rarity(Rarity.RARE));
+    public static final Item COMPUTER_SRAM_DDR_RAM = new ComputerItem(BaseSettings.rarity(Rarity.EPIC));
+    public static final Item COMPUTER_SRAM_DDR2_RAM = new ComputerItem(BaseSettings.rarity(Rarity.EPIC));
+    public static final Item COMPUTER_SRAM_DDR3_RAM = new ComputerItem(BaseSettings.rarity(Rarity.EPIC));
+    public static final Item COMPUTER_SRAM_DDR4_RAM = new ComputerItem(BaseSettings.rarity(Rarity.EPIC));
+    public static final Item COMPUTER_SRAM_DDR5_RAM = new ComputerItem(BaseSettings.rarity(Rarity.EPIC));
+    public static final Item COMPUTER_SRAM_ECC_DDR_RAM = new ComputerItem(BaseSettings.rarity(Rarity.EPIC));
+    public static final Item COMPUTER_SRAM_ECC_DDR2_RAM = new ComputerItem(BaseSettings.rarity(Rarity.EPIC));
+/*
     public static final RegistryObject<Item> COMPUTER_SRAM_ECC_DDR3_RAM = ITEMS.register("computer_sram_ecc_ddr3_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("server_matureprosumer", ChatFormatting.GREEN))));
     public static final RegistryObject<Item> COMPUTER_SRAM_ECC_DDR4_RAM = ITEMS.register("computer_sram_ecc_ddr4_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("server_professional", ChatFormatting.RED))));
     public static final RegistryObject<Item> COMPUTER_SRAM_ECC_DDR5_RAM = ITEMS.register("computer_sram_ecc_ddr5_ram", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("server_professional_enthusiast", ChatFormatting.GRAY))));
@@ -107,7 +115,9 @@ public record ModItems() {
     public static final RegistryObject<Item> COMPUTER_FLUID_HEAT_TRANSFER_PLATE = ITEMS.register("computer_fluid_heat_transfer_plate", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.create("franz_hopper", ChatFormatting.DARK_PURPLE))));
     public static final RegistryObject<Item> COLORED_POLYCARBONATE_BODY_PART = ITEMS.register("colored_polycarbonate_body_part", PropertyLessItem::new);
 
-     */
+
+ */
+
 
 
 
@@ -146,7 +156,7 @@ public record ModItems() {
 
 
 
-    public static final WrittenBookItem STORY_BOOK = new Entry1(BaseSettings);
+    public static final WrittenBookItem STORY_BOOK = new EntryPool.Entry1(BaseSettings);
     public static final Item SILICON_WAFER = new WaferText(BaseSettings.maxDamage(4));
     public static final Item URANIUM_SILICATE = new Item(BaseSettings);
     public static final Item URANIUM_SILICON_PLATE = new Item(BaseSettings);
@@ -177,7 +187,6 @@ public record ModItems() {
     public static final ArmorItem AELITA_CHESTPLATE = new AelitaArmorElytra(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.CHEST, ArmorGroup);
     public static final ArmorItem AELITA_LEGGINGS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.LEGS, ArmorGroup);
     public static final ArmorItem AELITA_BOOTS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.FEET, ArmorGroup);
-
     public static final ArmorItem ODD_CHESTPLATE = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.CHEST, ArmorGroup);
     public static final ArmorItem ODD_LEGGINGS = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.LEGS, ArmorGroup);
     public static final ArmorItem ODD_BOOTS = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.FEET, ArmorGroup);
@@ -200,7 +209,7 @@ public record ModItems() {
     //for buckets
    public static final BucketItem LIQUID_HELIUM_BUCKET = new BucketItem(ModFluids.STILL_LIQUID_HELIUM, BaseSettings);
 
-
+    public static final WrittenBookItem STORY_BOOK2 = new EntryPool.Entry2(BaseSettings);
     public static final ImmutableMap<String,Item> ITEM_MAP = ImmutableMap.<String,Item>builder()
 //testing Items
             .put("test_multiplayer_phone",TEST_MULTIPLAYER_PHONE)
@@ -245,6 +254,19 @@ public record ModItems() {
             .put("computer_sdr_controller",COMPUTER_SDR_CONTROLLER)
             .put("computer_ddr_controller",COMPUTER_DDR_CONTROLLER)
             .put("computer_ecc_controller",COMPUTER_ECC_CONTROLLER)
+            .put("computer_dram_sdr_ram",COMPUTER_DRAM_SDR_RAM)
+            .put("computer_dram_ddr_ram",COMPUTER_DRAM_DDR_RAM)
+            .put("computer_dram_ddr2_ram",COMPUTER_DRAM2_DDR_RAM)
+            .put("computer_dram_ddr3_ram",COMPUTER_DRAM3_DDR_RAM)
+            .put("computer_dram_ddr4_ram",COMPUTER_DRAM4_DDR_RAM)
+            .put("computer_dram_ddr5_ram",COMPUTER_DRAM5_DDR_RAM)
+            .put("computer_sram_ddr_ram",COMPUTER_SRAM_DDR_RAM)
+            .put("computer_sram_ddr2_ram",COMPUTER_SRAM_DDR2_RAM)
+            .put("computer_sram_ddr3_ram",COMPUTER_SRAM_DDR3_RAM)
+            .put("computer_sram_ddr4_ram",COMPUTER_SRAM_DDR4_RAM)
+            .put("computer_sram_ddr5_ram",COMPUTER_SRAM_DDR5_RAM)
+            .put("computer_sram_ecc_ddr_ram",COMPUTER_SRAM_ECC_DDR_RAM)
+            .put("computer_sram_ecc_ddr2_ram",COMPUTER_SRAM_ECC_DDR2_RAM)
             //other computer components
            .put("bit",BIT)
             .put("byte",BYTE)
@@ -256,6 +278,7 @@ public record ModItems() {
             .put("gpu_package_risc",GPU_PACKAGE_RISC)
             .put("gpu_package_asic",GPU_PACKAGE_ASIC)
             .put("story_book",STORY_BOOK)
+            .put("story_book2",STORY_BOOK2)
             .put("silicon_wafer",SILICON_WAFER)
             .put("uranium_silicate",URANIUM_SILICATE)
             .put("uranium_silicon_plate",URANIUM_SILICON_PLATE)

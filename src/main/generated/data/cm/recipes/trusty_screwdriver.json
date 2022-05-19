@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aia",
+    "hih",
+    "hhh"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "h": {
+      "item": "minecraft:cobweb"
+    },
+    "a": []
+  },
+  "result": {
+    "item": "cm:trusty_screwdriver"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "cm"
+      ]
+    }
+  ]
+}

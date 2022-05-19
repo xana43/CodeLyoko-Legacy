@@ -1,13 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
-import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
-import dev.onyxstudios.cca.api.v3.level.LevelComponents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.world.WorldProperties;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -34,7 +30,7 @@ public final class InventorySaveComponent implements AutoSyncedComponent {
 
     public void loadPlayerInventory(final PlayerEntity player)
     {
-        //playerUUID = player.getUuid();
+        playerUUID = player.getUuid();
         player.getInventory().clear();
         player.getInventory().readNbt(playerInvSave.get(player.getUuid()));
     }

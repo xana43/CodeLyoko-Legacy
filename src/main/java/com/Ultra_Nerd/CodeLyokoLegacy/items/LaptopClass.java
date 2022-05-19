@@ -1,13 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.LapTopHeirarichy.MainLaptopScreen;
-import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleSlotStorage;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,12 +13,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleBatteryItem;
-import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 
 public final class LaptopClass extends Item implements SimpleBatteryItem  {
 
@@ -53,7 +44,7 @@ public final class LaptopClass extends Item implements SimpleBatteryItem  {
     public TypedActionResult<ItemStack> use(@NotNull World worldIn, @Nonnull PlayerEntity playerIn, @Nonnull Hand handIn) {
 
         final ItemStack item = playerIn.getStackInHand(handIn);
-        if(getStoredEnergy(item) > 0) {
+        if(getStoredEnergy(item) > 0  || playerIn.isCreative()) {
             if (item.getItem() == this && item.getDamage() == 0) {
                 item.setDamage(1);
                 if (worldIn.isClient) {

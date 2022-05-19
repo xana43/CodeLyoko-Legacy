@@ -9,6 +9,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -28,7 +29,7 @@ public final class ClassScreen extends Screen {
 
 
     public ClassScreen() {
-        super(Text.of(""));
+        super(LiteralText.EMPTY);
     }
     private void drawClassIndicator(Text classname, MatrixStack pPoseStack)
     {
@@ -203,6 +204,7 @@ private static void save(MinecraftClient client){
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
             CardinalData.LyokoClass.setLyokoclass(this.client.player,2);
             this.client.player.playSound(ModSounds.GUISOUND,1,6);
+            save(this.client);
             //ClassID = 2;
             }, Text.of("ninja").getWithStyle(ConstantUtil.HUD.withColor(5125)).get(0));
 
@@ -214,6 +216,7 @@ private static void save(MinecraftClient client){
             //ClassID = 3;
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Guardian);
             }, Text.of("guardian").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
+        save(this.client);
 
     }
 
@@ -221,7 +224,7 @@ private static void save(MinecraftClient client){
     {
         warrior =  new TexturedButtonWidget((this.width >> 1) + 150 , this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) ->{} /*((PlayerEXT)this.client.player).setClass(4)*/, Text.of("warrior").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
-
+        save(this.client);
     }
 
 

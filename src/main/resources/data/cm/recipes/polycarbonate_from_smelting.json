@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "cm:raw_polycarbonate"
-  },
-  "result": "cm:molten_polycarbonate_concentrate",
-  "experience": 5.0,
-  "cookingtime": 300
-}

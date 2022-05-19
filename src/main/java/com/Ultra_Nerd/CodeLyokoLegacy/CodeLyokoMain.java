@@ -17,6 +17,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
@@ -35,9 +36,11 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.scoreboard.ScoreboardCriterion;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stat;
 import net.minecraft.stat.StatFormatter;
+import net.minecraft.stat.StatType;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -45,6 +48,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.RegistryOps;
+import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
@@ -89,7 +93,7 @@ public record CodeLyokoMain() implements ModInitializer {
         SetupFunctions();
         registerDefaultAttributes();
         registerEnergyStorageBE();
-        registerStats();
+
     }
 
 
@@ -124,20 +128,25 @@ public record CodeLyokoMain() implements ModInitializer {
 
         ModStructures.structmap.forEach((s, structureFeature) -> StructyreFeatureAccessor.callRegister(MOD_ID + ":"+s,structureFeature, GenerationStep.Feature.SURFACE_STRUCTURES));
         ModFeature.CONFIGURED_TREE_IMMUTABLE_MAP.forEach((configuredFeatureRegistryKey, configuredFeature) -> Registry.register(BuiltinRegistries.CONFIGURED_FEATURE,configuredFeatureRegistryKey.getValue(),configuredFeature));
-        final int statSize = ModStats.statArray.length;
-        for(int i = 0; i<statSize; i++)
-        {
-            Registry.register(Registry.CUSTOM_STAT,ModStats.statArray[i],CodeLyokoPrefix(ModStats.statArray[i]));
-        }
+        ModStats.RegisterStats();
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
+
+
+                {
+                    return switch (stack.getTranslationKey()) {
+                        case "item.cm.story_book" -> 0x00008B;
+                        case "item.cm.story_book2" -> ColorHelper.Argb.getArgb(255,255,0,0);
+                        default -> 1;
+                    };
+
+                    //return 0x00008B;
+                }
+
+        ,ModItems.STORY_BOOK,ModItems.STORY_BOOK2);
 
     }
 
-    private static void registerStats()
-    {
-        if(ModStats.ENTERED_LYOKO_IDENTIFIER.toString() != null) {
-            //Stats.CUSTOM.getOrCreateStat(ModStats.ENTERED_LYOKO_IDENTIFIER);
-        }
-    }
+
     private static void registerDefaultAttributes()
     {
         //FabricDefaultAttributeRegistry.register(ModEntities.BLOK, EntityBlok.createMonsterAttributes());
@@ -162,7 +171,7 @@ public record CodeLyokoMain() implements ModInitializer {
 if(player != null) {
     if (MethodUtil.DimensionCheck.worldIsNotVanilla(destination)) {
         CardinalData.LyokoInventorySave.savePlayerInventory(player.server.getSaveProperties().getMainWorldProperties(), player);
-        player.incrementStat(ModStats.ENTERED_LYOKO_IDENTIFIER);
+
     } else if (MethodUtil.DimensionCheck.worldIsNotVanilla(origin)) {
         CardinalData.LyokoInventorySave.loadPlayerInventory(player.server.getSaveProperties().getMainWorldProperties(), player);
 
@@ -206,7 +215,7 @@ if(player != null) {
             //tick the xana attack handler
             tick.getAndIncrement();
             if((tick.get() >> 3) % 5 == 0) {
-                //if(serverPlayerEntity.getStatHandler().getStat(Stats.CUSTOM.getOrCreateStat(ModStats.ENTERED_LYOKO_IDENTIFIER)) > 0) {
+                if(serverPlayerEntity.getStatHandler().getStat(Stats.CUSTOM,ModStats.ENTERED_LYOKO_IDENTIFIER) > 0) {
                     if (XanaHandler.calculateAttackProbability()) {
                         final int notifyPlayerRandom = new Random().nextInt(world.getPlayers().size());
 
@@ -214,7 +223,7 @@ if(player != null) {
 
 
                     }
-                //}
+                }
             }
             //carry out continuous operations dependant on the dimension
             if(MethodUtil.DimensionCheck.playerNotInVanillaWorld(serverPlayerEntity))

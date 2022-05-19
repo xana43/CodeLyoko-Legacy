@@ -1,15 +1,22 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import net.minecraft.stat.StatFormatter;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public record ModStats() {
-    private static final String ENTERED_LYOKO = "entered_lyoko";
-    public static final Identifier ENTERED_LYOKO_IDENTIFIER = CodeLyokoMain.CodeLyokoPrefix(ENTERED_LYOKO);
 
-    public static final String[] statArray = new String[]{
-            ENTERED_LYOKO
-
-
-    };
+    public static Identifier ENTERED_LYOKO_IDENTIFIER;
+    public static void RegisterStats() {
+        ENTERED_LYOKO_IDENTIFIER = registerCustomStats("entered_lyoko", StatFormatter.DEFAULT);
+    }
+   private static Identifier registerCustomStats(final String name, final StatFormatter formatter)
+   {
+      final Identifier identifier = CodeLyokoMain.CodeLyokoPrefix(name);
+       Registry.register(Registry.CUSTOM_STAT,name,identifier);
+       Stats.CUSTOM.getOrCreateStat(identifier,formatter);
+       return identifier;
+   }
 }

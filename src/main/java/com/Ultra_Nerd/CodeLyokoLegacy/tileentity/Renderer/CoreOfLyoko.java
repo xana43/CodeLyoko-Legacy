@@ -73,7 +73,7 @@ public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements
 
             //MinecraftClient.getInstance().getBlockEntityRenderDispatcher().renderEntity(entity,matrices,vertexConsumers,light,overlay);
 
-                context.getRenderManager().getModelRenderer().render(entityWorld, lyokoCore, Blocks.AIR.getDefaultState(), entity.getPos(), matrices, vertexConsumers.getBuffer(RenderLayer.getTranslucentMovingBlock()), true, entityWorld.getRandom(), 0, overlay);
+            context.getRenderManager().getModelRenderer().render(entityWorld, lyokoCore, Blocks.AIR.getDefaultState(), entity.getPos(), matrices, vertexConsumers.getBuffer(RenderLayer.getTranslucentMovingBlock()), true, entityWorld.getRandom(), 0, overlay);
 
             matrices.pop();
 

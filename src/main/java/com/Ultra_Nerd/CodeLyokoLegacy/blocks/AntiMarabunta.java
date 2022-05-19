@@ -1,9 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
@@ -14,7 +12,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public final class AntiMarabunta extends Block {
     private static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);

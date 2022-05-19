@@ -8,6 +8,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.ScannerFrame;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.ScannerTop;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModStats;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -15,6 +16,8 @@ import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.stat.Stat;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
@@ -61,6 +64,8 @@ public final class ScannerTileEntity extends BlockEntity implements MasterEntity
                 serverWorld.getProfiler().push("portal");
                 if(scanTimer <= 0 && inScanner) {
 
+
+                    player.incrementStat(ModStats.ENTERED_LYOKO_IDENTIFIER);
                     player.teleport(serverWorld1, 0, 140, 0, player.getYaw(), player.getPitch());
                     //player.moveToWorld(serverWorld1);
                     //player.teleport(0,130,0);

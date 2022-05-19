@@ -73,7 +73,17 @@ dependencies {
 	//modImplementation include("be.florens:expandability-fabric:${expandability_version}")
 
 }
-
+sourceSets{
+	main {
+		compileClasspath += main.compileClasspath
+		runtimeClasspath += main.runtimeClasspath
+		resources{
+			srcDirs+=[
+				'src/main/generated'
+			]
+		}
+	}
+}
 processResources {
 	inputs.property "version", project.version
 
@@ -118,5 +128,18 @@ publishing {
 }
 loom{
 	accessWidenerPath = file("src/main/resources/cm.accesswidener")
+	runs{
 
+	datagenClient{
+		client()
+		name "Data Generation"
+		vmArg "-Dfabric-api.datagen"
+		vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+		vmArg "-Dfabric-api.datagen.strict-validation"
+		ideConfigGenerated = true
+		runDir "build/datagen"
+		source sourceSets.main
+
+		}
+	}
 }

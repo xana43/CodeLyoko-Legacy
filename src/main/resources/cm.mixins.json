@@ -10,7 +10,8 @@
     "PlayerLyokoMixin",
     "retainXP",
     "stopInventoryDrop",
-    "StructyreFeatureAccessor"
+    "StructyreFeatureAccessor",
+
   ],
   "client": [
     "HUD"

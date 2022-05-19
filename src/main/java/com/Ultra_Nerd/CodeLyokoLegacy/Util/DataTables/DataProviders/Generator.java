@@ -1,20 +1,22 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.DataProviders;
 
-//@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
-public final class Generator {
-/*
-    @SubscribeEvent
-    public static void genData(GatherDataEvent event)
-    {
-        final DataGenerator generator = event.getGenerator();
-        CodeLyokoMain.Log.info("gather data");
-        generator.addProvider(new LootTables(generator));
-        generator.addProvider(new CustomBlockTags(generator,event.getExistingFileHelper()));
-        generator.addProvider(new BlockStateSimple(generator,event.getExistingFileHelper()));
-        generator.addProvider(new ItemModelGenerator(generator,event.getExistingFileHelper()));
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.BlockStateSimple;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.CustomBlockTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.CustomItemTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.LootTables;
+import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
+
+public record Generator() implements DataGeneratorEntrypoint {
+    @Override
+    public void onInitializeDataGenerator(final FabricDataGenerator fabricDataGenerator) {
+        fabricDataGenerator.addProvider(LootTables::new);
+        fabricDataGenerator.addProvider(CustomBlockTags::new);
+        fabricDataGenerator.addProvider(CustomRecipeProvider::new);
+        fabricDataGenerator.addProvider(CustomItemTags::new);
+        fabricDataGenerator.addProvider(BlockStateSimple::new);
     }
 
- */
 
 }
