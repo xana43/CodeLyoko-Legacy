@@ -1,6 +1,5 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "tower_interface",
 	"ambientocclusion": true,
 	"texture_size": [32, 32],
 	"textures": {

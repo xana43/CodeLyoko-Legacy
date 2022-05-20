@@ -1,9 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockStateDefinitionProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +21,7 @@ public final class BlockStateSimple extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(final BlockStateModelGenerator blockStateModelGenerator) {
-
+                //blockStateModelGenerator.registerStateWithModelReference(ModBlocks.DIGITAL_LAVA_BLOCK, Blocks.LAVA);
     }
 
     @Override

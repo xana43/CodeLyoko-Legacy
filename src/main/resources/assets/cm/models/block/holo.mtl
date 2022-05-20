@@ -20,5 +20,9 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
+blend_mode TRANSLUCENT
+emission true
+ambient_occlusion false
+diffuse_shading false
 illum 2
 map_Kd cm:block/holo

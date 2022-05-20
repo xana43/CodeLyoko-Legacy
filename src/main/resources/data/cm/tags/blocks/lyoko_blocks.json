@@ -6,7 +6,16 @@
     "cm:digital_rock",
     "cm:digital_dirt",
     "cm:digital_ice",
-    "cm:volcano_ground"
+    "cm:volcano_ground",
+    "cm:tower_top",
+    "cm:tower_white",
+    "cm:tower_blue",
+    "cm:tower_base_corner",
+    "cm:tower_bottom",
+    "cm:tower_interface",
+    "cm:tower_wall_corner",
+    "cm:sector5_steel",
+    "cm:tower_enter"
 
   ]
 }

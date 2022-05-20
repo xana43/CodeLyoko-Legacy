@@ -38,6 +38,8 @@ import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
+import net.fabricmc.fabric.mixin.client.rendering.MixinEntityRenderers;
+import net.fabricmc.fabric.mixin.renderer.client.MixinBakedModel;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DeathScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
@@ -61,6 +63,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -74,6 +77,7 @@ import java.util.UUID;
 
 @Environment(EnvType.CLIENT)
 public record CodeLyokoClient() implements ClientModInitializer {
+
     public static final Identifier PacketID = CodeLyokoMain.CodeLyokoPrefix("spawn_packet");
     //keybinds
     private static KeyBinding classCreenBinding;
@@ -92,7 +96,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
         ));
         //Renderers
-
         BlockEntityRendererRegistry.register(ModTileEntities.LYOKO_CORE, CoreOfLyoko::new);
         registerEntityRenderers();
         receiveEntityPacket();
@@ -223,7 +226,7 @@ if(client.player != null) {
         //for entities that need layer locations
         EntityRendererRegistry.register(ModEntities.OVERBOARD, OverboardRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ModelOverboard.LAYER_LOCATION,ModelOverboard::createBodyLayer);
-
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),ModBlocks.PROJECTOR_FOCUS);
 
 
     }
@@ -272,6 +275,7 @@ if(client.player != null) {
 
     private static void registerItemPredicates()
     {
+
         //makes certain blocks behave properly
         /*
         ItemProperties.register(ModItems.TEST_MULTIPLAYER_PHONE.get(),CodeLyokoMain.CodeLyokoPrefix("message"),

@@ -1,21 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "aia",
-    "hih",
-    "hhh"
+    "c c",
+    "c c",
+    "c c"
   ],
   "key": {
-    "i": {
-      "item": "minecraft:iron_ingot"
-    },
-    "h": {
-      "item": "minecraft:cobweb"
-    },
-    "a": []
+    "c": {
+      "item": "minecraft:copper_ingot"
+    }
   },
   "result": {
-    "item": "cm:trusty_screwdriver"
+    "item": "cm:anodepart"
   },
   "fabric:load_conditions": [
     {

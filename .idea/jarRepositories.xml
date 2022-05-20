@@ -121,5 +121,10 @@
       <option name="name" value="maven4" />
       <option name="url" value="https://maven.florens.be" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="https://raw.githubusercontent.com/Devan-Kerman/Devan-Repo/master/" />
+    </remote-repository>
   </component>
 </project>

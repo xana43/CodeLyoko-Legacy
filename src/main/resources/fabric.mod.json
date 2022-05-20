@@ -18,6 +18,7 @@
 
   "environment": "*",
   "entrypoints": {
+
     "fabric-datagen": [
       "com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.DataProviders.Generator"
     ],

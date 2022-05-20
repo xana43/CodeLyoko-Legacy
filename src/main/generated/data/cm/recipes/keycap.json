@@ -1,18 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "cac",
-    "cac",
-    "cac"
+    "bbb",
+    "bsb",
+    "sss"
   ],
   "key": {
-    "c": {
-      "item": "minecraft:copper_ingot"
+    "b": {
+      "item": "cm:cold_polycarbonate_concentrate"
     },
-    "a": []
+    "s": {
+      "item": "cm:key_spring"
+    }
   },
   "result": {
-    "item": "cm:anodepart"
+    "item": "cm:key_cap"
   },
   "fabric:load_conditions": [
     {

@@ -11,7 +11,7 @@
     "retainXP",
     "stopInventoryDrop",
     "StructyreFeatureAccessor",
-
+    "util.LyokoRarityMixin"
   ],
   "client": [
     "HUD"

@@ -1,11 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -20,15 +23,17 @@ public final class ComputerItem extends Item {
 
 
     @Override
-    public void appendTooltip(final ItemStack stack, @org.jetbrains.annotations.Nullable final World world, final List<Text> tooltip, final TooltipContext context) {
+    public void appendTooltip(final ItemStack stack, @Nullable final World world, final List<Text> tooltip, final TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        if(context.isAdvanced())
+        if(Screen.hasShiftDown())
         {
-            tooltip.add(Text.of("a part for a computer" + "\n" + "there are a bunch of tiers" + "\n" + "the color of the item indicates it's tier"));
+            tooltip.add(new TranslatableText("computer.item.tooltip.shift"));
         }
         else
         {
-            tooltip.add(Text.of("Hold " + "\u00A7e" + "Shift " + "\u00A77" + "For more details"));
+            tooltip.add(new TranslatableText("computer.item.tooltip"));
+
+
 
         }
     }

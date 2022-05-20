@@ -4,11 +4,14 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public final class HologramProjectorBlock extends BlockWithEntity {
-    //public static @NotNull BooleanProperty VALID = BooleanProperty.create("valid");
+    public static @NotNull BooleanProperty VALID = BooleanProperty.of("valid");
 
 
 
@@ -19,8 +22,19 @@ public final class HologramProjectorBlock extends BlockWithEntity {
 
         );
         //this.registerDefaultState(this.defaultBlockState().setValue(VALID, false));
-
+        this.setDefaultState(this.getDefaultState().with(VALID, true));
     }
+
+    @Override
+    public BlockRenderType getRenderType(final BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Override
+    protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder.add(VALID));
+    }
+
 /*
     @Override
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {

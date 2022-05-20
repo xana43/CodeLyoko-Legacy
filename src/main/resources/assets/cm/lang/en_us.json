@@ -1,4 +1,9 @@
+
 {
+
+  "language.name": "English",
+  "language.region": "United States",
+  "language.code": "en_us",
   "_comment": "blocks",
   "block.cm.anodepart": "Anode Part",
   "block.cm.anti_marabunta": "Anti Marabunta",
@@ -276,6 +281,8 @@
     "phone.use.singleplayer": "cannot be used in single player",
   "phone.use.multiplayer": "you sent a distress call",
   "phone.receive": "a distress called sent by",
-  "phone.receve2": "was received"
-
+  "phone.receve2": "was received",
+  "_comment_10": "tooltops",
+  "computer.item.tooltip": "Hold \u00A7e Shift \u00A77For more details",
+  "computer.item.tooltip.shift": "a part for a computer\nthere are a bunch of tiers\nthe color of the item indicates it's tier"
 }

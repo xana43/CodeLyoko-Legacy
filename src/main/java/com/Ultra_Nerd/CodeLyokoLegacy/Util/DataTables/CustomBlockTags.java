@@ -46,6 +46,9 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(
                 ModBlocks.SILICA_SAND
         );
+        getOrCreateTagBuilder(BlockTags.ICE).add(
+                ModBlocks.DIGITAL_ICE
+        );
 
     }
 /*

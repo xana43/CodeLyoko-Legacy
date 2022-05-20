@@ -5,6 +5,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.village.VillageGossipType;
+import net.minecraft.village.VillagerGossips;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,6 +25,7 @@ public abstract class DisableStatusEffectRenderer {
             {
                 if(MethodUtil.DimensionCheck.playerNotInVanillaWorld(mc.player)) {
                     ci.cancel();
+
                 }
             }
         }
