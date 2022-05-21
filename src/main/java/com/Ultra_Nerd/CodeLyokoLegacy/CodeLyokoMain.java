@@ -10,6 +10,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.mixin.StructyreFeatureAccessor;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageBiomeProvider;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
+import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.ModOreGen;
 import io.github.ladysnake.locki.DefaultInventoryNodes;
 import io.github.ladysnake.locki.InventoryLock;
 import io.github.ladysnake.locki.Locki;
@@ -127,8 +128,33 @@ public record CodeLyokoMain() implements ModInitializer {
         ModScreenHandlers.screenHandlerMap.forEach((s, screenHandlerType) -> Registry.register(Registry.SCREEN_HANDLER,CodeLyokoPrefix(s),screenHandlerType));
 
         ModStructures.structmap.forEach((s, structureFeature) -> StructyreFeatureAccessor.callRegister(MOD_ID + ":"+s,structureFeature, GenerationStep.Feature.SURFACE_STRUCTURES));
-        ModFeature.CONFIGURED_TREE_IMMUTABLE_MAP.forEach((configuredFeatureRegistryKey, configuredFeature) -> Registry.register(BuiltinRegistries.CONFIGURED_FEATURE,configuredFeatureRegistryKey.getValue(),configuredFeature));
+        ModFeature.CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s,feature) -> {
+
+            Registry.register(BuiltinRegistries.CONFIGURED_FEATURE,CodeLyokoPrefix(s),feature.getLeft());
+            Registry.register(BuiltinRegistries.PLACED_FEATURE,CodeLyokoPrefix(s),feature.getRight());
+
+
+        });
         ModStats.RegisterStats();
+
+        ModGen.FEATURE_PAIR_MAP.forEach((s, configuredFeaturePlacedFeaturePair) -> {
+
+
+            Registry.register(BuiltinRegistries.CONFIGURED_FEATURE,CodeLyokoPrefix(s),configuredFeaturePlacedFeaturePair.getLeft());
+            Registry.register(BuiltinRegistries.PLACED_FEATURE,CodeLyokoPrefix(s),configuredFeaturePlacedFeaturePair.getRight());
+            BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
+
+                    RegistryKey.of(Registry.PLACED_FEATURE_KEY,CodeLyokoPrefix(s)));
+
+
+
+
+
+
+        });
+
+
+
         ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
 
 

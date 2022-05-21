@@ -8,8 +8,12 @@
     "cm:scanner_frame",
     "cm:scanner_top",
     "cm:tyuyamunite_ore",
-    "cm:chiplet_advanced_block",
     "cm:chiplet_basic_block",
+    "cm:chiplet_advanced_block",
+    "cm:holoprojector",
+    "cm:fluorite_ore",
+    "cm:fluorite_block",
+    "cm:fluoride_infuser",
     "cm:chiplet_franz_block"
   ]
 }

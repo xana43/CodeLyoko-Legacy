@@ -20,14 +20,14 @@ import java.util.Random;
 import java.util.function.Consumer;
 
 public final class CustomRecipeProvider extends FabricRecipeProvider {
-    private static final ConditionJsonProvider NEVER_LOADED = DefaultResourceConditions.allModsLoaded("cm");
-    private static final ConditionJsonProvider ALWAYS_LOADED = DefaultResourceConditions.not(NEVER_LOADED);
+
     public CustomRecipeProvider(final FabricDataGenerator dataGenerator) {
         super(dataGenerator);
     }
     @Override
     protected void generateRecipes(final Consumer<RecipeJsonProvider> exporter) {
-
+        final ConditionJsonProvider NEVER_LOADED = DefaultResourceConditions.allModsLoaded("cm");
+        final ConditionJsonProvider ALWAYS_LOADED = DefaultResourceConditions.not(NEVER_LOADED);
         ShapedRecipeJsonBuilder.create(ModItems.TRUSTTY_SCREWDRIVER).input('i', Items.IRON_INGOT).input('h',Items.COBWEB).criterion("knows_screwdriver", conditionsFromItem(ModItems.TRUSTTY_SCREWDRIVER))
                 .pattern(" i ")
                 .pattern("hih")
@@ -56,6 +56,12 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
         ShapelessRecipeJsonBuilder.create(ModItems.RAW_POLYCARBONATE).input(Items.CLAY_BALL).input(Items.BLACKSTONE).input(Items.AMETHYST_BLOCK).input(Items.GRANITE).input(Items.GRAVEL).input(Items.LAVA_BUCKET).input(Items.HONEY_BLOCK).criterion("knows_polycarbonate",conditionsFromItem(ModItems.SILICON_WAFER)).offerTo(exporter,CodeLyokoMain.CodeLyokoPrefix("polycarbonate"));
         offerBlasting(exporter, List.of(ModItems.RAW_SILICADUST),ModItems.SILICON_WAFER, 38,50,CodeLyokoMain.MOD_ID + "refinement");
         offerBlasting(exporter,List.of(ModItems.RAW_POLYCARBONATE),ModItems.MOLTEN_POLYCARBONATE_CONCENTRATE,78,88,CodeLyokoMain.MOD_ID +"refinement");
+        ShapedRecipeJsonBuilder.create(ModItems.KEY_SPRING).input('i',Items.IRON_INGOT).criterion("knows_key_spring",conditionsFromItem(ModItems.KEY_SPRING))
+                .pattern("iii")
+                .pattern(" i ")
+                .pattern("i i")
+                .offerTo(withConditions(exporter,NEVER_LOADED),CodeLyokoMain.CodeLyokoPrefix("key_spring"));
+
     }
 
 }

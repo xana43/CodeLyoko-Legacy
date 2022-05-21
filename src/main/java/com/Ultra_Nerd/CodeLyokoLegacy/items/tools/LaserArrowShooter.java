@@ -45,7 +45,7 @@ public final class LaserArrowShooter extends BowItem {
         if(!pStack.hasEnchantments())
         {
             pStack.addEnchantment(Enchantments.INFINITY,Enchantments.INFINITY.getMaxLevel());
-
+            pStack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
 
         }
 

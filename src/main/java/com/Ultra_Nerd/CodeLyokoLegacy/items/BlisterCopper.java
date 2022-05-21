@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -57,7 +58,7 @@ public final class BlisterCopper extends Item {
 
                 if(entityIn instanceof PlayerEntity playerEntity)
                 {
-                   // playerEntity.getInventory().setStack(itemSlot, new ItemStack(ModItems.CUPROUS_OXIDE));
+                   playerEntity.getInventory().setStack(itemSlot, new ItemStack(ModItems.CUPROUS_OXIDE));
                 }
 
 

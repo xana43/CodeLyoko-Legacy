@@ -1,76 +1,72 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.tools;
 
-import net.minecraft.item.SwordItem;
-import net.minecraft.item.ToolMaterial;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.block.entity.ShulkerBoxBlockEntity;
+import net.minecraft.client.render.entity.model.ShieldEntityModel;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.UseAction;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public final class ZweihanderWeapon extends SwordItem {
-    public ZweihanderWeapon(final ToolMaterial toolMaterial, final int attackDamage, final float attackSpeed, final Settings settings) {
-        super(toolMaterial, attackDamage, attackSpeed, settings);
-    }
-    // private final float attackdamage;
-    //private final float attackspeed;
-/*
-    public ZweihanderWeapon(@NotNull Tier tier, int attackDamageIn, float attackSpeedIn, @NotNull Properties builder) {
+
+     private final float attackdamage;
+    private final float attackspeed;
+
+    public ZweihanderWeapon(final @NotNull ToolMaterial tier, int attackDamageIn, float attackSpeedIn, final @NotNull Settings builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);
         this.attackspeed = attackSpeedIn;
-        this.attackdamage = (float) attackDamageIn + tier.getAttackDamageBonus();
+        this.attackdamage = (float) attackDamageIn + tier.getAttackDamage();
 
     }
 
 
-
     @Override
-    public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
-        return true;
-    }
-
-
-    @Override
-    public boolean onDroppedByPlayer(final ItemStack item, final Player player) {
-        return false;
-    }
-
-
-    @Override
-    public boolean onLeftClickEntity(@NotNull ItemStack stack, @NotNull Player player, @NotNull Entity entity) {
-
-            final Vec3 aim = player.getLookAngle();
-            final Vec3 entityDmovement = entity.getDeltaMovement();
-            //stack.setDamageValue(stack.getDamageValue() + 200);
-            entity.setDeltaMovement(entityDmovement.x + aim.x, entityDmovement.y + aim.y,entityDmovement.z + aim.z);
-
-
-
-
-        return true;
-
+    public UseAction getUseAction(final ItemStack stack) {
+        return UseAction.BLOCK;
     }
 
     @Override
-    public boolean isFoil(ItemStack pStack) {
+    public boolean hasGlint(final ItemStack stack) {
         return false;
     }
 
     @Override
-    public boolean isDamageable(ItemStack stack) {
+    public boolean isDamageable() {
         return false;
     }
 
     @Override
-    public void inventoryTick(@NotNull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(@NotNull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
 
 
-        if (entityIn instanceof Player player) {
-            final ItemStack IStack = player.getItemInHand(InteractionHand.OFF_HAND);
-            if (IStack.getItem() == ModItems.ZWEIHANDER.get()) {
+        if (entityIn instanceof PlayerEntity player) {
+            final ItemStack IStack = player.getStackInHand(Hand.OFF_HAND);
+            if (IStack.getItem() == ModItems.ZWEIHANDER) {
 
-                player.getInventory().add(player.getInventory().getFreeSlot(), IStack);
+                player.getInventory().setStack(player.getInventory().getEmptySlot(), IStack);
             }
 
         }
-        if (!stack.isEnchanted()) {
-            stack.enchant(Enchantments.SWEEPING_EDGE, Enchantments.SWEEPING_EDGE.getMaxLevel());
-            stack.enchant(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());
+        if (!stack.hasEnchantments()) {
+            stack.addEnchantment(Enchantments.SWEEPING, Enchantments.SWEEPING.getMaxLevel());
+            stack.addEnchantment(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());
+            stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
             //stack.getEnchantmentTags().clear();
 
         }
@@ -78,22 +74,19 @@ public final class ZweihanderWeapon extends SwordItem {
 
 
     @Override
-    public int getDefaultTooltipHideFlags(@NotNull final ItemStack stack) {
-        return ItemStack.TooltipPart.ENCHANTMENTS.getMask();
-    }
-
-    @Override
-    public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        Multimap<Attribute,AttributeModifier> multimap = HashMultimap.create();
+    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(final ItemStack stack, final EquipmentSlot slot) {
+        final Multimap<EntityAttribute,EntityAttributeModifier> multimap = HashMultimap.create();
 
         if (slot == EquipmentSlot.MAINHAND) {
-            multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackdamage, AttributeModifier.Operation.ADDITION));
-            multimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier",  this.attackspeed, AttributeModifier.Operation.ADDITION));
+            multimap.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID ,"Weapon modifier", this.attackdamage, EntityAttributeModifier.Operation.ADDITION));
+            multimap.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier",  this.attackspeed, EntityAttributeModifier.Operation.ADDITION));
+            multimap.put(EntityAttributes.GENERIC_ATTACK_KNOCKBACK,new EntityAttributeModifier("Zweihander Knockback",this.attackdamage / 16, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
         }
         return multimap;
 
-
     }
 
- */
+
+
+
 }

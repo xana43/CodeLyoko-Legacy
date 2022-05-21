@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
@@ -27,7 +28,7 @@ public final class ComputerItem extends Item {
         super.appendTooltip(stack, world, tooltip, context);
         if(Screen.hasShiftDown())
         {
-            tooltip.add(new TranslatableText("computer.item.tooltip.shift"));
+            tooltip.add(new TranslatableText("computer.item.tooltip.shift").setStyle(ConstantUtil.HUD));
         }
         else
         {

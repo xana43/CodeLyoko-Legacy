@@ -3,16 +3,28 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Blocks;
+import net.minecraft.predicate.block.BlockStatePredicate;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.heightprovider.HeightProvider;
+import net.minecraft.world.gen.heightprovider.HeightProviderType;
+import net.minecraft.world.gen.placementmodifier.CountPlacementModifier;
+import net.minecraft.world.gen.placementmodifier.HeightRangePlacementModifier;
+import net.minecraft.world.gen.placementmodifier.HeightmapPlacementModifier;
+import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
+
+import java.util.Arrays;
 
 public record ModFeature() {
 
@@ -22,16 +34,14 @@ public record ModFeature() {
             BlockStateProvider.of(Blocks.AIR),
             new BlobFoliagePlacer(ConstantIntProvider.create(2),ConstantIntProvider.create(4),1),
             new TwoLayersFeatureSize(1,0,1)
-    );
+    ).dirtProvider(BlockStateProvider.of(ModBlocks.DIGITAL_WOOD_FOREST));
     private static final ConfiguredFeature<?,?> FOREST_TREE = new ConfiguredFeature<>(Feature.TREE, FOREST_TREE_CONFIG.build());
-    private static final RegistryKey<ConfiguredFeature<?, ?>> FOREST_ENTRY_CONFIGURED = getRegistryKey(CodeLyokoMain.CodeLyokoPrefix("lyoko_forest_tree"));
-
-    private static RegistryKey<ConfiguredFeature<?,?>> getRegistryKey(final Identifier identifier)
-    {
-        return RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY,identifier);
-    }
-    public static final ImmutableMap<RegistryKey<ConfiguredFeature<?,?>>, ConfiguredFeature<?,?>> CONFIGURED_TREE_IMMUTABLE_MAP = ImmutableMap.<RegistryKey<ConfiguredFeature<?,?>>, ConfiguredFeature<?,?>>builder()
-            .put(FOREST_ENTRY_CONFIGURED,FOREST_TREE)
+    public static final PlacedFeature FOREST_TREE_PLACED = new PlacedFeature(
+            RegistryEntry.of(FOREST_TREE),
+            Arrays.asList(CountPlacementModifier.of(5), SquarePlacementModifier.of(),HeightRangePlacementModifier.uniform(YOffset.TOP,YOffset.TOP))
+    );
+    public static final ImmutableMap<String, Pair<ConfiguredFeature<?,?>, PlacedFeature>> CONFIGURED_TREE_IMMUTABLE_MAP = ImmutableMap.<String,Pair<ConfiguredFeature<?,?>, PlacedFeature>>builder()
+            .put("lyoko_forest_tree",new Pair<>(FOREST_TREE,FOREST_TREE_PLACED))
 
             .build();
 /*

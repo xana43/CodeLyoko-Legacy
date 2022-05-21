@@ -1,6 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.tools;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.TridentItem;
+import net.minecraft.util.UseAction;
 import org.jetbrains.annotations.NotNull;
 
 public final class YumiFans extends TridentItem {
@@ -11,6 +13,11 @@ public final class YumiFans extends TridentItem {
         super(builder);
 
 
+    }
+
+    @Override
+    public UseAction getUseAction(final ItemStack stack) {
+        return UseAction.SPEAR;
     }
 
     @Override

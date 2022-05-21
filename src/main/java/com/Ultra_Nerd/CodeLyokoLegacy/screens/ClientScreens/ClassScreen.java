@@ -146,12 +146,12 @@ private static void save(MinecraftClient client){
                 if(client.player.getServer() != null && !Objects.requireNonNull(client.getServer()).isSingleplayer())
                 {
                     client.player.getServer().save(false,false,false);
-                    CodeLyokoMain.LOG.info("Saving Server");
+                    //CodeLyokoMain.LOG.info("Saving Server");
                 }
                 else if(client.getServer() != null && client.getServer().isSingleplayer())
                 {
                     client.getServer().save(false,false,false);
-                    CodeLyokoMain.LOG.info("saving client");
+                    //CodeLyokoMain.LOG.info("saving client");
                 }
             }
 

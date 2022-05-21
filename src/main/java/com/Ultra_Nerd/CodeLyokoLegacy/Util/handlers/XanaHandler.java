@@ -21,6 +21,7 @@ public record XanaHandler() {
     public static void setProperties(final WorldProperties wproperties)
     {
         properties = wproperties;
+        setDangerLevelFromSave();
     }
     public static int getDangerLevel()
     {

@@ -34,7 +34,7 @@ public record ModBiome() {
 
             final GenerationSettings.Builder forestGensettings = new GenerationSettings.Builder();
            // CodeLyokoMain.LOG.info(String.valueOf(ModFeature.FOREST_ENTRY_PLACED));
-           // forestGensettings.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModFeature.FOREST_ENTRY_PLACED);
+           forestGensettings.feature(GenerationStep.Feature.VEGETAL_DECORATION, RegistryEntry.of(ModFeature.FOREST_TREE_PLACED));
             return (new Biome.Builder())
                     .category(Biome.Category.FOREST)
                     .precipitation(Biome.Precipitation.NONE)

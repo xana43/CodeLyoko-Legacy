@@ -19,6 +19,8 @@ public  final class CustomItemTags extends FabricTagProvider.ItemTagProvider/*ex
     protected void generateTags() {
         getOrCreateTagBuilder(ItemTags.IRON_ORES).add(ModBlocks.BORNITE_ORE.asItem());
         getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.ITEM_MAP.get("lyokodisc"));
+        getOrCreateTagBuilder(ItemTags.SAND).add(ModBlocks.SILICA_SAND.asItem());
+
 
 
     }
