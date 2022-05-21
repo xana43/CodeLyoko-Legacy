@@ -29,6 +29,8 @@ import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.LevelLoadingScreen;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -37,7 +39,10 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.NetworkState;
 import net.minecraft.scoreboard.ScoreboardCriterion;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stat;
 import net.minecraft.stat.StatFormatter;
@@ -137,23 +142,9 @@ public record CodeLyokoMain() implements ModInitializer {
         });
         ModStats.RegisterStats();
 
-        ModGen.FEATURE_PAIR_MAP.forEach((s, configuredFeaturePlacedFeaturePair) -> {
 
 
-            Registry.register(BuiltinRegistries.CONFIGURED_FEATURE,CodeLyokoPrefix(s),configuredFeaturePlacedFeaturePair.getLeft());
-            Registry.register(BuiltinRegistries.PLACED_FEATURE,CodeLyokoPrefix(s),configuredFeaturePlacedFeaturePair.getRight());
-            BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
-
-                    RegistryKey.of(Registry.PLACED_FEATURE_KEY,CodeLyokoPrefix(s)));
-
-
-
-
-
-
-        });
-
-
+BiomeFeatureInject();
 
         ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
 
@@ -172,7 +163,10 @@ public record CodeLyokoMain() implements ModInitializer {
 
     }
 
-
+    private static void BiomeFeatureInject()
+    {
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,RegistryKey.of(Registry.PLACED_FEATURE_KEY,CodeLyokoPrefix("coffinite_ore_overworld")));
+    }
     private static void registerDefaultAttributes()
     {
         //FabricDefaultAttributeRegistry.register(ModEntities.BLOK, EntityBlok.createMonsterAttributes());
@@ -186,7 +180,7 @@ public record CodeLyokoMain() implements ModInitializer {
         ServerWorldEvents.LOAD.register((server, world) -> XanaHandler.setProperties(world.getLevelProperties()));
         //saves and loats the inventoryfor both respawn and joining
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
-            if(MethodUtil.DimensionCheck.playerNotInVanillaWorld(newPlayer)) {
+            if(MethodUtil.DimensionCheck.playerInVanilla(newPlayer)) {
                 CardinalData.LyokoInventorySave.loadPlayerInventory(newPlayer.server.getSaveProperties().getMainWorldProperties(),newPlayer);
             }
 

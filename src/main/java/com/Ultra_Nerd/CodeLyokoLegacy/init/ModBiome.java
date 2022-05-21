@@ -4,12 +4,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.sound.MusicSound;
-import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.Weighted;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
@@ -34,7 +30,7 @@ public record ModBiome() {
 
             final GenerationSettings.Builder forestGensettings = new GenerationSettings.Builder();
            // CodeLyokoMain.LOG.info(String.valueOf(ModFeature.FOREST_ENTRY_PLACED));
-           forestGensettings.feature(GenerationStep.Feature.VEGETAL_DECORATION, RegistryEntry.of(ModFeature.FOREST_TREE_PLACED));
+           forestGensettings.feature(GenerationStep.Feature.VEGETAL_DECORATION, RegistryEntry.of(ModFeature.PlacedFeatures.FOREST_TREE_PLACED));
             return (new Biome.Builder())
                     .category(Biome.Category.FOREST)
                     .precipitation(Biome.Precipitation.NONE)
