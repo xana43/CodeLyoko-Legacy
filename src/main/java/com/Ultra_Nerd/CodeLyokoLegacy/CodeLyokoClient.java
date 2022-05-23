@@ -20,6 +20,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoRingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.ComputerControlPanelUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TowerGUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
@@ -34,6 +35,8 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
+import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -62,6 +65,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.screen.PlayerScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.screen.ScreenHandlerSyncHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Vec3d;
@@ -95,12 +100,15 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
 
         ));
+
         //Renderers
         BlockEntityRendererRegistry.register(ModTileEntities.LYOKO_CORE, CoreOfLyoko::new);
         registerEntityRenderers();
         receiveEntityPacket();
         FluidRenderRegistry();
         HandledScreens.register(ModScreenHandlers.TOWER_INTERFACE_SCREEN_HANDLER, TowerGUI::new);
+        HandledScreens.register(ModScreenHandlers.CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE, ComputerControlPanelUI::new);
+
         //Custom Sprites
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
             registry.register(CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing"));
@@ -226,7 +234,7 @@ if(client.player != null) {
         //for entities that need layer locations
         EntityRendererRegistry.register(ModEntities.OVERBOARD, OverboardRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ModelOverboard.LAYER_LOCATION,ModelOverboard::createBodyLayer);
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),ModBlocks.PROJECTOR_FOCUS);
+
 
 
     }
@@ -266,9 +274,11 @@ if(client.player != null) {
                 CodeLyokoMain.CodeLyokoPrefix("block/liquid_helium_flow"),
                 CodeLyokoMain.CodeLyokoPrefix("block/liquid_helium_still")
         ));
-        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(),ModFluids.STILL_DIGITAL_OCEAN,ModFluids.FLOWING_DIGITAL_OCEAN);
-        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(),ModFluids.STILL_LIQUID_HELIUM,ModFluids.FLOWING_LIQUID_HELIUM);
+
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(),ModFluids.STILL_LIQUID_HELIUM,ModFluids.FLOWING_LIQUID_HELIUM,ModFluids.STILL_DIGITAL_OCEAN,ModFluids.FLOWING_DIGITAL_OCEAN);
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(),ModFluids.FLOWING_DIGITAL_LAVA,ModFluids.STILL_DIGITAL_LAVA);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),ModBlocks.FALSE_WATER,ModBlocks.CHIPLET_FRANZ_BLOCK,ModBlocks.PROJECTOR_FOCUS);
+
 
 
     }

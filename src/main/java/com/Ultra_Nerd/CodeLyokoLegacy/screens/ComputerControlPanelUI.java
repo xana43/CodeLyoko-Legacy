@@ -1,28 +1,42 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 
-public final class ComputerControlPanelUI /*extends AbstractContainerScreen<ComputerControlPanelContainer>*/ {
-/*
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.gui.widget.TexturedButtonWidget;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.ColorHelper;
+import net.minecraft.util.math.MathHelper;
+import org.jetbrains.annotations.NotNull;
 
-    private static final ResourceLocation TEXTURES = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/computercontrolpanelui.png");
-    private static final ResourceLocation BUTTONTEXTURES = new ResourceLocation(CodeLyokoMain.MOD_ID, "textures/gui/buttonatlas.png");
-    private EditBox text;
-    private Button button;
+public final class ComputerControlPanelUI extends HandledScreen<ComputerControlPanelScreenHandler> /*extends AbstractContainerScreen<ComputerControlPanelScreenHandler>*/ {
+
+    private static final int size  = 256;
+    private static final Identifier TEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/computercontrolpanelui.png");
+    private static final Identifier BUTTONTEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/buttonatlas.png");
+    private TextFieldWidget text;
+    private TexturedButtonWidget button;
     private boolean CompActive;
-    private final Font gunship_font = new Font(resourceLocation -> new FontSet(getMinecraft().textureManager, CodeLyokoMain.CodeLyokoPrefix("gunship")));
+
 
     int x, y;
 
+    public ComputerControlPanelUI(final ComputerControlPanelScreenHandler handler, final PlayerInventory inventory, final Text title) {
+        super(handler, inventory, title);
+       playerInventoryTitleX = - 900;
 
-    public ComputerControlPanelUI(@NotNull ComputerControlPanelContainer screenContainer, @NotNull Inventory inv, @NotNull Component titleIn) {
-        super(screenContainer, inv, titleIn);
-
-        this.inventoryLabelX = -90;
-        this.inventoryLabelY = -90;
 
 
     }
-
 
 
     @Override
@@ -36,24 +50,21 @@ public final class ComputerControlPanelUI /*extends AbstractContainerScreen<Comp
     }
 
 
-    @Override
-    public void setFocused(@Nullable GuiEventListener p_setFocused_1_) {
-        super.setFocused(p_setFocused_1_);
-    }
-
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
+        this.button.mouseClicked(mouseX, mouseY, mouseButton);
         return super.mouseClicked(mouseX, mouseY, mouseButton);
 
     }
 
     @Override
-    public void render(@NotNull PoseStack stack, int p_render_1_, int p_render_2_, float p_render_3_) {
+    public void render(@NotNull MatrixStack stack, int p_render_1_, int p_render_2_, float p_render_3_) {
         this.renderBackground(stack);
         super.render(stack,p_render_1_, p_render_2_, p_render_3_);
         this.text.render(stack,p_render_1_, p_render_2_, p_render_3_);
-        this.button.renderButton(stack,p_render_1_, p_render_2_, p_render_3_);
+        this.button.render(stack,p_render_1_, p_render_2_, p_render_3_);
+        drawCenteredText(stack,textRenderer,String.valueOf(handler.getPropertyVal()),this.width >> 1, this.height >> 1, Formatting.WHITE.getColorIndex());
     }
 
 
@@ -62,111 +73,108 @@ public final class ComputerControlPanelUI /*extends AbstractContainerScreen<Comp
     @Override
     public void init() {
         super.init();
-        x = (this.width - this.getXSize()) >> 1;
-        y = (this.height - this.getYSize()) >> 1;
+
+        CompActive = handler.getPropertyVal() == 1;
+
+        x = (this.width - size) >> 1;
+        y = (this.height - (size >> 1)) >> 1;
         this.setTextField();
         this.setButtons();
 
     }
 
     @Override
-    public boolean isPauseScreen() {
+    public boolean shouldPause() {
         return false;
     }
 
-
     private void setButtons() {
 
-
-        this.button = new Button(x, y, this.width / 3, this.height >> 3, new TranslatableComponent("activate"),Button::onPress) {
+        //
+        this.button = new TexturedButtonWidget(x, y, this.width / 3, this.height >> 3,0,0,BUTTONTEXTURES, (press)-> {
+            CompActive = !CompActive;
+            handler.setProperty(0,CompActive? 1:0);
+        })
+            {
             @Override
-            protected int getYImage(boolean p_getYImage_1_) {
-                return super.getYImage(p_getYImage_1_);
-
-            }
-
-            @Override
-            public void onPress() {
-               //super.onPress();
-                CompActive = !CompActive;
-                if (!CompActive) {
-
-
-                    minecraft.player.playSound(ModSounds.QUANTUMZAP.get(), 1, 1);
-
-                } else {
-
-                    minecraft.player.playSound(ModSounds.QUANTUMZAP.get(), 1, 1);
-
-                }
-            }
-
-
-
-
-            @Override
-            public void renderButton(PoseStack stack, int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
+            public void renderButton(MatrixStack stack, int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
                 //super.renderButton(p_renderButton_1_, p_renderButton_2_, p_renderButton_3_);
-                int i = getYImage(isHovered);
+                final int i = getYImage(hovered);
+
 
                 RenderSystem.setShaderTexture(0,BUTTONTEXTURES);
+                int j = 0;
+                if(this.getMessage().getStyle().getColor() != null) {
+                    j = this.getMessage().getStyle().getColor().getRgb();
+                }
+                if(i == 1) {
+                    j = ColorHelper.Argb.getArgb(255,0,0,255);
+                    drawTexture(stack, x, y, 0, 0, 104, 19,1024,512);
+                }
+                else {
+                    drawTexture(stack, x, y, 0, 19, 104, 19,1024,512);
+                }
+                //drawTexture(stack,x, 38, 0, (46 + i) * 20, width >> 1, height);
+                drawCenteredText(stack,client.textRenderer, getMessage().shallowCopy().setStyle(ConstantUtil.HUD), x +( width +55)>> 1, y + (height + 32) >> 1, j | MathHelper.ceil(alpha * 255.0F) << 24);
 
-
-
-                int j = getFGColor();
-                drawCenteredString(stack,gunship_font, getMessage(), (x + width )>> 1, y + (height - 8) >> 1, j | Mth.ceil(alpha * 255.0F) << 24);
-                blit(stack,x, y, 0, (37 + i) << 1, 103, 37);
-                blit(stack,x, 38, 0, (46 + i) * 20, width >> 1, height);
 
             }
 
         };
         this.button.active = true;
-        this.addWidget(this.button);
+        this.addDrawable(this.button);
         this.button.visible = true;
 
 
     }
+
     @Override
-    public void containerTick() {
-        super.containerTick();
+    protected void handledScreenTick() {
+        super.handledScreenTick();
         if (CompActive) {
-            this.button.setMessage(new TranslatableComponent("de-activate"));
+            this.button.setMessage(new TranslatableText("de-activate"));
         } else {
-            this.button.setMessage(new TranslatableComponent("activate"));
+            this.button.setMessage(new TranslatableText("activate"));
         }
 
         if (CompActive) {
-            this.text.setMessage(new TranslatableComponent("Active"));
-            this.text.setTextColor(0x008000);
+            this.text.setMessage(new TranslatableText("Active"));
+            this.text.setEditableColor(0x008000);
         } else {
-            this.text.setMessage(new TranslatableComponent("in-active"));
-            this.text.setTextColor(0xda2c43);
+            this.text.setMessage(new TranslatableText("in-active"));
+            this.text.setEditableColor(0xda2c43);
         }
     }
+
+
 
     private void setTextField() {
         final int tx = this.width >> 1;
         final int ty = this.height >> 1;
-        this.text = new EditBox(gunship_font, x, ty + 40, this.width, 23, new TranslatableComponent("gui.cm.computer_input_main"));
-        this.text.setBordered(false);
+        this.text = new TextFieldWidget(client.textRenderer, x, ty + 40, this.width, 23, new TranslatableText("gui.cm.computer_input_main").setStyle(ConstantUtil.GUNSHIP));
+        this.text.setDrawsBackground(false);
         this.text.setVisible(true);
-        this.text.setTextColor(0xda2c43);
-        this.text.setMessage(new TranslatableComponent("in-active"));
+        this.text.setEditableColor(0xda2c43);
+        this.text.setMessage(new TranslatableText("gui.cm.inactive"));
         this.text.setEditable(false);
 
 
     }
+
     @Override
-    protected void renderBg(@NotNull PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
+    protected void drawBackground(final MatrixStack matrices, final float delta, final int mouseX, final int mouseY) {
         RenderSystem.setShaderTexture(0,TEXTURES);
-        this.blit(pPoseStack,x, y, 0, 0, this.getXSize(), this.getYSize());
+        this.drawTexture(matrices,x, y, 0, 0, size, size >> 1);
         if (CompActive) {
-            this.blit(pPoseStack,x, y + 15, 0, 144, this.getXSize(), this.getYSize() - 35);
+            this.drawTexture(matrices,x, y + 19, 0, 144, size, (size>>1) - 35);
         }
     }
 
- */
+
+
+
+
+
 
 
 

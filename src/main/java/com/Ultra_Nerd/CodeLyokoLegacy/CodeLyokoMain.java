@@ -2,12 +2,14 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.mixin.StructyreFeatureAccessor;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.ComputerControlPanelUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageBiomeProvider;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.ModOreGen;
@@ -18,6 +20,8 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.client.networking.v1.C2SPlayChannelEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
@@ -27,10 +31,19 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.network.PacketContext;
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.networking.v1.S2CPlayChannelEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.impl.networking.ServerSidePacketRegistryImpl;
+import net.fabricmc.fabric.impl.networking.server.ServerPlayNetworkAddon;
+import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.LevelLoadingScreen;
+import net.minecraft.client.gui.screen.ingame.AbstractFurnaceScreen;
+import net.minecraft.client.gui.screen.ingame.LecternScreen;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -40,9 +53,11 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.NetworkState;
+import net.minecraft.network.listener.ServerPlayPacketListener;
 import net.minecraft.scoreboard.ScoreboardCriterion;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stat;
 import net.minecraft.stat.StatFormatter;
@@ -62,6 +77,8 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
 import org.apache.commons.logging.Log;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
@@ -82,9 +99,10 @@ public record CodeLyokoMain() implements ModInitializer {
     public static final ItemGroup LYOKO_BLOCKS = FabricItemGroupBuilder.build(new Identifier(MOD_ID,"lyoko_blocks"), () -> new ItemStack(ModBlocks.TOWER_INTERFACE));
     public static final ItemGroup LYOKO_ARMOR = FabricItemGroupBuilder.build(CodeLyokoPrefix("lyoko_armor"), ()->new ItemStack(ModItems.WILLIAM_CHESTPLATE));
     public static final ItemGroup LYOKO_WEAPONS = FabricItemGroupBuilder.build(CodeLyokoPrefix("lyoko_weapons"),() -> new ItemStack(ModItems.LASER_ARROWSHOOTER));
+    public static final Identifier COMPUTER_PANEL_TAG = CodeLyokoPrefix("control_panel_tag");
 
-
-    public static Identifier CodeLyokoPrefix(String name)
+    @Contract("_ -> new")
+    public static @NotNull Identifier CodeLyokoPrefix(String name)
     {
         return new Identifier(MOD_ID,name);
     }
@@ -162,6 +180,8 @@ BiomeFeatureInject();
         ,ModItems.STORY_BOOK,ModItems.STORY_BOOK2);
 
     }
+
+
 
     private static void BiomeFeatureInject()
     {

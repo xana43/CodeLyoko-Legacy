@@ -1,9 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LyokoCoreBE;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.TowerInterfaceTileEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.UniversalEnergyStorageTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.*;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
@@ -33,13 +30,14 @@ public static final BlockEntityType<ScannerTileEntity> SCANNER_TILE_ENTITY = Fab
 
     public static final BlockEntityType<LyokoCoreBE> LYOKO_CORE = FabricBlockEntityTypeBuilder.create(LyokoCoreBE::new,ModBlocks.LYOKO_CORE).build();
     public static final BlockEntityType<TowerInterfaceTileEntity> TOWER_INTERFACE_TILE_ENTITY = FabricBlockEntityTypeBuilder.create(TowerInterfaceTileEntity::new,ModBlocks.TOWER_INTERFACE).build();
-
+    public static final BlockEntityType<ComputerControlPanelTileEntity> COMPUTER_CONTROL_PANEL = FabricBlockEntityTypeBuilder.create(ComputerControlPanelTileEntity::new,ModBlocks.COMPUTER_TOWER_CONTROL_PANEL).build();
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String,BlockEntityType<?>>builder()
 
             .put("lyoko_core",LYOKO_CORE)
             .put("tower_interface_tile_entity",TOWER_INTERFACE_TILE_ENTITY)
             .put("scanner_tile_entity",SCANNER_TILE_ENTITY)
             .put("universal_energy_tile_entity",UNIVERSAL_ENERGY_STORAGE)
+            .put("computer_control_panel_tile_entity",COMPUTER_CONTROL_PANEL)
             .build();
 
   //
@@ -62,7 +60,7 @@ public static final BlockEntityType<ScannerTileEntity> SCANNER_TILE_ENTITY = Fab
                     , ModBlocks.ELECTROPLATING_MACHINE.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<ComputerControlPanelTileEntity>> COMPUTER_CONTROL_PANEL_TILE_ENTITY =
-            TILE_ENTITY_TYPES.register("computer_control_panel_tile_entity", () -> BlockEntityType.Builder.of(ComputerControlPanelTileEntity::new
+            TILE_ENTITY_TYPES.register(, () -> BlockEntityType.Builder.of(ComputerControlPanelTileEntity::new
                     , ModBlocks.COMPUTER_TOWER_CONTROL_PANEL.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<CableTileEntity>> CABLE_TILE_ENTITY = TILE_ENTITY_TYPES.register(

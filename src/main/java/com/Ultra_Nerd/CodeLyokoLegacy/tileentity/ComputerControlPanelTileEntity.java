@@ -1,124 +1,105 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.InventoryProvider;
+import net.minecraft.block.FurnaceBlock;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.FurnaceBlockEntity;
+import net.minecraft.client.gui.screen.ingame.LecternScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SidedInventory;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.Packet;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.server.network.ServerQueryNetworkHandler;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
-import org.jetbrains.annotations.Nullable;
+import org.apache.commons.lang3.BooleanUtils;
+import org.jetbrains.annotations.NotNull;
 
 public final class ComputerControlPanelTileEntity extends BlockEntity implements NamedScreenHandlerFactory {
-    public ComputerControlPanelTileEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state) {
-        super(type, pos, state);
+    public ComputerControlPanelTileEntity( final BlockPos pos, final BlockState state) {
+        super(ModTileEntities.COMPUTER_CONTROL_PANEL, pos, state);
+
     }
 
+private final PropertyDelegate propertyDelegate =  new PropertyDelegate() {
+    @Override
+    public int get(final int index) {
+
+        //CodeLyokoMain.LOG.info("active = " + activebool);
+        return ComputerControlPanelTileEntity.this.activebool? 1:0;
+
+
+    }
+
+    @Override
+    public void set(final int index, final int value) {
+
+if(index == 0) {
+    activebool = value==1;
+    markDirty();
+    CodeLyokoMain.LOG.info("setData");
+}
+
+    }
+    @Override
+    public int size() {
+        return 1;
+    }
+};
 
 
 
+    private  boolean activebool;
     @Override
     public Text getDisplayName() {
-        return null;
+        return LiteralText.EMPTY;
     }
-
-    @Nullable
-    @Override
-    public ScreenHandler createMenu(final int syncId, final PlayerInventory inv, final PlayerEntity player) {
-        return null;
+    public boolean getActive()
+    {
+        return activebool;
     }
-/*
-    // May be accessed before onLoad
-    @OnlyIn(Dist.CLIENT)
-    private int PlayersPresent;
-
-    public ComputerControlPanelTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        super(ModTileEntities.COMPUTER_CONTROL_PANEL_TILE_ENTITY.get(),pos,state);
-    }
-/*
-    public ComputerControlPanelTileEntity() {
-        this(ModTileEntities.COMPUTER_CONTROL_PANEL_TILE_ENTITY.get());
-    }*/
-
-/*
-
 
     @Override
-    public @NotNull AABB getRenderBoundingBox() {
-        // This, combined with isGlobalRenderer in the TileEntityRenderer makes it so that the
-        // render does not disappear if the player can't see the blocks
-        // This is useful for rendering larger models or dynamically sized models
-        return INFINITE_EXTENT_AABB;
+    public @NotNull Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
     }
 
 
     @Override
-    public void onDataPacket(Connection net, @NotNull ClientboundBlockEntityDataPacket pkt) {
-        CompoundTag tag = pkt.getTag();
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
     }
 
     @Override
-    public @NotNull CompoundTag getTileData() {
-        return super.getTileData();
+    protected void writeNbt(final NbtCompound nbt) {
+        nbt.putBoolean("computer_active",activebool);
+        super.writeNbt(nbt);
     }
-
 
     @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        CompoundTag nbtTag = new CompoundTag();
-        return super.getUpdatePacket();//new ClientGamePacketListener(getBlockPos(), -1, nbtTag);
+    public void readNbt(final NbtCompound nbt) {
+        activebool = nbt.getBoolean("computer_active");
+        super.readNbt(nbt);
     }
-
-
-
-
-    /**
-     * @return display name of the interface
-     */
-    /*
-    @Nonnull
-    @Override
-    public Component getDisplayName() {
-        return new TranslatableComponent(ModBlocks.COMPUTER_TOWER_CONTROL_PANEL.get().getName().toString());
-    }
-
-    /**
-     * Create a containder from interfaceTileEntity
-     *
-     * @param windowIn     Id of GUI
-     * @param playerInv    Inventory of interacting player
-     * @param playerEntity PlayerEntity of interacting player
-     * @return Gui container
-     */
-    /*
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int windowIn, @Nonnull Inventory playerInv, @Nonnull Player playerEntity) {
-        return new ComputerControlPanelContainer(windowIn, playerInv, this);
-    }
-
 
     @Override
-    public boolean triggerEvent(int id, int type) {
-        if (id == 1) {
-            this.PlayersPresent = type;
-            return true;
-        } else {
-            return super.triggerEvent(id, type);
-        }
+    public @NotNull ScreenHandler createMenu(final int syncId, final PlayerInventory inv, final PlayerEntity player) {
+        //LecternScreen
+
+        return new ComputerControlPanelScreenHandler(syncId, this.propertyDelegate);
     }
 
 
-    @Override
-    public SidedInventory getInventory(final BlockState state, final WorldAccess world, final BlockPos pos) {
-        return null;
-    }
 
-     */
 }

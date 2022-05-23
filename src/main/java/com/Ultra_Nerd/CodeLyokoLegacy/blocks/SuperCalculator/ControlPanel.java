@@ -1,19 +1,34 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerControlPanelTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerCoreTileEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.client.gui.screen.ingame.BeaconScreen;
+import net.minecraft.client.gui.screen.ingame.JigsawBlockScreen;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.screen.BeaconScreenHandler;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.function.BooleanBiFunction;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
@@ -24,7 +39,7 @@ public final class ControlPanel extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return null;
+        return ModTileEntities.COMPUTER_CONTROL_PANEL.instantiate(pos, state);
     }
 
     public static final DirectionProperty PANEL = HorizontalFacingBlock.FACING;
@@ -199,9 +214,24 @@ public final class ControlPanel extends BlockWithEntity {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(PANEL,ctx.getPlayerLookDirection().getOpposite());
+        return this.getDefaultState().with(PANEL,ctx.getPlayerFacing().getOpposite());
     }
 
+    @Override
+    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+        if(!world.isClient)
+        {
+            final NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+            if(screenHandlerFactory != null)
+            {
+                player.openHandledScreen(screenHandlerFactory);
+
+
+            }
+
+        }
+        return ActionResult.SUCCESS;
+    }
 
 
 
