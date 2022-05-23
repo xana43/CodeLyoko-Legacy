@@ -4,12 +4,23 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerControlPanelTileEntity;
 import com.mojang.blaze3d.systems.RenderSystem;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientBlockEntityEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerBlockEntityEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
@@ -74,7 +85,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     public void init() {
         super.init();
 
-        CompActive = handler.getPropertyVal() == 1;
+
 
         x = (this.width - size) >> 1;
         y = (this.height - (size >> 1)) >> 1;
@@ -88,18 +99,24 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         return false;
     }
 
+
     private void setButtons() {
 
         //
         this.button = new TexturedButtonWidget(x, y, this.width / 3, this.height >> 3,0,0,BUTTONTEXTURES, (press)-> {
             CompActive = !CompActive;
             handler.setProperty(0,CompActive? 1:0);
+            final PacketByteBuf buff = PacketByteBufs.create();
+            buff.writeBoolean(handler.getPropertyVal() == 1);
+            ClientPlayNetworking.send(CodeLyokoMain.ChannelID,buff);
+
         })
             {
             @Override
             public void renderButton(MatrixStack stack, int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
                 //super.renderButton(p_renderButton_1_, p_renderButton_2_, p_renderButton_3_);
                 final int i = getYImage(hovered);
+
 
 
                 RenderSystem.setShaderTexture(0,BUTTONTEXTURES);
@@ -131,6 +148,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     @Override
     protected void handledScreenTick() {
         super.handledScreenTick();
+        CompActive = handler.getPropertyVal() == 1;
         if (CompActive) {
             this.button.setMessage(new TranslatableText("de-activate"));
         } else {

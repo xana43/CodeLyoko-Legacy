@@ -10,13 +10,7 @@ public record PacketHandlerClient() {
 
     public static void clientPacketRegistry()
     {
-        ClientPlayNetworking.registerGlobalReceiver(CodeLyokoMain.ChannelID,(client, handler, buf, responseSender) -> {
 
-            client.execute(() -> {
-
-            });
-
-        });
     }
 
 }

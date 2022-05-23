@@ -10,12 +10,15 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.mixin.StructyreFeatureAccessor;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ComputerControlPanelUI;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerControlPanelTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageBiomeProvider;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.ModOreGen;
 import io.github.ladysnake.locki.DefaultInventoryNodes;
 import io.github.ladysnake.locki.InventoryLock;
 import io.github.ladysnake.locki.Locki;
+import io.netty.buffer.Unpooled;
+import io.netty.util.concurrent.GenericFutureListener;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -25,14 +28,13 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.*;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.S2CPlayChannelEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -53,7 +55,12 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.NetworkState;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.listener.ServerPlayPacketListener;
+import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.network.packet.s2c.play.BlockEventS2CPacket;
+import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
 import net.minecraft.scoreboard.ScoreboardCriterion;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
@@ -69,6 +76,9 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.RegistryOps;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -101,6 +111,7 @@ public record CodeLyokoMain() implements ModInitializer {
     public static final ItemGroup LYOKO_WEAPONS = FabricItemGroupBuilder.build(CodeLyokoPrefix("lyoko_weapons"),() -> new ItemStack(ModItems.LASER_ARROWSHOOTER));
     public static final Identifier COMPUTER_PANEL_TAG = CodeLyokoPrefix("control_panel_tag");
 
+
     @Contract("_ -> new")
     public static @NotNull Identifier CodeLyokoPrefix(String name)
     {
@@ -117,9 +128,27 @@ public record CodeLyokoMain() implements ModInitializer {
         SetupFunctions();
         registerDefaultAttributes();
         registerEnergyStorageBE();
-
+        packetRegistry();
     }
+private static void packetRegistry()
+{
 
+    ServerPlayNetworking.registerGlobalReceiver(CodeLyokoMain.ChannelID,(server, player, handler, buf, responseSender) -> {
+        ServerPlayNetworking.registerReceiver(handler,COMPUTER_PANEL_TAG,(server1, player1, handler1, buf1, responseSender1) -> {});
+                final boolean tmp = buf.readBoolean();
+               server.execute(() -> {
+                   PacketByteBuf byteBuf = PacketByteBufs.create();
+                   byteBuf.writeBoolean(tmp);
+
+                   responseSender.sendPacket(responseSender.createPacket(COMPUTER_PANEL_TAG,byteBuf));
+                   ServerPlayNetworking.getReceived(handler).forEach(identifier -> {
+
+                       CodeLyokoMain.LOG.info(String.valueOf(identifier));
+                   });
+               });
+
+    });
+}
 
     private static void generalRegistration()
     {
@@ -196,6 +225,7 @@ BiomeFeatureInject();
     private static final TrackedData<NbtCompound> peristent = DataTracker.registerData(ServerPlayerEntity.class,TrackedDataHandlerRegistry.NBT_COMPOUND);
 
     private static void SetupFunctions(){
+
         //sets the properties for the xana handler to calcualate on
         ServerWorldEvents.LOAD.register((server, world) -> XanaHandler.setProperties(world.getLevelProperties()));
         //saves and loats the inventoryfor both respawn and joining

@@ -31,6 +31,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
@@ -76,7 +77,9 @@ import net.minecraft.world.entity.EntityLookup;
 import net.minecraft.world.entity.SimpleEntityLookup;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
+import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
+import software.bernie.geckolib3.world.storage.GeckoLibIdTracker;
 
 import java.util.UUID;
 
@@ -240,14 +243,14 @@ if(client.player != null) {
     }
 
     public static void receiveEntityPacket() {
-        ClientSidePacketRegistry.INSTANCE.register(PacketID, (ctx, byteBuf) -> {
+        ClientPlayNetworking.registerGlobalReceiver(PacketID, (client,handler,byteBuf,responseSender) -> {
             final EntityType<?> et = Registry.ENTITY_TYPE.get(byteBuf.readVarInt());
             final UUID uuid = byteBuf.readUuid();
             final int entityId = byteBuf.readVarInt();
             final Vec3d pos = EntityPacketHandler.PacketBufUtil.readVec3d(byteBuf);
             final float pitch = EntityPacketHandler.PacketBufUtil.readAngle(byteBuf);
             final float yaw = EntityPacketHandler.PacketBufUtil.readAngle(byteBuf);
-            ctx.getTaskQueue().execute(() -> {
+            client.execute(() -> {
                 if (MinecraftClient.getInstance().world == null)
                     throw new IllegalStateException("Tried to spawn entity in a null world!");
                 final Entity e = et.create(MinecraftClient.getInstance().world);
@@ -278,7 +281,7 @@ if(client.player != null) {
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(),ModFluids.STILL_LIQUID_HELIUM,ModFluids.FLOWING_LIQUID_HELIUM,ModFluids.STILL_DIGITAL_OCEAN,ModFluids.FLOWING_DIGITAL_OCEAN);
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(),ModFluids.FLOWING_DIGITAL_LAVA,ModFluids.STILL_DIGITAL_LAVA);
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),ModBlocks.FALSE_WATER,ModBlocks.CHIPLET_FRANZ_BLOCK,ModBlocks.PROJECTOR_FOCUS);
-
+        GeckoLib
 
 
     }
