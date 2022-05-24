@@ -6,18 +6,37 @@ import net.minecraft.block.pattern.BlockPatternBuilder;
 import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.predicate.block.BlockStatePredicate;
 
-public record BlockPatternRegistry() {
+public enum BlockPatternRegistry {
 
 
-
- public static final BlockPattern scanner = BlockPatternBuilder.start().aisle(
-         "010",
-         "020",
-         "030")
+   SCANNER( BlockPatternBuilder.start().aisle(
+                 "010",
+                 "020",
+                 "030")
          .where('1', CachedBlockPosition.matchesBlockState(state -> state.getBlock() == ModBlocks.SCANNER_TOP))
          .where('2', CachedBlockPosition.matchesBlockState(state -> state.getBlock()==ModBlocks.SCANNER_FRAME))
          .where('3', CachedBlockPosition.matchesBlockState(state -> state.getBlock()==ModBlocks.SCANNER_BASE))
-         .where('0', CachedBlockPosition.matchesBlockState(BlockStatePredicate.ANY)).build();
+         .where('0', CachedBlockPosition.matchesBlockState(BlockStatePredicate.ANY)).build());
+
+
+   private final BlockPattern thisBlockPatttern;
+   BlockPatternRegistry(final BlockPattern pattern)
+   {
+    this.thisBlockPatttern = pattern;
+   }
+
+   public BlockPattern getThisBlockPatttern()
+   {
+    return thisBlockPatttern;
+   }
+
+
+
+
+
+
+
+
 
 /*
 

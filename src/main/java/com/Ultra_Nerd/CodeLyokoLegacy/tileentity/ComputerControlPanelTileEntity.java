@@ -1,41 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ControlPanel;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ComputerControlPanelUI;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerBlockEntityEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FurnaceBlock;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.FurnaceBlockEntity;
-import net.minecraft.client.gui.screen.ingame.LecternScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.network.packet.s2c.play.ChunkData;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.server.network.ServerQueryNetworkHandler;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.chunk.BlockEntityTickInvoker;
-import org.apache.commons.lang3.BooleanUtils;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.Serializable;
 
 public final class ComputerControlPanelTileEntity extends BlockEntity implements NamedScreenHandlerFactory {
     public ComputerControlPanelTileEntity( final BlockPos pos, final BlockState state) {
@@ -76,14 +58,13 @@ public void setActivebool(boolean value)
 
 
 
-    world.setBlockState(pos, world.getBlockState(pos).with(ControlPanel.ScreenOn, activebool));
 
+    world.setBlockState(pos, world.getBlockState(pos).with(ControlPanel.ScreenOn, activebool));
     this.markDirty();
 
 
 
 }
-
 
     private  boolean activebool;
     @Override
@@ -100,10 +81,17 @@ public void setActivebool(boolean value)
         return BlockEntityUpdateS2CPacket.create(this);
     }
 
+    @Override
+    public void markRemoved() {
+        activebool = false;
+        super.markRemoved();
+    }
 
+    @Override
+    public void markDirty() {
+        super.markDirty();
 
-
-
+    }
 
     @Override
     public NbtCompound toInitialChunkDataNbt() {
@@ -126,7 +114,7 @@ public void setActivebool(boolean value)
     public @NotNull ScreenHandler createMenu(final int syncId, final PlayerInventory inv, final PlayerEntity player) {
         //LecternScreen
 
-        CodeLyokoMain.LOG.info("construct menu");
+
         return new ComputerControlPanelScreenHandler(syncId, this.propertyDelegate);
     }
 

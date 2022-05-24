@@ -1,16 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModScreenHandlers;
-import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerSyncHandler;
 
 public final class ComputerControlPanelScreenHandler extends ScreenHandler/*extends Container*/  {
         PropertyDelegate propertyDelegate;
@@ -41,6 +35,7 @@ public final class ComputerControlPanelScreenHandler extends ScreenHandler/*exte
     @Override
     public void setProperty(final int id, final int value) {
 
+        this.sendContentUpdates();
         super.setProperty(id, value);
 
 

@@ -4,22 +4,21 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerControlPanelTileEntity;
+import com.mojang.authlib.Environment;
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientBlockEntityEvents;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.EnvironmentInterfaces;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerBlockEntityEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.block.CommandBlock;
+import net.minecraft.block.entity.CommandBlockBlockEntity;
+import net.minecraft.client.gui.screen.ingame.CommandBlockScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.network.NetworkSide;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -27,7 +26,9 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.MathHelper;
+import org.apache.logging.log4j.core.lookup.EnvironmentLookup;
 import org.jetbrains.annotations.NotNull;
+import org.spongepowered.asm.mixin.FabricUtil;
 
 public final class ComputerControlPanelUI extends HandledScreen<ComputerControlPanelScreenHandler> /*extends AbstractContainerScreen<ComputerControlPanelScreenHandler>*/ {
 
@@ -48,6 +49,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
 
 
     }
+
 
 
     @Override
@@ -75,7 +77,8 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         super.render(stack,p_render_1_, p_render_2_, p_render_3_);
         this.text.render(stack,p_render_1_, p_render_2_, p_render_3_);
         this.button.render(stack,p_render_1_, p_render_2_, p_render_3_);
-        drawCenteredText(stack,textRenderer,String.valueOf(handler.getPropertyVal()),this.width >> 1, this.height >> 1, Formatting.WHITE.getColorIndex());
+
+        //drawCenteredText(stack,textRenderer,String.valueOf(handler.getPropertyVal()),this.width >> 1, this.height >> 1, Formatting.WHITE.getColorIndex());
     }
 
 
@@ -99,7 +102,6 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         return false;
     }
 
-
     private void setButtons() {
 
         //
@@ -109,6 +111,9 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
             final PacketByteBuf buff = PacketByteBufs.create();
             buff.writeBoolean(handler.getPropertyVal() == 1);
             ClientPlayNetworking.send(CodeLyokoMain.ChannelID,buff);
+
+
+
 
         })
             {
