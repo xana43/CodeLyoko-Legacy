@@ -1,25 +1,33 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ControlPanel;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-public final class ComputerControlPanelTileEntity extends BlockEntity implements NamedScreenHandlerFactory {
+import java.util.concurrent.atomic.AtomicBoolean;
+
+public final class ComputerControlPanelTileEntity extends BlockEntity implements ExtendedScreenHandlerFactory {
     public ComputerControlPanelTileEntity( final BlockPos pos, final BlockState state) {
         super(ModTileEntities.COMPUTER_CONTROL_PANEL, pos, state);
 
@@ -115,9 +123,35 @@ public void setActivebool(boolean value)
         //LecternScreen
 
 
-        return new ComputerControlPanelScreenHandler(syncId, this.propertyDelegate);
+        return new ComputerControlPanelScreenHandler(syncId);
+    }
+
+    public static void tick(final World world,final BlockPos pos,final BlockState state, final ComputerControlPanelTileEntity computerControlPanelTile)
+    {
+
+
+            if(MinecraftClient.getInstance().player != null) {
+
+                ClientPlayNetworking.registerReceiver(CodeLyokoMain.COMPUTER_PANEL_TAG, (client, handler, buf, responseSender) -> {
+
+                    final boolean tmp = buf.readBoolean();
+                    if(!world.isClient) {
+                        computerControlPanelTile.setActivebool(tmp);
+                        CodeLyokoMain.LOG.info("tawafd");
+                    }
+
+                });
+
+            }
+
+
+
+
     }
 
 
-
+    @Override
+    public void writeScreenOpeningData(final ServerPlayerEntity player, final PacketByteBuf buf) {
+        buf.writeBoolean(activebool);
+    }
 }

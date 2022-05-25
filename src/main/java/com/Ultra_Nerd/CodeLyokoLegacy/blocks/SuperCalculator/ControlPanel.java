@@ -253,28 +253,13 @@ public final class ControlPanel extends BlockWithEntity {
 
         return ActionResult.SUCCESS;
     }
-    private final AtomicBoolean tmp = new AtomicBoolean(false);
+
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
-        return (world1, pos, state1, blockEntity) -> {
-            if(blockEntity instanceof ComputerControlPanelTileEntity computerControlPanelTile)
 
-            {
-                if(MinecraftClient.getInstance().player != null) {
-                    ClientPlayNetworking.registerReceiver(CodeLyokoMain.COMPUTER_PANEL_TAG, (client, handler, buf, responseSender) -> {
+        return checkType(type,ModTileEntities.COMPUTER_CONTROL_PANEL,ComputerControlPanelTileEntity::tick);
 
-                        tmp.set(buf.readBoolean());
-                    });
-
-                }
-
-                if(!world.isClient) {
-                    computerControlPanelTile.setActivebool(tmp.get());
-                }
-            }
-
-        };
     }
 
     @Override

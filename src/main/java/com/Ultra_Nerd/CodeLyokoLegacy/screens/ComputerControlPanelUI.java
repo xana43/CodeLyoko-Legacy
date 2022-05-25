@@ -15,6 +15,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.MathHelper;
@@ -35,7 +36,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     public ComputerControlPanelUI(final ComputerControlPanelScreenHandler handler, final PlayerInventory inventory, final Text title) {
         super(handler, inventory, title);
        playerInventoryTitleX = - 900;
-
+        CompActive = handler.isActive();
 
 
     }
@@ -68,7 +69,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         this.text.render(stack,p_render_1_, p_render_2_, p_render_3_);
         this.button.render(stack,p_render_1_, p_render_2_, p_render_3_);
 
-        //drawCenteredText(stack,textRenderer,String.valueOf(handler.getPropertyVal()),this.width >> 1, this.height >> 1, Formatting.WHITE.getColorIndex());
+        //drawCenteredText(stack,textRenderer,String.valueOf(handler.isActive()),this.width >> 1, this.height >> 1, Formatting.WHITE.getColorIndex());
     }
 
 
@@ -85,6 +86,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         this.setTextField();
         this.setButtons();
 
+
     }
 
     @Override
@@ -97,13 +99,9 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         //
         this.button = new TexturedButtonWidget(x, y, this.width / 3, this.height >> 3,0,0,BUTTONTEXTURES, (press)-> {
             CompActive = !CompActive;
-            handler.setProperty(0,CompActive? 1:0);
-            final PacketByteBuf buff = PacketByteBufs.create();
-            buff.writeBoolean(handler.getPropertyVal() == 1);
-            ClientPlayNetworking.send(CodeLyokoMain.ChannelID,buff);
-
-
-
+            final PacketByteBuf tmp1231231 = PacketByteBufs.create();
+            tmp1231231.writeBoolean(CompActive);
+            ClientPlayNetworking.send(CodeLyokoMain.ChannelID,tmp1231231 );
 
         })
             {
@@ -143,7 +141,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     @Override
     protected void handledScreenTick() {
         super.handledScreenTick();
-        CompActive = handler.getPropertyVal() == 1;
+        //CompActive = handler.isActive();
         if (CompActive) {
             this.button.setMessage(new TranslatableText("de-activate"));
         } else {
