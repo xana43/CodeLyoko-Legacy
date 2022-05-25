@@ -134,7 +134,8 @@ public void setActivebool(boolean value)
 
                 ClientPlayNetworking.registerReceiver(CodeLyokoMain.COMPUTER_PANEL_TAG, (client, handler, buf, responseSender) -> {
 
-                    final boolean tmp = buf.readBoolean();
+
+                    final boolean tmp = buf.copy().readBoolean();
                     if(!world.isClient) {
                         computerControlPanelTile.setActivebool(tmp);
                         CodeLyokoMain.LOG.info("tawafd");

@@ -13,6 +13,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
 import io.github.ladysnake.locki.DefaultInventoryNodes;
 import io.github.ladysnake.locki.InventoryLock;
 import io.github.ladysnake.locki.Locki;
+import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -25,12 +26,11 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.block.entity.BeaconBlockEntity;
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -40,7 +40,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.TranslatableText;
@@ -104,9 +103,9 @@ private static void packetRegistry()
 
 
         final boolean tmp = buf.readBoolean();
-
+        LOG.info("sent to server");
         server.execute(() -> {
-            final PacketByteBuf byteBuf = PacketByteBufs.create();
+            final PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
             byteBuf.writeBoolean(tmp);
 
            responseSender.sendPacket(ServerPlayNetworking.createS2CPacket(COMPUTER_PANEL_TAG,byteBuf));

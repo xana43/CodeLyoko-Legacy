@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.impl.networking.server.ServerPlayNetworkAddon;
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -235,23 +236,23 @@ public final class ControlPanel extends BlockWithEntity {
 
     @Override
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
-        if(!world.isClient)
-        {
-            final NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-            if(screenHandlerFactory != null)
-            {
-                player.openHandledScreen(screenHandlerFactory);
+      if(world.isClient)
+      {
+          return ActionResult.SUCCESS;
+      }
+      else
+      {
+          final BlockEntity be = world.getBlockEntity(pos);
+          if(be instanceof ComputerControlPanelTileEntity)
+          {
+              player.openHandledScreen((ComputerControlPanelTileEntity)be);
+          }
+          return ActionResult.CONSUME;
+      }
 
 
 
-            }
 
-
-        }
-
-
-
-        return ActionResult.SUCCESS;
     }
 
     @Nullable
@@ -262,30 +263,6 @@ public final class ControlPanel extends BlockWithEntity {
 
     }
 
-    @Override
-    public void onBroken(final WorldAccess world, final BlockPos pos, final BlockState state) {
-        super.onBroken(world, pos, state);
-        if(world.getBlockEntity(pos) instanceof  ComputerControlPanelTileEntity tileEntity)
-        {
-            tileEntity.setActivebool(false);
-            tileEntity.markRemoved();
-
-        }
-        ClientPlayNetworking.unregisterReceiver(CodeLyokoMain.COMPUTER_PANEL_TAG);
-    }
-
-    @Override
-    public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
-        if(world.getBlockEntity(pos) instanceof  ComputerControlPanelTileEntity tileEntity)
-        {
-            tileEntity.setActivebool(false);
-            tileEntity.markRemoved();
-
-        }
-        ClientPlayNetworking.unregisterReceiver(CodeLyokoMain.COMPUTER_PANEL_TAG);
-
-        super.onBreak(world, pos, state, player);
-    }
 
     @Override
     public void onPlaced(final World world, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack itemStack) {

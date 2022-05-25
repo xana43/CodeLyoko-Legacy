@@ -5,14 +5,19 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
+import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
+import net.minecraft.server.network.ServerPlayerInteractionManager;
+import net.minecraft.server.network.ServerQueryNetworkHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
@@ -60,6 +65,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         this.button.mouseClicked(mouseX, mouseY, mouseButton);
         return super.mouseClicked(mouseX, mouseY, mouseButton);
 
+
     }
 
     @Override
@@ -99,9 +105,10 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         //
         this.button = new TexturedButtonWidget(x, y, this.width / 3, this.height >> 3,0,0,BUTTONTEXTURES, (press)-> {
             CompActive = !CompActive;
-            final PacketByteBuf tmp1231231 = PacketByteBufs.create();
+            final PacketByteBuf tmp1231231 = new PacketByteBuf(Unpooled.buffer());
             tmp1231231.writeBoolean(CompActive);
             ClientPlayNetworking.send(CodeLyokoMain.ChannelID,tmp1231231 );
+
 
         })
             {
@@ -141,6 +148,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     @Override
     protected void handledScreenTick() {
         super.handledScreenTick();
+
         //CompActive = handler.isActive();
         if (CompActive) {
             this.button.setMessage(new TranslatableText("de-activate"));

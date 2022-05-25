@@ -1,11 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModScreenHandlers;
+import net.minecraft.client.gui.screen.ingame.BeaconScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.ArrayPropertyDelegate;
-import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.*;
 
 public final class ComputerControlPanelScreenHandler extends ScreenHandler/*extends Container*/  {
 
@@ -41,7 +41,9 @@ public boolean isActive()
         return true;
     }
 
-
-
-
+    @Override
+    public boolean onButtonClick(final PlayerEntity player, final int id) {
+        CodeLyokoMain.LOG.info("test click");
+        return super.onButtonClick(player, id);
+    }
 }

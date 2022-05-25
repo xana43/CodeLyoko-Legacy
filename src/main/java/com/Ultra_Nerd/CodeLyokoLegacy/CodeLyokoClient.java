@@ -111,7 +111,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
         FluidRenderRegistry();
         HandledScreens.register(ModScreenHandlers.TOWER_INTERFACE_SCREEN_HANDLER, TowerGUI::new);
         HandledScreens.register(ModScreenHandlers.CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE, ComputerControlPanelUI::new);
-
         //Custom Sprites
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
             registry.register(CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing"));
