@@ -33,7 +33,7 @@ public final class ClassScreen extends Screen {
     }
     private void drawClassIndicator(Text classname, MatrixStack pPoseStack)
     {
-        drawCenteredText(pPoseStack, textRenderer, classname.getWithStyle(ConstantUtil.HUD).get(0), this.width >> 2, this.height >> 2, IndicatorColor);
+        drawCenteredText(pPoseStack, textRenderer, classname.getWithStyle(ConstantUtil.Styles.HUD.getThisStyle()).get(0), this.width >> 2, this.height >> 2, IndicatorColor);
     }
 
     @Override
@@ -67,7 +67,7 @@ public final class ClassScreen extends Screen {
         }
         else
         {
-            drawCenteredText(pPoseStack,textRenderer,Text.of("no class assigned").getWithStyle(ConstantUtil.HUD).get(0),this.width >> 2, this.height >> 2, IndicatorColor);
+            drawCenteredText(pPoseStack,textRenderer,Text.of("no class assigned").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle()).get(0),this.width >> 2, this.height >> 2, IndicatorColor);
         }
         /*
         if(ClientCapabilitySync.getPlayerClassType() != null) {
@@ -177,7 +177,7 @@ private static void save(MinecraftClient client){
 
 
 
-            }, Text.of("feline").getWithStyle(ConstantUtil.HUD.withColor(colors)).get(0));
+            }, Text.of("feline").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(colors)).get(0));
 
     }
 
@@ -193,7 +193,7 @@ private static void save(MinecraftClient client){
             save(this.client);
             //ClassID =1;
            // classIndicatorString.replace(15,ClientCapabilitySync.getPlayerClassType().getClassName().length() + 17,ClientCapabilitySync.getPlayerClassType().getClassName());
-            }, Text.of("samurai").getWithStyle(ConstantUtil.HUD.withColor(2007)).get(0));
+            }, Text.of("samurai").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(2007)).get(0));
 
     }
 
@@ -206,7 +206,7 @@ private static void save(MinecraftClient client){
             this.client.player.playSound(ModSounds.GUISOUND,1,6);
             save(this.client);
             //ClassID = 2;
-            }, Text.of("ninja").getWithStyle(ConstantUtil.HUD.withColor(5125)).get(0));
+            }, Text.of("ninja").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(5125)).get(0));
 
     }
     private void setGuardian()
@@ -215,7 +215,7 @@ private static void save(MinecraftClient client){
                 256, 256, (input) -> {
             //ClassID = 3;
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Guardian);
-            }, Text.of("guardian").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
+            }, Text.of("guardian").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
         save(this.client);
 
     }
@@ -223,7 +223,7 @@ private static void save(MinecraftClient client){
     private void setWarrior()
     {
         warrior =  new TexturedButtonWidget((this.width >> 1) + 150 , this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) ->{} /*((PlayerEXT)this.client.player).setClass(4)*/, Text.of("warrior").getWithStyle(ConstantUtil.HUD.withColor(0x1d5e18)).get(0));
+                256, 256, (input) ->{} /*((PlayerEXT)this.client.player).setClass(4)*/, Text.of("warrior").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
         save(this.client);
     }
 

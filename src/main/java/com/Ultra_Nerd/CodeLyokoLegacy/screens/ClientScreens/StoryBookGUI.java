@@ -6,7 +6,7 @@ import net.minecraft.text.StringVisitable;
 
 public final class StoryBookGUI extends BookScreen {
 
-    public StoryBookGUI(StringVisitable[] story,int pages)
+    public StoryBookGUI(final StringVisitable[] story,final int pages)
     {
         super(new Contents() {
             @Override

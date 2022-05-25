@@ -4,31 +4,21 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import com.mojang.authlib.Environment;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.EnvironmentInterfaces;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.block.CommandBlock;
-import net.minecraft.block.entity.CommandBlockBlockEntity;
-import net.minecraft.client.gui.screen.ingame.CommandBlockScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.network.NetworkSide;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.MathHelper;
-import org.apache.logging.log4j.core.lookup.EnvironmentLookup;
 import org.jetbrains.annotations.NotNull;
-import org.spongepowered.asm.mixin.FabricUtil;
 
 public final class ComputerControlPanelUI extends HandledScreen<ComputerControlPanelScreenHandler> /*extends AbstractContainerScreen<ComputerControlPanelScreenHandler>*/ {
 
@@ -137,7 +127,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
                     drawTexture(stack, x, y, 0, 19, 104, 19,1024,512);
                 }
                 //drawTexture(stack,x, 38, 0, (46 + i) * 20, width >> 1, height);
-                drawCenteredText(stack,client.textRenderer, getMessage().shallowCopy().setStyle(ConstantUtil.HUD), x +( width +55)>> 1, y + (height + 32) >> 1, j | MathHelper.ceil(alpha * 255.0F) << 24);
+                drawCenteredText(stack,client.textRenderer, getMessage().shallowCopy().setStyle(ConstantUtil.Styles.HUD.getThisStyle()), x +( width +55)>> 1, y + (height + 32) >> 1, j | MathHelper.ceil(alpha * 255.0F) << 24);
 
 
             }
@@ -174,7 +164,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     private void setTextField() {
         final int tx = this.width >> 1;
         final int ty = this.height >> 1;
-        this.text = new TextFieldWidget(client.textRenderer, x, ty + 40, this.width, 23, new TranslatableText("gui.cm.computer_input_main").setStyle(ConstantUtil.GUNSHIP));
+        this.text = new TextFieldWidget(client.textRenderer, x, ty + 40, this.width, 23, new TranslatableText("gui.cm.computer_input_main").setStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
         this.text.setDrawsBackground(false);
         this.text.setVisible(true);
         this.text.setEditableColor(0xda2c43);

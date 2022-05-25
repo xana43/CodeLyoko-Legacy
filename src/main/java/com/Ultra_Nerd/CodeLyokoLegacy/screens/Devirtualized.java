@@ -28,7 +28,7 @@ public final class Devirtualized extends Screen {
     private final List<ButtonWidget> buttons = Lists.newArrayList();
 
     public Devirtualized(@Nullable Text message, boolean isHardcore) {
-        super(new TranslatableText(isHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title").fillStyle(ConstantUtil.GUNSHIP));
+        super(new TranslatableText(isHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title").fillStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
         this.message = message;
         this.isHardcore = isHardcore;
     }

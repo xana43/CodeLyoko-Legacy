@@ -255,7 +255,7 @@ if(player != null) {
                     if (XanaHandler.calculateAttackProbability()) {
                         final int notifyPlayerRandom = new Random().nextInt(world.getPlayers().size());
 
-                        world.getPlayers().get(notifyPlayerRandom).sendMessage(new TranslatableText("xana.attack.start").getWithStyle(ConstantUtil.GUNSHIP.withColor(Formatting.RED)).get(0), true);
+                        world.getPlayers().get(notifyPlayerRandom).sendMessage(new TranslatableText("xana.attack.start").getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle().withColor(Formatting.RED)).get(0), true);
 
 
                     }

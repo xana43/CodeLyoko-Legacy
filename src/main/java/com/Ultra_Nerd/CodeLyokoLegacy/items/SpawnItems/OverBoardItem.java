@@ -1,31 +1,32 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.SpawnItems;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverboardEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.util.ActionResult;
 
 public final class OverBoardItem extends Item {
-    public OverBoardItem(final Settings pProperties) {
-        super(pProperties);
+
+
+    public OverBoardItem(final Settings settings) {
+        super(settings);
     }
 
+
     @Override
-    public boolean isDamageable() {
-        return false;
-    }
-/*
-    @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(final @NotNull Level pLevel, final @NotNull Player pPlayer, final @NotNull InteractionHand pUsedHand) {
-        if(DimensionCheck.playerNotInVanillaWorld(pPlayer))
+    public ActionResult useOnBlock(final ItemUsageContext context) {
+        if(!context.getWorld().isClient)
         {
-            if(!pLevel.isClientSide) {
-                final HitResult playerPOVHitResult = getPlayerPOVHitResult(pLevel, pPlayer, ClipContext.Fluid.NONE);
-                ModEntities.OVERBOARD.get().spawn((ServerLevel) pLevel, pPlayer.getItemInHand(pUsedHand), pPlayer, new BlockPos(playerPOVHitResult.getLocation().x, playerPOVHitResult.getLocation().y,
-                        playerPOVHitResult.getLocation().z), MobSpawnType.SPAWN_EGG, true, true);
-                return InteractionResultHolder.consume(pPlayer.getItemInHand(pUsedHand));
-            }
+
+            final OverboardEntity overboardEntity = new OverboardEntity(ModEntities.OVERBOARD,context.getWorld());
+            overboardEntity.setPosition(context.getHitPos());
+            context.getPlayer().getStackInHand(context.getHand()).decrement(1);
+            return ActionResult.SUCCESS;
         }
+        return ActionResult.FAIL;
 
-        return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
+
+
     }
-
- */
 }

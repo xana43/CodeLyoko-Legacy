@@ -7,7 +7,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,7 +27,7 @@ public final class ComputerItem extends Item {
         super.appendTooltip(stack, world, tooltip, context);
         if(Screen.hasShiftDown())
         {
-            tooltip.add(new TranslatableText("computer.item.tooltip.shift").setStyle(ConstantUtil.HUD));
+            tooltip.add(new TranslatableText("computer.item.tooltip.shift").setStyle(ConstantUtil.Styles.HUD.getThisStyle()));
         }
         else
         {

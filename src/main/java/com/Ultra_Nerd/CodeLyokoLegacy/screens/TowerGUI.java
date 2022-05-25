@@ -84,8 +84,8 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
 
         super.render(poseStack,mouseX, mouseY, partialTicks);
         //this.text.render(poseStack,mouseX, mouseY, partialTicks);
-        final var AcceptedText = Text.of(this.Accepted.getText()).getWithStyle(ConstantUtil.GUNSHIP);
-        final var CodeEnterTest = Text.of(this.text.getText()).getWithStyle(ConstantUtil.GUNSHIP);
+        final var AcceptedText = Text.of(this.Accepted.getText()).getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle());
+        final var CodeEnterTest = Text.of(this.text.getText()).getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle());
         if(AcceptedText.size() >= 1) {
             PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer, AcceptedText.get(0), this.Accepted.x, this.Accepted.y, acceptedColor);
         }
@@ -94,7 +94,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
         }
         if((tick >> 2) % 5 == 0)
         {
-            PressableTextWidget.drawTextWithShadow(poseStack,this.textRenderer, Text.of("|").getWithStyle(ConstantUtil.GUNSHIP).get(0), text.x + (this.text.getCursor() * 21),this.text.y,Color.WHITE.getRGB());
+            PressableTextWidget.drawTextWithShadow(poseStack,this.textRenderer, Text.of("|").getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()).get(0), text.x + (this.text.getCursor() * 21),this.text.y,Color.WHITE.getRGB());
 
                 Objects.requireNonNull(client.player).playSound(ModSounds.CURSORBLINK, 0.1f, 1f);
 
