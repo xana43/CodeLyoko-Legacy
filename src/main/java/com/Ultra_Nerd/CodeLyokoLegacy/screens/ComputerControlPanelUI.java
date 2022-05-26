@@ -105,9 +105,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         //
         this.button = new TexturedButtonWidget(x, y, this.width / 3, this.height >> 3,0,0,BUTTONTEXTURES, (press)-> {
             CompActive = !CompActive;
-            final PacketByteBuf tmp1231231 = new PacketByteBuf(Unpooled.buffer());
-            tmp1231231.writeBoolean(CompActive);
-            ClientPlayNetworking.send(CodeLyokoMain.ChannelID,tmp1231231 );
+           handler.setActive(CompActive);
 
 
         })

@@ -93,27 +93,9 @@ public record CodeLyokoMain() implements ModInitializer {
         SetupFunctions();
         registerDefaultAttributes();
         registerEnergyStorageBE();
-        packetRegistry();
+
     }
-private static void packetRegistry()
-{
 
-
-    ServerPlayNetworking.registerGlobalReceiver(ChannelID,(server, player, handler, buf, responseSender) -> {
-
-
-        final boolean tmp = buf.readBoolean();
-        LOG.info("sent to server");
-        server.execute(() -> {
-            final PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
-            byteBuf.writeBoolean(tmp);
-
-           responseSender.sendPacket(ServerPlayNetworking.createS2CPacket(COMPUTER_PANEL_TAG,byteBuf));
-        });
-
-    });
-
-}
 
     private static void generalRegistration()
     {

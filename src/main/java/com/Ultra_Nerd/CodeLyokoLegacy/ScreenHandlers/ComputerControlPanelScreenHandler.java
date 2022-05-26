@@ -31,9 +31,9 @@ public boolean isActive()
 }
 
 
-
-
-
+    public void setActive(final boolean active) {
+        isActive = active;
+    }
 
     @Override
     public boolean canUse(final PlayerEntity player) {
@@ -41,9 +41,5 @@ public boolean isActive()
         return true;
     }
 
-    @Override
-    public boolean onButtonClick(final PlayerEntity player, final int id) {
-        CodeLyokoMain.LOG.info("test click");
-        return super.onButtonClick(player, id);
-    }
+
 }

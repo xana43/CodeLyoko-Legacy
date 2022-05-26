@@ -34,32 +34,6 @@ public final class ComputerControlPanelTileEntity extends BlockEntity implements
     }
 
 
-
-private final PropertyDelegate propertyDelegate =  new PropertyDelegate() {
-    @Override
-    public int get(final int index) {
-
-        //CodeLyokoMain.LOG.info("active = " + activebool);
-        return ComputerControlPanelTileEntity.this.activebool? 1:0;
-
-
-    }
-
-    @Override
-    public void set(final int index, final int value) {
-
-if(index == 0) {
-    activebool = value==1;
-    markDirty();
-
-}
-
-    }
-    @Override
-    public int size() {
-        return 1;
-    }
-};
 public void setActivebool(boolean value)
 {
     activebool = value;
@@ -126,29 +100,7 @@ public void setActivebool(boolean value)
         return new ComputerControlPanelScreenHandler(syncId);
     }
 
-    public static void tick(final World world,final BlockPos pos,final BlockState state, final ComputerControlPanelTileEntity computerControlPanelTile)
-    {
 
-
-            if(MinecraftClient.getInstance().player != null) {
-
-                ClientPlayNetworking.registerReceiver(CodeLyokoMain.COMPUTER_PANEL_TAG, (client, handler, buf, responseSender) -> {
-
-
-                    final boolean tmp = buf.copy().readBoolean();
-                    if(!world.isClient) {
-                        computerControlPanelTile.setActivebool(tmp);
-                        CodeLyokoMain.LOG.info("tawafd");
-                    }
-
-                });
-
-            }
-
-
-
-
-    }
 
 
     @Override

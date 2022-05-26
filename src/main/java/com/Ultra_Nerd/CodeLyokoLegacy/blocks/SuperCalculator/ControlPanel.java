@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerControlPanelTileEntity;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -8,6 +9,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerLoginNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.impl.networking.server.ServerPlayNetworkAddon;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BeaconBlockEntity;
@@ -23,6 +25,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.listener.ServerPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandlerFactory;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerNetworkIo;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -227,7 +230,7 @@ public final class ControlPanel extends BlockWithEntity {
     }
 
 
-
+    private NamedScreenHandlerFactory screenHandlerFactory;
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
@@ -242,10 +245,10 @@ public final class ControlPanel extends BlockWithEntity {
       }
       else
       {
-          final BlockEntity be = world.getBlockEntity(pos);
-          if(be instanceof ComputerControlPanelTileEntity)
-          {
-              player.openHandledScreen((ComputerControlPanelTileEntity)be);
+
+
+          if(screenHandlerFactory != null) {
+              player.openHandledScreen(screenHandlerFactory);
           }
           return ActionResult.CONSUME;
       }
@@ -259,7 +262,30 @@ public final class ControlPanel extends BlockWithEntity {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
 
-        return checkType(type,ModTileEntities.COMPUTER_CONTROL_PANEL,ComputerControlPanelTileEntity::tick);
+        return (world1, pos, state1, blockEntity) -> {
+
+            if(MinecraftClient.getInstance().player != null) {
+
+
+                    if(blockEntity instanceof ComputerControlPanelTileEntity te) {
+
+
+
+
+                              if (MinecraftClient.getInstance().player.currentScreenHandler instanceof ComputerControlPanelScreenHandler se)
+                              {
+
+                                  te.setActivebool(se.isActive());
+                              }
+
+
+                      //computerControlPanelTile.setActivebool(com);
+                    }
+
+
+
+            }
+        };
 
     }
 
@@ -269,6 +295,7 @@ public final class ControlPanel extends BlockWithEntity {
 
 
 
+         screenHandlerFactory = state.createScreenHandlerFactory(world,pos);
 
         super.onPlaced(world, pos, state, placer, itemStack);
     }
