@@ -54,7 +54,7 @@ dependencies {
 	//include "com.github.Chocohead:Fabric-ASM:v${asm_version}"
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "software.bernie.geckolib:geckolib-fabric-1.18:${geko_version}"
+	modImplementation "software.bernie.geckolib:geckolib-fabric-1.19:${geko_version}"
 	modImplementation "dev.monarkhes:myron:${project.myron_version}"
 	include "dev.monarkhes:myron:${project.myron_version}"
 	modImplementation "io.github.ladysnake:locki:${locki_version}"

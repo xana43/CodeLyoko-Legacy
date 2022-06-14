@@ -83,7 +83,7 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
 
     public @NotNull Registry<StructureSet> getStructRegistry()
     {
-        return field_37053;
+        return structureSetRegistry;
     }
 
     public CustomGenSettings getCarthageSettings()

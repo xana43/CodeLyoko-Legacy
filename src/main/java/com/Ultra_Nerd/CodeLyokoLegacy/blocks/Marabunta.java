@@ -33,7 +33,7 @@ public final class Marabunta extends SoulSandBlock {
     }
 
     @Override
-    public void randomTick(final BlockState state, final ServerWorld world, final BlockPos pos, final Random random) {
+    public void randomTick(final BlockState state, final ServerWorld world, final BlockPos pos, final net.minecraft.util.math.random.Random random) {
         super.randomTick(state, world, pos, random);
         for (byte i = 0; i < 90; ++i) {
             BlockPos blockpos = pos.offset(Direction.Axis.pickRandomAxis(random),random.nextInt(3) - 1);

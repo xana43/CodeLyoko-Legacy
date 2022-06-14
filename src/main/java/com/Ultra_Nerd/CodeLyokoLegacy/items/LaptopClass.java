@@ -8,7 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -63,7 +63,7 @@ public final class LaptopClass extends Item implements SimpleBatteryItem  {
                 MinecraftClient.getInstance().currentScreen.close();
             }
             item.setDamage(0);
-            playerIn.sendMessage(new TranslatableText("laptop.battery.dead"),false);
+            playerIn.sendMessage(new TranslatableTextContent("laptop.battery.dead"),false);
         }
 
 

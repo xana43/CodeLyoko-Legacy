@@ -11,7 +11,7 @@ import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +25,7 @@ public final class TowerInterfaceTileEntity extends BlockEntity implements Named
 
      @Override
      public Text getDisplayName() {
-         return LiteralText.EMPTY;
+         return LiteralTextContent.EMPTY;
      }
 
      @Override

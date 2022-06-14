@@ -12,18 +12,18 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public final class ModelHornet extends AnimatedGeoModel<HornetEntity> {
     @Override
-    public Identifier getModelLocation(final HornetEntity object) {
+    public Identifier getModelResource(final HornetEntity object) {
 
         return CodeLyokoMain.CodeLyokoPrefix("geo/hornet.geo.json");
     }
 
     @Override
-    public Identifier getTextureLocation(final HornetEntity object) {
+    public Identifier getTextureResource(final HornetEntity object) {
         return CodeLyokoMain.CodeLyokoPrefix("textures/entity/hornet/hornetatlas.png");
     }
 
     @Override
-    public Identifier getAnimationFileLocation(final HornetEntity animatable) {
+    public Identifier getAnimationResource(final HornetEntity animatable) {
 
         return CodeLyokoMain.CodeLyokoPrefix("animations/entities/hornet.json");
     }

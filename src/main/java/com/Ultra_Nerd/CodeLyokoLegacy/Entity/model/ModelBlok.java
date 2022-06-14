@@ -15,17 +15,17 @@ public final class ModelBlok extends AnimatedGeoModel<EntityBlok> {
 
 
     @Override
-    public Identifier getModelLocation(final EntityBlok object) {
+    public Identifier getModelResource(final EntityBlok object) {
         return CodeLyokoMain.CodeLyokoPrefix("geo/blok.geo.json");
     }
 
     @Override
-    public Identifier getTextureLocation(final EntityBlok object) {
+    public Identifier getTextureResource(final EntityBlok object) {
         return CodeLyokoMain.CodeLyokoPrefix("textures/entity/blok/blok.png");
     }
 
     @Override
-    public Identifier getAnimationFileLocation(final EntityBlok animatable) {
+    public Identifier getAnimationResource(final EntityBlok animatable) {
         return null;
     }
 }

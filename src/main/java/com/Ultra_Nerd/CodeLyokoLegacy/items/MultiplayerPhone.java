@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.items;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -25,17 +25,17 @@ public final class MultiplayerPhone extends Item {
         {
             if(user.getServer().isSingleplayer())
             {
-                user.sendMessage(new TranslatableText("phone.use.singleplayer"),false);
+                user.sendMessage(new TranslatableTextContent("phone.use.singleplayer"),false);
                 return TypedActionResult.fail(thisStack);
             }
             else if (!user.getServer().isSingleplayer())
             {
-                user.sendMessage(new TranslatableText("phone.use.multiplayer").formatted(Formatting.BLACK),true);
+                user.sendMessage(new TranslatableTextContent("phone.use.multiplayer").formatted(Formatting.BLACK),true);
                 world.getPlayers().forEach(playerEntity -> {
 
                     if(playerEntity != user && playerEntity.getInventory().contains(new ItemStack(this)))
                     {
-                        playerEntity.sendMessage(new TranslatableText("phone.receive").append("").append(user.getGameProfile().getName()).append("").append(new TranslatableText("phone.receive2")),true);
+                        playerEntity.sendMessage(new TranslatableTextContent("phone.receive").append("").append(user.getGameProfile().getName()).append("").append(new TranslatableTextContent("phone.receive2")),true);
                     }
 
                 });

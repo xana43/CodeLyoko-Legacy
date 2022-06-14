@@ -19,7 +19,7 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -51,7 +51,7 @@ public void setActivebool(boolean value)
     private  boolean activebool;
     @Override
     public Text getDisplayName() {
-        return LiteralText.EMPTY;
+        return LiteralTextContent.EMPTY;
     }
     public boolean getActive()
     {

@@ -4,7 +4,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.StringVisitable;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;

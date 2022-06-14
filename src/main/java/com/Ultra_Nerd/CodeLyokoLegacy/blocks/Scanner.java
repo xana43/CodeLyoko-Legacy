@@ -342,7 +342,7 @@ private float time;
                 {
                     final MinecraftClient mc =MinecraftClient.getInstance();
 
-                    switch (mc.options.particles)
+                    switch (mc.options.getParticles().getValue())
                     {
                         case ALL ->{
                             for(int i =0; i < 200 ; i++)

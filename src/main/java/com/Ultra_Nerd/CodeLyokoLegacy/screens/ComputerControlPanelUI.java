@@ -19,7 +19,7 @@ import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.server.network.ServerQueryNetworkHandler;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -130,7 +130,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
                     drawTexture(stack, x, y, 0, 19, 104, 19,1024,512);
                 }
                 //drawTexture(stack,x, 38, 0, (46 + i) * 20, width >> 1, height);
-                drawCenteredText(stack,client.textRenderer, getMessage().shallowCopy().setStyle(ConstantUtil.Styles.HUD.getThisStyle()), x +( width +55)>> 1, y + (height + 32) >> 1, j | MathHelper.ceil(alpha * 255.0F) << 24);
+                drawCenteredText(stack,client.textRenderer, getMessage().copy().setStyle(ConstantUtil.Styles.HUD.getThisStyle()), x +( width +55)>> 1, y + (height + 32) >> 1, j | MathHelper.ceil(alpha * 255.0F) << 24);
 
 
             }
@@ -149,16 +149,16 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
 
         //CompActive = handler.isActive();
         if (CompActive) {
-            this.button.setMessage(new TranslatableText("de-activate"));
+            this.button.setMessage(new TranslatableTextContent("de-activate"));
         } else {
-            this.button.setMessage(new TranslatableText("activate"));
+            this.button.setMessage(new TranslatableTextContent("activate"));
         }
 
         if (CompActive) {
-            this.text.setMessage(new TranslatableText("Active"));
+            this.text.setMessage(new TranslatableTextContent("Active"));
             this.text.setEditableColor(0x008000);
         } else {
-            this.text.setMessage(new TranslatableText("in-active"));
+            this.text.setMessage(new TranslatableTextContent("in-active"));
             this.text.setEditableColor(0xda2c43);
         }
     }
@@ -168,11 +168,11 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     private void setTextField() {
         final int tx = this.width >> 1;
         final int ty = this.height >> 1;
-        this.text = new TextFieldWidget(client.textRenderer, x, ty + 40, this.width, 23, new TranslatableText("gui.cm.computer_input_main").setStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
+        this.text = new TextFieldWidget(client.textRenderer, x, ty + 40, this.width, 23, new TranslatableTextContent("gui.cm.computer_input_main").setStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
         this.text.setDrawsBackground(false);
         this.text.setVisible(true);
         this.text.setEditableColor(0xda2c43);
-        this.text.setMessage(new TranslatableText("gui.cm.inactive"));
+        this.text.setMessage(new TranslatableTextContent("gui.cm.inactive"));
         this.text.setEditable(false);
 
 

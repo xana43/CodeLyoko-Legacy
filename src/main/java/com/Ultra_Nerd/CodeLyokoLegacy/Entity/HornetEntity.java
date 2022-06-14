@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHornet;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
+import dev.onyxstudios.cca.api.v3.component.ComponentContainer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
@@ -213,6 +214,8 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
     }
 
 
-
-
+    @Override
+    public ComponentContainer getComponentContainer() {
+        return null;
+    }
 }

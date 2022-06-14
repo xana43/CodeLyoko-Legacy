@@ -81,7 +81,7 @@ public class LyokoVehicleEntity extends BoatEntity {
     }
 
     @Override
-    public float method_7548() {
+    public float getNearbySlipperiness() {
         return 0.90f;
     }
 

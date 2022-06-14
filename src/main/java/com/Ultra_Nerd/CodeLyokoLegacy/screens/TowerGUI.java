@@ -17,16 +17,16 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.GenericContainerScreenHandler;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
@@ -154,7 +154,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
         super.init();
         final int tx = this.width >> 1;
         final int ty = this.height >> 1;
-        this.text = new TextFieldWidget(this.textRenderer, tx - 70, ty - 10, 200, 33, LiteralText.EMPTY);
+        this.text = new TextFieldWidget(this.textRenderer, tx - 70, ty - 10, 200, 33, LiteralTextContent.EMPTY);
         this.text.setMaxLength(8);
         this.text.setDrawsBackground(false);
         this.text.setVisible(true);
@@ -164,7 +164,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
         this.text.setCursor(0);
         this.text.setFocusUnlocked(false);
         this.text.active = true;
-        this.Accepted = new TextFieldWidget(this.textRenderer, tx - 95, ty + 20, 200, 33, LiteralText.EMPTY);
+        this.Accepted = new TextFieldWidget(this.textRenderer, tx - 95, ty + 20, 200, 33, LiteralTextContent.EMPTY);
         this.Accepted.active = false;
         this.Accepted.setEditable(false);
     }

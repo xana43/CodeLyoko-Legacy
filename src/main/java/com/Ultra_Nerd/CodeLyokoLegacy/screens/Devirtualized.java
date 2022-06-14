@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.google.common.collect.Lists;
 import net.minecraft.client.gui.screen.ConfirmScreen;
-import net.minecraft.client.gui.screen.SaveLevelScreen;
+import net.minecraft.client.gui.screen.MessageScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -28,7 +28,7 @@ public final class Devirtualized extends Screen {
     private final List<ButtonWidget> buttons = Lists.newArrayList();
 
     public Devirtualized(@Nullable Text message, boolean isHardcore) {
-        super(new TranslatableText(isHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title").fillStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
+        super(new TranslatableTextContent(isHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title").fillStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
         this.message = message;
         this.isHardcore = isHardcore;
     }
@@ -36,15 +36,15 @@ public final class Devirtualized extends Screen {
     protected void init() {
         this.ticksSinceDeath = 0;
         this.buttons.clear();
-        this.buttons.add(this.addDrawableChild(new ButtonWidget((this.width >> 1) - 100, (this.height >> 2) + 72, 200, 20, this.isHardcore ? new TranslatableText("deathScreen.spectate") : new TranslatableText("deathScreen.respawn"), (button) -> {
+        this.buttons.add(this.addDrawableChild(new ButtonWidget((this.width >> 1) - 100, (this.height >> 2) + 72, 200, 20, this.isHardcore ? new TranslatableTextContent("deathScreen.spectate") : new TranslatableTextContent("deathScreen.respawn"), (button) -> {
             this.client.player.requestRespawn();
             this.client.setScreen(null);
         })));
-        this.buttons.add(this.addDrawableChild(new ButtonWidget((this.width >> 1) - 100, (this.height >> 2) + 96, 200, 20, new TranslatableText("deathScreen.titleScreen"), (button) -> {
+        this.buttons.add(this.addDrawableChild(new ButtonWidget((this.width >> 1) - 100, (this.height >> 2) + 96, 200, 20, new TranslatableTextContent("deathScreen.titleScreen"), (button) -> {
             if (this.isHardcore) {
                 this.quitLevel();
             } else {
-                ConfirmScreen confirmScreen = new ConfirmScreen(this::onConfirmQuit, new TranslatableText("deathScreen.quit.confirm"), LiteralText.EMPTY, new TranslatableText("deathScreen.titleScreen"), new TranslatableText("deathScreen.respawn"));
+                ConfirmScreen confirmScreen = new ConfirmScreen(this::onConfirmQuit, new TranslatableTextContent("deathScreen.quit.confirm"), LiteralTextContent.EMPTY, new TranslatableTextContent("deathScreen.titleScreen"), new TranslatableTextContent("deathScreen.respawn"));
                 this.client.setScreen(confirmScreen);
                 confirmScreen.disableButtons(20);
             }
@@ -55,7 +55,7 @@ public final class Devirtualized extends Screen {
             widget.active = false;
         }
 
-        this.scoreText = (new TranslatableText("deathScreen.score")).append(": ").append((new LiteralText(Integer.toString(this.client.player.getScore()))).formatted(Formatting.YELLOW));
+        this.scoreText = (new TranslatableTextContent("deathScreen.score")).append(": ").append((new LiteralTextContent(Integer.toString(this.client.player.getScore()))).formatted(Formatting.YELLOW));
     }
 
     public boolean shouldCloseOnEsc() {
@@ -79,7 +79,7 @@ public final class Devirtualized extends Screen {
             this.client.world.disconnect();
         }
 
-        this.client.disconnect(new SaveLevelScreen(new TranslatableText("menu.savingLevel")));
+        this.client.disconnect(new MessageScreen(new TranslatableTextContent("menu.savingLevel")));
         this.client.setScreen(new TitleScreen());
     }
 

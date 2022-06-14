@@ -11,10 +11,11 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
+import java.util.OptionalInt;
 
 
 public class TowerWall extends Block {
@@ -26,7 +27,7 @@ public class TowerWall extends Block {
                 .strength(-1, -1)
                 .dropsNothing()
                 .sounds(BlockSoundGroup.GLASS)
-                .luminance(250)
+                .luminance(value -> 250)
 
         );
 
