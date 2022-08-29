@@ -28,14 +28,14 @@ public final class CarthageBiomeProvider extends BiomeSource {
     {
         super(getSpawnBiomes(registry));
         this.thisRegistry = registry;
-        this.biomeHolder = registry.getOrCreateEntry(RegistryKey.of(registry.getKey(),ModBiome.RegisteredBiomes.SECTOR5.getIdentifier()));
+        this.biomeHolder = registry.getOrCreateEntryDataResult(RegistryKey.of(registry.getKey(),ModBiome.RegisteredBiomes.SECTOR5.getIdentifier()));
     }
 
 
     public static List<RegistryEntry<Biome>> getSpawnBiomes(@NotNull Registry<Biome> registry)
     {
 
-        return SPAWN.stream().map(registry::getOrCreateEntry).collect(Collectors.toList());
+        return SPAWN.stream().map(registry::getOrCreateEntryDataResult).collect(Collectors.toList());
     }
 
 

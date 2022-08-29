@@ -1,10 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -31,6 +28,7 @@ public final class ArchitectureWorkstation extends HorizontalFacingBlock {
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder.add(FACING).add(on));
     }
+
 
     @Nullable
     @Override
