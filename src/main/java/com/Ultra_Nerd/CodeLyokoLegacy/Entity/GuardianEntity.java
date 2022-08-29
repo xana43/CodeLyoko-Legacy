@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
+import dev.onyxstudios.cca.api.v3.component.ComponentContainer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
@@ -15,6 +16,8 @@ public final class GuardianEntity extends FlyingEntity implements RangedAttackMo
     public void attack(final LivingEntity target, final float pullProgress) {
 
     }
+
+
 /*
     public GuardianEntity(@NotNull EntityType<? extends FlyingMob> type, @NotNull Level worldIn) {
         super(type, worldIn);

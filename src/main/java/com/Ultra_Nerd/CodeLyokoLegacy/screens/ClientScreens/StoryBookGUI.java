@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens;
 
 import net.minecraft.client.gui.screen.ingame.BookScreen;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.StringVisitable;
 
 public final class StoryBookGUI extends BookScreen {

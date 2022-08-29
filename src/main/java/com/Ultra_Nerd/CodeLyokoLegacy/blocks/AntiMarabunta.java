@@ -8,10 +8,9 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-
-import java.util.Random;
 
 public final class AntiMarabunta extends Block {
     private static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
@@ -45,7 +44,7 @@ public final class AntiMarabunta extends Block {
         }
 
         for (byte i = 127; i > -1; i--) {
-            final BlockPos blockpos = pos.offset(Direction.random(rand),rand.nextInt(3) - 1);
+            final BlockPos blockpos = pos.offset(Direction.random(net.minecraft.util.math.random.Random.create()),rand.nextInt(3) - 1);
 
             if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isChunkLoaded(blockpos)) {
                 return;

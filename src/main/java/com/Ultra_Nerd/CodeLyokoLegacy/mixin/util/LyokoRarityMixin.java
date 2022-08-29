@@ -1,9 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CustomLyokoRarity;
-import io.netty.handler.codec.memcache.binary.BinaryMemcacheOpcodes;
-import net.minecraft.entity.passive.AxolotlEntity;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import org.spongepowered.asm.mixin.Final;
@@ -30,11 +27,13 @@ public abstract class LyokoRarityMixin {
     {
             throw new AssertionError();
 
+
     }
 
     @Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = 179,target = "Lnet/minecraft/util/Rarity;field_8905:[Lnet/minecraft/util/Rarity;",shift = At.Shift.AFTER))
     private static void addNewRarity(final CallbackInfo ci)
     {
+
         final var rarities = new ArrayList<>(Arrays.asList(field_8905));
         final var last = rarities.get(rarities.size() - 1);
         //define new rarities

@@ -1,13 +1,25 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
+import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.resource.Resource;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourcePack;
 import net.minecraft.text.StringVisitable;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public record MethodUtil() {
 
@@ -38,6 +50,7 @@ public record MethodUtil() {
         }
 
         public static boolean EntityNotInVanillaWorld(@NotNull Entity entity) {
+           
             return entity.world.getRegistryKey() == ModDimensions.forestSectorWorld || entity.world.getRegistryKey() == ModDimensions.carthage || entity.world.getRegistryKey() == ModDimensions.desertSectorWorld || entity.world.getRegistryKey() == ModDimensions.iceSectorWorld
 
                     || entity.world.getRegistryKey() == ModDimensions.mountainSectorWorld || entity.world.getRegistryKey() == ModDimensions.volcanoWorld || entity.world.getRegistryKey() == ModDimensions.digitalOceanWorld || entity.world.getRegistryKey() == ModDimensions.frontierWorld;
@@ -89,7 +102,7 @@ public record MethodUtil() {
             final int length = denoted.length;
             for(int i = 0; i < length; i++)
             {
-                pages[i] = new TranslatableText(denoted[i]);
+                pages[i] = Text.translatable(denoted[i]);
             }
             return pages;
         }

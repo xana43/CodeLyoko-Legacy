@@ -8,12 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.EntityDamageSource;
-import net.minecraft.entity.damage.ProjectileDamageSource;
 import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.predicate.entity.DamageSourcePredicate;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

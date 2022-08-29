@@ -11,7 +11,7 @@ public final class KankrelatRenderder /*extends GeoEntityRenderer<KankrelatEntit
 
     @Nonnull
     @Override
-    public ResourceLocation getTextureLocation(@Nonnull KankrelatEntity entity) {
+    public ResourceLocation getTextureResource(@Nonnull KankrelatEntity entity) {
         return Tex;
     }
 

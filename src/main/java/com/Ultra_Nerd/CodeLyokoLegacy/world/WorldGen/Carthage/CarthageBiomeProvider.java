@@ -53,10 +53,8 @@ public final class CarthageBiomeProvider extends BiomeSource {
         return CARTHAGE_BIOME_PROVIDER_CODEC;
     }
 
-    @Override
-    public @NotNull BiomeSource withSeed(long p_47916_) {
-        return this;
-    }
+
+
 
     @Override
     public RegistryEntry<Biome> getBiome(final int x, final int y, final int z, final MultiNoiseUtil.MultiNoiseSampler noise) {

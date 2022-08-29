@@ -13,7 +13,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3f;
-import org.lwjgl.system.CallbackI;
 
 //@OnlyIn(Dist.CLIENT)
 @Environment(EnvType.CLIENT)

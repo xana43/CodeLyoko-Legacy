@@ -3,17 +3,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy.particles;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ParticleUTIL.DefaultLyokoParticleType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BeaconBlock;
-import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.render.entity.LightningEntityRenderer;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.enchantment.SweepingEnchantment;
-import net.minecraft.entity.LightningEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.SwordItem;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
 @Environment(EnvType.CLIENT)

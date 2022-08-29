@@ -1,22 +1,22 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.ModFeatures.structures.Tower.TowerBase;
-import com.google.common.collect.ImmutableMap;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.gen.structure.StructureType;
 
 public record ModStructures() {
-    public static final StructureFeature<?> towerStruct = new TowerBase(StructurePoolFeatureConfig.CODEC);
+    public static StructureType<TowerBase> towerStruct;
 
 
 
 
 
 
-    public static final ImmutableMap<String,StructureFeature<?>> structmap = ImmutableMap.<String,StructureFeature<?>>builder()
-            .put("tower_base", towerStruct)
-
-
-            .build();
+   public static void registerNewStructures()
+   {
+       towerStruct = Registry.register(Registry.STRUCTURE_TYPE, new Identifier(CodeLyokoMain.MOD_ID,"tower_base"), ()->TowerBase.CODEC);
+   }
 
 }

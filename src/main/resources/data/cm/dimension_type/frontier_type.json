@@ -13,5 +13,7 @@
   "effects": "cm:codelyoko_effects_general",
   "infiniburn": "#minecraft:infiniburn_overworld",
   "min_y": -64,
-  "height": 384
+  "height": 384,
+  "monster_spawn_light_level": 0,
+  "monster_spawn_block_light_limit": 0
 }

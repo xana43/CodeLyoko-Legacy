@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.items.tools;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;

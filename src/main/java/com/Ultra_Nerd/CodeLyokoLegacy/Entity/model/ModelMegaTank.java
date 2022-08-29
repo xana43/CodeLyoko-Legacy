@@ -12,33 +12,33 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public final class ModelMegaTank extends AnimatedGeoModel<MegaTankEntity> {
     @Override
-    public Identifier getModelLocation(final MegaTankEntity object) {
+    public Identifier getModelResource(final MegaTankEntity object) {
         return CodeLyokoMain.CodeLyokoPrefix("geo/megatank.geo.json");
     }
 
     @Override
-    public Identifier getTextureLocation(final MegaTankEntity object) {
+    public Identifier getTextureResource(final MegaTankEntity object) {
         return CodeLyokoMain.CodeLyokoPrefix("textures/entity/megatank/megatank.png");
     }
 
     @Override
-    public Identifier getAnimationFileLocation(final MegaTankEntity animatable) {
+    public Identifier getAnimationResource(final MegaTankEntity animatable) {
         return CodeLyokoMain.CodeLyokoPrefix("animations/entities/megatank.json");
     }
 
 /*
     @Override
-    public @NotNull ResourceLocation getModelLocation(MegaTankEntity object) {
+    public @NotNull ResourceLocation getModelResource(MegaTankEntity object) {
         return CodeLyokoMain.CodeLyokoPrefix("geo/megatank.geo.json");
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(MegaTankEntity object) {
+    public @NotNull ResourceLocation getTextureResource(MegaTankEntity object) {
         return new ResourceLocation(CodeLyokoMain.MOD_ID,"textures/entity/megatank/megatank.png");
     }
 
     @Override
-    public @NotNull ResourceLocation getAnimationFileLocation(MegaTankEntity animatable) {
+    public @NotNull ResourceLocation getAnimationResource(MegaTankEntity animatable) {
         return new ResourceLocation(CodeLyokoMain.MOD_ID,"animations/entities/megatank.json");
     }
 

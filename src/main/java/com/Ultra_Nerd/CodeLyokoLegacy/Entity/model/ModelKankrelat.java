@@ -10,33 +10,33 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public final class ModelKankrelat extends AnimatedGeoModel<KankrelatEntity> {
     @Override
-    public Identifier getModelLocation(final KankrelatEntity object) {
+    public Identifier getModelResource(final KankrelatEntity object) {
         return null;
     }
 
     @Override
-    public Identifier getTextureLocation(final KankrelatEntity object) {
+    public Identifier getTextureResource(final KankrelatEntity object) {
         return null;
     }
 
     @Override
-    public Identifier getAnimationFileLocation(final KankrelatEntity animatable) {
+    public Identifier getAnimationResource(final KankrelatEntity animatable) {
         return null;
     }
 
     /*
     @Override
-    public @NotNull ResourceLocation getAnimationFileLocation(KankrelatEntity animatable) {
+    public @NotNull ResourceLocation getAnimationResource(KankrelatEntity animatable) {
         return CodeLyokoMain.CodeLyokoPrefix("animations/entities/kankrelat.json");
     }
 
     @Override
-    public @Nullable ResourceLocation getModelLocation(KankrelatEntity object) {
+    public @Nullable ResourceLocation getModelResource(KankrelatEntity object) {
         return null;
     }
 
     @Override
-    public @Nullable ResourceLocation getTextureLocation(KankrelatEntity object) {
+    public @Nullable ResourceLocation getTextureResource(KankrelatEntity object) {
         return null;
     }
 

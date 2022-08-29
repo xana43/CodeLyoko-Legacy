@@ -1,9 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 
 public final class OverboardEntity extends LyokoVehicleEntity  {

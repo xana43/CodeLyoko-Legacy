@@ -2,12 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.items.SpawnItems;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverboardEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.client.gui.screen.ingame.AbstractFurnaceScreen;
-import net.minecraft.client.gui.screen.ingame.JigsawBlockScreen;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.screen.AbstractFurnaceScreenHandler;
 import net.minecraft.util.ActionResult;
 
 public final class OverBoardItem extends Item {

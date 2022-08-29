@@ -2,17 +2,14 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.IceBlock;
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.Item;
-import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.event.listener.EntityGameEventHandler;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class LyokoVehicleEntity extends BoatEntity {
@@ -81,7 +78,7 @@ public class LyokoVehicleEntity extends BoatEntity {
     }
 
     @Override
-    public float method_7548() {
+    public float getNearbySlipperiness() {
         return 0.90f;
     }
 

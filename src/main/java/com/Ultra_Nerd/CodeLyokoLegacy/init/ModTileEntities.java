@@ -5,9 +5,6 @@ import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public record ModTileEntities() {
 
 

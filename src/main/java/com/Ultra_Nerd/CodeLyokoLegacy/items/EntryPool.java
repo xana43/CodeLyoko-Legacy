@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.WrittenBookItem;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -56,7 +55,7 @@ public record EntryPool()  {
         @Override
         public void appendTooltip(final ItemStack stack, @Nullable final World world, final List<Text> tooltip, final TooltipContext context) {
             super.appendTooltip(stack, world, tooltip, context);
-            tooltip.add(new TranslatableText("lyoko.story.entry"));
+            tooltip.add(Text.translatable("lyoko.story.entry"));
         }
 
 
@@ -76,7 +75,7 @@ public record EntryPool()  {
         @Override
         public void appendTooltip(final ItemStack stack, @Nullable final World world, final List<Text> tooltip, final TooltipContext context) {
             super.appendTooltip(stack, world, tooltip, context);
-            tooltip.add(new TranslatableText("lyoko.story.entry2"));
+            tooltip.add(Text.translatable("lyoko.story.entry2"));
         }
 
 

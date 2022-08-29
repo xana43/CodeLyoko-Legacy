@@ -10,10 +10,11 @@
     "PlayerLyokoMixin",
     "retainXP",
     "stopInventoryDrop",
-    "StructyreFeatureAccessor",
     "util.LyokoRarityMixin"
   ],
   "client": [
+    "util.mixin.BakedModelManagerAccessor",
+    "util.mixin.MixinModelLoader",
     "HUD"
   ],
   "injectors": {

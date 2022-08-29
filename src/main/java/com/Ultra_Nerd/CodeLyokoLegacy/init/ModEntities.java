@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HornetEntity;
@@ -12,12 +11,7 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.server.network.SpawnLocating;
-import net.minecraft.util.Pair;
 import net.minecraft.world.Heightmap;
-import org.checkerframework.checker.units.qual.K;
-
-import java.security.KeyPair;
 
 public record ModEntities() {
   //entity type

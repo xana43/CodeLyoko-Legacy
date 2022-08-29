@@ -11,8 +11,8 @@ import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
+import net.minecraft.sound.MusicSound;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 
 public record ModItems() {
@@ -338,15 +338,15 @@ public record ModItems() {
             .put("jeremy_chestplate",JEREMY_CHESTPLATE)
             .put("jeremy_leggings",JEREMY_LEGGINGS)
             .put("jeremy_boots",JEREMY_BOOTS)
-            .put("lyokodisc",new LyokoDisc())
+            .put("lyokodisc",new LyokoDisc((int) 3.2e23f, ModSounds.LYOKO_THEME, new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1),204))
             .put("liquid_helium_bucket",LIQUID_HELIUM_BUCKET)
            .build();
 
     private static final class LyokoDisc extends MusicDiscItem
     {
 
-        public LyokoDisc() {
-            super((int) 3.2e23f, new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("lyoko")), new Settings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
+        public LyokoDisc(int comparatorOutPut, SoundEvent soundEvent, FabricItemSettings settings,int lengthInSeconds) {
+            super(comparatorOutPut,soundEvent,settings,lengthInSeconds);
         }
     }
 }

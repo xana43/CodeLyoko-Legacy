@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.client.itemRenderers;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.APIEmbed.api.Myron;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.ForceFieldEmitter;
-import dev.monarkhes.myron.api.Myron;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;

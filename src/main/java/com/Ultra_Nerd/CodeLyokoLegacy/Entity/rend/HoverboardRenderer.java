@@ -30,14 +30,14 @@ public final class HoverboardRenderer<T extends HoverboardEntity> extends Entity
         matrixStackIn.translate(0, -1.5f, 0);
         matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(360 + entityYaw));
         this.BoardModel.setupAnim(entityIn, 0, 0, 0, 0, 0);
-        final VertexConsumer vertexBuilder = bufferIn.getBuffer(this.BoardModel.renderType(this.getTextureLocation(entityIn)));
+        final VertexConsumer vertexBuilder = bufferIn.getBuffer(this.BoardModel.renderType(this.getTextureResource(entityIn)));
         this.BoardModel.renderToBuffer(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         matrixStackIn.popPose();
     }
 
     @Nonnull
     @Override
-    public ResourceLocation getTextureLocation(@Nonnull HoverboardEntity entity) {
+    public ResourceLocation getTextureResource(@Nonnull HoverboardEntity entity) {
         return HoverboardTex;
     }
 

@@ -11,7 +11,7 @@ import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.MiscPlacedFeatures;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -31,9 +31,7 @@ public record ModBiome() {
             final GenerationSettings.Builder forestGensettings = new GenerationSettings.Builder();
            // CodeLyokoMain.LOG.info(String.valueOf(ModFeature.FOREST_ENTRY_PLACED));
            forestGensettings.feature(GenerationStep.Feature.VEGETAL_DECORATION, RegistryEntry.of(ModFeature.PlacedFeatures.FOREST_TREE_PLACED));
-            return (new Biome.Builder())
-                    .category(Biome.Category.FOREST)
-                    .precipitation(Biome.Precipitation.NONE)
+            return (new Biome.Builder()).precipitation(Biome.Precipitation.NONE)
                     .downfall(0)
                     .effects(new BiomeEffects.Builder().waterColor(2387).fogColor(2387).waterFogColor(2387)
                             .skyColor(2387).build())
@@ -50,7 +48,7 @@ public record ModBiome() {
             GenerationSettings.Builder desertGen = new GenerationSettings.Builder();
 
             return (new Biome.Builder())
-                    .category(Biome.Category.DESERT)
+
                     .precipitation(Biome.Precipitation.NONE)
                     .downfall(0)
                     .effects(new BiomeEffects.Builder().waterFogColor(12759680).fogColor(12759680).waterColor(12759680).skyColor(12759680).build())
@@ -69,7 +67,7 @@ public record ModBiome() {
            iceGenBuilder.feature(GenerationStep.Feature.SURFACE_STRUCTURES, MiscPlacedFeatures.BLUE_ICE);
 
             return (new Biome.Builder())
-                    .category(Biome.Category.ICY)
+
                     .precipitation(Biome.Precipitation.SNOW)
                     .downfall(0)
                     .effects(new BiomeEffects.Builder().music(new MusicSound(ModSounds.ICE,0,0,true)).skyColor(2387).waterColor(2387).waterFogColor(2387).fogColor(2387).build())
@@ -85,7 +83,7 @@ public record ModBiome() {
             SpawnSettings.Builder oceanSpawns = new SpawnSettings.Builder();
             GenerationSettings.Builder ocenGen = new GenerationSettings.Builder();
             return (new Biome.Builder())
-                    .category(Biome.Category.OCEAN)
+
                     .precipitation(Biome.Precipitation.NONE)
                     .downfall(0)
                     .temperature(13)
@@ -102,7 +100,7 @@ public record ModBiome() {
             final GenerationSettings.Builder mountainGen = new GenerationSettings.Builder();
 
             return (new Biome.Builder())
-                    .category(Biome.Category.MOUNTAIN)
+
                     .precipitation(Biome.Precipitation.NONE)
                     .temperature(2)
                     .downfall(0)
@@ -113,7 +111,7 @@ public record ModBiome() {
                     .build();
         }
     private static final Biome FRONTEIR = new Biome.Builder()
-            .category(Biome.Category.NONE)
+
             .downfall(0)
             .temperature(-243)
             .temperatureModifier(Biome.TemperatureModifier.FROZEN)
@@ -130,7 +128,7 @@ public record ModBiome() {
             GenerationSettings.Builder volcanoGen = new GenerationSettings.Builder();
             volcanoGen.feature(GenerationStep.Feature.FLUID_SPRINGS,MiscPlacedFeatures.SPRING_LAVA);
             return (new Biome.Builder())
-                    .category(Biome.Category.NETHER)
+
                     .downfall(0)
                     .precipitation(Biome.Precipitation.NONE)
                     .temperature(46)
@@ -147,7 +145,7 @@ public record ModBiome() {
                 SpawnSettings.Builder sector5Spawn = new SpawnSettings.Builder().spawnCost(ModEntities.BLOK,1,0);
                 GenerationSettings.Builder sector5Gen = new GenerationSettings.Builder();
                 return (new Biome.Builder())
-                        .category(Biome.Category.NONE)
+
                         .downfall(0)
                         .precipitation(Biome.Precipitation.NONE)
                         .temperature(13)

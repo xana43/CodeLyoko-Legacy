@@ -31,14 +31,14 @@ public final class OverbikeRenderer<T extends OverbikeEntity> extends EntityRend
         matrixStackIn.scale(-.5F, -.5F, .5F);
         matrixStackIn.translate(0, -1.5f, 0);
         this.BikeModel.setupAnim(entityIn, 0, 0, 0, 0, 0);
-        VertexConsumer vertexBuilder = bufferIn.getBuffer(this.BikeModel.renderType(this.getTextureLocation(entityIn)));
+        VertexConsumer vertexBuilder = bufferIn.getBuffer(this.BikeModel.renderType(this.getTextureResource(entityIn)));
         this.BikeModel.renderToBuffer(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         matrixStackIn.popPose();
     }
 
     @Nonnull
     @Override
-    public ResourceLocation getTextureLocation(@Nonnull OverbikeEntity entity) {
+    public ResourceLocation getTextureResource(@Nonnull OverbikeEntity entity) {
         return CodeLyokoMain.CodeLyokoPrefix("textures/entity/overbike/overbiketexture.png");
     }
 

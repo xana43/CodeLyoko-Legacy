@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ParticleUTIL;
 
 import com.mojang.brigadier.StringReader;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleEffect;

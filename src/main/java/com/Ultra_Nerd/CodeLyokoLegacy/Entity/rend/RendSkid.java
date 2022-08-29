@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
-import dev.monarkhes.myron.api.Myron;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.APIEmbed.api.Myron;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Frustum;
@@ -11,14 +11,10 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.SpriteAtlasManager;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3f;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
 
 
 public final class RendSkid extends EntityRenderer<EntitySkid> {

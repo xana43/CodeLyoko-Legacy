@@ -36,6 +36,8 @@ public record ModSounds() {
     public static final SoundEvent MEGATANKDIE = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix( "entity.megatank.die"));
     public static final SoundEvent CURSORBLINK = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("interface_cursor"));
     public static final SoundEvent HORNETFLY = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.hornet.fly"));
+
+    public static final SoundEvent LYOKO_THEME = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("lyoko"));
     //public static final BlockSoundGroup TowerInterfaceSound = new BlockSoundGroup();
     public static final SoundEvent[] SOUNDS = new SoundEvent[]{
             OPENTOWERGUISOUND,
@@ -64,8 +66,8 @@ public record ModSounds() {
             MEGATANKSMALLFALL,
             MEGATANKBIGFALL,
             CURSORBLINK,
-            HORNETFLY
-
+            HORNETFLY,
+            LYOKO_THEME
 
     };
 

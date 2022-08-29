@@ -3,11 +3,9 @@ package com.Ultra_Nerd.CodeLyokoLegacy.items;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.DamageSources.LyokoDamage;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 

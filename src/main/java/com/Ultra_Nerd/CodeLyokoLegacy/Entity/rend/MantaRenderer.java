@@ -19,7 +19,7 @@ public final class MantaRenderer extends GeoEntityRenderer<MantaEntity> {
 
     @Nonnull
     @Override
-    public ResourceLocation getTextureLocation(@Nonnull MantaEntity entity) {
+    public ResourceLocation getTextureResource(@Nonnull MantaEntity entity) {
         return CodeLyokoMain.CodeLyokoPrefix("textures/entity/manta/mantatemplate.png");
     }
 

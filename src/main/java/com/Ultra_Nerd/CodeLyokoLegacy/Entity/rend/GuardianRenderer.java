@@ -15,7 +15,7 @@ public final class GuardianRenderer /*extends MobRenderer<GuardianEntity, MathGu
 
     @Nonnull
     @Override
-    public ResourceLocation getTextureLocation(@Nonnull GuardianEntity entity) {
+    public ResourceLocation getTextureResource(@Nonnull GuardianEntity entity) {
         return CodeLyokoMain.CodeLyokoPrefix("textures/entity/guardian/guardian.png");
     }
 

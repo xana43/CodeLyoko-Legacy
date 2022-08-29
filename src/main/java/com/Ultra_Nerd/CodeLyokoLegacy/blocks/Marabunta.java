@@ -4,18 +4,19 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.DamageSources.LyokoDamage;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
+import net.minecraft.block.SoulSandBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
-import java.util.Random;
+
 
 public final class Marabunta extends SoulSandBlock {
 
@@ -64,7 +65,7 @@ public final class Marabunta extends SoulSandBlock {
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        entity.damage(new LyokoDamage(this.getTranslationKey()), new Random().nextInt(10));
+        entity.damage(new LyokoDamage(this.getTranslationKey()), Random.create().nextInt(10));
     }
 
 

@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.MinecraftClient;
@@ -10,7 +9,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
@@ -21,10 +19,12 @@ public abstract class retainXP {
     @Shadow protected abstract void updatePose();
 
     @Inject(method = "getXpToDrop",at = @At("HEAD"), cancellable = true)
-    private void retainxp(final PlayerEntity player, final CallbackInfoReturnable<Integer> cir)
+    private void retainxp(final CallbackInfoReturnable<Integer> cir)
     {
-            if(player != null) {
-                if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(player)) {
+        final MinecraftClient mc = MinecraftClient.getInstance();
+
+            if(mc.player != null) {
+                if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(mc.player)) {
 
                     cir.setReturnValue(0);
                 }

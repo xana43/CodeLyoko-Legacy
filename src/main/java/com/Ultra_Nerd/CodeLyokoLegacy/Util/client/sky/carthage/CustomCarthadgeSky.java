@@ -8,15 +8,9 @@ import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector2f;
-import net.minecraft.client.util.math.Vector3d;
-import net.minecraft.util.CubicSampler;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3f;
-import org.jetbrains.annotations.NotNull;
 @Environment(EnvType.CLIENT)
 public record CustomCarthadgeSky() implements DimensionRenderingRegistry.SkyRenderer/*implements ISkyRenderHandler*/ {
 

@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBiome;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Common.CustomGenSettings;
 import com.mojang.serialization.Codec;
@@ -13,11 +12,11 @@ import net.minecraft.tag.TagKey;
 import net.minecraft.util.dynamic.RegistryOps;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryEntryList;
-import net.minecraft.world.*;
+import net.minecraft.world.ChunkRegion;
+import net.minecraft.world.HeightLimitView;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.util.MultiNoiseUtil;
@@ -27,6 +26,7 @@ import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.Blender;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
+import net.minecraft.world.gen.noise.NoiseConfig;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -83,7 +83,7 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
 
     public @NotNull Registry<StructureSet> getStructRegistry()
     {
-        return field_37053;
+        return structureSetRegistry;
     }
 
     public CustomGenSettings getCarthageSettings()
@@ -99,23 +99,15 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
     }
 
     @Override
-    public @NotNull ChunkGenerator withSeed(long seed) {
-        return new CarthageGenerator(getStructRegistry(),getThisBiomeRegistry(),settings);
-    }
-
-    @Override
-    public MultiNoiseUtil.MultiNoiseSampler getMultiNoiseSampler() {
-        return null;
-    }
-
-    @Override
-    public void carve(final ChunkRegion chunkRegion, final long seed, final BiomeAccess biomeAccess, final StructureAccessor structureAccessor, final Chunk chunk, final GenerationStep.Carver generationStep) {
+    public void carve(final ChunkRegion chunkRegion, final long seed, final NoiseConfig noiseConfig, final BiomeAccess world, final StructureAccessor structureAccessor, final Chunk chunk, final GenerationStep.Carver carverStep) {
 
     }
 
 
+
+
     @Override
-    public void buildSurface(@Nonnull ChunkRegion region, StructureAccessor featureManager, @NotNull Chunk chunk) {
+    public void buildSurface(@Nonnull ChunkRegion region, StructureAccessor featureManager,final NoiseConfig config, @NotNull Chunk chunk) {
         final BlockState bedrock = ModBlocks.DIGITAL_OCEAN_BLOCK.getDefaultState();
         final BlockState stone = ModBlocks.SECTOR5_STEEL.getDefaultState();
         final BlockState white = ModBlocks.TOWER_WHITE.getDefaultState();
@@ -198,11 +190,9 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
 
 
     @Override
-    public CompletableFuture<Chunk> populateNoise(final Executor executor, final Blender blender, final StructureAccessor structureAccessor, final Chunk chunk) {
+    public CompletableFuture<Chunk> populateNoise(final Executor executor, final Blender blender, final NoiseConfig noiseConfig, final StructureAccessor structureAccessor, final Chunk chunk) {
         return CompletableFuture.completedFuture(chunk);
     }
-
-
 
     @Override
     public int getSeaLevel() {
@@ -235,12 +225,14 @@ private int getHeightAt(int baseHeight,float vertialVariance, float horizontalVa
     }
 
     @Override
-    public int getHeight(final int x, final int z, final Heightmap.Type heightmap, final HeightLimitView world) {
+    public int getHeight(final int x, final int z, final Heightmap.Type heightmap, final HeightLimitView world, final NoiseConfig noiseConfig) {
         return 0;
     }
 
+
+
     @Override
-    public int getHeightOnGround(final int x, final int z, final Heightmap.Type heightmap, final HeightLimitView world) {
+    public int getHeightOnGround(final int x, final int z, final Heightmap.Type heightmap, final HeightLimitView world, final NoiseConfig config) {
         final int baseHeight = settings.baseHeight();
         final float verticalVariance = settings.verticalVariance();
         final float horizontalVariance = settings.horizontalVariance();
@@ -249,13 +241,14 @@ private int getHeightAt(int baseHeight,float vertialVariance, float horizontalVa
     }
 
     @Override
-    public void getDebugHudText(final List<String> text, final BlockPos pos) {
+    public void getDebugHudText(final List<String> text, final NoiseConfig noiseConfig, final BlockPos pos) {
 
     }
 
+
     @Override
-    public VerticalBlockSample getColumnSample(final int x, final int z, final HeightLimitView world) {
-        final int y = getHeightOnGround(x,z, Heightmap.Type.WORLD_SURFACE_WG,world);
+    public VerticalBlockSample getColumnSample(final int x, final int z, final HeightLimitView world,NoiseConfig config) {
+        final int y = getHeightOnGround(x,z, Heightmap.Type.WORLD_SURFACE_WG,world,config);
         final BlockState none = Blocks.AIR.getDefaultState();
         final BlockState[] states = new BlockState[y];
         for(int i = 1; i < y; i++)

@@ -11,12 +11,8 @@ import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.SmeltingRecipe;
-import net.minecraft.tag.ItemTags;
 
 import java.util.List;
-import java.util.Random;
 import java.util.function.Consumer;
 
 public final class CustomRecipeProvider extends FabricRecipeProvider {

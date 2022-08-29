@@ -7,23 +7,22 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HornetEntity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public final class ModelHornet extends AnimatedGeoModel<HornetEntity> {
     @Override
-    public Identifier getModelLocation(final HornetEntity object) {
+    public Identifier getModelResource(final HornetEntity object) {
 
         return CodeLyokoMain.CodeLyokoPrefix("geo/hornet.geo.json");
     }
 
     @Override
-    public Identifier getTextureLocation(final HornetEntity object) {
+    public Identifier getTextureResource(final HornetEntity object) {
         return CodeLyokoMain.CodeLyokoPrefix("textures/entity/hornet/hornetatlas.png");
     }
 
     @Override
-    public Identifier getAnimationFileLocation(final HornetEntity animatable) {
+    public Identifier getAnimationResource(final HornetEntity animatable) {
 
         return CodeLyokoMain.CodeLyokoPrefix("animations/entities/hornet.json");
     }
@@ -32,17 +31,17 @@ public final class ModelHornet extends AnimatedGeoModel<HornetEntity> {
 
     /*
     @Override
-    public @Nullable ResourceLocation getModelLocation(HornetEntity object) {
+    public @Nullable ResourceLocation getModelResource(HornetEntity object) {
         return null;
     }
 
     @Override
-    public @Nullable ResourceLocation getTextureLocation(HornetEntity object) {
+    public @Nullable ResourceLocation getTextureResource(HornetEntity object) {
         return null;
     }
 
     @Override
-    public @NotNull ResourceLocation getAnimationFileLocation(HornetEntity animatable) {
+    public @NotNull ResourceLocation getAnimationResource(HornetEntity animatable) {
         return new ResourceLocation(CodeLyokoMain.MOD_ID, "animations/entities/hornet.json");
     }
 

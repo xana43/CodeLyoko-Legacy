@@ -5,7 +5,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.items.armor.Models;// Made with Blockbenc
 
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.Models.Util.ArmorModelRenderer;
 import net.minecraft.client.model.ModelPart;
-import org.jetbrains.annotations.NotNull;
 
 public final class FelineChestPlate extends ArmorModelRenderer {
 	public FelineChestPlate(final ModelPart root, final boolean thinArms) {

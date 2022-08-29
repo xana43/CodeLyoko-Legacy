@@ -1,7 +1,8 @@
 accessWidener v1 named
 
 extendable method net/minecraft/client/world/GeneratorType <init> (Ljava/lang/String;)V
-
+extendable class net/minecraft/client/render/model/json/ModelTransformation$Deserializer
+extendable class net/minecraft/client/render/model/json/Transformation$Deserializer
 
 
 

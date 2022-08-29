@@ -10,17 +10,17 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public final class ModelManta extends AnimatedGeoModel<MantaEntity> {
     @Override
-    public Identifier getModelLocation(final MantaEntity object) {
+    public Identifier getModelResource(final MantaEntity object) {
         return null;
     }
 
     @Override
-    public Identifier getTextureLocation(final MantaEntity object) {
+    public Identifier getTextureResource(final MantaEntity object) {
         return null;
     }
 
     @Override
-    public Identifier getAnimationFileLocation(final MantaEntity animatable) {
+    public Identifier getAnimationResource(final MantaEntity animatable) {
         return null;
     }
 
@@ -28,17 +28,17 @@ public final class ModelManta extends AnimatedGeoModel<MantaEntity> {
 
 /*
     @Override
-    public @NotNull ResourceLocation getAnimationFileLocation(MantaEntity animated) {
+    public @NotNull ResourceLocation getAnimationResource(MantaEntity animated) {
         return CodeLyokoMain.CodeLyokoPrefix("animations/entities/manta.json");
     }
 
     @Override
-    public @Nullable ResourceLocation getModelLocation(MantaEntity object) {
+    public @Nullable ResourceLocation getModelResource(MantaEntity object) {
         return null;
     }
 
     @Override
-    public @Nullable ResourceLocation getTextureLocation(MantaEntity object) {
+    public @Nullable ResourceLocation getTextureResource(MantaEntity object) {
         return null;
     }
 

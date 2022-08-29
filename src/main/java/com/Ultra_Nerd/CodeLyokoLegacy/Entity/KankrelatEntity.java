@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
+import dev.onyxstudios.cca.api.v3.component.ComponentContainer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.world.World;
@@ -11,11 +12,6 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import java.rmi.Remote;
-import java.rmi.server.Operation;
-import java.rmi.server.RemoteCall;
-import java.rmi.server.Skeleton;
 
 public final class KankrelatEntity extends HostileEntity implements IAnimatable {
 
@@ -52,6 +48,7 @@ public final class KankrelatEntity extends HostileEntity implements IAnimatable 
     public @NotNull AnimationFactory getFactory() {
         return manager;
     }
+
 
 
 /*

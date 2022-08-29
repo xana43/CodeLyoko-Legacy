@@ -5,22 +5,12 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayNetworkHandler;
-import net.minecraft.server.network.ServerPlayerInteractionManager;
-import net.minecraft.server.network.ServerQueryNetworkHandler;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.MathHelper;
@@ -130,7 +120,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
                     drawTexture(stack, x, y, 0, 19, 104, 19,1024,512);
                 }
                 //drawTexture(stack,x, 38, 0, (46 + i) * 20, width >> 1, height);
-                drawCenteredText(stack,client.textRenderer, getMessage().shallowCopy().setStyle(ConstantUtil.Styles.HUD.getThisStyle()), x +( width +55)>> 1, y + (height + 32) >> 1, j | MathHelper.ceil(alpha * 255.0F) << 24);
+                drawCenteredText(stack,client.textRenderer, getMessage().copy().setStyle(ConstantUtil.Styles.HUD.getThisStyle()), x +( width +55)>> 1, y + (height + 32) >> 1, j | MathHelper.ceil(alpha * 255.0F) << 24);
 
 
             }
@@ -149,16 +139,16 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
 
         //CompActive = handler.isActive();
         if (CompActive) {
-            this.button.setMessage(new TranslatableText("de-activate"));
+            this.button.setMessage(Text.translatable("de-activate"));
         } else {
-            this.button.setMessage(new TranslatableText("activate"));
+            this.button.setMessage(Text.translatable("activate"));
         }
 
         if (CompActive) {
-            this.text.setMessage(new TranslatableText("Active"));
+            this.text.setMessage(Text.translatable("Active"));
             this.text.setEditableColor(0x008000);
         } else {
-            this.text.setMessage(new TranslatableText("in-active"));
+            this.text.setMessage(Text.translatable("in-active"));
             this.text.setEditableColor(0xda2c43);
         }
     }
@@ -168,11 +158,11 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     private void setTextField() {
         final int tx = this.width >> 1;
         final int ty = this.height >> 1;
-        this.text = new TextFieldWidget(client.textRenderer, x, ty + 40, this.width, 23, new TranslatableText("gui.cm.computer_input_main").setStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
+        this.text = new TextFieldWidget(client.textRenderer, x, ty + 40, this.width, 23, Text.translatable("gui.cm.computer_input_main").setStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
         this.text.setDrawsBackground(false);
         this.text.setVisible(true);
         this.text.setEditableColor(0xda2c43);
-        this.text.setMessage(new TranslatableText("gui.cm.inactive"));
+        this.text.setMessage(Text.translatable("gui.cm.inactive"));
         this.text.setEditable(false);
 
 

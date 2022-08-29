@@ -7,13 +7,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.mixin.StructyreFeatureAccessor;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageBiomeProvider;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
-import io.github.ladysnake.locki.DefaultInventoryNodes;
-import io.github.ladysnake.locki.InventoryLock;
-import io.github.ladysnake.locki.Locki;
-import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -27,10 +22,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
-import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -39,10 +31,9 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -65,7 +56,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public record CodeLyokoMain() implements ModInitializer {
 
-    public static final InventoryLock LYOKO_LOCK = Locki.registerLock(CodeLyokoPrefix("lyoko_lock"));
+
     public static final String MOD_ID = "cm";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
 
@@ -126,7 +117,7 @@ public record CodeLyokoMain() implements ModInitializer {
         Registry.register(Registry.BIOME_SOURCE,CodeLyokoPrefix("carthage_biome"), CarthageBiomeProvider.CARTHAGE_BIOME_PROVIDER_CODEC);
         ModScreenHandlers.screenHandlerMap.forEach((s, screenHandlerType) -> Registry.register(Registry.SCREEN_HANDLER,CodeLyokoPrefix(s),screenHandlerType));
 
-        ModStructures.structmap.forEach((s, structureFeature) -> StructyreFeatureAccessor.callRegister(MOD_ID + ":"+s,structureFeature, GenerationStep.Feature.SURFACE_STRUCTURES));
+        ModStructures.registerNewStructures();
         ModFeature.CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s,feature) -> {
 
             Registry.register(BuiltinRegistries.CONFIGURED_FEATURE,CodeLyokoPrefix(s),feature.getLeft());
@@ -236,7 +227,7 @@ if(player != null) {
                     if (XanaHandler.calculateAttackProbability()) {
                         final int notifyPlayerRandom = new Random().nextInt(world.getPlayers().size());
 
-                        world.getPlayers().get(notifyPlayerRandom).sendMessage(new TranslatableText("xana.attack.start").getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle().withColor(Formatting.RED)).get(0), true);
+                        world.getPlayers().get(notifyPlayerRandom).sendMessage(Text.translatable("xana.attack.start").getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle().withColor(Formatting.RED)).get(0), true);
 
 
                     }
@@ -247,12 +238,11 @@ if(player != null) {
             {
                 serverPlayerEntity.getHungerManager().setExhaustion(0);
                 serverPlayerEntity.getHungerManager().setSaturationLevel(5);
-                CodeLyokoMain.LYOKO_LOCK.lock(serverPlayerEntity, DefaultInventoryNodes.CRAFTING);
                 serverPlayerEntity.getAbilities().allowModifyWorld = serverPlayerEntity.isCreative();
 
                 //CodeLyokoMain.LYOKO_LOCK.lock(serverPlayerEntity, DefaultInventoryNodes.MAIN_INVENTORY);
-            } else if (CodeLyokoMain.LYOKO_LOCK.isLocking(serverPlayerEntity,DefaultInventoryNodes.CRAFTING) /*&& CodeLyokoMain.LYOKO_LOCK.isLocking(serverPlayerEntity,DefaultInventoryNodes.MAIN_INVENTORY)*/) {
-                CodeLyokoMain.LYOKO_LOCK.unlock(serverPlayerEntity,DefaultInventoryNodes.CRAFTING);
+            } else/*&& CodeLyokoMain.LYOKO_LOCK.isLocking(serverPlayerEntity,DefaultInventoryNodes.MAIN_INVENTORY)*/ {
+
                 serverPlayerEntity.getAbilities().allowModifyWorld = true;
                 //CodeLyokoMain.LYOKO_LOCK.unlock(serverPlayerEntity,DefaultInventoryNodes.MAIN_INVENTORY);
             }

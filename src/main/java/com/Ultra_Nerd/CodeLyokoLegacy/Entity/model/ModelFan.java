@@ -9,17 +9,17 @@ public final class ModelFan /*extends AnimatedGeoModel<EntityFan>*/{
     private static final Identifier FAN_ANIMATION = CodeLyokoMain.CodeLyokoPrefix("animations/entities/fan.json");
 
     @Override
-    public @NotNull ResourceLocation getModelLocation(EntityFan object) {
+    public @NotNull ResourceLocation getModelResource(EntityFan object) {
         return FAN_MODEL;
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(EntityFan object) {
+    public @NotNull ResourceLocation getTextureResource(EntityFan object) {
         return FAN_TEXTURE;
     }
 
     @Override
-    public @NotNull ResourceLocation getAnimationFileLocation(EntityFan animatable) {
+    public @NotNull ResourceLocation getAnimationResource(EntityFan animatable) {
         return FAN_ANIMATION;
     }
 

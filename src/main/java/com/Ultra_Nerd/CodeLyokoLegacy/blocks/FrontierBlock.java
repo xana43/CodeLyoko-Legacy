@@ -11,8 +11,8 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 
-import java.util.Random;
 
 public final class FrontierBlock extends TransparentBlock {
     public FrontierBlock() {
@@ -29,13 +29,13 @@ public final class FrontierBlock extends TransparentBlock {
     public void randomTick(final BlockState state, final ServerWorld world, final BlockPos pos, final Random random) {
         super.randomTick(state, world, pos, random);
         if(world.getRegistryKey() == ModDimensions.forestSectorWorld) {
-            DamangeTime -= random.nextInt(0, 10);
+            DamangeTime -= random.nextInt(10);
         }
     }
 
 
     @Override
-    public void scheduledTick(final BlockState state, final ServerWorld world, final BlockPos pos, final Random random) {
+    public void scheduledTick(final BlockState state, final ServerWorld world, final BlockPos pos, final net.minecraft.util.math.random.Random random) {
         super.scheduledTick(state, world, pos, random);
         if(DamangeTime <= 0)
         {
@@ -47,7 +47,7 @@ public final class FrontierBlock extends TransparentBlock {
                 {
                     itemEntity.remove(Entity.RemovalReason.KILLED);
                 }
-                entity.damage(source,random.nextInt(0,20));
+                entity.damage(source,random.nextInt(20));
             }
             DamangeTime = 10000;
         }
