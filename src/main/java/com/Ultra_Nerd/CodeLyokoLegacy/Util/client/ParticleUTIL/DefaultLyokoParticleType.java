@@ -12,7 +12,6 @@ import java.util.Objects;
 public final class DefaultLyokoParticleType extends ParticleType<DefaultLyokoParticleType> implements ParticleEffect {
 
 
-
     public DefaultLyokoParticleType(final boolean alwaysShow) {
 
         super(alwaysShow, new Factory<>() {

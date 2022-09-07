@@ -61,7 +61,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
     public static final Identifier PacketID = CodeLyokoMain.CodeLyokoPrefix("spawn_packet");
     //keybinds
     private static KeyBinding classCreenBinding;
-    private static final String keyCategory = "category." + CodeLyokoMain.MOD_ID+".lyoko_controls";
+    private static final String keyCategory = "category." + CodeLyokoMain.MOD_ID + ".lyoko_controls";
 
     @Override
     public void onInitializeClient() {
@@ -71,7 +71,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_RIGHT_ALT,
                 keyCategory
-
 
 
         ));
@@ -99,7 +98,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
 
         //effect registry
-        DimensionEffectsAccessor.getIdentifierMap().put(CodeLyokoMain.CodeLyokoPrefix("codelyoko_effects_general"), new DimensionEffects(Float.NaN,false, DimensionEffects.SkyType.NONE,true,false) {
+        DimensionEffectsAccessor.getIdentifierMap().put(CodeLyokoMain.CodeLyokoPrefix("codelyoko_effects_general"), new DimensionEffects(Float.NaN, false, DimensionEffects.SkyType.NONE, true, false) {
             @Override
             public Vec3d adjustFogColor(final Vec3d color, final float sunHeight) {
                 return Vec3d.ZERO;
@@ -109,6 +108,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
             public boolean useThickFog(final int camX, final int camY) {
                 return false;
             }
+
             @Override
             public float @Nullable [] getFogColorOverride(final float skyAngle, final float tickDelta) {
                 return null;
@@ -117,62 +117,55 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
         });
 
-        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.carthage,new CustomCarthadgeSky());
-        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.iceSectorWorld,new CustomIceSky());
-        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld,new CustomVolcanoSky());
+        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.carthage, new CustomCarthadgeSky());
+        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.iceSectorWorld, new CustomIceSky());
+        DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld, new CustomVolcanoSky());
 
         //custom hud
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
 
-if(client.player != null) {
+            if (client.player != null) {
 
 
-    if(MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
-        if (client.currentScreen instanceof DeathScreen) {
+                if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
+                    if (client.currentScreen instanceof DeathScreen) {
 
-            if(client.getServer().isSingleplayer())
-            {
-                client.setScreen(new Devirtualized(null,client.getServer().isHardcore()));
+                        if (client.getServer().isSingleplayer()) {
+                            client.setScreen(new Devirtualized(null, client.getServer().isHardcore()));
 
+                        } else {
+                            client.setScreen(new Devirtualized(null, client.player.getServer().isHardcore()));
+                        }
+                    }
+                }
+                if (MethodUtil.DimensionCheck.playerInVanilla(client.player)) {
+                    if (classCreenBinding.isPressed()) {
+                        client.setScreen(new ClassScreen());
+                    }
+                }
             }
-            else
-            {
-                client.setScreen(new Devirtualized(null,client.player.getServer().isHardcore()));
-            }
-        }
-    }
-    if(MethodUtil.DimensionCheck.playerInVanilla(client.player))
-    {
-        if(classCreenBinding.isPressed())
-        {
-            client.setScreen(new ClassScreen());
-        }
-    }
-}
         });
 
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.FORCE_FIELD_EMITTER, new ForceFieldEmitterRenderer());
 
 
-    clientEvents();
-    registerParticles();
+        clientEvents();
+        registerParticles();
     }
 
-    private static void clientEvents()
-    {
+    private static void clientEvents() {
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
             final MinecraftClient mc = MinecraftClient.getInstance();
             //if(mc != null) {
-            if(mc.player != null) {
-                if(MethodUtil.DimensionCheck.playerNotInVanillaWorld(mc.player)) {
+            if (mc.player != null) {
+                if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(mc.player)) {
                     RenderSystem.setShaderTexture(0, CodeLyokoMain.CodeLyokoPrefix("textures/gui/lyoko_health_bar.png"));
                     matrixStack.push();
 
-                    if(!mc.player.isCreative() && !mc.player.isSpectator()) {
+                    if (!mc.player.isCreative() && !mc.player.isSpectator()) {
                         mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 7) - 2, mc.getWindow().getScaledHeight() >> 11, 0, 0, 33, 254);
                         int texV = 0;
-                        switch (CardinalData.LyokoClass.getLyokoClass(mc.player))
-                        {
+                        switch (CardinalData.LyokoClass.getLyokoClass(mc.player)) {
                             case 0 -> texV = PlayerClassType.Feline.getTextureIndex();
                             case 1 -> texV = PlayerClassType.Samurai.getTextureIndex();
                             case 2 -> texV = PlayerClassType.Ninja.getTextureIndex();
@@ -190,8 +183,7 @@ if(client.player != null) {
         });
     }
 
-    private static void registerParticles()
-    {
+    private static void registerParticles() {
         ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE, LyokoFloatingParticle.TowerParticleNeutral::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_XANA, LyokoFloatingParticle.TowerParticleXana::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.TOWER_PARTICLE_JEREMY, LyokoFloatingParticle.TowerParticleJeremy::new);
@@ -199,22 +191,20 @@ if(client.player != null) {
         ParticleFactoryRegistry.getInstance().register(ModParticles.RING_PARTICLE, LyokoRingParticle.TestRingParticle::new);
     }
 
-    private static void registerEntityRenderers()
-    {
+    private static void registerEntityRenderers() {
         EntityRendererRegistry.register(ModEntities.BLOK, RendBlok::new);
         EntityRendererRegistry.register(ModEntities.MEGATANK, MegaTankRenderer::new);
         EntityRendererRegistry.register(ModEntities.LASER_ENTITY_TYPE, LaserRenderer::new);
         EntityRendererRegistry.register(ModEntities.HORNET_ENTITY_ENTITY_TYPE, HornetRenderer::new);
         //for entities that need layer locations
         EntityRendererRegistry.register(ModEntities.OVERBOARD, OverboardRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(ModelOverboard.LAYER_LOCATION,ModelOverboard::createBodyLayer);
-
+        EntityModelLayerRegistry.registerModelLayer(ModelOverboard.LAYER_LOCATION, ModelOverboard::createBodyLayer);
 
 
     }
 
     public static void receiveEntityPacket() {
-        ClientPlayNetworking.registerGlobalReceiver(PacketID, (client,handler,byteBuf,responseSender) -> {
+        ClientPlayNetworking.registerGlobalReceiver(PacketID, (client, handler, byteBuf, responseSender) -> {
             final EntityType<?> et = Registry.ENTITY_TYPE.get(byteBuf.readVarInt());
             final UUID uuid = byteBuf.readUuid();
             final int entityId = byteBuf.readVarInt();
@@ -227,7 +217,7 @@ if(client.player != null) {
                 final Entity e = et.create(MinecraftClient.getInstance().world);
                 if (e == null)
                     throw new IllegalStateException("Failed to create instance of entity \"" + Registry.ENTITY_TYPE.getId(et) + "\"!");
-                e.updateTrackedPosition(pos.x,pos.y,pos.z);
+                e.updateTrackedPosition(pos.x, pos.y, pos.z);
                 e.setPos(pos.x, pos.y, pos.z);
                 e.setPitch(pitch);
                 e.setYaw(yaw);
@@ -237,28 +227,26 @@ if(client.player != null) {
             });
         });
     }
-    private static void FluidRenderRegistry()
-    {
-        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_DIGITAL_OCEAN,ModFluids.FLOWING_DIGITAL_OCEAN,new SimpleFluidRenderHandler(CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing"),CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing")));
-        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_DIGITAL_LAVA,ModFluids.FLOWING_DIGITAL_LAVA,new SimpleFluidRenderHandler(
+
+    private static void FluidRenderRegistry() {
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_DIGITAL_OCEAN, ModFluids.FLOWING_DIGITAL_OCEAN, new SimpleFluidRenderHandler(CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing"), CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing")));
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_DIGITAL_LAVA, ModFluids.FLOWING_DIGITAL_LAVA, new SimpleFluidRenderHandler(
                 CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing_lava"),
                 CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing_lava")
         ));
-        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_LIQUID_HELIUM,ModFluids.FLOWING_LIQUID_HELIUM,new SimpleFluidRenderHandler(
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_LIQUID_HELIUM, ModFluids.FLOWING_LIQUID_HELIUM, new SimpleFluidRenderHandler(
                 CodeLyokoMain.CodeLyokoPrefix("block/liquid_helium_flow"),
                 CodeLyokoMain.CodeLyokoPrefix("block/liquid_helium_still")
         ));
 
-        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(),ModFluids.STILL_LIQUID_HELIUM,ModFluids.FLOWING_LIQUID_HELIUM,ModFluids.STILL_DIGITAL_OCEAN,ModFluids.FLOWING_DIGITAL_OCEAN);
-        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(),ModFluids.FLOWING_DIGITAL_LAVA,ModFluids.STILL_DIGITAL_LAVA);
-        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(),ModBlocks.FALSE_WATER,ModBlocks.CHIPLET_FRANZ_BLOCK,ModBlocks.PROJECTOR_FOCUS);
-
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_LIQUID_HELIUM, ModFluids.FLOWING_LIQUID_HELIUM, ModFluids.STILL_DIGITAL_OCEAN, ModFluids.FLOWING_DIGITAL_OCEAN);
+        BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), ModFluids.FLOWING_DIGITAL_LAVA, ModFluids.STILL_DIGITAL_LAVA);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ModBlocks.FALSE_WATER, ModBlocks.CHIPLET_FRANZ_BLOCK, ModBlocks.PROJECTOR_FOCUS);
 
 
     }
 
-    private static void registerItemPredicates()
-    {
+    private static void registerItemPredicates() {
 
         //makes certain blocks behave properly
         /*
@@ -293,13 +281,12 @@ if(client.player != null) {
                             case 1 -> 0.2f;
                             default -> 0;
                         });
-        ModelPredicateProviderRegistry.register(ModItems.DIGITAL_SABER,CodeLyokoMain.CodeLyokoPrefix("blocking"),(stack, world, entity, seed) -> {
+        ModelPredicateProviderRegistry.register(ModItems.DIGITAL_SABER, CodeLyokoMain.CodeLyokoPrefix("blocking"), (stack, world, entity, seed) -> {
 
-           if(entity == null)
-           {
-               return 0;
-           }
-           return entity.isUsingItem() && entity.getActiveItem() == stack ? 1:0;
+            if (entity == null) {
+                return 0;
+            }
+            return entity.isUsingItem() && entity.getActiveItem() == stack ? 1 : 0;
         });
 /*
         ItemProperties.register(ModItems.RAW_POLYCARBONATE.get(), CodeLyokoMain.CodeLyokoPrefix("quantity"),

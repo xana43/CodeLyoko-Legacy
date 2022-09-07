@@ -13,15 +13,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(AbstractInventoryScreen.class)
 public abstract class DisableStatusEffectRenderer {
 
-    @Inject(method = "drawStatusEffects",at = @At("HEAD"),cancellable = true)
-    private void disableStatusRenderer(final MatrixStack matrices, final int mouseX, final int mouseY, final CallbackInfo ci)
-    {
+    @Inject(method = "drawStatusEffects", at = @At("HEAD"), cancellable = true)
+    private void disableStatusRenderer(final MatrixStack matrices, final int mouseX, final int mouseY, final CallbackInfo ci) {
         final MinecraftClient mc = MinecraftClient.getInstance();
-        if(mc != null)
-        {
-            if(mc.player != null)
-            {
-                if(MethodUtil.DimensionCheck.playerNotInVanillaWorld(mc.player)) {
+        if (mc != null) {
+            if (mc.player != null) {
+                if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(mc.player)) {
                     ci.cancel();
 
                 }

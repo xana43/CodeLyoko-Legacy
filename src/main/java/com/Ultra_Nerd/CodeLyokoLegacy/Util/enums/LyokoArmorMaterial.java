@@ -31,7 +31,7 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
     private final float toughness;
 
 
-    LyokoArmorMaterial(final String nameIn, final int maxDamageFactor, final byte[] damageReductionIn, final int enchant,final SoundEvent soundsIn,
+    LyokoArmorMaterial(final String nameIn, final int maxDamageFactor, final byte[] damageReductionIn, final int enchant, final SoundEvent soundsIn,
                        final float toughnessIn) {
         this.name = nameIn;
         this.damageReduction = damageReductionIn;
@@ -41,8 +41,6 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
 
         this.maxDamageFactor = maxDamageFactor;
     }
-
-
 
 
     @Override
@@ -70,7 +68,6 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
     public @Nullable Ingredient getRepairIngredient() {
         return null;
     }
-
 
 
     @Nonnull

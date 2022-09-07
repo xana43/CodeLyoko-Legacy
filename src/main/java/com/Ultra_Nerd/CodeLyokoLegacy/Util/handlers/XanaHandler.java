@@ -12,50 +12,44 @@ public record XanaHandler() {
     private static int ticksToNextCalculation;
     private static int dangerLevel;
     private static WorldProperties properties;
+    private static int ticksTillCalculation;
 
-    private static void setDangerLevelFromSave()
-    {
+    private static void setDangerLevelFromSave() {
         dangerLevel = CardinalData.XanaCalculator.getDangerLevel(properties);
     }
 
-    public static void setProperties(final WorldProperties wproperties)
-    {
+    public static void setProperties(final WorldProperties wproperties) {
         properties = wproperties;
         setDangerLevelFromSave();
     }
-    public static int getDangerLevel()
-    {
+
+    public static int getDangerLevel() {
         return dangerLevel;
     }
-    public static void resetDangerLevel()
-    {
+
+    public static void resetDangerLevel() {
         dangerLevel = 0;
     }
-    public static void setTicksToNextCalculation(final int seconds)
-    {
+
+    public static void setTicksToNextCalculation(final int seconds) {
         ticksToNextCalculation = MethodUtil.TickConversion.secondsToTicks(seconds);
         setTicksTillCalculation();
     }
-    private static int ticksTillCalculation;
-    private static void setTicksTillCalculation()
-    {
+
+    private static void setTicksTillCalculation() {
         ticksTillCalculation = random.nextInt(ticksToNextCalculation, (ticksToNextCalculation + 1) << 2);
     }
-    public static boolean calculateAttackProbability()
-    {
-        final int attackCallID = random.nextInt(0,200);
-        CardinalData.XanaCalculator.setDangerLevel(dangerLevel,properties);
+
+    public static boolean calculateAttackProbability() {
+        final int attackCallID = random.nextInt(0, 200);
+        CardinalData.XanaCalculator.setDangerLevel(dangerLevel, properties);
         ticksTillCalculation--;
-        if(ticksTillCalculation <= 0)
-        {
-            if(attackCallID == 69)
-            {
+        if (ticksTillCalculation <= 0) {
+            if (attackCallID == 69) {
                 dangerLevel++;
 
                 return true;
-            }
-            else
-            {
+            } else {
 
                 setTicksTillCalculation();
                 return false;

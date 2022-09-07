@@ -12,8 +12,6 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public final class ModelBlok extends AnimatedGeoModel<EntityBlok> {
 
 
-
-
     @Override
     public Identifier getModelResource(final EntityBlok object) {
         return CodeLyokoMain.CodeLyokoPrefix("geo/blok.geo.json");

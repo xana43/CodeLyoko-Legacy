@@ -7,21 +7,20 @@ import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
 
 
-public final class PlayerClassComponent implements PlayerComponent<PlayerClassComponent> ,AutoSyncedComponent{
+public final class PlayerClassComponent implements PlayerComponent<PlayerClassComponent>, AutoSyncedComponent {
 
     private int classID;
+
     /*
     public PlayerClassComponent(final PlayerEntity player){
     }
 
      */
-    public int getClassID()
-    {
+    public int getClassID() {
         return this.classID;
     }
 
-    public void setClassID(final int classID)
-    {
+    public void setClassID(final int classID) {
         //CodeLyokoMain.LOG.info("setting classID " + classID +" for player " + player.getName());
         this.classID = classID;
     }
@@ -35,6 +34,6 @@ public final class PlayerClassComponent implements PlayerComponent<PlayerClassCo
     @Override
     public void writeToNbt(final @NotNull NbtCompound tag) {
         //CodeLyokoMain.LOG.info("Saving data for Player " + player.getName());
-        tag.putInt("player_class",classID);
+        tag.putInt("player_class", classID);
     }
 }

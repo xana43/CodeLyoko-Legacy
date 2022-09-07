@@ -10,7 +10,7 @@ import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 
-public final class LootTables extends FabricBlockLootTableProvider  {
+public final class LootTables extends FabricBlockLootTableProvider {
     public LootTables(final FabricDataGenerator dataGenerator) {
         super(dataGenerator);
     }
@@ -18,14 +18,12 @@ public final class LootTables extends FabricBlockLootTableProvider  {
     @Override
     protected void generateBlockLootTables() {
         ModBlocks.BLOCK_MAP.values().forEach(block -> {
-            if(block != ModBlocks.SILICA_SAND) {
+            if (block != ModBlocks.SILICA_SAND) {
                 addDrop(block);
                 //addDropWithSilkTouch(block);
 
-            }
-            else if(block == ModBlocks.SILICA_SAND)
-            {
-               addDrop(block,dropsWithSilkTouch(block, applyExplosionDecay(block, ItemEntry.builder(ModItems.RAW_SILICADUST).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(4.0F, 5.0F))).apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE)))));
+            } else if (block == ModBlocks.SILICA_SAND) {
+                addDrop(block, dropsWithSilkTouch(block, applyExplosionDecay(block, ItemEntry.builder(ModItems.RAW_SILICADUST).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(4.0F, 5.0F))).apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE)))));
             }
         });
     }

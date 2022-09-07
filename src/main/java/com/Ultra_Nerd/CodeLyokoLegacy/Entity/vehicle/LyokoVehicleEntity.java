@@ -18,13 +18,11 @@ public class LyokoVehicleEntity extends BoatEntity {
 
     public LyokoVehicleEntity(final EntityType<? extends BoatEntity> entityType, final World world) {
         super(entityType, world);
-        if(!MethodUtil.DimensionCheck.EntityNotInVanillaWorld(this))
-        {
+        if (!MethodUtil.DimensionCheck.EntityNotInVanillaWorld(this)) {
             this.remove(RemovalReason.DISCARDED);
         }
 
     }
-
 
 
     @Override
@@ -39,18 +37,15 @@ public class LyokoVehicleEntity extends BoatEntity {
     }
 
 
-
-
-
     @Override
     public float interpolatePaddlePhase(final int paddle, final float tickDelta) {
-        return  0;
+        return 0;
     }
 
 
     @Override
     public void setPaddleMovings(final boolean leftMoving, final boolean rightMoving) {
-        super.setPaddleMovings(false,false);
+        super.setPaddleMovings(false, false);
     }
 
 
@@ -74,7 +69,7 @@ public class LyokoVehicleEntity extends BoatEntity {
     @Override
     public void updatePassengerPosition(final Entity passenger) {
         passenger.setPose(EntityPose.STANDING);
-            super.updatePassengerPosition(passenger);
+        super.updatePassengerPosition(passenger);
     }
 
     @Override
@@ -82,22 +77,18 @@ public class LyokoVehicleEntity extends BoatEntity {
         return 0.90f;
     }
 
-    protected void movement()
-    {
+    protected void movement() {
 
-        if(movingDown)
-        {
+        if (movingDown) {
 
-            this.addVelocity(getVelocity().x,getVelocity().y - 1, getVelocity().z);
+            this.addVelocity(getVelocity().x, getVelocity().y - 1, getVelocity().z);
         }
-        if(movingUp)
-        {
-            this.addVelocity(getVelocity().x,getVelocity().y + 1, getVelocity().z);
+        if (movingUp) {
+            this.addVelocity(getVelocity().x, getVelocity().y + 1, getVelocity().z);
 
         }
 
     }
-
 
 
     @Override
@@ -106,9 +97,6 @@ public class LyokoVehicleEntity extends BoatEntity {
         this.movement();
 
     }
-
-
-
 
 
 }

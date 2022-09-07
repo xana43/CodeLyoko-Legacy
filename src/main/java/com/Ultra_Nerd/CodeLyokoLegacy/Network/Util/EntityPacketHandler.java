@@ -13,21 +13,18 @@ import net.minecraft.util.registry.Registry;
 public record EntityPacketHandler() {
 
 
-
-    public static Packet<?> create(Entity e, Identifier packetID)
-    {
-        if(e.world.isClient)
-        {
+    public static Packet<?> create(Entity e, Identifier packetID) {
+        if (e.world.isClient) {
             throw new IllegalStateException("can't be called on client");
         }
-       final PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
+        final PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
         byteBuf.writeVarInt(Registry.ENTITY_TYPE.getRawId(e.getType()));
         byteBuf.writeUuid(e.getUuid());
         byteBuf.writeVarInt(e.getId());
-        PacketBufUtil.writeVec3d(byteBuf,e.getPos());
-        PacketBufUtil.writeAngle(byteBuf,e.getPitch());
-        PacketBufUtil.writeAngle(byteBuf,e.getYaw());
-        return ServerPlayNetworking.createS2CPacket(packetID,byteBuf);
+        PacketBufUtil.writeVec3d(byteBuf, e.getPos());
+        PacketBufUtil.writeAngle(byteBuf, e.getPitch());
+        PacketBufUtil.writeAngle(byteBuf, e.getYaw());
+        return ServerPlayNetworking.createS2CPacket(packetID, byteBuf);
     }
 
     public record PacketBufUtil() {
@@ -35,8 +32,7 @@ public record EntityPacketHandler() {
         /**
          * Packs a floating-point angle into a {@code byte}.
          *
-         * @param angle
-         *         angle
+         * @param angle angle
          * @return packed angle
          */
         public static byte packAngle(float angle) {
@@ -46,8 +42,7 @@ public record EntityPacketHandler() {
         /**
          * Unpacks a floating-point angle from a {@code byte}.
          *
-         * @param angleByte
-         *         packed angle
+         * @param angleByte packed angle
          * @return angle
          */
         public static float unpackAngle(byte angleByte) {
@@ -57,10 +52,8 @@ public record EntityPacketHandler() {
         /**
          * Writes an angle to a {@link PacketByteBuf}.
          *
-         * @param byteBuf
-         *         destination buffer
-         * @param angle
-         *         angle
+         * @param byteBuf destination buffer
+         * @param angle   angle
          */
         public static void writeAngle(PacketByteBuf byteBuf, float angle) {
             byteBuf.writeByte(packAngle(angle));
@@ -69,8 +62,7 @@ public record EntityPacketHandler() {
         /**
          * Reads an angle from a {@link PacketByteBuf}.
          *
-         * @param byteBuf
-         *         source buffer
+         * @param byteBuf source buffer
          * @return angle
          */
         public static float readAngle(PacketByteBuf byteBuf) {
@@ -80,10 +72,8 @@ public record EntityPacketHandler() {
         /**
          * Writes a {@link Vec3d} to a {@link PacketByteBuf}.
          *
-         * @param byteBuf
-         *         destination buffer
-         * @param vec3d
-         *         vector
+         * @param byteBuf destination buffer
+         * @param vec3d   vector
          */
         public static void writeVec3d(PacketByteBuf byteBuf, Vec3d vec3d) {
             byteBuf.writeDouble(vec3d.x);
@@ -94,8 +84,7 @@ public record EntityPacketHandler() {
         /**
          * Reads a {@link Vec3d} from a {@link PacketByteBuf}.
          *
-         * @param byteBuf
-         *         source buffer
+         * @param byteBuf source buffer
          * @return vector
          */
         public static Vec3d readVec3d(PacketByteBuf byteBuf) {
@@ -128,10 +117,6 @@ public record EntityPacketHandler() {
     }
 
      */
-
-
-
-
 
 
 }

@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +15,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 public final class BlisterCopper extends Item {
-    private short I = 500;
+    private static final String NBT_TAG_ACCESSOR = "timer";
 
     public BlisterCopper(@NotNull Settings properties) {
         super(properties);
@@ -43,15 +44,22 @@ public final class BlisterCopper extends Item {
 
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
-
-        if (worldIn.isClient) {
+        NbtCompound timerTag = stack.getNbt();
+        if(timerTag == null)
+        {
+            timerTag = new NbtCompound();
+            timerTag.putInt(NBT_TAG_ACCESSOR,500);
+            stack.setNbt(timerTag);
+        }
+        if (!worldIn.isClient) {
             //CodeLyokoMain.Log.debug(I);
-            if (I-- == 0) {
+            timerTag.putInt(NBT_TAG_ACCESSOR,timerTag.getInt(NBT_TAG_ACCESSOR) - 1);
+            if (timerTag.getInt(NBT_TAG_ACCESSOR) == 0) {
                 if (stack.getDamage() != 60) {
 
                     stack.setDamage(stack.getDamage() + 1);
 
-                    I = 500;
+                   timerTag.putInt(NBT_TAG_ACCESSOR,500);
                 }
             }
             if (stack.getDamage() == 60) {

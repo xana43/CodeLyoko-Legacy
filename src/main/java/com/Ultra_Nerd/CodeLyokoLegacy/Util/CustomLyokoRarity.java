@@ -4,10 +4,6 @@ import net.minecraft.util.Rarity;
 
 public record CustomLyokoRarity() {
 
-    static {
-        Rarity.values();
-    }
-
     public static Rarity FRANZ_STARTER;
     public static Rarity FRANZ_NOVICE;
     public static Rarity FRANZ_HOPPER;
@@ -21,5 +17,9 @@ public record CustomLyokoRarity() {
     public static Rarity SERVER_MATURE;
     public static Rarity DATACENTER;
     public static Rarity MAINFRAME;
+
+    static {
+        Rarity.values();
+    }
 
 }

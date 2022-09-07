@@ -6,14 +6,15 @@ import org.jetbrains.annotations.NotNull;
 
 public final class XanaDataComponent implements AutoSyncedComponent {
     private int dangerLevel;
-    public int getDangerLevel()
-    {
+
+    public int getDangerLevel() {
         return dangerLevel;
     }
-    public void setDangerLevel(final int level)
-    {
+
+    public void setDangerLevel(final int level) {
         dangerLevel = level;
     }
+
     @Override
     public void readFromNbt(final @NotNull NbtCompound tag) {
         dangerLevel = tag.getInt("xana_danger_level");
@@ -21,6 +22,6 @@ public final class XanaDataComponent implements AutoSyncedComponent {
 
     @Override
     public void writeToNbt(final @NotNull NbtCompound tag) {
-        tag.putInt("xana_danger_level",dangerLevel);
+        tag.putInt("xana_danger_level", dangerLevel);
     }
 }

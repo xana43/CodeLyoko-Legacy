@@ -38,8 +38,8 @@ public final class TowerBase extends Structure {
     private final HeightProvider startHeight;
     private final Optional<Heightmap.Type> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
-    public TowerBase(Structure.Config config, RegistryEntry<StructurePool> startPool,Optional<Identifier> startJigsawName,int size,HeightProvider startHeight,Optional<Heightmap.Type> projectStartToHeightmap,int maxDistanceFromCenter)
-    {
+
+    public TowerBase(Structure.Config config, RegistryEntry<StructurePool> startPool, Optional<Identifier> startJigsawName, int size, HeightProvider startHeight, Optional<Heightmap.Type> projectStartToHeightmap, int maxDistanceFromCenter) {
 
         super(config);
         this.startPool = startPool;
@@ -57,77 +57,68 @@ public final class TowerBase extends Structure {
         return GenerationStep.Feature.SURFACE_STRUCTURES;
     }
 
-    private static VerticalBlockSample sampleAreaPositive(final BlockPos pos, Structure.Context context)
-    {
-        VerticalBlockSample sample = new VerticalBlockSample(0,new BlockState[]{});
+    private static VerticalBlockSample sampleAreaPositive(final BlockPos pos, Structure.Context context) {
+        VerticalBlockSample sample = new VerticalBlockSample(0, new BlockState[]{});
 
-            for (int i = 0; i < 2; i++)
-            {
-                sample = context.chunkGenerator().getColumnSample(pos.getX() + i, pos.getZ() + i, context.world(),context.noiseConfig());
+        for (int i = 0; i < 2; i++) {
+            sample = context.chunkGenerator().getColumnSample(pos.getX() + i, pos.getZ() + i, context.world(), context.noiseConfig());
 
-            }
-        if(2 < 0)
-        {
+        }
+        if (2 < 0) {
             throw new IllegalStateException("offset must be at least 0");
         }
 
         return sample;
     }
-    private static VerticalBlockSample sampleAreaNegative(final BlockPos pos, Structure.Context context)
-    {
-        VerticalBlockSample sample = new VerticalBlockSample(0,new BlockState[]{});
 
-        for (int i = -2; i < 0; i++)
-        {
-            sample = context.chunkGenerator().getColumnSample(pos.getX() + i, pos.getZ() + i, context.world(),context.noiseConfig());
+    private static VerticalBlockSample sampleAreaNegative(final BlockPos pos, Structure.Context context) {
+        VerticalBlockSample sample = new VerticalBlockSample(0, new BlockState[]{});
+
+        for (int i = -2; i < 0; i++) {
+            sample = context.chunkGenerator().getColumnSample(pos.getX() + i, pos.getZ() + i, context.world(), context.noiseConfig());
         }
-        if(-2 > 0)
-        {
+        if (-2 > 0) {
             throw new IllegalStateException("offset must be below 0");
         }
 
         return sample;
     }
+
     @Override
-    public @NotNull Optional<Structure.StructurePosition> getStructurePosition(Structure.Context context)
-    {
+    public @NotNull Optional<Structure.StructurePosition> getStructurePosition(Structure.Context context) {
 
         BlockPos blockPos = context.chunkPos().getCenterAtY(0);
         //int toplandY = context.chunkGenerator().getHeightOnGround(blockPos.getX(), blockPos.getZ(), Heightmap.Type.WORLD_SURFACE_WG,context.world());
         Optional<StructurePosition> pieceGen = Optional.empty();
-        for (int i = context.world().getHeight() >> 1; i >0; i--)
-        {
+        for (int i = context.world().getHeight() >> 1; i > 0; i--) {
 
-                if(sampleAreaPositive(blockPos, context).getState(i).isIn(ModTags.Blocks.LYOKO_BLOCKS)
-                && sampleAreaNegative(blockPos, context).getState(i).isIn(ModTags.Blocks.LYOKO_BLOCKS)
-                        &&sampleAreaPositive(blockPos, context).getState(i) != Blocks.VOID_AIR.getDefaultState()
-                        &&sampleAreaNegative(blockPos, context).getState(i) != Blocks.VOID_AIR.getDefaultState()
-                )
-                {
+            if (sampleAreaPositive(blockPos, context).getState(i).isIn(ModTags.Blocks.LYOKO_BLOCKS)
+                    && sampleAreaNegative(blockPos, context).getState(i).isIn(ModTags.Blocks.LYOKO_BLOCKS)
+                    && sampleAreaPositive(blockPos, context).getState(i) != Blocks.VOID_AIR.getDefaultState()
+                    && sampleAreaNegative(blockPos, context).getState(i) != Blocks.VOID_AIR.getDefaultState()
+            ) {
 
-                    blockPos = blockPos.offset(Direction.UP,i - 54);
+                blockPos = blockPos.offset(Direction.UP, i - 54);
 
 
-                    pieceGen = StructurePoolBasedGenerator.generate(
-                            context,
-                            this.startPool,
-                            this.startJigsawName,
-                            this.size,
-                            blockPos,
-                            false,
-                            this.projectStartToHeightmap,
-                            this.maxDistanceFromCenter
-                    );
-                    break;
+                pieceGen = StructurePoolBasedGenerator.generate(
+                        context,
+                        this.startPool,
+                        this.startJigsawName,
+                        this.size,
+                        blockPos,
+                        false,
+                        this.projectStartToHeightmap,
+                        this.maxDistanceFromCenter
+                );
+                break;
 
 
-                }
-
+            }
 
 
         }
         //blockPos = blockPos.offset(Direction.Axis.Y,toplandY >> 2);
-
 
 
         return pieceGen;

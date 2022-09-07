@@ -12,7 +12,7 @@ public final class BlockStateSimple extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(final BlockStateModelGenerator blockStateModelGenerator) {
-                //blockStateModelGenerator.registerStateWithModelReference(ModBlocks.DIGITAL_LAVA_BLOCK, Blocks.LAVA);
+        //blockStateModelGenerator.registerStateWithModelReference(ModBlocks.DIGITAL_LAVA_BLOCK, Blocks.LAVA);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerControlPanelTileEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -8,11 +7,8 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
@@ -28,6 +24,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
@@ -185,8 +182,6 @@ public final class ControlPanel extends BlockWithEntity {
     }
 
 
-
-
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder.add(PANEL).add(ScreenOn));
@@ -196,7 +191,6 @@ public final class ControlPanel extends BlockWithEntity {
     public BlockRenderType getRenderType(final BlockState state) {
         return BlockRenderType.MODEL;
     }
-
 
 
     @Override
@@ -211,75 +205,33 @@ public final class ControlPanel extends BlockWithEntity {
     }
 
 
-    private NamedScreenHandlerFactory screenHandlerFactory;
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(PANEL,ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(PANEL, ctx.getPlayerFacing().getOpposite()).with(ScreenOn, false);
     }
 
     @Override
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
-      if(world.isClient)
-      {
-          return ActionResult.SUCCESS;
-      }
-      else
-      {
+        if (!world.isClient) {
 
-
-          if(screenHandlerFactory != null) {
-              player.openHandledScreen(screenHandlerFactory);
-          }
-          return ActionResult.CONSUME;
-      }
-
-
-
-
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
-
-        return (world1, pos, state1, blockEntity) -> {
-
-            if(MinecraftClient.getInstance().player != null) {
-
-
-                    if(blockEntity instanceof ComputerControlPanelTileEntity te) {
-
-
-
-
-                              if (MinecraftClient.getInstance().player.currentScreenHandler instanceof ComputerControlPanelScreenHandler se)
-                              {
-
-                                  te.setActivebool(se.isActive());
-                              }
-
-
-                      //computerControlPanelTile.setActivebool(com);
-                    }
-
-
-
+            final NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+            if (screenHandlerFactory != null) {
+                player.openHandledScreen(screenHandlerFactory);
             }
-        };
+
+        }
+        return ActionResult.SUCCESS;
+
 
     }
-
 
     @Override
-    public void onPlaced(final World world, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack itemStack) {
+    public <T extends BlockEntity> @NotNull BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
 
-
-
-         screenHandlerFactory = state.createScreenHandlerFactory(world,pos);
-
-        super.onPlaced(world, pos, state, placer, itemStack);
+        return checkType(type, ModTileEntities.COMPUTER_CONTROL_PANEL, (world1, pos, state1, blockEntity) -> ComputerControlPanelTileEntity.setState(world, pos, state1));
     }
+
 
     //
 

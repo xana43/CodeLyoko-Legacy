@@ -28,8 +28,6 @@ public enum LyokoTiers implements ToolMaterial {
     }
 
 
-
-
     @Override
     public int getDurability() {
         return this.MaxUses;

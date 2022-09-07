@@ -19,15 +19,14 @@ public record ForceFieldEmitterRenderer() implements BuiltinItemRendererRegistry
     public void render(final ItemStack stack, final ModelTransformation.Mode mode, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {
         matrices.push();
         final MinecraftClient mc = MinecraftClient.getInstance();
-        if(stack.getItem() instanceof final ForceFieldEmitter forceFieldEmitter)
-        {
+        if (stack.getItem() instanceof final ForceFieldEmitter forceFieldEmitter) {
 
             final float pull = ForceFieldEmitter.getPullProgress(stack.getMaxUseTime() - forceFieldEmitter.publicUseTicks);
 
-            matrices.scale(pull,pull,pull);
+            matrices.scale(pull, pull, pull);
 
         }
-        if(mc != null) {
+        if (mc != null) {
             final BakedModel forceField = Myron.getModel(CodeLyokoMain.CodeLyokoPrefix("models/item/force_field_model"));
 
             mc.getBlockRenderManager().getModelRenderer().render(matrices.peek(), vertexConsumers.getBuffer(RenderLayer.getSolid()), Blocks.AIR.getDefaultState(), forceField, 1, 1, 1, light, overlay);

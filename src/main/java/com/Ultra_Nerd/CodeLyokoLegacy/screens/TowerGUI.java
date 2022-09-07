@@ -30,17 +30,11 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     }
 
 
-
-
-
     private static final Identifier TEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/towerinterface.png");
     private TextFieldWidget text;
     private TextFieldWidget Accepted;
     private byte I;
     private int acceptedColor;
-
-
-
 
 
     @Override
@@ -54,7 +48,6 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     }
 
 
-
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
         this.text.mouseClicked(mouseX, mouseY, mouseButton);
@@ -62,40 +55,30 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     }
 
 
-
     int tick = 0;
 
 
-
     @Override
-    public void render(@NotNull MatrixStack poseStack, int mouseX, int mouseY, float partialTicks)
-    {
+    public void render(@NotNull MatrixStack poseStack, int mouseX, int mouseY, float partialTicks) {
 
         this.renderBackground(poseStack);
 
-        super.render(poseStack,mouseX, mouseY, partialTicks);
+        super.render(poseStack, mouseX, mouseY, partialTicks);
         //this.text.render(poseStack,mouseX, mouseY, partialTicks);
         final var AcceptedText = Text.of(this.Accepted.getText()).getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle());
         final var CodeEnterTest = Text.of(this.text.getText()).getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle());
-        if(AcceptedText.size() >= 1) {
+        if (AcceptedText.size() >= 1) {
             PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer, AcceptedText.get(0), this.Accepted.x, this.Accepted.y, acceptedColor);
         }
-        if(CodeEnterTest.size() >= 1) {
+        if (CodeEnterTest.size() >= 1) {
             PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer, CodeEnterTest.get(0), this.text.x, this.text.y, Color.WHITE.getRGB());
         }
-        if((tick >> 2) % 5 == 0)
-        {
-            PressableTextWidget.drawTextWithShadow(poseStack,this.textRenderer, Text.of("|").getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()).get(0), text.x + (this.text.getCursor() * 21),this.text.y,Color.WHITE.getRGB());
+        if ((tick >> 2) % 5 == 0) {
+            PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer, Text.of("|").getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()).get(0), text.x + (this.text.getCursor() * 21), this.text.y, Color.WHITE.getRGB());
 
-                Objects.requireNonNull(client.player).playSound(ModSounds.CURSORBLINK, 0.1f, 1f);
+            Objects.requireNonNull(client.player).playSound(ModSounds.CURSORBLINK, 0.1f, 1f);
 
         }
-
-
-
-
-
-
 
 
     }
@@ -111,8 +94,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     }
 
 
-    private void CheckField()
-    {
+    private void CheckField() {
         final String correctCode = "ACCEPTED";
 
         if (this.text.getText().equalsIgnoreCase("LYOKO") || this.text.getText().equalsIgnoreCase("CHIMERA")
@@ -122,22 +104,19 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
             this.Accepted.setText(correctCode);
             this.text.setText(StringUtils.EMPTY);
             this.text.setCursor(0);
-            Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1,2f);
+            Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 2f);
         } else if (this.text.getText().equalsIgnoreCase("XANA")) {
             I = 100;
             acceptedColor = 16711680;
             this.Accepted.setText(correctCode);
             this.text.setText(StringUtils.EMPTY);
             this.text.setCursor(0);
-            Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1,0.9f);
-        }
-        else
-        {
+            Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 0.9f);
+        } else {
             this.text.setText(StringUtils.EMPTY);
-            Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1,0.5f);
+            Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 0.5f);
         }
     }
-
 
 
     @Override
@@ -166,7 +145,6 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     }
 
 
-
     @Override
     public boolean shouldCloseOnEsc() {
         return true;
@@ -176,9 +154,8 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     @Override
     public boolean keyPressed(int Key, int p_keyPressed_2_, int p_keyPressed_3_) {
 
-        switch (Key)
-        {
-            case GLFW.GLFW_KEY_BACKSPACE ->  this.text.eraseCharacters(1);
+        switch (Key) {
+            case GLFW.GLFW_KEY_BACKSPACE -> this.text.eraseCharacters(1);
             case GLFW.GLFW_KEY_ENTER -> CheckField();
         }
 
@@ -192,33 +169,22 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     public boolean charTyped(char key, final int Keynum) {
 
 
-
-        if(Character.getType(key) == Character.UPPERCASE_LETTER)
-        {
+        if (Character.getType(key) == Character.UPPERCASE_LETTER) {
             this.text.charTyped(key, Keynum);
+        } else {
+            this.text.charTyped(key ^= 32, Keynum);
         }
-        else
-        {
-            this.text.charTyped(key^=32, Keynum);
-        }
-        Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, new Random().nextFloat(1f,1.1f));
-        return super.charTyped(key^=32, Keynum);
+        Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, new Random().nextFloat(1f, 1.1f));
+        return super.charTyped(key ^= 32, Keynum);
 
     }
-
-
 
 
     @Override
     protected void drawBackground(final MatrixStack matrices, final float delta, final int mouseX, final int mouseY) {
-        RenderSystem.setShaderTexture(0,TEXTURES);
-        this.drawTexture(matrices,(this.width - 200) >> 1, (this.height - 141) >> 1, 0 ,0, 200, 141);
+        RenderSystem.setShaderTexture(0, TEXTURES);
+        this.drawTexture(matrices, (this.width - 200) >> 1, (this.height - 141) >> 1, 0, 0, 200, 141);
     }
-
-
-
-
-
 
 
 }

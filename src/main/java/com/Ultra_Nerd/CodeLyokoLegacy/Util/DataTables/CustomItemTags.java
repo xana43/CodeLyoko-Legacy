@@ -7,19 +7,20 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.tag.ItemTags;
 import org.jetbrains.annotations.Nullable;
 
-public  final class CustomItemTags extends FabricTagProvider.ItemTagProvider/*extends ItemTagsProvider*/ {
+public final class CustomItemTags extends FabricTagProvider.ItemTagProvider/*extends ItemTagsProvider*/ {
     public CustomItemTags(final FabricDataGenerator dataGenerator, @Nullable final BlockTagProvider blockTagProvider) {
         super(dataGenerator, blockTagProvider);
     }
+
     public CustomItemTags(final FabricDataGenerator dataGenerator) {
         super(dataGenerator);
     }
+
     @Override
     protected void generateTags() {
         getOrCreateTagBuilder(ItemTags.IRON_ORES).add(ModBlocks.BORNITE_ORE.asItem());
         getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.ITEM_MAP.get("lyokodisc"));
         getOrCreateTagBuilder(ItemTags.SAND).add(ModBlocks.SILICA_SAND.asItem());
-
 
 
     }

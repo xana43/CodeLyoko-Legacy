@@ -13,52 +13,52 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3f;
+
 @Environment(EnvType.CLIENT)
 public record CustomIceSky() implements DimensionRenderingRegistry.SkyRenderer {
-
 
 
     private static final Identifier sky1 = CodeLyokoMain.CodeLyokoPrefix("textures/skies/ice/ice_sky.png");
 
     private static final Tessellator tessellator = Tessellator.getInstance();
     private static final BufferBuilder bufferBuilder = tessellator.getBuffer();
+
     @Override
     public void render(WorldRenderContext context) {
         // mc.textureManager.bindTexture(texturelocation);
 
 
-        RenderSystem.setShaderTexture(0,ConstantUtil.skytop);
+        RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
 
         final MatrixStack matrixStack = context.matrixStack();
 
-        for(byte i = 0; i < 6; ++i) {
+        for (byte i = 0; i < 6; ++i) {
             matrixStack.push();
             final Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
-            switch (i)
-            {
+            switch (i) {
 
-                case 1 ->{
-                    RenderSystem.setShaderTexture(0,sky1);
+                case 1 -> {
+                    RenderSystem.setShaderTexture(0, sky1);
                     matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
                     matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(0));
                 }
                 case 2 -> {
-                    RenderSystem.setShaderTexture(0,sky1);
+                    RenderSystem.setShaderTexture(0, sky1);
                     matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
                     matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180));
                 }
-                case 3 ->{
+                case 3 -> {
                     RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
                     matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
                 }
-                case 4 ->{
-                    RenderSystem.setShaderTexture(0,sky1);
+                case 4 -> {
+                    RenderSystem.setShaderTexture(0, sky1);
                     matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0F));
                     matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-90));
                 }
-                case 5 ->{
-                    RenderSystem.setShaderTexture(0,sky1);
+                case 5 -> {
+                    RenderSystem.setShaderTexture(0, sky1);
                     matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
                     matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90));
                 }

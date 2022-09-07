@@ -19,7 +19,6 @@ import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
-import net.minecraft.world.biome.source.util.MultiNoiseUtil;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
@@ -35,62 +34,53 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-public final class CarthageGenerator extends ChunkGenerator{
-
-
-
-
+public final class CarthageGenerator extends ChunkGenerator {
 
 
     private static final Codec<CustomGenSettings> SETTINGS_CODEC = RecordCodecBuilder.create(
-        settingsInstance -> settingsInstance.group(
-                Codec.INT.fieldOf("base").forGetter(CustomGenSettings::baseHeight),
-                Codec.FLOAT.fieldOf("verticalvariance").forGetter(CustomGenSettings::verticalVariance),
-                Codec.FLOAT.fieldOf("horizontalvariance").forGetter(CustomGenSettings::horizontalVariance))
-                .apply(settingsInstance,CustomGenSettings::new));
-public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCodecBuilder.create(
-        carthageGeneratorInstance ->
-                carthageGeneratorInstance.group(
-                        RegistryOps.createRegistryCodec(Registry.STRUCTURE_SET_KEY).forGetter(CarthageGenerator::getStructRegistry),
-                        RegistryOps.createRegistryCodec(Registry.BIOME_KEY).forGetter(CarthageGenerator::getThisBiomeRegistry),
-                        SETTINGS_CODEC.fieldOf("settings").forGetter(CarthageGenerator::getCarthageSettings)
-                ).apply(carthageGeneratorInstance,CarthageGenerator::new)
-);
+            settingsInstance -> settingsInstance.group(
+                            Codec.INT.fieldOf("base").forGetter(CustomGenSettings::baseHeight),
+                            Codec.FLOAT.fieldOf("verticalvariance").forGetter(CustomGenSettings::verticalVariance),
+                            Codec.FLOAT.fieldOf("horizontalvariance").forGetter(CustomGenSettings::horizontalVariance))
+                    .apply(settingsInstance, CustomGenSettings::new));
+    public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCodecBuilder.create(
+            carthageGeneratorInstance ->
+                    carthageGeneratorInstance.group(
+                            RegistryOps.createRegistryCodec(Registry.STRUCTURE_SET_KEY).forGetter(CarthageGenerator::getStructRegistry),
+                            RegistryOps.createRegistryCodec(Registry.BIOME_KEY).forGetter(CarthageGenerator::getThisBiomeRegistry),
+                            SETTINGS_CODEC.fieldOf("settings").forGetter(CarthageGenerator::getCarthageSettings)
+                    ).apply(carthageGeneratorInstance, CarthageGenerator::new)
+    );
 
     private final CustomGenSettings settings;
+
     //private final Registry<StructureSet> structureSets;
     public CarthageGenerator(@NotNull Registry<StructureSet> structureSets, Registry<Biome> registry, CustomGenSettings settings) {
-        super(structureSets,getSet(structureSets), new CarthageBiomeProvider(registry));
+        super(structureSets, getSet(structureSets), new CarthageBiomeProvider(registry));
         this.settings = settings;
         //this.structureSets = structureSets;
 
     }
 
 
-
-    private static @NotNull Optional<RegistryEntryList<StructureSet>> getSet(@NotNull Registry<StructureSet> thisStructureRegistry)
-    {
+    private static @NotNull Optional<RegistryEntryList<StructureSet>> getSet(@NotNull Registry<StructureSet> thisStructureRegistry) {
         RegistryEntryList.Named<StructureSet> structureSetNamed = thisStructureRegistry.getOrCreateEntryList(TagKey.of(Registry.STRUCTURE_SET_KEY,
                 CodeLyokoMain.CodeLyokoPrefix("carthage_chunkgen_struct")));
         return Optional.of(structureSetNamed);
     }
 
-    public Registry<Biome> getThisBiomeRegistry()
-    {
-        return ((CarthageBiomeProvider)biomeSource).getBiomeRegistry();
+    public Registry<Biome> getThisBiomeRegistry() {
+        return ((CarthageBiomeProvider) biomeSource).getBiomeRegistry();
     }
 
 
-    public @NotNull Registry<StructureSet> getStructRegistry()
-    {
+    public @NotNull Registry<StructureSet> getStructRegistry() {
         return structureSetRegistry;
     }
 
-    public CustomGenSettings getCarthageSettings()
-    {
+    public CustomGenSettings getCarthageSettings() {
         return settings;
     }
-
 
 
     @Override
@@ -104,10 +94,8 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
     }
 
 
-
-
     @Override
-    public void buildSurface(@Nonnull ChunkRegion region, StructureAccessor featureManager,final NoiseConfig config, @NotNull Chunk chunk) {
+    public void buildSurface(@Nonnull ChunkRegion region, StructureAccessor featureManager, final NoiseConfig config, @NotNull Chunk chunk) {
         final BlockState bedrock = ModBlocks.DIGITAL_OCEAN_BLOCK.getDefaultState();
         final BlockState stone = ModBlocks.SECTOR5_STEEL.getDefaultState();
         final BlockState white = ModBlocks.TOWER_WHITE.getDefaultState();
@@ -200,7 +188,6 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
     }
 
 
-
     private void createSphere(@NotNull Chunk chunk, @NotNull BlockState stone, BlockPos.@NotNull Mutable pos, int x, int z, int height, int innerHeight) {
         for (int h = 0; h < height; h++) {
             chunk.setBlockState(pos.set(x, h + 128, z), stone, false);
@@ -213,10 +200,9 @@ public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCo
     }
 
 
-private int getHeightAt(int baseHeight,float vertialVariance, float horizontalVariance,int x, int z)
-{
-    return (int) (baseHeight+Math.sin(x/horizontalVariance) * vertialVariance + Math.cos(z/horizontalVariance) * vertialVariance);
-}
+    private int getHeightAt(int baseHeight, float vertialVariance, float horizontalVariance, int x, int z) {
+        return (int) (baseHeight + Math.sin(x / horizontalVariance) * vertialVariance + Math.cos(z / horizontalVariance) * vertialVariance);
+    }
 
 
     @Override
@@ -230,14 +216,13 @@ private int getHeightAt(int baseHeight,float vertialVariance, float horizontalVa
     }
 
 
-
     @Override
     public int getHeightOnGround(final int x, final int z, final Heightmap.Type heightmap, final HeightLimitView world, final NoiseConfig config) {
         final int baseHeight = settings.baseHeight();
         final float verticalVariance = settings.verticalVariance();
         final float horizontalVariance = settings.horizontalVariance();
 
-        return getHeightAt(baseHeight,verticalVariance,horizontalVariance,x,z);
+        return getHeightAt(baseHeight, verticalVariance, horizontalVariance, x, z);
     }
 
     @Override
@@ -247,24 +232,17 @@ private int getHeightAt(int baseHeight,float vertialVariance, float horizontalVa
 
 
     @Override
-    public VerticalBlockSample getColumnSample(final int x, final int z, final HeightLimitView world,NoiseConfig config) {
-        final int y = getHeightOnGround(x,z, Heightmap.Type.WORLD_SURFACE_WG,world,config);
+    public VerticalBlockSample getColumnSample(final int x, final int z, final HeightLimitView world, NoiseConfig config) {
+        final int y = getHeightOnGround(x, z, Heightmap.Type.WORLD_SURFACE_WG, world, config);
         final BlockState none = Blocks.AIR.getDefaultState();
         final BlockState[] states = new BlockState[y];
-        for(int i = 1; i < y; i++)
-        {
+        for (int i = 1; i < y; i++) {
             states[i] = none;
         }
 
 
-        return new VerticalBlockSample(world.getBottomY(),states);
+        return new VerticalBlockSample(world.getBottomY(), states);
     }
-
-
-
-
-
-
 
 
 }

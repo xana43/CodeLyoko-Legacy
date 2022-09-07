@@ -17,14 +17,10 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 
 
-public final class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer<T>  {
-
-
+public final class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer<T> {
 
 
     private final @NotNull EntityModel<T> OverBoardModel;
-
-
 
 
     public OverboardRenderer(EntityRendererFactory.@NotNull Context renderManager) {
@@ -33,7 +29,9 @@ public final class OverboardRenderer<T extends OverboardEntity> extends EntityRe
         this.OverBoardModel = new ModelOverboard<>(renderManager.getPart(ModelOverboard.LAYER_LOCATION));
 
     }
+
     private static final Identifier OVERBOARD_TEX = CodeLyokoMain.CodeLyokoPrefix("textures/entity/overboard/overboarduv.png");
+
     @Override
     public Identifier getTexture(final T entity) {
         return OVERBOARD_TEX;
@@ -52,10 +50,6 @@ public final class OverboardRenderer<T extends OverboardEntity> extends EntityRe
         this.OverBoardModel.render(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.DEFAULT_UV, 1, 1, 1, 1);
         matrixStackIn.pop();
     }
-
-
-
-
 
 
 }

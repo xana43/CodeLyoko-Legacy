@@ -4,7 +4,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.google.common.collect.Lists;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.ClickEvent;
@@ -17,8 +16,6 @@ import java.util.List;
 import java.util.Objects;
 
 public final class Devirtualized extends Screen {
-
-
 
 
     private byte ticksSinceDeath;
@@ -50,8 +47,7 @@ public final class Devirtualized extends Screen {
             }
         })));
 
-        for(ButtonWidget widget : this.buttons)
-        {
+        for (ButtonWidget widget : this.buttons) {
             widget.active = false;
         }
 
@@ -61,7 +57,6 @@ public final class Devirtualized extends Screen {
     public boolean shouldCloseOnEsc() {
         return false;
     }
-
 
 
     private void onConfirmQuit(boolean quit) {
@@ -80,7 +75,7 @@ public final class Devirtualized extends Screen {
         }
 
         this.client.disconnect(new net.minecraft.client.gui.screen.MessageScreen(Text.translatable("menu.savingLevel")));
-       // this.client.setScreen(new TitleScreen());
+        // this.client.setScreen(new TitleScreen());
     }
 
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
@@ -121,7 +116,7 @@ public final class Devirtualized extends Screen {
         if (this.message != null && mouseY > 85.0) {
             Objects.requireNonNull(this.textRenderer);
             if (mouseY < 94) {
-                Style style = this.getTextComponentUnderMouse((int)mouseX);
+                Style style = this.getTextComponentUnderMouse((int) mouseX);
                 if (style != null && style.getClickEvent() != null && style.getClickEvent().getAction() == ClickEvent.Action.OPEN_URL) {
                     this.handleTextClick(style);
                     return false;
@@ -141,8 +136,7 @@ public final class Devirtualized extends Screen {
         ++this.ticksSinceDeath;
 
         if (this.ticksSinceDeath == 20) {
-            for(ButtonWidget widget : this.buttons)
-            {
+            for (ButtonWidget widget : this.buttons) {
                 widget.active = true;
             }
 

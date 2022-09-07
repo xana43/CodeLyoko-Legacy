@@ -11,28 +11,27 @@ public final class PlayerScannerComponent implements AutoSyncedComponent, Player
 
     private final PlayerEntity player;
     private BlockPos blockPos = BlockPos.ORIGIN;
-    public PlayerScannerComponent(final PlayerEntity player)
-    {
+
+    public PlayerScannerComponent(final PlayerEntity player) {
         this.player = player;
     }
 
 
-    public void savePosition()
-    {
+    public void savePosition() {
         blockPos = player.getBlockPos();
     }
 
-    public void setPosition()
-    {
-        player.setPosition(blockPos.getX(),blockPos.getY(),blockPos.getZ());
+    public void setPosition() {
+        player.setPosition(blockPos.getX(), blockPos.getY(), blockPos.getZ());
     }
+
     @Override
     public void readFromNbt(final @NotNull NbtCompound tag) {
-        blockPos = new BlockPos(tag.getIntArray("player_pos")[0],tag.getIntArray("player_pos")[1],tag.getIntArray("player_pos")[2]);
+        blockPos = new BlockPos(tag.getIntArray("player_pos")[0], tag.getIntArray("player_pos")[1], tag.getIntArray("player_pos")[2]);
     }
 
     @Override
     public void writeToNbt(final @NotNull NbtCompound tag) {
-            tag.putIntArray("player_pos",new int[]{blockPos.getX(),blockPos.getY(),blockPos.getZ()});
+        tag.putIntArray("player_pos", new int[]{blockPos.getX(), blockPos.getY(), blockPos.getZ()});
     }
 }

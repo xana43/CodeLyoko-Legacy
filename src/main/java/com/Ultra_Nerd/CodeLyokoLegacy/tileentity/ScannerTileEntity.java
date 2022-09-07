@@ -25,42 +25,39 @@ public final class ScannerTileEntity extends BlockEntity implements MasterEntity
     public RegistryKey<World> destinationWorld = ModDimensions.carthage;
     private int scanTimer = MethodUtil.TickConversion.secondsToTicks(9);
     private boolean inScanner;
+
     public ScannerTileEntity(final BlockPos pos, final BlockState state) {
         super(ModTileEntities.SCANNER_TILE_ENTITY, pos, state);
         //destinationWorld = ModDimensions.carthage;
     }
-    public boolean isInScanner()
-    {
+
+    public boolean isInScanner() {
         return inScanner;
     }
+
     @Override
     public void tick() {
         MasterEntity.super.tick();
         inScanner = this.world.getClosestPlayer(this.pos.getX(), this.pos.getY(), this.pos.getZ(), 1, false) != null;
-        if(inScanner)
-        {
+        if (inScanner) {
             scanTimer--;
             virtualizePlayer();
 
-        }
-        else
-        {
+        } else {
             scanTimer = MethodUtil.TickConversion.secondsToTicks(9);
         }
     }
 
-    public void virtualizePlayer()
-    {
-        if(this.world instanceof ServerWorld serverWorld) {
+    public void virtualizePlayer() {
+        if (this.world instanceof ServerWorld serverWorld) {
 
             final MinecraftServer mcs = serverWorld.getServer();
             final ServerWorld serverWorld1 = mcs.getWorld(destinationWorld);
-            final ServerPlayerEntity player = (ServerPlayerEntity) serverWorld.getClosestPlayer(this.pos.getX(),this.pos.getY(),this.pos.getZ(),1,false);
+            final ServerPlayerEntity player = (ServerPlayerEntity) serverWorld.getClosestPlayer(this.pos.getX(), this.pos.getY(), this.pos.getZ(), 1, false);
 
-            if(serverWorld1 != null && player != null)
-            {
+            if (serverWorld1 != null && player != null) {
                 serverWorld.getProfiler().push("portal");
-                if(scanTimer <= 0 && inScanner) {
+                if (scanTimer <= 0 && inScanner) {
 
 
                     player.incrementStat(ModStats.ENTERED_LYOKO_IDENTIFIER);
@@ -71,9 +68,6 @@ public final class ScannerTileEntity extends BlockEntity implements MasterEntity
                 }
                 serverWorld.getProfiler().pop();
             }
-
-
-
 
 
         }
@@ -131,17 +125,17 @@ public final class ScannerTileEntity extends BlockEntity implements MasterEntity
 
          */
     }
+
     @Override
-    public void invalidateEntity()
-    {
+    public void invalidateEntity() {
         assert world != null;
-        final BlockPos frame = new BlockPos(pos.getX(),pos.getY() + 1,pos.getZ());
-        final BlockPos top = new BlockPos(pos.getX(),pos.getY() + 2,pos.getZ());
-        world.setBlockState(pos,world.getBlockState(pos).with(Scanner.Scanner,false));
-        if(world.getBlockState(frame).getBlock() == ModBlocks.SCANNER_FRAME) {
+        final BlockPos frame = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
+        final BlockPos top = new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ());
+        world.setBlockState(pos, world.getBlockState(pos).with(Scanner.Scanner, false));
+        if (world.getBlockState(frame).getBlock() == ModBlocks.SCANNER_FRAME) {
             world.setBlockState(frame, world.getBlockState(frame).with(ScannerFrame.ScannerFrameInvis, false));
         }
-        if(world.getBlockState(top).getBlock() == ModBlocks.SCANNER_TOP) {
+        if (world.getBlockState(top).getBlock() == ModBlocks.SCANNER_TOP) {
             world.setBlockState(top, world.getBlockState(top).with(ScannerTop.scannerFormedTop, false));
         }
     }
@@ -194,7 +188,6 @@ public final class ScannerTileEntity extends BlockEntity implements MasterEntity
     }
 
  */
-
 
 
 }

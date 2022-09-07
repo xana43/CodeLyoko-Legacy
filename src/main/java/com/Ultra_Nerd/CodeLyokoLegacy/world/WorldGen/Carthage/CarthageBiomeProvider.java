@@ -20,32 +20,26 @@ public final class CarthageBiomeProvider extends BiomeSource {
     private final @NotNull Registry<Biome> thisRegistry;
     private final @NotNull RegistryEntry<Biome> biomeHolder;
     public static final Codec<CarthageBiomeProvider> CARTHAGE_BIOME_PROVIDER_CODEC = RegistryOps.createRegistryCodec(BuiltinRegistries.BIOME.getKey())
-            .xmap(CarthageBiomeProvider::new,CarthageBiomeProvider::getBiomeRegistry).codec();
+            .xmap(CarthageBiomeProvider::new, CarthageBiomeProvider::getBiomeRegistry).codec();
     private static final List<RegistryKey<Biome>> SPAWN = Collections.singletonList(RegistryKey.of(Registry.BIOME_KEY, ModBiome.RegisteredBiomes.SECTOR5.getIdentifier()));
 
 
-    public CarthageBiomeProvider(@NotNull Registry<Biome> registry)
-    {
+    public CarthageBiomeProvider(@NotNull Registry<Biome> registry) {
         super(getSpawnBiomes(registry));
         this.thisRegistry = registry;
-        this.biomeHolder = registry.getOrCreateEntryDataResult(RegistryKey.of(registry.getKey(),ModBiome.RegisteredBiomes.SECTOR5.getIdentifier()));
+        this.biomeHolder = registry.getOrCreateEntry(RegistryKey.of(registry.getKey(), ModBiome.RegisteredBiomes.SECTOR5.getIdentifier()));
     }
 
 
-    public static List<RegistryEntry<Biome>> getSpawnBiomes(@NotNull Registry<Biome> registry)
-    {
+    public static List<RegistryEntry<Biome>> getSpawnBiomes(@NotNull Registry<Biome> registry) {
 
-        return SPAWN.stream().map(registry::getOrCreateEntryDataResult).collect(Collectors.toList());
+        return SPAWN.stream().map(registry::getOrCreateEntry).collect(Collectors.toList());
     }
 
 
-
-    public @NotNull Registry<Biome> getBiomeRegistry()
-    {
+    public @NotNull Registry<Biome> getBiomeRegistry() {
         return thisRegistry;
     }
-
-
 
 
     @Override
@@ -54,13 +48,10 @@ public final class CarthageBiomeProvider extends BiomeSource {
     }
 
 
-
-
     @Override
     public RegistryEntry<Biome> getBiome(final int x, final int y, final int z, final MultiNoiseUtil.MultiNoiseSampler noise) {
         return biomeHolder;
     }
-
 
 
 }

@@ -12,22 +12,20 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
-public final class TowerInterfaceTileEntity extends BlockEntity implements NamedScreenHandlerFactory
- {
-     public TowerInterfaceTileEntity(final BlockPos pos, final BlockState state) {
-         super(ModTileEntities.TOWER_INTERFACE_TILE_ENTITY, pos, state);
-     }
+public final class TowerInterfaceTileEntity extends BlockEntity implements NamedScreenHandlerFactory {
+    public TowerInterfaceTileEntity(final BlockPos pos, final BlockState state) {
+        super(ModTileEntities.TOWER_INTERFACE_TILE_ENTITY, pos, state);
+    }
 
-     @Override
-     public Text getDisplayName() {
-         return Text.empty();
-     }
+    @Override
+    public Text getDisplayName() {
+        return Text.empty();
+    }
 
-     @Override
-     public @NotNull ScreenHandler createMenu(final int syncId, final PlayerInventory inv, final PlayerEntity player) {
-         return new TowerInterfaceScreenHandler(syncId);
-     }
-
+    @Override
+    public @NotNull ScreenHandler createMenu(final int syncId, final PlayerInventory inv, final PlayerEntity player) {
+        return new TowerInterfaceScreenHandler(syncId);
+    }
 
 
 }

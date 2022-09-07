@@ -41,8 +41,7 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
                 {
                         ModBlocks.CHIPLET_FRANZ_BLOCK
                 };
-        for (final Block block : commonBlocksPICKDIAMOND)
-        {
+        for (final Block block : commonBlocksPICKDIAMOND) {
             getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL).add(block);
             getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(block);
         }

@@ -28,11 +28,10 @@ public final class RendSkid extends EntityRenderer<EntitySkid> {
     }
 
 
-    private  static final BakedModel SkidBladnir;
+    private static final BakedModel SkidBladnir;
 
 
-    static
-    {
+    static {
         SkidBladnir = Myron.getModel(CodeLyokoMain.CodeLyokoPrefix("entity/skid/skid"));
     }
 
@@ -42,21 +41,16 @@ public final class RendSkid extends EntityRenderer<EntitySkid> {
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
         matrices.push();
         matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(360 - yaw));
-        MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer().render(entity.world,SkidBladnir,Blocks.AIR.getDefaultState(), entity.getBlockPos(),matrices, vertexConsumers.getBuffer(RenderLayer.getSolid()),
-                false,entity.world.random,0,0);
+        MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer().render(entity.world, SkidBladnir, Blocks.AIR.getDefaultState(), entity.getBlockPos(), matrices, vertexConsumers.getBuffer(RenderLayer.getSolid()),
+                false, entity.world.random, 0, 0);
         matrices.pop();
     }
-
 
 
     @Override
     public boolean shouldRender(EntitySkid pLivingEntity, Frustum pCamera, double pCamX, double pCamY, double pCamZ) {
         return true;
     }
-
-
-
-
 
 
 }
