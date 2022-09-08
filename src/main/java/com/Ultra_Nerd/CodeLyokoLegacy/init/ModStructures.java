@@ -10,13 +10,8 @@ public record ModStructures() {
     public static StructureType<TowerBase> towerStruct;
 
 
-
-
-
-
-   public static void registerNewStructures()
-   {
-       towerStruct = Registry.register(Registry.STRUCTURE_TYPE, new Identifier(CodeLyokoMain.MOD_ID,"tower_base"), ()->TowerBase.CODEC);
-   }
+    public static void registerNewStructures() {
+        towerStruct = Registry.register(Registry.STRUCTURE_TYPE, new Identifier(CodeLyokoMain.MOD_ID, "tower_base"), () -> TowerBase.CODEC);
+    }
 
 }

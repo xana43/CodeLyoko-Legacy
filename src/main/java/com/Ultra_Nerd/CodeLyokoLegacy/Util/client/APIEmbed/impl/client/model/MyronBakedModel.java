@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class MyronBakedModel implements BakedModel, FabricBakedModel {
+public final class MyronBakedModel implements BakedModel, FabricBakedModel {
     private final Mesh mesh;
     private final ModelTransformation transformation;
     private final Sprite sprite;

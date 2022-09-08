@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-public class ObjLoader extends AbstractObjLoader implements ModelResourceProvider, ModelVariantProvider {
+public final class ObjLoader extends AbstractObjLoader implements ModelResourceProvider, ModelVariantProvider {
     private static final Gson GSON = (new GsonBuilder())
             .registerTypeAdapter(ModelTransformation.class, new ModelTransformDeserializer())
             .registerTypeAdapter(Transformation.class, new TransformDeserializer())

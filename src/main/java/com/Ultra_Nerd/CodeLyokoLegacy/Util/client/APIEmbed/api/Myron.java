@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
-public class Myron {
+public final class Myron {
     /**
      * Gets a baked model by its ID.
      * Useful for models that aren't associated with blocks/items, and therefore don't have a {@link ModelIdentifier}.

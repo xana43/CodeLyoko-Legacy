@@ -6,8 +6,6 @@ import net.minecraft.sound.SoundEvent;
 public record ModSounds() {
 
 
-
-
     public static final SoundEvent LAZY_WARRIOR = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_warrior"));
     public static final SoundEvent LAZY_FELINE = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_feline"));
     public static final SoundEvent LAZY_NINJA = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_ninja"));
@@ -33,7 +31,7 @@ public record ModSounds() {
     public static final SoundEvent MEGATANKHURT2 = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.hurt2"));
     public static final SoundEvent MEGATANKBIGFALL = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.bigfall"));
     public static final SoundEvent MEGATANKSMALLFALL = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.smallfall"));
-    public static final SoundEvent MEGATANKDIE = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix( "entity.megatank.die"));
+    public static final SoundEvent MEGATANKDIE = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.die"));
     public static final SoundEvent CURSORBLINK = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("interface_cursor"));
     public static final SoundEvent HORNETFLY = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.hornet.fly"));
 

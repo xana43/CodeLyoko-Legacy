@@ -1,14 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerControlPanelTileEntity;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
@@ -24,7 +25,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
@@ -204,6 +204,15 @@ public final class ControlPanel extends BlockWithEntity {
         };
     }
 
+    @Override
+    public void onPlaced(final World world, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack itemStack) {
+        final PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeBlockPos(pos);
+
+
+        super.onPlaced(world, pos, state, placer, itemStack);
+    }
+
 
     @Nullable
     @Override
@@ -224,12 +233,6 @@ public final class ControlPanel extends BlockWithEntity {
         return ActionResult.SUCCESS;
 
 
-    }
-
-    @Override
-    public <T extends BlockEntity> @NotNull BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
-
-        return checkType(type, ModTileEntities.COMPUTER_CONTROL_PANEL, (world1, pos, state1, blockEntity) -> ComputerControlPanelTileEntity.setState(world, pos, state1));
     }
 
 

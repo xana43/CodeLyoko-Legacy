@@ -2,14 +2,18 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -22,6 +26,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     private static final Identifier TEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/computercontrolpanelui.png");
     private static final Identifier BUTTONTEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/buttonatlas.png");
     private TextFieldWidget text;
+    private boolean active;
     private TexturedButtonWidget button;
     ComputerControlPanelScreenHandler computerControlPanelScreenHandler;
 
@@ -74,7 +79,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         y = (this.height - (size >> 1)) >> 1;
         this.setTextField();
         this.setButtons();
-
+        active = handler.isActive();
 
     }
 
@@ -87,10 +92,12 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
 
         //
         this.button = new TexturedButtonWidget(x, y, this.width / 3, this.height >> 3, 0, 0, BUTTONTEXTURES, (press) -> {
-            handler.setIsActive(!handler.getIsActive());
-            assert this.client != null;
-            assert this.client.interactionManager != null;
-            this.client.interactionManager.clickButton(handler.syncId, 0);
+            final PacketByteBuf buf = PacketByteBufs.create();
+            active = !active;
+            buf.writeBlockPos(handler.getPos());
+            buf.writeBoolean(active);
+            ClientPlayNetworking.send(PacketHandlerCommon.ChannelID, buf);
+
         }) {
             @Override
             public void renderButton(MatrixStack stack, int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
@@ -128,13 +135,13 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         super.handledScreenTick();
 
         //CompActive = handler.isActive();
-        if (handler.getIsActive()) {
+        if (active) {
             this.button.setMessage(Text.translatable("de-activate"));
         } else {
             this.button.setMessage(Text.translatable("activate"));
         }
 
-        if (handler.getIsActive()) {
+        if (active) {
             this.text.setMessage(Text.translatable("Active"));
             this.text.setEditableColor(0x008000);
         } else {
@@ -161,7 +168,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     protected void drawBackground(final MatrixStack matrices, final float delta, final int mouseX, final int mouseY) {
         RenderSystem.setShaderTexture(0, TEXTURES);
         this.drawTexture(matrices, x, y, 0, 0, size, size >> 1);
-        if (handler.getIsActive()) {
+        if (active) {
             this.drawTexture(matrices, x, y + 19, 0, 144, size, (size >> 1) - 35);
         }
     }

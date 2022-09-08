@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-public class MyronMaterial {
+public final class MyronMaterial {
     public static final MyronMaterial DEFAULT = new MyronMaterial("missing_texture");
 
     static {

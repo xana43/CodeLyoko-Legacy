@@ -36,7 +36,7 @@ import java.util.*;
 import java.util.function.Function;
 
 @Environment(EnvType.CLIENT)
-public class Myron implements ClientModInitializer {
+public final class Myron implements ClientModInitializer {
     public static final String MOD_ID = "myron";
     public static final Logger LOGGER = LogManager.getLogger("Myron");
     public static final Map<Identifier, Mesh> MESHES = new HashMap<>();

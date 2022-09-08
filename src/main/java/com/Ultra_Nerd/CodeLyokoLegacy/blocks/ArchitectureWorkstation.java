@@ -1,7 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -33,7 +36,7 @@ public final class ArchitectureWorkstation extends HorizontalFacingBlock {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING,ctx.getPlayerFacing().getOpposite()).with(on,false);
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite()).with(on, false);
     }
 
 

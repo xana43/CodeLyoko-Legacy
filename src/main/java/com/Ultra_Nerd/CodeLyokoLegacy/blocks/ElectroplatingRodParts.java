@@ -25,13 +25,10 @@ public final class ElectroplatingRodParts extends Block {
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
 
-
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         return RodPart;
     }
-
-
 
 
 }

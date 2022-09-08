@@ -33,7 +33,7 @@ public record CustomIceSky() implements DimensionRenderingRegistry.SkyRenderer {
 
         final MatrixStack matrixStack = context.matrixStack();
 
-        for (byte i = 0; i < 6; ++i) {
+        for (int i = 0; i < 6; ++i) {
             matrixStack.push();
             final Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
             switch (i) {

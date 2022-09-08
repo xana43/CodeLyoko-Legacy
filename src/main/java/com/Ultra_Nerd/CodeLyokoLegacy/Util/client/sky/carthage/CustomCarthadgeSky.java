@@ -16,22 +16,21 @@ import net.minecraft.util.math.Vec3f;
 public record CustomCarthadgeSky() implements DimensionRenderingRegistry.SkyRenderer/*implements ISkyRenderHandler*/ {
 
 
-    private static final Identifier texturelocation = new Identifier(CodeLyokoMain.MOD_ID, "textures/skies/sector5/sector5sky.png");
+    private static final Identifier TEXTURE_LOCATION = new Identifier(CodeLyokoMain.MOD_ID, "textures/skies/sector5/sector5sky.png");
     private static final Tessellator tessellator = Tessellator.getInstance();
     private static final BufferBuilder bufferBuilder = tessellator.getBuffer();
 
     @Override
     public void render(final WorldRenderContext context) {
-        RenderSystem.setShaderTexture(0, texturelocation);
+        RenderSystem.setShaderTexture(0, TEXTURE_LOCATION);
 
         final MatrixStack matrixStack = context.matrixStack();
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
 
         matrixStack.push();
-        //for (byte i = 0; i < 6; ++i) {
 
 
-//originally in a for loop, but loop unrolling would REALLY be beneffical here because of the fact that the compiler won't know about how the matrix vertex works
+        //originally in a for loop, but loop unrolling would REALLY be beneffical here because of the fact that the compiler won't know about how the matrix vertex works
         //only works for this renderer because it's just a simple cube
         final Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
         bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
@@ -72,7 +71,7 @@ public record CustomCarthadgeSky() implements DimensionRenderingRegistry.SkyRend
 
 
         tessellator.draw();
-        //}
+
         matrixStack.pop();
     }
 }

@@ -6,7 +6,6 @@ public final class LyokoDamage extends DamageSource {
 
     public LyokoDamage(final String name) {
         super(name);
-
     }
 
     @Override

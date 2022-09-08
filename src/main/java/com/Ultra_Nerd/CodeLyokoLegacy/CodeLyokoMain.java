@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
@@ -71,8 +72,6 @@ public record CodeLyokoMain() implements ModInitializer {
         return new Identifier(MOD_ID, name);
     }
 
-    public static final Identifier ChannelID = CodeLyokoMain.CodeLyokoPrefix("lyokopacket");
-
     private static void registerEnergyStorageBE() {
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.simpleEnergyStorage, ModTileEntities.UNIVERSAL_ENERGY_STORAGE);
     }
@@ -80,7 +79,7 @@ public record CodeLyokoMain() implements ModInitializer {
     @Override
     public void onInitialize() {
         GeckoLib.initialize();
-
+        PacketHandlerCommon.CommonChannelRegistry();
         generalRegistration();
         SetupFunctions();
         registerDefaultAttributes();

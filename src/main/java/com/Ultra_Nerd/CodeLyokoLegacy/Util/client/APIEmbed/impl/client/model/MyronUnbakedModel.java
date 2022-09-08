@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
-public class MyronUnbakedModel implements UnbakedModel {
+public final class MyronUnbakedModel implements UnbakedModel {
     private final Obj obj;
     private final Map<String, com.Ultra_Nerd.CodeLyokoLegacy.Util.client.APIEmbed.impl.client.model.MyronMaterial> materials;
     private final Collection<SpriteIdentifier> textureDependencies;

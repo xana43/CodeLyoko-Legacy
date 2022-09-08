@@ -13,10 +13,6 @@ public final class TowerGeneric extends Block {
     }
 
 
-
-
-
-
     @Override
     public boolean canMobSpawnInside() {
         return false;

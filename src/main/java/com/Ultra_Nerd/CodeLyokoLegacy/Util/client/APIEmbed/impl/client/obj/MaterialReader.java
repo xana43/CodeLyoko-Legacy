@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.*;
 
-public class MaterialReader {
+public final class MaterialReader {
     private static final Map<String, Option> OPTIONS = new HashMap<>();
     private static final Option NONE = (tokenizer, line, token, material) -> {
     };

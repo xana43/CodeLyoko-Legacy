@@ -30,8 +30,7 @@ public final class TowerInterface extends BlockWithEntity {
 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
-        return switch (state.get(DIRINTERFACE))
-        {
+        return switch (state.get(DIRINTERFACE)) {
             case NORTH -> SHAPE_N;
             case SOUTH -> SHAPE_S;
             case EAST -> SHAPE_E;
@@ -41,10 +40,10 @@ public final class TowerInterface extends BlockWithEntity {
     }
 
     public TowerInterface() {
-        super(FabricBlockSettings.of(Material.BARRIER).strength(-1,-1).sounds(BlockSoundGroup.AMETHYST_CLUSTER).luminance(80));
+        super(FabricBlockSettings.of(Material.BARRIER).strength(-1, -1).sounds(BlockSoundGroup.AMETHYST_CLUSTER).luminance(80));
         //this.registerDefaultState(this.defaultBlockState().setValue(DIRINTERFACE, Direction.NORTH));
-        this.setDefaultState(this.getStateManager().getDefaultState().with(DIRINTERFACE,Direction.NORTH));
-       // this.getDefaultState().with(DIRINTERFACE,Direction.NORTH);
+        this.setDefaultState(this.getStateManager().getDefaultState().with(DIRINTERFACE, Direction.NORTH));
+        // this.getDefaultState().with(DIRINTERFACE,Direction.NORTH);
     }
 
     @Override
@@ -60,7 +59,7 @@ public final class TowerInterface extends BlockWithEntity {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(DIRINTERFACE,ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(DIRINTERFACE, ctx.getPlayerFacing().getOpposite());
     }
 
     @Nullable
@@ -71,11 +70,9 @@ public final class TowerInterface extends BlockWithEntity {
 
     @Override
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
-        if(!world.isClient)
-        {
+        if (!world.isClient) {
             final NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-            if(screenHandlerFactory != null)
-            {
+            if (screenHandlerFactory != null) {
                 player.openHandledScreen(screenHandlerFactory);
             }
         }

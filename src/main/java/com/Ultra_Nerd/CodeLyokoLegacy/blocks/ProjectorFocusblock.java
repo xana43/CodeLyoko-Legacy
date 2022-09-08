@@ -67,7 +67,7 @@ public final class ProjectorFocusblock extends Block {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(VALIDFOCUS,false);
+        return this.getDefaultState().with(VALIDFOCUS, false);
     }
 
 
@@ -75,15 +75,6 @@ public final class ProjectorFocusblock extends Block {
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder.add(VALIDFOCUS));
     }
-
-
-
-
-
-
-
-
-
 
 
 }
