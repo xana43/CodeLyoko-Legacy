@@ -4,10 +4,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.math.BlockPos;
 
-public final class ComputerCoreTileEntity extends InventoryBE {
-    public ComputerCoreTileEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state) {
-        super(type, pos, state);
-    }
+public final class ComputerCoreTileEntity {
+
 
     //public ComputerCoreTileEntity(BlockEntityType<?> tileEntityTypeIn) {
    //     super(tileEntityTypeIn);

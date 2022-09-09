@@ -8,6 +8,12 @@ import net.minecraft.util.collection.DefaultedList;
 
 public interface LyokoInventoryBlock extends Inventory {
     /**
+     * Retrieves the item list of this inventory.
+     * Must return the same instance every time it's called.
+     */
+    DefaultedList<ItemStack> getItems();
+
+    /**
      * Creates an inventory from the item list.
      */
     static LyokoInventoryBlock of(DefaultedList<ItemStack> items) {
@@ -22,12 +28,6 @@ public interface LyokoInventoryBlock extends Inventory {
     }
 
     /**
-     * Retrieves the item list of this inventory.
-     * Must return the same instance every time it's called.
-     */
-    DefaultedList<ItemStack> getItems();
-
-    /**
      * Returns the inventory size.
      */
     @Override
@@ -37,7 +37,6 @@ public interface LyokoInventoryBlock extends Inventory {
 
     /**
      * Checks if the inventory is empty.
-     *
      * @return true if this inventory has only empty stacks, false otherwise.
      */
     @Override
@@ -61,7 +60,6 @@ public interface LyokoInventoryBlock extends Inventory {
 
     /**
      * Removes items from an inventory slot.
-     *
      * @param slot  The slot to remove from.
      * @param count How many items to remove. If there are less items in the slot than what are requested,
      *              takes all items in that slot.
@@ -77,7 +75,6 @@ public interface LyokoInventoryBlock extends Inventory {
 
     /**
      * Removes all items from an inventory slot.
-     *
      * @param slot The slot to remove from.
      */
     @Override
@@ -87,7 +84,6 @@ public interface LyokoInventoryBlock extends Inventory {
 
     /**
      * Replaces the current stack in an inventory slot with the provided stack.
-     *
      * @param slot  The inventory slot of which to replace the itemstack.
      * @param stack The replacing itemstack. If the stack is too big for
      *              this inventory ({@link Inventory#getMaxCountPerStack()}),
@@ -96,8 +92,8 @@ public interface LyokoInventoryBlock extends Inventory {
     @Override
     default void setStack(int slot, ItemStack stack) {
         getItems().set(slot, stack);
-        if (stack.getCount() > getMaxCountPerStack()) {
-            stack.setCount(getMaxCountPerStack());
+        if (stack.getCount() > stack.getMaxCount()) {
+            stack.setCount(stack.getMaxCount());
         }
     }
 

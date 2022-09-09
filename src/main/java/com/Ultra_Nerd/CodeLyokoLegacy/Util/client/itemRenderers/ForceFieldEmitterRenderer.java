@@ -28,9 +28,9 @@ public record ForceFieldEmitterRenderer() implements BuiltinItemRendererRegistry
         }
         if (mc != null) {
             final BakedModel forceField = Myron.getModel(CodeLyokoMain.CodeLyokoPrefix("models/item/force_field_model"));
-
-            mc.getBlockRenderManager().getModelRenderer().render(matrices.peek(), vertexConsumers.getBuffer(RenderLayer.getSolid()), Blocks.AIR.getDefaultState(), forceField, 1, 1, 1, light, overlay);
-
+            if (forceField != null) {
+                mc.getBlockRenderManager().getModelRenderer().render(matrices.peek(), vertexConsumers.getBuffer(RenderLayer.getSolid()), Blocks.AIR.getDefaultState(), forceField, 1, 1, 1, light, overlay);
+            }
         }
         matrices.pop();
     }

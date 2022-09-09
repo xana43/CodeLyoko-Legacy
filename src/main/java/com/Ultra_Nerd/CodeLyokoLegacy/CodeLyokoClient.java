@@ -7,6 +7,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.MegaTankRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.OverboardRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.RendBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.EntityPacketHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ReactorScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.itemRenderers.ForceFieldEmitterRenderer;
@@ -20,6 +21,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ComputerControlPanelUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.ReactorGUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TowerGUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -82,6 +84,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         FluidRenderRegistry();
         HandledScreens.register(ModScreenHandlers.TOWER_INTERFACE_SCREEN_HANDLER, TowerGUI::new);
         HandledScreens.register(ModScreenHandlers.CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE, ComputerControlPanelUI::new);
+        HandledScreens.register(ModScreenHandlers.COMPUTER_REACTOR_SCREEN_HANDLER, ReactorGUI::new);
         //Custom Sprites
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
             registry.register(CodeLyokoMain.CodeLyokoPrefix("block/digital_flowing"));

@@ -128,7 +128,7 @@ public record CodeLyokoMain() implements ModInitializer {
 
 
         BiomeFeatureInject();
-
+        EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.energyStorage, ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
 
 

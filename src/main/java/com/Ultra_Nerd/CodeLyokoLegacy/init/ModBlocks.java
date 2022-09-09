@@ -124,18 +124,18 @@ public record ModBlocks() {
     public static final Block TYUYAMUNITE_ORE = new OreBlock(FabricBlockSettings.of(Material.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE));
     public static final Block TORBERNITE_ORE = new OreBlock(FabricBlockSettings.of(Material.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE));
     public static final Block TOWER_ENTER = new TowerEnter();
-    /*  public static final Block TITANIUM = new Block(FabricBlockSettings.of(Material.METAL).strength(6, 10).sounds(BlockSoundGroup.METAL));
-      public static final Block URANUM_REACTOR = new ComputerIntegratedReactor();
-      public static final Block URANINITE_ORE = new Block(FabricBlockSettings.of(Material.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE));
-      public static final Block URANIUM_BLOCK_238 = new Block(FabricBlockSettings.of(Material.METAL).strength(6, 20).sounds(BlockSoundGroup.METAL));
-      public static final Block URANIUM_BLOCK_235 = new Block(FabricBlockSettings.of(Material.METAL).strength(6, 20).sounds(BlockSoundGroup.METAL));
-      public static final Block URANIUM_CANISTER = new UraniumCanister(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5, 5));
-      public static final Block URANOPHANE_ORE = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(4, 4));
-      public static final Block UV_MACHINE = new Block(FabricBlockSettings.copyOf(Blocks.ANVIL));
-      public static final Block UV_FOCUS = new UVFocusBlock(FabricBlockSettings.copyOf(Blocks.GLASS));
-      public static final Block UV_LIGHT = new Block(FabricBlockSettings.copyOf(Blocks.GLOWSTONE));
+    public static final Block TITANIUM = new Block(FabricBlockSettings.of(Material.METAL).strength(6, 10).sounds(BlockSoundGroup.METAL));
+    public static final Block URANUM_REACTOR = new ComputerIntegratedReactor();
+    public static final Block URANINITE_ORE = new Block(FabricBlockSettings.of(Material.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE));
+    public static final Block URANIUM_BLOCK_238 = new Block(FabricBlockSettings.of(Material.METAL).strength(6, 20).sounds(BlockSoundGroup.METAL));
+    public static final Block URANIUM_BLOCK_235 = new Block(FabricBlockSettings.of(Material.METAL).strength(6, 20).sounds(BlockSoundGroup.METAL));
+    public static final Block URANIUM_CANISTER = new UraniumCanister(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(5, 5));
+    public static final Block URANOPHANE_ORE = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(4, 4));
+    public static final Block UV_MACHINE = new Block(FabricBlockSettings.copyOf(Blocks.ANVIL));
+    //public static final Block UV_FOCUS = new UVFocusBlock(FabricBlockSettings.copyOf(Blocks.GLASS));
+    public static final Block UV_LIGHT = new Block(FabricBlockSettings.copyOf(Blocks.GLOWSTONE));
 
-     */
+
     public static final Block VOLCANO_GROUND = new Block(FabricBlockSettings.copyOf(Blocks.STONE));
 
 
@@ -223,16 +223,16 @@ public record ModBlocks() {
             .put("tyuyamunite_ore", TYUYAMUNITE_ORE)
             .put("torbernite_ore", TORBERNITE_ORE)
             .put("tower_enter", TOWER_ENTER)
-            //.put("titanium_block",TITANIUM)
-            //.put("computer_reactor",URANUM_REACTOR)
-            //.put("uraninite_ore",URANINITE_ORE)
-            //.put("uranium_block_238",URANIUM_BLOCK_238)
-            //.put("uranium_block_235",URANIUM_BLOCK_235)
-            //.put("uranium_canister",URANIUM_CANISTER)
-            //.put("uranophane_ore",URANOPHANE_ORE)
-            //.put("uv_machine",UV_MACHINE)
-            //.put("uv_focus",UV_FOCUS)
-            //.put("uv_light",UV_LIGHT)
+            .put("titanium_block", TITANIUM)
+            .put("computer_reactor", URANUM_REACTOR)
+            .put("uraninite_ore", URANINITE_ORE)
+            .put("uranium_block_238", URANIUM_BLOCK_238)
+            .put("uranium_block_235", URANIUM_BLOCK_235)
+            .put("uranium_canister", URANIUM_CANISTER)
+            .put("uranophane_ore", URANOPHANE_ORE)
+            .put("uv_machine", UV_MACHINE)
+            //.put("uv_focus", UV_FOCUS)
+            .put("uv_light", UV_LIGHT)
             //other blocks here
             .put("volcano_ground", VOLCANO_GROUND)
             //fluidblocks

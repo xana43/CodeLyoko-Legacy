@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "cm:block/computer_screen"
+      "model": "cm:block/computer_reactor"
     }
   }
 }

@@ -1,55 +1,52 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 
-public final class ReactorGUI //extends ContainerScreen<ReactorContainer>
-{
-	/*
-	private static final ResourceLocation TEXTURES = new ResourceLocation(ref.MOD_ID + ":textures/gui/Reactor.png");
-	private final PlayerEntity player;
-	private final ComputerReactorTileEntity tileentity;
-	
-	public ReactorGUI(PlayerEntity player, ComputerReactorTileEntity tileentity)
-	{
-		super(new ReactorContainer(player, tileentity));
-		this.player = player;
-		this.tileentity = tileentity;
-	}
-	
-	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) 
-	{
-		String tileName = this.tileentity.getDisplayName().getUnformattedText();
-		this.fontRenderer.drawString(tileName, (this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2) -5, 6, 4210752);
-		this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 7, this.ySize - 96 + 2, 4210752);
-		this.fontRenderer.drawString(Integer.toString(this.tileentity.getEnergy()), 100, 72, 4210752);
-	}
-	
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-	{
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-		this.mc.getTextureManager().bindTexture(TEXTURES);
-		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
-		
-		int l = this.getCookProgressScaled(24);
-		this.drawTexturedModalRect(this.guiLeft + 113, this.guiTop + 32, 176, 14, l + 1, 16);
-		
-		int k = this.getEnergyStoredScaled(75);
-		this.drawTexturedModalRect(this.guiLeft + 152, this.guiTop + 7, 176, 32, 16, 76 - k);
-	}
-	
-	private int getEnergyStoredScaled(int pixels)
-	{
-		int i = this.tileentity.getEnergy();
-		int j = this.tileentity.Maxen();
-		return i != 0 && j != 0 ? i * pixels / j : 0; 
-	}
-	
-	private int getCookProgressScaled(int pixels)
-	{
-		int i = this.tileentity.Fission;
-		return i != 0 ? i * pixels / 25 : 0;
-	}
-	*/
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ReactorScreenHandler;
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.boss.BossBar;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.ColorHelper;
+import software.bernie.geckolib3.core.util.Color;
 
+public final class ReactorGUI extends HandledScreen<ReactorScreenHandler> {
+
+    private static final Identifier TEXTURE = new Identifier("minecraft", "textures/gui/container/dispenser.png");
+
+    public ReactorGUI(final ReactorScreenHandler handler, final PlayerInventory inventory, final Text title) {
+        super(handler, inventory, title);
+    }
+
+    @Override
+    protected void drawBackground(final MatrixStack matrices, final float delta, final int mouseX, final int mouseY) {
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, TEXTURE);
+        final int x = (width - backgroundWidth) >> 1;
+        final int y = (height - backgroundHeight) >> 1;
+        drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight);
+    }
+
+    @Override
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        renderBackground(matrices);
+        final int x = (width - 36) >> 1;
+        final int y = (height - 117) >> 1;
+        super.render(matrices, mouseX, mouseY, delta);
+        drawMouseoverTooltip(matrices, mouseX, mouseY);
+        drawCenteredText(matrices, textRenderer, Text.translatable("computer_reactor.input.slot"), x, y, ColorHelper.Argb.getArgb(255,255,255,255));
+        drawCenteredText(matrices, textRenderer, Text.translatable("computer_reactor.output.slot"), x + 36, y, ColorHelper.Argb.getArgb(255,255,255,255));
+        drawCenteredText(matrices, textRenderer, Text.translatable("computer_reactor.energy.amount", handler.getEnergyAmount()), x + 36, y + 45, ColorHelper.Argb.getArgb(255,255,255,255));
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        // Center the title
+        titleX = (backgroundWidth - textRenderer.getWidth(title)) >> 1;
+    }
 }

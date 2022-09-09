@@ -284,5 +284,6 @@
   "phone.receve2": "was received",
   "_comment_10": "tooltops",
   "computer.item.tooltip": "Hold \u00A7e Shift \u00A77For more details",
-  "computer.item.tooltip.shift": "a part for a computer\nthere are a bunch of tiers\nthe color of the item indicates it's tier"
+  "computer.item.tooltip.shift": "a part for a computer\nthere are a bunch of tiers\nthe color of the item indicates it's tier",
+  "computer_reactor.energy.amount": "stored energy: %s"
 }
