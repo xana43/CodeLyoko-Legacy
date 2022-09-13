@@ -1,0 +1,55 @@
+Feature flow
+    - metal refinement system for the super calculator
+            - start with the basics like copper etc, and then work your way up tp UV etching silicon chips
+    - Allow the super calculator to store each player's information and profile settings
+            - basically make a proper computer in minecraft
+    - Multiblock refactoring
+            -Currently the only MultiBlock structure is the scanner, and it's for the most part
+            using manual checking, this needs to be refactored to be automatic
+    - Dimension travel
+            - there's already a hardcoded way that the scanners get the player to each dimension, but that needs to
+            tie in with the super calculator and allow for way towers to teleport players to other sectors
+            plus allow for the skid to come accross Replikas
+    -Story
+            - make a sort of story based progression via journals and generated ruins
+Feature Flow Breakdown
+    -Beginning
+        - create basic computer components with iron, and anything else that's part of the tag
+        - once those have been created, find other story entries that allows for the player to know the recipes
+        - Tiered lyoko profiles
+                - so like if you're using a classical computer A. you can only have 1 scanner active at a time
+               B. the total life points of each class is lower, and there's less features in general
+               like no way tower access ability, sector 5 can't be accessed, etc and each tier would add more features
+    - End game
+        - Try to destroy Xana as by this time Xana should be able to spawn monsters in the overworld
+        that can only really be dealt with by deactivating xana controlled towers
+Class structure
+    Each player can be of any class (I.E. Samurai, Warrior, Ninja, Guardian, Feline) all based off of the
+    OLD codelyoko facebook game. Each class will have it's own skills
+        - Ninja, runs a tiny bit faster, can use the digital fans, can use telekinesis
+        - Guardian, has more hitpoints and more defense, can glide, can use Energy balls and create temporary walls
+        and bridges
+        - Feline, can wall run, run a lot faster, can use the laser arrow, takes no fall damage
+        - Samurai, can use super sprint, can use the digital katana, can use triplicate to confuse enemies
+        - Warrior, can use the Zweihander, moves a bit slower, can deal MUCH more damage from all melee sources
+    Each class will also be able to summon their respective vehicles
+        - Samurai can summon the Over bike
+        - Ninja and Guardian can summon the Over Board
+        - Feline can summon the Hover board
+        - Warrior can summon a digital manta
+Enemy definition
+        All the enemies present from Season 1 - 4 will be added
+        - Megatank, Super high defense and health, needs to stop in order to attack and can be easily baited to roll
+        off the edge of the sector
+
+       - Krab, can climb on walls, attack the fastest out of all of the other monsters
+       - Kankrelat, very weak and simple but spawn in big groups
+       - Blok, can use multiple elemental attacks such as ice, fire, poison, insant damage, wither etc
+       - Tarantula, slow moving and needs to stop to attack as well, but focues more on supressing fire
+       - Hornet, Manta, effectively the same enemy except that mantas can traverse the digital ocean
+       - Schithozoa, able to take away a player's ability from respawning in the Over world and the player
+       can only respawn in lyoko until they get their respawn key back
+Vehicle definition
+       for the most part all the vehicles are the same
+       - Hoverboard, Overboard, Over bike, can all fly but the overbike can also have gravity
+       - Skidblanir, able to hold up to 5 players, can be used to travel in the digital ocean
