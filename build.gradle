@@ -1,158 +1,52 @@
 plugins {
-	id 'fabric-loom' version '0.12-SNAPSHOT'
-	id 'maven-publish'
-	id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id "architectury-plugin" version "3.4-SNAPSHOT"
+    id "dev.architectury.loom" version "0.12.0-SNAPSHOT" apply false
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
-version = project.mod_version
-group = project.maven_group
-
-repositories {
-	// Add repositories to retrieve artifacts from in here.
-	// You should only use this when depending on other mods because
-	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-	// for more information about repositories.
-	//gekolib
-
-	maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-	//Locki
-	maven {
-		name = "Ladysnake Mods"
-		url = "https://ladysnake.jfrog.io/artifactory/mods"
-		content {
-			includeGroup 'io.github.ladysnake'
-			includeGroupByRegex '(dev|io\\.github)\\.onyxstudios.*'
-		}
-	}
-	maven {
-		name = "Nexus Repository Manager"
-		url = 'https://oss.sonatype.org/content/repositories/snapshots'
-	}
-
-	//myron
-	maven { url = "https://hephaestus.dev/release" }
-
-	mavenLocal()
-
-	maven {url = "https://maven.kyrptonaught.dev"}
-	maven { url = "https://oss.sonatype.org/content/repositories/releases/" }
-	maven { url = "https://maven.dblsaiko.net/" }
-	maven { url = "https://server.bbkr.space:8081/artifactory/libs-release/" }
-
-	//ASM
-	maven { url 'https://jitpack.io' }
-
-
-
-}
-shadowJar {
-	configurations = [project.configurations.shadow]
-	relocate 'de.javagl.obj', 'myron.shaded.de.javagl.obj'
-	classifier = "shadow"
-}
-dependencies {
-	implementation(shadow("de.javagl:obj:${obj_version}"))
-	// To change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	//include "com.github.Chocohead:Fabric-ASM:v${asm_version}"
-	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "software.bernie.geckolib:geckolib-fabric-1.19:${geko_version}"
-	//modImplementation include("dev.monarkhes:myron:${project.myron_version}")
-	//modImplementation "io.github.ladysnake:locki:${locki_version}"
-	//include "io.github.ladysnake:locki:${locki_version}"
-	//modImplementation "net.kyrptonaught:customportalapi:${portal_version}"
-	//include "net.kyrptonaught:customportalapi:${portal_version}"
-	//modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-world:${cca_version}"
-	//modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-util:${cca_version}"
-	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-level:${cca_version}"
-	//include "dev.onyxstudios.cardinal-components-api:cardinal-components-world:${cca_version}"
-	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cca_version}"
-	//include "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cca_version}"
-	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cca_version}"
-	//include "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cca_version}"
-	//include "dev.onyxstudios.cardinal-components-api:cardinal-components-level:${cca_version}"
-	//include "dev.onyxstudios.cardinal-components-api:cardinal-components-util:${cca_version}"
-	include modApi("teamreborn:energy:${energy_api_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-	//modImplementation include("be.florens:expandability-fabric:${expandability_version}")
-
-}
-sourceSets{
-	main {
-		compileClasspath += main.compileClasspath
-		runtimeClasspath += main.runtimeClasspath
-		resources{
-			srcDirs+=[
-				'src/main/generated'
-			]
-		}
-	}
-}
-processResources {
-	inputs.property "version", project.version
-
-	filesMatching("fabric.mod.json") {
-		expand "version": project.version
-	}
+architectury {
+    minecraft = rootProject.minecraft_version
 }
 
-tasks.withType(JavaCompile).configureEach {
-	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	it.options.release = 17
+subprojects {
+    apply plugin: "dev.architectury.loom"
+
+    loom {
+        silentMojangMappingsLicense()
+    }
+
+    dependencies {
+        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+        // The following line declares the mojmap mappings, you may use other mappings as well
+        mappings loom.officialMojangMappings()
+        // The following line declares the yarn mappings you may select this one as well.
+        // mappings "net.fabricmc:yarn:1.19+build.4:v2"
+    }
 }
 
-java {
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-	// if it is present.
-	// If you remove this line, sources will not be generated.
-	withSourcesJar()
-}
+allprojects {
+    apply plugin: "java"
+    apply plugin: "architectury-plugin"
+    apply plugin: "maven-publish"
 
-jar {
-	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
-	}
-}
+    archivesBaseName = rootProject.archives_base_name
+    version = rootProject.mod_version
+    group = rootProject.maven_group
 
-// configure the maven publication
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			from components.java
-		}
-	}
+    repositories {
+        // Add repositories to retrieve artifacts from in here.
+        // You should only use this when depending on other mods because
+        // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+        // See https://docs.gradle.org/current/userguide/declaring_repositories.html
+        // for more information about repositories.
+        maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+    }
 
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
-		// Notice: This blocks does NOT have the same function as the blocks in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
-	}
-}
-loom{
-	accessWidenerPath = file("src/main/resources/cm.accesswidener")
-	runs{
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+        options.release = 17
+    }
 
-	datagenClient{
-		client()
-		name "Data Generation"
-		vmArg "-Dfabric-api.datagen"
-		vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-		vmArg "-Dfabric-api.datagen.strict-validation"
-		ideConfigGenerated = true
-		runDir "build/datagen"
-		source sourceSets.main
-
-		}
-	}
+    java {
+        withSourcesJar()
+    }
 }

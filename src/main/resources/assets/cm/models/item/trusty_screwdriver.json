@@ -1,6 +1,0 @@
-{
-  "loader": "forge:obj",
-  "model": "cm:models/item/trusty_screwdriver.obj",
-  "flip-v": true,
-  "ambientocclusion": true
-}

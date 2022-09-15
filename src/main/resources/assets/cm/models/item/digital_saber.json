@@ -1,7 +1,0 @@
-{
-    "parent":"builtin/entity",
-    "overrides": [
-            {"predicate": {"cm:blocking": 1.0},"model":"cm:item/saber/digital_saber_blocking"},
-            {"predicate": {"cm:blocking": 0.0},"model":"cm:item/saber/digital_saber_normal"}
- ]
-}
