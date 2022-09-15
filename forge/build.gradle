@@ -14,8 +14,8 @@ loom {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
 
-        mixinConfig "examplemod-common.mixins.json"
-        mixinConfig "examplemod.mixins.json"
+        mixinConfig "codelyoko-common.mixins.json"
+        mixinConfig "codelyoko.mixins.json"
     }
 }
 
@@ -31,7 +31,7 @@ dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
     // Remove the next line if you don't want to depend on the API
     modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
-    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.19:${rootProject.forge_gecko_lib_version}")
+    //implementation "software.bernie.geckolib:geckolib-forge-1.19:${rootProject.forge_gecko_lib_version}"
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 }

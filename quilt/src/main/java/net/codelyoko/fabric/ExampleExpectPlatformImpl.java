@@ -1,6 +1,6 @@
-package net.examplemod.fabric;
+package net.codelyoko.fabric;
 
-import net.examplemod.ExampleExpectPlatform;
+import net.codelyoko.ExampleExpectPlatform;
 import org.quiltmc.loader.api.QuiltLoader;
 
 import java.nio.file.Path;

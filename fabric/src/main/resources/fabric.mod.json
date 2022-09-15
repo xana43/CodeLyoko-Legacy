@@ -16,12 +16,12 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.examplemod.fabric.ExampleModFabric"
+      "net.codelyoko.fabric.ExampleModFabric"
     ]
   },
   "mixins": [
-    "examplemod.mixins.json",
-    "examplemod-common.mixins.json"
+    "codelyoko.mixins.json",
+    "codelyoko-common.mixins.json"
   ],
   "depends": {
     "fabric": "*",

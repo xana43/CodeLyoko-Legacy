@@ -4,7 +4,7 @@ loaderVersion = "[41,)"
 license = "Insert License Here"
 
 [[mods]]
-modId = "examplemod"
+modId = "codelyoko"
 version = "${version}"
 displayName = "Example Mod"
 authors = "Me!"
@@ -13,21 +13,21 @@ This is an example description! Tell everyone what your mod is about!
 '''
 #logoFile = ""
 
-[[dependencies.examplemod]]
+[[dependencies.codelyoko]]
 modId = "forge"
 mandatory = true
 versionRange = "[41,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.examplemod]]
+[[dependencies.codelyoko]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.19,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.examplemod]]
+[[dependencies.codelyoko]]
 modId = "architectury"
 mandatory = true
 versionRange = "[5.12.42,)"

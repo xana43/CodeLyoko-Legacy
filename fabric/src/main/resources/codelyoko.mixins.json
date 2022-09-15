@@ -1,9 +1,8 @@
 {
   "required": true,
-  "package": "net.examplemod.mixin",
+  "package": "net.codelyoko.mixins.fabric",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "MixinTitleScreen"
   ],
   "mixins": [
   ],
