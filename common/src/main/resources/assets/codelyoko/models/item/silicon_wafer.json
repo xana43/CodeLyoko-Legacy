@@ -1,0 +1,13 @@
+{
+   "parent": "item/generated",
+   "textures": {
+       "layer0": "cm:item/siliconwaferperfect"
+   },
+  "overrides": [
+    {"predicate":  {"cm:quality": 0.0}, "model": "cm:item/silicon_wafer"},
+    {"predicate":  {"cm:quality": 0.25}, "model": "cm:item/siliconwafer_qualitymodels/high"},
+    {"predicate":  {"cm:quality": 0.5}, "model": "cm:item/siliconwafer_qualitymodels/medium"},
+    {"predicate":  {"cm:quality": 0.75}, "model": "cm:item/siliconwafer_qualitymodels/mediocore"},
+    {"predicate":  {"cm:quality": 1.0}, "model": "cm:item/siliconwafer_qualitymodels/poor"}
+  ]
+}

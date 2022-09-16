@@ -16,7 +16,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.codelyoko.fabric.ExampleModFabric"
+      "net.codelyoko.fabric.CodeLyokoFabric"
     ]
   },
   "mixins": [

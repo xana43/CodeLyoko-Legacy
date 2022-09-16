@@ -12,74 +12,24 @@
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="maven2" />
-      <option name="name" value="maven2" />
-      <option name="url" value="https://libraries.minecraft.net/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="MavenRepo" />
       <option name="name" value="MavenRepo" />
       <option name="url" value="https://repo.maven.apache.org/maven2/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
-      <option name="url" value="https://files.minecraftforge.net/maven/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
-      <option name="url" value="https://jitpack.io" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
-      <option name="url" value="https://repo.repsy.io/mvn/gandiber/geckolib" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Progwml6 maven" />
-      <option name="name" value="Progwml6 maven" />
-      <option name="url" value="https://dvs1.progwml6.com/files/maven/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="ModMaven" />
-      <option name="name" value="ModMaven" />
-      <option name="url" value="https://modmaven.k-4u.nl" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="maven2" />
       <option name="name" value="maven2" />
-      <option name="url" value="http://chickenbones.net/maven/codechicken/CodeChickenLib/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven2" />
-      <option name="name" value="maven2" />
-      <option name="url" value="http://chickenbones.net/maven/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven2" />
-      <option name="name" value="maven2" />
-      <option name="url" value="https://maven.blamejared.com" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven3" />
-      <option name="name" value="maven3" />
-      <option name="url" value="https://maven.blamejared.com/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven4" />
-      <option name="name" value="maven4" />
-      <option name="url" value="https://maven.minecraftforge.net/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
       <option name="url" value="https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="ParchmentMC" />
-      <option name="name" value="ParchmentMC" />
-      <option name="url" value="https://maven.parchmentmc.org/" />
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://maven.architectury.dev/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Forge" />
+      <option name="name" value="Forge" />
+      <option name="url" value="https://maven.minecraftforge.net/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="Fabric" />
@@ -87,74 +37,14 @@
       <option name="url" value="https://maven.fabricmc.net/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="UserLocalRemappedMods" />
-      <option name="name" value="UserLocalRemappedMods" />
-      <option name="url" value="file:/$USER_HOME$/CodeLyoko%201.18.2/CodeLyoko-Fabric/CodeLyoko-Legacy-FABRIC/.gradle/loom-cache/remapped_mods/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven2" />
-      <option name="name" value="maven2" />
-      <option name="url" value="https://hephaestus.dev/release" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Nexus Repository Manager" />
-      <option name="name" value="Nexus Repository Manager" />
-      <option name="url" value="https://oss.sonatype.org/content/repositories/snapshots" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Ladysnake Mods" />
-      <option name="name" value="Ladysnake Mods" />
-      <option name="url" value="https://ladysnake.jfrog.io/artifactory/mods" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven2" />
-      <option name="name" value="maven2" />
-      <option name="url" value="https://redgrapefruit09.github.io/maven" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven3" />
-      <option name="name" value="maven3" />
-      <option name="url" value="https://maven.kyrptonaught.dev" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven4" />
-      <option name="name" value="maven4" />
-      <option name="url" value="https://maven.florens.be" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven4" />
-      <option name="name" value="maven4" />
-      <option name="url" value="https://raw.githubusercontent.com/Devan-Kerman/Devan-Repo/master/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="MavenLocal" />
-      <option name="name" value="MavenLocal" />
-      <option name="url" value="file:/$MAVEN_REPOSITORY$/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven5" />
-      <option name="name" value="maven5" />
-      <option name="url" value="https://maven.dblsaiko.net/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven6" />
-      <option name="name" value="maven6" />
-      <option name="url" value="https://server.bbkr.space:8081/artifactory/libs-release/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven4" />
-      <option name="name" value="maven4" />
-      <option name="url" value="https://oss.sonatype.org/content/repositories/releases/" />
+      <option name="id" value="Mojang" />
+      <option name="name" value="Mojang" />
+      <option name="url" value="https://libraries.minecraft.net/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="UserLocalRemappedMods" />
       <option name="name" value="UserLocalRemappedMods" />
       <option name="url" value="file:/$PROJECT_DIR$/.gradle/loom-cache/remapped_mods/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
-      <option name="url" value="https://maven.architectury.dev/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="maven3" />

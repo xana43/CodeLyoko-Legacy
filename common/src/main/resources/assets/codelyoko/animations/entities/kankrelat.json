@@ -1,0 +1,63 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.ModelKankrelat.walk": {
+			"loop": true,
+			"animation_length": 0.24,
+			"bones": {
+				"Leg": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.04": {
+							"vector": [-17.5, 0, 0]
+						},
+						"0.08": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"Leg2": {
+					"rotation": {
+						"0.12": {
+							"vector": [0, 0, 0]
+						},
+						"0.16": {
+							"vector": [-17.5, 0, 0]
+						},
+						"0.2": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"Leg3": {
+					"rotation": {
+						"0.12": {
+							"vector": [0, 0, 0]
+						},
+						"0.16": {
+							"vector": [-17.5, 0, 0]
+						},
+						"0.2": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"Leg4": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.04": {
+							"vector": [-17.5, 0, 0]
+						},
+						"0.08": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		}
+	}
+}

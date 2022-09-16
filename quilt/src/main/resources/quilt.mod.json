@@ -6,7 +6,7 @@
   ],
   "quilt_loader": {
     "group": "${group}",
-    "id": "examplemod",
+    "id": "codelyoko",
     "version": "${version}",
     "name": "Example Mod",
     "description": "This is an example description! Tell everyone what your mod is about!",
@@ -20,7 +20,7 @@
     "environment": "*",
     "entrypoints": {
       "init": [
-        "net.examplemod.quilt.ExampleModQuilt"
+        "net.codelyoko.quilt.ExampleModQuilt"
       ]
     },
     "depends": [

@@ -1,0 +1,35 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.LaserArrow",
+				"texture_width": 16,
+				"texture_height": 16,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "bone",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{
+							"origin": [-1, 0, 0],
+							"size": [1, 1, 4],
+							"uv": {
+								"north": {"uv": [12, 0], "uv_size": [1, 1]},
+								"east": {"uv": [3, 7], "uv_size": [4, 1]},
+								"south": {"uv": [5, 7], "uv_size": [1, 1]},
+								"west": {"uv": [3, 7], "uv_size": [4, 1]},
+								"up": {"uv": [10, 6], "uv_size": [1, -6]},
+								"down": {"uv": [13, 0], "uv_size": [1, 6]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

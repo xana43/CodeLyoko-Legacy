@@ -1,0 +1,56 @@
+{
+  "sea_level": 384,
+  "disable_mob_generation": false,
+  "aquifers_enabled": false,
+  "ore_veins_enabled": false,
+  "legacy_random_source": false,
+  "spawn_target": [],
+  "default_block": {
+    "Name": "cm:digital_ocean"
+  },
+  "default_fluid": {
+    "Name": "cm:digital_ocean",
+    "Properties": {
+      "level": "15"
+    }
+  },
+  "noise": {
+    "min_y": -64,
+    "height": 384,
+    "size_horizontal": 1,
+    "size_vertical": 2
+  },
+  "noise_router": {
+    "barrier": 0,
+    "fluid_level_floodedness": {
+      "type": "minecraft:cube",
+      "argument": 384
+    },
+    "fluid_level_spread": 0,
+    "lava": 0,
+    "temperature": 0,
+    "vegetation": 0,
+    "continents": {
+      "type": "minecraft:cube",
+      "argument": "minecraft:overworld/continents"
+    },
+    "erosion": 0,
+    "depth": 0,
+    "ridges": 0,
+    "initial_density_without_jaggedness": {
+      "type": "minecraft:cube",
+      "argument": "minecraft:overworld/continents"
+    },
+    "final_density": {
+      "type": "minecraft:cube",
+      "argument": "minecraft:overworld/continents"
+    },
+    "vein_toggle": 0,
+    "vein_ridged": 0,
+    "vein_gap": 0
+  },
+  "surface_rule": {
+    "type": "minecraft:sequence",
+    "sequence": []
+  }
+}

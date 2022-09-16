@@ -1,0 +1,12 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "particle": "cm:block/tower_base",
+    "up":"cm:block/tower_base",
+    "down":"cm:block/tower_base",
+    "north":"cm:block/tower_wall",
+    "south":"cm:block/tower_base",
+    "east":"cm:block/tower_wall",
+    "west":"cm:block/tower_base"
+  }
+}

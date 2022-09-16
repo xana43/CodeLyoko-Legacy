@@ -1,0 +1,5 @@
+{
+	"model": "cm:models/item/zweihander.obj",
+	"flip-v": true,
+	"ambientocclusion": true
+}

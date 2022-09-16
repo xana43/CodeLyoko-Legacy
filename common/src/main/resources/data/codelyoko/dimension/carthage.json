@@ -1,0 +1,13 @@
+{
+  "type":"cm:carthage_type",
+  "generator": {
+    "type": "cm:carthage_chunkgen",
+    "settings":
+    {
+      "base": 10,
+      "verticalvariance": 10,
+      "horizontalvariance": 10
+    }
+
+  }
+}

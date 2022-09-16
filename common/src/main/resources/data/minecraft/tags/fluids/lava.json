@@ -1,0 +1,10 @@
+{
+  "replace" : false,
+  "values": [
+    "cm:digital_lava",
+    "cm:digital_lava_flowing",
+    "cm:still_uranium",
+    "cm:flowing_uranium"
+
+  ]
+}

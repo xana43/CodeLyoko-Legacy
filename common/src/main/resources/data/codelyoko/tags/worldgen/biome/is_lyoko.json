@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "cm:forest_sector",
+    "cm:sector5",
+    "cm:mountain_sector",
+    "cm:ice_sector",
+    "cm:desert_sector",
+    "cm:volcano_replika",
+    "cm:digital_ocean"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "providers": [
+    {
+      "type": "ttf",
+      "file": "cm:hudfont.ttf",
+      "shift": [0, 0],
+      "size": 20,
+      "oversample": 2.0
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "cm:block/computer_screen",
+		"particle": "cm:block/computer_screen"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 1],
+			"to": [16, 1, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0.5, 7]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 1], "texture": "#0"},
+				"east": {"uv": [0, 0, 12, 1], "texture": "#0", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 1], "texture": "#0"},
+				"west": {"uv": [0, 0, 12, 1], "texture": "#0", "cullface": "west"},
+				"down": {"uv": [15, 0, 16, 12], "texture": "#0", "cullface": "down"}
+			}
+		},
+		{
+			"from": [0, 1, 1],
+			"to": [16, 2, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 1.52832, 7.04492]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 1], "rotation": 180, "texture": "#0"},
+				"east": {"uv": [0, 0, 1, 12], "rotation": 270, "texture": "#0", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 1], "texture": "#0"},
+				"west": {"uv": [0, 0, 1, 12], "rotation": 90, "texture": "#0", "cullface": "west"},
+				"up": {"uv": [15, 0, 16, 12], "rotation": 180, "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [-90, 0, -180],
+			"translation": [-6, 7, 8]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [-90, 0, -180],
+			"translation": [-6, 7, 8]
+		},
+		"firstperson_righthand": {
+			"translation": [-8.75, 7, 0]
+		},
+		"firstperson_lefthand": {
+			"translation": [-8.75, 7, 0]
+		},
+		"ground": {
+			"translation": [0, 5.5, 0]
+		},
+		"gui": {
+			"rotation": [33, 0, 26.5],
+			"translation": [-3, 4.75, 0]
+		},
+		"head": {
+			"translation": [0, -29, 0],
+			"scale": [1.6, 1.6, 1.6]
+		},
+		"fixed": {
+			"rotation": [90, 0, 0],
+			"translation": [0, 0, 5.75]
+		}
+	},
+	"groups": [0, 1,
+		{
+			"name": "top row keys",
+			"origin": [9, 9, 10],
+			"children": [
+				{
+					"name": "row1",
+					"origin": [10.54102, 9, 12.00879],
+					"children": []
+				},
+				{
+					"name": "row2",
+					"origin": [10.54102, 9, 12.00879],
+					"children": []
+				},
+				{
+					"name": "row2",
+					"origin": [10.54102, 9, 12.00879],
+					"children": []
+				},
+				{
+					"name": "row2",
+					"origin": [10.54102, 9, 12.00879],
+					"children": []
+				},
+				{
+					"name": "row2",
+					"origin": [10.54102, 9, 12.00879],
+					"children": []
+				}
+			]
+		}
+	]
+}

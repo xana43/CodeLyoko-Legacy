@@ -1,0 +1,12 @@
+{
+  "type": "cm:mountainsector_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "seed": 0,
+    "settings": "cm:mountain_gen_settings",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "cm:mountain_sector"
+    }
+  }
+}

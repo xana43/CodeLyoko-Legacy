@@ -1,0 +1,100 @@
+# Blender MTL File: 'core of lyoko.blend'
+# Material Count: 7
+
+newmtl 191,191,191
+Ns 299.999989
+Ka 1.000000 1.000000 1.000000
+Kd 0.749020 0.749020 0.749020
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+diffuse_shading false
+ambient_occlusion false
+emission true
+illum 1
+map_Kd cm:block/dice
+
+newmtl 191,191,191.001
+Ns 299.999989
+Ka 1.000000 1.000000 1.000000
+Kd 0.749020 0.749020 0.749020
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+emission true
+ambient_occlusion false
+illum 1
+map_Kd cm:block/digital_sand
+
+newmtl Material
+Ns 323.999994
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+emission true
+diffuse_shading false
+ambient_occlusion false
+illum 2
+map_Kd cm:block/digital_rock
+
+newmtl Material.001
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+emission true
+diffuse_shading false
+ambient_occlusion false
+illum 2
+map_Kd cm:item/zweihander_symbol
+
+newmtl Material.002
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+emission true
+diffuse_shading false
+ambient_occlusion false
+illum 2
+map_Kd cm:block/digital_blocktop
+
+newmtl shell
+Ns 299.999989
+Ka 1.000000 1.000000 1.000000
+Kd 0.749020 0.749020 0.749020
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+blend_mode TRANSLUCENT
+diffuse_shading false
+ambient_occlusion false
+map_Kd cm:block/holo
+
+newmtl shell.001
+Ns 299.999989
+Ka 1.000000 1.000000 1.000000
+Kd 0.749020 0.749020 0.749020
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+blend_mode TRANSLUCENT
+emission true
+diffuse_shading false
+ambient_occlusion false
+illum 1
+map_Kd cm:block/holo

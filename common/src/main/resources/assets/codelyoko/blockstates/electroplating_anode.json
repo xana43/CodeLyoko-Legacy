@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "cm:block/electroplating_anode"
+    }
+  }
+}
