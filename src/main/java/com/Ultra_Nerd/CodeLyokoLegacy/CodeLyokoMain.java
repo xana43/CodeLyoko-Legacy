@@ -248,6 +248,7 @@ public record CodeLyokoMain() implements ModInitializer {
                 }
             }
         });
+
         XanaHandler.setTicksToNextCalculation(1);
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
 
@@ -274,6 +275,8 @@ public record CodeLyokoMain() implements ModInitializer {
 
 
         });
+
+        //xana
         final AtomicInteger tick = new AtomicInteger();
         ServerTickEvents.START_WORLD_TICK.register(world -> world.getPlayers().forEach(serverPlayerEntity -> {
             //tick the xana attack handler
