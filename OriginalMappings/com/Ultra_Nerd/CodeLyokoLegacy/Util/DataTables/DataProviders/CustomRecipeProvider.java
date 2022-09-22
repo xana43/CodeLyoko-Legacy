@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.DataProviders;
+package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.DataProviders;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;

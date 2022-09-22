@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TowerInterfaceScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;

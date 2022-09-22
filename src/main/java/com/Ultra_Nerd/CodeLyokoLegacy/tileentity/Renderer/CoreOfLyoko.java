@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.APIEmbed.api.Myron;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.client.APIEmbed.api.Myron;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LyokoCoreBE;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.render.RenderLayer;

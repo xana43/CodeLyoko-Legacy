@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ComputerIntegratedReactor;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.*;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -20,23 +19,27 @@ public record ModTileEntities() {
                         () -> BlockEntityType.Builder.of(ElectricInfusingChamberTileEntity::new,
                                 ModBlocks.ELECTRIC_FLUORIDE_INFUSER.get()).build(null));
 
-    */public static final BlockEntityType<UniversalEnergyStorageTileEntity> UNIVERSAL_ENERGY_STORAGE = FabricBlockEntityTypeBuilder.create(UniversalEnergyStorageTileEntity::new, ModBlocks.STORAGE).build();
-    public static final BlockEntityType<ScannerTileEntity> SCANNER_TILE_ENTITY = FabricBlockEntityTypeBuilder.create(ScannerTileEntity::new, ModBlocks.SCANNER_BASE).build();
+    */public static final BlockEntityType<UniversalEnergyStorageTileEntity> UNIVERSAL_ENERGY_STORAGE = FabricBlockEntityTypeBuilder.create(
+            UniversalEnergyStorageTileEntity::new, ModBlocks.STORAGE).build();
+    public static final BlockEntityType<ScannerTileEntity> SCANNER_TILE_ENTITY = FabricBlockEntityTypeBuilder.create(
+            ScannerTileEntity::new, ModBlocks.SCANNER_BASE).build();
 
-    public static final BlockEntityType<LyokoCoreBE> LYOKO_CORE = FabricBlockEntityTypeBuilder.create(LyokoCoreBE::new, ModBlocks.LYOKO_CORE).build();
-    public static final BlockEntityType<TowerInterfaceTileEntity> TOWER_INTERFACE_TILE_ENTITY = FabricBlockEntityTypeBuilder.create(TowerInterfaceTileEntity::new, ModBlocks.TOWER_INTERFACE).build();
-    public static final BlockEntityType<ComputerControlPanelTileEntity> COMPUTER_CONTROL_PANEL = FabricBlockEntityTypeBuilder.create(ComputerControlPanelTileEntity::new, ModBlocks.COMPUTER_TOWER_CONTROL_PANEL).build();
-    public static final BlockEntityType<ComputerReactorTileEntity> COMPUTER_REACTOR_TILE_ENTITY = FabricBlockEntityTypeBuilder.create(ComputerReactorTileEntity::new,ModBlocks.URANUM_REACTOR).build();
+    public static final BlockEntityType<LyokoCoreBE> LYOKO_CORE = FabricBlockEntityTypeBuilder.create(LyokoCoreBE::new,
+            ModBlocks.LYOKO_CORE).build();
+    public static final BlockEntityType<TowerInterfaceTileEntity> TOWER_INTERFACE_TILE_ENTITY = FabricBlockEntityTypeBuilder.create(
+            TowerInterfaceTileEntity::new, ModBlocks.TOWER_INTERFACE).build();
+    public static final BlockEntityType<ComputerControlPanelTileEntity> COMPUTER_CONTROL_PANEL = FabricBlockEntityTypeBuilder.create(
+            ComputerControlPanelTileEntity::new, ModBlocks.COMPUTER_TOWER_CONTROL_PANEL).build();
+    public static final BlockEntityType<ComputerReactorTileEntity> COMPUTER_REACTOR_TILE_ENTITY = FabricBlockEntityTypeBuilder.create(
+            ComputerReactorTileEntity::new, ModBlocks.URANUM_REACTOR).build();
 
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String, BlockEntityType<?>>builder()
 
-            .put("lyoko_core", LYOKO_CORE)
-            .put("tower_interface_tile_entity", TOWER_INTERFACE_TILE_ENTITY)
+            .put("lyoko_core", LYOKO_CORE).put("tower_interface_tile_entity", TOWER_INTERFACE_TILE_ENTITY)
             .put("scanner_tile_entity", SCANNER_TILE_ENTITY)
             .put("universal_energy_tile_entity", UNIVERSAL_ENERGY_STORAGE)
             .put("computer_control_panel_tile_entity", COMPUTER_CONTROL_PANEL)
-            .put("computer_integrated_reactor",COMPUTER_REACTOR_TILE_ENTITY)
-            .build();
+            .put("computer_integrated_reactor", COMPUTER_REACTOR_TILE_ENTITY).build();
 
     //
     /*

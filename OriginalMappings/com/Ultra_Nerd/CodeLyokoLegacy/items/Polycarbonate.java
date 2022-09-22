@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DamageSources.LyokoDamage;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DamageSources.LyokoDamage;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;

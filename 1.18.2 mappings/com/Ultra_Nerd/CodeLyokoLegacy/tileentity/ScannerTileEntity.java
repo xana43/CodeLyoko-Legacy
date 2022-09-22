@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.BlockPatternRegistry;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.BlockPatternRegistry;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Scanner;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.ScannerFrame;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.ScannerTop;

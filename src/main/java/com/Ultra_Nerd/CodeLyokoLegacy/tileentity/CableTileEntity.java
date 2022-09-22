@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-public final class CableTileEntity /*extends BlockEntity implements BlockEntityTicker<CableTileEntity>, IEnergyStorage*/ {
+public final class CableTileEntity /*extends BlockEntity implements TickingBlockEntity<CableTileEntity>, IEnergyStorage*/ {
     /*
 
     public static @NotNull HashMap<CableTileEntity, ArrayList<BlockEntity>> CONNECTIONS = new HashMap<>();

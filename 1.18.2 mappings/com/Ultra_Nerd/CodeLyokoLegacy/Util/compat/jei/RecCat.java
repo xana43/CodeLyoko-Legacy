@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util.compat.jei;
+package com.Ultra_Nerd.CodeLyokoLegacy.util.compat.jei;
 
 public class RecCat {
 

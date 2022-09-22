@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;

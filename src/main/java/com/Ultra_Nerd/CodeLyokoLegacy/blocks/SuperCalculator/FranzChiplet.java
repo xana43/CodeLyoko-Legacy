@@ -142,36 +142,4 @@ public final class FranzChiplet extends BlockWithEntity {
     }
 
 
-
-
-
-
-/*
-    @Nonnull
-    @Override
-    public InteractionResult use(@Nonnull BlockState state, @NotNull Level worldIn, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand handIn, @Nonnull BlockHitResult result) {
-        if (worldIn.isClientSide) {
-            BlockEntity Chiplet = worldIn.getBlockEntity(pos);
-            if (Chiplet instanceof QuantumChipletTileEntity) {
-
-                //NetworkHooks.openGui((ServerPlayer) player, (QuantumChipletTileEntity) Chiplet, pos);
-                return InteractionResult.SUCCESS;
-            }
-        }
-        return InteractionResult.FAIL;
-    }
-
-
-    @Override
-    public void onRemove(@NotNull BlockState state, @Nonnull Level worldIn, @Nonnull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tile1 = worldIn.getBlockEntity(pos);
-            if (tile1 instanceof QuantumChipletTileEntity) {
-                Containers.dropContents(worldIn, pos, ((QuantumChipletTileEntity) tile1).getItems());
-            }
-        }
-    }
-
-     */
-
 }

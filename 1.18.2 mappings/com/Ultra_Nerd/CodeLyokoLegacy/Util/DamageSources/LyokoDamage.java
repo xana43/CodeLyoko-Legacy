@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util.DamageSources;
+package com.Ultra_Nerd.CodeLyokoLegacy.util.DamageSources;
 
 import net.minecraft.entity.damage.DamageSource;
 

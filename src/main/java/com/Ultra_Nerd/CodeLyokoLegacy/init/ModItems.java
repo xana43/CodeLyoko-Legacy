@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.CustomLyokoRarity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoArmorMaterial;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoTiers;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.CustomLyokoRarity;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoArmorMaterial;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoTiers;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.*;
@@ -109,7 +109,7 @@ public record ModItems() {
     public static final Item COLORED_POLYCARBONATE_BODY_PART = new Item(BaseSettings());
     public static final Item BIT = new Item(BaseSettings());
     public static final Item BYTE = new Item(BaseSettings());
-    public static final Item FLUORIDE = new FluorideItem(BaseSettings());
+    public static final Item FLUORIDE = new Item(BaseSettings());
     public static final Item GIGABIT = new Item(BaseSettings());
     public static final Item GIGABYTE = new Item(BaseSettings());
     public static final Item GPU_COMPUTE_PROCESSOR_CORE = new ComputerItem(BaseSettings());

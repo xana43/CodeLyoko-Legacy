@@ -1,16 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ReactorScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.LyokoInventoryBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.LyokoInventoryBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
@@ -18,21 +17,13 @@ import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import org.jetbrains.annotations.Nullable;
-import team.reborn.energy.api.base.SimpleEnergyStorage;
+import org.jetbrains.annotations.NotNull;
 
-public final class ComputerReactorTileEntity extends BlockEntity implements LyokoInventoryBlock, SidedInventory, NamedScreenHandlerFactory {
-    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(2, ItemStack.EMPTY);
+public final class ComputerReactorTileEntity extends EnergyStorageBlockEntity implements LyokoInventoryBlock, NamedScreenHandlerFactory {
 
-    public final SimpleEnergyStorage energyStorage = new SimpleEnergyStorage(4000, 100, 100) {
-        @Override
-        protected void onFinalCommit() {
-            markDirty();
-        }
-    };
+
+
     private final PropertyDelegate energyAmount = new PropertyDelegate() {
         @Override
         public int get(final int index) {
@@ -57,10 +48,11 @@ public final class ComputerReactorTileEntity extends BlockEntity implements Lyok
     ;
 
     public ComputerReactorTileEntity(final BlockPos pos, final BlockState state) {
-        super(ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY, pos, state);
+        super(ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY, pos, state,2,4000,null,null);
 
     }
 
+    @Override
     public void tick() {
 
         if (world.isClient) {
@@ -98,50 +90,32 @@ public final class ComputerReactorTileEntity extends BlockEntity implements Lyok
         markDirty();
     }
 
-    @Override
-    public DefaultedList<ItemStack> getItems() {
-        return items;
-    }
 
-    @Nullable
     @Override
-    public ScreenHandler createMenu(final int syncId, final PlayerInventory inv, final PlayerEntity player) {
+    public @NotNull ScreenHandler createMenu(final int syncId, final PlayerInventory inv, final PlayerEntity player) {
         return new ReactorScreenHandler(syncId, inv, this, energyAmount);
     }
 
     @Override
     public void readNbt(final NbtCompound nbt) {
         super.readNbt(nbt);
-        Inventories.readNbt(nbt, items);
+        Inventories.readNbt(nbt, itemStacks);
         energyStorage.amount = nbt.getLong("energy");
     }
 
     @Override
     protected void writeNbt(final NbtCompound nbt) {
-        Inventories.writeNbt(nbt, items);
+        Inventories.writeNbt(nbt, itemStacks);
         nbt.putLong("energy", energyStorage.getAmount());
         super.writeNbt(nbt);
     }
 
-    @Override
-    public int[] getAvailableSlots(final Direction side) {
-        return new int[0];
-    }
-
-    @Override
-    public boolean canInsert(final int slot, final ItemStack stack, @Nullable final Direction dir) {
-        return false;
-    }
-
-    @Override
-    public boolean canExtract(final int slot, final ItemStack stack, final Direction dir) {
-        return false;
-    }
 
     @Override
     public Text getDisplayName() {
         return Text.translatable(getCachedState().getBlock().getTranslationKey());
     }
+
 
 
 }

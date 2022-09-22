@@ -3,11 +3,13 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.event.PlaceBlockEvent;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageBiomeProvider;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
 import net.fabricmc.api.ModInitializer;
@@ -17,10 +19,12 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerBlockEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -38,6 +42,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -61,11 +66,16 @@ public record CodeLyokoMain() implements ModInitializer {
     public static final String MOD_ID = "cm";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
 
-    public static final ItemGroup LYOKO_ITEM = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "lyoko_items"), () -> new ItemStack(ModItems.BIT));
-    public static final ItemGroup LYOKO_BLOCKS = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "lyoko_blocks"), () -> new ItemStack(ModBlocks.TOWER_INTERFACE));
-    public static final ItemGroup LYOKO_ARMOR = FabricItemGroupBuilder.build(CodeLyokoPrefix("lyoko_armor"), () -> new ItemStack(ModItems.WILLIAM_CHESTPLATE));
-    public static final ItemGroup LYOKO_WEAPONS = FabricItemGroupBuilder.build(CodeLyokoPrefix("lyoko_weapons"), () -> new ItemStack(ModItems.LASER_ARROWSHOOTER));
-
+    public static final ItemGroup LYOKO_ITEM = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "lyoko_items"),
+            () -> new ItemStack(ModItems.BIT));
+    public static final ItemGroup LYOKO_BLOCKS = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "lyoko_blocks"),
+            () -> new ItemStack(ModBlocks.TOWER_INTERFACE));
+    public static final ItemGroup LYOKO_ARMOR = FabricItemGroupBuilder.build(CodeLyokoPrefix("lyoko_armor"),
+            () -> new ItemStack(ModItems.WILLIAM_CHESTPLATE));
+    public static final ItemGroup LYOKO_WEAPONS = FabricItemGroupBuilder.build(CodeLyokoPrefix("lyoko_weapons"),
+            () -> new ItemStack(ModItems.LASER_ARROWSHOOTER));
+    private static final TrackedData<NbtCompound> peristent = DataTracker.registerData(ServerPlayerEntity.class,
+            TrackedDataHandlerRegistry.NBT_COMPOUND);
 
     @Contract("_ -> new")
     public static @NotNull Identifier CodeLyokoPrefix(String name) {
@@ -73,20 +83,62 @@ public record CodeLyokoMain() implements ModInitializer {
     }
 
     private static void registerEnergyStorageBE() {
-        EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.simpleEnergyStorage, ModTileEntities.UNIVERSAL_ENERGY_STORAGE);
+        EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.simpleEnergyStorage,
+                ModTileEntities.UNIVERSAL_ENERGY_STORAGE);
     }
 
-    @Override
-    public void onInitialize() {
-        GeckoLib.initialize();
-        PacketHandlerCommon.CommonChannelRegistry();
-        generalRegistration();
-        SetupFunctions();
-        registerDefaultAttributes();
-        registerEnergyStorageBE();
+    private static void checkWorld() {
+        PlaceBlockEvent.EVENT.register(((entity, world, pos) -> {
 
+            for (int x = -32; x < 32; ++x) {
+                for (int y = -32; y < 32; ++y) {
+                    for (int z = -32; z < 32; ++z) {
+                        final BlockPos checkedPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+                        if (world.getBlockEntity(checkedPos) instanceof MultiBlockController multiBlockController) {
+                            if (!multiBlockController.getCheckSuccessful()) {
+                                multiBlockController.check();
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            return ActionResult.PASS;
+        }));
+        ServerBlockEntityEvents.BLOCK_ENTITY_UNLOAD.register((blockEntity, world) -> {
+            for (int x = -32; x < 32; ++x) {
+                for (int y = -32; y < 32; ++y) {
+                    for (int z = -32; z < 32; ++z) {
+                        final BlockPos checkedPos = new BlockPos(blockEntity.getPos().getX() + x,
+                                blockEntity.getPos().getY() + y, blockEntity.getPos().getZ() + z);
+                        if (world.getBlockEntity(checkedPos) instanceof MultiBlockController multiBlockController) {
+
+                            multiBlockController.invalidateEntity();
+
+                        }
+                    }
+                }
+            }
+        });
+
+        PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {
+            for (int x = -32; x < 32; ++x) {
+                for (int y = -32; y < 32; ++y) {
+                    for (int z = -32; z < 32; ++z) {
+                        final BlockPos checkedPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+
+                        if (world.getBlockEntity(checkedPos) instanceof MultiBlockController multiBlockController) {
+
+                            if (multiBlockController.getCheckSuccessful()) {
+                                multiBlockController.check();
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
-
 
     private static void generalRegistration() {
 
@@ -95,11 +147,14 @@ public record CodeLyokoMain() implements ModInitializer {
             Registry.register(Registry.BLOCK, new Identifier(MOD_ID, s), block);
             //LOG.info(String.valueOf(blocks));
             if (block != ModBlocks.LYOKO_CORE && block != ModBlocks.DIGITAL_OCEAN_BLOCK && block != ModBlocks.DIGITAL_LAVA_BLOCK) {
-                Registry.register(Registry.ITEM, new Identifier(MOD_ID, s), new BlockItem(block, new FabricItemSettings().group(LYOKO_BLOCKS)));
+                Registry.register(Registry.ITEM, new Identifier(MOD_ID, s),
+                        new BlockItem(block, new FabricItemSettings().group(LYOKO_BLOCKS)));
             }
         });
         ModItems.ITEM_MAP.forEach((s, item) -> Registry.register(Registry.ITEM, new Identifier(MOD_ID, s), item));
-        ModTileEntities.BLOCKENTITY_MAP.forEach((s, blockEntityType) -> Registry.register(Registry.BLOCK_ENTITY_TYPE, CodeLyokoPrefix(s), blockEntityType));
+        ModTileEntities.BLOCKENTITY_MAP.forEach(
+                (s, blockEntityType) -> Registry.register(Registry.BLOCK_ENTITY_TYPE, CodeLyokoPrefix(s),
+                        blockEntityType));
         //ModSounds.SOUNDS.forEach(soundEvent -> Registry.register(Registry.SOUND_EVENT,soundEvent.getId(),soundEvent));
         final int size = ModSounds.SOUNDS.length;
         for (int i = 0; i < size; i++) {
@@ -107,14 +162,21 @@ public record CodeLyokoMain() implements ModInitializer {
             Registry.register(Registry.SOUND_EVENT, ModSounds.SOUNDS[i].getId(), ModSounds.SOUNDS[i]);
         }
         ModBiome.BIOME_MAP.forEach((s, biome) -> Registry.register(BuiltinRegistries.BIOME, CodeLyokoPrefix(s), biome));
-        ModEntities.ENTITY_TYPE_HASH_MAP.forEach((s, entityType) -> Registry.register(Registry.ENTITY_TYPE, CodeLyokoPrefix(s), entityType));
-        ModFluids.FLUID_IMMUTABLE_MAP.forEach((s, fluid) ->
-                Registry.register(Registry.FLUID, CodeLyokoPrefix(s), fluid));
+        ModEntities.ENTITY_TYPE_HASH_MAP.forEach(
+                (s, entityType) -> Registry.register(Registry.ENTITY_TYPE, CodeLyokoPrefix(s), entityType));
+        ModFluids.FLUID_IMMUTABLE_MAP.forEach(
+                (s, fluid) -> Registry.register(Registry.FLUID, CodeLyokoPrefix(s), fluid));
 
-        ModParticles.PARTICLE_TYPE_IMMUTABLE_MAP.forEach((s, defaultParticleType) -> Registry.register(Registry.PARTICLE_TYPE, CodeLyokoPrefix(s), defaultParticleType));
-        Registry.register(Registry.CHUNK_GENERATOR, CodeLyokoPrefix("carthage_chunkgen"), CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
-        Registry.register(Registry.BIOME_SOURCE, CodeLyokoPrefix("carthage_biome"), CarthageBiomeProvider.CARTHAGE_BIOME_PROVIDER_CODEC);
-        ModScreenHandlers.screenHandlerMap.forEach((s, screenHandlerType) -> Registry.register(Registry.SCREEN_HANDLER, CodeLyokoPrefix(s), screenHandlerType));
+        ModParticles.PARTICLE_TYPE_IMMUTABLE_MAP.forEach(
+                (s, defaultParticleType) -> Registry.register(Registry.PARTICLE_TYPE, CodeLyokoPrefix(s),
+                        defaultParticleType));
+        Registry.register(Registry.CHUNK_GENERATOR, CodeLyokoPrefix("carthage_chunkgen"),
+                CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
+        Registry.register(Registry.BIOME_SOURCE, CodeLyokoPrefix("carthage_biome"),
+                CarthageBiomeProvider.CARTHAGE_BIOME_PROVIDER_CODEC);
+        ModScreenHandlers.screenHandlerMap.forEach(
+                (s, screenHandlerType) -> Registry.register(Registry.SCREEN_HANDLER, CodeLyokoPrefix(s),
+                        screenHandlerType));
 
         ModStructures.registerNewStructures();
         ModFeature.CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s, feature) -> {
@@ -128,7 +190,8 @@ public record CodeLyokoMain() implements ModInitializer {
 
 
         BiomeFeatureInject();
-        EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.energyStorage, ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY);
+        EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyStorage(),
+                ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
 
 
@@ -148,7 +211,8 @@ public record CodeLyokoMain() implements ModInitializer {
 
 
     private static void BiomeFeatureInject() {
-        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, RegistryKey.of(Registry.PLACED_FEATURE_KEY, CodeLyokoPrefix("coffinite_ore_overworld")));
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
+                RegistryKey.of(Registry.PLACED_FEATURE_KEY, CodeLyokoPrefix("coffinite_ore_overworld")));
     }
 
     private static void registerDefaultAttributes() {
@@ -157,8 +221,6 @@ public record CodeLyokoMain() implements ModInitializer {
 
     }
 
-    private static final TrackedData<NbtCompound> peristent = DataTracker.registerData(ServerPlayerEntity.class, TrackedDataHandlerRegistry.NBT_COMPOUND);
-
     private static void SetupFunctions() {
 
         //sets the properties for the xana handler to calcualate on
@@ -166,7 +228,8 @@ public record CodeLyokoMain() implements ModInitializer {
         //saves and loats the inventoryfor both respawn and joining
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
             if (MethodUtil.DimensionCheck.playerInVanilla(newPlayer)) {
-                CardinalData.LyokoInventorySave.loadPlayerInventory(newPlayer.server.getSaveProperties().getMainWorldProperties(), newPlayer);
+                CardinalData.LyokoInventorySave.loadPlayerInventory(
+                        newPlayer.server.getSaveProperties().getMainWorldProperties(), newPlayer);
             }
 
         });
@@ -175,10 +238,12 @@ public record CodeLyokoMain() implements ModInitializer {
 
             if (player != null) {
                 if (MethodUtil.DimensionCheck.worldIsNotVanilla(destination)) {
-                    CardinalData.LyokoInventorySave.savePlayerInventory(player.server.getSaveProperties().getMainWorldProperties(), player);
+                    CardinalData.LyokoInventorySave.savePlayerInventory(
+                            player.server.getSaveProperties().getMainWorldProperties(), player);
 
                 } else if (MethodUtil.DimensionCheck.worldIsNotVanilla(origin)) {
-                    CardinalData.LyokoInventorySave.loadPlayerInventory(player.server.getSaveProperties().getMainWorldProperties(), player);
+                    CardinalData.LyokoInventorySave.loadPlayerInventory(
+                            player.server.getSaveProperties().getMainWorldProperties(), player);
 
                 }
             }
@@ -199,7 +264,8 @@ public record CodeLyokoMain() implements ModInitializer {
             handler.player.getDataTracker().startTracking(peristent, t.getAcquire());
             if (!handler.player.getDataTracker().get(peristent).contains(nbtdat)) {
                 handler.player.getDataTracker().get(peristent).putBoolean(nbtdat, true);
-                handler.player.getInventory().setStack(handler.player.getInventory().getEmptySlot(), new ItemStack(ModItems.STORY_BOOK));
+                handler.player.getInventory()
+                        .setStack(handler.player.getInventory().getEmptySlot(), new ItemStack(ModItems.STORY_BOOK));
 
             } else {
 
@@ -217,7 +283,9 @@ public record CodeLyokoMain() implements ModInitializer {
                     if (XanaHandler.calculateAttackProbability()) {
                         final int notifyPlayerRandom = new Random().nextInt(world.getPlayers().size());
 
-                        world.getPlayers().get(notifyPlayerRandom).sendMessage(Text.translatable("xana.attack.start").getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle().withColor(Formatting.RED)).get(0), true);
+                        world.getPlayers().get(notifyPlayerRandom).sendMessage(Text.translatable("xana.attack.start")
+                                .getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle().withColor(Formatting.RED))
+                                .get(0), true);
 
 
                     }
@@ -257,6 +325,18 @@ public record CodeLyokoMain() implements ModInitializer {
             }
 
         });
+    }
+
+    @Override
+    public void onInitialize() {
+        GeckoLib.initialize();
+        PacketHandlerCommon.CommonChannelRegistry();
+        generalRegistration();
+        SetupFunctions();
+        registerDefaultAttributes();
+        registerEnergyStorageBE();
+        checkWorld();
+
     }
 
 

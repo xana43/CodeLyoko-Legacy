@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.APIEmbed.api.Myron;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.client.APIEmbed.api.Myron;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Frustum;

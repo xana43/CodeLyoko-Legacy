@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.particles;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ParticleUTIL.DefaultLyokoParticleType;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.client.ParticleUTIL.DefaultLyokoParticleType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BeaconBlock;

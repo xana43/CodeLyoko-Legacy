@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.google.common.collect.Lists;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;

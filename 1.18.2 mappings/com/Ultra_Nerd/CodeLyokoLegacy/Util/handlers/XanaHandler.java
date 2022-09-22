@@ -1,7 +1,7 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers;
+package com.Ultra_Nerd.CodeLyokoLegacy.util.handlers;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import net.minecraft.world.WorldProperties;
 
 import java.util.Random;

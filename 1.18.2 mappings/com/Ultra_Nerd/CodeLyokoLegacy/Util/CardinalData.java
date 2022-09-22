@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util;
+package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.InventorySaveComponent;

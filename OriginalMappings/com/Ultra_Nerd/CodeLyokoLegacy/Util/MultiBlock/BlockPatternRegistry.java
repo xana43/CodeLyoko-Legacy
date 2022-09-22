@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock;
+package com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import net.minecraft.block.pattern.BlockPattern;

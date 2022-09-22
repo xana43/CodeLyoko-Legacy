@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util.client.itemRenderers;
+package com.Ultra_Nerd.CodeLyokoLegacy.util.client.itemRenderers;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.ForceFieldEmitter;

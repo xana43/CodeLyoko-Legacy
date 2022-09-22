@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin.util;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.CustomLyokoRarity;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.CustomLyokoRarity;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import org.spongepowered.asm.mixin.Final;

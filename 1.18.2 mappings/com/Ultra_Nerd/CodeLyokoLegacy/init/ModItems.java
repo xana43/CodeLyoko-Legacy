@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.CustomLyokoRarity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoArmorMaterial;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.enums.LyokoTiers;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.CustomLyokoRarity;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoArmorMaterial;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoTiers;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.*;

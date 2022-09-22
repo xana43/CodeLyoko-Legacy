@@ -11,7 +11,7 @@ public final class ComputerCoreTileEntity {
    //     super(tileEntityTypeIn);
     //}
 	/*
-	private EG storage = new EG(1000000000, 1000000000);
+	private EnergyModule storage = new EnergyModule(1000000000, 1000000000);
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if(capability == CapabilityEnergy.ENERGY) return(T)this.storage;

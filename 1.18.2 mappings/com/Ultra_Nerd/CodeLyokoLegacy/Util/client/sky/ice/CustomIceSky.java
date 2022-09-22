@@ -1,8 +1,8 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.ice;
+package com.Ultra_Nerd.CodeLyokoLegacy.util.client.sky.ice;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

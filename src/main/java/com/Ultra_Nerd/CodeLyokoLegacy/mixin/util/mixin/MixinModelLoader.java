@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin.util.mixin;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.client.APIEmbed.impl.client.obj.ObjLoader;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.client.APIEmbed.impl.client.obj.ObjLoader;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.model.ModelProviderException;

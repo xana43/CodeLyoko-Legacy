@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DamageSources.LyokoDamage;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DamageSources.LyokoDamage;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;

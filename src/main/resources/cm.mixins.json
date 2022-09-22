@@ -1,24 +1,25 @@
 {
-  "required": true,
-  "package": "com.Ultra_Nerd.CodeLyokoLegacy.mixin",
-  "refmap": "cm.refmap.json",
-  "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "DisableStatusEffectRenderer",
-    "InventoryScreenDropDisable",
-    "ItemDropMixin",
-    "PlayerLyokoMixin",
-    "retainXP",
-    "stopInventoryDrop",
-    "util.LyokoRarityMixin"
-  ],
-  "client": [
-    "util.mixin.BakedModelManagerAccessor",
-    "util.mixin.MixinModelLoader",
-    "HUD"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  },
-  "minVersion": "0.8"
+    "required": true,
+    "package": "com.Ultra_Nerd.CodeLyokoLegacy.mixin",
+    "refmap": "cm.refmap.json",
+    "compatibilityLevel": "JAVA_17",
+    "mixins": [
+        "BlockMixin",
+        "DisableStatusEffectRenderer",
+        "InventoryScreenDropDisable",
+        "ItemDropMixin",
+        "PlayerLyokoMixin",
+        "retainXP",
+        "stopInventoryDrop",
+        "util.LyokoRarityMixin"
+    ],
+    "client": [
+        "HUD",
+        "util.mixin.BakedModelManagerAccessor",
+        "util.mixin.MixinModelLoader"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "minVersion": "0.8"
 }

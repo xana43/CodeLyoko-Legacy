@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MultiBlockPartCallback;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MultiBlockPartCallback;
 import com.sun.jdi.Mirror;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;

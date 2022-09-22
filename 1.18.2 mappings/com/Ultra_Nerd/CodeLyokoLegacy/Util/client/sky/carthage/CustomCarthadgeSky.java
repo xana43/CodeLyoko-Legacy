@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util.client.sky.carthage;
+package com.Ultra_Nerd.CodeLyokoLegacy.util.client.sky.carthage;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.mojang.blaze3d.systems.RenderSystem;

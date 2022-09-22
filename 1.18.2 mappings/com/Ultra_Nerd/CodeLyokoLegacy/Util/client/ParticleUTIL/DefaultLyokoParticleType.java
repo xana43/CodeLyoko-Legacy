@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util.client.ParticleUTIL;
+package com.Ultra_Nerd.CodeLyokoLegacy.util.client.ParticleUTIL;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;

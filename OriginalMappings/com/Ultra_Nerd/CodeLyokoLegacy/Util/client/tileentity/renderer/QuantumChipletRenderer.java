@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util.client.tileentity.renderer;
+package com.Ultra_Nerd.CodeLyokoLegacy.util.client.tileentity.renderer;
 
 public final class QuantumChipletRenderer /*extends BlockEntityRenderers implements BlockEntityRenderer<QuantumChipletTileEntity>*/ {
     /*

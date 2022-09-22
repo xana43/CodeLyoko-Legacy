@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPose;

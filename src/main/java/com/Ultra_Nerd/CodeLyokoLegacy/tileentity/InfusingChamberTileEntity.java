@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-public final class InfusingChamberTileEntity /*extends InventoryBE implements BlockEntityTicker<InfusingChamberTileEntity>, MenuProvider*/ {
+public final class InfusingChamberTileEntity /*extends InventoryBE implements TickingBlockEntity<InfusingChamberTileEntity>, MenuProvider*/ {
 
 /*
     public @NotNull ItemStackHandler handler = new ItemStackHandler(4);

@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-public class ElectroplatingTileEntity /*extends BlockEntity implements BlockEntityTicker<ElectroplatingTileEntity>//, INamedContainerProvider*/
+public class ElectroplatingTileEntity /*extends BlockEntity implements TickingBlockEntity<ElectroplatingTileEntity>//, INamedContainerProvider*/
  {
      /*
     private boolean once = false;

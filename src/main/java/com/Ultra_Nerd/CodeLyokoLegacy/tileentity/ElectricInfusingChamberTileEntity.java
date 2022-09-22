@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-public final class ElectricInfusingChamberTileEntity /*extends BlockEntity implements BlockEntityTicker<ElectricInfusingChamberTileEntity>,MenuProvider*/ {
+public final class ElectricInfusingChamberTileEntity /*extends BlockEntity implements TickingBlockEntity<ElectricInfusingChamberTileEntity>,MenuProvider*/ {
     /*
     public @NotNull ItemStackHandler handler = new ItemStackHandler(3);
-   private final EG internal = new EG(this,90000);
+   private final EnergyModule internal = new EnergyModule(this,90000);
     private String customName;
     private ItemStack smelting = ItemStack.EMPTY;
 

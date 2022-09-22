@@ -44,7 +44,7 @@ private static final String energykey = "lyoko_universal_energy_storeage";
 
     private final CapabilityEnergy energy = new CapabilityEnergy();
 
-    private final EG store = new EG(90000);
+    private final EnergyModule store = new EnergyModule(90000);
     public int UNIRF = store.getEnergyStored();
     private String name;
 

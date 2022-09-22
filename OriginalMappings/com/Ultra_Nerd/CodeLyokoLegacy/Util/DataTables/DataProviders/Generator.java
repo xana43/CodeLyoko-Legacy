@@ -1,9 +1,9 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.DataProviders;
+package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.DataProviders;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.BlockStateSimple;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.CustomBlockTags;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.CustomItemTags;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.LootTables;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.BlockStateSimple;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.CustomBlockTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.CustomItemTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.LootTables;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 

@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin.util;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.CustomLyokoRarity;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.CustomLyokoRarity;
 import io.netty.handler.codec.memcache.binary.BinaryMemcacheOpcodes;
 import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.text.TranslatableText;

@@ -2,10 +2,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers.XanaHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.mixin.StructyreFeatureAccessor;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageBiomeProvider;

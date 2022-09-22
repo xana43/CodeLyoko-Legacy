@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Util.enums;
+package com.Ultra_Nerd.CodeLyokoLegacy.util.enums;
 
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
