@@ -55,39 +55,6 @@ public final class ArmorWarrior extends LyokoArmor {
         }
     }
 
-    @Override
-    public void onArmorTick(ItemStack stack, Level world, @NotNull Player player) {
-        if (!DimensionCheck.playerNotInVanillaWorld(player)) {
-            if (player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.WILLIAM_CHESTPLATE.get()) {
-                player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).setCount(0);
-                if (player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
-                    player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).setCount(0);
-                }
-            }
-            if (player.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() == ModItems.WILLIAM_LEGGINGS.get()) {
-                player.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).setCount(0);
-                if (player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
-                    player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).setCount(0);
-                }
-            }
-            if (player.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() == ModItems.WILLIAM_BOOTS.get()) {
-                player.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).setCount(0);
-                if (player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
-                    player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).setCount(0);
-                }
-            }
-        } else {
-            if (!player.getItemBySlot(EquipmentSlot.CHEST).isEmpty() &&
-                    !player.getItemBySlot(EquipmentSlot.FEET).isEmpty() &&
-                    !player.getItemBySlot(EquipmentSlot.LEGS).isEmpty()) {
-            if(player.getEffect(MobEffects.DAMAGE_RESISTANCE) == null) {
-                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, -1, 2, false, false, false));
-            }
 
-            }
-        }
-    }
-    */
-
-
+*/
 }

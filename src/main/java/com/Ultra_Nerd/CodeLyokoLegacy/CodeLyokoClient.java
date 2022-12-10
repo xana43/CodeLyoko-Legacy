@@ -100,7 +100,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
 
         //effect registry
-        DimensionEffectsAccessor.getIdentifierMap().put(CodeLyokoMain.CodeLyokoPrefix("codelyoko_effects_general"), new DimensionEffects(Float.NaN, false, DimensionEffects.SkyType.NONE, true, false) {
+        DimensionEffectsAccessor.getIdentifierMap().put(CodeLyokoMain.CodeLyokoPrefix("codelyoko_effects_general"),
+                new DimensionEffects(Float.NaN, true, DimensionEffects.SkyType.NONE, true, false) {
             @Override
             public Vec3d adjustFogColor(final Vec3d color, final float sunHeight) {
                 return Vec3d.ZERO;

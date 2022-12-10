@@ -34,7 +34,9 @@ public final class InventorySaveComponent implements AutoSyncedComponent {
     public void readFromNbt(final @NotNull NbtCompound tag) {
         // if(playerUUID != null) {
         // CodeLyokoMain.LOG.info(playerUUID.toString());
-        playerInvSave.replace(playerUUID, tag.getList(playerUUID.toString(), NbtList.COMPOUND_TYPE));
+        if(playerUUID != null) {
+            playerInvSave.replace(playerUUID, tag.getList(playerUUID.toString(), NbtList.COMPOUND_TYPE));
+        }
         // }
     }
 

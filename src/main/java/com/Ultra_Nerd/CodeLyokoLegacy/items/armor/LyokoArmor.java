@@ -50,22 +50,22 @@ public class LyokoArmor extends ArmorItem {
     protected boolean onArmorTick(final PlayerEntity player,final Item armorItem)
     {
         if(!MethodUtil.DimensionCheck.playerNotInVanillaWorld(player)) {
-            if (player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).getItem() == armorItem) {
+            if (player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).isOf(armorItem)) {
                 player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).setCount(0);
 
-                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).getItem() == ModItems.BLANKHELMET) {
+                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).isOf(ModItems.BLANKHELMET)) {
                     player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
                 }
             }
-            if (player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).getItem() == armorItem) {
+            if (player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).isOf(armorItem)) {
                 player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).setCount(0);
-                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).getItem() == ModItems.BLANKHELMET) {
+                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).isOf(ModItems.BLANKHELMET)) {
                     player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
                 }
             }
-            if (player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).getItem() == armorItem) {
+            if (player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).isOf(armorItem)) {
                 player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).setCount(0);
-                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).getItem() == ModItems.BLANKHELMET) {
+                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).isOf(ModItems.BLANKHELMET)) {
                     player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
                 }
             }

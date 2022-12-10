@@ -1,6 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.SpawnItems;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.world.World;
+
+import java.util.Objects;
 
 public final class HoverBoardItem extends Item {
     public HoverBoardItem(final Settings pProperties) {
@@ -28,4 +40,13 @@ public final class HoverBoardItem extends Item {
     }
 
  */
+
+    @Override
+    public ActionResult useOnBlock(final ItemUsageContext context) {
+        if(MethodUtil.DimensionCheck.playerNotInVanillaWorld(Objects.requireNonNull(context.getPlayer())))
+        {
+
+        }
+        return super.useOnBlock(context);
+    }
 }

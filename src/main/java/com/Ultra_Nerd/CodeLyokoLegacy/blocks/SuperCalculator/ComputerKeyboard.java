@@ -16,14 +16,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Stream;
 
 public final class ComputerKeyboard extends HorizontalFacingBlock {
-
-
-
-
-
-
-
-
     private static final VoxelShape SHAPE_N = Stream.of(
             Block.createCuboidShape(-0.3055970149253753, 5.24120673250286, 2.787371867921733, 15.694402985074625, 6.91620673250286, 11.787371867921731),
             Block.createCuboidShape(10.244402985074625, 6.387147486637496, 9.99899916689835, 11.244402985074625, 7.262147486637496, 10.99899916689835),
@@ -327,7 +319,6 @@ public final class ComputerKeyboard extends HorizontalFacingBlock {
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         return switch (state.get(FACING)) {
-            case NORTH -> SHAPE_N;
             case SOUTH -> SHAPE_S;
             case EAST -> SHAPE_E;
             case WEST -> SHAPE_W;

@@ -36,6 +36,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
@@ -89,7 +90,6 @@ public record CodeLyokoMain() implements ModInitializer {
 
     private static void checkWorld() {
         PlaceBlockEvent.EVENT.register(((entity, world, pos) -> {
-
             for (int x = -32; x < 32; ++x) {
                 for (int y = -32; y < 32; ++y) {
                     for (int z = -32; z < 32; ++z) {
@@ -106,21 +106,7 @@ public record CodeLyokoMain() implements ModInitializer {
 
             return ActionResult.PASS;
         }));
-        ServerBlockEntityEvents.BLOCK_ENTITY_UNLOAD.register((blockEntity, world) -> {
-            for (int x = -32; x < 32; ++x) {
-                for (int y = -32; y < 32; ++y) {
-                    for (int z = -32; z < 32; ++z) {
-                        final BlockPos checkedPos = new BlockPos(blockEntity.getPos().getX() + x,
-                                blockEntity.getPos().getY() + y, blockEntity.getPos().getZ() + z);
-                        if (world.getBlockEntity(checkedPos) instanceof MultiBlockController multiBlockController) {
 
-                            multiBlockController.invalidateEntity();
-
-                        }
-                    }
-                }
-            }
-        });
 
         PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {
             for (int x = -32; x < 32; ++x) {
@@ -155,9 +141,8 @@ public record CodeLyokoMain() implements ModInitializer {
         ModTileEntities.BLOCKENTITY_MAP.forEach(
                 (s, blockEntityType) -> Registry.register(Registry.BLOCK_ENTITY_TYPE, CodeLyokoPrefix(s),
                         blockEntityType));
-        //ModSounds.SOUNDS.forEach(soundEvent -> Registry.register(Registry.SOUND_EVENT,soundEvent.getId(),soundEvent));
-        final int size = ModSounds.SOUNDS.length;
-        for (int i = 0; i < size; i++) {
+        //ModSounds.SOUNDS.forEach(soundEvent -> Registry.register(Registry.SOUND_EVENT,soundEvent.getId(),soundEvent))
+        for (int i = 0; i < ModSounds.SOUNDS.length; i++) {
 
             Registry.register(Registry.SOUND_EVENT, ModSounds.SOUNDS[i].getId(), ModSounds.SOUNDS[i]);
         }
@@ -223,9 +208,10 @@ public record CodeLyokoMain() implements ModInitializer {
 
     private static void SetupFunctions() {
 
+
         //sets the properties for the xana handler to calcualate on
         ServerWorldEvents.LOAD.register((server, world) -> XanaHandler.setProperties(world.getLevelProperties()));
-        //saves and loats the inventoryfor both respawn and joining
+        //saves and loads the inventory for both respawn and joining
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
             if (MethodUtil.DimensionCheck.playerInVanilla(newPlayer)) {
                 CardinalData.LyokoInventorySave.loadPlayerInventory(

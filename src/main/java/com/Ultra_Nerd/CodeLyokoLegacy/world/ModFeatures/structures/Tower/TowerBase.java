@@ -94,13 +94,13 @@ public final class TowerBase extends Structure {
 
             if (sampleAreaPositive(blockPos, context).getState(i).isIn(ModTags.Blocks.LYOKO_BLOCKS)
                     && sampleAreaNegative(blockPos, context).getState(i).isIn(ModTags.Blocks.LYOKO_BLOCKS)
-                    && sampleAreaPositive(blockPos, context).getState(i) != Blocks.VOID_AIR.getDefaultState()
-                    && sampleAreaNegative(blockPos, context).getState(i) != Blocks.VOID_AIR.getDefaultState()
+                    && !sampleAreaPositive(blockPos, context).getState(i).isOf(Blocks.VOID_AIR)
+                    && !sampleAreaNegative(blockPos, context).getState(i).isOf(Blocks.VOID_AIR)
+                    && !sampleAreaPositive(blockPos,context).getState(i).isOf(Blocks.AIR)
+                    && !sampleAreaNegative(blockPos,context).getState(i).isOf(Blocks.AIR)
             ) {
 
-                blockPos = blockPos.offset(Direction.UP, i - 54);
-
-
+                blockPos = blockPos.offset(Direction.UP, 1);
                 pieceGen = StructurePoolBasedGenerator.generate(
                         context,
                         this.startPool,

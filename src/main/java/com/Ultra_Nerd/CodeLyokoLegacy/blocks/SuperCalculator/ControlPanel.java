@@ -196,7 +196,6 @@ public final class ControlPanel extends BlockWithEntity {
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         return switch (state.get(PANEL)) {
-            case NORTH -> shapeN;
             case SOUTH -> shapeS;
             case EAST -> shapeE;
             case WEST -> shapeW;

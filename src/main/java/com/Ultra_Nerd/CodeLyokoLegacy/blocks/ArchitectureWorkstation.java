@@ -43,7 +43,6 @@ public final class ArchitectureWorkstation extends HorizontalFacingBlock {
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         return switch (state.get(FACING)) {
-            case NORTH -> shapeN;
             case SOUTH -> shapeS;
             case EAST -> shapeE;
             case WEST -> shapeW;

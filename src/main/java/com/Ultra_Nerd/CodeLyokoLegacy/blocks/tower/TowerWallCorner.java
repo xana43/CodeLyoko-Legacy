@@ -54,39 +54,47 @@ public final class TowerWallCorner extends Block {
         double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D);
         double d1 = (double) pos.getY() + 0.5D + (rand.nextDouble() - 0.5D);
         double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
-        if (stateIn.get(DIRTOWERC) == Direction.NORTH) {
-            if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)) == Blocks.AIR.getDefaultState()) {
-                worldIn.addParticle(ModParticles.TOWER_PARTICLE,
-                        d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
-            } else {
-                worldIn.addParticle(ModParticles.TOWER_PARTICLE,
-                        pos.getX() - 0.25f, d1, d2, 0, -1, 0);
+        switch (stateIn.get(DIRTOWERC))
+        {
+            case NORTH ->{
+                if(worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)).isOf(Blocks.AIR))
+                {
+                    worldIn.addParticle(ModParticles.TOWER_PARTICLE, d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
+                }
+                else
+                {
+                    worldIn.addParticle(ModParticles.TOWER_PARTICLE, pos.getX() - 0.25f, d1, d2, 0, -1, 0);
+                }
             }
-        } else if (stateIn.get(DIRTOWERC) == Direction.SOUTH) {
-            if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)) == Blocks.AIR.getDefaultState()) {
-                worldIn.addParticle(ModParticles.TOWER_PARTICLE,
-                        d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
-            } else {
-                worldIn.addParticle(ModParticles.TOWER_PARTICLE,
-                        pos.getX() + 1.25f, d1, d2, 0, -1, 0);
+            case SOUTH -> {
+                if(worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)).isOf(Blocks.AIR))
+                {
+                    worldIn.addParticle(ModParticles.TOWER_PARTICLE, d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
+                }
+                else
+                {
+                    worldIn.addParticle(ModParticles.TOWER_PARTICLE, pos.getX() + 1.25f, d1, d2, 0, -1, 0);
+                }
             }
-        } else if (stateIn.get(DIRTOWERC) == Direction.EAST) {
-            if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ())) == Blocks.AIR.getDefaultState()) {
-                worldIn.addParticle(ModParticles.TOWER_PARTICLE,
-                        pos.getX() - 0.25f, d1, d2, 0, -1, 0);
-            } else {
-                worldIn.addParticle(ModParticles.TOWER_PARTICLE,
-                        d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
+            case EAST -> {
+                if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ())).isOf(Blocks.AIR)) {
+                    worldIn.addParticle(ModParticles.TOWER_PARTICLE, pos.getX() - 0.25f, d1, d2, 0, -1, 0);
+                } else {
+                    worldIn.addParticle(ModParticles.TOWER_PARTICLE, d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
+                }
             }
-        } else if (stateIn.get(DIRTOWERC) == Direction.WEST) {
-            if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ())) == Blocks.AIR.getDefaultState()) {
-                worldIn.addParticle(ModParticles.TOWER_PARTICLE,
-                        pos.getX() + 1.25f, d1, d2, 0, -1, 0);
-            } else {
-                worldIn.addParticle(ModParticles.TOWER_PARTICLE,
-                        d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
+            case WEST -> {
+                if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ())).isOf(Blocks.AIR)) {
+                    worldIn.addParticle(ModParticles.TOWER_PARTICLE,
+                            pos.getX() + 1.25f, d1, d2, 0, -1, 0);
+                } else {
+                    worldIn.addParticle(ModParticles.TOWER_PARTICLE,
+                            d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
+                }
             }
         }
+
+
     }
 
 

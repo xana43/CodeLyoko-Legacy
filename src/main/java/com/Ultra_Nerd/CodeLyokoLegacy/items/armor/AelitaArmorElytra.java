@@ -24,40 +24,12 @@ public final class AelitaArmorElytra extends LyokoArmor implements FabricElytraI
                 worldIn.addEntity(las);
             }
         }
-    }*/
-
-
-
-
-/*
-    @Override
-    public void inventoryTick(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
-        super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
-        if (entityIn instanceof Player player) {
-            if(!stack.isEnchanted()) {
-                stack.enchant(Enchantments.BINDING_CURSE, Enchantments.BINDING_CURSE.getMaxLevel());
-            }
-            if (!DimensionCheck.playerNotInVanillaWorld(player)) {
-                if (player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() == ModItems.AELITA_CHESTPLATE.get()) {
-                    player.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).setCount(0);
-                }
-                if (player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).getItem() == ModItems.BLANKHELMET.get()) {
-                    player.getInventory().getArmor(EquipmentSlot.HEAD.getIndex()).setCount(0);
-                }
-                if (player.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() == ModItems.AELITA_LEGGINGS.get()) {
-                    player.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).setCount(0);
-                }
-                if (player.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() == ModItems.AELITA_BOOTS.get()) {
-                    player.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).setCount(0);
-                }
-                for (int I = 0; I < player.getInventory().getContainerSize(); I++) {
-                    if (player.getInventory().getItem(I).getItem() == ModItems.FORCE_FIELD_EMITTER.get()) {
-                        player.getInventory().setItem(I, ItemStack.EMPTY);
-                    }
-                }
-            }
-        }
     }
+
+
+
+
+
 
     @Override
     public void onArmorTick(ItemStack stack, Level world, @NotNull Player player) {
