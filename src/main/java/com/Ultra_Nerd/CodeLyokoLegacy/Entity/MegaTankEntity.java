@@ -29,10 +29,12 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nonnull;
 import java.util.EnumSet;
@@ -272,14 +274,17 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
 
         //CodeLyokoMain.LOG.info("attacking " + event.getAnimatable().isAttacking());
         if (event.isMoving() && !event.getAnimatable().isAttacking()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.move", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.move",
+                    ILoopType.EDefaultLoopTypes.LOOP));
             //CodeLyokoMain.LOG.info("moving");
         } else if (event.getAnimatable().isAttacking()) {
 
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.open", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.open",
+                    ILoopType.EDefaultLoopTypes.LOOP));
             //CodeLyokoMain.LOG.info("attacking");
         } else{
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.idle", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.idle",
+                    ILoopType.EDefaultLoopTypes.LOOP));
             //CodeLyokoMain.LOG.info("not moving");
 
 
@@ -292,7 +297,7 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
 
     @Override
     public @NotNull AnimationFactory getFactory() {
-        return new AnimationFactory(this);
+        return GeckoLibUtil.createFactory(this);
     }
 
 

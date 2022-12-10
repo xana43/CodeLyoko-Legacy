@@ -32,6 +32,7 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nonnull;
 
@@ -157,7 +158,7 @@ private static SoundEvent getStepSound()
 
     @Override
     public @NotNull AnimationFactory getFactory() {
-        return new AnimationFactory(this);
+        return GeckoLibUtil.createFactory(this);
     }
 
     @Override

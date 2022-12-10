@@ -12,9 +12,10 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public final class MantaEntity extends GuardianEntity implements IAnimatable, RangedAttackMob {
-    private final AnimationFactory manager = new AnimationFactory(this);
+    private final AnimationFactory manager = GeckoLibUtil.createFactory(this);
     private final AnimationController<?> controller = new AnimationController<>(this, "mantamovecontroller", 20, this::animationPred);
 
     public MantaEntity(final EntityType<? extends GuardianEntity> entityType, final World world) {

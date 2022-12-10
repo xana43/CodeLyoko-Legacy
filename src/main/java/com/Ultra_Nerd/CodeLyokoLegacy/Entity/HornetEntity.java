@@ -29,10 +29,12 @@ import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nonnull;
 
@@ -173,15 +175,22 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
         data.addAnimationController(controllerMove);
 
     }
+
+    //@Override
+    //public @NotNull AnimationFactory getFactory() {
+     //   return new AnimationFactory(this);
+    //}
+
     @Override
-    public @NotNull AnimationFactory getFactory() {
-        return new AnimationFactory(this);
+    public AnimationFactory getFactory() {
+        return GeckoLibUtil.createFactory(this);
     }
 
     private <E extends HornetEntity> PlayState movePredicate(AnimationEvent<E> event)
     {
 
-            controllerMove.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly", true));
+            controllerMove.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly",
+                    ILoopType.EDefaultLoopTypes.LOOP));
 
         return PlayState.CONTINUE;
     }
@@ -193,7 +202,8 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
         if(event.getAnimatable().isAttacking())
         {
 
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hornet.attack", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hornet.attack",
+                    ILoopType.EDefaultLoopTypes.LOOP));
 
         }
         return PlayState.CONTINUE;
