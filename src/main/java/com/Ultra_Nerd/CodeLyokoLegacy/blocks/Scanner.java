@@ -1,12 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.event.PlaceBlockEvent;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -20,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -412,91 +408,6 @@ public final class Scanner extends BlockWithEntity {
     }
 
 
-
-
-/*
-    @Override
-    public @NotNull InteractionResult use(final @NotNull BlockState pState, final Level pLevel, final @NotNull BlockPos pPos, final @NotNull Player pPlayer, final @NotNull InteractionHand pHand, final BlockHitResult pHit) {
-
-        if(pLevel.getBlockEntity(pPos) instanceof ScannerTileEntity scannerTile)
-        {
-            if(!pLevel.isClientSide) {
-                pPlayer.sendMessage(new TextComponent("Checking for valid placement"), pPlayer.getUUID());
-                if (scannerTile.check()) {
-
-                    if (!FMLEnvironment.production) {
-                        pPlayer.sendMessage(new TextComponent("Scanner check " + scannerTile.check()), pPlayer.getUUID());
-                    } else {
-                        pPlayer.sendMessage(new TextComponent("scanner formed"), pPlayer.getUUID());
-                    }
-                    pLevel.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.setThispos(scannerTile));
-                } else {
-                    pLevel.getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.removePos(scannerTile));
-                }
-            }
-
-
-           // scannerTile.getLevel().getCapability(CapabilityRegistration.BLOCK_ENTITY_CAP).ifPresent(cap -> cap.setThispos(pLevel.getBlockEntity(pPos)));
-            //CodeLyokoMain.Log.info("used");
-            return InteractionResult.SUCCESS;
-        }
-        else
-        {
-            return InteractionResult.FAIL;
-        }
-
-
-        if(pLevel.getBlockEntity(pPos) instanceof ScannerTileEntity tileEntity && !pLevel.isClientSide)
-        {
-            if(!pPlayer.isCreative() && pPlayer.getItemInHand(pHand).getItem() == ModItems.TRUSTTY_SCREWDRIVER.get()) {
-                checkStruct(tileEntity, pPos, (ServerLevel) pLevel);
-                return InteractionResult.SUCCESS;
-            }
-            else if(pPlayer.isCreative())
-            {
-                checkStruct(tileEntity, pPos, (ServerLevel) pLevel);
-                return InteractionResult.SUCCESS;
-
-            }
-            else
-            {
-                return InteractionResult.FAIL;
-            }
-        }
-
-
-        return InteractionResult.FAIL;
-
-
-
-    }
-
-
-    /*
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
-
-    @Nullable
-
-
-    @Override
-    public boolean isNormalCube(@Nonnull BlockState state, @Nonnull IBlockReader worldIn, @Nonnull BlockPos pos) {
-        return false;
-    }
-
-    @Override
-    public boolean isSideInvisible(@Nonnull BlockState state, @Nonnull BlockState adjacentBlockState, @Nonnull Direction side) {
-        return false;
-    }
-
-    @Override
-    public boolean isTransparent(@Nonnull BlockState state) {
-        return false;
-    }
-
- */
 }
 
 

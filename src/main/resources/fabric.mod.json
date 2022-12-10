@@ -40,14 +40,14 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.8",
+    "fabricloader": "*",
     "fabric": "*",
     "minecraft": "1.19.x",
     "java": ">=17",
-    "geckolib3":">=3.0.42",
+    "geckolib3":"*",
 
-    "cardinal-components-base": "~5.0.1",
-    "cardinal-components-entity":"~5.0.1",
+    "cardinal-components-base": "*",
+    "cardinal-components-entity":"*",
     "team_reborn_energy": ">=2.2.0"
 
   },
