@@ -134,15 +134,12 @@ public record ModBlocks() {
     public static final Block UV_MACHINE = new Block(FabricBlockSettings.copyOf(Blocks.ANVIL));
     //public static final Block UV_FOCUS = new UVFocusBlock(FabricBlockSettings.copyOf(Blocks.GLASS));
     public static final Block UV_LIGHT = new Block(FabricBlockSettings.copyOf(Blocks.GLOWSTONE));
-
-
     public static final Block VOLCANO_GROUND = new Block(FabricBlockSettings.copyOf(Blocks.STONE));
-
-
     public static final Block DIGITAL_OCEAN_BLOCK = new DigitalSeaBlock();
     public static final Block DIGITAL_LAVA_BLOCK = new DigitalLavaBlock();
     public static final Block URANIUM_WASTE_BLOCK = new UraniumWaste();
     public static final Block LIQUID_HELIUM_BLOCK = new LiquidHelium();
+    public static final LaptopCharger LAPTOP_CHARGER = new LaptopCharger(FabricBlockSettings.copy(Blocks.ANVIL));
     public static final ImmutableMap<String, Block> BLOCK_MAP = ImmutableMap.<String, Block>builder()
             .put("architecture_work_station", ARCHITECTURE_WORK_STATION)
             .put("anti_marabunta", ANTI_MARABUNTA)
@@ -240,6 +237,7 @@ public record ModBlocks() {
             .put("digital_lava", DIGITAL_LAVA_BLOCK)
             .put("uranium_waste", URANIUM_WASTE_BLOCK)
             .put("liquid_helium", LIQUID_HELIUM_BLOCK)
+            .put("laptop_charger",LAPTOP_CHARGER)
             .build();
 
 }

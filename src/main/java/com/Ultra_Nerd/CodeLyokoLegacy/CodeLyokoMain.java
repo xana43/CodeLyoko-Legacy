@@ -84,7 +84,7 @@ public record CodeLyokoMain() implements ModInitializer {
     }
 
     private static void registerEnergyStorageBE() {
-        EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.simpleEnergyStorage,
+        EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyImplementation(),
                 ModTileEntities.UNIVERSAL_ENERGY_STORAGE);
     }
 

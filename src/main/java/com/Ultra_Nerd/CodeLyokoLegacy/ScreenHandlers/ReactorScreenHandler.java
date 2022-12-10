@@ -50,7 +50,7 @@ public final class ReactorScreenHandler extends ScreenHandler {
     public ItemStack transferSlot(final PlayerEntity player, final int index) {
         ItemStack newStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasStack()) {
+        if (slot.hasStack()) {
             ItemStack originalStack = slot.getStack();
             newStack = originalStack.copy();
             if (index < this.inventory.size()) {

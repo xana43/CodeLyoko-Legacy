@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
@@ -25,9 +26,17 @@ public abstract class EnergyStorageBlockEntity extends SidedTickingBlockEntity {
         return energyStorage;
     }
 
+    private static final String energyKey = "general_energy_storage";
+    @Override
+    public void readNbt(final NbtCompound nbt) {
 
+        super.readNbt(nbt);
+        energyStorage.amount = nbt.getLong(energyKey);
+    }
 
-
-
-
+    @Override
+    protected void writeNbt(final NbtCompound nbt) {
+        super.writeNbt(nbt);
+        nbt.putLong(energyKey,energyStorage.amount);
+    }
 }

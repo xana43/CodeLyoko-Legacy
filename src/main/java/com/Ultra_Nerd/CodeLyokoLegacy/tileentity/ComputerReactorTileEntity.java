@@ -1,18 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ReactorScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.LyokoInventoryBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.LyokoInventoryBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -45,7 +43,7 @@ public final class ComputerReactorTileEntity extends EnergyStorageBlockEntity im
             return 1;
         }
     };
-    ;
+
 
     public ComputerReactorTileEntity(final BlockPos pos, final BlockState state) {
         super(ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY, pos, state,2,4000,null,null);
@@ -54,12 +52,11 @@ public final class ComputerReactorTileEntity extends EnergyStorageBlockEntity im
 
     @Override
     public void tick() {
-
-        if (world.isClient) {
+        if (world.isClient()) {
             return;
         }
-        final ItemStack uraniumFuel = getItems().get(0);
-        final ItemStack uraniumWaste = getItems().get(1);
+        final ItemStack uraniumFuel = getStack(0);
+        final ItemStack uraniumWaste = getStack(1);
         if (uraniumFuel.isOf(ModItems.URANIUM_ISOTOPE235) && uraniumWaste.getCount() < 64) {
             uraniumFuel.decrement(1);
 
@@ -96,19 +93,7 @@ public final class ComputerReactorTileEntity extends EnergyStorageBlockEntity im
         return new ReactorScreenHandler(syncId, inv, this, energyAmount);
     }
 
-    @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
-        Inventories.readNbt(nbt, itemStacks);
-        energyStorage.amount = nbt.getLong("energy");
-    }
 
-    @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        Inventories.writeNbt(nbt, itemStacks);
-        nbt.putLong("energy", energyStorage.getAmount());
-        super.writeNbt(nbt);
-    }
 
 
     @Override
