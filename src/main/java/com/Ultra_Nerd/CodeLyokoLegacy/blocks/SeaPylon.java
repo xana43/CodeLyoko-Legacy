@@ -26,7 +26,6 @@ public final class SeaPylon extends Block {
                 .luminance(10)
 
 
-
         );
 
     }
@@ -37,23 +36,11 @@ public final class SeaPylon extends Block {
     }
 
 
-
-
-
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(DIRPYLON,ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(DIRPYLON, ctx.getPlayerFacing().getOpposite());
     }
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
-public class QuantumChipletContainer/* extends AbstractContainerMenu*/  {
+public class QuantumChipletContainer/* extends AbstractContainerMenu*/ {
     /*public final QuantumChipletTileEntity QuantumTE;
     //private final IWorldPosCallable callable;
 

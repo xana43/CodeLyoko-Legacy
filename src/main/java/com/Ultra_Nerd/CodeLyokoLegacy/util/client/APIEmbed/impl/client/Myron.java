@@ -109,10 +109,12 @@ public final class Myron implements ClientModInitializer {
             }
 
             int materialColor = material.getColor();
-            Sprite sprite = textureGetter.apply(new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, material.getTexture()));
+            Sprite sprite = textureGetter.apply(
+                    new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, material.getTexture()));
 
             for (int faceIndex = 0; faceIndex < group.getNumFaces(); ++faceIndex) {
-                face(renderer, emitter, group, group.getFace(faceIndex), material, materialColor, sprite, bakeSettings, isBlock);
+                face(renderer, emitter, group, group.getFace(faceIndex), material, materialColor, sprite, bakeSettings,
+                        isBlock);
             }
         }
 

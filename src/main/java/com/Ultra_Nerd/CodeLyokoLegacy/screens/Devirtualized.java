@@ -18,14 +18,15 @@ import java.util.Objects;
 public final class Devirtualized extends Screen {
 
 
-    private byte ticksSinceDeath;
     private final Text message;
     private final boolean isHardcore;
-    private Text scoreText;
     private final List<ButtonWidget> buttons = Lists.newArrayList();
+    private byte ticksSinceDeath;
+    private Text scoreText;
 
     public Devirtualized(@Nullable Text message, boolean isHardcore) {
-        super(Text.translatable(isHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title").fillStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
+        super(Text.translatable(isHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title")
+                .fillStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
         this.message = message;
         this.isHardcore = isHardcore;
     }
@@ -33,25 +34,33 @@ public final class Devirtualized extends Screen {
     protected void init() {
         this.ticksSinceDeath = 0;
         this.buttons.clear();
-        this.buttons.add(this.addDrawableChild(new ButtonWidget((this.width >> 1) - 100, (this.height >> 2) + 72, 200, 20, this.isHardcore ? Text.translatable("deathScreen.spectate") : Text.translatable("deathScreen.respawn"), (button) -> {
-            this.client.player.requestRespawn();
-            this.client.setScreen(null);
-        })));
-        this.buttons.add(this.addDrawableChild(new ButtonWidget((this.width >> 1) - 100, (this.height >> 2) + 96, 200, 20, Text.translatable("deathScreen.titleScreen"), (button) -> {
-            if (this.isHardcore) {
-                this.quitLevel();
-            } else {
-                ConfirmScreen confirmScreen = new ConfirmScreen(this::onConfirmQuit, Text.translatable("deathScreen.quit.confirm"), Text.empty(), Text.translatable("deathScreen.titleScreen"), Text.translatable("deathScreen.respawn"));
-                this.client.setScreen(confirmScreen);
-                confirmScreen.disableButtons(20);
-            }
-        })));
+        this.buttons.add(this.addDrawableChild(
+                new ButtonWidget((this.width >> 1) - 100, (this.height >> 2) + 72, 200, 20,
+                        this.isHardcore ? Text.translatable("deathScreen.spectate") : Text.translatable(
+                                "deathScreen.respawn"), (button) -> {
+                    this.client.player.requestRespawn();
+                    this.client.setScreen(null);
+                })));
+        this.buttons.add(this.addDrawableChild(
+                new ButtonWidget((this.width >> 1) - 100, (this.height >> 2) + 96, 200, 20,
+                        Text.translatable("deathScreen.titleScreen"), (button) -> {
+                    if (this.isHardcore) {
+                        this.quitLevel();
+                    } else {
+                        ConfirmScreen confirmScreen = new ConfirmScreen(this::onConfirmQuit,
+                                Text.translatable("deathScreen.quit.confirm"), Text.empty(),
+                                Text.translatable("deathScreen.titleScreen"), Text.translatable("deathScreen.respawn"));
+                        this.client.setScreen(confirmScreen);
+                        confirmScreen.disableButtons(20);
+                    }
+                })));
 
         for (ButtonWidget widget : this.buttons) {
             widget.active = false;
         }
 
-        this.scoreText = (Text.translatable("deathScreen.score")).append(": ").append((Text.literal(Integer.toString(this.client.player.getScore()))).formatted(Formatting.YELLOW));
+        this.scoreText = (Text.translatable("deathScreen.score")).append(": ")
+                .append((Text.literal(Integer.toString(this.client.player.getScore()))).formatted(Formatting.YELLOW));
     }
 
     public boolean shouldCloseOnEsc() {
@@ -74,7 +83,8 @@ public final class Devirtualized extends Screen {
             this.client.world.disconnect();
         }
 
-        this.client.disconnect(new net.minecraft.client.gui.screen.MessageScreen(Text.translatable("menu.savingLevel")));
+        this.client.disconnect(
+                new net.minecraft.client.gui.screen.MessageScreen(Text.translatable("menu.savingLevel")));
         // this.client.setScreen(new TitleScreen());
     }
 
@@ -108,7 +118,8 @@ public final class Devirtualized extends Screen {
             final int i = this.client.textRenderer.getWidth(this.message);
             final int j = (this.width >> 1) - (i >> 1);
             final int k = (this.width >> 1) + (i >> 1);
-            return mouseX >= j && mouseX <= k ? this.client.textRenderer.getTextHandler().getStyleAt(this.message, mouseX - j) : null;
+            return mouseX >= j && mouseX <= k ? this.client.textRenderer.getTextHandler()
+                    .getStyleAt(this.message, mouseX - j) : null;
         }
     }
 
@@ -117,7 +128,8 @@ public final class Devirtualized extends Screen {
             Objects.requireNonNull(this.textRenderer);
             if (mouseY < 94) {
                 Style style = this.getTextComponentUnderMouse((int) mouseX);
-                if (style != null && style.getClickEvent() != null && style.getClickEvent().getAction() == ClickEvent.Action.OPEN_URL) {
+                if (style != null && style.getClickEvent() != null && style.getClickEvent()
+                        .getAction() == ClickEvent.Action.OPEN_URL) {
                     this.handleTextClick(style);
                     return false;
                 }

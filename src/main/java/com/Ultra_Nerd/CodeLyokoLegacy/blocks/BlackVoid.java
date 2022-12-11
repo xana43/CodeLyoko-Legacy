@@ -28,13 +28,14 @@ public final class BlackVoid extends Block {
             Block.createCuboidShape(9.924999999999997, 0, 2, 11.924999999999995, 0.5, 9),
             Block.createCuboidShape(0.9249999999999972, 0, 2, 2.9249999999999954, 0.5, 9),
             Block.createCuboidShape(11.924999999999997, 0, 6, 12.924999999999995, 0.5, 13),
-            Block.createCuboidShape(9.024999999999991, 0, 13.024999999999999, 16.02500000000001, 0.5, 14.024999999999997),
+            Block.createCuboidShape(9.024999999999991, 0, 13.024999999999999, 16.02500000000001, 0.5,
+                    14.024999999999997),
             Block.createCuboidShape(9.024999999999991, 0, 15.024999999999999, 16.02500000000001, 0.5, 16.025),
             Block.createCuboidShape(1.5249999999999915, 0, 15.024999999999999, 8.52500000000001, 0.5, 16.025)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
     public BlackVoid() {
-        super(FabricBlockSettings.of(Material.STRUCTURE_VOID).strength(-1,-1).dropsNothing().resistance(-1));
+        super(FabricBlockSettings.of(Material.STRUCTURE_VOID).strength(-1, -1).dropsNothing().resistance(-1));
     }
 
     @Override
@@ -51,7 +52,7 @@ public final class BlackVoid extends Block {
     @Override
     public void onEntityLand(final BlockView world, final Entity entity) {
         super.onEntityLand(world, entity);
-        entity.damage(DamageSource.OUT_OF_WORLD,Float.MAX_VALUE);
+        entity.damage(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
     }
 
     @Override
@@ -62,7 +63,7 @@ public final class BlackVoid extends Block {
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        entity.damage(DamageSource.OUT_OF_WORLD,Float.MAX_VALUE);
+        entity.damage(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
     }
 
 

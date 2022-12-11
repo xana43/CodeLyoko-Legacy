@@ -10,5 +10,4 @@ public final class ArmorArcher extends LyokoArmor {
     }
 
 
-
 }

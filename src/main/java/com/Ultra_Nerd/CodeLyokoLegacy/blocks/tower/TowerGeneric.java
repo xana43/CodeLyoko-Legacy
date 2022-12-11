@@ -19,6 +19,4 @@ public final class TowerGeneric extends Block {
     }
 
 
-
-
 }

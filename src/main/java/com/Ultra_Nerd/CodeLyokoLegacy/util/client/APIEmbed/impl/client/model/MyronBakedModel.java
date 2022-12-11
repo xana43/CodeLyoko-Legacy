@@ -41,7 +41,8 @@ public final class MyronBakedModel implements BakedModel, FabricBakedModel {
         if (this.mesh != null) {
             ctx.meshConsumer().accept(mesh);
         } else {
-            Myron.LOGGER.warn("Mesh is null while emitting block quads for block {}", state.getBlock().getName().toString());
+            Myron.LOGGER.warn("Mesh is null while emitting block quads for block {}",
+                    state.getBlock().getName().toString());
         }
     }
 
@@ -50,7 +51,8 @@ public final class MyronBakedModel implements BakedModel, FabricBakedModel {
         if (this.mesh != null) {
             ctx.meshConsumer().accept(mesh);
         } else {
-            Myron.LOGGER.warn("Mesh is null while emitting block quads for item {}", stack.getItem().getName().toString());
+            Myron.LOGGER.warn("Mesh is null while emitting block quads for item {}",
+                    stack.getItem().getName().toString());
         }
     }
 

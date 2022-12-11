@@ -12,16 +12,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Stream;
 
 public final class FranzChiplet extends BlockWithEntity {
-    public FranzChiplet(final Settings settings) {
-        super(settings);
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return null;
-    }
-
     private final static VoxelShape shape = Stream.of(
             Block.createCuboidShape(4, 4, 0, 5, 5, 1),
             Block.createCuboidShape(0, 0, 0, 4, 16, 2),
@@ -130,6 +120,16 @@ public final class FranzChiplet extends BlockWithEntity {
             Block.createCuboidShape(4, 4, 15, 5, 5, 16),
             Block.createCuboidShape(5, 4, 0, 11, 5, 1)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
+
+    public FranzChiplet(final Settings settings) {
+        super(settings);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
+    }
 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {

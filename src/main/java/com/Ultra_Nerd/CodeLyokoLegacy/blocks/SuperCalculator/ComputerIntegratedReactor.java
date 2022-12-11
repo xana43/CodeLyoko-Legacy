@@ -52,7 +52,8 @@ public final class ComputerIntegratedReactor extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
-        return checkType(type,ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY,(world1, pos, state1, blockEntity) -> blockEntity.tick());
+        return checkType(type, ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY,
+                (world1, pos, state1, blockEntity) -> blockEntity.tick());
     }
 
     @Override

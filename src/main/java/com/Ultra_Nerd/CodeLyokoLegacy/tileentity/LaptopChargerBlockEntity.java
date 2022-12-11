@@ -8,30 +8,29 @@ import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
-public class LaptopChargerBlockEntity extends EnergyStorageBlockEntity {
-
+public final class LaptopChargerBlockEntity extends EnergyStorageBlockEntity {
     public LaptopChargerBlockEntity(final BlockPos pos, final BlockState state) {
-        super(ModTileEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY, pos, state,1,90,10L,10L);
+        super(ModTileEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY, pos, state, 1, 90, 10L, 10L);
     }
 
-    public void setItem(final ItemStack item)
-    {
-        setItem(item.copy(),0);
+    public void setItem(final ItemStack item) {
+        setItem(item.copy(), 0);
         item.decrement(1);
-
+        update();
     }
 
     @Override
     public void tick() {
-        if(world.isClient())
-        {
+        if (world.isClient()) {
             return;
         }
-        if(getItems().get(0).isOf(ModItems.JEREMY_LAPTOP) && energyStorage.amount > 0)
-        {
-            final LaptopClass jeremyLaptop = (LaptopClass)getItems().get(0).getItem();
-            if(jeremyLaptop.getStoredEnergy(getItems().get(0)) < jeremyLaptop.getEnergyCapacity()) {
-                jeremyLaptop.setStoredEnergy(getItems().get(0), jeremyLaptop.getStoredEnergy(getItems().get(0)) + 1);
+        if (getItems().get(0).isOf(ModItems.JEREMY_LAPTOP)) {
+
+            final LaptopClass jeremyLaptop = (LaptopClass) getStack(0).getItem();
+            if (jeremyLaptop.getStoredEnergy(
+                    getStack(0)) < jeremyLaptop.getEnergyCapacity() && energyStorage.amount > 0) {
+                jeremyLaptop.setStoredEnergy(getStack(0), jeremyLaptop.getStoredEnergy(getStack(0)) + 10);
+                update();
             }
             energyStorage.amount--;
         }

@@ -8,12 +8,4 @@ public final class RendFan /*extends GeoProjectilesRenderer<EntityFan>*/ {
     }*/
 
 
-
-
-
-
-
-
-
-
 }

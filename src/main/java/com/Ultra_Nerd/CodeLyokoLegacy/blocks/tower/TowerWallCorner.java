@@ -8,12 +8,9 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-
-
 
 
 public final class TowerWallCorner extends Block {
@@ -44,7 +41,7 @@ public final class TowerWallCorner extends Block {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(DIRTOWERC,ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(DIRTOWERC, ctx.getPlayerFacing().getOpposite());
     }
 
 
@@ -54,25 +51,18 @@ public final class TowerWallCorner extends Block {
         double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D);
         double d1 = (double) pos.getY() + 0.5D + (rand.nextDouble() - 0.5D);
         double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
-        switch (stateIn.get(DIRTOWERC))
-        {
-            case NORTH ->{
-                if(worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)).isOf(Blocks.AIR))
-                {
+        switch (stateIn.get(DIRTOWERC)) {
+            case NORTH -> {
+                if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)).isOf(Blocks.AIR)) {
                     worldIn.addParticle(ModParticles.TOWER_PARTICLE, d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
-                }
-                else
-                {
+                } else {
                     worldIn.addParticle(ModParticles.TOWER_PARTICLE, pos.getX() - 0.25f, d1, d2, 0, -1, 0);
                 }
             }
             case SOUTH -> {
-                if(worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)).isOf(Blocks.AIR))
-                {
+                if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1)).isOf(Blocks.AIR)) {
                     worldIn.addParticle(ModParticles.TOWER_PARTICLE, d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
-                }
-                else
-                {
+                } else {
                     worldIn.addParticle(ModParticles.TOWER_PARTICLE, pos.getX() + 1.25f, d1, d2, 0, -1, 0);
                 }
             }
@@ -96,9 +86,6 @@ public final class TowerWallCorner extends Block {
 
 
     }
-
-
-
 
 
 }

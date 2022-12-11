@@ -27,6 +27,4 @@ public final class DigitalSapling extends SaplingBlock {
  */
 
 
-
-
 }

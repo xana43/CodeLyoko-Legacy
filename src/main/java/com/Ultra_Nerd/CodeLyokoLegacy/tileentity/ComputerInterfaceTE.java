@@ -9,11 +9,9 @@ import org.jetbrains.annotations.NotNull;
 
 public final class ComputerInterfaceTE extends BlockEntity implements MasterEntity {
     //public ComputerInterfaceTE(BlockEntityType<?> tileEntityTypeIn) {
-      //  super(tileEntityTypeIn);
+    //  super(tileEntityTypeIn);
     //}
-    boolean screen = false;
 
-    private boolean once = false;
 
     public ComputerInterfaceTE(@NotNull BlockEntityType<?> p_155228_, @NotNull BlockPos p_155229_, @NotNull BlockState p_155230_) {
         super(p_155228_, p_155229_, p_155230_);

@@ -23,12 +23,8 @@ public final class ArmorFeline extends LyokoArmor {
 
 
     private static final double movement_modifier = 0.6;
-    public ArmorFeline(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
-        super(materialIn, slot, builder);
-
-
-
-    }
+    private static final StatusEffectInstance JUMPEFFECT = new StatusEffectInstance(StatusEffects.JUMP_BOOST, 1, 3,
+            true, false, false);
 /*
     @Override
     public void initializeClient(@NotNull Consumer<IItemRenderProperties> consumer) {
@@ -49,25 +45,25 @@ public final class ArmorFeline extends LyokoArmor {
     }
     */
 
+    public ArmorFeline(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
+        super(materialIn, slot, builder);
+
+
+    }
+
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(final ItemStack stack, final EquipmentSlot slot) {
-        Multimap<EntityAttribute,EntityAttributeModifier> multimap = HashMultimap.create();
-        if(slot == EquipmentSlot.FEET)
-        {
-            multimap.put(EntityAttributes.GENERIC_MOVEMENT_SPEED,new EntityAttributeModifier(UUID.fromString("91AEAA56-376B-4498-935B-2F7F68070635"),"speed_modifier",movement_modifier, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
+        Multimap<EntityAttribute, EntityAttributeModifier> multimap = HashMultimap.create();
+        if (slot == EquipmentSlot.FEET) {
+            multimap.put(EntityAttributes.GENERIC_MOVEMENT_SPEED,
+                    new EntityAttributeModifier(UUID.fromString("91AEAA56-376B-4498-935B-2F7F68070635"),
+                            "speed_modifier", movement_modifier, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
             //multimap.put(Attributes);
         }
 
 
         return multimap;
     }
-
-
-
-
-
-
-
 
     @Override
     public void inventoryTick(final ItemStack stack, final World pLevel, final Entity pEntity, final int pSlotId, final boolean pIsSelected) {
@@ -76,21 +72,15 @@ public final class ArmorFeline extends LyokoArmor {
 
     }
 
-
-
-
-
-private static final StatusEffectInstance JUMPEFFECT = new StatusEffectInstance(StatusEffects.JUMP_BOOST, 1, 3, true, false, false);
-
-
     @Override
     protected boolean onArmorTick(final PlayerEntity player, final Item armorItem) {
-        if(super.onArmorTick(player,this))
-        {
-            if(player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).getItem() == ModItems.ODD_BOOTS && player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).getItem() == ModItems.ODD_LEGGINGS) {
+        if (super.onArmorTick(player, this)) {
+            if (player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId())
+                    .getItem() == ModItems.ODD_BOOTS && player.getInventory()
+                    .getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).getItem() == ModItems.ODD_LEGGINGS) {
                 if (!player.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
 
-                        player.addStatusEffect(JUMPEFFECT);
+                    player.addStatusEffect(JUMPEFFECT);
                     //CodeLyokoMain.LOG.info(JUMPEFFECT.toString());
 
                 }
@@ -100,9 +90,6 @@ private static final StatusEffectInstance JUMPEFFECT = new StatusEffectInstance(
         }
         return super.onArmorTick(player, this);
     }
-
-
-
 
 
 }

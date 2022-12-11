@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 
 public final class MainLaptopScreen extends Screen {
 
-    private static final Identifier TEXTURE = CodeLyokoMain.CodeLyokoPrefix("textures/gui/laptopguibase_pot.png");
-    private static int x/*, y*/;
+    private static final Identifier TEXTURE = CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_pot.png");
     private static final int xSize = 1024, ySize = 1024;
+    private static int x/*, y*/;
     private ButtonWidget imageButton;
 
     public MainLaptopScreen() {
@@ -40,12 +40,10 @@ public final class MainLaptopScreen extends Screen {
  */
 
 
-
     @Override
     public boolean shouldCloseOnEsc() {
         return true;
     }
-
 
 
     @Override
@@ -58,21 +56,19 @@ public final class MainLaptopScreen extends Screen {
         super.init();
     }
 
-    private void setImageButton()
-    {
-        imageButton =  new ButtonWidget(this.width >> 1, this.height >> 1, 30, 30// 0, 31, TEXTURE,
-                /*256, 256*/,Text.of("Test"), (button) -> {});
+    private void setImageButton() {
+        imageButton = new ButtonWidget(this.width >> 1, this.height >> 1, 30, 30// 0, 31, TEXTURE,
+                /*256, 256*/, Text.of("Test"), (button) -> {
+        });
         //imageButton.(0x1d5e18);
     }
 
 
-
-
     @Override
     public void renderBackground(@NotNull MatrixStack pPoseStack) {
-       // super.renderBackground(pPoseStack);
-        RenderSystem.setShaderTexture(0,TEXTURE);
-        this.drawTexture(pPoseStack,x, 0, 0, 0, xSize, ySize);
+        // super.renderBackground(pPoseStack);
+        RenderSystem.setShaderTexture(0, TEXTURE);
+        this.drawTexture(pPoseStack, x, 0, 0, 0, xSize, ySize);
     }
 
     @Override
@@ -80,7 +76,8 @@ public final class MainLaptopScreen extends Screen {
         this.renderBackground(pPoseStack);
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 
-        this.imageButton.render(pPoseStack,pMouseX,pMouseY,pPartialTick);
-        drawCenteredText(pPoseStack,this.client.textRenderer,imageButton.getMessage(),imageButton.x,imageButton.y,0x1d5e18);
+        this.imageButton.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+        drawCenteredText(pPoseStack, this.client.textRenderer, imageButton.getMessage(), imageButton.x, imageButton.y,
+                0x1d5e18);
     }
 }

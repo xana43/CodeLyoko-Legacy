@@ -25,7 +25,8 @@ public final class BlisterCopper extends Item {
     @Override
     public void appendTooltip(final ItemStack stack, @org.jetbrains.annotations.Nullable final World world, final List<Text> tooltip, final TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(Text.of("this form of copper is usable, but it oxidizes quickly back to cuprous oxide, use electroplating to keep it stable"));
+        tooltip.add(
+                Text.of("this form of copper is usable, but it oxidizes quickly back to cuprous oxide, use electroplating to keep it stable"));
     }
 
     @Override
@@ -34,39 +35,35 @@ public final class BlisterCopper extends Item {
     }
 
 
-
     @Override
     public boolean isDamageable() {
         return true;
     }
 
 
-
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         NbtCompound timerTag = stack.getNbt();
-        if(timerTag == null)
-        {
+        if (timerTag == null) {
             timerTag = new NbtCompound();
-            timerTag.putInt(NBT_TAG_ACCESSOR,500);
+            timerTag.putInt(NBT_TAG_ACCESSOR, 500);
             stack.setNbt(timerTag);
         }
         if (!worldIn.isClient) {
             //CodeLyokoMain.Log.debug(I);
-            timerTag.putInt(NBT_TAG_ACCESSOR,timerTag.getInt(NBT_TAG_ACCESSOR) - 1);
+            timerTag.putInt(NBT_TAG_ACCESSOR, timerTag.getInt(NBT_TAG_ACCESSOR) - 1);
             if (timerTag.getInt(NBT_TAG_ACCESSOR) == 0) {
                 if (stack.getDamage() != 60) {
 
                     stack.setDamage(stack.getDamage() + 1);
 
-                   timerTag.putInt(NBT_TAG_ACCESSOR,500);
+                    timerTag.putInt(NBT_TAG_ACCESSOR, 500);
                 }
             }
             if (stack.getDamage() == 60) {
 
-                if(entityIn instanceof PlayerEntity playerEntity)
-                {
-                   playerEntity.getInventory().setStack(itemSlot, new ItemStack(ModItems.CUPROUS_OXIDE));
+                if (entityIn instanceof PlayerEntity playerEntity) {
+                    playerEntity.getInventory().setStack(itemSlot, new ItemStack(ModItems.CUPROUS_OXIDE));
                 }
 
 

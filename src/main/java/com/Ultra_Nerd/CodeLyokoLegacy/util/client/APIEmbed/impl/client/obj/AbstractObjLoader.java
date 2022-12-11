@@ -20,7 +20,8 @@ import java.util.HashSet;
 import java.util.Map;
 
 public class AbstractObjLoader {
-    public static final SpriteIdentifier DEFAULT_SPRITE = new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, null);
+    public static final SpriteIdentifier DEFAULT_SPRITE = new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE,
+            null);
 
     protected @Nullable UnbakedModel loadModel(
             ResourceManager resourceManager, Identifier identifier, ModelTransformation transformation, boolean isSideLit) {
@@ -43,7 +44,8 @@ public class AbstractObjLoader {
                 Collection<SpriteIdentifier> textureDependencies = new HashSet<>();
 
                 for (MyronMaterial material : materials.values()) {
-                    textureDependencies.add(new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, material.getTexture()));
+                    textureDependencies.add(
+                            new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, material.getTexture()));
                 }
 
                 MyronMaterial material = materials.get("sprite");

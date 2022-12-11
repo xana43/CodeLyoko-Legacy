@@ -19,7 +19,8 @@ public final class HornetRenderer extends GeoEntityRenderer<HornetEntity> {
 
     @Override
     public RenderLayer getRenderType(final HornetEntity animatable, final float partialTicks, final MatrixStack stack, final VertexConsumerProvider renderTypeBuffer, final VertexConsumer vertexBuilder, final int packedLightIn, final Identifier textureLocation) {
-        return RenderLayer.getEntityTranslucent(CodeLyokoMain.CodeLyokoPrefix("textures/entity/hornet/hornetatlas.png"));
+        return RenderLayer.getEntityTranslucent(
+                CodeLyokoMain.codeLyokoPrefix("textures/entity/hornet/hornetatlas.png"));
     }
 
     //new ModelHornet(), 1f

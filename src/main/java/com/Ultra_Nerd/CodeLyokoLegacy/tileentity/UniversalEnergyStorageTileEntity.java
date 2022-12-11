@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -13,9 +12,10 @@ import team.reborn.energy.api.base.SimpleEnergyStorage;
 import team.reborn.energy.api.base.SimpleSidedEnergyContainer;
 
 
-public final class UniversalEnergyStorageTileEntity extends BlockEntity{
+public final class UniversalEnergyStorageTileEntity extends BlockEntity {
 
-    private final SimpleEnergyStorage energyStorageImplementation = new SimpleEnergyStorage(900,10,10);
+    private static final String nbtkey = "universal_energy_key";
+    private final SimpleEnergyStorage energyStorageImplementation = new SimpleEnergyStorage(900, 10, 10);
     private final SimpleSidedEnergyContainer sidedEnergyContainer = new SimpleSidedEnergyContainer() {
         @Override
         public long getCapacity() {
@@ -25,19 +25,17 @@ public final class UniversalEnergyStorageTileEntity extends BlockEntity{
         @Override
         public long getMaxInsert(@Nullable final Direction side) {
             assert side != null;
-            return switch (side)
-                    {
-                        case DOWN,UP,NORTH,SOUTH,WEST,EAST -> energyStorageImplementation.maxInsert;
-                    };
+            return switch (side) {
+                case DOWN, UP, NORTH, SOUTH, WEST, EAST -> energyStorageImplementation.maxInsert;
+            };
         }
 
         @Override
         public long getMaxExtract(@Nullable final Direction side) {
             assert side != null;
-            return switch (side)
-                    {
-                        case DOWN,UP,NORTH,SOUTH,WEST,EAST -> energyStorageImplementation.maxExtract;
-                    };
+            return switch (side) {
+                case DOWN, UP, NORTH, SOUTH, WEST, EAST -> energyStorageImplementation.maxExtract;
+            };
         }
 
         @Override
@@ -49,45 +47,44 @@ public final class UniversalEnergyStorageTileEntity extends BlockEntity{
         @Override
         public EnergyStorage getSideStorage(@Nullable final Direction side) {
             assert side != null;
-            return switch (side)
-                    {
-                        case DOWN, NORTH, SOUTH, WEST, EAST ,UP-> energyStorageImplementation;
-                    };
+            return switch (side) {
+                case DOWN, NORTH, SOUTH, WEST, EAST, UP -> energyStorageImplementation;
+            };
         }
     };
+
     public UniversalEnergyStorageTileEntity(final BlockPos pos, final BlockState state) {
         super(ModTileEntities.UNIVERSAL_ENERGY_STORAGE, pos, state);
     }
-    public EnergyStorage getEnergyImplementation()
-    {
+
+    public EnergyStorage getEnergyImplementation() {
         return energyStorageImplementation;
     }
-    public void setEnergyAmount(final long amount)
-    {
+
+    public void setEnergyAmount(final long amount) {
         energyStorageImplementation.amount = amount;
     }
-    public EnergyStorage getSideImplementation(final Direction side)
-    {
+
+    public EnergyStorage getSideImplementation(final Direction side) {
         return sidedEnergyContainer.getSideStorage(side);
     }
-    public long getMaxSidedExtract(final Direction side)
-    {
+
+    public long getMaxSidedExtract(final Direction side) {
         return sidedEnergyContainer.getMaxExtract(side);
     }
-    public long getMaxSidedInsert(final Direction side)
-    {
+
+    public long getMaxSidedInsert(final Direction side) {
         return sidedEnergyContainer.getMaxInsert(side);
     }
 
-    public long getCapacity()
-    {
+    public long getCapacity() {
         return energyStorageImplementation.capacity;
     }
-    public long getCurrentAmount()
-    {
+
+    public long getCurrentAmount() {
         return energyStorageImplementation.amount;
     }
-    private static final String nbtkey ="universal_energy_key";
+
     @Override
     public void readNbt(final NbtCompound nbt) {
         super.readNbt(nbt);
@@ -97,6 +94,6 @@ public final class UniversalEnergyStorageTileEntity extends BlockEntity{
     @Override
     protected void writeNbt(final NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putLong(nbtkey,energyStorageImplementation.amount);
+        nbt.putLong(nbtkey, energyStorageImplementation.amount);
     }
 }

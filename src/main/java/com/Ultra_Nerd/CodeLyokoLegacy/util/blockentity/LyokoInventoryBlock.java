@@ -110,8 +110,8 @@ public interface LyokoInventoryBlock extends Inventory {
     }
 
     @Override
-    default void markDirty()
-    {}
+    default void markDirty() {
+    }
 
     /**
      * @return true if the player can use the inventory, false otherwise.

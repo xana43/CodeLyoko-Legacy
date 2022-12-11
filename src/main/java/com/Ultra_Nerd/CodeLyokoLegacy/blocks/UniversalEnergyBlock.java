@@ -8,7 +8,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -17,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-
 
 
 public final class UniversalEnergyBlock extends BlockWithEntity {
@@ -41,9 +39,8 @@ public final class UniversalEnergyBlock extends BlockWithEntity {
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
 
         final BlockEntity be = world.getBlockEntity(pos);
-        if(be instanceof UniversalEnergyStorageTileEntity universalEnergyStorageTile && world.isClient())
-        {
-            player.sendMessage(Text.of("Energy Amount: " + universalEnergyStorageTile.getCurrentAmount()),false);
+        if (be instanceof UniversalEnergyStorageTileEntity universalEnergyStorageTile && world.isClient()) {
+            player.sendMessage(Text.of("Energy Amount: " + universalEnergyStorageTile.getCurrentAmount()), false);
         }
         return ActionResult.SUCCESS;
     }
@@ -55,11 +52,9 @@ public final class UniversalEnergyBlock extends BlockWithEntity {
 
     @Override
     public void onStateReplaced(final BlockState state, final World world, final BlockPos pos, final BlockState newState, final boolean moved) {
-        if(state.getBlock() != newState.getBlock())
-        {
+        if (state.getBlock() != newState.getBlock()) {
             final BlockEntity be = world.getBlockEntity(pos);
-            if(be instanceof UniversalEnergyStorageTileEntity universalEnergyStorageTile)
-            {
+            if (be instanceof UniversalEnergyStorageTileEntity universalEnergyStorageTile) {
                 universalEnergyStorageTile.setEnergyAmount(0);
             }
         }
@@ -70,11 +65,10 @@ public final class UniversalEnergyBlock extends BlockWithEntity {
     public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
 
 
-            final BlockEntity be = world.getBlockEntity(pos);
-            if(be instanceof UniversalEnergyStorageTileEntity universalEnergyStorageTile)
-            {
-                universalEnergyStorageTile.setEnergyAmount(0);
-            }
+        final BlockEntity be = world.getBlockEntity(pos);
+        if (be instanceof UniversalEnergyStorageTileEntity universalEnergyStorageTile) {
+            universalEnergyStorageTile.setEnergyAmount(0);
+        }
 
         super.onBreak(world, pos, state, player);
 

@@ -8,13 +8,13 @@ import net.minecraft.util.Identifier;
 public record ConstantUtil() {
 
 
-    public static final Identifier skytop = CodeLyokoMain.CodeLyokoPrefix("textures/skies/volcano/dark.png");
+    public static final Identifier skytop = CodeLyokoMain.codeLyokoPrefix("textures/skies/volcano/dark.png");
     public static final BooleanProperty SCANNER_PROPERTY = BooleanProperty.of("scanner_property");
 
     //public static final EntityCa LYOKO = MobCategory.create("lyoko","lyoko",10,false,false,128);
     public enum Styles {
-        GUNSHIP(Style.EMPTY.withFont(CodeLyokoMain.CodeLyokoPrefix("gunship"))),
-        HUD(Style.EMPTY.withFont(CodeLyokoMain.CodeLyokoPrefix("lyoko_hud_font")));
+        GUNSHIP(Style.EMPTY.withFont(CodeLyokoMain.codeLyokoPrefix("gunship"))),
+        HUD(Style.EMPTY.withFont(CodeLyokoMain.codeLyokoPrefix("lyoko_hud_font")));
 
 
         private final Style thisStyle;

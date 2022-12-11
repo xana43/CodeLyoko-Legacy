@@ -18,7 +18,7 @@ import net.minecraft.util.math.Vec3f;
 public record CustomIceSky() implements DimensionRenderingRegistry.SkyRenderer {
 
 
-    private static final Identifier sky1 = CodeLyokoMain.CodeLyokoPrefix("textures/skies/ice/ice_sky.png");
+    private static final Identifier sky1 = CodeLyokoMain.codeLyokoPrefix("textures/skies/ice/ice_sky.png");
 
     private static final Tessellator tessellator = Tessellator.getInstance();
     private static final BufferBuilder bufferBuilder = tessellator.getBuffer();

@@ -244,8 +244,4 @@ public final class InfusingChamberTileEntity /*extends InventoryBE implements Ti
  */
 
 
-
-
-
-
 }

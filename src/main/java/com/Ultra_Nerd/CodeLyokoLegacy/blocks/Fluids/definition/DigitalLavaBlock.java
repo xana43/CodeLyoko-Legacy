@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.DamageSources.LyokoDamage;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DamageSources.LyokoDamage;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,10 +20,9 @@ public final class DigitalLavaBlock extends FluidBlock {
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        if(!world.isClient) {
+        if (!world.isClient) {
             entity.damage(new LyokoDamage(this.getTranslationKey()).setBypassesArmor().setNeutral(), Float.MAX_VALUE);
-            if(entity instanceof ArrowEntity)
-            {
+            if (entity instanceof ArrowEntity) {
                 entity.kill();
             }
         }

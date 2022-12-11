@@ -32,7 +32,7 @@ public final class ComputerControlPanelTileEntity extends BlockEntity implements
     }
 
     @Override
-    public @NotNull BlockEntityUpdateS2CPacket toUpdatePacket() {
+    public BlockEntityUpdateS2CPacket toUpdatePacket() {
         return BlockEntityUpdateS2CPacket.create(this);
     }
 

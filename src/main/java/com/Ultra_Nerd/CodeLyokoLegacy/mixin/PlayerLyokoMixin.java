@@ -14,16 +14,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntity.class)
 public abstract class PlayerLyokoMixin {
 
-    @Inject(method = "swingHand(Lnet/minecraft/util/Hand;)V",at = @At("HEAD"))
-    public void swingSound(final CallbackInfo ci)
-    {
+    @Inject(method = "swingHand(Lnet/minecraft/util/Hand;)V", at = @At("HEAD"))
+    public void swingSound(final CallbackInfo ci) {
         final MinecraftClient mc = MinecraftClient.getInstance();
-        if(mc != null) {
-            if(mc.player != null) {
-                if (mc.player.getEquippedStack(EquipmentSlot.MAINHAND).getItem() == ModItems.DIGITAL_SABER && mc.options.attackKey.isPressed()) {
+        if (mc != null) {
+            if (mc.player != null) {
+                if (mc.player.getEquippedStack(EquipmentSlot.MAINHAND)
+                        .getItem() == ModItems.DIGITAL_SABER && mc.options.attackKey.isPressed()) {
                     assert mc.crosshairTarget != null;
-                    switch (mc.crosshairTarget.getType())
-                    {
+                    switch (mc.crosshairTarget.getType()) {
                         case MISS -> mc.player.playSound(ModSounds.SWORDSLASH, SoundCategory.PLAYERS, 1, 1);
                         case BLOCK -> {
                         }
@@ -38,12 +37,6 @@ public abstract class PlayerLyokoMixin {
             }
         }
     }
-
-
-
-
-
-
 
 
 }

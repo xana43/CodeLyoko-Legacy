@@ -7,8 +7,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 
-public final class MegaTankRenderer extends GeoEntityRenderer<MegaTankEntity>/*extends GeoEntityRenderer<MegaTankEntity>*/
-{
+public final class MegaTankRenderer extends GeoEntityRenderer<MegaTankEntity>/*extends GeoEntityRenderer<MegaTankEntity>*/ {
     public MegaTankRenderer(final EntityRendererFactory.Context ctx) {
         super(ctx, new ModelMegaTank());
     }/*

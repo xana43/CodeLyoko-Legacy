@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 
 public final class ZweihanderWeapon extends SwordItem {
 
-     private final float attackdamage;
+    private final float attackdamage;
     private final float attackspeed;
 
     public ZweihanderWeapon(final @NotNull ToolMaterial tier, int attackDamageIn, float attackSpeedIn, final @NotNull Settings builder) {
@@ -72,18 +72,22 @@ public final class ZweihanderWeapon extends SwordItem {
 
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(final ItemStack stack, final EquipmentSlot slot) {
-        final Multimap<EntityAttribute,EntityAttributeModifier> multimap = HashMultimap.create();
+        final Multimap<EntityAttribute, EntityAttributeModifier> multimap = HashMultimap.create();
 
         if (slot == EquipmentSlot.MAINHAND) {
-            multimap.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID ,"Weapon modifier", this.attackdamage, EntityAttributeModifier.Operation.ADDITION));
-            multimap.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier",  this.attackspeed, EntityAttributeModifier.Operation.ADDITION));
-            multimap.put(EntityAttributes.GENERIC_ATTACK_KNOCKBACK,new EntityAttributeModifier("Zweihander Knockback",this.attackdamage / 16, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
+            multimap.put(EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                    new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", this.attackdamage,
+                            EntityAttributeModifier.Operation.ADDITION));
+            multimap.put(EntityAttributes.GENERIC_ATTACK_SPEED,
+                    new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", this.attackspeed,
+                            EntityAttributeModifier.Operation.ADDITION));
+            multimap.put(EntityAttributes.GENERIC_ATTACK_KNOCKBACK,
+                    new EntityAttributeModifier("Zweihander Knockback", this.attackdamage / 16,
+                            EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
         }
         return multimap;
 
     }
-
-
 
 
 }

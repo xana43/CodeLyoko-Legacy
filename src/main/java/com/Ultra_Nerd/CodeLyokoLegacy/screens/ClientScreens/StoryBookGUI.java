@@ -5,8 +5,7 @@ import net.minecraft.text.StringVisitable;
 
 public final class StoryBookGUI extends BookScreen {
 
-    public StoryBookGUI(final StringVisitable[] story,final int pages)
-    {
+    public StoryBookGUI(final StringVisitable[] story, final int pages) {
         super(new Contents() {
             @Override
             public int getPageCount() {

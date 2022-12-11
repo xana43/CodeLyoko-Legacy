@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 
 
 public final class HoverboardRenderer<T extends HoverboardEntity> extends EntityRenderer<T> {
-    protected HoverboardRenderer(final EntityRendererFactory.Context ctx) {
+    private HoverboardRenderer(final EntityRendererFactory.Context ctx) {
         super(ctx);
     }
 

@@ -11,8 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public final class HologramProjectorBlock extends BlockWithEntity {
-    public static @NotNull BooleanProperty VALID = BooleanProperty.of("valid");
-
+    public static final @NotNull BooleanProperty VALID = BooleanProperty.of("valid");
 
 
     public HologramProjectorBlock() {

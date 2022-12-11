@@ -5,11 +5,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 
-public final class LyokoCoreBE extends BlockEntity  {
+public final class LyokoCoreBE extends BlockEntity {
     public LyokoCoreBE(final BlockPos pos, final BlockState state) {
         super(ModTileEntities.LYOKO_CORE, pos, state);
     }
-
 
 
 }

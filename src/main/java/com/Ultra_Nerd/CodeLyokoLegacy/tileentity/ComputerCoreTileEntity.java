@@ -1,14 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.util.math.BlockPos;
-
 public final class ComputerCoreTileEntity {
 
 
     //public ComputerCoreTileEntity(BlockEntityType<?> tileEntityTypeIn) {
-   //     super(tileEntityTypeIn);
+    //     super(tileEntityTypeIn);
     //}
 	/*
 	private EnergyModule storage = new EnergyModule(1000000000, 1000000000);

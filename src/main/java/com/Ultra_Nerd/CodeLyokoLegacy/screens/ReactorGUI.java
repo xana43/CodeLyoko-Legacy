@@ -6,12 +6,10 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
-import software.bernie.geckolib3.core.util.Color;
 
 public final class ReactorGUI extends HandledScreen<ReactorScreenHandler> {
 
@@ -38,9 +36,13 @@ public final class ReactorGUI extends HandledScreen<ReactorScreenHandler> {
         final int y = (height - 117) >> 1;
         super.render(matrices, mouseX, mouseY, delta);
         drawMouseoverTooltip(matrices, mouseX, mouseY);
-        drawCenteredText(matrices, textRenderer, Text.translatable("computer_reactor.input.slot"), x, y, ColorHelper.Argb.getArgb(255,255,255,255));
-        drawCenteredText(matrices, textRenderer, Text.translatable("computer_reactor.output.slot"), x + 36, y, ColorHelper.Argb.getArgb(255,255,255,255));
-        drawCenteredText(matrices, textRenderer, Text.translatable("computer_reactor.energy.amount", handler.getEnergyAmount()), x + 36, y + 45, ColorHelper.Argb.getArgb(255,255,255,255));
+        drawCenteredText(matrices, textRenderer, Text.translatable("computer_reactor.input.slot"), x, y,
+                ColorHelper.Argb.getArgb(255, 255, 255, 255));
+        drawCenteredText(matrices, textRenderer, Text.translatable("computer_reactor.output.slot"), x + 36, y,
+                ColorHelper.Argb.getArgb(255, 255, 255, 255));
+        drawCenteredText(matrices, textRenderer,
+                Text.translatable("computer_reactor.energy.amount", handler.getEnergyAmount()), x + 36, y + 45,
+                ColorHelper.Argb.getArgb(255, 255, 255, 255));
     }
 
     @Override

@@ -13,17 +13,17 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public final class ModelMegaTank extends AnimatedGeoModel<MegaTankEntity> {
     @Override
     public Identifier getModelResource(final MegaTankEntity object) {
-        return CodeLyokoMain.CodeLyokoPrefix("geo/megatank.geo.json");
+        return CodeLyokoMain.codeLyokoPrefix("geo/megatank.geo.json");
     }
 
     @Override
     public Identifier getTextureResource(final MegaTankEntity object) {
-        return CodeLyokoMain.CodeLyokoPrefix("textures/entity/megatank/megatank.png");
+        return CodeLyokoMain.codeLyokoPrefix("textures/entity/megatank/megatank.png");
     }
 
     @Override
     public Identifier getAnimationResource(final MegaTankEntity animatable) {
-        return CodeLyokoMain.CodeLyokoPrefix("animations/entities/megatank.json");
+        return CodeLyokoMain.codeLyokoPrefix("animations/entities/megatank.json");
     }
 
 /*

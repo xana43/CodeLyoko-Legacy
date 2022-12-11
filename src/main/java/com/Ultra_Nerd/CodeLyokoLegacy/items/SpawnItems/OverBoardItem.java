@@ -16,16 +16,14 @@ public final class OverBoardItem extends Item {
 
     @Override
     public ActionResult useOnBlock(final ItemUsageContext context) {
-        if(!context.getWorld().isClient)
-        {
+        if (!context.getWorld().isClient) {
 
-            final OverboardEntity overboardEntity = new OverboardEntity(ModEntities.OVERBOARD,context.getWorld());
+            final OverboardEntity overboardEntity = new OverboardEntity(ModEntities.OVERBOARD, context.getWorld());
             overboardEntity.setPosition(context.getHitPos());
             context.getPlayer().getStackInHand(context.getHand()).decrement(1);
             return ActionResult.SUCCESS;
         }
         return ActionResult.FAIL;
-
 
 
     }

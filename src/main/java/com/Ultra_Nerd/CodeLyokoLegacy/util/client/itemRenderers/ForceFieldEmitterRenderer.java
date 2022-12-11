@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.client.itemRenderers;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.client.APIEmbed.api.Myron;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.ForceFieldEmitter;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.client.APIEmbed.api.Myron;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
@@ -21,15 +21,19 @@ public record ForceFieldEmitterRenderer() implements BuiltinItemRendererRegistry
         final MinecraftClient mc = MinecraftClient.getInstance();
         if (stack.getItem() instanceof final ForceFieldEmitter forceFieldEmitter) {
 
-            final float pull = ForceFieldEmitter.getPullProgress(stack.getMaxUseTime() - forceFieldEmitter.publicUseTicks);
+            final float pull = ForceFieldEmitter.getPullProgress(
+                    stack.getMaxUseTime() - forceFieldEmitter.publicUseTicks);
 
             matrices.scale(pull, pull, pull);
 
         }
         if (mc != null) {
-            final BakedModel forceField = Myron.getModel(CodeLyokoMain.CodeLyokoPrefix("models/item/force_field_model"));
+            final BakedModel forceField = Myron.getModel(
+                    CodeLyokoMain.codeLyokoPrefix("models/item/force_field_model"));
             if (forceField != null) {
-                mc.getBlockRenderManager().getModelRenderer().render(matrices.peek(), vertexConsumers.getBuffer(RenderLayer.getSolid()), Blocks.AIR.getDefaultState(), forceField, 1, 1, 1, light, overlay);
+                mc.getBlockRenderManager().getModelRenderer()
+                        .render(matrices.peek(), vertexConsumers.getBuffer(RenderLayer.getSolid()),
+                                Blocks.AIR.getDefaultState(), forceField, 1, 1, 1, light, overlay);
             }
         }
         matrices.pop();

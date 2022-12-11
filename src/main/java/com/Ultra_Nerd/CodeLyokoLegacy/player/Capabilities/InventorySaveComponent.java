@@ -11,9 +11,8 @@ import java.util.UUID;
 
 public final class InventorySaveComponent implements AutoSyncedComponent {
 
-    private final HashMap<UUID, NbtList> playerInvSave = new HashMap<>();
     private static UUID playerUUID;
-
+    private final HashMap<UUID, NbtList> playerInvSave = new HashMap<>();
 
     public void savePlayerInventory(final PlayerEntity player) {
 
@@ -34,7 +33,7 @@ public final class InventorySaveComponent implements AutoSyncedComponent {
     public void readFromNbt(final @NotNull NbtCompound tag) {
         // if(playerUUID != null) {
         // CodeLyokoMain.LOG.info(playerUUID.toString());
-        if(playerUUID != null) {
+        if (playerUUID != null) {
             playerInvSave.replace(playerUUID, tag.getList(playerUUID.toString(), NbtList.COMPOUND_TYPE));
         }
         // }

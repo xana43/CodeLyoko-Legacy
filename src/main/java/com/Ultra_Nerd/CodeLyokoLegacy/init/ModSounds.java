@@ -6,36 +6,42 @@ import net.minecraft.sound.SoundEvent;
 public record ModSounds() {
 
 
-    public static final SoundEvent LAZY_WARRIOR = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_warrior"));
-    public static final SoundEvent LAZY_FELINE = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_feline"));
-    public static final SoundEvent LAZY_NINJA = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_ninja"));
-    public static final SoundEvent LAZY_SAMURAI = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_samurai"));
-    public static final SoundEvent LAZY_GUARDIAN = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_guardian"));
-    public static final SoundEvent LAZY_ARCHER = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("armor_equip_archer"));
-    public static final SoundEvent SECTOR5 = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("sector5"));
-    public static final SoundEvent BLOKAMBIENT = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.blok.ambient"));
-    public static final SoundEvent BLOKHURT = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.blok.hurt"));
-    public static final SoundEvent GUISOUND = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("gui"));
-    public static final SoundEvent LASERARROW = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("laser"));
-    public static final SoundEvent ICE = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("icesector"));
-    public static final SoundEvent DESERT = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("desertsector"));
-    public static final SoundEvent FOREST = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("forestsector"));
-    public static final SoundEvent MOUNTAIN = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("mountainsector"));
-    public static final SoundEvent OCEAN = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("digital_ocean"));
-    public static final SoundEvent VOLCANO = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("volcano_replika_music"));
-    public static final SoundEvent OPENTOWERGUISOUND = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("tower_gui_sound"));
-    public static final SoundEvent SWORDDRAW = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("lyoko.weapon.sword.draw"));
-    public static final SoundEvent SWORDSLASH = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("lyoko.weapon.sword.slash"));
-    public static final SoundEvent MEGATANKROLL = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.move"));
-    public static final SoundEvent MEGATANKHURT1 = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.hurt1"));
-    public static final SoundEvent MEGATANKHURT2 = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.hurt2"));
-    public static final SoundEvent MEGATANKBIGFALL = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.bigfall"));
-    public static final SoundEvent MEGATANKSMALLFALL = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.smallfall"));
-    public static final SoundEvent MEGATANKDIE = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.megatank.die"));
-    public static final SoundEvent CURSORBLINK = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("interface_cursor"));
-    public static final SoundEvent HORNETFLY = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("entity.hornet.fly"));
+    public static final SoundEvent LAZY_WARRIOR = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("armor_equip_warrior"));
+    public static final SoundEvent LAZY_FELINE = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("armor_equip_feline"));
+    public static final SoundEvent LAZY_NINJA = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("armor_equip_ninja"));
+    public static final SoundEvent LAZY_SAMURAI = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("armor_equip_samurai"));
+    public static final SoundEvent LAZY_GUARDIAN = new SoundEvent(
+            CodeLyokoMain.codeLyokoPrefix("armor_equip_guardian"));
+    public static final SoundEvent LAZY_ARCHER = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("armor_equip_archer"));
+    public static final SoundEvent SECTOR5 = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("sector5"));
+    public static final SoundEvent BLOKAMBIENT = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("entity.blok.ambient"));
+    public static final SoundEvent BLOKHURT = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("entity.blok.hurt"));
+    public static final SoundEvent GUISOUND = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("gui"));
+    public static final SoundEvent LASERARROW = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("laser"));
+    public static final SoundEvent ICE = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("icesector"));
+    public static final SoundEvent DESERT = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("desertsector"));
+    public static final SoundEvent FOREST = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("forestsector"));
+    public static final SoundEvent MOUNTAIN = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("mountainsector"));
+    public static final SoundEvent OCEAN = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("digital_ocean"));
+    public static final SoundEvent VOLCANO = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("volcano_replika_music"));
+    public static final SoundEvent OPENTOWERGUISOUND = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("tower_gui_sound"));
+    public static final SoundEvent SWORDDRAW = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("lyoko.weapon.sword.draw"));
+    public static final SoundEvent SWORDSLASH = new SoundEvent(
+            CodeLyokoMain.codeLyokoPrefix("lyoko.weapon.sword.slash"));
+    public static final SoundEvent MEGATANKROLL = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("entity.megatank.move"));
+    public static final SoundEvent MEGATANKHURT1 = new SoundEvent(
+            CodeLyokoMain.codeLyokoPrefix("entity.megatank.hurt1"));
+    public static final SoundEvent MEGATANKHURT2 = new SoundEvent(
+            CodeLyokoMain.codeLyokoPrefix("entity.megatank.hurt2"));
+    public static final SoundEvent MEGATANKBIGFALL = new SoundEvent(
+            CodeLyokoMain.codeLyokoPrefix("entity.megatank.bigfall"));
+    public static final SoundEvent MEGATANKSMALLFALL = new SoundEvent(
+            CodeLyokoMain.codeLyokoPrefix("entity.megatank.smallfall"));
+    public static final SoundEvent MEGATANKDIE = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("entity.megatank.die"));
+    public static final SoundEvent CURSORBLINK = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("interface_cursor"));
+    public static final SoundEvent HORNETFLY = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("entity.hornet.fly"));
 
-    public static final SoundEvent LYOKO_THEME = new SoundEvent(CodeLyokoMain.CodeLyokoPrefix("lyoko"));
+    public static final SoundEvent LYOKO_THEME = new SoundEvent(CodeLyokoMain.codeLyokoPrefix("lyoko"));
     //public static final BlockSoundGroup TowerInterfaceSound = new BlockSoundGroup();
     public static final SoundEvent[] SOUNDS = new SoundEvent[]{
             OPENTOWERGUISOUND,

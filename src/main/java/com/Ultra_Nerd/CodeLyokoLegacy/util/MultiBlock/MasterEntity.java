@@ -6,5 +6,4 @@ public interface MasterEntity extends MultiBlockBase {
     void invalidateEntity();
 
 
-
 }

@@ -91,7 +91,4 @@ public final class AelitaArmorElytra extends LyokoArmor implements FabricElytraI
  */
 
 
-
-
-
 }

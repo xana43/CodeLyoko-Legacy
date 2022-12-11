@@ -9,7 +9,6 @@ public final class soldering_iron extends Item {
     }
 
 
-
     @Override
     public boolean isDamageable() {
         return true;

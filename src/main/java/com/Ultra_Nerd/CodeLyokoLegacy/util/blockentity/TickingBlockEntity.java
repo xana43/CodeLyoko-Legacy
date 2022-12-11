@@ -9,25 +9,27 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
-public abstract class TickingBlockEntity extends BlockEntity implements LyokoInventoryBlock{
+public abstract class TickingBlockEntity extends BlockEntity implements LyokoInventoryBlock {
 
     protected DefaultedList<ItemStack> itemStacks;
+
     public TickingBlockEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state,
             final int inventorySize) {
         super(type, pos, state);
-        itemStacks = DefaultedList.ofSize(inventorySize,ItemStack.EMPTY);
+        itemStacks = DefaultedList.ofSize(inventorySize, ItemStack.EMPTY);
     }
-    public void setItem(final ItemStack newStack,final int Index)
-    {
-        itemStacks.set(Index,newStack);
+
+    public void setItem(final ItemStack newStack, final int Index) {
+        itemStacks.set(Index, newStack);
     }
-    public void tick(){}
-    public void update()
-    {
+
+    public void tick() {
+    }
+
+    public void update() {
         this.markDirty();
-        if(this.world != null)
-        {
-            this.world.setBlockState(this.pos,getCachedState());
+        if (this.world != null) {
+            this.world.setBlockState(this.pos, getCachedState());
         }
     }
 

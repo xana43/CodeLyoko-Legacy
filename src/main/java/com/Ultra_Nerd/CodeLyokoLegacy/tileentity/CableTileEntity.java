@@ -19,7 +19,7 @@ public final class CableTileEntity /*extends BlockEntity implements TickingBlock
  */
 
     //public CableTileEntity() {
-   //     this(ModTileEntities.CABLE_TILE_ENTITY.get());
+    //     this(ModTileEntities.CABLE_TILE_ENTITY.get());
     //}
 
 /*

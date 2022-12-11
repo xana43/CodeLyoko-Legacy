@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHornet;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
-import dev.onyxstudios.cca.api.v3.component.ComponentContainer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -41,15 +40,30 @@ import javax.annotation.Nonnull;
 public final class HornetEntity extends HostileEntity implements IAnimatable, RangedAttackMob {
 
 
-
-
-
+    private final AnimationController<?> controller = new AnimationController<>(this, "hornet_controller", 0,
+            this::attackPredicate);
 
     public HornetEntity(@NotNull EntityType<? extends HostileEntity> hornetEntityEntityType, @NotNull World world) {
         super(hornetEntityEntityType, world);
-        AnimationController.addModelFetcher((AnimationController.ModelFetcher<HornetEntity>) animated -> new ModelHornet());
+        AnimationController.addModelFetcher(
+                (AnimationController.ModelFetcher<HornetEntity>) animated -> new ModelHornet());
 
 
+    }
+
+    public static boolean isValidSpawn(final BiomeAccess biomeAccess, final BlockPos pos, final ServerWorldAccess worldAccess) {
+        return biomeAccess.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOME) && worldAccess.getBlockState(
+                pos.offset(Direction.Axis.Y, -1)) == Blocks.AIR.getDefaultState();
+    }
+
+    public static DefaultAttributeContainer.Builder registerAttributes() {
+        return HostileEntity.createMobAttributes().add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10D)
+                .add(EntityAttributes.GENERIC_ARMOR, 10D)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20D)
+                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.10);
     }
 
     @Override
@@ -67,14 +81,10 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
         super.tickMovement();
     }
 
-
-
     @Override
     protected boolean canAddPassenger(final Entity passenger) {
         return false;
     }
-
-
 
     @Override
     public boolean handleFallDamage(final float fallDistance, final float damageMultiplier, final DamageSource damageSource) {
@@ -97,18 +107,19 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
 
 
         if (this.isAlive()) {
-            this.world.playSound(null,this.getX(), this.getY(), this.getZ(), ModSounds.HORNETFLY, SoundCategory.HOSTILE, 0.95F + this.random.nextFloat() * 0.05F, 0.95F + this.random.nextFloat() * 0.05F);
+            this.world.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.HORNETFLY,
+                    SoundCategory.HOSTILE, 0.95F + this.random.nextFloat() * 0.05F,
+                    0.95F + this.random.nextFloat() * 0.05F);
         }
 
 
     }
 
-
     @Override
     protected void initGoals() {
         super.initGoals();
 
-        this.goalSelector.add(2,new ProjectileAttackGoal(this,6,6,10){
+        this.goalSelector.add(2, new ProjectileAttackGoal(this, 6, 6, 10) {
             @Override
             public void start() {
                 super.start();
@@ -121,18 +132,16 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
                 HornetEntity.this.setAttacking(false);
             }
         });
-        this.goalSelector.add(1,new FlyGoal(this,3));
-        this.goalSelector.add(3,new LookAroundGoal(this));
-        this.goalSelector.add(2,new LookAtEntityGoal(this,PlayerEntity.class,10,100,true));
-        this.targetSelector.add(1,new ActiveTargetGoal<>(this,PlayerEntity.class,true));
+        this.goalSelector.add(1, new FlyGoal(this, 3));
+        this.goalSelector.add(3, new LookAroundGoal(this));
+        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 10, 100, true));
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
         return super.getAmbientSound();
     }
-
-
 
     @Override
     protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
@@ -145,52 +154,34 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
 
     }
 
-
     @Override
     public boolean canSpawn(final WorldAccess world, final SpawnReason spawnReason) {
         return true;
     }
 
-    public static boolean isValidSpawn(final BiomeAccess biomeAccess, final BlockPos pos, final ServerWorldAccess worldAccess)
-    {
-        return biomeAccess.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOME) && worldAccess.getBlockState(pos.offset(Direction.Axis.Y, -1)) == Blocks.AIR.getDefaultState();
-    }
-
-    public static DefaultAttributeContainer.Builder registerAttributes()
-    {
-        return HostileEntity.createMobAttributes().add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,1D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH,10D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,0.2D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE,10D)
-                .add(EntityAttributes.GENERIC_ARMOR, 10D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE,20D)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED,0.10);
-    }
-    private final AnimationController<?> controller = new AnimationController<>(this,"hornet_controller",0,this::attackPredicate);
-    private final AnimationController<?> controllerMove = new AnimationController<>(this,"hornet_move_controller",0,this::movePredicate);
     @Override
     public void registerControllers(@NotNull AnimationData data) {
 
         data.addAnimationController(controller);
         data.addAnimationController(controllerMove);
 
-    }
-
-    //@Override
-    //public @NotNull AnimationFactory getFactory() {
-     //   return new AnimationFactory(this);
-    //}
+    }    private final AnimationController<?> controllerMove = new AnimationController<>(this, "hornet_move_controller", 0,
+            this::movePredicate);
 
     @Override
     public AnimationFactory getFactory() {
         return GeckoLibUtil.createFactory(this);
     }
 
-    private <E extends HornetEntity> PlayState movePredicate(AnimationEvent<E> event)
-    {
+    //@Override
+    //public @NotNull AnimationFactory getFactory() {
+    //   return new AnimationFactory(this);
+    //}
 
-            controllerMove.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly",
-                    ILoopType.EDefaultLoopTypes.LOOP));
+    private <E extends HornetEntity> PlayState movePredicate(AnimationEvent<E> event) {
+
+        controllerMove.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly",
+                ILoopType.EDefaultLoopTypes.LOOP));
 
         return PlayState.CONTINUE;
     }
@@ -198,9 +189,7 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
     private <E extends HornetEntity> @NotNull PlayState attackPredicate(@NotNull AnimationEvent<E> event) {
 
 
-
-        if(event.getAnimatable().isAttacking())
-        {
+        if (event.getAnimatable().isAttacking()) {
 
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hornet.attack",
                     ILoopType.EDefaultLoopTypes.LOOP));
@@ -211,11 +200,10 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
 
     }
 
-
     @Override
     public void attack(@NotNull LivingEntity target, final float distanceFactor) {
 
-        final EntityLaser laser = new EntityLaser(this.world,this,40);
+        final EntityLaser laser = new EntityLaser(this.world, this, 40);
         final double d0 = target.getX() - this.getX();
         final double d1 = target.getBodyY(0.3333333333333333D) - laser.getY();
         final double d2 = target.getZ() - this.getZ();
@@ -224,6 +212,8 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
         this.playSound(ModSounds.LASERARROW, 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
         this.world.spawnEntity(laser);
     }
+
+
 
 
 

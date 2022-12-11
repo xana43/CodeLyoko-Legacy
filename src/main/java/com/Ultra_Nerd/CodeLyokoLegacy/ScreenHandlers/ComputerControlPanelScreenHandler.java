@@ -12,6 +12,7 @@ public final class ComputerControlPanelScreenHandler extends ScreenHandler/*exte
 
     private BlockPos pos;
     private boolean isActive;
+
     public ComputerControlPanelScreenHandler(final int syncId, final PacketByteBuf buf) {
         this(syncId);
         pos = buf.readBlockPos();

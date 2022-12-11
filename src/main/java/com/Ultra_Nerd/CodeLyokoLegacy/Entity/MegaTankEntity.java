@@ -43,16 +43,43 @@ import java.util.Random;
 public final class MegaTankEntity extends SkeletonEntity implements IAnimatable {
 
 
+    private final AnimationController<?> tank = new AnimationController<>(this, "movecontroller", 0,
+            this::animationPred);
 
 
     public MegaTankEntity(EntityType<? extends SkeletonEntity> type, @NotNull World world) {
         super(type, world);
 
-        AnimationController.addModelFetcher((AnimationController.ModelFetcher<MegaTankEntity>) animated -> new ModelMegaTank());
+        AnimationController.addModelFetcher(
+                (AnimationController.ModelFetcher<MegaTankEntity>) animated -> new ModelMegaTank());
 
 
     }
 
+    //@Override
+    private static SoundEvent getStepSound() {
+        return ModSounds.MEGATANKROLL;
+    }
+
+    public static DefaultAttributeContainer.@NotNull Builder registerAttributes() {
+        // TODO Auto-generated method stub
+        return HostileEntity.createHostileAttributes()
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 200D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5D)
+                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 10D)
+                .add(EntityAttributes.GENERIC_ARMOR, 20D)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20D);
+
+
+    }
+
+
+    // abstract SoundEvent getStepSound();
+
+    public static boolean canSpawn(@NotNull WorldAccess world, @NotNull SpawnReason reason, @NotNull BlockPos pos, @NotNull Random rand) {
+        return world.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOME);
+    }
 
     @Override
     protected boolean isAffectedByDaylight() {
@@ -61,38 +88,12 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
 
     @Override
     protected void playStepSound(final BlockPos pos, final BlockState state) {
-            this.playSound(getStepSound(),0.15f,1);
+        this.playSound(getStepSound(), 0.15f, 1);
     }
 
     @Override
     public boolean isUndead() {
         return false;
-    }
-
-
-
-    // abstract SoundEvent getStepSound();
-
-
-    //@Override
-  private static SoundEvent getStepSound()
-  {
-      return ModSounds.MEGATANKROLL;
-  }
-
-
-    public static DefaultAttributeContainer.@NotNull Builder registerAttributes() {
-        // TODO Auto-generated method stub
-        return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,1D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH,200D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,0.5D)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED,10D)
-                .add(EntityAttributes.GENERIC_ARMOR,20D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20D);
-
-
-
     }
 
     @Override
@@ -114,28 +115,97 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
         return null;
     }
 
-
-
-
     @Nonnull
     @Override
-    public  FallSounds getFallSounds() {
-        return  new FallSounds(ModSounds.MEGATANKSMALLFALL,ModSounds.MEGATANKBIGFALL);
+    public FallSounds getFallSounds() {
+        return new FallSounds(ModSounds.MEGATANKSMALLFALL, ModSounds.MEGATANKBIGFALL);
     }
-    private static final class ProjectileStopThenAttackGoal extends Goal
-    {
+
+    @Override
+    protected void initGoals() {
+
+
+        this.goalSelector.add(1, new ProjectileStopThenAttackGoal(this, 1, 10, 10));
+        this.goalSelector.add(2, new WanderAroundFarGoal(this, 3.0));
+        this.goalSelector.add(4, new LookAroundGoal(this));
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+    }
+
+    @Override
+    protected @NotNull SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
+        final boolean random = new Random().nextBoolean();
+        if (random) {
+            return ModSounds.MEGATANKHURT1;
+        } else {
+            return ModSounds.MEGATANKHURT2;
+        }
+    }
+
+    @Override
+    public void registerControllers(@NotNull AnimationData data) {
+        data.addAnimationController(tank);
+    }
+
+    @Override
+    public void attack(final LivingEntity target, final float pullProgress) {
+        //super.attack(target, pullProgress);
+        final EntityLaser abstractarrow = new EntityLaser(this.world, this, 20);
+
+        final double d0 = target.getX() - this.getX();
+        final double d1 = target.getBodyY(0.3333333333333333D) - abstractarrow.getY();
+        final double d2 = target.getZ() - this.getZ();
+        final double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+
+        abstractarrow.setVelocity(d0, d1 + d3 * 0.2F, d2, 4F, (14 - this.world.getDifficulty().getId() << 2));
+        this.playSound(ModSounds.LASERARROW, 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
+        if (!this.world.isClient) {
+            this.world.spawnEntity(abstractarrow);
+        }
+    }
+
+    private <E extends MegaTankEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
+
+
+        //CodeLyokoMain.LOG.info("attacking " + event.getAnimatable().isAttacking());
+        if (event.isMoving() && !event.getAnimatable().isAttacking()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.move",
+                    ILoopType.EDefaultLoopTypes.LOOP));
+            //CodeLyokoMain.LOG.info("moving");
+        } else if (event.getAnimatable().isAttacking()) {
+
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.open",
+                    ILoopType.EDefaultLoopTypes.LOOP));
+            //CodeLyokoMain.LOG.info("attacking");
+        } else {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.idle",
+                    ILoopType.EDefaultLoopTypes.LOOP));
+            //CodeLyokoMain.LOG.info("not moving");
+
+
+        }
+
+
+        return PlayState.CONTINUE;
+    }
+
+    @Override
+    public @NotNull AnimationFactory getFactory() {
+        return GeckoLibUtil.createFactory(this);
+    }
+
+    private static final class ProjectileStopThenAttackGoal extends Goal {
 
         private final MobEntity mob;
         private final RangedAttackMob owner;
-        @Nullable
-        private LivingEntity target;
-        private int updateCountdownTicks;
         private final double mobSpeed;
-        private int seenTargetTicks;
         private final int minIntervalTicks;
         private final int maxIntervalTicks;
         private final float maxShootRange;
         private final float squaredMaxShootRange;
+        @Nullable
+        private LivingEntity target;
+        private int updateCountdownTicks;
+        private int seenTargetTicks;
 
         public ProjectileStopThenAttackGoal(RangedAttackMob mob, double mobSpeed, int intervalTicks, float maxShootRange) {
             this(mob, mobSpeed, intervalTicks, intervalTicks, maxShootRange);
@@ -147,7 +217,7 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
                 throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
             } else {
                 this.owner = mob;
-                this.mob = (MobEntity)mob;
+                this.mob = (MobEntity) mob;
                 this.mobSpeed = mobSpeed;
                 this.minIntervalTicks = minIntervalTicks;
                 this.maxIntervalTicks = maxIntervalTicks;
@@ -183,15 +253,18 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
         }
 
         public void tick() {
-            final double d = this.mob.squaredDistanceTo(this.target.getX(), this.target.getY(), this.target.getZ());
-            final boolean bl = this.mob.getVisibilityCache().canSee(this.target);
+            if (target == null) {
+                return;
+            }
+            final double d = this.mob.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
+            final boolean bl = this.mob.getVisibilityCache().canSee(target);
             if (bl) {
                 ++this.seenTargetTicks;
             } else {
                 this.seenTargetTicks = 0;
             }
 
-            if (!(d > (double)this.squaredMaxShootRange) && this.seenTargetTicks >= 5) {
+            if (!(d > (double) this.squaredMaxShootRange) && this.seenTargetTicks >= 5) {
                 this.mob.getNavigation().stop();
             } else {
                 this.mob.setAttacking(false);
@@ -204,103 +277,22 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
                     return;
                 }
 
-                final float f = (float)Math.sqrt(d) / this.maxShootRange;
+                final float f = (float) Math.sqrt(d) / this.maxShootRange;
                 final float g = MathHelper.clamp(f, 0.1F, 1.0F);
-                if(!(d > (double) this.squaredMaxShootRange) && this.seenTargetTicks >= 5) {
+                if (!(d > (double) this.squaredMaxShootRange) && this.seenTargetTicks >= 5) {
                     this.owner.attack(this.target, g);
                     this.mob.setAttacking(true);
                 }
-                this.updateCountdownTicks = MathHelper.floor(f * (float)(this.maxIntervalTicks - this.minIntervalTicks) + (float)this.minIntervalTicks);
+                this.updateCountdownTicks = MathHelper.floor(
+                        f * (float) (this.maxIntervalTicks - this.minIntervalTicks) + (float) this.minIntervalTicks);
             } else if (this.updateCountdownTicks < 0) {
-                this.updateCountdownTicks = MathHelper.floor(MathHelper.lerp(Math.sqrt(d) / (double)this.maxShootRange, this.minIntervalTicks, this.maxIntervalTicks));
+                this.updateCountdownTicks = MathHelper.floor(
+                        MathHelper.lerp(Math.sqrt(d) / (double) this.maxShootRange, this.minIntervalTicks,
+                                this.maxIntervalTicks));
             }
 
         }
     }
-    @Override
-    protected void initGoals() {
-
-
-        this.goalSelector.add(1,new ProjectileStopThenAttackGoal(this,1,10,10));
-        this.goalSelector.add(2,new WanderAroundFarGoal(this,3.0));
-        this.goalSelector.add(4,new LookAroundGoal(this));
-        this.targetSelector.add(1,new ActiveTargetGoal<>(this, PlayerEntity.class,true));
-    }
-
-
-
-    @Override
-    protected @NotNull SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
-        final boolean random = new Random().nextBoolean();
-        if (random) {
-            return ModSounds.MEGATANKHURT1;
-        } else {
-            return ModSounds.MEGATANKHURT2;
-        }
-    }
-    public static boolean canSpawn(@NotNull WorldAccess world, @NotNull SpawnReason reason, @NotNull BlockPos pos, @NotNull Random rand) {
-        return world.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOME);
-    }
-
-
-
-    private final AnimationController<?> tank = new AnimationController<>(this, "movecontroller", 0, this::animationPred);
-    @Override
-    public void registerControllers(@NotNull AnimationData data) {
-   data.addAnimationController(tank);
-    }
-
-    @Override
-    public void attack(final LivingEntity target, final float pullProgress) {
-        //super.attack(target, pullProgress);
-        final EntityLaser abstractarrow = new EntityLaser(this.world,this,20);
-
-        final double d0 = target.getX() - this.getX();
-        final double d1 = target.getBodyY(0.3333333333333333D) - abstractarrow.getY();
-        final double d2 = target.getZ() - this.getZ();
-        final double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-
-        abstractarrow.setVelocity(d0, d1 + d3 * 0.2F, d2, 4F, (14 - this.world.getDifficulty().getId() << 2));
-        this.playSound(ModSounds.LASERARROW, 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
-        if(!this.world.isClient) {
-            this.world.spawnEntity(abstractarrow);
-        }
-    }
-
-
-
-    private <E extends MegaTankEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
-
-
-        //CodeLyokoMain.LOG.info("attacking " + event.getAnimatable().isAttacking());
-        if (event.isMoving() && !event.getAnimatable().isAttacking()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.move",
-                    ILoopType.EDefaultLoopTypes.LOOP));
-            //CodeLyokoMain.LOG.info("moving");
-        } else if (event.getAnimatable().isAttacking()) {
-
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.open",
-                    ILoopType.EDefaultLoopTypes.LOOP));
-            //CodeLyokoMain.LOG.info("attacking");
-        } else{
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.idle",
-                    ILoopType.EDefaultLoopTypes.LOOP));
-            //CodeLyokoMain.LOG.info("not moving");
-
-
-        }
-
-
-
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public @NotNull AnimationFactory getFactory() {
-        return GeckoLibUtil.createFactory(this);
-    }
-
-
 
 
 }

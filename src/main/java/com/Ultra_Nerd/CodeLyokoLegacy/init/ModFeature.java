@@ -20,6 +20,12 @@ import java.util.Arrays;
 public record ModFeature() {
 
 
+    public static final ImmutableMap<String, Pair<ConfiguredFeature<?, ?>, PlacedFeature>> CONFIGURED_TREE_IMMUTABLE_MAP = ImmutableMap.<String, Pair<ConfiguredFeature<?, ?>, PlacedFeature>>builder()
+            .put("lyoko_forest_tree", new Pair<>(ForestFeatures.FOREST_TREE, PlacedFeatures.FOREST_TREE_PLACED))
+            .put("coffinite_ore_overworld", new Pair<>(OreFeatures.OVERWORLD_COFFINITE_ORE_CONFIG,
+                    PlacedFeatures.OVERWORLD_COFFINITE_ORE_PLACED))
+            .build();
+
     private record ForestFeatures() {
 
         private static final TreeFeatureConfig.Builder FOREST_TREE_CONFIG = new TreeFeatureConfig.Builder(
@@ -29,7 +35,8 @@ public record ModFeature() {
                 new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 1),
                 new TwoLayersFeatureSize(1, 0, 1)
         ).dirtProvider(BlockStateProvider.of(ModBlocks.DIGITAL_WOOD_FOREST));
-        private static final ConfiguredFeature<?, ?> FOREST_TREE = new ConfiguredFeature<>(Feature.TREE, FOREST_TREE_CONFIG.build());
+        private static final ConfiguredFeature<?, ?> FOREST_TREE = new ConfiguredFeature<>(Feature.TREE,
+                FOREST_TREE_CONFIG.build());
     }
 
     private record OreFeatures() {
@@ -42,12 +49,12 @@ public record ModFeature() {
                 8));
     }
 
-
     public record PlacedFeatures() {
 
         public static final PlacedFeature FOREST_TREE_PLACED = new PlacedFeature(
                 RegistryEntry.of(ForestFeatures.FOREST_TREE),
-                Arrays.asList(CountPlacementModifier.of(5), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.TOP, YOffset.TOP))
+                Arrays.asList(CountPlacementModifier.of(5), SquarePlacementModifier.of(),
+                        HeightRangePlacementModifier.uniform(YOffset.TOP, YOffset.TOP))
         );
         public static final PlacedFeature OVERWORLD_COFFINITE_ORE_PLACED = new PlacedFeature(
                 RegistryEntry.of(OreFeatures.OVERWORLD_COFFINITE_ORE_CONFIG),
@@ -57,12 +64,6 @@ public record ModFeature() {
                         HeightRangePlacementModifier.uniform(YOffset.getBottom(), YOffset.fixed(40))
                 ));
     }
-
-
-    public static final ImmutableMap<String, Pair<ConfiguredFeature<?, ?>, PlacedFeature>> CONFIGURED_TREE_IMMUTABLE_MAP = ImmutableMap.<String, Pair<ConfiguredFeature<?, ?>, PlacedFeature>>builder()
-            .put("lyoko_forest_tree", new Pair<>(ForestFeatures.FOREST_TREE, PlacedFeatures.FOREST_TREE_PLACED))
-            .put("coffinite_ore_overworld", new Pair<>(OreFeatures.OVERWORLD_COFFINITE_ORE_CONFIG, PlacedFeatures.OVERWORLD_COFFINITE_ORE_PLACED))
-            .build();
 /*
     public static final DeferredRegister<StructureFeature<?>> LYOKOFEATURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, CodeLyokoMain.MOD_ID);
 

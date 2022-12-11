@@ -1,12 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CustomLyokoRarity;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoArmorMaterial;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoTiers;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.CustomLyokoRarity;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoArmorMaterial;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoTiers;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
@@ -19,11 +19,6 @@ public record ModItems() {
 
     //public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CodeLyokoMain.MOD_ID);
 
-
-    private static FabricItemSettings BaseSettings() {
-        return new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM);
-
-    }
 
     //for blocks items
     //public static final RegistryObject<BlockItem> ANTI_MARABUNTA = ITEMS.register("anti_marabunta",() -> new BlockItem(ModBlocks.ANTI_MARABUNTA.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
@@ -46,12 +41,18 @@ public record ModItems() {
     //for items
     public static final Item APU_PACKAGE_ARM = new ComputerItem(BaseSettings());
     //public static final RegistryObject<Item> APU_PACKAGE_ARM = ITEMS.register("apu_package_arm", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final Item APU_PACKAGE_x86 = new ComputerItem(BaseSettings().rarity(Rarity.UNCOMMON));//ITEMS.register("", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
-    public static final Item APU_PACKAGE_ASIC = new ComputerItem(BaseSettings().rarity(Rarity.RARE));//ITEMS.register("apu_package_asic", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.RARE)));
-    public static final Item APU_PACKAGE_RISC = new ComputerItem(BaseSettings().rarity(Rarity.EPIC));//ITEMS.register("apu_package_risc", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.EPIC)));
-    public static final Item APU_DIE_ARM = new ComputerItem(BaseSettings());//ITEMS.register("apu_die_arm", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final Item APU_DIE_x86 = new ComputerItem(BaseSettings().rarity(Rarity.COMMON));//ITEMS.register("apu_die_x86", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
-    public static final Item APU_DIE_ASIC = new ComputerItem(BaseSettings().rarity(Rarity.RARE));//ITEMS.register("apu_die_asic", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.RARE)));
+    public static final Item APU_PACKAGE_x86 = new ComputerItem(BaseSettings().rarity(
+            Rarity.UNCOMMON));//ITEMS.register("", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
+    public static final Item APU_PACKAGE_ASIC = new ComputerItem(BaseSettings().rarity(
+            Rarity.RARE));//ITEMS.register("apu_package_asic", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.RARE)));
+    public static final Item APU_PACKAGE_RISC = new ComputerItem(BaseSettings().rarity(
+            Rarity.EPIC));//ITEMS.register("apu_package_risc", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.EPIC)));
+    public static final Item APU_DIE_ARM = new ComputerItem(
+            BaseSettings());//ITEMS.register("apu_die_arm", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
+    public static final Item APU_DIE_x86 = new ComputerItem(BaseSettings().rarity(
+            Rarity.COMMON));//ITEMS.register("apu_die_x86", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.UNCOMMON)));
+    public static final Item APU_DIE_ASIC = new ComputerItem(BaseSettings().rarity(
+            Rarity.RARE));//ITEMS.register("apu_die_asic", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).rarity(Rarity.RARE)));
     public static final Item BORNITE_ITEM = new Item(BaseSettings().maxDamage(4));
     public static final Item BLISTER_COPPER = new BlisterCopper(BaseSettings().maxDamage(60));
     public static final Item CHALCOPYRITE_ITEM = new Item(BaseSettings().maxDamage(5));
@@ -72,40 +73,60 @@ public record ModItems() {
     public static final Item COMPUTER_X86_CORE = new ComputerItem(BaseSettings().rarity(Rarity.COMMON));
     public static final Item COMPUTER_RISC_CORE = new ComputerItem(BaseSettings().rarity(Rarity.UNCOMMON));
     public static final Item COMPUTER_ASIC_CORE = new ComputerItem(BaseSettings().rarity(Rarity.RARE));
-    public static final Item COMPUTER_QUANTUM_CORE = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.MAINFRAME));
+    public static final Item COMPUTER_QUANTUM_CORE = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.MAINFRAME));
     public static final Item COMPUTER_RISC_GPU_CORE = new ComputerItem(BaseSettings().rarity(Rarity.UNCOMMON));
     public static final Item COMPUTER_ASIC_GPU_CORE = new ComputerItem(BaseSettings().rarity(Rarity.RARE));
-    public static final Item COMPUTER_NEURAL_GPU_CORE = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.MAINFRAME));
-    public static final Item COMPUTER_QUANTUM_NUMA_GPU_CORE = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.FRANZ_STARTER));
+    public static final Item COMPUTER_NEURAL_GPU_CORE = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.MAINFRAME));
+    public static final Item COMPUTER_QUANTUM_NUMA_GPU_CORE = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.FRANZ_STARTER));
     public static final Item COMPUTER_DRAM_DIE = new ComputerItem(BaseSettings());
     public static final Item COMPUTER_SRAM_DIE = new ComputerItem(BaseSettings());
-    public static final Item COMPUTER_QRAM_DIE = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.FRANZ_STARTER));
+    public static final Item COMPUTER_QRAM_DIE = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.FRANZ_STARTER));
     public static final Item COMPUTER_SRAM_CONTROLLER = new ComputerItem(BaseSettings());
     public static final Item COMPUTER_SDR_CONTROLLER = new ComputerItem(BaseSettings());
     public static final Item COMPUTER_DDR_CONTROLLER = new ComputerItem(BaseSettings());
     public static final Item COMPUTER_ECC_CONTROLLER = new ComputerItem(BaseSettings());
-    public static final Item COMPUTER_DRAM_SDR_RAM = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.COMMONPART));
-    public static final Item COMPUTER_DRAM_DDR_RAM = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.COMMONPART));
-    public static final Item COMPUTER_DRAM2_DDR_RAM = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.COMMONPART));
+    public static final Item COMPUTER_DRAM_SDR_RAM = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.COMMONPART));
+    public static final Item COMPUTER_DRAM_DDR_RAM = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.COMMONPART));
+    public static final Item COMPUTER_DRAM2_DDR_RAM = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.COMMONPART));
     public static final Item COMPUTER_DRAM3_DDR_RAM = new ComputerItem(BaseSettings().rarity(Rarity.COMMON));
     public static final Item COMPUTER_DRAM4_DDR_RAM = new ComputerItem(BaseSettings().rarity(Rarity.UNCOMMON));
     public static final Item COMPUTER_DRAM5_DDR_RAM = new ComputerItem(BaseSettings().rarity(Rarity.RARE));
     public static final Item COMPUTER_SRAM_DDR_RAM = new ComputerItem(BaseSettings().rarity(Rarity.EPIC));
-    public static final Item COMPUTER_SRAM_DDR2_RAM = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.PROSUMER));
-    public static final Item COMPUTER_SRAM_DDR3_RAM = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.SERVER_BETA));
-    public static final Item COMPUTER_SRAM_DDR4_RAM = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.ENTHUSIAST));
-    public static final Item COMPUTER_SRAM_DDR5_RAM = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.DATACENTER));
-    public static final Item COMPUTER_SRAM_ECC_DDR_RAM = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.SERVER_BETA));
-    public static final Item COMPUTER_SRAM_ECC_DDR2_RAM = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.SERVER_CONSUMER));
-    public static final Item COMPUTER_SRAM_ECC_DDR3_RAM = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.SERVER_MATURE));
-    public static final Item COMPUTER_SRAM_ECC_DDR4_RAM = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.SERVER_PROSUMER));
-    public static final Item COMPUTER_SRAM_ECC_DDR5_RAM = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.DATACENTER));
-    public static final Item COMPUTER_QRAM_LOW_DENSITY = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.FRANZ_STARTER));
-    public static final Item COMPUTER_QRAM_MEDIUM_DENSITY = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.FRANZ_NOVICE));
-    public static final Item COMPUTER_QRAM_HIGH_DENSITY = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.FRANZ_HOPPER));
+    public static final Item COMPUTER_SRAM_DDR2_RAM = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.PROSUMER));
+    public static final Item COMPUTER_SRAM_DDR3_RAM = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.SERVER_BETA));
+    public static final Item COMPUTER_SRAM_DDR4_RAM = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.ENTHUSIAST));
+    public static final Item COMPUTER_SRAM_DDR5_RAM = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.DATACENTER));
+    public static final Item COMPUTER_SRAM_ECC_DDR_RAM = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.SERVER_BETA));
+    public static final Item COMPUTER_SRAM_ECC_DDR2_RAM = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.SERVER_CONSUMER));
+    public static final Item COMPUTER_SRAM_ECC_DDR3_RAM = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.SERVER_MATURE));
+    public static final Item COMPUTER_SRAM_ECC_DDR4_RAM = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.SERVER_PROSUMER));
+    public static final Item COMPUTER_SRAM_ECC_DDR5_RAM = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.DATACENTER));
+    public static final Item COMPUTER_QRAM_LOW_DENSITY = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.FRANZ_STARTER));
+    public static final Item COMPUTER_QRAM_MEDIUM_DENSITY = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.FRANZ_NOVICE));
+    public static final Item COMPUTER_QRAM_HIGH_DENSITY = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.FRANZ_HOPPER));
     public static final Item COMPUTER_HEATSINK = new ComputerItem(BaseSettings().rarity(Rarity.UNCOMMON));
     public static final Item COMPUTER_FULLTOWER_FAN_HEATSINK = new ComputerItem(BaseSettings().rarity(Rarity.RARE));
-    public static final Item COMPUTER_FLUID_HEAT_TRANSFER_PLATE = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.FRANZ_HOPPER));
+    public static final Item COMPUTER_FLUID_HEAT_TRANSFER_PLATE = new ComputerItem(
+            BaseSettings().rarity(CustomLyokoRarity.FRANZ_HOPPER));
     public static final Item COLORED_POLYCARBONATE_BODY_PART = new Item(BaseSettings());
     public static final Item BIT = new Item(BaseSettings());
     public static final Item BYTE = new Item(BaseSettings());
@@ -116,7 +137,6 @@ public record ModItems() {
     public static final Item GPU_COMPUTE_PROCESSOR = new ComputerItem(BaseSettings().rarity(Rarity.UNCOMMON));
     public static final Item GPU_PACKAGE_RISC = new ComputerItem(BaseSettings().rarity(Rarity.RARE));
     public static final Item GPU_PACKAGE_ASIC = new ComputerItem(BaseSettings().rarity(Rarity.EPIC));
-
     public static final Item GPU_PACKAGE_QUANTUM = new ComputerItem(BaseSettings().rarity(CustomLyokoRarity.MAINFRAME));
     public static final Item INTEGRATED_HEAT_SPREADER = new Item(BaseSettings());
     public static final Item KEY_CAP = new Item(BaseSettings());
@@ -134,9 +154,8 @@ public record ModItems() {
     public static final Item RAW_POLYCARBONATE = new Item(BaseSettings());
     public static final Item SOLID_QUANTUM = new Item(BaseSettings().rarity(CustomLyokoRarity.FRANZ_HOPPER));
     public static final Item SOLDER_BLOB = new Item(BaseSettings());
-
-
-    public static final WrittenBookItem STORY_BOOK = new EntryPool.Entry1(new Item.Settings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
+    public static final WrittenBookItem STORY_BOOK = new EntryPool.Entry1(
+            new Item.Settings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
     public static final Item SILICON_WAFER = new WaferText(BaseSettings().maxDamage(4));
     public static final Item URANIUM_SILICATE = new Item(BaseSettings());
     public static final Item URANIUM_SILICON_PLATE = new Item(BaseSettings());
@@ -150,46 +169,71 @@ public record ModItems() {
     public static final Item URANIUM_ISOTOPE235 = new Item(BaseSettings());
     //for tools
     //public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final Item TRUSTTY_SCREWDRIVER = new TrustyScrewDriverItem(new Item.Settings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
+    public static final Item TRUSTTY_SCREWDRIVER = new TrustyScrewDriverItem(
+            new Item.Settings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
     //public static final RegistryObject<Item> SOLDERING_IRON = ITEMS.register("soldering_iron", () -> new soldering_iron(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final Item JEREMY_LAPTOP = new LaptopClass(new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
+    public static final Item JEREMY_LAPTOP = new LaptopClass(
+            new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
+    //for buckets
+    public static final BucketItem LIQUID_HELIUM_BUCKET = new BucketItem(ModFluids.STILL_LIQUID_HELIUM,
+            new Item.Settings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
+    public static final WrittenBookItem STORY_BOOK2 = new EntryPool.Entry2(
+            new Item.Settings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
     //for weapons
     private static final FabricItemSettings WEAPONS = new FabricItemSettings().group(CodeLyokoMain.LYOKO_WEAPONS);
     public static final SwordItem DIGITAL_SABER = new SaberKatana(LyokoTiers.LyokoSamurai, 25, -0.9f, WEAPONS);
     public static final BowItem LASER_ARROWSHOOTER = new LaserArrowShooter(WEAPONS);
-    public static final SwordItem QUANTUM_SABER = new SwordItem(LyokoTiers.LyokoTool, 15, 2, WEAPONS.rarity(Rarity.EPIC));
+    public static final SwordItem QUANTUM_SABER = new SwordItem(LyokoTiers.LyokoTool, 15, 2,
+            WEAPONS.rarity(Rarity.EPIC));
     public static final TridentItem YUMI_TRADITONAL_FANS = new YumiFans(WEAPONS);
     public static final SwordItem ZWEIHANDER = new ZweihanderWeapon(LyokoTiers.LyokoWarrior, 60, -3f, WEAPONS);
     public static final BowItem FORCE_FIELD_EMITTER = new ForceFieldEmitter(WEAPONS.rarity(Rarity.EPIC));
     public static final BowItem ARCHER_BOW = new ArcherClassBow(WEAPONS);
     //for armor
     private static final FabricItemSettings ArmorGroup = new FabricItemSettings().group(CodeLyokoMain.LYOKO_ARMOR);
-    public static final ArmorItem AELITA_CHESTPLATE = new AelitaArmorElytra(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.CHEST, ArmorGroup);
-    public static final ArmorItem AELITA_LEGGINGS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.LEGS, ArmorGroup);
-    public static final ArmorItem AELITA_BOOTS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.FEET, ArmorGroup);
-    public static final ArmorItem ODD_CHESTPLATE = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.CHEST, ArmorGroup);
-    public static final ArmorItem ODD_LEGGINGS = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.LEGS, ArmorGroup);
-    public static final ArmorItem ODD_BOOTS = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.FEET, ArmorGroup);
-    public static final ArmorItem ULRICH_HEADBAND = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.HEAD, ArmorGroup);
-    public static final ArmorItem ULRICH_CHESTPLATE = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.CHEST, ArmorGroup);
-    public static final ArmorItem ULRICH_LEGGINGS = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.LEGS, ArmorGroup);
-    public static final ArmorItem ULRICH_BOOTS = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.FEET, ArmorGroup);
-    public static final ArmorItem BLANKHELMET = new ArmorItem(LyokoArmorMaterial.BLANKHELM, EquipmentSlot.HEAD, ArmorGroup);
-    public static final ArmorItem WILLIAM_CHESTPLATE = new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.CHEST, ArmorGroup);
-    public static final ArmorItem WILLIAM_LEGGINGS = new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.LEGS, ArmorGroup);
-    public static final ArmorItem WILLIAM_BOOTS = new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.FEET, ArmorGroup);
-    public static final ArmorItem YUMI_CHESTPLATE = new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.CHEST, ArmorGroup);
-    public static final ArmorItem YUMI_LEGGINGS = new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.LEGS, ArmorGroup);
+    public static final ArmorItem AELITA_CHESTPLATE = new AelitaArmorElytra(LyokoArmorMaterial.GUARDIAN,
+            EquipmentSlot.CHEST, ArmorGroup);
+    public static final ArmorItem AELITA_LEGGINGS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.LEGS,
+            ArmorGroup);
+    public static final ArmorItem AELITA_BOOTS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.FEET,
+            ArmorGroup);
+    public static final ArmorItem ODD_CHESTPLATE = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.CHEST,
+            ArmorGroup);
+    public static final ArmorItem ODD_LEGGINGS = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.LEGS,
+            ArmorGroup);
+    public static final ArmorItem ODD_BOOTS = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.FEET,
+            ArmorGroup);
+    public static final ArmorItem ULRICH_HEADBAND = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.HEAD,
+            ArmorGroup);
+    public static final ArmorItem ULRICH_CHESTPLATE = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.CHEST,
+            ArmorGroup);
+    public static final ArmorItem ULRICH_LEGGINGS = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.LEGS,
+            ArmorGroup);
+    public static final ArmorItem ULRICH_BOOTS = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.FEET,
+            ArmorGroup);
+    public static final ArmorItem BLANKHELMET = new ArmorItem(LyokoArmorMaterial.BLANKHELM, EquipmentSlot.HEAD,
+            ArmorGroup);
+    public static final ArmorItem WILLIAM_CHESTPLATE = new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.CHEST,
+            ArmorGroup);
+    public static final ArmorItem WILLIAM_LEGGINGS = new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.LEGS,
+            ArmorGroup);
+    public static final ArmorItem WILLIAM_BOOTS = new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.FEET,
+            ArmorGroup);
+    public static final ArmorItem YUMI_CHESTPLATE = new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.CHEST,
+            ArmorGroup);
+    public static final ArmorItem YUMI_LEGGINGS = new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.LEGS,
+            ArmorGroup);
     public static final ArmorItem YUMI_BOOTS = new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.FEET, ArmorGroup);
-    public static final ArmorItem MIND_HELMET = new MindHelm(LyokoArmorMaterial.BLANKHELM, EquipmentSlot.HEAD, ArmorGroup.rarity(Rarity.EPIC));
-    public static final ArmorItem LINKER = new linker(LyokoArmorMaterial.LINKER, EquipmentSlot.CHEST, ArmorGroup.rarity(Rarity.EPIC));
-    public static final ArmorItem JEREMY_CHESTPLATE = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.CHEST, ArmorGroup);
-    public static final ArmorItem JEREMY_LEGGINGS = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.LEGS, ArmorGroup);
-    public static final ArmorItem JEREMY_BOOTS = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.FEET, ArmorGroup);
-    //for buckets
-    public static final BucketItem LIQUID_HELIUM_BUCKET = new BucketItem(ModFluids.STILL_LIQUID_HELIUM, new Item.Settings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
-
-    public static final WrittenBookItem STORY_BOOK2 = new EntryPool.Entry2(new Item.Settings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
+    public static final ArmorItem MIND_HELMET = new MindHelm(LyokoArmorMaterial.BLANKHELM, EquipmentSlot.HEAD,
+            ArmorGroup.rarity(Rarity.EPIC));
+    public static final ArmorItem LINKER = new linker(LyokoArmorMaterial.LINKER, EquipmentSlot.CHEST,
+            ArmorGroup.rarity(Rarity.EPIC));
+    public static final ArmorItem JEREMY_CHESTPLATE = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.CHEST,
+            ArmorGroup);
+    public static final ArmorItem JEREMY_LEGGINGS = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.LEGS,
+            ArmorGroup);
+    public static final ArmorItem JEREMY_BOOTS = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.FEET,
+            ArmorGroup);
     public static final ImmutableMap<String, Item> ITEM_MAP = ImmutableMap.<String, Item>builder()
 //testing Items
             .put("test_multiplayer_phone", TEST_MULTIPLAYER_PHONE)
@@ -332,9 +376,15 @@ public record ModItems() {
             .put("jeremy_chestplate", JEREMY_CHESTPLATE)
             .put("jeremy_leggings", JEREMY_LEGGINGS)
             .put("jeremy_boots", JEREMY_BOOTS)
-            .put("lyokodisc", new LyokoDisc((int) 3.2e23f, ModSounds.LYOKO_THEME, new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1), 204))
+            .put("lyokodisc", new LyokoDisc((int) 3.2e23f, ModSounds.LYOKO_THEME,
+                    new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1), 204))
             .put("liquid_helium_bucket", LIQUID_HELIUM_BUCKET)
             .build();
+
+    private static FabricItemSettings BaseSettings() {
+        return new FabricItemSettings().group(CodeLyokoMain.LYOKO_ITEM);
+
+    }
 
     private static final class LyokoDisc extends MusicDiscItem {
 

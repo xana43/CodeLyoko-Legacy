@@ -27,7 +27,8 @@ public final class PlayerScannerComponent implements AutoSyncedComponent, Player
 
     @Override
     public void readFromNbt(final @NotNull NbtCompound tag) {
-        blockPos = new BlockPos(tag.getIntArray("player_pos")[0], tag.getIntArray("player_pos")[1], tag.getIntArray("player_pos")[2]);
+        blockPos = new BlockPos(tag.getIntArray("player_pos")[0], tag.getIntArray("player_pos")[1],
+                tag.getIntArray("player_pos")[2]);
     }
 
     @Override

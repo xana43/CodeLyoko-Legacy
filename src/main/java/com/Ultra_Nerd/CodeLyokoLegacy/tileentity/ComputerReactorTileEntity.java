@@ -21,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 public final class ComputerReactorTileEntity extends EnergyStorageBlockEntity implements LyokoInventoryBlock, NamedScreenHandlerFactory {
 
 
-
     private final PropertyDelegate energyAmount = new PropertyDelegate() {
         @Override
         public int get(final int index) {
@@ -31,10 +30,11 @@ public final class ComputerReactorTileEntity extends EnergyStorageBlockEntity im
             };
         }
 
+        @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("SF_SWITCH_NO_DEFAULT")
         @Override
         public void set(final int index, final int value) {
-            switch (index) {
-                case 0 -> energyStorage.amount = value;
+            if (index == 0) {
+                energyStorage.amount = value;
             }
         }
 
@@ -46,7 +46,7 @@ public final class ComputerReactorTileEntity extends EnergyStorageBlockEntity im
 
 
     public ComputerReactorTileEntity(final BlockPos pos, final BlockState state) {
-        super(ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY, pos, state,2,4000,null,null);
+        super(ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY, pos, state, 2, 4000, null, null);
 
     }
 
@@ -94,13 +94,10 @@ public final class ComputerReactorTileEntity extends EnergyStorageBlockEntity im
     }
 
 
-
-
     @Override
     public Text getDisplayName() {
         return Text.translatable(getCachedState().getBlock().getTranslationKey());
     }
-
 
 
 }

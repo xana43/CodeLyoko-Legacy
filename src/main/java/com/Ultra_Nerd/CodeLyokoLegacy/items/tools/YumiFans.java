@@ -9,6 +9,7 @@ public final class YumiFans extends TridentItem {
     private static final float Velocity = 1f;
     private static final float FanDamage = 1f;
     private static final int thrownTime = 0;
+
     public YumiFans(@NotNull Settings builder) {
         super(builder);
 

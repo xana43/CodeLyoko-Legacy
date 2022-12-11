@@ -3,8 +3,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TowerInterfaceScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.PressableTextWidget;
@@ -18,24 +18,25 @@ import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
+import java.security.SecureRandom;
 import java.util.Objects;
 import java.util.Random;
 
 public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
+    private static final Identifier TEXTURES = CodeLyokoMain.codeLyokoPrefix("textures/gui/towerinterface.png");
+    int tick = 0;
+    private TextFieldWidget text;
+    private TextFieldWidget Accepted;
+    private byte I;
+    private int acceptedColor;
+
+
     public TowerGUI(final TowerInterfaceScreenHandler handler, final PlayerInventory inventory, final Text title) {
         super(handler, inventory, title);
         this.playerInventoryTitleX = 900;
 
 
     }
-
-
-    private static final Identifier TEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/towerinterface.png");
-    private TextFieldWidget text;
-    private TextFieldWidget Accepted;
-    private byte I;
-    private int acceptedColor;
-
 
     @Override
     public boolean isMouseOver(double p_isMouseOver_1_, double p_isMouseOver_3_) {
@@ -47,16 +48,11 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
         return false;
     }
 
-
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
         this.text.mouseClicked(mouseX, mouseY, mouseButton);
         return super.mouseClicked(mouseX, mouseY, mouseButton);
     }
-
-
-    int tick = 0;
-
 
     @Override
     public void render(@NotNull MatrixStack poseStack, int mouseX, int mouseY, float partialTicks) {
@@ -65,16 +61,21 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
 
         super.render(poseStack, mouseX, mouseY, partialTicks);
         //this.text.render(poseStack,mouseX, mouseY, partialTicks);
-        final var AcceptedText = Text.of(this.Accepted.getText()).getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle());
+        final var AcceptedText = Text.of(this.Accepted.getText())
+                .getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle());
         final var CodeEnterTest = Text.of(this.text.getText()).getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle());
         if (AcceptedText.size() >= 1) {
-            PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer, AcceptedText.get(0), this.Accepted.x, this.Accepted.y, acceptedColor);
+            PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer, AcceptedText.get(0), this.Accepted.x,
+                    this.Accepted.y, acceptedColor);
         }
         if (CodeEnterTest.size() >= 1) {
-            PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer, CodeEnterTest.get(0), this.text.x, this.text.y, Color.WHITE.getRGB());
+            PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer, CodeEnterTest.get(0), this.text.x,
+                    this.text.y, Color.WHITE.getRGB());
         }
         if ((tick >> 2) % 5 == 0) {
-            PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer, Text.of("|").getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()).get(0), text.x + (this.text.getCursor() * 21), this.text.y, Color.WHITE.getRGB());
+            PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer,
+                    Text.of("|").getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()).get(0),
+                    text.x + (this.text.getCursor() * 21), this.text.y, Color.WHITE.getRGB());
 
             Objects.requireNonNull(client.player).playSound(ModSounds.CURSORBLINK, 0.1f, 1f);
 
@@ -82,7 +83,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
 
 
     }
-
+    private final SecureRandom completeRandom = new SecureRandom();
     @Override
     protected void handledScreenTick() {
         this.text.tick();
@@ -174,7 +175,8 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
         } else {
             this.text.charTyped(key ^= 32, Keynum);
         }
-        Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, new Random().nextFloat(1f, 1.1f));
+        Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, completeRandom.nextFloat(1f,
+                1.1f));
         return super.charTyped(key ^= 32, Keynum);
 
     }

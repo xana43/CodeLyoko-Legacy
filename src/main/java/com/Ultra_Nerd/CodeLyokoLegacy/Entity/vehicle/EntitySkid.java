@@ -4,7 +4,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.world.World;
 
-public final class EntitySkid extends LyokoVehicleEntity{
+public final class EntitySkid extends LyokoVehicleEntity {
     public EntitySkid(final EntityType<? extends BoatEntity> entityType, final World world) {
         super(entityType, world);
     }
@@ -101,10 +101,6 @@ public final class EntitySkid extends LyokoVehicleEntity{
     }
 
  */
-
-
-
-
 
 
 }

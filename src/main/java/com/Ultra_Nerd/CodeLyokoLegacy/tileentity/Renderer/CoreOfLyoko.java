@@ -1,8 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.client.APIEmbed.api.Myron;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LyokoCoreBE;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.client.APIEmbed.api.Myron;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -15,15 +16,16 @@ import net.minecraft.world.World;
 
 public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements BlockEntityRenderer<LyokoCoreBE> {
 
+    private static final BakedModel lyokoCore = Myron.getModel(
+            CodeLyokoMain.codeLyokoPrefix("models/blocks/core_of_lyoko"));
     private static int y;
-
-    private static final BakedModel lyokoCore = Myron.getModel(CodeLyokoMain.CodeLyokoPrefix("models/blocks/core_of_lyoko"));
 
     @Override
     public int getRenderDistance() {
         return 128;
     }
 
+    @SuppressFBWarnings("ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD")
     @Override
     public void render(final LyokoCoreBE entity, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {
         //blockRenderDispatcher.renderSingleBlock(ModBlocks.LYOKO_CORE.get().defaultBlockState(),pPoseStack,pBufferSource,pPackedOverlay,pPackedOverlay, EmptyModelData.INSTANCE);
@@ -45,7 +47,10 @@ public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements
 
         //MinecraftClient.getInstance().getBlockEntityRenderDispatcher().renderEntity(entity,matrices,vertexConsumers,light,overlay);
 
-        context.getRenderManager().getModelRenderer().render(entityWorld, lyokoCore, Blocks.AIR.getDefaultState(), entity.getPos(), matrices, vertexConsumers.getBuffer(RenderLayer.getTranslucentMovingBlock()), true, entityWorld.getRandom(), 0, overlay);
+        context.getRenderManager().getModelRenderer()
+                .render(entityWorld, lyokoCore, Blocks.AIR.getDefaultState(), entity.getPos(), matrices,
+                        vertexConsumers.getBuffer(RenderLayer.getTranslucentMovingBlock()), true,
+                        entityWorld.getRandom(), 0, overlay);
 
         matrices.pop();
 

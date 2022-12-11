@@ -19,7 +19,6 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerBlockEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
@@ -36,7 +35,6 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
@@ -71,15 +69,15 @@ public record CodeLyokoMain() implements ModInitializer {
             () -> new ItemStack(ModItems.BIT));
     public static final ItemGroup LYOKO_BLOCKS = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "lyoko_blocks"),
             () -> new ItemStack(ModBlocks.TOWER_INTERFACE));
-    public static final ItemGroup LYOKO_ARMOR = FabricItemGroupBuilder.build(CodeLyokoPrefix("lyoko_armor"),
+    public static final ItemGroup LYOKO_ARMOR = FabricItemGroupBuilder.build(codeLyokoPrefix("lyoko_armor"),
             () -> new ItemStack(ModItems.WILLIAM_CHESTPLATE));
-    public static final ItemGroup LYOKO_WEAPONS = FabricItemGroupBuilder.build(CodeLyokoPrefix("lyoko_weapons"),
+    public static final ItemGroup LYOKO_WEAPONS = FabricItemGroupBuilder.build(codeLyokoPrefix("lyoko_weapons"),
             () -> new ItemStack(ModItems.LASER_ARROWSHOOTER));
     private static final TrackedData<NbtCompound> peristent = DataTracker.registerData(ServerPlayerEntity.class,
             TrackedDataHandlerRegistry.NBT_COMPOUND);
 
     @Contract("_ -> new")
-    public static @NotNull Identifier CodeLyokoPrefix(String name) {
+    public static @NotNull Identifier codeLyokoPrefix(String name) {
         return new Identifier(MOD_ID, name);
     }
 
@@ -139,39 +137,39 @@ public record CodeLyokoMain() implements ModInitializer {
         });
         ModItems.ITEM_MAP.forEach((s, item) -> Registry.register(Registry.ITEM, new Identifier(MOD_ID, s), item));
         ModTileEntities.BLOCKENTITY_MAP.forEach(
-                (s, blockEntityType) -> Registry.register(Registry.BLOCK_ENTITY_TYPE, CodeLyokoPrefix(s),
+                (s, blockEntityType) -> Registry.register(Registry.BLOCK_ENTITY_TYPE, codeLyokoPrefix(s),
                         blockEntityType));
         //ModSounds.SOUNDS.forEach(soundEvent -> Registry.register(Registry.SOUND_EVENT,soundEvent.getId(),soundEvent))
         for (int i = 0; i < ModSounds.SOUNDS.length; i++) {
 
             Registry.register(Registry.SOUND_EVENT, ModSounds.SOUNDS[i].getId(), ModSounds.SOUNDS[i]);
         }
-        ModBiome.BIOME_MAP.forEach((s, biome) -> Registry.register(BuiltinRegistries.BIOME, CodeLyokoPrefix(s), biome));
+        ModBiome.BIOME_MAP.forEach((s, biome) -> Registry.register(BuiltinRegistries.BIOME, codeLyokoPrefix(s), biome));
         ModEntities.ENTITY_TYPE_HASH_MAP.forEach(
-                (s, entityType) -> Registry.register(Registry.ENTITY_TYPE, CodeLyokoPrefix(s), entityType));
+                (s, entityType) -> Registry.register(Registry.ENTITY_TYPE, codeLyokoPrefix(s), entityType));
         ModFluids.FLUID_IMMUTABLE_MAP.forEach(
-                (s, fluid) -> Registry.register(Registry.FLUID, CodeLyokoPrefix(s), fluid));
+                (s, fluid) -> Registry.register(Registry.FLUID, codeLyokoPrefix(s), fluid));
 
         ModParticles.PARTICLE_TYPE_IMMUTABLE_MAP.forEach(
-                (s, defaultParticleType) -> Registry.register(Registry.PARTICLE_TYPE, CodeLyokoPrefix(s),
+                (s, defaultParticleType) -> Registry.register(Registry.PARTICLE_TYPE, codeLyokoPrefix(s),
                         defaultParticleType));
-        Registry.register(Registry.CHUNK_GENERATOR, CodeLyokoPrefix("carthage_chunkgen"),
+        Registry.register(Registry.CHUNK_GENERATOR, codeLyokoPrefix("carthage_chunkgen"),
                 CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
-        Registry.register(Registry.BIOME_SOURCE, CodeLyokoPrefix("carthage_biome"),
+        Registry.register(Registry.BIOME_SOURCE, codeLyokoPrefix("carthage_biome"),
                 CarthageBiomeProvider.CARTHAGE_BIOME_PROVIDER_CODEC);
         ModScreenHandlers.screenHandlerMap.forEach(
-                (s, screenHandlerType) -> Registry.register(Registry.SCREEN_HANDLER, CodeLyokoPrefix(s),
+                (s, screenHandlerType) -> Registry.register(Registry.SCREEN_HANDLER, codeLyokoPrefix(s),
                         screenHandlerType));
 
         ModStructures.registerNewStructures();
         ModFeature.CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s, feature) -> {
 
-            Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, CodeLyokoPrefix(s), feature.getLeft());
-            Registry.register(BuiltinRegistries.PLACED_FEATURE, CodeLyokoPrefix(s), feature.getRight());
+            Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, codeLyokoPrefix(s), feature.getLeft());
+            Registry.register(BuiltinRegistries.PLACED_FEATURE, codeLyokoPrefix(s), feature.getRight());
 
 
         });
-        ModStats.RegisterStats();
+        ModStats.registerStats();
 
 
         BiomeFeatureInject();
@@ -197,7 +195,7 @@ public record CodeLyokoMain() implements ModInitializer {
 
     private static void BiomeFeatureInject() {
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
-                RegistryKey.of(Registry.PLACED_FEATURE_KEY, CodeLyokoPrefix("coffinite_ore_overworld")));
+                RegistryKey.of(Registry.PLACED_FEATURE_KEY, codeLyokoPrefix("coffinite_ore_overworld")));
     }
 
     private static void registerDefaultAttributes() {
@@ -319,7 +317,7 @@ public record CodeLyokoMain() implements ModInitializer {
     @Override
     public void onInitialize() {
         GeckoLib.initialize();
-        PacketHandlerCommon.CommonChannelRegistry();
+        PacketHandlerCommon.commonChannelRegistry();
         generalRegistration();
         SetupFunctions();
         registerDefaultAttributes();

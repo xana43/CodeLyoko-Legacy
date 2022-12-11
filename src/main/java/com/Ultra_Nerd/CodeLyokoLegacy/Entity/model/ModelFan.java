@@ -1,7 +1,6 @@
-
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 
-public final class ModelFan /*extends AnimatedGeoModel<EntityFan>*/{
+public final class ModelFan /*extends AnimatedGeoModel<EntityFan>*/ {
 /*
 
     private static final Identifier FAN_MODEL = CodeLyokoMain.CodeLyokoPrefix("geo/fan.geo.json");

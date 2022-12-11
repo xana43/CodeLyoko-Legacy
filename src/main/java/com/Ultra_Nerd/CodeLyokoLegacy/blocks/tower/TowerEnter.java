@@ -38,9 +38,8 @@ public final class TowerEnter extends Block {
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        if(!(entity instanceof PlayerEntity) && !(entity instanceof LyokoVehicleEntity))
-        {
-          entity.damage(DamageSource.OUT_OF_WORLD,Float.MAX_VALUE);
+        if (!(entity instanceof PlayerEntity) && !(entity instanceof LyokoVehicleEntity)) {
+            entity.damage(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
         }
     }
 
@@ -53,7 +52,7 @@ public final class TowerEnter extends Block {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(DIRTOWER2,ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(DIRTOWER2, ctx.getPlayerFacing().getOpposite());
     }
 
     @Override
@@ -62,13 +61,6 @@ public final class TowerEnter extends Block {
     }
 
     //
-
-
-
-
-
-
-
 
 
 }

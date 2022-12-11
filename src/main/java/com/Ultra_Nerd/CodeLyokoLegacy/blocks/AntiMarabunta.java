@@ -16,18 +16,15 @@ public final class AntiMarabunta extends Block {
     private static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
 
 
-
-
-
     public AntiMarabunta() {
-        super(FabricBlockSettings.of(Material.BARRIER).strength(6,10).sounds(BlockSoundGroup.STONE).ticksRandomly());
+        super(FabricBlockSettings.of(Material.BARRIER).strength(6, 10).sounds(BlockSoundGroup.STONE).ticksRandomly());
     }
 
     @Override
     public void randomTick(final BlockState state, final ServerWorld worldIn, final BlockPos pos, final Random rand) {
         super.randomTick(state, worldIn, pos, rand);
         for (byte i = 0; i < 127; ++i) {
-            final BlockPos blockpos = pos.offset(Direction.random(rand),rand.nextInt(3) - 1);
+            final BlockPos blockpos = pos.offset(Direction.random(rand), rand.nextInt(3) - 1);
 
             if (blockpos.getY() >= -50 && blockpos.getY() < 384 && !worldIn.isChunkLoaded(blockpos)) {
                 return;
@@ -44,7 +41,8 @@ public final class AntiMarabunta extends Block {
         }
 
         for (byte i = 127; i > -1; i--) {
-            final BlockPos blockpos = pos.offset(Direction.random(net.minecraft.util.math.random.Random.create()),rand.nextInt(3) - 1);
+            final BlockPos blockpos = pos.offset(Direction.random(net.minecraft.util.math.random.Random.create()),
+                    rand.nextInt(3) - 1);
 
             if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !worldIn.isChunkLoaded(blockpos)) {
                 return;

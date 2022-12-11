@@ -32,8 +32,8 @@ public record ModTileEntities() {
             ComputerControlPanelTileEntity::new, ModBlocks.COMPUTER_TOWER_CONTROL_PANEL).build();
     public static final BlockEntityType<ComputerReactorTileEntity> COMPUTER_REACTOR_TILE_ENTITY = FabricBlockEntityTypeBuilder.create(
             ComputerReactorTileEntity::new, ModBlocks.URANUM_REACTOR).build();
-    public  static final BlockEntityType<LaptopChargerBlockEntity> LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY =
-            FabricBlockEntityTypeBuilder.create(LaptopChargerBlockEntity::new,ModBlocks.LAPTOP_CHARGER).build();
+    public static final BlockEntityType<LaptopChargerBlockEntity> LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY =
+            FabricBlockEntityTypeBuilder.create(LaptopChargerBlockEntity::new, ModBlocks.LAPTOP_CHARGER).build();
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String, BlockEntityType<?>>builder()
 
             .put("lyoko_core", LYOKO_CORE).put("tower_interface_tile_entity", TOWER_INTERFACE_TILE_ENTITY)
@@ -41,7 +41,7 @@ public record ModTileEntities() {
             .put("universal_energy_tile_entity", UNIVERSAL_ENERGY_STORAGE)
             .put("computer_control_panel_tile_entity", COMPUTER_CONTROL_PANEL)
             .put("computer_integrated_reactor", COMPUTER_REACTOR_TILE_ENTITY)
-            .put("laptop_charger_blockentity",LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY).build();
+            .put("laptop_charger_blockentity", LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY).build();
 
     //
     /*

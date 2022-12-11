@@ -15,7 +15,6 @@ public final class WaferText extends Item {
     }
 
 
-
     @Override
     public void appendTooltip(final ItemStack stack, @org.jetbrains.annotations.Nullable final World world, final List<Text> tooltip, final TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);

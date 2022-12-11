@@ -15,6 +15,6 @@ public final class LaserRenderer extends ArrowEntityRenderer {
 
     @Override
     public Identifier getTexture(final ArrowEntity arrowEntity) {
-        return CodeLyokoMain.CodeLyokoPrefix("textures/entity/laserarrow.png");
+        return CodeLyokoMain.codeLyokoPrefix("textures/entity/laserarrow.png");
     }
 }

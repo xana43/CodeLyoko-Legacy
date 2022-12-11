@@ -34,16 +34,12 @@ public class LaptopCharger extends Block implements BlockEntityProvider {
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
         final BlockEntity be = world.getBlockEntity(pos);
 
-        if(be instanceof LaptopChargerBlockEntity chargerBlockEntity && !world.isClient())
-        {
+        if (be instanceof LaptopChargerBlockEntity chargerBlockEntity && !world.isClient()) {
             final ItemStack laptop = player.getStackInHand(hand);
-            if(laptop.isOf(ModItems.JEREMY_LAPTOP))
-            {
+            if (laptop.isOf(ModItems.JEREMY_LAPTOP)) {
                 chargerBlockEntity.setItem(laptop);
-            }
-            else if(laptop.isOf(ItemStack.EMPTY.getItem()))
-            {
-                player.setStackInHand(hand,chargerBlockEntity.getItems().get(0).copy());
+            } else if (laptop.isOf(ItemStack.EMPTY.getItem())) {
+                player.setStackInHand(hand, chargerBlockEntity.getItems().get(0).copy());
                 chargerBlockEntity.getItems().get(0).decrement(1);
             }
         }
@@ -54,8 +50,7 @@ public class LaptopCharger extends Block implements BlockEntityProvider {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
         return (world1, pos, state1, blockEntity) -> {
-            if(blockEntity instanceof LaptopChargerBlockEntity)
-            {
+            if (blockEntity instanceof LaptopChargerBlockEntity) {
                 ((LaptopChargerBlockEntity) blockEntity).tick();
             }
         };
@@ -64,9 +59,9 @@ public class LaptopCharger extends Block implements BlockEntityProvider {
     @Override
     public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
         super.onBreak(world, pos, state, player);
-        if(world.getBlockEntity(pos) instanceof LaptopChargerBlockEntity chargerBlockEntity)
-        {
-            chargerBlockEntity.getItems().forEach(itemStack -> world.spawnEntity(new ItemEntity(world,pos.getX(),pos.getY(),pos.getZ(),itemStack)));
+        if (world.getBlockEntity(pos) instanceof LaptopChargerBlockEntity chargerBlockEntity) {
+            chargerBlockEntity.getItems().forEach(itemStack -> world.spawnEntity(
+                    new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack)));
         }
     }
 }

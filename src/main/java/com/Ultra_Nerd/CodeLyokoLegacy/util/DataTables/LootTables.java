@@ -23,7 +23,10 @@ public final class LootTables extends FabricBlockLootTableProvider {
                 //addDropWithSilkTouch(block);
 
             } else if (block == ModBlocks.SILICA_SAND) {
-                addDrop(block, dropsWithSilkTouch(block, applyExplosionDecay(block, ItemEntry.builder(ModItems.RAW_SILICADUST).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(4.0F, 5.0F))).apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE)))));
+                addDrop(block, dropsWithSilkTouch(block, applyExplosionDecay(block,
+                        ItemEntry.builder(ModItems.RAW_SILICADUST)
+                                .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(4.0F, 5.0F)))
+                                .apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE)))));
             }
         });
     }

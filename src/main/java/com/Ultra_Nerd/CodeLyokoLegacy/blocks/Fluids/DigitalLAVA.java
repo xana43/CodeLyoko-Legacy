@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 
-public abstract class DigitalLAVA extends LyokoFluid{
+public abstract class DigitalLAVA extends LyokoFluid {
     @Override
     public Fluid getStill() {
         return ModFluids.STILL_DIGITAL_LAVA;
@@ -27,12 +27,11 @@ public abstract class DigitalLAVA extends LyokoFluid{
 
     @Override
     protected BlockState toBlockState(final FluidState state) {
-        return ModBlocks.DIGITAL_LAVA_BLOCK.getDefaultState().with(Properties.LEVEL_15,getBlockStateLevel(state));
+        return ModBlocks.DIGITAL_LAVA_BLOCK.getDefaultState().with(Properties.LEVEL_15, getBlockStateLevel(state));
     }
 
 
-    public static class Flowing extends DigitalLAVA
-    {
+    public static class Flowing extends DigitalLAVA {
         @Override
         protected void appendProperties(final StateManager.Builder<Fluid, FluidState> builder) {
             super.appendProperties(builder.add(LEVEL));
@@ -54,8 +53,7 @@ public abstract class DigitalLAVA extends LyokoFluid{
         }
     }
 
-    public static class Still extends DigitalLAVA
-    {
+    public static class Still extends DigitalLAVA {
         @Override
         protected boolean isInfinite() {
             return true;

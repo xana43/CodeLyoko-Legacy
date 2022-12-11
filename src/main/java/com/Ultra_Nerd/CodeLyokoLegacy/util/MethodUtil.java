@@ -32,7 +32,7 @@ public record MethodUtil() {
 
         }
 
-        public static boolean EntityNotInVanillaWorld(@NotNull Entity entity) {
+        public static boolean entityNotInVanillaWorld(@NotNull Entity entity) {
 
             return entity.world.getRegistryKey() == ModDimensions.forestSectorWorld || entity.world.getRegistryKey() == ModDimensions.carthage || entity.world.getRegistryKey() == ModDimensions.desertSectorWorld || entity.world.getRegistryKey() == ModDimensions.iceSectorWorld
 

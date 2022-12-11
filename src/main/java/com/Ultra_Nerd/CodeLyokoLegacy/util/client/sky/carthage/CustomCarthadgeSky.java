@@ -16,7 +16,8 @@ import net.minecraft.util.math.Vec3f;
 public record CustomCarthadgeSky() implements DimensionRenderingRegistry.SkyRenderer/*implements ISkyRenderHandler*/ {
 
 
-    private static final Identifier TEXTURE_LOCATION = new Identifier(CodeLyokoMain.MOD_ID, "textures/skies/sector5/sector5sky.png");
+    private static final Identifier TEXTURE_LOCATION = new Identifier(CodeLyokoMain.MOD_ID,
+            "textures/skies/sector5/sector5sky.png");
     private static final Tessellator tessellator = Tessellator.getInstance();
     private static final BufferBuilder bufferBuilder = tessellator.getBuffer();
 

@@ -31,7 +31,8 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     }
 
     public record LyokoClass() {
-        public static final ComponentKey<PlayerClassComponent> LYOKOCLASS = ComponentRegistry.getOrCreate(CodeLyokoMain.CodeLyokoPrefix("lyoko_class"), PlayerClassComponent.class);
+        public static final ComponentKey<PlayerClassComponent> LYOKOCLASS = ComponentRegistry.getOrCreate(
+                CodeLyokoMain.codeLyokoPrefix("lyoko_class"), PlayerClassComponent.class);
 
         public static int getLyokoClass(final PlayerEntity player) {
             return LYOKOCLASS.get(player).getClassID();
@@ -45,7 +46,8 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     }
 
     public record XanaCalculator() {
-        public static final ComponentKey<XanaDataComponent> XANA_DATA = ComponentRegistry.getOrCreate(CodeLyokoMain.CodeLyokoPrefix("xana_data"), XanaDataComponent.class);
+        public static final ComponentKey<XanaDataComponent> XANA_DATA = ComponentRegistry.getOrCreate(
+                CodeLyokoMain.codeLyokoPrefix("xana_data"), XanaDataComponent.class);
 
         public static void setDangerLevel(final int dangerLevel, final WorldProperties worldProperties) {
             XANA_DATA.get(worldProperties).setDangerLevel(dangerLevel);
@@ -57,7 +59,8 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     }
 
     public record LyokoInventorySave() {
-        public static final ComponentKey<InventorySaveComponent> LYOKO_INVENTORY_SAVE = ComponentRegistry.getOrCreate(CodeLyokoMain.CodeLyokoPrefix("temp_inventory"), InventorySaveComponent.class);
+        public static final ComponentKey<InventorySaveComponent> LYOKO_INVENTORY_SAVE = ComponentRegistry.getOrCreate(
+                CodeLyokoMain.codeLyokoPrefix("temp_inventory"), InventorySaveComponent.class);
 
         public static void savePlayerInventory(final WorldProperties worldProperties, final PlayerEntity playerEntity) {
 
@@ -70,7 +73,8 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     }
 
     public record ReturnToScanner() {
-        public static final ComponentKey<PlayerScannerComponent> RETURN_TO_SCANNER = ComponentRegistry.getOrCreate(CodeLyokoMain.CodeLyokoPrefix("scanner_position"), PlayerScannerComponent.class);
+        public static final ComponentKey<PlayerScannerComponent> RETURN_TO_SCANNER = ComponentRegistry.getOrCreate(
+                CodeLyokoMain.codeLyokoPrefix("scanner_position"), PlayerScannerComponent.class);
 
         public static void saveScannerLocation(final PlayerEntity player) {
             RETURN_TO_SCANNER.get(player).savePosition();

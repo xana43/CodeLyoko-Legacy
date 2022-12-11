@@ -10,15 +10,13 @@ import org.jetbrains.annotations.NotNull;
 
 public final class RouterTE extends BlockEntity implements BlockEntityTicker<RouterTE> {
     public RouterTE(@NotNull BlockEntityType<?> tileEntityTypeIn, @NotNull BlockPos pos, @NotNull BlockState state) {
-        super(tileEntityTypeIn,pos,state);
+        super(tileEntityTypeIn, pos, state);
     }
 
     /*public RouterTE() {
         this(ModTileEntities.ROUTER_TILE_ENTITY.get());
     }
      */
-
-
 
 
     @Override

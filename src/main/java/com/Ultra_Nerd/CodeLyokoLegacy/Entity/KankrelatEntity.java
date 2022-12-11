@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-import dev.onyxstudios.cca.api.v3.component.ComponentContainer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.world.World;
@@ -17,18 +16,11 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public final class KankrelatEntity extends HostileEntity implements IAnimatable {
 
-    private final AnimationController<?> controller = new AnimationController<>(this, "kankrelatcontroller", 20, this::animationPred);
-    private final AnimationFactory manager = GeckoLibUtil.createFactory(this);
-
+    private final AnimationFactory manager = GeckoLibUtil.createFactory(this);    private final AnimationController<?> controller = new AnimationController<>(this, "kankrelatcontroller", 20,
+            this::animationPred);
     public KankrelatEntity(final EntityType<? extends HostileEntity> entityType, final World world) {
         super(entityType, world);
     }
-/*
-    public KankrelatEntity(@NotNull EntityType<? extends KankrelatEntity> type, @NotNull Level world) {
-        super(type, world);
-    }
-
- */
 
     private <E extends KankrelatEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
         if (event.isMoving()) {
@@ -39,8 +31,12 @@ public final class KankrelatEntity extends HostileEntity implements IAnimatable 
             return PlayState.STOP;
         }
     }
+/*
+    public KankrelatEntity(@NotNull EntityType<? extends KankrelatEntity> type, @NotNull Level world) {
+        super(type, world);
+    }
 
-
+ */
 
     @Override
     public void registerControllers(@NotNull AnimationData data) {
@@ -51,6 +47,8 @@ public final class KankrelatEntity extends HostileEntity implements IAnimatable 
     public @NotNull AnimationFactory getFactory() {
         return manager;
     }
+
+
 
 
 

@@ -12,12 +12,10 @@ import java.util.Map.Entry;
 public class FlourideInfusionResult {
 
     private static final FlourideInfusionResult INSTANCE = new FlourideInfusionResult();
-    private final Table<ItemStack, ItemStack, ItemStack> smeltingList = HashBasedTable.<ItemStack, ItemStack, ItemStack>create();
-    private final Map<ItemStack, Float> experienceList = Maps.<ItemStack, Float>newHashMap();
+    private final Table<ItemStack, ItemStack, ItemStack> smeltingList = HashBasedTable.create();
+    private final Map<ItemStack, Float> experienceList = Maps.newHashMap();
 
-    public static @NotNull FlourideInfusionResult getInstance() {
-        return INSTANCE;
-    }
+
 /*
     private FlourideInfusionResult() {
         addRefiningRecipe(new ItemStack(ModItems.URANIUM_DIOXIDE.get()), new ItemStack(ModItems.FLUORIDE.get()),

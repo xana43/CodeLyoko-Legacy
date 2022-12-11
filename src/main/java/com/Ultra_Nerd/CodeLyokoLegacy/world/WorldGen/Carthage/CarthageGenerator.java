@@ -46,8 +46,10 @@ public final class CarthageGenerator extends ChunkGenerator {
     public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCodecBuilder.create(
             carthageGeneratorInstance ->
                     carthageGeneratorInstance.group(
-                            RegistryOps.createRegistryCodec(Registry.STRUCTURE_SET_KEY).forGetter(CarthageGenerator::getStructRegistry),
-                            RegistryOps.createRegistryCodec(Registry.BIOME_KEY).forGetter(CarthageGenerator::getThisBiomeRegistry),
+                            RegistryOps.createRegistryCodec(Registry.STRUCTURE_SET_KEY)
+                                    .forGetter(CarthageGenerator::getStructRegistry),
+                            RegistryOps.createRegistryCodec(Registry.BIOME_KEY)
+                                    .forGetter(CarthageGenerator::getThisBiomeRegistry),
                             SETTINGS_CODEC.fieldOf("settings").forGetter(CarthageGenerator::getCarthageSettings)
                     ).apply(carthageGeneratorInstance, CarthageGenerator::new)
     );
@@ -64,8 +66,9 @@ public final class CarthageGenerator extends ChunkGenerator {
 
 
     private static @NotNull Optional<RegistryEntryList<StructureSet>> getSet(@NotNull Registry<StructureSet> thisStructureRegistry) {
-        RegistryEntryList.Named<StructureSet> structureSetNamed = thisStructureRegistry.getOrCreateEntryList(TagKey.of(Registry.STRUCTURE_SET_KEY,
-                CodeLyokoMain.CodeLyokoPrefix("carthage_chunkgen_struct")));
+        RegistryEntryList.Named<StructureSet> structureSetNamed = thisStructureRegistry.getOrCreateEntryList(
+                TagKey.of(Registry.STRUCTURE_SET_KEY,
+                        CodeLyokoMain.codeLyokoPrefix("carthage_chunkgen_struct")));
         return Optional.of(structureSetNamed);
     }
 
@@ -122,7 +125,8 @@ public final class CarthageGenerator extends ChunkGenerator {
                 createSphere(chunk, stone, pos, x, z, height, innerHeight);
 
                 final int heightSpawn = (int) (Math.sqrt(Math.pow(25, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
-                final int innerHeightSpawn = (int) (Math.sqrt(Math.pow(23, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
+                final int innerHeightSpawn = (int) (Math.sqrt(
+                        Math.pow(23, 2) - Math.pow(realX, 2) - Math.pow(realZ, 2)));
                 createSphere(chunk, stone, pos, x, z, heightSpawn, innerHeightSpawn);
                 for (int h = 0; h < heightSpawn; h++) {
                     if ((realZ == -1 || realZ == 0 || realZ == 1) && realX > 11) {
@@ -201,7 +205,8 @@ public final class CarthageGenerator extends ChunkGenerator {
 
 
     private int getHeightAt(int baseHeight, float vertialVariance, float horizontalVariance, int x, int z) {
-        return (int) (baseHeight + Math.sin(x / horizontalVariance) * vertialVariance + Math.cos(z / horizontalVariance) * vertialVariance);
+        return (int) (baseHeight + Math.sin(x / horizontalVariance) * vertialVariance + Math.cos(
+                z / horizontalVariance) * vertialVariance);
     }
 
 

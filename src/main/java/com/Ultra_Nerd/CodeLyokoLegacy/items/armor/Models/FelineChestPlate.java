@@ -7,9 +7,9 @@ import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.Models.Util.ArmorModelRenderer
 import net.minecraft.client.model.ModelPart;
 
 public final class FelineChestPlate extends ArmorModelRenderer {
-	public FelineChestPlate(final ModelPart root, final boolean thinArms) {
-		super(root, thinArms);
-	}
+    public FelineChestPlate(final ModelPart root, final boolean thinArms) {
+        super(root, thinArms);
+    }
 
 
 

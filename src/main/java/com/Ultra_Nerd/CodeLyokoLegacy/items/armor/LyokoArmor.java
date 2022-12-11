@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -37,35 +37,36 @@ public class LyokoArmor extends ArmorItem {
     public void inventoryTick(final ItemStack stack, final World world, final Entity entity, final int slot, final boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
 
-        if(!stack.hasEnchantments())
-        {
-            stack.addEnchantment(Enchantments.BINDING_CURSE,Enchantments.BINDING_CURSE.getMaxLevel());
+        if (!stack.hasEnchantments()) {
+            stack.addEnchantment(Enchantments.BINDING_CURSE, Enchantments.BINDING_CURSE.getMaxLevel());
             stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
         }
-        if(entity instanceof final PlayerEntity player)
-        {
-            onArmorTick(player,stack.getItem());
+        if (entity instanceof final PlayerEntity player) {
+            onArmorTick(player, stack.getItem());
         }
     }
-    protected boolean onArmorTick(final PlayerEntity player,final Item armorItem)
-    {
-        if(!MethodUtil.DimensionCheck.playerNotInVanillaWorld(player)) {
+
+    protected boolean onArmorTick(final PlayerEntity player, final Item armorItem) {
+        if (!MethodUtil.DimensionCheck.playerNotInVanillaWorld(player)) {
             if (player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).isOf(armorItem)) {
                 player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).setCount(0);
 
-                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).isOf(ModItems.BLANKHELMET)) {
+                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId())
+                        .isOf(ModItems.BLANKHELMET)) {
                     player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
                 }
             }
             if (player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).isOf(armorItem)) {
                 player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).setCount(0);
-                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).isOf(ModItems.BLANKHELMET)) {
+                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId())
+                        .isOf(ModItems.BLANKHELMET)) {
                     player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
                 }
             }
             if (player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).isOf(armorItem)) {
                 player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).setCount(0);
-                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).isOf(ModItems.BLANKHELMET)) {
+                if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId())
+                        .isOf(ModItems.BLANKHELMET)) {
                     player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
                 }
             }

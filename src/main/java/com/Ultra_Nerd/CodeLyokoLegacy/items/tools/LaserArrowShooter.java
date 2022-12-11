@@ -18,9 +18,6 @@ import org.jetbrains.annotations.NotNull;
 public final class LaserArrowShooter extends BowItem {
 
 
-
-
-
     public LaserArrowShooter(@NotNull Settings builder) {
         super(builder);
 
@@ -38,13 +35,10 @@ public final class LaserArrowShooter extends BowItem {
     }
 
 
-
-
     @Override
     public void inventoryTick(@NotNull ItemStack pStack, @NotNull World pLevel, @NotNull Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if(!pStack.hasEnchantments())
-        {
-            pStack.addEnchantment(Enchantments.INFINITY,Enchantments.INFINITY.getMaxLevel());
+        if (!pStack.hasEnchantments()) {
+            pStack.addEnchantment(Enchantments.INFINITY, Enchantments.INFINITY.getMaxLevel());
             pStack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
 
         }
@@ -64,23 +58,23 @@ public final class LaserArrowShooter extends BowItem {
                 && playerIn.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() == ModItems.ODD_BOOTS.get()) {
             //worldIn.playSound(null,playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModItems.BIT.get(), SoundCategory.NEUTRAL, 1f, 1f);
 */
-            if(!world.isClient()) {
-                world.playSound(null, user.getBlockPos(), ModSounds.LASERARROW, SoundCategory.PLAYERS, 1f, 1f);
+        if (!world.isClient()) {
+            world.playSound(null, user.getBlockPos(), ModSounds.LASERARROW, SoundCategory.PLAYERS, 1f, 1f);
 
 
-                final EntityLaser las = new EntityLaser(world, user,20);
+            final EntityLaser las = new EntityLaser(world, user, 20);
 
-                //las.(10);
-                las.setNoGravity(true);
-                las.shake =0;
-                las.setPos(user.getX(),user.getEyeY(),user.getZ());
-                las.setVelocity(user,user.getPitch(),user.getYaw(),0, 11.44f, 0);
-                world.spawnEntity(las);
-            }
-            item.decrement(0);
+            //las.(10);
+            las.setNoGravity(true);
+            las.shake = 0;
+            las.setPos(user.getX(), user.getEyeY(), user.getZ());
+            las.setVelocity(user, user.getPitch(), user.getYaw(), 0, 11.44f, 0);
+            world.spawnEntity(las);
+        }
+        item.decrement(0);
 
-            //item.getItem().damageItem(item,1, playerIn, null);
-            return TypedActionResult.pass(item);
+        //item.getItem().damageItem(item,1, playerIn, null);
+        return TypedActionResult.pass(item);
         //} else {
         //    return new InteractionResultHolder<>(InteractionResult.FAIL, item);
         //}

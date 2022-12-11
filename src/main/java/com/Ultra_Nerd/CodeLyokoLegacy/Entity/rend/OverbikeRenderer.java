@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 
 
 public final class OverbikeRenderer<T extends OverbikeEntity> extends EntityRenderer<T> {
-    protected OverbikeRenderer(final EntityRendererFactory.Context ctx) {
+    private OverbikeRenderer(final EntityRendererFactory.Context ctx) {
         super(ctx);
     }
 

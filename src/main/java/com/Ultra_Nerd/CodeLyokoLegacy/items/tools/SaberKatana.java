@@ -23,17 +23,14 @@ public final class SaberKatana extends SwordItem {
     private final float attackdamage;
     private final float attackspeed;
     private boolean selectedOnce;
+
     public SaberKatana(final ToolMaterial toolMaterial, final int attackDamage, final float attackSpeed, final Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
         this.attackspeed = attackSpeed;
         this.attackdamage = attackDamage + toolMaterial.getAttackDamage();
 
 
-
     }
-
-
-
 
 
     @Override
@@ -52,31 +49,32 @@ public final class SaberKatana extends SwordItem {
 
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(final ItemStack stack, final EquipmentSlot slot) {
-        Multimap<EntityAttribute,EntityAttributeModifier> multimap = HashMultimap.create();
+        Multimap<EntityAttribute, EntityAttributeModifier> multimap = HashMultimap.create();
 
         if (slot == EquipmentSlot.MAINHAND) {
-            multimap.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon damage modifier", this.attackdamage, EntityAttributeModifier.Operation.ADDITION));
-            multimap.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon speed modifier",  this.attackspeed, EntityAttributeModifier.Operation.ADDITION));
+            multimap.put(EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                    new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon damage modifier", this.attackdamage,
+                            EntityAttributeModifier.Operation.ADDITION));
+            multimap.put(EntityAttributes.GENERIC_ATTACK_SPEED,
+                    new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon speed modifier", this.attackspeed,
+                            EntityAttributeModifier.Operation.ADDITION));
         }
         return multimap;
 
     }
 
 
-
     @Override
     public void inventoryTick(final ItemStack stack, final World world, final Entity entity, final int slot, final boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
-        if(selected && !selectedOnce)
-        {
-            entity.playSound(ModSounds.SWORDDRAW,1,1);
+        if (selected && !selectedOnce) {
+            entity.playSound(ModSounds.SWORDDRAW, 1, 1);
             selectedOnce = true;
         } else if (!selected) {
             selectedOnce = false;
         }
-        if(!stack.hasEnchantments())
-        {
-            stack.addEnchantment(Enchantments.SWEEPING,Enchantments.SWEEPING.getMaxLevel());
+        if (!stack.hasEnchantments()) {
+            stack.addEnchantment(Enchantments.SWEEPING, Enchantments.SWEEPING.getMaxLevel());
             stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
 
         }

@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.DamageSources.LyokoDamage;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DamageSources.LyokoDamage;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -17,17 +17,13 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 
-
 public final class Marabunta extends SoulSandBlock {
-
-
 
 
     public Marabunta() {
         super(FabricBlockSettings.of(Material.EGG)
                 .strength(6, 10)
                 .sounds(BlockSoundGroup.STONE).ticksRandomly()
-
 
 
         );
@@ -37,7 +33,7 @@ public final class Marabunta extends SoulSandBlock {
     public void randomTick(final BlockState state, final ServerWorld world, final BlockPos pos, final net.minecraft.util.math.random.Random random) {
         super.randomTick(state, world, pos, random);
         for (byte i = 0; i < 90; ++i) {
-            BlockPos blockpos = pos.offset(Direction.Axis.pickRandomAxis(random),random.nextInt(3) - 1);
+            BlockPos blockpos = pos.offset(Direction.Axis.pickRandomAxis(random), random.nextInt(3) - 1);
 
             if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !world.isChunkLoaded(blockpos)) {
                 return;
@@ -60,14 +56,13 @@ public final class Marabunta extends SoulSandBlock {
 
     /*
      * Called When an Entity Collided with the Block
-    */
+     */
 
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
         entity.damage(new LyokoDamage(this.getTranslationKey()), Random.create().nextInt(10));
     }
-
 
 
     @Override

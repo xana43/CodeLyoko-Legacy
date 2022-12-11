@@ -11,22 +11,22 @@ import team.reborn.energy.api.base.SimpleEnergyStorage;
 import java.util.Optional;
 
 public abstract class EnergyStorageBlockEntity extends SidedTickingBlockEntity {
+    private static final String energyKey = "general_energy_storage";
     protected final SimpleEnergyStorage energyStorage;
+
 
     public EnergyStorageBlockEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state,
             final int inventorySize, final long capacity, @Nullable Long maxInsert, @Nullable Long maxExtract) {
         super(type, pos, state, inventorySize);
         maxExtract = Optional.ofNullable(maxExtract).orElse(0L);
         maxInsert = Optional.ofNullable(maxInsert).orElse(0L);
-        energyStorage = new SimpleEnergyStorage(capacity,maxInsert,maxExtract);
+        energyStorage = new SimpleEnergyStorage(capacity, maxInsert, maxExtract);
     }
-
 
     public EnergyStorage getEnergyStorage() {
         return energyStorage;
     }
 
-    private static final String energyKey = "general_energy_storage";
     @Override
     public void readNbt(final NbtCompound nbt) {
 
@@ -37,6 +37,6 @@ public abstract class EnergyStorageBlockEntity extends SidedTickingBlockEntity {
     @Override
     protected void writeNbt(final NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putLong(energyKey,energyStorage.amount);
+        nbt.putLong(energyKey, energyStorage.amount);
     }
 }

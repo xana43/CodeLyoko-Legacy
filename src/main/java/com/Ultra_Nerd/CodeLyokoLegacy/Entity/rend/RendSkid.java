@@ -18,6 +18,13 @@ import net.minecraft.util.math.Vec3f;
 
 
 public final class RendSkid extends EntityRenderer<EntitySkid> {
+    private static final BakedModel SkidBladnir;
+
+    static {
+        SkidBladnir = Myron.getModel(CodeLyokoMain.codeLyokoPrefix("entity/skid/skid"));
+    }
+
+
     private RendSkid(final EntityRendererFactory.Context ctx) {
         super(ctx);
     }
@@ -27,22 +34,15 @@ public final class RendSkid extends EntityRenderer<EntitySkid> {
         return SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE;
     }
 
-
-    private static final BakedModel SkidBladnir;
-
-
-    static {
-        SkidBladnir = Myron.getModel(CodeLyokoMain.CodeLyokoPrefix("entity/skid/skid"));
-    }
-
-
     @Override
     public void render(final EntitySkid entity, final float yaw, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light) {
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
         matrices.push();
         matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(360 - yaw));
-        MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer().render(entity.world, SkidBladnir, Blocks.AIR.getDefaultState(), entity.getBlockPos(), matrices, vertexConsumers.getBuffer(RenderLayer.getSolid()),
-                false, entity.world.random, 0, 0);
+        MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer()
+                .render(entity.world, SkidBladnir, Blocks.AIR.getDefaultState(), entity.getBlockPos(), matrices,
+                        vertexConsumers.getBuffer(RenderLayer.getSolid()),
+                        false, entity.world.random, 0, 0);
         matrices.pop();
     }
 

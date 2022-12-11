@@ -12,10 +12,6 @@ import net.minecraft.world.BlockView;
 import java.util.stream.Stream;
 
 public final class ElectroplatingRodParts extends Block {
-    public ElectroplatingRodParts(final Settings settings) {
-        super(settings);
-    }
-
     private static final VoxelShape RodPart = Stream.of(
             Block.createCuboidShape(6, 0, 6, 10, 16, 10),
             Block.createCuboidShape(7, 0, 5, 9, 16, 6),
@@ -24,6 +20,9 @@ public final class ElectroplatingRodParts extends Block {
             Block.createCuboidShape(10, 0, 7, 11, 16, 9)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
+    public ElectroplatingRodParts(final Settings settings) {
+        super(settings);
+    }
 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {

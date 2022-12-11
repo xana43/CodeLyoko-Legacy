@@ -15,8 +15,9 @@ import net.minecraft.screen.slot.Slot;
 public final class ReactorScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
+
     public ReactorScreenHandler(final int syncId, final PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(2),new ArrayPropertyDelegate(1));
+        this(syncId, playerInventory, new SimpleInventory(2), new ArrayPropertyDelegate(1));
     }
 
     public ReactorScreenHandler(final int syncId, final PlayerInventory playerInventory, final Inventory inventory, final PropertyDelegate propertyDelegate) {
@@ -42,10 +43,11 @@ public final class ReactorScreenHandler extends ScreenHandler {
             this.addSlot(new Slot(playerInventory, row, 8 + row * 18, 142));
         }
     }
-    public int getEnergyAmount()
-    {
+
+    public int getEnergyAmount() {
         return propertyDelegate.get(0);
     }
+
     @Override
     public ItemStack transferSlot(final PlayerEntity player, final int index) {
         ItemStack newStack = ItemStack.EMPTY;

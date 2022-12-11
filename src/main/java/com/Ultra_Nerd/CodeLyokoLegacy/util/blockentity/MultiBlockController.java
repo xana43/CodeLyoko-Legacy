@@ -12,16 +12,18 @@ public class MultiBlockController extends BlockEntity implements MasterEntity {
     private final BlockPattern currentPattern;
     private final BooleanProperty thisProperty;
     protected boolean checkSuccessful;
+
     public MultiBlockController(final BlockEntityType<?> type, final BlockPos pos, final BlockState state,
             final BlockPattern pattern, final BooleanProperty stateProperty) {
         super(type, pos, state);
         currentPattern = pattern;
         this.thisProperty = stateProperty;
     }
-    public boolean getCheckSuccessful()
-    {
+
+    public boolean getCheckSuccessful() {
         return this.checkSuccessful;
     }
+
     @Override
     public void check() {
         if (world != null) {

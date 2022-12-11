@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 
-public abstract class UraniumWasteFluid extends LyokoFluid{
+public abstract class UraniumWasteFluid extends LyokoFluid {
     @Override
     public Fluid getStill() {
         return ModFluids.STILL_URANIUM;
@@ -27,12 +27,11 @@ public abstract class UraniumWasteFluid extends LyokoFluid{
 
     @Override
     protected BlockState toBlockState(final FluidState state) {
-        return ModBlocks.URANIUM_WASTE_BLOCK.getDefaultState().with(Properties.LEVEL_15,getBlockStateLevel(state));
+        return ModBlocks.URANIUM_WASTE_BLOCK.getDefaultState().with(Properties.LEVEL_15, getBlockStateLevel(state));
     }
 
 
-    public static class Flowing extends UraniumWasteFluid
-    {
+    public static class Flowing extends UraniumWasteFluid {
         @Override
         protected void appendProperties(final StateManager.Builder<Fluid, FluidState> builder) {
             super.appendProperties(builder.add(LEVEL));
@@ -54,8 +53,7 @@ public abstract class UraniumWasteFluid extends LyokoFluid{
         }
     }
 
-    public static class Still extends UraniumWasteFluid
-    {
+    public static class Still extends UraniumWasteFluid {
         @Override
         protected boolean isInfinite() {
             return true;

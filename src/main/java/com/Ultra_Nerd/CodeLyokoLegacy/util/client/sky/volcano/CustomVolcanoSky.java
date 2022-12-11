@@ -19,8 +19,8 @@ import net.minecraft.util.math.Vec3f;
 public record CustomVolcanoSky() implements DimensionRenderingRegistry.SkyRenderer/*implements ISkyRenderHandler*/ {
 
 
-    private static final Identifier sky1 = CodeLyokoMain.CodeLyokoPrefix("textures/skies/volcano/sky1.png");
-    private static final Identifier sky2 = CodeLyokoMain.CodeLyokoPrefix("textures/skies/volcano/sky2.png");
+    private static final Identifier sky1 = CodeLyokoMain.codeLyokoPrefix("textures/skies/volcano/sky1.png");
+    private static final Identifier sky2 = CodeLyokoMain.codeLyokoPrefix("textures/skies/volcano/sky2.png");
 
 
     private static final Tessellator tessellator = Tessellator.getInstance();

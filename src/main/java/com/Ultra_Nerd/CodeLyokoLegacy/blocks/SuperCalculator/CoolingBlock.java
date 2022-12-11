@@ -12,10 +12,6 @@ import net.minecraft.world.BlockView;
 import java.util.stream.Stream;
 
 public final class CoolingBlock extends Block {
-    public CoolingBlock(final Settings settings) {
-        super(settings);
-    }
-
     private static final VoxelShape shape = Stream.of(
 
             Block.createCuboidShape(9, 0, 7, 13, 32, 9),
@@ -757,6 +753,10 @@ public final class CoolingBlock extends Block {
             Block.createCuboidShape(-13, 0, 7, -9, 32, 9),
             Block.createCuboidShape(-13, 0, 23, -9, 32, 25)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
+
+    public CoolingBlock(final Settings settings) {
+        super(settings);
+    }
 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {

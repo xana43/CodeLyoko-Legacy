@@ -7,21 +7,23 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
 public record PacketHandlerCommon() {
-    public static final Identifier ChannelID = CodeLyokoMain.CodeLyokoPrefix("control_panel_packet");
-    public  static  final Identifier TowerChannelID = CodeLyokoMain.CodeLyokoPrefix("tower_packet");
-    public static void CommonChannelRegistry() {
+    public static final Identifier ChannelID = CodeLyokoMain.codeLyokoPrefix("control_panel_packet");
+    public static final Identifier TowerChannelID = CodeLyokoMain.codeLyokoPrefix("tower_packet");
+
+    public static void commonChannelRegistry() {
         ServerPlayNetworking.registerGlobalReceiver(ChannelID, (server, player, handler, buf, responseSender) -> {
 
 
             final BlockPos pos = buf.readBlockPos();
             final boolean active = buf.readBoolean();
 
-            server.execute(() -> player.world.setBlockState(pos, player.world.getBlockState(pos).with(ControlPanel.ScreenOn, active)));
+            server.execute(() -> player.world.setBlockState(pos,
+                    player.world.getBlockState(pos).with(ControlPanel.ScreenOn, active)));
 
         });
         //TODO:a way for the tower GUI to change the state of the tower
-        ServerPlayNetworking.registerGlobalReceiver(TowerChannelID,(server, player, handler, buf, responseSender) -> {
-            final  BlockPos pos = buf.readBlockPos();
+        ServerPlayNetworking.registerGlobalReceiver(TowerChannelID, (server, player, handler, buf, responseSender) -> {
+            final BlockPos pos = buf.readBlockPos();
             final boolean active = buf.readBoolean();
 
         });

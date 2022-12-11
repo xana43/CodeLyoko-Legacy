@@ -12,18 +12,11 @@ import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
-public class FluorideInfuser extends BlockWithEntity  {
+public class FluorideInfuser extends BlockWithEntity {
 
-
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return null;
-    }
 
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty INFUSING = BooleanProperty.of("infusing");
-
     public FluorideInfuser() {
         super(FabricBlockSettings.of(Material.METAL)
 
@@ -32,9 +25,15 @@ public class FluorideInfuser extends BlockWithEntity  {
 
         );
 
-  //      this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(INFUSING, false));
+        //      this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(INFUSING, false));
 
 
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
     }
 /*
 

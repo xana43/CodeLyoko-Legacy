@@ -16,7 +16,8 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public final class MantaEntity extends GuardianEntity implements IAnimatable, RangedAttackMob {
     private final AnimationFactory manager = GeckoLibUtil.createFactory(this);
-    private final AnimationController<?> controller = new AnimationController<>(this, "mantamovecontroller", 20, this::animationPred);
+    private final AnimationController<?> controller = new AnimationController<>(this, "mantamovecontroller", 20,
+            this::animationPred);
 
     public MantaEntity(final EntityType<? extends GuardianEntity> entityType, final World world) {
         super(entityType, world);
@@ -87,7 +88,7 @@ public final class MantaEntity extends GuardianEntity implements IAnimatable, Ra
 
     @Override
     public void registerControllers(@NotNull AnimationData data) {
-    data.addAnimationController(controller);
+        data.addAnimationController(controller);
     }
 
     private <E extends MantaEntity> @NotNull PlayState animationPred(AnimationEvent<E> event) {

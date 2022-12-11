@@ -20,19 +20,25 @@ public record ModEntities() {
             .spawnGroup(SpawnGroup.MONSTER)
             .defaultAttributes(EntityBlok::createMonsterAttributes)
             .dimensions(EntityDimensions.fixed(2, 2))
-            .spawnRestriction(SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EntityBlok::canSpawn)
+            .spawnRestriction(SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    EntityBlok::canSpawn)
             .fireImmune().build();
-    public static final EntityType<EntityLaser> LASER_ENTITY_TYPE = FabricEntityTypeBuilder.<EntityLaser>create(SpawnGroup.MISC, EntityLaser::new).build();
-    public static final EntityType<MegaTankEntity> MEGATANK = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, MegaTankEntity::new).dimensions(EntityDimensions.fixed(1, 1)).fireImmune()
+    public static final EntityType<EntityLaser> LASER_ENTITY_TYPE = FabricEntityTypeBuilder.<EntityLaser>create(
+            SpawnGroup.MISC, EntityLaser::new).build();
+    public static final EntityType<MegaTankEntity> MEGATANK = FabricEntityTypeBuilder.create(SpawnGroup.MONSTER,
+                    MegaTankEntity::new).dimensions(EntityDimensions.fixed(1, 1)).fireImmune()
             .build();
     public static final EntityType<HornetEntity> HORNET_ENTITY_ENTITY_TYPE = FabricEntityTypeBuilder.createMob()
             .entityFactory(HornetEntity::new)
             .spawnGroup(SpawnGroup.MONSTER)
             .defaultAttributes(HornetEntity::registerAttributes)
             .dimensions(EntityDimensions.fixed(1, 1))
-            .spawnRestriction(SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (type, world, spawnReason, pos, random) -> HornetEntity.isValidSpawn(world.getBiomeAccess(), pos, world))
+            .spawnRestriction(SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    (type, world, spawnReason, pos, random) -> HornetEntity.isValidSpawn(world.getBiomeAccess(), pos,
+                            world))
             .build();
-    public static final EntityType<OverboardEntity> OVERBOARD = FabricEntityTypeBuilder.<OverboardEntity>create(SpawnGroup.MISC, OverboardEntity::new)
+    public static final EntityType<OverboardEntity> OVERBOARD = FabricEntityTypeBuilder.create(
+                    SpawnGroup.MISC, OverboardEntity::new)
 
             .dimensions(EntityDimensions.fixed(2, 1))
 

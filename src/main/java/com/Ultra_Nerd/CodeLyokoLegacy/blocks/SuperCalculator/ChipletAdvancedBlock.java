@@ -12,10 +12,6 @@ import net.minecraft.world.BlockView;
 import java.util.stream.Stream;
 
 public final class ChipletAdvancedBlock extends Block {
-    public ChipletAdvancedBlock(final Settings settings) {
-        super(settings);
-    }
-
     private static final VoxelShape shape = Stream.of(
             Block.createCuboidShape(1, 0, 1, 15, 16, 15),
             Block.createCuboidShape(0, 2, 1, 1, 3, 15),
@@ -52,6 +48,9 @@ public final class ChipletAdvancedBlock extends Block {
             Block.createCuboidShape(0, 14, 15, 16, 15, 16)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
+    public ChipletAdvancedBlock(final Settings settings) {
+        super(settings);
+    }
 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {

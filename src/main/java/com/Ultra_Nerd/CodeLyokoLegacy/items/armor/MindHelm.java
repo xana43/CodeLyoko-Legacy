@@ -7,9 +7,9 @@ import org.jetbrains.annotations.NotNull;
 
 //@Mod.EventBusSubscriber(modid = CodeLyokoMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class MindHelm extends ArmorItem {
-    private static int timer = 3600000;
-    private byte damage = 1;
-    private static boolean inventory = false;
+    private static final int timer = 3600000;
+    private static final boolean inventory = false;
+    private final byte damage = 1;
 
     public MindHelm(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);

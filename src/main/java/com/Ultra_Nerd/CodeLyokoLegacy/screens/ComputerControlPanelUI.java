@@ -23,19 +23,17 @@ import org.jetbrains.annotations.NotNull;
 public final class ComputerControlPanelUI extends HandledScreen<ComputerControlPanelScreenHandler> /*extends AbstractContainerScreen<ComputerControlPanelScreenHandler>*/ {
 
     private static final int size = 256;
-    private static final Identifier TEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/computercontrolpanelui.png");
-    private static final Identifier BUTTONTEXTURES = CodeLyokoMain.CodeLyokoPrefix("textures/gui/buttonatlas.png");
+    private static final Identifier TEXTURES = CodeLyokoMain.codeLyokoPrefix("textures/gui/computercontrolpanelui.png");
+    private static final Identifier BUTTONTEXTURES = CodeLyokoMain.codeLyokoPrefix("textures/gui/buttonatlas.png");
+    int x, y;
     private TextFieldWidget text;
     private boolean active;
     private TexturedButtonWidget button;
-    ComputerControlPanelScreenHandler computerControlPanelScreenHandler;
-
-    int x, y;
 
     public ComputerControlPanelUI(final ComputerControlPanelScreenHandler handler, final PlayerInventory inventory, final Text title) {
         super(handler, inventory, title);
         playerInventoryTitleX = -900;
-        computerControlPanelScreenHandler = handler;
+
 
     }
 
@@ -91,14 +89,15 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     private void setButtons() {
 
         //
-        this.button = new TexturedButtonWidget(x, y, this.width / 3, this.height >> 3, 0, 0, BUTTONTEXTURES, (press) -> {
-            final PacketByteBuf buf = PacketByteBufs.create();
-            active = !active;
-            buf.writeBlockPos(handler.getPos());
-            buf.writeBoolean(active);
-            ClientPlayNetworking.send(PacketHandlerCommon.ChannelID, buf);
+        this.button = new TexturedButtonWidget(x, y, this.width / 3, this.height >> 3, 0, 0, BUTTONTEXTURES,
+                (press) -> {
+                    final PacketByteBuf buf = PacketByteBufs.create();
+                    active = !active;
+                    buf.writeBlockPos(handler.getPos());
+                    buf.writeBoolean(active);
+                    ClientPlayNetworking.send(PacketHandlerCommon.ChannelID, buf);
 
-        }) {
+                }) {
             @Override
             public void renderButton(MatrixStack stack, int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
                 //super.renderButton(p_renderButton_1_, p_renderButton_2_, p_renderButton_3_);
@@ -117,7 +116,9 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
                     drawTexture(stack, x, y, 0, 19, 104, 19, 1024, 512);
                 }
                 //drawTexture(stack,x, 38, 0, (46 + i) * 20, width >> 1, height);
-                drawCenteredText(stack, client.textRenderer, getMessage().copy().setStyle(ConstantUtil.Styles.HUD.getThisStyle()), x + (width + 55) >> 1, y + (height + 32) >> 1, j | MathHelper.ceil(alpha * 255.0F) << 24);
+                drawCenteredText(stack, client.textRenderer,
+                        getMessage().copy().setStyle(ConstantUtil.Styles.HUD.getThisStyle()), x + (width + 55) >> 1,
+                        y + (height + 32) >> 1, j | MathHelper.ceil(alpha * 255.0F) << 24);
 
 
             }
@@ -154,7 +155,8 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     private void setTextField() {
         final int tx = this.width >> 1;
         final int ty = this.height >> 1;
-        this.text = new TextFieldWidget(client.textRenderer, x, ty + 40, this.width, 23, Text.translatable("gui.cm.computer_input_main").setStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
+        this.text = new TextFieldWidget(client.textRenderer, x, ty + 40, this.width, 23,
+                Text.translatable("gui.cm.computer_input_main").setStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
         this.text.setDrawsBackground(false);
         this.text.setVisible(true);
         this.text.setEditableColor(0xda2c43);

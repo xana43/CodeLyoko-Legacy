@@ -8,23 +8,15 @@ import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public final class ElectricFluorideInfuser extends BlockWithEntity {
 
 
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return null;
-    }
-
-    public static @NotNull DirectionProperty FACING = HorizontalFacingBlock.FACING;
+    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
     public ElectricFluorideInfuser() {
         super(FabricBlockSettings.copy(Blocks.IRON_BLOCK)
-
 
 
         );
@@ -32,6 +24,12 @@ public final class ElectricFluorideInfuser extends BlockWithEntity {
         //this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(INFUSING, false));
 
         // TODO Auto-generated constructor stub
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
     }
 
 /*

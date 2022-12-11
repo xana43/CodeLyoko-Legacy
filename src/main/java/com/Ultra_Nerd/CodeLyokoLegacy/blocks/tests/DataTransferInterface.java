@@ -15,17 +15,17 @@ public final class DataTransferInterface extends BlockWithEntity {
         super(settings);
     }
 
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return null;
-    }
-
     public DataTransferInterface() {
         super(FabricBlockSettings.of(Material.METAL)
 
                 .strength(-1, -1)
                 .sounds(BlockSoundGroup.METAL));
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
     }
 
     @Override

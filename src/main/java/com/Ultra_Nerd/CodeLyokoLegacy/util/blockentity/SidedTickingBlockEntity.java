@@ -16,9 +16,8 @@ public abstract class SidedTickingBlockEntity extends TickingBlockEntity impleme
     @Override
     public int[] getAvailableSlots(final Direction side) {
         final int[] result = new int[getItems().size()];
-        for (int i = 0; i < result.length;i++)
-        {
-            result [i] = i;
+        for (int i = 0; i < result.length; i++) {
+            result[i] = i;
         }
         return result;
     }

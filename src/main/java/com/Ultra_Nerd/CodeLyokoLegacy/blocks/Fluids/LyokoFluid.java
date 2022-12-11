@@ -10,8 +10,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
-public abstract class LyokoFluid extends FlowableFluid
-{
+public abstract class LyokoFluid extends FlowableFluid {
     @Override
     public boolean matchesType(final Fluid fluid) {
         return fluid == getStill() || fluid == getFlowing();

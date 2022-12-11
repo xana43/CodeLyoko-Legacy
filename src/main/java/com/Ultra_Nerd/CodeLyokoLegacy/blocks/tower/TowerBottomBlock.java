@@ -19,16 +19,16 @@ public final class TowerBottomBlock extends Block {
     @Override
     public void onLandedUpon(final World world, final BlockState state, final BlockPos pos, final Entity entity, final float fallDistance) {
         super.onLandedUpon(world, state, pos, entity, fallDistance);
-        if(!(entity instanceof PlayerEntity) && !(entity instanceof LyokoVehicleEntity))
-        {
-            entity.damage(DamageSource.OUT_OF_WORLD,Float.MAX_VALUE);
+        if (!(entity instanceof PlayerEntity) && !(entity instanceof LyokoVehicleEntity)) {
+            entity.damage(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
         }
     }
 
     @Override
     public void onSteppedOn(final World world, final BlockPos pos, final BlockState state, final Entity entity) {
         super.onSteppedOn(world, pos, state, entity);
-        Iterable<BlockPos> blockList = BlockPos.iterate(pos.getX() - 7, pos.getY(), pos.getZ() - 7, pos.getX() + 7, pos.getY() + 32, pos.getZ() + 7);
+        Iterable<BlockPos> blockList = BlockPos.iterate(pos.getX() - 7, pos.getY(), pos.getZ() - 7, pos.getX() + 7,
+                pos.getY() + 32, pos.getZ() + 7);
         for (BlockPos blockPos : blockList) {
             if (world.getBlockState(blockPos).getBlock() == ModBlocks.TOWER_BLUE) {
                 if (entity instanceof PlayerEntity)
@@ -41,10 +41,6 @@ public final class TowerBottomBlock extends Block {
             entity.damage(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
         }
     }
-
-
-
-
 
 
 }

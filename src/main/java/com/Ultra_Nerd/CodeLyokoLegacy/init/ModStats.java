@@ -10,12 +10,12 @@ public record ModStats() {
 
     public static Identifier ENTERED_LYOKO_IDENTIFIER;
 
-    public static void RegisterStats() {
+    public static void registerStats() {
         ENTERED_LYOKO_IDENTIFIER = registerCustomStats("entered_lyoko", StatFormatter.DEFAULT);
     }
 
     private static Identifier registerCustomStats(final String name, final StatFormatter formatter) {
-        final Identifier identifier = CodeLyokoMain.CodeLyokoPrefix(name);
+        final Identifier identifier = CodeLyokoMain.codeLyokoPrefix(name);
         Registry.register(Registry.CUSTOM_STAT, name, identifier);
         Stats.CUSTOM.getOrCreateStat(identifier, formatter);
         return identifier;

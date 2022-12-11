@@ -28,6 +28,12 @@ public final class TowerInterface extends BlockWithEntity {
     private static final VoxelShape SHAPE_E = Block.createCuboidShape(9, 1, 1, 9.1, 15, 15);
     private static final VoxelShape SHAPE_W = Block.createCuboidShape(9, 1, 1, 9.1, 15, 15);
 
+    public TowerInterface() {
+        super(FabricBlockSettings.of(Material.BARRIER).strength(-1, -1).sounds(BlockSoundGroup.AMETHYST_CLUSTER)
+                .luminance(80));
+        this.setDefaultState(this.getStateManager().getDefaultState().with(DIRINTERFACE, Direction.NORTH));
+    }
+
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         return switch (state.get(DIRINTERFACE)) {
@@ -36,11 +42,6 @@ public final class TowerInterface extends BlockWithEntity {
             case WEST -> SHAPE_W;
             default -> SHAPE_N;
         };
-    }
-
-    public TowerInterface() {
-        super(FabricBlockSettings.of(Material.BARRIER).strength(-1, -1).sounds(BlockSoundGroup.AMETHYST_CLUSTER).luminance(80));
-        this.setDefaultState(this.getStateManager().getDefaultState().with(DIRINTERFACE, Direction.NORTH));
     }
 
     @Override

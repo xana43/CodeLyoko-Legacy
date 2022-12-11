@@ -9,7 +9,7 @@
         "InventoryScreenDropDisable",
         "ItemDropMixin",
         "PlayerLyokoMixin",
-        "retainXP",
+        "RetainXP",
         "stopInventoryDrop",
         "util.LyokoRarityMixin"
     ],

@@ -26,6 +26,7 @@ public final class Myron {
     }
 
     public static @Nullable Mesh load(Identifier modelPath, Function<SpriteIdentifier, Sprite> textureGetter, ModelBakeSettings bakeSettings, boolean isBlock) {
-        return com.Ultra_Nerd.CodeLyokoLegacy.util.client.APIEmbed.impl.client.Myron.load(modelPath, textureGetter, bakeSettings, isBlock);
+        return com.Ultra_Nerd.CodeLyokoLegacy.util.client.APIEmbed.impl.client.Myron.load(modelPath, textureGetter,
+                bakeSettings, isBlock);
     }
 }

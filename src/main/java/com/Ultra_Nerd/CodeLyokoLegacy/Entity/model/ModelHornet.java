@@ -13,18 +13,18 @@ public final class ModelHornet extends AnimatedGeoModel<HornetEntity> {
     @Override
     public Identifier getModelResource(final HornetEntity object) {
 
-        return CodeLyokoMain.CodeLyokoPrefix("geo/hornet.geo.json");
+        return CodeLyokoMain.codeLyokoPrefix("geo/hornet.geo.json");
     }
 
     @Override
     public Identifier getTextureResource(final HornetEntity object) {
-        return CodeLyokoMain.CodeLyokoPrefix("textures/entity/hornet/hornetatlas.png");
+        return CodeLyokoMain.codeLyokoPrefix("textures/entity/hornet/hornetatlas.png");
     }
 
     @Override
     public Identifier getAnimationResource(final HornetEntity animatable) {
 
-        return CodeLyokoMain.CodeLyokoPrefix("animations/entities/hornet.json");
+        return CodeLyokoMain.codeLyokoPrefix("animations/entities/hornet.json");
     }
 
 

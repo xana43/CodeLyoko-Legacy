@@ -20,8 +20,9 @@ import javax.annotation.Nonnull;
 public final class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer<T> {
 
 
+    private static final Identifier OVERBOARD_TEX = CodeLyokoMain.codeLyokoPrefix(
+            "textures/entity/overboard/overboarduv.png");
     private final @NotNull EntityModel<T> OverBoardModel;
-
 
     public OverboardRenderer(EntityRendererFactory.@NotNull Context renderManager) {
         super(renderManager);
@@ -29,8 +30,6 @@ public final class OverboardRenderer<T extends OverboardEntity> extends EntityRe
         this.OverBoardModel = new ModelOverboard<>(renderManager.getPart(ModelOverboard.LAYER_LOCATION));
 
     }
-
-    private static final Identifier OVERBOARD_TEX = CodeLyokoMain.CodeLyokoPrefix("textures/entity/overboard/overboarduv.png");
 
     @Override
     public Identifier getTexture(final T entity) {
@@ -46,7 +45,8 @@ public final class OverboardRenderer<T extends OverboardEntity> extends EntityRe
         matrixStackIn.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(360 + entityYaw));
         //assert MinecraftClient.getInstance().player != null;
         //this.OverBoardModel.setAngles(entityIn, 0, 0, 0, 0, 0);
-        final VertexConsumer vertexBuilder = bufferIn.getBuffer(this.OverBoardModel.getLayer(this.getTexture(entityIn)));
+        final VertexConsumer vertexBuilder = bufferIn.getBuffer(
+                this.OverBoardModel.getLayer(this.getTexture(entityIn)));
         this.OverBoardModel.render(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.DEFAULT_UV, 1, 1, 1, 1);
         matrixStackIn.pop();
     }

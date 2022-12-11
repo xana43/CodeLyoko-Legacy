@@ -18,7 +18,7 @@ public class LyokoVehicleEntity extends BoatEntity {
 
     public LyokoVehicleEntity(final EntityType<? extends BoatEntity> entityType, final World world) {
         super(entityType, world);
-        if (!MethodUtil.DimensionCheck.EntityNotInVanillaWorld(this)) {
+        if (!MethodUtil.DimensionCheck.entityNotInVanillaWorld(this)) {
             this.remove(RemovalReason.DISCARDED);
         }
 

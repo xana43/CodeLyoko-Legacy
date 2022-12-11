@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 public final class ProjectorFocusblock extends Block {
 
 
-    public static @NotNull BooleanProperty VALIDFOCUS = BooleanProperty.of("validfocus");
+    public static final @NotNull BooleanProperty VALIDFOCUS = BooleanProperty.of("validfocus");
 
     private static final VoxelShape focus = Stream.of(
             Block.createCuboidShape(1, 0, 4, 15, 16, 12),

@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Recipies;
 
 public interface ICustomRecipes //extends Recipe<RecipeWrapper>
- {/*
+{/*
 
     ResourceLocation RECIPE_TYPE = new ResourceLocation(CodeLyokoMain.MOD_ID, "recipetypes");
 
