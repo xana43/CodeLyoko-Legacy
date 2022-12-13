@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
+import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
@@ -13,6 +14,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public final class ComputerKeyboard extends HorizontalFacingBlock {
@@ -580,7 +582,6 @@ public final class ComputerKeyboard extends HorizontalFacingBlock {
         super.appendProperties(builder.add(FACING));
     }
 
-
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         return switch (state.get(FACING)) {
@@ -591,6 +592,15 @@ public final class ComputerKeyboard extends HorizontalFacingBlock {
         };
     }
 
+    @Override
+    public VoxelShape getCollisionShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
+        return switch (state.get(FACING)) {
+            case SOUTH -> SHAPE_S;
+            case EAST -> SHAPE_E;
+            case WEST -> SHAPE_W;
+            default -> SHAPE_N;
+        };
+    }
 
     @Nullable
     @Override

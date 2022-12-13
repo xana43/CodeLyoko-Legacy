@@ -16,7 +16,6 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -30,10 +29,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
-public final class Scanner extends BlockWithEntity {
+public final class Scanner extends HorizontalFacingBlock implements BlockEntityProvider {
 
 
-    public static final DirectionProperty directionProperty = HorizontalFacingBlock.FACING;
     private static final VoxelShape shapeS = Stream.of(Block.createCuboidShape(2, 0, -2, 14, 1, 18),
                     Block.createCuboidShape(-4, 0, 5, -3, 15.3, 11), Block.createCuboidShape(-3, 0, 5, -2, 1, 11),
                     Block.createCuboidShape(19, 0, 5, 20, 15.3, 11), Block.createCuboidShape(5, 0, -3, 11, 1, -2),
@@ -292,13 +290,12 @@ public final class Scanner extends BlockWithEntity {
         );
 
         this.setDefaultState(this.getDefaultState().with(ConstantUtil.SCANNER_PROPERTY, false)
-                .with(directionProperty, Direction.NORTH));
+                .with(FACING, Direction.NORTH));
     }
 
     @Override
     public VoxelShape getCullingShape(final BlockState state, final BlockView world, final BlockPos pos) {
-        return switch (state.get(directionProperty)) {
-            case NORTH -> shapeN;
+        return switch (state.get(FACING)) {
             case SOUTH -> shapeS;
             case EAST -> shapeE;
             case WEST -> shapeW;
@@ -315,8 +312,7 @@ public final class Scanner extends BlockWithEntity {
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
 
         if (state.get(ConstantUtil.SCANNER_PROPERTY)) {
-            return switch (state.get(directionProperty)) {
-                case NORTH -> shapeN;
+            return switch (state.get(FACING)) {
                 case SOUTH -> shapeS;
                 case EAST -> shapeE;
                 case WEST -> shapeW;
@@ -336,12 +332,12 @@ public final class Scanner extends BlockWithEntity {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(directionProperty, ctx.getPlayerFacing());
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing());
     }
 
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(ConstantUtil.SCANNER_PROPERTY).add(directionProperty));
+        super.appendProperties(builder.add(ConstantUtil.SCANNER_PROPERTY).add(FACING));
     }
 
     @Override

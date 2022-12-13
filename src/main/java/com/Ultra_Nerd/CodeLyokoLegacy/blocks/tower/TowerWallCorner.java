@@ -2,21 +2,19 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.Material;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 
-public final class TowerWallCorner extends Block {
-
-
-    public static final DirectionProperty DIRTOWERC = HorizontalFacingBlock.FACING;
+public final class TowerWallCorner extends HorizontalFacingBlock {
 
     public TowerWallCorner() {
         super(FabricBlockSettings.of(Material.BARRIER)
@@ -33,15 +31,11 @@ public final class TowerWallCorner extends Block {
         return false;
     }
 
-    @Override
-    protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(DIRTOWERC));
-    }
 
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(DIRTOWERC, ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
     }
 
 
@@ -51,7 +45,7 @@ public final class TowerWallCorner extends Block {
         double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D);
         double d1 = (double) pos.getY() + 0.5D + (rand.nextDouble() - 0.5D);
         double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
-        switch (stateIn.get(DIRTOWERC)) {
+        switch (stateIn.get(FACING)) {
             case NORTH -> {
                 if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1)).isOf(Blocks.AIR)) {
                     worldIn.addParticle(ModParticles.TOWER_PARTICLE, d0, d1, pos.getZ() + 1.25f, 0, -1, 0);

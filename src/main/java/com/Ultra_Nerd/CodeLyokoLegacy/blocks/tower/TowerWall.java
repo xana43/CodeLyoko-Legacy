@@ -9,7 +9,6 @@ import net.minecraft.block.Material;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -17,9 +16,9 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 
-public class TowerWall extends Block {
+public class TowerWall extends HorizontalFacingBlock {
 
-    public static final DirectionProperty DIRTOWER = HorizontalFacingBlock.FACING;
+
     public static final IntProperty CURRENT_ACTIVATION_STATE = IntProperty.of("activation", 0, 3);
 
     public TowerWall() {
@@ -40,13 +39,13 @@ public class TowerWall extends Block {
 
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(DIRTOWER).add(CURRENT_ACTIVATION_STATE));
+        super.appendProperties(builder.add(CURRENT_ACTIVATION_STATE));
     }
 
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(DIRTOWER, ctx.getPlayerFacing().getOpposite())
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite())
                 .with(CURRENT_ACTIVATION_STATE, 0);
     }
 
@@ -56,7 +55,7 @@ public class TowerWall extends Block {
         final double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D);
         final double d1 = (double) pos.getY() + 0.5D + (rand.nextDouble() - 0.5D);
         final double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
-        switch (state.get(DIRTOWER)) {
+        switch (state.get(FACING)) {
             case NORTH -> {
                 switch (state.get(CURRENT_ACTIVATION_STATE)) {
                     case 0 -> world.addParticle(ModParticles.TOWER_PARTICLE, d0, d1,
@@ -111,18 +110,4 @@ public class TowerWall extends Block {
     }
 
 
-    //mod compatiability
-
-
-
-
-/*
-    @OnlyIn(Dist.CLIENT)
-    @Override
-    public void animateTick(@Nonnull BlockState stateIn, @Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull Random rand) {
-        super.animateTick(stateIn, worldIn, pos, rand);
-
-    }
-
- */
 }

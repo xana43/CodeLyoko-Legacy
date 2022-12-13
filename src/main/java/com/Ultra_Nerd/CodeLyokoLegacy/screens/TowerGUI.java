@@ -20,16 +20,15 @@ import org.lwjgl.glfw.GLFW;
 import java.awt.*;
 import java.security.SecureRandom;
 import java.util.Objects;
-import java.util.Random;
 
 public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     private static final Identifier TEXTURES = CodeLyokoMain.codeLyokoPrefix("textures/gui/towerinterface.png");
+    private final SecureRandom completeRandom = new SecureRandom();
     int tick = 0;
     private TextFieldWidget text;
     private TextFieldWidget Accepted;
     private byte I;
     private int acceptedColor;
-
 
     public TowerGUI(final TowerInterfaceScreenHandler handler, final PlayerInventory inventory, final Text title) {
         super(handler, inventory, title);
@@ -83,7 +82,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
 
 
     }
-    private final SecureRandom completeRandom = new SecureRandom();
+
     @Override
     protected void handledScreenTick() {
         this.text.tick();

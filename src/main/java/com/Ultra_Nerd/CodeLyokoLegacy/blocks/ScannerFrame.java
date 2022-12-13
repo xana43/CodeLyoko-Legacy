@@ -4,11 +4,10 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -20,10 +19,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
-public final class ScannerFrame extends Block {
+public final class ScannerFrame extends HorizontalFacingBlock {
 
 
-    public static final DirectionProperty directionPropertyFrame = Properties.HORIZONTAL_FACING;
     private static final VoxelShape shapeS = Stream.of(Block.createCuboidShape(-4, 0, 5, -3, 15.3, 11),
                     Block.createCuboidShape(19, 0, 5, 20, 15.3, 11), Block.createCuboidShape(5, 0, 19, 11, 15.3, 20),
                     Block.createCuboidShape(-3, 0, 2, -2, 15.3, 5), Block.createCuboidShape(18, 0, 11, 19, 15.3, 14),
@@ -146,21 +144,21 @@ public final class ScannerFrame extends Block {
         super(properties);
 
         this.setDefaultState(this.getDefaultState().with(ConstantUtil.SCANNER_PROPERTY, false)
-                .with(directionPropertyFrame, Direction.NORTH));
+                .with(FACING, Direction.NORTH));
     }
 
 
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(directionPropertyFrame, ctx.getPlayerFacing());
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing());
     }
 
 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         if (state.get(ConstantUtil.SCANNER_PROPERTY)) {
-            return switch (state.get(directionPropertyFrame)) {
+            return switch (state.get(FACING)) {
                 case NORTH -> shapeN;
                 case SOUTH -> shapeS;
                 case EAST -> shapeE;
@@ -175,6 +173,6 @@ public final class ScannerFrame extends Block {
 
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(ConstantUtil.SCANNER_PROPERTY).add(directionPropertyFrame));
+        super.appendProperties(builder.add(ConstantUtil.SCANNER_PROPERTY));
     }
 }

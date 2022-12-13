@@ -56,4 +56,5 @@ public final class ChipletAdvancedBlock extends Block {
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         return shape;
     }
+
 }

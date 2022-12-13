@@ -15,7 +15,8 @@ import java.util.stream.Stream;
 
 public final class BlackVoid extends Block {
 
-    private static final VoxelShape nullshape = Stream.of(
+    private static final VoxelShape collisionShape = Block.createCuboidShape(0,0,0,16,4,16);
+    /*private static final VoxelShape nullshape = Stream.of(
             Block.createCuboidShape(3, 0, 3, 10, 0.5, 4),
             Block.createCuboidShape(3, 0, 1, 10, 0.5, 2),
             Block.createCuboidShape(9, 0, 1, 16, 0.5, 2),
@@ -32,7 +33,7 @@ public final class BlackVoid extends Block {
                     14.024999999999997),
             Block.createCuboidShape(9.024999999999991, 0, 15.024999999999999, 16.02500000000001, 0.5, 16.025),
             Block.createCuboidShape(1.5249999999999915, 0, 15.024999999999999, 8.52500000000001, 0.5, 16.025)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
+    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();*/
 
     public BlackVoid() {
         super(FabricBlockSettings.of(Material.STRUCTURE_VOID).strength(-1, -1).dropsNothing().resistance(-1));
@@ -40,8 +41,10 @@ public final class BlackVoid extends Block {
 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
-        return nullshape;
+        return collisionShape;
     }
+
+
 
     @Override
     public BlockRenderType getRenderType(final BlockState state) {

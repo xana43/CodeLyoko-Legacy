@@ -7,7 +7,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
 
-public final class ComputerControlPanelScreenHandler extends ScreenHandler/*extends Container*/ {
+public final class ComputerControlPanelScreenHandler extends ScreenHandler {
 
 
     private BlockPos pos;

@@ -3,11 +3,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -19,10 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
-public final class ScannerTop extends Block {
-
-
-    public static final DirectionProperty directionPropertyTop = Properties.HORIZONTAL_FACING;
+public final class ScannerTop extends HorizontalFacingBlock {
 
     private static final VoxelShape shapeS = Stream.of(Block.createCuboidShape(-4, 0, 5, -3, 15.3, 11),
                     Block.createCuboidShape(19, 0, 5, 20, 15.3, 11), Block.createCuboidShape(5, 0, 19, 11, 15.3, 20),
@@ -212,7 +208,7 @@ public final class ScannerTop extends Block {
     public ScannerTop(@NotNull final Settings properties) {
         super(properties);
 
-        this.setDefaultState(this.getDefaultState().with(directionPropertyTop, Direction.NORTH)
+        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH)
                 .with(ConstantUtil.SCANNER_PROPERTY, false));
     }
 
@@ -220,21 +216,18 @@ public final class ScannerTop extends Block {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(directionPropertyTop, ctx.getPlayerFacing());
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing());
     }
 
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(directionPropertyTop).add(ConstantUtil.SCANNER_PROPERTY));
+        super.appendProperties(builder.add(ConstantUtil.SCANNER_PROPERTY));
     }
-
-    //mod compatiability
-
 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         if (state.get(ConstantUtil.SCANNER_PROPERTY)) {
-            return switch (state.get(directionPropertyTop)) {
+            return switch (state.get(FACING)) {
                 case NORTH -> shapeN;
                 case SOUTH -> shapeS;
                 case EAST -> shapeE;

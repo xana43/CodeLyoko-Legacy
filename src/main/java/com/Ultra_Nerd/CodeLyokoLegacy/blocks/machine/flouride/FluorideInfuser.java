@@ -17,6 +17,7 @@ public class FluorideInfuser extends BlockWithEntity {
 
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty INFUSING = BooleanProperty.of("infusing");
+
     public FluorideInfuser() {
         super(FabricBlockSettings.of(Material.METAL)
 

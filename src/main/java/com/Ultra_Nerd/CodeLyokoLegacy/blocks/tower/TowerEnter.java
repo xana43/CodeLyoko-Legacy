@@ -18,10 +18,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 
-public final class TowerEnter extends Block {
-
-
-    public static final DirectionProperty DIRTOWER2 = HorizontalFacingBlock.FACING;
+public final class TowerEnter extends HorizontalFacingBlock {
 
     public TowerEnter() {
         super(FabricBlockSettings.of(Material.BARRIER)
@@ -43,16 +40,10 @@ public final class TowerEnter extends Block {
         }
     }
 
-    @Override
-    protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(DIRTOWER2));
-    }
-
-
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(DIRTOWER2, ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
     }
 
     @Override

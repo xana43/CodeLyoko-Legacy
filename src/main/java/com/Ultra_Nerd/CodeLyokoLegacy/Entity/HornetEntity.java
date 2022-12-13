@@ -165,18 +165,13 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
         data.addAnimationController(controller);
         data.addAnimationController(controllerMove);
 
-    }    private final AnimationController<?> controllerMove = new AnimationController<>(this, "hornet_move_controller", 0,
-            this::movePredicate);
+    }
 
     @Override
     public AnimationFactory getFactory() {
         return GeckoLibUtil.createFactory(this);
-    }
-
-    //@Override
-    //public @NotNull AnimationFactory getFactory() {
-    //   return new AnimationFactory(this);
-    //}
+    }    private final AnimationController<?> controllerMove = new AnimationController<>(this, "hornet_move_controller", 0,
+            this::movePredicate);
 
     private <E extends HornetEntity> PlayState movePredicate(AnimationEvent<E> event) {
 
@@ -185,6 +180,11 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
 
         return PlayState.CONTINUE;
     }
+
+    //@Override
+    //public @NotNull AnimationFactory getFactory() {
+    //   return new AnimationFactory(this);
+    //}
 
     private <E extends HornetEntity> @NotNull PlayState attackPredicate(@NotNull AnimationEvent<E> event) {
 
@@ -212,7 +212,6 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
         this.playSound(ModSounds.LASERARROW, 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
         this.world.spawnEntity(laser);
     }
-
 
 
 

@@ -12,10 +12,10 @@ import net.minecraft.state.property.DirectionProperty;
 import org.jetbrains.annotations.Nullable;
 
 
-public final class SeaPylon extends Block {
+public final class SeaPylon extends HorizontalFacingBlock {
 
 
-    public static final DirectionProperty DIRPYLON = HorizontalFacingBlock.FACING;
+
 
     public SeaPylon() {
         super(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
@@ -30,16 +30,12 @@ public final class SeaPylon extends Block {
 
     }
 
-    @Override
-    protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(DIRPYLON));
-    }
 
 
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(DIRPYLON, ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
     }
 
 

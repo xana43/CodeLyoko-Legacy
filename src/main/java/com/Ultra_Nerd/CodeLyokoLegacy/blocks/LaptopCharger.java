@@ -6,12 +6,15 @@ import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LaptopChargerBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContext;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -19,7 +22,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class LaptopCharger extends Block implements BlockEntityProvider {
+import java.util.List;
+
+public class LaptopCharger extends HorizontalFacingBlock implements BlockEntityProvider {
     public LaptopCharger(final Settings settings) {
         super(settings);
     }
@@ -56,12 +61,17 @@ public class LaptopCharger extends Block implements BlockEntityProvider {
         };
     }
 
+    @Nullable
+    @Override
+    public BlockState getPlacementState(final ItemPlacementContext ctx) {
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing());
+    }
+
     @Override
     public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
         super.onBreak(world, pos, state, player);
         if (world.getBlockEntity(pos) instanceof LaptopChargerBlockEntity chargerBlockEntity) {
-            chargerBlockEntity.getItems().forEach(itemStack -> world.spawnEntity(
-                    new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), itemStack)));
+            chargerBlockEntity.getItems().forEach(itemStack -> Block.dropStack(world, pos, itemStack));
         }
     }
 }

@@ -47,10 +47,8 @@ public record XanaHandler() {
         if (ticksTillCalculation <= 0) {
             if (attackCallID == 69) {
                 dangerLevel++;
-
                 return true;
             } else {
-
                 setTicksTillCalculation();
                 return false;
             }

@@ -16,11 +16,11 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 public final class KankrelatEntity extends HostileEntity implements IAnimatable {
 
-    private final AnimationFactory manager = GeckoLibUtil.createFactory(this);    private final AnimationController<?> controller = new AnimationController<>(this, "kankrelatcontroller", 20,
-            this::animationPred);
+    private final AnimationFactory manager = GeckoLibUtil.createFactory(this);
     public KankrelatEntity(final EntityType<? extends HostileEntity> entityType, final World world) {
         super(entityType, world);
-    }
+    }    private final AnimationController<?> controller = new AnimationController<>(this, "kankrelatcontroller", 20,
+            this::animationPred);
 
     private <E extends KankrelatEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
         if (event.isMoving()) {
@@ -31,6 +31,11 @@ public final class KankrelatEntity extends HostileEntity implements IAnimatable 
             return PlayState.STOP;
         }
     }
+
+    @Override
+    public void registerControllers(@NotNull AnimationData data) {
+        data.addAnimationController(controller);
+    }
 /*
     public KankrelatEntity(@NotNull EntityType<? extends KankrelatEntity> type, @NotNull Level world) {
         super(type, world);
@@ -39,14 +44,11 @@ public final class KankrelatEntity extends HostileEntity implements IAnimatable 
  */
 
     @Override
-    public void registerControllers(@NotNull AnimationData data) {
-        data.addAnimationController(controller);
-    }
-
-    @Override
     public @NotNull AnimationFactory getFactory() {
         return manager;
     }
+
+
 
 
 

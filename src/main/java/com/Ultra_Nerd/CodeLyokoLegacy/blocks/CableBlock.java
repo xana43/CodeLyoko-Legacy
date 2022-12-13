@@ -1,11 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.FenceBlock;
+import net.minecraft.block.HorizontalConnectingBlock;
 import net.minecraft.util.shape.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-public final class CableBlock extends FenceBlock {
+public final class CableBlock extends HorizontalConnectingBlock {
 
 //    private final static Map<CableBlock, LinkedList<CableBlock>> CABLE_LISTS = new HashMap<>();
 //    private CableBlock startOfCable;
@@ -13,10 +13,13 @@ public final class CableBlock extends FenceBlock {
     private final VoxelShape @NotNull [] shape;
     private final VoxelShape mainShape = Block.createCuboidShape(1, 0, 1, 15, 14, 15);
 
-    public CableBlock(@NotNull Settings properties) {
-        super(properties);
+    public CableBlock(final Settings settings) {
+
+        super(2.0F, 2.0F, 16.0F, 16.0F, 24.0F, settings);
         this.shape = this.createShapes(10, 10, 10, 10, 10);
     }
+
+
 
 /*
 

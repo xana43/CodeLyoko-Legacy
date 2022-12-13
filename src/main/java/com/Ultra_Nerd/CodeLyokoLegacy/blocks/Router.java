@@ -1,144 +1,130 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class Router extends Block implements BlockEntityProvider {
+import javax.annotation.Nonnull;
+import java.util.stream.Stream;
+
+public final class Router extends HorizontalFacingBlock implements BlockEntityProvider {
+    public static final BooleanProperty ROUTER_ACTIVE = BooleanProperty.of("ractive");
+    private static final VoxelShape N = Stream.of(
+            Block.createCuboidShape(14, 1, 8, 15, 3, 9),
+            Block.createCuboidShape(0, 0, 0, 16, 3, 8),
+            Block.createCuboidShape(0, 0, 8, 1, 3, 9),
+            Block.createCuboidShape(15, 0, 8, 16, 3, 9),
+            Block.createCuboidShape(1, 0, 8, 15, 1, 9),
+            Block.createCuboidShape(1, 2, 8, 4, 3, 9),
+            Block.createCuboidShape(4, 2, 8, 14, 3, 9),
+            Block.createCuboidShape(4, 1, 8, 5, 2, 9),
+            Block.createCuboidShape(6, 1, 8, 7, 2, 9),
+            Block.createCuboidShape(8, 1, 8, 9, 2, 9),
+            Block.createCuboidShape(10, 1, 8, 11, 2, 9),
+            Block.createCuboidShape(12, 1, 8, 13, 2, 9)
+    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
+    private static final VoxelShape S = Stream.of(
+            Block.createCuboidShape(1.75, 1, 7.25, 2.75, 3, 8.25),
+            Block.createCuboidShape(0.75, 0, 8.25, 16.75, 3, 16.25),
+            Block.createCuboidShape(15.75, 0, 7.25, 16.75, 3, 8.25),
+            Block.createCuboidShape(0.75, 0, 7.25, 1.75, 3, 8.25),
+            Block.createCuboidShape(1.75, 0, 7.25, 15.75, 1, 8.25),
+            Block.createCuboidShape(12.75, 2, 7.25, 15.75, 3, 8.25),
+            Block.createCuboidShape(2.75, 2, 7.25, 12.75, 3, 8.25),
+            Block.createCuboidShape(11.75, 1, 7.25, 12.75, 2, 8.25),
+            Block.createCuboidShape(9.75, 1, 7.25, 10.75, 2, 8.25),
+            Block.createCuboidShape(7.75, 1, 7.25, 8.75, 2, 8.25),
+            Block.createCuboidShape(5.75, 1, 7.25, 6.75, 2, 8.25),
+            Block.createCuboidShape(3.75, 1, 7.25, 4.75, 2, 8.25)
+    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
+    private static final VoxelShape E = Stream.of(
+            Block.createCuboidShape(7.5, 1, 13.75, 8.5, 3, 14.75),
+            Block.createCuboidShape(8.5, 0, -0.25, 16.5, 3, 15.75),
+            Block.createCuboidShape(7.5, 0, -0.25, 8.5, 3, 0.75),
+            Block.createCuboidShape(7.5, 0, 14.75, 8.5, 3, 15.75),
+            Block.createCuboidShape(7.5, 0, 0.75, 8.5, 1, 14.75),
+            Block.createCuboidShape(7.5, 2, 0.75, 8.5, 3, 3.75),
+            Block.createCuboidShape(7.5, 2, 3.75, 8.5, 3, 13.75),
+            Block.createCuboidShape(7.5, 1, 3.75, 8.5, 2, 4.75),
+            Block.createCuboidShape(7.5, 1, 5.75, 8.5, 2, 6.75),
+            Block.createCuboidShape(7.5, 1, 7.75, 8.5, 2, 8.75),
+            Block.createCuboidShape(7.5, 1, 9.75, 8.5, 2, 10.75),
+            Block.createCuboidShape(7.5, 1, 11.75, 8.5, 2, 12.75)
+    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
+    private static final VoxelShape W = Stream.of(
+            Block.createCuboidShape(8.25, 1, 1.5, 9.25, 3, 2.5),
+            Block.createCuboidShape(0.25, 0, 0.5, 8.25, 3, 16.5),
+            Block.createCuboidShape(8.25, 0, 15.5, 9.25, 3, 16.5),
+            Block.createCuboidShape(8.25, 0, 0.5, 9.25, 3, 1.5),
+            Block.createCuboidShape(8.25, 0, 1.5, 9.25, 1, 15.5),
+            Block.createCuboidShape(8.25, 2, 12.5, 9.25, 3, 15.5),
+            Block.createCuboidShape(8.25, 2, 2.5, 9.25, 3, 12.5),
+            Block.createCuboidShape(8.25, 1, 11.5, 9.25, 2, 12.5),
+            Block.createCuboidShape(8.25, 1, 9.5, 9.25, 2, 10.5),
+            Block.createCuboidShape(8.25, 1, 7.5, 9.25, 2, 8.5),
+            Block.createCuboidShape(8.25, 1, 5.5, 9.25, 2, 6.5),
+            Block.createCuboidShape(8.25, 1, 3.5, 9.25, 2, 4.5)
+    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
     public Router(final Settings settings) {
         super(settings);
     }
 
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return null;
-    }
-    /*public static final DirectionProperty ROUTER_DIRECTION = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty ROUTER_ACTIVE = BooleanProperty.create("ractive");
-    private static final VoxelShape N = Stream.of(
-            Block.box(14, 1, 8, 15, 3, 9),
-            Block.box(0, 0, 0, 16, 3, 8),
-            Block.box(0, 0, 8, 1, 3, 9),
-            Block.box(15, 0, 8, 16, 3, 9),
-            Block.box(1, 0, 8, 15, 1, 9),
-            Block.box(1, 2, 8, 4, 3, 9),
-            Block.box(4, 2, 8, 14, 3, 9),
-            Block.box(4, 1, 8, 5, 2, 9),
-            Block.box(6, 1, 8, 7, 2, 9),
-            Block.box(8, 1, 8, 9, 2, 9),
-            Block.box(10, 1, 8, 11, 2, 9),
-            Block.box(12, 1, 8, 13, 2, 9)
-    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-    private static final VoxelShape S = Stream.of(
-            Block.box(1.75, 1, 7.25, 2.75, 3, 8.25),
-            Block.box(0.75, 0, 8.25, 16.75, 3, 16.25),
-            Block.box(15.75, 0, 7.25, 16.75, 3, 8.25),
-            Block.box(0.75, 0, 7.25, 1.75, 3, 8.25),
-            Block.box(1.75, 0, 7.25, 15.75, 1, 8.25),
-            Block.box(12.75, 2, 7.25, 15.75, 3, 8.25),
-            Block.box(2.75, 2, 7.25, 12.75, 3, 8.25),
-            Block.box(11.75, 1, 7.25, 12.75, 2, 8.25),
-            Block.box(9.75, 1, 7.25, 10.75, 2, 8.25),
-            Block.box(7.75, 1, 7.25, 8.75, 2, 8.25),
-            Block.box(5.75, 1, 7.25, 6.75, 2, 8.25),
-            Block.box(3.75, 1, 7.25, 4.75, 2, 8.25)
-    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-    private static final VoxelShape E = Stream.of(
-            Block.box(7.5, 1, 13.75, 8.5, 3, 14.75),
-            Block.box(8.5, 0, -0.25, 16.5, 3, 15.75),
-            Block.box(7.5, 0, -0.25, 8.5, 3, 0.75),
-            Block.box(7.5, 0, 14.75, 8.5, 3, 15.75),
-            Block.box(7.5, 0, 0.75, 8.5, 1, 14.75),
-            Block.box(7.5, 2, 0.75, 8.5, 3, 3.75),
-            Block.box(7.5, 2, 3.75, 8.5, 3, 13.75),
-            Block.box(7.5, 1, 3.75, 8.5, 2, 4.75),
-            Block.box(7.5, 1, 5.75, 8.5, 2, 6.75),
-            Block.box(7.5, 1, 7.75, 8.5, 2, 8.75),
-            Block.box(7.5, 1, 9.75, 8.5, 2, 10.75),
-            Block.box(7.5, 1, 11.75, 8.5, 2, 12.75)
-    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-    private static final VoxelShape W = Stream.of(
-            Block.box(8.25, 1, 1.5, 9.25, 3, 2.5),
-            Block.box(0.25, 0, 0.5, 8.25, 3, 16.5),
-            Block.box(8.25, 0, 15.5, 9.25, 3, 16.5),
-            Block.box(8.25, 0, 0.5, 9.25, 3, 1.5),
-            Block.box(8.25, 0, 1.5, 9.25, 1, 15.5),
-            Block.box(8.25, 2, 12.5, 9.25, 3, 15.5),
-            Block.box(8.25, 2, 2.5, 9.25, 3, 12.5),
-            Block.box(8.25, 1, 11.5, 9.25, 2, 12.5),
-            Block.box(8.25, 1, 9.5, 9.25, 2, 10.5),
-            Block.box(8.25, 1, 7.5, 9.25, 2, 8.5),
-            Block.box(8.25, 1, 5.5, 9.25, 2, 6.5),
-            Block.box(8.25, 1, 3.5, 9.25, 2, 4.5)
-    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-
-    public Router(@NotNull Properties properties) {
+    public Router(@NotNull FabricBlockSettings properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(ROUTER_DIRECTION, Direction.NORTH).setValue(ROUTER_ACTIVE, false));
+        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(ROUTER_ACTIVE,
+                false));
     }
-
-
-
 
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos,BlockState state) {
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return null; //ModTileEntities.ROUTER_TILE_ENTITY.get().create(pos, state);
     }
 
     @Nonnull
     @Override
-    public VoxelShape getShape(@NotNull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
-        switch (state.getValue(ROUTER_DIRECTION)) {
-            case NORTH:
-                return N;
-            case SOUTH:
-                return S;
-            case EAST:
-                return E;
-            case WEST:
-                return W;
-            default:
-                return N;
-        }
+    public VoxelShape getOutlineShape(@NotNull BlockState state, @Nonnull BlockView worldIn, @Nonnull BlockPos pos,
+            @Nonnull ShapeContext context) {
+        return switch (state.get(FACING)) {
+            case SOUTH -> S;
+            case EAST -> E;
+            case WEST -> W;
+            default -> N;
+        };
     }
 
     @Override
-    public @NotNull RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
+    public VoxelShape getCollisionShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
+        return switch (state.get(FACING)) {
+            case SOUTH -> S;
+            case EAST -> E;
+            case WEST -> W;
+            default -> N;
+        };
     }
 
-
-
     @Override
-    public @NotNull BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
+    public @NotNull BlockState getPlacementState(@NotNull ItemPlacementContext context) {
         // TODO Auto-generated method stub
-        return this.defaultBlockState().setValue(ROUTER_DIRECTION, context.getHorizontalDirection().getOpposite());
+        return this.getDefaultState().with(FACING, context.getPlayerFacing().getOpposite());
     }
 
     @Override
-    protected void createBlockStateDefinition(@Nonnull StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(ROUTER_ACTIVE).add(ROUTER_DIRECTION);
+    protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder.add(ROUTER_ACTIVE));
     }
 
-    //mod compatiability
-    @Nonnull
-    @Override
-    public BlockState rotate(@NotNull BlockState state, @NotNull Rotation rot) {
-        return state.setValue(ROUTER_DIRECTION, rot.rotate(state.getValue(ROUTER_DIRECTION)));
-    }
 
-    @Nonnull
-    @Override
-    public BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirrorIn) {
-        return state.rotate(mirrorIn.getRotation(state.getValue(ROUTER_DIRECTION)));
-    }
-
-     */
 }

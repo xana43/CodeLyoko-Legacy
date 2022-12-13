@@ -35,7 +35,8 @@ public final class Marabunta extends SoulSandBlock {
         for (byte i = 0; i < 90; ++i) {
             BlockPos blockpos = pos.offset(Direction.Axis.pickRandomAxis(random), random.nextInt(3) - 1);
 
-            if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !world.isChunkLoaded(blockpos)) {
+            if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !world.isChunkLoaded(
+                    world.getWorldChunk(pos).getPos().x, world.getWorldChunk(pos).getPos().z)) {
                 return;
             }
             // BlockState iblockstate = worldIn.getBlockState(blockpos.up());

@@ -8,8 +8,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -20,9 +18,9 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public final class TowerInterface extends BlockWithEntity {
+public final class TowerInterface extends HorizontalFacingBlock implements BlockEntityProvider {
 
-    public static final DirectionProperty DIRINTERFACE = HorizontalFacingBlock.FACING;
+
     private static final VoxelShape SHAPE_N = Block.createCuboidShape(1, 1, 9, 15, 15, 9.1);
     private static final VoxelShape SHAPE_S = Block.createCuboidShape(1, 1, 9, 15, 15, 9.1);
     private static final VoxelShape SHAPE_E = Block.createCuboidShape(9, 1, 1, 9.1, 15, 15);
@@ -31,12 +29,12 @@ public final class TowerInterface extends BlockWithEntity {
     public TowerInterface() {
         super(FabricBlockSettings.of(Material.BARRIER).strength(-1, -1).sounds(BlockSoundGroup.AMETHYST_CLUSTER)
                 .luminance(80));
-        this.setDefaultState(this.getStateManager().getDefaultState().with(DIRINTERFACE, Direction.NORTH));
+        this.setDefaultState(this.getStateManager().getDefaultState().with(FACING, Direction.NORTH));
     }
 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
-        return switch (state.get(DIRINTERFACE)) {
+        return switch (state.get(FACING)) {
             case SOUTH -> SHAPE_S;
             case EAST -> SHAPE_E;
             case WEST -> SHAPE_W;
@@ -44,20 +42,11 @@ public final class TowerInterface extends BlockWithEntity {
         };
     }
 
-    @Override
-    protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(DIRINTERFACE));
-    }
-
-    @Override
-    public BlockRenderType getRenderType(final BlockState state) {
-        return BlockRenderType.MODEL;
-    }
 
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(DIRINTERFACE, ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
     }
 
     @Nullable

@@ -29,10 +29,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
-public final class ControlPanel extends BlockWithEntity {
+public final class ControlPanel extends HorizontalFacingBlock implements BlockEntityProvider {
 
 
-    public static final DirectionProperty PANEL = HorizontalFacingBlock.FACING;
+
     public static final BooleanProperty ScreenOn = BooleanProperty.of("screen_on");
     private static final VoxelShape shapeN = Stream.of(
             Block.createCuboidShape(0.09999999999999964, -4, 2.2226819720551028, 1.1000000000000014, 0.025,
@@ -242,6 +242,7 @@ public final class ControlPanel extends BlockWithEntity {
             Block.createCuboidShape(2.661340986027552, 0, 15.56134098602755, 3.661340986027552, 0.05,
                     16.561340986027552)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
+
     public ControlPanel() {
         super(FabricBlockSettings.of(Material.METAL)
 
@@ -249,7 +250,7 @@ public final class ControlPanel extends BlockWithEntity {
                 .sounds(BlockSoundGroup.METAL)
 
         );
-        this.setDefaultState(this.getDefaultState().with(PANEL, Direction.NORTH).with(ScreenOn, false));
+        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(ScreenOn, false));
 
 
     }
@@ -262,18 +263,15 @@ public final class ControlPanel extends BlockWithEntity {
 
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(PANEL).add(ScreenOn));
+        super.appendProperties(builder.add(ScreenOn));
     }
 
-    @Override
-    public BlockRenderType getRenderType(final BlockState state) {
-        return BlockRenderType.MODEL;
-    }
+
 
 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
-        return switch (state.get(PANEL)) {
+        return switch (state.get(FACING)) {
             case SOUTH -> shapeS;
             case EAST -> shapeE;
             case WEST -> shapeW;
@@ -294,7 +292,7 @@ public final class ControlPanel extends BlockWithEntity {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(PANEL, ctx.getPlayerFacing().getOpposite()).with(ScreenOn, false);
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite()).with(ScreenOn, false);
     }
 
     @Override
