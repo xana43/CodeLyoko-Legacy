@@ -29,7 +29,7 @@ public final class ArchitectureWorkstation extends HorizontalFacingBlock {
 
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(on));
+        super.appendProperties(builder.add(on).add(FACING));
     }
 
 

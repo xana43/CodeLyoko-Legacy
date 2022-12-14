@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelMegaTank;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
@@ -19,6 +20,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -88,7 +90,7 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
 
     @Override
     protected void playStepSound(final BlockPos pos, final BlockState state) {
-        this.playSound(getStepSound(), 0.15f, 1);
+        this.playSound(getStepSound(), MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.HOSTILE), 1);
     }
 
     @Override

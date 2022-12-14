@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -76,21 +77,17 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
             Block.createCuboidShape(8.25, 1, 5.5, 9.25, 2, 6.5),
             Block.createCuboidShape(8.25, 1, 3.5, 9.25, 2, 4.5)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
-    public Router(final Settings settings) {
-        super(settings);
-    }
 
     public Router(@NotNull FabricBlockSettings properties) {
         super(properties);
-        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(ROUTER_ACTIVE,
-                false));
+        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(ROUTER_ACTIVE, false));
     }
 
 
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return null; //ModTileEntities.ROUTER_TILE_ENTITY.get().create(pos, state);
+        return ModTileEntities.ROUTER_BLOCK_ENTITY_TYPE.instantiate(pos, state);
     }
 
     @Nonnull
@@ -118,12 +115,12 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
     @Override
     public @NotNull BlockState getPlacementState(@NotNull ItemPlacementContext context) {
         // TODO Auto-generated method stub
-        return this.getDefaultState().with(FACING, context.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(FACING, context.getPlayerFacing().getOpposite()).with(ROUTER_ACTIVE, false);
     }
 
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(ROUTER_ACTIVE));
+        super.appendProperties(builder.add(ROUTER_ACTIVE).add(FACING));
     }
 
 

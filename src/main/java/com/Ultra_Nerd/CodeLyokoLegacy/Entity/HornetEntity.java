@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -15,6 +16,7 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -115,6 +117,14 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
 
     }
 
+
+
+    @Override
+    protected float getSoundVolume() {
+
+        return MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.HOSTILE);
+    }
+
     @Override
     protected void initGoals() {
         super.initGoals();
@@ -170,7 +180,8 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
     @Override
     public AnimationFactory getFactory() {
         return GeckoLibUtil.createFactory(this);
-    }    private final AnimationController<?> controllerMove = new AnimationController<>(this, "hornet_move_controller", 0,
+    }
+    private final AnimationController<?> controllerMove = new AnimationController<>(this, "hornet_move_controller", 0,
             this::movePredicate);
 
     private <E extends HornetEntity> PlayState movePredicate(AnimationEvent<E> event) {
@@ -209,7 +220,8 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
         final double d2 = target.getZ() - this.getZ();
         final double d3 = Math.sqrt(d0 * d0 + d2 * d2);
         laser.setVelocity(d0, d1 + d3 * (double) 0.2F, d2, 6F, (float) (14 - this.world.getDifficulty().getId() << 2));
-        this.playSound(ModSounds.LASERARROW, 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
+        this.playSound(ModSounds.LASERARROW, getSoundVolume(),
+                1.0F / (this.getRandom().nextFloat() * 1.2f));
         this.world.spawnEntity(laser);
     }
 

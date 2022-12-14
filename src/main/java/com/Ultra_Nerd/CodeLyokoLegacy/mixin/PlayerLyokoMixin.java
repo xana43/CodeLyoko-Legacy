@@ -23,7 +23,8 @@ public abstract class PlayerLyokoMixin {
                         .getItem() == ModItems.DIGITAL_SABER && mc.options.attackKey.isPressed()) {
                     assert mc.crosshairTarget != null;
                     switch (mc.crosshairTarget.getType()) {
-                        case MISS -> mc.player.playSound(ModSounds.SWORDSLASH, SoundCategory.PLAYERS, 1, 1);
+                        case MISS -> mc.player.playSound(ModSounds.SWORDSLASH, SoundCategory.PLAYERS,
+                                mc.options.getSoundVolume(SoundCategory.PLAYERS), 1);
                         case BLOCK -> {
                         }
                         case ENTITY -> {

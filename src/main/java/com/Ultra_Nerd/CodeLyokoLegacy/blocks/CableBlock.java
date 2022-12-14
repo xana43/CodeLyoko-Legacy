@@ -1,7 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalConnectingBlock;
+import net.minecraft.state.StateManager;
 import net.minecraft.util.shape.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,14 +16,17 @@ public final class CableBlock extends HorizontalConnectingBlock {
     private final VoxelShape mainShape = Block.createCuboidShape(1, 0, 1, 15, 14, 15);
 
     public CableBlock(final Settings settings) {
-
         super(2.0F, 2.0F, 16.0F, 16.0F, 24.0F, settings);
         this.shape = this.createShapes(10, 10, 10, 10, 10);
     }
 
+    @Override
+    protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder.add(NORTH, SOUTH, EAST, WEST, WATERLOGGED));
+    }
 
 
-/*
+    /*
 
     @Nullable
     @Override

@@ -71,8 +71,6 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     @Override
     public void init() {
         super.init();
-
-
         x = (this.width - size) >> 1;
         y = (this.height - (size >> 1)) >> 1;
         this.setTextField();

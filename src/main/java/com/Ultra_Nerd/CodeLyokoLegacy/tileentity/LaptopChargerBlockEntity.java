@@ -4,9 +4,15 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.LaptopClass;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntity;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.Packet;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.Nullable;
 
 public final class LaptopChargerBlockEntity extends EnergyStorageBlockEntity {
     public LaptopChargerBlockEntity(final BlockPos pos, final BlockState state) {
@@ -17,6 +23,18 @@ public final class LaptopChargerBlockEntity extends EnergyStorageBlockEntity {
         setItem(item.copy(), 0);
         item.decrement(1);
         update();
+
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
     }
 
     @Override
@@ -24,6 +42,7 @@ public final class LaptopChargerBlockEntity extends EnergyStorageBlockEntity {
         if (world.isClient()) {
             return;
         }
+        world.updateListeners(pos,getCachedState(),getCachedState(), Block.NOTIFY_LISTENERS);
         if (getItems().get(0).isOf(ModItems.JEREMY_LAPTOP)) {
 
             final LaptopClass jeremyLaptop = (LaptopClass) getStack(0).getItem();
@@ -34,5 +53,6 @@ public final class LaptopChargerBlockEntity extends EnergyStorageBlockEntity {
             }
             energyStorage.amount--;
         }
+
     }
 }

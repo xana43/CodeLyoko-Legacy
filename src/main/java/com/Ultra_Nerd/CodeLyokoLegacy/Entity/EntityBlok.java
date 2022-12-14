@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -16,6 +17,7 @@ import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -105,6 +107,11 @@ public final class EntityBlok extends SkeletonEntity implements IAnimatable {
     protected @NotNull SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
         // TODO Auto-generated method stub
         return ModSounds.BLOKHURT;
+    }
+
+    @Override
+    protected float getSoundVolume() {
+        return MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.HOSTILE);
     }
 
     @Override

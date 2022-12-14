@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Block.class)
-public class BlockMixin {
+public final class BlockMixin {
 
     @Inject(at = @At("HEAD"), method = "onPlaced", cancellable = true)
     private void codelyoko$onPlaced(final World world, final BlockPos pos, final BlockState state, final LivingEntity placer, final ItemStack itemStack, final CallbackInfo ci) {

@@ -14,7 +14,6 @@ import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -30,7 +29,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Stream;
 
 public final class ControlPanel extends HorizontalFacingBlock implements BlockEntityProvider {
-
 
 
     public static final BooleanProperty ScreenOn = BooleanProperty.of("screen_on");
@@ -263,10 +261,8 @@ public final class ControlPanel extends HorizontalFacingBlock implements BlockEn
 
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(ScreenOn));
+        super.appendProperties(builder.add(ScreenOn).add(FACING));
     }
-
-
 
 
     @Override

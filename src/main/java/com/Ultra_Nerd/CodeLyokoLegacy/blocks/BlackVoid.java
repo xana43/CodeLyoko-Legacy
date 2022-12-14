@@ -4,18 +4,14 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-import java.util.stream.Stream;
-
 public final class BlackVoid extends Block {
 
-    private static final VoxelShape collisionShape = Block.createCuboidShape(0,0,0,16,4,16);
+    private static final VoxelShape collisionShape = Block.createCuboidShape(0, 0, 0, 16, 4, 16);
     /*private static final VoxelShape nullshape = Stream.of(
             Block.createCuboidShape(3, 0, 3, 10, 0.5, 4),
             Block.createCuboidShape(3, 0, 1, 10, 0.5, 2),
@@ -43,7 +39,6 @@ public final class BlackVoid extends Block {
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         return collisionShape;
     }
-
 
 
     @Override

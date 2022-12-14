@@ -28,15 +28,8 @@ public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements
     @SuppressFBWarnings("ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD")
     @Override
     public void render(final LyokoCoreBE entity, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {
-        //blockRenderDispatcher.renderSingleBlock(ModBlocks.LYOKO_CORE.get().defaultBlockState(),pPoseStack,pBufferSource,pPackedOverlay,pPackedOverlay, EmptyModelData.INSTANCE);
-        //this.context.getBlockRenderDispatcher().renderSingleBlock(ModBlocks.LYOKO_CORE.get().defaultBlockState(),pPoseStack,pBufferSource,pPackedLight,pPackedOverlay, EmptyModelData.INSTANCE);
-        // if(lyokoCore != null) {
 
         matrices.push();
-
-        //pPoseStack.mulPose(new Quaternion(0,y++,0,true));
-
-
         final World entityWorld = entity.getWorld();
         matrices.translate(0.5, 0.5, 0.5);
         matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(y += 6));
@@ -44,9 +37,6 @@ public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements
             y = 0;
         }
         matrices.translate(-0.5, -0.5, -0.5);
-
-        //MinecraftClient.getInstance().getBlockEntityRenderDispatcher().renderEntity(entity,matrices,vertexConsumers,light,overlay);
-
         context.getRenderManager().getModelRenderer()
                 .render(entityWorld, lyokoCore, Blocks.AIR.getDefaultState(), entity.getPos(), matrices,
                         vertexConsumers.getBuffer(RenderLayer.getTranslucentMovingBlock()), true,

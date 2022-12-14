@@ -143,15 +143,15 @@ public final class ScannerFrame extends HorizontalFacingBlock {
     public ScannerFrame(@NotNull FabricBlockSettings properties) {
         super(properties);
 
-        this.setDefaultState(this.getDefaultState().with(ConstantUtil.SCANNER_PROPERTY, false)
-                .with(FACING, Direction.NORTH));
+        this.setDefaultState(this.getDefaultState().with(ConstantUtil.SCANNER_PROPERTY, false).with(FACING,
+                Direction.NORTH));
     }
 
 
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing());
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing()).with(ConstantUtil.SCANNER_PROPERTY, false);
     }
 
 
@@ -173,6 +173,6 @@ public final class ScannerFrame extends HorizontalFacingBlock {
 
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(ConstantUtil.SCANNER_PROPERTY));
+        super.appendProperties(builder.add(ConstantUtil.SCANNER_PROPERTY).add(FACING));
     }
 }

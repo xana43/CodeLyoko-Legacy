@@ -332,7 +332,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing());
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing()).with(ConstantUtil.SCANNER_PROPERTY, false);
     }
 
     @Override
