@@ -11,7 +11,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -42,7 +42,7 @@ public final class OverboardRenderer<T extends OverboardEntity> extends EntityRe
         matrixStackIn.push();
         matrixStackIn.scale(-2F, -2F, 2.0F);
         matrixStackIn.translate(0, -1.5f, 0);
-        matrixStackIn.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(360 + entityYaw));
+        matrixStackIn.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(360 + entityYaw));
         //assert MinecraftClient.getInstance().player != null;
         //this.OverBoardModel.setAngles(entityIn, 0, 0, 0, 0, 0);
         final VertexConsumer vertexBuilder = bufferIn.getBuffer(

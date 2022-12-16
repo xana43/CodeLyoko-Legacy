@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHornet;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import net.minecraft.block.BlockState;
@@ -16,7 +15,6 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -27,19 +25,18 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.source.BiomeAccess;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.builder.ILoopType;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nonnull;
 
-public final class HornetEntity extends HostileEntity implements IAnimatable, RangedAttackMob {
+public final class HornetEntity extends HostileEntity implements GeoAnimatable, RangedAttackMob {
 
 
     private final AnimationController<?> controller = new AnimationController<>(this, "hornet_controller", 0,
@@ -47,8 +44,6 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
 
     public HornetEntity(@NotNull EntityType<? extends HostileEntity> hornetEntityEntityType, @NotNull World world) {
         super(hornetEntityEntityType, world);
-        AnimationController.addModelFetcher(
-                (AnimationController.ModelFetcher<HornetEntity>) animated -> new ModelHornet());
 
 
     }
@@ -68,10 +63,6 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
                 .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.10);
     }
 
-    @Override
-    protected boolean hasWings() {
-        return true;
-    }
 
     @Override
     protected void fall(final double heightDifference, final boolean onGround, final BlockState landedState, final BlockPos landedPosition) {
@@ -116,7 +107,6 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
 
 
     }
-
 
 
     @Override
@@ -170,46 +160,48 @@ public final class HornetEntity extends HostileEntity implements IAnimatable, Ra
     }
 
     @Override
-    public void registerControllers(@NotNull AnimationData data) {
+    public void registerControllers(@NotNull AnimatableManager.ControllerRegistrar data) {
 
-        data.addAnimationController(controller);
-        data.addAnimationController(controllerMove);
+        data.add(controller);
+        data.add(controllerMove);
 
     }
 
     @Override
-    public AnimationFactory getFactory() {
-        return GeckoLibUtil.createFactory(this);
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return GeckoLibUtil.createInstanceCache(this);
     }
-    private final AnimationController<?> controllerMove = new AnimationController<>(this, "hornet_move_controller", 0,
-            this::movePredicate);
 
-    private <E extends HornetEntity> PlayState movePredicate(AnimationEvent<E> event) {
+    @Override
+    public double getTick(final Object o) {
+        return 0;
+    }
 
-        controllerMove.setAnimation(new AnimationBuilder().addAnimation("animation.hornet.fly",
-                ILoopType.EDefaultLoopTypes.LOOP));
+    private <E extends HornetEntity> PlayState movePredicate(AnimationState<E> event) {
+
+        controllerMove.setAnimation(RawAnimation.begin().thenLoop("animation.hornet.fly"));
 
         return PlayState.CONTINUE;
-    }
+    }    private final AnimationController<?> controllerMove = new AnimationController<>(this, "hornet_move_controller", 0,
+            this::movePredicate);
 
-    //@Override
-    //public @NotNull AnimationFactory getFactory() {
-    //   return new AnimationFactory(this);
-    //}
-
-    private <E extends HornetEntity> @NotNull PlayState attackPredicate(@NotNull AnimationEvent<E> event) {
+    private <E extends HornetEntity> @NotNull PlayState attackPredicate(@NotNull AnimationState<E> event) {
 
 
         if (event.getAnimatable().isAttacking()) {
 
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hornet.attack",
-                    ILoopType.EDefaultLoopTypes.LOOP));
+            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.hornet.attack"));
 
         }
         return PlayState.CONTINUE;
 
 
     }
+
+    //@Override
+    //public @NotNull AnimationFactory getFactory() {
+    //   return new AnimationFactory(this);
+    //}
 
     @Override
     public void attack(@NotNull LivingEntity target, final float distanceFactor) {

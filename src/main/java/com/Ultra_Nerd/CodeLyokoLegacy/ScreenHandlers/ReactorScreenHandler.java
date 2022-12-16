@@ -49,7 +49,7 @@ public final class ReactorScreenHandler extends ScreenHandler {
     }
 
     @Override
-    public ItemStack transferSlot(final PlayerEntity player, final int index) {
+    public ItemStack quickMove(final PlayerEntity player, final int index) {
         ItemStack newStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot.hasStack()) {

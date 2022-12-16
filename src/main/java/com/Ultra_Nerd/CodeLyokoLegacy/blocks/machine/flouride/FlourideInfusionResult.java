@@ -53,7 +53,7 @@ public class FlourideInfusionResult {
         return stack2.getItem() == stack1.getItem(); //&& (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
     }
 
-    public @NotNull Table<ItemStack, ItemStack, ItemStack> getDualSmeltingList() {
+    public Table<ItemStack, ItemStack, ItemStack> getDualSmeltingList() {
         return this.smeltingList;
     }
 

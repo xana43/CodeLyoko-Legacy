@@ -6,7 +6,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.HornetRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.MegaTankRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.OverboardRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.RendBlok;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.EntityPacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoRingParticle;
@@ -31,14 +30,11 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DeathScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
@@ -47,16 +43,10 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
-
-import java.util.UUID;
 
 @Environment(EnvType.CLIENT)
 public record CodeLyokoClient() implements ClientModInitializer {
@@ -125,7 +115,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
     }
 
-    public static void receiveEntityPacket() {
+   /* public static void receiveEntityPacket() {
         ClientPlayNetworking.registerGlobalReceiver(PacketID, (client, handler, byteBuf, responseSender) -> {
             final EntityType<?> et = Registry.ENTITY_TYPE.get(byteBuf.readVarInt());
             final UUID uuid = byteBuf.readUuid();
@@ -149,7 +139,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 MinecraftClient.getInstance().world.addEntity(entityId, e);
             });
         });
-    }
+    }*/
 
     private static void FluidRenderRegistry() {
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_DIGITAL_OCEAN, ModFluids.FLOWING_DIGITAL_OCEAN,
@@ -258,16 +248,19 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
         //Renderers
         BlockEntityRendererRegistry.register(ModTileEntities.LYOKO_CORE, CoreOfLyoko::new);
-        BlockEntityRendererRegistry.register(ModTileEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY, LaptopChargerRenderer::new);
+        BlockEntityRendererRegistry.register(ModTileEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY,
+                LaptopChargerRenderer::new);
         registerEntityRenderers();
-        receiveEntityPacket();
+        //receiveEntityPacket();
         FluidRenderRegistry();
         HandledScreens.register(ModScreenHandlers.TOWER_INTERFACE_SCREEN_HANDLER, TowerGUI::new);
         HandledScreens.register(ModScreenHandlers.CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE,
                 ComputerControlPanelUI::new);
         HandledScreens.register(ModScreenHandlers.COMPUTER_REACTOR_SCREEN_HANDLER, ReactorGUI::new);
+
         //Custom Sprites
-        ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE)
+
+        /*ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE)
                 .register((atlasTexture, registry) -> {
                     registry.register(CodeLyokoMain.codeLyokoPrefix("block/digital_flowing"));
                     registry.register(CodeLyokoMain.codeLyokoPrefix("block/digital_flowing_lava"));
@@ -277,7 +270,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
                     registry.register(CodeLyokoMain.codeLyokoPrefix("particle/tower_particle_2"));
                     registry.register(CodeLyokoMain.codeLyokoPrefix("textures/entity/hornet/hornetatlas"));
 
-                });
+                });*/
         //client events
         registerItemPredicates();
 

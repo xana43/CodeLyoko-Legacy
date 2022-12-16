@@ -1,13 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 
 public final class BlockStateSimple extends FabricModelProvider {
-    public BlockStateSimple(final FabricDataGenerator dataGenerator) {
-        super(dataGenerator);
+
+
+    public BlockStateSimple(final FabricDataOutput output) {
+        super(output);
     }
 
     @Override

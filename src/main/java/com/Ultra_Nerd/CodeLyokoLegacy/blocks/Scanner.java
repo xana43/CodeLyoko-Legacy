@@ -358,7 +358,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
     }
 
     @Override
-    public <T extends BlockEntity> @NotNull BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
         return (world1, pos, state1, blockEntity) -> {
             if (blockEntity instanceof ScannerTileEntity scannerTile) {
 

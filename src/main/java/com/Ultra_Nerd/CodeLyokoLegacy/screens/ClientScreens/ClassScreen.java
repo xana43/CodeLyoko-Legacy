@@ -59,24 +59,25 @@ public final class ClassScreen extends Screen {
         //feline option
         feline.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 
-        drawCenteredText(pPoseStack, textRenderer, feline.getMessage(), feline.x + (feline.getWidth() >> 1), feline.y,
+        drawCenteredText(pPoseStack, textRenderer, feline.getMessage(), feline.getX() + (feline.getWidth() >> 1),
+                feline.getY(),
                 colors);
         //samurai option
         samurai.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack, textRenderer, samurai.getMessage(), samurai.x + (samurai.getWidth() >> 1),
-                samurai.y, 2007);
+        drawCenteredText(pPoseStack, textRenderer, samurai.getMessage(), samurai.getX() + (samurai.getWidth() >> 1),
+                samurai.getY(), 2007);
         //ninja option
         ninja.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack, textRenderer, ninja.getMessage(), ninja.x + (ninja.getWidth() >> 1), ninja.y,
+        drawCenteredText(pPoseStack, textRenderer, ninja.getMessage(), ninja.getX() + (ninja.getWidth() >> 1), ninja.getY(),
                 5125);
         //guardian option
         guardian.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack, textRenderer, guardian.getMessage(), guardian.x + (guardian.getWidth() >> 1),
-                guardian.y, 0xff369b);
+        drawCenteredText(pPoseStack, textRenderer, guardian.getMessage(), guardian.getX() + (guardian.getWidth() >> 1),
+                guardian.getY(), 0xff369b);
         //warrior option
         warrior.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack, textRenderer, warrior.getMessage(), warrior.x + (guardian.getWidth() >> 1),
-                warrior.y, 0xa9a9a9);
+        drawCenteredText(pPoseStack, textRenderer, warrior.getMessage(), warrior.getX() + (guardian.getWidth() >> 1),
+                warrior.getY(), 0xa9a9a9);
         //current class
         if (IndicatorColor != 0) {
             switch (CardinalData.LyokoClass.getLyokoClass(this.client.player)) {
@@ -84,6 +85,7 @@ public final class ClassScreen extends Screen {
                 case 1 -> drawClassIndicator(Text.of("Current Class: Samurai"), pPoseStack);
                 case 2 -> drawClassIndicator(Text.of("current class: Ninja"), pPoseStack);
                 case 3 -> drawClassIndicator(Text.of("Current Class: Guardian"), pPoseStack);
+                default -> {}
             }
         } else {
             drawCenteredText(pPoseStack, textRenderer,
@@ -129,6 +131,7 @@ public final class ClassScreen extends Screen {
             case 1 -> IndicatorColor = 2007;
             case 2 -> IndicatorColor = 5125;
             case 3 -> IndicatorColor = 0x1d5e18;
+            default -> {}
         }
 
         /*

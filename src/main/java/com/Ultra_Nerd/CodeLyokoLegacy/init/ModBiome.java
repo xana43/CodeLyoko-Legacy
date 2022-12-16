@@ -3,15 +3,20 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.*;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.sound.MusicSound;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.feature.MiscConfiguredFeatures;
 import net.minecraft.world.gen.feature.MiscPlacedFeatures;
+import net.minecraft.world.gen.feature.PlacedFeature;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -20,7 +25,15 @@ public record ModBiome() {
 
     private static final SpawnSettings.Builder biomeSpawns = new SpawnSettings.Builder().spawn(SpawnGroup.MONSTER,
             new SpawnSettings.SpawnEntry(ModEntities.BLOK, 10, 2, 4));
-
+    public static void bootStrap(final Registerable<Biome> biomeRegisterable)
+    {
+        BIOME_MAP.forEach((s, biome) -> {
+            final RegistryKey<Biome> biomeRegistryKey = RegistryKey.of(RegistryKeys.BIOME,
+                    CodeLyokoMain.codeLyokoPrefix(s));
+            biomeRegisterable.register(biomeRegistryKey,biome);
+            CodeLyokoMain.LOG.info("Registering " + s);
+        });
+    }
     /*Forest Sector*/
     // private static final SurfaceBuilder FOREST_CARVER = new SurfaceBuilder(null,ModBlocks.BORNITE_ORE.getDefaultState(), 0,0,null);
     private static final Biome FOREST_SECTOR = buildForest();
@@ -58,8 +71,8 @@ public record ModBiome() {
 
         final GenerationSettings.Builder forestGensettings = new GenerationSettings.Builder();
         // CodeLyokoMain.LOG.info(String.valueOf(ModFeature.FOREST_ENTRY_PLACED));
-        forestGensettings.feature(GenerationStep.Feature.VEGETAL_DECORATION,
-                RegistryEntry.of(ModFeature.PlacedFeatures.FOREST_TREE_PLACED));
+       // forestGensettings.feature(GenerationStep.Feature.VEGETAL_DECORATION,
+         //       RegistryEntry.of(ModFeature.PlacedFeatures.FOREST_TREE_PLACED));
         return (new Biome.Builder()).precipitation(Biome.Precipitation.NONE)
                 .downfall(0)
                 .effects(new BiomeEffects.Builder().waterColor(2387).fogColor(2387).waterFogColor(2387)
@@ -90,13 +103,14 @@ public record ModBiome() {
     private static Biome buildIce() {
 
         GenerationSettings.Builder iceGenBuilder = new GenerationSettings.Builder();
-        iceGenBuilder.feature(GenerationStep.Feature.SURFACE_STRUCTURES, MiscPlacedFeatures.BLUE_ICE);
+        //iceGenBuilder.feature(GenerationStep.Feature.SURFACE_STRUCTURES,
+          //      (RegistryEntry<PlacedFeature>) MiscPlacedFeatures.BLUE_ICE);
 
         return (new Biome.Builder())
 
                 .precipitation(Biome.Precipitation.SNOW)
                 .downfall(0)
-                .effects(new BiomeEffects.Builder().music(new MusicSound(ModSounds.ICE, 0, 0, true)).skyColor(2387)
+                .effects(new BiomeEffects.Builder().music(new MusicSound(RegistryEntry.of(ModSounds.ICE), 0, 0, true)).skyColor(2387)
                         .waterColor(2387).waterFogColor(2387).fogColor(2387).build())
                 .spawnSettings(biomeSpawns.build())
                 .generationSettings(iceGenBuilder.build())
@@ -114,7 +128,7 @@ public record ModBiome() {
                 .downfall(0)
                 .temperature(13)
                 .temperatureModifier(Biome.TemperatureModifier.NONE)
-                .effects(new BiomeEffects.Builder().music(new MusicSound(ModSounds.OCEAN, 0, 0, true)).skyColor(2382)
+                .effects(new BiomeEffects.Builder().music(new MusicSound(RegistryEntry.of(ModSounds.OCEAN), 0, 0, true)).skyColor(2382)
                         .waterColor(2382).waterFogColor(2382).fogColor(2382).build())
                 .generationSettings(ocenGen.build())
                 .spawnSettings(oceanSpawns.build())
@@ -131,7 +145,7 @@ public record ModBiome() {
                 .temperature(2)
                 .downfall(0)
                 .temperatureModifier(Biome.TemperatureModifier.NONE)
-                .effects(new BiomeEffects.Builder().music(new MusicSound(ModSounds.MOUNTAIN, 0, 0, true))
+                .effects(new BiomeEffects.Builder().music(new MusicSound(RegistryEntry.of(ModSounds.MOUNTAIN), 0, 0, true))
                         .waterFogColor(1).waterColor(1).fogColor(1).skyColor(1).build())
                 .generationSettings(mountainGen.build())
                 .spawnSettings(biomeSpawns.build())
@@ -141,13 +155,15 @@ public record ModBiome() {
     private static Biome buildVolcano() {
         SpawnSettings.Builder volcanoSpawn = new SpawnSettings.Builder().spawnCost(ModEntities.BLOK, 1, 0);
         GenerationSettings.Builder volcanoGen = new GenerationSettings.Builder();
-        volcanoGen.feature(GenerationStep.Feature.FLUID_SPRINGS, MiscPlacedFeatures.SPRING_LAVA);
+       // volcanoGen.feature(GenerationStep.Feature.FLUID_SPRINGS,
+         //       (RegistryEntry<PlacedFeature>) MiscPlacedFeatures.SPRING_LAVA);
         return (new Biome.Builder())
 
                 .downfall(0)
                 .precipitation(Biome.Precipitation.NONE)
                 .temperature(46)
-                .effects(new BiomeEffects.Builder().fogColor(7579).music(new MusicSound(ModSounds.VOLCANO, 0, 0, true))
+                .effects(new BiomeEffects.Builder().fogColor(7579).music(new MusicSound(RegistryEntry.of(ModSounds.VOLCANO),
+                                0, 0, true))
                         .waterFogColor(7579).skyColor(7579).waterColor(7579).build())
                 .spawnSettings(volcanoSpawn.build())
                 .generationSettings(volcanoGen.build())
@@ -162,7 +178,9 @@ public record ModBiome() {
                 .downfall(0)
                 .precipitation(Biome.Precipitation.NONE)
                 .temperature(13)
-                .effects(new BiomeEffects.Builder().music(new MusicSound(ModSounds.SECTOR5, 0, 0, true)).fogColor(2387)
+                .effects(new BiomeEffects.Builder().music(new MusicSound(RegistryEntry.of(ModSounds.SECTOR5),
+                                0, 0,
+                                true)).fogColor(2387)
                         .waterColor(2387).waterFogColor(2387).skyColor(2387).build())
                 .spawnSettings(sector5Spawn.build())
                 .generationSettings(sector5Gen.build())
@@ -184,10 +202,11 @@ public record ModBiome() {
 
         private final Identifier BiomeLocation;
         private final RegistryEntry<Biome> biomeRegistryKey;
-
+        private final Biome biomeValue;
         RegisteredBiomes(Biome biomeToIdentify) {
             this.BiomeLocation = identiferOfBiome(biomeToIdentify);
             this.biomeRegistryKey = getBiomeKey(biomeToIdentify);
+            this.biomeValue = biomeToIdentify;
         }
 
         private static RegistryEntry<Biome> getBiomeKey(Biome biome) {
@@ -206,7 +225,10 @@ public record ModBiome() {
             return output.get();
 
         }
-
+        public final Biome getBiomeValue()
+        {
+            return biomeValue;
+        }
         public final RegistryEntry<Biome> getBiomeRegistryKey() {
             return this.biomeRegistryKey;
         }

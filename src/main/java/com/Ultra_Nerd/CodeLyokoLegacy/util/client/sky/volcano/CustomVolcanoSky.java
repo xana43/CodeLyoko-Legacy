@@ -11,8 +11,8 @@ import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
+import org.joml.Matrix4f;
 
 //@OnlyIn(Dist.CLIENT)
 @Environment(EnvType.CLIENT)
@@ -29,7 +29,7 @@ public record CustomVolcanoSky() implements DimensionRenderingRegistry.SkyRender
     @Override
     public void render(final WorldRenderContext ctx) {
         // mc.textureManager.bindTexture(texturelocation);
-        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
         RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
 
         final MatrixStack matrixStack = ctx.matrixStack();
@@ -39,30 +39,32 @@ public record CustomVolcanoSky() implements DimensionRenderingRegistry.SkyRender
             switch (i) {
                 case 1 -> {
                     RenderSystem.setShaderTexture(0, sky1);
-                    matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0F));
-                    matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(0));
+                    matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
+                    matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(0));
                 }
                 case 2 -> {
                     RenderSystem.setShaderTexture(0, sky2);
-                    matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90.0F));
-                    matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180));
+                    matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90.0F));
+                    matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180));
                 }
                 case 3 -> {
                     RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
-                    matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180.0F));
+                    matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0F));
 
 
                     matrixStack.translate(0, 50, 0);
                 }
                 case 4 -> {
                     RenderSystem.setShaderTexture(0, sky2);
-                    matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0F));
-                    matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-90));
+                    matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90.0F));
+                    matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-90));
                 }
                 case 5 -> {
                     RenderSystem.setShaderTexture(0, sky1);
-                    matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(-90.0F));
-                    matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90));
+                    matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-90.0F));
+                    matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90));
+                }
+                default -> {
                 }
             }
 

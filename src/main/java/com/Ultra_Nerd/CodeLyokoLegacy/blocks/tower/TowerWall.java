@@ -1,7 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.loader.impl.util.ExceptionUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -10,6 +12,7 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.util.logging.UncaughtExceptionHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
@@ -29,7 +32,7 @@ public class TowerWall extends HorizontalFacingBlock {
                 .luminance(value -> 250)
 
         );
-
+        this.setDefaultState(this.getDefaultState().with(CURRENT_ACTIVATION_STATE,0));
     }
 
     @Override
@@ -39,7 +42,7 @@ public class TowerWall extends HorizontalFacingBlock {
 
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(CURRENT_ACTIVATION_STATE));
+        super.appendProperties(builder.add(CURRENT_ACTIVATION_STATE).add(FACING));
     }
 
     @Nullable
@@ -66,6 +69,10 @@ public class TowerWall extends HorizontalFacingBlock {
                             pos.getZ() + 1.25f, 0, 0, 0);
                     case 3 -> world.addParticle(ModParticles.TOWER_PARTICLE_JEREMY, d0, d1,
                             pos.getZ() + 1.25f, 0, 0, 0);
+                    default -> {
+                        CodeLyokoMain.LOG.error("case is:" + state.get(CURRENT_ACTIVATION_STATE));
+                        throw new UnsupportedOperationException("tower activation states doesn't exist");
+                    }
                 }
             }
             case SOUTH -> {
@@ -78,6 +85,8 @@ public class TowerWall extends HorizontalFacingBlock {
                             d0, d1, pos.getZ() - 0.25f, 0, 0, 0);
                     case 3 -> world.addParticle(ModParticles.TOWER_PARTICLE_JEREMY,
                             d0, d1, pos.getZ() - 0.25f, 0, 0, 0);
+                    default -> { CodeLyokoMain.LOG.error("case is:" + state.get(CURRENT_ACTIVATION_STATE));
+                        throw new UnsupportedOperationException("tower activation states doesn't exist");}
                 }
             }
             case EAST -> {
@@ -90,6 +99,8 @@ public class TowerWall extends HorizontalFacingBlock {
                             pos.getX() - 0.25f, d1, d2, 0, 0, 0);
                     case 3 -> world.addParticle(ModParticles.TOWER_PARTICLE_JEREMY,
                             pos.getX() - 0.25f, d1, d2, 0, 0, 0);
+                    default -> { CodeLyokoMain.LOG.error("case is:" + state.get(CURRENT_ACTIVATION_STATE));
+                        throw new UnsupportedOperationException("tower activation states doesn't exist");}
                 }
             }
             case WEST -> {
@@ -102,8 +113,12 @@ public class TowerWall extends HorizontalFacingBlock {
                             pos.getX() + 1.25f, d1, d2, 0, 0, 0);
                     case 3 -> world.addParticle(ModParticles.TOWER_PARTICLE_JEREMY,
                             pos.getX() + 1.25f, d1, d2, 0, 0, 0);
+                    default -> { CodeLyokoMain.LOG.error("case is:" + state.get(CURRENT_ACTIVATION_STATE));
+                        throw new UnsupportedOperationException("tower activation states doesn't exist");}
                 }
             }
+            default -> { CodeLyokoMain.LOG.error("case is:" + state.get(FACING));
+                throw new UnsupportedOperationException("no function defined for this direction");}
 
         }
 

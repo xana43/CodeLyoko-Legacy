@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cm:key_spring"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "knows_key_spring": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "cm:key_spring"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "cm"
+      ]
+    }
+  ],
+  "requirements": [
+    [
+      "knows_key_spring",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cm:key_spring"
+    ]
+  }
+}

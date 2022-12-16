@@ -3,9 +3,9 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
@@ -68,13 +68,13 @@ public record MethodUtil() {
 
         private static final StringVisitable[] pages = new StringVisitable[100];
 
-        public static StringVisitable @NotNull [] textArray(@NotNull final String textToDenote) {
+        public static StringVisitable[] textArray(@NotNull final String textToDenote) {
             final String[] denoted = textToDenote.split("δ");
             final int length = denoted.length;
             for (int i = 0; i < length; i++) {
                 pages[i] = Text.translatable(denoted[i]);
             }
-            return pages;
+            return pages.clone();
         }
 
         public static int textArrayLengthToPage(final StringVisitable @NotNull [] formattedTexts) {

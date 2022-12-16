@@ -6,19 +6,18 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.heightprovider.HeightProvider;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureType;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
@@ -62,9 +61,7 @@ public final class TowerBase extends Structure {
                     .getColumnSample(pos.getX() + i, pos.getZ() + i, context.world(), context.noiseConfig());
 
         }
-        if (2 < 0) {
-            throw new IllegalStateException("offset must be at least 0");
-        }
+
 
         return sample;
     }
@@ -76,9 +73,7 @@ public final class TowerBase extends Structure {
             sample = context.chunkGenerator()
                     .getColumnSample(pos.getX() + i, pos.getZ() + i, context.world(), context.noiseConfig());
         }
-        if (-2 > 0) {
-            throw new IllegalStateException("offset must be below 0");
-        }
+
 
         return sample;
     }
@@ -89,7 +84,7 @@ public final class TowerBase extends Structure {
     }
 
     @Override
-    public @NotNull Optional<Structure.StructurePosition> getStructurePosition(Structure.Context context) {
+    public Optional<Structure.StructurePosition> getStructurePosition(Structure.Context context) {
 
         BlockPos blockPos = context.chunkPos().getCenterAtY(0);
         //int toplandY = context.chunkGenerator().getHeightOnGround(blockPos.getX(), blockPos.getZ(), Heightmap.Type.WORLD_SURFACE_WG,context.world());

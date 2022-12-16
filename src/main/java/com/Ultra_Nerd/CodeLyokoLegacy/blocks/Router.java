@@ -113,8 +113,7 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
     }
 
     @Override
-    public @NotNull BlockState getPlacementState(@NotNull ItemPlacementContext context) {
-        // TODO Auto-generated method stub
+    public BlockState getPlacementState(@NotNull ItemPlacementContext context) {
         return this.getDefaultState().with(FACING, context.getPlayerFacing().getOpposite()).with(ROUTER_ACTIVE, false);
     }
 

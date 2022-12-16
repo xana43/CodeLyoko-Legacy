@@ -46,9 +46,14 @@ public final class ComputerIntegratedReactor extends Block implements BlockEntit
         }
         return ActionResult.SUCCESS;
     }
-
+    @Nullable
     @Override
-    public <T extends BlockEntity> @NotNull BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
+    public NamedScreenHandlerFactory createScreenHandlerFactory(final BlockState state, final World world, final BlockPos pos) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        return blockEntity instanceof NamedScreenHandlerFactory ? (NamedScreenHandlerFactory)blockEntity : null;
+    }
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
         return (world1, pos, state1, blockEntity) -> {
             if (blockEntity instanceof ComputerReactorTileEntity) {
                 ((ComputerReactorTileEntity) blockEntity).tick();

@@ -6,9 +6,13 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MantaEntity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
-public final class ModelManta extends AnimatedGeoModel<MantaEntity> {
+public final class ModelManta extends DefaultedEntityGeoModel<MantaEntity> {
+    public ModelManta(final Identifier assetSubpath) {
+        super(assetSubpath);
+    }
+
     @Override
     public Identifier getModelResource(final MantaEntity object) {
         return null;

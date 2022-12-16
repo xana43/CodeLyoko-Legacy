@@ -59,7 +59,7 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
     }
 
     @Override
-    public @NotNull SoundEvent getEquipSound() {
+    public SoundEvent getEquipSound() {
         return this.soundEvent;
     }
 

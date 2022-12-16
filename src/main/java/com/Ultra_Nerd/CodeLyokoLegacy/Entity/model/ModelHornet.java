@@ -6,30 +6,31 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HornetEntity;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
-public final class ModelHornet extends AnimatedGeoModel<HornetEntity> {
-    @Override
-    public Identifier getModelResource(final HornetEntity object) {
-
-        return CodeLyokoMain.codeLyokoPrefix("geo/hornet.geo.json");
+public final class ModelHornet extends DefaultedEntityGeoModel<HornetEntity> {
+    public ModelHornet() {
+        super(CodeLyokoMain.codeLyokoPrefix("hornet"));
     }
 
     @Override
-    public Identifier getTextureResource(final HornetEntity object) {
-        return CodeLyokoMain.codeLyokoPrefix("textures/entity/hornet/hornetatlas.png");
+    public DefaultedEntityGeoModel<HornetEntity> withAltAnimations(final Identifier altPath) {
+        return super.withAltAnimations(CodeLyokoMain.codeLyokoPrefix("animations/entities/hornet.json"));
     }
 
     @Override
-    public Identifier getAnimationResource(final HornetEntity animatable) {
-
-        return CodeLyokoMain.codeLyokoPrefix("animations/entities/hornet.json");
+    public DefaultedEntityGeoModel<HornetEntity> withAltTexture(final Identifier altPath) {
+        return super.withAltTexture(CodeLyokoMain.codeLyokoPrefix("textures/entity/hornet/hornetatlas.png"));
     }
 
+    @Override
+    public RenderLayer getRenderType(final HornetEntity animatable, final Identifier texture) {
+        return RenderLayer.getEntityTranslucent(getTextureResource(animatable));
+    }
 
-
-    /*
+   /*
     @Override
     public @Nullable ResourceLocation getModelResource(HornetEntity object) {
         return null;

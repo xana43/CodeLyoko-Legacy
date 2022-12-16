@@ -6,16 +6,16 @@ import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.mob.GuardianEntity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public final class MantaEntity extends GuardianEntity implements IAnimatable, RangedAttackMob {
-    private final AnimationFactory manager = GeckoLibUtil.createFactory(this);
+public final class MantaEntity extends GuardianEntity implements GeoAnimatable, RangedAttackMob {
+    private final AnimatableInstanceCache manager = GeckoLibUtil.createInstanceCache(this);
     private final AnimationController<?> controller = new AnimationController<>(this, "mantamovecontroller", 20,
             this::animationPred);
 
@@ -81,17 +81,24 @@ public final class MantaEntity extends GuardianEntity implements IAnimatable, Ra
             this.level.addFreshEntity(laser);
         }
     */
+
+
     @Override
-    public @NotNull AnimationFactory getFactory() {
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
         return manager;
     }
 
     @Override
-    public void registerControllers(@NotNull AnimationData data) {
-        data.addAnimationController(controller);
+    public double getTick(final Object o) {
+        return 0;
     }
 
-    private <E extends MantaEntity> @NotNull PlayState animationPred(AnimationEvent<E> event) {
+    @Override
+    public void registerControllers(@NotNull AnimatableManager.ControllerRegistrar data) {
+        data.add(controller);
+    }
+
+    private <E extends MantaEntity> @NotNull PlayState animationPred(AnimationState<E> event) {
         return PlayState.STOP;
     }
 

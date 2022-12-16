@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import net.minecraft.block.BlockState;
@@ -27,25 +26,24 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nonnull;
 
 
-public final class EntityBlok extends SkeletonEntity implements IAnimatable {
+public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
 
 
     public EntityBlok(final EntityType<? extends EntityBlok> entityType, final World world) {
         super(entityType, world);
 
-        AnimationController.addModelFetcher(
-                (AnimationController.ModelFetcher<EntityBlok>) iAnimatable -> new ModelBlok());
+
     }
 
     @Nullable
@@ -83,13 +81,13 @@ public final class EntityBlok extends SkeletonEntity implements IAnimatable {
         this.world.spawnEntity(abstractarrow);
     }
 
-    private <E extends EntityBlok> @NotNull PlayState pred(AnimationEvent<E> event) {
+    private <E extends EntityBlok> @NotNull PlayState pred(AnimationState<E> event) {
         return PlayState.STOP;
     }
 
     @Override
-    public void registerControllers(@NotNull AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "blokcontroller", 20, this::pred));
+    public void registerControllers(@NotNull AnimatableManager.ControllerRegistrar data) {
+        data.add(new AnimationController<>(this, "blokcontroller", 20, this::pred));
     }
 
     @Override
@@ -146,9 +144,16 @@ public final class EntityBlok extends SkeletonEntity implements IAnimatable {
         return true;
     }
 
+
+
     @Override
-    public @NotNull AnimationFactory getFactory() {
-        return GeckoLibUtil.createFactory(this);
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return GeckoLibUtil.createInstanceCache(this);
+    }
+
+    @Override
+    public double getTick(final Object o) {
+        return 0;
     }
 
     @Override

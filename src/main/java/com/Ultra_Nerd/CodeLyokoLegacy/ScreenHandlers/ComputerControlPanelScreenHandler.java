@@ -35,7 +35,7 @@ public final class ComputerControlPanelScreenHandler extends ScreenHandler {
     }
 
     @Override
-    public ItemStack transferSlot(final PlayerEntity player, final int index) {
+    public ItemStack quickMove(final PlayerEntity player, final int index) {
         return null;
     }
 

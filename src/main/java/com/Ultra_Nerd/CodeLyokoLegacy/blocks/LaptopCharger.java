@@ -18,9 +18,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class LaptopCharger extends HorizontalFacingBlock implements BlockEntityProvider {
+public final class LaptopCharger extends HorizontalFacingBlock implements BlockEntityProvider {
     public LaptopCharger(final Settings settings) {
         super(settings);
     }
@@ -62,7 +63,6 @@ public class LaptopCharger extends HorizontalFacingBlock implements BlockEntityP
         return ActionResult.CONSUME;
     }
 
-    @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
         return (world1, pos, state1, blockEntity) -> {

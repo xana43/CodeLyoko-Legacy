@@ -10,8 +10,8 @@ import net.minecraft.screen.ScreenHandlerType;
 public record ModScreenHandlers() {
 
 
-    public static final ScreenHandlerType<TowerInterfaceScreenHandler> TOWER_INTERFACE_SCREEN_HANDLER = new ScreenHandlerType<>(
-            (syncId, playerInventory) -> new TowerInterfaceScreenHandler(syncId));
+    public static final ScreenHandlerType<TowerInterfaceScreenHandler> TOWER_INTERFACE_SCREEN_HANDLER = new ExtendedScreenHandlerType<>(
+            (syncId, playerInventory,buf) -> new TowerInterfaceScreenHandler(syncId,playerInventory.player,buf));
     public static final ScreenHandlerType<ComputerControlPanelScreenHandler> CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE = new ExtendedScreenHandlerType<>(
             (syncId, inventory, buf) -> new ComputerControlPanelScreenHandler(syncId, buf));
     public static final ScreenHandlerType<ReactorScreenHandler> COMPUTER_REACTOR_SCREEN_HANDLER = new ScreenHandlerType<>(

@@ -4,28 +4,26 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.builder.ILoopType;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public final class KankrelatEntity extends HostileEntity implements IAnimatable {
+public final class KankrelatEntity extends HostileEntity implements GeoAnimatable {
 
-    private final AnimationFactory manager = GeckoLibUtil.createFactory(this);
+    private final AnimatableInstanceCache manager = GeckoLibUtil.createInstanceCache(this);
+
     public KankrelatEntity(final EntityType<? extends HostileEntity> entityType, final World world) {
         super(entityType, world);
-    }    private final AnimationController<?> controller = new AnimationController<>(this, "kankrelatcontroller", 20,
-            this::animationPred);
+    }
 
-    private <E extends KankrelatEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
+    private <E extends KankrelatEntity> @NotNull PlayState animationPred(@NotNull AnimationState<E> event) {
         if (event.isMoving()) {
-            controller.setAnimation(new AnimationBuilder().addAnimation("animation.ModelKankrelat.walk",
-                    ILoopType.EDefaultLoopTypes.LOOP));
+            controller.setAnimation(RawAnimation.begin().thenLoop("animation.ModelKankrelat.walk"));
             return PlayState.CONTINUE;
         } else {
             return PlayState.STOP;
@@ -33,9 +31,24 @@ public final class KankrelatEntity extends HostileEntity implements IAnimatable 
     }
 
     @Override
-    public void registerControllers(@NotNull AnimationData data) {
-        data.addAnimationController(controller);
+    public void registerControllers(@NotNull AnimatableManager.ControllerRegistrar data) {
+        data.add(controller);
+    }    private final AnimationController<?> controller = new AnimationController<>(this, "kankrelatcontroller", 20,
+            this::animationPred);
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return manager;
     }
+
+    @Override
+    public double getTick(final Object o) {
+        return 0;
+    }
+
+
+
+
 /*
     public KankrelatEntity(@NotNull EntityType<? extends KankrelatEntity> type, @NotNull Level world) {
         super(type, world);
@@ -43,10 +56,7 @@ public final class KankrelatEntity extends HostileEntity implements IAnimatable 
 
  */
 
-    @Override
-    public @NotNull AnimationFactory getFactory() {
-        return manager;
-    }
+
 
 
 

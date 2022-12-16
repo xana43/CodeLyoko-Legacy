@@ -6,26 +6,17 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
-import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-
-public final class ModelBlok extends AnimatedGeoModel<EntityBlok> {
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
 
-    @Override
-    public Identifier getModelResource(final EntityBlok object) {
-        return CodeLyokoMain.codeLyokoPrefix("geo/blok.geo.json");
+public final class ModelBlok extends DefaultedEntityGeoModel<EntityBlok> {
+
+
+    public ModelBlok() {
+        super(CodeLyokoMain.codeLyokoPrefix("blok"));
     }
 
-    @Override
-    public Identifier getTextureResource(final EntityBlok object) {
-        return CodeLyokoMain.codeLyokoPrefix("textures/entity/blok/blok.png");
-    }
 
-    @Override
-    public Identifier getAnimationResource(final EntityBlok animatable) {
-        return null;
-    }
 }
 
 

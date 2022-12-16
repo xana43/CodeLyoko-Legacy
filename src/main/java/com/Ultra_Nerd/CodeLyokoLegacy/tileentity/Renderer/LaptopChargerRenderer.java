@@ -7,9 +7,10 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 
-public record LaptopChargerRenderer(BlockEntityRendererFactory.Context context) implements BlockEntityRenderer<LaptopChargerBlockEntity> {
+public record LaptopChargerRenderer(
+        BlockEntityRendererFactory.Context context) implements BlockEntityRenderer<LaptopChargerBlockEntity> {
 
 
     @Override
@@ -20,7 +21,7 @@ public record LaptopChargerRenderer(BlockEntityRendererFactory.Context context) 
         if (heldItem != ItemStack.EMPTY) {
             matrices.push();
             matrices.translate(0.5, 0.08, 0.5);
-            matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90));
+            matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90));
             matrices.scale(0.8f, 0.8f, 0.8f);
             context.getItemRenderer().renderItem(heldItem, ModelTransformation.Mode.FIXED, light, overlay, matrices,
                     vertexConsumers, 0);

@@ -31,7 +31,7 @@ public enum PlayerClassType {
 
  */
 
-    @NotNull
+
     public final String getClassName() {
         return this.name;
     }

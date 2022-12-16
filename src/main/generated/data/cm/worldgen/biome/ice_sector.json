@@ -1,0 +1,40 @@
+{
+  "carvers": {},
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 2387,
+    "music": {
+      "max_delay": 0,
+      "min_delay": 0,
+      "replace_current_music": true,
+      "sound": {
+        "sound_id": "cm:icesector"
+      }
+    },
+    "sky_color": 2387,
+    "water_color": 2387,
+    "water_fog_color": 2387
+  },
+  "features": [],
+  "precipitation": "snow",
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "cm:blok",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 10
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": -3.0,
+  "temperature_modifier": "frozen"
+}

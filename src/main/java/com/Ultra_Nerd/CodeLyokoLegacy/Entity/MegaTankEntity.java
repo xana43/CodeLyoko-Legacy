@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelMegaTank;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import net.minecraft.block.BlockState;
@@ -28,21 +27,20 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.builder.ILoopType;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nonnull;
 import java.util.EnumSet;
 import java.util.Random;
 
-public final class MegaTankEntity extends SkeletonEntity implements IAnimatable {
+public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatable {
 
 
     private final AnimationController<?> tank = new AnimationController<>(this, "movecontroller", 0,
@@ -52,8 +50,8 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
     public MegaTankEntity(EntityType<? extends SkeletonEntity> type, @NotNull World world) {
         super(type, world);
 
-        AnimationController.addModelFetcher(
-                (AnimationController.ModelFetcher<MegaTankEntity>) animated -> new ModelMegaTank());
+        //AnimationController.(
+          //      (AnimationController.ModelFetcher<MegaTankEntity>) animated -> new ModelMegaTank());
 
 
     }
@@ -144,8 +142,18 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
     }
 
     @Override
-    public void registerControllers(@NotNull AnimationData data) {
-        data.addAnimationController(tank);
+    public void registerControllers(@NotNull AnimatableManager.ControllerRegistrar data) {
+        data.add(tank);
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return GeckoLibUtil.createInstanceCache(this);
+    }
+
+    @Override
+    public double getTick(final Object o) {
+        return 0;
     }
 
     @Override
@@ -165,35 +173,28 @@ public final class MegaTankEntity extends SkeletonEntity implements IAnimatable 
         }
     }
 
-    private <E extends MegaTankEntity> @NotNull PlayState animationPred(@NotNull AnimationEvent<E> event) {
+    private <E extends MegaTankEntity> PlayState animationPred(@NotNull AnimationState<E> event) {
 
 
         //CodeLyokoMain.LOG.info("attacking " + event.getAnimatable().isAttacking());
         if (event.isMoving() && !event.getAnimatable().isAttacking()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.move",
-                    ILoopType.EDefaultLoopTypes.LOOP));
+            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.MegaTank.move"));
             //CodeLyokoMain.LOG.info("moving");
         } else if (event.getAnimatable().isAttacking()) {
 
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.open",
-                    ILoopType.EDefaultLoopTypes.LOOP));
+            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.MegaTank.open"));
             //CodeLyokoMain.LOG.info("attacking");
         } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.MegaTank.idle",
-                    ILoopType.EDefaultLoopTypes.LOOP));
+            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.MegaTank.idle"));
             //CodeLyokoMain.LOG.info("not moving");
-
 
         }
 
+    return PlayState.CONTINUE;
 
-        return PlayState.CONTINUE;
     }
 
-    @Override
-    public @NotNull AnimationFactory getFactory() {
-        return GeckoLibUtil.createFactory(this);
-    }
+
 
     private static final class ProjectileStopThenAttackGoal extends Goal {
 

@@ -1,9 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "bbb",
-    "bsb",
-    "sss"
+  "category": "misc",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "cm"
+      ]
+    }
   ],
   "key": {
     "b": {
@@ -13,15 +17,12 @@
       "item": "cm:key_spring"
     }
   },
+  "pattern": [
+    "bbb",
+    "bsb",
+    "sss"
+  ],
   "result": {
     "item": "cm:key_cap"
-  },
-  "fabric:load_conditions": [
-    {
-      "condition": "fabric:all_mods_loaded",
-      "values": [
-        "cm"
-      ]
-    }
-  ]
+  }
 }

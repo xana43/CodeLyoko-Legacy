@@ -5,7 +5,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleType;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
 
 import java.util.Objects;
 
@@ -39,7 +39,7 @@ public final class DefaultLyokoParticleType extends ParticleType<DefaultLyokoPar
 
     @Override
     public String asString() {
-        return Objects.requireNonNull(Registry.PARTICLE_TYPE.getId(this)).toString();
+        return Objects.requireNonNull(Registries.PARTICLE_TYPE.getId(this)).toString();
     }
 
     @Override

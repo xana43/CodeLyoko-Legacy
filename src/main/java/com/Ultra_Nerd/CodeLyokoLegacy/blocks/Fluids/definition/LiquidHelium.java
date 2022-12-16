@@ -13,6 +13,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public final class LiquidHelium extends FluidBlock {
@@ -20,14 +21,14 @@ public final class LiquidHelium extends FluidBlock {
         super(ModFluids.STILL_LIQUID_HELIUM, FabricBlockSettings.copy(Blocks.WATER));
     }
 
-
+    private static final SecureRandom random = new SecureRandom();
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         if (entity instanceof final LivingEntity livingEntity) {
 
             livingEntity.limbAngle = 0;
             livingEntity.inPowderSnow = true;
-            livingEntity.damage(DamageSource.FREEZE, new Random().nextInt(3));
+            livingEntity.damage(DamageSource.FREEZE, random.nextInt(3));
             if (livingEntity instanceof final PlayerEntity player) {
                 if (player.isCreative()) {
                     player.inPowderSnow = false;

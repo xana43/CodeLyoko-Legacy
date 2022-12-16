@@ -21,7 +21,7 @@ public final class ReactorGUI extends HandledScreen<ReactorScreenHandler> {
 
     @Override
     protected void drawBackground(final MatrixStack matrices, final float delta, final int mouseX, final int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
         final int x = (width - backgroundWidth) >> 1;

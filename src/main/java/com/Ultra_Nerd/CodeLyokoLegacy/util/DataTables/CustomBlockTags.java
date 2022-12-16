@@ -1,18 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
-import net.minecraft.tag.BlockTags;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.BlockTags;
+
+import java.util.concurrent.CompletableFuture;
 
 public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
-    public CustomBlockTags(final FabricDataGenerator dataGenerator) {
-        super(dataGenerator);
+
+
+    public CustomBlockTags(final FabricDataOutput output, final CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        super(output, registriesFuture);
     }
 
     @Override
-    protected void generateTags() {
+    protected void configure(final RegistryWrapper.WrapperLookup arg) {
         //blocks for iron
         final Block[] commonBlocksPICKIRON = {
                 ModBlocks.ARCHITECTURE_WORK_STATION,
@@ -56,6 +61,8 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
         );
 
     }
+
+
 /*
     public CustomBlockTags(final DataGenerator p_126511_, @Nullable final ExistingFileHelper existingFileHelper) {
         super(p_126511_, CodeLyokoMain.MOD_ID, existingFileHelper);

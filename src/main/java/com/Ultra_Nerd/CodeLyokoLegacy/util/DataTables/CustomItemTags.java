@@ -2,22 +2,28 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.tag.ItemTags;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.ItemTags;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.CompletableFuture;
+
 public final class CustomItemTags extends FabricTagProvider.ItemTagProvider/*extends ItemTagsProvider*/ {
-    public CustomItemTags(final FabricDataGenerator dataGenerator, @Nullable final BlockTagProvider blockTagProvider) {
-        super(dataGenerator, blockTagProvider);
+
+
+    public CustomItemTags(final FabricDataOutput output, final CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture, @Nullable final BlockTagProvider blockTagProvider) {
+        super(output, completableFuture, blockTagProvider);
     }
 
-    public CustomItemTags(final FabricDataGenerator dataGenerator) {
-        super(dataGenerator);
+    public CustomItemTags(FabricDataOutput output,
+            CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture) {
+        this(output, completableFuture, null);
     }
 
     @Override
-    protected void generateTags() {
+    protected void configure(final RegistryWrapper.WrapperLookup arg) {
         getOrCreateTagBuilder(ItemTags.IRON_ORES).add(ModBlocks.BORNITE_ORE.asItem());
         getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.ITEM_MAP.get("lyokodisc"));
         getOrCreateTagBuilder(ItemTags.SAND).add(ModBlocks.SILICA_SAND.asItem());

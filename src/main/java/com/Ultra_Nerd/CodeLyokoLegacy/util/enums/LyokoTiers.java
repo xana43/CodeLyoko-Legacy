@@ -55,7 +55,7 @@ public enum LyokoTiers implements ToolMaterial {
 
 
     @Override
-    public @NotNull Ingredient getRepairIngredient() {
+    public Ingredient getRepairIngredient() {
         return Ingredient.EMPTY;
     }
 }

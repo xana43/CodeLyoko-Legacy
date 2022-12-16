@@ -6,25 +6,15 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
-import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
 
-public final class ModelMegaTank extends AnimatedGeoModel<MegaTankEntity> {
-    @Override
-    public Identifier getModelResource(final MegaTankEntity object) {
-        return CodeLyokoMain.codeLyokoPrefix("geo/megatank.geo.json");
+public final class ModelMegaTank extends DefaultedEntityGeoModel<MegaTankEntity> {
+    public ModelMegaTank() {
+        super(CodeLyokoMain.codeLyokoPrefix("megatank"));
     }
 
-    @Override
-    public Identifier getTextureResource(final MegaTankEntity object) {
-        return CodeLyokoMain.codeLyokoPrefix("textures/entity/megatank/megatank.png");
-    }
 
-    @Override
-    public Identifier getAnimationResource(final MegaTankEntity animatable) {
-        return CodeLyokoMain.codeLyokoPrefix("animations/entities/megatank.json");
-    }
 
 /*
     @Override

@@ -14,7 +14,7 @@ public final class MainLaptopScreen extends Screen {
 
     private static final Identifier TEXTURE = CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_pot.png");
     private static final int xSize = 1024, ySize = 1024;
-    private static int x/*, y*/;
+    private int x/*, y*/;
     private ButtonWidget imageButton;
 
     public MainLaptopScreen() {
@@ -57,9 +57,13 @@ public final class MainLaptopScreen extends Screen {
     }
 
     private void setImageButton() {
-        imageButton = new ButtonWidget(this.width >> 1, this.height >> 1, 30, 30// 0, 31, TEXTURE,
-                /*256, 256*/, Text.of("Test"), (button) -> {
-        });
+        imageButton = ButtonWidget.builder(Text.of("test"), button -> {
+        }).size(30,30).build();
+        imageButton.setPos(this.width >> 1, this.height >> 1);
+        //this.height >> 1, 30, 30//
+        // 0, 31,
+        // TEXTURE,
+        ///*256, 256*/, Text.of("Test"), (button) -> {},textSupplier -> {return Text.empty();});
         //imageButton.(0x1d5e18);
     }
 
@@ -77,7 +81,8 @@ public final class MainLaptopScreen extends Screen {
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 
         this.imageButton.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack, this.client.textRenderer, imageButton.getMessage(), imageButton.x, imageButton.y,
+        drawCenteredText(pPoseStack, this.client.textRenderer, imageButton.getMessage(), imageButton.getX(),
+                imageButton.getY(),
                 0x1d5e18);
     }
 }

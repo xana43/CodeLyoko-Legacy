@@ -1,10 +1,11 @@
 {
   "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 50,
+  "experience": 38.0,
   "group": "cmrefinement",
   "ingredient": {
     "item": "cm:raw_silicadust"
   },
-  "result": "cm:silicon_wafer",
-  "experience": 38.0,
-  "cookingtime": 50
+  "result": "cm:silicon_wafer"
 }

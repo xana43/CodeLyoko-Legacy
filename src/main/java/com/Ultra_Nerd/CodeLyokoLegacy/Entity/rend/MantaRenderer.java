@@ -2,12 +2,12 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MantaEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 
 public final class MantaRenderer extends GeoEntityRenderer<MantaEntity> {
-    public MantaRenderer(final EntityRendererFactory.Context ctx, final AnimatedGeoModel<MantaEntity> modelProvider) {
+    public MantaRenderer(final EntityRendererFactory.Context ctx, final DefaultedEntityGeoModel<MantaEntity> modelProvider) {
         super(ctx, modelProvider);
     }
 

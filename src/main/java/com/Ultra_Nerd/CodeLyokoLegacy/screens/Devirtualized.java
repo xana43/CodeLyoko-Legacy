@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.client.GUI.LyokoButton;
 import com.google.common.collect.Lists;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
@@ -35,14 +36,14 @@ public final class Devirtualized extends Screen {
         this.ticksSinceDeath = 0;
         this.buttons.clear();
         this.buttons.add(this.addDrawableChild(
-                new ButtonWidget((this.width >> 1) - 100, (this.height >> 2) + 72, 200, 20,
+                new LyokoButton((this.width >> 1) - 100, (this.height >> 2) + 72, 200, 20,
                         this.isHardcore ? Text.translatable("deathScreen.spectate") : Text.translatable(
                                 "deathScreen.respawn"), (button) -> {
                     this.client.player.requestRespawn();
                     this.client.setScreen(null);
-                })));
+                },textSupplier -> null)));
         this.buttons.add(this.addDrawableChild(
-                new ButtonWidget((this.width >> 1) - 100, (this.height >> 2) + 96, 200, 20,
+                new LyokoButton((this.width >> 1) - 100, (this.height >> 2) + 96, 200, 20,
                         Text.translatable("deathScreen.titleScreen"), (button) -> {
                     if (this.isHardcore) {
                         this.quitLevel();

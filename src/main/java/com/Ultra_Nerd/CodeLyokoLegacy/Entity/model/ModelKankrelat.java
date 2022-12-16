@@ -6,9 +6,13 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.KankrelatEntity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
-public final class ModelKankrelat extends AnimatedGeoModel<KankrelatEntity> {
+public final class ModelKankrelat extends DefaultedEntityGeoModel<KankrelatEntity> {
+    public ModelKankrelat(final Identifier assetSubpath) {
+        super(assetSubpath);
+    }
+
     @Override
     public Identifier getModelResource(final KankrelatEntity object) {
         return null;

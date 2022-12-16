@@ -1,21 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " i ",
-    "hih",
-    "hhh"
-  ],
-  "key": {
-    "i": {
-      "item": "minecraft:iron_ingot"
-    },
-    "h": {
-      "item": "minecraft:cobweb"
-    }
-  },
-  "result": {
-    "item": "cm:trusty_screwdriver"
-  },
+  "category": "equipment",
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",
@@ -23,5 +8,21 @@
         "cm"
       ]
     }
-  ]
+  ],
+  "key": {
+    "h": {
+      "item": "minecraft:cobweb"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    " i ",
+    "hih",
+    "hhh"
+  ],
+  "result": {
+    "item": "cm:trusty_screwdriver"
+  }
 }

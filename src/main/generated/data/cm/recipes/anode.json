@@ -1,18 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "c c",
-    "c c",
-    "c c"
-  ],
-  "key": {
-    "c": {
-      "item": "minecraft:copper_ingot"
-    }
-  },
-  "result": {
-    "item": "cm:anodepart"
-  },
+  "category": "building",
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",
@@ -20,5 +8,18 @@
         "cm"
       ]
     }
-  ]
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    "c c",
+    "c c",
+    "c c"
+  ],
+  "result": {
+    "item": "cm:anodepart"
+  }
 }

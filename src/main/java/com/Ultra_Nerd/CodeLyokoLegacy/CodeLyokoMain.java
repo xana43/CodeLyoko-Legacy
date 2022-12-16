@@ -13,20 +13,30 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageBiomeProvider;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.biome.v1.BiomeModification;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.networking.v1.S2CPlayChannelEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.impl.biome.BiomeSourceAccess;
+import net.fabricmc.fabric.impl.biome.modification.BuiltInRegistryKeys;
+import net.fabricmc.fabric.mixin.registry.sync.RegistriesMixin;
+import net.minecraft.Bootstrap;
+import net.minecraft.command.argument.RegistryEntryArgumentType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -35,6 +45,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.*;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
@@ -43,15 +54,20 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ColorHelper;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.biome.BuiltinBiomes;
+import net.minecraft.world.biome.source.BiomeAccess;
+import net.minecraft.world.biome.source.BiomeSource;
+import net.minecraft.world.biome.source.BiomeSources;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.feature.ConfiguredFeatures;
+import net.minecraft.world.level.WorldGenSettings;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import software.bernie.geckolib3.GeckoLib;
+import software.bernie.geckolib.GeckoLib;
 import team.reborn.energy.api.EnergyStorage;
 
 import java.util.Random;
@@ -65,14 +81,18 @@ public record CodeLyokoMain() implements ModInitializer {
     public static final String MOD_ID = "cm";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
 
-    public static final ItemGroup LYOKO_ITEM = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "lyoko_items"),
-            () -> new ItemStack(ModItems.BIT));
-    public static final ItemGroup LYOKO_BLOCKS = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "lyoko_blocks"),
-            () -> new ItemStack(ModBlocks.TOWER_INTERFACE));
-    public static final ItemGroup LYOKO_ARMOR = FabricItemGroupBuilder.build(codeLyokoPrefix("lyoko_armor"),
-            () -> new ItemStack(ModItems.WILLIAM_CHESTPLATE));
-    public static final ItemGroup LYOKO_WEAPONS = FabricItemGroupBuilder.build(codeLyokoPrefix("lyoko_weapons"),
-            () -> new ItemStack(ModItems.LASER_ARROWSHOOTER));
+    public static final ItemGroup LYOKO_ITEM =
+            FabricItemGroup.builder(new Identifier(MOD_ID, "lyoko_items")).icon(() -> new ItemStack(ModItems.BIT))
+                    .build();
+    public static final ItemGroup LYOKO_BLOCKS =
+            FabricItemGroup.builder(new Identifier(MOD_ID, "lyoko_blocks"))
+                    .icon(() -> new ItemStack(ModBlocks.TOWER_INTERFACE)).build();
+    public static final ItemGroup LYOKO_ARMOR =
+            FabricItemGroup.builder(codeLyokoPrefix("lyoko_armor"))
+                    .icon(() -> new ItemStack(ModItems.WILLIAM_CHESTPLATE)).build();
+    public static final ItemGroup LYOKO_WEAPONS =
+            FabricItemGroup.builder(codeLyokoPrefix("lyoko_weapons"))
+                    .icon(() -> new ItemStack(ModItems.LASER_ARROWSHOOTER)).build();
     private static final TrackedData<NbtCompound> peristent = DataTracker.registerData(ServerPlayerEntity.class,
             TrackedDataHandlerRegistry.NBT_COMPOUND);
 
@@ -126,46 +146,67 @@ public record CodeLyokoMain() implements ModInitializer {
 
     private static void generalRegistration() {
 
+
+
         ModBlocks.BLOCK_MAP.forEach((s, block) -> {
 
-            Registry.register(Registry.BLOCK, new Identifier(MOD_ID, s), block);
+            Registry.register(Registries.BLOCK, new Identifier(MOD_ID, s), block);
             //LOG.info(String.valueOf(blocks));
             if (block != ModBlocks.LYOKO_CORE && block != ModBlocks.DIGITAL_OCEAN_BLOCK && block != ModBlocks.DIGITAL_LAVA_BLOCK) {
-                Registry.register(Registry.ITEM, new Identifier(MOD_ID, s),
-                        new BlockItem(block, new FabricItemSettings().group(LYOKO_BLOCKS)));
+                final BlockItem blockItem = new BlockItem(block, new FabricItemSettings());
+                Registry.register(Registries.ITEM, new Identifier(MOD_ID, s),
+                        blockItem);
+                ItemGroupEvents.modifyEntriesEvent(LYOKO_BLOCKS).register(entries -> {
+                    entries.add(blockItem);
+                });
             }
         });
-        ModItems.ITEM_MAP.forEach((s, item) -> Registry.register(Registry.ITEM, new Identifier(MOD_ID, s), item));
+        ModItems.ITEM_MAP.forEach((s, item) -> {
+            Registry.register(Registries.ITEM, new Identifier(MOD_ID, s), item);
+            ItemGroupEvents.modifyEntriesEvent(LYOKO_ITEM).register(entries -> entries.add(item));
+        });
+        ModItems.ARMOR_MAP.forEach((s, item) -> {
+            Registry.register(Registries.ITEM, new Identifier(MOD_ID, s), item);
+            ItemGroupEvents.modifyEntriesEvent(LYOKO_ARMOR).register(entries -> entries.add(item));
+        });
+        ModItems.WEAPON_MAP.forEach((s, item) -> {
+            Registry.register(Registries.ITEM, new Identifier(MOD_ID, s), item);
+            ItemGroupEvents.modifyEntriesEvent(LYOKO_WEAPONS).register(entries -> entries.add(item));
+        });
         ModTileEntities.BLOCKENTITY_MAP.forEach(
-                (s, blockEntityType) -> Registry.register(Registry.BLOCK_ENTITY_TYPE, codeLyokoPrefix(s),
+                (s, blockEntityType) -> Registry.register(Registries.BLOCK_ENTITY_TYPE, codeLyokoPrefix(s),
                         blockEntityType));
         //ModSounds.SOUNDS.forEach(soundEvent -> Registry.register(Registry.SOUND_EVENT,soundEvent.getId(),soundEvent))
         for (int i = 0; i < ModSounds.SOUNDS.length; i++) {
 
-            Registry.register(Registry.SOUND_EVENT, ModSounds.SOUNDS[i].getId(), ModSounds.SOUNDS[i]);
+            Registry.register(Registries.SOUND_EVENT, ModSounds.SOUNDS[i].getId(), ModSounds.SOUNDS[i]);
         }
-        ModBiome.BIOME_MAP.forEach((s, biome) -> Registry.register(BuiltinRegistries.BIOME, codeLyokoPrefix(s), biome));
+        //ModBiome.BIOME_MAP.forEach((s, biome) -> Registry.register(,
+          //      codeLyokoPrefix(s),
+            //biome));
         ModEntities.ENTITY_TYPE_HASH_MAP.forEach(
-                (s, entityType) -> Registry.register(Registry.ENTITY_TYPE, codeLyokoPrefix(s), entityType));
+                (s, entityType) -> Registry.register(Registries.ENTITY_TYPE, codeLyokoPrefix(s), entityType));
         ModFluids.FLUID_IMMUTABLE_MAP.forEach(
-                (s, fluid) -> Registry.register(Registry.FLUID, codeLyokoPrefix(s), fluid));
+                (s, fluid) -> Registry.register(Registries.FLUID, codeLyokoPrefix(s), fluid));
 
         ModParticles.PARTICLE_TYPE_IMMUTABLE_MAP.forEach(
-                (s, defaultParticleType) -> Registry.register(Registry.PARTICLE_TYPE, codeLyokoPrefix(s),
+                (s, defaultParticleType) -> Registry.register(Registries.PARTICLE_TYPE, codeLyokoPrefix(s),
                         defaultParticleType));
-        Registry.register(Registry.CHUNK_GENERATOR, codeLyokoPrefix("carthage_chunkgen"),
-                CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
-        Registry.register(Registry.BIOME_SOURCE, codeLyokoPrefix("carthage_biome"),
-                CarthageBiomeProvider.CARTHAGE_BIOME_PROVIDER_CODEC);
+        //Registry.register(Registries.CHUNK_GENERATOR, codeLyokoPrefix("carthage_chunkgen"),
+            //  CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
+        //Registry.register(Registries.BIOME_SOURCE, codeLyokoPrefix("carthage_biome"),
+          //    CarthageBiomeProvider.CARTHAGE_BIOME_PROVIDER_CODEC);
         ModScreenHandlers.screenHandlerMap.forEach(
-                (s, screenHandlerType) -> Registry.register(Registry.SCREEN_HANDLER, codeLyokoPrefix(s),
+                (s, screenHandlerType) -> Registry.register(Registries.SCREEN_HANDLER, codeLyokoPrefix(s),
                         screenHandlerType));
 
         ModStructures.registerNewStructures();
+
         ModFeature.CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s, feature) -> {
 
-            Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, codeLyokoPrefix(s), feature.getLeft());
-            Registry.register(BuiltinRegistries.PLACED_FEATURE, codeLyokoPrefix(s), feature.getRight());
+            //Registry.register(, codeLyokoPrefix(s), feature.getLeft());
+
+            //Registry.register(BuiltinRegistries.PLACED_FEATURE, codeLyokoPrefix(s), feature.getRight());
 
 
         });
@@ -194,8 +235,8 @@ public record CodeLyokoMain() implements ModInitializer {
 
 
     private static void BiomeFeatureInject() {
-        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
-                RegistryKey.of(Registry.PLACED_FEATURE_KEY, codeLyokoPrefix("coffinite_ore_overworld")));
+        //BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
+     //           RegistryKey.of(RegistryKeys.PLACED_FEATURE, codeLyokoPrefix("coffinite_ore_overworld")));
     }
 
     private static void registerDefaultAttributes() {

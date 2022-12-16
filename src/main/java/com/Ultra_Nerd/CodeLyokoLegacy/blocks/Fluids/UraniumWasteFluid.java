@@ -8,6 +8,7 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
+import net.minecraft.world.World;
 
 public abstract class UraniumWasteFluid extends LyokoFluid {
     @Override
@@ -38,7 +39,7 @@ public abstract class UraniumWasteFluid extends LyokoFluid {
         }
 
         @Override
-        protected boolean isInfinite() {
+        protected boolean isInfinite(final World world) {
             return true;
         }
 
@@ -55,7 +56,7 @@ public abstract class UraniumWasteFluid extends LyokoFluid {
 
     public static class Still extends UraniumWasteFluid {
         @Override
-        protected boolean isInfinite() {
+        protected boolean isInfinite(final World world) {
             return true;
         }
 

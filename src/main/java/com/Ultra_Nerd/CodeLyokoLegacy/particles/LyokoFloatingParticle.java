@@ -68,7 +68,7 @@ public final class LyokoFloatingParticle extends SpriteBillboardParticle {
     public record TowerParticleJeremy(
             SpriteProvider spriteProvider) implements ParticleFactory<DefaultLyokoParticleType> {
         @Override
-        public @NotNull Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
+        public Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
             final LyokoFloatingParticle lyokoFloatingParticle = new LyokoFloatingParticle(world, x, y, z, velocityX,
                     velocityY, velocityZ, spriteProvider);
             lyokoFloatingParticle.velocityMultiplier = 0.8f;
@@ -85,7 +85,7 @@ public final class LyokoFloatingParticle extends SpriteBillboardParticle {
 
 
         @Override
-        public @NotNull Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
+        public Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
             final LyokoFloatingParticle lyokoFloatingParticle = new LyokoFloatingParticle(world, x, y, z, velocityX,
                     velocityY, velocityZ, spriteProvider);
             lyokoFloatingParticle.velocityMultiplier = 0.8f;
@@ -101,7 +101,7 @@ public final class LyokoFloatingParticle extends SpriteBillboardParticle {
             SpriteProvider spriteProvider) implements ParticleFactory<DefaultLyokoParticleType> {
 
         @Override
-        public @NotNull Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
+        public Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
             final LyokoFloatingParticle lyokoFloatingParticle = new LyokoFloatingParticle(world, x, y, z, velocityX,
                     velocityY, velocityZ, spriteProvider);
             lyokoFloatingParticle.velocityMultiplier = 0.8f;
@@ -118,7 +118,7 @@ public final class LyokoFloatingParticle extends SpriteBillboardParticle {
 
 
         @Override
-        public @NotNull Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
+        public Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
             final LyokoFloatingParticle lyokoFloatingParticle = new LyokoFloatingParticle(world, x, y, z, velocityX,
                     velocityY, velocityZ, spriteProvider);
             lyokoFloatingParticle.velocityMultiplier = 0.8f;

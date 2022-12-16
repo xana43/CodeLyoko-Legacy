@@ -14,6 +14,9 @@
     "cm:fluorite_ore",
     "cm:fluorite_block",
     "cm:fluoride_infuser",
+    "cm:cable_block",
+    "cm:computer_keyboard",
+    "cm:gummite_ore",
     "cm:chiplet_franz_block"
   ]
 }

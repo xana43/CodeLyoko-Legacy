@@ -56,7 +56,7 @@ shadowJar {
 	classifier = "shadow"
 }
 dependencies {
-	implementation(shadow("de.javagl:obj:${obj_version}"))
+	//implementation(shadow("de.javagl:obj:${obj_version}"))
     implementation 'com.github.spotbugs:spotbugs-annotations:4.0.1'
     // To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -65,12 +65,7 @@ dependencies {
 	//include "com.github.Chocohead:Fabric-ASM:v${asm_version}"
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "software.bernie.geckolib:geckolib-fabric-1.19:${geko_version}"
-	//modImplementation include("dev.monarkhes:myron:${project.myron_version}")
-	//modImplementation "io.github.ladysnake:locki:${locki_version}"
-	//include "io.github.ladysnake:locki:${locki_version}"
-	//modImplementation "net.kyrptonaught:customportalapi:${portal_version}"
-	//include "net.kyrptonaught:customportalapi:${portal_version}"
+	modImplementation "software.bernie.geckolib:geckolib-fabric-1.19.3:${geko_version}"
 	//modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-world:${cca_version}"
 	//modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-util:${cca_version}"
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-level:${cca_version}"
