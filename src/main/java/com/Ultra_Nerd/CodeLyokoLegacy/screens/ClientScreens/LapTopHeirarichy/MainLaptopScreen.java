@@ -2,6 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.LapTopHeirarichy;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
@@ -9,7 +11,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
-
+@Environment(EnvType.CLIENT)
 public final class MainLaptopScreen extends Screen {
 
     private static final Identifier TEXTURE = CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_pot.png");
@@ -22,22 +24,7 @@ public final class MainLaptopScreen extends Screen {
 
 
     }
-/*
 
-    @Override
-    public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
-
-        if(pButton == GLFW.GLFW_MOUSE_BUTTON_RIGHT)
-        {
-            assert this.minecraft != null;
-            ForgeHooksClient.popGuiLayer(this.minecraft);
-        }
-
-
-        return false;
-    }
-
- */
 
 
     @Override
@@ -60,11 +47,6 @@ public final class MainLaptopScreen extends Screen {
         imageButton = ButtonWidget.builder(Text.of("test"), button -> {
         }).size(30,30).build();
         imageButton.setPos(this.width >> 1, this.height >> 1);
-        //this.height >> 1, 30, 30//
-        // 0, 31,
-        // TEXTURE,
-        ///*256, 256*/, Text.of("Test"), (button) -> {},textSupplier -> {return Text.empty();});
-        //imageButton.(0x1d5e18);
     }
 
 

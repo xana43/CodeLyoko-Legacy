@@ -6,8 +6,12 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.client.gui.screen.ingame.FurnaceScreen;
+import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
@@ -20,6 +24,7 @@ import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
 
+@Environment(EnvType.CLIENT)
 public final class ComputerControlPanelUI extends HandledScreen<ComputerControlPanelScreenHandler> /*extends AbstractContainerScreen<ComputerControlPanelScreenHandler>*/ {
 
     private static final int size = 256;

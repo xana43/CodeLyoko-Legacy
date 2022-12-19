@@ -59,6 +59,9 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.ICE).add(
                 ModBlocks.DIGITAL_ICE
         );
+        getOrCreateTagBuilder(BlockTags.CRYSTAL_SOUND_BLOCKS).add(
+          ModBlocks.TOWER_INTERFACE
+        );
 
     }
 

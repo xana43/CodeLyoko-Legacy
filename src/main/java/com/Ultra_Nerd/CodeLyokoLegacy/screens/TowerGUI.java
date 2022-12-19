@@ -7,6 +7,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TowerInterfaceScreenHandler
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -25,7 +27,7 @@ import java.awt.*;
 import java.security.SecureRandom;
 import java.util.Locale;
 import java.util.Objects;
-
+@Environment(EnvType.CLIENT)
 public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     private static final Identifier TEXTURES = CodeLyokoMain.codeLyokoPrefix("textures/gui/towerinterface.png");
     private final SecureRandom completeRandom = new SecureRandom();

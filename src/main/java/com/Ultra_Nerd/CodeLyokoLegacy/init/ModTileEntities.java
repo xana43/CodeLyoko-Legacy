@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.CableBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.*;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -36,6 +37,8 @@ public record ModTileEntities() {
             FabricBlockEntityTypeBuilder.create(LaptopChargerBlockEntity::new, ModBlocks.LAPTOP_CHARGER).build();
     public  static final BlockEntityType<RouterTE> ROUTER_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(RouterTE::new,ModBlocks.ROUTER).build();
+    public static final BlockEntityType<CableTileEntity> CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE =
+            FabricBlockEntityTypeBuilder.create(CableTileEntity::new, ModBlocks.CABLE_BLOCK).build();
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String, BlockEntityType<?>>builder()
 
             .put("lyoko_core", LYOKO_CORE).put("tower_interface_tile_entity", TOWER_INTERFACE_TILE_ENTITY)
@@ -44,7 +47,9 @@ public record ModTileEntities() {
             .put("computer_control_panel_tile_entity", COMPUTER_CONTROL_PANEL)
             .put("computer_integrated_reactor", COMPUTER_REACTOR_TILE_ENTITY)
             .put("laptop_charger_blockentity", LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY)
-            .put("router_blockentity",ROUTER_BLOCK_ENTITY_TYPE).build();
+            .put("router_blockentity",ROUTER_BLOCK_ENTITY_TYPE)
+            .put("cable_blockentity",CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE).build();
+
 
     //
     /*

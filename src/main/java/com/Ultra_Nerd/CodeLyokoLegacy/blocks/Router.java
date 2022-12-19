@@ -1,22 +1,30 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.RouterTE;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.function.BooleanBiFunction;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public final class Router extends HorizontalFacingBlock implements BlockEntityProvider {
@@ -77,12 +85,48 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
             Block.createCuboidShape(8.25, 1, 5.5, 9.25, 2, 6.5),
             Block.createCuboidShape(8.25, 1, 3.5, 9.25, 2, 4.5)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
+    private final List<BlockPos> connectedBlocks = new ArrayList<>();
 
     public Router(@NotNull FabricBlockSettings properties) {
         super(properties);
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(ROUTER_ACTIVE, false));
     }
 
+    @Override
+    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+
+        if (world.getBlockEntity(pos) instanceof RouterTE routerTE) {
+
+            switch (state.get(FACING)) {
+                case NORTH -> {
+
+                        routerTE.connectToRouter(pos.offset(Direction.NORTH, 1));
+
+                }
+
+                case SOUTH -> {
+
+
+                        routerTE.connectToRouter(pos.offset(Direction.SOUTH, 1));
+
+                }
+                case EAST -> {
+
+
+                        routerTE.connectToRouter(pos.offset(Direction.EAST, 1));
+
+                }
+
+                case WEST -> {
+                    routerTE.connectToRouter(pos.offset(Direction.WEST, 1));
+
+                }
+            }
+        }
+
+
+        return ActionResult.SUCCESS;
+    }
 
     @Nullable
     @Override
@@ -95,20 +139,20 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
     public VoxelShape getOutlineShape(@NotNull BlockState state, @Nonnull BlockView worldIn, @Nonnull BlockPos pos,
             @Nonnull ShapeContext context) {
         return switch (state.get(FACING)) {
-            case SOUTH -> S;
-            case EAST -> E;
-            case WEST -> W;
-            default -> N;
+            case SOUTH -> N;
+            case EAST -> W;
+            case WEST -> E;
+            default -> S;
         };
     }
 
     @Override
     public VoxelShape getCollisionShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         return switch (state.get(FACING)) {
-            case SOUTH -> S;
-            case EAST -> E;
-            case WEST -> W;
-            default -> N;
+            case SOUTH -> N;
+            case EAST -> W;
+            case WEST -> E;
+            default -> S;
         };
     }
 

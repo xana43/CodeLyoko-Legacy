@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.StoryBookGUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
@@ -11,6 +12,7 @@ import net.minecraft.item.WrittenBookItem;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -83,7 +85,9 @@ public record EntryPool() {
 
         @Override
         public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
-
+            user.unlockRecipes(new Identifier[]{
+                    CodeLyokoMain.codeLyokoPrefix("anode")
+            });
             return super.use(world, user, hand);
         }
     }

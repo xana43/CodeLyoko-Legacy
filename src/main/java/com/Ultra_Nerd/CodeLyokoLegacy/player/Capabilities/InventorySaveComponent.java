@@ -26,7 +26,9 @@ public final class InventorySaveComponent implements AutoSyncedComponent {
     public void loadPlayerInventory(final PlayerEntity player) {
         playerUUID = player.getUuid();
         player.getInventory().clear();
-        player.getInventory().readNbt(playerInvSave.get(player.getUuid()));
+        if(playerInvSave.get(playerUUID) != null) {
+            player.getInventory().readNbt(playerInvSave.get(player.getUuid()));
+        }
     }
 
     @Override

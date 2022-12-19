@@ -3,7 +3,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.client.GUI.LyokoButton;
 import com.google.common.collect.Lists;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ConfirmScreen;
+import net.minecraft.client.gui.screen.DeathScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
@@ -16,6 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 
+@Environment(EnvType.CLIENT)
 public final class Devirtualized extends Screen {
 
 
@@ -24,7 +28,6 @@ public final class Devirtualized extends Screen {
     private final List<ButtonWidget> buttons = Lists.newArrayList();
     private byte ticksSinceDeath;
     private Text scoreText;
-
     public Devirtualized(@Nullable Text message, boolean isHardcore) {
         super(Text.translatable(isHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title")
                 .fillStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));

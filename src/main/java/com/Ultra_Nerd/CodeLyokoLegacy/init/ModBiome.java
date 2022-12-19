@@ -76,7 +76,7 @@ public record ModBiome() {
         return (new Biome.Builder()).precipitation(Biome.Precipitation.NONE)
                 .downfall(0)
                 .effects(new BiomeEffects.Builder().waterColor(2387).fogColor(2387).waterFogColor(2387)
-                        .skyColor(2387).build())
+                        .skyColor(2387).music(new MusicSound(RegistryEntry.of(ModSounds.FOREST),0,0,true)).build())
                 .spawnSettings(biomeSpawns.build())
                 .generationSettings(forestGensettings.build())
                 .temperature(3)

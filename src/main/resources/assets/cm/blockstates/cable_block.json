@@ -1,6 +1,8 @@
 {
     "multipart": [
-        {   "apply": { "model": "cm:block/cable_block_post" }},
+        {   "when": {"is_master": false},
+            "apply": { "model": "cm:block/cable_block_post" }
+        },
         {   "when": { "north": "true" },
             "apply": { "model": "cm:block/cable_block_side", "uvlock": true }
         },

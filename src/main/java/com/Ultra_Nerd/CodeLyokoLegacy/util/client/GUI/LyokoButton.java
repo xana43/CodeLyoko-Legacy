@@ -1,15 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.client.GUI;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ComputerInterfaceUi;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundManager;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-
+@Environment(EnvType.CLIENT)
 public class LyokoButton extends ButtonWidget {
     private final SoundEvent downSound;
 

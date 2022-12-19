@@ -1,31 +1,124 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalConnectingBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.CableTileEntity;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public final class CableBlock extends HorizontalConnectingBlock {
+public final class CableBlock extends HorizontalConnectingBlock implements BlockEntityProvider {
 
 //    private final static Map<CableBlock, LinkedList<CableBlock>> CABLE_LISTS = new HashMap<>();
 //    private CableBlock startOfCable;
-
+    private static final BooleanProperty isMaster = BooleanProperty.of("is_master");
     private final VoxelShape @NotNull [] shape;
     private final VoxelShape mainShape = Block.createCuboidShape(1, 0, 1, 15, 14, 15);
 
     public CableBlock(final Settings settings) {
         super(2.0F, 2.0F, 16.0F, 16.0F, 24.0F, settings);
         this.shape = this.createShapes(10, 10, 10, 10, 10);
+        this.setDefaultState(this.getDefaultState().with(WATERLOGGED,false).with(isMaster,false));
     }
 
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(NORTH, SOUTH, EAST, WEST, WATERLOGGED));
+        super.appendProperties(builder.add(NORTH, SOUTH, EAST, WEST, WATERLOGGED,isMaster));
     }
 
 
+/*
+    @Override
+    public void onPlaced(final World world, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack itemStack) {
+        final CableTileEntity thisTE = (CableTileEntity) world.getBlockEntity(pos);
+        CableTileEntity.CONNECTIONS.put(thisTE, new ArrayList<>());
+        for (int x = -1; x < 2; x++) {
+            for (int y = -1; y < 2; y++) {
+                for (int z = -1; z < 2; z++) {
+                    if (!(x == 0 && y == 0 && z == 0)) {
+                        final BlockEntity surrounding = world.getBlockEntity(new BlockPos(pos.getX() + x,
+                                pos.getY() + y, pos.getZ() + z));
+                        if (surrounding instanceof CableTileEntity) {
+                            if (CableTileEntity.CONNECTIONS.containsKey(surrounding)) {
+                                CableTileEntity.CONNECTIONS.get(surrounding).add(world.getBlockEntity(pos));
+                                CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                            }
+                        }
+                        if (surrounding instanceof ScannerTileEntity) {
+                            CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                            thisTE.connectToScanner();
+                        }
+                        if (surrounding instanceof ComputerControlPanelTileEntity) {
+                            CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                            thisTE.connectToComp();
+                        }
+                        if(surrounding instanceof RouterTE)
+                        {
+                            CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                            thisTE.connectedToRouter();
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+ */
+
+    @Override
+    public void onPlaced(final World world, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack itemStack) {
+        if(world.getBlockEntity(pos)instanceof CableTileEntity cableTileEntity)
+        {
+            cableTileEntity.calculateConnected();
+            if(cableTileEntity.getIsMaster())
+            {
+                world.setBlockState(pos,state.with(isMaster,true));
+            }
+        }
+        super.onPlaced(world, pos, state, placer, itemStack);
+    }
+
+    @Nullable
+    @Override
+    public BlockState getPlacementState(final ItemPlacementContext ctx) {
+        return this.getDefaultState().with(WATERLOGGED,
+                ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER);
+    }
+
+
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return ModTileEntities.CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE.instantiate(pos, state);
+    }
+
+    @Override
+    public BlockState getStateForNeighborUpdate(final BlockState state, final Direction direction, final BlockState neighborState, final WorldAccess world, final BlockPos pos, final BlockPos neighborPos) {
+        if (state.get(WATERLOGGED))
+        {
+            world.scheduleFluidTick(pos,Fluids.WATER,Fluids.WATER.getTickRate(world));
+        }
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    }
+
+    @Override
+    public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
+        return mainShape;
+    }
     /*
 
     @Nullable
