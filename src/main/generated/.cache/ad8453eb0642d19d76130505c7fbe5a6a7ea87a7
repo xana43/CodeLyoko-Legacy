@@ -1,4 +1,4 @@
-// 1.19.3	2022-12-16T13:57:27.9345219	CodeLyokoLegacy/Block Loot Tables
+// 1.19.3	2022-12-18T20:14:55.7326328	CodeLyokoLegacy/Block Loot Tables
 1a5a1fa46f429dc79528451de79813cac0cbc3a6 data\cm\loot_tables\blocks\digital_darkness.json
 aaa522da17b1c7067868c3ff7e2436ddd47a5728 data\cm\loot_tables\blocks\electroplating_machine.json
 9809747154fdd2abf8efc9756a44c51ea1abdcea data\cm\loot_tables\blocks\uv_light.json
@@ -10,8 +10,8 @@ f6511f5eabeb7f9920fa396301050a43038d26fe data\cm\loot_tables\blocks\uv_machine.j
 740ba3a1c1817fe7f7a9ac3a6e2babe6e0fd8b9e data\cm\loot_tables\blocks\scanner_base.json
 116e61004d712e4db11c7746f11f0c9f3b5853c1 data\cm\loot_tables\blocks\quantum_core.json
 a1f73370ddd3c4bfb9a45417e3bd214202573aad data\cm\loot_tables\blocks\tower_blue.json
-24b302e9d3f4a9f836bff7e992f618ab687f63f5 data\cm\loot_tables\blocks\digital_ice.json
 77b869f521e17321ef95a6f14c42705721a2b2a8 data\cm\loot_tables\blocks\computer_screen_frame.json
+24b302e9d3f4a9f836bff7e992f618ab687f63f5 data\cm\loot_tables\blocks\digital_ice.json
 bb4e2c7a5ce2dce38a99557b3ac8017a87216310 data\cm\loot_tables\blocks\electric_fluoride_infuser.json
 0b412b8929fdea8f0a4c469b1ccccf40f99140c7 data\cm\loot_tables\blocks\fluorite_ore.json
 7a7e9f180b0e12d0d05eaacd4b6f8a43341ac39b data\cm\loot_tables\blocks\cable_block.json

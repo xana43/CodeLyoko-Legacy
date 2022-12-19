@@ -70,6 +70,7 @@ import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
 import team.reborn.energy.api.EnergyStorage;
 
+import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -235,8 +236,12 @@ public record CodeLyokoMain() implements ModInitializer {
 
 
     private static void BiomeFeatureInject() {
-        //BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
-     //           RegistryKey.of(RegistryKeys.PLACED_FEATURE, codeLyokoPrefix("coffinite_ore_overworld")));
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
+               RegistryKey.of(RegistryKeys.PLACED_FEATURE, codeLyokoPrefix("coffinite_ore_overworld")));
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(RegistryKey.of(RegistryKeys.BIOME,
+                ModBiome.RegisteredBiomes.FOREST_SECTOR.getIdentifier())),GenerationStep.Feature.SURFACE_STRUCTURES,
+                RegistryKey.of(RegistryKeys.PLACED_FEATURE,
+                        codeLyokoPrefix("lyoko_forest_tree")));
     }
 
     private static void registerDefaultAttributes() {

@@ -29,7 +29,7 @@ public final class ModelMegaTank extends DefaultedEntityGeoModel<MegaTankEntity>
 
     @Override
     public @NotNull ResourceLocation getAnimationResource(MegaTankEntity animatable) {
-        return new ResourceLocation(CodeLyokoMain.MOD_ID,"animations/entities/megatank.json");
+        return new ResourceLocation(CodeLyokoMain.MOD_ID,"animations/entity/megatank.json");
     }
 
  */

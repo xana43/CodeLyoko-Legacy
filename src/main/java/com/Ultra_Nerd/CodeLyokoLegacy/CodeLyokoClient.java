@@ -30,6 +30,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.particle.v1.FabricSpriteProvider;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
@@ -42,6 +43,7 @@ import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.texture.atlas.AtlasSource;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
@@ -108,7 +110,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.MEGATANK, MegaTankRenderer::new);
         EntityRendererRegistry.register(ModEntities.LASER_ENTITY_TYPE, LaserRenderer::new);
         EntityRendererRegistry.register(ModEntities.HORNET_ENTITY_ENTITY_TYPE, HornetRenderer::new);
-        //for entities that need layer locations
+        //for entity that need layer locations
         EntityRendererRegistry.register(ModEntities.OVERBOARD, OverboardRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ModelOverboard.LAYER_LOCATION, ModelOverboard::createBodyLayer);
 
@@ -272,9 +274,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
                 });*/
         //client events
+
         registerItemPredicates();
-
-
         //effect registry
         DimensionEffectsAccessor.getIdentifierMap().put(CodeLyokoMain.codeLyokoPrefix("codelyoko_effects_general"),
                 new DimensionEffects(Float.NaN, true, DimensionEffects.SkyType.NONE, true, false) {

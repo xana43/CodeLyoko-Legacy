@@ -13,38 +13,17 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 public final class ModelHornet extends DefaultedEntityGeoModel<HornetEntity> {
     public ModelHornet() {
         super(CodeLyokoMain.codeLyokoPrefix("hornet"));
+        withAltTexture(CodeLyokoMain.codeLyokoPrefix("hornet/hornetatlas"));
     }
 
-    @Override
-    public DefaultedEntityGeoModel<HornetEntity> withAltAnimations(final Identifier altPath) {
-        return super.withAltAnimations(CodeLyokoMain.codeLyokoPrefix("animations/entities/hornet.json"));
-    }
 
-    @Override
-    public DefaultedEntityGeoModel<HornetEntity> withAltTexture(final Identifier altPath) {
-        return super.withAltTexture(CodeLyokoMain.codeLyokoPrefix("textures/entity/hornet/hornetatlas.png"));
-    }
+
+
 
     @Override
     public RenderLayer getRenderType(final HornetEntity animatable, final Identifier texture) {
         return RenderLayer.getEntityTranslucent(getTextureResource(animatable));
     }
 
-   /*
-    @Override
-    public @Nullable ResourceLocation getModelResource(HornetEntity object) {
-        return null;
-    }
 
-    @Override
-    public @Nullable ResourceLocation getTextureResource(HornetEntity object) {
-        return null;
-    }
-
-    @Override
-    public @NotNull ResourceLocation getAnimationResource(HornetEntity animatable) {
-        return new ResourceLocation(CodeLyokoMain.MOD_ID, "animations/entities/hornet.json");
-    }
-
- */
 }

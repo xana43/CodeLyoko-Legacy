@@ -23,7 +23,7 @@ public final class ModelMegaTank extends AnimatedGeoModel<MegaTankEntity> {
 
     @Override
     public Identifier getAnimationFileLocation(final MegaTankEntity animatable) {
-        return CodeLyokoMain.CodeLyokoPrefix("animations/entities/megatank.json");
+        return CodeLyokoMain.CodeLyokoPrefix("animations/entity/megatank.json");
     }
 
 /*
@@ -39,7 +39,7 @@ public final class ModelMegaTank extends AnimatedGeoModel<MegaTankEntity> {
 
     @Override
     public @NotNull ResourceLocation getAnimationFileLocation(MegaTankEntity animatable) {
-        return new ResourceLocation(CodeLyokoMain.MOD_ID,"animations/entities/megatank.json");
+        return new ResourceLocation(CodeLyokoMain.MOD_ID,"animations/entity/megatank.json");
     }
 
  */

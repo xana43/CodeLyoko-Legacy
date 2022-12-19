@@ -33,7 +33,7 @@ public final class ModelManta extends DefaultedEntityGeoModel<MantaEntity> {
 /*
     @Override
     public @NotNull ResourceLocation getAnimationResource(MantaEntity animated) {
-        return CodeLyokoMain.CodeLyokoPrefix("animations/entities/manta.json");
+        return CodeLyokoMain.CodeLyokoPrefix("animations/entity/manta.json");
     }
 
     @Override

@@ -31,7 +31,7 @@ public final class ModelKankrelat extends DefaultedEntityGeoModel<KankrelatEntit
     /*
     @Override
     public @NotNull ResourceLocation getAnimationResource(KankrelatEntity animatable) {
-        return CodeLyokoMain.CodeLyokoPrefix("animations/entities/kankrelat.json");
+        return CodeLyokoMain.CodeLyokoPrefix("animations/entity/kankrelat.json");
     }
 
     @Override

@@ -6,6 +6,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
+import net.minecraft.util.Identifier;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
 
@@ -14,6 +15,7 @@ public final class ModelBlok extends DefaultedEntityGeoModel<EntityBlok> {
 
     public ModelBlok() {
         super(CodeLyokoMain.codeLyokoPrefix("blok"));
+        withAltTexture(CodeLyokoMain.codeLyokoPrefix("blok/blok"));
     }
 
 

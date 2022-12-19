@@ -10,11 +10,15 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RangedAttackMob;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.PhantomEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -36,13 +40,13 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nonnull;
 
-public final class HornetEntity extends HostileEntity implements GeoAnimatable, RangedAttackMob {
+public final class HornetEntity extends PhantomEntity implements GeoAnimatable, RangedAttackMob {
 
 
     private final AnimationController<?> controller = new AnimationController<>(this, "hornet_controller", 0,
             this::attackPredicate);
 
-    public HornetEntity(@NotNull EntityType<? extends HostileEntity> hornetEntityEntityType, @NotNull World world) {
+    public HornetEntity(@NotNull EntityType<? extends PhantomEntity> hornetEntityEntityType, @NotNull World world) {
         super(hornetEntityEntityType, world);
 
 
@@ -132,7 +136,7 @@ public final class HornetEntity extends HostileEntity implements GeoAnimatable, 
                 HornetEntity.this.setAttacking(false);
             }
         });
-        this.goalSelector.add(1, new FlyGoal(this, 3));
+        //this.goalSelector.add(1, new FlyGoal(this, 3));
         this.goalSelector.add(3, new LookAroundGoal(this));
         this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 10, 100, true));
         this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
@@ -182,8 +186,7 @@ public final class HornetEntity extends HostileEntity implements GeoAnimatable, 
         controllerMove.setAnimation(RawAnimation.begin().thenLoop("animation.hornet.fly"));
 
         return PlayState.CONTINUE;
-    }    private final AnimationController<?> controllerMove = new AnimationController<>(this, "hornet_move_controller", 0,
-            this::movePredicate);
+    }
 
     private <E extends HornetEntity> @NotNull PlayState attackPredicate(@NotNull AnimationState<E> event) {
 
@@ -196,12 +199,8 @@ public final class HornetEntity extends HostileEntity implements GeoAnimatable, 
         return PlayState.CONTINUE;
 
 
-    }
-
-    //@Override
-    //public @NotNull AnimationFactory getFactory() {
-    //   return new AnimationFactory(this);
-    //}
+    }    private final AnimationController<?> controllerMove = new AnimationController<>(this, "hornet_move_controller", 0,
+            this::movePredicate);
 
     @Override
     public void attack(@NotNull LivingEntity target, final float distanceFactor) {
@@ -216,6 +215,11 @@ public final class HornetEntity extends HostileEntity implements GeoAnimatable, 
                 1.0F / (this.getRandom().nextFloat() * 1.2f));
         this.world.spawnEntity(laser);
     }
+
+    //@Override
+    //public @NotNull AnimationFactory getFactory() {
+    //   return new AnimationFactory(this);
+    //}
 
 
 

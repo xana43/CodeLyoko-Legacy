@@ -233,7 +233,7 @@ if(client.player != null) {
         EntityRendererRegistry.register(ModEntities.MEGATANK, MegaTankRenderer::new);
         EntityRendererRegistry.register(ModEntities.LASER_ENTITY_TYPE, LaserRenderer::new);
         EntityRendererRegistry.register(ModEntities.HORNET_ENTITY_ENTITY_TYPE, HornetRenderer::new);
-        //for entities that need layer locations
+        //for entity that need layer locations
         EntityRendererRegistry.register(ModEntities.OVERBOARD, OverboardRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ModelOverboard.LAYER_LOCATION,ModelOverboard::createBodyLayer);
 

@@ -18,18 +18,13 @@ public record Generator() implements DataGeneratorEntrypoint {
     private static FabricDataGenerator.Pack pack;
     @Override
     public void onInitializeDataGenerator(final FabricDataGenerator fabricDataGenerator) {
-        //fabricDataGenerator..(LootTables::new);
-        //fabricDataGenerator.addProvider(CustomBlockTags::new);
-        //fabricDataGenerator.addProvider(CustomRecipeProvider::new);
-        //fabricDataGenerator.addProvider(CustomItemTags::new);
-        //fabricDataGenerator.addProvider(BlockStateSimple::new);
         pack = fabricDataGenerator.createPack();
         pack.addProvider(LootTables::new);
         pack.addProvider(CustomRecipeProvider::new);
         pack.addProvider(CustomBlockTags::new);
         pack.addProvider(CustomItemTags::new);
         pack.addProvider(WorldProvider::new);
-        //pack.addProvider(BlockStateSimple::new);
+
     }
 
     @Override

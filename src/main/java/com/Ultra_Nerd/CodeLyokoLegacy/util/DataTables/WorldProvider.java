@@ -2,12 +2,16 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBiome;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFeature;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.PlacedFeature;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -26,6 +30,28 @@ public final class WorldProvider extends FabricDynamicRegistryProvider {
 
 
 
+        });
+        final RegistryWrapper.Impl<ConfiguredFeature<?,?>> configuredFeatureRegistry = registries.getWrapperOrThrow(RegistryKeys.CONFIGURED_FEATURE);
+        ModFeature.CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s, builderPlacedFeaturePair) -> {
+            final RegistryKey<ConfiguredFeature<?,?>> configuredFeatureRegistryKey =
+                    RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, CodeLyokoMain.codeLyokoPrefix(s));
+            entries.add(configuredFeatureRegistryKey, new ConfiguredFeature<>(Feature.TREE,builderPlacedFeaturePair.getLeft()
+                    .build()));
+        });
+        ModFeature.ORE_IMMUTABLE_MAP.forEach((s, builderPlacedFeaturePair) -> {
+            final RegistryKey<ConfiguredFeature<?,?>> configuredFeatureRegistryKey =
+                    RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, CodeLyokoMain.codeLyokoPrefix(s));
+            entries.add(configuredFeatureRegistryKey, builderPlacedFeaturePair.getLeft());
+        });
+        ModFeature.CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s, builderPlacedFeaturePair) -> {
+            final RegistryKey<PlacedFeature> placedFeatureRegistryKey =
+                    RegistryKey.of(RegistryKeys.PLACED_FEATURE, CodeLyokoMain.codeLyokoPrefix(s));
+            entries.add(placedFeatureRegistryKey,builderPlacedFeaturePair.getRight());
+        });
+        ModFeature.ORE_IMMUTABLE_MAP.forEach((s, builderPlacedFeaturePair) -> {
+            final RegistryKey<PlacedFeature> configuredFeatureRegistryKey =
+                    RegistryKey.of(RegistryKeys.PLACED_FEATURE, CodeLyokoMain.codeLyokoPrefix(s));
+            entries.add(configuredFeatureRegistryKey, builderPlacedFeaturePair.getRight());
         });
     }
 

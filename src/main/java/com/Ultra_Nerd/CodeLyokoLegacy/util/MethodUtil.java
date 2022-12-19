@@ -69,7 +69,7 @@ public record MethodUtil() {
         private static final StringVisitable[] pages = new StringVisitable[100];
 
         public static StringVisitable[] textArray(@NotNull final String textToDenote) {
-            final String[] denoted = textToDenote.split("δ");
+            final String[] denoted = textToDenote.split(">δ<");
             final int length = denoted.length;
             for (int i = 0; i < length; i++) {
                 pages[i] = Text.translatable(denoted[i]);

@@ -1,9 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -27,11 +29,11 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 public final class Scanner extends HorizontalFacingBlock implements BlockEntityProvider {
-
-
+    private List<BlockState> checkedBlockStates;
     private static final VoxelShape shapeS = Stream.of(Block.createCuboidShape(2, 0, -2, 14, 1, 18),
                     Block.createCuboidShape(-4, 0, 5, -3, 15.3, 11), Block.createCuboidShape(-3, 0, 5, -2, 1, 11),
                     Block.createCuboidShape(19, 0, 5, 20, 15.3, 11), Block.createCuboidShape(5, 0, -3, 11, 1, -2),
@@ -326,8 +328,12 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
     @Override
     public void onPlaced(final World world, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack itemStack) {
         super.onPlaced(world, pos, state, placer, itemStack);
-
+        if(world.getBlockEntity(pos) instanceof MasterEntity masterEntity)
+        {
+            masterEntity.check();
+        }
     }
+
 
     @Nullable
     @Override

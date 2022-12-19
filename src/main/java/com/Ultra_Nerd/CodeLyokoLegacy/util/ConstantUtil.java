@@ -32,7 +32,7 @@ public record ConstantUtil() {
 
 
         private static final String n = "\n";
-        private static final String page = "δ";
+        private static final String page = ">δ<";
 
 
         public enum EntryList {

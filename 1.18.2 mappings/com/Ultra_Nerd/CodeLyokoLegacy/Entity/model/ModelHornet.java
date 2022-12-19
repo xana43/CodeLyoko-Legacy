@@ -25,7 +25,7 @@ public final class ModelHornet extends AnimatedGeoModel<HornetEntity> {
     @Override
     public Identifier getAnimationFileLocation(final HornetEntity animatable) {
 
-        return CodeLyokoMain.CodeLyokoPrefix("animations/entities/hornet.json");
+        return CodeLyokoMain.CodeLyokoPrefix("animations/entity/hornet.json");
     }
 
 
@@ -43,7 +43,7 @@ public final class ModelHornet extends AnimatedGeoModel<HornetEntity> {
 
     @Override
     public @NotNull ResourceLocation getAnimationFileLocation(HornetEntity animatable) {
-        return new ResourceLocation(CodeLyokoMain.MOD_ID, "animations/entities/hornet.json");
+        return new ResourceLocation(CodeLyokoMain.MOD_ID, "animations/entity/hornet.json");
     }
 
  */
