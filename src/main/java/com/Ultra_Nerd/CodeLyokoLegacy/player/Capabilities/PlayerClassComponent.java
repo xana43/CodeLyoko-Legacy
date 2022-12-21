@@ -11,11 +11,6 @@ public final class PlayerClassComponent implements PlayerComponent<PlayerClassCo
 
     private int classID;
 
-    /*
-    public PlayerClassComponent(final PlayerEntity player){
-    }
-
-     */
     public int getClassID() {
         return this.classID;
     }

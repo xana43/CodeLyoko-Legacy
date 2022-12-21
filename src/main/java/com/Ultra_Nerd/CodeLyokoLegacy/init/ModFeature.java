@@ -43,7 +43,7 @@ public record ModFeature() {
 
         private static final TreeFeatureConfig.Builder FOREST_TREE_CONFIG = new TreeFeatureConfig.Builder(
                 BlockStateProvider.of(ModBlocks.DIGITAL_WOOD_FOREST),
-                new StraightTrunkPlacer(90, 93, 96),
+                new StraightTrunkPlacer(32, 24, 24),
                 BlockStateProvider.of(Blocks.AIR),
                 new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(4), 1),
                 new TwoLayersFeatureSize(1, 0, 1)

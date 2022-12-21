@@ -1,6 +1,6 @@
 {
    "parent": "item/generated",
    "textures": {
-       "layer0": "cm:item/QuByte"
+       "layer0": "cm:item/qu_byte"
    }
 }

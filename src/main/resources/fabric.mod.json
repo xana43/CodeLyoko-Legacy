@@ -48,12 +48,13 @@
 
     "cardinal-components-base": "*",
     "cardinal-components-entity":"*",
-    "team_reborn_energy": ">=2.2.0"
+    "team_reborn_energy": "*"
 
   },
   "suggests": {
-    "starlight":">=1.0.2",
-    "ferritecore":">=4.2.0"
+    "starlight":">=1.1.1",
+    "ferritecore":">=4.2.0",
+    "sodium": ">=0.4.6"
   },
   "accessWidener": "cm.accesswidener",
 

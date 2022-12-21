@@ -50,7 +50,6 @@ public final class BlisterCopper extends Item {
             stack.setNbt(timerTag);
         }
         if (!worldIn.isClient) {
-            //CodeLyokoMain.Log.debug(I);
             timerTag.putInt(NBT_TAG_ACCESSOR, timerTag.getInt(NBT_TAG_ACCESSOR) - 1);
             if (timerTag.getInt(NBT_TAG_ACCESSOR) == 0) {
                 if (stack.getDamage() != 60) {
