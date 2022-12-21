@@ -3,16 +3,13 @@ package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 
-import java.awt.geom.Area;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,34 +27,74 @@ public final class CableTileEntity extends BlockEntity {
         {
             if(world.getBlockState(pos.offset(dir,1)).isOf(ModBlocks.CABLE_BLOCK))
             {
-                CodeLyokoMain.LOG.info("there should be no blocks around");
                 return false;
             }
         }
         return true;
     }
     private static final SecureRandom random = new SecureRandom();
+    private boolean isEnd = false;
+    public void checkIfEnd()
+    {
+        int count = 0;
+        for (final Direction dir : Direction.values())
+        {
+            final BlockPos checkPos = pos.offset(dir,1);
+            if(world.getBlockState(checkPos).isOf(ModBlocks.CABLE_BLOCK))
+            {
+                count++;
+            }
+        }
+        isEnd = count <= 1;
+    }
+    public boolean getIsEnd()
+    {
+        return isEnd;
+    }
+    public void setIsEnd(final Boolean isEnd)
+    {
+        this.isEnd = isEnd;
+    }
     public boolean getIsMaster()
     {
         return isMaster;
     }
+    public BlockPos currentMaster = BlockPos.ORIGIN;
+    public void propogateCheck(final int offset)
+    {
+
+            for (final Direction dir : Direction.values()) {
+
+                BlockPos checkedPos = pos.offset(dir, offset);
+                if (world.getBlockState(checkedPos).isOf(ModBlocks.CABLE_BLOCK)) {
+                    if (world.getBlockEntity(checkedPos) instanceof CableTileEntity cableTile) {
+                        if (cableTile.isMaster) {
+                            currentMaster = checkedPos;
+                            appendToMaster(pos, checkedPos, world);
+                            return;
+                        }
+                        propogateCheck(offset + 1);
+                    }
+                }
+
+
+            }
+
+
+    }
+
+
     public void calculateConnected()
     {
         isMaster = initialCheck();
+        if(!this.isMaster)
+        {
+            propogateCheck(1);
+        }
         for(final Direction dir : Direction.values())
         {
             final BlockPos nextPosition = pos.offset(dir,1);
-            if(world.getBlockState(nextPosition).isOf(ModBlocks.CABLE_BLOCK) && !connectedPositions.contains(nextPosition) &&
-                    !world.getBlockEntity(nextPosition,ModTileEntities.CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE).get().isMaster && this.isMaster)
-            {
-                connectedPositions.add(nextPosition);
-            } else if (!this.isMaster) {
-                if(world.getBlockEntity(nextPosition) instanceof CableTileEntity cableTileEntity) {
-                    if (cableTileEntity.isMaster) {
-                        appendToMaster(pos, nextPosition, world);
-                    }
-                }
-            } else if (world.getBlockState(nextPosition).isOf(ModBlocks.CABLE_BLOCK)) {
+             if (world.getBlockState(nextPosition).isOf(ModBlocks.CABLE_BLOCK)) {
                 if(world.getBlockEntity(pos) instanceof CableTileEntity tileEntity)
                 {
                     if(tileEntity.isMaster && this.isMaster)
@@ -75,7 +112,9 @@ public final class CableTileEntity extends BlockEntity {
                 }
             }
         }
+
     }
+
     public static void appendToMaster(final BlockPos appendPosition,final BlockPos masterPos,final World world)
     {
         if(world.getBlockEntity(masterPos) instanceof CableTileEntity cableTileEntity)
@@ -89,22 +128,9 @@ public final class CableTileEntity extends BlockEntity {
 
     @Override
     public boolean isRemoved() {
-        /*for (final Direction dir : Direction.values())
-        {
-            final BlockPos nextPosition = pos.offset(dir,1);
-            if(world != null && !world.isClient()) {
-                if (!this.isMaster && world.getBlockEntity(nextPosition) != null && world.getBlockState(pos)
-                        .isOf(ModBlocks.CABLE_BLOCK)) {
-                    if (world.getBlockEntity(nextPosition) instanceof CableTileEntity cableTileEntity) {
-                        if (cableTileEntity.isMaster) {
-                            removeFromMaster(pos, nextPosition, world);
-                        }
-                    }
-                }
-            }
-        }
 
-         */
+
+
         return super.isRemoved();
     }
 
@@ -112,14 +138,13 @@ public final class CableTileEntity extends BlockEntity {
     {
         if(world.getBlockEntity(masterPos) instanceof CableTileEntity cableTileEntity)
         {
-            if(cableTileEntity.isMaster)
-            {
-                cableTileEntity.connectedPositions.remove(appendPosition);
-            }
+            cableTileEntity.connectedPositions.remove(appendPosition);
         }
     }
     private static final String positionsKey = "connected_positions";
     private static final String isMasterKey = "is_master";
+    private static final String isEndKey = "is_end";
+    private static final String currentMasterKey = "current_master";
     @Override
     protected void writeNbt(final NbtCompound nbt) {
         super.writeNbt(nbt);
@@ -130,6 +155,10 @@ public final class CableTileEntity extends BlockEntity {
         }
         nbt.put(positionsKey,nbtList);
         nbt.putBoolean(isMasterKey,isMaster);
+        nbt.putBoolean(isEndKey,isEnd);
+        if(currentMaster != BlockPos.ORIGIN) {
+            nbt.put(currentMasterKey, NbtOps.INSTANCE.createLong(currentMaster.asLong()));
+        }
     }
 
     @Override
@@ -141,6 +170,10 @@ public final class CableTileEntity extends BlockEntity {
            final NbtLong nbtLong = (NbtLong)nbtList.get(i);
            connectedPositions.add(BlockPos.fromLong(nbtLong.longValue()));
        }
+       isMaster = nbt.getBoolean(isMasterKey);
+       isEnd = nbt.getBoolean(isEndKey);
+       currentMaster = BlockPos.fromLong(((NbtLong)nbt.get(currentMasterKey)).longValue());
+
     }
     /*
     public static @NotNull HashMap<CableTileEntity, ArrayList<BlockEntity>> CONNECTIONS = new HashMap<>();

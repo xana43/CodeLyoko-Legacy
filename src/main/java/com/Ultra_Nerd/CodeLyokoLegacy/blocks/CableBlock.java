@@ -1,10 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.CableTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
@@ -38,6 +43,31 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
         super.appendProperties(builder.add(NORTH, SOUTH, EAST, WEST, WATERLOGGED,isMaster));
     }
 
+    @Override
+    public void neighborUpdate(final BlockState state, final World world, final BlockPos pos, final Block sourceBlock, final BlockPos sourcePos, final boolean notify) {
+        super.neighborUpdate(state, world, pos, sourceBlock, sourcePos, notify);
+        world.getBlockEntity(pos,ModTileEntities.CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE).get().checkIfEnd();
+        CodeLyokoMain.LOG.info("should update if end");
+    }
+
+    @Override
+    public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
+        for (final Direction dir : Direction.values())
+        {
+            final BlockPos nextPosition = pos.offset(dir,1);
+            if(world != null && !world.isClient()) {
+                if (!world.getBlockState(pos).get(isMaster) && world.getBlockEntity(nextPosition) != null && world.getBlockState(pos)
+                        .isOf(ModBlocks.CABLE_BLOCK)) {
+                    if (world.getBlockEntity(nextPosition) instanceof CableTileEntity cableTileEntity) {
+                        if (cableTileEntity.getIsMaster()) {
+                            CableTileEntity.removeFromMaster(pos, nextPosition, world);
+                        }
+                    }
+                }
+            }
+        }
+        super.onBreak(world, pos, state, player);
+    }
 
 /*
     @Override
@@ -80,16 +110,22 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
 
     @Override
     public void onPlaced(final World world, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack itemStack) {
-        if(world.getBlockEntity(pos)instanceof CableTileEntity cableTileEntity)
+        if(world.getBlockEntity(pos)instanceof CableTileEntity cableTileEntity && !world.isClient())
         {
             cableTileEntity.calculateConnected();
             if(cableTileEntity.getIsMaster())
             {
                 world.setBlockState(pos,state.with(isMaster,true));
             }
+            else
+            {
+                cableTileEntity.checkIfEnd();
+                cableTileEntity.propogateCheck(1);
+            }
         }
         super.onPlaced(world, pos, state, placer, itemStack);
     }
+
 
     @Nullable
     @Override

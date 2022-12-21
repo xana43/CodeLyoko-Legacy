@@ -1,17 +1,17 @@
-// 1.19.3	2022-12-18T20:30:29.3593046	CodeLyokoLegacy/Block Loot Tables
+// 1.19.3	2022-12-21T02:51:34.3223859	CodeLyokoLegacy/Block Loot Tables
 1a5a1fa46f429dc79528451de79813cac0cbc3a6 data\cm\loot_tables\blocks\digital_darkness.json
 aaa522da17b1c7067868c3ff7e2436ddd47a5728 data\cm\loot_tables\blocks\electroplating_machine.json
 9809747154fdd2abf8efc9756a44c51ea1abdcea data\cm\loot_tables\blocks\uv_light.json
 ca6c135df383d299e6198b98ca348468c4880c8f data\cm\loot_tables\blocks\uranium_waste.json
-2c15724c3fabecfbab4541242a98ab1df04a2a15 data\cm\loot_tables\blocks\computer_cooling_block.json
 19b8ee660af79b8bb5179d4564a2c6b07e695cf0 data\cm\loot_tables\blocks\tower_white.json
+2c15724c3fabecfbab4541242a98ab1df04a2a15 data\cm\loot_tables\blocks\computer_cooling_block.json
 f6511f5eabeb7f9920fa396301050a43038d26fe data\cm\loot_tables\blocks\uv_machine.json
 2fe2c6f582b9c522107358d827389ed8fb0e2299 data\cm\loot_tables\blocks\uranium_canister.json
 740ba3a1c1817fe7f7a9ac3a6e2babe6e0fd8b9e data\cm\loot_tables\blocks\scanner_base.json
 116e61004d712e4db11c7746f11f0c9f3b5853c1 data\cm\loot_tables\blocks\quantum_core.json
-77b869f521e17321ef95a6f14c42705721a2b2a8 data\cm\loot_tables\blocks\computer_screen_frame.json
-24b302e9d3f4a9f836bff7e992f618ab687f63f5 data\cm\loot_tables\blocks\digital_ice.json
 a1f73370ddd3c4bfb9a45417e3bd214202573aad data\cm\loot_tables\blocks\tower_blue.json
+24b302e9d3f4a9f836bff7e992f618ab687f63f5 data\cm\loot_tables\blocks\digital_ice.json
+77b869f521e17321ef95a6f14c42705721a2b2a8 data\cm\loot_tables\blocks\computer_screen_frame.json
 bb4e2c7a5ce2dce38a99557b3ac8017a87216310 data\cm\loot_tables\blocks\electric_fluoride_infuser.json
 0b412b8929fdea8f0a4c469b1ccccf40f99140c7 data\cm\loot_tables\blocks\fluorite_ore.json
 7a7e9f180b0e12d0d05eaacd4b6f8a43341ac39b data\cm\loot_tables\blocks\cable_block.json
@@ -67,8 +67,8 @@ fb769aec93309ebe5eed0f628a56467fa0540300 data\cm\loot_tables\blocks\coffinite_or
 fe519048c96a2a3438a9416bc59c88e6df149461 data\cm\loot_tables\blocks\computer_keyboard.json
 bc360498b7f55601bda66069781eb62e8856b81c data\cm\loot_tables\blocks\chiplet_basic_block.json
 b94d71488d314aaf3cc705858f0bc64d6ff1c589 data\cm\loot_tables\blocks\computer_screen_connector.json
-ff242c56aad2ed23387aff8306c9f9b73433e1bc data\cm\loot_tables\blocks\metatyuyamunite_ore.json
 4462e4d6c02f8a970f789be68f64a8a4fe5f3eb4 data\cm\loot_tables\blocks\scanner_top.json
+ff242c56aad2ed23387aff8306c9f9b73433e1bc data\cm\loot_tables\blocks\metatyuyamunite_ore.json
 e434ef03ca37cc089bea45ba9b3f5a80c47fedaa data\cm\loot_tables\blocks\covellite_ore.json
 a5aaae4d2873b8458edafc1649bdfef3b28503bf data\cm\loot_tables\blocks\sector5_steel.json
 a6b591874c02432ac8c4505d2332ca5ac00669d4 data\cm\loot_tables\blocks\digital_wood_mountain.json
@@ -76,8 +76,8 @@ dc748104869c3ae1c6d3ce87ea6f2c981f5407f6 data\cm\loot_tables\blocks\tower_top.js
 bce481d78e2baaa5689e6375b2d49965bd144c98 data\cm\loot_tables\blocks\computer_tower_control_panel.json
 91a65ecae557c816736937b8052ff254a2e2ddca data\cm\loot_tables\blocks\uranium_block_238.json
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data\cm\loot_tables\blocks\lyoko_core.json
-941cc73915a2b81a9bf50d1ef622a560284f3bb2 data\cm\loot_tables\blocks\digital_dirt.json
 920a93ca150d406f18aed49f3201dcfca6adbe43 data\cm\loot_tables\blocks\bornite_ore.json
+941cc73915a2b81a9bf50d1ef622a560284f3bb2 data\cm\loot_tables\blocks\digital_dirt.json
 2f6e52b512c21c55691d90a53d7baa0b41cefc70 data\cm\loot_tables\blocks\carnotite_ore.json
 61d5b6dafc0445dbbf6d910680681ed608bcf6d9 data\cm\loot_tables\blocks\silica_sand.json
 32dca755ff7afc0bc5a03e97d842f443285670b6 data\cm\loot_tables\blocks\computer_screen.json
