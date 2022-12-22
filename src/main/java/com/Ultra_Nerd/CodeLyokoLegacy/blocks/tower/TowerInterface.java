@@ -31,11 +31,10 @@ public final class TowerInterface extends HorizontalFacingBlock implements Block
     private static final VoxelShape SHAPE_W = Block.createCuboidShape(9, 1, 1, 9.1, 15, 15);
     public static final BooleanProperty IS_GENERATED = BooleanProperty.of("is_generated");
     public TowerInterface() {
-        super(FabricBlockSettings.of(Material.BARRIER).strength(-1, -1).sounds(BlockSoundGroup.AMETHYST_CLUSTER)
+        super(FabricBlockSettings.of(Material.BARRIER).strength(-1, Integer.MAX_VALUE).sounds(BlockSoundGroup.AMETHYST_CLUSTER)
                 .luminance(80));
         this.setDefaultState(this.getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(IS_GENERATED
                 ,true));
-
     }
 
     @Override

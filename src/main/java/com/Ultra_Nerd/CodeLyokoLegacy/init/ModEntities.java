@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HornetEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.HoverboardEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverboardEntity;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -44,12 +45,16 @@ public record ModEntities() {
 
             .build();
 
+    public static final EntityType<HoverboardEntity> HOVERBOARD =
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, HoverboardEntity::new).dimensions(EntityDimensions.fixed(1
+                    , 1)).build();
     public static final ImmutableMap<String, EntityType<?>> ENTITY_TYPE_HASH_MAP = ImmutableMap.<String, EntityType<?>>builder()
             .put("blok", BLOK)
             .put("laser", LASER_ENTITY_TYPE)
             .put("megatank", MEGATANK)
             .put("hornet", HORNET_ENTITY_ENTITY_TYPE)
             .put("overboard", OVERBOARD)
+            .put("hoverboard", HOVERBOARD)
             .build();
 //entityRenderer
 
@@ -85,9 +90,7 @@ public record ModEntities() {
     public static final RegistryObject<EntityType<KankrelatEntity>> KANKRELAT = Entities.register("kankrelat", () ->
             EntityType.Builder.of(KankrelatEntity::new, MobCategory.MONSTER).sized(1, 1)
                     .build(new ResourceLocation(CodeLyokoMain.MOD_ID, "kankrelat").toString()));
-    public static final RegistryObject<EntityType<HoverboardEntity>> HOVERBOARD = Entities.register("hoverboard", () ->
-            EntityType.Builder.of(HoverboardEntity::new, MobCategory.MISC).sized(1, 1)
-                    .build(new ResourceLocation(CodeLyokoMain.MOD_ID, "hoverboard").toString()));
+
 
     public static final RegistryObject<EntityType<OverbikeEntity>> OVERBIKE = Entities.register("overbike", () ->
             EntityType.Builder.of(OverbikeEntity::new, MobCategory.MISC).sized(2, 1)

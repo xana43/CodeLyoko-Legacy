@@ -33,8 +33,6 @@ public final class TowerBottomBlock extends Block {
             if (world.getBlockState(blockPos).getBlock() == ModBlocks.TOWER_BLUE) {
                 if (entity instanceof PlayerEntity)
                     entity.setPos(blockPos.getX() + 0.5, blockPos.getY() + 1.0, blockPos.getZ() + 0.5);
-//                EnderTeleportEvent event = new EnderTeleportEvent((LivingEntity) entityIn, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 0.0f);
-
             }
         }
         if (!(entity instanceof PlayerEntity) && !(entity instanceof LyokoVehicleEntity)) {

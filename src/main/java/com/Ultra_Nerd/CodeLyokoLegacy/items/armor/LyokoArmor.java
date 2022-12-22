@@ -12,7 +12,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class LyokoArmor extends ArmorItem {
+import static com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil.ArmorMethods.isArmorSlot;
+
+public abstract class LyokoArmor extends ArmorItem {
     public LyokoArmor(final ArmorMaterial material, final EquipmentSlot slot, final Settings settings) {
         super(material, slot, settings);
 
@@ -41,12 +43,12 @@ public class LyokoArmor extends ArmorItem {
             stack.addEnchantment(Enchantments.BINDING_CURSE, Enchantments.BINDING_CURSE.getMaxLevel());
             stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
         }
-        if (entity instanceof final PlayerEntity player) {
-            onArmorTick(player, stack.getItem());
+        if (entity instanceof final PlayerEntity player && isArmorSlot(slot)) {
+            onArmorTick(player, world, stack.getItem());
         }
     }
 
-    protected boolean onArmorTick(final PlayerEntity player, final Item armorItem) {
+    protected void onArmorTick(final PlayerEntity player, final World world, final Item armorItem) {
         if (!MethodUtil.DimensionCheck.playerNotInVanillaWorld(player)) {
             if (player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).isOf(armorItem)) {
                 player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).setCount(0);
@@ -70,10 +72,10 @@ public class LyokoArmor extends ArmorItem {
                     player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
                 }
             }
-            return false;
+
         }
 
-        return true;
+
     }
 
 }

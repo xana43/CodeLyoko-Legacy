@@ -9,7 +9,7 @@
     "Name": "cm:volcano_ground"
   },
   "default_fluid": {
-    "Name": "cm:digital_ocean"
+    "Name": "cm:digital_lava"
   },
   "noise": {
     "min_y": 0,

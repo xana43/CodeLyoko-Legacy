@@ -1,8 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registerable;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BlockTags;
@@ -15,6 +17,7 @@ import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.placementmodifier.CountPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.HeightRangePlacementModifier;
+import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
@@ -26,8 +29,7 @@ public record ModFeature() {
     public static void bootStrap(Registerable<ConfiguredFeature<?,?>> registerable)
     {
 
-        CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s, configuredFeaturePlacedFeaturePair) -> ConfiguredFeatures.register(registerable,ConfiguredFeatures.of(s),Feature.TREE,
-                configuredFeaturePlacedFeaturePair.getLeft().build()));
+        CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s, configuredFeaturePlacedFeaturePair) -> ConfiguredFeatures.register(registerable,ConfiguredFeatures.of(s),Feature.TREE, configuredFeaturePlacedFeaturePair.getLeft().build()));
 
     }
 
@@ -39,6 +41,10 @@ public record ModFeature() {
             .put("coffinite_ore_overworld", new Pair<>(OreFeatures.OVERWORLD_COFFINITE_ORE_CONFIG,
                     PlacedFeatures.OVERWORLD_COFFINITE_ORE_PLACED))
             .build();
+    public static final ImmutableMap<String,Pair<ConfiguredFeature<?,?>,PlacedFeature>> MISC_IMMUTABLE_MAP = ImmutableMap.<String, Pair<ConfiguredFeature<?, ?>, PlacedFeature>>builder()
+            .put("lyoko_lava_lake",new Pair<>(MiscFeatures.LAVA_LAKE_CONFIG, PlacedFeatures.LAVA_LAKE_VOLCANO_PLACED))
+            .build();
+
     private record ForestFeatures() {
 
         private static final TreeFeatureConfig.Builder FOREST_TREE_CONFIG = new TreeFeatureConfig.Builder(
@@ -61,13 +67,21 @@ public record ModFeature() {
                 ModBlocks.COFFINITE_ORE.getDefaultState(),
                 8));
     }
-
+    private record MiscFeatures()
+    {
+        private static final ConfiguredFeature<?,?> LAVA_LAKE_CONFIG =
+                new ConfiguredFeature<>(Feature.LAKE,
+                        new LakeFeature.Config(BlockStateProvider.of(Blocks.LAVA.getDefaultState()),
+                        BlockStateProvider.of(ModBlocks.VOLCANO_GROUND.getDefaultState())));
+    }
     public record PlacedFeatures() {
-
+        public static final RegistryKey<PlacedFeature> LAVA_LAKE_VOLCANO_KEY =
+                RegistryKey.of(RegistryKeys.PLACED_FEATURE
+                , CodeLyokoMain.codeLyokoPrefix("lyoko_lava_lake"));
         public static final PlacedFeature FOREST_TREE_PLACED = new PlacedFeature(
                 RegistryEntry.of(ForestFeatures.FOREST_TREE),
                 Arrays.asList(CountPlacementModifier.of(5), SquarePlacementModifier.of(),
-                        HeightRangePlacementModifier.uniform(YOffset.TOP, YOffset.TOP))
+                        net.minecraft.world.gen.feature.PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP)
         );
         public static final PlacedFeature OVERWORLD_COFFINITE_ORE_PLACED = new PlacedFeature(
                 RegistryEntry.of(OreFeatures.OVERWORLD_COFFINITE_ORE_CONFIG),
@@ -76,5 +90,10 @@ public record ModFeature() {
                         SquarePlacementModifier.of(),
                         HeightRangePlacementModifier.uniform(YOffset.getBottom(), YOffset.fixed(40))
                 ));
+        public static final PlacedFeature LAVA_LAKE_VOLCANO_PLACED = new PlacedFeature(
+                RegistryEntry.of(MiscFeatures.LAVA_LAKE_CONFIG
+                ), Arrays.asList(RarityFilterPlacementModifier.of(50),SquarePlacementModifier.of(),
+                                net.minecraft.world.gen.feature.PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP)
+        );
     }
 }

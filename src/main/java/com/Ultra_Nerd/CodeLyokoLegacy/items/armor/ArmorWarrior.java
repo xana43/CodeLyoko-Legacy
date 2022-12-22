@@ -1,8 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.MovementType;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
 
 public final class ArmorWarrior extends LyokoArmor {
 
@@ -14,23 +23,31 @@ public final class ArmorWarrior extends LyokoArmor {
         super(materialIn, slot, builder);
 
 
-    } /*@Override
-    public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        Multimap<Attribute,AttributeModifier> multimap = HashMultimap.create();
+    }
 
-//new AttributeModifier(UUID.fromString("46656c69-6e65-204a-756d-7020426f6f73"),"jump_modifier"
+    @Override
+    public @NotNull Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(ItemStack stack,
+            EquipmentSlot slot) {
+        Multimap<EntityAttribute,EntityAttributeModifier> multimap = HashMultimap.create();
+
         if(slot == EquipmentSlot.FEET)
         {
-            multimap.put(Attributes.MOVEMENT_SPEED,new AttributeModifier(UUID.fromString("91AEAA56-376B-4498-935B-2F7F68070635"),"speed_modifier",movement_modifier, AttributeModifier.Operation.MULTIPLY_TOTAL));
-
+            multimap.put(EntityAttributes.GENERIC_MOVEMENT_SPEED,new EntityAttributeModifier(UUID.fromString(
+                    "91AEAA56-376B-4498-935B-2F7F68070635"),"speed_modifier",movement_modifier,
+                        EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
         }
         if(slot == EquipmentSlot.CHEST)
         {
-            multimap.put(Attributes.ATTACK_DAMAGE,new AttributeModifier(BASE_ATTACK_DAMAGE_UUID,"attack_modifier",attack_modifier, AttributeModifier.Operation.MULTIPLY_TOTAL));
-            multimap.put(Attributes.ATTACK_SPEED,new AttributeModifier(BASE_ATTACK_DAMAGE_UUID,"attack_speed",attack_speed,AttributeModifier.Operation.MULTIPLY_TOTAL));
+            multimap.put(EntityAttributes.GENERIC_ATTACK_DAMAGE,new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID,
+                    "attack_modifier",attack_modifier, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
+            multimap.put(EntityAttributes.GENERIC_ATTACK_SPEED,new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID,
+                    "attack_speed",attack_speed,
+                    EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
         }
         return multimap;
     }
+    /*
+
 
     @Override
     public boolean isDamageable(ItemStack stack) {

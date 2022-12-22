@@ -228,7 +228,6 @@ public final class ScannerTop extends HorizontalFacingBlock {
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         if (state.get(ConstantUtil.SCANNER_PROPERTY)) {
             return switch (state.get(FACING)) {
-                case NORTH -> shapeN;
                 case SOUTH -> shapeS;
                 case EAST -> shapeE;
                 case WEST -> shapeW;

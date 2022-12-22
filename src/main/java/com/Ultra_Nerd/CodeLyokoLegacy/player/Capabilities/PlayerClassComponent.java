@@ -16,14 +16,12 @@ public final class PlayerClassComponent implements PlayerComponent<PlayerClassCo
     }
 
     public void setClassID(final int classID) {
-        //CodeLyokoMain.LOG.info("setting classID " + classID +" for player " + player.getName());
         this.classID = classID;
     }
 
     @Override
     public void readFromNbt(final @NotNull NbtCompound tag) {
         classID = tag.getInt("player_class");
-        //CodeLyokoMain.LOG.info("Loading Data for Player " + player.getName());
     }
 
     @Override

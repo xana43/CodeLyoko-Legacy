@@ -37,6 +37,7 @@ import net.fabricmc.fabric.impl.biome.modification.BuiltInRegistryKeys;
 import net.fabricmc.fabric.mixin.registry.sync.RegistriesMixin;
 import net.minecraft.Bootstrap;
 import net.minecraft.command.argument.RegistryEntryArgumentType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -62,6 +63,8 @@ import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.biome.source.BiomeSources;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredFeatures;
+import net.minecraft.world.gen.feature.MiscPlacedFeatures;
+import net.minecraft.world.gen.feature.PlacedFeatures;
 import net.minecraft.world.level.WorldGenSettings;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -239,9 +242,12 @@ public record CodeLyokoMain() implements ModInitializer {
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
                RegistryKey.of(RegistryKeys.PLACED_FEATURE, codeLyokoPrefix("coffinite_ore_overworld")));
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(RegistryKey.of(RegistryKeys.BIOME,
-                ModBiome.RegisteredBiomes.FOREST_SECTOR.getIdentifier())),GenerationStep.Feature.SURFACE_STRUCTURES,
+                ModBiome.RegisteredBiomes.FOREST_SECTOR.getIdentifier())),GenerationStep.Feature.VEGETAL_DECORATION,
                 RegistryKey.of(RegistryKeys.PLACED_FEATURE,
                         codeLyokoPrefix("lyoko_forest_tree")));
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(RegistryKey.of(RegistryKeys.BIOME,
+                ModBiome.RegisteredBiomes.VOLCANO.getIdentifier())),GenerationStep.Feature.TOP_LAYER_MODIFICATION,
+                ModFeature.PlacedFeatures.LAVA_LAKE_VOLCANO_KEY);
     }
 
     private static void registerDefaultAttributes() {
@@ -309,9 +315,15 @@ public record CodeLyokoMain() implements ModInitializer {
         //xana
         final AtomicInteger tick = new AtomicInteger();
         ServerTickEvents.START_WORLD_TICK.register(world -> world.getPlayers().forEach(serverPlayerEntity -> {
-            //tick the xana attack handler
+
+            //tick the xana attack handler and heal player stress
             tick.getAndIncrement();
             if ((tick.get() >> 3) % 5 == 0) {
+                if(!serverPlayerEntity.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.MIND_HELMET))
+                {
+                    CardinalData.MindHelmStress.decreaseStress(serverPlayerEntity);
+                }
+
                 if (serverPlayerEntity.getStatHandler().getStat(Stats.CUSTOM, ModStats.ENTERED_LYOKO_IDENTIFIER) > 0) {
                     if (XanaHandler.calculateAttackProbability()) {
                         final int notifyPlayerRandom = new Random().nextInt(world.getPlayers().size());

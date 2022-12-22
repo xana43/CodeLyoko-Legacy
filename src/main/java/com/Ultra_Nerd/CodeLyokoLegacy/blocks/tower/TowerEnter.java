@@ -22,7 +22,7 @@ public final class TowerEnter extends HorizontalFacingBlock {
     public TowerEnter() {
         super(FabricBlockSettings.of(Material.BARRIER)
 
-                .strength(-1, -1)
+                .strength(-1, Integer.MAX_VALUE)
                 .sounds(BlockSoundGroup.GLASS)
                 .noCollision().luminance(60)
 

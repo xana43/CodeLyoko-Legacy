@@ -4,7 +4,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import org.jetbrains.annotations.NotNull;
 
-@NotNull @Environment(EnvType.CLIENT)
+@NotNull
+@Environment(EnvType.CLIENT)
 public enum PlayerClassType {
 
     Archer("Archer", 34),
@@ -22,7 +23,6 @@ public enum PlayerClassType {
         this.textureIndex = TextureIndex;
 
     }
-
 
 
     public final String getClassName() {

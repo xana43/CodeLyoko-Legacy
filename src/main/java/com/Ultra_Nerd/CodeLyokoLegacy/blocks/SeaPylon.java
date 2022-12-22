@@ -19,7 +19,7 @@ public final class SeaPylon extends HorizontalFacingBlock {
     public SeaPylon() {
         super(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
 
-                .strength(-1, -1)
+                .strength(-1, Integer.MAX_VALUE)
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque()
                 .luminance(10)

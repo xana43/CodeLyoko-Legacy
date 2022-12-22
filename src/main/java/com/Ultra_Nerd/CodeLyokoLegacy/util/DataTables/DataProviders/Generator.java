@@ -1,17 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.DataProviders;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBiome;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFeature;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.CustomBlockTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.CustomItemTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.LootTables;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.WorldProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.impl.datagen.FabricDataGenHelper;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
-import org.spongepowered.asm.mixin.Final;
 
 
 public record Generator() implements DataGeneratorEntrypoint {
@@ -29,7 +27,7 @@ public record Generator() implements DataGeneratorEntrypoint {
 
     @Override
     public void buildRegistry(final RegistryBuilder registryBuilder) {
-        CodeLyokoMain.LOG.info("registering Biomes");
+        //CodeLyokoMain.LOG.info("registering Biomes");
         registryBuilder.addRegistry(RegistryKeys.BIOME,ModBiome::bootStrap);
         registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModFeature::bootStrap);
     }

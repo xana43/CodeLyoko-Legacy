@@ -50,8 +50,6 @@ public record CustomVolcanoSky() implements DimensionRenderingRegistry.SkyRender
                 case 3 -> {
                     RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
                     matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0F));
-
-
                     matrixStack.translate(0, 50, 0);
                 }
                 case 4 -> {

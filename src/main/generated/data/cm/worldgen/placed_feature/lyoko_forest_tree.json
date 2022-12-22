@@ -52,16 +52,8 @@
       "type": "minecraft:in_square"
     },
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "minecraft:uniform",
-        "max_inclusive": {
-          "below_top": 0
-        },
-        "min_inclusive": {
-          "below_top": 0
-        }
-      }
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
     }
   ]
 }

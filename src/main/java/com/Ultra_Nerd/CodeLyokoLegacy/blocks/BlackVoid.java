@@ -4,6 +4,8 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
@@ -11,28 +13,12 @@ import net.minecraft.world.World;
 
 public final class BlackVoid extends Block {
 
-    private static final VoxelShape collisionShape = Block.createCuboidShape(0, 0, 0, 16, 4, 16);
-    /*private static final VoxelShape nullshape = Stream.of(
-            Block.createCuboidShape(3, 0, 3, 10, 0.5, 4),
-            Block.createCuboidShape(3, 0, 1, 10, 0.5, 2),
-            Block.createCuboidShape(9, 0, 1, 16, 0.5, 2),
-            Block.createCuboidShape(5, 0, 4, 7, 0.5, 11),
-            Block.createCuboidShape(13, 0, 4, 15, 0.5, 11),
-            Block.createCuboidShape(5, 0, 8, 7, 0.5, 15),
-            Block.createCuboidShape(3.150000000000001, 0, 7, 5.149999999999999, 0.5, 14),
-            Block.createCuboidShape(0.1500000000000008, 0, 8, 2.1499999999999986, 0.5, 15),
-            Block.createCuboidShape(7.15, 0, 7, 9.149999999999999, 0.5, 14),
-            Block.createCuboidShape(9.924999999999997, 0, 2, 11.924999999999995, 0.5, 9),
-            Block.createCuboidShape(0.9249999999999972, 0, 2, 2.9249999999999954, 0.5, 9),
-            Block.createCuboidShape(11.924999999999997, 0, 6, 12.924999999999995, 0.5, 13),
-            Block.createCuboidShape(9.024999999999991, 0, 13.024999999999999, 16.02500000000001, 0.5,
-                    14.024999999999997),
-            Block.createCuboidShape(9.024999999999991, 0, 15.024999999999999, 16.02500000000001, 0.5, 16.025),
-            Block.createCuboidShape(1.5249999999999915, 0, 15.024999999999999, 8.52500000000001, 0.5, 16.025)
-    ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();*/
+    private static final VoxelShape collisionShape = Block.createCuboidShape(0, 0, 0, 16, 2, 16);
+
 
     public BlackVoid() {
-        super(FabricBlockSettings.of(Material.STRUCTURE_VOID).strength(-1, -1).dropsNothing().resistance(-1));
+        super(FabricBlockSettings.of(Material.STRUCTURE_VOID).strength(-1, Integer.MAX_VALUE).dropsNothing().nonOpaque()
+                .luminance(10));
     }
 
     @Override
@@ -50,6 +36,24 @@ public final class BlackVoid extends Block {
     @Override
     public void onEntityLand(final BlockView world, final Entity entity) {
         super.onEntityLand(world, entity);
+        entity.damage(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+    }
+
+    @Override
+    public void onLandedUpon(final World world, final BlockState state, final BlockPos pos, final Entity entity, final float fallDistance) {
+        super.onLandedUpon(world, state, pos, entity, fallDistance);
+        entity.damage(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+    }
+
+    @Override
+    public void onProjectileHit(final World world, final BlockState state, final BlockHitResult hit, final ProjectileEntity projectile) {
+        super.onProjectileHit(world, state, hit, projectile);
+        projectile.remove(Entity.RemovalReason.KILLED);
+    }
+
+    @Override
+    public void onSteppedOn(final World world, final BlockPos pos, final BlockState state, final Entity entity) {
+        super.onSteppedOn(world, pos, state, entity);
         entity.damage(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
     }
 

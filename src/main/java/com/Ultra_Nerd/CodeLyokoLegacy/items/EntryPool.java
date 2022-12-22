@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.StoryBookGUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
@@ -85,9 +84,7 @@ public record EntryPool() {
 
         @Override
         public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
-            user.unlockRecipes(new Identifier[]{
-                    CodeLyokoMain.codeLyokoPrefix("anode")
-            });
+            user.unlockRecipes(new Identifier[]{ConstantUtil.RECIPIE_IDENTIFIERS[0]});
             return super.use(world, user, hand);
         }
     }

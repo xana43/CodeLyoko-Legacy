@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ComputerInterfaceUi;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -23,6 +24,7 @@ public final class TestComputerUI extends Block {
         {
             MinecraftClient.getInstance().setScreen(new ComputerInterfaceUi(Text.of("test screen"),pos));
         }
+        CardinalData.HumanDNAAttribute.setHasDna(player,false);
         return super.onUse(state, world, pos, player, hand, hit);
     }
 }

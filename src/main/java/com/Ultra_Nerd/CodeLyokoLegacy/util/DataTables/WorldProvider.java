@@ -31,27 +31,41 @@ public final class WorldProvider extends FabricDynamicRegistryProvider {
 
 
         });
-        final RegistryWrapper.Impl<ConfiguredFeature<?,?>> configuredFeatureRegistry = registries.getWrapperOrThrow(RegistryKeys.CONFIGURED_FEATURE);
+        //final RegistryWrapper.Impl<ConfiguredFeature<?,?>> configuredFeatureRegistry =
+          //      registries.getWrapperOrThrow(RegistryKeys.CONFIGURED_FEATURE);
+        //tree features
         ModFeature.CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s, builderPlacedFeaturePair) -> {
             final RegistryKey<ConfiguredFeature<?,?>> configuredFeatureRegistryKey =
                     RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, CodeLyokoMain.codeLyokoPrefix(s));
             entries.add(configuredFeatureRegistryKey, new ConfiguredFeature<>(Feature.TREE,builderPlacedFeaturePair.getLeft()
                     .build()));
         });
-        ModFeature.ORE_IMMUTABLE_MAP.forEach((s, builderPlacedFeaturePair) -> {
-            final RegistryKey<ConfiguredFeature<?,?>> configuredFeatureRegistryKey =
-                    RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, CodeLyokoMain.codeLyokoPrefix(s));
-            entries.add(configuredFeatureRegistryKey, builderPlacedFeaturePair.getLeft());
-        });
         ModFeature.CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s, builderPlacedFeaturePair) -> {
             final RegistryKey<PlacedFeature> placedFeatureRegistryKey =
                     RegistryKey.of(RegistryKeys.PLACED_FEATURE, CodeLyokoMain.codeLyokoPrefix(s));
             entries.add(placedFeatureRegistryKey,builderPlacedFeaturePair.getRight());
         });
+        //ore Features
+        ModFeature.ORE_IMMUTABLE_MAP.forEach((s, builderPlacedFeaturePair) -> {
+            final RegistryKey<ConfiguredFeature<?,?>> configuredFeatureRegistryKey =
+                    RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, CodeLyokoMain.codeLyokoPrefix(s));
+            entries.add(configuredFeatureRegistryKey, builderPlacedFeaturePair.getLeft());
+        });
         ModFeature.ORE_IMMUTABLE_MAP.forEach((s, builderPlacedFeaturePair) -> {
             final RegistryKey<PlacedFeature> configuredFeatureRegistryKey =
                     RegistryKey.of(RegistryKeys.PLACED_FEATURE, CodeLyokoMain.codeLyokoPrefix(s));
             entries.add(configuredFeatureRegistryKey, builderPlacedFeaturePair.getRight());
+        });
+        //misc features
+        ModFeature.MISC_IMMUTABLE_MAP.forEach((s, configuredFeaturePlacedFeaturePair) -> {
+            final RegistryKey<ConfiguredFeature<?,?>> configuredFeatureRegistryKey =
+                    RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE,CodeLyokoMain.codeLyokoPrefix(s));
+            entries.add(configuredFeatureRegistryKey,configuredFeaturePlacedFeaturePair.getLeft());
+        });
+        ModFeature.MISC_IMMUTABLE_MAP.forEach((s, configuredFeaturePlacedFeaturePair) -> {
+            final RegistryKey<PlacedFeature> configuredFeatureRegistryKey =
+                    RegistryKey.of(RegistryKeys.PLACED_FEATURE,CodeLyokoMain.codeLyokoPrefix(s));
+            entries.add(configuredFeatureRegistryKey,configuredFeaturePlacedFeaturePair.getRight());
         });
     }
 

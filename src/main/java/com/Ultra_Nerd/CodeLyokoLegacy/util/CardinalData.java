@@ -1,12 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.InventorySaveComponent;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.PlayerClassComponent;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.PlayerScannerComponent;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.XanaDataComponent;
+import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.*;
 import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
+import dev.onyxstudios.cca.api.v3.component.ComponentRegistryV3;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import dev.onyxstudios.cca.api.v3.level.LevelComponentFactoryRegistry;
@@ -27,11 +25,46 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     @Override
     public void registerEntityComponentFactories(final @NotNull EntityComponentFactoryRegistry registry) {
         registry.registerForPlayers(LyokoClass.LYOKOCLASS, it -> new PlayerClassComponent());
+        registry.registerForPlayers(MindHelmStress.MINDHELMSTRESS,player -> new MindHelmStressComponent());
         registry.registerForPlayers(ReturnToScanner.RETURN_TO_SCANNER, PlayerScannerComponent::new);
+        registry.registerForPlayers(HumanDNAAttribute.HUMAN_DNA_COMPONENT_KEY, HumanDNA::new);
     }
-
+    public record HumanDNAAttribute()
+    {
+        private static final ComponentKey<HumanDNA> HUMAN_DNA_COMPONENT_KEY =
+                ComponentRegistry.getOrCreate(CodeLyokoMain.codeLyokoPrefix("human_dna"), HumanDNA.class);
+        public static void setHasDna(final PlayerEntity player, final boolean hasDna)
+        {
+            HUMAN_DNA_COMPONENT_KEY.get(player).setHasDNA(hasDna);
+        }
+        public static boolean getHasDna(final PlayerEntity player)
+        {
+            return HUMAN_DNA_COMPONENT_KEY.get(player).getHasDna();
+        }
+        public static String getDna(final PlayerEntity player)
+        {
+            return HUMAN_DNA_COMPONENT_KEY.get(player).getDNA();
+        }
+    }
+    public record MindHelmStress()
+    {
+        private static final ComponentKey<MindHelmStressComponent> MINDHELMSTRESS = ComponentRegistry.getOrCreate(
+                CodeLyokoMain.codeLyokoPrefix("mind_stress"),MindHelmStressComponent.class);
+        public static void increaseStress(final int stressor, final PlayerEntity player)
+        {
+            MINDHELMSTRESS.get(player).addToStressLevel(stressor);
+        }
+        public static void decreaseStress(final PlayerEntity player)
+        {
+            MINDHELMSTRESS.get(player).decreaseStressLevel();
+        }
+        public static int getStressLevel(final PlayerEntity player)
+        {
+            return MINDHELMSTRESS.get(player).getStressLevel();
+        }
+    }
     public record LyokoClass() {
-        public static final ComponentKey<PlayerClassComponent> LYOKOCLASS = ComponentRegistry.getOrCreate(
+        private static final ComponentKey<PlayerClassComponent> LYOKOCLASS = ComponentRegistry.getOrCreate(
                 CodeLyokoMain.codeLyokoPrefix("lyoko_class"), PlayerClassComponent.class);
 
         public static int getLyokoClass(final PlayerEntity player) {
@@ -46,7 +79,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     }
 
     public record XanaCalculator() {
-        public static final ComponentKey<XanaDataComponent> XANA_DATA = ComponentRegistry.getOrCreate(
+        private static final ComponentKey<XanaDataComponent> XANA_DATA = ComponentRegistry.getOrCreate(
                 CodeLyokoMain.codeLyokoPrefix("xana_data"), XanaDataComponent.class);
 
         public static void setDangerLevel(final int dangerLevel, final WorldProperties worldProperties) {
@@ -59,7 +92,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     }
 
     public record LyokoInventorySave() {
-        public static final ComponentKey<InventorySaveComponent> LYOKO_INVENTORY_SAVE = ComponentRegistry.getOrCreate(
+        private static final ComponentKey<InventorySaveComponent> LYOKO_INVENTORY_SAVE = ComponentRegistry.getOrCreate(
                 CodeLyokoMain.codeLyokoPrefix("temp_inventory"), InventorySaveComponent.class);
 
         public static void savePlayerInventory(final WorldProperties worldProperties, final PlayerEntity playerEntity) {
@@ -73,7 +106,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     }
 
     public record ReturnToScanner() {
-        public static final ComponentKey<PlayerScannerComponent> RETURN_TO_SCANNER = ComponentRegistry.getOrCreate(
+        private static final ComponentKey<PlayerScannerComponent> RETURN_TO_SCANNER = ComponentRegistry.getOrCreate(
                 CodeLyokoMain.codeLyokoPrefix("scanner_position"), PlayerScannerComponent.class);
 
         public static void saveScannerLocation(final PlayerEntity player) {

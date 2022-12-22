@@ -25,25 +25,7 @@ public final class ArmorFeline extends LyokoArmor {
     private static final double movement_modifier = 0.6;
     private static final StatusEffectInstance JUMPEFFECT = new StatusEffectInstance(StatusEffects.JUMP_BOOST, 1, 3,
             true, false, false);
-/*
-    @Override
-    public void initializeClient(@NotNull Consumer<IItemRenderProperties> consumer) {
-       // consumer.accept(CatRenderer.INSTANCE);
-        super.initializeClient(consumer);
-    }
 
-    private static final class CatRenderer implements IItemRenderProperties
-    {
-        private static final CatRenderer INSTANCE = new CatRenderer();
-
-        @Override
-        public @NotNull HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
-            EntityModelSet modelSet = Minecraft.getInstance().getEntityModels();
-            ModelPart root = modelSet.bakeLayer(armorSlot == EquipmentSlot.CHEST ? ModModelLayers.FELINE_LAYER_LOCATION_INNER : ModModelLayers.FELINE_LAYER_LOCATION_OUTER);
-            return new ArmorModelRenderer(root);
-        }
-    }
-    */
 
     public ArmorFeline(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);
@@ -58,7 +40,6 @@ public final class ArmorFeline extends LyokoArmor {
             multimap.put(EntityAttributes.GENERIC_MOVEMENT_SPEED,
                     new EntityAttributeModifier(UUID.fromString("91AEAA56-376B-4498-935B-2F7F68070635"),
                             "speed_modifier", movement_modifier, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
-            //multimap.put(Attributes);
         }
 
 
@@ -73,22 +54,22 @@ public final class ArmorFeline extends LyokoArmor {
     }
 
     @Override
-    protected boolean onArmorTick(final PlayerEntity player, final Item armorItem) {
-        if (super.onArmorTick(player, this)) {
-            if (player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId())
-                    .getItem() == ModItems.ODD_BOOTS && player.getInventory()
-                    .getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).getItem() == ModItems.ODD_LEGGINGS) {
-                if (!player.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
+    protected void onArmorTick(final PlayerEntity player, final World world, final Item armorItem) {
+        super.onArmorTick(player,world,armorItem);
+        if (player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId())
+                .getItem() == ModItems.ODD_BOOTS && player.getInventory()
+                .getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).getItem() == ModItems.ODD_LEGGINGS) {
+            if (!player.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
 
-                    player.addStatusEffect(JUMPEFFECT);
-                    //CodeLyokoMain.LOG.info(JUMPEFFECT.toString());
+                player.addStatusEffect(JUMPEFFECT);
+                //CodeLyokoMain.LOG.info(JUMPEFFECT.toString());
 
-                }
-                //player.addStatusEffect(JUMPEFFECT);
-                player.fallDistance = 0;
             }
+            //player.addStatusEffect(JUMPEFFECT);
+            player.fallDistance = 0;
         }
-        return super.onArmorTick(player, this);
+
+
     }
 
 

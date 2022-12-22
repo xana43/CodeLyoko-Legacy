@@ -2,6 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModScreenHandlers;
+import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.block.entity.EndPortalBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -69,6 +71,7 @@ public final class ReactorScreenHandler extends ScreenHandler {
                 slot.markDirty();
             }
         }
+
 
         return newStack;
     }

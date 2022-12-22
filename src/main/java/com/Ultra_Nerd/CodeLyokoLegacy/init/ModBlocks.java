@@ -55,12 +55,13 @@ public record ModBlocks() {
     public static final Block DIGITAL_SEA_PYLON = new SeaPylon();
     public static final Block DIGITAL_GRASS = new Block(
             FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).allowsSpawning((state, world, pos, type) -> true)
-                    .strength(-1, -1));
-    public static final Block DIGITAL_DIRT = new Block(FabricBlockSettings.copyOf(Blocks.DIRT).strength(-1, -1));
-    public static final Block DIGITAL_ROCK = new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(-1, -1)
+                    .strength(-1, Integer.MAX_VALUE));
+    public static final Block DIGITAL_DIRT = new Block(FabricBlockSettings.copyOf(Blocks.DIRT).strength(-1,
+            Integer.MAX_VALUE));
+    public static final Block DIGITAL_ROCK = new Block(FabricBlockSettings.copyOf(Blocks.STONE).strength(-1, Integer.MAX_VALUE)
             .allowsSpawning((state, world, pos, type) -> true));
     public static final Block DIGITAL_WOOD_FOREST = new Block(
-            FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(-1, -1));
+            FabricBlockSettings.copyOf(Blocks.OAK_WOOD).strength(-1, Integer.MAX_VALUE));
     public static final Block DIGITAL_WOOD_MOUNTAIN = new Block(FabricBlockSettings.copyOf(Blocks.JUNGLE_WOOD));
     public static final Block DIGITAL_LEAF_MOUNTAIN = new LeavesBlock(FabricBlockSettings.copyOf(Blocks.JUNGLE_LEAVES));
 
@@ -89,10 +90,10 @@ public record ModBlocks() {
     }
     */
 
-    public static final Block DIGITAL_ICE = new IceBlock(FabricBlockSettings.copyOf(Blocks.ICE).strength(-1, -1));
+    public static final Block DIGITAL_ICE = new IceBlock(FabricBlockSettings.copyOf(Blocks.ICE).strength(-1, Integer.MAX_VALUE));
     public static final Block DIGITAL_SAND = new Block(
-            FabricBlockSettings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(-1, -1));
-    public static final Block DIGITAL_DARKNESS = new Block(FabricBlockSettings.of(Material.EGG).strength(-1, -1));
+            FabricBlockSettings.of(Material.AGGREGATE, MapColor.PALE_YELLOW).strength(-1, Integer.MAX_VALUE));
+    public static final Block DIGITAL_DARKNESS = new Block(FabricBlockSettings.of(Material.EGG).strength(-1, Integer.MAX_VALUE));
     public static final Block ELECTRIC_FLUORIDE_INFUSER = new ElectricFluorideInfuser();
     public static final Block EXTERNAL_ENERGY_ACCEPTOR = new ExternalPowerAcceptor(
             FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
@@ -117,7 +118,7 @@ public record ModBlocks() {
             FabricBlockSettings.of(Material.STONE).strength(3, 10).sounds(BlockSoundGroup.STONE));
     public static final Block HOLOPROJECTOR = new HologramProjectorBlock();
     public static final Block LYOKO_CORE = new LyokoCore(
-            FabricBlockSettings.copyOf(Blocks.DRAGON_EGG).noCollision().strength(-1, -1)
+            FabricBlockSettings.copyOf(Blocks.DRAGON_EGG).noCollision().strength(-1, Integer.MAX_VALUE)
                     .luminance(Blocks.GLOWSTONE.getDefaultState().getLuminance() << 1));
     public static final Block MARABUNTA = new Marabunta();
     public static final Block METATYUYAMUNITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copy(Blocks.IRON_ORE));
@@ -140,15 +141,15 @@ public record ModBlocks() {
     public static final Block SKLODOWSKITE_ORE = new Block(
             FabricBlockSettings.of(Material.STONE).strength(4, 4).sounds(BlockSoundGroup.STONE));
     public static final Block SILICA_SAND = new SandBlock(0xFFFFFF, FabricBlockSettings.copy(Blocks.SAND));
-    public static final Block SECTOR5_STEEL = new Block(FabricBlockSettings.of(Material.METAL).strength(-1, -1));
+    public static final Block SECTOR5_STEEL = new Block(FabricBlockSettings.of(Material.METAL).strength(-1, Integer.MAX_VALUE));
     public static final Block ROUTER = new Router(FabricBlockSettings.copyOf(Blocks.DRAGON_EGG));
-    public static final Block TOWER_WHITE = new TowerGeneric();
+    public static final Block TOWER_WHITE = new Block(FabricBlockSettings.of(Material.BARRIER).strength(-1, Integer.MAX_VALUE).sounds(BlockSoundGroup.GLASS).luminance(250));
     public static final Block TOWER_INTERFACE = new TowerInterface();
     public static final Block TOWER_BASE = new TowerWall();
     public static final Block TOWER_WALL = new TowerWall();
-    public static final Block TOWER_BLUE = new TowerGeneric();
+    public static final Block TOWER_BLUE = new Block(FabricBlockSettings.of(Material.BARRIER).strength(-1, Integer.MAX_VALUE).sounds(BlockSoundGroup.GLASS).luminance(250));
     public static final Block TOWER_TOP = new Block(
-            FabricBlockSettings.copy(Blocks.IRON_BLOCK).strength(-1, -1).sounds(BlockSoundGroup.GLASS));
+            FabricBlockSettings.copy(Blocks.IRON_BLOCK).strength(-1, Integer.MAX_VALUE).sounds(BlockSoundGroup.GLASS));
     public static final Block TOWER_WALL_CORNER = new TowerWallCorner();
     public static final Block TOWER_BASE_CORNER = new TowerWallCorner();
     public static final Block TOWER_BOTTOM = new TowerBottomBlock(

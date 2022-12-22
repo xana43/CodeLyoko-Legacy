@@ -26,7 +26,7 @@ public class TowerWall extends HorizontalFacingBlock {
 
     public TowerWall() {
         super(FabricBlockSettings.of(Material.BARRIER)
-                .strength(-1, -1)
+                .strength(-1, Integer.MAX_VALUE)
                 .dropsNothing()
                 .sounds(BlockSoundGroup.GLASS)
                 .luminance(value -> 250)

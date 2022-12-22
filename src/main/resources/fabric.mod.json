@@ -63,7 +63,9 @@
               "cm:lyoko_class",
               "cm:temp_inventory",
               "cm:xana_data",
-              "cm:scanner_position"
+              "cm:scanner_position",
+              "cm:mind_stress",
+              "cm:human_dna"
           ]
     }
 }

@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.StringVisitable;
@@ -10,7 +11,14 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 public record MethodUtil() {
-
+    public record ArmorMethods()
+    {
+        public static boolean isArmorSlot(final int slot)
+        {
+            return slot == EquipmentSlot.CHEST.getEntitySlotId() || slot == EquipmentSlot.LEGS.getEntitySlotId()
+                    || slot == EquipmentSlot.FEET.getEntitySlotId() || slot == EquipmentSlot.HEAD.getEntitySlotId();
+        }
+    }
 
     public record TickConversion() {
         public static int tickToSeconds(final int ticks) {

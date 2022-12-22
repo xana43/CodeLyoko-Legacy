@@ -64,7 +64,7 @@ public final class ZweihanderWeapon extends SwordItem {
             stack.addEnchantment(Enchantments.SWEEPING, Enchantments.SWEEPING.getMaxLevel());
             stack.addEnchantment(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());
             stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
-            //stack.getEnchantmentTags().clear();
+
 
         }
     }

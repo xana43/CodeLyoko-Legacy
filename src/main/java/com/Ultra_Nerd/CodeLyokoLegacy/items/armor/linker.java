@@ -3,12 +3,32 @@ package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import team.reborn.energy.api.base.SimpleBatteryItem;
+import team.reborn.energy.api.base.SimpleEnergyItem;
 
-public final class linker extends ArmorItem {
+public final class linker extends ArmorItem implements SimpleEnergyItem {
     public linker(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);
     }
+
+    @Override
+    public long getEnergyCapacity(final ItemStack stack) {
+        return 9000;
+    }
+
+    @Override
+    public long getEnergyMaxInput(final ItemStack stack) {
+        return 0;
+    }
+
+    @Override
+    public long getEnergyMaxOutput(final ItemStack stack) {
+        return 0;
+    }
+
+
 /*
     @Override
     public void onArmorTick(@NotNull ItemStack stack, Level world, Player player) {
