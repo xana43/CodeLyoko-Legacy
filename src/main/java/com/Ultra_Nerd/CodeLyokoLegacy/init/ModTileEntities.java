@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.CableBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.*;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -31,14 +30,16 @@ public record ModTileEntities() {
             TowerInterfaceTileEntity::new, ModBlocks.TOWER_INTERFACE).build();
     public static final BlockEntityType<ComputerControlPanelTileEntity> COMPUTER_CONTROL_PANEL = FabricBlockEntityTypeBuilder.create(
             ComputerControlPanelTileEntity::new, ModBlocks.COMPUTER_TOWER_CONTROL_PANEL).build();
-    public static final BlockEntityType<ComputerReactorTileEntity> COMPUTER_REACTOR_TILE_ENTITY = FabricBlockEntityTypeBuilder.create(
-            ComputerReactorTileEntity::new, ModBlocks.URANUM_REACTOR).build();
-    public static final BlockEntityType<LaptopChargerBlockEntity> LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY =
-            FabricBlockEntityTypeBuilder.create(LaptopChargerBlockEntity::new, ModBlocks.LAPTOP_CHARGER).build();
+    public static final BlockEntityType<ComputerReactorTileEntityInventory> COMPUTER_REACTOR_TILE_ENTITY = FabricBlockEntityTypeBuilder.create(
+            ComputerReactorTileEntityInventory::new, ModBlocks.URANUM_REACTOR).build();
+    public static final BlockEntityType<LaptopChargerBlockEntityInventory> LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY =
+            FabricBlockEntityTypeBuilder.create(LaptopChargerBlockEntityInventory::new, ModBlocks.LAPTOP_CHARGER).build();
     public  static final BlockEntityType<RouterTE> ROUTER_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(RouterTE::new,ModBlocks.ROUTER).build();
     public static final BlockEntityType<CableTileEntity> CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(CableTileEntity::new, ModBlocks.CABLE_BLOCK).build();
+    public static final BlockEntityType<ComputerCoreTileEntity> COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE =
+            FabricBlockEntityTypeBuilder.create(ComputerCoreTileEntity::new,ModBlocks.COMPUTER_CORE).build();
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String, BlockEntityType<?>>builder()
 
             .put("lyoko_core", LYOKO_CORE).put("tower_interface_tile_entity", TOWER_INTERFACE_TILE_ENTITY)
@@ -48,7 +49,8 @@ public record ModTileEntities() {
             .put("computer_integrated_reactor", COMPUTER_REACTOR_TILE_ENTITY)
             .put("laptop_charger_blockentity", LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY)
             .put("router_blockentity",ROUTER_BLOCK_ENTITY_TYPE)
-            .put("cable_blockentity",CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE).build();
+            .put("cable_blockentity",CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE)
+            .put("computer_core_blockentity",COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE).build();
 
 
     //
@@ -91,8 +93,8 @@ public record ModTileEntities() {
     public static final RegistryObject<BlockEntityType<DataTransferInterfaceTileEntity>> DATA_TRANSFER_INTERFACE_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("data_transfer_interface_tile_entity", () -> BlockEntityType.Builder.of(DataTransferInterfaceTileEntity::new,
                     ModBlocks.DATA_TRANSFER_INTERFACE.get()).build(null));
-    public static final RegistryObject<BlockEntityType<ComputerReactorTileEntity>> REACTOR_BLOCK_ENTITY =
-            TILE_ENTITY_TYPES.register("computer_reactor_tile_entity",() -> BlockEntityType.Builder.of(ComputerReactorTileEntity::new,
+    public static final RegistryObject<BlockEntityType<ComputerReactorTileEntityInventory>> REACTOR_BLOCK_ENTITY =
+            TILE_ENTITY_TYPES.register("computer_reactor_tile_entity",() -> BlockEntityType.Builder.of(ComputerReactorTileEntityInventory::new,
                     ModBlocks.URANUM_REACTOR.get()).build(null));
 */
 

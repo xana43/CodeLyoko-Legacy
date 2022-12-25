@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LaptopChargerBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LaptopChargerBlockEntityInventory;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -18,7 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public final class LaptopCharger extends HorizontalFacingBlock implements BlockEntityProvider {
@@ -48,7 +47,7 @@ public final class LaptopCharger extends HorizontalFacingBlock implements BlockE
         final BlockEntity be = world.getBlockEntity(pos);
         world.updateListeners(pos, state, state, Block.NOTIFY_LISTENERS);
 
-        if (be instanceof LaptopChargerBlockEntity chargerBlockEntity) {
+        if (be instanceof LaptopChargerBlockEntityInventory chargerBlockEntity) {
             chargerBlockEntity.update();
             final ItemStack laptop = player.getStackInHand(hand);
             if (laptop.isOf(ModItems.JEREMY_LAPTOP)) {
@@ -66,8 +65,8 @@ public final class LaptopCharger extends HorizontalFacingBlock implements BlockE
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
         return (world1, pos, state1, blockEntity) -> {
-            if (blockEntity instanceof LaptopChargerBlockEntity) {
-                ((LaptopChargerBlockEntity) blockEntity).tick();
+            if (blockEntity instanceof LaptopChargerBlockEntityInventory) {
+                ((LaptopChargerBlockEntityInventory) blockEntity).tick();
             }
         };
     }
@@ -81,7 +80,7 @@ public final class LaptopCharger extends HorizontalFacingBlock implements BlockE
     @Override
     public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
         super.onBreak(world, pos, state, player);
-        if (world.getBlockEntity(pos) instanceof LaptopChargerBlockEntity chargerBlockEntity) {
+        if (world.getBlockEntity(pos) instanceof LaptopChargerBlockEntityInventory chargerBlockEntity) {
             chargerBlockEntity.getItems().forEach(itemStack -> Block.dropStack(world, pos, itemStack));
         }
     }

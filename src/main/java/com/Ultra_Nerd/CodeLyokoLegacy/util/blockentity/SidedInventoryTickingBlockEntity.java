@@ -8,8 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class SidedTickingBlockEntity extends TickingBlockEntity implements SidedInventory {
-    public SidedTickingBlockEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state, final int inventorySize) {
+public abstract class SidedInventoryTickingBlockEntity extends InventoryTickingBlockEntity implements SidedInventory {
+    public SidedInventoryTickingBlockEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state, final int inventorySize) {
         super(type, pos, state, inventorySize);
     }
 

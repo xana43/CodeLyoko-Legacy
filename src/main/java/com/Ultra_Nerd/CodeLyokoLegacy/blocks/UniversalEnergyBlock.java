@@ -32,7 +32,7 @@ public final class UniversalEnergyBlock extends BlockWithEntity {
 
     @Override
     public BlockRenderType getRenderType(final BlockState state) {
-        return BlockRenderType.INVISIBLE;
+        return BlockRenderType.MODEL;
     }
 
     @Override

@@ -13,10 +13,9 @@ import net.minecraft.registry.RegistryKeys;
 
 
 public record Generator() implements DataGeneratorEntrypoint {
-    private static FabricDataGenerator.Pack pack;
     @Override
     public void onInitializeDataGenerator(final FabricDataGenerator fabricDataGenerator) {
-        pack = fabricDataGenerator.createPack();
+        final FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
         pack.addProvider(LootTables::new);
         pack.addProvider(CustomRecipeProvider::new);
         pack.addProvider(CustomBlockTags::new);
@@ -27,7 +26,6 @@ public record Generator() implements DataGeneratorEntrypoint {
 
     @Override
     public void buildRegistry(final RegistryBuilder registryBuilder) {
-        //CodeLyokoMain.LOG.info("registering Biomes");
         registryBuilder.addRegistry(RegistryKeys.BIOME,ModBiome::bootStrap);
         registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModFeature::bootStrap);
     }

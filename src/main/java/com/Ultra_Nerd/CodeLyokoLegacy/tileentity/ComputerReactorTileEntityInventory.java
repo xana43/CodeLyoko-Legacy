@@ -4,7 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ReactorScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntityInventory;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.LyokoInventoryBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,7 +18,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
-public final class ComputerReactorTileEntity extends EnergyStorageBlockEntity implements LyokoInventoryBlock, NamedScreenHandlerFactory {
+public final class ComputerReactorTileEntityInventory extends EnergyStorageBlockEntityInventory implements LyokoInventoryBlock, NamedScreenHandlerFactory {
 
 
     private final PropertyDelegate energyAmount = new PropertyDelegate() {
@@ -45,7 +45,7 @@ public final class ComputerReactorTileEntity extends EnergyStorageBlockEntity im
     };
 
 
-    public ComputerReactorTileEntity(final BlockPos pos, final BlockState state) {
+    public ComputerReactorTileEntityInventory(final BlockPos pos, final BlockState state) {
         super(ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY, pos, state, 2, 4000, null, null);
 
     }

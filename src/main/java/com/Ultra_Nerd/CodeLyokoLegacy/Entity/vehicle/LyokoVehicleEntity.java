@@ -21,7 +21,6 @@ public class LyokoVehicleEntity extends BoatEntity {
         if (!MethodUtil.DimensionCheck.entityNotInVanillaWorld(this)) {
             this.remove(RemovalReason.DISCARDED);
         }
-
     }
 
 

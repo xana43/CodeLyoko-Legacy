@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.ModFeatures.structures.Tower;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModStructures;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import com.mojang.serialization.Codec;
@@ -93,6 +94,10 @@ public final class TowerBase extends Structure {
 
             if (sampleAreaPositive(blockPos, context).getState(i).isIn(ModTags.Blocks.LYOKO_BLOCKS)
                     && sampleAreaNegative(blockPos, context).getState(i).isIn(ModTags.Blocks.LYOKO_BLOCKS)
+                    && !sampleAreaPositive(blockPos,context).getState(i).isOf(ModBlocks.DIGITAL_OCEAN_BLOCK)
+                    && !sampleAreaNegative(blockPos,context).getState(i).isOf(ModBlocks.DIGITAL_OCEAN_BLOCK)
+                    && !sampleAreaPositive(blockPos,context).getState(i).isOf(ModBlocks.DIGITAL_LAVA_BLOCK)
+                    && !sampleAreaNegative(blockPos,context).getState(i).isOf(ModBlocks.DIGITAL_LAVA_BLOCK)
                     && !sampleAreaPositive(blockPos, context).getState(i).isOf(Blocks.VOID_AIR)
                     && !sampleAreaNegative(blockPos, context).getState(i).isOf(Blocks.VOID_AIR)
                     && !sampleAreaPositive(blockPos, context).getState(i).isOf(Blocks.AIR)

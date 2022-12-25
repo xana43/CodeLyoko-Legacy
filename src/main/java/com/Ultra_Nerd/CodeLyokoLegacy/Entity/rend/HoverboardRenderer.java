@@ -38,7 +38,7 @@ public final class HoverboardRenderer<T extends HoverboardEntity> extends Entity
         matrixStackIn.push();
         matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
         matrixStackIn.translate(0, -1.5f, 0);
-        matrixStackIn.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(360 + entityYaw));
+        matrixStackIn.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180 + entityYaw));
         this.BoardModel.setAngles(entityIn, 0, 0, 0, 0, 0);
         final VertexConsumer vertexBuilder = bufferIn.getBuffer(this.BoardModel.getLayer(this.getTexture(entityIn)));
         this.BoardModel.render(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.DEFAULT_UV, 1, 1, 1, 1);

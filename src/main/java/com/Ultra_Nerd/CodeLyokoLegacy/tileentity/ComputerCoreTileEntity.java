@@ -1,33 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-public final class ComputerCoreTileEntity {
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntity;
+import net.minecraft.block.BlockState;
+import net.minecraft.util.math.BlockPos;
+import team.reborn.energy.api.base.SimpleEnergyStorage;
+
+public final class ComputerCoreTileEntity extends EnergyStorageBlockEntity {
+    public ComputerCoreTileEntity(final BlockPos pos, final BlockState state) {
+        super(ModTileEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE, pos, state,new SimpleEnergyStorage(90000,10000,0));
+    }
+
+    @Override
+    public void tick() {
+
+    }
 
 
-    //public ComputerCoreTileEntity(BlockEntityType<?> tileEntityTypeIn) {
-    //     super(tileEntityTypeIn);
-    //}
-	/*
-	private EnergyModule storage = new EnergyModule(1000000000, 1000000000);
-	@Override
-	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if(capability == CapabilityEnergy.ENERGY) return(T)this.storage;
-		return super.getCapability(capability, facing);
-	}
-	
-	@Override
-	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-		if(capability == CapabilityEnergy.ENERGY) return true;
-		return super.hasCapability(capability, facing);
-	}
-	
-	
-	@Override
-	public void update()
-	{
-		
-		this.storage.receiveEnergy(1000000000, false);
-		this.storage.extractEnergy(2000000000, false);
-		
-	}
-*/
+
 }

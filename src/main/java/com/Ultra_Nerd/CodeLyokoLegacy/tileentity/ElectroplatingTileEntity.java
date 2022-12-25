@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-public class ElectroplatingTileEntity /*extends BlockEntity implements TickingBlockEntity<ElectroplatingTileEntity>//, INamedContainerProvider*/ {
+public class ElectroplatingTileEntity /*extends BlockEntity implements InventoryTickingBlockEntity<ElectroplatingTileEntity>//, INamedContainerProvider*/ {
      /*
     private boolean once = false;
     private final int maxSmeltTime = 1000;

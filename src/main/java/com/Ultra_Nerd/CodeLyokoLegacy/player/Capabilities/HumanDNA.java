@@ -40,9 +40,25 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
 
     private void createDNA() {
         final StringBuilder DNASequence = new StringBuilder();
-        for (int i = 0; i < 4; i++) {
+        final StringBuilder DNASequenceHelix2 = new StringBuilder();
+
+        for(int i = 0; i < 100; i++)
+        {
             DNASequence.append(DNACoding[ThreadLocalRandom.current().nextInt(0, 3)]);
         }
+        for (int i = 0; i < 100; i++)
+        {
+            final char DNAChem =DNASequence.toString().charAt(i);
+            switch (DNAChem)
+            {
+                case 'A' -> DNASequenceHelix2.append('T');
+                case 'T' -> DNASequenceHelix2.append('A');
+                case 'C' -> DNASequenceHelix2.append('G');
+                case 'G' -> DNASequenceHelix2.append('C');
+            }
+        }
+        DNASequence.append('\n').append(DNASequenceHelix2);
+        CodeLyokoMain.LOG.info(DNASequence.toString());
         DNA = DNASequence.toString();
     }
 

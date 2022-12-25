@@ -9,6 +9,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.boss.BossBar;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -81,15 +82,16 @@ public final class ClassScreen extends Screen {
         //current class
         if (IndicatorColor != 0) {
             switch (CardinalData.LyokoClass.getLyokoClass(this.client.player)) {
-                case 0 -> drawClassIndicator(Text.of("Current Class: Feline"), pPoseStack);
-                case 1 -> drawClassIndicator(Text.of("Current Class: Samurai"), pPoseStack);
-                case 2 -> drawClassIndicator(Text.of("current class: Ninja"), pPoseStack);
-                case 3 -> drawClassIndicator(Text.of("Current Class: Guardian"), pPoseStack);
+                case 0 -> drawClassIndicator(Text.translatable("lyoko.class.feline"), pPoseStack);
+                case 1 -> drawClassIndicator(Text.translatable("lyoko.class.samurai"), pPoseStack);
+                case 2 -> drawClassIndicator(Text.translatable("lyoko.class.ninja"), pPoseStack);
+                case 3 -> drawClassIndicator(Text.translatable("lyoko.class.guardian"), pPoseStack);
+                case 4 -> drawClassIndicator(Text.translatable("lyoko.class.warrior"),pPoseStack);
                 default -> {}
             }
         } else {
             drawCenteredText(pPoseStack, textRenderer,
-                    Text.of("no class assigned").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle()).get(0),
+                    Text.translatable("lyoko.class.null").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle()).get(0),
                     this.width >> 2, this.height >> 2, IndicatorColor);
         }
         /*
@@ -131,21 +133,11 @@ public final class ClassScreen extends Screen {
             case 1 -> IndicatorColor = 2007;
             case 2 -> IndicatorColor = 5125;
             case 3 -> IndicatorColor = 0x1d5e18;
+            case 4 -> IndicatorColor = ColorHelper.Argb.getArgb(255,10,10,10);
             default -> {}
         }
 
-        /*
-        if(ClientCapabilitySync.getPlayerClassType() != null) {
 
-            switch (ClientCapabilitySync.getPlayerClassType().getClassName()) {
-                case "Felyne" -> IndicatorColor = Color.MAGENTA.getRGB();
-                case "Samurai" -> IndicatorColor = 2007;
-                case "Ninja" -> IndicatorColor = 5125;
-                case "Guardian" -> IndicatorColor = Color.PINK.getRGB();
-            }
-        }
-
-         */
 
     }
 
@@ -210,18 +202,14 @@ public final class ClassScreen extends Screen {
 
     private void setGuardian() {
         guardian = new TexturedButtonWidget((this.width >> 1) + 80, this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> {
-            //ClassID = 3;
-            //CapabilityPlayerClassSync.Sync(PlayerClassType.Guardian);
-        }, Text.of("guardian").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
+                256, 256, (input) -> CardinalData.LyokoClass.setLyokoclass(this.client.player,3), Text.of("guardian").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
         save(this.client);
 
     }
 
     private void setWarrior() {
         warrior = new TexturedButtonWidget((this.width >> 1) + 150, this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> {
-        } /*((PlayerEXT)this.client.player).setClass(4)*/,
+                256, 256, (input) -> CardinalData.LyokoClass.setLyokoclass(this.client.player,4),
                 Text.of("warrior").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
         save(this.client);
     }

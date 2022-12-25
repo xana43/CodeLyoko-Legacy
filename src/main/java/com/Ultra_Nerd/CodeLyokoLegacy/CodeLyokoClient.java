@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHoverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelOverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.linker;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoRingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
@@ -42,7 +43,7 @@ import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.util.Identifier;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
@@ -50,7 +51,7 @@ import org.lwjgl.glfw.GLFW;
 @Environment(EnvType.CLIENT)
 public record CodeLyokoClient() implements ClientModInitializer {
 
-    public static final Identifier PacketID = CodeLyokoMain.codeLyokoPrefix("spawn_packet");
+    //public static final Identifier PacketID = CodeLyokoMain.codeLyokoPrefix("spawn_packet");
     private static final String keyCategory = "category." + CodeLyokoMain.MOD_ID + ".lyoko_controls";
     //keybinds
     private static KeyBinding classCreenBinding;
@@ -111,7 +112,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.OVERBOARD, OverboardRenderer::new);
         EntityRendererRegistry.register(ModEntities.HOVERBOARD, HoverboardRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ModelOverboard.LAYER_LOCATION, ModelOverboard::createBodyLayer);
-        EntityModelLayerRegistry.registerModelLayer(ModelHoverboard.LAYER_LOCATION,ModelHoverboard::createLayer);
+        EntityModelLayerRegistry.registerModelLayer(ModelHoverboard.LAYER_LOCATION, ModelHoverboard::createLayer);
 
     }
 
@@ -120,15 +121,11 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 new SimpleFluidRenderHandler(CodeLyokoMain.codeLyokoPrefix("block/digital_flowing"),
                         CodeLyokoMain.codeLyokoPrefix("block/digital_flowing")));
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_DIGITAL_LAVA, ModFluids.FLOWING_DIGITAL_LAVA,
-                new SimpleFluidRenderHandler(
-                        CodeLyokoMain.codeLyokoPrefix("block/digital_flowing_lava"),
-                        CodeLyokoMain.codeLyokoPrefix("block/digital_flowing_lava")
-                ));
+                new SimpleFluidRenderHandler(CodeLyokoMain.codeLyokoPrefix("block/digital_flowing_lava"),
+                        CodeLyokoMain.codeLyokoPrefix("block/digital_flowing_lava")));
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_LIQUID_HELIUM, ModFluids.FLOWING_LIQUID_HELIUM,
-                new SimpleFluidRenderHandler(
-                        CodeLyokoMain.codeLyokoPrefix("block/liquid_helium_flow"),
-                        CodeLyokoMain.codeLyokoPrefix("block/liquid_helium_still")
-                ));
+                new SimpleFluidRenderHandler(CodeLyokoMain.codeLyokoPrefix("block/liquid_helium_flow"),
+                        CodeLyokoMain.codeLyokoPrefix("block/liquid_helium_still")));
 
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_LIQUID_HELIUM,
                 ModFluids.FLOWING_LIQUID_HELIUM, ModFluids.STILL_DIGITAL_OCEAN, ModFluids.FLOWING_DIGITAL_OCEAN);
@@ -144,38 +141,25 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
         //makes certain blocks behave properly
 
-        ModelPredicateProviderRegistry.register(ModItems.TEST_MULTIPLAYER_PHONE,CodeLyokoMain.codeLyokoPrefix(
-                "message"),
-                (stack, world, entityin,integer) ->
-                {
-                    if(stack.hasEnchantments())
-                    {
-                        return 1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
-                }
-        );
+        ModelPredicateProviderRegistry.register(ModItems.TEST_MULTIPLAYER_PHONE,
+                CodeLyokoMain.codeLyokoPrefix("message"),
+                (stack, world, entityin, integer) -> stack.hasEnchantments() ? 1 : 0);
 
-        ModelPredicateProviderRegistry.register(ModItems.TEST_MULTIPLAYER_PHONE,CodeLyokoMain.codeLyokoPrefix("charge"),
-                (stack,world,entityin,integer) ->
-                        switch (stack.getDamage()) {
-                            case 0 -> 0.1f;
-                            case 1 -> 0.2f;
-                            default -> 0;
-                        });
-
+        ModelPredicateProviderRegistry.register(ModItems.TEST_MULTIPLAYER_PHONE,
+                CodeLyokoMain.codeLyokoPrefix("charge"),
+                (stack, world, entityin, integer) -> switch (stack.getDamage()) {
+                    case 0 -> 0.1f;
+                    case 1 -> 0.2f;
+                    default -> 0;
+                });
 
 
         ModelPredicateProviderRegistry.register(ModItems.JEREMY_LAPTOP, CodeLyokoMain.codeLyokoPrefix("state"),
-                (stack, world, entity, integer) ->
-                        switch (stack.getDamage()) {
-                            case 0 -> 0.1f;
-                            case 1 -> 0.2f;
-                            default -> 0;
-                        });
+                (stack, world, entity, integer) -> switch (stack.getDamage()) {
+                    case 0 -> 0.1f;
+                    case 1 -> 0.2f;
+                    default -> 0;
+                });
         ModelPredicateProviderRegistry.register(ModItems.DIGITAL_SABER, CodeLyokoMain.codeLyokoPrefix("blocking"),
                 (stack, world, entity, seed) -> {
 
@@ -186,7 +170,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 });
 
         ModelPredicateProviderRegistry.register(ModItems.RAW_POLYCARBONATE, CodeLyokoMain.codeLyokoPrefix("quantity"),
-                (stack, world, entityin,integer) -> {
+                (stack, world, entityin, integer) -> {
 
                     if (stack.getCount() > 0 && stack.getCount() < 65) {
                         return stack.getCount() / 100f;
@@ -197,14 +181,13 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
 
         ModelPredicateProviderRegistry.register(ModItems.SILICON_WAFER, CodeLyokoMain.codeLyokoPrefix("quality"),
-                (stack, world, entityin, integer) ->
-                        switch (stack.getDamage()) {
-                            case 1 -> 0.25f;
-                            case 2 -> 0.5f;
-                            case 3 -> 0.75f;
-                            case 4 -> 1;
-                            default -> 0.0f;
-                        });
+                (stack, world, entityin, integer) -> switch (stack.getDamage()) {
+                    case 1 -> 0.25f;
+                    case 2 -> 0.5f;
+                    case 3 -> 0.75f;
+                    case 4 -> 1;
+                    default -> 0.0f;
+                });
 
 
     }
@@ -212,14 +195,12 @@ public record CodeLyokoClient() implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         //set key bindings
-        classCreenBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key." + CodeLyokoMain.MOD_ID + ".class",
-                InputUtil.Type.SCANCODE,
-                GLFW.GLFW_KEY_RIGHT_ALT,
-                keyCategory
+        classCreenBinding = KeyBindingHelper.registerKeyBinding(
+                new KeyBinding("key." + CodeLyokoMain.MOD_ID + ".class", InputUtil.Type.SCANCODE,
+                        GLFW.GLFW_KEY_RIGHT_ALT, keyCategory
 
 
-        ));
+                ));
 
         //Renderers
         BlockEntityRendererRegistry.register(ModTileEntities.LYOKO_CORE, CoreOfLyoko::new);
@@ -280,7 +261,10 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 }
                 if (MethodUtil.DimensionCheck.playerInVanilla(client.player) && client.player.getEquippedStack(
                         EquipmentSlot.HEAD).isOf(ModItems.LINKER)) {
-                    if (classCreenBinding.isPressed()) {
+                    final ItemStack headStack = client.player.getEquippedStack(EquipmentSlot.HEAD);
+                    final linker linker = (linker) headStack.getItem();
+                    final long storedEnergy = linker.getStoredEnergy(headStack);
+                    if (classCreenBinding.isPressed() && storedEnergy > 0) {
                         client.setScreen(new ClassScreen());
                     }
                 }

@@ -10,6 +10,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.electroplate.Electroplating
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.ElectricFluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.FluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.DataTransferInterface;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.PlayerCustomProfileTest;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.TestComputerUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.*;
 import com.google.common.collect.ImmutableMap;
@@ -35,12 +36,13 @@ public record ModBlocks() {
     public static final Block COVELLITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.IRON_ORE));
     public static final Block CHALCOCITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.IRON_ORE));
     public static final Block COMPUTER_FRAME = new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
-    public static final Block CENTRAL_CONTROL_UNIT = new ComputerCentralControlUnit(
+    public static final Block CENTRAL_CONTROL_UNIT = new ComputerCoreUnit(
             FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
     public static final Block COMPUTER_SCREEN = new Block(
             FabricBlockSettings.of(Material.GLASS).strength(1, Blocks.GLASS.getBlastResistance())
                     .sounds(BlockSoundGroup.GLASS));
     public static final Block COMPUTER_SCREEN_FRAME = new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
+    public static final Block COMPUTER_CORE = new ComputerCoreUnit(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
     public static final Block COMPUTER_KEYBOARD = new ComputerKeyboard();
     public static final Block CHIPLET_BASIC_BLOCK = new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
     public static final Block CHIPLET_ADVANCED_BLOCK = new ChipletAdvancedBlock(
@@ -182,6 +184,7 @@ public record ModBlocks() {
     public static final Block LIQUID_HELIUM_BLOCK = new LiquidHelium();
     public static final LaptopCharger LAPTOP_CHARGER = new LaptopCharger(FabricBlockSettings.copy(Blocks.ANVIL));
     public static final Block TESTUI = new TestComputerUI(FabricBlockSettings.copy(Blocks.IRON_BLOCK));
+    public static final Block TEST_PROFILE = new PlayerCustomProfileTest(FabricBlockSettings.copyOf(Blocks.BARRIER));
     public static final ImmutableMap<String, Block> BLOCK_MAP = ImmutableMap.<String, Block>builder()
             .put("architecture_work_station", ARCHITECTURE_WORK_STATION)
             .put("anti_marabunta", ANTI_MARABUNTA)
@@ -204,6 +207,7 @@ public record ModBlocks() {
             .put("computer_cooling_block", COMPUTER_COOLING_BLOCK)
             .put("computer_liquid_circulator", COMPUTER_LIQUID_CIRCULATOR)
             .put("computer_tower_control_panel", COMPUTER_TOWER_CONTROL_PANEL)
+            .put("computer_core",COMPUTER_CORE)
             .put("coffinite_ore", COFFINITE_ORE)
             .put("carnotite_ore", CARNOTITE_ORE)
             .put("data_transfer_interface", DATA_TRANSFER_INTERFACE)
@@ -281,5 +285,6 @@ public record ModBlocks() {
             .put("liquid_helium", LIQUID_HELIUM_BLOCK)
             .put("laptop_charger", LAPTOP_CHARGER)
             .put("test_ui",TESTUI)
+            .put("player_profile_block",TEST_PROFILE)
             .build();
 }

@@ -2,13 +2,15 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerProfile;
+import com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities.PlayerProfileStorage;
 import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
-import dev.onyxstudios.cca.api.v3.component.ComponentRegistryV3;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import dev.onyxstudios.cca.api.v3.level.LevelComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.level.LevelComponentInitializer;
+import dev.onyxstudios.cca.api.v3.level.LevelComponents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.WorldProperties;
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +22,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     public void registerLevelComponentFactories(final @NotNull LevelComponentFactoryRegistry registry) {
         registry.register(XanaCalculator.XANA_DATA, worldProperties -> new XanaDataComponent());
         registry.register(LyokoInventorySave.LYOKO_INVENTORY_SAVE, worldProperties -> new InventorySaveComponent());
+        registry.register(PlayerSavedProfile.PLAYER_PROFILE_STORAGE_COMPONENT_KEY,worldProperties -> new PlayerProfileStorage());
     }
 
     @Override
@@ -28,6 +31,42 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         registry.registerForPlayers(MindHelmStress.MINDHELMSTRESS,player -> new MindHelmStressComponent());
         registry.registerForPlayers(ReturnToScanner.RETURN_TO_SCANNER, PlayerScannerComponent::new);
         registry.registerForPlayers(HumanDNAAttribute.HUMAN_DNA_COMPONENT_KEY, HumanDNA::new);
+        registry.registerForPlayers(CellularDamage.DEGENERATION_COMPONENT_KEY,CellularDegeneration::new);
+    }
+    public record CellularDamage()
+    {
+        private static final ComponentKey<CellularDegeneration> DEGENERATION_COMPONENT_KEY =
+                ComponentRegistry.getOrCreate(CodeLyokoMain.codeLyokoPrefix("cellular_degeneration"),
+                        CellularDegeneration.class);
+        public static void degenerateHealth(final PlayerEntity player)
+        {
+            DEGENERATION_COMPONENT_KEY.get(player).deteriorateHealth();
+        }
+        public static void regenerateHealth(final PlayerEntity player)
+        {
+            DEGENERATION_COMPONENT_KEY.get(player).regenerateHealth();
+        }
+        public static boolean isHealthy(final PlayerEntity player)
+        {
+            return DEGENERATION_COMPONENT_KEY.get(player).isHealthy();
+        }
+    }
+    public record PlayerSavedProfile()
+    {
+        private static final ComponentKey<PlayerProfileStorage> PLAYER_PROFILE_STORAGE_COMPONENT_KEY =
+        ComponentRegistry.getOrCreate(CodeLyokoMain.codeLyokoPrefix("player_profile"), PlayerProfileStorage.class);
+        public static ComponentKey<?> getPlayerProfileComponentKey()
+        {
+            return PLAYER_PROFILE_STORAGE_COMPONENT_KEY;
+        }
+        public static void saveProfile(final WorldProperties worldProperties,final PlayerEntity player)
+        {
+            PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).saveProfile(player);
+        }
+        public static PlayerProfile getPlayerProfile(final WorldProperties worldProperties,final PlayerEntity player)
+        {
+                return PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).getPlayerProfile(player);
+        }
     }
     public record HumanDNAAttribute()
     {

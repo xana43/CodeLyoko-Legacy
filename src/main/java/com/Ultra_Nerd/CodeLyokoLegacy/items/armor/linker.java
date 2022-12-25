@@ -15,12 +15,12 @@ public final class linker extends ArmorItem implements SimpleEnergyItem {
 
     @Override
     public long getEnergyCapacity(final ItemStack stack) {
-        return 9000;
+        return 90000;
     }
 
     @Override
     public long getEnergyMaxInput(final ItemStack stack) {
-        return 0;
+        return 40;
     }
 
     @Override

@@ -1,7 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ComputerCoreUnit;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.SpawnItems.LyokoSpawnItem;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CustomLyokoRarity;
@@ -36,8 +37,14 @@ public record ModItems() {
     //public static final RegistryObject<ForgeSpawnEggItem> OVERBOARD_SPAWN_ITEM = ITEMS.register("overboard_spawn_item",() -> new ForgeSpawnEggItem(ModEntities.OVERBOARD,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     // public static final RegistryObject<ForgeSpawnEggItem> OVERBIKE_SPAWN_ITEM = ITEMS.register("overbike_spawn_item", () -> new ForgeSpawnEggItem(ModEntities.OVERBIKE,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     //public static final RegistryObject<ForgeSpawnEggItem> SKID_SPAWN_ITEM = ITEMS.register("skid_spawn_item", () -> new ForgeSpawnEggItem(ModEntities.SKID,1,1,new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    //public static final RegistryObject<Item> HOVERBOARD_SPAWN_ITEM = ITEMS.register("hoverboard_spawn_item", () -> new HoverBoardItem(new Item.Properties().setNoRepair().stacksTo(1).tab(CodeLyokoMain.LYOKO_ITEMS)));
+    //public static final Item HOVERBOARD_SPAWN_ITEM = ITEMS.register("hoverboard_spawn_item",
+    //      () -> new LyokoSpawnItem(new Item.Properties().setNoRepair().stacksTo(1).tab(CodeLyokoMain.LYOKO_ITEMS)));
+    public static final Item HOVERBOARD_SPAWN_ITEM = new LyokoSpawnItem(
+            BaseSettings().rarity(CustomLyokoRarity.FRANZ_NOVICE),ModEntities.HOVERBOARD);
+    public static final Item OVERBOARD_SPAWN_ITEM =
+            new LyokoSpawnItem(BaseSettings().rarity(CustomLyokoRarity.FRANZ_NOVICE),ModEntities.OVERBOARD);
     //public static final RegistryObject<Item> OVERBOARD_SPAWN_ITEM = ITEMS.register("overboard_spawn_item",() -> new OverBoardItem(new Item.Properties().setNoRepair().tab(CodeLyokoMain.LYOKO_ITEMS).stacksTo(1)));
+
     //for items
     public static final Item APU_PACKAGE_ARM = new ComputerItem(BaseSettings());
     //public static final RegistryObject<Item> APU_PACKAGE_ARM = ITEMS.register("apu_package_arm", () -> new ComputerItem(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
@@ -181,6 +188,9 @@ public record ModItems() {
     public static final ImmutableMap<String, Item> ITEM_MAP = ImmutableMap.<String, Item>builder()
 //testing Items
             .put("test_multiplayer_phone", TEST_MULTIPLAYER_PHONE)
+            // spawn Items
+            .put("hoverboard_spawn_item", HOVERBOARD_SPAWN_ITEM)
+            .put("overboard_spawn_item",OVERBOARD_SPAWN_ITEM)
 //Items
 
             .put("apu_package_arm", APU_PACKAGE_ARM)

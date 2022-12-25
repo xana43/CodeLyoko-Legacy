@@ -102,10 +102,10 @@ public final class Devirtualized extends Screen {
         drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2 / 2, 30, 16777215);
         matrices.pop();
         if (this.message != null) {
-            drawCenteredText(matrices, this.textRenderer, this.message, this.width / 2, 85, 16777215);
+            drawCenteredText(matrices, this.textRenderer, this.message, this.width >> 1, 85, 16777215);
         }
 
-        drawCenteredText(matrices, this.textRenderer, this.scoreText, this.width / 2, 100, 16777215);
+        drawCenteredText(matrices, this.textRenderer, this.scoreText, this.width >> 1, 100, 16777215);
         if (this.message != null && mouseY > 85) {
             Objects.requireNonNull(this.textRenderer);
             if (mouseY < 85 + 9) {

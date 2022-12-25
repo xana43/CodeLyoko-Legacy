@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "cm:hoverboard_spawn_item",
+    "cm:overboard_spawn_item"
+  ]
+}

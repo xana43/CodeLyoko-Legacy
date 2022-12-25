@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
@@ -19,5 +20,11 @@ public record ModTags() {
         public static final TagKey<Biome> LYOKO_BIOME = TagKey.of(RegistryKeys.BIOME,
                 CodeLyokoMain.codeLyokoPrefix("is_lyoko"));
     }
+
+    public record ItemTags()
+    {
+        public static final TagKey<Item> LYOKO_ITEM = TagKey.of(RegistryKeys.ITEM,
+                CodeLyokoMain.codeLyokoPrefix("lyoko_item"));
+     }
 
 }

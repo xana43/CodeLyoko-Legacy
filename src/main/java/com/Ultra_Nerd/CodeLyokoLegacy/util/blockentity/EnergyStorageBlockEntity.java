@@ -5,38 +5,52 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
-import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
-import java.util.Optional;
-
-public abstract class EnergyStorageBlockEntity extends SidedTickingBlockEntity {
-    private static final String energyKey = "general_energy_storage";
-    protected final SimpleEnergyStorage energyStorage;
-
+public abstract class EnergyStorageBlockEntity extends TickingBlockEntity {
+    protected static final String ENERGY_AMOUNT_KEY = "nbt_energyAmount";
+    private SimpleEnergyStorage energyStorage = new SimpleEnergyStorage(0, 0, 0);
 
     public EnergyStorageBlockEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state,
-            final int inventorySize, final long capacity, @Nullable Long maxInsert, @Nullable Long maxExtract) {
-        super(type, pos, state, inventorySize);
-        maxExtract = Optional.ofNullable(maxExtract).orElse(0L);
-        maxInsert = Optional.ofNullable(maxInsert).orElse(0L);
-        energyStorage = new SimpleEnergyStorage(capacity, maxInsert, maxExtract);
+            @Nullable SimpleEnergyStorage storage) {
+        super(type, pos, state);
+        if (storage != null) {
+            energyStorage = storage;
+        }
+
     }
 
-    public EnergyStorage getEnergyStorage() {
+    public SimpleEnergyStorage getEnergyStorage() {
         return energyStorage;
     }
 
-    @Override
-    public void readNbt(final NbtCompound nbt) {
+    public long getCapacity() {
+        return energyStorage.capacity;
+    }
 
-        super.readNbt(nbt);
-        energyStorage.amount = nbt.getLong(energyKey);
+    public long getStoredEnergy() {
+        return energyStorage.amount;
+    }
+
+    public void setEnergyAmount(final long newAmount) {
+        energyStorage.amount = newAmount;
+        markDirty();
+    }
+
+    public void incrementEnergyAmount(final long increment) {
+        energyStorage.amount += increment;
+        markDirty();
     }
 
     @Override
     protected void writeNbt(final NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putLong(energyKey, energyStorage.amount);
+        nbt.putLong(ENERGY_AMOUNT_KEY, energyStorage.amount);
+    }
+
+    @Override
+    public void readNbt(final NbtCompound nbt) {
+        super.readNbt(nbt);
+        energyStorage.amount = nbt.getLong(ENERGY_AMOUNT_KEY);
     }
 }

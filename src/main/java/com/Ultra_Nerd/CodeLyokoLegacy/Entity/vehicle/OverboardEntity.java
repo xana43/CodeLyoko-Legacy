@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.world.World;
 
 public final class OverboardEntity extends LyokoVehicleEntity {
@@ -11,14 +12,13 @@ public final class OverboardEntity extends LyokoVehicleEntity {
         super(p_38290_, p_38291_);
 
         this.setPaddleMovings(false, false);
-
+        setNoGravity(true);
 
     }
 
-
     @Override
-    public void setNoGravity(final boolean noGravity) {
-        super.setNoGravity(true);
+    public boolean handleFallDamage(final float fallDistance, final float damageMultiplier, final DamageSource damageSource) {
+        return false;
     }
 
     @Override
