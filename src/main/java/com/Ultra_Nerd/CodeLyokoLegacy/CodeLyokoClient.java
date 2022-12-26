@@ -4,16 +4,14 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.LaserRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHoverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelOverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerClient;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.linker;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoRingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ComputerControlPanelUI;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ReactorGUI;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.TowerGUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.LaptopChargerRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
@@ -33,6 +31,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DeathScreen;
@@ -44,6 +43,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
@@ -213,7 +213,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE,
                 ComputerControlPanelUI::new);
         HandledScreens.register(ModScreenHandlers.COMPUTER_REACTOR_SCREEN_HANDLER, ReactorGUI::new);
-
+        HandledScreens.register(ModScreenHandlers.COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE, ComputerInterfaceUi::new);
         //client events
 
         registerItemPredicates();
@@ -237,7 +237,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
 
                 });
-
+        PacketHandlerClient.clientPacketRegistry();
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.carthage, new CustomCarthadgeSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.iceSectorWorld, new CustomIceSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld, new CustomVolcanoSky());
@@ -260,13 +260,15 @@ public record CodeLyokoClient() implements ClientModInitializer {
                     }
                 }
                 if (MethodUtil.DimensionCheck.playerInVanilla(client.player) && client.player.getEquippedStack(
-                        EquipmentSlot.HEAD).isOf(ModItems.LINKER)) {
-                    final ItemStack headStack = client.player.getEquippedStack(EquipmentSlot.HEAD);
+                        EquipmentSlot.CHEST).isOf(ModItems.LINKER)) {
+                    final ItemStack headStack = client.player.getEquippedStack(EquipmentSlot.CHEST);
                     final linker linker = (linker) headStack.getItem();
                     final long storedEnergy = linker.getStoredEnergy(headStack);
-                    if (classCreenBinding.isPressed() && storedEnergy > 0) {
+                    if (classCreenBinding.isPressed() && (storedEnergy > 0 || client.player.isCreative())) {
                         client.setScreen(new ClassScreen());
                     }
+                } else if (classCreenBinding.isPressed()) {
+                    client.player.sendMessage(Text.translatable("lyoko.link.unavailable"));
                 }
             }
         });

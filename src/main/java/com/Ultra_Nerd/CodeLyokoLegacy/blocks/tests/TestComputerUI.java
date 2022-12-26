@@ -1,30 +1,48 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ComputerInterfaceUi;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
-import net.minecraft.block.Block;
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.Text;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-public final class TestComputerUI extends Block {
+public final class TestComputerUI extends BlockWithEntity {
     public TestComputerUI(final Settings settings) {
         super(settings);
     }
 
     @Override
+    public BlockRenderType getRenderType(final BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Override
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
-        if(world.isClient())
+        if(!world.isClient())
         {
-            MinecraftClient.getInstance().setScreen(new ComputerInterfaceUi(Text.of("test screen"),pos));
+            final NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+
+            if(screenHandlerFactory != null)
+            {
+                CodeLyokoMain.LOG.info("world should be server, and the screen handler factory shouldn't be null");
+                player.openHandledScreen(screenHandlerFactory);
+            }
         }
-        CardinalData.HumanDNAAttribute.setHasDna(player,false);
-        return super.onUse(state, world, pos, player, hand, hit);
+        return ActionResult.SUCCESS;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return ModTileEntities.COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE.instantiate(pos, state);
     }
 }

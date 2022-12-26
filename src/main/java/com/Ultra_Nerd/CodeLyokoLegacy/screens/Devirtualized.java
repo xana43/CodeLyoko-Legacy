@@ -45,13 +45,13 @@ public final class Devirtualized extends Screen {
     protected void init() {
         this.ticksSinceDeath = 0;
         this.buttons.clear();
-        Text text = this.isHardcore ? Text.translatable("deathScreen.spectate") : Text.translatable("lyoko" +
+        final Text text = this.isHardcore ? Text.translatable("deathScreen.spectate") : Text.translatable("lyoko" +
                 ".deathScreen.respawn");
         this.buttons.add(this.addDrawableChild(ButtonWidget.builder(text, (button) -> {
             this.client.player.requestRespawn();
             this.client.setScreen(null);
         }).dimensions(this.width / 2 - 100, this.height / 4 + 72, 200, 20).build()));
-        this.titleScreenButton = (ButtonWidget)this.addDrawableChild(ButtonWidget.builder(Text.translatable("deathScreen.titleScreen"), (button) -> {
+        this.titleScreenButton = this.addDrawableChild(ButtonWidget.builder(Text.translatable("deathScreen.titleScreen"), (button) -> {
             this.client.getAbuseReportContext().tryShowDraftScreen(this.client, this, this::onTitleScreenButtonClicked, true);
         }).dimensions(this.width / 2 - 100, this.height / 4 + 96, 200, 20).build());
         this.buttons.add(this.titleScreenButton);
@@ -139,7 +139,7 @@ public final class Devirtualized extends Screen {
         if (this.message != null && mouseY > 85.0) {
             Objects.requireNonNull(this.textRenderer);
             if (mouseY < (double)(85 + 9)) {
-                Style style = this.getTextComponentUnderMouse((int)mouseX);
+                final Style style = this.getTextComponentUnderMouse((int)mouseX);
                 if (style != null && style.getClickEvent() != null && style.getClickEvent().getAction() == ClickEvent.Action.OPEN_URL) {
                     this.handleTextClick(style);
                     return false;

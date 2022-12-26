@@ -1,15 +1,19 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.boss.BossBar;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -32,20 +36,7 @@ public final class ClassScreen extends Screen {
         super(Text.empty());
     }
 
-    private static void save(MinecraftClient client) {
 
-
-        if (client.player != null) {
-            if (client.player.getServer() != null && !Objects.requireNonNull(client.getServer()).isSingleplayer()) {
-                client.player.getServer().save(false, false, false);
-                //CodeLyokoMain.LOG.info("Saving Server");
-            } else if (client.getServer() != null && client.getServer().isSingleplayer()) {
-                client.getServer().save(false, false, false);
-                //CodeLyokoMain.LOG.info("saving client");
-            }
-        }
-
-    }
 
     private void drawClassIndicator(Text classname, MatrixStack pPoseStack) {
         drawCenteredText(pPoseStack, textRenderer,
@@ -165,8 +156,9 @@ public final class ClassScreen extends Screen {
             assert this.client != null;
             assert this.client.player != null;
             this.client.player.playSound(ModSounds.GUISOUND, 1, 6);
-            CardinalData.LyokoClass.setLyokoclass(this.client.player, 0);
-            save(this.client);
+            final PacketByteBuf buf = PacketByteBufs.create();
+            buf.writeInt(0);
+            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID,buf);
 
 
         }, Text.of("feline").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(colors)).get(0));
@@ -177,11 +169,11 @@ public final class ClassScreen extends Screen {
         samurai = new TexturedButtonWidget((int) (this.width / 3f), this.height >> 1, 30, 30, 128, 0, 31, textures,
                 128, 128, (input) -> {
 
-            //CapabilityPlayerClassSync.Sync(PlayerClassType.Samurai);
 
-            CardinalData.LyokoClass.setLyokoclass(this.client.player, 1);
             this.client.player.playSound(ModSounds.GUISOUND, 1, 6);
-            save(this.client);
+            final PacketByteBuf buf = PacketByteBufs.create();
+            buf.writeInt(1);
+            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID,buf);
             //ClassID =1;
             // classIndicatorString.replace(15,ClientCapabilitySync.getPlayerClassType().getClassName().length() + 17,ClientCapabilitySync.getPlayerClassType().getClassName());
         }, Text.of("samurai").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(2007)).get(0));
@@ -192,9 +184,10 @@ public final class ClassScreen extends Screen {
         ninja = new TexturedButtonWidget(this.width >> 1, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
-            CardinalData.LyokoClass.setLyokoclass(this.client.player, 2);
             this.client.player.playSound(ModSounds.GUISOUND, 1, 6);
-            save(this.client);
+            final PacketByteBuf buf = PacketByteBufs.create();
+            buf.writeInt(2);
+            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID,buf);
             //ClassID = 2;
         }, Text.of("ninja").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(5125)).get(0));
 
@@ -202,8 +195,13 @@ public final class ClassScreen extends Screen {
 
     private void setGuardian() {
         guardian = new TexturedButtonWidget((this.width >> 1) + 80, this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> CardinalData.LyokoClass.setLyokoclass(this.client.player,3), Text.of("guardian").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
-        save(this.client);
+                256, 256, (input) -> {
+            final PacketByteBuf buf = PacketByteBufs.create();
+            buf.writeInt(3);
+            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID,buf);
+            },
+                Text.of("guardian").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
+
 
     }
 
@@ -211,7 +209,7 @@ public final class ClassScreen extends Screen {
         warrior = new TexturedButtonWidget((this.width >> 1) + 150, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> CardinalData.LyokoClass.setLyokoclass(this.client.player,4),
                 Text.of("warrior").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
-        save(this.client);
+
     }
 
 

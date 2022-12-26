@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.ComputerInterfaceTestTE;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
@@ -40,6 +41,10 @@ public record ModTileEntities() {
             FabricBlockEntityTypeBuilder.create(CableTileEntity::new, ModBlocks.CABLE_BLOCK).build();
     public static final BlockEntityType<ComputerCoreTileEntity> COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(ComputerCoreTileEntity::new,ModBlocks.COMPUTER_CORE).build();
+    public static final BlockEntityType<KeyBoardInterface> KEYBOARD_BLOCK_ENTITY =
+            FabricBlockEntityTypeBuilder.create(KeyBoardInterface::new,ModBlocks.COMPUTER_KEYBOARD).build();
+    public static final BlockEntityType<ComputerInterfaceTestTE> COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE =
+            FabricBlockEntityTypeBuilder.create(ComputerInterfaceTestTE::new,ModBlocks.TESTUI).build();
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String, BlockEntityType<?>>builder()
 
             .put("lyoko_core", LYOKO_CORE).put("tower_interface_tile_entity", TOWER_INTERFACE_TILE_ENTITY)
@@ -50,7 +55,9 @@ public record ModTileEntities() {
             .put("laptop_charger_blockentity", LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY)
             .put("router_blockentity",ROUTER_BLOCK_ENTITY_TYPE)
             .put("cable_blockentity",CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE)
-            .put("computer_core_blockentity",COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE).build();
+            .put("computer_core_blockentity",COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE)
+            .put("keyboard_blockentity",KEYBOARD_BLOCK_ENTITY)
+            .put("test_ui",COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE).build();
 
 
     //
@@ -82,8 +89,8 @@ public record ModTileEntities() {
     public static final RegistryObject<BlockEntityType<RouterTE>> ROUTER_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("router_tile_entity", () -> BlockEntityType.Builder.of(RouterTE::new,
                     ModBlocks.ROUTER.get()).build(null));
-    public static final RegistryObject<BlockEntityType<ComputerInterfaceTE>> COMPUTER_INTERFACE_TILE_ENTITY =
-            TILE_ENTITY_TYPES.register("computer_interface_tile_entity", () -> BlockEntityType.Builder.of(ComputerInterfaceTE::new,
+    public static final RegistryObject<BlockEntityType<ComputerInterfaceTestTE>> COMPUTER_INTERFACE_TILE_ENTITY =
+            TILE_ENTITY_TYPES.register("computer_interface_tile_entity", () -> BlockEntityType.Builder.of(ComputerInterfaceTestTE::new,
                     ModBlocks.COMPUTER_KEYBOARD.get()).build(null));
     public static final RegistryObject<BlockEntityType<TestTE>> TEST_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("test_tile_entity", () -> BlockEntityType.Builder.of(TestTE::new,

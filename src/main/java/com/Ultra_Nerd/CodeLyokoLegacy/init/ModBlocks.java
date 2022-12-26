@@ -28,9 +28,9 @@ public record ModBlocks() {
     public static final Block BLACK_VOID = new BlackVoid();
     public static final Block BORNITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.IRON_ORE));
     public static final Block CABLE_BLOCK = new CableBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
-    public static final Block COMPUTER_SCREEN_CONNECTOR = new SuperComputerSideScreenConnector(
+    public static final Block COMPUTER_SCREEN_CONNECTOR = new FenceBlock(
             FabricBlockSettings.copyOf(
-                    Blocks.IRON_BARS));//BLOCKS.register("computer_screen_connector", () -> new SuperComputerSideScreenConnector(BlockBehaviour.Properties.copyOf(Blocks.IRON_BARS)));
+                    Blocks.IRON_BARS));
     public static final Block CHALCOPYRITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(
             Blocks.IRON_ORE));//BLOCKS.register("chalcopyrite_ore", () -> new Block(Block.Properties.copyOf(Blocks.IRON_ORE)));
     public static final Block COVELLITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.IRON_ORE));
@@ -51,6 +51,7 @@ public record ModBlocks() {
     public static final Block COMPUTER_COOLING_BLOCK = new CoolingBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
     public static final Block COMPUTER_LIQUID_CIRCULATOR = new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
     public static final Block COMPUTER_TOWER_CONTROL_PANEL = new ControlPanel();
+
     public static final Block COFFINITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.IRON_ORE));
     public static final Block CARNOTITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.DIAMOND_ORE));
     public static final Block DATA_TRANSFER_INTERFACE = new DataTransferInterface();

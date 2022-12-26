@@ -1,21 +1,30 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.KeyBoardInterface;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
-public final class ComputerKeyboard extends HorizontalFacingBlock {
+public final class ComputerKeyboard extends HorizontalFacingBlock implements BlockEntityProvider{
+    public static final BooleanProperty IS_SCREEN_FORMED = BooleanProperty.of("is_screen_fromed");
     private static final VoxelShape SHAPE_N = Stream.of(
             Block.createCuboidShape(-0.3055970149253753, 5.24120673250286, 2.787371867921733, 15.694402985074625,
                     6.91620673250286, 11.787371867921731),
@@ -570,14 +579,34 @@ public final class ComputerKeyboard extends HorizontalFacingBlock {
 
         );
 
-        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH));
+        this.setDefaultState(this.getDefaultState().with(IS_SCREEN_FORMED,false));
 
 
     }
 
     @Override
+    public BlockRenderType getRenderType(final BlockState state) {
+        if(state.get(IS_SCREEN_FORMED))
+        {
+            return BlockRenderType.INVISIBLE;
+        }
+        return BlockRenderType.MODEL;
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
+        return (world1, pos, state1, blockEntity) -> {
+            if(blockEntity instanceof KeyBoardInterface keyBoardInterface)
+            {
+                keyBoardInterface.tick();
+            }
+        };
+    }
+
+    @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(FACING));
+        super.appendProperties(builder.add(FACING).add(IS_SCREEN_FORMED));
     }
 
     @Override
@@ -606,5 +635,15 @@ public final class ComputerKeyboard extends HorizontalFacingBlock {
         return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
     }
 
-
+    @Nullable
+    @Override
+    public NamedScreenHandlerFactory createScreenHandlerFactory(final BlockState state, final World world, final BlockPos pos) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        return blockEntity instanceof NamedScreenHandlerFactory ? (NamedScreenHandlerFactory)blockEntity : null;
+    }
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return ModTileEntities.KEYBOARD_BLOCK_ENTITY.instantiate(pos, state);
+    }
 }

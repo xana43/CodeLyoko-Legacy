@@ -20,7 +20,7 @@ public class LyokoButton extends ButtonWidget {
     }
     public LyokoButton(final int x, final int y, final int width, final int height, final Text message,
             final PressAction onPress, final SoundEvent downSound) {
-        super(x, y, width, height, message, onPress, textSupplier -> null);
+        super(x, y, width, height, message, onPress, DEFAULT_NARRATION_SUPPLIER);
         this.downSound = downSound;
     }
     public LyokoButton(final int x, final int y, final int width, final int height, final Text message,
@@ -30,7 +30,7 @@ public class LyokoButton extends ButtonWidget {
     }
     public LyokoButton(final int x, final int y, final int width, final int height, final Text message,
             final PressAction onPress) {
-        super(x, y, width, height, message, onPress, textSupplier -> null);
+        super(x, y, width, height, message, onPress, DEFAULT_NARRATION_SUPPLIER);
         this.downSound = SoundEvents.UI_BUTTON_CLICK.value();
     }
     public LyokoButton(final Screen currentScreen,final int width,final int height,final Text message,
@@ -50,8 +50,10 @@ public class LyokoButton extends ButtonWidget {
     public LyokoButton(final Screen currentScreen,final int width,final int height,final Text message,
             final PressAction onPress)
     {
+
         super((currentScreen.width >> 1) - (width >> 1),(currentScreen.height >> 1) - (height >> 1),width,height,
-                message,onPress,textSupplier -> null);
+                message,onPress,DEFAULT_NARRATION_SUPPLIER);
+
         this.downSound = SoundEvents.UI_BUTTON_CLICK.value();
     }
 

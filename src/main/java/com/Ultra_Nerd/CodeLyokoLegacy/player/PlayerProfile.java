@@ -1,9 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import dev.onyxstudios.cca.api.v3.util.NbtSerializable;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LightningEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.ServerMetadata;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Arm;
 
 public final class PlayerProfile implements NbtSerializable {
     private final PlayerEntity player;
@@ -12,7 +20,17 @@ public final class PlayerProfile implements NbtSerializable {
     private int timesEntered = 0;
     public PlayerProfile(final PlayerEntity player)
     {
-        this.player = player;
+        FakePlayer fakePlayer = null;
+        if(!player.world.isClient()) {
+             fakePlayer = FakePlayer.getOrCreate((ServerWorld) player.world);
+            this.player = fakePlayer;
+        }
+        else
+        {
+            this.player = player;
+        }
+
+
 
     }
 
@@ -23,6 +41,7 @@ public final class PlayerProfile implements NbtSerializable {
 
     public void refreshPlayerClass()
     {
+        CodeLyokoMain.LOG.info("refreshing player class");
       playerClassType = CardinalData.LyokoClass.getLyokoClass(player);
 
     }
@@ -47,6 +66,7 @@ public final class PlayerProfile implements NbtSerializable {
     @Override
     public void fromTag(final NbtCompound tag) {
         if(player != null) {
+            //this.player.readNbt(tag);
             this.DNA = tag.getString(player.getUuidAsString() + "-dna");
             this.playerClassType = tag.getInt(player.getUuidAsString() + "-class");
             this.timesEntered = tag.getInt(player.getUuidAsString() + "-entered");
@@ -59,7 +79,7 @@ public final class PlayerProfile implements NbtSerializable {
             tag.putString(player.getUuidAsString() + "-dna", DNA);
             tag.putInt(player.getUuidAsString() + "-class", playerClassType);
             tag.putInt(player.getUuidAsString() + "-entered", timesEntered);
-            player.writeNbt(tag);
+            //player.writeNbt(tag);
         }
         return tag;
     }

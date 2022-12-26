@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
 public final class ComputerInterfaceTE extends BlockEntity implements MasterEntity {
-    //public ComputerInterfaceTE(BlockEntityType<?> tileEntityTypeIn) {
+    //public ComputerInterfaceTestTE(BlockEntityType<?> tileEntityTypeIn) {
     //  super(tileEntityTypeIn);
     //}
 
@@ -17,7 +17,7 @@ public final class ComputerInterfaceTE extends BlockEntity implements MasterEnti
         super(p_155228_, p_155229_, p_155230_);
     }
     /*
-    public ComputerInterfaceTE() {
+    public ComputerInterfaceTestTE() {
         this(ModTileEntities.COMPUTER_INTERFACE_TILE_ENTITY.get());
     }
 

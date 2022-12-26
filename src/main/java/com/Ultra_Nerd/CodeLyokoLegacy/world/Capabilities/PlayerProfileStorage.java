@@ -16,9 +16,8 @@ public final class PlayerProfileStorage implements AutoSyncedComponent{
 
             final PlayerProfile playerProfile = new PlayerProfile(player);
             playerProfile.loadDNA();
+            playerProfile.refreshPlayerClass();
             this.playerProfile = playerProfile;
-       // LevelComponents.sync(CardinalData.PlayerSavedProfile.getPlayerProfileComponentKey(),
-         //       player.getServer());
 
     }
     public PlayerProfile getPlayerProfile(final PlayerEntity player)

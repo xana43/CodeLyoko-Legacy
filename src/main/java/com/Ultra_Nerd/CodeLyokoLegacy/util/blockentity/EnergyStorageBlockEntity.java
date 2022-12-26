@@ -9,7 +9,7 @@ import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 public abstract class EnergyStorageBlockEntity extends TickingBlockEntity {
     protected static final String ENERGY_AMOUNT_KEY = "nbt_energyAmount";
-    private SimpleEnergyStorage energyStorage = new SimpleEnergyStorage(0, 0, 0);
+    protected SimpleEnergyStorage energyStorage = new SimpleEnergyStorage(0, 0, 0);
 
     public EnergyStorageBlockEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state,
             @Nullable SimpleEnergyStorage storage) {

@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -27,16 +28,18 @@ public class MultiBlockController extends BlockEntity implements MasterEntity {
     @Override
     public void check() {
         if (world != null) {
+
             if (currentPattern.searchAround(world, pos) != null) {
-                for (int x = 0; x < currentPattern.getDepth(); ++x) {
+                for (int x = 0; x < currentPattern.getWidth(); ++x) {
                     for (int y = 0; y < currentPattern.getHeight(); ++y) {
-                        for (int z = 0; z < currentPattern.getWidth(); ++z) {
+                        for (int z = 0; z < currentPattern.getDepth(); ++z) {
                             final BlockPos posOffset = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
                             final BlockState checkedState = world.getBlockState(posOffset);
                             if (checkedState.contains(thisProperty)) {
                                 world.setBlockState(posOffset, checkedState.with(thisProperty, true));
-                                checkSuccessful = true;
+
                             }
+                            checkSuccessful = true;
                         }
                     }
                 }
@@ -51,19 +54,20 @@ public class MultiBlockController extends BlockEntity implements MasterEntity {
     @Override
     public void invalidateEntity() {
         if (world != null) {
-            if (currentPattern.searchAround(world, pos) != null) {
-                for (int x = -currentPattern.getDepth(); x < currentPattern.getDepth(); ++x) {
-                    for (int y = -currentPattern.getWidth(); y < currentPattern.getHeight(); ++y) {
-                        for (int z = -currentPattern.getHeight(); z < currentPattern.getWidth(); ++z) {
+            //if (currentPattern.searchAround(world, pos) != null) {
+                for (int x = -currentPattern.getWidth(); x < currentPattern.getWidth(); ++x) {
+                    for (int y = -currentPattern.getHeight(); y < currentPattern.getHeight(); ++y) {
+                        for (int z = -currentPattern.getDepth(); z < currentPattern.getDepth(); ++z) {
                             final BlockPos posOffset = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
                             final BlockState checkedState = world.getBlockState(posOffset);
                             if (checkedState.contains(thisProperty)) {
                                 world.setBlockState(posOffset, checkedState.with(thisProperty, false));
-                                checkSuccessful = false;
+
                             }
+                            checkSuccessful = false;
                         }
                     }
-                }
+                //}
 
             }
         }

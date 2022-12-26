@@ -10,20 +10,20 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.PlaceBlockEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
-import dev.onyxstudios.cca.api.v3.level.LevelComponents;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.*;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.message.v1.ServerMessageEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.EquipmentSlot;
@@ -39,6 +39,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
@@ -46,6 +47,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkSectionPos;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.world.gen.GenerationStep;
 import org.jetbrains.annotations.Contract;
@@ -93,9 +95,13 @@ public record CodeLyokoMain() implements ModInitializer {
                 for (int y = -32; y < 32; ++y) {
                     for (int z = -32; z < 32; ++z) {
                         final BlockPos checkedPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-                        if (world.getBlockEntity(checkedPos) instanceof MultiBlockController multiBlockController) {
+                        if (world.getBlockEntity(
+                                checkedPos) instanceof MultiBlockController multiBlockController && world.isChunkLoaded(
+                                ChunkSectionPos.getSectionCoord(checkedPos.getX()),
+                                ChunkSectionPos.getSectionCoord(checkedPos.getZ()))) {
                             if (!multiBlockController.getCheckSuccessful()) {
                                 multiBlockController.check();
+
                             }
                         }
                     }
@@ -113,7 +119,10 @@ public record CodeLyokoMain() implements ModInitializer {
                     for (int z = -32; z < 32; ++z) {
                         final BlockPos checkedPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
 
-                        if (world.getBlockEntity(checkedPos) instanceof MultiBlockController multiBlockController) {
+                        if (world.getBlockEntity(
+                                checkedPos) instanceof MultiBlockController multiBlockController && world.isChunkLoaded(
+                                ChunkSectionPos.getSectionCoord(checkedPos.getX()),
+                                ChunkSectionPos.getSectionCoord(checkedPos.getZ()))) {
 
                             if (multiBlockController.getCheckSuccessful()) {
                                 multiBlockController.check();
@@ -131,13 +140,10 @@ public record CodeLyokoMain() implements ModInitializer {
         ModBlocks.BLOCK_MAP.forEach((s, block) -> {
 
             Registry.register(Registries.BLOCK, new Identifier(MOD_ID, s), block);
-            //LOG.info(String.valueOf(blocks));
             if (block != ModBlocks.LYOKO_CORE && block != ModBlocks.DIGITAL_OCEAN_BLOCK && block != ModBlocks.DIGITAL_LAVA_BLOCK) {
                 final BlockItem blockItem = new BlockItem(block, new FabricItemSettings());
                 Registry.register(Registries.ITEM, new Identifier(MOD_ID, s), blockItem);
-                ItemGroupEvents.modifyEntriesEvent(LYOKO_BLOCKS).register(entries -> {
-                    entries.add(blockItem);
-                });
+                ItemGroupEvents.modifyEntriesEvent(LYOKO_BLOCKS).register(entries -> entries.add(blockItem));
             }
         });
         ModItems.ITEM_MAP.forEach((s, item) -> {
@@ -178,17 +184,10 @@ public record CodeLyokoMain() implements ModInitializer {
         ModScreenHandlers.screenHandlerMap.forEach(
                 (s, screenHandlerType) -> Registry.register(Registries.SCREEN_HANDLER, codeLyokoPrefix(s),
                         screenHandlerType));
-
+        CodeLyokoMain.LOG.info(String.valueOf(RegistryEntry.of(ModScreenHandlers.COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE)));
         ModStructures.registerNewStructures();
 
-        ModFeature.CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s, feature) -> {
 
-            //Registry.register(, codeLyokoPrefix(s), feature.getLeft());
-
-            //Registry.register(BuiltinRegistries.PLACED_FEATURE, codeLyokoPrefix(s), feature.getRight());
-
-
-        });
         ModStats.registerStats();
 
 
