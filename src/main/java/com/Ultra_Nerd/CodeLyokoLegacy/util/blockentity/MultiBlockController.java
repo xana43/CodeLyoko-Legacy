@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -39,6 +40,7 @@ public class MultiBlockController extends BlockEntity implements MasterEntity {
 
                             }
                             checkSuccessful = true;
+                            CodeLyokoMain.LOG.info("check succeeded at {}",pos);
                         }
                     }
                 }

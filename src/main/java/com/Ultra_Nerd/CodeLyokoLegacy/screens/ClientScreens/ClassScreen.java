@@ -8,18 +8,14 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.boss.BossBar;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 
 public final class ClassScreen extends Screen {
@@ -37,8 +33,7 @@ public final class ClassScreen extends Screen {
     }
 
 
-
-    private void drawClassIndicator(Text classname, MatrixStack pPoseStack) {
+    private void drawClassIndicator(final Text classname, final MatrixStack pPoseStack) {
         drawCenteredText(pPoseStack, textRenderer,
                 classname.getWithStyle(ConstantUtil.Styles.HUD.getThisStyle()).get(0), this.width >> 2,
                 this.height >> 2, IndicatorColor);
@@ -60,7 +55,8 @@ public final class ClassScreen extends Screen {
                 samurai.getY(), 2007);
         //ninja option
         ninja.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack, textRenderer, ninja.getMessage(), ninja.getX() + (ninja.getWidth() >> 1), ninja.getY(),
+        drawCenteredText(pPoseStack, textRenderer, ninja.getMessage(), ninja.getX() + (ninja.getWidth() >> 1),
+                ninja.getY(),
                 5125);
         //guardian option
         guardian.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
@@ -77,8 +73,9 @@ public final class ClassScreen extends Screen {
                 case 1 -> drawClassIndicator(Text.translatable("lyoko.class.samurai"), pPoseStack);
                 case 2 -> drawClassIndicator(Text.translatable("lyoko.class.ninja"), pPoseStack);
                 case 3 -> drawClassIndicator(Text.translatable("lyoko.class.guardian"), pPoseStack);
-                case 4 -> drawClassIndicator(Text.translatable("lyoko.class.warrior"),pPoseStack);
-                default -> {}
+                case 4 -> drawClassIndicator(Text.translatable("lyoko.class.warrior"), pPoseStack);
+                default -> {
+                }
             }
         } else {
             drawCenteredText(pPoseStack, textRenderer,
@@ -124,10 +121,10 @@ public final class ClassScreen extends Screen {
             case 1 -> IndicatorColor = 2007;
             case 2 -> IndicatorColor = 5125;
             case 3 -> IndicatorColor = 0x1d5e18;
-            case 4 -> IndicatorColor = ColorHelper.Argb.getArgb(255,10,10,10);
-            default -> {}
+            case 4 -> IndicatorColor = ColorHelper.Argb.getArgb(255, 10, 10, 10);
+            default -> {
+            }
         }
-
 
 
     }
@@ -158,7 +155,7 @@ public final class ClassScreen extends Screen {
             this.client.player.playSound(ModSounds.GUISOUND, 1, 6);
             final PacketByteBuf buf = PacketByteBufs.create();
             buf.writeInt(0);
-            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID,buf);
+            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID, buf);
 
 
         }, Text.of("feline").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(colors)).get(0));
@@ -173,7 +170,7 @@ public final class ClassScreen extends Screen {
             this.client.player.playSound(ModSounds.GUISOUND, 1, 6);
             final PacketByteBuf buf = PacketByteBufs.create();
             buf.writeInt(1);
-            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID,buf);
+            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID, buf);
             //ClassID =1;
             // classIndicatorString.replace(15,ClientCapabilitySync.getPlayerClassType().getClassName().length() + 17,ClientCapabilitySync.getPlayerClassType().getClassName());
         }, Text.of("samurai").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(2007)).get(0));
@@ -187,7 +184,7 @@ public final class ClassScreen extends Screen {
             this.client.player.playSound(ModSounds.GUISOUND, 1, 6);
             final PacketByteBuf buf = PacketByteBufs.create();
             buf.writeInt(2);
-            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID,buf);
+            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID, buf);
             //ClassID = 2;
         }, Text.of("ninja").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(5125)).get(0));
 
@@ -198,8 +195,8 @@ public final class ClassScreen extends Screen {
                 256, 256, (input) -> {
             final PacketByteBuf buf = PacketByteBufs.create();
             buf.writeInt(3);
-            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID,buf);
-            },
+            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID, buf);
+        },
                 Text.of("guardian").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
 
 
@@ -207,7 +204,7 @@ public final class ClassScreen extends Screen {
 
     private void setWarrior() {
         warrior = new TexturedButtonWidget((this.width >> 1) + 150, this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> CardinalData.LyokoClass.setLyokoclass(this.client.player,4),
+                256, 256, (input) -> CardinalData.LyokoClass.setLyokoclass(this.client.player, 4),
                 Text.of("warrior").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
 
     }
@@ -219,26 +216,6 @@ public final class ClassScreen extends Screen {
         RenderSystem.setShaderTexture(0, textures);
         drawTexture(pPoseStack, x, 0, 0, 0, xSize, ySize);
     }
-
-
-
-
-
-/*
-
-    @Override
-    public void saveClass(final NbtCompound nbt, final CallbackInfo ci) {
-        final NbtCompound playerCompount = new NbtCompound();
-        playerCompount.putInt("player_class",ClassID);
-        nbt.put(CodeLyokoMain.MOD_ID, playerCompount);
-    }
-
-    @Override
-    public void readeClass(final NbtCompound nbt, final CallbackInfo ci) {
-
-    }
-
- */
 
 
 }

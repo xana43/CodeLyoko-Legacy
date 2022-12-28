@@ -98,29 +98,10 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
         if (world.getBlockEntity(pos) instanceof RouterTE routerTE) {
 
             switch (state.get(FACING)) {
-                case NORTH -> {
-
-                        routerTE.connectToRouter(pos.offset(Direction.NORTH, 1));
-
-                }
-
-                case SOUTH -> {
-
-
-                        routerTE.connectToRouter(pos.offset(Direction.SOUTH, 1));
-
-                }
-                case EAST -> {
-
-
-                        routerTE.connectToRouter(pos.offset(Direction.EAST, 1));
-
-                }
-
-                case WEST -> {
-                    routerTE.connectToRouter(pos.offset(Direction.WEST, 1));
-
-                }
+                case NORTH -> routerTE.connectToRouter(pos.offset(Direction.NORTH, 1));
+                case SOUTH -> routerTE.connectToRouter(pos.offset(Direction.SOUTH, 1));
+                case EAST -> routerTE.connectToRouter(pos.offset(Direction.EAST, 1));
+                case WEST -> routerTE.connectToRouter(pos.offset(Direction.WEST, 1));
             }
         }
 

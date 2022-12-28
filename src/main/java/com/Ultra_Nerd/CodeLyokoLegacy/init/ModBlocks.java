@@ -18,6 +18,7 @@ import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.StateManager;
 
 public record ModBlocks() {
     //for blocks
@@ -41,8 +42,18 @@ public record ModBlocks() {
             FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
     public static final Block COMPUTER_SCREEN = new Block(
             FabricBlockSettings.of(Material.GLASS).strength(1, Blocks.GLASS.getBlastResistance())
-                    .sounds(BlockSoundGroup.GLASS));
-    public static final Block COMPUTER_SCREEN_FRAME = new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
+                    .sounds(BlockSoundGroup.GLASS)){
+        @Override
+        protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
+            super.appendProperties(builder.add(ComputerKeyboard.IS_SCREEN_FORMED));
+        }
+    };
+    public static final Block COMPUTER_SCREEN_FRAME = new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)){
+        @Override
+        protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
+            super.appendProperties(builder.add(ComputerKeyboard.IS_SCREEN_FORMED));
+        }
+    };
     public static final Block COMPUTER_CORE = new ComputerCoreUnit(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
     public static final Block COMPUTER_KEYBOARD = new ComputerKeyboard();
     public static final Block CHIPLET_BASIC_BLOCK = new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));

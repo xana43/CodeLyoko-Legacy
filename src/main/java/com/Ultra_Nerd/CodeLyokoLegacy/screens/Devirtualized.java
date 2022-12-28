@@ -1,14 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.client.GUI.LyokoButton;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BedBlock;
-import net.minecraft.block.RespawnAnchorBlock;
-import net.minecraft.block.entity.BedBlockEntity;
 import net.minecraft.client.gui.screen.*;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
@@ -35,7 +31,7 @@ public final class Devirtualized extends Screen {
     private final List<ButtonWidget> buttons = Lists.newArrayList();
     @Nullable
     private ButtonWidget titleScreenButton;
-    public Devirtualized(@Nullable Text message, boolean isHardcore) {
+    public Devirtualized(final @Nullable Text message,final boolean isHardcore) {
         super(Text.translatable(isHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title")
                 .fillStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
         this.message = message;
@@ -51,14 +47,12 @@ public final class Devirtualized extends Screen {
             this.client.player.requestRespawn();
             this.client.setScreen(null);
         }).dimensions(this.width / 2 - 100, this.height / 4 + 72, 200, 20).build()));
-        this.titleScreenButton = this.addDrawableChild(ButtonWidget.builder(Text.translatable("deathScreen.titleScreen"), (button) -> {
-            this.client.getAbuseReportContext().tryShowDraftScreen(this.client, this, this::onTitleScreenButtonClicked, true);
-        }).dimensions(this.width / 2 - 100, this.height / 4 + 96, 200, 20).build());
+        this.titleScreenButton = this.addDrawableChild(ButtonWidget.builder(Text.translatable("deathScreen.titleScreen"), (button) -> this.client.getAbuseReportContext().tryShowDraftScreen(this.client, this, this::onTitleScreenButtonClicked, true)).dimensions(this.width / 2 - 100, this.height / 4 + 96, 200, 20).build());
         this.buttons.add(this.titleScreenButton);
 
         ButtonWidget buttonWidget;
-        for(Iterator var2 = this.buttons.iterator(); var2.hasNext(); buttonWidget.active = false) {
-            buttonWidget = (ButtonWidget)var2.next();
+        for(final Iterator<ButtonWidget> var2 = this.buttons.iterator(); var2.hasNext(); buttonWidget.active = false) {
+            buttonWidget = var2.next();
         }
 
         this.scoreText = Text.translatable("deathScreen.score").append(": ").append(Text.literal(Integer.toString(this.client.player.getScore())).formatted(Formatting.YELLOW));
@@ -72,7 +66,7 @@ public final class Devirtualized extends Screen {
         if (this.isHardcore) {
             this.quitLevel();
         } else {
-            ConfirmScreen confirmScreen = new ConfirmScreen((confirmed) -> {
+           final ConfirmScreen confirmScreen = new ConfirmScreen((confirmed) -> {
                 if (confirmed) {
                     this.quitLevel();
                 } else {
@@ -95,7 +89,7 @@ public final class Devirtualized extends Screen {
         this.client.setScreen(new TitleScreen());
     }
 
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+    public void render(final MatrixStack matrices,final int mouseX,final int mouseY,final float delta) {
         this.fillGradient(matrices, 0, 0, this.width, this.height, 1615855616, -1602211792);
         matrices.push();
         matrices.scale(2.0F, 2.0F, 2.0F);
@@ -109,7 +103,7 @@ public final class Devirtualized extends Screen {
         if (this.message != null && mouseY > 85) {
             Objects.requireNonNull(this.textRenderer);
             if (mouseY < 85 + 9) {
-                Style style = this.getTextComponentUnderMouse(mouseX);
+                final Style style = this.getTextComponentUnderMouse(mouseX);
                 this.renderTextHoverEffect(matrices, style, mouseX, mouseY);
             }
         }
@@ -124,7 +118,7 @@ public final class Devirtualized extends Screen {
     }
 
     @Nullable
-    private Style getTextComponentUnderMouse(int mouseX) {
+    private Style getTextComponentUnderMouse(final int mouseX) {
         if (this.message == null) {
             return null;
         } else {
@@ -135,10 +129,10 @@ public final class Devirtualized extends Screen {
         }
     }
 
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+    public boolean mouseClicked(final double mouseX,final double mouseY,final int button) {
         if (this.message != null && mouseY > 85.0) {
             Objects.requireNonNull(this.textRenderer);
-            if (mouseY < (double)(85 + 9)) {
+            if (mouseY < (85 + 9)) {
                 final Style style = this.getTextComponentUnderMouse((int)mouseX);
                 if (style != null && style.getClickEvent() != null && style.getClickEvent().getAction() == ClickEvent.Action.OPEN_URL) {
                     this.handleTextClick(style);
@@ -159,8 +153,8 @@ public final class Devirtualized extends Screen {
         ++this.ticksSinceDeath;
         ButtonWidget buttonWidget;
         if (this.ticksSinceDeath == 20) {
-            for(Iterator var1 = this.buttons.iterator(); var1.hasNext(); buttonWidget.active = true) {
-                buttonWidget = (ButtonWidget)var1.next();
+            for(final Iterator<ButtonWidget> var1 = this.buttons.iterator(); var1.hasNext(); buttonWidget.active = true) {
+                buttonWidget = var1.next();
             }
         }
 
