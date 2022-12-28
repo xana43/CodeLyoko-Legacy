@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -33,7 +32,7 @@ public final class TestComputerUI extends BlockWithEntity {
 
             if(screenHandlerFactory != null)
             {
-                CodeLyokoMain.LOG.info("world should be server, and the screen handler factory shouldn't be null");
+                //CodeLyokoMain.LOG.info("world should be server, and the screen handler factory shouldn't be null");
                 player.openHandledScreen(screenHandlerFactory);
             }
         }
@@ -43,6 +42,6 @@ public final class TestComputerUI extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return ModTileEntities.COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE.instantiate(pos, state);
+        return ModBlockEntities.COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE.instantiate(pos, state);
     }
 }

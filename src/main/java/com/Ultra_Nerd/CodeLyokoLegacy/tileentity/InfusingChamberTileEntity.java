@@ -13,11 +13,11 @@ public final class InfusingChamberTileEntity /*extends InventoryBE implements In
     private int totalCookTime = 400;
 
    /* public InfusingChamberTileEntity() {
-        this(ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get());
+        this(ModBlockEntities.INFUSING_CHAMBER_TILE_ENTITY.get());
     }*/
 /*
     public InfusingChamberTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        super(ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get(),pos,state,4);
+        super(ModBlockEntities.INFUSING_CHAMBER_TILE_ENTITY.get(),pos,state,4);
     }
 
     public boolean hasCapability(Capability<?> capability, Direction facing) {

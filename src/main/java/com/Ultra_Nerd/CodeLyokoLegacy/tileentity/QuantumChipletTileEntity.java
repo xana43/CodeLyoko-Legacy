@@ -10,7 +10,7 @@ public final class QuantumChipletTileEntity /*extends InventoryBE implements Men
     }
 /*
     public QuantumChipletTileEntity() {
-        this(ModTileEntities.QUANTUM_CHIPLET_TILE_ENTITY.get());
+        this(ModBlockEntities.QUANTUM_CHIPLET_TILE_ENTITY.get());
     }*/
 /*
     @Override

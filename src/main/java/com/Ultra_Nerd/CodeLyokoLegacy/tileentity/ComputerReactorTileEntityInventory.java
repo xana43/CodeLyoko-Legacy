@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ReactorScreenHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntityInventory;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.LyokoInventoryBlock;
 import net.minecraft.block.BlockState;
@@ -46,7 +46,7 @@ public final class ComputerReactorTileEntityInventory extends EnergyStorageBlock
 
 
     public ComputerReactorTileEntityInventory(final BlockPos pos, final BlockState state) {
-        super(ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY, pos, state, 2, 4000, null, null);
+        super(ModBlockEntities.COMPUTER_REACTOR_TILE_ENTITY, pos, state, 2, 4000, null, null);
 
     }
 

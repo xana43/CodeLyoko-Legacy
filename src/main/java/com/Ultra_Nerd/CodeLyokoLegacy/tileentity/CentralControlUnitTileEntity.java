@@ -13,7 +13,7 @@ public final class CentralControlUnitTileEntity extends BlockEntity {
     }
 
     /*public CentralControlUnitTileEntity() {
-        this(ModTileEntities.CENTRAL_CONTROL_UNIT_TILE_ENTITY.get());
+        this(ModBlockEntities.CENTRAL_CONTROL_UNIT_TILE_ENTITY.get());
     }*/
 
 

@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -54,7 +54,7 @@ public final class UniversalEnergyStorageTileEntity extends BlockEntity {
     };
 
     public UniversalEnergyStorageTileEntity(final BlockPos pos, final BlockState state) {
-        super(ModTileEntities.UNIVERSAL_ENERGY_STORAGE, pos, state);
+        super(ModBlockEntities.UNIVERSAL_ENERGY_STORAGE, pos, state);
     }
 
     public EnergyStorage getEnergyImplementation() {

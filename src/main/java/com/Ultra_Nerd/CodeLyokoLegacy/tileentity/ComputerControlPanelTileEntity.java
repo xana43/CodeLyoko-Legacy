@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ControlPanel;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -21,7 +21,7 @@ public final class ComputerControlPanelTileEntity extends BlockEntity implements
 
 
     public ComputerControlPanelTileEntity(final BlockPos pos, final BlockState state) {
-        super(ModTileEntities.COMPUTER_CONTROL_PANEL, pos, state);
+        super(ModBlockEntities.COMPUTER_CONTROL_PANEL, pos, state);
 
     }
 

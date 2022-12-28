@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -66,7 +66,7 @@ public final class TowerInterface extends HorizontalFacingBlock implements Block
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return ModTileEntities.TOWER_INTERFACE_TILE_ENTITY.instantiate(pos, state);
+        return ModBlockEntities.TOWER_INTERFACE_TILE_ENTITY.instantiate(pos, state);
     }
 
     @Override

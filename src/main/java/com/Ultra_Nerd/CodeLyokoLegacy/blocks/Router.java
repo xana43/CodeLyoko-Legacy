@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.RouterTE;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
@@ -131,7 +131,7 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return ModTileEntities.ROUTER_BLOCK_ENTITY_TYPE.instantiate(pos, state);
+        return ModBlockEntities.ROUTER_BLOCK_ENTITY_TYPE.instantiate(pos, state);
     }
 
     @Nonnull

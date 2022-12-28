@@ -11,7 +11,7 @@ public final class DataTransferInterfaceTileEntity extends BlockEntity /*impleme
     }
 /*
     public DataTransferInterfaceTileEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        super(ModTileEntities.DATA_TRANSFER_INTERFACE_TILE_ENTITY.get(),pos,state);
+        super(ModBlockEntities.DATA_TRANSFER_INTERFACE_TILE_ENTITY.get(),pos,state);
     }
 
 

@@ -1,9 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityLaser;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HornetEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.HoverboardEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverboardEntity;
 import com.google.common.collect.ImmutableMap;
@@ -48,6 +45,8 @@ public record ModEntities() {
     public static final EntityType<HoverboardEntity> HOVERBOARD =
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, HoverboardEntity::new).dimensions(EntityDimensions.fixed(1
                     , 1)).build();
+    public static final EntityType<EntityFan> FAN_ENTITY_TYPE =
+            FabricEntityTypeBuilder.<EntityFan>create(SpawnGroup.MISC, EntityFan::new).build();
     public static final ImmutableMap<String, EntityType<?>> ENTITY_TYPE_HASH_MAP = ImmutableMap.<String, EntityType<?>>builder()
             .put("blok", BLOK)
             .put("laser", LASER_ENTITY_TYPE)
@@ -55,6 +54,7 @@ public record ModEntities() {
             .put("hornet", HORNET_ENTITY_ENTITY_TYPE)
             .put("overboard", OVERBOARD)
             .put("hoverboard", HOVERBOARD)
+            .put("fan",FAN_ENTITY_TYPE)
             .build();
 //entityRenderer
 

@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerReactorTileEntityInventory;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
@@ -27,7 +27,7 @@ public final class ComputerIntegratedReactor extends Block implements BlockEntit
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY.instantiate(pos, state);
+        return ModBlockEntities.COMPUTER_REACTOR_TILE_ENTITY.instantiate(pos, state);
     }
 
     @Override

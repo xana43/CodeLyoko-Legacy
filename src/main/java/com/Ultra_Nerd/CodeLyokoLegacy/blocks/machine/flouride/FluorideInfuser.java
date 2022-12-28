@@ -71,7 +71,7 @@ public class FluorideInfuser extends BlockWithEntity {
     @org.jetbrains.annotations.Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return null; //ModTileEntities.INFUSING_CHAMBER_TILE_ENTITY.get().create(pos,state);
+        return null; //ModBlockEntities.INFUSING_CHAMBER_TILE_ENTITY.get().create(pos,state);
     }
 
 

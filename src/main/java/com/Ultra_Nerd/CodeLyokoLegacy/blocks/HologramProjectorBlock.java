@@ -51,7 +51,7 @@ public final class HologramProjectorBlock extends BlockWithEntity {
     @org.jetbrains.annotations.Nullable
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return null;//ModTileEntities.HOLOGRAM_TILE_ENTITY.get().create(pos, state);
+        return null;//ModBlockEntities.HOLOGRAM_TILE_ENTITY.get().create(pos, state);
     }
 
  */

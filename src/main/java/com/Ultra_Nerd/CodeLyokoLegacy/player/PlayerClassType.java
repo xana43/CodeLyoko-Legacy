@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player;
 
-import dev.onyxstudios.cca.api.v3.util.NbtSerializable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import org.jetbrains.annotations.NotNull;

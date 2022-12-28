@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerCoreTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
@@ -25,7 +25,7 @@ public final class ComputerCoreUnit extends Block implements BlockEntityProvider
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return ModTileEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE.instantiate(pos, state);
+        return ModBlockEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE.instantiate(pos, state);
     }
 
 

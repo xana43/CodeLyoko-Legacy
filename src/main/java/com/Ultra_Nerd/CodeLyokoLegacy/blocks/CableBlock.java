@@ -1,13 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.CableTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
@@ -46,7 +44,7 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
     @Override
     public void neighborUpdate(final BlockState state, final World world, final BlockPos pos, final Block sourceBlock, final BlockPos sourcePos, final boolean notify) {
         super.neighborUpdate(state, world, pos, sourceBlock, sourcePos, notify);
-        world.getBlockEntity(pos,ModTileEntities.CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE).get().checkIfEnd();
+        world.getBlockEntity(pos, ModBlockEntities.CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE).get().checkIfEnd();
         CodeLyokoMain.LOG.info("should update if end");
     }
 
@@ -139,7 +137,7 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return ModTileEntities.CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE.instantiate(pos, state);
+        return ModBlockEntities.CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE.instantiate(pos, state);
     }
 
     @Override
@@ -160,7 +158,7 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return ModTileEntities.CABLE_TILE_ENTITY.get().create();
+        return ModBlockEntities.CABLE_TILE_ENTITY.get().create();
     }
 
     private boolean sameState(BlockState state)

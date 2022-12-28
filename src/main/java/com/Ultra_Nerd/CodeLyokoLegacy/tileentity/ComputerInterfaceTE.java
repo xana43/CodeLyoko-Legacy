@@ -18,7 +18,7 @@ public final class ComputerInterfaceTE extends BlockEntity implements MasterEnti
     }
     /*
     public ComputerInterfaceTestTE() {
-        this(ModTileEntities.COMPUTER_INTERFACE_TILE_ENTITY.get());
+        this(ModBlockEntities.COMPUTER_INTERFACE_TILE_ENTITY.get());
     }
 
      */

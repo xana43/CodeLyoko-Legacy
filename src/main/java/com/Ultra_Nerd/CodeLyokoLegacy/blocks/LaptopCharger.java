@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LaptopChargerBlockEntityInventory;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -28,7 +28,7 @@ public final class LaptopCharger extends HorizontalFacingBlock implements BlockE
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return ModTileEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY.instantiate(pos, state);
+        return ModBlockEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY.instantiate(pos, state);
     }
 
 

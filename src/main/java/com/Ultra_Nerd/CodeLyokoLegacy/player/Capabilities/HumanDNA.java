@@ -26,6 +26,13 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
     private String DNA = "";
     private boolean hasDNA = true;
 
+    @Override
+    public boolean shouldSyncWith(final ServerPlayerEntity player) {
+        return player == this.player;
+    }
+
+
+
     public HumanDNA(final PlayerEntity player) {
         this.player = player;
     }

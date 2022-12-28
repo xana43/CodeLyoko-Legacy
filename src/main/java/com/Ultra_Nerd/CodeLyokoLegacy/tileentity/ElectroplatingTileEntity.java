@@ -13,7 +13,7 @@ public class ElectroplatingTileEntity /*extends BlockEntity implements Inventory
     }
 /*
     public ElectroplatingTileEntity(BlockPos pos, BlockState state) {
-        this(ModTileEntities.ELECTROPLATING_TILE_ENTITY.get());
+        this(ModBlockEntities.ELECTROPLATING_TILE_ENTITY.get());
     }*/
 
 /*

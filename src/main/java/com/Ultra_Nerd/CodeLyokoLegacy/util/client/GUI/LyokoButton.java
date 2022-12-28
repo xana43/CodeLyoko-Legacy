@@ -33,6 +33,10 @@ public class LyokoButton extends ButtonWidget {
         super(x, y, width, height, message, onPress, DEFAULT_NARRATION_SUPPLIER);
         this.downSound = SoundEvents.UI_BUTTON_CLICK.value();
     }
+    public void setCentered()
+    {
+        this.setX((this.width >> 1) + this.getX());
+    }
     public LyokoButton(final Screen currentScreen,final int width,final int height,final Text message,
             final PressAction onPress,final NarrationSupplier narrationSupplier,final SoundEvent downSound)
     {
@@ -65,11 +69,7 @@ public class LyokoButton extends ButtonWidget {
         this.setY(this.getY() + y);
     }
 
-    public void setPosition(final int x, final int y)
-    {
-        this.setX(x);
-        this.setY(y);
-    }
+
 
     @Override
     public void playDownSound(final SoundManager soundManager) {

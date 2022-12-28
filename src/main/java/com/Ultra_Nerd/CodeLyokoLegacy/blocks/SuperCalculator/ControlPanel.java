@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
@@ -256,7 +256,7 @@ public final class ControlPanel extends HorizontalFacingBlock implements BlockEn
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return ModTileEntities.COMPUTER_CONTROL_PANEL.instantiate(pos, state);
+        return ModBlockEntities.COMPUTER_CONTROL_PANEL.instantiate(pos, state);
     }
 
     @Override

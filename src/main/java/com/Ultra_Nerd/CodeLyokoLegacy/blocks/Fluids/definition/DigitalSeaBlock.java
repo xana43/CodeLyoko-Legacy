@@ -1,5 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MantaEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.Piranha;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.DamageSources.LyokoDamage;
@@ -23,7 +25,7 @@ public final class DigitalSeaBlock extends FluidBlock {
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        if (!(entity instanceof EntitySkid) && !world.isClient) {
+        if (!(entity instanceof EntitySkid) && !(entity instanceof Piranha) && !(entity instanceof MantaEntity) && !world.isClient) {
             entity.damage(new LyokoDamage(this.getTranslationKey()).setBypassesArmor().setNeutral(), Float.MAX_VALUE);
             if (entity instanceof ArrowEntity) {
                 entity.kill();

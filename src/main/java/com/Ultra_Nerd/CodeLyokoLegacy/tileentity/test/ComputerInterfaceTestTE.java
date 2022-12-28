@@ -1,9 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoServer;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerInterfaceScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -21,9 +19,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
-public class ComputerInterfaceTestTE extends BlockEntity implements ExtendedScreenHandlerFactory, NamedScreenHandlerFactory {
+public final class ComputerInterfaceTestTE extends BlockEntity implements ExtendedScreenHandlerFactory,
+        NamedScreenHandlerFactory {
     public ComputerInterfaceTestTE(final BlockPos pos, final BlockState state) {
-        super(ModTileEntities.COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE, pos, state);
+        super(ModBlockEntities.COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE, pos, state);
     }
 
     @Override
@@ -50,6 +49,6 @@ public class ComputerInterfaceTestTE extends BlockEntity implements ExtendedScre
     @Nullable
     @Override
     public ScreenHandler createMenu(final int syncId, final PlayerInventory inv, final PlayerEntity player) {
-        return new ComputerInterfaceScreenHandler(syncId,player);
+        return new ComputerInterfaceScreenHandler(syncId, player);
     }
 }

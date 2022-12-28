@@ -1,8 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModStats;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.BlockPatternRegistry;
@@ -17,13 +16,17 @@ import net.minecraft.world.World;
 
 public final class ScannerTileEntity extends MultiBlockController {
 
-    public RegistryKey<World> destinationWorld = ModDimensions.carthage;
+    private RegistryKey<World> destinationWorld = ModDimensions.carthage;
     private int scanTimer = MethodUtil.TickConversion.secondsToTicks(9);
 
     private boolean inScanner;
 
+    public void setDestinationWorld(final RegistryKey<World> destinationWorld) {
+        this.destinationWorld = destinationWorld;
+    }
+
     public ScannerTileEntity(final BlockPos pos, final BlockState state) {
-        super(ModTileEntities.SCANNER_TILE_ENTITY, pos, state, BlockPatternRegistry.SCANNER.getThisBlockPatttern(),
+        super(ModBlockEntities.SCANNER_TILE_ENTITY, pos, state, BlockPatternRegistry.SCANNER.getThisBlockPatttern(),
                 ConstantUtil.SCANNER_PROPERTY);
         //destinationWorld = ModDimensions.carthage;
     }
@@ -54,7 +57,6 @@ public final class ScannerTileEntity extends MultiBlockController {
             if (serverWorld1 != null && player != null) {
                 serverWorld.getProfiler().push("portal");
                 if (scanTimer <= 0 && inScanner) {
-                    player.incrementStat(ModStats.ENTERED_LYOKO_IDENTIFIER);
                     player.teleport(serverWorld1, 0, 140, 0, player.getYaw(), player.getPitch());
                 }
                 serverWorld.getProfiler().pop();

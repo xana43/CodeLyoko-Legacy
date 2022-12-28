@@ -86,7 +86,7 @@ public record CodeLyokoMain() implements ModInitializer {
 
     private static void registerEnergyStorageBE() {
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyImplementation(),
-                ModTileEntities.UNIVERSAL_ENERGY_STORAGE);
+                ModBlockEntities.UNIVERSAL_ENERGY_STORAGE);
     }
 
     private static void checkWorld() {
@@ -158,7 +158,7 @@ public record CodeLyokoMain() implements ModInitializer {
             Registry.register(Registries.ITEM, new Identifier(MOD_ID, s), item);
             ItemGroupEvents.modifyEntriesEvent(LYOKO_WEAPONS).register(entries -> entries.add(item));
         });
-        ModTileEntities.BLOCKENTITY_MAP.forEach(
+        ModBlockEntities.BLOCKENTITY_MAP.forEach(
                 (s, blockEntityType) -> Registry.register(Registries.BLOCK_ENTITY_TYPE, codeLyokoPrefix(s),
                         blockEntityType));
         //ModSounds.SOUNDS.forEach(soundEvent -> Registry.register(Registry.SOUND_EVENT,soundEvent.getId(),soundEvent))
@@ -184,7 +184,8 @@ public record CodeLyokoMain() implements ModInitializer {
         ModScreenHandlers.screenHandlerMap.forEach(
                 (s, screenHandlerType) -> Registry.register(Registries.SCREEN_HANDLER, codeLyokoPrefix(s),
                         screenHandlerType));
-        CodeLyokoMain.LOG.info(String.valueOf(RegistryEntry.of(ModScreenHandlers.COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE)));
+        CodeLyokoMain.LOG.info(
+                String.valueOf(RegistryEntry.of(ModScreenHandlers.COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE)));
         ModStructures.registerNewStructures();
 
 
@@ -193,9 +194,9 @@ public record CodeLyokoMain() implements ModInitializer {
 
         BiomeFeatureInject();
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyStorage(),
-                ModTileEntities.COMPUTER_REACTOR_TILE_ENTITY);
+                ModBlockEntities.COMPUTER_REACTOR_TILE_ENTITY);
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyStorage(),
-                ModTileEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE);
+                ModBlockEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
 
 
@@ -254,6 +255,8 @@ public record CodeLyokoMain() implements ModInitializer {
                             player.server.getSaveProperties().getMainWorldProperties(), player);
 
                     player.incrementStat(ModStats.ENTERED_LYOKO_IDENTIFIER);
+                    CardinalData.PlayerSavedProfile.getPlayerProfile(
+                            player.getServer().getSaveProperties().getMainWorldProperties(), player).incrementEntered();
                 } else if (MethodUtil.DimensionCheck.worldIsNotVanilla(origin)) {
                     CardinalData.LyokoInventorySave.loadPlayerInventory(
                             player.server.getSaveProperties().getMainWorldProperties(), player);
@@ -346,7 +349,10 @@ public record CodeLyokoMain() implements ModInitializer {
             if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(oldPlayer)) {
                 newPlayer.experienceLevel = oldPlayer.experienceLevel;
             }
-
+            if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(oldPlayer)) {
+                CardinalData.CellularDamage.getCellComponentKey().get(newPlayer)
+                        .copyFrom(CardinalData.CellularDamage.getCellComponentKey().get(oldPlayer));
+            }
         });
     }
 

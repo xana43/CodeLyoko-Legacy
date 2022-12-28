@@ -1,13 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 
 public final class LyokoCoreBE extends BlockEntity {
     public LyokoCoreBE(final BlockPos pos, final BlockState state) {
-        super(ModTileEntities.LYOKO_CORE, pos, state);
+        super(ModBlockEntities.LYOKO_CORE, pos, state);
     }
 
 

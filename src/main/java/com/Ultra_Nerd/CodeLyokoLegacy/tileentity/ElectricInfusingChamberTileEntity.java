@@ -18,7 +18,7 @@ public final class ElectricInfusingChamberTileEntity /*extends BlockEntity imple
 
     /*
         public ElectricInfusingChamberTileEntity() {
-            this(ModTileEntities.ELECTRIC_INFUSING_CHAMBER_TILE_ENTITY.get());
+            this(ModBlockEntities.ELECTRIC_INFUSING_CHAMBER_TILE_ENTITY.get());
         }
 
         public ElectricInfusingChamberTileEntity(BlockEntityType<?> tileEntityTypeIn) {

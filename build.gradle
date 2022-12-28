@@ -63,7 +63,7 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation "software.bernie.geckolib:geckolib-fabric-1.19.3:${geko_version}"
-	//modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-world:${cca_version}"
+	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-world:${cca_version}"
 	//modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-util:${cca_version}"
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-level:${cca_version}"
 	//include "dev.onyxstudios.cardinal-components-api:cardinal-components-world:${cca_version}"
@@ -76,7 +76,7 @@ dependencies {
 	include modApi("teamreborn:energy:${energy_api_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
-	//modImplementation include("be.florens:expandability-fabric:${expandability_version}")
+
 
 }
 sourceSets{

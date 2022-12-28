@@ -1,8 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
@@ -26,7 +25,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -360,7 +358,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return ModTileEntities.SCANNER_TILE_ENTITY.instantiate(pos, state);
+        return ModBlockEntities.SCANNER_TILE_ENTITY.instantiate(pos, state);
     }
 
     @Override

@@ -1,11 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
-public final class RendFan /*extends GeoProjectilesRenderer<EntityFan>*/ {
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityFan;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelFan;
+import net.minecraft.client.render.entity.EntityRendererFactory;
+import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-/*
-    public RendFan(EntityRendererProvider.@NotNull Context renderManager) {
+public final class RendFan extends GeoEntityRenderer<EntityFan> {
+    public RendFan(final EntityRendererFactory.Context renderManager) {
         super(renderManager, new ModelFan());
-    }*/
+    }
+
+
 
 
 }

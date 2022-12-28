@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -55,18 +54,18 @@ public class MultiBlockController extends BlockEntity implements MasterEntity {
     public void invalidateEntity() {
         if (world != null) {
             //if (currentPattern.searchAround(world, pos) != null) {
-                for (int x = -currentPattern.getWidth(); x < currentPattern.getWidth(); ++x) {
-                    for (int y = -currentPattern.getHeight(); y < currentPattern.getHeight(); ++y) {
-                        for (int z = -currentPattern.getDepth(); z < currentPattern.getDepth(); ++z) {
-                            final BlockPos posOffset = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-                            final BlockState checkedState = world.getBlockState(posOffset);
-                            if (checkedState.contains(thisProperty)) {
-                                world.setBlockState(posOffset, checkedState.with(thisProperty, false));
+            for (int x = -currentPattern.getWidth(); x < currentPattern.getWidth(); ++x) {
+                for (int y = -currentPattern.getHeight(); y < currentPattern.getHeight(); ++y) {
+                    for (int z = -currentPattern.getDepth(); z < currentPattern.getDepth(); ++z) {
+                        final BlockPos posOffset = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+                        final BlockState checkedState = world.getBlockState(posOffset);
+                        if (checkedState.contains(thisProperty)) {
+                            world.setBlockState(posOffset, checkedState.with(thisProperty, false));
 
-                            }
-                            checkSuccessful = false;
                         }
+                        checkSuccessful = false;
                     }
+                }
                 //}
 
             }

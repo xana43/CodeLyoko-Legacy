@@ -1,73 +1,67 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-public final class EntityFan /*extends ThrownTrident implements IAnimatable*/ {
-    /*private boolean dealtDamage;
-    private final AnimationFactory manager = new AnimationFactory(this);
-    private final AnimationController<?> controller = new AnimationController<>(this, "fancontroller", 20, this::animationpred);
-    private ItemStack thrownstack;
-    public EntityFan(@NotNull EntityType<? extends ThrownTrident> type, @NotNull Level worldIn) {
-        super(type,worldIn);
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.TridentEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
+
+public final class EntityFan extends TridentEntity implements GeoAnimatable {
+    private final AnimatableInstanceCache manager = GeckoLibUtil.createInstanceCache(this);
+
+    public EntityFan(final World world, final LivingEntity owner, final ItemStack stack) {
+        super(world, owner, stack);
     }
 
-    public EntityFan(@NotNull Level world, LivingEntity thrower, ItemStack thrownStackIn) {
-        super(ModEntities.FAN.get(), world);
-        this.thrownstack = new ItemStack(ModItems.YUMI_TRADITONAL_FANS.get());
-
+    public EntityFan(final EntityType<? extends TridentEntity> entityType, final World world) {
+        super(entityType, world);
     }
 
 
 
-    @Nonnull
-    @Override
-    public Packet<?> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
 
     @Override
     public void tick() {
-        if (this.inGroundTime > 4) {
-            this.dealtDamage = true;
-        }
-
-        Entity entity = this.getOwner();
-        if ((this.dealtDamage || this.noPhysics) && entity != null) {
-            this.setNoPhysics(true);
-            Vec3 vec3d = new Vec3(entity.getX() - this.getY(), entity.getEyeY() - this.getY(), entity.getZ() - this.getZ());
-            this.setPosRaw(this.getX(), this.getY() + vec3d.y * 0.015D * 1, this.getZ());
-            if (!this.level.isClientSide) {
-                this.yOld = this.getY();
-            }
-
-
-            this.setDeltaMovement(this.getDeltaMovement().scale(0.95D).add(vec3d.normalize().scale(1)));
-            if (this.clientSideReturnTridentTickCount == 0) {
-                this.playSound(SoundEvents.TRIDENT_RETURN, 10.0F, 1.0F);
-            }
-
-            ++this.clientSideReturnTridentTickCount;
-        }
-
-
+        this.setNoGravity(true);
         super.tick();
     }
 
-    private <E extends EntityFan> @NotNull PlayState animationpred(AnimationEvent<E> event) {
+    private <E extends EntityFan> @NotNull PlayState animationpred(AnimationState<E> event) {
 
-        controller.setAnimation(new AnimationBuilder().addAnimation("animation.fan.spin", true));
+        controller.setAnimation(RawAnimation.begin().thenLoop("animation.fan.spin"));
         return PlayState.CONTINUE;
 
 
+    }    private final AnimationController<?> controller = new AnimationController<>(this, "fancontroller", 20,
+            this::animationpred);
+
+    @Override
+    public void registerControllers(final AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(controller);
     }
 
     @Override
-    public @NotNull AnimationFactory getFactory() {
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
         return manager;
     }
 
     @Override
-    public void registerControllers(@NotNull AnimationData data) {
-        data.addAnimationController(controller);
+    public double getTick(final Object o) {
+        return 0;
     }
 
-     */
+
+
+
 }

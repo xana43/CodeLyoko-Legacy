@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.LaptopClass;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntityInventory;
 import net.minecraft.block.Block;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 public final class LaptopChargerBlockEntityInventory extends EnergyStorageBlockEntityInventory {
     public LaptopChargerBlockEntityInventory(final BlockPos pos, final BlockState state) {
-        super(ModTileEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY, pos, state, 1, 90, 10L, 10L);
+        super(ModBlockEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY, pos, state, 1, 90, 10L, 10L);
     }
 
     public void setItem(final ItemStack item) {

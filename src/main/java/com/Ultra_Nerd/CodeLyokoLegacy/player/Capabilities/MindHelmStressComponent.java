@@ -12,13 +12,11 @@ public final class MindHelmStressComponent implements AutoSyncedComponent, Playe
 
     public void addToStressLevel(final int stressor) {
         StressLevel += stressor;
-        CodeLyokoMain.LOG.info("increasing stress");
     }
 
     public void decreaseStressLevel() {
 
         if (StressLevel > 0) {
-            CodeLyokoMain.LOG.info("decreasing stress");
             StressLevel -= 1;
         }
     }

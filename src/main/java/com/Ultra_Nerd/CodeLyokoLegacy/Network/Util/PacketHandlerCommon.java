@@ -2,10 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ControlPanel;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
-import dev.onyxstudios.cca.api.v3.level.LevelComponents;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
@@ -30,7 +28,7 @@ public record PacketHandlerCommon() {
         ServerPlayNetworking.registerGlobalReceiver(TowerChannelID, (server, player, handler, buf, responseSender) -> {
             final BlockPos pos = buf.readBlockPos();
             final int activationState = buf.readInt();
-            server.execute(() -> player.world.getBlockEntity(pos, ModTileEntities.TOWER_INTERFACE_TILE_ENTITY).get().calculateTowerActivation(activationState));
+            server.execute(() -> player.world.getBlockEntity(pos, ModBlockEntities.TOWER_INTERFACE_TILE_ENTITY).get().calculateTowerActivation(activationState));
 
         });
         //TODO: once the computer UI is finished make this send information through the cables to the scanners and

@@ -3,17 +3,15 @@ package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TowerInterfaceScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.TowerInterface;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.TowerWall;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
@@ -22,11 +20,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public final class TowerInterfaceTileEntity extends BlockEntity implements NamedScreenHandlerFactory, ExtendedScreenHandlerFactory {
     public TowerInterfaceTileEntity(final BlockPos pos, final BlockState state) {
-        super(ModTileEntities.TOWER_INTERFACE_TILE_ENTITY, pos, state);
+        super(ModBlockEntities.TOWER_INTERFACE_TILE_ENTITY, pos, state);
     }
 
     @Override

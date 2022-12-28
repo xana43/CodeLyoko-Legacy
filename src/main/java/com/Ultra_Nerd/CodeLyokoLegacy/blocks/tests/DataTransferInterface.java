@@ -69,7 +69,7 @@ public final class DataTransferInterface extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return ModTileEntities.DATA_TRANSFER_INTERFACE_TILE_ENTITY.get().create(pos, state);
+        return ModBlockEntities.DATA_TRANSFER_INTERFACE_TILE_ENTITY.get().create(pos, state);
     }
 
     @Nullable

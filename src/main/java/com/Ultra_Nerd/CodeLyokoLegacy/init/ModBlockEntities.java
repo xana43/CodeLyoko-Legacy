@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
 
-public record ModTileEntities() {
+public record ModBlockEntities() {
 
 
     /*
@@ -45,6 +45,8 @@ public record ModTileEntities() {
             FabricBlockEntityTypeBuilder.create(KeyBoardInterface::new,ModBlocks.COMPUTER_KEYBOARD).build();
     public static final BlockEntityType<ComputerInterfaceTestTE> COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(ComputerInterfaceTestTE::new,ModBlocks.TESTUI).build();
+    public static final BlockEntityType<HologramProjectorTileEntity> HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE =
+            FabricBlockEntityTypeBuilder.create(HologramProjectorTileEntity::new,ModBlocks.TEST_SPHERE).build();
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String, BlockEntityType<?>>builder()
 
             .put("lyoko_core", LYOKO_CORE).put("tower_interface_tile_entity", TOWER_INTERFACE_TILE_ENTITY)
@@ -57,7 +59,8 @@ public record ModTileEntities() {
             .put("cable_blockentity",CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE)
             .put("computer_core_blockentity",COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE)
             .put("keyboard_blockentity",KEYBOARD_BLOCK_ENTITY)
-            .put("test_ui",COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE).build();
+            .put("test_ui",COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE)
+            .put("hologram_projector",HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE).build();
 
 
     //

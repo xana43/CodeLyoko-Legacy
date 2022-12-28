@@ -10,9 +10,10 @@ import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.linker;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoRingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.HologramRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.LaptopChargerRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
@@ -31,7 +32,6 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DeathScreen;
@@ -108,6 +108,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.MEGATANK, MegaTankRenderer::new);
         EntityRendererRegistry.register(ModEntities.LASER_ENTITY_TYPE, LaserRenderer::new);
         EntityRendererRegistry.register(ModEntities.HORNET_ENTITY_ENTITY_TYPE, HornetRenderer::new);
+        EntityRendererRegistry.register(ModEntities.FAN_ENTITY_TYPE, RendFan::new);
         //for entity that need layer locations
         EntityRendererRegistry.register(ModEntities.OVERBOARD, OverboardRenderer::new);
         EntityRendererRegistry.register(ModEntities.HOVERBOARD, HoverboardRenderer::new);
@@ -201,11 +202,12 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
 
                 ));
-
         //Renderers
-        BlockEntityRendererRegistry.register(ModTileEntities.LYOKO_CORE, CoreOfLyoko::new);
-        BlockEntityRendererRegistry.register(ModTileEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY,
+        BlockEntityRendererRegistry.register(ModBlockEntities.LYOKO_CORE, CoreOfLyoko::new);
+        BlockEntityRendererRegistry.register(ModBlockEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY,
                 LaptopChargerRenderer::new);
+        BlockEntityRendererRegistry.register(ModBlockEntities.HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE,
+                HologramRenderer::new);
         registerEntityRenderers();
         //receiveEntityPacket();
         FluidRenderRegistry();
@@ -213,7 +215,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE,
                 ComputerControlPanelUI::new);
         HandledScreens.register(ModScreenHandlers.COMPUTER_REACTOR_SCREEN_HANDLER, ReactorGUI::new);
-        HandledScreens.register(ModScreenHandlers.COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE, ComputerInterfaceUi::new);
+        HandledScreens.register(ModScreenHandlers.COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE,
+                ComputerInterfaceUi::new);
         //client events
 
         registerItemPredicates();
