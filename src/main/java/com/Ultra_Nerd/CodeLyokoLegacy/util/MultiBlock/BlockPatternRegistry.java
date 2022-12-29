@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.block.pattern.BlockPatternBuilder;
 import net.minecraft.block.pattern.CachedBlockPosition;
@@ -33,7 +32,7 @@ public enum BlockPatternRegistry {
             .where('2',CachedBlockPosition.matchesBlockState(blockState -> blockState.isOf(ModBlocks.COMPUTER_SCREEN_FRAME)))
             .where('3',CachedBlockPosition.matchesBlockState(blockState -> blockState.isOf(ModBlocks.COMPUTER_SCREEN)))
             .where('4',CachedBlockPosition.matchesBlockState(blockState -> blockState.isOf(ModBlocks.COMPUTER_SCREEN_CONNECTOR)))
-            .where('0',CachedBlockPosition.matchesBlockState(blockState -> blockState.isOf(Blocks.AIR)))
+            .where('0',CachedBlockPosition.matchesBlockState(BlockStatePredicate.ANY))
             .build());
 
 

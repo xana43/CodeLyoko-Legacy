@@ -123,7 +123,6 @@ public record CodeLyokoMain() implements ModInitializer {
                                 checkedPos) instanceof MultiBlockController multiBlockController && world.isChunkLoaded(
                                 ChunkSectionPos.getSectionCoord(checkedPos.getX()),
                                 ChunkSectionPos.getSectionCoord(checkedPos.getZ()))) {
-
                             if (multiBlockController.getCheckSuccessful()) {
                                 multiBlockController.check();
                             }

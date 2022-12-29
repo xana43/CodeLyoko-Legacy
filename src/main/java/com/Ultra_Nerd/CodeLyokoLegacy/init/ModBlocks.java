@@ -17,6 +17,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.*;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 
@@ -31,8 +32,17 @@ public record ModBlocks() {
     public static final Block BORNITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.IRON_ORE));
     public static final Block CABLE_BLOCK = new CableBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
     public static final Block COMPUTER_SCREEN_CONNECTOR = new FenceBlock(
-            FabricBlockSettings.copyOf(
-                    Blocks.IRON_BARS));
+            FabricBlockSettings.copyOf(Blocks.IRON_BARS)){
+        @Override
+        public BlockState getPlacementState(final ItemPlacementContext ctx) {
+            return this.getDefaultState().with(ComputerKeyboard.IS_SCREEN_FORMED,false);
+        }
+
+        @Override
+        protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
+            super.appendProperties(builder.add(ComputerKeyboard.IS_SCREEN_FORMED));
+        }
+    };
     public static final Block CHALCOPYRITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(
             Blocks.IRON_ORE));//BLOCKS.register("chalcopyrite_ore", () -> new Block(Block.Properties.copyOf(Blocks.IRON_ORE)));
     public static final Block COVELLITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.IRON_ORE));
@@ -44,11 +54,19 @@ public record ModBlocks() {
             FabricBlockSettings.of(Material.GLASS).strength(1, Blocks.GLASS.getBlastResistance())
                     .sounds(BlockSoundGroup.GLASS)){
         @Override
+        public BlockState getPlacementState(final ItemPlacementContext ctx) {
+            return this.getDefaultState().with(ComputerKeyboard.IS_SCREEN_FORMED,false);
+        }
+        @Override
         protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
             super.appendProperties(builder.add(ComputerKeyboard.IS_SCREEN_FORMED));
         }
     };
     public static final Block COMPUTER_SCREEN_FRAME = new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)){
+        @Override
+        public BlockState getPlacementState(final ItemPlacementContext ctx) {
+            return this.getDefaultState().with(ComputerKeyboard.IS_SCREEN_FORMED,false);
+        }
         @Override
         protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
             super.appendProperties(builder.add(ComputerKeyboard.IS_SCREEN_FORMED));

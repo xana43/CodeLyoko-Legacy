@@ -1,13 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.KeyBoardInterface;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
@@ -581,6 +585,16 @@ public final class ComputerKeyboard extends HorizontalFacingBlock implements Blo
         this.setDefaultState(this.getDefaultState().with(IS_SCREEN_FORMED,false));
 
 
+    }
+
+    @Override
+    public void onPlaced(final World world, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack itemStack) {
+        super.onPlaced(world, pos, state, placer, itemStack);
+        if(world.getBlockEntity(pos) instanceof MultiBlockController multiBlockController && !world.isClient())
+        {
+            multiBlockController.check();
+            CodeLyokoMain.LOG.info("should start checking");
+        }
     }
 
     @Override
