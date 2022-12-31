@@ -1,12 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.PlayerProfileDebug;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.VehicleMaterializationTest;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -21,31 +20,25 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class PlayerCustomProfileTest extends BlockWithEntity {
-    public PlayerCustomProfileTest(final Settings settings) {
+public class PlayerVehicleTest extends BlockWithEntity {
+    public PlayerVehicleTest(final Settings settings) {
         super(settings);
     }
 
     @Override
-    public BlockRenderType getRenderType(final BlockState state) {
-        return BlockRenderType.MODEL;
-    }
-
-    @Override
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
-
-        CardinalData.PlayerSavedProfile.saveProfile(world.getLevelProperties(), player);
         final NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-        if(!world.isClient() && screenHandlerFactory != null) {
-            player.openHandledScreen(screenHandlerFactory);
+        if(!world.isClient()) {
+            if (screenHandlerFactory != null) {
+                player.openHandledScreen(screenHandlerFactory);
+            }
         }
         return super.onUse(state, world, pos, player, hand, hit);
     }
 
-
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return ModBlockEntities.PLAYER_DATA_STORAGE_BLOCK_ENTITY_TYPE.instantiate(pos, state);
+        return ModBlockEntities.VEHICLE_BE_BLOCK_ENTITY_TYPE.instantiate(pos, state);
     }
 }

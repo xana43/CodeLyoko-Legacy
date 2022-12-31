@@ -9,10 +9,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.electroplate.ElectroplatingMachine;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.ElectricFluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.FluorideInfuser;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.DataTransferInterface;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.PlayerCustomProfileTest;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.TestComputerUI;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.TestSphereRenderer;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.*;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -217,6 +214,8 @@ public record ModBlocks() {
     public static final Block TESTUI = new TestComputerUI(FabricBlockSettings.copy(Blocks.IRON_BLOCK));
     public static final Block TEST_PROFILE = new PlayerCustomProfileTest(FabricBlockSettings.copyOf(Blocks.BARRIER));
     public static final Block TEST_SPHERE = new TestSphereRenderer(FabricBlockSettings.copyOf(Blocks.BARRIER));
+    public static final Block TEST_VECHICLE_INTERFACE =
+            new PlayerVehicleTest(FabricBlockSettings.copyOf(Blocks.BARRIER));
     public static final ImmutableMap<String, Block> BLOCK_MAP = ImmutableMap.<String, Block>builder()
             .put("architecture_work_station", ARCHITECTURE_WORK_STATION)
             .put("anti_marabunta", ANTI_MARABUNTA)
@@ -319,5 +318,6 @@ public record ModBlocks() {
             .put("test_ui",TESTUI)
             .put("player_profile_block",TEST_PROFILE)
             .put("test_phere",TEST_SPHERE)
+            .put("test_vechicle_materialization",TEST_VECHICLE_INTERFACE)
             .build();
 }

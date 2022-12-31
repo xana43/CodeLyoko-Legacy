@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHoverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelOverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerClient;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.linker;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
@@ -12,6 +13,9 @@ import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoRingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.StoryBookGUI;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.PlayerProfileDebug;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.VehicleMaterializationTest;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.HologramRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.LaptopChargerRenderer;
@@ -28,10 +32,12 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DeathScreen;
@@ -43,7 +49,9 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
@@ -51,10 +59,12 @@ import org.lwjgl.glfw.GLFW;
 @Environment(EnvType.CLIENT)
 public record CodeLyokoClient() implements ClientModInitializer {
 
-    //public static final Identifier PacketID = CodeLyokoMain.codeLyokoPrefix("spawn_packet");
     private static final String keyCategory = "category." + CodeLyokoMain.MOD_ID + ".lyoko_controls";
     //keybinds
     private static KeyBinding classCreenBinding;
+    private static KeyBinding classAbilityBinding1;
+    private static KeyBinding classAbilityBinding2;
+
 
     private static void clientEvents() {
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
@@ -69,6 +79,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
                     if (!mc.player.isCreative() && !mc.player.isSpectator()) {
                         mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 7) - 2,
                                 mc.getWindow().getScaledHeight() >> 11, 0, 0, 33, 254);
+                        mc.inGameHud.drawTexture(matrixStack, mc.getWindow().getScaledWidth() >> 4,
+                                mc.getWindow().getScaledHeight() >> 11, 174, 0, 6, 254);
                         int texV = 0;
                         switch (CardinalData.LyokoClass.getLyokoClass(mc.player)) {
                             case 0 -> texV = PlayerClassType.Feline.getTextureIndex();
@@ -79,6 +91,9 @@ public record CodeLyokoClient() implements ClientModInitializer {
                         }
                         mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 6) - 1,
                                 (mc.getWindow().getScaledHeight() >> 11), texV, 0, 25,
+                                (int) ((12.7f) * mc.player.getHealth()));
+                        mc.inGameHud.drawTexture(matrixStack, mc.getWindow().getScaledWidth() >> 4,
+                                mc.getWindow().getScaledHeight() >> 11, 183, 0, 6,
                                 (int) ((12.7f) * mc.player.getHealth()));
 
                     }
@@ -197,11 +212,14 @@ public record CodeLyokoClient() implements ClientModInitializer {
     public void onInitializeClient() {
         //set key bindings
         classCreenBinding = KeyBindingHelper.registerKeyBinding(
-                new KeyBinding("key." + CodeLyokoMain.MOD_ID + ".class", InputUtil.Type.SCANCODE,
-                        GLFW.GLFW_KEY_RIGHT_ALT, keyCategory
-
-
-                ));
+                new KeyBinding("key." + CodeLyokoMain.MOD_ID + ".class", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_ALT,
+                        keyCategory));
+        classAbilityBinding1 = KeyBindingHelper.registerKeyBinding(
+                new KeyBinding("key." + CodeLyokoMain.MOD_ID + ".class_ability1", InputUtil.Type.KEYSYM,
+                        GLFW.GLFW_KEY_V, keyCategory));
+        classAbilityBinding2 = KeyBindingHelper.registerKeyBinding(
+                new KeyBinding("key." + CodeLyokoMain.MOD_ID + ".class_ability2", InputUtil.Type.KEYSYM,
+                        GLFW.GLFW_KEY_B, keyCategory));
         //Renderers
         BlockEntityRendererRegistry.register(ModBlockEntities.LYOKO_CORE, CoreOfLyoko::new);
         BlockEntityRendererRegistry.register(ModBlockEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY,
@@ -217,8 +235,25 @@ public record CodeLyokoClient() implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.COMPUTER_REACTOR_SCREEN_HANDLER, ReactorGUI::new);
         HandledScreens.register(ModScreenHandlers.COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE,
                 ComputerInterfaceUi::new);
+        HandledScreens.register(ModScreenHandlers.PROFILE_DEBUG_SCREEN_HANDLER_SCREEN_HANDLER_TYPE,
+                PlayerProfileDebug::new);
+        HandledScreens.register(ModScreenHandlers.VEHICLE_MATERIALIZE_TEST_HANDLER_SCREEN_HANDLER_TYPE,
+                VehicleMaterializationTest::new);
         //client events
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
 
+
+                {
+                    return switch (stack.getTranslationKey()) {
+                        case "item.cm.story_book" -> 0x00008B;
+                        case "item.cm.story_book2" -> ColorHelper.Argb.getArgb(255, 255, 0, 0);
+                        default -> 1;
+                    };
+
+                    //return 0x00008B;
+                }
+
+                , ModItems.STORY_BOOK, ModItems.STORY_BOOK2);
         registerItemPredicates();
         //effect registry
         DimensionEffectsAccessor.getIdentifierMap().put(CodeLyokoMain.codeLyokoPrefix("codelyoko_effects_general"),
@@ -245,6 +280,20 @@ public record CodeLyokoClient() implements ClientModInitializer {
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.iceSectorWorld, new CustomIceSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld, new CustomVolcanoSky());
 
+        //custom key response
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+
+            if (client.player != null) {
+                if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
+                    if (classAbilityBinding1.isPressed()) {
+                        ClientPlayNetworking.send(PacketHandlerCommon.PRIMARY_CLASS_ABILITY, PacketByteBufs.empty());
+                    }
+                    if (classAbilityBinding2.isPressed()) {
+                        ClientPlayNetworking.send(PacketHandlerCommon.SECONDARY_CLASS_ABILITY, PacketByteBufs.empty());
+                    }
+                }
+            }
+        });
         //custom hud
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
 
@@ -252,6 +301,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
 
                 if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
+
                     if (client.currentScreen instanceof DeathScreen) {
 
                         if (client.getServer().isSingleplayer()) {

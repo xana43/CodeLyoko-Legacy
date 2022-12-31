@@ -68,7 +68,8 @@
               "cm:human_dna",
               "cm:player_profile",
               "cm:cellular_degeneration",
-              "cm:skid_nav_data"
+              "cm:skid_nav_data",
+              "cm:digital_energy"
           ]
     }
 }

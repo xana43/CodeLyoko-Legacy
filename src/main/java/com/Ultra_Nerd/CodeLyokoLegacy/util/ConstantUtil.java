@@ -50,8 +50,17 @@ public record ConstantUtil() {
                     "xxxx/xx/xx" + n +
                     "Jeremy Belpois" + n + "xx:00" + n +
                     "copper, iron, gold, uranium, steel. The basic ingredients for all things tech. well Uranium is" +
-                    n + "part of the reactor's functionality" + page + "enclosed is the recipe for a basic component of a computer");
-            final String thisEntry;
+                    n + "part of the reactor's functionality" + page + "enclosed is the recipe for a basic component " +
+                    "of a computer"),
+            ENTRY3("Entry 3:" +n+
+                    "xxx/xx/xx" +n+
+                    "Jeremy Belpois" + n + "xx:00" + n +
+                    "while adventuring around the internet, I've discovered something strange about how the super " +
+                    "computers all work" + n +
+                    "the digital space doesn't appear to exist within the same laws of physics that we do and as " +page+
+                    "such, there are nodes that appear to originate from other universes entirely, which by all logic" +
+                    " should be impossible. I must do more research.");
+            private final String thisEntry;
 
             EntryList(final String thisEntry) {
                 this.thisEntry = thisEntry;

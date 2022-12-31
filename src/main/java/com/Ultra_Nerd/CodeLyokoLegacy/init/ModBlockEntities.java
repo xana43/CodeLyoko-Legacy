@@ -1,7 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.PlayerProfileDebug;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.ComputerInterfaceTestTE;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.PlayerDataStorage;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.VehicleBE;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
@@ -47,6 +50,11 @@ public record ModBlockEntities() {
             FabricBlockEntityTypeBuilder.create(ComputerInterfaceTestTE::new,ModBlocks.TESTUI).build();
     public static final BlockEntityType<HologramProjectorTileEntity> HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(HologramProjectorTileEntity::new,ModBlocks.TEST_SPHERE).build();
+    //tests
+    public static final BlockEntityType<PlayerDataStorage> PLAYER_DATA_STORAGE_BLOCK_ENTITY_TYPE =
+            FabricBlockEntityTypeBuilder.create(PlayerDataStorage::new,ModBlocks.TEST_PROFILE).build();
+    public static final BlockEntityType<VehicleBE> VEHICLE_BE_BLOCK_ENTITY_TYPE =
+            FabricBlockEntityTypeBuilder.create(VehicleBE::new,ModBlocks.TEST_VECHICLE_INTERFACE).build();
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String, BlockEntityType<?>>builder()
 
             .put("lyoko_core", LYOKO_CORE).put("tower_interface_tile_entity", TOWER_INTERFACE_TILE_ENTITY)
@@ -60,7 +68,9 @@ public record ModBlockEntities() {
             .put("computer_core_blockentity",COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE)
             .put("keyboard_blockentity",KEYBOARD_BLOCK_ENTITY)
             .put("test_ui",COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE)
-            .put("hologram_projector",HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE).build();
+            .put("hologram_projector",HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE)
+            .put("player_data_test",PLAYER_DATA_STORAGE_BLOCK_ENTITY_TYPE)
+            .put("vehicle_matter_test",VEHICLE_BE_BLOCK_ENTITY_TYPE).build();
 
 
     //

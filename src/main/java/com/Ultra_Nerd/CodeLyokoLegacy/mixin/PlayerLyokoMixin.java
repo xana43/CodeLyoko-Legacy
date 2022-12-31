@@ -2,6 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
@@ -40,6 +42,7 @@ public abstract class PlayerLyokoMixin {
                 Blocks.SMOOTH_QUARTZ_STAIRS);
     }
 
+    @Environment(EnvType.CLIENT)
     @Inject(method = "swingHand(Lnet/minecraft/util/Hand;)V", at = @At("HEAD"))
     public void swingSound(final CallbackInfo ci) {
         final MinecraftClient mc = MinecraftClient.getInstance();

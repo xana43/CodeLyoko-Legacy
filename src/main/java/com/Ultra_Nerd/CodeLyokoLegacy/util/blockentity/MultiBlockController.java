@@ -28,67 +28,26 @@ public abstract class MultiBlockController extends BlockEntity implements Master
     public boolean getCheckSuccessful() {
         return this.checkSuccessful;
     }
-
+    //TODO: get this working properly
     @Override
     public void check() {
         if (world != null) {
 
-            if (currentPattern.searchAround(world, this.pos) != null) {
-                if(world.getBlockState(pos).get(HorizontalFacingBlock.FACING) == Direction.NORTH) {
-                    for (int x = -2; x < currentPattern.getWidth() - 1; ++x) {
-                        for (int y = 0; y < currentPattern.getHeight(); ++y) {
-                            for (int z = 0; z < currentPattern.getDepth(); ++z) {
-                                final BlockPos posOffset = new BlockPos(this.pos.getX() + x, this.pos.getY() + y,
-                                        this.pos.getZ() + z);
-                                final BlockState checkedState = world.getBlockState(posOffset);
-                                if (checkedState.contains(this.thisProperty)) {
-                                    world.setBlockState(posOffset, checkedState.with(this.thisProperty, true));
+            if (currentPattern.searchAround(world, pos) != null) {
+                for (int x = -2; x < currentPattern.getWidth() - 1; ++x) {
+                    for (int y = 0; y < currentPattern.getHeight(); ++y) {
+                        for (int z = 0; z < currentPattern.getDepth(); ++z) {
+                            final BlockPos posOffset = new BlockPos(this.pos.getX() + x, this.pos.getY() + y,
+                                    this.pos.getZ() + z);
+                            final BlockState checkedState = world.getBlockState(posOffset);
+                            if (checkedState.contains(this.thisProperty)) {
+                                world.setBlockState(posOffset, checkedState.with(this.thisProperty, true));
 
-                                }
-                                world.addParticle(ModParticles.TOWER_PARTICLE, true, posOffset.getX(),
-                                        posOffset.getY(),
-                                        posOffset.getZ(), 0, 0, 0);
-                                this.checkSuccessful = true;
                             }
-                        }
-                    }
-                }
-                else if (world.getBlockState(this.pos).get(HorizontalFacingBlock.FACING) == Direction.SOUTH) {
-                    CodeLyokoMain.LOG.info("Facing south");
-                    for (int x = -2; x < currentPattern.getWidth() - 1; ++x) {
-                        for (int y = 0; y < currentPattern.getHeight(); ++y) {
-                            for (int z = 0; z < currentPattern.getDepth(); ++z) {
-                                final BlockPos posOffset = new BlockPos(this.pos.getX() + x,this. pos.getY() + y,
-                                        this.pos.getZ() - z);
-                                final BlockState checkedState = world.getBlockState(posOffset);
-                                if (checkedState.contains(this.thisProperty)) {
-                                    world.setBlockState(posOffset, checkedState.with(this.thisProperty, true));
-
-                                }
-                                world.addParticle(ModParticles.TOWER_PARTICLE, true, posOffset.getX(),
-                                        posOffset.getY(),
-                                        posOffset.getZ(), 0, 0, 0);
-                                this.checkSuccessful = true;
-                            }
-                        }
-                    }
-                }
-                else if (world.getBlockState(this.pos).get(HorizontalFacingBlock.FACING) == Direction.WEST) {
-                    CodeLyokoMain.LOG.info("Facing south");
-                    for (int x = -2; x < currentPattern.getDepth() - 1; ++x) {
-                        for (int y = 0; y < currentPattern.getHeight(); ++y) {
-                            for (int z = 0; z < currentPattern.getWidth(); ++z) {
-                                final BlockPos posOffset = new BlockPos(this.pos.getX() + x,this. pos.getY() + y,
-                                        this.pos.getZ() + z);
-                                final BlockState checkedState = world.getBlockState(posOffset);
-                                if (checkedState.contains(this.thisProperty)) {
-                                    world.setBlockState(posOffset, checkedState.with(this.thisProperty, true));
-                                }
-                                world.addParticle(ModParticles.TOWER_PARTICLE, true, posOffset.getX(),
-                                        posOffset.getY(),
-                                        posOffset.getZ(), 0, 0, 0);
-                                this.checkSuccessful = true;
-                            }
+                            world.addParticle(ModParticles.TOWER_PARTICLE, true, posOffset.getX(),
+                                    posOffset.getY(),
+                                    posOffset.getZ(), 0, 0, 0);
+                            this.checkSuccessful = true;
                         }
                     }
                 }

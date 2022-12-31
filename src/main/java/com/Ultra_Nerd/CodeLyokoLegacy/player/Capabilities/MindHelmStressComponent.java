@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
 import net.minecraft.nbt.NbtCompound;

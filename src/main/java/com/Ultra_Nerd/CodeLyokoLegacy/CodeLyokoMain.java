@@ -98,7 +98,7 @@ public record CodeLyokoMain() implements ModInitializer {
                         if (world.getBlockEntity(
                                 checkedPos) instanceof MultiBlockController multiBlockController && world.isChunkLoaded(
                                 ChunkSectionPos.getSectionCoord(checkedPos.getX()),
-                                ChunkSectionPos.getSectionCoord(checkedPos.getZ()))) {
+                                ChunkSectionPos.getSectionCoord(checkedPos.getZ())) && !world.isClient()) {
                             if (!multiBlockController.getCheckSuccessful()) {
                                 multiBlockController.check();
 
@@ -196,20 +196,7 @@ public record CodeLyokoMain() implements ModInitializer {
                 ModBlockEntities.COMPUTER_REACTOR_TILE_ENTITY);
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyStorage(),
                 ModBlockEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE);
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
 
-
-                {
-                    return switch (stack.getTranslationKey()) {
-                        case "item.cm.story_book" -> 0x00008B;
-                        case "item.cm.story_book2" -> ColorHelper.Argb.getArgb(255, 255, 0, 0);
-                        default -> 1;
-                    };
-
-                    //return 0x00008B;
-                }
-
-                , ModItems.STORY_BOOK, ModItems.STORY_BOOK2);
 
     }
 

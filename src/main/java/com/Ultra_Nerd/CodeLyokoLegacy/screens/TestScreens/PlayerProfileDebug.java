@@ -1,25 +1,31 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TestHandler.ProfileDebugScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
-import net.minecraft.client.gui.screen.Screen;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.world.WorldProperties;
-
-public final class PlayerProfileDebug extends Screen {
+@Environment(EnvType.CLIENT)
+public final class PlayerProfileDebug extends HandledScreen<ProfileDebugScreenHandler> {
     private final PlayerEntity callingPlayer;
     private final WorldProperties worldProperties;
-    public PlayerProfileDebug(final Text title,final PlayerEntity callingPlayer,final WorldProperties worldProperties) {
-        super(title);
-        this.callingPlayer = callingPlayer;
-        this.worldProperties = worldProperties;
-    }
+
     private TextWidget profileText;
+
+    public PlayerProfileDebug(final ProfileDebugScreenHandler handler, final PlayerInventory inventory,
+            final Text title) {
+        super(handler, inventory, title);
+        this.callingPlayer = handler.getPlayer();
+        this.worldProperties = handler.getWorldProperties();
+    }
+
     @Override
     protected void init() {
         super.init();
@@ -43,6 +49,11 @@ public final class PlayerProfileDebug extends Screen {
                         callingPlayer).getPlayerClassType()),width >> 1, height >> 2, ColorHelper.Argb.getArgb(255,
                         255,255,255));
 
+
+    }
+
+    @Override
+    protected void drawBackground(final MatrixStack matrices, final float delta, final int mouseX, final int mouseY) {
 
     }
 }

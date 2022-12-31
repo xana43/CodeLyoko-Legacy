@@ -38,7 +38,29 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         registry.registerForPlayers(ReturnToScanner.RETURN_TO_SCANNER, PlayerScannerComponent::new,RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(HumanDNAAttribute.HUMAN_DNA_COMPONENT_KEY, HumanDNA::new, RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(CellularDamage.DEGENERATION_COMPONENT_KEY,CellularDegeneration::new);
+        registry.registerForPlayers(DigitalEnergyComponent.DIGITAL_ENERGY_COMPONENT_KEY,(player -> new DigitalEnergy()));
         registry.registerFor(EntitySkid.class,SkidBladnirNavData.SKID_BLADNIR_DATA_COMPONENT_KEY,SkidBladnirData::new);
+    }
+    public record DigitalEnergyComponent()
+    {
+        private static final ComponentKey<DigitalEnergy> DIGITAL_ENERGY_COMPONENT_KEY =
+                ComponentRegistry.getOrCreate(CodeLyokoMain.codeLyokoPrefix("digital_energy"), DigitalEnergy.class);
+        public static ComponentKey<DigitalEnergy> getDigitalEnergyComponentKey()
+        {
+            return DIGITAL_ENERGY_COMPONENT_KEY;
+        }
+
+        public static boolean tryUseEnergy(final PlayerEntity player, final int energyUsage)
+        {
+            final boolean isEnergyUsed = DIGITAL_ENERGY_COMPONENT_KEY.get(player).useEnergy(energyUsage);
+            DIGITAL_ENERGY_COMPONENT_KEY.sync(player);
+            return isEnergyUsed;
+        }
+        public static void regenerateEnergy(final PlayerEntity player)
+        {
+            DIGITAL_ENERGY_COMPONENT_KEY.get(player).regenerateEnergy();
+            DIGITAL_ENERGY_COMPONENT_KEY.sync(player);
+        }
     }
     public record SkidBladnirNavData()
     {
