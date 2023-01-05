@@ -2,10 +2,13 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
+import net.minecraft.block.BeaconBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BeaconBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.LecternBlockEntity;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
@@ -32,7 +35,6 @@ public abstract class MultiBlockController extends BlockEntity implements Master
     @Override
     public void check() {
         if (world != null) {
-
             if (currentPattern.searchAround(world, pos) != null) {
                 for (int x = -2; x < currentPattern.getWidth() - 1; ++x) {
                     for (int y = 0; y < currentPattern.getHeight(); ++y) {
