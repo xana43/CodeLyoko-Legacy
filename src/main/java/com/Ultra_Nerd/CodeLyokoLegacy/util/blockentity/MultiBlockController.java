@@ -1,25 +1,24 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 
 public abstract class MultiBlockController extends BlockEntity implements MasterEntity {
+    private static final String CHECK_KEY = "is_check_successful";
     private final BlockPattern currentPattern;
     private final BooleanProperty thisProperty;
     protected boolean checkSuccessful;
 
-    public MultiBlockController(final BlockEntityType<?> type, final BlockPos pos, final BlockState state,
-            final BlockPattern pattern, final BooleanProperty stateProperty) {
+    public MultiBlockController(final BlockEntityType<?> type, final BlockPos pos, final BlockState state, final BlockPattern pattern, final BooleanProperty stateProperty) {
         super(type, pos, state);
         currentPattern = pattern;
         this.thisProperty = stateProperty;
@@ -28,6 +27,7 @@ public abstract class MultiBlockController extends BlockEntity implements Master
     public boolean getCheckSuccessful() {
         return this.checkSuccessful;
     }
+
     //TODO: get this working properly
     @Override
     public void check() {
@@ -44,8 +44,7 @@ public abstract class MultiBlockController extends BlockEntity implements Master
                                 world.setBlockState(posOffset, checkedState.with(this.thisProperty, true));
 
                             }
-                            world.addParticle(ModParticles.TOWER_PARTICLE, true, posOffset.getX(),
-                                    posOffset.getY(),
+                            world.addParticle(ModParticles.TOWER_PARTICLE, true, posOffset.getX(), posOffset.getY(),
                                     posOffset.getZ(), 0, 0, 0);
                             this.checkSuccessful = true;
                         }
@@ -56,9 +55,19 @@ public abstract class MultiBlockController extends BlockEntity implements Master
 
                 invalidateEntity();
             }
-
+            world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_LISTENERS);
 
         }
+    }
+
+    @Override
+    public BlockEntityUpdateS2CPacket toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return this.createNbt();
     }
 
     @Override
@@ -82,11 +91,11 @@ public abstract class MultiBlockController extends BlockEntity implements Master
             }
         }
     }
-    private static final String CHECK_KEY = "is_check_successful";
+
     @Override
     protected void writeNbt(final NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putBoolean(CHECK_KEY,checkSuccessful);
+        nbt.putBoolean(CHECK_KEY, checkSuccessful);
     }
 
     @Override
