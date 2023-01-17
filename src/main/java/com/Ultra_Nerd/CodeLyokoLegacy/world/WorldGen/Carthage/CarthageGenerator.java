@@ -1,25 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Common.CustomGenSettings;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.structure.StructureSet;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
@@ -33,10 +24,8 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
-import java.util.function.Function;
 
 public final class CarthageGenerator extends ChunkGenerator {
 
@@ -47,57 +36,57 @@ public final class CarthageGenerator extends ChunkGenerator {
                             Codec.FLOAT.fieldOf("verticalvariance").forGetter(CustomGenSettings::verticalVariance),
                             Codec.FLOAT.fieldOf("horizontalvariance").forGetter(CustomGenSettings::horizontalVariance))
                     .apply(settingsInstance, CustomGenSettings::new));
-
-    public CarthageGenerator(final BiomeSource biomeSource, final Function<RegistryEntry<Biome>, GenerationSettings> generationSettingsGetter) {
-        super(biomeSource, generationSettingsGetter);
-    }
-   /* public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCodecBuilder.create(
+    public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCodecBuilder.create(
             carthageGeneratorInstance ->
                     carthageGeneratorInstance.group(
-                            RegistryOps.getEntryCodec(RegistryKeys.STRUCTURE_SET)
-                                    .(CarthageGenerator::getStructRegistry),
-                            RegistryOps.createRegistryCodec(Registry.BIOME_KEY)
-                                    .forGetter(CarthageGenerator::getThisBiomeRegistry),
+                            //RegistryOps.getEntryCodec(RegistryKeys.STRUCTURE_SET).dependent
+                            // (CarthageGenerator::getStructRegistry),
+                            BiomeSource.CODEC.fieldOf("biome_source")
+                                    .forGetter(carthageGenerator -> carthageGenerator.biomeSource),
                             SETTINGS_CODEC.fieldOf("settings").forGetter(CarthageGenerator::getCarthageSettings)
+
                     ).apply(carthageGeneratorInstance, CarthageGenerator::new)
-    );*/
+    );
+    private final CustomGenSettings settings;
 
-    //private final CustomGenSettings settings;
 
-    //private final Registry<StructureSet> structureSets;
-   /* public CarthageGenerator(@NotNull Registry<StructureSet> structureSets, Registry<Biome> registry,
-            CustomGenSettings settings) {
-        super(structureSets, getSet(structureSets), new CarthageBiomeProvider(registry));
+    public CarthageGenerator(final BiomeSource biomeSource,
+            final CustomGenSettings settings) {
+        super(biomeSource);
         this.settings = settings;
-        //this.structureSets = structureSets;
-
-    }*/
+    }
 
 
-    private static @NotNull Optional<RegistryEntryList<StructureSet>> getSet(@NotNull Registry<StructureSet> thisStructureRegistry) {
+
+
+
+
+   /* private static @NotNull Optional<RegistryEntryList<StructureSet>> getSet(@NotNull Registry<StructureSet>
+   thisStructureRegistry) {
+
         RegistryEntryList.Named<StructureSet> structureSetNamed = thisStructureRegistry.getOrCreateEntryList(
                 TagKey.of(RegistryKeys.STRUCTURE_SET,
                         CodeLyokoMain.codeLyokoPrefix("carthage_chunkgen_struct")));
         return Optional.of(structureSetNamed);
-    }
+    }*/
 
-    public Registry<Biome> getThisBiomeRegistry() {
-        return null;//((CarthageBiomeProvider) biomeSource).getBiomeRegistry();
-    }
+    //public Registry<Biome> getThisBiomeRegistry() {
+    //  return null;//((CarthageBiomeProvider) biomeSource).getBiomeRegistry();
+    //}
 
 
-    public @NotNull Registry<StructureSet> getStructRegistry() {
+   /* public @NotNull Registry<StructureSet> getStructRegistry() {
         return null; //structureSetRegistry;
-    }
+    }*/
 
     public CustomGenSettings getCarthageSettings() {
-        return null;//settings;
+        return settings;
     }
 
 
     @Override
     protected @NotNull Codec<? extends ChunkGenerator> getCodec() {
-        return null;// CARTHAGE_GENERATOR_CODEC;
+        return CARTHAGE_GENERATOR_CODEC;
     }
 
     @Override
@@ -232,11 +221,11 @@ public final class CarthageGenerator extends ChunkGenerator {
 
     @Override
     public int getHeightOnGround(final int x, final int z, final Heightmap.Type heightmap, final HeightLimitView world, final NoiseConfig config) {
-        //final int baseHeight = settings.baseHeight();
-        //final float verticalVariance = settings.verticalVariance();
-        //final float horizontalVariance = settings.horizontalVariance();
+        final int baseHeight = settings.baseHeight();
+        final float verticalVariance = settings.verticalVariance();
+        final float horizontalVariance = settings.horizontalVariance();
 
-        return 0;//getHeightAt(baseHeight, verticalVariance, horizontalVariance, x, z);
+        return getHeightAt(baseHeight, verticalVariance, horizontalVariance, x, z);
     }
 
     @Override

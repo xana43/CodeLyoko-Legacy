@@ -33,8 +33,7 @@ public final class KankrelatEntity extends HostileEntity implements GeoAnimatabl
     @Override
     public void registerControllers(@NotNull AnimatableManager.ControllerRegistrar data) {
         data.add(controller);
-    }    private final AnimationController<?> controller = new AnimationController<>(this, "kankrelatcontroller", 20,
-            this::animationPred);
+    }
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
@@ -45,6 +44,12 @@ public final class KankrelatEntity extends HostileEntity implements GeoAnimatabl
     public double getTick(final Object o) {
         return 0;
     }
+    private final AnimationController<?> controller = new AnimationController<>(this, "kankrelatcontroller", 20,
+            this::animationPred);
+
+
+
+
 
 
 

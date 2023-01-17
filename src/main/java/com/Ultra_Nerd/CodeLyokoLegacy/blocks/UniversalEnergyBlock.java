@@ -39,7 +39,7 @@ public final class UniversalEnergyBlock extends BlockWithEntity {
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
 
         final BlockEntity be = world.getBlockEntity(pos);
-        if (be instanceof UniversalEnergyStorageTileEntity universalEnergyStorageTile && world.isClient()) {
+        if (be instanceof final UniversalEnergyStorageTileEntity universalEnergyStorageTile && world.isClient()) {
             player.sendMessage(Text.of("Energy Amount: " + universalEnergyStorageTile.getCurrentAmount()), false);
         }
         return ActionResult.SUCCESS;
@@ -66,7 +66,7 @@ public final class UniversalEnergyBlock extends BlockWithEntity {
 
 
         final BlockEntity be = world.getBlockEntity(pos);
-        if (be instanceof UniversalEnergyStorageTileEntity universalEnergyStorageTile) {
+        if (be instanceof final UniversalEnergyStorageTileEntity universalEnergyStorageTile) {
             universalEnergyStorageTile.setEnergyAmount(0);
         }
 

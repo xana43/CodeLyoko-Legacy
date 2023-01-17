@@ -10,6 +10,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.PlaceBlockEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageBiomeProvider;
+import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -160,14 +162,10 @@ public record CodeLyokoMain() implements ModInitializer {
         ModBlockEntities.BLOCKENTITY_MAP.forEach(
                 (s, blockEntityType) -> Registry.register(Registries.BLOCK_ENTITY_TYPE, codeLyokoPrefix(s),
                         blockEntityType));
-        //ModSounds.SOUNDS.forEach(soundEvent -> Registry.register(Registry.SOUND_EVENT,soundEvent.getId(),soundEvent))
         for (int i = 0; i < ModSounds.SOUNDS.length; i++) {
 
             Registry.register(Registries.SOUND_EVENT, ModSounds.SOUNDS[i].getId(), ModSounds.SOUNDS[i]);
         }
-        //ModBiome.BIOME_MAP.forEach((s, biome) -> Registry.register(,
-        //      codeLyokoPrefix(s),
-        //biome));
         ModEntities.ENTITY_TYPE_HASH_MAP.forEach(
                 (s, entityType) -> Registry.register(Registries.ENTITY_TYPE, codeLyokoPrefix(s), entityType));
         ModFluids.FLUID_IMMUTABLE_MAP.forEach(
@@ -176,10 +174,8 @@ public record CodeLyokoMain() implements ModInitializer {
         ModParticles.PARTICLE_TYPE_IMMUTABLE_MAP.forEach(
                 (s, defaultParticleType) -> Registry.register(Registries.PARTICLE_TYPE, codeLyokoPrefix(s),
                         defaultParticleType));
-        //Registry.register(Registries.CHUNK_GENERATOR, codeLyokoPrefix("carthage_chunkgen"),
-        //  CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
-        //Registry.register(Registries.BIOME_SOURCE, codeLyokoPrefix("carthage_biome"),
-        //    CarthageBiomeProvider.CARTHAGE_BIOME_PROVIDER_CODEC);
+        Registry.register(Registries.CHUNK_GENERATOR, codeLyokoPrefix("carthage_chunkgen"),
+          CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
         ModScreenHandlers.screenHandlerMap.forEach(
                 (s, screenHandlerType) -> Registry.register(Registries.SCREEN_HANDLER, codeLyokoPrefix(s),
                         screenHandlerType));

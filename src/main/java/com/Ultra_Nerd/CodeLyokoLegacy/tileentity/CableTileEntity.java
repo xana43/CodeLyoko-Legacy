@@ -32,7 +32,7 @@ public final class CableTileEntity extends BlockEntity {
     }
 
     public static void appendToMaster(final BlockPos appendPosition, final BlockPos masterPos, final World world) {
-        if (world.getBlockEntity(masterPos) instanceof CableTileEntity cableTileEntity) {
+        if (world.getBlockEntity(masterPos) instanceof final CableTileEntity cableTileEntity) {
             if (cableTileEntity.isMaster && !cableTileEntity.connectedPositions.contains(appendPosition)) {
                 cableTileEntity.connectedPositions.add(appendPosition);
             }
@@ -40,7 +40,7 @@ public final class CableTileEntity extends BlockEntity {
     }
 
     public static void removeFromMaster(final BlockPos appendPosition, final BlockPos masterPos, final World world) {
-        if (world.getBlockEntity(masterPos) instanceof CableTileEntity cableTileEntity) {
+        if (world.getBlockEntity(masterPos) instanceof final CableTileEntity cableTileEntity) {
             cableTileEntity.connectedPositions.remove(appendPosition);
         }
     }
@@ -81,9 +81,9 @@ public final class CableTileEntity extends BlockEntity {
 
         for (final Direction dir : Direction.values()) {
 
-            BlockPos checkedPos = pos.offset(dir, offset);
+            final BlockPos checkedPos = pos.offset(dir, offset);
             if (world.getBlockState(checkedPos).isOf(ModBlocks.CABLE_BLOCK)) {
-                if (world.getBlockEntity(checkedPos) instanceof CableTileEntity cableTile) {
+                if (world.getBlockEntity(checkedPos) instanceof final CableTileEntity cableTile) {
                     if (cableTile.isMaster) {
                         currentMaster = checkedPos;
                         appendToMaster(pos, checkedPos, world);
@@ -107,7 +107,7 @@ public final class CableTileEntity extends BlockEntity {
         for (final Direction dir : Direction.values()) {
             final BlockPos nextPosition = pos.offset(dir, 1);
             if (world.getBlockState(nextPosition).isOf(ModBlocks.CABLE_BLOCK)) {
-                if (world.getBlockEntity(pos) instanceof CableTileEntity tileEntity) {
+                if (world.getBlockEntity(pos) instanceof final CableTileEntity tileEntity) {
                     if (tileEntity.isMaster && this.isMaster) {
                         final int chose = random.nextInt(0, 1);
                         if (chose == 1) {

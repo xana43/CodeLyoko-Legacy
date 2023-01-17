@@ -21,7 +21,7 @@ import java.util.List;
 
 public record EntryPool() {
     private static abstract class BaseEntry extends WrittenBookItem {
-        private StringVisitable[] visitables;
+        private StringVisitable[] visitable;
 
         public BaseEntry(@NotNull Settings builder) {
             super(builder);
@@ -36,14 +36,14 @@ public record EntryPool() {
         @Override
         public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
             if (world.isClient) {
-                MinecraftClient.getInstance()
-                        .setScreen(new StoryBookGUI(visitables, MethodUtil.TextUtil.textArrayLengthToPage(visitables)));
+                MinecraftClient.getInstance().setScreen(new StoryBookGUI(
+                        visitable, MethodUtil.TextUtil.textArrayLengthToPage(visitable)));
             }
             return super.use(world, user, hand);
         }
 
         protected void setScreen(final StringVisitable[] entry) {
-            visitables = entry;
+            visitable = entry;
         }
     }
 

@@ -49,7 +49,7 @@ public final class ScannerTileEntity extends MultiBlockController {
     }
 
     public void virtualizePlayer() {
-        if (this.world instanceof ServerWorld serverWorld) {
+        if (this.world instanceof final ServerWorld serverWorld) {
             final MinecraftServer mcs = serverWorld.getServer();
             final ServerWorld serverWorld1 = mcs.getWorld(destinationWorld);
             final ServerPlayerEntity player = (ServerPlayerEntity) serverWorld.getClosestPlayer(this.pos.getX(),

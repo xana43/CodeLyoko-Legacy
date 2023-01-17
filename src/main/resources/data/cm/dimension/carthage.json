@@ -1,10 +1,15 @@
 {
   "type":"cm:carthage_type",
   "generator": {
-    "type": "minecraft:noise",
-    "settings": "minecraft:end",
+    "type": "cm:carthage_chunkgen",
+    "settings": {
+      "base": 10,
+      "verticalvariance": 10,
+      "horizontalvariance": 10
+    },
     "biome_source": {
-      "type": "minecraft:the_end"
+      "type": "minecraft:fixed",
+      "biome": "cm:sector5"
     }
   }
 

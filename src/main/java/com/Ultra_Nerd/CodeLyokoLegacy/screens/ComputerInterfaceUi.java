@@ -213,31 +213,32 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
         drawCenteredText(matrixStack, textRenderer, DNASnipHelix2, (int) (this.width / 3.5f),
                 (int) (this.height * 1.06f), ColorHelper.Argb.getArgb(255, 255, 255, 255));
     }
-
     private void drawPlayerClasses(final PlayerProfile playerProfile, final MatrixStack matrixStack, final TextRenderer textRenderer) {
+        final int classWidth = (int)(this.width / 3.5f);
+        final int classHeight = (int)(this.height/1.2f);
         final int color = ColorHelper.Argb.getArgb(255, 255, 255, 255);
         final MutableText prependClass = Text.translatable("lyoko.screen.class").append(":");
         switch (playerProfile.getPlayerClassType()) {
             case 0 -> drawCenteredText(matrixStack, textRenderer,
                     prependClass.append(Text.translatable("lyoko.class.feline"))
-                            .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), (int) (this.width / 3.5f),
-                    (int) (this.height / 1.2f), color);
+                            .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), classWidth,
+                    classHeight, color);
             case 1 -> drawCenteredText(matrixStack, textRenderer,
                     prependClass.append(Text.translatable("lyoko.class.samurai"))
-                            .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), (int) (this.width / 3.5f),
-                    (int) (this.height / 1.2f), color);
+                            .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), classWidth,
+                    classHeight, color);
             case 2 -> drawCenteredText(matrixStack, textRenderer,
                     prependClass.append(Text.translatable("lyoko.class.ninja"))
-                            .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), (int) (this.width / 3.5f),
-                    (int) (this.height / 1.2f), color);
+                            .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), classWidth,
+                    classHeight, color);
             case 3 -> drawCenteredText(matrixStack, textRenderer,
                     prependClass.append(Text.translatable("lyoko.class.guardian"))
-                            .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), (int) (this.width / 3.5f),
-                    (int) (this.height / 1.2f), color);
+                            .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), classWidth,
+                    classHeight, color);
             case 4 -> drawCenteredText(matrixStack, textRenderer,
                     prependClass.append(Text.translatable("lyoko.class.warrior"))
-                            .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), (int) (this.width / 3.5f),
-                    (int) (this.height / 1.2f), color);
+                            .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), classWidth,
+                    classHeight, color);
         }
     }
 

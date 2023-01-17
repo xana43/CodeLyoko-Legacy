@@ -47,7 +47,7 @@ public final class LaptopCharger extends HorizontalFacingBlock implements BlockE
         final BlockEntity be = world.getBlockEntity(pos);
         world.updateListeners(pos, state, state, Block.NOTIFY_LISTENERS);
 
-        if (be instanceof LaptopChargerBlockEntityInventory chargerBlockEntity) {
+        if (be instanceof final LaptopChargerBlockEntityInventory chargerBlockEntity) {
             chargerBlockEntity.update();
             final ItemStack laptop = player.getStackInHand(hand);
             if (laptop.isOf(ModItems.JEREMY_LAPTOP)) {
@@ -65,8 +65,8 @@ public final class LaptopCharger extends HorizontalFacingBlock implements BlockE
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
         return (world1, pos, state1, blockEntity) -> {
-            if (blockEntity instanceof LaptopChargerBlockEntityInventory) {
-                ((LaptopChargerBlockEntityInventory) blockEntity).tick();
+            if (blockEntity instanceof final LaptopChargerBlockEntityInventory chargerBlock) {
+                chargerBlock.tick();
             }
         };
     }
@@ -80,7 +80,7 @@ public final class LaptopCharger extends HorizontalFacingBlock implements BlockE
     @Override
     public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
         super.onBreak(world, pos, state, player);
-        if (world.getBlockEntity(pos) instanceof LaptopChargerBlockEntityInventory chargerBlockEntity) {
+        if (world.getBlockEntity(pos) instanceof final LaptopChargerBlockEntityInventory chargerBlockEntity) {
             chargerBlockEntity.getItems().forEach(itemStack -> Block.dropStack(world, pos, itemStack));
         }
     }

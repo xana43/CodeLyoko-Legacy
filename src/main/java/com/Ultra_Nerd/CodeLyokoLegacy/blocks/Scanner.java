@@ -326,7 +326,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
     @Override
     public void onPlaced(final World world, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack itemStack) {
         super.onPlaced(world, pos, state, placer, itemStack);
-        if(world.getBlockEntity(pos) instanceof MasterEntity masterEntity)
+        if(world.getBlockEntity(pos) instanceof final MasterEntity masterEntity)
         {
             masterEntity.check();
         }
@@ -346,7 +346,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
 
     @Override
     public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
-        if (world.getBlockEntity(pos) instanceof ScannerTileEntity scannerTile) {
+        if (world.getBlockEntity(pos) instanceof final ScannerTileEntity scannerTile) {
 
             scannerTile.invalidateEntity();
             time = 0;
@@ -364,7 +364,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
         return (world1, pos, state1, blockEntity) -> {
-            if (blockEntity instanceof ScannerTileEntity scannerTile) {
+            if (blockEntity instanceof final ScannerTileEntity scannerTile) {
 
                 time += 0.01f;
                 final float offset = (MathHelper.sin(time) * 1.2f) + 1.4f;

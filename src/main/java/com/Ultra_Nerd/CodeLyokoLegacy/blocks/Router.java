@@ -95,7 +95,7 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
     @Override
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
 
-        if (world.getBlockEntity(pos) instanceof RouterTE routerTE) {
+        if (world.getBlockEntity(pos) instanceof final RouterTE routerTE) {
 
             switch (state.get(FACING)) {
                 case NORTH -> routerTE.connectToRouter(pos.offset(Direction.NORTH, 1));
