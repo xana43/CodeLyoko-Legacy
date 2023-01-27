@@ -49,7 +49,10 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         {
             return DIGITAL_ENERGY_COMPONENT_KEY;
         }
-
+        public static int getCurrentEnergy(final PlayerEntity player)
+        {
+            return DIGITAL_ENERGY_COMPONENT_KEY.get(player).getCurrentEnergy();
+        }
         public static boolean tryUseEnergy(final PlayerEntity player, final int energyUsage)
         {
             final boolean isEnergyUsed = DIGITAL_ENERGY_COMPONENT_KEY.get(player).useEnergy(energyUsage);
@@ -59,6 +62,15 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         public static void regenerateEnergy(final PlayerEntity player)
         {
             DIGITAL_ENERGY_COMPONENT_KEY.get(player).regenerateEnergy();
+            DIGITAL_ENERGY_COMPONENT_KEY.sync(player);
+        }
+        public static boolean isUsingenergy(final PlayerEntity player)
+        {
+            return DIGITAL_ENERGY_COMPONENT_KEY.get(player).isUsingEnergy();
+        }
+        public static void setIsUsingEnergy(final PlayerEntity player,final boolean isUsingEnergy)
+        {
+            DIGITAL_ENERGY_COMPONENT_KEY.get(player).setUsingEnergy(isUsingEnergy);
             DIGITAL_ENERGY_COMPONENT_KEY.sync(player);
         }
     }

@@ -7,15 +7,14 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.Models.GlobalOBJModels;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.PlaceBlockEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageBiomeProvider;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
@@ -50,7 +49,6 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkSectionPos;
-import net.minecraft.util.math.ColorHelper;
 import net.minecraft.world.gen.GenerationStep;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -59,6 +57,7 @@ import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
 import team.reborn.energy.api.EnergyStorage;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -175,7 +174,7 @@ public record CodeLyokoMain() implements ModInitializer {
                 (s, defaultParticleType) -> Registry.register(Registries.PARTICLE_TYPE, codeLyokoPrefix(s),
                         defaultParticleType));
         Registry.register(Registries.CHUNK_GENERATOR, codeLyokoPrefix("carthage_chunkgen"),
-          CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
+                CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
         ModScreenHandlers.screenHandlerMap.forEach(
                 (s, screenHandlerType) -> Registry.register(Registries.SCREEN_HANDLER, codeLyokoPrefix(s),
                         screenHandlerType));
@@ -330,16 +329,24 @@ public record CodeLyokoMain() implements ModInitializer {
 
             if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(oldPlayer)) {
                 newPlayer.experienceLevel = oldPlayer.experienceLevel;
-            }
-            if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(oldPlayer)) {
                 CardinalData.CellularDamage.getCellComponentKey().get(newPlayer)
                         .copyFrom(CardinalData.CellularDamage.getCellComponentKey().get(oldPlayer));
             }
+        });
+        //regenerates the player's digital energy
+        ServerTickEvents.END_SERVER_TICK.register(world -> {
+            for (final ServerPlayerEntity player : world.getPlayerManager().getPlayerList()) {
+                if((world.getTicks() >> 3) % 5 == 0 && !CardinalData.DigitalEnergyComponent.isUsingenergy(player)) {
+                    CardinalData.DigitalEnergyComponent.regenerateEnergy(player);
+                }
+            }
+
         });
     }
 
     @Override
     public void onInitialize() {
+        GlobalOBJModels.loadModels();
         GeckoLib.initialize();
         PacketHandlerCommon.commonChannelRegistry();
         generalRegistration();
@@ -347,7 +354,7 @@ public record CodeLyokoMain() implements ModInitializer {
         registerDefaultAttributes();
         registerEnergyStorageBE();
         checkWorld();
-
+        //CodeLyokoMain.LOG.info(String.valueOf(GlobalOBJModels.LYOKO_CORE.isInitialized()));
     }
 
 

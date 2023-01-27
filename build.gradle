@@ -76,7 +76,7 @@ dependencies {
 	include modApi("teamreborn:energy:${energy_api_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
-
+	include modImplementation("com.github.0x3C50:Renderer:master-SNAPSHOT")
 
 }
 sourceSets{

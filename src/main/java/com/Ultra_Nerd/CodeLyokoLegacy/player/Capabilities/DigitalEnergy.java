@@ -9,21 +9,34 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class DigitalEnergy implements AutoSyncedComponent, PlayerComponent<DigitalEnergy> {
 
 
-    private static final int MAX_ENERGY = 40;
+    private static final int MAX_ENERGY = 128;
     private static final String DIGITAL_ENERGY_KEY = "digital_energy";
     private int currentEnergy = MAX_ENERGY;
-
+    private boolean isUsingEnergy = false;
     public boolean useEnergy(final int energyUsage) {
-        if (currentEnergy > 0 && currentEnergy > energyUsage) {
+        if (currentEnergy > 0 && currentEnergy >= energyUsage) {
             currentEnergy -= energyUsage;
+            isUsingEnergy = true;
             return true;
         }
+        isUsingEnergy = false;
         return false;
     }
+    public void setUsingEnergy(final boolean isUsingEnergy)
+    {
+        this.isUsingEnergy = isUsingEnergy;
+    }
+    public boolean isUsingEnergy() {
+        return isUsingEnergy;
+    }
 
+    public int getCurrentEnergy()
+    {
+        return currentEnergy;
+    }
     public void regenerateEnergy() {
         if (currentEnergy < MAX_ENERGY) {
-            currentEnergy += ThreadLocalRandom.current().nextInt(1, 4);
+            currentEnergy += ThreadLocalRandom.current().nextInt(1, 2);
         } else if (currentEnergy > MAX_ENERGY) {
             currentEnergy = MAX_ENERGY;
         }

@@ -7,6 +7,9 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -62,11 +65,33 @@ public record PacketHandlerCommon() {
                 ServerPlayNetworking.send(player, ClassScreenIDClient, ByteBuf);
             });
         });
+        record ClassEffects()
+        {
+            record Samurai()
+            {
+                public static final StatusEffectInstance SUPER_SPRINT = new StatusEffectInstance(StatusEffects.SPEED,
+                        -1, 128, false, false, false);
+            }
+        }
         //TODO:add class specific abilities and tie them to the digital energy meter
         ServerPlayNetworking.registerGlobalReceiver(PRIMARY_CLASS_ABILITY,
                 (server, player, handler, buf, responseSender) -> {
-                    CodeLyokoMain.LOG.info("primary used");
+                    //if ((server.getTicks() >> 2) % 5 == 0) {
+                        if (CardinalData.DigitalEnergyComponent.tryUseEnergy(player, 1)) {
+                            switch (CardinalData.LyokoClass.getLyokoClass(player)) {
+                                case 0 -> {
+                                }
+                                case 1 -> {
+                                    player.addStatusEffect(ClassEffects.Samurai.SUPER_SPRINT);
+                                    if(player.isOnGround()) {
+                                        player.handleFallDamage(player.fallDistance, 0.3f, DamageSource.FALL);
+                                    }
+                                }
+                            }
+                        }
+                    //}
                 });
+
         ServerPlayNetworking.registerGlobalReceiver(SECONDARY_CLASS_ABILITY,
                 (server, player, handler, buf, responseSender) -> {
                     CodeLyokoMain.LOG.info("secondary used");

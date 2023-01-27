@@ -91,10 +91,10 @@ public record CodeLyokoClient() implements ClientModInitializer {
                         }
                         mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 6) - 1,
                                 (mc.getWindow().getScaledHeight() >> 11), texV, 0, 25,
-                                (int) ((12.7f) * mc.player.getHealth()));
+                                (int) ((mc.getWindow().getScaledHeight() >> 5) * (mc.player.getHealth() * 1.6f)));
                         mc.inGameHud.drawTexture(matrixStack, mc.getWindow().getScaledWidth() >> 4,
                                 mc.getWindow().getScaledHeight() >> 11, 183, 0, 6,
-                                (int) ((12.7f) * mc.player.getHealth()));
+                                (CardinalData.DigitalEnergyComponent.getCurrentEnergy(mc.player)) << 1);
 
                     }
 
@@ -281,16 +281,23 @@ public record CodeLyokoClient() implements ClientModInitializer {
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld, new CustomVolcanoSky());
 
         //custom key response
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+        ClientTickEvents.START_CLIENT_TICK.register(client -> {
 
             if (client.player != null) {
                 if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
                     if (classAbilityBinding1.isPressed()) {
+                        CardinalData.DigitalEnergyComponent.setIsUsingEnergy(client.player, true);
                         ClientPlayNetworking.send(PacketHandlerCommon.PRIMARY_CLASS_ABILITY, PacketByteBufs.empty());
+
                     }
-                    if (classAbilityBinding2.isPressed()) {
+                    else if (classAbilityBinding2.isPressed()) {
                         ClientPlayNetworking.send(PacketHandlerCommon.SECONDARY_CLASS_ABILITY, PacketByteBufs.empty());
                     }
+                    else
+                    {
+                        CardinalData.DigitalEnergyComponent.setIsUsingEnergy(client.player, false);
+                    }
+
                 }
             }
         });
