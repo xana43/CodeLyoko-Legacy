@@ -282,7 +282,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
 
 
     public Scanner() {
-        super(FabricBlockSettings.of(Material.METAL)
+        super(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
 
                 .strength(10, 10).sounds(BlockSoundGroup.METAL)
 
@@ -336,7 +336,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing()).with(ConstantUtil.SCANNER_PROPERTY, false);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(ConstantUtil.SCANNER_PROPERTY, false);
     }
 
     @Override

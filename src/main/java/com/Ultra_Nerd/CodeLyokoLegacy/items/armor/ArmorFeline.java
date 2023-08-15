@@ -11,6 +11,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,7 +28,7 @@ public final class ArmorFeline extends LyokoArmor {
             true, false, false);
 
 
-    public ArmorFeline(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
+    public ArmorFeline(@NotNull ArmorMaterial materialIn, @NotNull ArmorItem.Type slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);
 
 

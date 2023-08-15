@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class CarthageBiomeProvider extends BiomeSource implements BiomeAccess.Storage {
     public static final Codec<CarthageBiomeProvider> CARTHAGE_BIOME_PROVIDER_CODEC = Biome.REGISTRY_CODEC.fieldOf(
@@ -28,7 +29,7 @@ public final class CarthageBiomeProvider extends BiomeSource implements BiomeAcc
     private final RegistryEntry<Biome> biomeHolder;
 
     public CarthageBiomeProvider(@NotNull RegistryEntry<Biome> registry) {
-        super(ImmutableList.of(registry));
+        super();
         this.biomeHolder = registry;
     }
 
@@ -45,6 +46,11 @@ public final class CarthageBiomeProvider extends BiomeSource implements BiomeAcc
     @Override
     protected Codec<? extends BiomeSource> getCodec() {
         return CARTHAGE_BIOME_PROVIDER_CODEC;
+    }
+
+    @Override
+    protected Stream<RegistryEntry<Biome>> biomeStream() {
+        return Stream.of(biomeHolder);
     }
 
 

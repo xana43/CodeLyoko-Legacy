@@ -242,7 +242,7 @@ public final class ControlPanel extends HorizontalFacingBlock implements BlockEn
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
     public ControlPanel() {
-        super(FabricBlockSettings.of(Material.METAL)
+        super(FabricBlockSettings.copy(Blocks.IRON_BLOCK)
 
                 .strength(10, 10)
                 .sounds(BlockSoundGroup.METAL)
@@ -288,7 +288,7 @@ public final class ControlPanel extends HorizontalFacingBlock implements BlockEn
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite()).with(ScreenOn, false);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(ScreenOn, false);
     }
 
     @Override

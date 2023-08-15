@@ -26,9 +26,9 @@ public final class LiquidHelium extends FluidBlock {
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         if (entity instanceof final LivingEntity livingEntity) {
 
-            livingEntity.limbAngle = 0;
+            livingEntity.handSwingProgress = 0;
             livingEntity.inPowderSnow = true;
-            livingEntity.damage(DamageSource.FREEZE, random.nextInt(3));
+            livingEntity.damage(entity.getWorld().getDamageSources().freeze(), random.nextInt(3));
             if (livingEntity instanceof final PlayerEntity player) {
                 if (player.isCreative()) {
                     player.inPowderSnow = false;

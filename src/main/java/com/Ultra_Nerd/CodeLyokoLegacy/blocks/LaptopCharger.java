@@ -74,7 +74,7 @@ public final class LaptopCharger extends HorizontalFacingBlock implements BlockE
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing());
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
     @Override

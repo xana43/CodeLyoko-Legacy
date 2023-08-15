@@ -84,7 +84,7 @@ public final class EntityLaser extends ArrowEntity {
     private void destroyAtTheEndOfLife() {
         lifetime--;
         if (lifetime <= 0) {
-            if (!world.isClient) {
+            if (!getWorld().isClient) {
                 this.kill();
             }
         }
@@ -94,8 +94,9 @@ public final class EntityLaser extends ArrowEntity {
     @Override
     protected void onEntityHit(final EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
-        entityHitResult.getEntity().damage(DamageSource.arrow(this, this.getOwner()), (float) this.getDamage());
-        if (!world.isClient) {
+        entityHitResult.getEntity().damage(entityHitResult.getEntity().getWorld().getDamageSources().arrow(this, this.getOwner()),
+                (float) this.getDamage());
+        if (!getWorld().isClient) {
             this.kill();
         }
     }
@@ -103,7 +104,7 @@ public final class EntityLaser extends ArrowEntity {
     @Override
     protected void onBlockHit(final BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
-        if (!world.isClient) {
+        if (!getWorld().isClient) {
             this.kill();
         }
     }

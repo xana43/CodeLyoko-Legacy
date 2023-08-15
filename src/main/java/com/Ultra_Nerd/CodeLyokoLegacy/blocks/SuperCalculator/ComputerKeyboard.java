@@ -575,7 +575,7 @@ public final class ComputerKeyboard extends HorizontalFacingBlock implements Blo
 
 
     public ComputerKeyboard() {
-        super(FabricBlockSettings.of(Material.METAL)
+        super(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
 
                 .strength(1, 10)
                 .sounds(BlockSoundGroup.METAL)
@@ -645,7 +645,7 @@ public final class ComputerKeyboard extends HorizontalFacingBlock implements Blo
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
     @Nullable

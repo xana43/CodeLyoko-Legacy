@@ -10,6 +10,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.FurnaceScreen;
 import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -48,10 +49,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         return false;
     }
 
-    @Override
-    public boolean changeFocus(boolean p_changeFocus_1_) {
-        return false;
-    }
+
 
 
     @Override
@@ -63,7 +61,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     }
 
     @Override
-    public void render(@NotNull MatrixStack stack, int p_render_1_, int p_render_2_, float p_render_3_) {
+    public void render(@NotNull DrawContext stack, int p_render_1_, int p_render_2_, float p_render_3_) {
         this.renderBackground(stack);
         super.render(stack, p_render_1_, p_render_2_, p_render_3_);
         this.text.render(stack, p_render_1_, p_render_2_, p_render_3_);
@@ -102,9 +100,10 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
 
                 }) {
             @Override
-            public void renderButton(MatrixStack stack, int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
+            public void renderButton(DrawContext stack, int p_renderButton_1_, int p_renderButton_2_,
+                    float p_renderButton_3_) {
                 //super.renderButton(p_renderButton_1_, p_renderButton_2_, p_renderButton_3_);
-                final int i = getYImage(hovered);
+                final int i = getType().ordinal();//getYImage(hovered);
 
 
                 RenderSystem.setShaderTexture(0, BUTTONTEXTURES);
@@ -114,12 +113,12 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
                 }
                 if (i == 1) {
                     j = ColorHelper.Argb.getArgb(255, 0, 0, 255);
-                    drawTexture(stack, x, y, 0, 0, 104, 19, 1024, 512);
+                    drawTexture(stack, BUTTONTEXTURES,x, y, 0, 0, 104, 19, 1024, 512,512);
                 } else {
-                    drawTexture(stack, x, y, 0, 19, 104, 19, 1024, 512);
+                    drawTexture(stack,BUTTONTEXTURES, x, y, 0, 19, 104, 19, 1024, 512,512);
                 }
                 //drawTexture(stack,x, 38, 0, (46 + i) * 20, width >> 1, height);
-                drawCenteredText(stack, client.textRenderer,
+                stack.drawCenteredTextWithShadow(client.textRenderer,
                         getMessage().copy().setStyle(ConstantUtil.Styles.HUD.getThisStyle()), x + (width + 55) >> 1,
                         y + (height + 32) >> 1, j | MathHelper.ceil(alpha * 255.0F) << 24);
 
@@ -170,11 +169,11 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     }
 
     @Override
-    protected void drawBackground(final MatrixStack matrices, final float delta, final int mouseX, final int mouseY) {
+    protected void drawBackground(final DrawContext matrices, final float delta, final int mouseX, final int mouseY) {
         RenderSystem.setShaderTexture(0, TEXTURES);
-        this.drawTexture(matrices, x, y, 0, 0, size, size >> 1);
+        matrices.drawTexture(TEXTURES, x, y, 0, 0, size, size >> 1);
         if (active) {
-            this.drawTexture(matrices, x, y + 19, 0, 144, size, (size >> 1) - 35);
+            matrices.drawTexture(TEXTURES, x, y + 19, 0, 144, size, (size >> 1) - 35);
         }
     }
 

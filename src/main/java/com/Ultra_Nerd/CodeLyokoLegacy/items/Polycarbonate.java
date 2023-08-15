@@ -40,9 +40,9 @@ public final class Polycarbonate extends Item {
 
         }
         if (selected) {
-            entity.damage(new LyokoDamage("damage.polycarbonate"), 0.2f);
+            entity.damage(entity.getWorld().getDamageSources().inFire(), 0.2f);
         }
     }
 
-
+//new LyokoDamage("damage.polycarbonate")
 }

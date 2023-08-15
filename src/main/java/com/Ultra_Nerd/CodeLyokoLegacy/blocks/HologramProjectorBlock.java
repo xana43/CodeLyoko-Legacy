@@ -15,7 +15,7 @@ public final class HologramProjectorBlock extends BlockWithEntity {
 
 
     public HologramProjectorBlock() {
-        super(FabricBlockSettings.of(Material.METAL)
+        super(FabricBlockSettings.copy(Blocks.IRON_BLOCK)
                 .strength(6, 10)
                 .sounds(BlockSoundGroup.METAL)
 

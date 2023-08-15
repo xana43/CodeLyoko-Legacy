@@ -7,7 +7,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.Models.GlobalOBJModels;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.PlaceBlockEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
@@ -57,7 +56,6 @@ import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
 import team.reborn.energy.api.EnergyStorage;
 
-import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -69,13 +67,18 @@ public record CodeLyokoMain() implements ModInitializer {
     public static final String MOD_ID = "cm";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
 
-    public static final ItemGroup LYOKO_ITEM = FabricItemGroup.builder(new Identifier(MOD_ID, "lyoko_items"))
-            .icon(() -> new ItemStack(ModItems.BIT)).build();
-    public static final ItemGroup LYOKO_BLOCKS = FabricItemGroup.builder(new Identifier(MOD_ID, "lyoko_blocks"))
+    public static final ItemGroup LYOKO_ITEM = FabricItemGroup.builder()
+            .icon(() -> new ItemStack(ModItems.BIT))
+            .displayName(Text.translatable("itemGroup.lyoko_items"))
+            .build();
+    public static final ItemGroup LYOKO_BLOCKS = FabricItemGroup.builder()
+            .displayName(Text.translatable("itemGroup.lyoko_blocks"))
             .icon(() -> new ItemStack(ModBlocks.TOWER_INTERFACE)).build();
-    public static final ItemGroup LYOKO_ARMOR = FabricItemGroup.builder(codeLyokoPrefix("lyoko_armor"))
+    public static final ItemGroup LYOKO_ARMOR = FabricItemGroup.builder()
+            .displayName(Text.translatable("itemGroup.lyoko_armor"))
             .icon(() -> new ItemStack(ModItems.WILLIAM_CHESTPLATE)).build();
-    public static final ItemGroup LYOKO_WEAPONS = FabricItemGroup.builder(codeLyokoPrefix("lyoko_weapons"))
+    public static final ItemGroup LYOKO_WEAPONS = FabricItemGroup.builder()
+            .displayName(Text.translatable("itemGroup.lyoko_weapons"))
             .icon(() -> new ItemStack(ModItems.LASER_ARROWSHOOTER)).build();
     private static final TrackedData<NbtCompound> peristent = DataTracker.registerData(ServerPlayerEntity.class,
             TrackedDataHandlerRegistry.NBT_COMPOUND);
@@ -135,28 +138,43 @@ public record CodeLyokoMain() implements ModInitializer {
     }
 
     private static void generalRegistration() {
-
-
+        Registry.register(Registries.ITEM_GROUP,CodeLyokoMain.codeLyokoPrefix("lyoko_blocks"),LYOKO_BLOCKS);
+        Registry.register(Registries.ITEM_GROUP,CodeLyokoMain.codeLyokoPrefix("lyoko_item"),LYOKO_ITEM);
+        Registry.register(Registries.ITEM_GROUP,CodeLyokoMain.codeLyokoPrefix("lyoko_armor"),LYOKO_ARMOR);
+        Registry.register(Registries.ITEM_GROUP,CodeLyokoMain.codeLyokoPrefix("lyoko_weapons"),LYOKO_WEAPONS);
         ModBlocks.BLOCK_MAP.forEach((s, block) -> {
 
             Registry.register(Registries.BLOCK, new Identifier(MOD_ID, s), block);
             if (block != ModBlocks.LYOKO_CORE && block != ModBlocks.DIGITAL_OCEAN_BLOCK && block != ModBlocks.DIGITAL_LAVA_BLOCK) {
                 final BlockItem blockItem = new BlockItem(block, new FabricItemSettings());
                 Registry.register(Registries.ITEM, new Identifier(MOD_ID, s), blockItem);
-                ItemGroupEvents.modifyEntriesEvent(LYOKO_BLOCKS).register(entries -> entries.add(blockItem));
+
+                final RegistryKey<ItemGroup> registryKey = RegistryKey.of(Registries.ITEM_GROUP.getKey(),
+                        CodeLyokoMain.codeLyokoPrefix("lyoko_blocks"));
+                ItemGroupEvents.modifyEntriesEvent(registryKey).register(entries -> entries.add(blockItem));
             }
         });
+
         ModItems.ITEM_MAP.forEach((s, item) -> {
             Registry.register(Registries.ITEM, new Identifier(MOD_ID, s), item);
-            ItemGroupEvents.modifyEntriesEvent(LYOKO_ITEM).register(entries -> entries.add(item));
+
+            final RegistryKey<ItemGroup> registryKey = RegistryKey.of(Registries.ITEM_GROUP.getKey(),
+                    CodeLyokoMain.codeLyokoPrefix("lyoko_item"));
+            ItemGroupEvents.modifyEntriesEvent(registryKey).register(entries -> entries.add(item));
         });
         ModItems.ARMOR_MAP.forEach((s, item) -> {
             Registry.register(Registries.ITEM, new Identifier(MOD_ID, s), item);
-            ItemGroupEvents.modifyEntriesEvent(LYOKO_ARMOR).register(entries -> entries.add(item));
+
+            final RegistryKey<ItemGroup> registryKey = RegistryKey.of(Registries.ITEM_GROUP.getKey(),
+                    CodeLyokoMain.codeLyokoPrefix("lyoko_armor"));
+            ItemGroupEvents.modifyEntriesEvent(registryKey).register(entries -> entries.add(item));
         });
         ModItems.WEAPON_MAP.forEach((s, item) -> {
             Registry.register(Registries.ITEM, new Identifier(MOD_ID, s), item);
-            ItemGroupEvents.modifyEntriesEvent(LYOKO_WEAPONS).register(entries -> entries.add(item));
+
+            final RegistryKey<ItemGroup> registryKey = RegistryKey.of(Registries.ITEM_GROUP.getKey(),
+                    CodeLyokoMain.codeLyokoPrefix("lyoko_weapons"));
+            ItemGroupEvents.modifyEntriesEvent(registryKey).register(entries -> entries.add(item));
         });
         ModBlockEntities.BLOCKENTITY_MAP.forEach(
                 (s, blockEntityType) -> Registry.register(Registries.BLOCK_ENTITY_TYPE, codeLyokoPrefix(s),
@@ -346,7 +364,7 @@ public record CodeLyokoMain() implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        GlobalOBJModels.loadModels();
+        //GlobalOBJModels.loadModels();
         GeckoLib.initialize();
         PacketHandlerCommon.commonChannelRegistry();
         generalRegistration();

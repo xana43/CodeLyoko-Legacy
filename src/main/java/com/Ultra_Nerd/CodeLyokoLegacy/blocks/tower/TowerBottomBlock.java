@@ -20,7 +20,7 @@ public final class TowerBottomBlock extends Block {
     public void onLandedUpon(final World world, final BlockState state, final BlockPos pos, final Entity entity, final float fallDistance) {
         super.onLandedUpon(world, state, pos, entity, fallDistance);
         if (!(entity instanceof PlayerEntity) && !(entity instanceof LyokoVehicleEntity)) {
-            entity.damage(DamageSource.OUT_OF_WORLD, Float.MAX_VALUE);
+            entity.damage(entity.getWorld().getDamageSources().outOfWorld(), Float.MAX_VALUE);
         }
     }
 
@@ -36,7 +36,7 @@ public final class TowerBottomBlock extends Block {
             }
         }
         if (!(entity instanceof PlayerEntity) && !(entity instanceof LyokoVehicleEntity)) {
-            entity.damage(DamageSource.OUT_OF_WORLD, Integer.MAX_VALUE);
+            entity.damage(entity.getWorld().getDamageSources().outOfWorld(), Integer.MAX_VALUE);
         }
     }
 

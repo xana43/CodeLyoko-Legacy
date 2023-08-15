@@ -48,9 +48,11 @@ public class LyokoVehicleEntity extends BoatEntity {
     }
 
 
+
+
     @Override
-    public boolean canBeRiddenInWater() {
-        return false;
+    public boolean shouldDismountUnderwater() {
+        return true;
     }
 
     @Nullable
@@ -66,10 +68,12 @@ public class LyokoVehicleEntity extends BoatEntity {
         return null;
     }
 
+
+
     @Override
-    public void updatePassengerPosition(final Entity passenger) {
+    protected void addPassenger(final Entity passenger) {
         passenger.setPose(EntityPose.STANDING);
-        super.updatePassengerPosition(passenger);
+        super.addPassenger(passenger);
     }
 
     @Override

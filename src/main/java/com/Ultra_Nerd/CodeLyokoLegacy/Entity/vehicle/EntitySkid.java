@@ -20,9 +20,11 @@ public final class EntitySkid extends LyokoVehicleEntity {
         super(entityType, world);
     }
 
+
+
     @Override
-    public boolean canBeRiddenInWater() {
-        return true;
+    public boolean shouldDismountUnderwater() {
+        return false;
     }
 
     @Override
@@ -33,16 +35,16 @@ public final class EntitySkid extends LyokoVehicleEntity {
     public void selectHub()
     {
       final HitResult raycast = raycast(50,2,false);
-      final BlockPos lookingPos = new BlockPos(raycast.getPos());
-      if(world.getBlockState(lookingPos).isOf(ModBlocks.DIGITAL_SEA_PYLON))
+      final BlockPos lookingPos = new BlockPos((int)raycast.getPos().x,(int)raycast.getPos().y,(int)raycast.getPos().z);
+      if(getWorld().getBlockState(lookingPos).isOf(ModBlocks.DIGITAL_SEA_PYLON))
       {
-          world.setBlockState(lookingPos,world.getBlockState(lookingPos).with(SeaPylon.SELECTED,true));
+          getWorld().setBlockState(lookingPos,getWorld().getBlockState(lookingPos).with(SeaPylon.SELECTED,true));
       }
     }
 
     @Override
     public void dismountVehicle() {
-        if(world.getDimensionKey() != ModDimensions.digitalOceanType) {
+        if(getWorld().getDimensionKey() != ModDimensions.digitalOceanType) {
             super.dismountVehicle();
         }
     }
@@ -67,14 +69,14 @@ public final class EntitySkid extends LyokoVehicleEntity {
                 for(int z = -30; z < 30; z++)
                 {
                    final BlockPos checkedPos = entity.getBlockPos().add(x,y,z);
-                   if(entity.world.getBlockState(checkedPos).isIn(ModTags.Blocks.LYOKO_BLOCKS) &&
-                   !entity.world.getBlockState(checkedPos).isOf(ModBlocks.DIGITAL_LAVA_BLOCK) &&
-                   !entity.world.getBlockState(checkedPos).isOf(ModBlocks.DIGITAL_OCEAN_BLOCK))
+                   if(entity.getWorld().getBlockState(checkedPos).isIn(ModTags.Blocks.LYOKO_BLOCKS) &&
+                   !entity.getWorld().getBlockState(checkedPos).isOf(ModBlocks.DIGITAL_LAVA_BLOCK) &&
+                   !entity.getWorld().getBlockState(checkedPos).isOf(ModBlocks.DIGITAL_OCEAN_BLOCK))
                    {
 
-                       if(entity.world.getBlockState(checkedPos.add(0,1,0)).isOf(Blocks.AIR))
+                       if(entity.getWorld().getBlockState(checkedPos.add(0,1,0)).isOf(Blocks.AIR))
                        {
-                           if(entity.world.getBlockState(checkedPos.add(0,2,0)).isOf(Blocks.AIR))
+                           if(entity.getWorld().getBlockState(checkedPos.add(0,2,0)).isOf(Blocks.AIR))
                            {
                                 return checkedPos;
                            }

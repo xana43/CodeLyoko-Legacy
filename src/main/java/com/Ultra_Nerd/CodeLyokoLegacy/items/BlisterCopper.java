@@ -11,7 +11,6 @@ import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public final class BlisterCopper extends Item {
@@ -42,7 +41,8 @@ public final class BlisterCopper extends Item {
 
 
     @Override
-    public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(final ItemStack stack, final World worldIn, final Entity entityIn, int itemSlot,
+            boolean isSelected) {
         NbtCompound timerTag = stack.getNbt();
         if (timerTag == null) {
             timerTag = new NbtCompound();

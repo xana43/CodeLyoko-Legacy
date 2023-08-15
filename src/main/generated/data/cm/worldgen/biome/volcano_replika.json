@@ -16,7 +16,7 @@
     "water_fog_color": 7579
   },
   "features": [],
-  "precipitation": "none",
+  "has_precipitation": false,
   "spawn_costs": {
     "cm:blok": {
       "charge": 1.0,

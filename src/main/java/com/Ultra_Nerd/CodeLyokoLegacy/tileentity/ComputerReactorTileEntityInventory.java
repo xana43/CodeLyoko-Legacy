@@ -30,7 +30,6 @@ public final class ComputerReactorTileEntityInventory extends EnergyStorageBlock
             };
         }
 
-        @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("SF_SWITCH_NO_DEFAULT")
         @Override
         public void set(final int index, final int value) {
             if (index == 0) {

@@ -7,6 +7,7 @@ import net.minecraft.entity.MovementType;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +20,7 @@ public final class ArmorWarrior extends LyokoArmor {
     private static final double attack_modifier = 0.7D;
     private static final double attack_speed = -0.2D;
 
-    public ArmorWarrior(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
+    public ArmorWarrior(@NotNull ArmorMaterial materialIn, @NotNull ArmorItem.Type slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);
 
 

@@ -33,18 +33,18 @@ public record MethodUtil() {
     public record DimensionCheck() {
 
         public static boolean playerNotInVanillaWorld(@NotNull PlayerEntity player) {
-            return player.world.getRegistryKey() == ModDimensions.forestSectorWorld || player.world.getRegistryKey() == ModDimensions.carthage || player.world.getRegistryKey() == ModDimensions.desertSectorWorld || player.world.getRegistryKey() == ModDimensions.iceSectorWorld
+            return player.getWorld().getRegistryKey() == ModDimensions.forestSectorWorld || player.getWorld().getRegistryKey() == ModDimensions.carthage || player.getWorld().getRegistryKey() == ModDimensions.desertSectorWorld || player.getWorld().getRegistryKey() == ModDimensions.iceSectorWorld
 
-                    || player.world.getRegistryKey() == ModDimensions.mountainSectorWorld || player.world.getRegistryKey() == ModDimensions.volcanoWorld || player.world.getRegistryKey() == ModDimensions.digitalOceanWorld || player.world.getRegistryKey() == ModDimensions.frontierWorld;
+                    || player.getWorld().getRegistryKey() == ModDimensions.mountainSectorWorld || player.getWorld().getRegistryKey() == ModDimensions.volcanoWorld || player.getWorld().getRegistryKey() == ModDimensions.digitalOceanWorld || player.getWorld().getRegistryKey() == ModDimensions.frontierWorld;
 
 
         }
 
         public static boolean entityNotInVanillaWorld(@NotNull Entity entity) {
 
-            return entity.world.getRegistryKey() == ModDimensions.forestSectorWorld || entity.world.getRegistryKey() == ModDimensions.carthage || entity.world.getRegistryKey() == ModDimensions.desertSectorWorld || entity.world.getRegistryKey() == ModDimensions.iceSectorWorld
+            return entity.getWorld().getRegistryKey() == ModDimensions.forestSectorWorld || entity.getWorld().getRegistryKey() == ModDimensions.carthage || entity.getWorld().getRegistryKey() == ModDimensions.desertSectorWorld || entity.getWorld().getRegistryKey() == ModDimensions.iceSectorWorld
 
-                    || entity.world.getRegistryKey() == ModDimensions.mountainSectorWorld || entity.world.getRegistryKey() == ModDimensions.volcanoWorld || entity.world.getRegistryKey() == ModDimensions.digitalOceanWorld || entity.world.getRegistryKey() == ModDimensions.frontierWorld;
+                    || entity.getWorld().getRegistryKey() == ModDimensions.mountainSectorWorld || entity.getWorld().getRegistryKey() == ModDimensions.volcanoWorld || entity.getWorld().getRegistryKey() == ModDimensions.digitalOceanWorld || entity.getWorld().getRegistryKey() == ModDimensions.frontierWorld;
 
 
         }
@@ -57,7 +57,7 @@ public record MethodUtil() {
         }
 
         public static boolean playerInVanilla(PlayerEntity player) {
-            return player.world.getRegistryKey() == World.OVERWORLD || player.world.getRegistryKey() == World.NETHER || player.world.getRegistryKey() == World.END;
+            return player.getWorld().getRegistryKey() == World.OVERWORLD || player.getWorld().getRegistryKey() == World.NETHER || player.getWorld().getRegistryKey() == World.END;
         }
 
         public static boolean worldIsVanilla(World level) {

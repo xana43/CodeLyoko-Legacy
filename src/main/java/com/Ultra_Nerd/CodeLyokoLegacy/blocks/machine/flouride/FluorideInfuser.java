@@ -3,8 +3,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.BooleanProperty;
@@ -19,7 +19,7 @@ public class FluorideInfuser extends BlockWithEntity {
     public static final BooleanProperty INFUSING = BooleanProperty.of("infusing");
 
     public FluorideInfuser() {
-        super(FabricBlockSettings.of(Material.METAL)
+        super(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
 
                 .strength(6, 10)
                 .sounds(BlockSoundGroup.METAL)

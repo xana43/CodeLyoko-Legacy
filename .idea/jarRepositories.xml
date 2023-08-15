@@ -151,5 +151,25 @@
       <option name="name" value="UserLocalRemappedMods" />
       <option name="url" value="file:/$PROJECT_DIR$/.gradle/loom-cache/remapped_mods/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="Ladysnake Mods" />
+      <option name="name" value="Ladysnake Mods" />
+      <option name="url" value="https://maven.ladysnake.org/releases" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="FelNull Maven" />
+      <option name="name" value="FelNull Maven" />
+      <option name="url" value="https://maven.felnull.dev" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="LoomLocalMinecraft" />
+      <option name="name" value="LoomLocalMinecraft" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../CodeLyoko%201.18.2/CodeLyoko-Fabric/CodeLyoko-Legacy-FABRIC/.gradle/loom-cache/minecraftMaven/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="LoomGlobalMinecraft" />
+      <option name="name" value="LoomGlobalMinecraft" />
+      <option name="url" value="file:/$USER_HOME$/.gradle/caches/fabric-loom/minecraftMaven/" />
+    </remote-repository>
   </component>
 </project>

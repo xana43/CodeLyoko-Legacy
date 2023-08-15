@@ -12,6 +12,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -104,7 +105,7 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
     }
 
     @Override
-    public void render(final MatrixStack matrices, final int mouseX, final int mouseY, final float delta) {
+    public void render(final DrawContext matrices, final int mouseX, final int mouseY, final float delta) {
 
         this.renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
@@ -112,38 +113,51 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
 
     }
 
-    private void renderSectorImages(final MatrixStack matrixStack) {
-        boolean hovered = false;
+    private void renderSectorImages(final DrawContext matrixStack) {
         if (carthage.isHovered()) {
             RenderSystem.setShaderTexture(0, PREVIEW_CARTHAGE);
-            hovered = true;
+            matrixStack.drawTexture(PREVIEW_CARTHAGE, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
+                    96,
+                    118, 96);
+
         }
         if (forest.isHovered()) {
             RenderSystem.setShaderTexture(0, PREVIEW_FOREST);
-            hovered = true;
+            matrixStack.drawTexture(PREVIEW_FOREST, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
+                    96,
+                    118, 96);
+
         }
         if(desert.isHovered())
         {
            RenderSystem.setShaderTexture(0,PREVIEW_DESERT);
-           hovered = true;
+            matrixStack.drawTexture(PREVIEW_DESERT, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
+                    96,
+                    118, 96);
+
         }
         if(ice.isHovered())
         {
             RenderSystem.setShaderTexture(0,PREVIEW_ICE);
-            hovered = true;
+            matrixStack.drawTexture(PREVIEW_ICE, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
+                96,
+                118, 96);
+
+
         }
         if(mountain.isHovered())
         {
             RenderSystem.setShaderTexture(0,PREVIEW_MOUNTAIN);
-            hovered = true;
+            matrixStack.drawTexture(PREVIEW_MOUNTAIN, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
+                    96,
+                    118, 96);
+
         }
-        if(hovered) {
-            drawTexture(matrixStack, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118, 96, 118, 96);
-        }
+
     }
 
     @Override
-    protected void drawBackground(final MatrixStack matrices, final float delta, final int mouseX, final int mouseY) {
+    protected void drawBackground(final DrawContext matrices, final float delta, final int mouseX, final int mouseY) {
 
     }
     private final LyokoButton profileButton = new LyokoButton(0,0, 80, 20, Text.literal("Current Profile"),
@@ -161,18 +175,18 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
     @Override
     protected void init() {
         super.init();
-        profileButton.setPos((int) (this.backgroundWidth / 10f), (int) (this.height / 1.5f));
+        profileButton.setPosition((int) (this.backgroundWidth / 10f), (int) (this.height / 1.5f));
         this.addDrawableChild(profileButton);
         final int sector_button_position = (int) (this.width/1.38f);
-        carthage.setPos(sector_button_position, this.height >> 2);
+        carthage.setPosition(sector_button_position, this.height >> 2);
         carthage.setCentered();
-        forest.setPos(sector_button_position, this.height / 3);
+        forest.setPosition(sector_button_position, this.height / 3);
         forest.setCentered();
-        desert.setPos(sector_button_position, (int) (this.height / 2.4f));
+        desert.setPosition(sector_button_position, (int) (this.height / 2.4f));
         desert.setCentered();
-        ice.setPos(sector_button_position,this.height >> 1);
+        ice.setPosition(sector_button_position,this.height >> 1);
         ice.setCentered();
-        mountain.setPos(sector_button_position, (int) (this.height / 1.72f));
+        mountain.setPosition(sector_button_position, (int) (this.height / 1.72f));
         mountain.setCentered();
         this.addDrawableChild(carthage);
         this.addDrawableChild(forest);
@@ -183,12 +197,12 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
     }
 
     @Override
-    public void renderBackground(final MatrixStack matrices) {
+    public void renderBackground(final DrawContext matrices) {
         //super.renderBackground(matrices);
         RenderSystem.setShaderTexture(0, TEXTURE);
-        drawTexture(matrices, 0, 0, 0, 0, 1280, 720, this.width, this.height);
-        matrices.push();
-        matrices.scale(0.4f, 0.4f, 0.4f);
+        matrices.drawTexture(TEXTURE, 0, 0, 0, 0, 1280, 720, this.width, this.height);
+        //matrices.push();
+        //matrices.scale(0.4f, 0.4f, 0.4f);
         final PlayerProfile playerProfile = CardinalData.PlayerSavedProfile.getPlayerProfile(
                 handler.getWorldProperties(), getScreenHandler().getPlayer());
         if (playerProfile != null) {
@@ -196,46 +210,49 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
             drawPlayerClasses(playerProfile, matrices, textRenderer);
             drawPlayerDNA(playerProfile, matrices, textRenderer);
         }
-        matrices.pop();
+        //matrices.pop();
 
     }
 
-    private void drawPlayerDNA(final PlayerProfile playerProfile, final MatrixStack matrixStack, final TextRenderer textRenderer) {
+    private void drawPlayerDNA(final PlayerProfile playerProfile, final DrawContext matrixStack,
+            final TextRenderer textRenderer) {
         final Text DNASnip = Text.of(playerProfile.getDNA().substring(0, 20))
                 .getWithStyle(ConstantUtil.Styles.HUD.getThisStyle()).get(0);
         final Text DNASnipHelix2 = Text.of(playerProfile.getDNA().substring(101, 121))
                 .getWithStyle(ConstantUtil.Styles.HUD.getThisStyle()).get(0);
-        drawCenteredText(matrixStack, textRenderer,
+        matrixStack.drawCenteredTextWithShadow(textRenderer,
                 Text.translatable("lyoko.dna.indicator").setStyle(ConstantUtil.Styles.HUD.getThisStyle()),
                 (int) (this.width / 3.5f), (int) (this.height / 1.08f), ColorHelper.Argb.getArgb(255, 255, 255, 255));
-        drawCenteredText(matrixStack, textRenderer, DNASnip, (int) (this.width / 3.5f), this.height,
+        matrixStack.drawCenteredTextWithShadow(textRenderer, DNASnip, (int) (this.width / 3.5f),
+                this.height,
                 ColorHelper.Argb.getArgb(255, 255, 255, 255));
-        drawCenteredText(matrixStack, textRenderer, DNASnipHelix2, (int) (this.width / 3.5f),
+        matrixStack.drawCenteredTextWithShadow( textRenderer, DNASnipHelix2, (int) (this.width / 3.5f),
                 (int) (this.height * 1.06f), ColorHelper.Argb.getArgb(255, 255, 255, 255));
     }
-    private void drawPlayerClasses(final PlayerProfile playerProfile, final MatrixStack matrixStack, final TextRenderer textRenderer) {
+    private void drawPlayerClasses(final PlayerProfile playerProfile, final DrawContext matrixStack,
+            final TextRenderer textRenderer) {
         final int classWidth = (int)(this.width / 3.5f);
         final int classHeight = (int)(this.height/1.2f);
         final int color = ColorHelper.Argb.getArgb(255, 255, 255, 255);
         final MutableText prependClass = Text.translatable("lyoko.screen.class").append(":");
         switch (playerProfile.getPlayerClassType()) {
-            case 0 -> drawCenteredText(matrixStack, textRenderer,
+            case 0 -> matrixStack.drawCenteredTextWithShadow( textRenderer,
                     prependClass.append(Text.translatable("lyoko.class.feline"))
                             .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), classWidth,
                     classHeight, color);
-            case 1 -> drawCenteredText(matrixStack, textRenderer,
+            case 1 -> matrixStack.drawCenteredTextWithShadow(textRenderer,
                     prependClass.append(Text.translatable("lyoko.class.samurai"))
                             .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), classWidth,
                     classHeight, color);
-            case 2 -> drawCenteredText(matrixStack, textRenderer,
+            case 2 -> matrixStack.drawCenteredTextWithShadow(textRenderer,
                     prependClass.append(Text.translatable("lyoko.class.ninja"))
                             .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), classWidth,
                     classHeight, color);
-            case 3 -> drawCenteredText(matrixStack, textRenderer,
+            case 3 -> matrixStack.drawCenteredTextWithShadow(textRenderer,
                     prependClass.append(Text.translatable("lyoko.class.guardian"))
                             .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), classWidth,
                     classHeight, color);
-            case 4 -> drawCenteredText(matrixStack, textRenderer,
+            case 4 -> matrixStack.drawCenteredTextWithShadow(textRenderer,
                     prependClass.append(Text.translatable("lyoko.class.warrior"))
                             .setStyle(ConstantUtil.Styles.HUD.getThisStyle()), classWidth,
                     classHeight, color);

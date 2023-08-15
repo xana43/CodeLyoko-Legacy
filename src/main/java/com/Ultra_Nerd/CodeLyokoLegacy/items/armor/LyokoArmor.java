@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import static com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil.ArmorMethods.isArmorSlot;
 
 public abstract class LyokoArmor extends ArmorItem {
-    public LyokoArmor(final ArmorMaterial material, final EquipmentSlot slot, final Settings settings) {
+    public LyokoArmor(final ArmorMaterial material, final ArmorItem.Type slot, final Settings settings) {
         super(material, slot, settings);
 
     }

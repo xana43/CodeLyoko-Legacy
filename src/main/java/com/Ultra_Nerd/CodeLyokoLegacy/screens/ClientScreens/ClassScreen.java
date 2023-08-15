@@ -10,6 +10,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
@@ -35,38 +36,39 @@ public final class ClassScreen extends Screen {
     }
 
 
-    private void drawClassIndicator(final Text classname, final MatrixStack pPoseStack) {
-        drawCenteredText(pPoseStack, textRenderer,
+    private void drawClassIndicator(final Text classname, final DrawContext ctx) {
+        ctx.drawCenteredTextWithShadow(textRenderer,
                 classname.getWithStyle(ConstantUtil.Styles.HUD.getThisStyle()).get(0), this.width >> 2,
                 this.height >> 2, IndicatorColor);
     }
 
     @Override
-    public void render(final @NotNull MatrixStack pPoseStack, final int pMouseX, final int pMouseY, final float pPartialTick) {
+    public void render(final @NotNull DrawContext pPoseStack, final int pMouseX, final int pMouseY, final float pPartialTick) {
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
         this.renderBackground(pPoseStack);
         //feline option
         feline.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 
-        drawCenteredText(pPoseStack, textRenderer, feline.getMessage(), feline.getX() + (feline.getWidth() >> 1),
+        pPoseStack.drawCenteredTextWithShadow(textRenderer, feline.getMessage(), feline.getX() + (feline.getWidth() >> 1),
                 feline.getY(),
                 colors);
         //samurai option
         samurai.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack, textRenderer, samurai.getMessage(), samurai.getX() + (samurai.getWidth() >> 1),
+        pPoseStack.drawCenteredTextWithShadow(textRenderer, samurai.getMessage(), samurai.getX() + (samurai.getWidth() >> 1),
                 samurai.getY(), 2007);
         //ninja option
         ninja.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack, textRenderer, ninja.getMessage(), ninja.getX() + (ninja.getWidth() >> 1),
+        pPoseStack.drawCenteredTextWithShadow(textRenderer, ninja.getMessage(), ninja.getX() + (ninja.getWidth() >> 1),
                 ninja.getY(),
                 5125);
         //guardian option
         guardian.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack, textRenderer, guardian.getMessage(), guardian.getX() + (guardian.getWidth() >> 1),
+        pPoseStack.drawCenteredTextWithShadow(textRenderer, guardian.getMessage(), guardian.getX() + (guardian.getWidth() >> 1),
                 guardian.getY(), 0xff369b);
         //warrior option
         warrior.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack, textRenderer, warrior.getMessage(), warrior.getX() + (guardian.getWidth() >> 1),
+        pPoseStack.drawCenteredTextWithShadow(textRenderer, warrior.getMessage(),
+                warrior.getX() + (guardian.getWidth() >> 1),
                 warrior.getY(), 0xa9a9a9);
         //current class
         if (IndicatorColor != 0) {
@@ -80,7 +82,7 @@ public final class ClassScreen extends Screen {
                 }
             }
         } else {
-            drawCenteredText(pPoseStack, textRenderer,
+            pPoseStack.drawCenteredTextWithShadow(textRenderer,
                     Text.translatable("lyoko.class.null").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle()).get(0),
                     this.width >> 2, this.height >> 2, IndicatorColor);
         }
@@ -213,10 +215,10 @@ public final class ClassScreen extends Screen {
 
 
     @Override
-    public void renderBackground(@NotNull MatrixStack pPoseStack) {
+    public void renderBackground(@NotNull DrawContext pPoseStack) {
         // super.renderBackground(pPoseStack);
         RenderSystem.setShaderTexture(0, textures);
-        drawTexture(pPoseStack, x, 0, 0, 0, xSize, ySize);
+        pPoseStack.drawTexture(textures, x, 0, 0, 0, xSize, ySize);
     }
 
 

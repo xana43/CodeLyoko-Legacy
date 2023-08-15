@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LyokoCoreBE;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
@@ -20,7 +19,6 @@ public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements
         return 128;
     }
 
-    @SuppressFBWarnings("ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD")
     @Override
     public void render(final LyokoCoreBE entity, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {
 

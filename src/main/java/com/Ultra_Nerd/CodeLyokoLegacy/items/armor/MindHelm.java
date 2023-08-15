@@ -23,7 +23,7 @@ public final class MindHelm extends ArmorItem {
     private static final int initialTimer = MethodUtil.TickConversion.secondsToTicks(60);
     private static final String stressTimer = "stress_timer";
     private static final SecureRandom random = new SecureRandom();
-    public MindHelm(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
+    public MindHelm(@NotNull ArmorMaterial materialIn, @NotNull ArmorItem.Type slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);
     }
 
@@ -49,7 +49,7 @@ public final class MindHelm extends ArmorItem {
                     }
                     final int stress = CardinalData.MindHelmStress.getStressLevel(player);
                     if (stress >= ConstantUtil.STRESS_THRESHHOLD && !player.isCreative()) {
-                        entity.damage(new DamageSource("stress").setNeutral().setUnblockable().setBypassesArmor().setBypassesProtection(),
+                        entity.damage(entity.getWorld().getDamageSources().magic(),
                                 random.nextInt(stress >> 1, stress));
                     }
                 }
@@ -57,5 +57,5 @@ public final class MindHelm extends ArmorItem {
             }
         }
     }
-
+//new DamageSource("stress").setNeutral().setUnblockable().setBypassesArmor().setBypassesProtection()
 }

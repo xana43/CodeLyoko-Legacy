@@ -56,7 +56,8 @@ public abstract class PlayerLyokoMixin {
                                 mc.options.getSoundVolume(SoundCategory.PLAYERS), 1);
                         case BLOCK -> {
                             final BlockState targetedBlock =
-                                    mc.player.world.getBlockState(new BlockPos(mc.crosshairTarget.getPos()));
+                                    mc.player.getWorld().getBlockState(new BlockPos((int)mc.crosshairTarget.getPos().x,
+                                            (int)mc.crosshairTarget.getPos().y,(int)mc.crosshairTarget.getPos().z));
                             if (targetedBlock.isIn(BlockTags.DIRT)) {
 
                             } else if (isFreshMetal(targetedBlock)) {

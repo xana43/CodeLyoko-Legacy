@@ -17,7 +17,7 @@ public final class AntiMarabunta extends Block {
 
 
     public AntiMarabunta() {
-        super(FabricBlockSettings.of(Material.BARRIER).strength(6, 10).sounds(BlockSoundGroup.STONE).ticksRandomly());
+        super(FabricBlockSettings.copyOf(Blocks.BARRIER).strength(6, 10).sounds(BlockSoundGroup.STONE).ticksRandomly());
     }
 
     @Override

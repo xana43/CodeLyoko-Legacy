@@ -1,0 +1,8 @@
+{
+    "parent": "special-model-loader:builtin/obj",
+    "model": "cm:models/block/core_of_lyoko.obj",
+    "flip-v": true,
+    "ambientocclusion": true,
+    "particle": "cm:block/body"
+
+}

@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 public final class ComputerIntegratedReactor extends Block implements BlockEntityProvider {
     public ComputerIntegratedReactor() {
-        super(FabricBlockSettings.of(Material.METAL).strength(6, 10).sounds(BlockSoundGroup.METAL));
+        super(FabricBlockSettings.copy(Blocks.IRON_BLOCK).strength(6, 10).sounds(BlockSoundGroup.METAL));
     }
 
     @Nullable

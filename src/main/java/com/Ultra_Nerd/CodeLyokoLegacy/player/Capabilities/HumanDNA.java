@@ -75,7 +75,7 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
 
     public void setHasDNA(final boolean hasDNA) {
         this.hasDNA = hasDNA;
-        if (!hasDNA && !player.world.isClient()) {
+        if (!hasDNA && !player.getWorld().isClient()) {
             final ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) player;
             if (MethodUtil.DimensionCheck.worldIsVanilla(serverPlayerEntity.getSpawnPointDimension())) {
                 final BlockPos worldOrigin = new BlockPos(BlockPos.ORIGIN);
@@ -83,7 +83,7 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
                     for (int y = 20; y < 384; y++) {
                         for (int z = 0; z < (32 * 16); z++) {
                             final BlockPos checkedPosiition = worldOrigin.add(x,y,z);
-                            if (serverPlayerEntity.world.getRegistryKey() == ModDimensions.digitalOceanWorld) {
+                            if (serverPlayerEntity.getWorld().getRegistryKey() == ModDimensions.digitalOceanWorld) {
                                 final int DimensionChoser = ThreadLocalRandom.current().nextInt(0, 7);
                                 switch (DimensionChoser) {
                                     case 0 -> {
@@ -164,11 +164,11 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
 
                                 }
                             } else {
-                                if (searchForValidRespawnPositions(serverPlayerEntity.world,
+                                if (searchForValidRespawnPositions(serverPlayerEntity.getWorld(),
                                         checkedPosiition)) {
                                     final BlockPos towerSpawnPosition = checkedPosiition
                                             .offset(Direction.NORTH, 1);
-                                    serverPlayerEntity.setSpawnPoint(player.world.getRegistryKey(),
+                                    serverPlayerEntity.setSpawnPoint(player.getWorld().getRegistryKey(),
                                             towerSpawnPosition, 0, true, false);
 
                                     return;

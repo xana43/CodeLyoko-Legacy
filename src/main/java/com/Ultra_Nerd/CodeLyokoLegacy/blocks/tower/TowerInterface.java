@@ -29,7 +29,7 @@ public final class TowerInterface extends HorizontalFacingBlock implements Block
     private static final VoxelShape SHAPE_W = Block.createCuboidShape(9, 1, 1, 9.1, 15, 15);
     public static final BooleanProperty IS_GENERATED = BooleanProperty.of("is_generated");
     public TowerInterface() {
-        super(FabricBlockSettings.of(Material.BARRIER).strength(-1, Integer.MAX_VALUE).sounds(BlockSoundGroup.AMETHYST_CLUSTER)
+        super(FabricBlockSettings.copyOf(Blocks.BARRIER).strength(-1, Integer.MAX_VALUE).sounds(BlockSoundGroup.AMETHYST_CLUSTER)
                 .luminance(80));
         this.setDefaultState(this.getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(IS_GENERATED
                 ,true));
@@ -60,7 +60,7 @@ public final class TowerInterface extends HorizontalFacingBlock implements Block
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite()).with(IS_GENERATED,false);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(IS_GENERATED,false);
     }
 
     @Nullable

@@ -50,7 +50,7 @@ public record ModBiome() {
             .effects(new BiomeEffects.Builder().skyColor(16777215).waterColor(16777215).waterFogColor(16777215)
                     .fogColor(16777215).build())
             .spawnSettings(new SpawnSettings.Builder().build())
-            .precipitation(Biome.Precipitation.NONE)
+            .precipitation(false)
             .generationSettings(new GenerationSettings.Builder().build())
             .build();
     private static final Biome VOLCANO = buildVolcano();
@@ -73,7 +73,7 @@ public record ModBiome() {
         // CodeLyokoMain.LOG.info(String.valueOf(ModFeature.FOREST_ENTRY_PLACED));
        // forestGensettings.feature(GenerationStep.Feature.VEGETAL_DECORATION,
          //       RegistryEntry.of(ModFeature.PlacedFeatures.FOREST_TREE_PLACED));
-        return (new Biome.Builder()).precipitation(Biome.Precipitation.NONE)
+        return (new Biome.Builder()).precipitation(false)
                 .downfall(0)
                 .effects(new BiomeEffects.Builder().waterColor(2387).fogColor(2387).waterFogColor(2387)
                         .skyColor(2387).music(new MusicSound(RegistryEntry.of(ModSounds.FOREST),0,0,true)).build())
@@ -89,7 +89,7 @@ public record ModBiome() {
 
         return (new Biome.Builder())
 
-                .precipitation(Biome.Precipitation.NONE)
+                .precipitation(false)
                 .downfall(0)
                 .effects(new BiomeEffects.Builder().waterFogColor(12759680).fogColor(12759680).waterColor(12759680)
                         .skyColor(12759680).build())
@@ -108,7 +108,7 @@ public record ModBiome() {
 
         return (new Biome.Builder())
 
-                .precipitation(Biome.Precipitation.SNOW)
+                .precipitation(true)
                 .downfall(0)
                 .effects(new BiomeEffects.Builder().music(new MusicSound(RegistryEntry.of(ModSounds.ICE), 0, 0, true)).skyColor(2387)
                         .waterColor(2387).waterFogColor(2387).fogColor(2387).build())
@@ -124,7 +124,7 @@ public record ModBiome() {
         GenerationSettings.Builder ocenGen = new GenerationSettings.Builder();
         return (new Biome.Builder())
 
-                .precipitation(Biome.Precipitation.NONE)
+                .precipitation(false)
                 .downfall(0)
                 .temperature(13)
                 .temperatureModifier(Biome.TemperatureModifier.NONE)
@@ -141,7 +141,7 @@ public record ModBiome() {
 
         return (new Biome.Builder())
 
-                .precipitation(Biome.Precipitation.NONE)
+                .precipitation(false)
                 .temperature(2)
                 .downfall(0)
                 .temperatureModifier(Biome.TemperatureModifier.NONE)
@@ -160,7 +160,7 @@ public record ModBiome() {
         return (new Biome.Builder())
 
                 .downfall(0)
-                .precipitation(Biome.Precipitation.NONE)
+                .precipitation(false)
                 .temperature(46)
                 .effects(new BiomeEffects.Builder().fogColor(7579).music(new MusicSound(RegistryEntry.of(ModSounds.VOLCANO),
                                 0, 0, true))
@@ -176,7 +176,7 @@ public record ModBiome() {
         return (new Biome.Builder())
 
                 .downfall(0)
-                .precipitation(Biome.Precipitation.NONE)
+                .precipitation(false)
                 .temperature(13)
                 .effects(new BiomeEffects.Builder().music(new MusicSound(RegistryEntry.of(ModSounds.SECTOR5),
                                 0, 0,

@@ -328,47 +328,51 @@ public record ModItems() {
     //for armor
     private static final FabricItemSettings ArmorGroup = new FabricItemSettings();
     public static final ArmorItem AELITA_CHESTPLATE = new AelitaArmorElytra(LyokoArmorMaterial.GUARDIAN,
-            EquipmentSlot.CHEST, ArmorGroup);
-    public static final ArmorItem AELITA_LEGGINGS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.LEGS,
+            ArmorItem.Type.CHESTPLATE, ArmorGroup);
+    public static final ArmorItem AELITA_LEGGINGS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, ArmorItem.Type.LEGGINGS,
             ArmorGroup);
-    public static final ArmorItem AELITA_BOOTS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, EquipmentSlot.FEET,
+    public static final ArmorItem AELITA_BOOTS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, ArmorItem.Type.BOOTS,
             ArmorGroup);
-    public static final ArmorItem ODD_CHESTPLATE = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.CHEST,
+    public static final ArmorItem ODD_CHESTPLATE = new ArmorFeline(LyokoArmorMaterial.FELINE, ArmorItem.Type.CHESTPLATE,
             ArmorGroup);
-    public static final ArmorItem ODD_LEGGINGS = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.LEGS,
+    public static final ArmorItem ODD_LEGGINGS = new ArmorFeline(LyokoArmorMaterial.FELINE, ArmorItem.Type.LEGGINGS,
             ArmorGroup);
-    public static final ArmorItem ODD_BOOTS = new ArmorFeline(LyokoArmorMaterial.FELINE, EquipmentSlot.FEET,
+    public static final ArmorItem ODD_BOOTS = new ArmorFeline(LyokoArmorMaterial.FELINE, ArmorItem.Type.BOOTS,
             ArmorGroup);
-    public static final ArmorItem ULRICH_HEADBAND = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.HEAD,
+    public static final ArmorItem ULRICH_HEADBAND = new ArmorItem(LyokoArmorMaterial.SAMURAI, ArmorItem.Type.HELMET,
             ArmorGroup);
-    public static final ArmorItem ULRICH_CHESTPLATE = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.CHEST,
+    public static final ArmorItem ULRICH_CHESTPLATE = new ArmorItem(LyokoArmorMaterial.SAMURAI,
+            ArmorItem.Type.CHESTPLATE,
             ArmorGroup);
-    public static final ArmorItem ULRICH_LEGGINGS = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.LEGS,
+    public static final ArmorItem ULRICH_LEGGINGS = new ArmorItem(LyokoArmorMaterial.SAMURAI, ArmorItem.Type.LEGGINGS,
             ArmorGroup);
-    public static final ArmorItem ULRICH_BOOTS = new ArmorItem(LyokoArmorMaterial.SAMURAI, EquipmentSlot.FEET,
+    public static final ArmorItem ULRICH_BOOTS = new ArmorItem(LyokoArmorMaterial.SAMURAI, ArmorItem.Type.BOOTS,
             ArmorGroup);
-    public static final ArmorItem BLANKHELMET = new ArmorItem(LyokoArmorMaterial.BLANKHELM, EquipmentSlot.HEAD,
+    public static final ArmorItem BLANKHELMET = new ArmorItem(LyokoArmorMaterial.BLANKHELM, ArmorItem.Type.HELMET,
             ArmorGroup);
-    public static final ArmorItem WILLIAM_CHESTPLATE = new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.CHEST,
+    public static final ArmorItem WILLIAM_CHESTPLATE = new ArmorWarrior(LyokoArmorMaterial.WARRIOR,
+            ArmorItem.Type.CHESTPLATE,
             ArmorGroup);
-    public static final ArmorItem WILLIAM_LEGGINGS = new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.LEGS,
+    public static final ArmorItem WILLIAM_LEGGINGS = new ArmorWarrior(LyokoArmorMaterial.WARRIOR,
+            ArmorItem.Type.LEGGINGS,
             ArmorGroup);
-    public static final ArmorItem WILLIAM_BOOTS = new ArmorWarrior(LyokoArmorMaterial.WARRIOR, EquipmentSlot.FEET,
+    public static final ArmorItem WILLIAM_BOOTS = new ArmorWarrior(LyokoArmorMaterial.WARRIOR, ArmorItem.Type.BOOTS,
             ArmorGroup);
-    public static final ArmorItem YUMI_CHESTPLATE = new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.CHEST,
+    public static final ArmorItem YUMI_CHESTPLATE = new ArmorNinja(LyokoArmorMaterial.NINJA, ArmorItem.Type.CHESTPLATE,
             ArmorGroup);
-    public static final ArmorItem YUMI_LEGGINGS = new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.LEGS,
+    public static final ArmorItem YUMI_LEGGINGS = new ArmorNinja(LyokoArmorMaterial.NINJA, ArmorItem.Type.LEGGINGS,
             ArmorGroup);
-    public static final ArmorItem YUMI_BOOTS = new ArmorNinja(LyokoArmorMaterial.NINJA, EquipmentSlot.FEET, ArmorGroup);
-    public static final ArmorItem MIND_HELMET = new MindHelm(LyokoArmorMaterial.BLANKHELM, EquipmentSlot.HEAD,
+    public static final ArmorItem YUMI_BOOTS = new ArmorNinja(LyokoArmorMaterial.NINJA, ArmorItem.Type.BOOTS, ArmorGroup);
+    public static final ArmorItem MIND_HELMET = new MindHelm(LyokoArmorMaterial.BLANKHELM, ArmorItem.Type.HELMET,
             ArmorGroup.rarity(Rarity.EPIC));
-    public static final ArmorItem LINKER = new linker(LyokoArmorMaterial.LINKER, EquipmentSlot.CHEST,
+    public static final ArmorItem LINKER = new linker(LyokoArmorMaterial.LINKER, ArmorItem.Type.CHESTPLATE,
             ArmorGroup.rarity(Rarity.EPIC));
-    public static final ArmorItem JEREMY_CHESTPLATE = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.CHEST,
+    public static final ArmorItem JEREMY_CHESTPLATE = new ArmorArcher(LyokoArmorMaterial.ARCHER,
+            ArmorItem.Type.CHESTPLATE,
             ArmorGroup);
-    public static final ArmorItem JEREMY_LEGGINGS = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.LEGS,
+    public static final ArmorItem JEREMY_LEGGINGS = new ArmorArcher(LyokoArmorMaterial.ARCHER, ArmorItem.Type.LEGGINGS,
             ArmorGroup);
-    public static final ArmorItem JEREMY_BOOTS = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.FEET,
+    public static final ArmorItem JEREMY_BOOTS = new ArmorArcher(LyokoArmorMaterial.ARCHER, ArmorItem.Type.BOOTS,
             ArmorGroup);
     public static final ImmutableMap<String, Item> ARMOR_MAP = ImmutableMap.<String, Item>builder()
             .put("aelita_chestplate", AELITA_CHESTPLATE)

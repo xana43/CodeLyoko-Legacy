@@ -5,7 +5,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;// Made with Blockbench 4.2.
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverboardEntity;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
@@ -25,7 +24,7 @@ public final class ModelOverboard<T extends OverboardEntity> extends EntityModel
 
     }
 
-    @SuppressFBWarnings("DLS_DEAD_LOCAL_STORE")
+
     public static TexturedModelData createBodyLayer() {
         final ModelData meshdefinition = new ModelData();
         final ModelPartData partdefinition = meshdefinition.getRoot();

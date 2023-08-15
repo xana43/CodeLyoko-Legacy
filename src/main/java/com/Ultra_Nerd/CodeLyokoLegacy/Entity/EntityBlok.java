@@ -34,7 +34,6 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import javax.annotation.Nonnull;
 
 
 public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
@@ -70,15 +69,15 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
 
     @Override
     public void attack(final LivingEntity target, final float pullProgress) {
-        final ArrowEntity abstractarrow = new EntityLaser(this.world, this, 20);
+        final ArrowEntity abstractarrow = new EntityLaser(this.getWorld(), this, 20);
 
         final double d0 = target.getX() - this.getX();
         final double d1 = target.getBodyY(0.3333333333333333D) - abstractarrow.getY();
         final double d2 = target.getZ() - this.getZ();
         final double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        abstractarrow.setVelocity(d0, d1 + d3 * 0.2D, d2, 4F, (float) (14 - this.world.getDifficulty().getId() << 2));
+        abstractarrow.setVelocity(d0, d1 + d3 * 0.2D, d2, 4F, (float) (14 - this.getWorld().getDifficulty().getId() << 2));
         //this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
-        this.world.spawnEntity(abstractarrow);
+        this.getWorld().spawnEntity(abstractarrow);
     }
 
     private <E extends EntityBlok> @NotNull PlayState pred(AnimationState<E> event) {
@@ -102,7 +101,7 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
     }
 
     @Override
-    protected @NotNull SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
+    protected @NotNull SoundEvent getHurtSound(final DamageSource damageSourceIn) {
         // TODO Auto-generated method stub
         return ModSounds.BLOKHURT;
     }

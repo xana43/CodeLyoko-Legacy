@@ -22,7 +22,7 @@ public final class LyokoCore extends BlockWithEntity {
 
 
     @Override
-    public boolean canMobSpawnInside() {
+    public boolean canMobSpawnInside(final BlockState state) {
         return false;
     }
 

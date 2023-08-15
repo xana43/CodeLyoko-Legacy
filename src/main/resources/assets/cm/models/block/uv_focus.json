@@ -1,9 +1,8 @@
 {
-
+  "parent": "special-model-loader:builtin/obj",
   "model": "cm:models/block/uv_focus.obj",
   "flip-v": true,
   "ambientocclusion": true,
-  "textures": {
-    "particle": "cm:block/chipletmetal"
-  }
+  "particle": "cm:block/chipletmetal"
+
 }

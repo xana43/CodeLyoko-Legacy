@@ -52,7 +52,6 @@
 
   },
   "suggests": {
-    "starlight":">=1.1.1",
     "ferritecore":">=4.2.0",
     "sodium": ">=0.4.6"
   },

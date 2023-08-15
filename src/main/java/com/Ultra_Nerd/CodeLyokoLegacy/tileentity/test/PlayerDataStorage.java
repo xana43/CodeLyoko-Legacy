@@ -33,6 +33,6 @@ public final class PlayerDataStorage extends BlockEntity implements ExtendedScre
 
     @Override
     public @NotNull ScreenHandler createMenu(final int syncId, final PlayerInventory inv, final PlayerEntity player) {
-        return new ProfileDebugScreenHandler(syncId,player,player.world.getLevelProperties());
+        return new ProfileDebugScreenHandler(syncId,player,player.getWorld().getLevelProperties());
     }
 }

@@ -31,13 +31,13 @@ public record PacketHandlerCommon() {
         ServerPlayNetworking.registerGlobalReceiver(ChannelID, (server, player, handler, buf, responseSender) -> {
             final BlockPos pos = buf.readBlockPos();
             final boolean active = buf.readBoolean();
-            server.execute(() -> player.world.setBlockState(pos,
-                    player.world.getBlockState(pos).with(ControlPanel.ScreenOn, active)));
+            server.execute(() -> player.getWorld().setBlockState(pos,
+                    player.getWorld().getBlockState(pos).with(ControlPanel.ScreenOn, active)));
         });
         ServerPlayNetworking.registerGlobalReceiver(TowerChannelID, (server, player, handler, buf, responseSender) -> {
             final BlockPos pos = buf.readBlockPos();
             final int activationState = buf.readInt();
-            server.execute(() -> player.world.getBlockEntity(pos, ModBlockEntities.TOWER_INTERFACE_TILE_ENTITY).get()
+            server.execute(() -> player.getWorld().getBlockEntity(pos, ModBlockEntities.TOWER_INTERFACE_TILE_ENTITY).get()
                     .calculateTowerActivation(activationState));
 
         });
@@ -84,7 +84,8 @@ public record PacketHandlerCommon() {
                                 case 1 -> {
                                     player.addStatusEffect(ClassEffects.Samurai.SUPER_SPRINT);
                                     if(player.isOnGround()) {
-                                        player.handleFallDamage(player.fallDistance, 0.3f, DamageSource.FALL);
+                                        player.handleFallDamage(player.fallDistance, 0.3f,
+                                                player.getWorld().getDamageSources().fall());
                                     }
                                 }
                             }

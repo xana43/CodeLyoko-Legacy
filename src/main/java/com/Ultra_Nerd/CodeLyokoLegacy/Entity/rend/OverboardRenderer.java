@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
+
 
 
 public final class OverboardRenderer<T extends OverboardEntity> extends EntityRenderer<T> {
@@ -37,7 +37,8 @@ public final class OverboardRenderer<T extends OverboardEntity> extends EntityRe
     }
 
     @Override
-    public void render(@Nonnull T entityIn, float entityYaw, float partialTicks, @Nonnull MatrixStack matrixStackIn, @Nonnull VertexConsumerProvider bufferIn, int packedLightIn) {
+    public void render(final T entityIn, float entityYaw, float partialTicks, final MatrixStack matrixStackIn,
+            final VertexConsumerProvider bufferIn, int packedLightIn) {
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.push();
         matrixStackIn.scale(-2F, -2F, 2.0F);

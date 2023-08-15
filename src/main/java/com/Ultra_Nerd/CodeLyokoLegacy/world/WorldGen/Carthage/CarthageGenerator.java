@@ -22,7 +22,6 @@ import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.noise.NoiseConfig;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -96,7 +95,8 @@ public final class CarthageGenerator extends ChunkGenerator {
 
 
     @Override
-    public void buildSurface(@Nonnull ChunkRegion region, StructureAccessor featureManager, final NoiseConfig config, @NotNull Chunk chunk) {
+    public void buildSurface(final ChunkRegion region, StructureAccessor featureManager, final NoiseConfig config,
+            @NotNull Chunk chunk) {
         final BlockState bedrock = ModBlocks.DIGITAL_OCEAN_BLOCK.getDefaultState();
         final BlockState stone = ModBlocks.SECTOR5_STEEL.getDefaultState();
         final BlockState white = ModBlocks.TOWER_WHITE.getDefaultState();

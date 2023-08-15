@@ -6,8 +6,8 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.loader.impl.util.ExceptionUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.Material;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
@@ -25,7 +25,7 @@ public class TowerWall extends HorizontalFacingBlock {
     public static final IntProperty CURRENT_ACTIVATION_STATE = IntProperty.of("activation", 0, 3);
 
     public TowerWall() {
-        super(FabricBlockSettings.of(Material.BARRIER)
+        super(FabricBlockSettings.copyOf(Blocks.BARRIER)
                 .strength(-1, Integer.MAX_VALUE)
                 .dropsNothing()
                 .sounds(BlockSoundGroup.GLASS)
@@ -36,7 +36,7 @@ public class TowerWall extends HorizontalFacingBlock {
     }
 
     @Override
-    public boolean canMobSpawnInside() {
+    public boolean canMobSpawnInside(final BlockState state) {
         return false;
     }
 
@@ -48,7 +48,7 @@ public class TowerWall extends HorizontalFacingBlock {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite())
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite())
                 .with(CURRENT_ACTIVATION_STATE, 0);
     }
 

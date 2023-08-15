@@ -80,11 +80,12 @@ public final class SaberKatana extends SwordItem {
         }
     }
 
-    @Override
-    public SoundEvent getEquipSound() {
-        return ModSounds.SWORDDRAW;
-    }
 
+
+    //@Override
+    //public SoundEvent getEquipSound() {
+    //    return ModSounds.SWORDDRAW;
+    //}
     @Override
     public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
         user.setCurrentHand(hand);

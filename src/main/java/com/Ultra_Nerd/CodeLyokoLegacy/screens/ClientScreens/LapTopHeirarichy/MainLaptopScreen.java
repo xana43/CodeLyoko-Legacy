@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
@@ -46,24 +47,24 @@ public final class MainLaptopScreen extends Screen {
     private void setImageButton() {
         imageButton = ButtonWidget.builder(Text.of("test"), button -> {
         }).size(30,30).build();
-        imageButton.setPos(this.width >> 1, this.height >> 1);
+        imageButton.setPosition(this.width >> 1, this.height >> 1);
     }
 
 
     @Override
-    public void renderBackground(@NotNull MatrixStack pPoseStack) {
+    public void renderBackground(@NotNull DrawContext pPoseStack) {
         // super.renderBackground(pPoseStack);
         RenderSystem.setShaderTexture(0, TEXTURE);
-        this.drawTexture(pPoseStack, x, 0, 0, 0, xSize, ySize);
+        pPoseStack.drawTexture(TEXTURE,x, 0, 0, 0, xSize, ySize);
     }
 
     @Override
-    public void render(@NotNull MatrixStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    public void render(@NotNull DrawContext pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         this.renderBackground(pPoseStack);
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 
         this.imageButton.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        drawCenteredText(pPoseStack, this.client.textRenderer, imageButton.getMessage(), imageButton.getX(),
+        pPoseStack.drawCenteredTextWithShadow(this.client.textRenderer, imageButton.getMessage(), imageButton.getX(),
                 imageButton.getY(),
                 0x1d5e18);
     }

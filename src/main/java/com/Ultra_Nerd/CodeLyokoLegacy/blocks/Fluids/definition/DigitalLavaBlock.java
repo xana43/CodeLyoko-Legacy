@@ -21,7 +21,7 @@ public final class DigitalLavaBlock extends FluidBlock {
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
         if (!world.isClient) {
-            entity.damage(new LyokoDamage(this.getTranslationKey()).setBypassesArmor().setNeutral(), Float.MAX_VALUE);
+            entity.damage(entity.getWorld().getDamageSources().outOfWorld(), Float.MAX_VALUE);
             if (entity instanceof ArrowEntity) {
                 entity.kill();
             }

@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -115,10 +115,9 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
         return ModBlockEntities.ROUTER_BLOCK_ENTITY_TYPE.instantiate(pos, state);
     }
 
-    @Nonnull
     @Override
-    public VoxelShape getOutlineShape(@NotNull BlockState state, @Nonnull BlockView worldIn, @Nonnull BlockPos pos,
-            @Nonnull ShapeContext context) {
+    public VoxelShape getOutlineShape(@NotNull BlockState state, BlockView worldIn, BlockPos pos,
+            ShapeContext context) {
         return switch (state.get(FACING)) {
             case SOUTH -> N;
             case EAST -> W;
@@ -139,7 +138,7 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
 
     @Override
     public BlockState getPlacementState(@NotNull ItemPlacementContext context) {
-        return this.getDefaultState().with(FACING, context.getPlayerFacing().getOpposite()).with(ROUTER_ACTIVE, false);
+        return this.getDefaultState().with(FACING, context.getHorizontalPlayerFacing().getOpposite()).with(ROUTER_ACTIVE, false);
     }
 
     @Override

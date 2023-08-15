@@ -36,7 +36,8 @@ public final class FrontierBlock extends TransparentBlock {
         super.scheduledTick(state, world, pos, random);
         if (DamageTime <= 0) {
             final Iterable<Entity> serverEntities = world.iterateEntities();
-            final DamageSource source = new LyokoDamage(this.getName().toString()).setBypassesArmor();
+            final DamageSource source = /*new LyokoDamage(this.getName().toString()).setBypassesArmor()
+            */ world.getDamageSources().outOfWorld();
             for (final Entity entity : serverEntities) {
                 if (entity instanceof final ItemEntity itemEntity) {
                     itemEntity.remove(Entity.RemovalReason.KILLED);

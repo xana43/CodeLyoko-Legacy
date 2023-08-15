@@ -18,7 +18,6 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 
 public final class ZweihanderWeapon extends SwordItem {
 
@@ -49,7 +48,8 @@ public final class ZweihanderWeapon extends SwordItem {
     }
 
     @Override
-    public void inventoryTick(@NotNull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(@NotNull ItemStack stack, final World worldIn, final Entity entityIn, int itemSlot,
+            boolean isSelected) {
 
 
         if (entityIn instanceof PlayerEntity player) {

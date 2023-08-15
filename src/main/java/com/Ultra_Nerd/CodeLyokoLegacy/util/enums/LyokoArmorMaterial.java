@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.enums;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
@@ -9,7 +10,7 @@ import net.minecraft.sound.SoundEvents;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
+
 
 public enum LyokoArmorMaterial implements ArmorMaterial {
 
@@ -44,13 +45,13 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
 
 
     @Override
-    public int getDurability(@NotNull EquipmentSlot equipmentSlot) {
-        return MAX_DAMAGE_ARRAY[equipmentSlot.getEntitySlotId()] * this.maxDamageFactor;
+    public int getDurability(@NotNull ArmorItem.Type equipmentSlot) {
+        return MAX_DAMAGE_ARRAY[equipmentSlot.getEquipmentSlot().getEntitySlotId()] * this.maxDamageFactor;
     }
 
     @Override
-    public int getProtectionAmount(@NotNull EquipmentSlot p_40411_) {
-        return this.damageReduction[p_40411_.getEntitySlotId()];
+    public int getProtection(@NotNull ArmorItem.Type p_40411_) {
+        return this.damageReduction[p_40411_.getEquipmentSlot().getEntitySlotId()];
     }
 
     @Override
@@ -70,7 +71,7 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
     }
 
 
-    @Nonnull
+
     @Override
     public String getName() {
         return this.name;

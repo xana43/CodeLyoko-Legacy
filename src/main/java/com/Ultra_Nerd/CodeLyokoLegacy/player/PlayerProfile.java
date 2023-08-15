@@ -21,8 +21,8 @@ public final class PlayerProfile implements NbtSerializable {
     public PlayerProfile(final PlayerEntity player)
     {
         FakePlayer fakePlayer = null;
-        if(!player.world.isClient()) {
-             fakePlayer = FakePlayer.getOrCreate((ServerWorld) player.world);
+        if(!player.getWorld().isClient()) {
+             fakePlayer = FakePlayer.getOrCreate((ServerWorld) player.getWorld());
             this.player = fakePlayer;
         }
         else

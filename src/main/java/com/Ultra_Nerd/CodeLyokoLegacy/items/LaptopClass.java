@@ -21,7 +21,7 @@ import team.reborn.energy.api.EnergyStorageUtil;
 import team.reborn.energy.api.base.SimpleBatteryItem;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
-import javax.annotation.Nonnull;
+
 
 public final class LaptopClass extends Item implements SimpleEnergyItem{
 
@@ -42,9 +42,9 @@ public final class LaptopClass extends Item implements SimpleEnergyItem{
         }
     }
 
-    @Nonnull
+
     @Override
-    public TypedActionResult<ItemStack> use(@NotNull World worldIn, @Nonnull PlayerEntity playerIn, @Nonnull Hand handIn) {
+    public TypedActionResult<ItemStack> use(@NotNull World worldIn, final PlayerEntity playerIn, final Hand handIn) {
 
         final ItemStack item = playerIn.getStackInHand(handIn);
         if (getStoredEnergy(item) > 0 || playerIn.isCreative() && !playerIn.isSneaking()) {

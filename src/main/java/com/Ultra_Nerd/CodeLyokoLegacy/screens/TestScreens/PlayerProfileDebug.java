@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TestHandler.ProfileDebugScr
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.client.util.math.MatrixStack;
@@ -37,14 +38,14 @@ public final class PlayerProfileDebug extends HandledScreen<ProfileDebugScreenHa
     }
 
     @Override
-    public void render(final MatrixStack matrices, final int mouseX, final int mouseY, final float delta) {
+    public void render(final DrawContext matrices, final int mouseX, final int mouseY, final float delta) {
         super.render(matrices, mouseX, mouseY, delta);
         profileText.render(matrices, mouseX, mouseY, delta);
         profileText.renderButton(matrices, mouseX, mouseY, delta);
-        drawCenteredText(matrices,textRenderer,
+        matrices.drawCenteredTextWithShadow(textRenderer,
                 Text.of(CardinalData.PlayerSavedProfile.getPlayerProfile(worldProperties,callingPlayer).getPlayer().getEntityName()),
                 width>>1,height>>1, ColorHelper.Argb.getArgb(255,255,255,255));
-        drawCenteredText(matrices,textRenderer,
+        matrices.drawCenteredTextWithShadow(textRenderer,
                 Text.of("Class" + CardinalData.PlayerSavedProfile.getPlayerProfile(worldProperties,
                         callingPlayer).getPlayerClassType()),width >> 1, height >> 2, ColorHelper.Argb.getArgb(255,
                         255,255,255));
@@ -53,7 +54,7 @@ public final class PlayerProfileDebug extends HandledScreen<ProfileDebugScreenHa
     }
 
     @Override
-    protected void drawBackground(final MatrixStack matrices, final float delta, final int mouseX, final int mouseY) {
+    protected void drawBackground(final DrawContext matrices, final float delta, final int mouseX, final int mouseY) {
 
     }
 }

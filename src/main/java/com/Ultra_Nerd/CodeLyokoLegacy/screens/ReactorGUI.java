@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ReactorScreenHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -22,27 +23,28 @@ public final class ReactorGUI extends HandledScreen<ReactorScreenHandler> {
     }
 
     @Override
-    protected void drawBackground(final MatrixStack matrices, final float delta, final int mouseX, final int mouseY) {
+    protected void drawBackground(final DrawContext matrices, final float delta, final int mouseX, final int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
         final int x = (width - backgroundWidth) >> 1;
         final int y = (height - backgroundHeight) >> 1;
-        drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight);
+        matrices.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+    public void render(final DrawContext matrices, int mouseX, int mouseY, float delta) {
         renderBackground(matrices);
         final int x = (width - 36) >> 1;
         final int y = (height - 117) >> 1;
         super.render(matrices, mouseX, mouseY, delta);
         drawMouseoverTooltip(matrices, mouseX, mouseY);
-        drawCenteredText(matrices, textRenderer, Text.translatable("computer_reactor.input.slot"), x, y,
+        matrices.drawCenteredTextWithShadow(textRenderer, Text.translatable("computer_reactor.input.slot"), x, y,
                 ColorHelper.Argb.getArgb(255, 255, 255, 255));
-        drawCenteredText(matrices, textRenderer, Text.translatable("computer_reactor.output.slot"), x + 36, y,
+        matrices.drawCenteredTextWithShadow(textRenderer, Text.translatable("computer_reactor.output.slot"),
+                x + 36, y,
                 ColorHelper.Argb.getArgb(255, 255, 255, 255));
-        drawCenteredText(matrices, textRenderer,
+        matrices.drawCenteredTextWithShadow(textRenderer,
                 Text.translatable("computer_reactor.energy.amount", handler.getEnergyAmount()), x + 36, y + 45,
                 ColorHelper.Argb.getArgb(255, 255, 255, 255));
     }

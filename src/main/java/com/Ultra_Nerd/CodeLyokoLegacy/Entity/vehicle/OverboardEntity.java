@@ -22,10 +22,8 @@ public final class OverboardEntity extends LyokoVehicleEntity {
     }
 
     @Override
-    public void updatePassengerPosition(final Entity passenger) {
+    protected void addPassenger(final Entity passenger) {
         passenger.setPos(this.getX(), this.getY() + 0.5f, this.getZ());
-        super.updatePassengerPosition(passenger);
-
-
+        super.addPassenger(passenger);
     }
 }

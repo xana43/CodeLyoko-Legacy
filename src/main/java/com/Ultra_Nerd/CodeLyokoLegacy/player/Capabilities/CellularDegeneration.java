@@ -37,11 +37,11 @@ public final class CellularDegeneration implements AutoSyncedComponent, PlayerCo
         }
         if(cellHealth < 50)
         {
-            player.damage(new DamageSource("lyoko.cell.damage").setBypassesArmor(), ThreadLocalRandom.current()
+            player.damage(player.getWorld().getDamageSources().magic(), ThreadLocalRandom.current()
                     .nextFloat(4,8));
         }
     }
-
+//new DamageSource("lyoko.cell.damage").setBypassesArmor()
     public void regenerateHealth() {
         if (cellHealth < maxCellHealth) {
             cellHealth++;

@@ -26,7 +26,7 @@ public final class LyokoRingParticle extends SpriteBillboardParticle {
 
 
         this.velocityY = 0;
-        this.field_28787 = false;
+        //this.field_28787 = false;
         this.xw = x;
         this.zw = z;
         //this.velocityX = MathHelper.cos((float) MathHelper.atan2(velx,velz));

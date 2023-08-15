@@ -9,7 +9,7 @@ import team.reborn.energy.api.base.SimpleBatteryItem;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
 public final class linker extends ArmorItem implements SimpleEnergyItem {
-    public linker(@NotNull ArmorMaterial materialIn, @NotNull EquipmentSlot slot, @NotNull Settings builder) {
+    public linker(@NotNull ArmorMaterial materialIn, @NotNull ArmorItem.Type slot, @NotNull Settings builder) {
         super(materialIn, slot, builder);
     }
 

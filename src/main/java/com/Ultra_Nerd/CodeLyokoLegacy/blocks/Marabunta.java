@@ -6,7 +6,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.DamageSources.LyokoDamage;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.block.SoulSandBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
@@ -21,7 +20,7 @@ public final class Marabunta extends SoulSandBlock {
 
 
     public Marabunta() {
-        super(FabricBlockSettings.of(Material.EGG)
+        super(FabricBlockSettings.copyOf(Blocks.DRAGON_EGG)
                 .strength(6, 10)
                 .sounds(BlockSoundGroup.STONE).ticksRandomly()
 
@@ -62,12 +61,12 @@ public final class Marabunta extends SoulSandBlock {
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        entity.damage(new LyokoDamage(this.getTranslationKey()), Random.create().nextInt(10));
+        entity.damage(entity.getWorld().getDamageSources().magic(), Random.create().nextInt(10));
     }
 
 
     @Override
-    public boolean canMobSpawnInside() {
+    public boolean canMobSpawnInside(final BlockState state) {
         return false;
     }
 }

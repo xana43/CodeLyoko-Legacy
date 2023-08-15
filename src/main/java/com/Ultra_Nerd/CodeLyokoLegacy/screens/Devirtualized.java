@@ -1,29 +1,33 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.screens;
+package com.Ultra_Nerd.CodeLyokoLegacy.screens;//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
+
+
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.screen.*;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.screen.ScreenTexts;
-import net.minecraft.text.ClickEvent;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import org.jetbrains.annotations.Nullable;
-
+import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.ConfirmScreen;
+import net.minecraft.client.gui.screen.MessageScreen;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.screen.ScreenTexts;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.text.ClickEvent.Action;
+import net.minecraft.util.Formatting;
+import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
-public final class Devirtualized extends Screen {
-
-
+public class Devirtualized extends Screen {
     private int ticksSinceDeath;
     private final Text message;
     private final boolean isHardcore;
@@ -31,9 +35,9 @@ public final class Devirtualized extends Screen {
     private final List<ButtonWidget> buttons = Lists.newArrayList();
     @Nullable
     private ButtonWidget titleScreenButton;
-    public Devirtualized(final @Nullable Text message,final boolean isHardcore) {
-        super(Text.translatable(isHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title")
-                .fillStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
+
+    public Devirtualized(@Nullable Text message, boolean isHardcore) {
+        super(Text.translatable(isHardcore ? "lyoko.deathScreen.title.hardcore" : "lyoko.deathScreen.title"));
         this.message = message;
         this.isHardcore = isHardcore;
     }
@@ -41,20 +45,16 @@ public final class Devirtualized extends Screen {
     protected void init() {
         this.ticksSinceDeath = 0;
         this.buttons.clear();
-        final Text text = this.isHardcore ? Text.translatable("deathScreen.spectate") : Text.translatable("lyoko" +
-                ".deathScreen.respawn");
-        this.buttons.add(this.addDrawableChild(ButtonWidget.builder(text, (button) -> {
+        Text text = this.isHardcore ? Text.translatable("deathScreen.spectate") : Text.translatable("deathScreen.respawn");
+        this.buttons.add((ButtonWidget)this.addDrawableChild(ButtonWidget.builder(text, (button) -> {
             this.client.player.requestRespawn();
-            this.client.setScreen(null);
+            button.active = false;
         }).dimensions(this.width / 2 - 100, this.height / 4 + 72, 200, 20).build()));
-        this.titleScreenButton = this.addDrawableChild(ButtonWidget.builder(Text.translatable("deathScreen.titleScreen"), (button) -> this.client.getAbuseReportContext().tryShowDraftScreen(this.client, this, this::onTitleScreenButtonClicked, true)).dimensions(this.width / 2 - 100, this.height / 4 + 96, 200, 20).build());
+        this.titleScreenButton = (ButtonWidget)this.addDrawableChild(ButtonWidget.builder(Text.translatable("deathScreen.titleScreen"), (button) -> {
+            this.client.getAbuseReportContext().tryShowDraftScreen(this.client, this, this::onTitleScreenButtonClicked, true);
+        }).dimensions(this.width / 2 - 100, this.height / 4 + 96, 200, 20).build());
         this.buttons.add(this.titleScreenButton);
-
-        ButtonWidget buttonWidget;
-        for(final Iterator<ButtonWidget> var2 = this.buttons.iterator(); var2.hasNext(); buttonWidget.active = false) {
-            buttonWidget = var2.next();
-        }
-
+        this.setButtonsActive(false);
         this.scoreText = Text.translatable("deathScreen.score").append(": ").append(Text.literal(Integer.toString(this.client.player.getScore())).formatted(Formatting.YELLOW));
     }
 
@@ -66,12 +66,12 @@ public final class Devirtualized extends Screen {
         if (this.isHardcore) {
             this.quitLevel();
         } else {
-           final ConfirmScreen confirmScreen = new ConfirmScreen((confirmed) -> {
+            ConfirmScreen confirmScreen = new TitleScreenConfirmScreen((confirmed) -> {
                 if (confirmed) {
                     this.quitLevel();
                 } else {
                     this.client.player.requestRespawn();
-                    this.client.setScreen(null);
+                    this.client.setScreen((Screen)null);
                 }
 
             }, Text.translatable("deathScreen.quit.confirm"), ScreenTexts.EMPTY, Text.translatable("deathScreen.titleScreen"), Text.translatable("deathScreen.respawn"));
@@ -89,36 +89,34 @@ public final class Devirtualized extends Screen {
         this.client.setScreen(new TitleScreen());
     }
 
-    public void render(final MatrixStack matrices,final int mouseX,final int mouseY,final float delta) {
-        this.fillGradient(matrices, 0, 0, this.width, this.height, 1615855616, -1602211792);
-        matrices.push();
-        matrices.scale(2.0F, 2.0F, 2.0F);
-        drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2 / 2, 30, 16777215);
-        matrices.pop();
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        context.fillGradient(0, 0, this.width, this.height, 1615855616, -1602211792);
+        context.getMatrices().push();
+        context.getMatrices().scale(2.0F, 2.0F, 2.0F);
+        context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2 / 2, 30, 16777215);
+        context.getMatrices().pop();
         if (this.message != null) {
-            drawCenteredText(matrices, this.textRenderer, this.message, this.width >> 1, 85, 16777215);
+            context.drawCenteredTextWithShadow(this.textRenderer, this.message, this.width / 2, 85, 16777215);
         }
 
-        drawCenteredText(matrices, this.textRenderer, this.scoreText, this.width >> 1, 100, 16777215);
+        context.drawCenteredTextWithShadow(this.textRenderer, this.scoreText, this.width / 2, 100, 16777215);
         if (this.message != null && mouseY > 85) {
             Objects.requireNonNull(this.textRenderer);
             if (mouseY < 85 + 9) {
-                final Style style = this.getTextComponentUnderMouse(mouseX);
-                this.renderTextHoverEffect(matrices, style, mouseX, mouseY);
+                Style style = this.getTextComponentUnderMouse(mouseX);
+                context.drawHoverEvent(this.textRenderer, style, mouseX, mouseY);
             }
         }
 
-        super.render(matrices, mouseX, mouseY, delta);
+        super.render(context, mouseX, mouseY, delta);
         if (this.titleScreenButton != null && this.client.getAbuseReportContext().hasDraft()) {
-            RenderSystem.setShaderTexture(0, ClickableWidget.WIDGETS_TEXTURE);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            this.drawTexture(matrices, this.titleScreenButton.getX() + this.titleScreenButton.getWidth() - 17, this.titleScreenButton.getY() + 3, 182, 24, 15, 15);
+            context.drawTexture(ClickableWidget.WIDGETS_TEXTURE, this.titleScreenButton.getX() + this.titleScreenButton.getWidth() - 17, this.titleScreenButton.getY() + 3, 182, 24, 15, 15);
         }
 
     }
 
     @Nullable
-    private Style getTextComponentUnderMouse(final int mouseX) {
+    private Style getTextComponentUnderMouse(int mouseX) {
         if (this.message == null) {
             return null;
         } else {
@@ -129,12 +127,12 @@ public final class Devirtualized extends Screen {
         }
     }
 
-    public boolean mouseClicked(final double mouseX,final double mouseY,final int button) {
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (this.message != null && mouseY > 85.0) {
             Objects.requireNonNull(this.textRenderer);
-            if (mouseY < (85 + 9)) {
-                final Style style = this.getTextComponentUnderMouse((int)mouseX);
-                if (style != null && style.getClickEvent() != null && style.getClickEvent().getAction() == ClickEvent.Action.OPEN_URL) {
+            if (mouseY < (double)(85 + 9)) {
+                Style style = this.getTextComponentUnderMouse((int)mouseX);
+                if (style != null && style.getClickEvent() != null && style.getClickEvent().getAction() == Action.OPEN_URL) {
                     this.handleTextClick(style);
                     return false;
                 }
@@ -151,12 +149,24 @@ public final class Devirtualized extends Screen {
     public void tick() {
         super.tick();
         ++this.ticksSinceDeath;
-        ButtonWidget buttonWidget;
         if (this.ticksSinceDeath == 20) {
-            for(final Iterator<ButtonWidget> var1 = this.buttons.iterator(); var1.hasNext(); buttonWidget.active = true) {
-                buttonWidget = var1.next();
-            }
+            this.setButtonsActive(true);
         }
 
+    }
+
+    private void setButtonsActive(boolean active) {
+        ButtonWidget buttonWidget;
+        for(Iterator var2 = this.buttons.iterator(); var2.hasNext(); buttonWidget.active = active) {
+            buttonWidget = (ButtonWidget)var2.next();
+        }
+
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class TitleScreenConfirmScreen extends ConfirmScreen {
+        public TitleScreenConfirmScreen(BooleanConsumer booleanConsumer, Text text, Text text2, Text text3, Text text4) {
+            super(booleanConsumer, text, text2, text3, text4);
+        }
     }
 }

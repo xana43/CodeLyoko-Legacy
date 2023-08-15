@@ -11,6 +11,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.PressableTextWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
@@ -49,10 +50,6 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
         return false;
     }
 
-    @Override
-    public boolean changeFocus(boolean p_changeFocus_1_) {
-        return false;
-    }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
@@ -61,7 +58,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     }
 
     @Override
-    public void render(@NotNull MatrixStack poseStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull DrawContext poseStack, int mouseX, int mouseY, float partialTicks) {
 
         this.renderBackground(poseStack);
 
@@ -71,16 +68,16 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
                 .getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle());
         final var CodeEnterTest = Text.of(this.text.getText()).getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle());
         if (AcceptedText.size() >= 1) {
-            PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer, AcceptedText.get(0),
+            poseStack.drawTextWithShadow(this.textRenderer, AcceptedText.get(0),
                     this.Accepted.getX(),
                     this.Accepted.getY(), acceptedColor);
         }
         if (CodeEnterTest.size() >= 1) {
-            PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer, CodeEnterTest.get(0), this.text.getX(),
+            poseStack.drawTextWithShadow(this.textRenderer, CodeEnterTest.get(0), this.text.getX(),
                     this.text.getY(), Color.WHITE.getRGB());
         }
         if ((tick >> 2) % 5 == 0) {
-            PressableTextWidget.drawTextWithShadow(poseStack, this.textRenderer,
+            poseStack.drawTextWithShadow(this.textRenderer,
                     Text.of("|").getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()).get(0),
                     text.getX() + (this.text.getCursor() * 21), this.text.getY(), Color.WHITE.getRGB());
 
@@ -154,7 +151,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
         this.text.setDrawsBackground(false);
         this.text.setVisible(true);
         this.text.setEditableColor(16777215);
-        this.text.setTextFieldFocused(true);
+        this.text.setFocused(true);
         this.text.setEditable(true);
         this.text.setCursor(0);
         this.text.setFocusUnlocked(false);
@@ -209,9 +206,9 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
 
 
     @Override
-    protected void drawBackground(final MatrixStack matrices, final float delta, final int mouseX, final int mouseY) {
+    protected void drawBackground(final DrawContext matrices, final float delta, final int mouseX, final int mouseY) {
         RenderSystem.setShaderTexture(0, TEXTURES);
-        this.drawTexture(matrices, (this.width - 200) >> 1, (this.height - 141) >> 1, 0, 0, 200, 141);
+        matrices.drawTexture(TEXTURES,(this.width - 200) >> 1, (this.height - 141) >> 1, 0, 0, 200, 141);
     }
 
 

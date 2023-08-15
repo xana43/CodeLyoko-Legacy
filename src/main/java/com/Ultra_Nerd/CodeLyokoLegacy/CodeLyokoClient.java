@@ -26,6 +26,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.client.sky.carthage.CustomCarthadgeSk
 import com.Ultra_Nerd.CodeLyokoLegacy.util.client.sky.ice.CustomIceSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.client.sky.volcano.CustomVolcanoSky;
 import com.mojang.blaze3d.systems.RenderSystem;
+import dev.felnull.specialmodelloader.api.event.SpecialModelLoaderEvents;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -40,6 +41,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.DeathScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
@@ -51,6 +53,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
@@ -74,12 +77,13 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(mc.player)) {
                     RenderSystem.setShaderTexture(0,
                             CodeLyokoMain.codeLyokoPrefix("textures/gui/lyoko_health_bar.png"));
-                    matrixStack.push();
-
+                    final Identifier texture =  CodeLyokoMain.codeLyokoPrefix("textures/gui/lyoko_health_bar.png");
                     if (!mc.player.isCreative() && !mc.player.isSpectator()) {
-                        mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 7) - 2,
-                                mc.getWindow().getScaledHeight() >> 11, 0, 0, 33, 254);
-                        mc.inGameHud.drawTexture(matrixStack, mc.getWindow().getScaledWidth() >> 4,
+                       matrixStack.drawTexture( texture, (mc.getWindow().getScaledWidth() >> 7) - 2,
+                            mc.getWindow().getScaledHeight() >> 11, 0, 0, 33
+                               , 254);
+
+                        matrixStack.drawTexture(texture, mc.getWindow().getScaledWidth() >> 4,
                                 mc.getWindow().getScaledHeight() >> 11, 174, 0, 6, 254);
                         int texV = 0;
                         switch (CardinalData.LyokoClass.getLyokoClass(mc.player)) {
@@ -89,16 +93,17 @@ public record CodeLyokoClient() implements ClientModInitializer {
                             case 3 -> texV = PlayerClassType.Guardian.getTextureIndex();
 
                         }
-                        mc.inGameHud.drawTexture(matrixStack, (mc.getWindow().getScaledWidth() >> 6) - 1,
+
+                        matrixStack.drawTexture(texture, (mc.getWindow().getScaledWidth() >> 6) - 1,
                                 (mc.getWindow().getScaledHeight() >> 11), texV, 0, 25,
                                 (int) ((mc.getWindow().getScaledHeight() >> 5) * (mc.player.getHealth() * 1.6f)));
-                        mc.inGameHud.drawTexture(matrixStack, mc.getWindow().getScaledWidth() >> 4,
+                        matrixStack.drawTexture(texture, mc.getWindow().getScaledWidth() >> 4,
                                 mc.getWindow().getScaledHeight() >> 11, 183, 0, 6,
                                 (CardinalData.DigitalEnergyComponent.getCurrentEnergy(mc.player)) << 1);
 
                     }
 
-                    matrixStack.pop();
+                   // mc.inGameHud.render(matrixStack,tickDelta);
                 }
             }
             // }
@@ -210,6 +215,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        SpecialModelLoaderEvents.LOAD_SCOPE.register(location -> CodeLyokoMain.MOD_ID.equals(location.getNamespace()));
         //set key bindings
         classCreenBinding = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding("key." + CodeLyokoMain.MOD_ID + ".class", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_ALT,

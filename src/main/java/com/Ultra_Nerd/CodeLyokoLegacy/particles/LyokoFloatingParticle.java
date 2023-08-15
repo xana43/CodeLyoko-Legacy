@@ -22,7 +22,6 @@ public final class LyokoFloatingParticle extends SpriteBillboardParticle {
         this.provider = provider;
         this.velocityMultiplier = 0.96f;
         this.gravityStrength = -0.1f;
-        this.field_28787 = true;
         this.velocityY *= 0.20000000298023224;
         if (velocityX == 0.0 && velocityZ == 0.0) {
             this.velocityX *= 0.10000000149011612;

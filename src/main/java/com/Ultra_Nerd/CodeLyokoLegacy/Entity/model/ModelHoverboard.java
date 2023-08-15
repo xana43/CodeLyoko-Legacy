@@ -15,7 +15,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.model.data.EntityModelData;
 
-import javax.annotation.Nonnull;
+
 
 public final class ModelHoverboard<T extends HoverboardEntity> extends EntityModel<T> {
 

@@ -36,7 +36,6 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import javax.annotation.Nonnull;
 import java.util.EnumSet;
 import java.util.Random;
 
@@ -115,7 +114,7 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
         return null;
     }
 
-    @Nonnull
+
     @Override
     public FallSounds getFallSounds() {
         return new FallSounds(ModSounds.MEGATANKSMALLFALL, ModSounds.MEGATANKBIGFALL);
@@ -132,7 +131,7 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
     }
 
     @Override
-    protected @NotNull SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
+    protected @NotNull SoundEvent getHurtSound(final DamageSource damageSourceIn) {
         final boolean random = new Random().nextBoolean();
         if (random) {
             return ModSounds.MEGATANKHURT1;
@@ -159,17 +158,17 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
     @Override
     public void attack(final LivingEntity target, final float pullProgress) {
         //super.attack(target, pullProgress);
-        final EntityLaser abstractarrow = new EntityLaser(this.world, this, 20);
+        final EntityLaser abstractarrow = new EntityLaser(this.getWorld(), this, 20);
 
         final double d0 = target.getX() - this.getX();
         final double d1 = target.getBodyY(0.3333333333333333D) - abstractarrow.getY();
         final double d2 = target.getZ() - this.getZ();
         final double d3 = Math.sqrt(d0 * d0 + d2 * d2);
 
-        abstractarrow.setVelocity(d0, d1 + d3 * 0.2F, d2, 4F, (14 - this.world.getDifficulty().getId() << 2));
+        abstractarrow.setVelocity(d0, d1 + d3 * 0.2F, d2, 4F, (14 - this.getWorld().getDifficulty().getId() << 2));
         this.playSound(ModSounds.LASERARROW, 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
-        if (!this.world.isClient) {
-            this.world.spawnEntity(abstractarrow);
+        if (!this.getWorld().isClient) {
+            this.getWorld().spawnEntity(abstractarrow);
         }
     }
 

@@ -38,7 +38,7 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import javax.annotation.Nonnull;
+
 
 public final class HornetEntity extends PhantomEntity implements GeoAnimatable, RangedAttackMob {
 
@@ -104,7 +104,7 @@ public final class HornetEntity extends PhantomEntity implements GeoAnimatable, 
 
 
         if (this.isAlive()) {
-            this.world.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.HORNETFLY,
+            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.HORNETFLY,
                     SoundCategory.HOSTILE, 0.95F + this.random.nextFloat() * 0.05F,
                     0.95F + this.random.nextFloat() * 0.05F);
         }
@@ -148,7 +148,7 @@ public final class HornetEntity extends PhantomEntity implements GeoAnimatable, 
     }
 
     @Override
-    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
+    protected SoundEvent getHurtSound(final DamageSource damageSourceIn) {
         return super.getHurtSound(damageSourceIn);
     }
 
@@ -205,15 +205,15 @@ public final class HornetEntity extends PhantomEntity implements GeoAnimatable, 
     @Override
     public void attack(@NotNull LivingEntity target, final float distanceFactor) {
 
-        final EntityLaser laser = new EntityLaser(this.world, this, 40);
+        final EntityLaser laser = new EntityLaser(this.getWorld(), this, 40);
         final double d0 = target.getX() - this.getX();
         final double d1 = target.getBodyY(0.3333333333333333D) - laser.getY();
         final double d2 = target.getZ() - this.getZ();
         final double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        laser.setVelocity(d0, d1 + d3 * (double) 0.2F, d2, 6F, (float) (14 - this.world.getDifficulty().getId() << 2));
+        laser.setVelocity(d0, d1 + d3 * (double) 0.2F, d2, 6F, (float) (14 - this.getWorld().getDifficulty().getId() << 2));
         this.playSound(ModSounds.LASERARROW, getSoundVolume(),
                 1.0F / (this.getRandom().nextFloat() * 1.2f));
-        this.world.spawnEntity(laser);
+        this.getWorld().spawnEntity(laser);
     }
 
     //@Override

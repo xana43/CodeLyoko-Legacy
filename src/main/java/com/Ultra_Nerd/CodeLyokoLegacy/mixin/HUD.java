@@ -2,10 +2,12 @@ package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,10 +35,13 @@ public abstract class HUD {
     private int renderHealthValue;
 
     @Shadow
+    private static Identifier ICONS;
+    @Shadow
     protected abstract PlayerEntity getCameraPlayer();
 
     @Inject(method = "renderHealthBar", at = @At(value = "HEAD"), cancellable = true)
-    public void disableHealth(final MatrixStack matrices, final PlayerEntity player, final int x, final int y, final int lines, final int regeneratingHeartIndex, final float maxHealth, final int lastHealth, final int health, final int absorption, final boolean blinking, final CallbackInfo ci) {
+    public void disableHealth(final DrawContext matrices, final PlayerEntity player, final int x, final int y, final int lines,
+            final int regeneratingHeartIndex, final float maxHealth, final int lastHealth, final int health, final int absorption, final boolean blinking, final CallbackInfo ci) {
         if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(player)) {
             ci.cancel();
 
@@ -44,7 +49,7 @@ public abstract class HUD {
     }
 
     @Inject(method = "renderStatusBars", at = @At(value = "HEAD"), cancellable = true)
-    public void disableFood(final MatrixStack matrices, final CallbackInfo ci) {
+    public void disableFood(final DrawContext matrices, final CallbackInfo ci) {
         if (client.player != null) {
             if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
 
@@ -69,15 +74,15 @@ public abstract class HUD {
                     if (u > 0) {
                         x = m + w * 8;
                         if (w * 2 + 1 < u) {
-                            this.client.inGameHud.drawTexture(matrices, x, s, 34, 9, 9, 9);
+                            matrices.drawTexture(ICONS, x, s, 34, 9, 9, 9);
                         }
 
                         if (w * 2 + 1 == u) {
-                            this.client.inGameHud.drawTexture(matrices, x, s, 25, 9, 9, 9);
+                            matrices.drawTexture(ICONS, x, s, 25, 9, 9, 9);
                         }
 
                         if (w * 2 + 1 > u) {
-                            this.client.inGameHud.drawTexture(matrices, x, s, 16, 9, 9, 9);
+                            matrices.drawTexture(ICONS, x, s, 16, 9, 9, 9);
                         }
                     }
                 }
@@ -88,7 +93,7 @@ public abstract class HUD {
     }
 
     @Inject(method = "renderStatusEffectOverlay", at = @At(value = "HEAD"), cancellable = true)
-    public void test(final MatrixStack matrices, final CallbackInfo ci) {
+    public void test(final DrawContext matrices, final CallbackInfo ci) {
         if (client.player != null) {
             if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
                 ci.cancel();
