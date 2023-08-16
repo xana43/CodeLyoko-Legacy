@@ -34,6 +34,7 @@ public abstract class HUD {
     @Shadow
     private int renderHealthValue;
 
+    @Final
     @Shadow
     private static Identifier ICONS;
     @Shadow

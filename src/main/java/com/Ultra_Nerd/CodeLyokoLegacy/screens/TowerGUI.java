@@ -67,12 +67,12 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
         final var AcceptedText = Text.of(this.Accepted.getText())
                 .getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle());
         final var CodeEnterTest = Text.of(this.text.getText()).getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle());
-        if (AcceptedText.size() >= 1) {
+        if (!AcceptedText.isEmpty()) {
             poseStack.drawTextWithShadow(this.textRenderer, AcceptedText.get(0),
                     this.Accepted.getX(),
                     this.Accepted.getY(), acceptedColor);
         }
-        if (CodeEnterTest.size() >= 1) {
+        if (!CodeEnterTest.isEmpty()) {
             poseStack.drawTextWithShadow(this.textRenderer, CodeEnterTest.get(0), this.text.getX(),
                     this.text.getY(), Color.WHITE.getRGB());
         }
@@ -93,7 +93,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
         this.text.tick();
         tick++;
         I--;
-        if (I <= 0 && this.Accepted.getText().length() != 0) {
+        if (I <= 0 && !this.Accepted.getText().isEmpty()) {
             this.Accepted.setText(StringUtils.EMPTY);
         }
     }

@@ -1,5 +1,4 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
-
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.DamageSources.LyokoDamage;
 import net.minecraft.entity.Entity;
@@ -11,10 +10,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ThreadLocalRandom;
-
 public final class Polycarbonate extends Item {
-
-
     private static final String NBT_ACCESOR = "timer";
 
     public Polycarbonate(@NotNull Settings properties) {

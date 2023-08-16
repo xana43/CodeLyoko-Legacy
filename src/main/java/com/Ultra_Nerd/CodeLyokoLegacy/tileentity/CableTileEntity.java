@@ -22,8 +22,8 @@ public final class CableTileEntity extends BlockEntity {
     private static final String isMasterKey = "is_master";
     private static final String isEndKey = "is_end";
     private static final String currentMasterKey = "current_master";
-    public List<BlockPos> connectedPositions = new ArrayList<>();
-    public BlockPos currentMaster = BlockPos.ORIGIN;
+    public static List<BlockPos> connectedPositions = new ArrayList<>();
+    public static BlockPos currentMaster = BlockPos.ORIGIN;
     private boolean isMaster = false;
     private boolean isEnd = false;
 
@@ -33,15 +33,15 @@ public final class CableTileEntity extends BlockEntity {
 
     public static void appendToMaster(final BlockPos appendPosition, final BlockPos masterPos, final World world) {
         if (world.getBlockEntity(masterPos) instanceof final CableTileEntity cableTileEntity) {
-            if (cableTileEntity.isMaster && !cableTileEntity.connectedPositions.contains(appendPosition)) {
-                cableTileEntity.connectedPositions.add(appendPosition);
+            if (cableTileEntity.isMaster && !connectedPositions.contains(appendPosition)) {
+                connectedPositions.add(appendPosition);
             }
         }
     }
 
     public static void removeFromMaster(final BlockPos appendPosition, final BlockPos masterPos, final World world) {
         if (world.getBlockEntity(masterPos) instanceof final CableTileEntity cableTileEntity) {
-            cableTileEntity.connectedPositions.remove(appendPosition);
+            connectedPositions.remove(appendPosition);
         }
     }
 

@@ -1,8 +1,7 @@
 {
     "required": true,
     "package": "com.Ultra_Nerd.CodeLyokoLegacy.mixin",
-    "refmap": "cm.refmap.json",
-    "compatibilityLevel": "JAVA_17",
+    "compatibilityLevel": "JAVA_18",
     "mixins": [
         "BlockMixin",
         "DisableStatusEffectRenderer",
@@ -14,7 +13,9 @@
         "util.LyokoRarityMixin"
     ],
     "client": [
-        "HUD"
+        "CustomTitleLogo",
+        "HUD",
+        "ReplaceTitleScreen"
     ],
     "injectors": {
         "defaultRequire": 1

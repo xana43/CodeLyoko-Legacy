@@ -27,7 +27,7 @@ import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
-public class Devirtualized extends Screen {
+public final class Devirtualized extends Screen {
     private int ticksSinceDeath;
     private final Text message;
     private final boolean isHardcore;
@@ -86,7 +86,7 @@ public class Devirtualized extends Screen {
         }
 
         this.client.disconnect(new MessageScreen(Text.translatable("menu.savingLevel")));
-        this.client.setScreen(new TitleScreen());
+        this.client.setScreen(new CustomMenuScreen(true));
     }
 
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {

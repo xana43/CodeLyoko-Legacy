@@ -115,39 +115,39 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
 
     private void renderSectorImages(final DrawContext matrixStack) {
         if (carthage.isHovered()) {
-            RenderSystem.setShaderTexture(0, PREVIEW_CARTHAGE);
+            //RenderSystem.setShaderTexture(0, PREVIEW_CARTHAGE);
             matrixStack.drawTexture(PREVIEW_CARTHAGE, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
                     96,
                     118, 96);
 
         }
-        if (forest.isHovered()) {
-            RenderSystem.setShaderTexture(0, PREVIEW_FOREST);
+        else if (forest.isHovered()) {
+            //RenderSystem.setShaderTexture(0, PREVIEW_FOREST);
             matrixStack.drawTexture(PREVIEW_FOREST, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
                     96,
                     118, 96);
 
         }
-        if(desert.isHovered())
+        else if(desert.isHovered())
         {
-           RenderSystem.setShaderTexture(0,PREVIEW_DESERT);
+           //RenderSystem.setShaderTexture(0,PREVIEW_DESERT);
             matrixStack.drawTexture(PREVIEW_DESERT, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
                     96,
                     118, 96);
 
         }
-        if(ice.isHovered())
+        else if(ice.isHovered())
         {
-            RenderSystem.setShaderTexture(0,PREVIEW_ICE);
+            //RenderSystem.setShaderTexture(0,PREVIEW_ICE);
             matrixStack.drawTexture(PREVIEW_ICE, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
                 96,
                 118, 96);
 
 
         }
-        if(mountain.isHovered())
+        else if(mountain.isHovered())
         {
-            RenderSystem.setShaderTexture(0,PREVIEW_MOUNTAIN);
+            //RenderSystem.setShaderTexture(0,PREVIEW_MOUNTAIN);
             matrixStack.drawTexture(PREVIEW_MOUNTAIN, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
                     96,
                     118, 96);

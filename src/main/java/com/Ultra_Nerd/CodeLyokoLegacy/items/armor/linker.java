@@ -1,15 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import team.reborn.energy.api.base.SimpleBatteryItem;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
 public final class linker extends ArmorItem implements SimpleEnergyItem {
-    public linker(@NotNull ArmorMaterial materialIn, @NotNull ArmorItem.Type slot, @NotNull Settings builder) {
+    public linker(final @NotNull ArmorMaterial materialIn,final @NotNull ArmorItem.Type slot,
+            final @NotNull Settings builder) {
         super(materialIn, slot, builder);
     }
 

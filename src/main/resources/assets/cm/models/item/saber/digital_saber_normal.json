@@ -1,5 +1,5 @@
 {
-
+    "parent": "special-model-loader:builtin/obj",
   "model": "cm:models/item/digital_saber.obj",
   "ambientocclusion": true,
                             "display":{

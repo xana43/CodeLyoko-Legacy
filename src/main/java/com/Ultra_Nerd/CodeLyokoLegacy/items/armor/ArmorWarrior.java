@@ -20,7 +20,8 @@ public final class ArmorWarrior extends LyokoArmor {
     private static final double attack_modifier = 0.7D;
     private static final double attack_speed = -0.2D;
 
-    public ArmorWarrior(@NotNull ArmorMaterial materialIn, @NotNull ArmorItem.Type slot, @NotNull Settings builder) {
+    public ArmorWarrior(final @NotNull ArmorMaterial materialIn,final @NotNull ArmorItem.Type slot,
+            final @NotNull Settings builder) {
         super(materialIn, slot, builder);
 
 

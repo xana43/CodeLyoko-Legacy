@@ -40,22 +40,22 @@
   ],
 
   "depends": {
-    "fabricloader": "*",
-    "fabric": "*",
-    "minecraft": ">=1.19.3",
+    "fabricloader": "0.14.22",
+    "fabric": "0.87.0+1.20.1",
+    "minecraft": "1.20.1",
     "java": ">=17",
-    "geckolib":"*",
+    "geckolib":">=4.2.0",
 
-    "cardinal-components-base": "*",
-    "cardinal-components-entity":"*",
-    "team_reborn_energy": "*"
+    "cardinal-components-base": "5.2.2",
+    "cardinal-components-entity":"5.2.2",
+    "team_reborn_energy": ">=2.3.0"
 
   },
   "suggests": {
     "ferritecore":">=4.2.0",
     "sodium": ">=0.4.6"
   },
-  "accessWidener": "cm.accesswidener",
+
 
   "custom":{
   "cardinal-components": [

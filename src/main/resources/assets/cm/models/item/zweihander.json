@@ -1,4 +1,5 @@
 {
+	"parent": "special-model-loader:builtin/obj",
 	"model": "cm:models/item/zweihander.obj",
 	"flip-v": true,
 	"ambientocclusion": true
