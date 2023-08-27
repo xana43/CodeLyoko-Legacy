@@ -1,0 +1,12 @@
+{
+  "type": "codelyoko:desertsector_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "seed": 0,
+    "settings": "codelyoko:desert_gen_settings",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "codelyoko:desert_sector"
+    }
+  }
+}

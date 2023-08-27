@@ -1,0 +1,8 @@
+{
+    "loader": "forge:obj",
+    "model": "codelyoko:models/entity/skid/skid.obj",
+    "detectCullableFaces": true,
+    "diffuseLighting": true,
+    "flip-v": true,
+    "ambientToFullbright": false
+}

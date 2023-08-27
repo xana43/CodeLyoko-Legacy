@@ -1,0 +1,12 @@
+{
+   "parent": "block/orientable",
+   "textures": {
+       "particle": "codelyoko:block/tower_block",
+       "up":"codelyoko:block/tower_block",
+       "down":"codelyoko:block/tower_block",
+       "north":"codelyoko:block/tower_wall",
+       "south":"codelyoko:block/tower_block",
+       "east":"codelyoko:block/tower_wall",
+       "west":"codelyoko:block/tower_block"
+   }
+}

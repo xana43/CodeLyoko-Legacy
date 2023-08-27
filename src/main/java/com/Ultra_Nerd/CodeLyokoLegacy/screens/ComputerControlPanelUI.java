@@ -158,11 +158,11 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         //final int tx = this.width >> 1;
         final int ty = this.height >> 1;
         this.text = new TextFieldWidget(client.textRenderer, x, ty + 40, this.width, 23,
-                Text.translatable("gui.cm.computer_input_main").setStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
+                Text.translatable("gui.codelyoko.computer_input_main").setStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
         this.text.setDrawsBackground(false);
         this.text.setVisible(true);
         this.text.setEditableColor(0xda2c43);
-        this.text.setMessage(Text.translatable("gui.cm.inactive"));
+        this.text.setMessage(Text.translatable("gui.codelyoko.inactive"));
         this.text.setEditable(false);
 
 

@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "codelyoko:block/digital_sea_pylon",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "codelyoko:block/digital_sea_pylon",
+      "y": 90,
+      "x": 180
+    },
+    "facing=south": {
+      "model": "codelyoko:block/digital_sea_pylon",
+      "y": 180,
+      "x": 180
+    },
+    "facing=west": {
+      "model": "codelyoko:block/digital_sea_pylon",
+      "y": 270,
+      "x": 180
+    }
+  }
+}

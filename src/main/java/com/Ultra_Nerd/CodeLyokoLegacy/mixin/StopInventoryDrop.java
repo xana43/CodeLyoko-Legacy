@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ClientPlayerInteractionManager.class)
 public abstract class StopInventoryDrop {
     @Inject(method = "clickSlot", at = @At("HEAD"), cancellable = true)
-    private void disableDropOnItem(final int syncId, final int slotId, final int button, final SlotActionType actionType, final PlayerEntity player, final CallbackInfo ci) {
+    private void codelyoko$disableDropOnItem(final int syncId, final int slotId, final int button, final SlotActionType actionType, final PlayerEntity player, final CallbackInfo ci) {
         if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(player) && !player.isCreative()) {
             if (actionType == SlotActionType.THROW) {
                 ci.cancel();

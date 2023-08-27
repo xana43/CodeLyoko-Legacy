@@ -1,0 +1,13 @@
+{
+   "parent": "item/generated",
+   "textures": {
+       "layer0": "codelyoko:item/siliconwaferperfect"
+   },
+  "overrides": [
+    {"predicate":  {"codelyoko:quality": 0.0}, "model": "codelyoko:item/silicon_wafer"},
+    {"predicate":  {"codelyoko:quality": 0.25}, "model": "codelyoko:item/siliconwafer_qualitymodels/high"},
+    {"predicate":  {"codelyoko:quality": 0.5}, "model": "codelyoko:item/siliconwafer_qualitymodels/medium"},
+    {"predicate":  {"codelyoko:quality": 0.75}, "model": "codelyoko:item/siliconwafer_qualitymodels/mediocore"},
+    {"predicate":  {"codelyoko:quality": 1.0}, "model": "codelyoko:item/siliconwafer_qualitymodels/poor"}
+  ]
+}

@@ -37,7 +37,7 @@ public final class UraniumWaste extends FluidBlock {
 
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
-        if (entity instanceof LivingEntity livingEntity) {
+        if (entity instanceof final LivingEntity livingEntity) {
             if (!livingEntity.hasStatusEffect(StatusEffects.NAUSEA) || !livingEntity.hasStatusEffect(
                     StatusEffects.POISON)) {
                 livingEntity.addStatusEffect(

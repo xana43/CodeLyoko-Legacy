@@ -1,0 +1,5 @@
+{
+  "loader": "forge:obj",
+  "model": "codelyoko:models/block/scanner.obj",
+  "ambientocclusion": true
+}

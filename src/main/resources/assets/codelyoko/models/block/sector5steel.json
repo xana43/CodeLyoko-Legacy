@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "up":"codelyoko:block/steel1",
+    "down":"codelyoko:block/steel1",
+    "north":"codelyoko:block/steel2",
+    "south":"codelyoko:block/steel2",
+    "east":"codelyoko:block/steel3",
+    "west":"codelyoko:block/steel4",
+    "particle": "codelyoko:block/steel1"
+  }
+}

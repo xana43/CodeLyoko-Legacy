@@ -48,7 +48,7 @@ public final class ComputerIntegratedReactor extends Block implements BlockEntit
     @Nullable
     @Override
     public NamedScreenHandlerFactory createScreenHandlerFactory(final BlockState state, final World world, final BlockPos pos) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
+        final BlockEntity blockEntity = world.getBlockEntity(pos);
         return blockEntity instanceof NamedScreenHandlerFactory ? (NamedScreenHandlerFactory)blockEntity : null;
     }
     @Override
@@ -64,7 +64,7 @@ public final class ComputerIntegratedReactor extends Block implements BlockEntit
     public void onStateReplaced(final BlockState state, final World world, final BlockPos pos, final BlockState newState, final boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             final BlockEntity BE = world.getBlockEntity(pos);
-            if (BE instanceof ComputerReactorTileEntityInventory reactorTile) {
+            if (BE instanceof final ComputerReactorTileEntityInventory reactorTile) {
                 ItemScatterer.spawn(world, pos, reactorTile);
                 world.updateComparators(pos, this);
             }

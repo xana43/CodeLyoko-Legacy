@@ -1,0 +1,8 @@
+{
+  "parent": "special-model-loader:builtin/obj",
+  "model": "codelyoko:models/block/uraniumcanister.obj",
+  "flip-v": true,
+  "ambientocclusion": true,
+  "particle": "codelyoko:block/body"
+
+}

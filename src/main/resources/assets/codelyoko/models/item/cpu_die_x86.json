@@ -1,0 +1,8 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "codelyoko:item/die_1",
+    "layer1": "codelyoko:item/86xdie",
+    "layer2": "codelyoko:item/x86_memory_controller"
+  }
+}

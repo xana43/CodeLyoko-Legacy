@@ -1,0 +1,12 @@
+{
+  "type": "codelyoko:forestsector_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "seed": 0,
+    "settings": "codelyoko:forest_gen_settings",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "codelyoko:forest_sector"
+    }
+  }
+}

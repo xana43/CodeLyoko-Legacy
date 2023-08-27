@@ -1,0 +1,29 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "codelyoko"
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "codelyoko:cold_polycarbonate_concentrate"
+    },
+    "s": {
+      "item": "codelyoko:key_spring"
+    }
+  },
+  "pattern": [
+    "bbb",
+    "bsb",
+    "sss"
+  ],
+  "result": {
+    "item": "codelyoko:key_cap"
+  },
+  "show_notification": true
+}

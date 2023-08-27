@@ -11,6 +11,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.PlaceBlockEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
+import com.mojang.serialization.Lifecycle;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -26,8 +27,13 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.entity.DamageUtil;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageSources;
+import net.minecraft.entity.damage.DamageType;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -35,10 +41,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
@@ -64,7 +67,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public record CodeLyokoMain() implements ModInitializer {
 
 
-    public static final String MOD_ID = "cm";
+    public static final String MOD_ID = "codelyoko";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
 
     public static final ItemGroup LYOKO_ITEM = FabricItemGroup.builder()
@@ -100,7 +103,7 @@ public record CodeLyokoMain() implements ModInitializer {
                     for (int z = -32; z < 32; ++z) {
                         final BlockPos checkedPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
                         if (world.getBlockEntity(
-                                checkedPos) instanceof MultiBlockController multiBlockController && world.isChunkLoaded(
+                                checkedPos) instanceof final MultiBlockController multiBlockController && world.isChunkLoaded(
                                 ChunkSectionPos.getSectionCoord(checkedPos.getX()),
                                 ChunkSectionPos.getSectionCoord(checkedPos.getZ())) && !world.isClient()) {
                             if (!multiBlockController.getCheckSuccessful()) {
@@ -124,7 +127,7 @@ public record CodeLyokoMain() implements ModInitializer {
                         final BlockPos checkedPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
 
                         if (world.getBlockEntity(
-                                checkedPos) instanceof MultiBlockController multiBlockController && world.isChunkLoaded(
+                                checkedPos) instanceof final MultiBlockController multiBlockController && world.isChunkLoaded(
                                 ChunkSectionPos.getSectionCoord(checkedPos.getX()),
                                 ChunkSectionPos.getSectionCoord(checkedPos.getZ()))) {
                             if (multiBlockController.getCheckSuccessful()) {
@@ -202,7 +205,6 @@ public record CodeLyokoMain() implements ModInitializer {
 
 
         ModStats.registerStats();
-
 
         BiomeFeatureInject();
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyStorage(),

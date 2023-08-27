@@ -1,23 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.LyokoVehicleEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.DamageSources.LyokoDamage;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.DamageUtil;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.thrown.ThrownEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.predicate.entity.DamageSourcePredicate;
-import net.minecraft.registry.*;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.command.DamageCommand;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.math.BlockPos;

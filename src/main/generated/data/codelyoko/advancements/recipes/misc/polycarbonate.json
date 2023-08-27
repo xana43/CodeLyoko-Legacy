@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "codelyoko:polycarbonate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "knows_polycarbonate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "codelyoko:silicon_wafer"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "knows_polycarbonate",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "codelyoko:polycarbonate"
+    ]
+  },
+  "sends_telemetry_event": false
+}

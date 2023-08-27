@@ -1,10 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.CustomMenuScreen;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MixinHooks;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.QuickPlay;
 import net.minecraft.client.RunArgs;
-import net.minecraft.client.gui.screen.AccessibilityOnboardingScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.realms.RealmsClient;
@@ -20,20 +18,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ReplaceTitleScreen {
     @Shadow
     public abstract void setScreen(final Screen screen);
-    @Final
-    @Shadow
-    public GameOptions options;
+
+    @Shadow @Final public GameOptions options;
+
+
+
     @Inject(method = "onInitFinished",at = @At("HEAD"), cancellable = true)
-    private void replaceTitleScreen(final RealmsClient realms, final ResourceReload reload, final RunArgs.QuickPlay quickPlay, final CallbackInfo ci)
+    private void codelyoko$replaceTitleScreen(final RealmsClient realms, final ResourceReload reload,
+            final RunArgs.QuickPlay quickPlay, final CallbackInfo ci)
     {
-      ci.cancel();
-        if (quickPlay.isEnabled()) {
-            QuickPlay.startQuickPlay(MinecraftClient.getInstance(), quickPlay, reload, realms);
-        } else if (this.options.onboardAccessibility) {
-            this.setScreen(new AccessibilityOnboardingScreen(this.options));
-        } else {
-            this.setScreen(new CustomMenuScreen(true));
-        }
+        MixinHooks.replaceTitleScreen(realms,reload,quickPlay,ci,options, MinecraftClient.getInstance());
     }
 }
 

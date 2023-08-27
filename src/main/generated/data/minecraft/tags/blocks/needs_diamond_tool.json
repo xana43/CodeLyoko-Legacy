@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "cm:chiplet_franz_block"
+    "codelyoko:chiplet_franz_block"
   ]
 }

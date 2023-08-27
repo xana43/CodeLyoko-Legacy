@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "cm",
+  "id": "codelyoko",
   "version": "${version}",
 
   "name": "CodeLyokoLegacy",
@@ -14,7 +14,7 @@
   },
 
   "license": "LGPL",
-  "icon": "assets/cm/eye-xana.png",
+  "icon": "assets/codelyoko/eye-xana.png",
 
   "environment": "*",
   "entrypoints": {
@@ -36,7 +36,7 @@
             ]
   },
   "mixins": [
-    "cm.mixins.json"
+    "codelyoko.mixins.json"
   ],
 
   "depends": {
@@ -59,16 +59,16 @@
 
   "custom":{
   "cardinal-components": [
-              "cm:lyoko_class",
-              "cm:temp_inventory",
-              "cm:xana_data",
-              "cm:scanner_position",
-              "cm:mind_stress",
-              "cm:human_dna",
-              "cm:player_profile",
-              "cm:cellular_degeneration",
-              "cm:skid_nav_data",
-              "cm:digital_energy"
+              "codelyoko:lyoko_class",
+              "codelyoko:temp_inventory",
+              "codelyoko:xana_data",
+              "codelyoko:scanner_position",
+              "codelyoko:mind_stress",
+              "codelyoko:human_dna",
+              "codelyoko:player_profile",
+              "codelyoko:cellular_degeneration",
+              "codelyoko:skid_nav_data",
+              "codelyoko:digital_energy"
           ]
     }
 }

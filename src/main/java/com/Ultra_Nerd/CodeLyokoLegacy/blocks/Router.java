@@ -85,7 +85,7 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
             Block.createCuboidShape(8.25, 1, 5.5, 9.25, 2, 6.5),
             Block.createCuboidShape(8.25, 1, 3.5, 9.25, 2, 4.5)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
-    private final List<BlockPos> connectedBlocks = new ArrayList<>();
+    private static final List<BlockPos> connectedBlocks = new ArrayList<>();
 
     public Router(@NotNull FabricBlockSettings properties) {
         super(properties);

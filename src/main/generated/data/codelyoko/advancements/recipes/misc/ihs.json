@@ -1,0 +1,43 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "codelyoko"
+      ]
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "codelyoko:ihs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "knows_ihs": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "codelyoko:integrated_heat_spreader"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "knows_ihs",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "codelyoko:ihs"
+    ]
+  },
+  "sends_telemetry_event": false
+}

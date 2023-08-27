@@ -1,10 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MixinHooks;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -41,16 +41,14 @@ public abstract class HUD {
     protected abstract PlayerEntity getCameraPlayer();
 
     @Inject(method = "renderHealthBar", at = @At(value = "HEAD"), cancellable = true)
-    public void disableHealth(final DrawContext matrices, final PlayerEntity player, final int x, final int y, final int lines,
+    public void codelyoko$disableHealth(final DrawContext matrices, final PlayerEntity player, final int x, final int y,
+            final int lines,
             final int regeneratingHeartIndex, final float maxHealth, final int lastHealth, final int health, final int absorption, final boolean blinking, final CallbackInfo ci) {
-        if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(player)) {
-            ci.cancel();
-
-        }
+        MixinHooks.cancelPlayerEvents(client,ci);
     }
 
     @Inject(method = "renderStatusBars", at = @At(value = "HEAD"), cancellable = true)
-    public void disableFood(final DrawContext matrices, final CallbackInfo ci) {
+    public void codelyoko$disableFood(final DrawContext matrices, final CallbackInfo ci) {
         if (client.player != null) {
             if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
 
@@ -94,12 +92,8 @@ public abstract class HUD {
     }
 
     @Inject(method = "renderStatusEffectOverlay", at = @At(value = "HEAD"), cancellable = true)
-    public void test(final DrawContext matrices, final CallbackInfo ci) {
-        if (client.player != null) {
-            if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
-                ci.cancel();
-            }
-        }
+    public void codelyoko$test(final DrawContext matrices, final CallbackInfo ci) {
+        MixinHooks.cancelPlayerEvents(client,ci);
 
     }
 

@@ -1,0 +1,24 @@
+# Blender MTL File: 'uraniumcanister.blend'
+# Material Count: 2
+
+newmtl body
+Ns 900.000000
+Ka 0.172727 0.172727 0.172727
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.314572 0.002668
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd codelyoko:block/digital_still
+map_Kd codelyoko:block/body
+newmtl caps
+Ns 900.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.749020 0.749020 0.749020
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd codelyoko:item/digital_katana_blade

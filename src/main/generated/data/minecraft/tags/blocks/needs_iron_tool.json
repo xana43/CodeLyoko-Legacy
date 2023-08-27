@@ -1,21 +1,21 @@
 {
   "replace": false,
   "values": [
-    "cm:architecture_work_station",
-    "cm:electroplating_anode",
-    "cm:electroplating_cathode",
-    "cm:scanner_base",
-    "cm:scanner_frame",
-    "cm:scanner_top",
-    "cm:tyuyamunite_ore",
-    "cm:chiplet_basic_block",
-    "cm:chiplet_advanced_block",
-    "cm:holoprojector",
-    "cm:fluorite_ore",
-    "cm:fluorite_block",
-    "cm:fluoride_infuser",
-    "cm:cable_block",
-    "cm:computer_keyboard",
-    "cm:gummite_ore"
+    "codelyoko:architecture_work_station",
+    "codelyoko:electroplating_anode",
+    "codelyoko:electroplating_cathode",
+    "codelyoko:scanner_base",
+    "codelyoko:scanner_frame",
+    "codelyoko:scanner_top",
+    "codelyoko:tyuyamunite_ore",
+    "codelyoko:chiplet_basic_block",
+    "codelyoko:chiplet_advanced_block",
+    "codelyoko:holoprojector",
+    "codelyoko:fluorite_ore",
+    "codelyoko:fluorite_block",
+    "codelyoko:fluoride_infuser",
+    "codelyoko:cable_block",
+    "codelyoko:computer_keyboard",
+    "codelyoko:gummite_ore"
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": { "model": "codelyoko:block/scanner_top", "y": 180 },
+    "facing=south": { "model": "codelyoko:block/scanner_top", "y": 0},
+    "facing=east": { "model": "codelyoko:block/scanner_top","y": 270},
+    "facing=west": { "model": "codelyoko:block/scanner_top","y": 90 }
+  }
+
+
+}

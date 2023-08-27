@@ -108,7 +108,7 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
 
     @Override
     public void onPlaced(final World world, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack itemStack) {
-        if(world.getBlockEntity(pos)instanceof CableTileEntity cableTileEntity && !world.isClient())
+        if(world.getBlockEntity(pos)instanceof final CableTileEntity cableTileEntity && !world.isClient())
         {
             cableTileEntity.calculateConnected();
             if(cableTileEntity.getIsMaster())

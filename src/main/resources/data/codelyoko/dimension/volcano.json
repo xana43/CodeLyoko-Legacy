@@ -1,0 +1,12 @@
+{
+  "type": "codelyoko:volcanosector_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "seed": 0,
+    "settings": "codelyoko:volcano_gen_settings",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "codelyoko:volcano_replika"
+    }
+  }
+}

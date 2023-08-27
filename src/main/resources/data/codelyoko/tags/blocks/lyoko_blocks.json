@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "codelyoko:digital_grass",
+    "codelyoko:digital_sand",
+    "codelyoko:digital_rock",
+    "codelyoko:digital_dirt",
+    "codelyoko:digital_ice",
+    "codelyoko:volcano_ground",
+    "codelyoko:tower_top",
+    "codelyoko:tower_white",
+    "codelyoko:tower_blue",
+    "codelyoko:tower_base_corner",
+    "codelyoko:tower_bottom",
+    "codelyoko:tower_interface",
+    "codelyoko:tower_wall_corner",
+    "codelyoko:sector5_steel",
+    "codelyoko:tower_enter"
+
+  ]
+}

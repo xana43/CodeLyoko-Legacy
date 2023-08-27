@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "facing=north,ractive=false": {"model":"codelyoko:block/router"},
+    "facing=east,ractive=false": {"model": "codelyoko:block/router", "y": 90},
+    "facing=south,ractive=false": {"model": "codelyoko:block/router","y": 180},
+    "facing=west,ractive=false": {"model": "codelyoko:block/router","y": 270},
+    "facing=north,ractive=true": {"model":"codelyoko:block/router_active"},
+    "facing=east,ractive=true": {"model": "codelyoko:block/router_active", "y": 90},
+    "facing=south,ractive=true": {"model": "codelyoko:block/router_active","y": 180},
+    "facing=west,ractive=true": {"model": "codelyoko:block/router_active","y": 270}
+
+  }
+}

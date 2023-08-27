@@ -1,0 +1,36 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "codelyoko:block/volcano_ground/0"
+      },
+      {
+        "model": "codelyoko:block/volcano_ground/0",
+        "y": 90
+      },
+      {
+        "model": "codelyoko:block/volcano_ground/0",
+        "y": 180
+      },
+      {
+        "model": "codelyoko:block/volcano_ground/0",
+        "y": 270
+      },
+      {
+        "model": "codelyoko:block/volcano_ground/1"
+      },
+      {
+        "model": "codelyoko:block/volcano_ground/1",
+        "y": 90
+      },
+      {
+        "model": "codelyoko:block/volcano_ground/1",
+        "y": 180
+      },
+      {
+        "model": "codelyoko:block/volcano_ground/1",
+        "y": 270
+      }
+    ]
+  }
+}

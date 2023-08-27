@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "cm:tower_interface"
+    "codelyoko:tower_interface"
   ]
 }

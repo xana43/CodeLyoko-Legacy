@@ -1,0 +1,13 @@
+{
+   "parent": "block/cube_all",
+   "textures": {
+    "particle":"codelyoko:block/digital_blocktop",
+       "up": "codelyoko:block/digital_blocktop",
+       "down":"codelyoko:block/dd",
+       "north":"codelyoko:block/dgs",
+       "south":"codelyoko:block/dgs",
+       "east":"codelyoko:block/dgs",
+       "west":"codelyoko:block/dgs"
+       
+   }
+}

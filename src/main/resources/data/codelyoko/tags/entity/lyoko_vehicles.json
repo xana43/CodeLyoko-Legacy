@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "codelyoko:overbike",
+    "codelyoko:overboard",
+    "codelyoko:hoverboard",
+    "codelyoko:skid"
+  ]
+}

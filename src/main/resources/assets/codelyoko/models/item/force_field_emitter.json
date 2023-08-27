@@ -1,0 +1,6 @@
+{
+  "parent": "builtin/entity",
+  "textures": {
+    "layer0": "codelyoko:item/force_field_emitter"
+  }
+}

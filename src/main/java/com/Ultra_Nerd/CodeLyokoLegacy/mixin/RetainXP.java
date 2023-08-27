@@ -23,20 +23,20 @@ public abstract class RetainXP {
     @Unique
     private World worldMix;
     @Inject(method = "<init>",at = @At("RETURN"))
-    private void getWorld(final World world, final BlockPos pos, final float yaw, final GameProfile gameProfile, final CallbackInfo ci)
+    private void codelyoko$getWorld(final World world, final BlockPos pos, final float yaw, final GameProfile gameProfile, final CallbackInfo ci)
     {
         worldMix = world;
     }
 
     @Inject(method = "getXpToDrop", at = @At("HEAD"), cancellable = true)
-    private void retainxp(final CallbackInfoReturnable<Integer> cir) {
+    private void codelyoko$retainxp(final CallbackInfoReturnable<Integer> cir) {
             if (MethodUtil.DimensionCheck.worldIsNotVanilla(worldMix)) {
                 cir.setReturnValue(0);
             }
     }
 
     @Inject(method = "shouldAlwaysDropXp", at = @At("HEAD"), cancellable = true)
-    private void retainxp2(final CallbackInfoReturnable<Boolean> cir) {
+    private void codelyoko$retainxp2(final CallbackInfoReturnable<Boolean> cir) {
                 if (MethodUtil.DimensionCheck.worldIsNotVanilla(worldMix)) {
                     cir.setReturnValue(false);
                 }

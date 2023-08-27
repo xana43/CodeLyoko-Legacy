@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 public final class DataTransferInterfaceUI /*extends AbstractContainerScreen<DataTransferInterfaceContainer>*/ {
 /*
-  private static final ResourceLocation GUI_TEX = new ResourceLocation("cm:textures/gui/data_transfer_interface_gui_2.png");
+  private static final ResourceLocation GUI_TEX = new ResourceLocation("codelyoko:textures/gui/data_transfer_interface_gui_2.png");
 
     private ImageButton buttonCarthage;
     private ImageButton buttonForest;
@@ -121,7 +121,7 @@ public final class DataTransferInterfaceUI /*extends AbstractContainerScreen<Dat
     }
 
     private void setXCoord() {
-        this.xCoord = new EditBox(this.getMinecraft().font, x + 90, y + 10, 30, 30, new TextComponent("gui.cm.interface_input"));
+        this.xCoord = new EditBox(this.getMinecraft().font, x + 90, y + 10, 30, 30, new TextComponent("gui.codelyoko.interface_input"));
         this.xCoord.setMaxLength(7);
         this.xCoord.setBordered(true);
         this.xCoord.setVisible(true);
@@ -136,7 +136,7 @@ public final class DataTransferInterfaceUI /*extends AbstractContainerScreen<Dat
     }
 
     private void setYCoord() {
-        this.yCoord = new EditBox(this.getMinecraft().font, x + 90, y + 40, 30, 30, new TranslatableComponent("gui.cm.interface_input"));
+        this.yCoord = new EditBox(this.getMinecraft().font, x + 90, y + 40, 30, 30, new TranslatableComponent("gui.codelyoko.interface_input"));
         this.yCoord.setMaxLength(7);
         this.yCoord.setBordered(true);
         this.yCoord.setVisible(true);
@@ -149,7 +149,7 @@ public final class DataTransferInterfaceUI /*extends AbstractContainerScreen<Dat
     }
 
     private void setZCoord() {
-        this.zCoord = new EditBox(this.getMinecraft().font, x + 90, y + 70, 30, 30, new TranslatableComponent("gui.cm.interface_input"));
+        this.zCoord = new EditBox(this.getMinecraft().font, x + 90, y + 70, 30, 30, new TranslatableComponent("gui.codelyoko.interface_input"));
         this.zCoord.setMaxLength(7);
         this.zCoord.setBordered(true);
         this.zCoord.setVisible(true);

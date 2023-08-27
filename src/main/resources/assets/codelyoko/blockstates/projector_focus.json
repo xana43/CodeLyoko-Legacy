@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "validfocus=false": {
+      "model": "codelyoko:block/projector_focus"
+    },
+    "validfocus=true": {
+      "model": "codelyoko:block/transparent"
+    }
+  }
+}

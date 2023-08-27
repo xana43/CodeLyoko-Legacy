@@ -1,5 +1,5 @@
-// 1.19.3	2022-12-23T17:19:41.1194789	CodeLyokoLegacy/Tags for minecraft:item
-6810cb8c2552c7aaef9161d6a6ed334fc48ac0ff data\minecraft\tags\items\iron_ores.json
-5f93be509f13a0232ced2a87e022dad933011902 data\cm\tags\items\lyoko_item.json
-963c5c845d1f0403af2cd72d680826d84da9af35 data\minecraft\tags\items\sand.json
-b7aa4d0865f7128e45eb16764a04f486ab70e6e7 data\minecraft\tags\items\music_discs.json
+// 1.20.1	2023-08-24T22:43:57.7442206	CodeLyokoLegacy/Tags for minecraft:item
+4a04be312c353ba065df0c5d852e5d9308c3108f data\minecraft\tags\items\iron_ores.json
+cca99cf85598f21cb120b917461d316128945976 data\codelyoko\tags\items\lyoko_item.json
+f354fdbf81d2fbcc03d7973d2b03443f9568cd01 data\minecraft\tags\items\sand.json
+d84ec42b206d7fa69b426fae9af10c8c6c947eb7 data\minecraft\tags\items\music_discs.json

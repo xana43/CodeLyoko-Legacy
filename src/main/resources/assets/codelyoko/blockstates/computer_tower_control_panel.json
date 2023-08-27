@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,screen_on=false": {
+      "model": "codelyoko:block/computer_controlpanel"
+    },
+    "facing=east,screen_on=false": {
+      "model": "codelyoko:block/computer_controlpanel",
+      "y": 90
+    },
+    "facing=south,screen_on=false": {
+      "model": "codelyoko:block/computer_controlpanel",
+      "y": 180
+    },
+    "facing=west,screen_on=false": {
+      "model": "codelyoko:block/computer_controlpanel",
+      "y": 270
+    },
+    "facing=north,screen_on=true": {
+      "model": "codelyoko:block/computer_controlpanel_on"
+    },
+    "facing=east,screen_on=true": {
+      "model": "codelyoko:block/computer_controlpanel_on",
+      "y": 90
+    },
+    "facing=south,screen_on=true": {
+      "model": "codelyoko:block/computer_controlpanel_on",
+      "y": 180
+    },
+    "facing=west,screen_on=true": {
+      "model": "codelyoko:block/computer_controlpanel_on",
+      "y": 270
+    }
+  }
+}

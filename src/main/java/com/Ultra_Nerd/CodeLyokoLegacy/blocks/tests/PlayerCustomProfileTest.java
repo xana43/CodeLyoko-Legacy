@@ -21,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class PlayerCustomProfileTest extends BlockWithEntity {
+public final class PlayerCustomProfileTest extends BlockWithEntity {
     public PlayerCustomProfileTest(final Settings settings) {
         super(settings);
     }

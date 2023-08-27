@@ -1,0 +1,11 @@
+{
+   "parent": "block/cube_all",
+   "textures": {
+       "up": "codelyoko:block/flouride_infuser_front_off",
+        "down": "codelyoko:block/flouride_infuser_side",
+     "north": "codelyoko:block/flouride_infuser_side_electric_idle",
+     "south": "codelyoko:block/flouride_infuser_side_electric_idle",
+     "east": "codelyoko:block/flouride_infuser_side_electric_idle",
+     "west": "codelyoko:block/flouride_infuser_side_electric_idle"
+   }
+}

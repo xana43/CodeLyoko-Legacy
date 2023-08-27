@@ -1,0 +1,6 @@
+{
+   "parent": "item/handheld",
+   "textures": {
+       "layer0": "codelyoko:item/digital_sampler"
+   }
+}

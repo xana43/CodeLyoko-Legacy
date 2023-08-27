@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "codelyoko:blok",
+    "codelyoko:megatank",
+    "codelyoko:hornet",
+    "codelyoko:guardian",
+    "codelyoko:manta",
+    "codelyoko:kankrelat"
+  ]
+}

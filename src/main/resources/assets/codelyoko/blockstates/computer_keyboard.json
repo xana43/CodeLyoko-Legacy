@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "codelyoko:block/computer_keyboard"
+    },
+    "facing=east": {
+      "model": "codelyoko:block/computer_keyboard",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "codelyoko:block/computer_keyboard",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "codelyoko:block/computer_keyboard",
+      "y": 270
+    }
+  }
+}

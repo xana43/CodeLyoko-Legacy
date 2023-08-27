@@ -1,0 +1,18 @@
+{
+  "type":"codelyoko:carthage_type",
+  "generator": {
+    "type": "codelyoko:carthage_chunkgen",
+    "settings": {
+      "base": 10,
+      "verticalvariance": 10,
+      "horizontalvariance": 10
+    },
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "codelyoko:sector5"
+    }
+  }
+
+
+  }
+

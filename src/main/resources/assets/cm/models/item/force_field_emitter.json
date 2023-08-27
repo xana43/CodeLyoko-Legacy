@@ -1,6 +1,0 @@
-{
-  "parent": "builtin/entity",
-  "textures": {
-    "layer0": "cm:item/force_field_emitter"
-  }
-}

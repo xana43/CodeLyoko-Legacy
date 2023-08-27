@@ -1,0 +1,17 @@
+{
+    "multipart": [
+        {   "apply": { "model": "codelyoko:block/cable_block_post_connector" }},
+        {   "when": { "north": "true" },
+            "apply": { "model": "codelyoko:block/cable_block_side_connector", "uvlock": true }
+        },
+        {   "when": { "east": "true" },
+            "apply": { "model": "codelyoko:block/cable_block_side_connector", "y": 90, "uvlock": true }
+        },
+        {   "when": { "south": "true" },
+            "apply": { "model": "codelyoko:block/cable_block_side_connector", "y": 180, "uvlock": true }
+        },
+        {   "when": { "west": "true" },
+            "apply": { "model": "codelyoko:block/cable_block_side_connector", "y": 270, "uvlock": true }
+        }
+    ]
+}

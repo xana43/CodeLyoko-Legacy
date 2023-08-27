@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "blur": true,
+    "particle": "codelyoko:block/anti_marabunta",
+    "all": "codelyoko:block/anti_marabunta"
+  }
+}

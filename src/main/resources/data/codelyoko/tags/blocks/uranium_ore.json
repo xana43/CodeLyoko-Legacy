@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "codelyoko:tyuyamunite_ore",
+    "codelyoko:torbernite_ore",
+    "codelyoko:uraninite_ore",
+    "codelyoko:gummite_ore",
+    "codelyoko:coffinite_ore",
+    "codelyoko:metatyuyamunite_ore",
+    "codelyoko:autunite_ore",
+    "codelyoko:metaautunite_ore",
+    "codelyoko:sklodowskite_ore"
+  ]
+}

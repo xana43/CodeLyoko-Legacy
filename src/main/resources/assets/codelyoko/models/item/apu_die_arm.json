@@ -1,0 +1,7 @@
+{
+   "parent": "item/generated",
+   "textures": {
+     "layer0": "codelyoko:item/die_1",
+     "layer1": "codelyoko:item/computer_arm_apu_die"
+   }
+}

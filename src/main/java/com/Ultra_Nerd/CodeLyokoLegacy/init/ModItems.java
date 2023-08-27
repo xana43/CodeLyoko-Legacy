@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ComputerCoreUnit;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.SpawnItems.LyokoSpawnItem;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.*;
@@ -10,7 +9,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoArmorMaterial;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoTiers;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Rarity;

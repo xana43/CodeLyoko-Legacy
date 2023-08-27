@@ -1,0 +1,12 @@
+{
+   "parent": "block/cube_all",
+   "textures": {
+     "particle": "codelyoko:block/tower_base",
+     "up":"codelyoko:block/tower_base",
+     "down":"codelyoko:block/tower_base",
+     "north":"codelyoko:block/tower_wall",
+     "south":"codelyoko:block/tower_base",
+     "east":"codelyoko:block/tower_base",
+     "west":"codelyoko:block/tower_base"
+   }
+}

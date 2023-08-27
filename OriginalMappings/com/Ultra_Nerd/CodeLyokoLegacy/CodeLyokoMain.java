@@ -66,7 +66,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public record CodeLyokoMain() implements ModInitializer {
 
     public static final InventoryLock LYOKO_LOCK = Locki.registerLock(CodeLyokoPrefix("lyoko_lock"));
-    public static final String MOD_ID = "cm";
+    public static final String MOD_ID = "codelyoko";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
 
     public static final ItemGroup LYOKO_ITEM = FabricItemGroupBuilder.build(new Identifier(MOD_ID,"lyoko_items"),() -> new ItemStack(ModItems.BIT));
@@ -145,8 +145,8 @@ BiomeFeatureInject();
 
                 {
                     return switch (stack.getTranslationKey()) {
-                        case "item.cm.story_book" -> 0x00008B;
-                        case "item.cm.story_book2" -> ColorHelper.Argb.getArgb(255,255,0,0);
+                        case "item.codelyoko.story_book" -> 0x00008B;
+                        case "item.codelyoko.story_book2" -> ColorHelper.Argb.getArgb(255,255,0,0);
                         default -> 1;
                     };
 

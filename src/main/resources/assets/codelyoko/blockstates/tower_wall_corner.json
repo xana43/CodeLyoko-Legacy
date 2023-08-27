@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "codelyoko:block/tower_wall_corner",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "codelyoko:block/tower_wall_corner",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "codelyoko:block/tower_wall_corner",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "codelyoko:block/tower_wall_corner",
+      "y": 270
+    }
+  }
+}

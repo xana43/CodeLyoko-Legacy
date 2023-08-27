@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "codelyoko:item/journal_backing",
+    "layer1": "codelyoko:item/journal_outline"
+  }
+}

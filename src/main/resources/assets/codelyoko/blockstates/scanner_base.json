@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "facing=north,scanner_property=false": {"model":"codelyoko:block/scanner_bottom", "y": 180},
+    "facing=south,scanner_property=false": {"model":"codelyoko:block/scanner_bottom","y": 0},
+    "facing=west,scanner_property=false": {"model":"codelyoko:block/scanner_bottom","y": 90},
+    "facing=east,scanner_property=false": {"model":"codelyoko:block/scanner_bottom","y": 270},
+    "facing=north,scanner_property=true": {
+      "model": "codelyoko:block/scanner_bottom",
+      "y": 180
+    },
+    "facing=south,scanner_property=true": {
+      "model": "codelyoko:block/scanner_bottom",
+      "y": 0
+    },
+    "facing=west,scanner_property=true": {
+      "model": "codelyoko:block/scanner_bottom",
+      "y": 90
+    },
+    "facing=east,scanner_property=true": {
+      "model": "codelyoko:block/scanner_bottom",
+      "y": 270
+    }
+  }
+}

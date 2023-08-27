@@ -15,9 +15,9 @@ public final class TowerWallCorner extends TowerWall {
     @Override
     public void randomDisplayTick(final BlockState stateIn, final World worldIn, final BlockPos pos, final Random rand) {
         super.randomDisplayTick(stateIn, worldIn, pos, rand);
-        double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D);
-        double d1 = (double) pos.getY() + 0.5D + (rand.nextDouble() - 0.5D);
-        double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
+        final double d0 = (double) pos.getX() + 0.5D + (rand.nextDouble() - 0.5D);
+        final double d1 = (double) pos.getY() + 0.5D + (rand.nextDouble() - 0.5D);
+        final double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
         switch (stateIn.get(FACING)) {
             case NORTH -> {
                 switch (stateIn.get(CURRENT_ACTIVATION_STATE)) {

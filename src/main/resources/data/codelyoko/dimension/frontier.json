@@ -1,0 +1,18 @@
+{
+  "type": "codelyoko:frontier_type",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "cm:void_frontier",
+      "lakes": false,
+      "features": false,
+      "layers": [
+        {
+          "block": "codelyoko:frontier_block",
+          "height": 1
+        }
+      ],
+      "structure_overrides": []
+    }
+  }
+}

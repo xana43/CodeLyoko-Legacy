@@ -1,0 +1,14 @@
+{
+    "parent": "special-model-loader:builtin/obj",
+  "model": "codelyoko:models/item/digital_saber.obj",
+  "ambientocclusion": true,
+                            "display":{
+                              "firstperson_righthand":{
+                              "rotation" : [20,0,0]
+                              },
+                              "firstperson_lefthand":{
+                               "rotation":[0,45,0]
+                              }
+                            }
+
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "codelyoko:block/chiplet_basic_block"
+    }
+  }
+}

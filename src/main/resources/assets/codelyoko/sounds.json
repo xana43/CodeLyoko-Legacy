@@ -1,0 +1,298 @@
+{
+  "entity.blok.ambient": {
+    "subtitle": "entity.blok.ambient",
+    "sounds": [
+      {
+        "name": "codelyoko:entity/blok/ambient",
+        "stream": false
+      }
+    ]
+  },
+  "entity.blok.hurt": {
+    "subtitle": "entity.blok.hurt",
+    "sounds": [
+      {
+        "name": "codelyoko:entity/blok/hurt",
+        "stream": false
+      }
+    ]
+  },
+  "entity.blok.death": {
+    "subtitle": "entity.blok.death",
+    "sounds": [
+      {
+        "name": "codelyoko:entity/blok/death",
+        "stream": false
+      }
+    ]
+  },
+  "lyoko": {
+    "subtitle": "play.CodeLyokoTheme",
+    "sounds": [
+      {
+        "name": "codelyoko:records/lyoko",
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "laser": {
+    "subtitle": "laser fire",
+    "sounds": [
+      {
+        "name": "codelyoko:items/laser",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "forestsector": {
+    "subtitle": "forest sector ambiance",
+    "sounds": [
+      {
+        "name": "codelyoko:music/forest/forestsector",
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "icesector": {
+    "subtitle": "ice sector ambiance",
+    "sounds": [
+      {
+        "name": "codelyoko:music/ice/icesector",
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "sector5": {
+    "subtitle": "sector5 ambiance",
+    "sounds": [
+      {
+        "name": "codelyoko:music/sector5/sector5_alt",
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "desertsector": {
+    "subtitle": "desert sector ambiance",
+    "sounds": [{
+      "name": "codelyoko:music/desert/desert_sector",
+      "stream": true,
+      "preload": true
+    }]
+  },
+  "mountainsector": {
+    "subtitle": "mountain sector ambiance",
+    "sounds":[{
+    "name": "codelyoko:music/mountain/mountain_sector",
+      "stream": true,
+      "preload": true
+      }]
+  },
+  "volcano_replika_music": {
+    "subtitle": "volcano replika ambiance",
+    "sounds": [{
+      "name": "codelyoko:music/volcano/volcano",
+      "stream": true,
+      "preload": true
+
+    }]
+  },
+  "armor_equip_warrior": {
+    "subtitle": "digital armor equip: Warrior Type",
+    "sounds": [
+      {
+        "name": "codelyoko:events/armor_digital_equip_warrior",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "armor_equip_feline": {
+    "subtitle": "digital armor equip: Feline Type",
+    "sounds": [
+      {
+        "name": "codelyoko:events/armor_digital_equip_feline",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "armor_equip_guardian": {
+    "subtitle": "digital armor equip: Guardian Type",
+    "sounds": [
+      {
+        "name": "codelyoko:events/armor_digital_equip_guardian",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "armor_equip_ninja": {
+    "subtitle": "digital armor equip: Ninja Type",
+    "sounds": [
+      {
+        "name": "codelyoko:events/armor_digital_equip_ninja",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "armor_equip_samurai": {
+    "subtitle": "digital armor equip: Samurai Type",
+    "sounds": [
+      {
+        "name": "codelyoko:events/armor_digital_equip_samurai",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "tower_gui_sound":{
+    "subtitle":"player open tower console",
+    "sounds":[{
+    "name":"codelyoko:events/tower_interface_open",
+    "stream": false,
+    "preload": true
+    }]
+  },
+  "interface_cursor":{
+  "subtitle":"cursor blinks",
+  "sounds":[{
+    "name":"codelyoko:events/cursor_blink",
+    "stream":false,
+    "preload":true
+  }]
+
+  },
+  "gui": {
+    "subtitle": "player type on tower console",
+    "sounds": [
+      {
+        "name": "codelyoko:events/user_type_in_interface",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "quantum_zap": {
+    "subtitle": "quantum chiplet zapping away",
+    "sounds": [
+      {
+        "name": "codelyoko:events/quantumchipletactive",
+        "steam": false,
+        "preload": true
+      }
+    ]
+  },
+  "digital_ocean": {
+    "subtitle": "digital ocean ambiance",
+    "sounds": [
+      {
+        "name": "codelyoko:music/sea/digital_sea",
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "entity.megatank.move": {
+    "subtitle": "megatank rolls",
+    "sounds": [
+      {
+        "name": "codelyoko:entity/megatank/tankrolling",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "entity.hornet.fly": {
+    "subtitle": "hornet flies",
+    "sounds": [
+      {
+        "name": "codelyoko:entity/hornet/hornetfly",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "entity.megatank.hurt1": {
+    "subtitle": "megatank gets hurt",
+    "sounds": [
+      {
+        "name": "codelyoko:entity/megatank/hurt1",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "entity.megatank.hurt2": {
+    "subtitle": "megatank gets hurt",
+    "sounds": [
+      {
+        "name": "codelyoko:entity/megatank/hurt2",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "entity.megatank.smallfall": {
+    "subtitle": "megatank gets hurt by falling",
+    "sounds": [
+      {
+        "name": "codelyoko:entity/megatank/smallfall",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "entity.megatank.bigfall": {
+    "subtitle": "megatank gets hurt by a bigfall",
+    "sounds": [
+      {
+        "name": "codelyoko:entity/megatank/bigfall",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "entity.megatank.die": {
+    "subtitle": "megatank dies",
+    "sounds": [
+      {
+        "name": "codelyoko:entity/megatank/megatankdie",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "player.devertualization": {
+    "subtitle": "player devertualize",
+    "sounds": [
+      {
+        "name": "codelyoko:events/player_devertualize",
+        "stream": false,
+        "preload": true
+      }
+    ]
+  },
+  "lyoko.weapon.sword.draw":{
+    "subtitle":"weapon.lyoko.draw",
+    "sounds":[{
+        "name":"codelyoko:items/swords/sword_draw_effect",
+        "steam":false,
+        "preload":true
+    }]
+  },
+  "lyoko.weapon.sword.slash":
+  {
+    "subtitle":"weapon.lyoko.slash",
+    "sounds":[{
+        "name":"codelyoko:items/swords/sword_slash_effect",
+        "stream":false,
+        "preload":true
+    }]
+  }
+}

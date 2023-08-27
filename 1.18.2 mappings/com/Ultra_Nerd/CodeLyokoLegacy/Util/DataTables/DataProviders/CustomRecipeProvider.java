@@ -26,7 +26,7 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
     }
     @Override
     protected void generateRecipes(final Consumer<RecipeJsonProvider> exporter) {
-        final ConditionJsonProvider NEVER_LOADED = DefaultResourceConditions.allModsLoaded("cm");
+        final ConditionJsonProvider NEVER_LOADED = DefaultResourceConditions.allModsLoaded("codelyoko");
         final ConditionJsonProvider ALWAYS_LOADED = DefaultResourceConditions.not(NEVER_LOADED);
         ShapedRecipeJsonBuilder.create(ModItems.TRUSTTY_SCREWDRIVER).input('i', Items.IRON_INGOT).input('h',Items.COBWEB).criterion("knows_screwdriver", conditionsFromItem(ModItems.TRUSTTY_SCREWDRIVER))
                 .pattern(" i ")

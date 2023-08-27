@@ -1,0 +1,46 @@
+# Blender MTL File: 'zweihander.blend'
+# Material Count: 4
+
+newmtl bladedgezwei
+Ns 707.076453
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd codelyoko:item/digital_katana_edge
+
+newmtl bladezwei
+Ns 766.283081
+Ka 0.590909 0.590909 0.590909
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd codelyoko:item/digital_katana_blade
+
+newmtl handlezwei
+Ns 299.999989
+Ka 1.000000 1.000000 1.000000
+Kd 0.749020 0.749020 0.749020
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd codelyoko:item/digital_katana_handle
+
+newmtl xanasymbol
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd codelyoko:item/zweihander_symbol

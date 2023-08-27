@@ -1,5 +1,0 @@
-{
-  "parent": "special-model-loader:builtin/obj",
-  "model": "cm:models/block/holo.obj",
-  "flip-v": true
-}

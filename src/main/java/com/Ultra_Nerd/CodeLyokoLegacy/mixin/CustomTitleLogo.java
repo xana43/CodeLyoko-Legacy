@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(LogoDrawer.class)
-public class CustomTitleLogo {
+public final class CustomTitleLogo {
     @Final
     @Shadow
     public static final Identifier LOGO_TEXTURE = CodeLyokoMain.codeLyokoPrefix("textures/block/transparent.png");

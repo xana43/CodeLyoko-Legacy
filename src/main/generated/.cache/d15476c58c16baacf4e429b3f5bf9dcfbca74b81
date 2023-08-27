@@ -1,8 +1,8 @@
-// 1.19.3	2022-12-23T17:19:41.1179771	CodeLyokoLegacy/Tags for minecraft:block
-936197d5a60b3cb05d30a652b217d7679d8cd142 data\minecraft\tags\blocks\needs_diamond_tool.json
-f6d2e0ee9f4dca7c3c521ca495de7ebcfd28adc4 data\minecraft\tags\blocks\ice.json
-f2b7ed8a5fad1488763db6b4e00d582e4a3f6a7e data\minecraft\tags\blocks\needs_iron_tool.json
-963c5c845d1f0403af2cd72d680826d84da9af35 data\minecraft\tags\blocks\mineable\shovel.json
-5bbe94d33c8aca269f48f2ee32b31279f3aaf983 data\minecraft\tags\blocks\mineable\pickaxe.json
-9bff3b8a2a9920406e7fdb9d07f1be0cc8c63a38 data\minecraft\tags\blocks\crystal_sound_blocks.json
-963c5c845d1f0403af2cd72d680826d84da9af35 data\minecraft\tags\blocks\sand.json
+// 1.20.1	2023-08-24T22:43:57.7427211	CodeLyokoLegacy/Tags for minecraft:block
+154fa35f92daa4685656e57807e39d7244184861 data\minecraft\tags\blocks\ice.json
+a5cf0b1b80f2a4600a5ad3781009afb401ec12ae data\minecraft\tags\blocks\needs_diamond_tool.json
+f550b039ad01c543b4601c8200937e54f704831b data\minecraft\tags\blocks\needs_iron_tool.json
+f354fdbf81d2fbcc03d7973d2b03443f9568cd01 data\minecraft\tags\blocks\mineable\shovel.json
+219013ff9fc9470b2ec2a88b2e743de83bd2dfd6 data\minecraft\tags\blocks\mineable\pickaxe.json
+c6bd701b48d36b9955901875a45d32365e52659f data\minecraft\tags\blocks\crystal_sound_blocks.json
+f354fdbf81d2fbcc03d7973d2b03443f9568cd01 data\minecraft\tags\blocks\sand.json

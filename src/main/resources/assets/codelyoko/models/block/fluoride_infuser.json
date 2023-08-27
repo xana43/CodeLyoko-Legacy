@@ -1,0 +1,14 @@
+{
+   "parent":"block/orientable",
+   "textures": {
+       "particle":"codelyoko:block/flouride_infuser_side",
+       "north":"codelyoko:block/flouride_infuser_side",
+       "down":"codelyoko:block/flouride_infuser_side",
+       "up":"codelyoko:block/flouride_infuser_front_off",
+       "south":"codelyoko:block/flouride_infuser_side",
+       "east":"codelyoko:block/flouride_infuser_side",
+       "west":"codelyoko:block/flouride_infuser_side"
+       
+       
+   }
+}

@@ -44,7 +44,7 @@ public abstract class PlayerLyokoMixin {
 
     @Environment(EnvType.CLIENT)
     @Inject(method = "swingHand(Lnet/minecraft/util/Hand;)V", at = @At("HEAD"))
-    public void swingSound(final CallbackInfo ci) {
+    public void codelyoko$swingSound(final CallbackInfo ci) {
         final MinecraftClient mc = MinecraftClient.getInstance();
         if (mc != null) {
             if (mc.player != null) {

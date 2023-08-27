@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 50,
+  "experience": 38.0,
+  "group": "codelyokorefinement",
+  "ingredient": {
+    "item": "codelyoko:raw_silicadust"
+  },
+  "result": "codelyoko:silicon_wafer"
+}

@@ -1,0 +1,43 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "codelyoko"
+      ]
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "codelyoko:anode"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "knows_anode": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "codelyoko:anodepart"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "knows_anode",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "codelyoko:anode"
+    ]
+  },
+  "sends_telemetry_event": false
+}

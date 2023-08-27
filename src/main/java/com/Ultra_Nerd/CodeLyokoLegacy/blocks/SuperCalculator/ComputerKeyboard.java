@@ -651,7 +651,7 @@ public final class ComputerKeyboard extends HorizontalFacingBlock implements Blo
     @Nullable
     @Override
     public NamedScreenHandlerFactory createScreenHandlerFactory(final BlockState state, final World world, final BlockPos pos) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
+        final BlockEntity blockEntity = world.getBlockEntity(pos);
         return blockEntity instanceof NamedScreenHandlerFactory ? (NamedScreenHandlerFactory)blockEntity : null;
     }
     @Nullable

@@ -24,10 +24,8 @@ public record CustomCarthadgeSky() implements DimensionRenderingRegistry.SkyRend
     @Override
     public void render(final WorldRenderContext context) {
         RenderSystem.setShaderTexture(0, TEXTURE_LOCATION);
-
         final MatrixStack matrixStack = context.matrixStack();
         RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
-
         matrixStack.push();
 
 

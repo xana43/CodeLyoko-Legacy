@@ -1,0 +1,12 @@
+{
+  "type": "codelyoko:icesector_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "seed": 0,
+    "settings": "codelyoko:ice_gen_settings",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "codelyoko:ice_sector"
+    }
+  }
+}

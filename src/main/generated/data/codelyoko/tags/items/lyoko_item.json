@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "codelyoko:hoverboard_spawn_item",
+    "codelyoko:overboard_spawn_item"
+  ]
+}

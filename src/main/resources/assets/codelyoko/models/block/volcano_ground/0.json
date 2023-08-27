@@ -1,0 +1,12 @@
+{
+   "parent": "block/cube_all",
+   "textures": {
+       "up": "codelyoko:block/volcano_top_1",
+       "down": "codelyoko:block/volcano_top_1",
+       "north": "codelyoko:block/volcano_side_1",
+       "south": "codelyoko:block/volcano_side_2",
+       "east": "codelyoko:block/volcano_side_3",
+       "west": "codelyoko:block/volcano_side_2",
+        "particle": "codelyoko:block/volcano_top_1"
+   }
+}

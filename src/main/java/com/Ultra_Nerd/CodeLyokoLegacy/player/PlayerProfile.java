@@ -12,6 +12,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.ServerMetadata;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Arm;
+import org.jetbrains.annotations.NotNull;
 
 public final class PlayerProfile implements NbtSerializable {
     private final PlayerEntity player;
@@ -20,15 +21,9 @@ public final class PlayerProfile implements NbtSerializable {
     private int timesEntered = 0;
     public PlayerProfile(final PlayerEntity player)
     {
-        FakePlayer fakePlayer = null;
-        if(!player.getWorld().isClient()) {
-             fakePlayer = FakePlayer.getOrCreate((ServerWorld) player.getWorld());
-            this.player = fakePlayer;
-        }
-        else
-        {
-            this.player = player;
-        }
+
+        this.player = player;
+
 
 
 
@@ -64,7 +59,7 @@ public final class PlayerProfile implements NbtSerializable {
 
 
     @Override
-    public void fromTag(final NbtCompound tag) {
+    public void fromTag(final @NotNull NbtCompound tag) {
         if(player != null) {
             //this.player.readNbt(tag);
             this.DNA = tag.getString(player.getUuidAsString() + "-dna");
@@ -74,7 +69,7 @@ public final class PlayerProfile implements NbtSerializable {
     }
 
     @Override
-    public NbtCompound toTag(final NbtCompound tag) {
+    public NbtCompound toTag(final @NotNull NbtCompound tag) {
         if(player != null) {
             tag.putString(player.getUuidAsString() + "-dna", DNA);
             tag.putInt(player.getUuidAsString() + "-class", playerClassType);

@@ -164,7 +164,7 @@ public final class ComputerInterfaceUi /*extends AbstractContainerScreen<Compute
         int ty = this.height / 2;
         FontRenderer gunship_font = this.getMinecraft().getFontResourceManager().getFontRenderer(new ResourceLocation(CodeLyokoMain.MOD_ID + ":gunship"));
         assert gunship_font != null;
-        this.text = new TextFieldWidget(gunship_font, x, ty + 40, this.width, 23, I18n.format("gui.cm.computer_input_main"));
+        this.text = new TextFieldWidget(gunship_font, x, ty + 40, this.width, 23, I18n.format("gui.codelyoko.computer_input_main"));
         this.text.setEnableBackgroundDrawing(false);
         this.text.setVisible(true);
         this.text.setTextColor(0xda2c43);

@@ -1,0 +1,12 @@
+{
+  "type":"codelyoko:digital_ocean_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "seed": 0,
+    "settings": "codelyoko:ocean_gen_settings",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "codelyoko:digital_ocean"
+    }
+  }
+}

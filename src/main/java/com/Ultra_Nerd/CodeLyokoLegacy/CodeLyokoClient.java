@@ -251,8 +251,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
                 {
                     return switch (stack.getTranslationKey()) {
-                        case "item.cm.story_book" -> 0x00008B;
-                        case "item.cm.story_book2" -> ColorHelper.Argb.getArgb(255, 255, 0, 0);
+                        case "item.codelyoko.story_book" -> 0x00008B;
+                        case "item.codelyoko.story_book2" -> ColorHelper.Argb.getArgb(255, 255, 0, 0);
                         default -> 1;
                     };
 

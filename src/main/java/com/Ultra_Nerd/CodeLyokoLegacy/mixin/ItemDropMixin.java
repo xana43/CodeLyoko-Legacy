@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(KeyBinding.class)
 public abstract class ItemDropMixin {
     @Inject(method = "onKeyPressed", at = @At("HEAD"), cancellable = true)
-    private static void stopDrop(final CallbackInfo ci) {
+    private static void codelyoko$stopDrop(final CallbackInfo ci) {
         final MinecraftClient mc = MinecraftClient.getInstance();
         if (mc.player != null) {
             if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(mc.player)) {

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "valid=false": {
+      "model": "codelyoko:block/holoprojector"
+    },
+    "valid=true": {
+      "model": "codelyoko:block/holo"
+    }
+  }
+}

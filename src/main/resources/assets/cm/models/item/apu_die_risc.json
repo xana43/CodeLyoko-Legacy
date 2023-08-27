@@ -1,7 +1,0 @@
-{
-   "parent": "item/generated",
-   "textures": {
-     "layer0": "cm:item/die_1",
-     "layer1": "cm:item/risc_apu_die"
-   }
-}

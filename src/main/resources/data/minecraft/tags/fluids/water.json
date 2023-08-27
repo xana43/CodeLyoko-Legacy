@@ -1,10 +1,10 @@
 {
   "replace" : false,
   "values": [
-    "cm:digital_ocean",
-    "cm:digital_ocean_flowing",
-    "cm:still_liquid_helium",
-    "cm:flowing_liquid_helium"
+    "codelyoko:digital_ocean",
+    "codelyoko:digital_ocean_flowing",
+    "codelyoko:still_liquid_helium",
+    "codelyoko:flowing_liquid_helium"
 
   ]
 }
