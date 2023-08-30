@@ -32,7 +32,7 @@ public abstract class LyokoRarityMixin {
     }
 
     @Inject(method = "<clinit>", at = @At(value = "FIELD", opcode = 179, target = "Lnet/minecraft/util/Rarity;field_8905:[Lnet/minecraft/util/Rarity;", shift = At.Shift.AFTER))
-    private static void addNewRarity(final CallbackInfo ci) {
+    private static void codelyoko$addNewRarity(final CallbackInfo ci) {
 
         final var rarities = new ArrayList<>(Arrays.asList(field_8905));
         final var last = rarities.get(rarities.size() - 1);

@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
 
-public class ContainerElectricInfusing /* extends AbstractContainerMenu implements Container*/ {
+public final class ContainerElectricInfusing /* extends AbstractContainerMenu implements Container*/ {
 /*
 
     public final @NotNull ElectricInfusingChamberTileEntity tileentity;

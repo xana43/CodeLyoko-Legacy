@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
-public class ContainerElectroplate /*extends AbstractContainerMenu*/ {
+public final class ContainerElectroplate /*extends AbstractContainerMenu*/ {
     /*protected ContainerElectroplate(@Nullable MenuType<?> p_38851_, int p_38852_) {
         super(p_38851_, p_38852_);
     }

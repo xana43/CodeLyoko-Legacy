@@ -25,7 +25,7 @@ import net.minecraft.util.math.ColorHelper;
 import java.util.ArrayList;
 import java.util.List;
 @Environment(EnvType.CLIENT)
-public class VehicleMaterializationTest extends HandledScreen<VehicleMaterializeTestHandler> {
+public final class VehicleMaterializationTest extends HandledScreen<VehicleMaterializeTestHandler> {
     private static final Identifier TEXTURE = CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_pot.png");
     private static final int xSize = 1024, ySize = 1024;
     private int x;
