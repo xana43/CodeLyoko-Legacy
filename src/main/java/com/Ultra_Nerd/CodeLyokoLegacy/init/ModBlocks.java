@@ -76,7 +76,8 @@ public record ModBlocks() {
             FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque());
     public static final Block CHIPLET_FRANZ_BLOCK = new FranzChiplet(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
     public static final Block COMPUTER_COOLING_BLOCK = new CoolingBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
-    public static final Block COMPUTER_LIQUID_CIRCULATOR = new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
+    public static final Block COMPUTER_LIQUID_CIRCULATOR = new ComputerFluidCirculator(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
+    public static final Block COMPUTER_LIQUID_PIPE = new ComputerFluidPipe(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
     public static final Block COMPUTER_TOWER_CONTROL_PANEL = new ControlPanel();
 
     public static final Block COFFINITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.IRON_ORE));
@@ -241,6 +242,7 @@ public record ModBlocks() {
             .put("chiplet_franz_block", CHIPLET_FRANZ_BLOCK)
             .put("computer_cooling_block", COMPUTER_COOLING_BLOCK)
             .put("computer_liquid_circulator", COMPUTER_LIQUID_CIRCULATOR)
+            .put("computer_liquid_pipe",COMPUTER_LIQUID_PIPE)
             .put("computer_tower_control_panel", COMPUTER_TOWER_CONTROL_PANEL)
             .put("computer_core",COMPUTER_CORE)
             .put("coffinite_ore", COFFINITE_ORE)

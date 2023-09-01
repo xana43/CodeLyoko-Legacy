@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.PlayerProfileDebug;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.ComputerInterfaceTestTE;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.PlayerDataStorage;
@@ -40,8 +39,8 @@ public record ModBlockEntities() {
             FabricBlockEntityTypeBuilder.create(LaptopChargerBlockEntityInventory::new, ModBlocks.LAPTOP_CHARGER).build();
     public  static final BlockEntityType<RouterTE> ROUTER_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(RouterTE::new,ModBlocks.ROUTER).build();
-    public static final BlockEntityType<CableTileEntity> CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE =
-            FabricBlockEntityTypeBuilder.create(CableTileEntity::new, ModBlocks.CABLE_BLOCK).build();
+    public static final BlockEntityType<CableBlockEntity> CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE =
+            FabricBlockEntityTypeBuilder.create(CableBlockEntity::new, ModBlocks.CABLE_BLOCK).build();
     public static final BlockEntityType<ComputerCoreTileEntity> COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(ComputerCoreTileEntity::new,ModBlocks.COMPUTER_CORE).build();
     public static final BlockEntityType<KeyBoardInterface> KEYBOARD_BLOCK_ENTITY =
@@ -55,6 +54,9 @@ public record ModBlockEntities() {
             FabricBlockEntityTypeBuilder.create(PlayerDataStorage::new,ModBlocks.TEST_PROFILE).build();
     public static final BlockEntityType<VehicleBE> VEHICLE_BE_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(VehicleBE::new,ModBlocks.TEST_VECHICLE_INTERFACE).build();
+    public static final BlockEntityType<ComputerCirculatorBlockEntity> COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE =
+            FabricBlockEntityTypeBuilder.create(ComputerCirculatorBlockEntity::new,
+                    ModBlocks.COMPUTER_LIQUID_CIRCULATOR).build();
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String, BlockEntityType<?>>builder()
 
             .put("lyoko_core", LYOKO_CORE).put("tower_interface_tile_entity", TOWER_INTERFACE_TILE_ENTITY)
@@ -70,7 +72,9 @@ public record ModBlockEntities() {
             .put("test_ui",COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE)
             .put("hologram_projector",HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE)
             .put("player_data_test",PLAYER_DATA_STORAGE_BLOCK_ENTITY_TYPE)
-            .put("vehicle_matter_test",VEHICLE_BE_BLOCK_ENTITY_TYPE).build();
+            .put("vehicle_matter_test",VEHICLE_BE_BLOCK_ENTITY_TYPE)
+            .put("computer_circulator_block_entity",COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE)
+            .build();
 
 
     //
@@ -96,8 +100,8 @@ public record ModBlockEntities() {
             TILE_ENTITY_TYPES.register(, () -> BlockEntityType.Builder.of(ComputerControlPanelTileEntity::new
                     , ModBlocks.COMPUTER_TOWER_CONTROL_PANEL.get()).build(null));
 
-    public static final RegistryObject<BlockEntityType<CableTileEntity>> CABLE_TILE_ENTITY = TILE_ENTITY_TYPES.register(
-            "cable_tile_entity", () -> BlockEntityType.Builder.of(CableTileEntity::new,
+    public static final RegistryObject<BlockEntityType<CableBlockEntity>> CABLE_TILE_ENTITY = TILE_ENTITY_TYPES.register(
+            "cable_tile_entity", () -> BlockEntityType.Builder.of(CableBlockEntity::new,
                     ModBlocks.CABLE_BLOCK.get()).build(null));
     public static final RegistryObject<BlockEntityType<RouterTE>> ROUTER_TILE_ENTITY =
             TILE_ENTITY_TYPES.register("router_tile_entity", () -> BlockEntityType.Builder.of(RouterTE::new,

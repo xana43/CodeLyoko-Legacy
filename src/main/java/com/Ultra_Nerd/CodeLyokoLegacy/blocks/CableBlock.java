@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.CableTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.CableBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
@@ -56,9 +56,9 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
             if(world != null && !world.isClient()) {
                 if (!world.getBlockState(pos).get(isMaster) && world.getBlockEntity(nextPosition) != null && world.getBlockState(pos)
                         .isOf(ModBlocks.CABLE_BLOCK)) {
-                    if (world.getBlockEntity(nextPosition) instanceof CableTileEntity cableTileEntity) {
-                        if (cableTileEntity.getIsMaster()) {
-                            CableTileEntity.removeFromMaster(pos, nextPosition, world);
+                    if (world.getBlockEntity(nextPosition) instanceof CableBlockEntity cableBlockEntity) {
+                        if (cableBlockEntity.getIsMaster()) {
+                            CableBlockEntity.removeFromMaster(pos, nextPosition, world);
                         }
                     }
                 }
@@ -70,31 +70,31 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
 /*
     @Override
     public void onPlaced(final World world, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack itemStack) {
-        final CableTileEntity thisTE = (CableTileEntity) world.getBlockEntity(pos);
-        CableTileEntity.CONNECTIONS.put(thisTE, new ArrayList<>());
+        final CableBlockEntity thisTE = (CableBlockEntity) world.getBlockEntity(pos);
+        CableBlockEntity.CONNECTIONS.put(thisTE, new ArrayList<>());
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
                 for (int z = -1; z < 2; z++) {
                     if (!(x == 0 && y == 0 && z == 0)) {
                         final BlockEntity surrounding = world.getBlockEntity(new BlockPos(pos.getX() + x,
                                 pos.getY() + y, pos.getZ() + z));
-                        if (surrounding instanceof CableTileEntity) {
-                            if (CableTileEntity.CONNECTIONS.containsKey(surrounding)) {
-                                CableTileEntity.CONNECTIONS.get(surrounding).add(world.getBlockEntity(pos));
-                                CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                        if (surrounding instanceof CableBlockEntity) {
+                            if (CableBlockEntity.CONNECTIONS.containsKey(surrounding)) {
+                                CableBlockEntity.CONNECTIONS.get(surrounding).add(world.getBlockEntity(pos));
+                                CableBlockEntity.CONNECTIONS.get(thisTE).add(surrounding);
                             }
                         }
                         if (surrounding instanceof ScannerTileEntity) {
-                            CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                            CableBlockEntity.CONNECTIONS.get(thisTE).add(surrounding);
                             thisTE.connectToScanner();
                         }
                         if (surrounding instanceof ComputerControlPanelTileEntity) {
-                            CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                            CableBlockEntity.CONNECTIONS.get(thisTE).add(surrounding);
                             thisTE.connectToComp();
                         }
                         if(surrounding instanceof RouterTE)
                         {
-                            CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                            CableBlockEntity.CONNECTIONS.get(thisTE).add(surrounding);
                             thisTE.connectedToRouter();
                         }
                     }
@@ -108,17 +108,17 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
 
     @Override
     public void onPlaced(final World world, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack itemStack) {
-        if(world.getBlockEntity(pos)instanceof final CableTileEntity cableTileEntity && !world.isClient())
+        if(world.getBlockEntity(pos)instanceof final CableBlockEntity cableBlockEntity && !world.isClient())
         {
-            cableTileEntity.calculateConnected();
-            if(cableTileEntity.getIsMaster())
+            cableBlockEntity.calculateConnected();
+            if(cableBlockEntity.getIsMaster())
             {
                 world.setBlockState(pos,state.with(isMaster,true));
             }
             else
             {
-                cableTileEntity.checkIfEnd();
-                cableTileEntity.propogateCheck(1);
+                cableBlockEntity.checkIfEnd();
+                cableBlockEntity.propogateCheck(1);
             }
         }
         super.onPlaced(world, pos, state, placer, itemStack);
@@ -199,25 +199,25 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
 /*
     @Override
     public void setPlacedBy(@Nonnull Level worldIn, @Nonnull BlockPos pos, @Nonnull BlockState state, LivingEntity placer, @Nonnull ItemStack stack) {
-        CableTileEntity thisTE = (CableTileEntity) worldIn.getBlockEntity(pos);
-        CableTileEntity.CONNECTIONS.put(thisTE, new ArrayList<>());
+        CableBlockEntity thisTE = (CableBlockEntity) worldIn.getBlockEntity(pos);
+        CableBlockEntity.CONNECTIONS.put(thisTE, new ArrayList<>());
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
                 for (int z = -1; z < 2; z++) {
                     if (!(x == 0 && y == 0 && z == 0)) {
                         BlockEntityCapabilit surrounding = worldIn.getBlockEntity(new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z));
-                        if (surrounding instanceof CableTileEntity) {
-                            if (CableTileEntity.CONNECTIONS.containsKey(surrounding)) {
-                                CableTileEntity.CONNECTIONS.get(surrounding).add(worldIn.getBlockEntity(pos));
-                                CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                        if (surrounding instanceof CableBlockEntity) {
+                            if (CableBlockEntity.CONNECTIONS.containsKey(surrounding)) {
+                                CableBlockEntity.CONNECTIONS.get(surrounding).add(worldIn.getBlockEntity(pos));
+                                CableBlockEntity.CONNECTIONS.get(thisTE).add(surrounding);
                             }
                         }
                         if (surrounding instanceof ScannerTileEntity) {
-                            CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                            CableBlockEntity.CONNECTIONS.get(thisTE).add(surrounding);
                             thisTE.connectToScanner();
                         }
                         if (surrounding instanceof ComputerControlPanelTileEntity) {
-                            CableTileEntity.CONNECTIONS.get(thisTE).add(surrounding);
+                            CableBlockEntity.CONNECTIONS.get(thisTE).add(surrounding);
                             thisTE.connectToComp();
                         }
                     }

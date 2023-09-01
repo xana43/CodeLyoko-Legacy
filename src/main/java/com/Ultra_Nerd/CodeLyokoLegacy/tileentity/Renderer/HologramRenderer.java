@@ -2,6 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.HologramProjectorTileEntity;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
@@ -9,6 +11,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import org.joml.Math;
 import org.joml.Matrix4f;
 
+@Environment(EnvType.CLIENT)
 public record HologramRenderer(
         BlockEntityRendererFactory.Context thisContext) implements BlockEntityRenderer<HologramProjectorTileEntity> {
     private static final float RADIUS = 6f;

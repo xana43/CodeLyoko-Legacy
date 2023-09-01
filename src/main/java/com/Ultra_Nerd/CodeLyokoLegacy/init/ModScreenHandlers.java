@@ -29,6 +29,9 @@ public record ModScreenHandlers() {
     public static final ScreenHandlerType<VehicleMaterializeTestHandler> VEHICLE_MATERIALIZE_TEST_HANDLER_SCREEN_HANDLER_TYPE =
             new ScreenHandlerType<>((syncId, playerInventory) -> new VehicleMaterializeTestHandler(syncId),
                     FeatureFlags.VANILLA_FEATURES);
+    public static final ScreenHandlerType<ComputerCirculatorScreenHandler> COMPUTER_CIRCULATOR_SCREEN_HANDLER =
+            new ExtendedScreenHandlerType<>((syncId, inventory, buf) -> new ComputerCirculatorScreenHandler(syncId,
+                    inventory.player,buf));
     public static final ImmutableMap<String, ScreenHandlerType<?>> screenHandlerMap = ImmutableMap.<String, ScreenHandlerType<?>>builder()
             .put("tower_screen_handler", TOWER_INTERFACE_SCREEN_HANDLER)
             .put("computer_controlpanel", CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE)
@@ -36,5 +39,6 @@ public record ModScreenHandlers() {
             .put("computer_interface_screen_handler",COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE)
             .put("profiledebugger",PROFILE_DEBUG_SCREEN_HANDLER_SCREEN_HANDLER_TYPE)
             .put("vehicletest",VEHICLE_MATERIALIZE_TEST_HANDLER_SCREEN_HANDLER_TYPE)
+            .put("computer_circulator_screen_handler",COMPUTER_CIRCULATOR_SCREEN_HANDLER)
             .build();
 }

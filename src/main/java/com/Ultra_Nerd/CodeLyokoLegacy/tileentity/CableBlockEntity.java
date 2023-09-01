@@ -16,7 +16,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class CableTileEntity extends BlockEntity {
+public final class CableBlockEntity extends BlockEntity {
     private static final SecureRandom random = new SecureRandom();
     private static final String positionsKey = "connected_positions";
     private static final String isMasterKey = "is_master";
@@ -27,20 +27,20 @@ public final class CableTileEntity extends BlockEntity {
     private boolean isMaster = false;
     private boolean isEnd = false;
 
-    public CableTileEntity(final BlockPos pos, final BlockState state) {
+    public CableBlockEntity(final BlockPos pos, final BlockState state) {
         super(ModBlockEntities.CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE, pos, state);
     }
 
     public static void appendToMaster(final BlockPos appendPosition, final BlockPos masterPos, final World world) {
-        if (world.getBlockEntity(masterPos) instanceof final CableTileEntity cableTileEntity) {
-            if (cableTileEntity.isMaster && !connectedPositions.contains(appendPosition)) {
+        if (world.getBlockEntity(masterPos) instanceof final CableBlockEntity cableBlockEntity) {
+            if (cableBlockEntity.isMaster && !connectedPositions.contains(appendPosition)) {
                 connectedPositions.add(appendPosition);
             }
         }
     }
 
     public static void removeFromMaster(final BlockPos appendPosition, final BlockPos masterPos, final World world) {
-        if (world.getBlockEntity(masterPos) instanceof final CableTileEntity cableTileEntity) {
+        if (world.getBlockEntity(masterPos) instanceof final CableBlockEntity cableBlockEntity) {
             connectedPositions.remove(appendPosition);
         }
     }
@@ -83,7 +83,7 @@ public final class CableTileEntity extends BlockEntity {
 
             final BlockPos checkedPos = pos.offset(dir, offset);
             if (world.getBlockState(checkedPos).isOf(ModBlocks.CABLE_BLOCK)) {
-                if (world.getBlockEntity(checkedPos) instanceof final CableTileEntity cableTile) {
+                if (world.getBlockEntity(checkedPos) instanceof final CableBlockEntity cableTile) {
                     if (cableTile.isMaster) {
                         currentMaster = checkedPos;
                         appendToMaster(pos, checkedPos, world);
@@ -107,7 +107,7 @@ public final class CableTileEntity extends BlockEntity {
         for (final Direction dir : Direction.values()) {
             final BlockPos nextPosition = pos.offset(dir, 1);
             if (world.getBlockState(nextPosition).isOf(ModBlocks.CABLE_BLOCK)) {
-                if (world.getBlockEntity(pos) instanceof final CableTileEntity tileEntity) {
+                if (world.getBlockEntity(pos) instanceof final CableBlockEntity tileEntity) {
                     if (tileEntity.isMaster && this.isMaster) {
                         final int chose = random.nextInt(0, 1);
                         if (chose == 1) {
@@ -158,7 +158,7 @@ public final class CableTileEntity extends BlockEntity {
 
     }
     /*
-    public static @NotNull HashMap<CableTileEntity, ArrayList<BlockEntity>> CONNECTIONS = new HashMap<>();
+    public static @NotNull HashMap<CableBlockEntity, ArrayList<BlockEntity>> CONNECTIONS = new HashMap<>();
 
     private boolean connectedToScanner;
     private boolean connectedToComp;
@@ -169,15 +169,15 @@ public final class CableTileEntity extends BlockEntity {
     public boolean isRemoved() {
         super.isRemoved();
         this.markRemoved();
-        ArrayList<BlockEntity> toDisconnect = CableTileEntity.CONNECTIONS.get(this);
+        ArrayList<BlockEntity> toDisconnect = CableBlockEntity.CONNECTIONS.get(this);
         this.disconnectToComp();
         this.disconnectToScanner();
         this.disconnectToRouter();
-        CableTileEntity.CONNECTIONS.remove(this);
+        CableBlockEntity.CONNECTIONS.remove(this);
         if(toDisconnect != null) {
             for (BlockEntity te : toDisconnect) {
-                if (te instanceof CableTileEntity) {
-                    CableTileEntity.CONNECTIONS.get(te).remove(this);
+                if (te instanceof CableBlockEntity) {
+                    CableBlockEntity.CONNECTIONS.get(te).remove(this);
                 }
             }
         }

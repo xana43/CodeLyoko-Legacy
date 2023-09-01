@@ -16,6 +16,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.screens.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.StoryBookGUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.PlayerProfileDebug;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.VehicleMaterializationTest;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.ComputerCirculatorRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.HologramRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.LaptopChargerRenderer;
@@ -212,7 +213,16 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
 
     }
-
+    private static void registerBlockEntityRenderers()
+    {
+        BlockEntityRendererRegistry.register(ModBlockEntities.LYOKO_CORE, CoreOfLyoko::new);
+        BlockEntityRendererRegistry.register(ModBlockEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY,
+                LaptopChargerRenderer::new);
+        BlockEntityRendererRegistry.register(ModBlockEntities.HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE,
+                HologramRenderer::new);
+        BlockEntityRendererRegistry.register(ModBlockEntities.COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE,
+                ComputerCirculatorRenderer::new);
+    }
     @Override
     public void onInitializeClient() {
         SpecialModelLoaderEvents.LOAD_SCOPE.register(location -> CodeLyokoMain.MOD_ID.equals(location.getNamespace()));
@@ -226,12 +236,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
         classAbilityBinding2 = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding("key." + CodeLyokoMain.MOD_ID + ".class_ability2", InputUtil.Type.KEYSYM,
                         GLFW.GLFW_KEY_B, keyCategory));
-        //Renderers
-        BlockEntityRendererRegistry.register(ModBlockEntities.LYOKO_CORE, CoreOfLyoko::new);
-        BlockEntityRendererRegistry.register(ModBlockEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY,
-                LaptopChargerRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntities.HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE,
-                HologramRenderer::new);
+        registerBlockEntityRenderers();
+
         registerEntityRenderers();
         //receiveEntityPacket();
         FluidRenderRegistry();
