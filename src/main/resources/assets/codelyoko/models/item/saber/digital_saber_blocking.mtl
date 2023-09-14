@@ -10,7 +10,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd cm:item/digital_katana_blade
+map_Kd codelyoko:item/digital_katana_blade
 newmtl BladeEdge
 Ns 323.999994
 Ka 1.000000 1.000000 1.000000
@@ -20,7 +20,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd cm:item/digital_katana_edge
+map_Kd codelyoko:item/digital_katana_edge
 newmtl Handle
 Ns 299.999989
 Ka 1.000000 1.000000 1.000000
@@ -30,4 +30,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd cm:item/digital_katana_handle
+map_Kd codelyoko:item/digital_katana_handle

@@ -1,8 +1,13 @@
-// 1.20.1	2023-08-24T22:43:57.7427211	CodeLyokoLegacy/Tags for minecraft:block
+// 1.20.1	2023-09-14T12:43:05.5845557	CodeLyokoLegacy/Tags for minecraft:block
+55c0a8f78c1d92d882f99ea58123a5f572f903f0 data\c\tags\blocks\uranium_235_blocks.json
 154fa35f92daa4685656e57807e39d7244184861 data\minecraft\tags\blocks\ice.json
-a5cf0b1b80f2a4600a5ad3781009afb401ec12ae data\minecraft\tags\blocks\needs_diamond_tool.json
-f550b039ad01c543b4601c8200937e54f704831b data\minecraft\tags\blocks\needs_iron_tool.json
-f354fdbf81d2fbcc03d7973d2b03443f9568cd01 data\minecraft\tags\blocks\mineable\shovel.json
-219013ff9fc9470b2ec2a88b2e743de83bd2dfd6 data\minecraft\tags\blocks\mineable\pickaxe.json
+bda055fd8bfd7f8e37bc9d5e4786cca1db4dcdac data\minecraft\tags\blocks\needs_diamond_tool.json
+e357cd225861e6b060ab7d1402794e9e30ea28d1 data\c\tags\blocks\uranium_238_blocks.json
+da702aa0afcf65f7babf4fda796869d8c4351c68 data\c\tags\blocks\uranium_ores.json
+638b950232908cd78be421fd5846dfb24d3d4a8e data\codelyoko\tags\blocks\lyoko_blocks.json
+8b78be8b4220c94f99c71835e3a745931c14bfd1 data\minecraft\tags\blocks\mineable\pickaxe.json
 c6bd701b48d36b9955901875a45d32365e52659f data\minecraft\tags\blocks\crystal_sound_blocks.json
 f354fdbf81d2fbcc03d7973d2b03443f9568cd01 data\minecraft\tags\blocks\sand.json
+0834ca13a7f022e19cc17b2eb2a5831b6c5b90a8 data\minecraft\tags\blocks\needs_iron_tool.json
+f354fdbf81d2fbcc03d7973d2b03443f9568cd01 data\minecraft\tags\blocks\mineable\shovel.json
+da702aa0afcf65f7babf4fda796869d8c4351c68 data\c\tags\blocks\raw_uranium_ores.json

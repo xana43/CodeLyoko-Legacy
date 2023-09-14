@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.ScannerTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;

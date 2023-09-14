@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
+package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;

@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-24T22:43:57.7377122	CodeLyokoLegacy/Block Loot Tables
+// 1.20.1	2023-09-14T12:43:05.5800543	CodeLyokoLegacy/Block Loot Tables
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data\codelyoko\loot_tables\blocks\digital_ocean.json
 c78df6ef9fdb2507bc83e93ed3fbb1fa2b18e0f9 data\codelyoko\loot_tables\blocks\electroplating_machine.json
 1ef56b5267b98031132eebd610821ccbc53d1379 data\codelyoko\loot_tables\blocks\digital_leaf_mountain.json
@@ -6,6 +6,7 @@ c78df6ef9fdb2507bc83e93ed3fbb1fa2b18e0f9 data\codelyoko\loot_tables\blocks\elect
 3882fb038e64e6e34b24660664ed475ff0a66eae data\codelyoko\loot_tables\blocks\silica_sand.json
 15a10726ec0b4e3c346498187aec1374ae6c4322 data\codelyoko\loot_tables\blocks\sector5_steel.json
 4b10369fabbb4b097c55a72d0181222b149c5081 data\codelyoko\loot_tables\blocks\computer_cooling_block.json
+0d318f37751643f38a729211f85cb3d73c86e148 data\codelyoko\loot_tables\blocks\computer_liquid_pipe.json
 c551c510dc450bfc2bb80fe5915b95f57f70e088 data\codelyoko\loot_tables\blocks\bornite_ore.json
 7348549338e4820d685c9a45d031f3a12d672cb9 data\codelyoko\loot_tables\blocks\quantum_steel.json
 96e839b61a5faeec4826b68dcb526306667db75e data\codelyoko\loot_tables\blocks\metatorbernite_ore.json
@@ -39,6 +40,7 @@ af5a05fd01da6ae07ba302f69d906474a2d3a537 data\codelyoko\loot_tables\blocks\urano
 2fa7b8fa4058cb4a3224174d8356aecd3386db33 data\codelyoko\loot_tables\blocks\digital_wood_forest.json
 c8b29c17513e5153e5558315c2d7792cc03c3097 data\codelyoko\loot_tables\blocks\uraninite_ore.json
 b55908011e071b4edfb3aae0036b818b61d58319 data\codelyoko\loot_tables\blocks\torbernite_ore.json
+bf7bdc71c8564fdc788a666cc8b2b69791212af7 data\codelyoko\loot_tables\blocks\computer_fluid_intake.json
 0f95b3ea5b157a267d1ae5341d9117e9a2f625d1 data\codelyoko\loot_tables\blocks\tyuyamunite_ore.json
 8fa019bcd561f5f50d83cd6a1ffb03a60212deb9 data\codelyoko\loot_tables\blocks\test_ui.json
 6d571229ada689ae9915a6ec065d9d40adec5236 data\codelyoko\loot_tables\blocks\uranium_block_235.json

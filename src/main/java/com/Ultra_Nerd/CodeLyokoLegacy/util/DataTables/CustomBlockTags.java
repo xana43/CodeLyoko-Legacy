@@ -1,9 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 
@@ -35,7 +38,16 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.FLUORIDE_INFUSER,
                 ModBlocks.CABLE_BLOCK,
                 ModBlocks.COMPUTER_KEYBOARD,
-                ModBlocks.GUMMITE_ORE
+                ModBlocks.GUMMITE_ORE,
+                ModBlocks.AUTUNITE_ORE,
+                ModBlocks.BORNITE_ORE,
+                ModBlocks.CARNOTITE_ORE,
+                ModBlocks.CHALCOCITE_ORE,
+                ModBlocks.CHALCOPYRITE_ORE,
+                ModBlocks.COFFINITE_ORE,
+                ModBlocks.COVELLITE_ORE,
+                ModBlocks.SALEEITE_ORE,
+                ModBlocks.COMPUTER_CORE
         };
         for (final Block block : commonBlocksPICKIRON) {
             getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL).add(block);
@@ -44,18 +56,50 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
         //for diamond
         final Block[] commonBlocksPICKDIAMOND =
                 {
-                        ModBlocks.CHIPLET_FRANZ_BLOCK
+                        ModBlocks.CHIPLET_FRANZ_BLOCK,
+                        ModBlocks.QUANTUM_CORE,
                 };
         for (final Block block : commonBlocksPICKDIAMOND) {
             getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL).add(block);
             getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(block);
         }
-        getOrCreateTagBuilder(BlockTags.SAND).add(
+        //for sand based blocks
+        final Block[] commonBlocksSAND ={
                 ModBlocks.SILICA_SAND
-        );
-        getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(
-                ModBlocks.SILICA_SAND
-        );
+        };
+        for(final Block block : commonBlocksSAND)
+        {
+            getOrCreateTagBuilder(BlockTags.SAND).add(block);
+            getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(block);
+        }
+        //for all lyoko blocks
+        final Block[] commonBlocksLYOKO ={
+                ModBlocks.SECTOR5_STEEL,
+                ModBlocks.DIGITAL_DARKNESS,
+                ModBlocks.DIGITAL_DIRT,
+                ModBlocks.DIGITAL_ICE,
+                ModBlocks.DIGITAL_LAVA_BLOCK,
+                ModBlocks.DIGITAL_LEAF_MOUNTAIN,
+                ModBlocks.DIGITAL_OCEAN_BLOCK,
+                ModBlocks.DIGITAL_ROCK,
+                ModBlocks.DIGITAL_SAND,
+                ModBlocks.DIGITAL_SEA_PYLON,
+                ModBlocks.DIGITAL_WOOD_FOREST,
+                ModBlocks.DIGITAL_WOOD_MOUNTAIN,
+                ModBlocks.TOWER_WALL,
+                ModBlocks.TOWER_WALL_CORNER,
+                ModBlocks.TOWER_WHITE,
+                ModBlocks.TOWER_TOP,
+                ModBlocks.TOWER_INTERFACE,
+                ModBlocks.TOWER_ENTER,
+                ModBlocks.TOWER_BOTTOM,
+                ModBlocks.TOWER_BASE,
+                ModBlocks.TOWER_BASE_CORNER,
+        };
+        for(final Block block: commonBlocksLYOKO)
+        {
+            getOrCreateTagBuilder(ModTags.Blocks.LYOKO_BLOCKS).add(block);
+        }
         getOrCreateTagBuilder(BlockTags.ICE).add(
                 ModBlocks.DIGITAL_ICE
         );
@@ -63,6 +107,33 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
           ModBlocks.TOWER_INTERFACE
         );
 
+        //for uranium related blocks
+        final Block[] commonUraniumOres = {
+                ModBlocks.AUTUNITE_ORE,
+                ModBlocks.BORNITE_ORE,
+                ModBlocks.CARNOTITE_ORE,
+                ModBlocks.CHALCOCITE_ORE,
+                ModBlocks.CHALCOPYRITE_ORE,
+                ModBlocks.COFFINITE_ORE,
+                ModBlocks.COVELLITE_ORE,
+                ModBlocks.GUMMITE_ORE,
+                ModBlocks.METAAUTUNITE_ORE,
+                ModBlocks.METATORBERNITE_ORE,
+                ModBlocks.METATYUYAMUNITE_ORE,
+                ModBlocks.SALEEITE_ORE,
+                ModBlocks.SKLODOWSKITE_ORE,
+                ModBlocks.TORBERNITE_ORE,
+                ModBlocks.TYUYAMUNITE_ORE,
+                ModBlocks.URANINITE_ORE,
+                ModBlocks.URANOPHANE_ORE,
+        };
+        for (final Block block: commonUraniumOres)
+        {
+            getOrCreateTagBuilder(ModTags.Blocks.URANIUM_ORE_TAG).add(block);
+            getOrCreateTagBuilder(ModTags.Blocks.URANIUM_ORES_TAG).add(block);
+        }
+        getOrCreateTagBuilder(ModTags.Blocks.URANIUM_235_BLOCKS).add(ModBlocks.URANIUM_BLOCK_235);
+        getOrCreateTagBuilder(ModTags.Blocks.URANIUM_238_BLOCKS).add(ModBlocks.URANIUM_BLOCK_238);
     }
 
 

@@ -1,16 +1,20 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
+package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerCirculatorScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.ComputerFluidPipe;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.TickingBlockEntity;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.minecraft.block.Block;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.FilteringStorage;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.listener.ClientPlayPacketListener;
@@ -24,17 +28,29 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 
+import static com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil.FluidStorageCreation.createFluidStorage;
+
 public final class ComputerCirculatorBlockEntity extends BlockEntity implements NamedScreenHandlerFactory,
-        ExtendedScreenHandlerFactory {
+        ExtendedScreenHandlerFactory,TickingBlockEntity {
 
 
-    private float fluidHeld;
-    private final float[] cardinalFlowSpeeds = new float[]{0.1f,0.1f,0.1f,0.1f,0.1f,0.1f};
+
+    private final long[] cardinalFlowSpeeds = new long[]{1,1,1,1,1,1};
     private final boolean[] flowDirections = new boolean[]{false,false,true,false,false,true};
+    public final SingleVariantStorage<FluidVariant> fluidStorage = createFluidStorage(this,Fluids.WATER);
+    public final Storage<FluidVariant> waterIntake = FilteringStorage.insertOnlyOf(fluidStorage);
 
     public ComputerCirculatorBlockEntity(final BlockPos pos, final BlockState state) {
         super(ModBlockEntities.COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE, pos, state);
     }
+
+    public static final NbtCompound chilled = new NbtCompound();
+    static {
+        chilled.putBoolean("chilled",true);
+    }
+
+
+
 
     @Override
     public @NotNull Packet<ClientPlayPacketListener> toUpdatePacket() {
@@ -51,35 +67,33 @@ public final class ComputerCirculatorBlockEntity extends BlockEntity implements 
         for(final Direction dir : Direction.values())
         {
             assert world != null;
-            final Block checkedBlock = world.getBlockState(pos.offset(dir)).getBlock();
-            if(checkedBlock == ModBlocks.COMPUTER_LIQUID_PIPE)
-            {
-                if(flowDirections[index]) {
-                    world.setBlockState(pos.offset(dir),
-                            checkedBlock.getDefaultState().with(ComputerFluidPipe.STORED_FLUID,
-                                    checkedBlock.getDefaultState().get(ComputerFluidPipe.STORED_FLUID)+ cardinalFlowSpeeds[index]));
-                }  else {
-                world.setBlockState(pos.offset(dir),
-                        checkedBlock.getDefaultState().with(ComputerFluidPipe.STORED_FLUID,
-                                checkedBlock.getDefaultState().get(ComputerFluidPipe.STORED_FLUID) - cardinalFlowSpeeds[index]));
-                fluidHeld += cardinalFlowSpeeds[index];
+            if(world.getBlockEntity(pos.offset(dir)) instanceof final CirculatorPipeBlockEntity circulatorPipeBlock) {
+                if (flowDirections[index]) {
+                            try(final Transaction transaction = Transaction.openOuter())
+                            {
+                                if(fluidStorage.extract(FluidVariant.of(Fluids.WATER), cardinalFlowSpeeds[index],
+                                        transaction) == cardinalFlowSpeeds[index] && circulatorPipeBlock.fluidStorage.insert(FluidVariant.of(Fluids.WATER,chilled),
+                                        cardinalFlowSpeeds[index],transaction) == cardinalFlowSpeeds[index])
+                                {
+                                    transaction.commit();
+                                }
+                            }
                 }
             }
+
             index++;
         }
     }
 
-    public float getFluidHeld()
-    {
-        return fluidHeld;
-    }
+
     @Override
     protected void writeNbt(final NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putFloat("held_fluid",fluidHeld);
+        nbt.put("fluid_type",fluidStorage.variant.toNbt());
+        nbt.putLong("amount",fluidStorage.amount);
         for (int i = 0; i < 6;i++)
         {
-            nbt.putFloat("flow_speed"+i,cardinalFlowSpeeds[i]);
+            nbt.putLong("flow_speed"+i,cardinalFlowSpeeds[i]);
             nbt.putBoolean("flow_allowance"+i,flowDirections[i]);
         }
 
@@ -88,10 +102,11 @@ public final class ComputerCirculatorBlockEntity extends BlockEntity implements 
     @Override
     public void readNbt(final NbtCompound nbt) {
         super.readNbt(nbt);
-        fluidHeld = nbt.getFloat("held_fluid");
+        fluidStorage.variant = FluidVariant.fromNbt(nbt.getCompound("fluid_type"));
+        fluidStorage.amount = nbt.getLong("amount");
         for(int i = 0; i < 6; i++)
         {
-            cardinalFlowSpeeds[i] = nbt.getFloat("flow_speed"+i);
+            cardinalFlowSpeeds[i] = nbt.getLong("flow_speed"+i);
             flowDirections[i] = nbt.getBoolean("flow_allowance"+i);
         }
     }
@@ -109,5 +124,10 @@ public final class ComputerCirculatorBlockEntity extends BlockEntity implements 
     @Override
     public @NotNull ScreenHandler createMenu(final int syncId, final PlayerInventory playerInventory, final PlayerEntity player) {
         return new ComputerCirculatorScreenHandler(syncId,player);
+    }
+
+    @Override
+    public void tick() {
+
     }
 }

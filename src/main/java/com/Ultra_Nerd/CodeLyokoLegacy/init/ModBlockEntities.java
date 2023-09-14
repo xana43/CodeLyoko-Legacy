@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.ComputerInterfaceTestTE;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.PlayerDataStorage;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.VehicleBE;
@@ -57,6 +58,12 @@ public record ModBlockEntities() {
     public static final BlockEntityType<ComputerCirculatorBlockEntity> COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(ComputerCirculatorBlockEntity::new,
                     ModBlocks.COMPUTER_LIQUID_CIRCULATOR).build();
+    public static final BlockEntityType<CirculatorPipeBlockEntity> CIRCULATOR_PIPE_BLOCK_ENTITY_TYPE =
+            FabricBlockEntityTypeBuilder.create(CirculatorPipeBlockEntity::new,ModBlocks.COMPUTER_LIQUID_PIPE).build();
+
+    public static final BlockEntityType<ComputerFluidIntakeBlockEntity> COMPUTER_FLUID_INTAKE_BLOCK_ENTITY =
+            FabricBlockEntityTypeBuilder.create(ComputerFluidIntakeBlockEntity::new,
+                    ModBlocks.COMPUTER_LIQUID_INTAKE_PUMP).build();
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String, BlockEntityType<?>>builder()
 
             .put("lyoko_core", LYOKO_CORE).put("tower_interface_tile_entity", TOWER_INTERFACE_TILE_ENTITY)
@@ -74,6 +81,8 @@ public record ModBlockEntities() {
             .put("player_data_test",PLAYER_DATA_STORAGE_BLOCK_ENTITY_TYPE)
             .put("vehicle_matter_test",VEHICLE_BE_BLOCK_ENTITY_TYPE)
             .put("computer_circulator_block_entity",COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE)
+            .put("computer_circulator_pipe",CIRCULATOR_PIPE_BLOCK_ENTITY_TYPE)
+            .put("computer_fluid_intake",COMPUTER_FLUID_INTAKE_BLOCK_ENTITY)
             .build();
 
 

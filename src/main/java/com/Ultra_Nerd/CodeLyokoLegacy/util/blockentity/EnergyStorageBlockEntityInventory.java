@@ -23,7 +23,7 @@ public abstract class EnergyStorageBlockEntityInventory extends SidedInventoryTi
         energyStorage = new SimpleEnergyStorage(capacity, maxInsert, maxExtract);
     }
 
-    public EnergyStorage getEnergyStorage() {
+    public final EnergyStorage getEnergyStorage() {
         return energyStorage;
     }
 

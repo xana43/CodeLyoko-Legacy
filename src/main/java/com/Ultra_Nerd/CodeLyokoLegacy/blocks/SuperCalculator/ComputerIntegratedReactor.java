@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerReactorTileEntityInventory;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.ComputerReactorTileEntityInventory;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -54,8 +54,8 @@ public final class ComputerIntegratedReactor extends Block implements BlockEntit
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
         return (world1, pos, state1, blockEntity) -> {
-            if (blockEntity instanceof ComputerReactorTileEntityInventory) {
-                ((ComputerReactorTileEntityInventory) blockEntity).tick();
+            if (blockEntity instanceof final ComputerReactorTileEntityInventory computerReactorTileEntityInventory) {
+                computerReactorTileEntityInventory.tick();
             }
         };
     }

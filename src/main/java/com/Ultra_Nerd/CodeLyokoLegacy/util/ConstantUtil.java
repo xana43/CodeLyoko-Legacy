@@ -66,7 +66,7 @@ public record ConstantUtil() {
                 this.thisEntry = thisEntry;
             }
 
-            public String getThisEntry() {
+            public final String getThisEntry() {
                 return thisEntry;
             }
         }

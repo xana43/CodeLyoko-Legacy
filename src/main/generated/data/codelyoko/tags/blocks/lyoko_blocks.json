@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    "codelyoko:sector5_steel",
+    "codelyoko:digital_darkness",
+    "codelyoko:digital_dirt",
+    "codelyoko:digital_ice",
+    "codelyoko:digital_lava",
+    "codelyoko:digital_leaf_mountain",
+    "codelyoko:digital_ocean",
+    "codelyoko:digital_rock",
+    "codelyoko:digital_sand",
+    "codelyoko:digital_sea_pylon",
+    "codelyoko:digital_wood_forest",
+    "codelyoko:digital_wood_mountain",
+    "codelyoko:tower_wall",
+    "codelyoko:tower_wall_corner",
+    "codelyoko:tower_white",
+    "codelyoko:tower_top",
+    "codelyoko:tower_interface",
+    "codelyoko:tower_enter",
+    "codelyoko:tower_bottom",
+    "codelyoko:tower_base",
+    "codelyoko:tower_base_corner"
+  ]
+}

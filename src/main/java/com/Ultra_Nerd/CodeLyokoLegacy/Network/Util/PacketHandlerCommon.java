@@ -26,8 +26,16 @@ public record PacketHandlerCommon() {
     public static final Identifier REFRESH = CodeLyokoMain.codeLyokoPrefix("refresh_data");
     public static final Identifier PLAYER_QUERY = CodeLyokoMain.codeLyokoPrefix("query_players");
     public static final Identifier PLAYER_QUERY_SERVER = CodeLyokoMain.codeLyokoPrefix("send_query_to_server");
-
+    public static final Identifier FLUID_UPDATE = CodeLyokoMain.codeLyokoPrefix("fluid_update");
     public static void commonChannelRegistry() {
+
+        ServerPlayNetworking.registerGlobalReceiver(FLUID_UPDATE,(server, player, handler, buf, responseSender) -> {
+            final  BlockPos pos = buf.readBlockPos();
+            server.execute(() -> {
+
+            });
+        });
+
         ServerPlayNetworking.registerGlobalReceiver(ChannelID, (server, player, handler, buf, responseSender) -> {
             final BlockPos pos = buf.readBlockPos();
             final boolean active = buf.readBoolean();
@@ -98,9 +106,8 @@ public record PacketHandlerCommon() {
                     CodeLyokoMain.LOG.info("secondary used");
                 });
         ServerPlayNetworking.registerGlobalReceiver(PLAYER_QUERY_SERVER,(server, player, handler, buf,
-                responseSender) -> {
-            server.execute(() -> ServerPlayNetworking.send(player,PLAYER_QUERY,
-                PacketByteBufs.empty()));});
+                responseSender) -> server.execute(() -> ServerPlayNetworking.send(player,PLAYER_QUERY,
+                    PacketByteBufs.empty())));
 
     }
 }

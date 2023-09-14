@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerCirculatorBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.ComputerCirculatorBlockEntity;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -19,16 +19,16 @@ public record ComputerCirculatorRenderer(BlockEntityRendererFactory.Context cont
         matrices.push();
             bufferbuilder.begin(VertexFormat.DrawMode.QUADS,VertexFormats.POSITION_COLOR_LIGHT);
             bufferbuilder.vertex(matrices.peek().getPositionMatrix(),entity.getPos().getX() - 0.5f,
-                    entity.getPos().getY() - 0.5f + entity.getFluidHeld(),entity.getPos().getZ() - 0.5f).color(0,0,
+                    entity.getPos().getY() - 0.5f + entity.fluidStorage.amount,entity.getPos().getZ() - 0.5f).color(0,0,
                     128,32).light(light);
             bufferbuilder.vertex(matrices.peek().getPositionMatrix(),entity.getPos().getX() + 0.5f,
-                    entity.getPos().getY() - 0.5f + entity.getFluidHeld(),entity.getPos().getZ() - 0.5f).color(0,0,
+                    entity.getPos().getY() - 0.5f + entity.fluidStorage.amount,entity.getPos().getZ() - 0.5f).color(0,0,
                     128,32).light(light);
             bufferbuilder.vertex(matrices.peek().getPositionMatrix(),entity.getPos().getX() - 0.5f,
-                    entity.getPos().getY() - 0.5f + entity.getFluidHeld(),entity.getPos().getZ() + 0.5f).color(0,0,
+                    entity.getPos().getY() - 0.5f + entity.fluidStorage.amount,entity.getPos().getZ() + 0.5f).color(0,0,
                     128,32).light(light);
             bufferbuilder.vertex(matrices.peek().getPositionMatrix(),entity.getPos().getX() + 0.5f,
-                    entity.getPos().getY() - 0.5f + entity.getFluidHeld(),entity.getPos().getZ() + 0.5f).color(0,0,
+                    entity.getPos().getY() - 0.5f + entity.fluidStorage.amount,entity.getPos().getZ() + 0.5f).color(0,0,
                     128,32).light(light);
             tessellator.draw();
             matrices.pop();

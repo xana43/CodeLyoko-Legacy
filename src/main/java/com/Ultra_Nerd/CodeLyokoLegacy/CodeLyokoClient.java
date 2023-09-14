@@ -6,6 +6,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelOverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerClient;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ComputerIntakePump;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.linker;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
@@ -16,10 +17,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.screens.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.StoryBookGUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.PlayerProfileDebug;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.VehicleMaterializationTest;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.ComputerCirculatorRenderer;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.HologramRenderer;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.LaptopChargerRenderer;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.client.itemRenderers.ForceFieldEmitterRenderer;
@@ -49,6 +47,7 @@ import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -215,13 +214,16 @@ public record CodeLyokoClient() implements ClientModInitializer {
     }
     private static void registerBlockEntityRenderers()
     {
-        BlockEntityRendererRegistry.register(ModBlockEntities.LYOKO_CORE, CoreOfLyoko::new);
-        BlockEntityRendererRegistry.register(ModBlockEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY,
+        BlockEntityRendererFactories.register(ModBlockEntities.COMPUTER_FLUID_INTAKE_BLOCK_ENTITY,
+                ComputerIntakePumpRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.LYOKO_CORE, CoreOfLyoko::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY,
                 LaptopChargerRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntities.HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE,
+        BlockEntityRendererFactories.register(ModBlockEntities.HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE,
                 HologramRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntities.COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE,
+        BlockEntityRendererFactories.register(ModBlockEntities.COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE,
                 ComputerCirculatorRenderer::new);
+
     }
     @Override
     public void onInitializeClient() {

@@ -27,6 +27,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.entity.DamageUtil;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
@@ -211,7 +212,23 @@ public record CodeLyokoMain() implements ModInitializer {
                 ModBlockEntities.COMPUTER_REACTOR_TILE_ENTITY);
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyStorage(),
                 ModBlockEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE);
+        FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) ->switch (direction){
+                    case NORTH -> blockEntity.waterIntake;
+                    default -> blockEntity.fluidStorage;
+                },
+                ModBlockEntities.COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE);
+        FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.fluidStorage,
+                ModBlockEntities.CIRCULATOR_PIPE_BLOCK_ENTITY_TYPE);
+        FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> switch (direction){
+            case DOWN -> blockEntity.input;
+            default -> blockEntity.output;
 
+        },ModBlockEntities.COMPUTER_FLUID_INTAKE_BLOCK_ENTITY);
+
+        FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> switch (direction){
+            case UP, EAST, SOUTH -> blockEntity.chilled_intake;
+            case DOWN, WEST, NORTH -> blockEntity.hot_outlet;
+        },ModBlockEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE);
 
     }
 

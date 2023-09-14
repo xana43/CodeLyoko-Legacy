@@ -9,7 +9,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
-public abstract class InventoryTickingBlockEntity extends BlockEntity implements LyokoInventoryBlock {
+public abstract class InventoryTickingBlockEntity extends BlockEntity implements LyokoInventoryBlock,TickingBlockEntity {
 
     protected DefaultedList<ItemStack> itemStacks;
 
@@ -23,8 +23,7 @@ public abstract class InventoryTickingBlockEntity extends BlockEntity implements
         itemStacks.set(Index, newStack);
     }
 
-    public void tick() {
-    }
+
 
     public void update() {
         this.markDirty();

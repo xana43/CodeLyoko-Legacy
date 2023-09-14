@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import net.minecraft.data.client.BlockStateVariantMap;
 import net.minecraft.state.property.Property;
 
 import java.util.Collection;
@@ -113,8 +114,8 @@ public record AdditionalStateProperties() {
             if(this == o)
             {
                 return true;
-            } else if (o instanceof final FloatProperty floatProperty && super.equals(o)) {
-                return this.values.equals(floatProperty.values);
+            } else if (o instanceof final DoubleProperty doubleProperty && super.equals(o)) {
+                return this.values.equals(doubleProperty.values);
             }
             return false;
         }
@@ -123,9 +124,9 @@ public record AdditionalStateProperties() {
         public int computeHashCode() {
             return 31*super.computeHashCode()+this.values.hashCode();
         }
-        public static FloatProperty of(final String name,final int min, final int max)
+        public static DoubleProperty of(final String name,final int min, final int max)
         {
-            return new FloatProperty(name, min, max);
+            return new DoubleProperty(name, min, max);
         }
 
         @Override
@@ -133,8 +134,8 @@ public record AdditionalStateProperties() {
         {
             try {
 
-                final double floatVar = Float.parseFloat(name);
-                return floatVar >= this.min && floatVar <= this.max ? Optional.of(floatVar) : Optional.empty();
+                final double doubleVar = Double.parseDouble(name);
+                return doubleVar >= this.min && doubleVar <= this.max ? Optional.of(doubleVar) : Optional.empty();
             } catch (final NumberFormatException err)
             {
                 return Optional.empty();

@@ -31,7 +31,6 @@ public record ModBiome() {
             final RegistryKey<Biome> biomeRegistryKey = RegistryKey.of(RegistryKeys.BIOME,
                     CodeLyokoMain.codeLyokoPrefix(s));
             biomeRegisterable.register(biomeRegistryKey,biome);
-            CodeLyokoMain.LOG.info("Registering " + s);
         });
     }
     /*Forest Sector*/

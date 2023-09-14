@@ -6,13 +6,28 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
+
+import javax.swing.text.html.HTML;
 
 public record ModTags() {
     public record Blocks() {
         public static final TagKey<Block> LYOKO_BLOCKS = TagKey.of(Registries.BLOCK.getKey(),
                 CodeLyokoMain.codeLyokoPrefix("lyoko_blocks"));
 
+        public static final TagKey<Block> COMPUTER_CIRCULATOR = TagKey.of(Registries.BLOCK.getKey(),
+                CodeLyokoMain.codeLyokoPrefix("circulation_blocks"));
+
+
+        private static TagKey<Block> createCommonTag(final String name)
+        {
+            return TagKey.of(Registries.BLOCK.getKey(), new Identifier("c",name));
+        }
+        public static final TagKey<Block> URANIUM_ORE_TAG = createCommonTag("raw_uranium_ores");
+        public static final TagKey<Block> URANIUM_ORES_TAG = createCommonTag("uranium_ores");
+        public static final TagKey<Block> URANIUM_235_BLOCKS = createCommonTag("uranium_235_blocks");
+        public static final TagKey<Block> URANIUM_238_BLOCKS = createCommonTag("uranium_238_blocks");
     }
 
     public record Biomes() {

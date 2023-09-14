@@ -16,6 +16,15 @@
     "codelyoko:fluoride_infuser",
     "codelyoko:cable_block",
     "codelyoko:computer_keyboard",
-    "codelyoko:gummite_ore"
+    "codelyoko:gummite_ore",
+    "codelyoko:autunite_ore",
+    "codelyoko:bornite_ore",
+    "codelyoko:carnotite_ore",
+    "codelyoko:chalcocite_ore",
+    "codelyoko:chalcopyrite_ore",
+    "codelyoko:coffinite_ore",
+    "codelyoko:covellite_ore",
+    "codelyoko:saleeite_ore",
+    "codelyoko:computer_core"
   ]
 }
