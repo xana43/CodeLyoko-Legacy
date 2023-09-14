@@ -20,7 +20,8 @@ public record LanguageGenerators() {
             translationBuilder.add(ModBlocks.COMPUTER_LIQUID_INTAKE_PUMP,"Fluid Intake Pump");
             translationBuilder.add(ModBlocks.COMPUTER_LIQUID_PIPE,"Basic Fluid Pipe");
             try{
-                final Path  existing = dataOutput.getModContainer().findPath("assets/codelyoko/lang/en_us.json").get();
+                final Path  existing = dataOutput.getModContainer().findPath(
+                        "assets/codelyoko/lang/en_us.existing.json").get();
                 translationBuilder.add(existing);
             } catch (final Exception e)
             {
@@ -38,7 +39,8 @@ public record LanguageGenerators() {
         @Override
         public void generateTranslations(final TranslationBuilder translationBuilder) {
             try{
-                final Path  existing = dataOutput.getModContainer().findPath("assets/codelyoko/lang/fr_fr.json").get();
+                final Path  existing = dataOutput.getModContainer().findPath(
+                        "assets/codelyoko/lang/fr_fr.existing.json").get();
                 translationBuilder.add(existing);
             } catch (final Exception e)
             {
