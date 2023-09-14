@@ -12,14 +12,20 @@ public record LanguageGenerators() {
     {
 
         public EnglishProvider(final FabricDataOutput dataOutput) {
-            super(dataOutput, "en_us");
+            super(dataOutput);
         }
 
         @Override
         public void generateTranslations(final TranslationBuilder translationBuilder) {
             translationBuilder.add(ModBlocks.COMPUTER_LIQUID_INTAKE_PUMP,"Fluid Intake Pump");
             translationBuilder.add(ModBlocks.COMPUTER_LIQUID_PIPE,"Basic Fluid Pipe");
-
+            try{
+                final Path  existing = dataOutput.getModContainer().findPath("assets/codelyoko/lang/en_us.json").get();
+                translationBuilder.add(existing);
+            } catch (final Exception e)
+            {
+                throw new RuntimeException("failed to add existing language file", e);
+            }
         }
     }
     public static class FrenchProvider extends FabricLanguageProvider
