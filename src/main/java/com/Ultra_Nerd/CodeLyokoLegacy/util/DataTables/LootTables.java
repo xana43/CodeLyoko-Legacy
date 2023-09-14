@@ -4,7 +4,9 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.loot.FabricBlockLootTableGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.fabricmc.fabric.impl.datagen.FabricDataGenHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
@@ -20,10 +22,10 @@ public final class LootTables extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
+
         ModBlocks.BLOCK_MAP.values().forEach(block -> {
             if (block != ModBlocks.SILICA_SAND) {
                 addDrop(block);
-                //addDropWithSilkTouch(block);
 
             } else {
                 addDrop(block, dropsWithSilkTouch(block, applyExplosionDecay(block,
@@ -34,21 +36,4 @@ public final class LootTables extends FabricBlockLootTableProvider {
         });
     }
 
-
-
-
-
-
-
-
-
-
-/*
-    @Override
-    protected void addTables() {
-        dataMap.put(ModBlocks.BORNITE_ORE.get(), createBlockTabe("bornite_ore",ModBlocks.BORNITE_ORE.get()));
-
-    }
-
- */
 }

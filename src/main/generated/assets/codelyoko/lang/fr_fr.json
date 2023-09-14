@@ -1,5 +1,4 @@
 {
-  "_comment": "blocks",
   "block.codelyoko.anodepart": "Partie d'Anode",
   "block.codelyoko.anti_marabunta": "Anti Marabounta",
   "block.codelyoko.architecture_work_station": "Poste de Travail Hautes Performances",
@@ -90,8 +89,20 @@
   "block.codelyoko.uv_focus": "Lentille de focus pour machine UV",
   "block.codelyoko.uv_light": "Lampe UV",
   "block.codelyoko.uv_machine": "Machine UV",
-
-  "_comment_2": "items",
+  "container.Reactor": "Réacteur intégré",
+  "container.electric_fluoride_infuser": "Infuseur de fluorure électrique",
+  "container.fluoride_infuser": "Infuseur de fluorure",
+  "death.attack.block.codelyoko.digital_ocean": "%s a été balayée par le courant numérique",
+  "death.attack.block.codelyoko.marabunta": "%s a été rongé par la Marabounta",
+  "entity.codelyoko.blok": "Blok",
+  "entity.codelyoko.fan": "Thrown Fan",
+  "entity.codelyoko.hornet": "Hornet",
+  "entity.codelyoko.laser": "Flèche laser",
+  "entity.codelyoko.manta": "Manta",
+  "entity.codelyoko.megatank": "Mega Tank",
+  "gui.codelyoko.indicator": "",
+  "gui.codelyoko.interface_input": "Entrer Code",
+  "gui.codelyoko.story_screen": "Ecran d'histoire",
   "item.codelyoko.aelita_boots": "Bottes d'Aelita",
   "item.codelyoko.aelita_chestplate": "Plastron d'Aelita",
   "item.codelyoko.aelita_leggings": "Jambières d'Aelita",
@@ -238,33 +249,8 @@
   "item.codelyoko.yumi_leggings": "Les jambières de Yumi",
   "item.codelyoko.yumi_traditional_fans": "Les éventails traditionnels de Yumi",
   "item.codelyoko.zweihander": "Le sabre du guerrier du passé",
-
-  "_comment_3": "itemgroups",
   "itemGroup.lyoko_armor": "Code Lyoko: Legacy - Armures",
   "itemGroup.lyoko_blocks": "Code Lyoko: Legacy - Blocs",
   "itemGroup.lyoko_items": "Code Lyoko: Legacy - Items",
-  "itemGroup.lyoko_weapons": "Code Lyoko: Legacy - Armes",
-
-  "_comment_4": "special blocks",
-  "death.attack.block.codelyoko.digital_ocean": "%s a été balayée par le courant numérique",
-  "death.attack.block.codelyoko.marabunta": "%s a été rongé par la Marabounta",
-
-  "_comment_5": "Containers",
-  "container.Reactor": "Réacteur intégré",
-  "container.electric_fluoride_infuser": "Infuseur de fluorure électrique",
-  "container.fluoride_infuser": "Infuseur de fluorure",
-
-  "_comment_6": "GUIs",
-  "gui.codelyoko.indicator": "",
-  "gui.codelyoko.interface_input": "Entrer Code",
-  "gui.codelyoko.story_screen": "Ecran d'histoire",
-
-  "_comment_7": "Entities",
-  "entity.codelyoko.blok": "Blok",
-  "entity.codelyoko.fan": "Thrown Fan",
-  "entity.codelyoko.hornet": "Hornet",
-  "entity.codelyoko.laser": "Flèche laser",
-  "entity.codelyoko.manta": "Manta",
-  "entity.codelyoko.megatank": "Mega Tank"
-
-  }
+  "itemGroup.lyoko_weapons": "Code Lyoko: Legacy - Armes"
+}

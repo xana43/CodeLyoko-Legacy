@@ -1,7 +1,7 @@
-// 1.20.1	2023-09-14T12:43:05.5875541	CodeLyokoLegacy/null
+// 1.20.1	2023-09-14T15:27:09.1361479	CodeLyokoLegacy/null
 c98122cfb6c9d48f4178e2fc8c733fc66fc914ad data\codelyoko\worldgen\configured_feature\lyoko_lava_lake.json
-0868a44e484a5c9e73dacbfbb2e2bfba0aac423c data\codelyoko\worldgen\biome\volcano_replika.json
 f24fa1f962950665e3688bc19a4c3eb06e4d289b data\codelyoko\worldgen\biome\digital_ocean.json
+0868a44e484a5c9e73dacbfbb2e2bfba0aac423c data\codelyoko\worldgen\biome\volcano_replika.json
 db39c71ce9c0e833a92a0ab783c05652417ad076 data\codelyoko\worldgen\placed_feature\lyoko_lava_lake.json
 110d26a26e2fdfa908e87b07c553cb6a15b0d3fc data\codelyoko\worldgen\placed_feature\coffinite_ore_overworld.json
 03d5a237e8ce44307cc5ce133b3333294c2dcc97 data\codelyoko\worldgen\biome\void_frontier.json

@@ -183,6 +183,8 @@ public record ModItems() {
             new Item.Settings().maxCount(1));
     public static final WrittenBookItem STORY_BOOK2 = new EntryPool.Entry2(
             new Item.Settings().maxCount(1));
+    public static final MusicDiscItem LYOKO_THEME = new LyokoDisc((int) 3.2e23f, ModSounds.LYOKO_THEME,
+            new FabricItemSettings().maxCount(1), 204);
     public static final ImmutableMap<String, Item> ITEM_MAP = ImmutableMap.<String, Item>builder()
 //testing Items
             .put("test_multiplayer_phone", TEST_MULTIPLAYER_PHONE)
@@ -299,10 +301,10 @@ public record ModItems() {
             .put("jeremys_laptop", JEREMY_LAPTOP)
 
 
-            .put("lyokodisc", new LyokoDisc((int) 3.2e23f, ModSounds.LYOKO_THEME,
-                    new FabricItemSettings().maxCount(1), 204))
+            .put("lyokodisc", LYOKO_THEME)
             .put("liquid_helium_bucket", LIQUID_HELIUM_BUCKET)
             .build();
+
     //for weapons
     private static final FabricItemSettings WEAPONS = new FabricItemSettings();
     public static final SwordItem DIGITAL_SABER = new SaberKatana(LyokoTiers.LyokoSamurai, 25, -0.9f, WEAPONS);

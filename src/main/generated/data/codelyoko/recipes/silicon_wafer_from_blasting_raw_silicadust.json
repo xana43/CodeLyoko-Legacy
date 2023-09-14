@@ -3,7 +3,7 @@
   "category": "misc",
   "cookingtime": 50,
   "experience": 38.0,
-  "group": "codelyokorefinement",
+  "group": "codelyoko:refinement",
   "ingredient": {
     "item": "codelyoko:raw_silicadust"
   },

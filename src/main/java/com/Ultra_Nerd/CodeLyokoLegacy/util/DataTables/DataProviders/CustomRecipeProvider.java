@@ -26,7 +26,7 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void generate(final Consumer<RecipeJsonProvider> exporter) {
-        final ConditionJsonProvider NEVER_LOADED = DefaultResourceConditions.allModsLoaded("codelyoko");
+        final ConditionJsonProvider NEVER_LOADED = DefaultResourceConditions.allModsLoaded(CodeLyokoMain.MOD_ID);
         final ConditionJsonProvider ALWAYS_LOADED = DefaultResourceConditions.not(NEVER_LOADED);
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS,ModItems.TRUSTTY_SCREWDRIVER).input('i', Items.IRON_INGOT)
                 .input('h', Items.COBWEB)
@@ -67,9 +67,9 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
                 .input(Items.HONEY_BLOCK).criterion("knows_polycarbonate", conditionsFromItem(ModItems.SILICON_WAFER))
                 .offerTo(exporter, CodeLyokoMain.codeLyokoPrefix("polycarbonate"));
         offerBlasting(exporter, List.of(ModItems.RAW_SILICADUST),RecipeCategory.MISC, ModItems.SILICON_WAFER, 38, 50,
-                CodeLyokoMain.MOD_ID + "refinement");
+                CodeLyokoMain.codeLyokoPrefix("refinement").toString());
         offerBlasting(exporter, List.of(ModItems.RAW_POLYCARBONATE),RecipeCategory.MISC, ModItems.MOLTEN_POLYCARBONATE_CONCENTRATE, 78, 88,
-                CodeLyokoMain.MOD_ID + "refinement");
+                CodeLyokoMain.codeLyokoPrefix("refinement").toString());
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC,ModItems.KEY_SPRING).input('i', Items.IRON_INGOT)
                 .criterion("knows_key_spring", conditionsFromItem(ModItems.KEY_SPRING))
                 .pattern("iii")

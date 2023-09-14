@@ -5,8 +5,13 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.block.Block;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -20,25 +25,47 @@ public final class CustomItemTags extends FabricTagProvider.ItemTagProvider {
 
     @Override
     protected void configure(final RegistryWrapper.WrapperLookup arg) {
-        getOrCreateTagBuilder(ItemTags.IRON_ORES).add(ModBlocks.BORNITE_ORE.asItem());
-        getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.ITEM_MAP.get("lyokodisc"));
+
+        final Block[] commonUraniumOres = {
+                ModBlocks.AUTUNITE_ORE,
+                ModBlocks.BORNITE_ORE,
+                ModBlocks.CARNOTITE_ORE,
+                ModBlocks.CHALCOCITE_ORE,
+                ModBlocks.CHALCOPYRITE_ORE,
+                ModBlocks.COFFINITE_ORE,
+                ModBlocks.COVELLITE_ORE,
+                ModBlocks.GUMMITE_ORE,
+                ModBlocks.METAAUTUNITE_ORE,
+                ModBlocks.METATORBERNITE_ORE,
+                ModBlocks.METATYUYAMUNITE_ORE,
+                ModBlocks.SALEEITE_ORE,
+                ModBlocks.SKLODOWSKITE_ORE,
+                ModBlocks.TORBERNITE_ORE,
+                ModBlocks.TYUYAMUNITE_ORE,
+                ModBlocks.URANINITE_ORE,
+                ModBlocks.URANOPHANE_ORE,
+        };
+        for (final Block block: commonUraniumOres)
+        {
+            getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_ORE_TAG).add(block.asItem());
+            getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_ORES_TAG).add(block.asItem());
+            getOrCreateTagBuilder(TagKey.of(Registries.ITEM.getKey(), new Identifier("c","ores"))).add(block.asItem());
+        }
+
+        final Block[] commonLeaves = {
+                ModBlocks.DIGITAL_LEAF_MOUNTAIN
+        };
+        for (final Block block : commonLeaves)
+        {
+            getOrCreateTagBuilder(ItemTags.LEAVES).add(block.asItem());
+            getOrCreateTagBuilder(TagKey.of(Registries.ITEM.getKey(), new Identifier("c","leaves"))).add(block.asItem());
+        }
+        getOrCreateTagBuilder(ItemTags.CHERRY_LOGS).add(ModBlocks.DIGITAL_WOOD_MOUNTAIN.asItem());
+        getOrCreateTagBuilder(ItemTags.JUNGLE_LOGS).add(ModBlocks.DIGITAL_WOOD_FOREST.asItem());
+        getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.LYOKO_THEME);
         getOrCreateTagBuilder(ItemTags.SAND).add(ModBlocks.SILICA_SAND.asItem());
         getOrCreateTagBuilder(ModTags.ItemTags.LYOKO_ITEM).add(ModItems.HOVERBOARD_SPAWN_ITEM,ModItems.OVERBOARD_SPAWN_ITEM);
 
     }
-/*
-    public CustomItemTags(DataGenerator p_126530_, BlockTagsProvider p_126531_ , @Nullable ExistingFileHelper existingFileHelper) {
-        super(p_126530_, p_126531_, CodeLyokoMain.MOD_ID, existingFileHelper);
-    }
 
-    @Override
-    protected void addTags() {
-        //super.addTags();
-        tag(Tags.Items.ORES)
-                .add(ModBlocks.BORNITE_ORE.get().asItem());
-        tag(CustomTags.CODELYOKO_URANIUM_ORE_ITEM)
-                .add(ModBlocks.BORNITE_ORE.get().asItem());
-    }
-
- */
 }

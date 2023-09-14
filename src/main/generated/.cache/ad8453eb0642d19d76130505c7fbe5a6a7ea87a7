@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-14T12:43:05.5800543	CodeLyokoLegacy/Block Loot Tables
+// 1.20.1	2023-09-14T15:27:09.1211441	CodeLyokoLegacy/Block Loot Tables
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data\codelyoko\loot_tables\blocks\digital_ocean.json
 c78df6ef9fdb2507bc83e93ed3fbb1fa2b18e0f9 data\codelyoko\loot_tables\blocks\electroplating_machine.json
 1ef56b5267b98031132eebd610821ccbc53d1379 data\codelyoko\loot_tables\blocks\digital_leaf_mountain.json
@@ -49,8 +49,8 @@ dc6bf391a9e1e61a61f2a042e31807b5ab69bf07 data\codelyoko\loot_tables\blocks\compu
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data\codelyoko\loot_tables\blocks\lyoko_core.json
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data\codelyoko\loot_tables\blocks\digital_lava.json
 8a7548c0b045d65aa336c9c5751eddffe0fde1eb data\codelyoko\loot_tables\blocks\gummite_ore.json
-e73dba55adf6b02df70b176a10776500459581b0 data\codelyoko\loot_tables\blocks\autunite_ore.json
 dc57ad6c9d4d1ffb1ffe3868d59dbae8ed07942a data\codelyoko\loot_tables\blocks\cable_block.json
+e73dba55adf6b02df70b176a10776500459581b0 data\codelyoko\loot_tables\blocks\autunite_ore.json
 aec4ffc8ae374c15c33e4b5d98b63840fe2b28e3 data\codelyoko\loot_tables\blocks\marabunta.json
 2e5907621b5fbe06d9af4770c71fc65de4a1b214 data\codelyoko\loot_tables\blocks\digital_ice.json
 7aae69019d4610496bcb26e87d19941a0b935c36 data\codelyoko\loot_tables\blocks\digital_sand.json
@@ -71,8 +71,8 @@ d91ce2c5eac523dcf4a9916403df8d061abf372c data\codelyoko\loot_tables\blocks\coffi
 5a49c1d4352c51152a5ca83500860197469251f9 data\codelyoko\loot_tables\blocks\titanium_block.json
 a8da28c2b0c22cb1e907ae1ef9fa403dfa7da9ab data\codelyoko\loot_tables\blocks\electroplating_cathode.json
 ce91acdd9e9dc393a057001e864577e7205cb962 data\codelyoko\loot_tables\blocks\liquid_helium.json
-ab3b7763580c538c2d960ccdd6ba1d689d3f5290 data\codelyoko\loot_tables\blocks\computer_keyboard.json
 c110c700aa955f2ad921a05251e9cb7f4b88c0c7 data\codelyoko\loot_tables\blocks\digital_rock.json
+ab3b7763580c538c2d960ccdd6ba1d689d3f5290 data\codelyoko\loot_tables\blocks\computer_keyboard.json
 9644c1e4bb1397323cd0e294d11c8e1f72f3d7c0 data\codelyoko\loot_tables\blocks\uv_machine.json
 c24b49631acdff365567cfd1b409da5682848074 data\codelyoko\loot_tables\blocks\architecture_work_station.json
 1b24e71b8b2679ba31b78f42ae6aeb6a35067cd4 data\codelyoko\loot_tables\blocks\cathodepart.json

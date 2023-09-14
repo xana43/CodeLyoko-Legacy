@@ -1,14 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -131,9 +137,29 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
         {
             getOrCreateTagBuilder(ModTags.Blocks.URANIUM_ORE_TAG).add(block);
             getOrCreateTagBuilder(ModTags.Blocks.URANIUM_ORES_TAG).add(block);
+            getOrCreateTagBuilder(TagKey.of(Registries.BLOCK.getKey(), new Identifier("c","ores"))).add(block);
         }
         getOrCreateTagBuilder(ModTags.Blocks.URANIUM_235_BLOCKS).add(ModBlocks.URANIUM_BLOCK_235);
         getOrCreateTagBuilder(ModTags.Blocks.URANIUM_238_BLOCKS).add(ModBlocks.URANIUM_BLOCK_238);
+        final Block[] commonLeaves = {
+          ModBlocks.DIGITAL_LEAF_MOUNTAIN
+        };
+        for (final Block block : commonLeaves)
+        {
+            getOrCreateTagBuilder(BlockTags.LEAVES).add(block);
+            getOrCreateTagBuilder(TagKey.of(Registries.BLOCK.getKey(), new Identifier("c","leaves"))).add(block);
+        }
+        getOrCreateTagBuilder(BlockTags.CHERRY_LOGS).add(ModBlocks.DIGITAL_WOOD_MOUNTAIN);
+        getOrCreateTagBuilder(BlockTags.JUNGLE_LOGS).add(ModBlocks.DIGITAL_WOOD_FOREST);
+        //for fluid blocks
+        getOrCreateTagBuilder(ModTags.Blocks.COMMON_LAVA_TAG).add(ModBlocks.DIGITAL_LAVA_BLOCK);
+        getOrCreateTagBuilder(ModTags.Blocks.COMMON_LAVA_TAG).add(ModBlocks.URANIUM_WASTE_BLOCK);
+        getOrCreateTagBuilder(ModTags.Blocks.COMMON_WATER_TAG).add(ModBlocks.LIQUID_HELIUM_BLOCK);
+        getOrCreateTagBuilder(ModTags.Blocks.COMMON_VISUAL_WATER_TAG).add(ModBlocks.LIQUID_HELIUM_BLOCK);
+        getOrCreateTagBuilder(ModTags.Blocks.COMMON_WATER_TAG).add(ModBlocks.DIGITAL_OCEAN_BLOCK);
+        getOrCreateTagBuilder(ModTags.Blocks.COMMON_VISUAL_WATER_TAG).add(ModBlocks.DIGITAL_OCEAN_BLOCK);
+
+
     }
 
 

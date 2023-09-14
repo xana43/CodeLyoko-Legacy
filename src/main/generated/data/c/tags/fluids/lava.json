@@ -1,10 +1,9 @@
 {
-  "replace" : false,
+  "replace": false,
   "values": [
-    "codelyoko:digital_lava",
     "codelyoko:digital_lava_flowing",
+    "codelyoko:digital_lava",
     "codelyoko:still_uranium",
     "codelyoko:flowing_uranium"
-
   ]
 }
