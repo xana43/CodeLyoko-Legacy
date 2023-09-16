@@ -20,7 +20,7 @@
   "entrypoints": {
 
     "fabric-datagen": [
-      "com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.DataProviders.Generator"
+        "com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.Generator"
     ],
     "main": [
       "com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain"
@@ -46,8 +46,8 @@
     "java": ">=17",
     "geckolib":">=4.2.0",
 
-    "cardinal-components-base": "5.2.2",
-    "cardinal-components-entity":"5.2.2",
+    "cardinal-components-base": ">=5.2.2",
+    "cardinal-components-entity":">=5.2.2",
     "team_reborn_energy": ">=2.3.0"
 
   },

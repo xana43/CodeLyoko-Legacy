@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -9,6 +10,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.data.client.Model;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,6 +22,8 @@ import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
 
 public record MethodUtil() {
     public record ArmorMethods() {
@@ -139,7 +143,7 @@ public record MethodUtil() {
 
         public record DimensionCheck() {
 
-            public static boolean playerNotInVanillaWorld(@NotNull PlayerEntity player) {
+            public static boolean playerNotInVanillaWorld(final @NotNull PlayerEntity player) {
                 return player.getWorld().getRegistryKey() == ModDimensions.forestSectorWorld || player.getWorld()
                         .getRegistryKey() == ModDimensions.carthage || player.getWorld()
                         .getRegistryKey() == ModDimensions.desertSectorWorld || player.getWorld()
@@ -153,7 +157,7 @@ public record MethodUtil() {
 
             }
 
-            public static boolean entityNotInVanillaWorld(@NotNull Entity entity) {
+            public static boolean entityNotInVanillaWorld(final @NotNull Entity entity) {
 
                 return entity.getWorld().getRegistryKey() == ModDimensions.forestSectorWorld || entity.getWorld()
                         .getRegistryKey() == ModDimensions.carthage || entity.getWorld()
@@ -168,29 +172,35 @@ public record MethodUtil() {
 
             }
 
-            public static boolean worldIsNotVanilla(@NotNull World level) {
+            public static boolean worldIsNotVanilla(final @NotNull World level) {
                 return level.getRegistryKey() == ModDimensions.forestSectorWorld || level.getRegistryKey() == ModDimensions.carthage || level.getRegistryKey() == ModDimensions.desertSectorWorld || level.getRegistryKey() == ModDimensions.iceSectorWorld
                         || level.getRegistryKey() == ModDimensions.mountainSectorWorld || level.getRegistryKey() == ModDimensions.volcanoWorld || level.getRegistryKey() == ModDimensions.digitalOceanWorld || level.getRegistryKey() == ModDimensions.frontierWorld;
 
 
             }
 
-            public static boolean playerInVanilla(PlayerEntity player) {
+            public static boolean playerInVanilla(final PlayerEntity player) {
                 return player.getWorld().getRegistryKey() == World.OVERWORLD || player.getWorld()
                         .getRegistryKey() == World.NETHER || player.getWorld().getRegistryKey() == World.END;
             }
 
-            public static boolean worldIsVanilla(World level) {
+            public static boolean worldIsVanilla(final World level) {
                 return level.getRegistryKey() == World.END || level.getRegistryKey() == World.OVERWORLD || level.getRegistryKey() == World.NETHER;
             }
 
-            public static boolean worldIsVanilla(RegistryKey<World> level) {
+            public static boolean worldIsVanilla(final RegistryKey<World> level) {
                 return level == World.END || level == World.OVERWORLD || level == World.NETHER;
             }
 
 
         }
-
+        public record HelperMethods()
+        {
+            public static Model item(final String parent)
+            {
+                return new Model(Optional.of(CodeLyokoMain.codeLyokoPrefix("item/"+parent)),Optional.empty());
+            }
+        }
 
         public record TextUtil() {
 

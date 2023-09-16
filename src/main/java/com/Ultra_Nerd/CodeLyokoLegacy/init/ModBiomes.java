@@ -5,29 +5,23 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.sound.MusicSound;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
-import net.minecraft.world.biome.source.BiomeSource;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.MiscConfiguredFeatures;
-import net.minecraft.world.gen.feature.MiscPlacedFeatures;
-import net.minecraft.world.gen.feature.PlacedFeature;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-public record ModBiome() {
+public record ModBiomes() {
 
 
-    private static final SpawnSettings.Builder biomeSpawns = new SpawnSettings.Builder().spawn(SpawnGroup.MONSTER,
+    private static final SpawnSettings.Builder biomesSpawns = new SpawnSettings.Builder().spawn(SpawnGroup.MONSTER,
             new SpawnSettings.SpawnEntry(ModEntities.BLOK, 10, 2, 4));
     public static void bootStrap(final Registerable<Biome> biomeRegisterable)
     {
-        BIOME_MAP.forEach((s, biome) -> {
+        BIOMES_MAP.forEach((s, biome) -> {
             final RegistryKey<Biome> biomeRegistryKey = RegistryKey.of(RegistryKeys.BIOME,
                     CodeLyokoMain.codeLyokoPrefix(s));
             biomeRegisterable.register(biomeRegistryKey,biome);
@@ -54,7 +48,7 @@ public record ModBiome() {
             .build();
     private static final Biome VOLCANO = buildVolcano();
     private static final Biome SECTOR_5 = buildSector5();
-    public static final ImmutableMap<String, Biome> BIOME_MAP = ImmutableMap.<String, Biome>builder()
+    public static final ImmutableMap<String, Biome> BIOMES_MAP = ImmutableMap.<String, Biome>builder()
             .put("sector5", SECTOR_5)
             .put("forest_sector", FOREST_SECTOR)
             .put("desert_sector", DESERT_SECTOR)
@@ -76,7 +70,7 @@ public record ModBiome() {
                 .downfall(0)
                 .effects(new BiomeEffects.Builder().waterColor(2387).fogColor(2387).waterFogColor(2387)
                         .skyColor(2387).music(new MusicSound(RegistryEntry.of(ModSounds.FOREST),0,0,true)).build())
-                .spawnSettings(biomeSpawns.build())
+                .spawnSettings(biomesSpawns.build())
                 .generationSettings(forestGensettings.build())
                 .temperature(3)
                 .build();
@@ -92,7 +86,7 @@ public record ModBiome() {
                 .downfall(0)
                 .effects(new BiomeEffects.Builder().waterFogColor(12759680).fogColor(12759680).waterColor(12759680)
                         .skyColor(12759680).build())
-                .spawnSettings(biomeSpawns.build())
+                .spawnSettings(biomesSpawns.build())
                 .generationSettings(desertGen.build())
                 .temperature(38)
                 .temperatureModifier(Biome.TemperatureModifier.NONE)
@@ -111,7 +105,7 @@ public record ModBiome() {
                 .downfall(0)
                 .effects(new BiomeEffects.Builder().music(new MusicSound(RegistryEntry.of(ModSounds.ICE), 0, 0, true)).skyColor(2387)
                         .waterColor(2387).waterFogColor(2387).fogColor(2387).build())
-                .spawnSettings(biomeSpawns.build())
+                .spawnSettings(biomesSpawns.build())
                 .generationSettings(iceGenBuilder.build())
                 .temperatureModifier(Biome.TemperatureModifier.FROZEN)
                 .temperature(-3)
@@ -119,8 +113,8 @@ public record ModBiome() {
     }
 
     private static Biome buildOcean() {
-        SpawnSettings.Builder oceanSpawns = new SpawnSettings.Builder();
-        GenerationSettings.Builder ocenGen = new GenerationSettings.Builder();
+        final SpawnSettings.Builder oceanSpawns = new SpawnSettings.Builder();
+        final GenerationSettings.Builder oceanGen = new GenerationSettings.Builder();
         return (new Biome.Builder())
 
                 .precipitation(false)
@@ -129,7 +123,7 @@ public record ModBiome() {
                 .temperatureModifier(Biome.TemperatureModifier.NONE)
                 .effects(new BiomeEffects.Builder().music(new MusicSound(RegistryEntry.of(ModSounds.OCEAN), 0, 0, true)).skyColor(2382)
                         .waterColor(2382).waterFogColor(2382).fogColor(2382).build())
-                .generationSettings(ocenGen.build())
+                .generationSettings(oceanGen.build())
                 .spawnSettings(oceanSpawns.build())
                 .build();
     }
@@ -147,13 +141,13 @@ public record ModBiome() {
                 .effects(new BiomeEffects.Builder().music(new MusicSound(RegistryEntry.of(ModSounds.MOUNTAIN), 0, 0, true))
                         .waterFogColor(1).waterColor(1).fogColor(1).skyColor(1).build())
                 .generationSettings(mountainGen.build())
-                .spawnSettings(biomeSpawns.build())
+                .spawnSettings(biomesSpawns.build())
                 .build();
     }
 
     private static Biome buildVolcano() {
-        SpawnSettings.Builder volcanoSpawn = new SpawnSettings.Builder().spawnCost(ModEntities.BLOK, 1, 0);
-        GenerationSettings.Builder volcanoGen = new GenerationSettings.Builder();
+        final SpawnSettings.Builder volcanoSpawn = new SpawnSettings.Builder().spawnCost(ModEntities.BLOK, 1, 0);
+        final GenerationSettings.Builder volcanoGen = new GenerationSettings.Builder();
        // volcanoGen.feature(GenerationStep.Feature.FLUID_SPRINGS,
          //       (RegistryEntry<PlacedFeature>) MiscPlacedFeatures.SPRING_LAVA);
         return (new Biome.Builder())
@@ -170,8 +164,8 @@ public record ModBiome() {
     }
 
     private static Biome buildSector5() {
-        SpawnSettings.Builder sector5Spawn = new SpawnSettings.Builder().spawnCost(ModEntities.BLOK, 1, 0);
-        GenerationSettings.Builder sector5Gen = new GenerationSettings.Builder();
+        final SpawnSettings.Builder sector5Spawn = new SpawnSettings.Builder().spawnCost(ModEntities.BLOK, 1, 0);
+        final GenerationSettings.Builder sector5Gen = new GenerationSettings.Builder();
         return (new Biome.Builder())
 
                 .downfall(0)
@@ -190,31 +184,31 @@ public record ModBiome() {
     public enum RegisteredBiomes {
 
 
-        SECTOR5(ModBiome.SECTOR_5),
-        FOREST_SECTOR(ModBiome.FOREST_SECTOR),
-        DESERT_SECTOR(ModBiome.DESERT_SECTOR),
-        ICE_SECTOR(ModBiome.ICE_SECTOR),
-        DIGITAL_OCEAN(ModBiome.DIGITAL_OCEAN),
-        MOUNTAIN_SECTOR(ModBiome.MOUNTAIN_SECTOR),
-        FRONTIER(ModBiome.FRONTEIR),
-        VOLCANO(ModBiome.VOLCANO);
+        SECTOR5(ModBiomes.SECTOR_5),
+        FOREST_SECTOR(ModBiomes.FOREST_SECTOR),
+        DESERT_SECTOR(ModBiomes.DESERT_SECTOR),
+        ICE_SECTOR(ModBiomes.ICE_SECTOR),
+        DIGITAL_OCEAN(ModBiomes.DIGITAL_OCEAN),
+        MOUNTAIN_SECTOR(ModBiomes.MOUNTAIN_SECTOR),
+        FRONTIER(ModBiomes.FRONTEIR),
+        VOLCANO(ModBiomes.VOLCANO);
 
-        private final Identifier BiomeLocation;
-        private final RegistryEntry<Biome> biomeRegistryKey;
-        private final Biome biomeValue;
-        RegisteredBiomes(Biome biomeToIdentify) {
-            this.BiomeLocation = identiferOfBiome(biomeToIdentify);
-            this.biomeRegistryKey = getBiomeKey(biomeToIdentify);
-            this.biomeValue = biomeToIdentify;
+        private final Identifier BiomesLocation;
+        private final RegistryEntry<Biome> biomesRegistryKey;
+        private final Biome biomesValue;
+        RegisteredBiomes(Biome biomesToIdentify) {
+            this.BiomesLocation = identifierBiomes(biomesToIdentify);
+            this.biomesRegistryKey = getBiomesKey(biomesToIdentify);
+            this.biomesValue = biomesToIdentify;
         }
 
-        private static RegistryEntry<Biome> getBiomeKey(Biome biome) {
+        private static RegistryEntry<Biome> getBiomesKey(Biome biome) {
             return RegistryEntry.of(biome);
         }
 
-        private static Identifier identiferOfBiome(final Biome biome) {
+        private static Identifier identifierBiomes(final Biome biome) {
             final AtomicReference<Identifier> output = new AtomicReference<Identifier>();
-            BIOME_MAP.forEach((s, biome1) -> {
+            BIOMES_MAP.forEach((s, biome1) -> {
 
                 if (biome == biome1) {
                     output.set(CodeLyokoMain.codeLyokoPrefix(s));
@@ -224,16 +218,16 @@ public record ModBiome() {
             return output.get();
 
         }
-        public final Biome getBiomeValue()
+        public final Biome getBiomesValue()
         {
-            return biomeValue;
+            return biomesValue;
         }
-        public final RegistryEntry<Biome> getBiomeRegistryKey() {
-            return this.biomeRegistryKey;
+        public final RegistryEntry<Biome> getBiomesRegistryKey() {
+            return this.biomesRegistryKey;
         }
 
         public final Identifier getIdentifier() {
-            return BiomeLocation;
+            return BiomesLocation;
         }
 
     }

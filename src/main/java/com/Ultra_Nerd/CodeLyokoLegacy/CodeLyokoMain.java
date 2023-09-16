@@ -6,16 +6,18 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.CustomAdvancements;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.LootTableOverride;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.PlaceBlockEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
-import com.mojang.serialization.Lifecycle;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -25,16 +27,15 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.message.v1.ServerMessageEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.object.builder.v1.advancement.CriterionRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.minecraft.entity.DamageUtil;
+import net.minecraft.advancement.criterion.Criteria;
+import net.minecraft.advancement.criterion.Criterion;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageSources;
-import net.minecraft.entity.damage.DamageType;
-import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -207,7 +208,7 @@ public record CodeLyokoMain() implements ModInitializer {
 
         ModStats.registerStats();
 
-        BiomeFeatureInject();
+        BiomesFeatureInject();
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyStorage(),
                 ModBlockEntities.COMPUTER_REACTOR_TILE_ENTITY);
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyStorage(),
@@ -233,15 +234,15 @@ public record CodeLyokoMain() implements ModInitializer {
     }
 
 
-    private static void BiomeFeatureInject() {
+    private static void BiomesFeatureInject() {
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
                 RegistryKey.of(RegistryKeys.PLACED_FEATURE, codeLyokoPrefix("coffinite_ore_overworld")));
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(
-                        RegistryKey.of(RegistryKeys.BIOME, ModBiome.RegisteredBiomes.FOREST_SECTOR.getIdentifier())),
+                        RegistryKey.of(RegistryKeys.BIOME, ModBiomes.RegisteredBiomes.FOREST_SECTOR.getIdentifier())),
                 GenerationStep.Feature.VEGETAL_DECORATION,
                 RegistryKey.of(RegistryKeys.PLACED_FEATURE, codeLyokoPrefix("lyoko_forest_tree")));
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(
-                        RegistryKey.of(RegistryKeys.BIOME, ModBiome.RegisteredBiomes.VOLCANO.getIdentifier())),
+                        RegistryKey.of(RegistryKeys.BIOME, ModBiomes.RegisteredBiomes.VOLCANO.getIdentifier())),
                 GenerationStep.Feature.TOP_LAYER_MODIFICATION, ModFeature.PlacedFeatures.LAVA_LAKE_VOLCANO_KEY);
     }
 
@@ -250,12 +251,13 @@ public record CodeLyokoMain() implements ModInitializer {
         FabricDefaultAttributeRegistry.register(ModEntities.MEGATANK, MegaTankEntity.registerAttributes());
 
     }
-
+    public static final CustomAdvancements.Criterions.EnteredLyoko enteredLyoko =
+            Criteria.register(new CustomAdvancements.Criterions.EnteredLyoko());
     private static void SetupFunctions() {
 
 
         //sets the properties for the xana handler to calcualate on
-        ServerWorldEvents.LOAD.register((server, world) -> XanaHandler.setProperties(world.getLevelProperties()));
+        ServerWorldEvents.LOAD.register((server, world) -> XanaHandler.setProperties(server,world.getLevelProperties()));
         //saves and loads the inventory for both respawn and joining
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
             if (MethodUtil.DimensionCheck.playerInVanilla(newPlayer)) {
@@ -273,14 +275,21 @@ public record CodeLyokoMain() implements ModInitializer {
                             player.server.getSaveProperties().getMainWorldProperties(), player);
 
                     player.incrementStat(ModStats.ENTERED_LYOKO_IDENTIFIER);
-                    CardinalData.PlayerSavedProfile.getPlayerProfile(
-                            player.getServer().getSaveProperties().getMainWorldProperties(), player).incrementEntered();
+                    if(CardinalData.PlayerSavedProfile.getPlayerProfile(player.getServer().getSaveProperties().getMainWorldProperties(), player) != null) {
+                        CardinalData.PlayerSavedProfile.getPlayerProfile(
+                                        player.getServer().getSaveProperties().getMainWorldProperties(), player)
+                                .incrementEntered();
+                    }
+                    CodeLyokoMain.LOG.debug("changed dimension");
+                    enteredLyoko.trigger(player,destination);
                 } else if (MethodUtil.DimensionCheck.worldIsNotVanilla(origin)) {
                     CardinalData.LyokoInventorySave.loadPlayerInventory(
                             player.server.getSaveProperties().getMainWorldProperties(), player);
                     player.resetStat(Stats.CUSTOM.getOrCreateStat(ModStats.ENTERED_LYOKO_IDENTIFIER));
                 }
+
             }
+
         });
 
         XanaHandler.setTicksToNextCalculation(1);
@@ -381,6 +390,7 @@ public record CodeLyokoMain() implements ModInitializer {
         });
     }
 
+
     @Override
     public void onInitialize() {
         //GlobalOBJModels.loadModels();
@@ -391,6 +401,7 @@ public record CodeLyokoMain() implements ModInitializer {
         registerDefaultAttributes();
         registerEnergyStorageBE();
         checkWorld();
+        LootTableOverride.modifyLootTables();
         //CodeLyokoMain.LOG.info(String.valueOf(GlobalOBJModels.LYOKO_CORE.isInitialized()));
     }
 

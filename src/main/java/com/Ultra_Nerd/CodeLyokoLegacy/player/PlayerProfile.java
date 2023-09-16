@@ -21,12 +21,7 @@ public final class PlayerProfile implements NbtSerializable {
     private int timesEntered = 0;
     public PlayerProfile(final PlayerEntity player)
     {
-
         this.player = player;
-
-
-
-
     }
 
     public int getPlayerClassType()

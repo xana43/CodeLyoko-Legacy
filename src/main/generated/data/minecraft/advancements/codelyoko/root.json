@@ -1,0 +1,39 @@
+{
+  "criteria": {
+    "entered_lyoko_advancement": {
+      "conditions": {
+        "next0": "codelyoko:volcano",
+        "next1": "codelyoko:carthage",
+        "next2": "codelyoko:desert",
+        "next3": "codelyoko:digital_ocean",
+        "next4": "codelyoko:forest",
+        "next5": "codelyoko:ice",
+        "next6": "codelyoko:frontier",
+        "next7": "codelyoko:mountain"
+      },
+      "trigger": "codelyoko:entered_lyoko_advancement"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "entered.lyoko.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "codelyoko:bit"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "entered.lyoko"
+    }
+  },
+  "requirements": [
+    [
+      "entered_lyoko_advancement"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

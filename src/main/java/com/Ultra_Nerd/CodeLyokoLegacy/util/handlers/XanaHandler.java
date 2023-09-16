@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.handlers;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldProperties;
 
 import java.util.Random;
@@ -13,13 +14,14 @@ public record XanaHandler() {
     private static int dangerLevel;
     private static WorldProperties properties;
     private static int ticksTillCalculation;
-
+    private static MinecraftServer internalServer = null;
     private static void setDangerLevelFromSave() {
         dangerLevel = CardinalData.XanaCalculator.getDangerLevel(properties);
     }
 
-    public static void setProperties(final WorldProperties wproperties) {
+    public static void setProperties(final MinecraftServer server ,final WorldProperties wproperties) {
         properties = wproperties;
+        internalServer = server;
         setDangerLevelFromSave();
     }
 
@@ -42,7 +44,7 @@ public record XanaHandler() {
 
     public static boolean calculateAttackProbability() {
         final int attackCallID = random.nextInt(0, 200);
-        CardinalData.XanaCalculator.setDangerLevel(dangerLevel, properties);
+        CardinalData.XanaCalculator.setDangerLevel(internalServer,dangerLevel, properties);
         ticksTillCalculation--;
         if (ticksTillCalculation <= 0) {
             if (attackCallID == 69) {

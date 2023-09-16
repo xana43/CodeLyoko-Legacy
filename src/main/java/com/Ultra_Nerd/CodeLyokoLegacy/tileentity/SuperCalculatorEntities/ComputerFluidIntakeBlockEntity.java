@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
@@ -34,7 +35,10 @@ public final class ComputerFluidIntakeBlockEntity extends BlockEntity implements
     {
         return internalTank.amount;
     }
-
+    public Fluid getStoredFluidVariant()
+    {
+        return internalTank.variant.getFluid();
+    }
 
     @Override
     public @NotNull Packet<ClientPlayPacketListener> toUpdatePacket() {

@@ -32,7 +32,6 @@ repositories {
 
 	//myron
 	maven { url = "https://hephaestus.dev/release" }
-
 	mavenLocal()
 
 	maven {url = "https://maven.kyrptonaught.dev"}
@@ -62,7 +61,7 @@ dependencies {
 	//include "com.github.Chocohead:Fabric-ASM:v${asm_version}"
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "software.bernie.geckolib:geckolib-fabric-1.20:${geko_version}"
+	modImplementation "software.bernie.geckolib:geckolib-fabric-1.20.1:${geko_version}"
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-world:${cca_version}"
 	//modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-util:${cca_version}"
 	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-level:${cca_version}"

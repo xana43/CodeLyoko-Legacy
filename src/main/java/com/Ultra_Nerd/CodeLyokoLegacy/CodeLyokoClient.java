@@ -6,7 +6,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelOverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerClient;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ComputerIntakePump;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.linker;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
@@ -14,7 +13,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoRingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.StoryBookGUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.PlayerProfileDebug;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.VehicleMaterializationTest;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.*;
@@ -40,7 +38,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.DeathScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
@@ -51,7 +48,6 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -64,7 +60,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
     private static final String keyCategory = "category." + CodeLyokoMain.MOD_ID + ".lyoko_controls";
     //keybinds
-    private static KeyBinding classCreenBinding;
+    private static KeyBinding classScreenBinding;
     private static KeyBinding classAbilityBinding1;
     private static KeyBinding classAbilityBinding2;
 
@@ -229,7 +225,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
     public void onInitializeClient() {
         SpecialModelLoaderEvents.LOAD_SCOPE.register(location -> CodeLyokoMain.MOD_ID.equals(location.getNamespace()));
         //set key bindings
-        classCreenBinding = KeyBindingHelper.registerKeyBinding(
+        classScreenBinding = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding("key." + CodeLyokoMain.MOD_ID + ".class", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_ALT,
                         keyCategory));
         classAbilityBinding1 = KeyBindingHelper.registerKeyBinding(
@@ -338,10 +334,10 @@ public record CodeLyokoClient() implements ClientModInitializer {
                     final ItemStack headStack = client.player.getEquippedStack(EquipmentSlot.CHEST);
                     final linker linker = (linker) headStack.getItem();
                     final long storedEnergy = linker.getStoredEnergy(headStack);
-                    if (classCreenBinding.isPressed() && (storedEnergy > 0 || client.player.isCreative())) {
+                    if (classScreenBinding.isPressed() && (storedEnergy > 0 || client.player.isCreative())) {
                         client.setScreen(new ClassScreen());
                     }
-                } else if (classCreenBinding.isPressed()) {
+                } else if (classScreenBinding.isPressed()) {
                     client.player.sendMessage(Text.translatable("lyoko.link.unavailable"));
                 }
             }

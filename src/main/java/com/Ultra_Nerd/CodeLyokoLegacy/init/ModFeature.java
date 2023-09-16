@@ -71,7 +71,7 @@ public record ModFeature() {
     {
         private static final ConfiguredFeature<?,?> LAVA_LAKE_CONFIG =
                 new ConfiguredFeature<>(Feature.LAKE,
-                        new LakeFeature.Config(BlockStateProvider.of(Blocks.LAVA.getDefaultState()),
+                        new LakeFeature.Config(BlockStateProvider.of(ModBlocks.DIGITAL_LAVA_BLOCK.getDefaultState()),
                         BlockStateProvider.of(ModBlocks.VOLCANO_GROUND.getDefaultState())));
     }
     public record PlacedFeatures() {

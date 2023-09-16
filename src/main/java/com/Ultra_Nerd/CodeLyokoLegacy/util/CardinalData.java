@@ -17,6 +17,7 @@ import dev.onyxstudios.cca.api.v3.level.LevelComponents;
 import net.fabricmc.fabric.api.client.model.ModelResourceProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldProperties;
 import org.jetbrains.annotations.NotNull;
@@ -138,7 +139,8 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         public static void saveProfile(final WorldProperties worldProperties,final PlayerEntity player)
         {
             PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).saveProfile(player);
-            worldProperties.syncComponent(PLAYER_PROFILE_STORAGE_COMPONENT_KEY);
+            //worldProperties.syncComponent(PLAYER_PROFILE_STORAGE_COMPONENT_KEY);
+            LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY,player.getServer());
         }
         public static PlayerProfile getPlayerProfile(final WorldProperties worldProperties,final PlayerEntity player)
         {
@@ -199,6 +201,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
 
         public static void setLyokoclass(final PlayerEntity player, final int ID) {
             LYOKOCLASS.get(player).setClassID(ID);
+
             LYOKOCLASS.sync(player);
         }
 
@@ -209,9 +212,10 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         private static final ComponentKey<XanaDataComponent> XANA_DATA = ComponentRegistry.getOrCreate(
                 CodeLyokoMain.codeLyokoPrefix("xana_data"), XanaDataComponent.class);
 
-        public static void setDangerLevel(final int dangerLevel, final WorldProperties worldProperties) {
+        public static void setDangerLevel(final MinecraftServer server,final int dangerLevel,
+                final WorldProperties worldProperties) {
             XANA_DATA.get(worldProperties).setDangerLevel(dangerLevel);
-            worldProperties.syncComponent(XANA_DATA);
+            LevelComponents.sync(XANA_DATA,server);
         }
 
         public static int getDangerLevel(final WorldProperties properties) {
@@ -226,7 +230,8 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         public static void savePlayerInventory(final WorldProperties worldProperties, final PlayerEntity playerEntity) {
 
             LYOKO_INVENTORY_SAVE.get(worldProperties).savePlayerInventory(playerEntity);
-            worldProperties.syncComponent(LYOKO_INVENTORY_SAVE);
+            //worldProperties.syncComponent(LYOKO_INVENTORY_SAVE);
+            LevelComponents.sync(LYOKO_INVENTORY_SAVE,playerEntity.getServer());
         }
 
         public static void loadPlayerInventory(final WorldProperties worldProperties, final PlayerEntity playerEntity) {

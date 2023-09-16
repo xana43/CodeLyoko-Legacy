@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ControlPanel;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
+import dev.onyxstudios.cca.api.v3.level.LevelComponents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -29,12 +30,7 @@ public record PacketHandlerCommon() {
     public static final Identifier FLUID_UPDATE = CodeLyokoMain.codeLyokoPrefix("fluid_update");
     public static void commonChannelRegistry() {
 
-        ServerPlayNetworking.registerGlobalReceiver(FLUID_UPDATE,(server, player, handler, buf, responseSender) -> {
-            final  BlockPos pos = buf.readBlockPos();
-            server.execute(() -> {
 
-            });
-        });
 
         ServerPlayNetworking.registerGlobalReceiver(ChannelID, (server, player, handler, buf, responseSender) -> {
             final BlockPos pos = buf.readBlockPos();

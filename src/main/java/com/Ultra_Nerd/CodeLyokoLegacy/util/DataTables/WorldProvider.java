@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBiome;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBiomes;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFeature;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
@@ -23,7 +23,7 @@ public final class WorldProvider extends FabricDynamicRegistryProvider {
     @Override
     protected void configure(final RegistryWrapper.WrapperLookup registries, final Entries entries) {
         final RegistryWrapper.Impl<Biome> biomeRegistry = registries.getWrapperOrThrow(RegistryKeys.BIOME);
-        ModBiome.BIOME_MAP.forEach((s, biome) -> {
+        ModBiomes.BIOMES_MAP.forEach((s, biome) -> {
             final RegistryKey<Biome> biomeRegistryKey = RegistryKey.of(RegistryKeys.BIOME,
                     CodeLyokoMain.codeLyokoPrefix(s));
             entries.add(biomeRegistryKey,biomeRegistry.getOrThrow(biomeRegistryKey).value());

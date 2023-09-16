@@ -13,11 +13,10 @@ public final class PlayerProfileStorage implements AutoSyncedComponent{
     public void saveProfile(final PlayerEntity player)
     {
         this.player = player;
-
-            final PlayerProfile playerProfile = new PlayerProfile(player);
-            playerProfile.loadDNA();
-            playerProfile.refreshPlayerClass();
-            this.playerProfile = playerProfile;
+        final PlayerProfile playerProfile = new PlayerProfile(player);
+        playerProfile.loadDNA();
+        playerProfile.refreshPlayerClass();
+        this.playerProfile = playerProfile;
 
     }
     public PlayerProfile getPlayerProfile(final PlayerEntity player)
@@ -36,7 +35,7 @@ public final class PlayerProfileStorage implements AutoSyncedComponent{
 
     @Override
     public void writeToNbt(final NbtCompound tag) {
-        if(player != null) {
+        if(player != null && playerProfile != null) {
         final NbtCompound profileTag = new NbtCompound();
 
             tag.put(player.getUuidAsString(), playerProfile.toTag(profileTag));
