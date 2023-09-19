@@ -60,24 +60,6 @@ public final class CarthageGenerator extends ChunkGenerator {
 
 
 
-   /* private static @NotNull Optional<RegistryEntryList<StructureSet>> getSet(@NotNull Registry<StructureSet>
-   thisStructureRegistry) {
-
-        RegistryEntryList.Named<StructureSet> structureSetNamed = thisStructureRegistry.getOrCreateEntryList(
-                TagKey.of(RegistryKeys.STRUCTURE_SET,
-                        CodeLyokoMain.codeLyokoPrefix("carthage_chunkgen_struct")));
-        return Optional.of(structureSetNamed);
-    }*/
-
-    //public Registry<Biome> getThisBiomeRegistry() {
-    //  return null;//((CarthageBiomeProvider) biomeSource).getBiomeRegistry();
-    //}
-
-
-   /* public @NotNull Registry<StructureSet> getStructRegistry() {
-        return null; //structureSetRegistry;
-    }*/
-
     public CustomGenSettings getCarthageSettings() {
         return settings;
     }

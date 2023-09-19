@@ -157,69 +157,6 @@ public final class CableBlockEntity extends BlockEntity {
         currentMaster = BlockPos.fromLong(((NbtLong) nbt.get(currentMasterKey)).longValue());
 
     }
-    /*
-    public static @NotNull HashMap<CableBlockEntity, ArrayList<BlockEntity>> CONNECTIONS = new HashMap<>();
 
-    private boolean connectedToScanner;
-    private boolean connectedToComp;
-    private boolean connectedToRouter;
-
-
-    @Override
-    public boolean isRemoved() {
-        super.isRemoved();
-        this.markRemoved();
-        ArrayList<BlockEntity> toDisconnect = CableBlockEntity.CONNECTIONS.get(this);
-        this.disconnectToComp();
-        this.disconnectToScanner();
-        this.disconnectToRouter();
-        CableBlockEntity.CONNECTIONS.remove(this);
-        if(toDisconnect != null) {
-            for (BlockEntity te : toDisconnect) {
-                if (te instanceof CableBlockEntity) {
-                    CableBlockEntity.CONNECTIONS.get(te).remove(this);
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
-        nbt.putBoolean("isConnectedToComp",connectedToComp);
-        nbt.putBoolean("isConnectedToScanner",connectedToScanner);
-        nbt.putBoolean("isConnectedToRouter",connectedToRouter);
-    }
-
-    @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
-        connectedToComp = nbt.getBoolean("isConnectedToComp");
-        connectedToScanner = nbt.getBoolean("isConnectedToScanner");
-        connectedToRouter = nbt.getBoolean("isConnectedToRouter");
-    }
-
-    public void connectToScanner() {
-        this.connectedToScanner = true;
-    }
-    public void disconnectToScanner() {
-        this.connectedToScanner = false;
-    }
-    public void connectToComp() {
-        this.connectedToComp = true;
-    }
-    public void disconnectToComp() {
-        this.connectedToComp = false;
-    }
-    public void connectedToRouter()
-    {
-        this.connectedToRouter = true;
-    }
-    public void disconnectToRouter()
-    {
-        this.connectedToRouter = false;
-    }
-*/
 
 }

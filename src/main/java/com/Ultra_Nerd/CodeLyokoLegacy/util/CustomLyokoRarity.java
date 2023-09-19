@@ -5,7 +5,6 @@ import net.minecraft.util.Rarity;
 
 public record CustomLyokoRarity() {
 
-
     public static Rarity FRANZ_STARTER;
 
     public static Rarity FRANZ_NOVICE;

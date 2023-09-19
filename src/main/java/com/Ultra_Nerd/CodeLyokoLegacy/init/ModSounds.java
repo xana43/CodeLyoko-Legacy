@@ -43,6 +43,8 @@ public record ModSounds() {
     public static final SoundEvent HORNETFLY = SoundEvent.of(CodeLyokoMain.codeLyokoPrefix("entity.hornet.fly"));
 
     public static final SoundEvent LYOKO_THEME = SoundEvent.of(CodeLyokoMain.codeLyokoPrefix("lyoko"));
+    public static final SoundEvent DEVIRTUALIZATION = SoundEvent.of(CodeLyokoMain.codeLyokoPrefix("player" +
+            ".devertualization"));
     //public static final BlockSoundGroup TowerInterfaceSound = BlockSoundGroup();
     public static final SoundEvent[] SOUNDS = {
             OPENTOWERGUISOUND,
@@ -72,77 +74,11 @@ public record ModSounds() {
             MEGATANKBIGFALL,
             CURSORBLINK,
             HORNETFLY,
-            LYOKO_THEME
+            LYOKO_THEME,
+            DEVIRTUALIZATION
 
     };
 
-/*
-    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, CodeLyokoMain.MOD_ID);
-    public static final HashMap<ResourceKey<Level>,Lazy<Music>> LAZY_HASH_MAP = HashMap<>();
 
-    //for objects that load last
-    public static final Lazy<SoundEvent> LAZY_THEME = RegisterLazyDuplicateSounds("lyoko",CodeLyokoMain.CodeLyokoPrefix("lyoko"));
-    public static final Lazy<SoundEvent> LAZY_WARRIOR = Lazy.of(() -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "armor_equip_warrior")));
-    public static final Lazy<SoundEvent> LAZY_FELINE = Lazy.of(() -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "armor_equip_feline")));
-    public static final Lazy<SoundEvent> LAZY_NINJA = Lazy.of(() -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "armor_equip_ninja")));
-    public static final Lazy<SoundEvent> LAZY_SAMURAI = Lazy.of(() -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "armor_equip_samurai")));
-    public static final Lazy<SoundEvent> LAZY_GUARDIAN = Lazy.of(() -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "armor_equip_guardian")));
-    public static final Lazy<SoundEvent> LAZY_ARCHER = Lazy.of(() -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "armor_equip_archer")));
-    public static final Lazy<Music> LAZY_SECTOR5 = RegisterThemeSounds("sector5",CodeLyokoMain.CodeLyokoPrefix("sector5"));
-    public static final Lazy<Music> LAZY_FOREST = RegisterThemeSounds("forest",CodeLyokoMain.CodeLyokoPrefix("forestsector"));
-    public static final Lazy<Music> LAZY_DESERT = RegisterThemeSounds("desertsector",CodeLyokoMain.CodeLyokoPrefix("desertsector"));
-    public static final Lazy<Music> LAZY_ICE = RegisterThemeSounds("icesector",CodeLyokoMain.CodeLyokoPrefix("icesector"));
-    public static final Lazy<Music> LAZY_OCEAN = RegisterThemeSounds("digital_ocean",CodeLyokoMain.CodeLyokoPrefix("digital_ocean"));
-    public static final Lazy<Music> LAZY_VOLCANO = RegisterThemeSounds("volcano_replika_music",CodeLyokoMain.CodeLyokoPrefix("volcano_replika_music"));
-    public static final Lazy<Music> LAZY_MOUNTAIN = RegisterThemeSounds("mountainsector",CodeLyokoMain.CodeLyokoPrefix("mountainsector"));
-    //for music discs
-    public static final RegistryObject<RecordItem> LYOKO_DISC = ModItems.ITEMS.register("lyokodisc", () -> RecordItem((byte) 10, LAZY_THEME, Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS).stacksTo(1).rarity(Rarity.RARE)));
-    //for sound events
-
-
-    public static final RegistryObject<SoundEvent> BLOKAMBIENT = SOUNDS.register("entity.blok.ambient", () -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "entity.blok.ambient")));
-    public static final RegistryObject<SoundEvent> BLOKHURT = SOUNDS.register("entity.blok.hurt", () -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "entity.blok.hurt")));
-
-    public static final RegistryObject<SoundEvent> OPENTOWERGUISOUND = SOUNDS.register("tower_gui_sound", () -> SoundEvent(CodeLyokoMain.CodeLyokoPrefix("tower_gui_sound")));
-
-    public static final RegistryObject<SoundEvent> LASERARROW = SOUNDS.register("laser", () -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "laser")));
-    public static final RegistryObject<SoundEvent> QUANTUMZAP = SOUNDS.register("quantum_zap", () -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "quantum_zap")));
-    public static final RegistryObject<SoundEvent> MEGATANKROLL = SOUNDS.register("entity.megatank.move", () -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "entity.megatank.move")));
-    public static final RegistryObject<SoundEvent> MEGATANKHURT1 = SOUNDS.register("entity.megatank.hurt1", () -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "entity.megatank.hurt1")));
-    public static final RegistryObject<SoundEvent> MEGATANKHURT2 = SOUNDS.register("entity.megatank.hurt2", () -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "entity.megatank.hurt2")));
-    public static final RegistryObject<SoundEvent> MEGATANKBIGFALL = SOUNDS.register("entity.megatank.bigfall", () -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "entity.megatank.bigfall")));
-    public static final RegistryObject<SoundEvent> MEGATANKSMALLFALL = SOUNDS.register("entity.megatank.smallfall", () -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "entity.megatank.smallfall")));
-    public static final RegistryObject<SoundEvent> MEGATANKDIE = SOUNDS.register("entity.megatank.die", () -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID, "entity.megatank.die")));
-
-    public static final RegistryObject<SoundEvent> DEVIRTUALIZATION = SOUNDS.register("devertualization", () -> SoundEvent ResourceLocation(CodeLyokoMain.MOD_ID,"player.devertualization")));
-
-    //required for the correct background music to be played in each dimension(See CodeLyokoMain.Java)
-    public static void populateMusicHashMap()
-    {
-
-        LAZY_HASH_MAP.put(ModDimensions.SECTOR5,LAZY_SECTOR5);
-        LAZY_HASH_MAP.put(ModDimensions.DESERT,LAZY_DESERT);
-        LAZY_HASH_MAP.put(ModDimensions.ICE,LAZY_ICE);
-        LAZY_HASH_MAP.put(ModDimensions.DIGITAL_OCEAN,LAZY_OCEAN);
-        LAZY_HASH_MAP.put(ModDimensions.FOREST,LAZY_FOREST);
-        LAZY_HASH_MAP.put(ModDimensions.VOLCANO,LAZY_VOLCANO);
-        LAZY_HASH_MAP.put(ModDimensions.MOUNTAIN,LAZY_MOUNTAIN);
-
-    }
-    //methods that streamline the Lazy sound event creation process
-    private static @NotNull Lazy<Music> RegisterThemeSounds(@NotNull String registryName, @NotNull ResourceLocation location)
-    {
-        SoundEvent tmpEvent = SoundEvent(location);
-        SOUNDS.register(registryName, () -> tmpEvent);
-        return Lazy.of(()- Music(tmpEvent,0,0,true));
-    }
-    private static @NotNull Lazy<SoundEvent> RegisterLazyDuplicateSounds(@NotNull String registryName, @NotNull ResourceLocation location)
-    {
-        SoundEvent tmpEvent = SoundEvent(location);
-        SOUNDS.register(registryName, () -> tmpEvent);
-        return Lazy.of(()-> tmpEvent);
-    }
-
- */
 
 }

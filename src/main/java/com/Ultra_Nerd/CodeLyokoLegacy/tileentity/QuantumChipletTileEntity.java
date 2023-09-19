@@ -1,187 +1,36 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
-public final class QuantumChipletTileEntity /*extends InventoryBE implements MenuProvider, Clearable*/ {
-    /*
+import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.LyokoInventoryBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.inventory.Inventories;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.BlockPos;
 
-    private NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
+public final class QuantumChipletTileEntity extends BlockEntity implements LyokoInventoryBlock {
 
-    public QuantumChipletTileEntity(@NotNull BlockEntityType<?> TileEntityIn, @NotNull BlockPos pos, @NotNull BlockState state, int size) {
-        super(TileEntityIn,pos,state,1);
-    }
-/*
-    public QuantumChipletTileEntity() {
-        this(ModBlockEntities.QUANTUM_CHIPLET_TILE_ENTITY.get());
-    }*/
-/*
-    @Override
-    public void load(@Nonnull CompoundTag compound) {
-        super.load(compound);
-        this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(compound, this.items);
-    }
-
-
-    @Override
-    public void saveAdditional(@Nonnull CompoundTag compound) {
-        super.saveAdditional(compound);
-        ContainerHelper.saveAllItems(compound, this.items);
-
-    }
-
-    public NonNullList<ItemStack> getItems() {
-        return this.items;
-    }
-
-    public void setItems(NonNullList<ItemStack> items) {
-        this.items = items;
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1,ItemStack.EMPTY);
+    public QuantumChipletTileEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state) {
+        super(type, pos, state);
     }
 
     @Override
-    public void setChanged() {
-        super.setChanged();
-        this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 2);
-    }
-
-
-
-    @Nonnull
-    @Override
-    public Component getDisplayName() {
-        return new TranslatableComponent("container." + CodeLyokoMain.MOD_ID + ".quantum_chiplet");
-    }
-
-
-
-
-
-    @Override
-    public AbstractContainerMenu createMenu(int id, @Nonnull Inventory playerInventory, Player player) {
-        return null;//new QuantumChipletContainer(id, player, this);
-    }
-
-
-
-    public int getSizeInventory() {
-        return this.items.size();
-    }
-
-
-
-
-    @Override
-    public boolean isRemoved() {
-        for (ItemStack itemstack : this.items) {
-            if (!itemstack.isEmpty()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-    @Nonnull
-    @Override
-    public ItemStack getItemInSlot(int index) {
-        return this.items.get(index);
-    }
-
-   /*
-
-    @Nonnull
-    @Override
-    public ItemStack decrStackSize(int index, int count) {
-        return ItemStackHelper.getAndSplit(this.items, index, count);
-    }
-
-
-
-    @Nonnull
-    @Override
-    public ItemStack removeStackFromSlot(int index) {
-        return ItemStackHelper.getAndRemove(this.items, index);
-    }*/
-
-/*
-    @Override
-    public ItemStack insertItem(int slot, @NotNull ItemStack stack) {
-        ItemStack Istack = this.items.get(slot);
-        boolean flag = !stack.isEmpty() && stack.equals(Istack) && ItemStack.isSame(stack, Istack);
-        this.items.set(slot, stack);
-        if (stack.getCount() > this.getSizeInventory()) {
-            stack.setCount(this.getSizeInventory());
-        }
-        if (!flag) {
-            this.setChanged();
-        }
-        return super.insertItem(slot, stack);
-    }
-
-    /*
-
-    @Override
-    public boolean isUsableByPlayer(@Nonnull PlayerEntity player) {
-        assert this.world != null;
-        if (this.world.getTileEntity(pos) != this) {
-            return false;
-        } else {
-            return player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64D;
-        }
+    public DefaultedList<ItemStack> getItems() {
+        return inventory;
     }
 
     @Override
-    public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return !stack.isDamaged();
-    }
-
-
-*/
-/*
-
-    @Override
-    public void setRemoved() {
-        super.setRemoved();
-        this.items.clear();
-    }
-
-
-
-    @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        CompoundTag nbt = new CompoundTag();
-        this.saveAdditional(nbt);
-
-        return super.getUpdatePacket();
-
-    }
-
-
-
-    @Override
-    public void onDataPacket(Connection net, @NotNull ClientboundBlockEntityDataPacket pkt) {
-        this.load(pkt.getTag());
-    }
-
-    @Nonnull
-    @Override
-    public CompoundTag getUpdateTag() {
-        this.saveAdditional(new CompoundTag());
-        return super.getUpdateTag();
+    public void readNbt(final NbtCompound nbt) {
+        super.readNbt(nbt);
+        Inventories.readNbt(nbt,inventory);
     }
 
     @Override
-    public void handleUpdateTag(@NotNull CompoundTag tag) {
-        super.handleUpdateTag(tag);
-        this.load(tag);
+    protected void writeNbt(final NbtCompound nbt) {
+        super.writeNbt(nbt);
+        Inventories.writeNbt(nbt,inventory);
     }
-
-
-
-    @Override
-    public void clearContent() {
-
-    }
-
- */
-
-
 }

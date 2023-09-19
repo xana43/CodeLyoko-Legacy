@@ -145,14 +145,14 @@ public record ModBlocks() {
                     .sounds(BlockSoundGroup.SAND));
     public static final Block FLUORITE_ORE = new ExperienceDroppingBlock(
             FabricBlockSettings.copyOf(Blocks.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE));
-    public static final Block FALSE_WATER = new Block(FabricBlockSettings.copyOf(Blocks.WATER));
+    public static final Block FALSE_WATER = new Block(FabricBlockSettings.copyOf(Blocks.WATER).noCollision());
     public static final Block FRONTIER_BLOCK = new FrontierBlock();
     public static final Block GUMMITE_ORE = new ExperienceDroppingBlock(
             FabricBlockSettings.copyOf(Blocks.STONE).strength(3, 10).sounds(BlockSoundGroup.STONE));
     public static final Block HOLOPROJECTOR = new HologramProjectorBlock();
     public static final Block LYOKO_CORE = new LyokoCore(
-            FabricBlockSettings.copyOf(Blocks.DRAGON_EGG).noCollision().strength(-1, Integer.MAX_VALUE)
-                    .luminance(Blocks.GLOWSTONE.getDefaultState().getLuminance() << 1));
+            FabricBlockSettings.copyOf(Blocks.DRAGON_EGG).dropsNothing().nonOpaque().strength(-1, -1)
+                    .luminance(Blocks.GLOWSTONE.getDefaultState().getLuminance()));
     public static final Block MARABUNTA = new Marabunta();
     public static final Block METATYUYAMUNITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copy(Blocks.IRON_ORE));
     public static final Block METATORBERNITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copy(METATYUYAMUNITE_ORE));
@@ -222,6 +222,7 @@ public record ModBlocks() {
     public static final Block TEST_SPHERE = new TestSphereRenderer(FabricBlockSettings.copyOf(Blocks.BARRIER));
     public static final Block TEST_VECHICLE_INTERFACE =
             new PlayerVehicleTest(FabricBlockSettings.copyOf(Blocks.BARRIER));
+    public static final Block COMPUTER_FLUID_COOLER = new ComputerFluidCooler(FabricBlockSettings.copyOf(Blocks.IRON_BARS));
     public static final ImmutableMap<String, Block> BLOCK_MAP = ImmutableMap.<String, Block>builder()
             .put("architecture_work_station", ARCHITECTURE_WORK_STATION)
             .put("anti_marabunta", ANTI_MARABUNTA)
@@ -245,6 +246,7 @@ public record ModBlocks() {
             .put("computer_liquid_circulator", COMPUTER_LIQUID_CIRCULATOR)
             .put("computer_liquid_pipe",COMPUTER_LIQUID_PIPE)
             .put("computer_fluid_intake",COMPUTER_LIQUID_INTAKE_PUMP)
+            .put("computer_fluid_cooler",COMPUTER_FLUID_COOLER)
             .put("computer_tower_control_panel", COMPUTER_TOWER_CONTROL_PANEL)
             .put("computer_core",COMPUTER_CORE)
             .put("coffinite_ore", COFFINITE_ORE)

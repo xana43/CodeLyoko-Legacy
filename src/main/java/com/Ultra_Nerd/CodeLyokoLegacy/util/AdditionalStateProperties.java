@@ -10,11 +10,11 @@ import java.util.Optional;
 import java.util.Set;
 
 public record AdditionalStateProperties() {
-    public static class FloatProperty extends Property<Float>
+    public static final class FloatProperty extends Property<Float>
     {
         private final ImmutableSet<Float> values;
         private final int min,max;
-        protected FloatProperty(final String name, final int min, final int max) {
+        public FloatProperty(final String name, final int min, final int max) {
             super(name, Float.class);
             if (min < 0) {
                 throw new IllegalArgumentException("Min value of " + name + " must be 0 or greater");
@@ -80,11 +80,11 @@ public record AdditionalStateProperties() {
 
 
     }
-    public static class DoubleProperty extends Property<Double>
+    public static final class DoubleProperty extends Property<Double>
     {
         private final ImmutableSet<Double> values;
         private final double min,max;
-        protected DoubleProperty(final String name, final double min, final double max) {
+        public DoubleProperty(final String name, final double min, final double max) {
             super(name, Double.class);
             if (min < 0) {
                 throw new IllegalArgumentException("Min value of " + name + " must be 0 or greater");

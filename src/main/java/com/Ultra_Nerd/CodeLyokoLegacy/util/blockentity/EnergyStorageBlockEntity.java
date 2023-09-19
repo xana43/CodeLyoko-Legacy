@@ -13,11 +13,11 @@ public abstract class EnergyStorageBlockEntity extends BlockEntity implements Ti
     protected SimpleEnergyStorage energyStorage;
 
     public EnergyStorageBlockEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state,
-            @Nullable SimpleEnergyStorage storage) {
+            final long capacity,final long maxinsert, final long maxextract) {
         super(type, pos, state);
-        if (storage != null) {
-            energyStorage = storage;
-        }
+
+        energyStorage = new SimpleEnergyStorage(capacity,maxinsert,maxextract);
+
 
     }
 

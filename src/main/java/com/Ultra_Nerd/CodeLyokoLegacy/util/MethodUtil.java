@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -10,7 +9,6 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.data.client.Model;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,8 +20,6 @@ import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Optional;
 
 public record MethodUtil() {
     public record ArmorMethods() {
@@ -50,6 +46,72 @@ public record MethodUtil() {
                 @Override
                 protected boolean canInsert(final FluidVariant variant) {
                     return variant.equals(FluidVariant.of(allowedVariant));
+                }
+
+                @Override
+                protected void onFinalCommit() {
+                    blockEntity.markDirty();
+                    if (!blockEntity.getWorld().isClient) {
+                        final PacketByteBuf buf = PacketByteBufs.create();
+                        buf.writeBlockPos(blockEntity.getPos());
+                        PlayerLookup.tracking(blockEntity).forEach(
+                                serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
+                                        PacketHandlerCommon.FLUID_UPDATE, buf));
+
+                    }
+                }
+            };
+
+        }
+        public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity,
+                final FluidVariant allowedVariant) {
+            return new SingleVariantStorage<FluidVariant>() {
+                @Override
+                protected FluidVariant getBlankVariant() {
+                    return FluidVariant.blank();
+                }
+
+                @Override
+                protected long getCapacity(final FluidVariant variant) {
+                    return FluidConstants.BUCKET;
+                }
+
+                @Override
+                protected boolean canInsert(final FluidVariant variant) {
+                    return variant.equals(allowedVariant);
+                }
+
+                @Override
+                protected void onFinalCommit() {
+                    blockEntity.markDirty();
+                    if (!blockEntity.getWorld().isClient) {
+                        final PacketByteBuf buf = PacketByteBufs.create();
+                        buf.writeBlockPos(blockEntity.getPos());
+                        PlayerLookup.tracking(blockEntity).forEach(
+                                serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
+                                        PacketHandlerCommon.FLUID_UPDATE, buf));
+
+                    }
+                }
+            };
+
+        }
+        public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity,
+                final FluidVariant allowedVariant,final int amountOfBuckets) {
+            return new SingleVariantStorage<FluidVariant>() {
+                @Override
+                protected FluidVariant getBlankVariant() {
+                    return FluidVariant.blank();
+                }
+
+                @Override
+                protected long getCapacity(final FluidVariant variant) {
+                    return (amountOfBuckets * FluidConstants.BUCKET) / 81;
+                }
+
+                @Override
+                protected boolean canInsert(final FluidVariant variant) {
+                    return variant.equals(allowedVariant);
                 }
 
                 @Override
@@ -196,10 +258,7 @@ public record MethodUtil() {
         }
         public record HelperMethods()
         {
-            public static Model item(final String parent)
-            {
-                return new Model(Optional.of(CodeLyokoMain.codeLyokoPrefix("item/"+parent)),Optional.empty());
-            }
+
         }
 
         public record TextUtil() {

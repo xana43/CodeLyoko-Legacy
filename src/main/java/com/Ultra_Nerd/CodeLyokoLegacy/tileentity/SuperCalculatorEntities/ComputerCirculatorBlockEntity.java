@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerCirculatorScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.NBT.NBTEntries;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.TickingBlockEntity;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -44,14 +45,6 @@ public final class ComputerCirculatorBlockEntity extends BlockEntity implements 
         super(ModBlockEntities.COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE, pos, state);
     }
 
-    public static final NbtCompound chilled = new NbtCompound();
-    static {
-        chilled.putBoolean("chilled",true);
-    }
-
-
-
-
     @Override
     public @NotNull Packet<ClientPlayPacketListener> toUpdatePacket() {
         return BlockEntityUpdateS2CPacket.create(this);
@@ -72,7 +65,8 @@ public final class ComputerCirculatorBlockEntity extends BlockEntity implements 
                             try(final Transaction transaction = Transaction.openOuter())
                             {
                                 if(fluidStorage.extract(FluidVariant.of(Fluids.WATER), cardinalFlowSpeeds[index],
-                                        transaction) == cardinalFlowSpeeds[index] && circulatorPipeBlock.fluidStorage.insert(FluidVariant.of(Fluids.WATER,chilled),
+                                        transaction) == cardinalFlowSpeeds[index] && circulatorPipeBlock.getInput().insert(FluidVariant.of(Fluids.WATER,
+                                                NBTEntries.chilled),
                                         cardinalFlowSpeeds[index],transaction) == cardinalFlowSpeeds[index])
                                 {
                                     transaction.commit();

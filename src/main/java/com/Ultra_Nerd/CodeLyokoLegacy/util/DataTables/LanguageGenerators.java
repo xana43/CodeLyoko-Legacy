@@ -9,7 +9,7 @@ import java.nio.file.Path;
 
 public record LanguageGenerators() {
 
-    public static class EnglishProvider extends FabricLanguageProvider
+    public static final class EnglishProvider extends FabricLanguageProvider
     {
 
         public EnglishProvider(final FabricDataOutput dataOutput) {
@@ -31,7 +31,7 @@ public record LanguageGenerators() {
             }
         }
     }
-    public static class FrenchProvider extends FabricLanguageProvider
+    public static final class FrenchProvider extends FabricLanguageProvider
     {
 
         public FrenchProvider(final FabricDataOutput dataOutput) {

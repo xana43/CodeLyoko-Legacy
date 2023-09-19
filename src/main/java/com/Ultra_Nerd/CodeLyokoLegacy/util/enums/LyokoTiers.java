@@ -18,7 +18,7 @@ public enum LyokoTiers implements ToolMaterial {
     private final float attackdamage, efficiency;
 
 
-    LyokoTiers(int harvest, int MaxUses, float efficiency, float attackdamage) {
+    LyokoTiers(final int harvest,final int MaxUses,final float efficiency,final float attackdamage) {
         this.harvest = harvest;
         this.MaxUses = MaxUses;
         this.efficiency = efficiency;

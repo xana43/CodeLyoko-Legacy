@@ -1,7 +1,7 @@
 {
     "parent": "special-model-loader:builtin/obj",
     "model": "codelyoko:models/block/core_of_lyoko.obj",
-    "flip-v": true,
+    "flip-v": false,
     "ambientocclusion": true,
     "particle": "codelyoko:block/body"
 

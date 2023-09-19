@@ -42,7 +42,9 @@ public final class TowerBase extends Structure {
     private final Optional<Heightmap.Type> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
 
-    public TowerBase(Structure.Config config, RegistryEntry<StructurePool> startPool, Optional<Identifier> startJigsawName, int size, HeightProvider startHeight, Optional<Heightmap.Type> projectStartToHeightmap, int maxDistanceFromCenter) {
+    public TowerBase(final Structure.Config config,final RegistryEntry<StructurePool> startPool,
+            final Optional<Identifier> startJigsawName,final int size,final HeightProvider startHeight,
+            final Optional<Heightmap.Type> projectStartToHeightmap,final int maxDistanceFromCenter) {
 
         super(config);
         this.startPool = startPool;
@@ -54,7 +56,7 @@ public final class TowerBase extends Structure {
 
     }
 
-    private static VerticalBlockSample sampleAreaPositive(final BlockPos pos, Structure.Context context) {
+    private static VerticalBlockSample sampleAreaPositive(final BlockPos pos, final Structure.Context context) {
         VerticalBlockSample sample = new VerticalBlockSample(0, new BlockState[]{});
 
         for (int i = 0; i < 2; i++) {
@@ -67,7 +69,7 @@ public final class TowerBase extends Structure {
         return sample;
     }
 
-    private static VerticalBlockSample sampleAreaNegative(final BlockPos pos, Structure.Context context) {
+    private static VerticalBlockSample sampleAreaNegative(final BlockPos pos, final Structure.Context context) {
         VerticalBlockSample sample = new VerticalBlockSample(0, new BlockState[]{});
 
         for (int i = -2; i < 0; i++) {
@@ -85,7 +87,7 @@ public final class TowerBase extends Structure {
     }
 
     @Override
-    public Optional<Structure.StructurePosition> getStructurePosition(Structure.Context context) {
+    public Optional<Structure.StructurePosition> getStructurePosition(final Structure.Context context) {
 
         BlockPos blockPos = context.chunkPos().getCenterAtY(0);
         //int toplandY = context.chunkGenerator().getHeightOnGround(blockPos.getX(), blockPos.getZ(), Heightmap.Type.WORLD_SURFACE_WG,context.world());

@@ -37,8 +37,7 @@ public final class PlayerProfileStorage implements AutoSyncedComponent{
     public void writeToNbt(final NbtCompound tag) {
         if(player != null && playerProfile != null) {
         final NbtCompound profileTag = new NbtCompound();
-
-            tag.put(player.getUuidAsString(), playerProfile.toTag(profileTag));
+        tag.put(player.getUuidAsString(), playerProfile.toTag(profileTag));
         }
 
 

@@ -11,7 +11,7 @@
       "fluid": {
         "type": "minecraft:simple_state_provider",
         "state": {
-          "Name": "minecraft:lava",
+          "Name": "codelyoko:digital_lava",
           "Properties": {
             "level": "0"
           }

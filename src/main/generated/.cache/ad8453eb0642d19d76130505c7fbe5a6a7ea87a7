@@ -1,8 +1,9 @@
-// 1.20.1	2023-09-16T16:22:27.2140299	CodeLyokoLegacy/Block Loot Tables
+// 1.20.1	2023-09-17T14:11:35.7700059	CodeLyokoLegacy/Block Loot Tables
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data\codelyoko\loot_tables\blocks\digital_ocean.json
 c78df6ef9fdb2507bc83e93ed3fbb1fa2b18e0f9 data\codelyoko\loot_tables\blocks\electroplating_machine.json
 1ef56b5267b98031132eebd610821ccbc53d1379 data\codelyoko\loot_tables\blocks\digital_leaf_mountain.json
 6d5886b32155d9272519e04d67cc75b28b9e51a7 data\codelyoko\loot_tables\blocks\uranium_block_238.json
+e18fe619b0dada058dd0aea9b68bf41e2f0442e7 data\codelyoko\loot_tables\blocks\computer_fluid_cooler.json
 3882fb038e64e6e34b24660664ed475ff0a66eae data\codelyoko\loot_tables\blocks\silica_sand.json
 15a10726ec0b4e3c346498187aec1374ae6c4322 data\codelyoko\loot_tables\blocks\sector5_steel.json
 4b10369fabbb4b097c55a72d0181222b149c5081 data\codelyoko\loot_tables\blocks\computer_cooling_block.json

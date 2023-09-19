@@ -149,8 +149,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), ModFluids.FLOWING_DIGITAL_LAVA,
                 ModFluids.STILL_DIGITAL_LAVA);
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ModBlocks.FALSE_WATER,
-                ModBlocks.CHIPLET_FRANZ_BLOCK, ModBlocks.PROJECTOR_FOCUS);
-
+                ModBlocks.CHIPLET_FRANZ_BLOCK, ModBlocks.PROJECTOR_FOCUS,ModBlocks.LYOKO_CORE);
+        
 
     }
 
@@ -212,7 +212,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
     {
         BlockEntityRendererFactories.register(ModBlockEntities.COMPUTER_FLUID_INTAKE_BLOCK_ENTITY,
                 ComputerIntakePumpRenderer::new);
-        BlockEntityRendererFactories.register(ModBlockEntities.LYOKO_CORE, CoreOfLyoko::new);
+        //BlockEntityRendererFactories.register(ModBlockEntities.LYOKO_CORE, CoreOfLyoko::new);
         BlockEntityRendererFactories.register(ModBlockEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY,
                 LaptopChargerRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE,
@@ -220,6 +220,20 @@ public record CodeLyokoClient() implements ClientModInitializer {
         BlockEntityRendererFactories.register(ModBlockEntities.COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE,
                 ComputerCirculatorRenderer::new);
 
+    }
+
+    private static void handledScreenRegistration()
+    {
+        HandledScreens.register(ModScreenHandlers.TOWER_INTERFACE_SCREEN_HANDLER, TowerGUI::new);
+        HandledScreens.register(ModScreenHandlers.CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE,
+                ComputerControlPanelUI::new);
+        HandledScreens.register(ModScreenHandlers.COMPUTER_REACTOR_SCREEN_HANDLER, ReactorGUI::new);
+        HandledScreens.register(ModScreenHandlers.COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE,
+                ComputerInterfaceUi::new);
+        HandledScreens.register(ModScreenHandlers.PROFILE_DEBUG_SCREEN_HANDLER_SCREEN_HANDLER_TYPE,
+                PlayerProfileDebug::new);
+        HandledScreens.register(ModScreenHandlers.VEHICLE_MATERIALIZE_TEST_HANDLER_SCREEN_HANDLER_TYPE,
+                VehicleMaterializationTest::new);
     }
     @Override
     public void onInitializeClient() {
@@ -239,16 +253,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         registerEntityRenderers();
         //receiveEntityPacket();
         FluidRenderRegistry();
-        HandledScreens.register(ModScreenHandlers.TOWER_INTERFACE_SCREEN_HANDLER, TowerGUI::new);
-        HandledScreens.register(ModScreenHandlers.CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE,
-                ComputerControlPanelUI::new);
-        HandledScreens.register(ModScreenHandlers.COMPUTER_REACTOR_SCREEN_HANDLER, ReactorGUI::new);
-        HandledScreens.register(ModScreenHandlers.COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE,
-                ComputerInterfaceUi::new);
-        HandledScreens.register(ModScreenHandlers.PROFILE_DEBUG_SCREEN_HANDLER_SCREEN_HANDLER_TYPE,
-                PlayerProfileDebug::new);
-        HandledScreens.register(ModScreenHandlers.VEHICLE_MATERIALIZE_TEST_HANDLER_SCREEN_HANDLER_TYPE,
-                VehicleMaterializationTest::new);
+        handledScreenRegistration();
         //client events
         ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
 

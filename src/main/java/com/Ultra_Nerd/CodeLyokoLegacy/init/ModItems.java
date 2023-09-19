@@ -326,7 +326,7 @@ public record ModItems() {
             .put("archer_bow", ARCHER_BOW)
             .build();
     //for armor
-    private static final FabricItemSettings ArmorGroup = new FabricItemSettings();
+    private static final FabricItemSettings ArmorGroup = new FabricItemSettings().maxCount(1);
     public static final ArmorItem AELITA_CHESTPLATE = new AelitaArmorElytra(LyokoArmorMaterial.GUARDIAN,
             ArmorItem.Type.CHESTPLATE, ArmorGroup);
     public static final ArmorItem AELITA_LEGGINGS = new ArmorItem(LyokoArmorMaterial.GUARDIAN, ArmorItem.Type.LEGGINGS,

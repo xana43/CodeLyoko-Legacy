@@ -218,7 +218,13 @@ public record CodeLyokoMain() implements ModInitializer {
                     default -> blockEntity.fluidStorage;
                 },
                 ModBlockEntities.COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE);
-        FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.fluidStorage,
+        FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) ->
+                    switch (direction)
+                    {
+                        case NORTH -> blockEntity.getOutput();
+                        default -> blockEntity.getInput();
+                    }
+                ,
                 ModBlockEntities.CIRCULATOR_PIPE_BLOCK_ENTITY_TYPE);
         FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> switch (direction){
             case DOWN -> blockEntity.input;
@@ -280,7 +286,7 @@ public record CodeLyokoMain() implements ModInitializer {
                                         player.getServer().getSaveProperties().getMainWorldProperties(), player)
                                 .incrementEntered();
                     }
-                    CodeLyokoMain.LOG.debug("changed dimension");
+                    //CodeLyokoMain.LOG.debug("changed dimension");
                     enteredLyoko.trigger(player,destination);
                 } else if (MethodUtil.DimensionCheck.worldIsNotVanilla(origin)) {
                     CardinalData.LyokoInventorySave.loadPlayerInventory(
@@ -349,11 +355,11 @@ public record CodeLyokoMain() implements ModInitializer {
                 serverPlayerEntity.getHungerManager().setSaturationLevel(5);
                 serverPlayerEntity.getAbilities().allowModifyWorld = serverPlayerEntity.isCreative();
 
-                //CodeLyokoMain.LYOKO_LOCK.lock(serverPlayerEntity, DefaultInventoryNodes.MAIN_INVENTORY);
-            } else/*&& CodeLyokoMain.LYOKO_LOCK.isLocking(serverPlayerEntity,DefaultInventoryNodes.MAIN_INVENTORY)*/ {
+
+            } else {
 
                 serverPlayerEntity.getAbilities().allowModifyWorld = true;
-                //CodeLyokoMain.LYOKO_LOCK.unlock(serverPlayerEntity,DefaultInventoryNodes.MAIN_INVENTORY);
+
             }
 
 
@@ -393,7 +399,6 @@ public record CodeLyokoMain() implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        //GlobalOBJModels.loadModels();
         GeckoLib.initialize();
         PacketHandlerCommon.commonChannelRegistry();
         generalRegistration();
@@ -402,7 +407,6 @@ public record CodeLyokoMain() implements ModInitializer {
         registerEnergyStorageBE();
         checkWorld();
         LootTableOverride.modifyLootTables();
-        //CodeLyokoMain.LOG.info(String.valueOf(GlobalOBJModels.LYOKO_CORE.isInitialized()));
     }
 
 

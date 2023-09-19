@@ -7,7 +7,8 @@ import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 public abstract class SidedEnergyStorageBlockEntity extends EnergyStorageBlockEntity {
-    public SidedEnergyStorageBlockEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state, @Nullable final SimpleEnergyStorage storage) {
-        super(type, pos, state, storage);
+    public SidedEnergyStorageBlockEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state,
+            final long capacity,final long maxinsert,final long maxextract) {
+        super(type, pos, state, capacity,maxinsert,maxextract);
     }
 }

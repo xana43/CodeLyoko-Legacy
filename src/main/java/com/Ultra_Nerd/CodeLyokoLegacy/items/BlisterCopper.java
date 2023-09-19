@@ -43,13 +43,14 @@ public final class BlisterCopper extends Item {
     @Override
     public void inventoryTick(final ItemStack stack, final World worldIn, final Entity entityIn, int itemSlot,
             boolean isSelected) {
-        NbtCompound timerTag = stack.getNbt();
-        if (timerTag == null) {
-            timerTag = new NbtCompound();
-            timerTag.putInt(NBT_TAG_ACCESSOR, 500);
-            stack.setNbt(timerTag);
-        }
+
         if (!worldIn.isClient) {
+            NbtCompound timerTag = stack.getNbt();
+            if (timerTag == null) {
+                timerTag = new NbtCompound();
+                timerTag.putInt(NBT_TAG_ACCESSOR, 500);
+                stack.setNbt(timerTag);
+            }
             timerTag.putInt(NBT_TAG_ACCESSOR, timerTag.getInt(NBT_TAG_ACCESSOR) - 1);
             if (timerTag.getInt(NBT_TAG_ACCESSOR) == 0) {
                 if (stack.getDamage() != 60) {
@@ -61,7 +62,7 @@ public final class BlisterCopper extends Item {
             }
             if (stack.getDamage() == 60) {
 
-                if (entityIn instanceof PlayerEntity playerEntity) {
+                if (entityIn instanceof final PlayerEntity playerEntity) {
                     playerEntity.getInventory().setStack(itemSlot, new ItemStack(ModItems.CUPROUS_OXIDE));
                 }
 

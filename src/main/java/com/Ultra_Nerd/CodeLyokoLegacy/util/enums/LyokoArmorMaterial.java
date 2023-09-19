@@ -45,12 +45,12 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
 
 
     @Override
-    public int getDurability(@NotNull ArmorItem.Type equipmentSlot) {
+    public int getDurability(final @NotNull ArmorItem.Type equipmentSlot) {
         return MAX_DAMAGE_ARRAY[equipmentSlot.getEquipmentSlot().getEntitySlotId()] * this.maxDamageFactor;
     }
 
     @Override
-    public int getProtection(@NotNull ArmorItem.Type p_40411_) {
+    public int getProtection(final @NotNull ArmorItem.Type p_40411_) {
         return this.damageReduction[p_40411_.getEquipmentSlot().getEntitySlotId()];
     }
 

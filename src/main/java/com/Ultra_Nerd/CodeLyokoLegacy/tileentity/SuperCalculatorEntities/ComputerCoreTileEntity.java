@@ -2,12 +2,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.NBT.NBTEntries;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntity;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.CombinedStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.FilteringStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
@@ -18,11 +16,9 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
-import java.util.List;
-
 public final class ComputerCoreTileEntity extends EnergyStorageBlockEntity {
     private final SingleVariantStorage<FluidVariant> core_tank_chilled =
-            MethodUtil.FluidStorageCreation.createFluidStorage(this, Fluids.WATER, ComputerCirculatorBlockEntity.chilled);
+            MethodUtil.FluidStorageCreation.createFluidStorage(this, Fluids.WATER, NBTEntries.chilled);
     private final SingleVariantStorage<FluidVariant> core_tank_hot =
             MethodUtil.FluidStorageCreation.createFluidStorage(this,Fluids.WATER);
     public final Storage<FluidVariant> chilled_intake = FilteringStorage.insertOnlyOf(core_tank_chilled);
@@ -34,8 +30,8 @@ public final class ComputerCoreTileEntity extends EnergyStorageBlockEntity {
     private boolean poweredOn;
 
     public ComputerCoreTileEntity(final BlockPos pos, final BlockState state) {
-        super(ModBlockEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE, pos, state,new SimpleEnergyStorage(90000000,
-                10000,0));
+        super(ModBlockEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE, pos, state,90000000,
+                10000,0);
     }
 
     public boolean isActive()

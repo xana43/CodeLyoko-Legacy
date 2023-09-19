@@ -1,8 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.Capabilities;
 
-import dev.onyxstudios.cca.api.v3.component.ComponentProvider;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;

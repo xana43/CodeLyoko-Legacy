@@ -17,7 +17,7 @@ public final class BlackVoid extends Block {
 
 
     public BlackVoid() {
-        super(FabricBlockSettings.copyOf(Blocks.STRUCTURE_VOID).strength(-1, Integer.MAX_VALUE).dropsNothing().nonOpaque()
+        super(FabricBlockSettings.copyOf(Blocks.STRUCTURE_VOID).strength(-1, -1).dropsNothing().nonOpaque()
                 .luminance(10));
     }
 

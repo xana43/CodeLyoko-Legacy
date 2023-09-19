@@ -2,11 +2,17 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.function.BooleanBiFunction;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
@@ -140,6 +146,28 @@ public final class FranzChiplet extends BlockWithEntity {
     public BlockRenderType getRenderType(final BlockState state) {
         return BlockRenderType.MODEL;
     }
+    @Override
+    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+        if(world.isClient) return ActionResult.SUCCESS;
+        final Inventory entityInventory = (Inventory) world.getBlockEntity(pos);
+        if(!player.getStackInHand(hand).isEmpty())
+        {
+            if(entityInventory.getStack(0).isEmpty())
+            {
+                entityInventory.setStack(0,player.getStackInHand(hand).copy());
+                player.getStackInHand(hand).setCount(0);
+            }
+        }
+        else {
+            if(!entityInventory.getStack(0).isEmpty())
+            {
+                player.getInventory().offerOrDrop(entityInventory.getStack(0));
+                entityInventory.removeStack(0);
+            }
+        }
+        return ActionResult.SUCCESS;
+    }
+
 
 
 }
