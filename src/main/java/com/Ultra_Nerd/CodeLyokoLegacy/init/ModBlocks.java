@@ -277,7 +277,7 @@ public record ModBlocks() {
             .put("frontier_block", FRONTIER_BLOCK)
             .put("gummite_ore", GUMMITE_ORE)
             .put("holoprojector", HOLOPROJECTOR)
-            .put("lyoko_core", LYOKO_CORE)
+            .put("core_of_lyoko", LYOKO_CORE)
             .put("marabunta", MARABUNTA)
             .put("metatyuyamunite_ore", METATYUYAMUNITE_ORE)
             .put("metatorbernite_ore", METATORBERNITE_ORE)

@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.SyncedBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -16,7 +17,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class CableBlockEntity extends BlockEntity {
+public final class CableBlockEntity extends SyncedBlockEntity {
     private static final SecureRandom random = new SecureRandom();
     private static final String positionsKey = "connected_positions";
     private static final String isMasterKey = "is_master";

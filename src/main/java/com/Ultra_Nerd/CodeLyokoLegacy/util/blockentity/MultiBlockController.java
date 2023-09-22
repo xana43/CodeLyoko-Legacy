@@ -11,11 +11,14 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.LecternBlockEntity;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.NotNull;
 
-public abstract class MultiBlockController extends BlockEntity implements MasterEntity {
+public abstract class MultiBlockController extends SyncedBlockEntity implements MasterEntity {
     private static final String CHECK_KEY = "is_check_successful";
     private final BlockPattern currentPattern;
     private final BooleanProperty thisProperty;
@@ -62,15 +65,7 @@ public abstract class MultiBlockController extends BlockEntity implements Master
         }
     }
 
-    @Override
-    public BlockEntityUpdateS2CPacket toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
 
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.createNbt();
-    }
 
     @Override
     public void invalidateEntity() {

@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
@@ -12,6 +11,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 import java.util.Objects;
@@ -35,6 +35,7 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
 
     public HumanDNA(final PlayerEntity player) {
         this.player = player;
+        createDNA();
     }
 
     private static boolean searchForValidRespawnPositions(final World world, final BlockPos blockPos) {
@@ -44,19 +45,15 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
                 && world.getBlockState(blockPos.offset(Direction.UP, 1)).isOf(Blocks.AIR)
                 && world.getBlockState(blockPos.offset(Direction.UP, 2)).isOf(Blocks.AIR);
     }
-
     private void createDNA() {
         final StringBuilder DNASequence = new StringBuilder();
         final StringBuilder DNASequenceHelix2 = new StringBuilder();
 
-        for(int i = 0; i < 100; i++)
-        {
-            DNASequence.append(DNACoding[ThreadLocalRandom.current().nextInt(0, 3)]);
-        }
         for (int i = 0; i < 100; i++)
         {
-            final char DNAChem =DNASequence.toString().charAt(i);
-            switch (DNAChem)
+            final Random random = Random.createLocal();
+            DNASequence.append(DNACoding[random.nextInt(DNACoding.length)]);
+            switch (DNASequence.toString().charAt(i))
             {
                 case 'A' -> DNASequenceHelix2.append('T');
                 case 'T' -> DNASequenceHelix2.append('A');
@@ -65,16 +62,23 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
             }
         }
         DNASequence.append('\n').append(DNASequenceHelix2);
-        CodeLyokoMain.LOG.info(DNASequence.toString());
         DNA = DNASequence.toString();
     }
 
     public String getDNA() {
+        if(DNA.isEmpty())
+        {
+            createDNA();
+            return DNA;
+        }
         return DNA;
     }
 
     public void setHasDNA(final boolean hasDNA) {
         this.hasDNA = hasDNA;
+    }
+    public void calculateValidSpawns()
+    {
         if (!hasDNA && !player.getWorld().isClient()) {
             final ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) player;
             if (MethodUtil.DimensionCheck.worldIsVanilla(serverPlayerEntity.getSpawnPointDimension())) {
@@ -82,14 +86,14 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
                 for (int x = 0; x < (32 * 16); x++) {
                     for (int y = 20; y < 384; y++) {
                         for (int z = 0; z < (32 * 16); z++) {
-                            final BlockPos checkedPosiition = worldOrigin.add(x,y,z);
+                            final BlockPos checkedPosition = worldOrigin.add(x,y,z);
                             if (serverPlayerEntity.getWorld().getRegistryKey() == ModDimensions.digitalOceanWorld) {
-                                final int DimensionChoser = ThreadLocalRandom.current().nextInt(0, 7);
-                                switch (DimensionChoser) {
+                                final int DimensionChooser = ThreadLocalRandom.current().nextInt(0, 7);
+                                switch (DimensionChooser) {
                                     case 0 -> {
                                         if (searchForValidRespawnPositions(serverPlayerEntity.getServer()
-                                                .getWorld(ModDimensions.forestSectorWorld), checkedPosiition)) {
-                                            final BlockPos towerSpawnPosition = checkedPosiition
+                                                .getWorld(ModDimensions.forestSectorWorld), checkedPosition)) {
+                                            final BlockPos towerSpawnPosition = checkedPosition
                                                     .offset(Direction.NORTH, 1);
                                             serverPlayerEntity.setSpawnPoint(ModDimensions.forestSectorWorld,
                                                     towerSpawnPosition, 0, true, true);
@@ -98,8 +102,8 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
                                     }
                                     case 1 -> {
                                         if (searchForValidRespawnPositions(serverPlayerEntity.getServer()
-                                                .getWorld(ModDimensions.desertSectorWorld), checkedPosiition)) {
-                                            final BlockPos towerSpawnPosition = checkedPosiition
+                                                .getWorld(ModDimensions.desertSectorWorld), checkedPosition)) {
+                                            final BlockPos towerSpawnPosition = checkedPosition
                                                     .offset(Direction.NORTH, 1);
                                             serverPlayerEntity.setSpawnPoint(ModDimensions.desertSectorWorld,
                                                     towerSpawnPosition, 0, true, true);
@@ -109,8 +113,8 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
                                     case 2 -> {
                                         if (searchForValidRespawnPositions(
                                                 serverPlayerEntity.getServer().getWorld(ModDimensions.iceSectorWorld),
-                                                checkedPosiition)) {
-                                            final BlockPos towerSpawnPosition = checkedPosiition
+                                                checkedPosition)) {
+                                            final BlockPos towerSpawnPosition = checkedPosition
                                                     .offset(Direction.NORTH, 1);
                                             serverPlayerEntity.setSpawnPoint(ModDimensions.iceSectorWorld,
                                                     towerSpawnPosition, 0, true, true);
@@ -120,8 +124,8 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
                                     case 3 -> {
                                         if (searchForValidRespawnPositions(serverPlayerEntity.getServer()
                                                         .getWorld(ModDimensions.mountainSectorWorld),
-                                                checkedPosiition)) {
-                                            final BlockPos towerSpawnPosition = checkedPosiition
+                                                checkedPosition)) {
+                                            final BlockPos towerSpawnPosition = checkedPosition
                                                     .offset(Direction.NORTH, 1);
                                             serverPlayerEntity.setSpawnPoint(ModDimensions.mountainSectorWorld,
                                                     towerSpawnPosition, 0, true, true);
@@ -131,8 +135,8 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
                                     case 4 -> {
                                         if (searchForValidRespawnPositions(
                                                 serverPlayerEntity.getServer().getWorld(ModDimensions.carthage),
-                                                checkedPosiition)) {
-                                            final BlockPos towerSpawnPosition = checkedPosiition
+                                                checkedPosition)) {
+                                            final BlockPos towerSpawnPosition = checkedPosition
                                                     .offset(Direction.NORTH, 1);
                                             serverPlayerEntity.setSpawnPoint(ModDimensions.carthage,
                                                     towerSpawnPosition, 0, true, true);
@@ -142,8 +146,8 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
                                     case 5 -> {
                                         if (searchForValidRespawnPositions(
                                                 serverPlayerEntity.getServer().getWorld(ModDimensions.frontierWorld),
-                                                checkedPosiition)) {
-                                            final BlockPos towerSpawnPosition = checkedPosiition
+                                                checkedPosition)) {
+                                            final BlockPos towerSpawnPosition = checkedPosition
                                                     .offset(Direction.NORTH, 1);
                                             serverPlayerEntity.setSpawnPoint(ModDimensions.frontierWorld,
                                                     towerSpawnPosition, 0, true, true);
@@ -153,8 +157,8 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
                                     case 6 -> {
                                         if (searchForValidRespawnPositions(
                                                 serverPlayerEntity.getServer().getWorld(ModDimensions.volcanoWorld),
-                                                checkedPosiition)) {
-                                            final BlockPos towerSpawnPosition = checkedPosiition
+                                                checkedPosition)) {
+                                            final BlockPos towerSpawnPosition = checkedPosition
                                                     .offset(Direction.NORTH, 1);
                                             serverPlayerEntity.setSpawnPoint(ModDimensions.volcanoWorld,
                                                     towerSpawnPosition, 0, true, false);
@@ -165,8 +169,8 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
                                 }
                             } else {
                                 if (searchForValidRespawnPositions(serverPlayerEntity.getWorld(),
-                                        checkedPosiition)) {
-                                    final BlockPos towerSpawnPosition = checkedPosiition
+                                        checkedPosition)) {
+                                    final BlockPos towerSpawnPosition = checkedPosition
                                             .offset(Direction.NORTH, 1);
                                     serverPlayerEntity.setSpawnPoint(player.getWorld().getRegistryKey(),
                                             towerSpawnPosition, 0, true, false);
@@ -180,7 +184,6 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
             }
         }
     }
-
     public boolean getHasDna() {
         return hasDNA;
     }

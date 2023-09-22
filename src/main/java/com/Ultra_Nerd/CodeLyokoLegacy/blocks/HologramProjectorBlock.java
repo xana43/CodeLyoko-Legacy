@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -25,7 +26,7 @@ public final class HologramProjectorBlock extends BlockWithEntity {
 
     @Override
     public BlockRenderType getRenderType(final BlockState state) {
-        return BlockRenderType.MODEL;
+        return BlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
@@ -33,33 +34,12 @@ public final class HologramProjectorBlock extends BlockWithEntity {
         super.appendProperties(builder.add(VALID));
     }
 
-/*
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder.add(BooleanProperty.create("valid")));
-    }
 
-
-
-    @Override
-    public @NotNull BlockState getStateForPlacement(@Nonnull BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(VALID, false);
-    }
-
-
-
-    @org.jetbrains.annotations.Nullable
-    @Override
-    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return null;//ModBlockEntities.HOLOGRAM_TILE_ENTITY.get().create(pos, state);
-    }
-
- */
 
 
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
-        return null;
+        return ModBlockEntities.HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE.instantiate(pos, state);
     }
 }

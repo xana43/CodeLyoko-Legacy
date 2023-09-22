@@ -52,7 +52,7 @@ public final class ZweihanderWeapon extends SwordItem {
             boolean isSelected) {
 
 
-        if (entityIn instanceof PlayerEntity player) {
+        if (entityIn instanceof final PlayerEntity player) {
             final ItemStack IStack = player.getStackInHand(Hand.OFF_HAND);
             if (IStack.getItem() == ModItems.ZWEIHANDER) {
 

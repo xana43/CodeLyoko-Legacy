@@ -20,7 +20,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldProperties;
+import net.minecraft.world.level.LevelProperties;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public record CardinalData() implements EntityComponentInitializer, LevelComponentInitializer {
 
@@ -29,7 +32,8 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     public void registerLevelComponentFactories(final @NotNull LevelComponentFactoryRegistry registry) {
         registry.register(XanaCalculator.XANA_DATA, worldProperties -> new XanaDataComponent());
         registry.register(LyokoInventorySave.LYOKO_INVENTORY_SAVE, worldProperties -> new InventorySaveComponent());
-        registry.register(PlayerSavedProfile.PLAYER_PROFILE_STORAGE_COMPONENT_KEY,worldProperties -> new PlayerProfileStorage());
+        registry.register(PlayerSavedProfile.PLAYER_PROFILE_STORAGE_COMPONENT_KEY,
+                worldProperties -> new PlayerProfileStorage());
     }
 
     @Override
@@ -139,8 +143,18 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         public static void saveProfile(final WorldProperties worldProperties,final PlayerEntity player)
         {
             PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).saveProfile(player);
-            //worldProperties.syncComponent(PLAYER_PROFILE_STORAGE_COMPONENT_KEY);
-            LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY,player.getServer());
+            LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY, Objects.requireNonNull(player.getServer()));
+        }
+        public static void updateProfile(final WorldProperties worldProperties,final PlayerProfile profile)
+        {
+            final PlayerProfile oldProfile = getPlayerProfile(worldProperties, profile.getPlayer());
+            if(oldProfile.equals(profile))
+            {
+                throw new RuntimeException("no profile change");
+            }
+            PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).updatePlayerProfile(profile);
+            LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY,Objects.requireNonNull(profile.getPlayer()
+                    .getServer()));
         }
         public static PlayerProfile getPlayerProfile(final WorldProperties worldProperties,final PlayerEntity player)
         {

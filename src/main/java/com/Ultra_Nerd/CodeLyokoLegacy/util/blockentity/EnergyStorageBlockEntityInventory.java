@@ -20,7 +20,13 @@ public abstract class EnergyStorageBlockEntityInventory extends SidedInventoryTi
         super(type, pos, state, inventorySize);
         maxExtract = Optional.ofNullable(maxExtract).orElse(0L);
         maxInsert = Optional.ofNullable(maxInsert).orElse(0L);
-        energyStorage = new SimpleEnergyStorage(capacity, maxInsert, maxExtract);
+        energyStorage = new SimpleEnergyStorage(capacity, maxInsert, maxExtract){
+            @Override
+            protected void onFinalCommit() {
+                super.onFinalCommit();
+                markDirty();
+            }
+        };
     }
 
     public final EnergyStorage getEnergyStorage() {

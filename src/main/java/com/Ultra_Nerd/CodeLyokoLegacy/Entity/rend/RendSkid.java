@@ -1,31 +1,35 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
+import net.minecraft.block.Blocks;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Frustum;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
+import net.minecraft.world.LightType;
 
 
 public final class RendSkid extends EntityRenderer<EntitySkid> {
-    //private static final BakedModel SkidBladnir;
+    private static final Identifier TEXTURE = CodeLyokoMain.codeLyokoPrefix("textures/entity/skid/da4cdc01.png");
+    private static final MinecraftClient mc = MinecraftClient.getInstance();
+    private static BakedModel SkidBlanirModel;
 
-    static {
-        //SkidBladnir = Myron.getModel(CodeLyokoMain.codeLyokoPrefix("entity/skid/skid"));
-    }
-
-
-    private RendSkid(final EntityRendererFactory.Context ctx) {
+    public RendSkid(final EntityRendererFactory.Context ctx) {
         super(ctx);
+        SkidBlanirModel = mc.getBakedModelManager().getModel(EntitySkid.getSkidLocation());
     }
 
     @Override
     public Identifier getTexture(final EntitySkid entity) {
-        return SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE;
+        return TEXTURE;
     }
 
     @Override
@@ -33,10 +37,9 @@ public final class RendSkid extends EntityRenderer<EntitySkid> {
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
         matrices.push();
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(360 - yaw));
-        //MinecraftClient.getInstance().getBlockRenderManager().getModelRenderer()
-        //      .render(entity.world, SkidBladnir, Blocks.AIR.getDefaultState(), entity.getBlockPos(), matrices,
-        //            vertexConsumers.getBuffer(RenderLayer.getSolid()),
-        //          false, entity.world.random, 0, 0);
+        mc.getBlockRenderManager().getModelRenderer().render(matrices.peek(),
+                vertexConsumers.getBuffer(RenderLayer.getSolid()),Blocks.AIR.getDefaultState(),SkidBlanirModel,1,1,1,
+                light,0);
         matrices.pop();
     }
 

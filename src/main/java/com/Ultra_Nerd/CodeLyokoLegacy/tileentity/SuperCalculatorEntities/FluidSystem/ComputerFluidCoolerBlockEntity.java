@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities;
+package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.FluidSystem;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
@@ -18,9 +18,13 @@ import net.minecraft.block.TorchBlock;
 import net.minecraft.client.particle.FireSmokeParticle;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.NotNull;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 public final class ComputerFluidCoolerBlockEntity extends EnergyStorageBlockEntity {

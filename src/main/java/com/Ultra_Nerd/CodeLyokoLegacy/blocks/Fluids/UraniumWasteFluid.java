@@ -40,7 +40,7 @@ public abstract class UraniumWasteFluid extends LyokoFluid {
 
         @Override
         protected boolean isInfinite(final World world) {
-            return true;
+            return false;
         }
 
         @Override

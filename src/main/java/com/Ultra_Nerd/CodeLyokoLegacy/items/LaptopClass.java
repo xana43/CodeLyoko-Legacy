@@ -2,8 +2,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.LapTopHeirarichy.MainLaptopScreen;
-import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,20 +13,18 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import team.reborn.energy.api.EnergyStorage;
-import team.reborn.energy.api.EnergyStorageUtil;
-import team.reborn.energy.api.base.SimpleBatteryItem;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
 
 
 public final class LaptopClass extends Item implements SimpleEnergyItem{
 
-
-    public LaptopClass(@NotNull Settings properties) {
+    private final long capacity,maxInput,maxOutput;
+    public LaptopClass(@NotNull Settings properties,final long capacity,final long maxInput,final long maxOutput) {
         super(properties);
-
+        this.capacity = capacity;
+        this.maxInput = maxInput;
+        this.maxOutput = maxOutput;
     }
 
     @Override
@@ -40,6 +36,7 @@ public final class LaptopClass extends Item implements SimpleEnergyItem{
         if (getStoredEnergy(stack) <= 0) {
             stack.setDamage(0);
         }
+
     }
 
 
@@ -76,17 +73,17 @@ public final class LaptopClass extends Item implements SimpleEnergyItem{
 
     @Override
     public long getEnergyCapacity(final ItemStack stack) {
-        return 90000;
+        return capacity;
     }
 
     @Override
     public long getEnergyMaxInput(final ItemStack stack) {
-        return 100;
+        return maxInput;
     }
 
     @Override
     public long getEnergyMaxOutput(final ItemStack stack) {
-        return 0;
+        return maxOutput;
     }
 
 

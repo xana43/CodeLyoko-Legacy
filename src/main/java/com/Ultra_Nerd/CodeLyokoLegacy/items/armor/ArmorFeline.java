@@ -63,10 +63,9 @@ public final class ArmorFeline extends LyokoArmor {
             if (!player.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
 
                 player.addStatusEffect(JUMPEFFECT);
-                //CodeLyokoMain.LOG.info(JUMPEFFECT.toString());
+
 
             }
-            //player.addStatusEffect(JUMPEFFECT);
             player.fallDistance = 0;
         }
 

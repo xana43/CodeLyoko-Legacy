@@ -1,7 +1,8 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities;
+package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.FluidSystem;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.SyncedBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.TickingBlockEntity;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -22,7 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 
-public final class ComputerFluidIntakeBlockEntity extends BlockEntity implements TickingBlockEntity{
+public final class ComputerFluidIntakeBlockEntity extends SyncedBlockEntity implements TickingBlockEntity{
 
     private final SingleVariantStorage<FluidVariant> internalTank =
             MethodUtil.FluidStorageCreation.createFluidStorage(this, Fluids.WATER);
@@ -40,15 +41,7 @@ public final class ComputerFluidIntakeBlockEntity extends BlockEntity implements
         return internalTank.variant.getFluid();
     }
 
-    @Override
-    public @NotNull Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
 
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
-    }
 
     @Override
     public void tick() {

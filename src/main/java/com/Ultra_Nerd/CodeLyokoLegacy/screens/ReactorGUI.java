@@ -16,43 +16,29 @@ import net.minecraft.util.math.ColorHelper;
 @Environment(EnvType.CLIENT)
 public final class ReactorGUI extends HandledScreen<ReactorScreenHandler> {
 
-    private static final Identifier TEXTURE = new Identifier("minecraft", "textures/gui/container/dispenser.png");
-
+    private boolean narrow;
+    private static final Identifier background = new Identifier("textures/gui/container/furnace.png");
     public ReactorGUI(final ReactorScreenHandler handler, final PlayerInventory inventory, final Text title) {
         super(handler, inventory, title);
     }
 
     @Override
-    protected void drawBackground(final DrawContext matrices, final float delta, final int mouseX, final int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        final int x = (width - backgroundWidth) >> 1;
-        final int y = (height - backgroundHeight) >> 1;
-        matrices.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
-    }
-
-    @Override
-    public void render(final DrawContext matrices, int mouseX, int mouseY, float delta) {
-        renderBackground(matrices);
-        final int x = (width - 36) >> 1;
-        final int y = (height - 117) >> 1;
-        super.render(matrices, mouseX, mouseY, delta);
-        drawMouseoverTooltip(matrices, mouseX, mouseY);
-        matrices.drawCenteredTextWithShadow(textRenderer, Text.translatable("computer_reactor.input.slot"), x, y,
-                ColorHelper.Argb.getArgb(255, 255, 255, 255));
-        matrices.drawCenteredTextWithShadow(textRenderer, Text.translatable("computer_reactor.output.slot"),
-                x + 36, y,
-                ColorHelper.Argb.getArgb(255, 255, 255, 255));
-        matrices.drawCenteredTextWithShadow(textRenderer,
-                Text.translatable("computer_reactor.energy.amount", handler.getEnergyAmount()), x + 36, y + 45,
-                ColorHelper.Argb.getArgb(255, 255, 255, 255));
-    }
-
-    @Override
     protected void init() {
         super.init();
-        // Center the title
+        narrow = width < 379;
         titleX = (backgroundWidth - textRenderer.getWidth(title)) >> 1;
+    }
+
+    @Override
+    protected void drawBackground(final DrawContext context, final float delta, final int mouseX, final int mouseY) {
+        context.drawTexture(background,x,y,0,0,backgroundWidth,backgroundHeight);
+        int results;
+        if(handler.isReacting())
+        {
+            results = handler.getUraniumProgress();
+            context.drawTexture(background,x+56,y+36+12 - results,176,12 - results,14,results + 1);
+        }
+        results = handler.getReactionProgress();
+        context.drawTexture(background,x + 79,y + 34,176,14,results+1,16);
     }
 }

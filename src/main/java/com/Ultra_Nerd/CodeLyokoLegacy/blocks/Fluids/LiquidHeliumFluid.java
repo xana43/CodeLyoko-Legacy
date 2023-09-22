@@ -42,7 +42,7 @@ public abstract class LiquidHeliumFluid extends LyokoFluid {
 
         @Override
         protected boolean isInfinite(final World world) {
-            return true;
+            return false;
         }
 
         @Override

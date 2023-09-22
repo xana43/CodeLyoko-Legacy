@@ -1,7 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SeaPylon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDamageSources;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
@@ -9,7 +11,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -19,12 +23,21 @@ public final class EntitySkid extends LyokoVehicleEntity {
     public EntitySkid(final EntityType<? extends BoatEntity> entityType, final World world) {
         super(entityType, world);
     }
-
-
+    private static final Identifier skidlocation = CodeLyokoMain.codeLyokoPrefix("entity" +
+            "/skid/skid");
+    public static Identifier getSkidLocation()
+    {
+        return skidlocation;
+    }
 
     @Override
     public boolean shouldDismountUnderwater() {
         return false;
+    }
+
+    @Override
+    public boolean isInvulnerableTo(final DamageSource damageSource) {
+        return damageSource == ModDamageSources.digitalLavaSource || damageSource == ModDamageSources.digitalOceanSource;
     }
 
     @Override

@@ -17,7 +17,6 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -27,13 +26,12 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.message.v1.ServerMessageEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.fabricmc.fabric.api.object.builder.v1.advancement.CriterionRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.advancement.criterion.Criterion;
+import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.data.DataTracker;
@@ -85,8 +83,7 @@ public record CodeLyokoMain() implements ModInitializer {
     public static final ItemGroup LYOKO_WEAPONS = FabricItemGroup.builder()
             .displayName(Text.translatable("itemGroup.lyoko_weapons"))
             .icon(() -> new ItemStack(ModItems.LASER_ARROWSHOOTER)).build();
-    private static final TrackedData<NbtCompound> peristent = DataTracker.registerData(ServerPlayerEntity.class,
-            TrackedDataHandlerRegistry.NBT_COMPOUND);
+
 
     @Contract("_ -> new")
     public static @NotNull Identifier codeLyokoPrefix(String name) {
@@ -215,7 +212,7 @@ public record CodeLyokoMain() implements ModInitializer {
                 ModBlockEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE);
         FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) ->switch (direction){
                     case NORTH -> blockEntity.waterIntake;
-                    default -> blockEntity.fluidStorage;
+                    default -> blockEntity.waterDistibution;
                 },
                 ModBlockEntities.COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE);
         FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) ->
@@ -308,22 +305,11 @@ public record CodeLyokoMain() implements ModInitializer {
 
         });
         //gives the player the first entry into the story
-        final String nbtdat = "first_join";
-        final AtomicReference<NbtCompound> t = new AtomicReference<>(new NbtCompound());
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-            handler.player.getDataTracker().startTracking(peristent, t.getAcquire());
-            if (!handler.player.getDataTracker().get(peristent).contains(nbtdat)) {
-                handler.player.getDataTracker().get(peristent).putBoolean(nbtdat, true);
-                handler.player.getInventory()
-                        .setStack(handler.player.getInventory().getEmptySlot(), new ItemStack(ModItems.STORY_BOOK));
-
-            } else {
-
-                t.set(handler.player.getDataTracker().get(peristent));
-            }
-
+            CardinalData.PlayerSavedProfile.saveProfile(server.getSaveProperties().getMainWorldProperties(), handler.player);
 
         });
+
 
         //xana
         final AtomicInteger tick = new AtomicInteger();
@@ -396,12 +382,19 @@ public record CodeLyokoMain() implements ModInitializer {
         });
     }
 
-
+    private static void registerFuels()
+    {
+        ModFuels.FUEL_MAP.forEach(FuelRegistry.INSTANCE::add);
+    }
     @Override
     public void onInitialize() {
+
         GeckoLib.initialize();
         PacketHandlerCommon.commonChannelRegistry();
         generalRegistration();
+        registerFuels();
+        ModRecipes.RecipeTypes.init();
+        ModRecipes.RecipeSerializers.init();
         SetupFunctions();
         registerDefaultAttributes();
         registerEnergyStorageBE();

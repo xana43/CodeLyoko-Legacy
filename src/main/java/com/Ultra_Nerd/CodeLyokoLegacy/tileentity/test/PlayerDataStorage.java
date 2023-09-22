@@ -8,7 +8,11 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -20,7 +24,15 @@ public final class PlayerDataStorage extends BlockEntity implements ExtendedScre
     public PlayerDataStorage(final BlockPos pos, final BlockState state) {
         super(ModBlockEntities.PLAYER_DATA_STORAGE_BLOCK_ENTITY_TYPE, pos, state);
     }
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return this.createNbt();
+    }
 
+    @Override
+    public @NotNull Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return  BlockEntityUpdateS2CPacket.create(this);
+    }
     @Override
     public void writeScreenOpeningData(final ServerPlayerEntity player, final PacketByteBuf buf) {
 

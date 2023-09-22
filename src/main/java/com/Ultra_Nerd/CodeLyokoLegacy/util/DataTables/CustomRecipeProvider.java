@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
@@ -28,9 +27,9 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
     public void generate(final Consumer<RecipeJsonProvider> exporter) {
         final ConditionJsonProvider NEVER_LOADED = DefaultResourceConditions.allModsLoaded(CodeLyokoMain.MOD_ID);
         final ConditionJsonProvider ALWAYS_LOADED = DefaultResourceConditions.not(NEVER_LOADED);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS,ModItems.TRUSTTY_SCREWDRIVER).input('i', Items.IRON_INGOT)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS,ModItems.TRUSTY_SCREWDRIVER).input('i', Items.IRON_INGOT)
                 .input('h', Items.COBWEB)
-                .criterion("knows_screwdriver", conditionsFromItem(ModItems.TRUSTTY_SCREWDRIVER))
+                .criterion("knows_screwdriver", conditionsFromItem(ModItems.TRUSTY_SCREWDRIVER))
                 .pattern(" i ")
                 .pattern("hih")
                 .pattern("hhh")

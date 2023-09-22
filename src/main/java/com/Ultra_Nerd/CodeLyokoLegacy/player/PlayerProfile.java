@@ -1,18 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import dev.onyxstudios.cca.api.v3.util.NbtSerializable;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LightningEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.ServerMetadata;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Arm;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public final class PlayerProfile implements NbtSerializable {
     private final PlayerEntity player;
@@ -31,7 +25,6 @@ public final class PlayerProfile implements NbtSerializable {
 
     public void refreshPlayerClass()
     {
-        CodeLyokoMain.LOG.info("refreshing player class");
       playerClassType = CardinalData.LyokoClass.getLyokoClass(player);
 
     }
@@ -57,20 +50,46 @@ public final class PlayerProfile implements NbtSerializable {
     public void fromTag(final @NotNull NbtCompound tag) {
         if(player != null) {
             //this.player.readNbt(tag);
-            this.DNA = tag.getString(player.getUuidAsString() + "-dna");
-            this.playerClassType = tag.getInt(player.getUuidAsString() + "-class");
-            this.timesEntered = tag.getInt(player.getUuidAsString() + "-entered");
+            this.DNA = tag.getString(player.getEntityName() + "-dna");
+            this.playerClassType = tag.getInt(player.getEntityName() + "-class");
+            this.timesEntered = tag.getInt(player.getEntityName() + "-entered");
         }
     }
 
     @Override
     public NbtCompound toTag(final @NotNull NbtCompound tag) {
         if(player != null) {
-            tag.putString(player.getUuidAsString() + "-dna", DNA);
-            tag.putInt(player.getUuidAsString() + "-class", playerClassType);
-            tag.putInt(player.getUuidAsString() + "-entered", timesEntered);
+            tag.putString(player.getEntityName() + "-dna", DNA);
+            tag.putInt(player.getEntityName() + "-class", playerClassType);
+            tag.putInt(player.getEntityName() + "-entered", timesEntered);
             //player.writeNbt(tag);
         }
         return tag;
     }
+    public NbtCompound toTag()
+    {
+        final NbtCompound compound = new NbtCompound();
+        if(player != null)
+        {
+            compound.putString(player.getEntityName() + "-dna", DNA);
+            compound.putInt(player.getEntityName() + "-class", playerClassType);
+            compound.putInt(player.getEntityName() + "-entered", timesEntered);
+            return compound;
+        }
+        return compound;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if(obj instanceof final PlayerProfile otherPlayerProfile)
+        {
+            return Objects.equals(this.DNA, otherPlayerProfile.DNA) && this.player == otherPlayerProfile.player && this.playerClassType == otherPlayerProfile.playerClassType && this.timesEntered == otherPlayerProfile.timesEntered;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
 }

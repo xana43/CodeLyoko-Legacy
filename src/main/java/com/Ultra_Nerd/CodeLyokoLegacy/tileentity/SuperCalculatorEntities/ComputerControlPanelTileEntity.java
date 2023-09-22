@@ -10,6 +10,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -32,14 +34,13 @@ public final class ComputerControlPanelTileEntity extends BlockEntity implements
     }
 
     @Override
-    public BlockEntityUpdateS2CPacket toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
-
-
-    @Override
     public NbtCompound toInitialChunkDataNbt() {
         return this.createNbt();
+    }
+
+    @Override
+    public @NotNull Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return  BlockEntityUpdateS2CPacket.create(this);
     }
 
     @Override

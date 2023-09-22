@@ -4,12 +4,15 @@ plugins {
 	id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
-sourceCompatibility = JavaVersion.VERSION_18
-targetCompatibility = JavaVersion.VERSION_18
 
-archivesBaseName = project.archives_base_name
+
+
 version = project.mod_version
 group = project.maven_group
+
+base {
+	archivesBaseName = project.archives_base_name
+}
 
 repositories {
 	// Add repositories to retrieve artifacts from in here.
@@ -110,7 +113,7 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
 	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	it.options.release = 18
+	it.options.release = 20
 }
 
 java {
@@ -118,6 +121,9 @@ java {
 	// if it is present.
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_20
+	targetCompatibility = JavaVersion.VERSION_20
+
 }
 
 jar {
@@ -152,6 +158,7 @@ loom{
 		vmArg "-Dfabric-api.datagen"
 		vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
 		vmArg "-Dfabric-api.datagen.strict-validation"
+		vmArg "-Dfabric-api.datagen.modid=${modid}"
 		ideConfigGenerated = true
 		runDir "build/datagen"
 		source sourceSets.main

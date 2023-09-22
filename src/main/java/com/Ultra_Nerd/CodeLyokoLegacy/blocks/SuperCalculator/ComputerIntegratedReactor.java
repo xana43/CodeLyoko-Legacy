@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
@@ -19,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public final class ComputerIntegratedReactor extends Block implements BlockEntityProvider {
+public final class ComputerIntegratedReactor extends AbstractFurnaceBlock implements BlockEntityProvider {
     public ComputerIntegratedReactor() {
         super(FabricBlockSettings.copy(Blocks.IRON_BLOCK).strength(6, 10).sounds(BlockSoundGroup.METAL));
     }
@@ -35,16 +36,18 @@ public final class ComputerIntegratedReactor extends Block implements BlockEntit
         return BlockRenderType.MODEL;
     }
 
+
+
     @Override
-    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
-        if (!world.isClient()) {
-            final NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
-            }
-        }
-        return ActionResult.SUCCESS;
+    protected void openScreen(final World world, final BlockPos pos, final PlayerEntity player) {
+       final BlockEntity blockEntity = world.getBlockEntity(pos);
+       if(blockEntity instanceof ComputerReactorTileEntityInventory)
+       {
+           player.openHandledScreen((NamedScreenHandlerFactory) blockEntity);
+
+       }
     }
+
     @Nullable
     @Override
     public NamedScreenHandlerFactory createScreenHandlerFactory(final BlockState state, final World world, final BlockPos pos) {

@@ -11,16 +11,32 @@ import org.jetbrains.annotations.Nullable;
 
 public final class ComputerCirculatorScreenHandler extends ScreenHandler {
     private final PlayerEntity player;
+    private byte[] flowDirections;
     private BlockPos currentPosition;
     public ComputerCirculatorScreenHandler(final int syncId,final PlayerEntity player) {
         super(ModScreenHandlers.COMPUTER_CIRCULATOR_SCREEN_HANDLER, syncId);
         currentPosition = BlockPos.ORIGIN;
+        flowDirections = new byte[]{};
         this.player = player;
     }
     public ComputerCirculatorScreenHandler(final int syncid,final PlayerEntity player,final PacketByteBuf buf)
     {
         this(syncid,player);
         currentPosition = buf.readBlockPos();
+        flowDirections = buf.readByteArray();
+    }
+
+    public byte[] getFlowDirections()
+    {
+        return flowDirections;
+    }
+    public BlockPos getCurrentPosition()
+    {
+        return currentPosition;
+    }
+    public PlayerEntity getPlayer()
+    {
+        return player;
     }
     @Override
     public ItemStack quickMove(final PlayerEntity player, final int slot) {
@@ -29,6 +45,6 @@ public final class ComputerCirculatorScreenHandler extends ScreenHandler {
 
     @Override
     public boolean canUse(final PlayerEntity player) {
-        return false;
+        return true;
     }
 }

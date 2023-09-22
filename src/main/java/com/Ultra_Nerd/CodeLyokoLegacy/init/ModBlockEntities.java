@@ -2,6 +2,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.FluidSystem.CirculatorPipeBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.FluidSystem.ComputerCirculatorBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.FluidSystem.ComputerFluidCoolerBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.FluidSystem.ComputerFluidIntakeBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.ComputerInterfaceTestTE;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.PlayerDataStorage;
 import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.VehicleBE;
@@ -36,8 +40,10 @@ public record ModBlockEntities() {
     public static final BlockEntityType<ComputerInterfaceTestTE> COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(ComputerInterfaceTestTE::new,ModBlocks.TESTUI).build();
     public static final BlockEntityType<HologramProjectorTileEntity> HOLOGRAM_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE =
-            FabricBlockEntityTypeBuilder.create(HologramProjectorTileEntity::new,ModBlocks.TEST_SPHERE).build();
+            FabricBlockEntityTypeBuilder.create(HologramProjectorTileEntity::new,ModBlocks.HOLOPROJECTOR).build();
     //tests
+    public static final BlockEntityType<HologramProjectorTileEntity> TEST_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE =
+            FabricBlockEntityTypeBuilder.create(HologramProjectorTileEntity::new,ModBlocks.TEST_SPHERE).build();
     public static final BlockEntityType<PlayerDataStorage> PLAYER_DATA_STORAGE_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(PlayerDataStorage::new,ModBlocks.TEST_PROFILE).build();
     public static final BlockEntityType<VehicleBE> VEHICLE_BE_BLOCK_ENTITY_TYPE =

@@ -171,13 +171,16 @@ public record ModItems() {
     public static final Item URANIUM_MELT = new Item(BaseSettings());
     public static final Item URANIUM_ISOTOPE238 = new Item(BaseSettings());
     public static final Item URANIUM_ISOTOPE235 = new Item(BaseSettings());
+    public static final Item URANIUM_BATTERY_STARTER = new Item(BaseSettings().rarity(CustomLyokoRarity.FRANZ_STARTER));
+    public static final Item URANIUM_BATTERY_NOVICE = new Item(BaseSettings().rarity(CustomLyokoRarity.FRANZ_NOVICE));
+    public static final Item URANIUM_BATTERY_FINAL = new Item(BaseSettings().rarity(CustomLyokoRarity.FRANZ_HOPPER));
     //for tools
     //public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final Item TRUSTTY_SCREWDRIVER = new TrustyScrewDriverItem(
+    public static final Item TRUSTY_SCREWDRIVER = new TrustyScrewDriverItem(
             new Item.Settings().maxCount(1));
     //public static final RegistryObject<Item> SOLDERING_IRON = ITEMS.register("soldering_iron", () -> new soldering_iron(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final Item JEREMY_LAPTOP = new LaptopClass(
-            new FabricItemSettings().maxCount(1));
+            new FabricItemSettings().maxCount(1),90000,100,0);
     //for buckets
     public static final BucketItem LIQUID_HELIUM_BUCKET = new BucketItem(ModFluids.STILL_LIQUID_HELIUM,
             new Item.Settings().maxCount(1));
@@ -296,7 +299,10 @@ public record ModItems() {
             .put("uranium_melt", URANIUM_MELT)
             .put("uranium_isotope238", URANIUM_ISOTOPE238)
             .put("uranium_isotope235", URANIUM_ISOTOPE235)
-            .put("trusty_screwdriver", TRUSTTY_SCREWDRIVER)
+            .put("uranium_battery_starter",URANIUM_BATTERY_STARTER)
+            .put("uranium_battery_novice",URANIUM_BATTERY_NOVICE)
+            .put("uranium_battery_final",URANIUM_BATTERY_FINAL)
+            .put("trusty_screwdriver", TRUSTY_SCREWDRIVER)
             //tools
             .put("jeremys_laptop", JEREMY_LAPTOP)
 

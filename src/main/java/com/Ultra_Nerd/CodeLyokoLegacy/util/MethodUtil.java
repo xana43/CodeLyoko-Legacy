@@ -54,6 +54,80 @@ public record MethodUtil() {
                     if (!blockEntity.getWorld().isClient) {
                         final PacketByteBuf buf = PacketByteBufs.create();
                         buf.writeBlockPos(blockEntity.getPos());
+                        buf.writeLong(getAmount());
+                        FluidVariant.of(allowedVariant).toPacket(buf);
+                        PlayerLookup.tracking(blockEntity).forEach(
+                                serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity, PacketHandlerCommon.FLUID_UPDATE, buf));
+
+                    }
+                }
+            };
+
+        }
+        public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity,
+                final Fluid... allowedVariant) {
+            return new SingleVariantStorage<FluidVariant>() {
+                @Override
+                protected FluidVariant getBlankVariant() {
+                    return FluidVariant.blank();
+                }
+
+                @Override
+                protected long getCapacity(final FluidVariant variant) {
+                    return FluidConstants.BUCKET;
+                }
+
+                @Override
+                protected boolean canInsert(final FluidVariant variant) {
+                    for (final Fluid fluid : allowedVariant)
+                    {
+                        return variant.equals(FluidVariant.of(fluid));
+                    }
+                    return false;
+                }
+
+                @Override
+                protected void onFinalCommit() {
+                    blockEntity.markDirty();
+                    if (!blockEntity.getWorld().isClient) {
+                        final PacketByteBuf buf = PacketByteBufs.create();
+                        buf.writeBlockPos(blockEntity.getPos());
+                        buf.writeLong(getAmount());
+                        for(final Fluid fluid : allowedVariant)
+                        {
+                            FluidVariant.of(fluid).toPacket(buf);
+                        }
+
+                        PlayerLookup.tracking(blockEntity).forEach(
+                                serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
+                                        PacketHandlerCommon.FLUID_UPDATE, buf));
+
+                    }
+                }
+            };
+
+        }
+        public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity) {
+            return new SingleVariantStorage<FluidVariant>() {
+                @Override
+                protected FluidVariant getBlankVariant() {
+                    return FluidVariant.blank();
+                }
+
+                @Override
+                protected long getCapacity(final FluidVariant variant) {
+                    return FluidConstants.BUCKET;
+                }
+
+
+
+                @Override
+                protected void onFinalCommit() {
+                    blockEntity.markDirty();
+                    if (!blockEntity.getWorld().isClient) {
+                        final PacketByteBuf buf = PacketByteBufs.create();
+                        buf.writeBlockPos(blockEntity.getPos());
+                        buf.writeLong(getAmount());
                         PlayerLookup.tracking(blockEntity).forEach(
                                 serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
                                         PacketHandlerCommon.FLUID_UPDATE, buf));
@@ -87,6 +161,8 @@ public record MethodUtil() {
                     if (!blockEntity.getWorld().isClient) {
                         final PacketByteBuf buf = PacketByteBufs.create();
                         buf.writeBlockPos(blockEntity.getPos());
+                        buf.writeLong(getAmount());
+                        allowedVariant.toPacket(buf);
                         PlayerLookup.tracking(blockEntity).forEach(
                                 serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
                                         PacketHandlerCommon.FLUID_UPDATE, buf));
@@ -120,6 +196,8 @@ public record MethodUtil() {
                     if (!blockEntity.getWorld().isClient) {
                         final PacketByteBuf buf = PacketByteBufs.create();
                         buf.writeBlockPos(blockEntity.getPos());
+                        buf.writeLong(getAmount());
+                        allowedVariant.toPacket(buf);
                         PlayerLookup.tracking(blockEntity).forEach(
                                 serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
                                         PacketHandlerCommon.FLUID_UPDATE, buf));
@@ -152,6 +230,9 @@ public record MethodUtil() {
                     blockEntity.markDirty();
                     if (!blockEntity.getWorld().isClient) {
                         final PacketByteBuf buf = PacketByteBufs.create();
+                        buf.writeBlockPos(blockEntity.getPos());
+                        buf.writeLong(getAmount());
+                        FluidVariant.of(allowedVariant).toPacket(buf);
                         PlayerLookup.tracking(blockEntity).forEach(
                                 serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
                                         PacketHandlerCommon.FLUID_UPDATE, buf));
@@ -184,6 +265,9 @@ public record MethodUtil() {
                     blockEntity.markDirty();
                     if (!blockEntity.getWorld().isClient) {
                         final PacketByteBuf buf = PacketByteBufs.create();
+                        buf.writeBlockPos(blockEntity.getPos());
+                        buf.writeLong(getAmount());
+                        FluidVariant.of(allowedVariant,compound).toPacket(buf);
                         PlayerLookup.tracking(blockEntity).forEach(
                                 serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
                                         PacketHandlerCommon.FLUID_UPDATE, buf));

@@ -14,6 +14,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.NotNull;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 public final class ComputerCoreTileEntity extends EnergyStorageBlockEntity {
@@ -39,10 +40,7 @@ public final class ComputerCoreTileEntity extends EnergyStorageBlockEntity {
         return poweredOn;
     }
 
-    @Override
-    public BlockEntityUpdateS2CPacket toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
+
 
     private void exchangeHeat()
     {
@@ -64,10 +62,7 @@ public final class ComputerCoreTileEntity extends EnergyStorageBlockEntity {
         return core_tank_chilled.amount;
     }
 
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.createNbt();
-    }
+
     @Override
     public void tick() {
         if(!world.isClient)

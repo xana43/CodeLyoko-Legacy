@@ -1,16 +1,15 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities;
+package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.FluidSystem;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.SyncedBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.TickingBlockEntity;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.FilteringStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
@@ -23,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil.FluidStorageCreation.createFluidStorage;
 
-public final class CirculatorPipeBlockEntity extends BlockEntity implements TickingBlockEntity {
+public final class CirculatorPipeBlockEntity extends SyncedBlockEntity implements TickingBlockEntity {
 
     private final SingleVariantStorage<FluidVariant> fluidStorage = createFluidStorage(this,Fluids.WATER);
     private final Storage<FluidVariant> input = FilteringStorage.insertOnlyOf(fluidStorage);
@@ -42,14 +41,7 @@ public final class CirculatorPipeBlockEntity extends BlockEntity implements Tick
 
 
 
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.createNbt();
-    }
-    @Override
-    public @NotNull Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
+
 
     @Override
     protected void writeNbt(final NbtCompound nbt) {
