@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ReactorScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
@@ -7,33 +8,34 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntityI
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.LyokoInventoryBlock;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.FilteringStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.AbstractCookingRecipe;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeManager;
-import net.minecraft.recipe.RecipeMatcher;
+import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.*;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class ComputerReactorTileEntityInventory extends EnergyStorageBlockEntityInventory implements LyokoInventoryBlock, NamedScreenHandlerFactory {
+public final class ComputerReactorTileEntityInventory extends EnergyStorageBlockEntityInventory implements LyokoInventoryBlock, NamedScreenHandlerFactory, RecipeInputProvider {
 private static final int REACTION_TIME_INDEX = 1;
 private static final int FUEL_MASS_INDEX = 2;
 private static final int IRRADIATION_INDEX  = 3;
@@ -61,7 +63,10 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
             };
 
         }
-
+        public Storage<FluidVariant> getWasteTank()
+        {
+            return FilteringStorage.extractOnlyOf(wasteTank);
+        }
         @Override
         public void set(final int index, final int value) {
             switch (index) {
@@ -141,7 +146,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
         boolean isGottenItemStackEmpty = !itemStack.isEmpty();
         if(isReacting() || isCurrentItemStackEmpty && isGottenItemStackEmpty && wasteTank.amount < wasteTank.getCapacity())
         {
-            Recipe<?> recipe;
+            Recipe recipe;
             if(isCurrentItemStackEmpty)
             {
                 recipe = matchGetter.getFirstMatch(this,world).orElse(null);
@@ -161,10 +166,10 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
                         reacting2 = true;
                         if (isGottenItemStackEmpty) {
 
-                            Item item = itemStack.getItem();
+                            final Item item = itemStack.getItem();
                             itemStack.decrement(1);
                             if (itemStack.isEmpty()) {
-                                Item item2 = item.getRecipeRemainder();
+                                final Item item2 = item.getRecipeRemainder();
                                 setStack(1, item2 == null ? ItemStack.EMPTY : new ItemStack(item2));
                             }
                         }
@@ -198,7 +203,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
             else {
                 irradiationTime = 0;
             }
-        } else if (irradiationTime > 0) {
+        } else if (!isReacting() && irradiationTime > 0) {
             irradiationTime = MathHelper.clamp(irradiationTime - 2, 0,irradiationTimeTotal);
         }
         if(reacting2)
@@ -216,7 +221,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
             final @Nullable Recipe<?> recipe,final DefaultedList<ItemStack> slots,final int count) {
         if (!slots.get(0).isEmpty() && recipe != null) {
             final ItemStack itemStack = recipe.getOutput(registryManager);
-            if (itemStack.isEmpty()) {
+            if (itemStack.isEmpty() || (itemStack.isIn(ModTags.ItemTags.URANIUM_BATTERIES) && itemStack.getDamage() == itemStack.getMaxDamage())) {
                 return false;
             } else {
                 final ItemStack itemStack2 = slots.get(1);
@@ -248,8 +253,13 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
             }
 
 
-
-            itemStack.decrement(1);
+            if(itemStack.isIn(ModTags.ItemTags.URANIUM_BATTERIES))
+            {
+                return itemStack.damage(10,Random.createLocal(),null);
+            }
+            else {
+                itemStack.decrement(1);
+            }
             return true;
         } else {
             return false;
@@ -267,6 +277,45 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
         }
     }
 
+    @Override
+    public boolean canInsert(final int slot, final ItemStack stack, final @Nullable Direction dir) {
+        return isValid(slot, stack);
+    }
+
+
+
+    @Override
+    public void setStack(final int slot, final ItemStack stack) {
+        final ItemStack itemStack = itemStacks.get(slot);
+        final boolean canSet = !stack.isEmpty() && ItemStack.canCombine(itemStack,stack);
+        itemStacks.set(slot, stack);
+        if(stack.getCount() > getMaxCountPerStack())
+        {
+            stack.setCount(getMaxCountPerStack());
+        }
+        if(slot == 0 && !canSet)
+        {
+            irradiationTimeTotal = getCookTime(world,this);
+            irradiationTime = 0;
+            markDirty();
+        }
+    }
+
+    @Override
+    public boolean isValid(final int slot, final ItemStack stack) {
+        if(slot == 1)
+        {
+            return false;
+        } else if(slot == 0) {
+            return true;
+        }else {
+            return canUseAsFuel(stack) || stack.isOf(ModItems.URANIUM_BATTERY_FINAL) || stack.isOf(ModItems.URANIUM_BATTERY_NOVICE) || stack.isOf(ModItems.URANIUM_BATTERY_STARTER);
+        }
+
+    }
+
+
+
     private static int getCookTime(final World world,final ComputerReactorTileEntityInventory reactorTileEntityInventory)
     {
         return reactorTileEntityInventory.matchGetter.getFirstMatch(reactorTileEntityInventory,world).map(AbstractCookingRecipe::getCookTime).orElse(200);
@@ -275,11 +324,13 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
     {
         if(recipe != null)
         {
+            CodeLyokoMain.LOG.debug("setting last recipe");
+            CodeLyokoMain.LOG.info("setting last recipe");
             final Identifier identifier = recipe.getId();
             this.recipesUsed.addTo(identifier,1);
         }
     }
-
+    @Override
     public void provideRecipeInputs(final RecipeMatcher finder) {
 
         for (final ItemStack itemStack : itemStacks) {

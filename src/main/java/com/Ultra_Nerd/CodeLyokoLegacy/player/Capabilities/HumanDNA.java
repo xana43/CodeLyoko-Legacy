@@ -45,14 +45,15 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
                 && world.getBlockState(blockPos.offset(Direction.UP, 1)).isOf(Blocks.AIR)
                 && world.getBlockState(blockPos.offset(Direction.UP, 2)).isOf(Blocks.AIR);
     }
+
     private void createDNA() {
         final StringBuilder DNASequence = new StringBuilder();
         final StringBuilder DNASequenceHelix2 = new StringBuilder();
 
         for (int i = 0; i < 100; i++)
         {
-            final Random random = Random.createLocal();
-            DNASequence.append(DNACoding[random.nextInt(DNACoding.length)]);
+
+            DNASequence.append(DNACoding[player.getRandom().nextInt(DNACoding.length)]);
             switch (DNASequence.toString().charAt(i))
             {
                 case 'A' -> DNASequenceHelix2.append('T');
@@ -66,11 +67,6 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
     }
 
     public String getDNA() {
-        if(DNA.isEmpty())
-        {
-            createDNA();
-            return DNA;
-        }
         return DNA;
     }
 

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "codelyoko:uranium_block_238"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "codelyoko:uranium_isotope238"
+  }
+}

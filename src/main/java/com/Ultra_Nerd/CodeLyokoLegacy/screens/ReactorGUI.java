@@ -6,6 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.ingame.FurnaceScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -27,6 +28,12 @@ public final class ReactorGUI extends HandledScreen<ReactorScreenHandler> {
         super.init();
         narrow = width < 379;
         titleX = (backgroundWidth - textRenderer.getWidth(title)) >> 1;
+    }
+
+    @Override
+    public void render(final DrawContext context, final int mouseX, final int mouseY, final float delta) {
+        super.render(context, mouseX, mouseY, delta);
+        this.drawMouseoverTooltip(context,mouseX,mouseY);
     }
 
     @Override

@@ -11,28 +11,24 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.screen.slot.Slot;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.ClickType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
 public final class SaberKatana extends SwordItem {
-    private final float attackdamage;
-    private final float attackspeed;
+    private final float attackDamage;
+    private final float attackSpeed;
     private boolean selectedOnce;
 
     public SaberKatana(final ToolMaterial toolMaterial, final int attackDamage, final float attackSpeed, final Settings settings) {
         super(toolMaterial, attackDamage, attackSpeed, settings);
-        this.attackspeed = attackSpeed;
-        this.attackdamage = attackDamage + toolMaterial.getAttackDamage();
+        this.attackSpeed = attackSpeed;
+        this.attackDamage = attackDamage + toolMaterial.getAttackDamage();
 
 
     }
@@ -57,10 +53,10 @@ public final class SaberKatana extends SwordItem {
         final Multimap<EntityAttribute, EntityAttributeModifier> multimap = HashMultimap.create();
         if (slot == EquipmentSlot.MAINHAND) {
             multimap.put(EntityAttributes.GENERIC_ATTACK_DAMAGE,
-                    new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon damage modifier", this.attackdamage,
+                    new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon damage modifier", this.attackDamage,
                             EntityAttributeModifier.Operation.ADDITION));
             multimap.put(EntityAttributes.GENERIC_ATTACK_SPEED,
-                    new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon speed modifier", this.attackspeed,
+                    new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon speed modifier", this.attackSpeed,
                             EntityAttributeModifier.Operation.ADDITION));
         }
         return multimap;

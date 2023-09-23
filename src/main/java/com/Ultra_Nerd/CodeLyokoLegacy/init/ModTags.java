@@ -43,6 +43,8 @@ public record ModTags() {
 
     public record ItemTags()
     {
+        public static final TagKey<Item> URANIUM_BATTERIES = TagKey.of(RegistryKeys.ITEM,
+                CodeLyokoMain.codeLyokoPrefix("uranium_batteries"));
         public static final TagKey<Item> URANIUM_ORE_TAG = createCommonTag("raw_uranium_ores");
         public static final TagKey<Item> URANIUM_ORES_TAG = createCommonTag("uranium_ores");
         private static TagKey<Item> createCommonTag(final String name)

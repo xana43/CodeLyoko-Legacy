@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public final class InventorySaveComponent implements AutoSyncedComponent {
 
-    private final HashMap<UUID, NbtList> playerInvSave = new HashMap<>();
+    private static final HashMap<UUID, NbtList> playerInvSave = new HashMap<>();
     private UUID playerUUID;
 
     public void savePlayerInventory(final PlayerEntity player) {

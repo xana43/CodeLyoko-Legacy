@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:uranium_block_238"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_uranium_isotope238": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "codelyoko:uranium_isotope238"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_uranium_isotope238",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:uranium_block_238"
+    ]
+  },
+  "sends_telemetry_event": false
+}

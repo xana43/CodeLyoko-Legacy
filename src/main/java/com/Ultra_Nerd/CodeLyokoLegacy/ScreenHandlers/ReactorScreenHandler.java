@@ -12,15 +12,14 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.AbstractCookingRecipe;
-import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.*;
 import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.screen.*;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
 
-public final class ReactorScreenHandler extends ScreenHandler {
+public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inventory> {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
     private final RecipeType<? extends AbstractCookingRecipe> recipeType;
@@ -55,27 +54,59 @@ public final class ReactorScreenHandler extends ScreenHandler {
         }
         addProperties(propertyDelegate);
     }
-    public void clearCraftingslots()
+    @Override
+    public void clearCraftingSlots()
     {
         getSlot(0).setStackNoCallbacks(ItemStack.EMPTY);
         getSlot(1).setStackNoCallbacks(ItemStack.EMPTY);
     }
+
+    @Override
+    public void populateRecipeFinder(final RecipeMatcher finder) {
+        if(inventory instanceof final RecipeInputProvider recipeInputProvider)
+        {
+            recipeInputProvider.provideRecipeInputs(finder);
+        }
+    }
+
+
+
+    @Override
+    public boolean matches(final Recipe<? super Inventory> recipe) {
+        return recipe.matches(inventory,world);
+    }
+
+    @Override
     public int getCraftingResultSlotIndex()
     {
         return 1;
     }
+    @Override
     public int getCraftingWidth()
     {
         return 1;
     }
+    @Override
     public int getCraftingHeight()
     {
         return 1;
     }
+    @Override
     public int getCraftingSlotCount()
     {
         return 2;
     }
+
+    @Override
+    public RecipeBookCategory getCategory() {
+        return null;
+    }
+
+    @Override
+    public boolean canInsertIntoSlot(final int index) {
+        return index != 1;
+    }
+
     public int getEnergyAmount() {
         return propertyDelegate.get(0);
     }
@@ -160,8 +191,5 @@ public final class ReactorScreenHandler extends ScreenHandler {
         return this.inventory.canPlayerUse(player);
     }
 
-    @Override
-    public boolean canInsertIntoSlot(final Slot slot) {
-        return slot.getIndex() != 1;
-    }
+
 }

@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.StoryBookGUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
@@ -8,6 +9,7 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.WrittenBookItem;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
@@ -84,6 +86,9 @@ public record EntryPool() {
 
         @Override
         public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
+            if(!world.isClient) {
+                CodeLyokoMain.usedItem.trigger((ServerPlayerEntity) user, user.getStackInHand(hand));
+            }
             user.unlockRecipes(new Identifier[]{ConstantUtil.RECIPIE_IDENTIFIERS[0]});
             return super.use(world, user, hand);
         }

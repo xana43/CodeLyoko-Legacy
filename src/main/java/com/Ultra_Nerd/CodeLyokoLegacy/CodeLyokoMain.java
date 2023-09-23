@@ -31,16 +31,12 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.advancement.criterion.Criteria;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.advancement.criterion.UsingItemCriterion;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -61,7 +57,6 @@ import team.reborn.energy.api.EnergyStorage;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 
 public record CodeLyokoMain() implements ModInitializer {
@@ -254,8 +249,9 @@ public record CodeLyokoMain() implements ModInitializer {
         FabricDefaultAttributeRegistry.register(ModEntities.MEGATANK, MegaTankEntity.registerAttributes());
 
     }
-    public static final CustomAdvancements.Criterions.EnteredLyoko enteredLyoko =
-            Criteria.register(new CustomAdvancements.Criterions.EnteredLyoko());
+    public static final CustomAdvancements.Criteria.EnteredLyoko enteredLyoko = net.minecraft.advancement.criterion.Criteria.register(new CustomAdvancements.Criteria.EnteredLyoko());
+    public static final CustomAdvancements.Criteria.UseItem usedItem =
+            Criteria.register(new CustomAdvancements.Criteria.UseItem());
     private static void SetupFunctions() {
 
 

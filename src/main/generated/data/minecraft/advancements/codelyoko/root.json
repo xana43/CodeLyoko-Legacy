@@ -1,38 +1,42 @@
 {
   "criteria": {
-    "entered_lyoko_advancement": {
+    "discovered_super_calculator_advancement": {
       "conditions": {
-        "next0": "codelyoko:volcano",
-        "next1": "codelyoko:carthage",
-        "next2": "codelyoko:desert",
-        "next3": "codelyoko:digital_ocean",
-        "next4": "codelyoko:forest",
-        "next5": "codelyoko:ice",
-        "next6": "codelyoko:frontier",
-        "next7": "codelyoko:mountain"
+        "item": {
+          "items": [
+            "codelyoko:story_book2"
+          ]
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {}
+          }
+        ]
       },
-      "trigger": "codelyoko:entered_lyoko_advancement"
+      "trigger": "codelyoko:use_item"
     }
   },
   "display": {
     "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
-      "translate": "entered.lyoko.description"
+      "translate": "discovered.super_calculator.description"
     },
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "codelyoko:bit"
+      "item": "codelyoko:computer_arm_core"
     },
     "show_toast": true,
     "title": {
-      "translate": "entered.lyoko"
+      "translate": "discovered.super_calculator"
     }
   },
   "requirements": [
     [
-      "entered_lyoko_advancement"
+      "discovered_super_calculator_advancement"
     ]
   ],
   "sends_telemetry_event": true
