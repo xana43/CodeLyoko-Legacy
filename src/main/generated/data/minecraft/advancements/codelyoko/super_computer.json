@@ -1,0 +1,43 @@
+{
+  "criteria": {
+    "discovered_super_calculator_advancement": {
+      "conditions": {
+        "item": {
+          "items": [
+            "codelyoko:story_book2"
+          ]
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {}
+          }
+        ]
+      },
+      "trigger": "codelyoko:use_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "discovered.super_calculator.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "codelyoko:cpu_package_quantum"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "discovered.super_calculator"
+    }
+  },
+  "requirements": [
+    [
+      "discovered_super_calculator_advancement"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

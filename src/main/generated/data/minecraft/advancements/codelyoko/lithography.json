@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:codelyoko/root",
+  "criteria": {
+    "build_lithography_machine": {
+      "conditions": {
+        "item": {
+          "items": [
+            "codelyoko:uv_machine"
+          ]
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {}
+          }
+        ]
+      },
+      "trigger": "codelyoko:use_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "build.litho.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "codelyoko:integrated_heat_spreader"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "build.litho"
+    }
+  },
+  "requirements": [
+    [
+      "build_lithography_machine"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
