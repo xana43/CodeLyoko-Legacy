@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.items.tools;
+package com.Ultra_Nerd.CodeLyokoLegacy.items.Tools;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.google.common.collect.HashMultimap;

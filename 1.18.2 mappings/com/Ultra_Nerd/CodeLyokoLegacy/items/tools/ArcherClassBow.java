@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.items.tools;
+package com.Ultra_Nerd.CodeLyokoLegacy.items.Tools;
 
 import net.minecraft.item.BowItem;
 import org.jetbrains.annotations.NotNull;

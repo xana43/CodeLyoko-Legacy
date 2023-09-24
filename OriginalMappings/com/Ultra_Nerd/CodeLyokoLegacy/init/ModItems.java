@@ -6,7 +6,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoArmorMaterial;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoTiers;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.Tools.*;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EquipmentSlot;
@@ -154,7 +154,7 @@ public record ModItems() {
     public static final Item URANIUM_MELT = new Item(BaseSettings());
     public static final Item URANIUM_ISOTOPE238 = new Item(BaseSettings());
     public static final Item URANIUM_ISOTOPE235 = new Item(BaseSettings());
-    //for tools
+    //for Tools
     //public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final Item TRUSTTY_SCREWDRIVER = new TrustyScrewDriverItem(new Item.Settings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
     //public static final RegistryObject<Item> SOLDERING_IRON = ITEMS.register("soldering_iron", () -> new soldering_iron(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
@@ -192,7 +192,7 @@ public record ModItems() {
     public static final ArmorItem JEREMY_CHESTPLATE = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.CHEST, ArmorGroup);
     public static final ArmorItem JEREMY_LEGGINGS = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.LEGS, ArmorGroup);
     public static final ArmorItem JEREMY_BOOTS = new ArmorArcher(LyokoArmorMaterial.ARCHER, EquipmentSlot.FEET, ArmorGroup);
-    //for buckets
+    //for Buckets
    public static final BucketItem LIQUID_HELIUM_BUCKET = new BucketItem(ModFluids.STILL_LIQUID_HELIUM, new Item.Settings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
 
     public static final WrittenBookItem STORY_BOOK2 = new EntryPool.Entry2(new Item.Settings().group(CodeLyokoMain.LYOKO_ITEM).maxCount(1));
@@ -305,7 +305,7 @@ public record ModItems() {
             .put("uranium_isotope238",URANIUM_ISOTOPE238)
             .put("uranium_isotope235",URANIUM_ISOTOPE235)
             .put("trusty_screwdriver",TRUSTTY_SCREWDRIVER)
-            //tools
+            //Tools
             .put("jeremys_laptop",JEREMY_LAPTOP)
             //weapons
             .put("digital_saber",DIGITAL_SABER)

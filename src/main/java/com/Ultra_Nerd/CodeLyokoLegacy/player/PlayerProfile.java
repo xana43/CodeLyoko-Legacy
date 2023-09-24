@@ -13,6 +13,7 @@ public final class PlayerProfile implements NbtSerializable {
     private int playerClassType;
     private String DNA;
     private int timesEntered = 0;
+    private boolean firstJoin;
     public PlayerProfile(final PlayerEntity player)
     {
         this.player = player;
@@ -27,6 +28,14 @@ public final class PlayerProfile implements NbtSerializable {
     {
       playerClassType = CardinalData.LyokoClass.getLyokoClass(player);
 
+    }
+    public void setFirstJoin(final boolean firstJoin)
+    {
+        this.firstJoin = firstJoin;
+    }
+    public boolean getFirstJoin()
+    {
+        return this.firstJoin;
     }
     public void incrementEntered()
     {
@@ -45,7 +54,6 @@ public final class PlayerProfile implements NbtSerializable {
         return DNA;
     }
 
-
     @Override
     public void fromTag(final @NotNull NbtCompound tag) {
         if(player != null) {
@@ -53,29 +61,28 @@ public final class PlayerProfile implements NbtSerializable {
             this.DNA = tag.getString(player.getEntityName() + "-dna");
             this.playerClassType = tag.getInt(player.getEntityName() + "-class");
             this.timesEntered = tag.getInt(player.getEntityName() + "-entered");
+            this.firstJoin = tag.getBoolean(player.getEntityName() + "-joined");
         }
     }
-
-    @Override
-    public NbtCompound toTag(final @NotNull NbtCompound tag) {
+    private void toCommonTag(final @NotNull NbtCompound tag)
+    {
         if(player != null) {
             tag.putString(player.getEntityName() + "-dna", DNA);
             tag.putInt(player.getEntityName() + "-class", playerClassType);
             tag.putInt(player.getEntityName() + "-entered", timesEntered);
+            tag.putBoolean(player.getEntityName()+"-joined",firstJoin);
             //player.writeNbt(tag);
         }
+    }
+    @Override
+    public NbtCompound toTag(final @NotNull NbtCompound tag) {
+       toCommonTag(tag);
         return tag;
     }
     public NbtCompound toTag()
     {
         final NbtCompound compound = new NbtCompound();
-        if(player != null)
-        {
-            compound.putString(player.getEntityName() + "-dna", DNA);
-            compound.putInt(player.getEntityName() + "-class", playerClassType);
-            compound.putInt(player.getEntityName() + "-entered", timesEntered);
-            return compound;
-        }
+        toCommonTag(compound);
         return compound;
     }
 
@@ -83,7 +90,7 @@ public final class PlayerProfile implements NbtSerializable {
     public boolean equals(final Object obj) {
         if(obj instanceof final PlayerProfile otherPlayerProfile)
         {
-            return Objects.equals(this.DNA, otherPlayerProfile.DNA) && this.player == otherPlayerProfile.player && this.playerClassType == otherPlayerProfile.playerClassType && this.timesEntered == otherPlayerProfile.timesEntered;
+            return Objects.equals(this.DNA, otherPlayerProfile.DNA) && this.player == otherPlayerProfile.player && this.playerClassType == otherPlayerProfile.playerClassType && this.timesEntered == otherPlayerProfile.timesEntered && this.firstJoin == otherPlayerProfile.firstJoin;
         }
         else
         {

@@ -1,12 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.client.itemRenderers;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.ForceFieldEmitter;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.Tools.ForceFieldEmitter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;

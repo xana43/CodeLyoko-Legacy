@@ -8,6 +8,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerClient;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.Tools.Buckets.CustomColorBucket;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.linker;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoRingParticle;
@@ -29,12 +30,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.model.BakedModelManagerHelper;
-import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
-import net.fabricmc.fabric.api.client.model.loading.v1.FabricBakedModelManager;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
@@ -50,15 +47,8 @@ import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.BakedModelManager;
-import net.minecraft.client.render.model.BuiltinBakedModel;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -67,8 +57,6 @@ import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
-
-import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
 public record CodeLyokoClient() implements ClientModInitializer {
@@ -157,8 +145,11 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 new SimpleFluidRenderHandler(CodeLyokoMain.codeLyokoPrefix("block/digital_flowing_lava"),
                         CodeLyokoMain.codeLyokoPrefix("block/digital_flowing_lava")));
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_LIQUID_HELIUM, ModFluids.FLOWING_LIQUID_HELIUM,
-                new SimpleFluidRenderHandler(CodeLyokoMain.codeLyokoPrefix("block/liquid_helium_flow"),
-                        CodeLyokoMain.codeLyokoPrefix("block/liquid_helium_still")));
+                new SimpleFluidRenderHandler(CodeLyokoMain.codeLyokoPrefix("block/liquid_helium_still"),
+                        CodeLyokoMain.codeLyokoPrefix("block/liquid_helium_flow")));
+        FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_URANIUM,ModFluids.FLOWING_URANIUM,
+                new SimpleFluidRenderHandler(CodeLyokoMain.codeLyokoPrefix("block/uranium_still"),
+                        CodeLyokoMain.codeLyokoPrefix("block/uranium_flow")));
 
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_LIQUID_HELIUM,
                 ModFluids.FLOWING_LIQUID_HELIUM, ModFluids.STILL_DIGITAL_OCEAN, ModFluids.FLOWING_DIGITAL_OCEAN);
@@ -260,6 +251,24 @@ public record CodeLyokoClient() implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.VEHICLE_MATERIALIZE_TEST_HANDLER_SCREEN_HANDLER_TYPE,
                 VehicleMaterializationTest::new);
     }
+    private static void registerColorProviders()
+    {
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
+
+
+                {
+                    return switch (stack.getTranslationKey()) {
+                        case "item.codelyoko.story_book" -> 0x00008B;
+                        case "item.codelyoko.story_book2" -> ColorHelper.Argb.getArgb(255, 255, 0, 0);
+                        default -> 1;
+                    };
+
+                    //return 0x00008B;
+                }
+
+                , ModItems.STORY_BOOK, ModItems.STORY_BOOK2);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ((CustomColorBucket)stack.getItem()).getFluidColor(tintIndex),ModItems.LIQUID_HELIUM_BUCKET);
+    }
     @Override
     public void onInitializeClient() {
         SpecialModelLoaderEvents.LOAD_SCOPE.register(location -> CodeLyokoMain.MOD_ID.equals(location.getNamespace()));
@@ -281,20 +290,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         FluidRenderRegistry();
         handledScreenRegistration();
         //client events
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
-
-
-                {
-                    return switch (stack.getTranslationKey()) {
-                        case "item.codelyoko.story_book" -> 0x00008B;
-                        case "item.codelyoko.story_book2" -> ColorHelper.Argb.getArgb(255, 255, 0, 0);
-                        default -> 1;
-                    };
-
-                    //return 0x00008B;
-                }
-
-                , ModItems.STORY_BOOK, ModItems.STORY_BOOK2);
+        registerColorProviders();
         registerItemPredicates();
         //effect registry
         DimensionEffectsAccessor.getIdentifierMap().put(CodeLyokoMain.codeLyokoPrefix("codelyoko_effects_general"),

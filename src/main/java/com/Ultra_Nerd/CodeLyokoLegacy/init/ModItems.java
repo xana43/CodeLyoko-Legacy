@@ -2,8 +2,9 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.items.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.SpawnItems.LyokoSpawnItem;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.Tools.Buckets.CustomColorBucket;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.items.tools.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.Tools.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CustomLyokoRarity;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoArmorMaterial;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.LyokoTiers;
@@ -12,6 +13,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.*;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.math.ColorHelper;
 
 public record ModItems() {
 
@@ -174,16 +176,16 @@ public record ModItems() {
     public static final Item URANIUM_BATTERY_STARTER = new Item(BaseSettings().rarity(CustomLyokoRarity.FRANZ_STARTER));
     public static final Item URANIUM_BATTERY_NOVICE = new Item(BaseSettings().rarity(CustomLyokoRarity.FRANZ_NOVICE));
     public static final Item URANIUM_BATTERY_FINAL = new Item(BaseSettings().rarity(CustomLyokoRarity.FRANZ_HOPPER));
-    //for tools
+    //for Tools
     //public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final Item TRUSTY_SCREWDRIVER = new TrustyScrewDriverItem(
             new Item.Settings().maxCount(1));
     //public static final RegistryObject<Item> SOLDERING_IRON = ITEMS.register("soldering_iron", () -> new soldering_iron(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final Item JEREMY_LAPTOP = new LaptopClass(
             new FabricItemSettings().maxCount(1),90000,100,0);
-    //for buckets
-    public static final BucketItem LIQUID_HELIUM_BUCKET = new BucketItem(ModFluids.STILL_LIQUID_HELIUM,
-            new Item.Settings().maxCount(1));
+    //for Buckets
+    public static final BucketItem LIQUID_HELIUM_BUCKET = new CustomColorBucket(ModFluids.STILL_LIQUID_HELIUM,
+            new Item.Settings().maxCount(1), ColorHelper.Argb.getArgb(3,255,255,255));
     public static final WrittenBookItem STORY_BOOK2 = new EntryPool.Entry2(
             new Item.Settings().maxCount(1));
     public static final MusicDiscItem LYOKO_THEME = new LyokoDisc((int) 3.2e23f, ModSounds.LYOKO_THEME,
@@ -195,7 +197,6 @@ public record ModItems() {
             .put("hoverboard_spawn_item", HOVERBOARD_SPAWN_ITEM)
             .put("overboard_spawn_item",OVERBOARD_SPAWN_ITEM)
 //Items
-
             .put("apu_package_arm", APU_PACKAGE_ARM)
             .put("apu_package_x86", APU_PACKAGE_x86)
             .put("apu_package_asic", APU_PACKAGE_ASIC)
@@ -303,7 +304,7 @@ public record ModItems() {
             .put("uranium_battery_novice",URANIUM_BATTERY_NOVICE)
             .put("uranium_battery_final",URANIUM_BATTERY_FINAL)
             .put("trusty_screwdriver", TRUSTY_SCREWDRIVER)
-            //tools
+            //Tools
             .put("jeremys_laptop", JEREMY_LAPTOP)
 
 

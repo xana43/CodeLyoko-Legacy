@@ -25,7 +25,7 @@ public record Generator() implements DataGeneratorEntrypoint {
         pack.addProvider(CustomEntityTags::new);
         pack.addProvider(LanguageGenerators.EnglishProvider::new);
         pack.addProvider(LanguageGenerators.FrenchProvider::new);
-        //pack.addProvider(ModelGenerator::new);
+        pack.addProvider(ModelGenerator::new);
         pack.addProvider(CustomAdvancements::new);
     }
 

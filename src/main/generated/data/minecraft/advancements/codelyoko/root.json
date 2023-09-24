@@ -1,10 +1,10 @@
 {
   "criteria": {
-    "discovered_super_calculator_advancement": {
+    "found_schematics": {
       "conditions": {
         "item": {
           "items": [
-            "codelyoko:story_book2"
+            "codelyoko:story_book"
           ]
         },
         "player": [
@@ -15,28 +15,28 @@
           }
         ]
       },
-      "trigger": "codelyoko:use_item"
+      "trigger": "minecraft:using_item"
     }
   },
   "display": {
     "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
-      "translate": "discovered.super_calculator.description"
+      "translate": "starter.schematic.description"
     },
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "codelyoko:computer_arm_core"
+      "item": "codelyoko:cpu_die_arm"
     },
     "show_toast": true,
     "title": {
-      "translate": "discovered.super_calculator"
+      "translate": "starter.schematic"
     }
   },
   "requirements": [
     [
-      "discovered_super_calculator_advancement"
+      "found_schematics"
     ]
   ],
   "sends_telemetry_event": true

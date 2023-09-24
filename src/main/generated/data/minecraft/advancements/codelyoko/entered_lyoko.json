@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:codelyoko/root",
+  "parent": "minecraft:codelyoko/super_computer",
   "criteria": {
     "entered_lyoko_advancement": {
       "conditions": {

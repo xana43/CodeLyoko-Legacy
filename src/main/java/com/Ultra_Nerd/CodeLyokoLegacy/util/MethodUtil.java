@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -8,24 +9,82 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
+import net.minecraft.advancement.Advancement;
+import net.minecraft.advancement.AdvancementFrame;
+import net.minecraft.advancement.criterion.CriterionConditions;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.data.client.Model;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
+import java.util.function.Consumer;
 
 public record MethodUtil() {
     public record ArmorMethods() {
         public static boolean isArmorSlot(final int slot) {
             return slot == EquipmentSlot.CHEST.getEntitySlotId() || slot == EquipmentSlot.LEGS.getEntitySlotId()
                     || slot == EquipmentSlot.FEET.getEntitySlotId() || slot == EquipmentSlot.HEAD.getEntitySlotId();
+        }
+    }
+    public record AdvancementCreation()
+    {
+        private static final Identifier DEFAULT_BACKGROUND  =new Identifier("textures/gui/advancements/backgrounds" +
+                "/adventure.png");
+        public static Advancement create(final Advancement parent,
+                final ItemConvertible itemConvertible,
+                final Text name,
+                final Text description,final AdvancementFrame frameType,
+                final boolean showToast,final boolean announceToChat, final boolean hidden,
+                final String criteriaName,final CriterionConditions conditions,final String location,
+                final Consumer<Advancement> advancementConsumer)
+        {
+            return Advancement.Builder.create()
+                    .parent(parent)
+                    .display(itemConvertible,name,description,null,frameType,showToast,
+                            announceToChat,hidden).criterion(criteriaName,conditions)
+                    .build(advancementConsumer,convertToPath(location));
+        }
+        private static String convertToPath(final String location)
+        {
+
+            if(location.charAt(0) == '/')
+            {
+                    return CodeLyokoMain.MOD_ID + location;
+            }
+            return CodeLyokoMain.MOD_ID +'/'+ location;
+        }
+        public static Advancement create(
+                final ItemConvertible itemConvertible,
+                final Text name,
+                final Text description,@Nullable final Identifier background,final AdvancementFrame frameType,
+                final boolean showToast,final boolean announceToChat, final boolean hidden,
+                final String criteriaName,final CriterionConditions conditions,final String location,
+                final Consumer<Advancement> advancementConsumer)
+        {
+            if(background == null || background.toString().isEmpty())
+            {
+                return Advancement.Builder.create()
+                        .display(itemConvertible,name,description,DEFAULT_BACKGROUND,frameType,showToast,
+                                announceToChat,hidden).criterion(criteriaName,conditions)
+                        .build(advancementConsumer, convertToPath(location));
+            }
+            return Advancement.Builder.create()
+                    .display(itemConvertible,name,description,background,frameType,showToast,
+                            announceToChat,hidden).criterion(criteriaName,conditions)
+                    .build(advancementConsumer, convertToPath(location));
         }
     }
 

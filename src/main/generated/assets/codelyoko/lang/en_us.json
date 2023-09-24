@@ -111,6 +111,7 @@
   "death.attack.codelyoko:digital_ocean": "%s was swept away by the digital current",
   "death.attack.codelyoko:marabunta": "%s was eaten away by the Marabunta",
   "discovered.super_calculator": "And so it begins",
+  "discovered.super_calculator.description": "you'd found the schematics for an unknown device, what does it do?",
   "entity.codelyoko.blok": "Blok",
   "entity.codelyoko.fan": "Thrown Fan",
   "entity.codelyoko.hornet": "Hornet",

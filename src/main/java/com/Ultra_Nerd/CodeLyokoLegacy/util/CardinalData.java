@@ -32,8 +32,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     public void registerLevelComponentFactories(final @NotNull LevelComponentFactoryRegistry registry) {
         registry.register(XanaCalculator.XANA_DATA, worldProperties -> new XanaDataComponent());
         registry.register(LyokoInventorySave.LYOKO_INVENTORY_SAVE, worldProperties -> new InventorySaveComponent());
-        registry.register(PlayerSavedProfile.PLAYER_PROFILE_STORAGE_COMPONENT_KEY,
-                worldProperties -> new PlayerProfileStorage());
+        registry.register(PlayerSavedProfile.PLAYER_PROFILE_STORAGE_COMPONENT_KEY, worldProperties -> new PlayerProfileStorage());
     }
 
     @Override

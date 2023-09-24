@@ -29,19 +29,16 @@ public final class LiquidHelium extends FluidBlock {
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         if (entity instanceof final LivingEntity livingEntity) {
 
-            livingEntity.handSwingProgress = 0;
-            livingEntity.inPowderSnow = true;
-            livingEntity.setOnFire(false);
-            livingEntity.slowMovement(state,new Vec3d(0.8999999761581421, 1.5, 0.8999999761581421));
-            livingEntity.damage(entity.getWorld().getDamageSources().freeze(), random.nextInt(3));
-            if (livingEntity instanceof final PlayerEntity player) {
-                if (player.isCreative()) {
-                    player.inPowderSnow = false;
-                }
+            if(!livingEntity.isInvulnerable()) {
+                livingEntity.handSwingProgress = 0;
+                livingEntity.inPowderSnow = true;
+                livingEntity.setOnFire(false);
+                livingEntity.slowMovement(state, new Vec3d(0.8999999761581421, 1.5, 0.8999999761581421));
+                livingEntity.damage(entity.getWorld().getDamageSources().freeze(), random.nextInt(3));
             }
-
         }
     }
+
 
 
     @Override
