@@ -163,9 +163,12 @@ public record ModItems() {
     public static final Item SOLDER_BLOB = new Item(BaseSettings());
     public static final WrittenBookItem STORY_BOOK = new EntryPool.Entry1(new Item.Settings().maxCount(1));
     public static final Item SILICON_WAFER = new WaferText(BaseSettings().maxDamage(4));
+    public static final Item TRIURANIUM_OCTAOXIDE = new Item(BaseSettings());
+    public static final Item TRUSTY_SCREWDRIVER = new TrustyScrewDriverItem(
+            new Item.Settings().maxCount(1));
     public static final Item URANIUM_SILICATE = new Item(BaseSettings());
     public static final Item URANIUM_SILICON_PLATE = new Item(BaseSettings());
-    public static final Item TRIURANIUM_OCTAOXIDE = new Item(BaseSettings());
+
     public static final Item TERABIT = new Item(BaseSettings());
     public static final Item TERABYTE = new Item(BaseSettings());
     public static final Item TITANIUM_INGOT = new Item(BaseSettings());
@@ -176,10 +179,13 @@ public record ModItems() {
     public static final Item URANIUM_BATTERY_STARTER = new Item(BaseSettings().rarity(CustomLyokoRarity.FRANZ_STARTER));
     public static final Item URANIUM_BATTERY_NOVICE = new Item(BaseSettings().rarity(CustomLyokoRarity.FRANZ_NOVICE));
     public static final Item URANIUM_BATTERY_FINAL = new Item(BaseSettings().rarity(CustomLyokoRarity.FRANZ_HOPPER));
+
+    public static final Item XANA_SYMBOL = new DecorationItem(ModEntities.XANA_SYMBOL_ENTITY_TYPE,
+            BaseSettings().rarity(CustomLyokoRarity.FRANZ_HOPPER).maxCount(1));
+
     //for Tools
     //public static final RegistryObject<Item> DIGITAL_SAMPLER = ITEMS.register("digital_sampler", () -> new ShovelItem(LyokoTiers.LyokoTool, 2, 2, new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
-    public static final Item TRUSTY_SCREWDRIVER = new TrustyScrewDriverItem(
-            new Item.Settings().maxCount(1));
+
     //public static final RegistryObject<Item> SOLDERING_IRON = ITEMS.register("soldering_iron", () -> new soldering_iron(new Item.Properties().tab(CodeLyokoMain.LYOKO_ITEMS)));
     public static final Item JEREMY_LAPTOP = new LaptopClass(
             new FabricItemSettings().maxCount(1),90000,100,0);
@@ -310,6 +316,7 @@ public record ModItems() {
 
             .put("lyokodisc", LYOKO_THEME)
             .put("liquid_helium_bucket", LIQUID_HELIUM_BUCKET)
+            .put("xana_symbol_item",XANA_SYMBOL)
             .build();
 
     //for weapons

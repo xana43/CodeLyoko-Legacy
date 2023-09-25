@@ -18,6 +18,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.resource.ResourceReload;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -25,8 +26,13 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-public record MixinHooks() {
+import java.util.List;
 
+public record MixinHooks() {
+    public static void customSplashTexts(final List<String> splashtexts)
+    {
+        splashtexts.add(Text.translatable("splashscreen.entry1").getString());
+    }
     public static void LyokoBlockPlacer(final World world, final BlockPos pos,@Nullable final LivingEntity placer, final CallbackInfo ci)
     {
         final ActionResult result = PlaceBlockEvent.EVENT.invoker().onPlace(placer, world, pos);

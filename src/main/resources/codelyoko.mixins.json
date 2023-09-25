@@ -1,7 +1,7 @@
 {
     "required": true,
     "package": "com.Ultra_Nerd.CodeLyokoLegacy.mixin",
-    "compatibilityLevel": "JAVA_18",
+    "compatibilityLevel": "JAVA_17",
     "mixins": [
         "BlockMixin",
         "DisableStatusEffectRenderer",
@@ -13,6 +13,7 @@
         "util.LyokoRarityMixin"
     ],
     "client": [
+        "AddedSplashTexts",
         "CustomTitleLogo",
         "HUD",
         "ReplaceTitleScreen"

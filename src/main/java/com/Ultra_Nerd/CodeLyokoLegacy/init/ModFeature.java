@@ -30,7 +30,6 @@ public record ModFeature() {
     {
 
         CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s, configuredFeaturePlacedFeaturePair) -> ConfiguredFeatures.register(registerable,ConfiguredFeatures.of(s),Feature.TREE, configuredFeaturePlacedFeaturePair.getLeft().build()));
-
     }
 
     public static final ImmutableMap<String, Pair<TreeFeatureConfig.Builder, PlacedFeature>> CONFIGURED_TREE_IMMUTABLE_MAP = ImmutableMap.<String, Pair<TreeFeatureConfig.Builder, PlacedFeature>>builder()

@@ -24,6 +24,29 @@ import java.util.Arrays;
 import java.util.List;
 
 public record ModCriteria() {
+    public static final class InvokeClassChange extends AbstractCriterion<InvokeClassChange.Condition>
+    {
+        private static final Identifier ID = CodeLyokoMain.codeLyokoPrefix("class_change");
+        @Override
+        protected Condition conditionsFromJson(JsonObject obj, LootContextPredicate playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
+            return null;
+        }
+
+        @Override
+        public Identifier getId() {
+            return ID;
+        }
+
+        public static final class Condition extends AbstractCriterionConditions
+        {
+            private final int classID;
+            private int previousClassId;
+            public Condition(final Identifier id,final LootContextPredicate entity,final int classID) {
+                super(id, entity);
+                this.classID = classID;
+            }
+        }
+    }
     public static final class UseItem extends AbstractCriterion<UseItem.Condition>
     {
         private static final Identifier ID = CodeLyokoMain.codeLyokoPrefix("use_item");
