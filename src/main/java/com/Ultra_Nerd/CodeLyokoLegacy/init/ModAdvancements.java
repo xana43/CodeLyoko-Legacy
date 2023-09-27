@@ -29,10 +29,10 @@ public record ModAdvancements() {
                     AdvancementFrame.GOAL,true,true,false,"discovered_super_calculator_advancement",
                     ModCriteria.UseItem.Condition.create(ModItems.STORY_BOOK2),"super_computer",
                     advancementConsumer);
-            selectedClass = MethodUtil.AdvancementCreation.create(DiscoveredSuperCalculator,ModItems.XANA_SYMBOL,
-                    Text.translatable("lyoko.class.selected"),Text.translatable("lyoko.class.selected.desc"),
-                    AdvancementFrame.TASK,true,true,false,"selected_class",
-                    );
+            //selectedClass = MethodUtil.AdvancementCreation.create(DiscoveredSuperCalculator,ModItems.XANA_SYMBOL,
+              //      Text.translatable("lyoko.class.selected"),Text.translatable("lyoko.class.selected.desc"),
+                //    AdvancementFrame.TASK,true,true,false,"selected_class",ModCriteria.InvokeClassChange.Condition
+                  //  );
             EnteredLyokoAdvancement = MethodUtil.AdvancementCreation.create(DiscoveredSuperCalculator,ModItems.BIT,
                     Text.translatable("entered.lyoko"),Text.translatable("entered.lyoko.description"),
                     AdvancementFrame.GOAL,true,true,false,"entered_lyoko_advancement", ModCriteria.EnteredLyoko.Condition.create(

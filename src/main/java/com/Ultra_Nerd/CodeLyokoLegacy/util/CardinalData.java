@@ -14,14 +14,14 @@ import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
 import dev.onyxstudios.cca.api.v3.level.LevelComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.level.LevelComponentInitializer;
 import dev.onyxstudios.cca.api.v3.level.LevelComponents;
-import net.fabricmc.fabric.api.client.model.ModelResourceProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldProperties;
-import net.minecraft.world.level.LevelProperties;
 import org.jetbrains.annotations.NotNull;
+import software.bernie.geckolib.GeckoLib;
 
 import java.util.Objects;
 
@@ -38,10 +38,10 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     @Override
     public void registerEntityComponentFactories(final @NotNull EntityComponentFactoryRegistry registry) {
         registry.registerForPlayers(LyokoClass.LYOKOCLASS, it -> new PlayerClassComponent(),RespawnCopyStrategy.CHARACTER);
-        registry.registerForPlayers(MindHelmStress.MINDHELMSTRESS,player -> new MindHelmStressComponent());
+        registry.registerForPlayers(MindHelmStress.MINDHELMSTRESS,player -> new MindHelmStressComponent(),RespawnCopyStrategy.NEVER_COPY);
         registry.registerForPlayers(ReturnToScanner.RETURN_TO_SCANNER, PlayerScannerComponent::new,RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(HumanDNAAttribute.HUMAN_DNA_COMPONENT_KEY, HumanDNA::new, RespawnCopyStrategy.CHARACTER);
-        registry.registerForPlayers(CellularDamage.DEGENERATION_COMPONENT_KEY,CellularDegeneration::new);
+        registry.registerForPlayers(CellularDamage.DEGENERATION_COMPONENT_KEY,CellularDegeneration::new, RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(DigitalEnergyComponent.DIGITAL_ENERGY_COMPONENT_KEY,(player -> new DigitalEnergy()));
         registry.registerFor(EntitySkid.class,SkidBladnirNavData.SKID_BLADNIR_DATA_COMPONENT_KEY,SkidBladnirData::new);
     }
@@ -68,7 +68,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
             DIGITAL_ENERGY_COMPONENT_KEY.get(player).regenerateEnergy();
             DIGITAL_ENERGY_COMPONENT_KEY.sync(player);
         }
-        public static boolean isUsingenergy(final PlayerEntity player)
+        public static boolean isUsingEnergy(final PlayerEntity player)
         {
             return DIGITAL_ENERGY_COMPONENT_KEY.get(player).isUsingEnergy();
         }
@@ -139,25 +139,31 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         {
             return PLAYER_PROFILE_STORAGE_COMPONENT_KEY;
         }
-        public static void saveProfile(final WorldProperties worldProperties,final PlayerEntity player)
+        public static void saveProfile(final WorldProperties worldProperties,final ServerPlayerEntity player)
         {
             PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).saveProfile(player);
-            LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY, Objects.requireNonNull(player.getServer()));
         }
         public static void updateProfile(final WorldProperties worldProperties,final PlayerProfile profile)
         {
             final PlayerProfile oldProfile = getPlayerProfile(worldProperties, profile.getPlayer());
             if(oldProfile.equals(profile))
             {
-                throw new RuntimeException("no profile change");
+                return;
             }
             PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).updatePlayerProfile(profile);
             LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY,Objects.requireNonNull(profile.getPlayer()
                     .getServer()));
         }
-        public static PlayerProfile getPlayerProfile(final WorldProperties worldProperties,final PlayerEntity player)
+        public static void removePlayerProfile(final WorldProperties worldProperties,final ServerPlayerEntity player)
         {
-                return PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).getPlayerProfile(player);
+            PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).removePlayerProfile(player);
+            LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY, Objects.requireNonNull(player.getServer()));
+        }
+
+        public static PlayerProfile getPlayerProfile(final WorldProperties worldProperties, final PlayerEntity player)
+        {       final PlayerProfile profile = PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).getPlayerProfile(player);
+                LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY,Objects.requireNonNull(player.getServer()));
+                return profile;
         }
     }
     public record HumanDNAAttribute()
@@ -186,6 +192,10 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     {
         private static final ComponentKey<MindHelmStressComponent> MINDHELMSTRESS = ComponentRegistry.getOrCreate(
                 CodeLyokoMain.codeLyokoPrefix("mind_stress"),MindHelmStressComponent.class);
+        public static ComponentKey<MindHelmStressComponent> getMindhelmStressKey()
+        {
+            return MINDHELMSTRESS;
+        }
         public static void increaseStress(final int stressor, final PlayerEntity player)
         {
             MINDHELMSTRESS.get(player).addToStressLevel(stressor);

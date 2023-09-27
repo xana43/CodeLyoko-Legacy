@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.util.event;
+package com.Ultra_Nerd.CodeLyokoLegacy.util.event.server;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;

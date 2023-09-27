@@ -10,7 +10,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.LootTableOverride;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.event.PlaceBlockEvent;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.PlaceBlockEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
 import net.fabricmc.api.ModInitializer;
@@ -26,11 +26,9 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -38,7 +36,6 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.*;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
@@ -247,8 +244,7 @@ public record CodeLyokoMain() implements ModInitializer {
         FabricDefaultAttributeRegistry.register(ModEntities.MEGATANK, MegaTankEntity.registerAttributes());
 
     }
-    public static final ModCriteria.EnteredLyoko enteredLyoko = net.minecraft.advancement.criterion.Criteria.register(new ModCriteria.EnteredLyoko());
-    public static final ModCriteria.UseItem usedItem = Criteria.register(new ModCriteria.UseItem());
+
     private static void SetupFunctions() {
 
 
@@ -275,7 +271,7 @@ public record CodeLyokoMain() implements ModInitializer {
                                 .incrementEntered();
                     }
                     //CodeLyokoMain.LOG.debug("changed dimension");
-                    enteredLyoko.trigger(player,destination);
+                    ModCustomTrackedCriteria.enteredLyoko.trigger(player,destination);
                 } else if (MethodUtil.DimensionCheck.worldIsNotVanilla(origin)) {
                     CardinalData.LyokoInventorySave.loadPlayerInventory(
                             player.server.getSaveProperties().getMainWorldProperties(), player);
@@ -296,16 +292,20 @@ public record CodeLyokoMain() implements ModInitializer {
 
         });
         //gives the player the first entry into the story
-        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-            final PlayerProfile updatedProfile = CardinalData.PlayerSavedProfile.getPlayerProfile(server.getSaveProperties().getMainWorldProperties(), handler.player);
-            if(updatedProfile == null) {
-                CardinalData.PlayerSavedProfile.saveProfile(server.getSaveProperties().getMainWorldProperties(), handler.player);
-            }
-            else if(!updatedProfile.getFirstJoin()) {
-                final PlayerInventory tmpInventory = handler.getPlayer().getInventory();
+        ServerEntityEvents.ENTITY_LOAD.register((entity,world) -> {
+            if(entity instanceof final ServerPlayerEntity player)
+            {
+            CardinalData.PlayerSavedProfile.saveProfile(world.getServer().getSaveProperties().getMainWorldProperties(),player);
+            final PlayerProfile updatedProfile =
+                    CardinalData.PlayerSavedProfile.getPlayerProfile(world.getServer().getSaveProperties().getMainWorldProperties(), player);
+            if(!updatedProfile.getFirstJoin()) {
+                //CodeLyokoMain.LOG.info("updating first join");
+                final PlayerInventory tmpInventory = player.getInventory();
                 tmpInventory.setStack(tmpInventory.getEmptySlot(),new ItemStack(ModItems.STORY_BOOK));
                 updatedProfile.setFirstJoin(true);
-                CardinalData.PlayerSavedProfile.updateProfile(server.getSaveProperties().getMainWorldProperties(), updatedProfile);
+                //CodeLyokoMain.LOG.info(String.valueOf(updatedProfile.getFirstJoin()));
+                CardinalData.PlayerSavedProfile.updateProfile(world.getServer().getSaveProperties().getMainWorldProperties(), updatedProfile);
+                }
             }
         });
 
@@ -373,7 +373,7 @@ public record CodeLyokoMain() implements ModInitializer {
         //regenerates the player's digital energy
         ServerTickEvents.END_SERVER_TICK.register(world -> {
             for (final ServerPlayerEntity player : world.getPlayerManager().getPlayerList()) {
-                if((world.getTicks() >> 3) % 5 == 0 && !CardinalData.DigitalEnergyComponent.isUsingenergy(player)) {
+                if((world.getTicks() >> 3) % 5 == 0 && !CardinalData.DigitalEnergyComponent.isUsingEnergy(player)) {
                     CardinalData.DigitalEnergyComponent.regenerateEnergy(player);
                 }
             }
@@ -394,6 +394,7 @@ public record CodeLyokoMain() implements ModInitializer {
         registerFuels();
         ModRecipes.RecipeTypes.init();
         ModRecipes.RecipeSerializers.init();
+        ModCustomTrackedCriteria.init();
         SetupFunctions();
         registerDefaultAttributes();
         registerEnergyStorageBE();

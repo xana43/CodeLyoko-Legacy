@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import dev.onyxstudios.cca.api.v3.util.NbtSerializable;
 import net.minecraft.entity.player.PlayerEntity;
@@ -63,27 +64,35 @@ public final class PlayerProfile implements NbtSerializable {
             this.timesEntered = tag.getInt(player.getEntityName() + "-entered");
             this.firstJoin = tag.getBoolean(player.getEntityName() + "-joined");
         }
+        else {
+            CodeLyokoMain.LOG.warn("player is null, cannot assign values");
+        }
     }
-    private void toCommonTag(final @NotNull NbtCompound tag)
+    private NbtCompound toCommonTag()
+    {
+        final NbtCompound compound = new NbtCompound();
+        return toCommonTag(compound);
+    }
+    private NbtCompound toCommonTag(final @NotNull NbtCompound tag)
     {
         if(player != null) {
             tag.putString(player.getEntityName() + "-dna", DNA);
             tag.putInt(player.getEntityName() + "-class", playerClassType);
             tag.putInt(player.getEntityName() + "-entered", timesEntered);
             tag.putBoolean(player.getEntityName()+"-joined",firstJoin);
-            //player.writeNbt(tag);
+            return tag;
+        }
+        else {
+            throw new NullPointerException("player is null, cannot write values");
         }
     }
     @Override
     public NbtCompound toTag(final @NotNull NbtCompound tag) {
-       toCommonTag(tag);
-        return tag;
+        return toCommonTag(tag);
     }
     public NbtCompound toTag()
     {
-        final NbtCompound compound = new NbtCompound();
-        toCommonTag(compound);
-        return compound;
+        return toCommonTag();
     }
 
     @Override
@@ -94,7 +103,7 @@ public final class PlayerProfile implements NbtSerializable {
         }
         else
         {
-            return false;
+            return super.equals(obj);
         }
     }
 

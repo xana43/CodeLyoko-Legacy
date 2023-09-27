@@ -160,17 +160,10 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
     protected void drawBackground(final DrawContext matrices, final float delta, final int mouseX, final int mouseY) {
 
     }
-    private final LyokoButton profileButton = new LyokoButton(0,0, 80, 20, Text.literal("Current Profile"),
+    private final LyokoButton profileButton = new LyokoButton(0,0, 80, 20, Text.literal("lyoko.player.profiles"),
             button -> {
 
-        //final PacketByteBuf namebuf = PacketByteBufs.create();
-        CardinalData.PlayerSavedProfile.saveProfile(handler.getWorldProperties(), handler.getPlayer());
-        //ClientPlayNetworking.send(PacketHandlerCommon.ComputerUIChannelID, namebuf);
-        if (CardinalData.PlayerSavedProfile.getPlayerProfile(handler.getWorldProperties(),
-                handler.getPlayer()) != null) {
-            CardinalData.PlayerSavedProfile.getPlayerProfile(handler.getWorldProperties(), handler.getPlayer())
-                    .refreshPlayerClass();
-        }
+
     });
     @Override
     protected void init() {

@@ -13,6 +13,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -34,10 +35,12 @@ public final class PlayerCustomProfileTest extends BlockWithEntity {
     @Override
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
 
-        CardinalData.PlayerSavedProfile.saveProfile(world.getLevelProperties(), player);
+
+
         final NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
         if(!world.isClient() && screenHandlerFactory != null) {
             player.openHandledScreen(screenHandlerFactory);
+            CardinalData.PlayerSavedProfile.saveProfile(world.getLevelProperties(),(ServerPlayerEntity) player);
         }
         return super.onUse(state, world, pos, player, hand, hit);
     }

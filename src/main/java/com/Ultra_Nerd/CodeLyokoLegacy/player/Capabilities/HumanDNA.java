@@ -1,7 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
@@ -35,7 +37,6 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
 
     public HumanDNA(final PlayerEntity player) {
         this.player = player;
-        createDNA();
     }
 
     private static boolean searchForValidRespawnPositions(final World world, final BlockPos blockPos) {
@@ -47,6 +48,7 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
     }
 
     private void createDNA() {
+        CodeLyokoMain.LOG.info(String.valueOf(player));
         final StringBuilder DNASequence = new StringBuilder();
         final StringBuilder DNASequenceHelix2 = new StringBuilder();
 
@@ -64,14 +66,20 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
         }
         DNASequence.append('\n').append(DNASequenceHelix2);
         DNA = DNASequence.toString();
+
     }
 
     public String getDNA() {
+        if(DNA.isEmpty())
+        {
+            createDNA();
+        }
         return DNA;
     }
 
     public void setHasDNA(final boolean hasDNA) {
         this.hasDNA = hasDNA;
+        CardinalData.HumanDNAAttribute.getHumanDnaComponentKey().sync(player);
     }
     public void calculateValidSpawns()
     {

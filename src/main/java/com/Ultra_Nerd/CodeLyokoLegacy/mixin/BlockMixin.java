@@ -18,6 +18,6 @@ public abstract class BlockMixin {
 
     @Inject(at = @At("HEAD"), method = "onPlaced", cancellable = true)
     private void codelyoko$onPlaced(final World world, final BlockPos pos, final BlockState state, @Nullable final LivingEntity placer, final ItemStack itemStack, final CallbackInfo ci) {
-        MixinHooks.LyokoBlockPlacer(world, pos, placer, ci);
+        MixinHooks.PlayerEvents.LyokoBlockPlacer(world, pos, placer, ci);
     }
 }

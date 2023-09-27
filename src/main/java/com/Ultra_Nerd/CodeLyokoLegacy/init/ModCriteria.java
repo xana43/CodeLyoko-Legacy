@@ -1,6 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
@@ -19,9 +21,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public record ModCriteria() {
     public static final class InvokeClassChange extends AbstractCriterion<InvokeClassChange.Condition>
@@ -29,9 +29,12 @@ public record ModCriteria() {
         private static final Identifier ID = CodeLyokoMain.codeLyokoPrefix("class_change");
         @Override
         protected Condition conditionsFromJson(JsonObject obj, LootContextPredicate playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
-            return null;
+            return new Condition(ID,playerPredicate,obj.get("previous_class_id").getAsInt());
         }
-
+        public void trigger(final ServerPlayerEntity player)
+        {
+            this.trigger(player,condition -> condition.classChanged(player));
+        }
         @Override
         public Identifier getId() {
             return ID;
@@ -39,11 +42,21 @@ public record ModCriteria() {
 
         public static final class Condition extends AbstractCriterionConditions
         {
-            private final int classID;
-            private int previousClassId;
-            public Condition(final Identifier id,final LootContextPredicate entity,final int classID) {
+            private final int previousClassId;
+            public Condition(final Identifier id,final LootContextPredicate entity,final int previousClassId) {
                 super(id, entity);
-                this.classID = classID;
+                this.previousClassId = previousClassId;
+
+            }
+            public boolean classChanged(final ServerPlayerEntity player)
+            {
+                return CardinalData.LyokoClass.getLyokoClass(player) != previousClassId;
+            }
+            @Override
+            public JsonObject toJson(AdvancementEntityPredicateSerializer predicateSerializer) {
+                final JsonObject obj = super.toJson(predicateSerializer);
+                obj.addProperty("previous_class_id",previousClassId);
+                return obj;
             }
         }
     }
@@ -100,10 +113,10 @@ public record ModCriteria() {
         @Override
         protected Condition conditionsFromJson(final JsonObject obj, final LootContextPredicate playerPredicate, final AdvancementEntityPredicateDeserializer predicateDeserializer) {
             final List<RegistryKey<World>> registryKeys = new ArrayList<>();
-            for (int i = 0; i < 8; i++)
+            for(final String entry: obj.keySet())
             {
-                registryKeys.add(obj.has("next"+i) ? RegistryKey.of(RegistryKeys.WORLD,
-                        new Identifier(JsonHelper.getString(obj,"next"+i))): null);
+                CodeLyokoMain.LOG.info("adding:"+entry+" to criteria");
+                registryKeys.add(RegistryKey.of(RegistryKeys.WORLD,new Identifier(JsonHelper.getString(obj,entry))));
             }
             return new Condition(playerPredicate,registryKeys);
         }

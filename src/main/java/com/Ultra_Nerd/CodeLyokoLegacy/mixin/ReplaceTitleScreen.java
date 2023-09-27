@@ -24,8 +24,7 @@ public abstract class ReplaceTitleScreen {
 
 
     @Inject(method = "onInitFinished",at = @At("HEAD"), cancellable = true)
-    private void codelyoko$replaceTitleScreen(final RealmsClient realms, final ResourceReload reload,
-            final RunArgs.QuickPlay quickPlay, final CallbackInfo ci)
+    private void codelyoko$replaceTitleScreen(final RealmsClient realms, final ResourceReload reload, final RunArgs.QuickPlay quickPlay, final CallbackInfo ci)
     {
         MixinHooks.replaceTitleScreen(realms,reload,quickPlay,ci,options, MinecraftClient.getInstance());
     }
