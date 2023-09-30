@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.QuantumChipletTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.QuantumChipletTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.function.BooleanBiFunction;

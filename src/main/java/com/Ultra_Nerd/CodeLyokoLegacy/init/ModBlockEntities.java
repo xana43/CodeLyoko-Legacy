@@ -1,14 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.FluidSystem.CirculatorPipeBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.FluidSystem.ComputerCirculatorBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.FluidSystem.ComputerFluidCoolerBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.FluidSystem.ComputerFluidIntakeBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.ComputerInterfaceTestTE;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.PlayerDataStorage;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.test.VehicleBE;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.CirculatorPipeBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerCirculatorBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerFluidCoolerBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerFluidIntakeBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.ComputerInterfaceTestTE;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.ItemProjectorTestBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.PlayerDataStorage;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.VehicleBE;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
@@ -61,6 +62,8 @@ public record ModBlockEntities() {
     public static final BlockEntityType<ComputerFluidCoolerBlockEntity> COOLER_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(ComputerFluidCoolerBlockEntity::new,ModBlocks.COMPUTER_FLUID_COOLER).build();
 
+    public static final BlockEntityType<ItemProjectorTestBlockEntity> ITEM_PROJECTOR_TEST_BLOCK_ENTITY =
+            FabricBlockEntityTypeBuilder.create(ItemProjectorTestBlockEntity::new,ModBlocks.TEST_ITEM_PROJECTOR).build();
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String, BlockEntityType<?>>builder()
 
             .put("lyoko_core", LYOKO_CORE)
@@ -82,6 +85,7 @@ public record ModBlockEntities() {
             .put("computer_circulator_pipe_block_entity",CIRCULATOR_PIPE_BLOCK_ENTITY_TYPE)
             .put("computer_fluid_intake_block_entity",COMPUTER_FLUID_INTAKE_BLOCK_ENTITY)
             .put("computer_fluid_cooler_block_entity",COOLER_BLOCK_ENTITY_TYPE)
+            .put("test_item_projector_block_entity", ITEM_PROJECTOR_TEST_BLOCK_ENTITY)
             .build();
 
 }

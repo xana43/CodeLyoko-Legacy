@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
+package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity;
 
 public final class InfusingChamberTileEntity /*extends InventoryBE implements BlockEntityTicker<InfusingChamberTileEntity>, MenuProvider*/ {
 

@@ -8,19 +8,13 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.network.PlayerListEntry;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.server.dedicated.gui.PlayerListGui;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.ColorHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +37,7 @@ public final class VehicleMaterializationTest extends HandledScreen<VehicleMater
         //players = client.world.getServer().getPlayerManager().getPlayerList();
     }
     private static List<PlayerListEntry> playerList = new ArrayList<>();
-    public void setPlayerList(final List<PlayerListEntry> playerCollection)
+    public static void setPlayerList(final List<PlayerListEntry> playerCollection)
     {
         playerList = playerCollection;
     }

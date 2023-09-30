@@ -1,8 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;

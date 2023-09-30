@@ -10,7 +10,6 @@ import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 public final class PlayerProfileStorage implements AutoSyncedComponent{
 

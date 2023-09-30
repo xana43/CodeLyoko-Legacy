@@ -87,7 +87,7 @@ public record EntryPool() {
         @Override
         public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
             if(!world.isClient) {
-                ModCustomTrackedCriteria.usedItem.trigger((ServerPlayerEntity) user, user.getStackInHand(hand));
+                ModCustomTrackedCriteria.USED_ITEM.trigger((ServerPlayerEntity) user, user.getStackInHand(hand));
             }
             user.unlockRecipes(new Identifier[]{ConstantUtil.RECIPIE_IDENTIFIERS[0]});
             return super.use(world, user, hand);

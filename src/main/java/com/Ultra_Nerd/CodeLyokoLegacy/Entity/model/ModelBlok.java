@@ -6,7 +6,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.model;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityBlok;
-import net.minecraft.util.Identifier;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
 

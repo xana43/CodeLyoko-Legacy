@@ -14,7 +14,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -144,7 +143,7 @@ public final class ScannerFrame extends HorizontalFacingBlock {
     public ScannerFrame(@NotNull FabricBlockSettings properties) {
         super(properties);
 
-        this.setDefaultState(this.getDefaultState().with(ConstantUtil.SCANNER_PROPERTY, false).with(FACING,
+        this.setDefaultState(this.getDefaultState().with(ConstantUtil.SCANNER_PROPERTY, Boolean.FALSE).with(FACING,
                 Direction.NORTH));
     }
 
@@ -152,14 +151,14 @@ public final class ScannerFrame extends HorizontalFacingBlock {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(ConstantUtil.SCANNER_PROPERTY, false);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(ConstantUtil.SCANNER_PROPERTY, Boolean.FALSE);
     }
 
 
 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
-        if (state.get(ConstantUtil.SCANNER_PROPERTY)) {
+        if (state.<Boolean>get(ConstantUtil.SCANNER_PROPERTY).booleanValue()) {
             return switch (state.get(FACING)) {
                 case SOUTH -> shapeS;
                 case EAST -> shapeE;

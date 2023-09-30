@@ -12,9 +12,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Vector3f;
-
-
 
 
 public final class HoverboardRenderer<T extends HoverboardEntity> extends EntityRenderer<T> {

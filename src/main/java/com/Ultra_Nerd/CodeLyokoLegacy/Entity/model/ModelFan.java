@@ -4,7 +4,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityFan;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
-import software.bernie.geckolib.model.GeoModel;
 
 public final class ModelFan extends DefaultedEntityGeoModel<EntityFan> {
     private static final Identifier FAN_MODEL = CodeLyokoMain.codeLyokoPrefix("geo/fan.geo.json");

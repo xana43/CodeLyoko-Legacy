@@ -4,7 +4,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -32,7 +31,7 @@ public final class EntityLaser extends ArrowEntity {
     }
 
     /**
-     * instantiates a new laser entity with just the world and the owner USE WITH A CALL SITE VELOCITY AND DIRECTION IMPLEMENTATION
+     * Instantiates a new laser entity with just the world and the owner USE WITH A CALL SITE VELOCITY AND DIRECTION IMPLEMENTATION
      *
      * @param world    the world this entity is being instantiated in
      * @param owner    the entity that spawned this entity

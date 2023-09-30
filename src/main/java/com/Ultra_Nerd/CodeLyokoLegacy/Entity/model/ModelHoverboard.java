@@ -10,11 +10,8 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.model.EntityModels;
 import net.minecraft.client.util.math.MatrixStack;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.model.data.EntityModelData;
-
 
 
 public final class ModelHoverboard<T extends HoverboardEntity> extends EntityModel<T> {

@@ -28,11 +28,11 @@ public class FlourideInfusionResult {
 
 
     public void addRefiningRecipe(@NotNull ItemStack input1, @NotNull ItemStack input2, ItemStack result, float experience) {
-        if (getInfusingResult(input1, input2) != ItemStack.EMPTY) return;
-        if (getInfusingResult(input2, input1) != ItemStack.EMPTY) return;
+        if (!getInfusingResult(input1, input2).isEmpty()) return;
+        if (!getInfusingResult(input2, input1).isEmpty()) return;
         this.smeltingList.put(input1, input2, result);
         this.smeltingList.put(input2, input1, result);
-        this.experienceList.put(result, experience);
+        this.experienceList.put(result, Float.valueOf(experience));
     }
 
     public ItemStack getInfusingResult(@NotNull ItemStack input1, @NotNull ItemStack input2) {
@@ -60,7 +60,7 @@ public class FlourideInfusionResult {
     public float getSinteringExperience(@NotNull ItemStack stack) {
         for (Entry<ItemStack, Float> entry : this.experienceList.entrySet()) {
             if (this.compareItemStacks(stack, entry.getKey())) {
-                return entry.getValue();
+                return entry.getValue().floatValue();
             }
         }
         return 0.0F;

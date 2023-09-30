@@ -1,5 +1,5 @@
-// 1.20.1	2023-09-25T17:42:09.3054519	CodeLyokoLegacy/Advancements
-d784bdb962a682463c979dac78539581515628ea data\minecraft\advancements\codelyoko\lithography.json
-f56a30bad00c4b040488568dabffd6535b389a69 data\minecraft\advancements\codelyoko\entered_lyoko.json
-8fdf1b2b74b71d04f449e5678f938a7c542c0021 data\minecraft\advancements\codelyoko\root.json
-ace0502b0a4c2d984183755ef8608f8a05c550e0 data\minecraft\advancements\codelyoko\super_computer.json
+// 1.20.1	2023-09-29T20:18:31.563607762	CodeLyokoLegacy/Advancements
+ace0502b0a4c2d984183755ef8608f8a05c550e0 data/minecraft/advancements/codelyoko/super_computer.json
+8fdf1b2b74b71d04f449e5678f938a7c542c0021 data/minecraft/advancements/codelyoko/root.json
+f56a30bad00c4b040488568dabffd6535b389a69 data/minecraft/advancements/codelyoko/entered_lyoko.json
+d784bdb962a682463c979dac78539581515628ea data/minecraft/advancements/codelyoko/lithography.json

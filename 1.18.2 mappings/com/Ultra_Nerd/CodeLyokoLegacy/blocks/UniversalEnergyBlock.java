@@ -4,7 +4,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.UniversalEnergyStorageTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.UniversalEnergyStorageTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;

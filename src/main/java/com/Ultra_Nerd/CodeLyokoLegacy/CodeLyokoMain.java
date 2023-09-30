@@ -87,6 +87,10 @@ public record CodeLyokoMain() implements ModInitializer {
                 ModBlockEntities.UNIVERSAL_ENERGY_STORAGE);
     }
 
+    private static void executeCheck()
+    {
+        
+    }
     private static void checkWorld() {
         PlaceBlockEvent.EVENT.register(((entity, world, pos) -> {
             for (int x = -32; x < 32; ++x) {
@@ -271,7 +275,7 @@ public record CodeLyokoMain() implements ModInitializer {
                                 .incrementEntered();
                     }
                     //CodeLyokoMain.LOG.debug("changed dimension");
-                    ModCustomTrackedCriteria.enteredLyoko.trigger(player,destination);
+                    ModCustomTrackedCriteria.ENTERED_LYOKO.trigger(player,destination);
                 } else if (MethodUtil.DimensionCheck.worldIsNotVanilla(origin)) {
                     CardinalData.LyokoInventorySave.loadPlayerInventory(
                             player.server.getSaveProperties().getMainWorldProperties(), player);

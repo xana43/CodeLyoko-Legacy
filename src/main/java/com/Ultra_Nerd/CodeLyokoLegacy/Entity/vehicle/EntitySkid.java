@@ -6,7 +6,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDamageSources;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -51,7 +50,7 @@ public final class EntitySkid extends LyokoVehicleEntity {
       final BlockPos lookingPos = new BlockPos((int)raycast.getPos().x,(int)raycast.getPos().y,(int)raycast.getPos().z);
       if(getWorld().getBlockState(lookingPos).isOf(ModBlocks.DIGITAL_SEA_PYLON))
       {
-          getWorld().setBlockState(lookingPos,getWorld().getBlockState(lookingPos).with(SeaPylon.SELECTED,true));
+          getWorld().setBlockState(lookingPos,getWorld().getBlockState(lookingPos).with(SeaPylon.SELECTED, Boolean.TRUE));
       }
     }
 

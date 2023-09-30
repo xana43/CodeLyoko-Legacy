@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.RouterTE;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.RouterTE;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -89,7 +89,7 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
 
     public Router(@NotNull FabricBlockSettings properties) {
         super(properties);
-        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(ROUTER_ACTIVE, false));
+        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(ROUTER_ACTIVE, Boolean.FALSE));
     }
 
     @Override
@@ -138,7 +138,7 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
 
     @Override
     public BlockState getPlacementState(@NotNull ItemPlacementContext context) {
-        return this.getDefaultState().with(FACING, context.getHorizontalPlayerFacing().getOpposite()).with(ROUTER_ACTIVE, false);
+        return this.getDefaultState().with(FACING, context.getHorizontalPlayerFacing().getOpposite()).with(ROUTER_ACTIVE, Boolean.FALSE);
     }
 
     @Override

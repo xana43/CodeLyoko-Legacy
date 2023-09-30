@@ -4,10 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldProperties;
-import org.jetbrains.annotations.Nullable;
 
 public final class ProfileDebugScreenHandler extends ScreenHandler {
     private final WorldProperties worldProperties;

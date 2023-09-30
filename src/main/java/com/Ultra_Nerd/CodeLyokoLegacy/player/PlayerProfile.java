@@ -87,7 +87,7 @@ public final class PlayerProfile implements NbtSerializable {
         }
     }
     @Override
-    public NbtCompound toTag(final @NotNull NbtCompound tag) {
+    public @NotNull NbtCompound toTag(final @NotNull NbtCompound tag) {
         return toCommonTag(tag);
     }
     public NbtCompound toTag()

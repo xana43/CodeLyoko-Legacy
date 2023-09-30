@@ -4,15 +4,11 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ControlPanel;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
-import dev.onyxstudios.cca.api.v3.level.LevelComponents;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
@@ -36,7 +32,7 @@ public record PacketHandlerCommon() {
             final BlockPos pos = buf.readBlockPos();
             final boolean active = buf.readBoolean();
             server.execute(() -> player.getWorld().setBlockState(pos,
-                    player.getWorld().getBlockState(pos).with(ControlPanel.ScreenOn, active)));
+                    player.getWorld().getBlockState(pos).with(ControlPanel.ScreenOn, Boolean.valueOf(active))));
         });
         ServerPlayNetworking.registerGlobalReceiver(TowerChannelID, (server, player, handler, buf, responseSender) -> {
             final BlockPos pos = buf.readBlockPos();

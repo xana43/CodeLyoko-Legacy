@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.ScannerTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ScannerTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -289,7 +289,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
 
         );
 
-        this.setDefaultState(this.getDefaultState().with(ConstantUtil.SCANNER_PROPERTY, false)
+        this.setDefaultState(this.getDefaultState().with(ConstantUtil.SCANNER_PROPERTY, Boolean.FALSE)
                 .with(FACING, Direction.NORTH));
     }
 
@@ -311,7 +311,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
 
-        if (state.get(ConstantUtil.SCANNER_PROPERTY)) {
+        if (state.<Boolean>get(ConstantUtil.SCANNER_PROPERTY).booleanValue()) {
             return switch (state.get(FACING)) {
                 case SOUTH -> shapeS;
                 case EAST -> shapeE;
@@ -336,7 +336,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(ConstantUtil.SCANNER_PROPERTY, false);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(ConstantUtil.SCANNER_PROPERTY, Boolean.FALSE);
     }
 
     @Override
@@ -375,7 +375,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
 
                 scannerTile.tick();
 
-                if (state.get(ConstantUtil.SCANNER_PROPERTY) && scannerTile.isInScanner()) {
+                if (state.<Boolean>get(ConstantUtil.SCANNER_PROPERTY).booleanValue() && scannerTile.isInScanner()) {
                     final MinecraftClient mc = MinecraftClient.getInstance();
 
                     switch (mc.options.getParticles().getValue()) {

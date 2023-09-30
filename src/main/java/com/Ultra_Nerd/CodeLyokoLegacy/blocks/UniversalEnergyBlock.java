@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.UniversalEnergyStorageTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.UniversalEnergyStorageTileEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;

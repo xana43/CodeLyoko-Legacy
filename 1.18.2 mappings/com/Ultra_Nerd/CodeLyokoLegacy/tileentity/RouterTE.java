@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
+package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

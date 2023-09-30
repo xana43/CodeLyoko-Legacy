@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
+package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity;
 
 public final class QuantumChipletTileEntity /*extends InventoryBE implements MenuProvider, Clearable*/ {
     /*

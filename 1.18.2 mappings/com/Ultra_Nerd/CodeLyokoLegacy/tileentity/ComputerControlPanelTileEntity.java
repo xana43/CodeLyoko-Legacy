@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
+package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;

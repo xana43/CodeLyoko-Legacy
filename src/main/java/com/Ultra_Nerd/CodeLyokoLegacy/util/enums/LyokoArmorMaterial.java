@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.enums;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;

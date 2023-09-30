@@ -13,7 +13,6 @@ import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.advancement.criterion.CriterionConditions;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.data.client.Model;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,8 +28,8 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.regex.Pattern;
 
 public record MethodUtil() {
     public record ArmorMethods() {
@@ -407,9 +406,9 @@ public record MethodUtil() {
         public record TextUtil() {
 
             private static final StringVisitable[] pages = new StringVisitable[100];
-
+private static final Pattern splitPattern = Pattern.compile(">δ<");
             public static StringVisitable[] textArray(@NotNull final String textToDenote) {
-                final String[] denoted = textToDenote.split(">δ<");
+                final String[] denoted =splitPattern.split(textToDenote);
                 final int length = denoted.length;
                 for (int i = 0; i < length; i++) {
                     pages[i] = Text.translatable(denoted[i]);

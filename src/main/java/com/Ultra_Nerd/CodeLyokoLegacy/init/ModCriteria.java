@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
@@ -55,7 +54,7 @@ public record ModCriteria() {
             @Override
             public JsonObject toJson(AdvancementEntityPredicateSerializer predicateSerializer) {
                 final JsonObject obj = super.toJson(predicateSerializer);
-                obj.addProperty("previous_class_id",previousClassId);
+                obj.addProperty("previous_class_id", Integer.valueOf(previousClassId));
                 return obj;
             }
         }
@@ -115,7 +114,7 @@ public record ModCriteria() {
             final List<RegistryKey<World>> registryKeys = new ArrayList<>();
             for(final String entry: obj.keySet())
             {
-                CodeLyokoMain.LOG.info("adding:"+entry+" to criteria");
+                //CodeLyokoMain.LOG.info("adding:"+entry+" to criteria");
                 registryKeys.add(RegistryKey.of(RegistryKeys.WORLD,new Identifier(JsonHelper.getString(obj,entry))));
             }
             return new Condition(playerPredicate,registryKeys);
@@ -164,11 +163,12 @@ public record ModCriteria() {
                 final JsonObject jsonObject = super.toJson(predicateSerializer);
                 if(nextWorld != null)
                 {
+                    final StringBuilder builder = new StringBuilder("next0");
                     int i = 0;
                     for (final RegistryKey<World> registryKey : nextWorld)
                     {
-
-                        jsonObject.addProperty("next"+i,registryKey.getValue().toString());
+                        builder.setCharAt(4, Character.forDigit(i,10));
+                        jsonObject.addProperty(builder.toString(),registryKey.getValue().toString());
                         i++;
                     }
 

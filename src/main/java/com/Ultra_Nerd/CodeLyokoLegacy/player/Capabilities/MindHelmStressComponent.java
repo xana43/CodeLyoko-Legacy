@@ -6,7 +6,7 @@ import net.minecraft.nbt.NbtCompound;
 
 public final class MindHelmStressComponent implements AutoSyncedComponent, PlayerComponent<MindHelmStressComponent> {
 
-    private static final String stressKey = " stress_level";
+    private static final String stressKey = "stress_level";
     private int StressLevel = 0;
 
     public void addToStressLevel(final int stressor) {

@@ -1,17 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
-import com.google.common.collect.ImmutableList;
 import com.mojang.authlib.GameProfile;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -31,14 +26,14 @@ public abstract class RetainXP {
     @Inject(method = "getXpToDrop", at = @At("HEAD"), cancellable = true)
     private void codelyoko$retainxp(final CallbackInfoReturnable<Integer> cir) {
             if (MethodUtil.DimensionCheck.worldIsNotVanilla(worldMix)) {
-                cir.setReturnValue(0);
+                cir.setReturnValue(Integer.valueOf(0));
             }
     }
 
     @Inject(method = "shouldAlwaysDropXp", at = @At("HEAD"), cancellable = true)
     private void codelyoko$retainxp2(final CallbackInfoReturnable<Boolean> cir) {
                 if (MethodUtil.DimensionCheck.worldIsNotVanilla(worldMix)) {
-                    cir.setReturnValue(false);
+                    cir.setReturnValue(Boolean.FALSE);
                 }
     }
 

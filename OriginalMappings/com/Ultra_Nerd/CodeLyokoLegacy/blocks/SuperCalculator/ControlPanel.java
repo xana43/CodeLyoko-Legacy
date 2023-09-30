@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ComputerControlPanelTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.ComputerControlPanelTileEntity;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerLoginNetworking;

@@ -40,17 +40,5 @@ public final class ArmorNinja extends LyokoArmor {
         super.onArmorTick(player, world, armorItem);
     }
 
-   /*
-    @Override
-    public void onArmorTick(ItemStack stack, @NotNull Level world, @NotNull Player player) {
 
-
-        final BlockHitResult trace = new BlockHitResult(player.getLookAngle(), player.getDirection(),player.eyeBlockPosition(),false);
-        final BlockPos pos = new BlockPos(trace.getBlockPos().getX(), trace.getBlockPos().getY(), trace.getBlockPos().getZ());
-        final Block test = world.getBlockState(pos).getBlock();
-
-
-    }
-
- */
 }

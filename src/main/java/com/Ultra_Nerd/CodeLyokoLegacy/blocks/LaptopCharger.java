@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LaptopChargerBlockEntityInventory;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.LaptopChargerBlockEntityInventory;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;

@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
+package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.BlockPatternRegistry;

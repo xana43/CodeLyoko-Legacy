@@ -21,7 +21,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldProperties;
 import org.jetbrains.annotations.NotNull;
-import software.bernie.geckolib.GeckoLib;
 
 import java.util.Objects;
 
@@ -250,11 +249,14 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         private static final ComponentKey<InventorySaveComponent> LYOKO_INVENTORY_SAVE = ComponentRegistry.getOrCreate(
                 CodeLyokoMain.codeLyokoPrefix("temp_inventory"), InventorySaveComponent.class);
 
+        public static ComponentKey<InventorySaveComponent> getLyokoInventorySave()
+        {
+            return LYOKO_INVENTORY_SAVE;
+        }
         public static void savePlayerInventory(final WorldProperties worldProperties, final PlayerEntity playerEntity) {
 
             LYOKO_INVENTORY_SAVE.get(worldProperties).savePlayerInventory(playerEntity);
-            //worldProperties.syncComponent(LYOKO_INVENTORY_SAVE);
-            LevelComponents.sync(LYOKO_INVENTORY_SAVE,playerEntity.getServer());
+
         }
 
         public static void loadPlayerInventory(final WorldProperties worldProperties, final PlayerEntity playerEntity) {

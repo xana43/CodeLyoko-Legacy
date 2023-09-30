@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
@@ -13,7 +12,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 import java.util.Objects;
@@ -48,10 +46,8 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
     }
 
     private void createDNA() {
-        CodeLyokoMain.LOG.info(String.valueOf(player));
         final StringBuilder DNASequence = new StringBuilder();
         final StringBuilder DNASequenceHelix2 = new StringBuilder();
-
         for (int i = 0; i < 100; i++)
         {
 

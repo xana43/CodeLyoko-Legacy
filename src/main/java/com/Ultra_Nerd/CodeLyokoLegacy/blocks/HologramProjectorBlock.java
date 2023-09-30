@@ -21,7 +21,7 @@ public final class HologramProjectorBlock extends BlockWithEntity {
                 .sounds(BlockSoundGroup.METAL)
 
         );
-        this.setDefaultState(this.getDefaultState().with(VALID, true));
+        this.setDefaultState(this.getDefaultState().with(VALID, Boolean.TRUE));
     }
 
     @Override

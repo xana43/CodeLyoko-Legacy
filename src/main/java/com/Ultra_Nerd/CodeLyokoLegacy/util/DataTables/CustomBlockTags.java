@@ -1,18 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 

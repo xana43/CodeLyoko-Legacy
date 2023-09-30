@@ -32,7 +32,7 @@ public record ModBlocks() {
             FabricBlockSettings.copyOf(Blocks.IRON_BARS)){
         @Override
         public BlockState getPlacementState(final ItemPlacementContext ctx) {
-            return this.getDefaultState().with(ComputerKeyboard.IS_SCREEN_FORMED,false);
+            return this.getDefaultState().with(ComputerKeyboard.IS_SCREEN_FORMED, Boolean.FALSE);
         }
 
         @Override
@@ -52,7 +52,7 @@ public record ModBlocks() {
                     .sounds(BlockSoundGroup.GLASS)){
         @Override
         public BlockState getPlacementState(final ItemPlacementContext ctx) {
-            return this.getDefaultState().with(ComputerKeyboard.IS_SCREEN_FORMED,false);
+            return this.getDefaultState().with(ComputerKeyboard.IS_SCREEN_FORMED, Boolean.FALSE);
         }
         @Override
         protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
@@ -62,7 +62,7 @@ public record ModBlocks() {
     public static final Block COMPUTER_SCREEN_FRAME = new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)){
         @Override
         public BlockState getPlacementState(final ItemPlacementContext ctx) {
-            return this.getDefaultState().with(ComputerKeyboard.IS_SCREEN_FORMED,false);
+            return this.getDefaultState().with(ComputerKeyboard.IS_SCREEN_FORMED, Boolean.FALSE);
         }
         @Override
         protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
@@ -222,6 +222,7 @@ public record ModBlocks() {
     public static final Block TEST_SPHERE = new TestSphereRenderer(FabricBlockSettings.copyOf(Blocks.BARRIER));
     public static final Block TEST_VECHICLE_INTERFACE =
             new PlayerVehicleTest(FabricBlockSettings.copyOf(Blocks.BARRIER));
+    public static final Block TEST_ITEM_PROJECTOR = new ItemProjectorTest();
     public static final Block COMPUTER_FLUID_COOLER = new ComputerFluidCooler(FabricBlockSettings.copyOf(Blocks.IRON_BARS));
     public static final ImmutableMap<String, Block> BLOCK_MAP = ImmutableMap.<String, Block>builder()
             .put("architecture_work_station", ARCHITECTURE_WORK_STATION)
@@ -329,5 +330,6 @@ public record ModBlocks() {
             .put("player_profile_block",TEST_PROFILE)
             .put("test_phere",TEST_SPHERE)
             .put("test_vechicle_materialization",TEST_VECHICLE_INTERFACE)
+            .put("test_item_projector",TEST_ITEM_PROJECTOR)
             .build();
 }

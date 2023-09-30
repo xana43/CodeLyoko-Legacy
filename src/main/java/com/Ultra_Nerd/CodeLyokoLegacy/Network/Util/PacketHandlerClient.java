@@ -21,7 +21,7 @@ public record PacketHandlerClient() {
                 responseSender) -> client.execute(() -> {
                     if(client.currentScreen instanceof VehicleMaterializationTest test)
                     {
-                        test.setPlayerList(handler.getPlayerList().stream().toList());
+                        VehicleMaterializationTest.setPlayerList(handler.getPlayerList().stream().toList());
                     }
                 }));
         ClientPlayNetworking.registerGlobalReceiver(PacketHandlerCommon.FLUID_UPDATE,(client, handler, buf,

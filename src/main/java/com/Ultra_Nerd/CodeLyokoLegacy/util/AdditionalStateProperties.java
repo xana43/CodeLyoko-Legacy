@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import net.minecraft.data.client.BlockStateVariantMap;
 import net.minecraft.state.property.Property;
 
 import java.util.Collection;
@@ -26,7 +25,7 @@ public record AdditionalStateProperties() {
                 final Set<Float> set = Sets.newHashSet();
 
                 for(float i = min; i <= max; ++i) {
-                    set.add(i);
+                    set.add(Float.valueOf(i));
                 }
 
                 this.values = ImmutableSet.copyOf(set);
@@ -65,7 +64,7 @@ public record AdditionalStateProperties() {
             try {
 
                 final float floatVar = Float.parseFloat(name);
-                return floatVar >= this.min && floatVar <= this.max ? Optional.of(floatVar) : Optional.empty();
+                return floatVar >= this.min && floatVar <= this.max ? Optional.of(Float.valueOf(floatVar)) : Optional.empty();
             } catch (final NumberFormatException err)
             {
                 return Optional.empty();
@@ -96,7 +95,7 @@ public record AdditionalStateProperties() {
                 final Set<Double> set = Sets.newHashSet();
 
                 for(double i = min; i <= max; ++i) {
-                    set.add(i);
+                    set.add(Double.valueOf(i));
                 }
 
                 this.values = ImmutableSet.copyOf(set);
@@ -135,7 +134,7 @@ public record AdditionalStateProperties() {
             try {
 
                 final double doubleVar = Double.parseDouble(name);
-                return doubleVar >= this.min && doubleVar <= this.max ? Optional.of(doubleVar) : Optional.empty();
+                return doubleVar >= this.min && doubleVar <= this.max ? Optional.of(Double.valueOf(doubleVar)) : Optional.empty();
             } catch (final NumberFormatException err)
             {
                 return Optional.empty();

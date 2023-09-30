@@ -1,7 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.TridentEntity;

@@ -4,13 +4,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.ReactorRecipe;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import net.minecraft.recipe.CookingRecipeSerializer;
-import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
-import net.minecraft.registry.Registerable;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.world.gen.feature.ConfiguredFeatures;
 
 public record ModRecipes() {
     public record RecipeTypes()

@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.enums;
 
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
-import org.jetbrains.annotations.NotNull;
 
 public enum LyokoTiers implements ToolMaterial {
 

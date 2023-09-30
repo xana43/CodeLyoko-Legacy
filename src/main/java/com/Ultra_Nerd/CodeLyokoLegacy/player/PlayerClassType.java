@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 public enum PlayerClassType {
 
     Archer("Archer", 34),
-    Feline("Felyne", 62),
+    Feline("Feline", 62),
     Guardian("Guardian", 90),
     Samurai("Samurai", 118),
     Ninja("Ninja", 146);

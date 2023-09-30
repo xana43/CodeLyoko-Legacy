@@ -56,7 +56,7 @@ public final class ProjectorFocusblock extends Block {
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque()
         );
-        this.setDefaultState(this.getDefaultState().with(VALIDFOCUS, false));
+        this.setDefaultState(this.getDefaultState().with(VALIDFOCUS, Boolean.FALSE));
     }
 
     @Override
@@ -67,7 +67,7 @@ public final class ProjectorFocusblock extends Block {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(VALIDFOCUS, false);
+        return this.getDefaultState().with(VALIDFOCUS, Boolean.FALSE);
     }
 
 

@@ -3,13 +3,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-
-import java.util.stream.Stream;
 
 public final class CoolingBlock extends Block {
     private static final VoxelShape shape = makeShape();

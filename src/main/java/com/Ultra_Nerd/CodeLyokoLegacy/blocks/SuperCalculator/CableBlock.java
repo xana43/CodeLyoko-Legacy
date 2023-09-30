@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.CableBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.CableBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
@@ -33,7 +33,7 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
     public CableBlock(final Settings settings) {
         super(2.0F, 2.0F, 16.0F, 16.0F, 24.0F, settings);
         this.shape = this.createShapes(10, 10, 10, 10, 10);
-        this.setDefaultState(this.getDefaultState().with(WATERLOGGED,false).with(isMaster,false));
+        this.setDefaultState(this.getDefaultState().with(WATERLOGGED, Boolean.FALSE).with(isMaster, Boolean.FALSE));
     }
 
     @Override
@@ -54,7 +54,7 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
         {
             final BlockPos nextPosition = pos.offset(dir,1);
             if(world != null && !world.isClient()) {
-                if (!world.getBlockState(pos).get(isMaster) && world.getBlockEntity(nextPosition) != null && world.getBlockState(pos)
+                if (!world.getBlockState(pos).<Boolean>get(isMaster).booleanValue() && world.getBlockEntity(nextPosition) != null && world.getBlockState(pos)
                         .isOf(ModBlocks.CABLE_BLOCK)) {
                     if (world.getBlockEntity(nextPosition) instanceof CableBlockEntity cableBlockEntity) {
                         if (cableBlockEntity.getIsMaster()) {
@@ -113,7 +113,7 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
             cableBlockEntity.calculateConnected();
             if(cableBlockEntity.getIsMaster())
             {
-                world.setBlockState(pos,state.with(isMaster,true));
+                world.setBlockState(pos,state.with(isMaster, Boolean.TRUE));
             }
             else
             {
@@ -129,7 +129,7 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
         return this.getDefaultState().with(WATERLOGGED,
-                ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER);
+                Boolean.valueOf(ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER));
     }
 
 
@@ -142,7 +142,7 @@ public final class CableBlock extends HorizontalConnectingBlock implements Block
 
     @Override
     public BlockState getStateForNeighborUpdate(final BlockState state, final Direction direction, final BlockState neighborState, final WorldAccess world, final BlockPos pos, final BlockPos neighborPos) {
-        if (state.get(WATERLOGGED))
+        if (state.<Boolean>get(WATERLOGGED).booleanValue())
         {
             world.scheduleFluidTick(pos,Fluids.WATER,Fluids.WATER.getTickRate(world));
         }

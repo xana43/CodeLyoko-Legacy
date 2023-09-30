@@ -36,7 +36,7 @@ public final class ArchitectureWorkstation extends HorizontalFacingBlock {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(on, false);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(on, Boolean.FALSE);
     }
 
 

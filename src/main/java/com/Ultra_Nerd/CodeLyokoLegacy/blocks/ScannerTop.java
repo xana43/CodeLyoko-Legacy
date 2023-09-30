@@ -209,14 +209,14 @@ public final class ScannerTop extends HorizontalFacingBlock {
         super(properties);
 
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH)
-                .with(ConstantUtil.SCANNER_PROPERTY, false));
+                .with(ConstantUtil.SCANNER_PROPERTY, Boolean.FALSE));
     }
 
 
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(ConstantUtil.SCANNER_PROPERTY, false);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(ConstantUtil.SCANNER_PROPERTY, Boolean.FALSE);
     }
 
     @Override
@@ -226,7 +226,7 @@ public final class ScannerTop extends HorizontalFacingBlock {
 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
-        if (state.get(ConstantUtil.SCANNER_PROPERTY)) {
+        if (state.<Boolean>get(ConstantUtil.SCANNER_PROPERTY).booleanValue()) {
             return switch (state.get(FACING)) {
                 case SOUTH -> shapeS;
                 case EAST -> shapeE;

@@ -32,7 +32,7 @@ public final class TowerInterface extends HorizontalFacingBlock implements Block
         super(FabricBlockSettings.copyOf(Blocks.BARRIER).strength(-1, Integer.MAX_VALUE).sounds(BlockSoundGroup.AMETHYST_CLUSTER)
                 .luminance(80));
         this.setDefaultState(this.getStateManager().getDefaultState().with(FACING, Direction.NORTH).with(IS_GENERATED
-                ,true));
+                , Boolean.TRUE));
     }
 
     @Override
@@ -60,7 +60,7 @@ public final class TowerInterface extends HorizontalFacingBlock implements Block
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(IS_GENERATED,false);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(IS_GENERATED, Boolean.FALSE);
     }
 
     @Nullable

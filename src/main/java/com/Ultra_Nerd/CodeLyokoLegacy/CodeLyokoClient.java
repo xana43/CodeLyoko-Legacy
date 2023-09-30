@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.TestRenderers.ItemProjectorTestRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.LaserRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHoverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelOverboard;
@@ -17,7 +18,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.PlayerProfileDebug;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.VehicleMaterializationTest;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.client.itemRenderers.ForceFieldEmitterRenderer;
@@ -30,19 +31,14 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientChunkEvents;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
 import net.minecraft.client.MinecraftClient;
@@ -54,7 +50,6 @@ import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -241,6 +236,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 HologramRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE,
                 ComputerCirculatorRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.ITEM_PROJECTOR_TEST_BLOCK_ENTITY, ItemProjectorTestRenderer::new);
 
     }
 

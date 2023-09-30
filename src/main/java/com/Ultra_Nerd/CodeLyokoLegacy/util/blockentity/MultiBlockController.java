@@ -2,21 +2,13 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
-import net.minecraft.block.BeaconBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BeaconBlockEntity;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.LecternBlockEntity;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class MultiBlockController extends SyncedBlockEntity implements MasterEntity {
     private static final String CHECK_KEY = "is_check_successful";
@@ -46,7 +38,7 @@ public abstract class MultiBlockController extends SyncedBlockEntity implements 
                                     this.pos.getZ() + z);
                             final BlockState checkedState = world.getBlockState(posOffset);
                             if (checkedState.contains(this.thisProperty)) {
-                                world.setBlockState(posOffset, checkedState.with(this.thisProperty, true));
+                                world.setBlockState(posOffset, checkedState.with(this.thisProperty, Boolean.TRUE));
 
                             }
                             world.addParticle(ModParticles.TOWER_PARTICLE, true, posOffset.getX(), posOffset.getY(),
@@ -77,7 +69,7 @@ public abstract class MultiBlockController extends SyncedBlockEntity implements 
                         final BlockPos posOffset = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
                         final BlockState checkedState = world.getBlockState(posOffset);
                         if (checkedState.contains(thisProperty)) {
-                            world.setBlockState(posOffset, checkedState.with(thisProperty, false));
+                            world.setBlockState(posOffset, checkedState.with(thisProperty, Boolean.FALSE));
 
                         }
                         checkSuccessful = false;

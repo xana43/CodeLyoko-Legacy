@@ -12,8 +12,7 @@ public final class ComputerInterfaceScreenHandler extends ScreenHandler {
     private BlockPos pos;
     private final PlayerEntity player;
     private WorldProperties worldProperties;
-    public ComputerInterfaceScreenHandler(final int syncId,final PlayerEntity player,
-            final WorldProperties worldProperties,final PacketByteBuf buf) {
+    public ComputerInterfaceScreenHandler(final int syncId,final PlayerEntity player, final WorldProperties worldProperties,final PacketByteBuf buf) {
         this(syncId,player);
         pos = buf.readBlockPos();
         this.worldProperties = worldProperties;

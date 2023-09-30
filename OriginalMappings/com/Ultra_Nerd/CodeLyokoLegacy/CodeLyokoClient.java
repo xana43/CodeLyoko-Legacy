@@ -23,7 +23,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ComputerControlPanelUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TowerGUI;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer.CoreOfLyoko;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.CoreOfLyoko;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;

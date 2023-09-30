@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.KeyBoardInterface;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.KeyBoardInterface;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
@@ -582,7 +582,7 @@ public final class ComputerKeyboard extends HorizontalFacingBlock implements Blo
 
         );
 
-        this.setDefaultState(this.getDefaultState().with(IS_SCREEN_FORMED,false));
+        this.setDefaultState(this.getDefaultState().with(IS_SCREEN_FORMED, Boolean.FALSE));
 
 
     }
@@ -599,7 +599,7 @@ public final class ComputerKeyboard extends HorizontalFacingBlock implements Blo
 
     @Override
     public BlockRenderType getRenderType(final BlockState state) {
-        if(state.get(IS_SCREEN_FORMED))
+        if(state.<Boolean>get(IS_SCREEN_FORMED).booleanValue())
         {
             return BlockRenderType.INVISIBLE;
         }

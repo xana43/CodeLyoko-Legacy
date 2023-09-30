@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ElectricInfusingChamberTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.ElectricInfusingChamberTileEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;

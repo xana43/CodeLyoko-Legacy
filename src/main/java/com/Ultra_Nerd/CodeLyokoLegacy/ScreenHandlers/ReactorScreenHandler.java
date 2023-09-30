@@ -4,9 +4,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 import com.Ultra_Nerd.CodeLyokoLegacy.Slots.ReactorInputSlot;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModRecipes;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModScreenHandlers;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.SuperCalculatorEntities.ComputerReactorTileEntityInventory;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.client.gui.screen.ingame.FurnaceScreen;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ComputerReactorTileEntityInventory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -110,7 +108,7 @@ public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inve
     public int getEnergyAmount() {
         return propertyDelegate.get(0);
     }
-    public boolean isFuel(final ItemStack stack)
+    public static boolean isFuel(final ItemStack stack)
     {
         return ComputerReactorTileEntityInventory.canUseAsFuel(stack);
     }
@@ -133,7 +131,7 @@ public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inve
                     if (!this.insertItem(itemStack2, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (this.isFuel(itemStack2)) {
+                } else if (ReactorScreenHandler.isFuel(itemStack2)) {
                     if (!this.insertItem(itemStack2, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }

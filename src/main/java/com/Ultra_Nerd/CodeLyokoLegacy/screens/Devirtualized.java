@@ -4,27 +4,26 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens;//
 //
 
 
-
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.MessageScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.screen.ScreenTexts;
+import net.minecraft.text.ClickEvent.Action;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.ClickEvent.Action;
 import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
 public final class Devirtualized extends Screen {
@@ -46,11 +45,11 @@ public final class Devirtualized extends Screen {
         this.ticksSinceDeath = 0;
         this.buttons.clear();
         Text text = this.isHardcore ? Text.translatable("deathScreen.spectate") : Text.translatable("deathScreen.respawn");
-        this.buttons.add((ButtonWidget)this.addDrawableChild(ButtonWidget.builder(text, (button) -> {
+        this.buttons.add(this.addDrawableChild(ButtonWidget.builder(text, (button) -> {
             this.client.player.requestRespawn();
             button.active = false;
         }).dimensions(this.width / 2 - 100, this.height / 4 + 72, 200, 20).build()));
-        this.titleScreenButton = (ButtonWidget)this.addDrawableChild(ButtonWidget.builder(Text.translatable("deathScreen.titleScreen"), (button) -> {
+        this.titleScreenButton = this.addDrawableChild(ButtonWidget.builder(Text.translatable("deathScreen.titleScreen"), (button) -> {
             this.client.getAbuseReportContext().tryShowDraftScreen(this.client, this, this::onTitleScreenButtonClicked, true);
         }).dimensions(this.width / 2 - 100, this.height / 4 + 96, 200, 20).build());
         this.buttons.add(this.titleScreenButton);
@@ -71,7 +70,7 @@ public final class Devirtualized extends Screen {
                     this.quitLevel();
                 } else {
                     this.client.player.requestRespawn();
-                    this.client.setScreen((Screen)null);
+                    this.client.setScreen(null);
                 }
 
             }, Text.translatable("deathScreen.quit.confirm"), ScreenTexts.EMPTY, Text.translatable("deathScreen.titleScreen"), Text.translatable("deathScreen.respawn"));

@@ -5,9 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.Nullable;
 
 public final class ComputerCirculatorScreenHandler extends ScreenHandler {
     private final PlayerEntity player;
@@ -19,9 +17,9 @@ public final class ComputerCirculatorScreenHandler extends ScreenHandler {
         flowDirections = new byte[]{};
         this.player = player;
     }
-    public ComputerCirculatorScreenHandler(final int syncid,final PlayerEntity player,final PacketByteBuf buf)
+    public ComputerCirculatorScreenHandler(final int syncID,final PlayerEntity player,final PacketByteBuf buf)
     {
-        this(syncid,player);
+        this(syncID,player);
         currentPosition = buf.readBlockPos();
         flowDirections = buf.readByteArray();
     }

@@ -26,7 +26,6 @@ public final class PlayerClassComponent implements PlayerComponent<PlayerClassCo
 
     @Override
     public void writeToNbt(final @NotNull NbtCompound tag) {
-        //CodeLyokoMain.LOG.info("Saving data for Player " + player.getName());
         tag.putInt("player_class", classID);
     }
 }

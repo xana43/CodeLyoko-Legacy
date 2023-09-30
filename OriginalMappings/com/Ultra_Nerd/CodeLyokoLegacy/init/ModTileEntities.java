@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.*;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;

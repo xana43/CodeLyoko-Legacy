@@ -6,7 +6,7 @@ public final class DefaultNbtHelper extends NbtCompound {
     public DefaultNbtHelper(final Boolean booleanValue,final String name)
     {
         super();
-        this.putBoolean(name,booleanValue);
+        this.putBoolean(name, booleanValue.booleanValue());
     }
 
     public DefaultNbtHelper(final int intValue,final String name)

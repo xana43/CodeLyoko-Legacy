@@ -2,10 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -16,11 +14,6 @@ public final class CellularDegeneration implements AutoSyncedComponent, PlayerCo
     private final PlayerEntity player;
     private int cellHealth = 1024;
     private boolean healthy = true;
-
-    @Override
-    public boolean shouldSyncWith(final ServerPlayerEntity player) {
-        return player == this.player;
-    }
 
     public CellularDegeneration(final PlayerEntity player) {
         this.player = player;
@@ -41,7 +34,6 @@ public final class CellularDegeneration implements AutoSyncedComponent, PlayerCo
                     .nextFloat(4,8));
         }
     }
-//new DamageSource("lyoko.cell.damage").setBypassesArmor()
     public void regenerateHealth() {
         if (cellHealth < maxCellHealth) {
             cellHealth++;

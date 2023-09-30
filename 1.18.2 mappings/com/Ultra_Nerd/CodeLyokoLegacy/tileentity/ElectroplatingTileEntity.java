@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.tileentity;
+package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity;
 
 public class ElectroplatingTileEntity /*extends BlockEntity implements BlockEntityTicker<ElectroplatingTileEntity>//, INamedContainerProvider*/
  {

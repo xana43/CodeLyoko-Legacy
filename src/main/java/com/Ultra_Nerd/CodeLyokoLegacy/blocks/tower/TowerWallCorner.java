@@ -20,7 +20,7 @@ public final class TowerWallCorner extends TowerWall {
         final double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
         switch (stateIn.get(FACING)) {
             case NORTH -> {
-                switch (stateIn.get(CURRENT_ACTIVATION_STATE)) {
+                switch (stateIn.<Integer>get(CURRENT_ACTIVATION_STATE).intValue()) {
                     case 0 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1))
                                 .isOf(Blocks.AIR)) {
@@ -64,7 +64,7 @@ public final class TowerWallCorner extends TowerWall {
                 }
             }
             case SOUTH -> {
-                switch (stateIn.get(CURRENT_ACTIVATION_STATE)) {
+                switch (stateIn.<Integer>get(CURRENT_ACTIVATION_STATE).intValue()) {
                     case 0 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1))
                                 .isOf(Blocks.AIR)) {
@@ -108,7 +108,7 @@ public final class TowerWallCorner extends TowerWall {
                 }
             }
             case EAST -> {
-                switch (stateIn.get(CURRENT_ACTIVATION_STATE)) {
+                switch (stateIn.<Integer>get(CURRENT_ACTIVATION_STATE).intValue()) {
                     case 0 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()))
                                 .isOf(Blocks.AIR)) {
@@ -152,7 +152,7 @@ public final class TowerWallCorner extends TowerWall {
                 }
             }
             case WEST -> {
-                switch (stateIn.get(CURRENT_ACTIVATION_STATE)) {
+                switch (stateIn.<Integer>get(CURRENT_ACTIVATION_STATE).intValue()) {
                     case 0 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()))
                                 .isOf(Blocks.AIR)) {

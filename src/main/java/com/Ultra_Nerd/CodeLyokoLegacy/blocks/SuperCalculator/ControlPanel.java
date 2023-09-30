@@ -248,7 +248,7 @@ public final class ControlPanel extends HorizontalFacingBlock implements BlockEn
                 .sounds(BlockSoundGroup.METAL)
 
         );
-        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(ScreenOn, false));
+        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(ScreenOn, Boolean.FALSE));
 
 
     }
@@ -288,7 +288,7 @@ public final class ControlPanel extends HorizontalFacingBlock implements BlockEn
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(ScreenOn, false);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(ScreenOn, Boolean.FALSE);
     }
 
     @Override

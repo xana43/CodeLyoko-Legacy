@@ -4,7 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTileEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.ScannerTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.ScannerTileEntity;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;

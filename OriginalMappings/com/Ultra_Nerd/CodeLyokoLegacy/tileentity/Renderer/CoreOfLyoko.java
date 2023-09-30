@@ -1,9 +1,9 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.tileentity.Renderer;
+package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
-import com.Ultra_Nerd.CodeLyokoLegacy.tileentity.LyokoCoreBE;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.LyokoCoreBE;
 import dev.monarkhes.myron.api.Myron;
 import dev.monarkhes.myron.impl.client.model.MyronBakedModel;
 import dev.monarkhes.myron.impl.client.model.MyronMaterial;

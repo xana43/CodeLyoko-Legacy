@@ -28,7 +28,7 @@ public abstract class DigitalOcean extends LyokoFluid {
 
     @Override
     protected BlockState toBlockState(final FluidState state) {
-        return ModBlocks.DIGITAL_OCEAN_BLOCK.getDefaultState().with(Properties.LEVEL_15, getBlockStateLevel(state));
+        return ModBlocks.DIGITAL_OCEAN_BLOCK.getDefaultState().with(Properties.LEVEL_15, Integer.valueOf(getBlockStateLevel(state)));
     }
 
 
@@ -45,7 +45,7 @@ public abstract class DigitalOcean extends LyokoFluid {
 
         @Override
         public int getLevel(final FluidState state) {
-            return state.get(LEVEL);
+            return state.<Integer>get(LEVEL).intValue();
         }
 
         @Override

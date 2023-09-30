@@ -172,7 +172,7 @@ public final class CarthageGenerator extends ChunkGenerator {
     }
 
 
-    private void createSphere(@NotNull Chunk chunk, @NotNull BlockState stone, BlockPos.@NotNull Mutable pos, int x, int z, int height, int innerHeight) {
+    private static void createSphere(@NotNull Chunk chunk, @NotNull BlockState stone, BlockPos.@NotNull Mutable pos, int x, int z, int height, int innerHeight) {
         for (int h = 0; h < height; h++) {
             chunk.setBlockState(pos.set(x, h + 128, z), stone, false);
             chunk.setBlockState(pos.set(x, 127 - h, z), stone, false);
@@ -184,9 +184,9 @@ public final class CarthageGenerator extends ChunkGenerator {
     }
 
 
-    private int getHeightAt(int baseHeight, float vertialVariance, float horizontalVariance, int x, int z) {
-        return (int) (baseHeight + Math.sin(x / horizontalVariance) * vertialVariance + Math.cos(
-                z / horizontalVariance) * vertialVariance);
+    private static int getHeightAt(final int baseHeight, final float verticalVariance,final float horizontalVariance,final int x,final int z) {
+        return (int) (baseHeight + Math.sin(x / horizontalVariance) * verticalVariance + Math.cos(
+                z / horizontalVariance) * verticalVariance);
     }
 
 

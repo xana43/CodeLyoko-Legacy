@@ -14,7 +14,7 @@ public final class ReactorInputSlot extends Slot {
     }
     public boolean canInsert(final ItemStack stack)
     {
-        return this.handler.isFuel(stack);
+        return ReactorScreenHandler.isFuel(stack);
     }
 
 

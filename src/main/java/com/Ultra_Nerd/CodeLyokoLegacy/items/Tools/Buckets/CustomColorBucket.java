@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.Tools.Buckets;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.BucketItem;
 
