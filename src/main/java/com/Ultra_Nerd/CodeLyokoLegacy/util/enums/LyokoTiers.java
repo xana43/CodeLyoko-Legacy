@@ -14,14 +14,14 @@ public enum LyokoTiers implements ToolMaterial {
     LyokoArcher(4, 2500, 9200, 8);
 
     private final int harvest, MaxUses;
-    private final float attackdamage, efficiency;
+    private final float attackDamage, efficiency;
 
 
-    LyokoTiers(final int harvest,final int MaxUses,final float efficiency,final float attackdamage) {
+    LyokoTiers(final int harvest,final int MaxUses,final float efficiency,final float attackDamage) {
         this.harvest = harvest;
         this.MaxUses = MaxUses;
         this.efficiency = efficiency;
-        this.attackdamage = attackdamage;
+        this.attackDamage = attackDamage;
 
 
     }
@@ -39,7 +39,7 @@ public enum LyokoTiers implements ToolMaterial {
 
     @Override
     public float getAttackDamage() {
-        return this.attackdamage;
+        return this.attackDamage;
     }
 
     @Override
@@ -49,7 +49,7 @@ public enum LyokoTiers implements ToolMaterial {
 
     @Override
     public int getEnchantability() {
-        return 0;
+        return Integer.MAX_VALUE;
     }
 
 

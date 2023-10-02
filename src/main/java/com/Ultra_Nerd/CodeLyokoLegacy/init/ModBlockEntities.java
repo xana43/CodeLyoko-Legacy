@@ -1,6 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.LaptopChargerBlockEntityInventory;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.RackChargerBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.UniversalEnergyStorageTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.CirculatorPipeBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerCirculatorBlockEntity;
@@ -64,6 +67,8 @@ public record ModBlockEntities() {
 
     public static final BlockEntityType<ItemProjectorTestBlockEntity> ITEM_PROJECTOR_TEST_BLOCK_ENTITY =
             FabricBlockEntityTypeBuilder.create(ItemProjectorTestBlockEntity::new,ModBlocks.TEST_ITEM_PROJECTOR).build();
+    public static final BlockEntityType<RackChargerBlockEntity> RACK_CHARGER_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(RackChargerBlockEntity::new,
+            ModBlocks.RACK_CHARGER_BLOCK).build();
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String, BlockEntityType<?>>builder()
 
             .put("lyoko_core", LYOKO_CORE)
@@ -86,6 +91,7 @@ public record ModBlockEntities() {
             .put("computer_fluid_intake_block_entity",COMPUTER_FLUID_INTAKE_BLOCK_ENTITY)
             .put("computer_fluid_cooler_block_entity",COOLER_BLOCK_ENTITY_TYPE)
             .put("test_item_projector_block_entity", ITEM_PROJECTOR_TEST_BLOCK_ENTITY)
+            .put("rack_charger_block_entity",RACK_CHARGER_BLOCK_ENTITY)
             .build();
 
 }

@@ -11,10 +11,10 @@ public abstract class EnergyStorageBlockEntity extends SyncedBlockEntity impleme
     protected final SimpleEnergyStorage energyStorage;
 
     public EnergyStorageBlockEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state,
-            final long capacity,final long maxinsert, final long maxextract) {
+            final long capacity,final long maxInsert, final long maxExtract) {
         super(type, pos, state);
 
-        energyStorage = new SimpleEnergyStorage(capacity,maxinsert,maxextract);
+        energyStorage = new SimpleEnergyStorage(capacity,maxInsert,maxExtract);
 
 
     }

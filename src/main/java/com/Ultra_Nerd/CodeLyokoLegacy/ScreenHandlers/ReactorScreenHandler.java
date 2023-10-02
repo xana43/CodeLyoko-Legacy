@@ -38,7 +38,7 @@ public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inve
         int row;
         int column;
         //reactor inventory
-        this.addSlot(new ReactorInputSlot(this,inventory, 0, 62, 35));
+        this.addSlot(new ReactorInputSlot(inventory, 0, 62, 35));
         this.addSlot(new FurnaceOutputSlot(playerInventory.player, inventory, 1, 98, 35));
         //player inventory
         for (row = 0; row < 3; ++row) {

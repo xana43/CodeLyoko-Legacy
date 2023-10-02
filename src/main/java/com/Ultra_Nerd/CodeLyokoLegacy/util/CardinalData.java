@@ -5,7 +5,11 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.Capabilities.SkidBladnirData;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerProfile;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.Capabilities.XanaAttackTypes;
+import com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities.InventorySaveComponent;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities.PlayerProfileStorage;
+import com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities.PlayerScannerComponent;
+import com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities.XanaDataComponent;
 import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
@@ -22,8 +26,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldProperties;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 public record CardinalData() implements EntityComponentInitializer, LevelComponentInitializer {
 
 
@@ -31,6 +33,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     public void registerLevelComponentFactories(final @NotNull LevelComponentFactoryRegistry registry) {
         registry.register(XanaCalculator.XANA_DATA, worldProperties -> new XanaDataComponent());
         registry.register(LyokoInventorySave.LYOKO_INVENTORY_SAVE, worldProperties -> new InventorySaveComponent());
+        registry.register(ReturnToScanner.RETURN_TO_SCANNER,worldProperties -> new PlayerScannerComponent());
         registry.register(PlayerSavedProfile.PLAYER_PROFILE_STORAGE_COMPONENT_KEY, worldProperties -> new PlayerProfileStorage());
     }
 
@@ -38,7 +41,6 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     public void registerEntityComponentFactories(final @NotNull EntityComponentFactoryRegistry registry) {
         registry.registerForPlayers(LyokoClass.LYOKOCLASS, it -> new PlayerClassComponent(),RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(MindHelmStress.MINDHELMSTRESS,player -> new MindHelmStressComponent(),RespawnCopyStrategy.NEVER_COPY);
-        registry.registerForPlayers(ReturnToScanner.RETURN_TO_SCANNER, PlayerScannerComponent::new,RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(HumanDNAAttribute.HUMAN_DNA_COMPONENT_KEY, HumanDNA::new, RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(CellularDamage.DEGENERATION_COMPONENT_KEY,CellularDegeneration::new, RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(DigitalEnergyComponent.DIGITAL_ENERGY_COMPONENT_KEY,(player -> new DigitalEnergy()));
@@ -150,18 +152,16 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
                 return;
             }
             PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).updatePlayerProfile(profile);
-            LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY,Objects.requireNonNull(profile.getPlayer()
-                    .getServer()));
+
         }
         public static void removePlayerProfile(final WorldProperties worldProperties,final ServerPlayerEntity player)
         {
             PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).removePlayerProfile(player);
-            LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY, Objects.requireNonNull(player.getServer()));
         }
 
         public static PlayerProfile getPlayerProfile(final WorldProperties worldProperties, final PlayerEntity player)
         {       final PlayerProfile profile = PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).getPlayerProfile(player);
-                LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY,Objects.requireNonNull(player.getServer()));
+                //LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY,Objects.requireNonNull(player.getServer()));
                 return profile;
         }
     }
@@ -176,7 +176,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         public static void setHasDna(final PlayerEntity player, final boolean hasDna)
         {
             HUMAN_DNA_COMPONENT_KEY.get(player).setHasDNA(hasDna);
-            HUMAN_DNA_COMPONENT_KEY.sync(player);
+            //HUMAN_DNA_COMPONENT_KEY.sync(player);
         }
         public static boolean getHasDna(final PlayerEntity player)
         {
@@ -213,7 +213,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     public record LyokoClass() {
         private static final ComponentKey<PlayerClassComponent> LYOKOCLASS = ComponentRegistry.getOrCreate(
                 CodeLyokoMain.codeLyokoPrefix("lyoko_class"), PlayerClassComponent.class);
-        public static ComponentKey<PlayerClassComponent> getLyokoclassComponent()
+        public static ComponentKey<PlayerClassComponent> getLyokoClassComponent()
         {
             return LYOKOCLASS;
         }
@@ -221,7 +221,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
             return LYOKOCLASS.get(player).getClassID();
         }
 
-        public static void setLyokoclass(final PlayerEntity player, final int ID) {
+        public static void setLyokoClass(final PlayerEntity player, final int ID) {
             LYOKOCLASS.get(player).setClassID(ID);
 
             LYOKOCLASS.sync(player);
@@ -234,14 +234,64 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         private static final ComponentKey<XanaDataComponent> XANA_DATA = ComponentRegistry.getOrCreate(
                 CodeLyokoMain.codeLyokoPrefix("xana_data"), XanaDataComponent.class);
 
-        public static void setDangerLevel(final MinecraftServer server,final int dangerLevel,
-                final WorldProperties worldProperties) {
+        public static void setDangerLevel(final MinecraftServer server,final int dangerLevel, final WorldProperties worldProperties) {
             XANA_DATA.get(worldProperties).setDangerLevel(dangerLevel);
             LevelComponents.sync(XANA_DATA,server);
         }
-
+        public static void setCheckRadius(final MinecraftServer server,final WorldProperties properties, final int radius)
+        {
+            XANA_DATA.get(properties).setRadius(radius);
+            LevelComponents.sync(XANA_DATA,server);
+        }
+        public static XanaAttackTypes getAttackTypes(final WorldProperties worldProperties)
+        {
+            return XANA_DATA.get(worldProperties).getAttackType();
+        }
+        public static int getRadius(final WorldProperties properties)
+        {
+            return XANA_DATA.get(properties).getRadius();
+        }
         public static int getDangerLevel(final WorldProperties properties) {
             return XANA_DATA.get(properties).getDangerLevel();
+        }
+        public static void increaseDangerLevel(final MinecraftServer server,final WorldProperties properties, final int dangerLevelIncrease)
+        {
+            XANA_DATA.get(properties).increaseDangerLevel(dangerLevelIncrease);
+            LevelComponents.sync(XANA_DATA,server);
+        }
+        public static void decreaseDangerLevel(final MinecraftServer server,final WorldProperties properties,final int dangerLevelDecrease)
+        {
+            XANA_DATA.get(properties).decreaseDangerLevel(dangerLevelDecrease);
+            LevelComponents.sync(XANA_DATA,server);
+        }
+        public static void clearValidAttackPositions(final MinecraftServer server,final WorldProperties properties)
+        {
+            XANA_DATA.get(properties).clearAllAttackPositions();
+            LevelComponents.sync(XANA_DATA,server);
+        }
+        public static BlockPos getActiveFactoryPosition(final WorldProperties properties)
+        {
+           return XANA_DATA.get(properties).getActiveFactoryPosition();
+        }
+        public static void setActiveFactoryPosition(final MinecraftServer server,final WorldProperties properties,final BlockPos activeFactoryPosition)
+        {
+            XANA_DATA.get(properties).setActiveFactoryPosition(activeFactoryPosition);
+            LevelComponents.sync(XANA_DATA,server);
+        }
+        public static void removeValidAttackPosition(final MinecraftServer server,final WorldProperties properties,final BlockPos validAttackPosition)
+        {
+            XANA_DATA.get(properties).removeValidAttackPosition(validAttackPosition);
+            LevelComponents.sync(XANA_DATA,server);
+        }
+        public static void addValidAttackPosition(final MinecraftServer server,final WorldProperties properties,final BlockPos validAttackPosition)
+        {
+            XANA_DATA.get(properties).addValidAttackPositions(validAttackPosition);
+            LevelComponents.sync(XANA_DATA,server);
+        }
+        public static void setAttackType(final MinecraftServer server,final WorldProperties properties,final XanaAttackTypes attackType)
+        {
+            XANA_DATA.get(properties).setAttackType(attackType);
+            LevelComponents.sync(XANA_DATA,server);
         }
     }
 
@@ -272,13 +322,12 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         {
             return RETURN_TO_SCANNER;
         }
-        public static void saveScannerLocation(final PlayerEntity player) {
-            RETURN_TO_SCANNER.get(player).savePosition();
-            RETURN_TO_SCANNER.sync(player);
+        public static void saveScannerLocation(final WorldProperties worldProperties,final PlayerEntity player) {
+            RETURN_TO_SCANNER.get(worldProperties).savePosition(player);
         }
 
-        public static void materializeAtScanner(final PlayerEntity player) {
-            RETURN_TO_SCANNER.get(player).setPosition();
+        public static void materializeAtScanner(final WorldProperties worldProperties,final PlayerEntity player) {
+            RETURN_TO_SCANNER.get(worldProperties).setPosition(player);
         }
     }
 }

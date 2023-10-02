@@ -20,6 +20,7 @@ public abstract class InventoryTickingBlockEntity extends SyncedBlockEntity impl
 
     public void setItem(final ItemStack newStack, final int Index) {
         itemStacks.set(Index, newStack);
+        markDirty();
     }
 
 

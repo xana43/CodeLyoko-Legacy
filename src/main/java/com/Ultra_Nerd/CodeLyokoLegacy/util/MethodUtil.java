@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.advancement.criterion.CriterionConditions;
@@ -18,6 +19,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.RegistryKey;
@@ -27,6 +29,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import team.reborn.energy.api.EnergyStorage;
+import team.reborn.energy.api.base.SimpleEnergyItem;
 
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
@@ -401,6 +405,21 @@ public record MethodUtil() {
         public record HelperMethods()
         {
 
+            public static void tryUseEnergy(final ItemStack stack, final EnergyStorage storage)
+            {
+                try(final Transaction transaction = Transaction.openOuter())
+                {
+                   final SimpleEnergyItem energyItem = (SimpleEnergyItem) stack.getItem();
+                   if(energyItem != null)
+                   {
+                       final long energyItemCurrentEnergy = energyItem.getStoredEnergy(stack);
+                       final long energyItemMaxInput = energyItem.getEnergyMaxInput(stack);
+                       final long extractedEnergy = storage.extract(energyItemMaxInput,transaction);
+                       energyItem.setStoredEnergy(stack,energyItemCurrentEnergy + extractedEnergy);
+                       transaction.commit();
+                   }
+                }
+            }
         }
 
         public record TextUtil() {

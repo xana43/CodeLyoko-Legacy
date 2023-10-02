@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities;
+package com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;

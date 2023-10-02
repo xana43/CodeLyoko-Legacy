@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ElectricitySystemHandlers.RackChargerHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TestHandler.ProfileDebugScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TestHandler.VehicleMaterializeTestHandler;
 import com.google.common.collect.ImmutableMap;
@@ -32,6 +33,8 @@ public record ModScreenHandlers() {
     public static final ScreenHandlerType<ComputerCirculatorScreenHandler> COMPUTER_CIRCULATOR_SCREEN_HANDLER =
             new ExtendedScreenHandlerType<>((syncId, inventory, buf) -> new ComputerCirculatorScreenHandler(syncId,
                     inventory.player,buf));
+    public static final ScreenHandlerType<RackChargerHandler> RACK_CHARGER_HANDLER_SCREEN_TYPE =
+            new ScreenHandlerType<>(RackChargerHandler::new,FeatureFlags.VANILLA_FEATURES);
     public static final ImmutableMap<String, ScreenHandlerType<?>> screenHandlerMap = ImmutableMap.<String, ScreenHandlerType<?>>builder()
             .put("tower_screen_handler", TOWER_INTERFACE_SCREEN_HANDLER)
             .put("computer_controlpanel", CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE)
@@ -40,5 +43,6 @@ public record ModScreenHandlers() {
             .put("profiledebugger",PROFILE_DEBUG_SCREEN_HANDLER_SCREEN_HANDLER_TYPE)
             .put("vehicletest",VEHICLE_MATERIALIZE_TEST_HANDLER_SCREEN_HANDLER_TYPE)
             .put("computer_circulator_screen_handler",COMPUTER_CIRCULATOR_SCREEN_HANDLER)
+            .put("rack_charger_screen_handler",RACK_CHARGER_HANDLER_SCREEN_TYPE)
             .build();
 }

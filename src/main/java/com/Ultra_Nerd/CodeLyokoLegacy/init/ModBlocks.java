@@ -6,6 +6,9 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.DigitalSeaBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.LiquidHelium;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.UraniumWaste;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Electricity.LaptopCharger;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Electricity.RackChargerBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Electricity.UniversalEnergyBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.electroplate.ElectroplatingMachine;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.ElectricFluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.FluorideInfuser;
@@ -164,7 +167,7 @@ public record ModBlocks() {
     public static final Block QUANTUM_CORE = new Block(FabricBlockSettings.copyOf(Blocks.END_PORTAL));
     public static final Block QUANTUM_STEEL_BLOCK = new QuantumSteelBlock(
             FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(6, 20).sounds(BlockSoundGroup.METAL));
-
+    public static final Block RACK_CHARGER_BLOCK = new RackChargerBlock(FabricBlockSettings.copyOf(Blocks.REDSTONE_BLOCK));
     public static final Block SALEEITE_ORE = new ExperienceDroppingBlock(
             FabricBlockSettings.copyOf(Blocks.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE));
     public static final Block SCANNER_BASE = new Scanner();
@@ -287,6 +290,7 @@ public record ModBlocks() {
             .put("quantum_block", QUANTUM_BLOCK)
             .put("quantum_core", QUANTUM_CORE)
             .put("quantum_steel", QUANTUM_STEEL_BLOCK)
+            .put("rack_charger",RACK_CHARGER_BLOCK)
             .put("saleeite_ore", SALEEITE_ORE)
             .put("scanner_base", SCANNER_BASE)
             .put("scanner_frame", SCANNER_FRAME)

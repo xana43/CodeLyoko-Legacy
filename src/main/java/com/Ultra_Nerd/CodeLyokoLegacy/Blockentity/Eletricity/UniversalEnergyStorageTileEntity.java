@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities;
+package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import net.minecraft.block.BlockState;
@@ -14,7 +14,7 @@ import team.reborn.energy.api.base.SimpleSidedEnergyContainer;
 
 public final class UniversalEnergyStorageTileEntity extends BlockEntity {
 
-    private static final String nbtkey = "universal_energy_key";
+    private static final String NBT_KEY = "universal_energy_key";
     private final SimpleEnergyStorage energyStorageImplementation = new SimpleEnergyStorage(900, 10, 10);
     private final SimpleSidedEnergyContainer sidedEnergyContainer = new SimpleSidedEnergyContainer() {
         @Override
@@ -88,12 +88,12 @@ public final class UniversalEnergyStorageTileEntity extends BlockEntity {
     @Override
     public void readNbt(final NbtCompound nbt) {
         super.readNbt(nbt);
-        energyStorageImplementation.amount = nbt.getLong(nbtkey);
+        energyStorageImplementation.amount = nbt.getLong(NBT_KEY);
     }
 
     @Override
     protected void writeNbt(final NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putLong(nbtkey, energyStorageImplementation.amount);
+        nbt.putLong(NBT_KEY, energyStorageImplementation.amount);
     }
 }

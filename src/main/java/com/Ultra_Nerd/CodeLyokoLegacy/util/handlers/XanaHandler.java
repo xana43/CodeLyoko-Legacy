@@ -2,7 +2,13 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.handlers;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.Capabilities.XanaAttackTypes;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldProperties;
 
 import java.util.Random;
@@ -11,26 +17,47 @@ public record XanaHandler() {
 
     private static final Random random = new Random();
     private static int ticksToNextCalculation;
-    private static int dangerLevel;
     private static WorldProperties properties;
     private static int ticksTillCalculation;
     private static MinecraftServer internalServer = null;
-    private static void setDangerLevelFromSave() {
-        dangerLevel = CardinalData.XanaCalculator.getDangerLevel(properties);
-    }
 
     public static void setProperties(final MinecraftServer server ,final WorldProperties wproperties) {
         properties = wproperties;
         internalServer = server;
-        setDangerLevelFromSave();
+        calculateValidAttackPositions();
     }
 
-    public static int getDangerLevel() {
-        return dangerLevel;
-    }
-
-    public static void resetDangerLevel() {
-        dangerLevel = 0;
+    private static void calculateValidAttackPositions()
+    {
+        final World world = internalServer.getOverworld();
+        final int radius = CardinalData.XanaCalculator.getRadius(properties);
+        final BlockPos factoryPosition = CardinalData.XanaCalculator.getActiveFactoryPosition(properties);
+        final XanaAttackTypes attackTypes = CardinalData.XanaCalculator.getAttackTypes(properties);
+        int maxEntityHeight = 0;
+        for(final Entity entity : attackTypes.getAttackers())
+        {
+            final float retrievedEntityHeight = entity.getHeight();
+            if(retrievedEntityHeight > maxEntityHeight)
+            {
+                maxEntityHeight = Math.round(retrievedEntityHeight);
+            }
+        }
+        for(int i = -(radius >> 1); i < radius; i++)
+        {
+            for(final Direction direction : Direction.values())
+            {
+                if(world.getBlockState(factoryPosition.offset(direction,i)) == Blocks.AIR.getDefaultState())
+                {
+                    for(int h = 0; h < maxEntityHeight; h++)
+                    {
+                        if(world.getBlockState(factoryPosition.offset(direction,i+h)) == Blocks.AIR.getDefaultState())
+                        {
+                            CardinalData.XanaCalculator.addValidAttackPosition(internalServer,properties,factoryPosition.offset(direction,i));
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public static void setTicksToNextCalculation(final int seconds) {
@@ -44,11 +71,10 @@ public record XanaHandler() {
 
     public static boolean calculateAttackProbability() {
         final int attackCallID = random.nextInt(0, 200);
-        CardinalData.XanaCalculator.setDangerLevel(internalServer,dangerLevel, properties);
         ticksTillCalculation--;
         if (ticksTillCalculation <= 0) {
             if (attackCallID == 69) {
-                dangerLevel++;
+                CardinalData.XanaCalculator.increaseDangerLevel(internalServer,properties,1);
                 return true;
             } else {
                 setTicksTillCalculation();

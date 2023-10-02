@@ -35,7 +35,10 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
@@ -204,6 +207,8 @@ public record CodeLyokoMain() implements ModInitializer {
                 ModBlockEntities.COMPUTER_REACTOR_TILE_ENTITY);
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyStorage(),
                 ModBlockEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE);
+        EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyStorage(),
+                ModBlockEntities.RACK_CHARGER_BLOCK_ENTITY);
         FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) ->switch (direction){
                     case NORTH -> blockEntity.waterIntake;
                     default -> blockEntity.waterDistibution;
@@ -252,7 +257,7 @@ public record CodeLyokoMain() implements ModInitializer {
     private static void SetupFunctions() {
 
 
-        //sets the properties for the xana handler to calcualate on
+        //sets the properties for the xana handler to calculate on
         ServerWorldEvents.LOAD.register((server, world) -> XanaHandler.setProperties(server,world.getLevelProperties()));
         //saves and loads the inventory for both respawn and joining
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
@@ -305,7 +310,9 @@ public record CodeLyokoMain() implements ModInitializer {
             if(!updatedProfile.getFirstJoin()) {
                 //CodeLyokoMain.LOG.info("updating first join");
                 final PlayerInventory tmpInventory = player.getInventory();
-                tmpInventory.setStack(tmpInventory.getEmptySlot(),new ItemStack(ModItems.STORY_BOOK));
+                if(tmpInventory.getEmptySlot() != -1) {
+                    tmpInventory.setStack(tmpInventory.getEmptySlot(), new ItemStack(ModItems.STORY_BOOK));
+                }
                 updatedProfile.setFirstJoin(true);
                 //CodeLyokoMain.LOG.info(String.valueOf(updatedProfile.getFirstJoin()));
                 CardinalData.PlayerSavedProfile.updateProfile(world.getServer().getSaveProperties().getMainWorldProperties(), updatedProfile);

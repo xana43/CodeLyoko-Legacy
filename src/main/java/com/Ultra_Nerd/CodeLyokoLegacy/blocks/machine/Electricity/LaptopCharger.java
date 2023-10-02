@@ -1,8 +1,8 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
+package com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Electricity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.LaptopChargerBlockEntityInventory;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.LaptopChargerBlockEntityInventory;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;

@@ -4,11 +4,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
-
-import java.util.Optional;
 
 public abstract class EnergyStorageBlockEntityInventory extends SidedInventoryTickingBlockEntity {
     private static final String energyKey = "general_energy_storage";
@@ -16,11 +13,9 @@ public abstract class EnergyStorageBlockEntityInventory extends SidedInventoryTi
 
 
     public EnergyStorageBlockEntityInventory(final BlockEntityType<?> type, final BlockPos pos, final BlockState state,
-            final int inventorySize, final long capacity, @Nullable Long maxInsert, @Nullable Long maxExtract) {
+            final int inventorySize, final long capacity,final long maxInsert, final long maxExtract) {
         super(type, pos, state, inventorySize);
-        maxExtract = Optional.ofNullable(maxExtract).orElse(Long.valueOf(0L));
-        maxInsert = Optional.ofNullable(maxInsert).orElse(Long.valueOf(0L));
-        energyStorage = new SimpleEnergyStorage(capacity, maxInsert.longValue(), maxExtract.longValue()){
+        energyStorage = new SimpleEnergyStorage(capacity, maxInsert, maxExtract){
             @Override
             protected void onFinalCommit() {
                 super.onFinalCommit();

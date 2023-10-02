@@ -1,4 +1,4 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity;
+package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;

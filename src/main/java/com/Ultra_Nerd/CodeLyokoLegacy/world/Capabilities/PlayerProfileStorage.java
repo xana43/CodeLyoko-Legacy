@@ -63,22 +63,16 @@ public final class PlayerProfileStorage implements AutoSyncedComponent{
         final NbtCompound compound = PLAYER_PROFILE_HASH_MAP.get(uuid);
         if(compound != null) {
             profile.fromTag(compound);
-
         }
         else
         {
             CodeLyokoMain.LOG.warn("no player profile data found, creating new profile");
-
         }
         LevelComponents.sync(CardinalData.PlayerSavedProfile.getPlayerProfileComponentKey(), Objects.requireNonNull(player.getServer()));
         return profile;
     }
     public void updatePlayerProfile(@NotNull final PlayerProfile newProfile)
     {
-        if(newProfile == null)
-        {
-            throw new NullPointerException("the new data that the profile is being updated with is null");
-        }
         if(newProfile.toTag().equals(PLAYER_PROFILE_HASH_MAP.get(newProfile.getPlayer().getUuid())))
         {
             return;

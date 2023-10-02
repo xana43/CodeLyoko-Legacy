@@ -62,7 +62,7 @@ public final class HumanDNA implements AutoSyncedComponent, PlayerComponent<Huma
         }
         DNASequence.append('\n').append(DNASequenceHelix2);
         DNA = DNASequence.toString();
-
+        CardinalData.HumanDNAAttribute.getHumanDnaComponentKey().sync(player);
     }
 
     public String getDNA() {

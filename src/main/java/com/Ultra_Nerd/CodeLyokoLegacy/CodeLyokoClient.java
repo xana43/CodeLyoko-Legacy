@@ -1,5 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.ElectricityRenderers.RackChargerRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.TestRenderers.ItemProjectorTestRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.LaserRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHoverboard;
@@ -10,15 +12,15 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerClient;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.Tools.Buckets.CustomColorBucket;
-import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.linker;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.SuperCalculatorDataLinker;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoRingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.ElectricitySystemScreens.RackChargerScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.PlayerProfileDebug;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.VehicleMaterializationTest;
-import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.client.itemRenderers.ForceFieldEmitterRenderer;
@@ -195,7 +197,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 });
 
         ModelPredicateProviderRegistry.register(ModItems.RAW_POLYCARBONATE, CodeLyokoMain.codeLyokoPrefix("quantity"),
-                (stack, world, entityin, integer) -> {
+                (stack, world, entity, integer) -> {
 
                     if (stack.getCount() > 0 && stack.getCount() < 65) {
                         return stack.getCount() / 100f;
@@ -206,7 +208,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
 
         ModelPredicateProviderRegistry.register(ModItems.SILICON_WAFER, CodeLyokoMain.codeLyokoPrefix("quality"),
-                (stack, world, entityin, integer) -> switch (stack.getDamage()) {
+                (stack, world, entity, integer) -> switch (stack.getDamage()) {
                     case 1 -> 0.25f;
                     case 2 -> 0.5f;
                     case 3 -> 0.75f;
@@ -237,6 +239,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         BlockEntityRendererFactories.register(ModBlockEntities.COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE,
                 ComputerCirculatorRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.ITEM_PROJECTOR_TEST_BLOCK_ENTITY, ItemProjectorTestRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.RACK_CHARGER_BLOCK_ENTITY, RackChargerRenderer::new);
 
     }
 
@@ -252,6 +255,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 PlayerProfileDebug::new);
         HandledScreens.register(ModScreenHandlers.VEHICLE_MATERIALIZE_TEST_HANDLER_SCREEN_HANDLER_TYPE,
                 VehicleMaterializationTest::new);
+        HandledScreens.register(ModScreenHandlers.RACK_CHARGER_HANDLER_SCREEN_TYPE, RackChargerScreen::new);
     }
     private static void registerColorProviders()
     {
@@ -320,9 +324,13 @@ public record CodeLyokoClient() implements ClientModInitializer {
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld, new CustomVolcanoSky());
 
         //custom key response
+
+
+        //custom death screen
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
 
             if (client.player != null) {
+
                 if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
                     if (classAbilityBinding1.isPressed()) {
                         CardinalData.DigitalEnergyComponent.setIsUsingEnergy(client.player, true);
@@ -338,15 +346,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
                     }
 
                 }
-            }
-        });
-
-        //custom death screen
-        ClientTickEvents.START_CLIENT_TICK.register(client -> {
-
-            if (client.player != null) {
-
-
 
                 if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
                         if (client.currentScreen instanceof DeathScreen) {
@@ -363,8 +362,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 if (MethodUtil.DimensionCheck.playerInVanilla(client.player) && client.player.getEquippedStack(
                         EquipmentSlot.CHEST).isOf(ModItems.LINKER)) {
                     final ItemStack headStack = client.player.getEquippedStack(EquipmentSlot.CHEST);
-                    final linker linker = (linker) headStack.getItem();
-                    final long storedEnergy = linker.getStoredEnergy(headStack);
+                    final SuperCalculatorDataLinker SuperCalculatorDataLinker = (SuperCalculatorDataLinker) headStack.getItem();
+                    final long storedEnergy = SuperCalculatorDataLinker.getStoredEnergy(headStack);
                     if (classScreenBinding.isPressed() && (storedEnergy > 0 || client.player.isCreative())) {
                         client.setScreen(new ClassScreen());
                     }

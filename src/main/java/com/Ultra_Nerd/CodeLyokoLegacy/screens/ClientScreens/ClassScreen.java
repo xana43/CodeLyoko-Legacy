@@ -207,7 +207,7 @@ public final class ClassScreen extends Screen {
 
     private void setWarrior() {
         warrior = new TexturedButtonWidget((this.width >> 1) + 150, this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> CardinalData.LyokoClass.setLyokoclass(this.client.player, 4),
+                256, 256, (input) -> CardinalData.LyokoClass.setLyokoClass(this.client.player, 4),
                 Text.of("warrior").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
 
     }

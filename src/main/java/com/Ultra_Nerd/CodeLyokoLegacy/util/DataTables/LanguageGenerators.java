@@ -23,6 +23,7 @@ public record LanguageGenerators() {
             translationBuilder.add("discovered.super_calculator","And so it begins");
             translationBuilder.add("discovered.super_calculator.description","you'd found the schematics for an " +
                     "unknown device, what does it do?");
+            translationBuilder.add("tooltip.energy.mindhelm","Stored Energy:%d");
             //translationBuilder.add(ModItems.LYOKO_THEME,"A world without Danger - CodeLyoko Theme");
             try{
                 final Path  existing = dataOutput.getModContainer().findPath(

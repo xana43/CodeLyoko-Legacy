@@ -55,6 +55,7 @@ public record ModEntities() {
     //decoration entities
     public static final EntityType<XanaSymbolEntity> XANA_SYMBOL_ENTITY_TYPE =
             FabricEntityTypeBuilder.create(SpawnGroup.MISC,XanaSymbolEntity::new).build();
+
     public static final ImmutableMap<String, EntityType<?>> ENTITY_TYPE_HASH_MAP = ImmutableMap.<String, EntityType<?>>builder()
             .put("blok", BLOK)
             .put("laser", LASER_ENTITY_TYPE)

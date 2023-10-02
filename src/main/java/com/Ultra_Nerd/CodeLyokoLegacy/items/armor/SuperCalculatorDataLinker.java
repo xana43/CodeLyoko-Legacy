@@ -1,30 +1,41 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ArmorTicker;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
-public final class linker extends ArmorItem implements SimpleEnergyItem, ArmorTicker {
-    public linker(final @NotNull ArmorMaterial materialIn,final @NotNull ArmorItem.Type slot,
-            final @NotNull Settings builder) {
+import java.util.List;
+
+public final class SuperCalculatorDataLinker extends ArmorItem implements SimpleEnergyItem, ArmorTicker {
+    public SuperCalculatorDataLinker(final @NotNull ArmorMaterial materialIn, final @NotNull ArmorItem.Type slot,
+                                     final @NotNull Settings builder) {
         super(materialIn, slot, builder);
     }
 
     @Override
+    public void appendTooltip(final ItemStack stack, @Nullable final World world, final List<Text> tooltip, final TooltipContext context) {
+        super.appendTooltip(stack, world, tooltip, context);
+        tooltip.add(Text.translatable("tooltip.energy.linker", getStoredEnergy(stack)));
+    }
+
+    @Override
     public long getEnergyCapacity(final ItemStack stack) {
-        return 90000;
+        return 432000;
     }
 
     @Override
     public long getEnergyMaxInput(final ItemStack stack) {
-        return 40;
+        return 2000;
     }
 
     @Override

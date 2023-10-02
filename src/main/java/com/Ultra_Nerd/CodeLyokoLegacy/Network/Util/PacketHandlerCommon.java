@@ -59,7 +59,7 @@ public record PacketHandlerCommon() {
             final int newPlayerClass = buf.readInt();
             server.execute(() -> {
                 CodeLyokoMain.LOG.info("setting new class on server");
-                CardinalData.LyokoClass.setLyokoclass(player, newPlayerClass);
+                CardinalData.LyokoClass.setLyokoClass(player, newPlayerClass);
                 final PacketByteBuf ByteBuf = PacketByteBufs.create();
                 ByteBuf.writeInt(newPlayerClass);
                 ServerPlayNetworking.send(player, ClassScreenIDClient, ByteBuf);

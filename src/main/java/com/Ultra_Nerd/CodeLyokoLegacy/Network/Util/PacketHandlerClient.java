@@ -14,7 +14,7 @@ public record PacketHandlerClient() {
                 responseSender) -> {
             final int clientPlayerClass = buf.readInt();
             client.execute(() -> {
-                CardinalData.LyokoClass.setLyokoclass(client.player, clientPlayerClass);
+                CardinalData.LyokoClass.setLyokoClass(client.player, clientPlayerClass);
             });
         });
         ClientPlayNetworking.registerGlobalReceiver(PacketHandlerCommon.PLAYER_QUERY,(client, handler, buf,

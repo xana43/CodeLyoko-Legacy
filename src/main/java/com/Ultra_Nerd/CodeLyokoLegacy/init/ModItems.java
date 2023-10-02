@@ -379,7 +379,7 @@ public record ModItems() {
     public static final ArmorItem YUMI_BOOTS = new ArmorNinja(LyokoArmorMaterial.NINJA, ArmorItem.Type.BOOTS, ArmorGroup);
     public static final ArmorItem MIND_HELMET = new MindHelm(LyokoArmorMaterial.BLANKHELM, ArmorItem.Type.HELMET,
             ArmorGroup.rarity(Rarity.EPIC));
-    public static final ArmorItem LINKER = new linker(LyokoArmorMaterial.LINKER, ArmorItem.Type.CHESTPLATE,
+    public static final ArmorItem LINKER = new SuperCalculatorDataLinker(LyokoArmorMaterial.LINKER, ArmorItem.Type.CHESTPLATE,
             ArmorGroup.rarity(Rarity.EPIC));
     public static final ArmorItem JEREMY_CHESTPLATE = new ArmorArcher(LyokoArmorMaterial.ARCHER,
             ArmorItem.Type.CHESTPLATE,

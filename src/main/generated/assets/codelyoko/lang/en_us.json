@@ -279,5 +279,6 @@
   "phone.receive": "a distress called sent by",
   "phone.receve2": "was received",
   "phone.use.multiplayer": "you sent a distress call",
-  "phone.use.singleplayer": "cannot be used in single player"
+  "phone.use.singleplayer": "cannot be used in single player",
+  "tooltip.energy.mindhelm": "Stored Energy: %d joules"
 }
