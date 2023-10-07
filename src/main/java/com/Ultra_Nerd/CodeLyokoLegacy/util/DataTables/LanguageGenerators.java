@@ -23,7 +23,7 @@ public record LanguageGenerators() {
             translationBuilder.add("discovered.super_calculator","And so it begins");
             translationBuilder.add("discovered.super_calculator.description","you'd found the schematics for an " +
                     "unknown device, what does it do?");
-            //translationBuilder.add("tooltip.energy.mindhelm","Stored Energy:%dJ");
+            translationBuilder.add("tooltip.energy.mindhelm","Stored Energy:%dJ");
             translationBuilder.add("reactor.energy.amount.gui","Stored Energy:%dJ");
             translationBuilder.add("reactor.waste.amount.gui","Stored Waste:%dL");
             //translationBuilder.add(ModItems.LYOKO_THEME,"A world without Danger - CodeLyoko Theme");
