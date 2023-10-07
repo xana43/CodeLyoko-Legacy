@@ -89,7 +89,7 @@ public record EntryPool() {
             if(!world.isClient) {
                 ModCustomTrackedCriteria.USED_ITEM.trigger((ServerPlayerEntity) user, user.getStackInHand(hand));
             }
-            user.unlockRecipes(new Identifier[]{ConstantUtil.RECIPIE_IDENTIFIERS[0]});
+            user.unlockRecipes(new Identifier[]{ConstantUtil.RECIPE_IDENTIFIERS[0]});
             return super.use(world, user, hand);
         }
     }

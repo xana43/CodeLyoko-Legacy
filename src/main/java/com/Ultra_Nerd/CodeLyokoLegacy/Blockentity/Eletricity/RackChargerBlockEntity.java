@@ -15,7 +15,6 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
-import team.reborn.energy.api.EnergyStorageUtil;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
 public final class RackChargerBlockEntity extends EnergyStorageBlockEntityInventory implements NamedScreenHandlerFactory {
@@ -28,6 +27,8 @@ public final class RackChargerBlockEntity extends EnergyStorageBlockEntityInvent
                 case 0 -> tierArray[0];
                 case 1 -> tierArray[1];
                 case 2 -> tierArray[2];
+                case 3 -> (int)energyStorage.amount;
+                case 4 -> (int)energyStorage.capacity;
 
                 default -> throw new IllegalStateException("Unexpected value: " + index);
             };
@@ -40,12 +41,14 @@ public final class RackChargerBlockEntity extends EnergyStorageBlockEntityInvent
                 case 0 -> tierArray[0] = value;
                 case 1 -> tierArray[1] = value;
                 case 2 -> tierArray[2] = value;
+                case 3 -> energyStorage.amount = value;
+                default -> throw new IllegalStateException("Unexpected value: " + index);
             }
         }
 
         @Override
         public int size() {
-            return 3;
+            return 4;
         }
     };
     private static final String TIER_ARRAY = "tier_array";
@@ -73,20 +76,46 @@ public final class RackChargerBlockEntity extends EnergyStorageBlockEntityInvent
     public void tick() {
         if(!itemStacks.isEmpty())
         {
-            for(final ItemStack stack : itemStacks)
+            for(int i = 0; i < itemStacks.size(); i++)
             {
-                if(!stack.isEmpty() && EnergyStorageUtil.isEnergyStorage(stack))
+                final ItemStack stack = itemStacks.get(i);
+                if(!stack.isEmpty() && stack.getItem() instanceof final SimpleEnergyItem energyItem)
                 {
-                    final SimpleEnergyItem energyItem = (SimpleEnergyItem) stack.getItem();
                     try(final Transaction transaction = Transaction.openOuter()) {
-                        final long extractedEnergy = energyStorage.extract(energyItem.getEnergyMaxInput(stack),transaction);
-                        long energyToInsert = energyItem.getStoredEnergy(stack) + extractedEnergy;
-                        if(energyToInsert >=0 && energyToInsert <= energyItem.getEnergyCapacity(stack)) {
-                            energyItem.setStoredEnergy(stack, energyToInsert);
-                        } else if (energyToInsert > energyItem.getEnergyCapacity(stack)) {
-                            energyToInsert = energyItem.getEnergyCapacity(stack);
-                            energyItem.setStoredEnergy(stack,energyToInsert);
+                        switch (tierArray[i])
+                        {
+                            case 0 ->{
+                                final long extractedEnergy = energyStorage.extract(energyItem.getEnergyMaxInput(stack) / 4,transaction);
+                                long energyToInsert = energyItem.getStoredEnergy(stack) + extractedEnergy;
+                                if(energyToInsert >=0 && energyToInsert <= energyItem.getEnergyCapacity(stack)) {
+                                    energyItem.setStoredEnergy(stack, energyToInsert);
+                                } else if (energyToInsert > energyItem.getEnergyCapacity(stack)) {
+                                    energyToInsert = energyItem.getEnergyCapacity(stack);
+                                    energyItem.setStoredEnergy(stack,energyToInsert);
+                                }
+                            }
+                            case 1 ->{
+                                final long extractedEnergy = energyStorage.extract(energyItem.getEnergyMaxInput(stack) / 2,transaction);
+                                long energyToInsert = energyItem.getStoredEnergy(stack) + extractedEnergy;
+                                if(energyToInsert >=0 && energyToInsert <= energyItem.getEnergyCapacity(stack)) {
+                                    energyItem.setStoredEnergy(stack, energyToInsert);
+                                } else if (energyToInsert > energyItem.getEnergyCapacity(stack)) {
+                                    energyToInsert = energyItem.getEnergyCapacity(stack);
+                                    energyItem.setStoredEnergy(stack,energyToInsert);
+                                }
+                            }
+                            case 2 ->{
+                                final long extractedEnergy = energyStorage.extract(energyItem.getEnergyMaxInput(stack),transaction);
+                                long energyToInsert = energyItem.getStoredEnergy(stack) + extractedEnergy;
+                                if(energyToInsert >=0 && energyToInsert <= energyItem.getEnergyCapacity(stack)) {
+                                    energyItem.setStoredEnergy(stack, energyToInsert);
+                                } else if (energyToInsert > energyItem.getEnergyCapacity(stack)) {
+                                    energyToInsert = energyItem.getEnergyCapacity(stack);
+                                    energyItem.setStoredEnergy(stack,energyToInsert);
+                                }
+                            }
                         }
+
                         transaction.commit();
                     }
 

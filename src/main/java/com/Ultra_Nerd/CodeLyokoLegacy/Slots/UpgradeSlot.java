@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Slots;
 
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
@@ -11,11 +10,6 @@ public final class UpgradeSlot extends Slot {
     public UpgradeSlot(final Inventory inventory, final int index, final int x, final int y,final ItemConvertible... allowedItem) {
         super(inventory, index, x, y);
         this.allowedItem = allowedItem;
-    }
-
-    @Override
-    public void onTakeItem(final PlayerEntity player, final ItemStack stack) {
-        super.onTakeItem(player, stack);
     }
 
     @Override

@@ -1,9 +1,9 @@
-// 1.20.1	2023-10-02T00:50:09.474057107	CodeLyokoLegacy/Block Loot Tables
+// 1.20.1	2023-10-02T21:47:38.066139302	CodeLyokoLegacy/Block Loot Tables
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data/codelyoko/loot_tables/blocks/uranium_waste.json
 e18fe619b0dada058dd0aea9b68bf41e2f0442e7 data/codelyoko/loot_tables/blocks/computer_fluid_cooler.json
 7348549338e4820d685c9a45d031f3a12d672cb9 data/codelyoko/loot_tables/blocks/quantum_steel.json
-3627212e5947a89e50913202d185fd1a1123bb95 data/codelyoko/loot_tables/blocks/projector_focus.json
 feb1a26bf766ce948d750809f784fd3004a3b9cd data/codelyoko/loot_tables/blocks/anodepart.json
+3627212e5947a89e50913202d185fd1a1123bb95 data/codelyoko/loot_tables/blocks/projector_focus.json
 a06f3ff86c6a47c503f39f7e8bf68521f41a34dd data/codelyoko/loot_tables/blocks/chiplet_franz_block.json
 a8da28c2b0c22cb1e907ae1ef9fa403dfa7da9ab data/codelyoko/loot_tables/blocks/electroplating_cathode.json
 78f26605a046b57b7638d50949584e115437cb3a data/codelyoko/loot_tables/blocks/chalcopyrite_ore.json

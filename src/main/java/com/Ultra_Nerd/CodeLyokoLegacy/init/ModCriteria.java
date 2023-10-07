@@ -114,7 +114,6 @@ public record ModCriteria() {
             final List<RegistryKey<World>> registryKeys = new ArrayList<>();
             for(final String entry: obj.keySet())
             {
-                //CodeLyokoMain.LOG.info("adding:"+entry+" to criteria");
                 registryKeys.add(RegistryKey.of(RegistryKeys.WORLD,new Identifier(JsonHelper.getString(obj,entry))));
             }
             return new Condition(playerPredicate,registryKeys);
@@ -150,7 +149,7 @@ public record ModCriteria() {
             @SafeVarargs
             public static Condition create(final RegistryKey<World>... nextWorlds)
             {
-                return new Condition(LootContextPredicate.EMPTY, Arrays.asList(nextWorlds));
+                return new Condition(LootContextPredicate.EMPTY, List.of(nextWorlds));
             }
 
             public boolean worldTest(final RegistryKey<World> nextWorld)

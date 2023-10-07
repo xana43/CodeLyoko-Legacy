@@ -1,23 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.MachineItems;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CustomLyokoRarity;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.ChargerUpgradeTiers;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
+import net.minecraft.util.Rarity;
 
 public final class ChargeUpgrade extends Item {
-    private final ChargerUpgradeTiers upgradeTier;
-    public ChargeUpgrade(final ChargerUpgradeTiers upgradeTier) {
-        super(new FabricItemSettings().rarity(CustomLyokoRarity.SERVER_CONSUMER));
+    private final int upgradeTier;
+    public ChargeUpgrade(final Rarity rarity,final int upgradeTier) {
+        super(new FabricItemSettings().rarity(rarity).maxCount(64));
         this.upgradeTier = upgradeTier;
     }
-    public static ChargerUpgradeTiers getUpgradeTierFromItem(final Item item)
+
+    public static int getUpgradeTierFromItem(final Item item)
     {
-        if(item instanceof final ChargeUpgrade chargeUpgrade)
-        {
-            return chargeUpgrade.upgradeTier;
-        }
-        return null;
+        return item instanceof final ChargeUpgrade chargeUpgrade ? chargeUpgrade.upgradeTier : -1;
     }
+
 
 }

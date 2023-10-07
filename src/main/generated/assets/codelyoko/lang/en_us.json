@@ -280,5 +280,7 @@
   "phone.receve2": "was received",
   "phone.use.multiplayer": "you sent a distress call",
   "phone.use.singleplayer": "cannot be used in single player",
-  "tooltip.energy.mindhelm": "Stored Energy: %d joules"
+  "reactor.energy.amount.gui": "Stored Energy:%dJ",
+  "reactor.waste.amount.gui": "Stored Waste:%dL",
+  "tooltip.energy.mindhelm": "Stored Energy:%dJ"
 }

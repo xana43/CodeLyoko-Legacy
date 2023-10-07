@@ -1,13 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ClientToServer.ClassEffectC2SPacket;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ControlPanel;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -45,10 +44,7 @@ public record PacketHandlerCommon() {
         // what not
         ServerPlayNetworking.registerGlobalReceiver(ComputerUIChannelID,
                 (server, player, handler, buf, responseSender) -> {
-                    //final BlockPos pos = buf.readBlockPos();
                     server.execute(() -> {
-                        CardinalData.PlayerSavedProfile.saveProfile(server.getSaveProperties().getMainWorldProperties(),
-                                player);
                         CardinalData.PlayerSavedProfile.getPlayerProfile(
                                 server.getSaveProperties().getMainWorldProperties(), player).refreshPlayerClass();
                     });
@@ -58,40 +54,13 @@ public record PacketHandlerCommon() {
         ServerPlayNetworking.registerGlobalReceiver(ClassScreenID, (server, player, handler, buf, responseSender) -> {
             final int newPlayerClass = buf.readInt();
             server.execute(() -> {
-                CodeLyokoMain.LOG.info("setting new class on server");
                 CardinalData.LyokoClass.setLyokoClass(player, newPlayerClass);
                 final PacketByteBuf ByteBuf = PacketByteBufs.create();
                 ByteBuf.writeInt(newPlayerClass);
                 ServerPlayNetworking.send(player, ClassScreenIDClient, ByteBuf);
             });
         });
-        record ClassEffects()
-        {
-            record Samurai()
-            {
-                public static final StatusEffectInstance SUPER_SPRINT = new StatusEffectInstance(StatusEffects.SPEED,
-                        -1, 128, false, false, false);
-            }
-        }
-        //TODO:add class specific abilities and tie them to the digital energy meter
-        ServerPlayNetworking.registerGlobalReceiver(PRIMARY_CLASS_ABILITY,
-                (server, player, handler, buf, responseSender) -> {
-                    //if ((server.getTicks() >> 2) % 5 == 0) {
-                        if (CardinalData.DigitalEnergyComponent.tryUseEnergy(player, 1)) {
-                            switch (CardinalData.LyokoClass.getLyokoClass(player)) {
-                                case 0 -> {
-                                }
-                                case 1 -> {
-                                    player.addStatusEffect(ClassEffects.Samurai.SUPER_SPRINT);
-                                    if(player.isOnGround()) {
-                                        player.handleFallDamage(player.fallDistance, 0.3f,
-                                                player.getWorld().getDamageSources().fall());
-                                    }
-                                }
-                            }
-                        }
-                    //}
-                });
+        ServerPlayNetworking.registerGlobalReceiver(PRIMARY_CLASS_ABILITY, ClassEffectC2SPacket.INSTANCE::receive);
 
         ServerPlayNetworking.registerGlobalReceiver(SECONDARY_CLASS_ABILITY,
                 (server, player, handler, buf, responseSender) -> {

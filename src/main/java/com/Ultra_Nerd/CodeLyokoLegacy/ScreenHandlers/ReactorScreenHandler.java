@@ -24,22 +24,22 @@ public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inve
 
     private final World world;
     public ReactorScreenHandler(final int syncId, final PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(2), new ArrayPropertyDelegate(5));
+        this(syncId, playerInventory, new SimpleInventory(2), new ArrayPropertyDelegate(8));
     }
 
     public ReactorScreenHandler(final int syncId, final PlayerInventory playerInventory, final Inventory inventory, final PropertyDelegate propertyDelegate) {
         super(ModScreenHandlers.COMPUTER_REACTOR_SCREEN_HANDLER, syncId);
         this.recipeType = ModRecipes.RecipeTypes.REACTOR_RECIPE_TYPE;
         checkSize(inventory, 2);
-        checkDataCount(propertyDelegate,5);
+        checkDataCount(propertyDelegate,8);
         this.inventory = inventory;
         this.propertyDelegate = propertyDelegate;
         this.world = playerInventory.player.getWorld();
         int row;
         int column;
         //reactor inventory
-        this.addSlot(new ReactorInputSlot(inventory, 0, 62, 35));
-        this.addSlot(new FurnaceOutputSlot(playerInventory.player, inventory, 1, 98, 35));
+        this.addSlot(new ReactorInputSlot(inventory, 0, 44, 33));
+        this.addSlot(new FurnaceOutputSlot(playerInventory.player, inventory, 1, 110, 33));
         //player inventory
         for (row = 0; row < 3; ++row) {
             for (column = 0; column < 9; ++column) {
@@ -128,15 +128,15 @@ public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inve
                 slot2.onQuickTransfer(itemStack2, itemStack);
             } else if (slot != 1 && slot != 0) {
                 if (isReactable(itemStack2)) {
-                    if (!this.insertItem(itemStack2, 0, 1, false)) {
+                    if (!this.insertItem(itemStack2, 0, 2, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (ReactorScreenHandler.isFuel(itemStack2)) {
-                    if (!this.insertItem(itemStack2, 0, 1, false)) {
+                    if (!this.insertItem(itemStack2, 0, 2, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (slot >= 3 && slot < 30) {
-                    if (!this.insertItem(itemStack2, 30, 39, false)) {
+                    if (!this.insertItem(itemStack2, 30, 38, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (slot >= 30 && slot < 39 && !this.insertItem(itemStack2, 3, 30, false)) {
@@ -170,6 +170,18 @@ public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inve
         final int irradiationTime = propertyDelegate.get(3);
         final int irradiationTimeTotal = propertyDelegate.get(4);
         return irradiationTimeTotal != 0 && irradiationTime != 0 ? irradiationTime * 24 / irradiationTimeTotal : 0;
+    }
+    public int getWasteAmount()
+    {
+        return propertyDelegate.get(5);
+    }
+    public int getWasteCapacity()
+    {
+        return propertyDelegate.get(6);
+    }
+    public int getEnergyCapacity()
+    {
+        return propertyDelegate.get(7);
     }
     public int getUraniumProgress()
     {

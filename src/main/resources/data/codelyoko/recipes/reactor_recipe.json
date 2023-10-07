@@ -1,0 +1,8 @@
+{
+  "type": "codelyoko:reactor_recipe",
+  "ingredient": {
+    "item": "codelyoko:uranium_isotope235"
+  },
+  "result": "codelyoko:uranium_isotope238",
+  "experience": 0
+}

@@ -34,12 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public final class ComputerReactorTileEntityInventory extends EnergyStorageBlockEntityInventory implements LyokoInventoryBlock, NamedScreenHandlerFactory, RecipeInputProvider {
-private static final int REACTION_TIME_INDEX = 1;
-private static final int FUEL_MASS_INDEX = 2;
-private static final int IRRADIATION_INDEX  = 3;
-private static final int IRRADIATION_TOTAL_INDEX = 4;
-private static final int PROPERTY_COUNT = 5;
-private int reactionTime;
+    private int reactionTime;
 private int fuelMass;
 private int irradiationTime;
 private int irradiationTimeTotal;
@@ -57,6 +52,9 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
                 case 2 -> fuelMass;
                 case 3 -> irradiationTime;
                 case 4 -> irradiationTimeTotal;
+                case 5 -> (int)wasteTank.getAmount();
+                case 6 -> (int)wasteTank.getCapacity();
+                case 7 -> (int)energyStorage.getCapacity();
                 default -> 0;
             };
 
@@ -73,12 +71,14 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
              case 2 -> fuelMass = value;
              case 3 -> irradiationTime = value;
              case 4 -> irradiationTimeTotal = value;
+             case 5 -> wasteTank.amount = value;
+                default -> throw new IllegalArgumentException("unexpected value:"+value+" at index:"+index);
             }
         }
 
         @Override
         public int size() {
-            return 5;
+            return 8;
         }
     };
 
@@ -90,7 +90,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
         nbt.putInt("IrradiationTimeTotal",irradiationTimeTotal);
         nbt.putLong("WasteAmount",wasteTank.amount);
         final NbtCompound nbtCompound = new NbtCompound();
-        recipesUsed.forEach((identifier, integer) -> nbtCompound.putInt(identifier.toString(), integer.intValue()));
+        recipesUsed.forEach((identifier, integer) -> nbtCompound.putInt(identifier.toString(), integer));
         nbt.put("RecipesUsed",nbtCompound);
     }
 

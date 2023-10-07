@@ -54,11 +54,11 @@ public final class MindHelm extends ArmorItem implements SimpleEnergyItem {
                     CardinalData.MindHelmStress.increaseStress(1, player);
                     final int information = random.nextInt(0, 420);
                     if (information == 69) {
-                        final int randomRecipe = random.nextInt(0, ConstantUtil.RECIPIE_IDENTIFIERS.length);
-                        player.unlockRecipes(new Identifier[]{ConstantUtil.RECIPIE_IDENTIFIERS[randomRecipe]});
+                        final int randomRecipe = random.nextInt(0, ConstantUtil.RECIPE_IDENTIFIERS.length);
+                        player.unlockRecipes(new Identifier[]{ConstantUtil.RECIPE_IDENTIFIERS[randomRecipe]});
                     }
                     final int stress = CardinalData.MindHelmStress.getStressLevel(player);
-                    if (stress >= ConstantUtil.STRESS_THRESHHOLD && !player.isCreative()) {
+                    if (stress >= ConstantUtil.STRESS_THRESHOLD && !player.isCreative()) {
                         entity.damage(entity.getWorld().getDamageSources().magic(),
                                 random.nextInt(stress >> 1, stress));
                     }

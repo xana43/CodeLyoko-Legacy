@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -23,15 +24,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
@@ -41,10 +48,11 @@ public record MethodUtil() {
             return slot == EquipmentSlot.CHEST.getEntitySlotId() || slot == EquipmentSlot.LEGS.getEntitySlotId()
                     || slot == EquipmentSlot.FEET.getEntitySlotId() || slot == EquipmentSlot.HEAD.getEntitySlotId();
         }
+
     }
     public record AdvancementCreation()
     {
-        private static final Identifier DEFAULT_BACKGROUND  =new Identifier("textures/gui/advancements/backgrounds" +
+        private static final Identifier DEFAULT_BACKGROUND = new Identifier("textures/gui/advancements/backgrounds" +
                 "/adventure.png");
         public static Advancement create(final Advancement parent,
                 final ItemConvertible itemConvertible,
@@ -69,6 +77,7 @@ public record MethodUtil() {
             }
             return CodeLyokoMain.MOD_ID +'/'+ location;
         }
+
         public static Advancement create(
                 final ItemConvertible itemConvertible,
                 final Text name,
@@ -94,7 +103,7 @@ public record MethodUtil() {
     public record FluidStorageCreation() {
         public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity,
                 final Fluid allowedVariant) {
-            return new SingleVariantStorage<FluidVariant>() {
+            return new SingleVariantStorage<>() {
                 @Override
                 protected FluidVariant getBlankVariant() {
                     return FluidVariant.blank();
@@ -113,14 +122,14 @@ public record MethodUtil() {
                 @Override
                 protected void onFinalCommit() {
                     blockEntity.markDirty();
-                    if (!blockEntity.getWorld().isClient) {
+                    if (!Objects.requireNonNull(blockEntity.getWorld()).isClient) {
                         final PacketByteBuf buf = PacketByteBufs.create();
                         buf.writeBlockPos(blockEntity.getPos());
                         buf.writeLong(getAmount());
                         FluidVariant.of(allowedVariant).toPacket(buf);
-                        PlayerLookup.tracking(blockEntity).forEach(
-                                serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity, PacketHandlerCommon.FLUID_UPDATE, buf));
-
+                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
+                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
+                        }
                     }
                 }
             };
@@ -128,7 +137,7 @@ public record MethodUtil() {
         }
         public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity,
                 final Fluid... allowedVariant) {
-            return new SingleVariantStorage<FluidVariant>() {
+            return new SingleVariantStorage<>() {
                 @Override
                 protected FluidVariant getBlankVariant() {
                     return FluidVariant.blank();
@@ -141,8 +150,7 @@ public record MethodUtil() {
 
                 @Override
                 protected boolean canInsert(final FluidVariant variant) {
-                    for (final Fluid fluid : allowedVariant)
-                    {
+                    for (final Fluid fluid : allowedVariant) {
                         return variant.equals(FluidVariant.of(fluid));
                     }
                     return false;
@@ -151,18 +159,17 @@ public record MethodUtil() {
                 @Override
                 protected void onFinalCommit() {
                     blockEntity.markDirty();
-                    if (!blockEntity.getWorld().isClient) {
+                    if (!Objects.requireNonNull(blockEntity.getWorld()).isClient) {
                         final PacketByteBuf buf = PacketByteBufs.create();
                         buf.writeBlockPos(blockEntity.getPos());
                         buf.writeLong(getAmount());
-                        for(final Fluid fluid : allowedVariant)
-                        {
+                        for (final Fluid fluid : allowedVariant) {
                             FluidVariant.of(fluid).toPacket(buf);
                         }
 
-                        PlayerLookup.tracking(blockEntity).forEach(
-                                serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
-                                        PacketHandlerCommon.FLUID_UPDATE, buf));
+                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
+                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
+                        }
 
                     }
                 }
@@ -170,7 +177,7 @@ public record MethodUtil() {
 
         }
         public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity) {
-            return new SingleVariantStorage<FluidVariant>() {
+            return new SingleVariantStorage<>() {
                 @Override
                 protected FluidVariant getBlankVariant() {
                     return FluidVariant.blank();
@@ -182,18 +189,16 @@ public record MethodUtil() {
                 }
 
 
-
                 @Override
                 protected void onFinalCommit() {
                     blockEntity.markDirty();
-                    if (!blockEntity.getWorld().isClient) {
+                    if (!Objects.requireNonNull(blockEntity.getWorld()).isClient) {
                         final PacketByteBuf buf = PacketByteBufs.create();
                         buf.writeBlockPos(blockEntity.getPos());
                         buf.writeLong(getAmount());
-                        PlayerLookup.tracking(blockEntity).forEach(
-                                serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
-                                        PacketHandlerCommon.FLUID_UPDATE, buf));
-
+                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
+                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
+                        }
                     }
                 }
             };
@@ -201,7 +206,7 @@ public record MethodUtil() {
         }
         public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity,
                 final FluidVariant allowedVariant) {
-            return new SingleVariantStorage<FluidVariant>() {
+            return new SingleVariantStorage<>() {
                 @Override
                 protected FluidVariant getBlankVariant() {
                     return FluidVariant.blank();
@@ -225,10 +230,9 @@ public record MethodUtil() {
                         buf.writeBlockPos(blockEntity.getPos());
                         buf.writeLong(getAmount());
                         allowedVariant.toPacket(buf);
-                        PlayerLookup.tracking(blockEntity).forEach(
-                                serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
-                                        PacketHandlerCommon.FLUID_UPDATE, buf));
-
+                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
+                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
+                        }
                     }
                 }
             };
@@ -236,7 +240,7 @@ public record MethodUtil() {
         }
         public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity,
                 final FluidVariant allowedVariant,final int amountOfBuckets) {
-            return new SingleVariantStorage<FluidVariant>() {
+            return new SingleVariantStorage<>() {
                 @Override
                 protected FluidVariant getBlankVariant() {
                     return FluidVariant.blank();
@@ -255,14 +259,14 @@ public record MethodUtil() {
                 @Override
                 protected void onFinalCommit() {
                     blockEntity.markDirty();
-                    if (!blockEntity.getWorld().isClient) {
+                    if (!Objects.requireNonNull(blockEntity.getWorld()).isClient) {
                         final PacketByteBuf buf = PacketByteBufs.create();
                         buf.writeBlockPos(blockEntity.getPos());
                         buf.writeLong(getAmount());
                         allowedVariant.toPacket(buf);
-                        PlayerLookup.tracking(blockEntity).forEach(
-                                serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
-                                        PacketHandlerCommon.FLUID_UPDATE, buf));
+                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
+                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
+                        }
 
                     }
                 }
@@ -271,7 +275,7 @@ public record MethodUtil() {
         }
         public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity,
                 final Fluid allowedVariant, final int amountOfBuckets) {
-            return new SingleVariantStorage<FluidVariant>() {
+            return new SingleVariantStorage<>() {
                 @Override
                 protected FluidVariant getBlankVariant() {
                     return FluidVariant.blank();
@@ -290,14 +294,14 @@ public record MethodUtil() {
                 @Override
                 protected void onFinalCommit() {
                     blockEntity.markDirty();
-                    if (!blockEntity.getWorld().isClient) {
+                    if (!Objects.requireNonNull(blockEntity.getWorld()).isClient) {
                         final PacketByteBuf buf = PacketByteBufs.create();
                         buf.writeBlockPos(blockEntity.getPos());
                         buf.writeLong(getAmount());
                         FluidVariant.of(allowedVariant).toPacket(buf);
-                        PlayerLookup.tracking(blockEntity).forEach(
-                                serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
-                                        PacketHandlerCommon.FLUID_UPDATE, buf));
+                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
+                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
+                        }
 
                     }
                 }
@@ -306,7 +310,7 @@ public record MethodUtil() {
         }
         public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity,
                 final Fluid allowedVariant, final NbtCompound compound) {
-            return new SingleVariantStorage<FluidVariant>() {
+            return new SingleVariantStorage<>() {
                 @Override
                 protected FluidVariant getBlankVariant() {
                     return FluidVariant.blank();
@@ -329,10 +333,10 @@ public record MethodUtil() {
                         final PacketByteBuf buf = PacketByteBufs.create();
                         buf.writeBlockPos(blockEntity.getPos());
                         buf.writeLong(getAmount());
-                        FluidVariant.of(allowedVariant,compound).toPacket(buf);
-                        PlayerLookup.tracking(blockEntity).forEach(
-                                serverPlayerEntity -> ServerPlayNetworking.send(serverPlayerEntity,
-                                        PacketHandlerCommon.FLUID_UPDATE, buf));
+                        FluidVariant.of(allowedVariant, compound).toPacket(buf);
+                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
+                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
+                        }
 
                     }
                 }
@@ -356,28 +360,21 @@ public record MethodUtil() {
                         .getRegistryKey() == ModDimensions.carthage || player.getWorld()
                         .getRegistryKey() == ModDimensions.desertSectorWorld || player.getWorld()
                         .getRegistryKey() == ModDimensions.iceSectorWorld
-
                         || player.getWorld().getRegistryKey() == ModDimensions.mountainSectorWorld || player.getWorld()
                         .getRegistryKey() == ModDimensions.volcanoWorld || player.getWorld()
                         .getRegistryKey() == ModDimensions.digitalOceanWorld || player.getWorld()
                         .getRegistryKey() == ModDimensions.frontierWorld;
-
-
             }
 
             public static boolean entityNotInVanillaWorld(final @NotNull Entity entity) {
-
                 return entity.getWorld().getRegistryKey() == ModDimensions.forestSectorWorld || entity.getWorld()
                         .getRegistryKey() == ModDimensions.carthage || entity.getWorld()
                         .getRegistryKey() == ModDimensions.desertSectorWorld || entity.getWorld()
                         .getRegistryKey() == ModDimensions.iceSectorWorld
-
                         || entity.getWorld().getRegistryKey() == ModDimensions.mountainSectorWorld || entity.getWorld()
                         .getRegistryKey() == ModDimensions.volcanoWorld || entity.getWorld()
                         .getRegistryKey() == ModDimensions.digitalOceanWorld || entity.getWorld()
                         .getRegistryKey() == ModDimensions.frontierWorld;
-
-
             }
 
             public static boolean worldIsNotVanilla(final @NotNull World level) {
@@ -409,28 +406,124 @@ public record MethodUtil() {
             {
                 try(final Transaction transaction = Transaction.openOuter())
                 {
-                   final SimpleEnergyItem energyItem = (SimpleEnergyItem) stack.getItem();
-                   if(energyItem != null)
-                   {
-                       final long energyItemCurrentEnergy = energyItem.getStoredEnergy(stack);
-                       final long energyItemMaxInput = energyItem.getEnergyMaxInput(stack);
-                       final long extractedEnergy = storage.extract(energyItemMaxInput,transaction);
-                       energyItem.setStoredEnergy(stack,energyItemCurrentEnergy + extractedEnergy);
-                       transaction.commit();
-                   }
+                    final SimpleEnergyItem energyItem = (SimpleEnergyItem) stack.getItem();
+                    if(energyItem != null)
+                    {
+                        final long energyItemCurrentEnergy = energyItem.getStoredEnergy(stack);
+                        final long energyItemMaxInput = energyItem.getEnergyMaxInput(stack);
+                        final long energyMaxCapacity = energyItem.getEnergyCapacity(stack);
+                        final long extractedEnergy = storage.extract(energyItemMaxInput,transaction);
+                        energyItem.setStoredEnergy(stack, Math.min(energyItemCurrentEnergy + extractedEnergy, energyMaxCapacity));
+                        transaction.commit();
+                    }
                 }
+            }
+            public static void tryUseEnergy(final ItemStack stack, final EnergyStorage storage,final int energyScalar)
+            {
+                try(final Transaction transaction = Transaction.openOuter())
+                {
+                    final SimpleEnergyItem energyItem = (SimpleEnergyItem) stack.getItem();
+                    if(energyItem != null)
+                    {
+                        final long energyItemCurrentEnergy = energyItem.getStoredEnergy(stack);
+                        final long energyItemMaxInput = energyItem.getEnergyMaxInput(stack);
+                        final long energyMaxCapacity = energyItem.getEnergyCapacity(stack);
+                        final long extractedEnergy = storage.extract(energyItemMaxInput / energyScalar,transaction);
+                        energyItem.setStoredEnergy(stack, Math.min(energyItemCurrentEnergy + extractedEnergy, energyMaxCapacity));
+                        transaction.commit();
+                    }
+                }
+            }
+            
+
+        }
+        public record CustomTranslationUtil()
+        {
+            private static final HashMap<String, Pair<String,String>> TRANSLATION_MAP = new HashMap<>();
+            public static void generateTranslationRegistry(final FabricLanguageProvider.TranslationBuilder translationBuilder,final String lang)
+            {
+                TRANSLATION_MAP.forEach((s, stringStringPair) -> {
+                    if(stringStringPair.getLeft().equals(lang))
+                    {
+                        translationBuilder.add(s,stringStringPair.getRight());
+                    }
+                });
+            }
+            private static final StringBuilder contextBuilder = new StringBuilder();
+            public enum TranslationType
+            {
+                ITEM,
+                BLOCK,
+                ENTITY,
+                BLOCK_ENTITY,
+                CUSTOM
+            }
+
+            public static MutableText createTranslationKey(final String name,final TranslationType translationType,final String context,final Object... args)
+            {
+                return switch (translationType)
+                {
+
+                    case ITEM -> Text.translatable("item."+name+'.'+context,args);
+                    case BLOCK -> Text.translatable("block."+name+'.'+context,args);
+                    case ENTITY -> Text.translatable("entity."+name+'.'+context,args);
+                    case BLOCK_ENTITY -> Text.translatable("block_entity."+name+'.'+context,args);
+
+                    default -> throw new IllegalStateException("Unexpected value: " + translationType);
+                };
+            }
+            public static MutableText createTranslation(final String name, final String locale, final String translation,final String context)
+            {
+
+               final MutableText intermediary = createTranslationKey(name,context);
+               final Pair<String,String> LanguageTranslation = new Pair<>(locale,translation);
+               TRANSLATION_MAP.put(intermediary.getString(),LanguageTranslation);
+               return intermediary;
+
+            }
+            public static MutableText createTranslationKey(final String name,final String context,final Object... args)
+            {
+                return Text.translatable(name +'.' + context,args);
+            }
+
+            public static MutableText createTranslationKey(final String name, final Object[] args, final String... contexts)
+            {
+                contextBuilder.setLength(0);
+                for(final String context : contexts)
+                {
+                    contextBuilder.append('.');
+                    contextBuilder.append(context);
+                }
+                return Text.translatable(name+contextBuilder,args);
+            }
+            public static MutableText createTranslationKey(final String name, final TranslationType translationType, final String... contexts)
+            {
+                contextBuilder.setLength(0);
+                for(final String context : contexts)
+                {
+                    contextBuilder.append('.');
+                    contextBuilder.append(context);
+                }
+                return switch (translationType)
+                {
+                    case ITEM -> Text.translatable("item."+name+'.'+ contextBuilder);
+                    case BLOCK -> Text.translatable("block."+name+'.'+contextBuilder);
+                    case ENTITY -> Text.translatable("entity."+name+'.'+contextBuilder);
+                    case BLOCK_ENTITY -> Text.translatable("block_entity."+name+'.'+contextBuilder);
+                    default -> throw new IllegalStateException("Unexpected value: " + translationType);
+                };
             }
         }
 
         public record TextUtil() {
 
             private static final StringVisitable[] pages = new StringVisitable[100];
-private static final Pattern splitPattern = Pattern.compile(">δ<");
+            private static final Pattern splitPattern = Pattern.compile(">δ<");
             public static StringVisitable[] textArray(@NotNull final String textToDenote) {
-                final String[] denoted =splitPattern.split(textToDenote);
+                final String[] denoted = splitPattern.split(textToDenote);
                 final int length = denoted.length;
                 for (int i = 0; i < length; i++) {
-                    pages[i] = Text.translatable(denoted[i]);
+                    pages[i] = Text.of(denoted[i]);
                 }
                 return pages.clone();
             }

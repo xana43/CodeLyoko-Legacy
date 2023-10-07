@@ -10,8 +10,8 @@ public record ConstantUtil() {
 
     public static final Identifier skytop = CodeLyokoMain.codeLyokoPrefix("textures/skies/volcano/dark.png");
     public static final BooleanProperty SCANNER_PROPERTY = BooleanProperty.of("scanner_property");
-    public static final int STRESS_THRESHHOLD = 10;
-    public static final Identifier[] RECIPIE_IDENTIFIERS = {CodeLyokoMain.codeLyokoPrefix("anode")};
+    public static final int STRESS_THRESHOLD = 10;
+    public static final Identifier[] RECIPE_IDENTIFIERS = {CodeLyokoMain.codeLyokoPrefix("anode")};
 
     //public static final EntityCa LYOKO = MobCategory.create("lyoko","lyoko",10,false,false,128);
     public enum Styles {

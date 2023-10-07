@@ -99,6 +99,7 @@ public interface LyokoInventoryBlock extends Inventory {
         if (stack.getCount() > stack.getMaxCount()) {
             stack.setCount(stack.getMaxCount());
         }
+        markDirty();
     }
 
     /**
