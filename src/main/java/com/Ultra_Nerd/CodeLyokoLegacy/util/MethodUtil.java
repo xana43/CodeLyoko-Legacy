@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -26,18 +25,15 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
-import java.util.HashMap;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
@@ -437,83 +433,7 @@ public record MethodUtil() {
             
 
         }
-        public record CustomTranslationUtil()
-        {
-            private static final HashMap<String, Pair<String,String>> TRANSLATION_MAP = new HashMap<>();
-            public static void generateTranslationRegistry(final FabricLanguageProvider.TranslationBuilder translationBuilder,final String lang)
-            {
-                TRANSLATION_MAP.forEach((s, stringStringPair) -> {
-                    if(stringStringPair.getLeft().equals(lang))
-                    {
-                        translationBuilder.add(s,stringStringPair.getRight());
-                    }
-                });
-            }
-            private static final StringBuilder contextBuilder = new StringBuilder();
-            public enum TranslationType
-            {
-                ITEM,
-                BLOCK,
-                ENTITY,
-                BLOCK_ENTITY,
-                CUSTOM
-            }
 
-            public static MutableText createTranslationKey(final String name,final TranslationType translationType,final String context,final Object... args)
-            {
-                return switch (translationType)
-                {
-
-                    case ITEM -> Text.translatable("item."+name+'.'+context,args);
-                    case BLOCK -> Text.translatable("block."+name+'.'+context,args);
-                    case ENTITY -> Text.translatable("entity."+name+'.'+context,args);
-                    case BLOCK_ENTITY -> Text.translatable("block_entity."+name+'.'+context,args);
-
-                    default -> throw new IllegalStateException("Unexpected value: " + translationType);
-                };
-            }
-            public static MutableText createTranslation(final String name, final String locale, final String translation,final String context)
-            {
-
-               final MutableText intermediary = createTranslationKey(name,context);
-               final Pair<String,String> LanguageTranslation = new Pair<>(locale,translation);
-               TRANSLATION_MAP.put(intermediary.getString(),LanguageTranslation);
-               return intermediary;
-
-            }
-            public static MutableText createTranslationKey(final String name,final String context,final Object... args)
-            {
-                return Text.translatable(name +'.' + context,args);
-            }
-
-            public static MutableText createTranslationKey(final String name, final Object[] args, final String... contexts)
-            {
-                contextBuilder.setLength(0);
-                for(final String context : contexts)
-                {
-                    contextBuilder.append('.');
-                    contextBuilder.append(context);
-                }
-                return Text.translatable(name+contextBuilder,args);
-            }
-            public static MutableText createTranslationKey(final String name, final TranslationType translationType, final String... contexts)
-            {
-                contextBuilder.setLength(0);
-                for(final String context : contexts)
-                {
-                    contextBuilder.append('.');
-                    contextBuilder.append(context);
-                }
-                return switch (translationType)
-                {
-                    case ITEM -> Text.translatable("item."+name+'.'+ contextBuilder);
-                    case BLOCK -> Text.translatable("block."+name+'.'+contextBuilder);
-                    case ENTITY -> Text.translatable("entity."+name+'.'+contextBuilder);
-                    case BLOCK_ENTITY -> Text.translatable("block_entity."+name+'.'+contextBuilder);
-                    default -> throw new IllegalStateException("Unexpected value: " + translationType);
-                };
-            }
-        }
 
         public record TextUtil() {
 
