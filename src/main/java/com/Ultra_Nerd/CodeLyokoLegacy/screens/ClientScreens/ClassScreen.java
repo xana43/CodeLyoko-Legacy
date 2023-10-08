@@ -19,6 +19,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 @Environment(EnvType.CLIENT)
 public final class ClassScreen extends Screen {
 
@@ -71,7 +73,7 @@ public final class ClassScreen extends Screen {
                 warrior.getY(), 0xa9a9a9);
         //current class
         if (IndicatorColor != 0) {
-            switch (CardinalData.LyokoClass.getLyokoClass(this.client.player)) {
+            switch (CardinalData.LyokoClass.getLyokoClass(Objects.requireNonNull(this.client).player)) {
                 case 0 -> drawClassIndicator(Text.translatable("lyoko.class.feline"), pPoseStack);
                 case 1 -> drawClassIndicator(Text.translatable("lyoko.class.samurai"), pPoseStack);
                 case 2 -> drawClassIndicator(Text.translatable("lyoko.class.ninja"), pPoseStack);
@@ -170,7 +172,7 @@ public final class ClassScreen extends Screen {
                 128, 128, (input) -> {
 
 
-            this.client.player.playSound(ModSounds.GUISOUND, 1, 6);
+            Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 6);
             final PacketByteBuf buf = PacketByteBufs.create();
             buf.writeInt(1);
             ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID, buf);
@@ -184,7 +186,7 @@ public final class ClassScreen extends Screen {
         ninja = new TexturedButtonWidget(this.width >> 1, this.height >> 1, 30, 30, 128, 0, 31, textures,
                 256, 256, (input) -> {
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
-            this.client.player.playSound(ModSounds.GUISOUND, 1, 6);
+            Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 6);
             final PacketByteBuf buf = PacketByteBufs.create();
             buf.writeInt(2);
             ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID, buf);
@@ -207,7 +209,7 @@ public final class ClassScreen extends Screen {
 
     private void setWarrior() {
         warrior = new TexturedButtonWidget((this.width >> 1) + 150, this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> CardinalData.LyokoClass.setLyokoClass(this.client.player, 4),
+                256, 256, (input) -> CardinalData.LyokoClass.setLyokoClass(Objects.requireNonNull(this.client).player, 4),
                 Text.of("warrior").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
 
     }

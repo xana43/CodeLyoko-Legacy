@@ -36,6 +36,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 
 
+@SuppressWarnings("MethodMayBeStatic")
 public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
 
 

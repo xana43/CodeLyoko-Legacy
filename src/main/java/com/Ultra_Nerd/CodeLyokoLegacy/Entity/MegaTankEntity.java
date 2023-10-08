@@ -39,6 +39,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.EnumSet;
 import java.util.Random;
 
+@SuppressWarnings("MethodMayBeStatic")
 public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatable {
 
 

@@ -160,9 +160,9 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         }
 
         public static PlayerProfile getPlayerProfile(final WorldProperties worldProperties, final PlayerEntity player)
-        {       final PlayerProfile profile = PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).getPlayerProfile(player);
-                //LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY,Objects.requireNonNull(player.getServer()));
-                return profile;
+        {
+            //LevelComponents.sync(PLAYER_PROFILE_STORAGE_COMPONENT_KEY,Objects.requireNonNull(player.getServer()));
+                return PLAYER_PROFILE_STORAGE_COMPONENT_KEY.get(worldProperties).getPlayerProfile(player);
         }
     }
     public record HumanDNAAttribute()

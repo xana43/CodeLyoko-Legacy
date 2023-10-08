@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public final class CableBlockEntity extends SyncedBlockEntity {
     private static final SecureRandom random = new SecureRandom();
@@ -47,7 +48,7 @@ public final class CableBlockEntity extends SyncedBlockEntity {
 
     private boolean initialCheck() {
         for (final Direction dir : Direction.values()) {
-            if (world.getBlockState(pos.offset(dir, 1)).isOf(ModBlocks.CABLE_BLOCK)) {
+            if (Objects.requireNonNull(world).getBlockState(pos.offset(dir, 1)).isOf(ModBlocks.CABLE_BLOCK)) {
                 return false;
             }
         }
@@ -58,7 +59,7 @@ public final class CableBlockEntity extends SyncedBlockEntity {
         int count = 0;
         for (final Direction dir : Direction.values()) {
             final BlockPos checkPos = pos.offset(dir, 1);
-            if (world.getBlockState(checkPos).isOf(ModBlocks.CABLE_BLOCK)) {
+            if (Objects.requireNonNull(world).getBlockState(checkPos).isOf(ModBlocks.CABLE_BLOCK)) {
                 count++;
             }
         }
@@ -82,7 +83,7 @@ public final class CableBlockEntity extends SyncedBlockEntity {
         for (final Direction dir : Direction.values()) {
 
             final BlockPos checkedPos = pos.offset(dir, offset);
-            if (world.getBlockState(checkedPos).isOf(ModBlocks.CABLE_BLOCK)) {
+            if (Objects.requireNonNull(world).getBlockState(checkedPos).isOf(ModBlocks.CABLE_BLOCK)) {
                 if (world.getBlockEntity(checkedPos) instanceof final CableBlockEntity cableTile) {
                     if (cableTile.isMaster) {
                         currentMaster = checkedPos;
@@ -106,7 +107,7 @@ public final class CableBlockEntity extends SyncedBlockEntity {
         }
         for (final Direction dir : Direction.values()) {
             final BlockPos nextPosition = pos.offset(dir, 1);
-            if (world.getBlockState(nextPosition).isOf(ModBlocks.CABLE_BLOCK)) {
+            if (Objects.requireNonNull(world).getBlockState(nextPosition).isOf(ModBlocks.CABLE_BLOCK)) {
                 if (world.getBlockEntity(pos) instanceof final CableBlockEntity tileEntity) {
                     if (tileEntity.isMaster && this.isMaster) {
                         final int chose = random.nextInt(0, 1);
@@ -148,13 +149,13 @@ public final class CableBlockEntity extends SyncedBlockEntity {
     public void readNbt(final NbtCompound nbt) {
         super.readNbt(nbt);
         final NbtList nbtList = (NbtList) nbt.get(positionsKey);
-        for (int i = 0; i < nbtList.size(); ++i) {
+        for (int i = 0; i < Objects.requireNonNull(nbtList).size(); ++i) {
             final NbtLong nbtLong = (NbtLong) nbtList.get(i);
             connectedPositions.add(BlockPos.fromLong(nbtLong.longValue()));
         }
         isMaster = nbt.getBoolean(isMasterKey);
         isEnd = nbt.getBoolean(isEndKey);
-        currentMaster = BlockPos.fromLong(((NbtLong) nbt.get(currentMasterKey)).longValue());
+        currentMaster = BlockPos.fromLong(((NbtLong) Objects.requireNonNull(nbt.get(currentMasterKey))).longValue());
 
     }
 

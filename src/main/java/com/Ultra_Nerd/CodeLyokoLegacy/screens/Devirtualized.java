@@ -49,9 +49,7 @@ public final class Devirtualized extends Screen {
             this.client.player.requestRespawn();
             button.active = false;
         }).dimensions(this.width / 2 - 100, this.height / 4 + 72, 200, 20).build()));
-        this.titleScreenButton = this.addDrawableChild(ButtonWidget.builder(Text.translatable("deathScreen.titleScreen"), (button) -> {
-            this.client.getAbuseReportContext().tryShowDraftScreen(this.client, this, this::onTitleScreenButtonClicked, true);
-        }).dimensions(this.width / 2 - 100, this.height / 4 + 96, 200, 20).build());
+        this.titleScreenButton = this.addDrawableChild(ButtonWidget.builder(Text.translatable("deathScreen.titleScreen"), (button) -> this.client.getAbuseReportContext().tryShowDraftScreen(this.client, this, this::onTitleScreenButtonClicked, true)).dimensions(this.width / 2 - 100, this.height / 4 + 96, 200, 20).build());
         this.buttons.add(this.titleScreenButton);
         this.setButtonsActive(false);
         this.scoreText = Text.translatable("deathScreen.score").append(": ").append(Text.literal(Integer.toString(this.client.player.getScore())).formatted(Formatting.YELLOW));

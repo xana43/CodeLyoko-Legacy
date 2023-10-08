@@ -14,6 +14,7 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
+@SuppressWarnings("MethodMayBeStatic")
 public final class MantaEntity extends GuardianEntity implements GeoAnimatable, RangedAttackMob {
     private final AnimatableInstanceCache manager = GeckoLibUtil.createInstanceCache(this);
     private final AnimationController<?> controller = new AnimationController<>(this, "mantamovecontroller", 20,

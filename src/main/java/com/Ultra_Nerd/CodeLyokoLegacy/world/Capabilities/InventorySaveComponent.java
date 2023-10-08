@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
 
+@SuppressWarnings("MethodMayBeStatic")
 public final class InventorySaveComponent implements AutoSyncedComponent {
 
     private static final HashMap<UUID, NbtList> PLAYER_INVENTORY_HASHMAP = new HashMap<>();

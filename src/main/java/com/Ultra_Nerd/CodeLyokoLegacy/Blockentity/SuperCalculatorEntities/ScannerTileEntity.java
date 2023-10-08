@@ -26,7 +26,7 @@ public final class ScannerTileEntity extends MultiBlockController {
     }
 
     public ScannerTileEntity(final BlockPos pos, final BlockState state) {
-        super(ModBlockEntities.SCANNER_TILE_ENTITY, pos, state, BlockPatternRegistry.SCANNER.getThisBlockPatttern(),
+        super(ModBlockEntities.SCANNER_TILE_ENTITY, pos, state, BlockPatternRegistry.SCANNER.getThisBlockPattern(),
                 ConstantUtil.SCANNER_PROPERTY);
         //destinationWorld = ModDimensions.carthage;
     }

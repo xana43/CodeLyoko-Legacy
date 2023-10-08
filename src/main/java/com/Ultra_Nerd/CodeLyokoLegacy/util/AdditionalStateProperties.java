@@ -25,7 +25,7 @@ public record AdditionalStateProperties() {
                 final Set<Float> set = Sets.newHashSet();
 
                 for(float i = min; i <= max; ++i) {
-                    set.add(Float.valueOf(i));
+                    set.add(i);
                 }
 
                 this.values = ImmutableSet.copyOf(set);
@@ -95,7 +95,7 @@ public record AdditionalStateProperties() {
                 final Set<Double> set = Sets.newHashSet();
 
                 for(double i = min; i <= max; ++i) {
-                    set.add(Double.valueOf(i));
+                    set.add(i);
                 }
 
                 this.values = ImmutableSet.copyOf(set);

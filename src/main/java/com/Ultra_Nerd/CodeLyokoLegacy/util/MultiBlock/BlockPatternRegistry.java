@@ -36,14 +36,14 @@ public enum BlockPatternRegistry {
             .build());
 
 
-    private final BlockPattern thisBlockPatttern;
+    private final BlockPattern thisBlockPattern;
 
     BlockPatternRegistry(final BlockPattern pattern) {
-        this.thisBlockPatttern = pattern;
+        this.thisBlockPattern = pattern;
     }
 
-    public BlockPattern getThisBlockPatttern() {
-        return thisBlockPatttern;
+    public BlockPattern getThisBlockPattern() {
+        return thisBlockPattern;
     }
 
 

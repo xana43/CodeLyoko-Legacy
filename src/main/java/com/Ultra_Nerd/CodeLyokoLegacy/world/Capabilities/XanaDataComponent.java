@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("MethodMayBeStatic")
 public final class XanaDataComponent implements AutoSyncedComponent {
     private int dangerLevel;
     private static final String DANGER_LEVEL_KEY = "xana_danger_level";

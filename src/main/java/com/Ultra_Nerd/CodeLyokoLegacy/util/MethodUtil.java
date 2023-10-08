@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.TranslatedLocale;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -14,6 +15,7 @@ import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.advancement.criterion.CriterionConditions;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -48,6 +50,7 @@ public record MethodUtil() {
     }
     public record AdvancementCreation()
     {
+        private static final StringBuilder buffer = new StringBuilder();
         private static final Identifier DEFAULT_BACKGROUND = new Identifier("textures/gui/advancements/backgrounds" +
                 "/adventure.png");
         public static Advancement create(final Advancement parent,
@@ -66,12 +69,17 @@ public record MethodUtil() {
         }
         private static String convertToPath(final String location)
         {
-
+            buffer.setLength(0);
+            buffer.append(CodeLyokoMain.MOD_ID);
             if(location.charAt(0) == '/')
             {
-                    return CodeLyokoMain.MOD_ID + location;
+                buffer.append(location);
             }
-            return CodeLyokoMain.MOD_ID +'/'+ location;
+            else
+            {
+                buffer.append('/').append(location);
+            }
+            return buffer.toString();
         }
 
         public static Advancement create(
@@ -429,9 +437,21 @@ public record MethodUtil() {
                         transaction.commit();
                     }
                 }
+
             }
             
-
+            public static <T> T testLocale(final T englishObject, final T frenchObject)
+            {
+                final MinecraftClient client = MinecraftClient.getInstance();
+                if(client != null && client.getLanguageManager() != null) {
+                    if (client.getLanguageManager().getLanguage().equals(TranslatedLocale.EN_US.toString())) {
+                        return englishObject;
+                    } else if (client.getLanguageManager().getLanguage().equals(TranslatedLocale.FR_FR.toString())) {
+                        return frenchObject;
+                    }
+                }
+                return null;
+            }
         }
 
 
@@ -448,14 +468,11 @@ public record MethodUtil() {
                 return pages.clone();
             }
 
-            public static int textArrayLengthToPage(final StringVisitable @NotNull [] formattedTexts) {
+            public static int textArrayLengthToPage(final @NotNull StringVisitable[]   formattedTexts) {
                 int length = 0;
-
-                for (final StringVisitable formattedText : formattedTexts) {
-                    if (formattedText != null) {
+                    for (final StringVisitable formattedText : formattedTexts) {
                         length++;
                     }
-                }
                 return length;
             }
 

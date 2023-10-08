@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 import java.util.Map.Entry;
 
+@SuppressWarnings("MethodMayBeStatic")
 public class FlourideInfusionResult {
 
     private static final FlourideInfusionResult INSTANCE = new FlourideInfusionResult();

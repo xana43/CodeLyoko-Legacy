@@ -40,6 +40,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 
 
+@SuppressWarnings("MethodMayBeStatic")
 public final class HornetEntity extends PhantomEntity implements GeoAnimatable, RangedAttackMob {
 
 

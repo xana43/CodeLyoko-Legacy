@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@SuppressWarnings("MethodMayBeStatic")
 @Mixin(ClientPlayerInteractionManager.class)
 public abstract class StopInventoryDrop {
     @Inject(method = "clickSlot", at = @At("HEAD"), cancellable = true)

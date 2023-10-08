@@ -4,10 +4,12 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.UUID;
 
+@SuppressWarnings("MethodMayBeStatic")
 public final class PlayerScannerComponent implements AutoSyncedComponent {
 
 
@@ -26,7 +28,7 @@ public final class PlayerScannerComponent implements AutoSyncedComponent {
 
 
     @Override
-    public void readFromNbt(final NbtCompound tag) {
+    public void readFromNbt(final @NotNull NbtCompound tag) {
             if(!POS_HASH_MAP.isEmpty())
             {
                 POS_HASH_MAP.clear();
@@ -38,7 +40,7 @@ public final class PlayerScannerComponent implements AutoSyncedComponent {
     }
 
     @Override
-    public void writeToNbt(final NbtCompound tag) {
+    public void writeToNbt(final @NotNull NbtCompound tag) {
             POS_HASH_MAP.forEach((uuid, blockPos) -> tag.putLong(uuid.toString(),blockPos.asLong()));
     }
 }

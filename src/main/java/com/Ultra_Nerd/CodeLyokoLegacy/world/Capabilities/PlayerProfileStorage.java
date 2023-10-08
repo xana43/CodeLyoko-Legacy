@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
+@SuppressWarnings("MethodMayBeStatic")
 public final class PlayerProfileStorage implements AutoSyncedComponent{
 
 

@@ -3,11 +3,19 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 public record LanguageGenerators() {
-
+    public static final List<String> registeredLanguages = new ArrayList<>();
+    private static void getLanguageFromDataOutput(final @NotNull FabricLanguageProvider output)
+    {
+        final String extracted = output.getName().substring(8);
+        registeredLanguages.add(extracted);
+    }
     public static final class EnglishProvider extends FabricLanguageProvider
     {
 
@@ -17,6 +25,8 @@ public record LanguageGenerators() {
 
         @Override
         public void generateTranslations(final TranslationBuilder translationBuilder) {
+            getLanguageFromDataOutput(this);
+            //registeredLanguages.add();
             translationBuilder.add(ModBlocks.COMPUTER_LIQUID_INTAKE_PUMP,"Fluid Intake Pump");
             translationBuilder.add(ModBlocks.COMPUTER_LIQUID_PIPE,"Basic Fluid Pipe");
             //custom translation keys
@@ -46,7 +56,7 @@ public record LanguageGenerators() {
 
         @Override
         public void generateTranslations(final TranslationBuilder translationBuilder) {
-            //translationBuilder.add(ModItems.LYOKO_THEME,"Un Monde Sans Danger - Thème du Codelyoko");
+            getLanguageFromDataOutput(this);
             try{
                 final Path  existing = dataOutput.getModContainer().findPath(
                         "assets/codelyoko/lang/fr_fr.existing.json").get();

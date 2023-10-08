@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import net.minecraft.util.Rarity;
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public record CustomLyokoRarity() {
 
     public static Rarity FRANZ_STARTER;

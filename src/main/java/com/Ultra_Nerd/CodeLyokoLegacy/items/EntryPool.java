@@ -22,6 +22,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public record EntryPool() {
+    private static final StringVisitable[][] entries = {MethodUtil.TextUtil.textArray(
+            ConstantUtil.StoryEntry.EntryList.ENTRY1.getThisEntry())};
     private static abstract class BaseEntry extends WrittenBookItem {
         private StringVisitable[] visitable;
 
@@ -37,9 +39,13 @@ public record EntryPool() {
 
         @Override
         public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
+            final StringVisitable[] languageEntry = MethodUtil.HelperMethods.testLocale(entries[0],entries[0]);
+            if(languageEntry != null) {
+                setScreen(languageEntry);
+            }
             if (world.isClient) {
-                MinecraftClient.getInstance().setScreen(new StoryBookGUI(
-                        visitable, MethodUtil.TextUtil.textArrayLengthToPage(visitable)));
+                MinecraftClient.getInstance().setScreen(new StoryBookGUI(visitable, MethodUtil.TextUtil.textArrayLengthToPage(visitable)));
+
             }
             return super.use(world, user, hand);
         }
@@ -50,13 +56,12 @@ public record EntryPool() {
     }
 
     public static final class Entry1 extends BaseEntry {
-        private static final StringVisitable[] entry = MethodUtil.TextUtil.textArray(
-                ConstantUtil.StoryEntry.EntryList.ENTRY1.getThisEntry());
+
 
 
         public Entry1(@NotNull Settings builder) {
             super(builder);
-            this.setScreen(entry);
+
         }
 
         @Override
@@ -69,12 +74,14 @@ public record EntryPool() {
     }
 
     public static final class Entry2 extends BaseEntry {
-        private static final StringVisitable[] entry2 = MethodUtil.TextUtil.textArray(
-                ConstantUtil.StoryEntry.EntryList.ENTRY2.getThisEntry());
+
 
         public Entry2(@NotNull final Settings builder) {
             super(builder);
-            this.setScreen(entry2);
+            final StringVisitable[] languageEntry = MethodUtil.HelperMethods.testLocale(entries[0],entries[0]);
+            if(languageEntry != null) {
+                this.setScreen(languageEntry);
+            }
         }
 
         @Override

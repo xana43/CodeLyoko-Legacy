@@ -7,7 +7,7 @@ public final class CustomColorBucket extends BucketItem {
     private final int fluidColor;
     public CustomColorBucket(final Fluid fluid,final Settings settings,final int fluidColor) {
         super(fluid, settings);
-        this.fluidColor =fluidColor;
+        this.fluidColor = fluidColor;
     }
 
     public int getFluidColor(final int tintIndex) {
