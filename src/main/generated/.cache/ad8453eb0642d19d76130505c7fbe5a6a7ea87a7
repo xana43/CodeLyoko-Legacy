@@ -1,4 +1,4 @@
-// 1.20.1	2023-10-07T20:48:13.056144671	CodeLyokoLegacy/Block Loot Tables
+// 1.20.1	2023-10-07T21:21:38.325768324	CodeLyokoLegacy/Block Loot Tables
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data/codelyoko/loot_tables/blocks/uranium_waste.json
 e18fe619b0dada058dd0aea9b68bf41e2f0442e7 data/codelyoko/loot_tables/blocks/computer_fluid_cooler.json
 7348549338e4820d685c9a45d031f3a12d672cb9 data/codelyoko/loot_tables/blocks/quantum_steel.json
@@ -33,8 +33,8 @@ cf070a19039019165f7f91be309cdcda0ba3cfcb data/codelyoko/loot_tables/blocks/covel
 58554627625cc63766c4029e5f810d5db38e2d59 data/codelyoko/loot_tables/blocks/chalcocite_ore.json
 b9d836cedb1b061110cb77ec74e0a285c71e9000 data/codelyoko/loot_tables/blocks/computer_reactor.json
 d8cdeba7c4b47911aabdb625d1dc0678189edd3e data/codelyoko/loot_tables/blocks/computer_screen_frame.json
-45fde9300e78cc1d9df0df6e5bb53dcf448bd971 data/codelyoko/loot_tables/blocks/digital_dirt.json
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data/codelyoko/loot_tables/blocks/digital_lava.json
+45fde9300e78cc1d9df0df6e5bb53dcf448bd971 data/codelyoko/loot_tables/blocks/digital_dirt.json
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data/codelyoko/loot_tables/blocks/liquid_helium.json
 15a10726ec0b4e3c346498187aec1374ae6c4322 data/codelyoko/loot_tables/blocks/sector5_steel.json
 9644c1e4bb1397323cd0e294d11c8e1f72f3d7c0 data/codelyoko/loot_tables/blocks/uv_machine.json

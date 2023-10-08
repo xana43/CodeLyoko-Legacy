@@ -468,10 +468,13 @@ public record MethodUtil() {
                 return pages.clone();
             }
 
+            @SuppressWarnings("ConstantValue")
             public static int textArrayLengthToPage(final @NotNull StringVisitable[]   formattedTexts) {
                 int length = 0;
                     for (final StringVisitable formattedText : formattedTexts) {
-                        length++;
+                        if(formattedText != null) {
+                            length++;
+                        }
                     }
                 return length;
             }

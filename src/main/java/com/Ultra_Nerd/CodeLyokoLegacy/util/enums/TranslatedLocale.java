@@ -8,14 +8,6 @@ public enum TranslatedLocale {
     {
         this.name = name;
     }
-    private void validate()
-    {
-
-    }
-    public String getName()
-    {
-        return name;
-    }
     @Override
     public String toString() {
         return name;

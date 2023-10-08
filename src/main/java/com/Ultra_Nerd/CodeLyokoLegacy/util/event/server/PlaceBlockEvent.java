@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 public interface PlaceBlockEvent {
     Event<PlaceBlockEvent> EVENT = EventFactory.createArrayBacked(PlaceBlockEvent.class,
             (listeners) -> (entity, world, pos) -> {
-                for (PlaceBlockEvent placeBlockEvent : listeners) {
-                    ActionResult result = placeBlockEvent.onPlace(entity, world, pos);
+                for (final PlaceBlockEvent placeBlockEvent : listeners) {
+                    final ActionResult result = placeBlockEvent.onPlace(entity, world, pos);
                     if (result != ActionResult.PASS) {
                         return result;
                     }

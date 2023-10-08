@@ -1,25 +1,26 @@
 {
-    "required": true,
-    "package": "com.Ultra_Nerd.CodeLyokoLegacy.mixin",
-    "compatibilityLevel": "JAVA_17",
-    "mixins": [
-        "BlockMixin",
-        "DisableStatusEffectRenderer",
-        "InventoryScreenDropDisable",
-        "ItemDropMixin",
-        "PlayerLyokoMixin",
-        "RetainXP",
-        "StopInventoryDrop",
-        "util.LyokoRarityMixin"
-    ],
-    "client": [
-        "AddedSplashTexts",
-        "CustomTitleLogo",
-        "HUD",
-        "ReplaceTitleScreen"
-    ],
-    "injectors": {
-        "defaultRequire": 1
-    },
-    "minVersion": "0.8"
+  "required": true,
+  "package": "com.Ultra_Nerd.CodeLyokoLegacy.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BlockMixin",
+    "DisableStatusEffectRenderer",
+    "InventoryScreenDropDisable",
+    "ItemDropMixin",
+    "PlayerLyokoMixin",
+    "RetainXP",
+    "StopInventoryDrop",
+    "util.LyokoRarityMixin"
+  ],
+  "client": [
+    "AddedSplashTexts",
+    "ClientMixins$LanguageChanged",
+    "CustomTitleLogo",
+    "HUD",
+    "ReplaceTitleScreen"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
 }

@@ -4,6 +4,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.EntryPool;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerProfile;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
@@ -400,6 +401,7 @@ public record CodeLyokoMain() implements ModInitializer {
     public void onInitialize() {
 
         GeckoLib.initialize();
+        EntryPool.init();
         PacketHandlerCommon.commonChannelRegistry();
         generalRegistration();
         registerFuels();

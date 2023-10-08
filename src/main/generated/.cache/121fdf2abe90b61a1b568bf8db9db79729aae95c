@@ -1,4 +1,4 @@
-// 1.20.1	2023-10-07T20:48:13.058912917	CodeLyokoLegacy/Recipes
+// 1.20.1	2023-10-07T21:21:38.328689313	CodeLyokoLegacy/Recipes
 cf76bcda3a0055fe47abe298f895745979140140 data/codelyoko/advancements/recipes/building_blocks/anode.json
 bf97f8d4979f39172439f8c5f594b7d11f2d08f5 data/codelyoko/recipes/uranium_isotope238_from_reacting_uranium_isotope235.json
 1a0326b807ff6ec003fe139a7fe73399ab819ccb data/codelyoko/advancements/recipes/misc/molten_polycarbonate_concentrate_from_blasting_raw_polycarbonate.json
@@ -8,9 +8,9 @@ bf97f8d4979f39172439f8c5f594b7d11f2d08f5 data/codelyoko/recipes/uranium_isotope2
 96fbf3559a46f0402ce44a2a5a3dd7f82a0a4f0d data/codelyoko/advancements/recipes/misc/uranium_block_238.json
 83bede78cb6f665e8594b11ca3949a1bbfd27a9e data/codelyoko/advancements/recipes/misc/uranium_isotope235.json
 e64420bf04778f5bd0d8eabe8e5eca03455f0411 data/codelyoko/advancements/recipes/misc/uranium_isotope238.json
+fdeb997acc1ecf841c6a0eeeeee8e3deae4d5545 data/codelyoko/advancements/recipes/misc/solid_quantum.json
 4e87dcf96dc14efcb7f1f487f3247ef3caa4bc45 data/codelyoko/recipes/silicon_wafer_from_blasting_raw_silicadust.json
 ce69481739009aca76664ef6ce133da511d74b23 data/codelyoko/advancements/recipes/misc/uranium_block_235.json
-fdeb997acc1ecf841c6a0eeeeee8e3deae4d5545 data/codelyoko/advancements/recipes/misc/solid_quantum.json
 8606c1ba62a5056e2cf2482f554ecf1b3ff2febe data/codelyoko/advancements/recipes/misc/key_spring.json
 2df587d72240775c8b9c3b9cd56ae7f9bd91cc2f data/codelyoko/advancements/recipes/misc/keycap.json
 00548a08f90b9f90a15c43d3bbc755549b7b8c5f data/codelyoko/recipes/cathode.json
