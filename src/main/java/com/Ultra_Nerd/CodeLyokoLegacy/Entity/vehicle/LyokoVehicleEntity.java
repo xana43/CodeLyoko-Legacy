@@ -13,8 +13,17 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class LyokoVehicleEntity extends BoatEntity {
-    public boolean movingUp = false;
-    public boolean movingDown = false;
+    private boolean movingUp = false;
+    private boolean movingDown = false;
+
+    public void setMovingDown(final boolean movingDown) {
+        this.movingDown = movingDown;
+    }
+
+    public void setMovingUp(final boolean movingUp) {
+        this.movingUp = movingUp;
+    }
+
 
     public LyokoVehicleEntity(final EntityType<? extends BoatEntity> entityType, final World world) {
         super(entityType, world);

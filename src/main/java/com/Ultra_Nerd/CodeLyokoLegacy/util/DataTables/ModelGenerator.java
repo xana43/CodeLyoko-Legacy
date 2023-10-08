@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Model;
-import net.minecraft.data.client.Models;
 import net.minecraft.item.Item;
 
 import java.util.Optional;
@@ -65,9 +64,6 @@ public final class ModelGenerator extends FabricModelProvider {
         {
             ModelMethods.registerDefaultBucketItem(itemModelGenerator,item);
         }
-        for(final Item item : ModItems.ITEM_MAP.values())
-        {
-            itemModelGenerator.register(item, Models.GENERATED);
-        }
+
     }
 }

@@ -54,6 +54,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -69,7 +70,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
     private static KeyBinding classScreenBinding;
     private static KeyBinding classAbilityBinding1;
     private static KeyBinding classAbilityBinding2;
-
+    private static KeyBinding moveVehicleUp;
+    private static KeyBinding moveVehicleDown;
 
     private static void clientEvents() {
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
@@ -275,10 +277,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 , ModItems.STORY_BOOK, ModItems.STORY_BOOK2);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ((CustomColorBucket)stack.getItem()).getFluidColor(tintIndex),ModItems.LIQUID_HELIUM_BUCKET);
     }
-    @Override
-    public void onInitializeClient() {
-        SpecialModelLoaderEvents.LOAD_SCOPE.register(location -> CodeLyokoMain.MOD_ID.equals(location.getNamespace()));
-        //set key bindings
+    private static void registerKeys()
+    {
         classScreenBinding = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding("key." + CodeLyokoMain.MOD_ID + ".class", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_ALT,
                         keyCategory));
@@ -288,6 +288,17 @@ public record CodeLyokoClient() implements ClientModInitializer {
         classAbilityBinding2 = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding("key." + CodeLyokoMain.MOD_ID + ".class_ability2", InputUtil.Type.KEYSYM,
                         GLFW.GLFW_KEY_B, keyCategory));
+        moveVehicleDown = KeyBindingHelper.registerKeyBinding(new KeyBinding("key."+CodeLyokoMain.MOD_ID+".vehicle.down",
+                InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_PAGE_DOWN,keyCategory));
+        moveVehicleUp = KeyBindingHelper.registerKeyBinding(new KeyBinding("key."+CodeLyokoMain.MOD_ID+".vehicle.up",
+                InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_PAGE_UP,keyCategory));
+    }
+    private static final PacketByteBuf keyboardByteBuf = PacketByteBufs.create();
+    @Override
+    public void onInitializeClient() {
+        SpecialModelLoaderEvents.LOAD_SCOPE.register(location -> CodeLyokoMain.MOD_ID.equals(location.getNamespace()));
+        //set key bindings
+        registerKeys();
         registerBlockEntityRenderers();
 
         registerEntityRenderers();
@@ -344,7 +355,21 @@ public record CodeLyokoClient() implements ClientModInitializer {
                     {
                         CardinalData.DigitalEnergyComponent.setIsUsingEnergy(client.player, false);
                     }
-
+                    if(moveVehicleUp.isPressed())
+                    {
+                        keyboardByteBuf.clear();
+                        keyboardByteBuf.writeInt(1);
+                        ClientPlayNetworking.send(PacketHandlerCommon.KEYBOARD_UPDATE,keyboardByteBuf);
+                    } else if (moveVehicleDown.isPressed()) {
+                        keyboardByteBuf.clear();
+                        keyboardByteBuf.writeInt(0);
+                        ClientPlayNetworking.send(PacketHandlerCommon.KEYBOARD_UPDATE,keyboardByteBuf);
+                    }
+                    else {
+                        keyboardByteBuf.clear();
+                        keyboardByteBuf.writeInt(-1);
+                        ClientPlayNetworking.send(PacketHandlerCommon.KEYBOARD_UPDATE,keyboardByteBuf);
+                    }
                 }
 
                 if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {

@@ -23,20 +23,25 @@ public record ClassEffectC2SPacket() implements ClientToServerPacket {
     @Override
     public void receive(final MinecraftServer server, final ServerPlayerEntity player, final ServerPlayNetworkHandler handler, final PacketByteBuf buf, final PacketSender packetSender)
     {
-        //if ((server.getTicks() >> 2) % 5 == 0) {
-        if (CardinalData.DigitalEnergyComponent.tryUseEnergy(player, 1)) {
-            switch (CardinalData.LyokoClass.getLyokoClass(player)) {
-                case 0 -> {
-                }
-                case 1 -> {
-                    player.addStatusEffect(ClassEffects.Samurai.SUPER_SPRINT);
-                    if(player.isOnGround()) {
-                        player.handleFallDamage(player.fallDistance, 0.3f,
-                                player.getWorld().getDamageSources().fall());
+
+        server.execute(() -> {
+            //if ((server.getTicks() >> 2) % 5 == 0) {
+            if (CardinalData.DigitalEnergyComponent.tryUseEnergy(player, 1)) {
+                switch (CardinalData.LyokoClass.getLyokoClass(player)) {
+                    case 0 -> {
+                    }
+                    case 1 -> {
+                        player.addStatusEffect(ClassEffects.Samurai.SUPER_SPRINT);
+                        if(player.isOnGround()) {
+                            player.handleFallDamage(player.fallDistance, 0.3f,
+                                    player.getWorld().getDamageSources().fall());
+                        }
                     }
                 }
             }
-        }
-        //}
+            //}
+        });
+
+
     }
 }

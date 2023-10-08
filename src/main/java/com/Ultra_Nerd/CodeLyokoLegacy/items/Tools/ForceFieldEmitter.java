@@ -51,7 +51,7 @@ public final class ForceFieldEmitter extends BowItem {
 
     @Override
     public void onStoppedUsing(final ItemStack stack, final World world, final LivingEntity user, final int remainingUseTicks) {
-        if (user instanceof PlayerEntity playerentity) {
+        if (user instanceof final PlayerEntity playerentity) {
 
             final int i = this.getMaxUseTime(stack) - remainingUseTicks;
             //i = (stack, worldIn, playerentity, i, true);
