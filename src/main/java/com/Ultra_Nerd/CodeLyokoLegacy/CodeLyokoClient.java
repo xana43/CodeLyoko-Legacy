@@ -72,6 +72,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
     private static KeyBinding classAbilityBinding2;
     private static KeyBinding moveVehicleUp;
     private static KeyBinding moveVehicleDown;
+    private static KeyBinding selectTransportHub;
 
     private static void clientEvents() {
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
@@ -292,6 +293,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_PAGE_DOWN,keyCategory));
         moveVehicleUp = KeyBindingHelper.registerKeyBinding(new KeyBinding("key."+CodeLyokoMain.MOD_ID+".vehicle.up",
                 InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_PAGE_UP,keyCategory));
+        selectTransportHub = KeyBindingHelper.registerKeyBinding(new KeyBinding("key."+CodeLyokoMain.MOD_ID+".skidbladnir.selecthub",
+                InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_J,keyCategory));
     }
     private static final PacketByteBuf keyboardByteBuf = PacketByteBufs.create();
     @Override
@@ -369,6 +372,10 @@ public record CodeLyokoClient() implements ClientModInitializer {
                         keyboardByteBuf.clear();
                         keyboardByteBuf.writeInt(-1);
                         ClientPlayNetworking.send(PacketHandlerCommon.KEYBOARD_UPDATE,keyboardByteBuf);
+                    }
+                    if(selectTransportHub.isPressed())
+                    {
+                        ClientPlayNetworking.send(PacketHandlerCommon.SKID_BLADNIR_UPDATE,PacketByteBufs.empty());
                     }
                 }
 

@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.EntryPool;
@@ -82,7 +83,7 @@ public record CodeLyokoMain() implements ModInitializer {
 
 
     @Contract("_ -> new")
-    public static @NotNull Identifier codeLyokoPrefix(String name) {
+    public static @NotNull Identifier codeLyokoPrefix(final String name) {
         return new Identifier(MOD_ID, name);
     }
 
@@ -267,7 +268,18 @@ public record CodeLyokoMain() implements ModInitializer {
                         newPlayer.server.getSaveProperties().getMainWorldProperties(), newPlayer);
             }
         });
-
+        ServerEntityWorldChangeEvents.AFTER_ENTITY_CHANGE_WORLD.register((originalEntity, newEntity, origin, destination) -> {
+            if(originalEntity instanceof EntitySkid && newEntity instanceof EntitySkid)
+            {
+                if(destination.getRegistryKey().equals(ModDimensions.digitalOceanWorld))
+                {
+                    final BlockPos retrievedLyokoPosition = CardinalData.SkidBladnirNavData.getLyokoPosition(newEntity);
+                    if(retrievedLyokoPosition == null || retrievedLyokoPosition == BlockPos.ORIGIN) {
+                        CardinalData.SkidBladnirNavData.setLyokoPosition(newEntity, newEntity.getBlockPos());
+                    }
+                }
+            }
+        });
         ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register((player, origin, destination) -> {
             if (player != null) {
                 if (MethodUtil.DimensionCheck.worldIsNotVanilla(destination)) {

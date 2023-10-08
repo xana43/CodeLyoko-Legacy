@@ -29,10 +29,6 @@ public record ModAdvancements() {
                     AdvancementFrame.GOAL,true,true,false,"discovered_super_calculator_advancement",
                     ModCriteria.UseItem.Condition.create(ModItems.STORY_BOOK2),"super_computer",
                     advancementConsumer);
-            //selectedClass = MethodUtil.AdvancementCreation.create(DiscoveredSuperCalculator,ModItems.XANA_SYMBOL,
-              //      Text.translatable("lyoko.class.selected"),Text.translatable("lyoko.class.selected.desc"),
-                //    AdvancementFrame.TASK,true,true,false,"selected_class",ModCriteria.InvokeClassChange.Condition
-                  //  );
             EnteredLyokoAdvancement = MethodUtil.AdvancementCreation.create(DiscoveredSuperCalculator,ModItems.BIT,
                     Text.translatable("entered.lyoko"),Text.translatable("entered.lyoko.description"),
                     AdvancementFrame.GOAL,true,true,false,"entered_lyoko_advancement", ModCriteria.EnteredLyoko.Condition.create(
@@ -67,7 +63,7 @@ public record ModAdvancements() {
 
         public enum Tier1Advancements
         {
-            BUILD_LITHOGRAPHY_MACHINE(tier1Advancements.buildLithography);
+            BUILD_LITHOGRAPHY_MACHINE(TierOneAdvancements.buildLithography);
             private final Advancement registeredAdvancement;
             Tier1Advancements(final Advancement advancement) {
                 registeredAdvancement = advancement;
@@ -79,7 +75,7 @@ public record ModAdvancements() {
         }
     }
 
-    private record tier1Advancements()
+    private record TierOneAdvancements()
     {
         private static Advancement buildLithography;
 
@@ -105,7 +101,7 @@ public record ModAdvancements() {
                 UsingItemCriterion.Conditions.create(EntityPredicate.Builder.create(),
                         ItemPredicate.Builder.create().items(ModItems.STORY_BOOK)),"/root",
                 advancementConsumer);
-        tier1Advancements.bootstrap(advancementConsumer, foundBaseSchematics);
+        TierOneAdvancements.bootstrap(advancementConsumer, foundBaseSchematics);
         LyokoTierAdvancement.bootstrap(advancementConsumer,null);
     }
     public static Advancement getCurrentRootAdvancement()

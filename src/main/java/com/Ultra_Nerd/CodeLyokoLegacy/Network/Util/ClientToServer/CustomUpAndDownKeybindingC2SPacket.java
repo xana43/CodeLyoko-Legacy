@@ -8,7 +8,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-public class CustomUpAndDownKeybindingC2SPacket implements ClientToServerPacket {
+public record CustomUpAndDownKeybindingC2SPacket() implements ClientToServerPacket {
     public static final CustomUpAndDownKeybindingC2SPacket INSTANCE = new CustomUpAndDownKeybindingC2SPacket();
     @Override
     public void receive(final MinecraftServer server, final ServerPlayerEntity player, final ServerPlayNetworkHandler handler, final PacketByteBuf buf, final PacketSender packetSender) {

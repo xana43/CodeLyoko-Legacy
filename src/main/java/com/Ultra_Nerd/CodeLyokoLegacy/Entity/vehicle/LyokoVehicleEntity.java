@@ -96,7 +96,7 @@ public class LyokoVehicleEntity extends BoatEntity {
 
             this.addVelocity(getVelocity().x, getVelocity().y - 1, getVelocity().z);
         }
-        if (movingUp) {
+        else if (movingUp) {
             this.addVelocity(getVelocity().x, getVelocity().y + 1, getVelocity().z);
 
         }

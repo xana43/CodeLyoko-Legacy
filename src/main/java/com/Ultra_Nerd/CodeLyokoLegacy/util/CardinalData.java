@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.Capabilities.SkidBladnirData;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerProfile;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.Capabilities.XanaAttackTypes;
@@ -26,6 +25,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldProperties;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public record CardinalData() implements EntityComponentInitializer, LevelComponentInitializer {
 
 
@@ -35,6 +36,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         registry.register(LyokoInventorySave.LYOKO_INVENTORY_SAVE, worldProperties -> new InventorySaveComponent());
         registry.register(ReturnToScanner.RETURN_TO_SCANNER,worldProperties -> new PlayerScannerComponent());
         registry.register(PlayerSavedProfile.PLAYER_PROFILE_STORAGE_COMPONENT_KEY, worldProperties -> new PlayerProfileStorage());
+        registry.register(SkidBladnirNavData.SKID_BLADNIR_DATA_COMPONENT_KEY,worldProperties -> new SkidBladnirData());
     }
 
     @Override
@@ -44,7 +46,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         registry.registerForPlayers(HumanDNAAttribute.HUMAN_DNA_COMPONENT_KEY, HumanDNA::new, RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(CellularDamage.DEGENERATION_COMPONENT_KEY,CellularDegeneration::new, RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(DigitalEnergyComponent.DIGITAL_ENERGY_COMPONENT_KEY,(player -> new DigitalEnergy()));
-        registry.registerFor(EntitySkid.class,SkidBladnirNavData.SKID_BLADNIR_DATA_COMPONENT_KEY,SkidBladnirData::new);
+
     }
     public record DigitalEnergyComponent()
     {
@@ -89,12 +91,13 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         }
         public static void setLyokoPosition(final Entity entity,final BlockPos lyokoPos)
         {
-            SKID_BLADNIR_DATA_COMPONENT_KEY.get(entity).setLyokoPosition(lyokoPos);
-            SKID_BLADNIR_DATA_COMPONENT_KEY.sync(entity);
+            final WorldProperties properties = entity.getWorld().getLevelProperties();
+            SKID_BLADNIR_DATA_COMPONENT_KEY.get(properties).setLyokoPosition(lyokoPos);
+            LevelComponents.sync(SKID_BLADNIR_DATA_COMPONENT_KEY, Objects.requireNonNull(entity.getServer()));
         }
         public static void setHubDestination(final Entity entity,final BlockPos hubDestination)
         {
-            SKID_BLADNIR_DATA_COMPONENT_KEY.get(entity).setHubDestinationPosition(hubDestination);
+            SKID_BLADNIR_DATA_COMPONENT_KEY.get(entity.getWorld().getLevelProperties()).setHubDestinationPosition(hubDestination);
             SKID_BLADNIR_DATA_COMPONENT_KEY.sync(entity);
         }
 

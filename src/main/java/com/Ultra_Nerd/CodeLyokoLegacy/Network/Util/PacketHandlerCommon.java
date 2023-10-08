@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ClientToServer.ClassEffectC2SPacket;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ClientToServer.CustomUpAndDownKeybindingC2SPacket;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ClientToServer.SkidBladnirC2SPacket;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ControlPanel;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
@@ -25,6 +26,7 @@ public record PacketHandlerCommon() {
     public static final Identifier PLAYER_QUERY_SERVER = CodeLyokoMain.codeLyokoPrefix("send_query_to_server");
     public static final Identifier FLUID_UPDATE = CodeLyokoMain.codeLyokoPrefix("fluid_update");
     public static final Identifier KEYBOARD_UPDATE = CodeLyokoMain.codeLyokoPrefix("keyboard_update");
+    public static final Identifier SKID_BLADNIR_UPDATE = CodeLyokoMain.codeLyokoPrefix("skidbladnir_update");
     public static void commonChannelRegistry() {
 
 
@@ -44,6 +46,7 @@ public record PacketHandlerCommon() {
         });
         //TODO: once the computer UI is finished make this send information through the cables to the scanners and
         // what not
+        ServerPlayNetworking.registerGlobalReceiver(SKID_BLADNIR_UPDATE, SkidBladnirC2SPacket.INSTANCE::receive);
         ServerPlayNetworking.registerGlobalReceiver(ComputerUIChannelID,
                 (server, player, handler, buf, responseSender) -> {
                     server.execute(() -> {
