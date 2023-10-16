@@ -13,12 +13,12 @@ import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.MessageScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.ClickEvent.Action;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
@@ -85,7 +85,7 @@ public final class Devirtualized extends Screen {
         this.client.disconnect(new MessageScreen(Text.translatable("menu.savingLevel")));
         this.client.setScreen(new CustomMenuScreen(true));
     }
-
+    private static final Identifier DRAFT_REPORT_ICON_TEXTURE = new Identifier("icon/draft_report");
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         context.fillGradient(0, 0, this.width, this.height, 1615855616, -1602211792);
         context.getMatrices().push();
@@ -107,7 +107,7 @@ public final class Devirtualized extends Screen {
 
         super.render(context, mouseX, mouseY, delta);
         if (this.titleScreenButton != null && this.client.getAbuseReportContext().hasDraft()) {
-            context.drawTexture(ClickableWidget.WIDGETS_TEXTURE, this.titleScreenButton.getX() + this.titleScreenButton.getWidth() - 17, this.titleScreenButton.getY() + 3, 182, 24, 15, 15);
+            context.drawTexture(DRAFT_REPORT_ICON_TEXTURE, this.titleScreenButton.getX() + this.titleScreenButton.getWidth() - 17, this.titleScreenButton.getY() + 3, 182, 24, 15, 15);
         }
 
     }

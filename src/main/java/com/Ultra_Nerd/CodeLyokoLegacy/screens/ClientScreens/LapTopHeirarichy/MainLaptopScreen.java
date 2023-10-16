@@ -51,7 +51,7 @@ public final class MainLaptopScreen extends Screen {
 
 
     @Override
-    public void renderBackground(@NotNull DrawContext pPoseStack) {
+    public void renderBackground(@NotNull DrawContext pPoseStack,final int mouseX, final int mouseY, final float delta) {
         // super.renderBackground(pPoseStack);
         RenderSystem.setShaderTexture(0, TEXTURE);
         pPoseStack.drawTexture(TEXTURE,x, 0, 0, 0, xSize, ySize);
@@ -59,7 +59,7 @@ public final class MainLaptopScreen extends Screen {
 
     @Override
     public void render(@NotNull DrawContext pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        this.renderBackground(pPoseStack);
+        this.renderBackground(pPoseStack,pMouseX,pMouseY,pPartialTick);
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 
         this.imageButton.render(pPoseStack, pMouseX, pMouseY, pPartialTick);

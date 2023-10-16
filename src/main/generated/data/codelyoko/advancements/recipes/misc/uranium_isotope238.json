@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_uranium_block_238",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_uranium_block_238"
     ]
   ],
   "rewards": {

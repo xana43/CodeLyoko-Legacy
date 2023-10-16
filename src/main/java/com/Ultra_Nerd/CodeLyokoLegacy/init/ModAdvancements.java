@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
-import net.minecraft.advancement.Advancement;
+import net.minecraft.advancement.AdvancementEntry;
 import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.advancement.criterion.UsingItemCriterion;
 import net.minecraft.predicate.entity.EntityPredicate;
@@ -17,21 +17,21 @@ public record ModAdvancements() {
 
     private record LyokoTierAdvancement()
     {
-        private static Advancement DiscoveredSuperCalculator;
-        private static Advancement EnteredLyokoAdvancement;
-        private static Advancement selectedClass;
-        public static void bootstrap(final Consumer<Advancement> advancementConsumer,
-                @Nullable final Advancement rootAdvancement)
+        private static AdvancementEntry DiscoveredSuperCalculator;
+        private static AdvancementEntry EnteredLyokoAdvancement;
+        private static AdvancementEntry selectedClass;
+        public static void bootstrap(final Consumer<AdvancementEntry> advancementConsumer,
+                @Nullable final AdvancementEntry rootAdvancement)
         {
             DiscoveredSuperCalculator = MethodUtil.AdvancementCreation.create(ModItems.CPU_PACKAGE_QUANTUM,
                     Text.translatable("discovered.super_calculator"),Text.translatable("discovered.super_calculator" +
                             ".description"),null,
                     AdvancementFrame.GOAL,true,true,false,"discovered_super_calculator_advancement",
-                    ModCriteria.UseItem.Condition.create(ModItems.STORY_BOOK2),"super_computer",
+                    ModCustomTrackedCriteria.USED_ITEM.create(ModCriteria.UseItem.Condition.create(ModItems.STORY_BOOK2)),"super_computer",
                     advancementConsumer);
             EnteredLyokoAdvancement = MethodUtil.AdvancementCreation.create(DiscoveredSuperCalculator,ModItems.BIT,
                     Text.translatable("entered.lyoko"),Text.translatable("entered.lyoko.description"),
-                    AdvancementFrame.GOAL,true,true,false,"entered_lyoko_advancement", ModCriteria.EnteredLyoko.Condition.create(
+                    AdvancementFrame.GOAL,true,true,false,"entered_lyoko_advancement", ModCustomTrackedCriteria.ENTERED_LYOKO.create(ModCriteria.EnteredLyoko.Condition.create(
                             List.of(ModDimensions.volcanoWorld,
                                     ModDimensions.carthage,
                                     ModDimensions.desertSectorWorld,
@@ -39,7 +39,7 @@ public record ModAdvancements() {
                                     ModDimensions.forestSectorWorld,
                                     ModDimensions.iceSectorWorld,
                                     ModDimensions.frontierWorld,
-                                    ModDimensions.mountainSectorWorld)),"/entered_lyoko",advancementConsumer);
+                                    ModDimensions.mountainSectorWorld))),"/entered_lyoko",advancementConsumer);
         }
 
 
@@ -50,12 +50,12 @@ public record ModAdvancements() {
         {
             DISCOVERED_SUPER_COMPUTER(LyokoTierAdvancement.DiscoveredSuperCalculator),
             ENTERED_LYOKO(LyokoTierAdvancement.EnteredLyokoAdvancement);
-            private final Advancement registeredAdvancement;
-            LyokoTierAdvancements(final Advancement advancement)
+            private final AdvancementEntry registeredAdvancement;
+            LyokoTierAdvancements(final AdvancementEntry advancement)
             {
                 this.registeredAdvancement = advancement;
             }
-            public final Advancement getRegisteredAdvancement()
+            public final AdvancementEntry getRegisteredAdvancement()
             {
                 return registeredAdvancement;
             }
@@ -64,11 +64,11 @@ public record ModAdvancements() {
         public enum Tier1Advancements
         {
             BUILD_LITHOGRAPHY_MACHINE(TierOneAdvancements.buildLithography);
-            private final Advancement registeredAdvancement;
-            Tier1Advancements(final Advancement advancement) {
+            private final AdvancementEntry registeredAdvancement;
+            Tier1Advancements(final AdvancementEntry advancement) {
                 registeredAdvancement = advancement;
             }
-            public final Advancement getRegisteredAdvancement()
+            public final AdvancementEntry getRegisteredAdvancement()
             {
                 return registeredAdvancement;
             }
@@ -77,23 +77,23 @@ public record ModAdvancements() {
 
     private record TierOneAdvancements()
     {
-        private static Advancement buildLithography;
+        private static AdvancementEntry buildLithography;
 
 
-        public static void bootstrap(final Consumer<Advancement> advancementConsumer,
-                @Nullable final Advancement rootAdvancement)
+        public static void bootstrap(final Consumer<AdvancementEntry> advancementConsumer,
+                @Nullable final AdvancementEntry rootAdvancement)
         {
         buildLithography = create(rootAdvancement,ModItems.INTEGRATED_HEAT_SPREADER,Text.translatable("build.litho"),
                 Text.translatable("build.litho.desc"),AdvancementFrame.TASK,true,true,false,
-                "build_lithography_machine",ModCriteria.UseItem.Condition.create(EntityPredicate.Builder.create(),
-                        ItemPredicate.Builder.create().items(ModBlocks.UV_MACHINE)),"/lithography",advancementConsumer);
+                "build_lithography_machine",ModCustomTrackedCriteria.USED_ITEM.create(ModCriteria.UseItem.Condition.create(EntityPredicate.Builder.create(),
+                        ItemPredicate.Builder.create().items(ModBlocks.UV_MACHINE))),"/lithography",advancementConsumer);
 
         }
 
     }
 
-    private static Advancement foundBaseSchematics;
-    public static void constructAdvancementTree(final Consumer<Advancement> advancementConsumer)
+    private static AdvancementEntry foundBaseSchematics;
+    public static void constructAdvancementTree(final Consumer<AdvancementEntry> advancementConsumer)
     {
         foundBaseSchematics = create(ModItems.CPU_DIE_ARM, Text.translatable("starter" +
                         ".schematic"),Text.translatable("starter.schematic.description"),null,
@@ -104,7 +104,7 @@ public record ModAdvancements() {
         TierOneAdvancements.bootstrap(advancementConsumer, foundBaseSchematics);
         LyokoTierAdvancement.bootstrap(advancementConsumer,null);
     }
-    public static Advancement getCurrentRootAdvancement()
+    public static AdvancementEntry getCurrentRootAdvancement()
     {
         return foundBaseSchematics;
     }

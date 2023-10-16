@@ -2,20 +2,15 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.CustomMenuScreen;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.event.Client.ClientEvents;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.PlaceBlockEvent;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.QuickPlay;
-import net.minecraft.client.RunArgs;
-import net.minecraft.client.gui.screen.AccessibilityOnboardingScreen;
 import net.minecraft.client.option.GameOptions;
-import net.minecraft.client.realms.RealmsClient;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.resource.ResourceReload;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -23,6 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
@@ -32,7 +28,10 @@ public record MixinHooks() {
     {
         splashtexts.add(Text.translatable("splashscreen.entry1").getString());
     }
-
+    public static void invokeLanguageUpdate()
+    {
+        ClientEvents.ON_LANGUAGE_CHANGED_EVENT.invoker().languageChanged();
+    }
     public static void disableStatusEffectsRenderInLyoko(
             final CallbackInfo ci)
     {
@@ -127,17 +126,9 @@ public record MixinHooks() {
         }
     }
 
-    public static void replaceTitleScreen(final RealmsClient realms, final ResourceReload reload,
-            final RunArgs.QuickPlay quickPlay, final CallbackInfo ci,final GameOptions options,
-            final MinecraftClient client)
+    public static void replaceTitleScreen(final CallbackInfoReturnable<Runnable> cir, final GameOptions options,
+                                          final MinecraftClient client)
     {
-        ci.cancel();
-        if (quickPlay.isEnabled()) {
-            QuickPlay.startQuickPlay(MinecraftClient.getInstance(), quickPlay, reload, realms);
-        } else if (options.onboardAccessibility) {
-            client.setScreen(new AccessibilityOnboardingScreen(options));
-        } else {
-            client.setScreen(new CustomMenuScreen(true));
-        }
+
     }
 }

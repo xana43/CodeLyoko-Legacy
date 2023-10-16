@@ -204,7 +204,7 @@ public final class HornetEntity extends PhantomEntity implements GeoAnimatable, 
             this::movePredicate);
 
     @Override
-    public void attack(@NotNull LivingEntity target, final float distanceFactor) {
+    public void shootAt(@NotNull LivingEntity target, final float distanceFactor) {
 
         final EntityLaser laser = new EntityLaser(this.getWorld(), this, 40);
         final double d0 = target.getX() - this.getX();

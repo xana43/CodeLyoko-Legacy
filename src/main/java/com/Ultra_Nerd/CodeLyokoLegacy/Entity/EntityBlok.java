@@ -69,7 +69,7 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
     }
 
     @Override
-    public void attack(final LivingEntity target, final float pullProgress) {
+    public void shootAt(final LivingEntity target, final float pullProgress) {
         final ArrowEntity abstractarrow = new EntityLaser(this.getWorld(), this, 20);
 
         final double d0 = target.getX() - this.getX();

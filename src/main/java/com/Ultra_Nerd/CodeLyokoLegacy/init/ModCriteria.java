@@ -3,12 +3,12 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.google.gson.JsonObject;
+import net.minecraft.advancement.AdvancementCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
-import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.entity.LootContextPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
@@ -20,30 +20,34 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.world.World;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public record ModCriteria() {
     public static final class InvokeClassChange extends AbstractCriterion<InvokeClassChange.Condition>
     {
         private static final Identifier ID = CodeLyokoMain.codeLyokoPrefix("class_change");
         @Override
-        protected Condition conditionsFromJson(JsonObject obj, LootContextPredicate playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
+        protected Condition conditionsFromJson(JsonObject obj, Optional<LootContextPredicate> playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
             return new Condition(ID,playerPredicate,obj.get("previous_class_id").getAsInt());
         }
         public void trigger(final ServerPlayerEntity player)
         {
             this.trigger(player,condition -> condition.classChanged(player));
         }
-        @Override
+
         public Identifier getId() {
             return ID;
         }
 
+
+
         public static final class Condition extends AbstractCriterionConditions
         {
             private final int previousClassId;
-            public Condition(final Identifier id,final LootContextPredicate entity,final int previousClassId) {
-                super(id, entity);
+            public Condition(final Identifier id,final Optional<LootContextPredicate> entity,final int previousClassId) {
+                super(entity);
                 this.previousClassId = previousClassId;
 
             }
@@ -52,8 +56,8 @@ public record ModCriteria() {
                 return CardinalData.LyokoClass.getLyokoClass(player) != previousClassId;
             }
             @Override
-            public JsonObject toJson(AdvancementEntityPredicateSerializer predicateSerializer) {
-                final JsonObject obj = super.toJson(predicateSerializer);
+            public JsonObject toJson() {
+                final JsonObject obj = super.toJson();
                 obj.addProperty("previous_class_id", Integer.valueOf(previousClassId));
                 return obj;
             }
@@ -63,7 +67,7 @@ public record ModCriteria() {
     {
         private static final Identifier ID = CodeLyokoMain.codeLyokoPrefix("use_item");
         @Override
-        protected Condition conditionsFromJson(final JsonObject obj, final LootContextPredicate playerPredicate, final AdvancementEntityPredicateDeserializer predicateDeserializer) {
+        protected Condition conditionsFromJson(final JsonObject obj, final Optional<LootContextPredicate> playerPredicate, final AdvancementEntityPredicateDeserializer predicateDeserializer) {
             return new Condition(playerPredicate, ItemPredicate.fromJson(obj.get("item")));
         }
 
@@ -72,35 +76,35 @@ public record ModCriteria() {
             this.trigger(player,condition -> condition.test(stack));
         }
 
-        @Override
+
         public Identifier getId() {
             return ID;
         }
 
         public static final class Condition extends AbstractCriterionConditions
         {
-            private final ItemPredicate itemPredicate;
-            public Condition(final LootContextPredicate entity,final ItemPredicate itemPredicate) {
-                super(ID, entity);
+            private final Optional<ItemPredicate> itemPredicate;
+            public Condition(final Optional<LootContextPredicate> entity,final Optional<ItemPredicate> itemPredicate) {
+                super(entity);
                 this.itemPredicate = itemPredicate;
             }
             public boolean test(final ItemStack stack)
             {
-                return itemPredicate.test(stack);
+                return itemPredicate.get().test(stack);
             }
             public static Condition create(final EntityPredicate.Builder player , final ItemPredicate.Builder item)
             {
-                return new Condition(EntityPredicate.asLootContextPredicate(player.build()),item.build());
+                return new Condition(Optional.of(EntityPredicate.asLootContextPredicate(player.build())), Optional.ofNullable(item.build()));
             }
             public static Condition create(final ItemConvertible... itemConvertibles)
             {
-                return new Condition(EntityPredicate.asLootContextPredicate(EntityPredicate.Builder.create().build())
-                        ,ItemPredicate.Builder.create().items(itemConvertibles).build());
+                return new Condition(Optional.of(EntityPredicate.asLootContextPredicate(EntityPredicate.Builder.create().build()))
+                        , Optional.ofNullable(ItemPredicate.Builder.create().items(itemConvertibles).build()));
             }
             @Override
-            public JsonObject toJson(final AdvancementEntityPredicateSerializer predicateSerializer) {
-                final JsonObject jsonObject = super.toJson(predicateSerializer);
-                jsonObject.add("item",itemPredicate.toJson());
+            public JsonObject toJson() {
+                final JsonObject jsonObject = super.toJson();
+                jsonObject.add("item",itemPredicate.get().toJson());
                 return jsonObject;
             }
         }
@@ -110,7 +114,7 @@ public record ModCriteria() {
     {
         private static final Identifier ID = CodeLyokoMain.codeLyokoPrefix("entered_lyoko_advancement");
         @Override
-        protected Condition conditionsFromJson(final JsonObject obj, final LootContextPredicate playerPredicate, final AdvancementEntityPredicateDeserializer predicateDeserializer) {
+        protected Condition conditionsFromJson(final JsonObject obj, final Optional<LootContextPredicate> playerPredicate, final AdvancementEntityPredicateDeserializer predicateDeserializer) {
             final List<RegistryKey<World>> registryKeys = new ArrayList<>();
             for(final String entry: obj.keySet())
             {
@@ -125,7 +129,6 @@ public record ModCriteria() {
             this.trigger(player,(condition) -> condition.worldTest(world.getRegistryKey()));
         }
 
-        @Override
         public Identifier getId() {
             return ID;
         }
@@ -133,8 +136,8 @@ public record ModCriteria() {
         {
             private final List<RegistryKey<World>> nextWorld;
 
-            private Condition(final LootContextPredicate player,final List<RegistryKey<World>> nextWorld) {
-                super(ID, player);
+            private Condition(final Optional<LootContextPredicate> player,final List<RegistryKey<World>> nextWorld) {
+                super(player);
                 this.nextWorld = nextWorld;
 
             }
@@ -143,13 +146,16 @@ public record ModCriteria() {
 
             public static Condition create(final List<RegistryKey<World>> nextWorld)
             {
-                return new Condition(LootContextPredicate.EMPTY,nextWorld);
+                final Condition Condition;
+
+                AdvancementCriterion<?> test = new EnteredLyoko().create(new Condition(Optional.empty(),nextWorld));
+                return new Condition(Optional.empty(),nextWorld);
             }
 
             @SafeVarargs
             public static Condition create(final RegistryKey<World>... nextWorlds)
             {
-                return new Condition(LootContextPredicate.EMPTY, List.of(nextWorlds));
+                return new Condition(Optional.empty(), List.of(nextWorlds));
             }
 
             public boolean worldTest(final RegistryKey<World> nextWorld)
@@ -158,8 +164,8 @@ public record ModCriteria() {
             }
 
             @Override
-            public JsonObject toJson(final AdvancementEntityPredicateSerializer predicateSerializer) {
-                final JsonObject jsonObject = super.toJson(predicateSerializer);
+            public JsonObject toJson() {
+                final JsonObject jsonObject = super.toJson();
                 if(nextWorld != null)
                 {
                     final StringBuilder builder = new StringBuilder("next0");

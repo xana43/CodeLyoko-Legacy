@@ -9,7 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.DefaultResourceConditions;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
@@ -20,7 +20,6 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.book.RecipeCategory;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public final class CustomRecipeProvider extends FabricRecipeProvider {
 
@@ -29,8 +28,10 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
         super(output);
     }
 
+
+
     @Override
-    public void generate(final Consumer<RecipeJsonProvider> exporter) {
+    public void generate(final RecipeExporter exporter) {
         final ConditionJsonProvider NEVER_LOADED = DefaultResourceConditions.allModsLoaded(CodeLyokoMain.MOD_ID);
         final ConditionJsonProvider ALWAYS_LOADED = DefaultResourceConditions.not(NEVER_LOADED);
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS,ModItems.TRUSTY_SCREWDRIVER).input('i', Items.IRON_INGOT)
@@ -97,12 +98,12 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
     {
 
         private static final StringBuilder recipePathBuilder = new StringBuilder();
-        private static void offerReacting(final Consumer<RecipeJsonProvider> recipeJsonProviderConsumer, final List<ItemConvertible> inputs, final ItemConvertible output)
+        private static void offerReacting(final RecipeExporter recipeJsonProviderConsumer, final List<ItemConvertible> inputs, final ItemConvertible output)
         {
             offerCustomCooking(recipeJsonProviderConsumer, ModRecipes.RecipeSerializers.REACTOR_RECIPE_SERIALIZER,inputs, output, 0, "reacting","_from_reacting");
         }
 
-        private static void offerCustomCooking(final Consumer<RecipeJsonProvider> exporter, final RecipeSerializer<? extends AbstractCookingRecipe> serializer, final List<ItemConvertible> inputs, final ItemConvertible output, final float experience, final String group, final String method)
+        private static void offerCustomCooking(final RecipeExporter exporter, final RecipeSerializer<? extends AbstractCookingRecipe> serializer, final List<ItemConvertible> inputs, final ItemConvertible output, final float experience, final String group, final String method)
         {
             for (final ItemConvertible itemConvertible : inputs) {
                 recipePathBuilder.setLength(0);

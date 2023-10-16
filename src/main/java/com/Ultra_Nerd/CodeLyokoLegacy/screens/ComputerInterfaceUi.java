@@ -107,9 +107,10 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
     @Override
     public void render(final DrawContext matrices, final int mouseX, final int mouseY, final float delta) {
 
-        this.renderBackground(matrices);
+        this.renderBackground(matrices,mouseX,mouseY,delta);
         super.render(matrices, mouseX, mouseY, delta);
         this.renderSectorImages(matrices);
+
 
     }
 
@@ -189,8 +190,9 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
 
     }
 
+
     @Override
-    public void renderBackground(final DrawContext matrices) {
+    public void renderBackground(final DrawContext matrices,final int mouseX, final int mouseY, final float delta) {
         //super.renderBackground(matrices);
         RenderSystem.setShaderTexture(0, TEXTURE);
         matrices.drawTexture(TEXTURE, 0, 0, 0, 0, 1280, 720, this.width, this.height);

@@ -30,8 +30,8 @@
   },
   "requirements": [
     [
-      "knows_cathode",
-      "has_the_recipe"
+      "has_the_recipe",
+      "knows_cathode"
     ]
   ],
   "rewards": {

@@ -58,7 +58,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     @Override
     public void render(@NotNull DrawContext poseStack, int mouseX, int mouseY, float partialTicks) {
 
-        this.renderBackground(poseStack);
+        this.renderBackground(poseStack,mouseX,mouseY,partialTicks);
 
         super.render(poseStack, mouseX, mouseY, partialTicks);
         //this.text.render(poseStack,mouseX, mouseY, partialTicks);
@@ -88,7 +88,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
 
     @Override
     protected void handledScreenTick() {
-        this.text.tick();
+        //this.text.tick();
         tick++;
         I--;
         if (I <= 0 && !this.Accepted.getText().isEmpty()) {
@@ -108,7 +108,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
             acceptedColor = 65280;
             this.Accepted.setText(correctCode);
 
-            this.text.setCursor(0);
+            this.text.setCursor(0,false);
             CodeLyokoMain.LOG.info(this.text.getText());
 
             switch (this.text.getText().toLowerCase(Locale.ROOT)) {
@@ -127,7 +127,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
             acceptedColor = 16711680;
             this.Accepted.setText(correctCode);
             this.text.setText(StringUtils.EMPTY);
-            this.text.setCursor(0);
+            this.text.setCursor(0,false);
             data.writeInt(1);
             ClientPlayNetworking.send(PacketHandlerCommon.TowerChannelID, data);
             Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 0.9f);
@@ -151,7 +151,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
         this.text.setEditableColor(16777215);
         this.text.setFocused(true);
         this.text.setEditable(true);
-        this.text.setCursor(0);
+        this.text.setCursor(0,false);
         this.text.setFocusUnlocked(false);
         this.text.active = true;
         this.Accepted = new TextFieldWidget(this.textRenderer, tx - 95, ty + 20, 200, 33, Text.empty());

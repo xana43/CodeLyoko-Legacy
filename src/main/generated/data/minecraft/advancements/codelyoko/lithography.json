@@ -16,7 +16,7 @@
           }
         ]
       },
-      "trigger": "codelyoko:use_item"
+      "trigger": "minecraft:codelyoko/used_item"
     }
   },
   "display": {

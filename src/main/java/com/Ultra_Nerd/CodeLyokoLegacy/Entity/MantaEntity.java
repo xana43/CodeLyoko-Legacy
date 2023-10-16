@@ -104,7 +104,7 @@ public final class MantaEntity extends GuardianEntity implements GeoAnimatable, 
     }
 
     @Override
-    public void attack(final LivingEntity target, final float pullProgress) {
+    public void shootAt(final LivingEntity target, final float pullProgress) {
 
     }
 }

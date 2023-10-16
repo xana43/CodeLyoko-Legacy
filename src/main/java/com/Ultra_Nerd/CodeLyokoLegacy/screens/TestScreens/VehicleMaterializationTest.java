@@ -44,7 +44,7 @@ public final class VehicleMaterializationTest extends HandledScreen<VehicleMater
     @Override
     public void render(final DrawContext matrices, final int mouseX, final int mouseY, final float delta) {
         super.render(matrices, mouseX, mouseY, delta);
-        this.renderBackground(matrices);
+        this.renderBackground(matrices,mouseX,mouseY,delta);
         /*for (final PlayerListEntry playerListEntry : playerList)
         {
             drawCenteredText(matrices,textRenderer,playerListEntry.getProfile().getName(),this.width >> 1,
@@ -64,9 +64,11 @@ public final class VehicleMaterializationTest extends HandledScreen<VehicleMater
 
     }
 
+
+
     @Override
-    public void renderBackground(final DrawContext matrices) {
-        super.renderBackground(matrices);
+    public void renderBackground(final DrawContext matrices,final int mouseX, final int mouseY, final float delta) {
+        super.renderBackground(matrices, mouseX, mouseY, delta);
         RenderSystem.setShaderTexture(0, TEXTURE);
         matrices.drawTexture(TEXTURE, x, 0, 0, 0, xSize, ySize);
     }

@@ -30,8 +30,8 @@
   },
   "requirements": [
     [
-      "knows_screwdriver",
-      "has_the_recipe"
+      "has_the_recipe",
+      "knows_screwdriver"
     ]
   ],
   "rewards": {

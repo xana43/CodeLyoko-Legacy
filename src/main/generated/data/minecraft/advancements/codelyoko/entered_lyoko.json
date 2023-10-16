@@ -12,7 +12,7 @@
         "next6": "codelyoko:frontier",
         "next7": "codelyoko:mountain"
       },
-      "trigger": "codelyoko:entered_lyoko_advancement"
+      "trigger": "minecraft:codelyoko/entered_lyoko"
     }
   },
   "display": {

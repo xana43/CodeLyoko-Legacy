@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
-import net.minecraft.advancement.Advancement;
+import net.minecraft.advancement.AdvancementEntry;
 
 import java.util.function.Consumer;
 
@@ -14,14 +14,14 @@ public final class CustomAdvancements extends FabricAdvancementProvider {
     }
 
     @Override
-    public void generateAdvancement(final Consumer<Advancement> consumer) {
+    public void generateAdvancement(final Consumer<AdvancementEntry> consumer) {
         new Advancements().accept(consumer);
     }
 
-    private record Advancements() implements Consumer<Consumer<Advancement>>
+    private record Advancements() implements Consumer<Consumer<AdvancementEntry>>
     {
         @Override
-        public void accept(final Consumer<Advancement> advancementConsumer) {
+        public void accept(final Consumer<AdvancementEntry> advancementConsumer) {
             constructAdvancementTree(advancementConsumer);
         }
 

@@ -3,12 +3,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.CustomRecipeBuilderProvid
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFuels;
 import com.google.gson.JsonObject;
-import net.minecraft.advancement.Advancement;
-import net.minecraft.advancement.AdvancementRewards;
-import net.minecraft.advancement.CriterionMerger;
-import net.minecraft.advancement.criterion.CriterionConditions;
+import net.minecraft.advancement.*;
 import net.minecraft.advancement.criterion.RecipeUnlockedCriterion;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -22,7 +20,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Consumer;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
     private final RecipeCategory category;
@@ -31,7 +31,7 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
     private final Item output;
     private final float experience;
     private final int cookingTime;
-    private final Advancement.Builder advancementBuilder = Advancement.Builder.createUntelemetered();
+    private final Map<String,AdvancementCriterion<?>> criteria = new LinkedHashMap<>();
     private String group;
     private final RecipeSerializer<? extends AbstractCookingRecipe> serializer;
 
@@ -46,8 +46,8 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
     }
 
     @Override
-    public CraftingRecipeJsonBuilder criterion(final String name, final CriterionConditions conditions) {
-        this.advancementBuilder.criterion(name, conditions);
+    public CraftingRecipeJsonBuilder criterion(final String name, final AdvancementCriterion<?> conditions) {
+        this.criteria.put(name, conditions);
         return this;
     }
 
@@ -77,24 +77,25 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
     }
 
     private void validate(final Identifier recipeId) {
-        if (this.advancementBuilder.getCriteria().isEmpty()) {
+        if (this.criteria.isEmpty()) {
             throw new IllegalArgumentException("No way of obtaining recipe " + recipeId);
         }
     }
 
     @Override
-    public void offerTo(final Consumer<RecipeJsonProvider> exporter, final Identifier recipeId) {
+    public void offerTo(final RecipeExporter exporter, final Identifier recipeId) {
         this.validate(recipeId);
-        this.advancementBuilder.parent(ROOT).criterion("has_the_recipe", RecipeUnlockedCriterion.create(recipeId)).rewards(AdvancementRewards.Builder.recipe(recipeId)).criteriaMerger(CriterionMerger.OR);
-        exporter.accept(new CustomCookingRecipeJsonProvider(recipeId, this.group == null ? "" : this.group, this.cookingRecipeCategory, input, output, experience, cookingTime, advancementBuilder
-                , recipeId.withPrefixedPath("recipes/" + category.getName() + "/"), serializer));
+        final Advancement.Builder builder = exporter.getAdvancementBuilder().criterion("has_the_recipe",RecipeUnlockedCriterion.create(recipeId)).rewards(AdvancementRewards.Builder.recipe(recipeId)).criteriaMerger(AdvancementRequirements.CriterionMerger.OR);
+        Objects.requireNonNull(builder);
+        this.criteria.forEach(builder::criterion);
+        exporter.accept(new CustomCookingRecipeJsonProvider(recipeId, this.group == null ? "" : this.group, this.cookingRecipeCategory, input, output, experience, cookingTime, builder.build(recipeId.withPrefixedPath("recipes/" + this.category.getName() + "/")), serializer));
     }
 
     private record CustomCookingRecipeJsonProvider(Identifier recipeId, String group
             , CookingRecipeCategory cookingRecipeCategory, Ingredient input, Item result,
                                                    float experience, int cookingTime,
-                                                   Advancement.Builder advancementBuilder
-            , Identifier advancementId,
+                                                   AdvancementEntry advancementEntry
+            ,
                                                    RecipeSerializer<? extends AbstractCookingRecipe> serializer) implements RecipeJsonProvider {
 
         @Override
@@ -103,32 +104,53 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
                 json.addProperty("group", this.group);
             }
             json.addProperty("category", this.cookingRecipeCategory.asString());
-            json.add("ingredient", this.input.toJson());
+            json.add("ingredient", this.input.toJson(false));
             json.addProperty("result", Registries.ITEM.getId(this.result).toString());
             json.addProperty("experience", this.experience);
             json.addProperty("cookingtime", this.cookingTime);
         }
 
         @Override
-        public Identifier getRecipeId() {
+        public Identifier id() {
             return recipeId;
         }
 
+        @Nullable
         @Override
-        public RecipeSerializer<?> getSerializer() {
+        public AdvancementEntry advancement() {
+            return this.advancementEntry;
+        }
+
+        @Override
+        public RecipeSerializer<? extends AbstractCookingRecipe> serializer() {
             return serializer;
         }
-
-        @Nullable
-        @Override
-        public JsonObject toAdvancementJson() {
-            return advancementBuilder.toJson();
+        public String getGroup()
+        {
+            return group;
         }
+       public CookingRecipeCategory getCategory()
+       {
+           return cookingRecipeCategory;
+       }
+       public float getExperience()
+       {
+           return experience;
+       }
+       public int getCookingTime()
+       {
+           return cookingTime;
+       }
 
-        @Nullable
-        @Override
-        public Identifier getAdvancementId() {
-            return advancementId;
-        }
+       public Ingredient getInput()
+       {
+           return input;
+       }
+
+       public Item getResult()
+       {
+           return result;
+       }
+
     }
 }

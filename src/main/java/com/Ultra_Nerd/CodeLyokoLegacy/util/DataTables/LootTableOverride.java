@@ -3,18 +3,12 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.entry.LootPoolEntry;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.util.Identifier;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public record LootTableOverride() {
     private static final Identifier SUS_SAND_DESERT_ID = new Identifier("minecraft","archaeology/desert_pyramid");
@@ -31,15 +25,15 @@ public record LootTableOverride() {
                 tableBuilder.pool(poolBuilder.build());
             }
         });
-        LootTableEvents.REPLACE.register((resourceManager, lootManager, id, original, source) -> {
+       /* LootTableEvents.REPLACE.register((resourceManager, lootManager, id, original, source) -> {
             if(SUS_SAND_DESERT_ID.equals(id))
             {
-                final List<LootPoolEntry> entries = new ArrayList<>(Arrays.asList(original.pools[0].entries));
+                final List<LootPoolEntry> entries = new ArrayList<>(Arrays.asList(lootManager..entries));
                 entries.add(ItemEntry.builder(ModItems.STORY_BOOK).build());
                 final LootPool.Builder pool = LootPool.builder().with(entries);
                 return LootTable.builder().pool(pool).build();
             }
             return null;
-        });
+        });*/
     }
 }

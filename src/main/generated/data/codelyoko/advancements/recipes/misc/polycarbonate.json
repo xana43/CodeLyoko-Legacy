@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "knows_polycarbonate",
-      "has_the_recipe"
+      "has_the_recipe",
+      "knows_polycarbonate"
     ]
   ],
   "rewards": {

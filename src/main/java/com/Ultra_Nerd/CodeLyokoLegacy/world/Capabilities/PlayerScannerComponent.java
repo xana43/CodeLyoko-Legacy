@@ -33,10 +33,7 @@ public final class PlayerScannerComponent implements AutoSyncedComponent {
             {
                 POS_HASH_MAP.clear();
             }
-            for(final String tagKey : tag.getKeys())
-            {
-                POS_HASH_MAP.put(UUID.fromString(tagKey),BlockPos.fromLong(tag.getLong(tagKey)));
-            }
+            tag.getKeys().forEach(key -> POS_HASH_MAP.put(UUID.fromString(key),BlockPos.fromLong(tag.getLong(key))));
     }
 
     @Override

@@ -41,7 +41,9 @@ public final class SkidBladnirData implements AutoSyncedComponent {
 
     @Override
     public void writeToNbt(final NbtCompound tag) {
-        tag.putLong(HOME_KEY,positions[0].asLong());
-        tag.putLong(DESTINATION_KEY,positions[1].asLong());
+        if(positions[0] != null && positions[1] != null && positions[0] != BlockPos.ORIGIN && positions[1] != BlockPos.ORIGIN) {
+            tag.putLong(HOME_KEY, positions[0].asLong());
+            tag.putLong(DESTINATION_KEY, positions[1].asLong());
+        }
     }
 }

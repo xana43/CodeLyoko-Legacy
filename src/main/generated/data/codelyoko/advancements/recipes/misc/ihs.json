@@ -30,8 +30,8 @@
   },
   "requirements": [
     [
-      "knows_ihs",
-      "has_the_recipe"
+      "has_the_recipe",
+      "knows_ihs"
     ]
   ],
   "rewards": {

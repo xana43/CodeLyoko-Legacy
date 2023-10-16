@@ -16,7 +16,7 @@ public final class XanaDataComponent implements AutoSyncedComponent {
     private static final String FACTORY_POSITION_KEY = "active_factory_position";
     private static final String ATTACK_TYPE_KEY = "attack_type";
     private static final String ATTACK_POSITION_KEY = "attack_position";
-    private static BlockPos activeFactoryPosition;
+    private static BlockPos activeFactoryPosition = BlockPos.ORIGIN;
     private static XanaAttackTypes attackType;
     public int getDangerLevel() {
         return dangerLevel;
@@ -83,6 +83,10 @@ public final class XanaDataComponent implements AutoSyncedComponent {
     @Override
     public void writeToNbt(final @NotNull NbtCompound tag) {
         tag.putInt(DANGER_LEVEL_KEY, dangerLevel);
+        if(attackType == null)
+        {
+            attackType = XanaAttackTypes.DUMMY;
+        }
         tag.putInt(ATTACK_TYPE_KEY,attackType.ordinal());
         tag.putLong(FACTORY_POSITION_KEY,activeFactoryPosition.asLong());
         tag.putLongArray(ATTACK_POSITION_KEY,XanaDataComponent.validAttackPositions);

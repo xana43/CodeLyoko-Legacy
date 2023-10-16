@@ -59,6 +59,8 @@ public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inve
         getSlot(1).setStackNoCallbacks(ItemStack.EMPTY);
     }
 
+
+
     @Override
     public void populateRecipeFinder(final RecipeMatcher finder) {
         if(inventory instanceof final RecipeInputProvider recipeInputProvider)
@@ -68,11 +70,11 @@ public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inve
     }
 
 
-
     @Override
-    public boolean matches(final Recipe<? super Inventory> recipe) {
-        return recipe.matches(inventory,world);
+    public boolean matches(final RecipeEntry<? extends Recipe<Inventory>> recipe) {
+        return recipe.value().matches(inventory,world);
     }
+
 
     @Override
     public int getCraftingResultSlotIndex()

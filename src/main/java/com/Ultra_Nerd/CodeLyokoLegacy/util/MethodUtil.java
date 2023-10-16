@@ -12,8 +12,9 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.advancement.Advancement;
+import net.minecraft.advancement.AdvancementCriterion;
+import net.minecraft.advancement.AdvancementEntry;
 import net.minecraft.advancement.AdvancementFrame;
-import net.minecraft.advancement.criterion.CriterionConditions;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
@@ -36,9 +37,10 @@ import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
-import java.util.regex.Pattern;
 
 public record MethodUtil() {
     public record ArmorMethods() {
@@ -53,13 +55,13 @@ public record MethodUtil() {
         private static final StringBuilder buffer = new StringBuilder();
         private static final Identifier DEFAULT_BACKGROUND = new Identifier("textures/gui/advancements/backgrounds" +
                 "/adventure.png");
-        public static Advancement create(final Advancement parent,
-                final ItemConvertible itemConvertible,
-                final Text name,
-                final Text description,final AdvancementFrame frameType,
-                final boolean showToast,final boolean announceToChat, final boolean hidden,
-                final String criteriaName,final CriterionConditions conditions,final String location,
-                final Consumer<Advancement> advancementConsumer)
+        public static AdvancementEntry create(final AdvancementEntry parent,
+                                         final ItemConvertible itemConvertible,
+                                         final Text name,
+                                         final Text description, final AdvancementFrame frameType,
+                                         final boolean showToast, final boolean announceToChat, final boolean hidden,
+                                         final String criteriaName, final AdvancementCriterion<?> conditions, final String location,
+                                         final Consumer<AdvancementEntry> advancementConsumer)
         {
             return Advancement.Builder.create()
                     .parent(parent)
@@ -82,13 +84,13 @@ public record MethodUtil() {
             return buffer.toString();
         }
 
-        public static Advancement create(
+        public static AdvancementEntry create(
                 final ItemConvertible itemConvertible,
                 final Text name,
                 final Text description,@Nullable final Identifier background,final AdvancementFrame frameType,
                 final boolean showToast,final boolean announceToChat, final boolean hidden,
-                final String criteriaName,final CriterionConditions conditions,final String location,
-                final Consumer<Advancement> advancementConsumer)
+                final String criteriaName,final AdvancementCriterion<?> conditions,final String location,
+                final Consumer<AdvancementEntry> advancementConsumer)
         {
             if(background == null || background.toString().isEmpty())
             {
@@ -439,11 +441,12 @@ public record MethodUtil() {
                 }
 
             }
-            
+            private  static final MinecraftClient client = MinecraftClient.getInstance();
             public static <T> T testLocale(final T englishObject, final T frenchObject)
             {
-                final MinecraftClient client = MinecraftClient.getInstance();
+
                 if(client != null && client.getLanguageManager() != null) {
+                    CodeLyokoMain.LOG.error("changing to:"+client.getLanguageManager().getLanguage());
                     if (client.getLanguageManager().getLanguage().equals(TranslatedLocale.EN_US.toString())) {
                         return englishObject;
                     } else if (client.getLanguageManager().getLanguage().equals(TranslatedLocale.FR_FR.toString())) {
@@ -456,30 +459,18 @@ public record MethodUtil() {
 
 
         public record TextUtil() {
-
-            private static final StringVisitable[] pages = new StringVisitable[100];
-            private static final Pattern splitPattern = Pattern.compile(">δ<");
+            private static final List<StringVisitable> denotedList = new ArrayList<>();
             public static StringVisitable[] textArray(@NotNull final String textToDenote) {
-                final String[] denoted = splitPattern.split(textToDenote);
-                final int length = denoted.length;
-                for (int i = 0; i < length; i++) {
-                    pages[i] = Text.of(denoted[i]);
+                denotedList.clear();
+                int pos = 0, end;
+                while ((end = textToDenote.indexOf('¶',pos)) >= 0)
+                {
+                    denotedList.add(Text.of(textToDenote.substring(pos,end)));
+                    pos = end + 1;
                 }
-                return pages.clone();
+                denotedList.add(Text.of(textToDenote.substring(pos)));
+                return denotedList.toArray(new StringVisitable[0]);
             }
-
-            @SuppressWarnings("ConstantValue")
-            public static int textArrayLengthToPage(final @NotNull StringVisitable[]   formattedTexts) {
-                int length = 0;
-                    for (final StringVisitable formattedText : formattedTexts) {
-                        if(formattedText != null) {
-                            length++;
-                        }
-                    }
-                return length;
-            }
-
-
         }
     }
 

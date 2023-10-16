@@ -21,7 +21,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.screen.*;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
@@ -144,9 +146,10 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
         boolean isGottenItemStackEmpty = !itemStack.isEmpty();
         if(isReacting() || isCurrentItemStackEmpty && isGottenItemStackEmpty && wasteTank.amount < wasteTank.getCapacity())
         {
-            Recipe recipe;
+            RecipeEntry recipe;
             if(isCurrentItemStackEmpty)
             {
+
                 recipe = matchGetter.getFirstMatch(this,world).orElse(null);
             }
             else {
@@ -216,9 +219,9 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
     }
 
     private static boolean canAcceptRecipeOutput(final DynamicRegistryManager registryManager,
-            final @Nullable Recipe<?> recipe,final DefaultedList<ItemStack> slots,final int count) {
+            final @Nullable RecipeEntry<?> recipe,final DefaultedList<ItemStack> slots,final int count) {
         if (!slots.get(0).isEmpty() && recipe != null) {
-            final ItemStack itemStack = recipe.getOutput(registryManager);
+            final ItemStack itemStack = recipe.value().getResult(registryManager);
             if (itemStack.isEmpty() || (itemStack.isIn(ModTags.ItemTags.URANIUM_BATTERIES) && itemStack.getDamage() == itemStack.getMaxDamage())) {
                 return false;
             } else {
@@ -238,11 +241,11 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
         }
     }
 
-    private static boolean craftRecipe(final DynamicRegistryManager registryManager,final @Nullable Recipe<?> recipe,
+    private static boolean craftRecipe(final DynamicRegistryManager registryManager,final @Nullable RecipeEntry<?> recipe,
             final DefaultedList<ItemStack> slots,final int count) {
         if (recipe != null && canAcceptRecipeOutput(registryManager, recipe, slots, count)) {
             final ItemStack itemStack = slots.get(0);
-            final ItemStack itemStack2 = recipe.getOutput(registryManager);
+            final ItemStack itemStack2 = recipe.value().getResult(registryManager);
             final ItemStack itemStack3 = slots.get(1);
             if (itemStack3.isEmpty()) {
                 slots.set(1, itemStack2.copy());
@@ -316,15 +319,15 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
 
     private static int getCookTime(final World world,final ComputerReactorTileEntityInventory reactorTileEntityInventory)
     {
-        return reactorTileEntityInventory.matchGetter.getFirstMatch(reactorTileEntityInventory, world).map(AbstractCookingRecipe::getCookTime).orElse(Integer.valueOf(200)).intValue();
+        return reactorTileEntityInventory.matchGetter.getFirstMatch(reactorTileEntityInventory, world).map(recipeEntry -> recipeEntry.value().getCookingTime()).orElse(Integer.valueOf(200)).intValue();
     }
-    public void setLastRecipe(final Recipe<?> recipe)
+    public void setLastRecipe(final RecipeEntry<?> recipe)
     {
         if(recipe != null)
         {
             CodeLyokoMain.LOG.debug("setting last recipe");
             CodeLyokoMain.LOG.info("setting last recipe");
-            final Identifier identifier = recipe.getId();
+            final Identifier identifier = recipe.id();
             this.recipesUsed.addTo(identifier,1);
         }
     }

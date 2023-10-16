@@ -161,7 +161,7 @@ public record ModItems() {
     public static final Item RAW_POLYCARBONATE = new Item(BaseSettings());
     public static final Item SOLID_QUANTUM = new Item(BaseSettings().rarity(CustomLyokoRarity.FRANZ_HOPPER));
     public static final Item SOLDER_BLOB = new Item(BaseSettings());
-    public static final WrittenBookItem STORY_BOOK = new EntryPool.Entry1(new Item.Settings().maxCount(1));
+    public static final WrittenBookItem STORY_BOOK = new EntryPool.JournalEntry1();
     public static final Item SILICON_WAFER = new WaferText(BaseSettings().maxDamage(4));
     public static final Item TRIURANIUM_OCTAOXIDE = new Item(BaseSettings());
     public static final Item TRUSTY_SCREWDRIVER = new TrustyScrewDriverItem(
@@ -192,8 +192,7 @@ public record ModItems() {
     //for Buckets
     public static final BucketItem LIQUID_HELIUM_BUCKET = new CustomColorBucket(ModFluids.STILL_LIQUID_HELIUM,
             new Item.Settings().maxCount(1), ColorHelper.Argb.getArgb(3,255,255,255));
-    public static final WrittenBookItem STORY_BOOK2 = new EntryPool.Entry2(
-            new Item.Settings().maxCount(1));
+    public static final WrittenBookItem STORY_BOOK2 = new EntryPool.JournalEntry2();
     public static final MusicDiscItem LYOKO_THEME = new LyokoDisc((int) 3.2e23f, ModSounds.LYOKO_THEME,
             new FabricItemSettings().maxCount(1), 204);
     public static final ImmutableMap<String, Item> ITEM_MAP = ImmutableMap.<String, Item>builder()

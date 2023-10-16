@@ -40,9 +40,9 @@
   ],
 
   "depends": {
-    "fabricloader": "0.14.22",
-    "fabric": ">=0.88.0+1.20.1",
-    "minecraft": "1.20.1",
+    "fabricloader": "*",
+    "fabric": "*",
+    "minecraft": "*",
     "java": ">=17",
     "geckolib":">=4.2.3",
     "cardinal-components-base": ">=5.2.2",

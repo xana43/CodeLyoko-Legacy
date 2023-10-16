@@ -12,7 +12,7 @@ public final class GuardianEntity extends FlyingEntity implements RangedAttackMo
     }
 
     @Override
-    public void attack(final LivingEntity target, final float pullProgress) {
+    public void shootAt(final LivingEntity target, final float pullProgress) {
 
     }
 

@@ -11,6 +11,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.ButtonTextures;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.network.PacketByteBuf;
@@ -26,6 +27,7 @@ public final class ClassScreen extends Screen {
 
 
     private static final Identifier textures = CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_pot.png");
+    private static final ButtonTextures buttonTextures = new ButtonTextures(CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_pot.png"),CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_pot.png"));
     private static final int xSize = 1024, ySize = 1024;
     private static final int colors = ColorHelper.Argb.getArgb(1, 255, 0, 255);
     private static int x;
@@ -46,7 +48,7 @@ public final class ClassScreen extends Screen {
     @Override
     public void render(final @NotNull DrawContext pPoseStack, final int pMouseX, final int pMouseY, final float pPartialTick) {
         super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        this.renderBackground(pPoseStack);
+        this.renderBackground(pPoseStack,pMouseX,pMouseY,pPartialTick);
         //feline option
         feline.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 
@@ -147,8 +149,8 @@ public final class ClassScreen extends Screen {
 
     //set buttons for each class
     private void setFeline() {
-        feline = new TexturedButtonWidget(this.width >> 3, this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> {
+        feline = new TexturedButtonWidget(this.width >> 3, this.height >> 1, 30, 30, buttonTextures,
+                (input) -> {
 
 
             //((PlayerEXT) this.client.player).setClass(0);
@@ -168,8 +170,8 @@ public final class ClassScreen extends Screen {
     }
 
     private void setSamurai() {
-        samurai = new TexturedButtonWidget((int) (this.width / 3f), this.height >> 1, 30, 30, 128, 0, 31, textures,
-                128, 128, (input) -> {
+        samurai = new TexturedButtonWidget((int) (this.width / 3f), this.height >> 1, 30, 30, buttonTextures,
+                (input) -> {
 
 
             Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 6);
@@ -183,8 +185,8 @@ public final class ClassScreen extends Screen {
     }
 
     private void setNinja() {
-        ninja = new TexturedButtonWidget(this.width >> 1, this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> {
+        ninja = new TexturedButtonWidget(this.width >> 1, this.height >> 1, 30, 30,buttonTextures,
+                (input) -> {
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
             Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 6);
             final PacketByteBuf buf = PacketByteBufs.create();
@@ -196,8 +198,8 @@ public final class ClassScreen extends Screen {
     }
 
     private void setGuardian() {
-        guardian = new TexturedButtonWidget((this.width >> 1) + 80, this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> {
+        guardian = new TexturedButtonWidget((this.width >> 1) + 80, this.height >> 1, 30, 30, buttonTextures,
+                (input) -> {
             final PacketByteBuf buf = PacketByteBufs.create();
             buf.writeInt(3);
             ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID, buf);
@@ -208,15 +210,15 @@ public final class ClassScreen extends Screen {
     }
 
     private void setWarrior() {
-        warrior = new TexturedButtonWidget((this.width >> 1) + 150, this.height >> 1, 30, 30, 128, 0, 31, textures,
-                256, 256, (input) -> CardinalData.LyokoClass.setLyokoClass(Objects.requireNonNull(this.client).player, 4),
+        warrior = new TexturedButtonWidget((this.width >> 1) + 150, this.height >> 1, 30, 30, buttonTextures,
+                (input) -> CardinalData.LyokoClass.setLyokoClass(Objects.requireNonNull(this.client).player, 4),
                 Text.of("warrior").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
 
     }
 
 
     @Override
-    public void renderBackground(@NotNull DrawContext pPoseStack) {
+    public void renderBackground(@NotNull DrawContext pPoseStack,final int mouseX, final int mouseY, final float delta) {
         // super.renderBackground(pPoseStack);
         RenderSystem.setShaderTexture(0, textures);
         pPoseStack.drawTexture(textures, x, 0, 0, 0, xSize, ySize);

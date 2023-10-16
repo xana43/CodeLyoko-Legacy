@@ -21,10 +21,7 @@ public final class RackChargerScreen extends HandledScreen<RackChargerHandler> {
         drawMouseoverTooltip(context,mouseX,mouseY);
     }
 
-    @Override
-    public void renderBackground(final DrawContext context) {
-        super.renderBackground(context);
-    }
+
 
     @Override
     public boolean shouldPause() {

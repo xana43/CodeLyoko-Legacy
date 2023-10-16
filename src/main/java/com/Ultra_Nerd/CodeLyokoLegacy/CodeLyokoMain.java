@@ -31,6 +31,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -139,7 +140,24 @@ public record CodeLyokoMain() implements ModInitializer {
             }
         });
     }
-
+    private static boolean blockBlacklist(final Block block)
+    {
+        final Block[] blacklistedBlocks = {
+          ModBlocks.LYOKO_CORE,
+          ModBlocks.DIGITAL_LAVA_BLOCK,
+          ModBlocks.DIGITAL_OCEAN_BLOCK,
+          ModBlocks.LIQUID_HELIUM_BLOCK,
+          ModBlocks.URANIUM_WASTE_BLOCK
+        };
+        for(final Block blackListedBlock : blacklistedBlocks)
+        {
+            if(block == blackListedBlock)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     private static void generalRegistration() {
         Registry.register(Registries.ITEM_GROUP,CodeLyokoMain.codeLyokoPrefix("lyoko_blocks"),LYOKO_BLOCKS);
         Registry.register(Registries.ITEM_GROUP,CodeLyokoMain.codeLyokoPrefix("lyoko_item"),LYOKO_ITEM);
@@ -148,7 +166,7 @@ public record CodeLyokoMain() implements ModInitializer {
         ModBlocks.BLOCK_MAP.forEach((s, block) -> {
 
             Registry.register(Registries.BLOCK, new Identifier(MOD_ID, s), block);
-            if (block != ModBlocks.LYOKO_CORE && block != ModBlocks.DIGITAL_OCEAN_BLOCK && block != ModBlocks.DIGITAL_LAVA_BLOCK && block != ModBlocks.LIQUID_HELIUM_BLOCK && block != ModBlocks.URANIUM_WASTE_BLOCK) {
+            if (blockBlacklist(block)) {
                 final BlockItem blockItem = new BlockItem(block, new FabricItemSettings());
                 Registry.register(Registries.ITEM, new Identifier(MOD_ID, s), blockItem);
 

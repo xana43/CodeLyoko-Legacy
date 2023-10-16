@@ -157,7 +157,7 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
     }
 
     @Override
-    public void attack(final LivingEntity target, final float pullProgress) {
+    public void shootAt(final LivingEntity target, final float pullProgress) {
         //super.attack(target, pullProgress);
         final EntityLaser abstractarrow = new EntityLaser(this.getWorld(), this, 20);
 
@@ -283,7 +283,7 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
                 final float f = (float) Math.sqrt(d) / this.maxShootRange;
                 final float g = MathHelper.clamp(f, 0.1F, 1.0F);
                 if (!(d > (double) this.squaredMaxShootRange) && this.seenTargetTicks >= 5) {
-                    this.owner.attack(this.target, g);
+                    this.owner.shootAt(this.target, g);
                     this.mob.setAttacking(true);
                 }
                 this.updateCountdownTicks = MathHelper.floor(

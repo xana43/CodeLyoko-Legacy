@@ -11,6 +11,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.ButtonTextures;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
@@ -28,6 +29,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     private static final int size = 256;
     private static final Identifier TEXTURES = CodeLyokoMain.codeLyokoPrefix("textures/gui/computercontrolpanelui.png");
     private static final Identifier BUTTONTEXTURES = CodeLyokoMain.codeLyokoPrefix("textures/gui/buttonatlas.png");
+    private static final ButtonTextures LEGITBUTTONTEXTURES =new ButtonTextures(CodeLyokoMain.codeLyokoPrefix("textures/gui/buttonatlas.png"),CodeLyokoMain.codeLyokoPrefix("textures/gui/buttonatlas.png"));
     int x, y;
     private TextFieldWidget text;
     private boolean active;
@@ -59,7 +61,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
 
     @Override
     public void render(@NotNull DrawContext stack, int p_render_1_, int p_render_2_, float p_render_3_) {
-        this.renderBackground(stack);
+        this.renderBackground(stack,p_render_1_,p_render_2_,p_render_3_);
         super.render(stack, p_render_1_, p_render_2_, p_render_3_);
         this.text.render(stack, p_render_1_, p_render_2_, p_render_3_);
         this.button.render(stack, p_render_1_, p_render_2_, p_render_3_);
@@ -87,7 +89,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     private void setButtons() {
 
         //
-        this.button = new TexturedButtonWidget(x, y, this.width / 3, this.height >> 3, 0, 0, BUTTONTEXTURES,
+        this.button = new TexturedButtonWidget(x, y, this.width / 3, this.height >> 3, LEGITBUTTONTEXTURES,
                 (press) -> {
                     final PacketByteBuf buf = PacketByteBufs.create();
                     active = !active;
@@ -110,9 +112,10 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
                 }
                 if (i == 1) {
                     j = ColorHelper.Argb.getArgb(255, 0, 0, 255);
-                    drawTexture(stack, BUTTONTEXTURES,x, y, 0, 0, 104, 19, 1024, 512,512);
+
+                    stack.drawTexture(BUTTONTEXTURES,x, y, 0, 0, 104, 19, 1024, 512,512);
                 } else {
-                    drawTexture(stack,BUTTONTEXTURES, x, y, 0, 19, 104, 19, 1024, 512,512);
+                    stack.drawTexture(BUTTONTEXTURES, x, y, 0, 19, 104, 19, 1024, 512,512);
                 }
                 //drawTexture(stack,x, 38, 0, (46 + i) * 20, width >> 1, height);
                 stack.drawCenteredTextWithShadow(client.textRenderer,
