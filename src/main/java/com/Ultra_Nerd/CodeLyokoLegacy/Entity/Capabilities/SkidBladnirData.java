@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.Capabilities;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.NotNull;
 
 public final class SkidBladnirData implements AutoSyncedComponent {
 
@@ -40,7 +41,7 @@ public final class SkidBladnirData implements AutoSyncedComponent {
     }
 
     @Override
-    public void writeToNbt(final NbtCompound tag) {
+    public void writeToNbt(final @NotNull NbtCompound tag) {
         if(positions[0] != null && positions[1] != null && positions[0] != BlockPos.ORIGIN && positions[1] != BlockPos.ORIGIN) {
             tag.putLong(HOME_KEY, positions[0].asLong());
             tag.putLong(DESTINATION_KEY, positions[1].asLong());

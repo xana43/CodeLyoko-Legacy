@@ -25,6 +25,7 @@ public abstract class RetainXP {
 
     @Inject(method = "getXpToDrop", at = @At("HEAD"), cancellable = true)
     private void codelyoko$retainxp(final CallbackInfoReturnable<Integer> cir) {
+
             if (MethodUtil.DimensionCheck.worldIsNotVanilla(worldMix)) {
                 cir.setReturnValue(Integer.valueOf(0));
             }

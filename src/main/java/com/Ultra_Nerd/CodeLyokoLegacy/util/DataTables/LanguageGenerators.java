@@ -27,6 +27,7 @@ public record LanguageGenerators() {
             translationBuilder.add("tooltip.energy.mindhelm","Stored Energy:%dJ");
             translationBuilder.add("reactor.energy.amount.gui","Stored Energy:%dJ");
             translationBuilder.add("reactor.waste.amount.gui","Stored Waste:%dL");
+            translationBuilder.add("demarcation.name","Point:%s");
             //translationBuilder.add(ModItems.LYOKO_THEME,"A world without Danger - CodeLyoko Theme");
             try{
                 final Path  existing = dataOutput.getModContainer().findPath(

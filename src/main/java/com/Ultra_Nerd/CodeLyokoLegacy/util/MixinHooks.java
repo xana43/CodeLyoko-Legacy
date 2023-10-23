@@ -45,6 +45,7 @@ public record MixinHooks() {
             }
         }
     }
+
     public record PlayerEvents()
     {
 

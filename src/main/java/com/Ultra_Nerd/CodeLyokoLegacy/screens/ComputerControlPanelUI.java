@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -29,7 +29,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     private static final int size = 256;
     private static final Identifier TEXTURES = CodeLyokoMain.codeLyokoPrefix("textures/gui/computercontrolpanelui.png");
     private static final Identifier BUTTONTEXTURES = CodeLyokoMain.codeLyokoPrefix("textures/gui/buttonatlas.png");
-    private static final ButtonTextures LEGITBUTTONTEXTURES =new ButtonTextures(CodeLyokoMain.codeLyokoPrefix("textures/gui/buttonatlas.png"),CodeLyokoMain.codeLyokoPrefix("textures/gui/buttonatlas.png"));
+    private static final ButtonTextures LEGITBUTTONTEXTURES =new ButtonTextures(CodeLyokoMain.codeLyokoPrefix("textures/gui/buttonatlas1.png"),CodeLyokoMain.codeLyokoPrefix("textures/gui/buttonatlas.png"));
     int x, y;
     private TextFieldWidget text;
     private boolean active;
@@ -95,7 +95,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
                     active = !active;
                     buf.writeBlockPos(handler.getPos());
                     buf.writeBoolean(active);
-                    ClientPlayNetworking.send(PacketHandlerCommon.ChannelID, buf);
+                    ClientPlayNetworking.send(PacketHandler.ChannelID, buf);
 
                 }) {
             @Override
@@ -157,6 +157,7 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
     private void setTextField() {
         //final int tx = this.width >> 1;
         final int ty = this.height >> 1;
+        assert client != null;
         this.text = new TextFieldWidget(client.textRenderer, x, ty + 40, this.width, 23,
                 Text.translatable("gui.codelyoko.computer_input_main").setStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()));
         this.text.setDrawsBackground(false);

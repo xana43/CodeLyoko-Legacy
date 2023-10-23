@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBiomes;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFeature;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModRecipes;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.*;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.registry.RegistryBuilder;
@@ -14,6 +14,7 @@ public record Generator() implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(final FabricDataGenerator fabricDataGenerator) {
         final FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
+        CodeLyokoMain.registerFuels();
         ModRecipes.RecipeTypes.init();
         ModRecipes.RecipeSerializers.init();
         pack.addProvider(LootTables::new);

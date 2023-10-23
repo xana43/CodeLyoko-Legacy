@@ -48,7 +48,7 @@ public final class LaptopClass extends Item implements SimpleEnergyItem{
             if (item.getItem() == this && item.getDamage() == 0) {
                 item.setDamage(1);
                 if (worldIn.isClient) {
-                    MinecraftClient.getInstance().setScreen(new MainLaptopScreen());
+                    //MinecraftClient.getInstance().setScreen(new MainLaptopScreen());
                 }
                 worldIn.playSound(playerIn, playerIn.getBlockPos(), ModSounds.OPENTOWERGUISOUND, SoundCategory.BLOCKS,
                         1, 1);

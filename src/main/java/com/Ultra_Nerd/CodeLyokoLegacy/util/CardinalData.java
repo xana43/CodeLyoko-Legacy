@@ -21,6 +21,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldProperties;
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +47,8 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         registry.registerForPlayers(HumanDNAAttribute.HUMAN_DNA_COMPONENT_KEY, HumanDNA::new, RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(CellularDamage.DEGENERATION_COMPONENT_KEY,CellularDegeneration::new, RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(DigitalEnergyComponent.DIGITAL_ENERGY_COMPONENT_KEY,(player -> new DigitalEnergy()));
-
+        registry.registerForPlayers(LyokoClass.ExtraClassData.SamuraiData.SAMURAI_CLASS_DATA_COMPONENT_KEY, ClassData.SamuraiClassData::new,RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(MiscellaneousPlayerData.getMiscellaneousPlayerDataComponentComponentKey(),MiscellaneousPlayerDataComponent::new,RespawnCopyStrategy.ALWAYS_COPY);
     }
     public record DigitalEnergyComponent()
     {
@@ -213,6 +215,24 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
             return MINDHELMSTRESS.get(player).getStressLevel();
         }
     }
+    public record MiscellaneousPlayerData()
+    {
+        private static final ComponentKey<MiscellaneousPlayerDataComponent> MISCELLANEOUS_PLAYER_DATA_COMPONENT_COMPONENT_KEY =
+                ComponentRegistry.getOrCreate(CodeLyokoMain.codeLyokoPrefix("misc_data"), MiscellaneousPlayerDataComponent.class);
+        public static ComponentKey<MiscellaneousPlayerDataComponent> getMiscellaneousPlayerDataComponentComponentKey()
+        {
+            return MISCELLANEOUS_PLAYER_DATA_COMPONENT_COMPONENT_KEY;
+        }
+        public static void setHasSecondaryAbility(final ServerPlayerEntity player)
+        {
+            MISCELLANEOUS_PLAYER_DATA_COMPONENT_COMPONENT_KEY.get(player).setHasSecondaryAbility();
+            MISCELLANEOUS_PLAYER_DATA_COMPONENT_COMPONENT_KEY.sync(player);
+        }
+        public static boolean getHasSecondaryAbility(final ServerPlayerEntity player)
+        {
+            return MISCELLANEOUS_PLAYER_DATA_COMPONENT_COMPONENT_KEY.get(player).getHasSecondaryAbility();
+        }
+    }
     public record LyokoClass() {
         private static final ComponentKey<PlayerClassComponent> LYOKOCLASS = ComponentRegistry.getOrCreate(
                 CodeLyokoMain.codeLyokoPrefix("lyoko_class"), PlayerClassComponent.class);
@@ -229,7 +249,44 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
 
             LYOKOCLASS.sync(player);
         }
+        public record ExtraClassData()
+        {
+            private static Identifier recurseData(final String name)
+            {
+                return CodeLyokoMain.codeLyokoPrefix("class_data."+name);
+            }
+            public record SamuraiData()
+            {
+                private static final ComponentKey<ClassData.SamuraiClassData> SAMURAI_CLASS_DATA_COMPONENT_KEY = ComponentRegistry.getOrCreate(
+                        recurseData("samurai_data"),ClassData.SamuraiClassData.class
+                );
 
+                public static ComponentKey<ClassData.SamuraiClassData> getSamuraiClassDataComponentKey() {
+                    return SAMURAI_CLASS_DATA_COMPONENT_KEY;
+                }
+                public static void addClone(final PlayerEntity player)
+                {
+                    SAMURAI_CLASS_DATA_COMPONENT_KEY.get(player).addClone();
+                    SAMURAI_CLASS_DATA_COMPONENT_KEY.sync(player);
+                }
+                public static void removeClone(final PlayerEntity player)
+                {
+                    SAMURAI_CLASS_DATA_COMPONENT_KEY.get(player).onRemoveClone();
+                    SAMURAI_CLASS_DATA_COMPONENT_KEY.sync(player);
+                }
+
+                public static void setMaxClones(final PlayerEntity player,final int newMaxClones)
+                {
+                    SAMURAI_CLASS_DATA_COMPONENT_KEY.get(player).setMaxClones(newMaxClones);
+                    SAMURAI_CLASS_DATA_COMPONENT_KEY.sync(player);
+                }
+                public static void addMaxClones(final PlayerEntity player)
+                {
+                    SAMURAI_CLASS_DATA_COMPONENT_KEY.get(player).addMaxClones();
+                    SAMURAI_CLASS_DATA_COMPONENT_KEY.sync(player);
+                }
+            }
+        }
 
     }
 

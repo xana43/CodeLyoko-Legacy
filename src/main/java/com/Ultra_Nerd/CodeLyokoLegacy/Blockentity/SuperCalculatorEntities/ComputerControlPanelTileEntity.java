@@ -45,7 +45,6 @@ public final class ComputerControlPanelTileEntity extends BlockEntity implements
 
     @Override
     public @NotNull ScreenHandler createMenu(final int syncId, final PlayerInventory inv, final PlayerEntity player) {
-
         return new ComputerControlPanelScreenHandler(syncId);
     }
 
@@ -53,6 +52,6 @@ public final class ComputerControlPanelTileEntity extends BlockEntity implements
     @Override
     public void writeScreenOpeningData(final ServerPlayerEntity player, final PacketByteBuf buf) {
         buf.writeBlockPos(pos);
-        buf.writeBoolean(getCachedState().<Boolean>get(ControlPanel.ScreenOn).booleanValue());
+        buf.writeBoolean(getCachedState().<Boolean>get(ControlPanel.ScreenOn));
     }
 }

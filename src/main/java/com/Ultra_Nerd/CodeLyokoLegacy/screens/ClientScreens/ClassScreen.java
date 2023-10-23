@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
@@ -27,7 +27,7 @@ public final class ClassScreen extends Screen {
 
 
     private static final Identifier textures = CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_pot.png");
-    private static final ButtonTextures buttonTextures = new ButtonTextures(CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_pot.png"),CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_pot.png"));
+    private static final ButtonTextures buttonTextures = new ButtonTextures(CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_po1t.png"),CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_pot2.png"));
     private static final int xSize = 1024, ySize = 1024;
     private static final int colors = ColorHelper.Argb.getArgb(1, 255, 0, 255);
     private static int x;
@@ -162,7 +162,7 @@ public final class ClassScreen extends Screen {
             this.client.player.playSound(ModSounds.GUISOUND, 1, 6);
             final PacketByteBuf buf = PacketByteBufs.create();
             buf.writeInt(0);
-            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID, buf);
+            ClientPlayNetworking.send(PacketHandler.ClassScreenID, buf);
 
 
         }, Text.of("feline").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(colors)).get(0));
@@ -174,10 +174,11 @@ public final class ClassScreen extends Screen {
                 (input) -> {
 
 
-            Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 6);
+                    assert this.client != null;
+                    Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 6);
             final PacketByteBuf buf = PacketByteBufs.create();
             buf.writeInt(1);
-            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID, buf);
+            ClientPlayNetworking.send(PacketHandler.ClassScreenID, buf);
             //ClassID =1;
             // classIndicatorString.replace(15,ClientCapabilitySync.getPlayerClassType().getClassName().length() + 17,ClientCapabilitySync.getPlayerClassType().getClassName());
         }, Text.of("samurai").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(2007)).get(0));
@@ -191,7 +192,7 @@ public final class ClassScreen extends Screen {
             Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 6);
             final PacketByteBuf buf = PacketByteBufs.create();
             buf.writeInt(2);
-            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID, buf);
+            ClientPlayNetworking.send(PacketHandler.ClassScreenID, buf);
             //ClassID = 2;
         }, Text.of("ninja").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(5125)).get(0));
 
@@ -202,7 +203,7 @@ public final class ClassScreen extends Screen {
                 (input) -> {
             final PacketByteBuf buf = PacketByteBufs.create();
             buf.writeInt(3);
-            ClientPlayNetworking.send(PacketHandlerCommon.ClassScreenID, buf);
+            ClientPlayNetworking.send(PacketHandler.ClassScreenID, buf);
         },
                 Text.of("guardian").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
 

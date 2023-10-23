@@ -110,6 +110,7 @@
   "death.attack.codelyoko:digital_lava_block": "%s was burned by data",
   "death.attack.codelyoko:digital_ocean": "%s was swept away by the digital current",
   "death.attack.codelyoko:marabunta": "%s was eaten away by the Marabunta",
+  "demarcation.name": "Point:%s",
   "discovered.super_calculator": "And so it begins",
   "discovered.super_calculator.description": "you'd found the schematics for an unknown device, what does it do?",
   "entity.codelyoko.blok": "Blok",

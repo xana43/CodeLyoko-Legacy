@@ -9,6 +9,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidS
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerCirculatorBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerFluidCoolerBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerFluidIntakeBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperComputerNetwork.CableBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperComputerNetwork.DemarcationBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.ComputerInterfaceTestTE;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.ItemProjectorTestBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.PlayerDataStorage;
@@ -69,6 +71,10 @@ public record ModBlockEntities() {
             FabricBlockEntityTypeBuilder.create(ItemProjectorTestBlockEntity::new,ModBlocks.TEST_ITEM_PROJECTOR).build();
     public static final BlockEntityType<RackChargerBlockEntity> RACK_CHARGER_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(RackChargerBlockEntity::new,
             ModBlocks.RACK_CHARGER_BLOCK).build();
+    public static final BlockEntityType<QuantumChipletTileEntity> QUANTUM_CHIPLET_TILE_ENTITY_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder.create(QuantumChipletTileEntity::new,
+            ModBlocks.CHIPLET_FRANZ_BLOCK).build();
+    public static final BlockEntityType<DemarcationBlockEntity> DEMARCATION_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder.create(DemarcationBlockEntity::new,
+            ModBlocks.DEMARCATION_POINT).build();
     public static final ImmutableMap<String, BlockEntityType<?>> BLOCKENTITY_MAP = ImmutableMap.<String, BlockEntityType<?>>builder()
 
             .put("lyoko_core", LYOKO_CORE)
@@ -92,6 +98,9 @@ public record ModBlockEntities() {
             .put("computer_fluid_cooler_block_entity",COOLER_BLOCK_ENTITY_TYPE)
             .put("test_item_projector_block_entity", ITEM_PROJECTOR_TEST_BLOCK_ENTITY)
             .put("rack_charger_block_entity",RACK_CHARGER_BLOCK_ENTITY)
+            .put("quantum_chiplet_block_entity",QUANTUM_CHIPLET_TILE_ENTITY_BLOCK_ENTITY_TYPE)
+            .put("test_hologram_projector",TEST_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE)
+            .put("demarcation_block_entity",DEMARCATION_BLOCK_ENTITY_TYPE)
             .build();
 
 }

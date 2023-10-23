@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MixinHooks;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MixinHooks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -34,11 +34,15 @@ public abstract class HUD {
     @Shadow
     private int renderHealthValue;
 
-    @Final
-    @Shadow
-    private static Identifier ICONS;
+
     @Shadow
     protected abstract PlayerEntity getCameraPlayer();
+
+    @Shadow @Final private static Identifier ARMOR_FULL_TEXTURE;
+
+    @Shadow @Final private static Identifier ARMOR_HALF_TEXTURE;
+
+    @Shadow @Final private static Identifier ARMOR_EMPTY_TEXTURE;
 
     @Inject(method = "renderHealthBar", at = @At(value = "HEAD"), cancellable = true)
     public void codelyoko$disableHealth(final DrawContext matrices, final PlayerEntity player, final int x, final int y,
@@ -73,15 +77,15 @@ public abstract class HUD {
                     if (u > 0) {
                         x = m + w * 8;
                         if (w * 2 + 1 < u) {
-                            matrices.drawTexture(ICONS, x, s, 34, 9, 9, 9);
+                            matrices.drawTexture(ARMOR_FULL_TEXTURE, x, s, 34, 9, 9, 9);
                         }
 
                         if (w * 2 + 1 == u) {
-                            matrices.drawTexture(ICONS, x, s, 25, 9, 9, 9);
+                            matrices.drawTexture(ARMOR_HALF_TEXTURE, x, s, 25, 9, 9, 9);
                         }
 
                         if (w * 2 + 1 > u) {
-                            matrices.drawTexture(ICONS, x, s, 16, 9, 9, 9);
+                            matrices.drawTexture(ARMOR_EMPTY_TEXTURE, x, s, 16, 9, 9, 9);
                         }
                     }
                 }

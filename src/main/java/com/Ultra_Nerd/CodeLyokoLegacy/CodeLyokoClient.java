@@ -8,8 +8,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelHoverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.model.ModelOverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.rend.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerClient;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.Tools.Buckets.CustomColorBucket;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.SuperCalculatorDataLinker;
@@ -19,6 +18,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ElectricitySystemScreens.RackChargerScreen;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.SuperCalculatorNetworkScreens.DemarcationPointScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.PlayerProfileDebug;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.VehicleMaterializationTest;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
@@ -72,7 +72,9 @@ public record CodeLyokoClient() implements ClientModInitializer {
     private static KeyBinding classAbilityBinding2;
     private static KeyBinding moveVehicleUp;
     private static KeyBinding moveVehicleDown;
+    private static KeyBinding testClone;
     private static KeyBinding selectTransportHub;
+
 
     private static void clientEvents() {
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> {
@@ -113,6 +115,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
             }
             // }
         });
+
     }
 
     private static void registerParticles() {
@@ -135,6 +138,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.HORNET_ENTITY_ENTITY_TYPE, HornetRenderer::new);
         EntityRendererRegistry.register(ModEntities.FAN_ENTITY_TYPE, RendFan::new);
         EntityRendererRegistry.register(ModEntities.SKID_ENTITY_TYPE,RendSkid::new);
+        EntityRendererRegistry.register(ModEntities.TRIPLICATE_ENTITY_TYPE,TriplicateRenderer::new);
         //for entity that need layer locations
         EntityRendererRegistry.register(ModEntities.OVERBOARD, OverboardRenderer::new);
         EntityRendererRegistry.register(ModEntities.HOVERBOARD, HoverboardRenderer::new);
@@ -259,6 +263,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.VEHICLE_MATERIALIZE_TEST_HANDLER_SCREEN_HANDLER_TYPE,
                 VehicleMaterializationTest::new);
         HandledScreens.register(ModScreenHandlers.RACK_CHARGER_HANDLER_SCREEN_TYPE, RackChargerScreen::new);
+        HandledScreens.register(ModScreenHandlers.DEMARCATION_SCREEN_HANDLER_TYPE, DemarcationPointScreen::new);
     }
     private static void registerColorProviders()
     {
@@ -295,10 +300,13 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_PAGE_UP,keyCategory));
         selectTransportHub = KeyBindingHelper.registerKeyBinding(new KeyBinding("key."+CodeLyokoMain.MOD_ID+".skidbladnir.selecthub",
                 InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_J,keyCategory));
+        testClone = KeyBindingHelper.registerKeyBinding(new KeyBinding("key."+CodeLyokoMain.MOD_ID+".test_clone",InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_GRAVE_ACCENT,keyCategory));
     }
     private static final PacketByteBuf keyboardByteBuf = PacketByteBufs.create();
     @Override
     public void onInitializeClient() {
+        PacketHandler.clientPacketRegistry();
         SpecialModelLoaderEvents.LOAD_SCOPE.register(location -> CodeLyokoMain.MOD_ID.equals(location.getNamespace()));
         //set key bindings
         registerKeys();
@@ -332,7 +340,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
 
                 });
-        PacketHandlerClient.clientPacketRegistry();
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.carthage, new CustomCarthadgeSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.iceSectorWorld, new CustomIceSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld, new CustomVolcanoSky());
@@ -344,15 +351,21 @@ public record CodeLyokoClient() implements ClientModInitializer {
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
 
             if (client.player != null) {
-
+                if(testClone.wasPressed())
+                {
+                    //CardinalData.LyokoClass.ExtraClassData.SamuraiData.addClone(client.player);
+                    final PacketByteBuf buf = PacketByteBufs.create();
+                    buf.writeGameProfile(client.player.getGameProfile());
+                    ClientPlayNetworking.send(PacketHandler.TEST_TRIPILCATE_CLIENT_SPAWN,buf);
+                }
                 if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
                     if (classAbilityBinding1.isPressed()) {
                         CardinalData.DigitalEnergyComponent.setIsUsingEnergy(client.player, true);
-                        ClientPlayNetworking.send(PacketHandlerCommon.PRIMARY_CLASS_ABILITY, PacketByteBufs.empty());
+                        ClientPlayNetworking.send(PacketHandler.PRIMARY_CLASS_ABILITY, PacketByteBufs.empty());
 
                     }
                     else if (classAbilityBinding2.isPressed()) {
-                        ClientPlayNetworking.send(PacketHandlerCommon.SECONDARY_CLASS_ABILITY, PacketByteBufs.empty());
+                        ClientPlayNetworking.send(PacketHandler.SECONDARY_CLASS_ABILITY, PacketByteBufs.empty());
                     }
                     else
                     {
@@ -362,20 +375,20 @@ public record CodeLyokoClient() implements ClientModInitializer {
                     {
                         keyboardByteBuf.clear();
                         keyboardByteBuf.writeInt(1);
-                        ClientPlayNetworking.send(PacketHandlerCommon.KEYBOARD_UPDATE,keyboardByteBuf);
+                        ClientPlayNetworking.send(PacketHandler.KEYBOARD_UPDATE,keyboardByteBuf);
                     } else if (moveVehicleDown.isPressed()) {
                         keyboardByteBuf.clear();
                         keyboardByteBuf.writeInt(0);
-                        ClientPlayNetworking.send(PacketHandlerCommon.KEYBOARD_UPDATE,keyboardByteBuf);
+                        ClientPlayNetworking.send(PacketHandler.KEYBOARD_UPDATE,keyboardByteBuf);
                     }
                     else {
                         keyboardByteBuf.clear();
                         keyboardByteBuf.writeInt(-1);
-                        ClientPlayNetworking.send(PacketHandlerCommon.KEYBOARD_UPDATE,keyboardByteBuf);
+                        ClientPlayNetworking.send(PacketHandler.KEYBOARD_UPDATE,keyboardByteBuf);
                     }
                     if(selectTransportHub.isPressed())
                     {
-                        ClientPlayNetworking.send(PacketHandlerCommon.SKID_BLADNIR_UPDATE,PacketByteBufs.empty());
+                        ClientPlayNetworking.send(PacketHandler.SKID_BLADNIR_UPDATE,PacketByteBufs.empty());
                     }
                 }
 

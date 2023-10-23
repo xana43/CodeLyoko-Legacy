@@ -2,8 +2,9 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.EntryPool;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerProfile;
@@ -19,6 +20,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -28,10 +30,12 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -43,6 +47,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -67,7 +72,6 @@ public record CodeLyokoMain() implements ModInitializer {
 
     public static final String MOD_ID = "codelyoko";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
-
     public static final ItemGroup LYOKO_ITEM = FabricItemGroup.builder()
             .icon(() -> new ItemStack(ModItems.BIT))
             .displayName(Text.translatable("itemGroup.lyoko_items"))
@@ -298,6 +302,19 @@ public record CodeLyokoMain() implements ModInitializer {
                 }
             }
         });
+        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
+            for (final ServerWorld world : server.getWorlds())
+            {
+              for(final ServerTriplicateCloneEntity entity : world.getEntitiesByType(ModEntities.TRIPLICATE_ENTITY_TYPE, ServerTriplicateCloneEntity::hasOwner))
+              {
+                  if(handler.getPlayer().equals(entity.getOwner()))
+                  {
+                      entity.remove(Entity.RemovalReason.DISCARDED);
+                  }
+              }
+            }
+
+        });
         ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register((player, origin, destination) -> {
             if (player != null) {
                 if (MethodUtil.DimensionCheck.worldIsNotVanilla(destination)) {
@@ -321,7 +338,6 @@ public record CodeLyokoMain() implements ModInitializer {
             }
 
         });
-
         XanaHandler.setTicksToNextCalculation(1);
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
 
@@ -421,9 +437,16 @@ public record CodeLyokoMain() implements ModInitializer {
             }
 
         });
+        ServerLivingEntityEvents.AFTER_DEATH.register((entity, damageSource) -> {
+            if(entity instanceof final ServerTriplicateCloneEntity triplicateClone)
+            {
+                CardinalData.LyokoClass.ExtraClassData.SamuraiData.removeClone(triplicateClone.getOwner());
+                triplicateClone.getOwner().sendMessage(Text.translatable("triplicate.clone.died"));
+            }
+        });
     }
 
-    private static void registerFuels()
+    public static void registerFuels()
     {
         ModFuels.FUEL_MAP.forEach(FuelRegistry.INSTANCE::add);
     }
@@ -432,7 +455,7 @@ public record CodeLyokoMain() implements ModInitializer {
 
         GeckoLib.initialize();
         EntryPool.init();
-        PacketHandlerCommon.commonChannelRegistry();
+        PacketHandler.commonChannelRegistry();
         generalRegistration();
         registerFuels();
         ModRecipes.RecipeTypes.init();

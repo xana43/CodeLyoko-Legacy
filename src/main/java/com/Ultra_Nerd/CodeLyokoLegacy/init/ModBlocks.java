@@ -6,6 +6,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.DigitalSeaBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.LiquidHelium;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.UraniumWaste;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculatorNetwork.CableBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculatorNetwork.DemarcationPoint;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Electricity.LaptopCharger;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Electricity.RackChargerBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Electricity.UniversalEnergyBlock;
@@ -86,6 +88,7 @@ public record ModBlocks() {
 
     public static final Block COFFINITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.IRON_ORE));
     public static final Block CARNOTITE_ORE = new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.DIAMOND_ORE));
+    public static final Block DEMARCATION_POINT = new DemarcationPoint(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));
     public static final Block DATA_TRANSFER_INTERFACE = new DataTransferInterface();
     public static final Block DIGITAL_SEA_PYLON = new SeaPylon();
     public static final Block DIGITAL_GRASS = new Block(
@@ -255,6 +258,7 @@ public record ModBlocks() {
             .put("computer_core",COMPUTER_CORE)
             .put("coffinite_ore", COFFINITE_ORE)
             .put("carnotite_ore", CARNOTITE_ORE)
+            .put("demarcation_point",DEMARCATION_POINT)
             .put("data_transfer_interface", DATA_TRANSFER_INTERFACE)
             .put("digital_sea_pylon", DIGITAL_SEA_PYLON)
             .put("digital_grass", DIGITAL_GRASS)

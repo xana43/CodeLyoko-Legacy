@@ -1,20 +1,22 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModParticles;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ScannerTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -376,8 +378,14 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
                 scannerTile.tick();
 
                 if (state.<Boolean>get(ConstantUtil.SCANNER_PROPERTY).booleanValue() && scannerTile.isInScanner()) {
-                    final MinecraftClient mc = MinecraftClient.getInstance();
-
+                    final PacketByteBuf buf = PacketByteBufs.create();
+                    buf.writeBlockPos(pos);
+                    buf.writeFloat(offset);
+                    if(world.isClient)
+                    {
+                        ClientPlayNetworking.send(PacketHandler.SYNC_SCANNER_PARTICLES,buf);
+                    }
+                    /*final MinecraftClient mc = MinecraftClient.getInstance();
                     switch (mc.options.getParticles().getValue()) {
                         case ALL -> {
                             for (int i = 0; i < 200; i++) {
@@ -399,7 +407,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
                                         pos.getZ() + 0.5f, 0, 0, 0);
                             }
                         }
-                    }
+                    }*/
 
 
                 }

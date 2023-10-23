@@ -1,16 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.DecorationEntities.XanaSymbolEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.HoverboardEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.OverboardEntity;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.entity.*;
 import net.minecraft.world.Heightmap;
 
 public record ModEntities() {
@@ -55,7 +53,11 @@ public record ModEntities() {
     //decoration entities
     public static final EntityType<XanaSymbolEntity> XANA_SYMBOL_ENTITY_TYPE =
             FabricEntityTypeBuilder.create(SpawnGroup.MISC,XanaSymbolEntity::new).build();
-
+    public static final EntityType<ServerTriplicateCloneEntity> TRIPLICATE_ENTITY_TYPE = FabricEntityTypeBuilder.createLiving().spawnGroup(SpawnGroup.MISC).entityFactory(ServerTriplicateCloneEntity::new)
+            .disableSaving()
+            .defaultAttributes(ServerTriplicateCloneEntity::createPlayerAttributes)
+            .dimensions(EntityDimensions.fixed(0.6f,1.8f))
+            .trackRangeBlocks(32).trackedUpdateRate(2).build();
     public static final ImmutableMap<String, EntityType<?>> ENTITY_TYPE_HASH_MAP = ImmutableMap.<String, EntityType<?>>builder()
             .put("blok", BLOK)
             .put("laser", LASER_ENTITY_TYPE)
@@ -66,6 +68,7 @@ public record ModEntities() {
             .put("fan",FAN_ENTITY_TYPE)
             .put("skidbladnir",SKID_ENTITY_TYPE)
             .put("xana_symbol",XANA_SYMBOL_ENTITY_TYPE)
+            .put("triplicate_entity",TRIPLICATE_ENTITY_TYPE)
             .build();
 //entityRenderer
 

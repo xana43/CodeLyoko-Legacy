@@ -1,3 +1,6 @@
-// 1.20.2	2023-10-16T04:22:49.043883373	CodeLyokoLegacy/Model Definitions
+// 1.20.2	2023-10-17T04:12:32.746238755	CodeLyokoLegacy/Model Definitions
 c3a1f1bec7381ab13457e3910ccfed59addef7d4 assets/codelyoko/models/item/rack_charger.json
+91184b1f49e5a80586b01bb1f37580c87fc2f443 assets/codelyoko/blockstates/cable_block.json
+3f038a6d000200c15759211577e4944b8d28f829 assets/codelyoko/models/block/cable_block.json
 81caf9ace340e9871a553e640a686729639c94ed assets/codelyoko/models/item/liquid_helium_bucket.json
+ade0300a381edc9cabc298a94d707b3a290be89e assets/codelyoko/models/item/cable_block.json

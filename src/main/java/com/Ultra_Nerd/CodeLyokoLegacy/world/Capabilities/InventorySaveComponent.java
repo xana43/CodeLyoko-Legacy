@@ -41,7 +41,6 @@ public final class InventorySaveComponent implements AutoSyncedComponent {
 
     @Override
     public void readFromNbt(final @NotNull NbtCompound tag) {
-        if(!PLAYER_INVENTORY_HASHMAP.isEmpty()) {PLAYER_INVENTORY_HASHMAP.clear();}
         tag.getKeys().forEach(key -> PLAYER_INVENTORY_HASHMAP.put(UUID.fromString(key),tag.getList(key,NbtElement.COMPOUND_TYPE)));
     }
 

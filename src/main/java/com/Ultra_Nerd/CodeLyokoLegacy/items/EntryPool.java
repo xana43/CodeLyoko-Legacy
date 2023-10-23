@@ -1,12 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModCustomTrackedCriteria;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.StoryBookGUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.TranslatedLocale;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.Client.ClientEvents;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -46,7 +44,8 @@ public record EntryPool() {
         addEntryToList(TranslatedLocale.EN_US,MethodUtil.TextUtil.textArray(ConstantUtil.StoryEntry.EntryList.ENTRY2.getThisEntry()));
     }
     private static abstract class BaseEntry extends WrittenBookItem {
-        private static final MinecraftClient minecraftClientInstance = MinecraftClient.getInstance();
+       // @Environment(EnvType.CLIENT)
+       // private static final MinecraftClient minecraftClientInstance = MinecraftClient.getInstance();
         private StringVisitable[] visitable;
         private final int englishIndex;
         private final int frenchIndex;
@@ -72,8 +71,8 @@ public record EntryPool() {
                 {
                     updateTranslation();
                 }
-                minecraftClientInstance.setScreen(new StoryBookGUI(visitable,visitable.length));
-
+                //minecraftClientInstance.setScreen(new StoryBookGUI(visitable,visitable.length));
+                //user.useBook();
             }
             return super.use(world, user, hand);
         }

@@ -1,12 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.TranslatedLocale;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
@@ -24,10 +20,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -39,7 +32,6 @@ import team.reborn.energy.api.base.SimpleEnergyItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Consumer;
 
 public record MethodUtil() {
@@ -128,15 +120,6 @@ public record MethodUtil() {
                 @Override
                 protected void onFinalCommit() {
                     blockEntity.markDirty();
-                    if (!Objects.requireNonNull(blockEntity.getWorld()).isClient) {
-                        final PacketByteBuf buf = PacketByteBufs.create();
-                        buf.writeBlockPos(blockEntity.getPos());
-                        buf.writeLong(getAmount());
-                        FluidVariant.of(allowedVariant).toPacket(buf);
-                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
-                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
-                        }
-                    }
                 }
             };
 
@@ -165,19 +148,6 @@ public record MethodUtil() {
                 @Override
                 protected void onFinalCommit() {
                     blockEntity.markDirty();
-                    if (!Objects.requireNonNull(blockEntity.getWorld()).isClient) {
-                        final PacketByteBuf buf = PacketByteBufs.create();
-                        buf.writeBlockPos(blockEntity.getPos());
-                        buf.writeLong(getAmount());
-                        for (final Fluid fluid : allowedVariant) {
-                            FluidVariant.of(fluid).toPacket(buf);
-                        }
-
-                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
-                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
-                        }
-
-                    }
                 }
             };
 
@@ -198,14 +168,6 @@ public record MethodUtil() {
                 @Override
                 protected void onFinalCommit() {
                     blockEntity.markDirty();
-                    if (!Objects.requireNonNull(blockEntity.getWorld()).isClient) {
-                        final PacketByteBuf buf = PacketByteBufs.create();
-                        buf.writeBlockPos(blockEntity.getPos());
-                        buf.writeLong(getAmount());
-                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
-                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
-                        }
-                    }
                 }
             };
 
@@ -231,15 +193,7 @@ public record MethodUtil() {
                 @Override
                 protected void onFinalCommit() {
                     blockEntity.markDirty();
-                    if (!blockEntity.getWorld().isClient) {
-                        final PacketByteBuf buf = PacketByteBufs.create();
-                        buf.writeBlockPos(blockEntity.getPos());
-                        buf.writeLong(getAmount());
-                        allowedVariant.toPacket(buf);
-                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
-                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
-                        }
-                    }
+
                 }
             };
 
@@ -265,16 +219,7 @@ public record MethodUtil() {
                 @Override
                 protected void onFinalCommit() {
                     blockEntity.markDirty();
-                    if (!Objects.requireNonNull(blockEntity.getWorld()).isClient) {
-                        final PacketByteBuf buf = PacketByteBufs.create();
-                        buf.writeBlockPos(blockEntity.getPos());
-                        buf.writeLong(getAmount());
-                        allowedVariant.toPacket(buf);
-                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
-                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
-                        }
 
-                    }
                 }
             };
 
@@ -300,16 +245,7 @@ public record MethodUtil() {
                 @Override
                 protected void onFinalCommit() {
                     blockEntity.markDirty();
-                    if (!Objects.requireNonNull(blockEntity.getWorld()).isClient) {
-                        final PacketByteBuf buf = PacketByteBufs.create();
-                        buf.writeBlockPos(blockEntity.getPos());
-                        buf.writeLong(getAmount());
-                        FluidVariant.of(allowedVariant).toPacket(buf);
-                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
-                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
-                        }
 
-                    }
                 }
             };
 
@@ -335,16 +271,7 @@ public record MethodUtil() {
                 @Override
                 protected void onFinalCommit() {
                     blockEntity.markDirty();
-                    if (!blockEntity.getWorld().isClient) {
-                        final PacketByteBuf buf = PacketByteBufs.create();
-                        buf.writeBlockPos(blockEntity.getPos());
-                        buf.writeLong(getAmount());
-                        FluidVariant.of(allowedVariant, compound).toPacket(buf);
-                        for (final ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) blockEntity.getWorld(), blockEntity.getPos())) {
-                            ServerPlayNetworking.send(player, PacketHandlerCommon.FLUID_UPDATE, buf);
-                        }
 
-                    }
                 }
             };
         }

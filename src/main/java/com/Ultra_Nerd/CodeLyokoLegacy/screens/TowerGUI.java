@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandlerCommon;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TowerInterfaceScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
@@ -44,6 +44,13 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
     }
 
     @Override
+    public void close() {
+        if(!text.isFocused()) {
+            super.close();
+        }
+    }
+
+    @Override
     public boolean isMouseOver(double p_isMouseOver_1_, double p_isMouseOver_3_) {
         return false;
     }
@@ -61,7 +68,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
         this.renderBackground(poseStack,mouseX,mouseY,partialTicks);
 
         super.render(poseStack, mouseX, mouseY, partialTicks);
-        //this.text.render(poseStack,mouseX, mouseY, partialTicks);
+        this.text.render(poseStack,mouseX, mouseY, partialTicks);
         final var AcceptedText = Text.of(this.Accepted.getText())
                 .getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle());
         final var CodeEnterTest = Text.of(this.text.getText()).getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle());
@@ -79,6 +86,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
                     Text.of("|").getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle()).get(0),
                     text.getX() + (this.text.getCursor() * 21), this.text.getY(), Color.WHITE.getRGB());
 
+            assert client != null;
             Objects.requireNonNull(client.player).playSound(ModSounds.CURSORBLINK, 0.1f, 1f);
 
         }
@@ -120,7 +128,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
             }
 
             this.text.setText(StringUtils.EMPTY);
-            ClientPlayNetworking.send(PacketHandlerCommon.TowerChannelID, data);
+            ClientPlayNetworking.send(PacketHandler.TowerChannelID, data);
             Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 2f);
         } else if (this.text.getText().equalsIgnoreCase("XANA")) {
             I = 100;
@@ -129,7 +137,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
             this.text.setText(StringUtils.EMPTY);
             this.text.setCursor(0,false);
             data.writeInt(1);
-            ClientPlayNetworking.send(PacketHandlerCommon.TowerChannelID, data);
+            ClientPlayNetworking.send(PacketHandler.TowerChannelID, data);
             Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 0.9f);
         } else {
             this.text.setText(StringUtils.EMPTY);
@@ -147,7 +155,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
         this.text = new TextFieldWidget(this.textRenderer, tx - 70, ty - 10, 200, 33, Text.empty());
         this.text.setMaxLength(8);
         this.text.setDrawsBackground(false);
-        this.text.setVisible(true);
+        this.text.setVisible(false);
         this.text.setEditableColor(16777215);
         this.text.setFocused(true);
         this.text.setEditable(true);
@@ -198,7 +206,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
         }
         Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, completeRandom.nextFloat(1f,
                 1.1f));
-        return super.charTyped(key ^= 32, Keynum);
+        return super.charTyped(key, Keynum);
 
     }
 

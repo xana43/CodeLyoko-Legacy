@@ -66,7 +66,9 @@
               "codelyoko:player_profile",
               "codelyoko:cellular_degeneration",
               "codelyoko:skid_nav_data",
-              "codelyoko:digital_energy"
+              "codelyoko:digital_energy",
+              "codelyoko:class_data.samurai_data",
+              "codelyoko:misc_data"
           ]
     }
 }

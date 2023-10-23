@@ -55,6 +55,7 @@ public final class ModelGenerator extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(final BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerParentedItemModel(ModBlocks.RACK_CHARGER_BLOCK, CodeLyokoMain.codeLyokoPrefix("block/rack_charger"));
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CABLE_BLOCK);
     }
     private static final Item[] defaultBuckets = {ModItems.LIQUID_HELIUM_BUCKET};
 

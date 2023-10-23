@@ -29,10 +29,6 @@ public final class PlayerScannerComponent implements AutoSyncedComponent {
 
     @Override
     public void readFromNbt(final @NotNull NbtCompound tag) {
-            if(!POS_HASH_MAP.isEmpty())
-            {
-                POS_HASH_MAP.clear();
-            }
             tag.getKeys().forEach(key -> POS_HASH_MAP.put(UUID.fromString(key),BlockPos.fromLong(tag.getLong(key))));
     }
 
