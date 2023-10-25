@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
@@ -20,7 +19,6 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
@@ -29,7 +27,6 @@ import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public record MethodUtil() {
@@ -369,18 +366,5 @@ public record MethodUtil() {
         }
 
 
-        public record TextUtil() {
-            public static StringVisitable[] textArray(@NotNull final String textToDenote) {
-                final List<StringVisitable> denotedList = new ObjectArrayList<>();
-                int pos = 0, end;
-                while ((end = textToDenote.indexOf('¶',pos)) >= 0)
-                {
-                    denotedList.add(Text.of(textToDenote.substring(pos,end)));
-                    pos = end + 1;
-                }
-                denotedList.add(Text.of(textToDenote.substring(pos)));
-                return denotedList.toArray(new StringVisitable[0]);
-            }
-        }
     }
 

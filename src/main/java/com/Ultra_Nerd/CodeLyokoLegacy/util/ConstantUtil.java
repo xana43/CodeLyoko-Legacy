@@ -1,9 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Style;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public record ConstantUtil() {
 
@@ -36,7 +41,17 @@ public record ConstantUtil() {
         {
             StringVisitable[] getEntries();
         }
-
+        private static StringVisitable[] textArray(@NotNull final String textToDenote) {
+            final List<StringVisitable> denotedList = new ObjectArrayList<>();
+            int pos = 0, end;
+            while ((end = textToDenote.indexOf('¶',pos)) >= 0)
+            {
+                denotedList.add(Text.of(textToDenote.substring(pos,end)));
+                pos = end + 1;
+            }
+            denotedList.add(Text.of(textToDenote.substring(pos)));
+            return denotedList.toArray(new StringVisitable[0]);
+        }
         public enum EntryListENUS implements EntryListing {
             //english entries
             ENTRY1("Entry 1: " + n +
@@ -64,7 +79,7 @@ public record ConstantUtil() {
             private final StringVisitable[] thisEntry;
 
             EntryListENUS(final String thisEntry) {
-                this.thisEntry = MethodUtil.TextUtil.textArray(thisEntry);
+                this.thisEntry = textArray(thisEntry);
             }
 
 
@@ -91,7 +106,7 @@ public record ConstantUtil() {
             private final StringVisitable[] thisEntry;
 
             EntryListFRFR(final String thisEntry) {
-                this.thisEntry = MethodUtil.TextUtil.textArray(thisEntry);
+                this.thisEntry = textArray(thisEntry);
             }
 
 
