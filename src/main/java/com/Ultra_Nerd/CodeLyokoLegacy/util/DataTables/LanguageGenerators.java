@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 
 import java.nio.file.Path;
+import java.util.Optional;
 
 public record LanguageGenerators() {
 
@@ -30,9 +31,12 @@ public record LanguageGenerators() {
             translationBuilder.add("demarcation.name","Point:%s");
             //translationBuilder.add(ModItems.LYOKO_THEME,"A world without Danger - CodeLyoko Theme");
             try{
-                final Path  existing = dataOutput.getModContainer().findPath(
-                        "assets/codelyoko/lang/en_us.existing.json").get();
-                translationBuilder.add(existing);
+                final Optional<Path> pathOptional = dataOutput.getModContainer().findPath("assets/codelyoko/lang/en_us.existing.json");
+                if(pathOptional.isPresent())
+                {
+                    translationBuilder.add(pathOptional.get());
+                }
+
             } catch (final Exception e)
             {
                 throw new RuntimeException("failed to add existing language file", e);
@@ -49,9 +53,10 @@ public record LanguageGenerators() {
         @Override
         public void generateTranslations(final TranslationBuilder translationBuilder) {
             try{
-                final Path  existing = dataOutput.getModContainer().findPath(
-                        "assets/codelyoko/lang/fr_fr.existing.json").get();
-                translationBuilder.add(existing);
+                final Optional<Path> optionalPath = dataOutput.getModContainer().findPath("assets/codelyoko/lang/fr_fr.existing.json");
+                if(optionalPath.isPresent()) {
+                    translationBuilder.add(optionalPath.get());
+                }
             } catch (final Exception e)
             {
                 throw new RuntimeException("failed to add existing language file", e);

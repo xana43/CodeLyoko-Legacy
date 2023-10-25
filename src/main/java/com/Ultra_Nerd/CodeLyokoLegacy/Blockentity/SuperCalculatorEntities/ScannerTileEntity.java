@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Scanner;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.BlockPatternRegistry;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
@@ -27,7 +27,7 @@ public final class ScannerTileEntity extends MultiBlockController {
 
     public ScannerTileEntity(final BlockPos pos, final BlockState state) {
         super(ModBlockEntities.SCANNER_TILE_ENTITY, pos, state, BlockPatternRegistry.SCANNER.getThisBlockPattern(),
-                ConstantUtil.SCANNER_PROPERTY);
+                Scanner.SCANNER_PROPERTY);
         //destinationWorld = ModDimensions.carthage;
     }
 

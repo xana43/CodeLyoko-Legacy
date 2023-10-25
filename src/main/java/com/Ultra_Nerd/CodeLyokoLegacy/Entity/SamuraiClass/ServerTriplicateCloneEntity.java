@@ -29,22 +29,13 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
     public ServerTriplicateCloneEntity(final EntityType<? extends LivingEntity> entityType, final World world) {
         super(entityType, world);
         inventory = new CustomLivingEntityInventory(this);
+        setInvulnerable(true);
     }
-
-
-
-
-
 
     public static DefaultAttributeContainer.Builder createPlayerAttributes() {
-        return LivingEntity.createLivingAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.10000000149011612).add(EntityAttributes.GENERIC_ATTACK_SPEED).add(EntityAttributes.GENERIC_LUCK);
+        return LivingEntity.createLivingAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH,900000000).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.10000000149011612).add(EntityAttributes.GENERIC_ATTACK_SPEED).add(EntityAttributes.GENERIC_LUCK);
     }
-    @Override
-    protected void dropInventory() {
-            super.dropInventory();
-            this.inventory.clear();
 
-    }
 
     @Override
     protected void dropXp() {
@@ -65,8 +56,8 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
     public boolean shouldRenderName() {
         return true;
     }
-    private Iterable<ItemStack> equippedItems;
-    private Iterable<ItemStack> armorItems;
+
+
     private Arm mainArm;
     private void cloneLocalPlayer()
     {
@@ -80,8 +71,6 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
                 this.setSprinting(false);
                 this.bodyYaw = serverPlayerEntity.bodyYaw;
                 this.inventory.clone(serverPlayerEntity.getInventory());
-                this.equippedItems = serverPlayerEntity.getItemsEquipped();
-                this.armorItems = serverPlayerEntity.getArmorItems();
                 this.mainArm = serverPlayerEntity.getMainArm();
                 for (final EquipmentSlot slot : EquipmentSlot.values()) {
                     this.equipStack(slot, serverPlayerEntity.getEquippedStack(slot));
@@ -132,6 +121,7 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
             }
         }
     }
+
     @Override
     protected void applyDamage(final DamageSource source, final float amount) {
         super.applyDamage(source, amount);

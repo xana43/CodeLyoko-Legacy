@@ -27,19 +27,16 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -97,10 +94,7 @@ public record CodeLyokoMain() implements ModInitializer {
                 ModBlockEntities.UNIVERSAL_ENERGY_STORAGE);
     }
 
-    private static void executeCheck()
-    {
-        
-    }
+
     private static void checkWorld() {
         PlaceBlockEvent.EVENT.register(((entity, world, pos) -> {
             for (int x = -32; x < 32; ++x) {
@@ -144,30 +138,13 @@ public record CodeLyokoMain() implements ModInitializer {
             }
         });
     }
-    private static boolean blockBlacklist(final Block block)
-    {
-        final Block[] blacklistedBlocks = {
-          ModBlocks.LYOKO_CORE,
-          ModBlocks.DIGITAL_LAVA_BLOCK,
-          ModBlocks.DIGITAL_OCEAN_BLOCK,
-          ModBlocks.LIQUID_HELIUM_BLOCK,
-          ModBlocks.URANIUM_WASTE_BLOCK
-        };
-        for(final Block blackListedBlock : blacklistedBlocks)
-        {
-            if(block == blackListedBlock)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+
     private static void generalRegistration() {
         Registry.register(Registries.ITEM_GROUP,CodeLyokoMain.codeLyokoPrefix("lyoko_blocks"),LYOKO_BLOCKS);
         Registry.register(Registries.ITEM_GROUP,CodeLyokoMain.codeLyokoPrefix("lyoko_item"),LYOKO_ITEM);
         Registry.register(Registries.ITEM_GROUP,CodeLyokoMain.codeLyokoPrefix("lyoko_armor"),LYOKO_ARMOR);
         Registry.register(Registries.ITEM_GROUP,CodeLyokoMain.codeLyokoPrefix("lyoko_weapons"),LYOKO_WEAPONS);
-        ModBlocks.BLOCK_MAP.forEach((s, block) -> {
+        /*ModBlocks.BLOCK_MAP.forEach((s, block) -> {
 
             Registry.register(Registries.BLOCK, new Identifier(MOD_ID, s), block);
             if (blockBlacklist(block)) {
@@ -178,7 +155,8 @@ public record CodeLyokoMain() implements ModInitializer {
                         CodeLyokoMain.codeLyokoPrefix("lyoko_blocks"));
                 ItemGroupEvents.modifyEntriesEvent(registryKey).register(entries -> entries.add(blockItem));
             }
-        });
+        });*/
+        ModBlocks.registerBlocks();
 
         ModItems.ITEM_MAP.forEach((s, item) -> {
             Registry.register(Registries.ITEM, new Identifier(MOD_ID, s), item);

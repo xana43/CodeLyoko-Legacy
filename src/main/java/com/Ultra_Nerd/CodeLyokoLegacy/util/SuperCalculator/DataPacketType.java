@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.SuperCalculator;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.SuperCalculatorDataPackets;
 import net.minecraft.util.Identifier;
 
 import java.util.Arrays;

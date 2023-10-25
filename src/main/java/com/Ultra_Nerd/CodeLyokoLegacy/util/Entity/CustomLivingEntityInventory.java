@@ -152,10 +152,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
             this.setStack(slot, itemStack);
         }
 
-        int j = i;
-        if (i > itemStack.getMaxCount() - itemStack.getCount()) {
-            j = itemStack.getMaxCount() - itemStack.getCount();
-        }
+        int j = Math.min(i, itemStack.getMaxCount() - itemStack.getCount());
 
         if (j > this.getMaxCountPerStack() - itemStack.getCount()) {
             j = this.getMaxCountPerStack() - itemStack.getCount();
@@ -242,9 +239,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
                 CrashReportSection crashReportSection = crashReport.addElement("Item being added");
                 crashReportSection.add("Item ID", Item.getRawId(stack.getItem()));
                 crashReportSection.add("Item data", stack.getDamage());
-                crashReportSection.add("Item name", () -> {
-                    return stack.getName().getString();
-                });
+                crashReportSection.add("Item name", () -> stack.getName().getString());
                 throw new CrashException(crashReport);
             }
         }
@@ -264,7 +259,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
             }
         }
 
-        return list != null && !((ItemStack)list.get(slot)).isEmpty() ? Inventories.splitStack(list, slot, amount) : ItemStack.EMPTY;
+        return list != null && !list.get(slot).isEmpty() ? Inventories.splitStack(list, slot, amount) : ItemStack.EMPTY;
     }
 
     public void removeOne(ItemStack stack) {
@@ -372,7 +367,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
             int j = nbtCompound.getByte("Slot") & 255;
             ItemStack itemStack = ItemStack.fromNbt(nbtCompound);
             if (!itemStack.isEmpty()) {
-                if (j >= 0 && j < this.main.size()) {
+                if (j < this.main.size()) {
                     this.main.set(j, itemStack);
                 } else if (j >= 100 && j < this.armor.size() + 100) {
                     this.armor.set(j - 100, itemStack);
@@ -435,7 +430,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
             }
         }
 
-        return list == null ? ItemStack.EMPTY : (ItemStack)list.get(slot);
+        return list == null ? ItemStack.EMPTY : list.get(slot);
     }
 
     public Text getName() {
@@ -443,7 +438,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
     }
 
     public ItemStack getArmorStack(int slot) {
-        return (ItemStack)this.armor.get(slot);
+        return this.armor.get(slot);
     }
 
     public void damageArmor(DamageSource damageSource, float amount, int[] slots) {
@@ -453,16 +448,12 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
                 amount = 1.0F;
             }
 
-            int[] var4 = slots;
-            int var5 = slots.length;
+            //int var5 = slots.length;
 
-            for(int var6 = 0; var6 < var5; ++var6) {
-                int i = var4[var6];
+            for (int i : slots) {
                 ItemStack itemStack = this.armor.get(i);
                 if ((!damageSource.isIn(DamageTypeTags.IS_FIRE) || !itemStack.getItem().isFireproof()) && itemStack.getItem() instanceof ArmorItem) {
-                    itemStack.damage((int)amount, this.entity, (player) -> {
-                        player.sendEquipmentBreakStatus(EquipmentSlot.fromTypeIndex(EquipmentSlot.Type.ARMOR, i));
-                    });
+                    itemStack.damage((int) amount, this.entity, (player) -> player.sendEquipmentBreakStatus(EquipmentSlot.fromTypeIndex(EquipmentSlot.Type.ARMOR, i)));
                 }
             }
 
@@ -472,13 +463,12 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
     public void dropAll() {
 
         for (final DefaultedList<ItemStack> itemStacks : this.combinedInventory) {
-            List<ItemStack> list =  itemStacks;
 
-            for (int i = 0; i < list.size(); ++i) {
-                ItemStack itemStack = list.get(i);
+            for (int i = 0; i < ((List<ItemStack>) itemStacks).size(); ++i) {
+                ItemStack itemStack = ((List<ItemStack>) itemStacks).get(i);
                 if (!itemStack.isEmpty()) {
                     this.entity.dropStack(itemStack);
-                    list.set(i, ItemStack.EMPTY);
+                    ((List<ItemStack>) itemStacks).set(i, ItemStack.EMPTY);
                 }
             }
         }
@@ -503,9 +493,8 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
     public boolean contains(ItemStack stack) {
 
         for (final DefaultedList<ItemStack> itemStacks : this.combinedInventory) {
-            List<ItemStack> list = itemStacks;
 
-            for (final ItemStack itemStack : list) {
+            for (final ItemStack itemStack : itemStacks) {
                 if (!itemStack.isEmpty() && ItemStack.canCombine(itemStack, stack)) {
                     return true;
                 }

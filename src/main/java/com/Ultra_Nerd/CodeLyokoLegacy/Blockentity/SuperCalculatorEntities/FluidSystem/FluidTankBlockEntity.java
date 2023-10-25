@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.block.BlockState;
@@ -14,13 +15,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public final class FluidTankBlockEntity extends BlockEntity {
     private final SingleVariantStorage<FluidVariant> internalStorage =
             MethodUtil.FluidStorageCreation.createFluidStorage(this);
-    private final List<FluidTankBlockEntity> fluidTankBlockEntities = new ArrayList<>();
+    private final List<FluidTankBlockEntity> fluidTankBlockEntities = new ObjectArrayList<>();
     public FluidTankBlockEntity(final BlockEntityType<?> type, final BlockPos pos, final BlockState state) {
         super(type, pos, state);
     }

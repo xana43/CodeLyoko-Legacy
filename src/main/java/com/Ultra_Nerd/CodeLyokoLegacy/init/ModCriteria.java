@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.google.gson.JsonObject;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.advancement.AdvancementCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
@@ -20,7 +21,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +37,7 @@ public record ModCriteria() {
             this.trigger(player,condition -> condition.classChanged(player));
         }
 
-        public Identifier getId() {
+        public static Identifier getId() {
             return ID;
         }
 
@@ -77,7 +77,7 @@ public record ModCriteria() {
         }
 
 
-        public Identifier getId() {
+        public static Identifier getId() {
             return ID;
         }
 
@@ -90,7 +90,7 @@ public record ModCriteria() {
             }
             public boolean test(final ItemStack stack)
             {
-                return itemPredicate.get().test(stack);
+                return itemPredicate.map(predicate -> predicate.test(stack)).orElse(false);
             }
             public static Condition create(final EntityPredicate.Builder player , final ItemPredicate.Builder item)
             {
@@ -104,7 +104,7 @@ public record ModCriteria() {
             @Override
             public JsonObject toJson() {
                 final JsonObject jsonObject = super.toJson();
-                jsonObject.add("item",itemPredicate.get().toJson());
+                itemPredicate.ifPresent(predicate -> jsonObject.add("item", predicate.toJson()));
                 return jsonObject;
             }
         }
@@ -115,7 +115,7 @@ public record ModCriteria() {
         private static final Identifier ID = CodeLyokoMain.codeLyokoPrefix("entered_lyoko_advancement");
         @Override
         protected Condition conditionsFromJson(final JsonObject obj, final Optional<LootContextPredicate> playerPredicate, final AdvancementEntityPredicateDeserializer predicateDeserializer) {
-            final List<RegistryKey<World>> registryKeys = new ArrayList<>();
+            final List<RegistryKey<World>> registryKeys = new ObjectArrayList<>();
             for(final String entry: obj.keySet())
             {
                 registryKeys.add(RegistryKey.of(RegistryKeys.WORLD,new Identifier(JsonHelper.getString(obj,entry))));
@@ -129,7 +129,7 @@ public record ModCriteria() {
             this.trigger(player,(condition) -> condition.worldTest(world.getRegistryKey()));
         }
 
-        public Identifier getId() {
+        public static Identifier getId() {
             return ID;
         }
         public static final class Condition extends AbstractCriterionConditions

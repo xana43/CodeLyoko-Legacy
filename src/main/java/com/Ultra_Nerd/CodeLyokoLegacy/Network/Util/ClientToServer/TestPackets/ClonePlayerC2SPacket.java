@@ -1,12 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ClientToServer.TestPackets;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
 import com.mojang.authlib.GameProfile;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -19,12 +16,13 @@ public record ClonePlayerC2SPacket() {
 
             final GameProfile profile = buf.readGameProfile();
             server.execute(() -> {
-                final ServerTriplicateCloneEntity clone = ModEntities.TRIPLICATE_ENTITY_TYPE.create(player.getWorld());
-                if (clone != null) {
-                    clone.setOwner(profile,server);
+                if(ModEntities.TRIPLICATE_ENTITY_TYPE != null) {
+                    final ServerTriplicateCloneEntity clone = ModEntities.TRIPLICATE_ENTITY_TYPE.create(player.getWorld());
+                    if (clone != null) {
+                        clone.setOwner(profile, server);
+                    }
+                    player.getWorld().spawnEntity(clone);
                 }
-                player.getWorld().spawnEntity(clone);
-                ServerPlayNetworking.send(player, PacketHandler.SPAWN_TRIPLICATE, PacketByteBufs.empty());
             });
     }
 }

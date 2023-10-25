@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TestHandler.VehicleMaterializeTestHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -16,7 +17,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-import java.util.ArrayList;
 import java.util.List;
 @Environment(EnvType.CLIENT)
 public final class VehicleMaterializationTest extends HandledScreen<VehicleMaterializeTestHandler> {
@@ -36,7 +36,7 @@ public final class VehicleMaterializationTest extends HandledScreen<VehicleMater
         ClientPlayNetworking.send(PacketHandler.PLAYER_QUERY_SERVER, PacketByteBufs.empty());
         //players = client.world.getServer().getPlayerManager().getPlayerList();
     }
-    private static List<PlayerListEntry> playerList = new ArrayList<>();
+    private static List<PlayerListEntry> playerList = new ObjectArrayList<>();
     public static void setPlayerList(final List<PlayerListEntry> playerCollection)
     {
         playerList = playerCollection;

@@ -32,7 +32,7 @@ public record ModBlockEntities() {
     public static final BlockEntityType<ComputerControlPanelTileEntity> COMPUTER_CONTROL_PANEL = FabricBlockEntityTypeBuilder.create(
             ComputerControlPanelTileEntity::new, ModBlocks.COMPUTER_TOWER_CONTROL_PANEL).build();
     public static final BlockEntityType<ComputerReactorTileEntityInventory> COMPUTER_REACTOR_TILE_ENTITY = FabricBlockEntityTypeBuilder.create(
-            ComputerReactorTileEntityInventory::new, ModBlocks.URANUM_REACTOR).build();
+            ComputerReactorTileEntityInventory::new, ModBlocks.URANIUM_REACTOR).build();
     public static final BlockEntityType<LaptopChargerBlockEntityInventory> LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY =
             FabricBlockEntityTypeBuilder.create(LaptopChargerBlockEntityInventory::new, ModBlocks.LAPTOP_CHARGER).build();
     public  static final BlockEntityType<RouterTE> ROUTER_BLOCK_ENTITY_TYPE =
@@ -53,7 +53,7 @@ public record ModBlockEntities() {
     public static final BlockEntityType<PlayerDataStorage> PLAYER_DATA_STORAGE_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(PlayerDataStorage::new,ModBlocks.TEST_PROFILE).build();
     public static final BlockEntityType<VehicleBE> VEHICLE_BE_BLOCK_ENTITY_TYPE =
-            FabricBlockEntityTypeBuilder.create(VehicleBE::new,ModBlocks.TEST_VECHICLE_INTERFACE).build();
+            FabricBlockEntityTypeBuilder.create(VehicleBE::new,ModBlocks.TEST_VEHICLE_INTERFACE).build();
     public static final BlockEntityType<ComputerCirculatorBlockEntity> COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE =
             FabricBlockEntityTypeBuilder.create(ComputerCirculatorBlockEntity::new,
                     ModBlocks.COMPUTER_LIQUID_CIRCULATOR).build();

@@ -7,13 +7,21 @@ import net.minecraft.recipe.CookingRecipeSerializer;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 
+@SuppressWarnings("EmptyMethod")
 public record ModRecipes() {
+
+
+    private static final String REACTOR_RECIPE_ID = createStringId("reactor_recipe");
+    private static String createStringId(final String id)
+    {
+       return CodeLyokoMain.codeLyokoPrefix(id).toString();
+    }
     public record RecipeTypes()
     {
 
         public static final RecipeType<ReactorRecipe> REACTOR_RECIPE_TYPE;
         static {
-           REACTOR_RECIPE_TYPE = RecipeType.register(CodeLyokoMain.codeLyokoPrefix("reactor_recipe").toString());
+           REACTOR_RECIPE_TYPE = RecipeType.register(REACTOR_RECIPE_ID);
         }
         public static void init()
         {}
@@ -21,11 +29,10 @@ public record ModRecipes() {
     public record RecipeSerializers()
     {
         public static final RecipeSerializer<ReactorRecipe> REACTOR_RECIPE_SERIALIZER;
-
         static {
 
             REACTOR_RECIPE_SERIALIZER =
-                    RecipeSerializer.register(CodeLyokoMain.codeLyokoPrefix("reactor_recipe").toString(),
+                    RecipeSerializer.register(REACTOR_RECIPE_ID,
                             new CookingRecipeSerializer<>(ReactorRecipe::new,
                                     MethodUtil.TickConversion.secondsToTicks(120)));
 

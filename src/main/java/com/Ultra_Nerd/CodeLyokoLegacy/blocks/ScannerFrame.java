@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -143,7 +142,7 @@ public final class ScannerFrame extends HorizontalFacingBlock {
     public ScannerFrame(@NotNull FabricBlockSettings properties) {
         super(properties);
 
-        this.setDefaultState(this.getDefaultState().with(ConstantUtil.SCANNER_PROPERTY, Boolean.FALSE).with(FACING,
+        this.setDefaultState(this.getDefaultState().with(Scanner.SCANNER_PROPERTY, Boolean.FALSE).with(FACING,
                 Direction.NORTH));
     }
 
@@ -151,14 +150,14 @@ public final class ScannerFrame extends HorizontalFacingBlock {
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(ConstantUtil.SCANNER_PROPERTY, Boolean.FALSE);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(Scanner.SCANNER_PROPERTY, Boolean.FALSE);
     }
 
 
 
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
-        if (state.<Boolean>get(ConstantUtil.SCANNER_PROPERTY).booleanValue()) {
+        if (state.<Boolean>get(Scanner.SCANNER_PROPERTY).booleanValue()) {
             return switch (state.get(FACING)) {
                 case SOUTH -> shapeS;
                 case EAST -> shapeE;
@@ -173,6 +172,6 @@ public final class ScannerFrame extends HorizontalFacingBlock {
 
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(ConstantUtil.SCANNER_PROPERTY).add(FACING));
+        super.appendProperties(builder.add(Scanner.SCANNER_PROPERTY).add(FACING));
     }
 }

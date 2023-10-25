@@ -74,10 +74,7 @@ public final class HornetEntity extends PhantomEntity implements GeoAnimatable, 
 
     }
 
-    @Override
-    public void tickMovement() {
-        super.tickMovement();
-    }
+
 
     @Override
     protected boolean canAddPassenger(final Entity passenger) {
@@ -143,21 +140,14 @@ public final class HornetEntity extends PhantomEntity implements GeoAnimatable, 
         this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
     }
 
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return super.getAmbientSound();
-    }
+
 
     @Override
     protected SoundEvent getHurtSound(final DamageSource damageSourceIn) {
         return super.getHurtSound(damageSourceIn);
     }
 
-    @Override
-    protected SoundEvent getDeathSound() {
-        return super.getDeathSound();
 
-    }
 
     @Override
     public boolean canSpawn(final WorldAccess world, final SpawnReason spawnReason) {

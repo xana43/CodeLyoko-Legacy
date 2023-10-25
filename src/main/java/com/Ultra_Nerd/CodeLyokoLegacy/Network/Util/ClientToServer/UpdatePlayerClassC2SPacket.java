@@ -9,7 +9,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-import static com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler.ClassScreenIDClient;
+import static com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler.ClassScreenID;
 
 public record UpdatePlayerClassC2SPacket(){
 
@@ -21,7 +21,7 @@ public record UpdatePlayerClassC2SPacket(){
             CardinalData.LyokoClass.setLyokoClass(player, newPlayerClass);
             final PacketByteBuf ByteBuf = PacketByteBufs.create();
             ByteBuf.writeInt(newPlayerClass);
-            ServerPlayNetworking.send(player, ClassScreenIDClient, ByteBuf);
+            ServerPlayNetworking.send(player, ClassScreenID, ByteBuf);
         });
     }
 }

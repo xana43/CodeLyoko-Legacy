@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ScannerTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -19,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public final class Scanner extends HorizontalFacingBlock implements BlockEntityProvider {
+    public static final BooleanProperty SCANNER_PROPERTY = BooleanProperty.of("scanner_property");
     private List<BlockState> checkedBlockStates;
     private static final VoxelShape shapeS = Stream.of(Block.createCuboidShape(2, 0, -2, 14, 1, 18),
                     Block.createCuboidShape(-4, 0, 5, -3, 15.3, 11), Block.createCuboidShape(-3, 0, 5, -2, 1, 11),
@@ -291,7 +292,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
 
         );
 
-        this.setDefaultState(this.getDefaultState().with(ConstantUtil.SCANNER_PROPERTY, Boolean.FALSE)
+        this.setDefaultState(this.getDefaultState().with(SCANNER_PROPERTY, Boolean.FALSE)
                 .with(FACING, Direction.NORTH));
     }
 
@@ -313,7 +314,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
 
-        if (state.<Boolean>get(ConstantUtil.SCANNER_PROPERTY).booleanValue()) {
+        if (state.<Boolean>get(SCANNER_PROPERTY).booleanValue()) {
             return switch (state.get(FACING)) {
                 case SOUTH -> shapeS;
                 case EAST -> shapeE;
@@ -338,12 +339,12 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
     @Nullable
     @Override
     public BlockState getPlacementState(final ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(ConstantUtil.SCANNER_PROPERTY, Boolean.FALSE);
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing()).with(SCANNER_PROPERTY, Boolean.FALSE);
     }
 
     @Override
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder.add(ConstantUtil.SCANNER_PROPERTY).add(FACING));
+        super.appendProperties(builder.add(SCANNER_PROPERTY).add(FACING));
     }
 
     @Override
@@ -377,7 +378,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
 
                 scannerTile.tick();
 
-                if (state.<Boolean>get(ConstantUtil.SCANNER_PROPERTY).booleanValue() && scannerTile.isInScanner()) {
+                if (state.<Boolean>get(SCANNER_PROPERTY).booleanValue() && scannerTile.isInScanner()) {
                     final PacketByteBuf buf = PacketByteBufs.create();
                     buf.writeBlockPos(pos);
                     buf.writeFloat(offset);

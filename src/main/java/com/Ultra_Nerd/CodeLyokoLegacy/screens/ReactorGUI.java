@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public final class ReactorGUI extends HandledScreen<ReactorScreenHandler> {
 
-    private boolean narrow;
+
     //private static final Identifier background = new Identifier("textures/gui/container/furnace.png");
     private static final Identifier background = CodeLyokoMain.codeLyokoPrefix("textures/gui/reactor_new.png");
     public ReactorGUI(final ReactorScreenHandler handler, final PlayerInventory inventory, final Text title) {
@@ -24,7 +24,6 @@ public final class ReactorGUI extends HandledScreen<ReactorScreenHandler> {
     @Override
     protected void init() {
         super.init();
-        narrow = width < 379;
         titleX = (backgroundWidth - textRenderer.getWidth(title)) >> 1;
     }
 

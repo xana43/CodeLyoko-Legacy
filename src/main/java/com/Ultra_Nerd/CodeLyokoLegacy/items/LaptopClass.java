@@ -1,12 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.LapTopHeirarichy.MainLaptopScreen;
-import net.minecraft.client.MinecraftClient;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
@@ -42,13 +45,15 @@ public final class LaptopClass extends Item implements SimpleEnergyItem{
 
     @Override
     public TypedActionResult<ItemStack> use(@NotNull World worldIn, final PlayerEntity playerIn, final Hand handIn) {
-
+        final PacketByteBuf buf = PacketByteBufs.create();
         final ItemStack item = playerIn.getStackInHand(handIn);
         if (getStoredEnergy(item) > 0 || playerIn.isCreative() && !playerIn.isSneaking()) {
             if (item.getItem() == this && item.getDamage() == 0) {
                 item.setDamage(1);
-                if (worldIn.isClient) {
-                    //MinecraftClient.getInstance().setScreen(new MainLaptopScreen());
+                if (!worldIn.isClient) {
+                    buf.clear();
+                    buf.writeBoolean(true);
+                    ServerPlayNetworking.send((ServerPlayerEntity) playerIn, PacketHandler.OPEN_LAPTOP_ON_CLIENT,buf);
                 }
                 worldIn.playSound(playerIn, playerIn.getBlockPos(), ModSounds.OPENTOWERGUISOUND, SoundCategory.BLOCKS,
                         1, 1);
@@ -60,8 +65,10 @@ public final class LaptopClass extends Item implements SimpleEnergyItem{
         } else if (playerIn.isSneaking() && worldIn.isClient()) {
             playerIn.sendMessage(Text.of("energy is " + getStoredEnergy(item)), false);
         } else {
-            if (MinecraftClient.getInstance().currentScreen instanceof MainLaptopScreen) {
-                MinecraftClient.getInstance().currentScreen.close();
+            if(!worldIn.isClient) {
+                buf.clear();
+                buf.writeBoolean(false);
+                ServerPlayNetworking.send((ServerPlayerEntity) playerIn, PacketHandler.OPEN_LAPTOP_ON_CLIENT, buf);
             }
             item.setDamage(0);
             playerIn.sendMessage(Text.translatable("laptop.battery.dead"), false);

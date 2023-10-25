@@ -105,10 +105,11 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
 
         private static void offerCustomCooking(final RecipeExporter exporter, final RecipeSerializer<? extends AbstractCookingRecipe> serializer, final List<ItemConvertible> inputs, final ItemConvertible output, final float experience, final String group, final String method)
         {
+            final String declaredGroup = CodeLyokoMain.codeLyokoPrefix(group).toString();
             for (final ItemConvertible itemConvertible : inputs) {
                 recipePathBuilder.setLength(0);
                 recipePathBuilder.append(getItemPath(output)).append(method).append('_').append(getItemPath(itemConvertible));
-                CustomCookingRecipeJsonBuilder.create(Ingredient.ofItems(itemConvertible), RecipeCategory.MISC,output,experience,serializer).group(CodeLyokoMain.codeLyokoPrefix(group).toString()).criterion(hasItem(itemConvertible),conditionsFromItem(itemConvertible)).offerTo(exporter,recipePathBuilder.toString());
+                CustomCookingRecipeJsonBuilder.create(Ingredient.ofItems(itemConvertible), RecipeCategory.MISC,output,experience,serializer).group(declaredGroup).criterion(hasItem(itemConvertible),conditionsFromItem(itemConvertible)).offerTo(exporter,recipePathBuilder.toString());
             }
         }
     }

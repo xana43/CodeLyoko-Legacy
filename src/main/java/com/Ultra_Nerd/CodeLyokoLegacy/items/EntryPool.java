@@ -1,15 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModCustomTrackedCriteria;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.TranslatedLocale;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.event.Client.ClientEvents;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.WrittenBookItem;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;
@@ -20,45 +23,49 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public record EntryPool() {
-    private static final List<StringVisitable[]> ENTRIES_EN_US = new ArrayList<>(2);
-    private static final List<StringVisitable[]> ENTRIES_FR_FR = new ArrayList<>(2);
+    private static final List<StringVisitable[]> ENTRIES_EN_US = new ObjectArrayList<>(4);
+    private static final List<StringVisitable[]> ENTRIES_FR_FR = new ObjectArrayList<>(4);
     private static void addEntryToList(final TranslatedLocale locale, final StringVisitable[] visitable)
     {
         switch (locale)
         {
-
             case EN_US -> ENTRIES_EN_US.add(visitable);
             case FR_FR -> ENTRIES_FR_FR.add(visitable);
         }
     }
+    public static List<StringVisitable[]> getEntriesEnUs()
+    {
+        return ENTRIES_EN_US;
+    }
+    public static List<StringVisitable[]> getEntriesFrFr()
+    {
+        return ENTRIES_FR_FR;
+    }
     public static void init()
     {
-        //entry1
-        addEntryToList(TranslatedLocale.EN_US,MethodUtil.TextUtil.textArray(ConstantUtil.StoryEntry.EntryList.ENTRY1.getThisEntry()));
-        addEntryToList(TranslatedLocale.FR_FR,MethodUtil.TextUtil.textArray(ConstantUtil.StoryEntry.EntryList.ENTRY1FR.getThisEntry()));
-        //entry2
-        addEntryToList(TranslatedLocale.EN_US,MethodUtil.TextUtil.textArray(ConstantUtil.StoryEntry.EntryList.ENTRY2.getThisEntry()));
+        //english entries
+        for(final ConstantUtil.StoryEntry.EntryListENUS en_us : ConstantUtil.StoryEntry.EntryListENUS.values())
+        {
+            addEntryToList(TranslatedLocale.EN_US, en_us.getEntries());
+        }
+        //french entries
+        for (final ConstantUtil.StoryEntry.EntryListFRFR fr_fr : ConstantUtil.StoryEntry.EntryListFRFR.values())
+        {
+            addEntryToList(TranslatedLocale.FR_FR, fr_fr.getEntries());
+        }
+
     }
     private static abstract class BaseEntry extends WrittenBookItem {
-       // @Environment(EnvType.CLIENT)
-       // private static final MinecraftClient minecraftClientInstance = MinecraftClient.getInstance();
-        private StringVisitable[] visitable;
-        private final int englishIndex;
-        private final int frenchIndex;
-        public BaseEntry(@NotNull Settings builder,final int englishIndex,final int frenchIndex) {
+        private final int entryIndex;
+        private static final PacketByteBuf buf = PacketByteBufs.create();
+        public BaseEntry(@NotNull Settings builder,final int entryIndex) {
             super(builder);
-            this.englishIndex = englishIndex;
-            this.frenchIndex = frenchIndex;
-            ClientEvents.ON_LANGUAGE_CHANGED_EVENT.register(this::updateTranslation);
+            this.entryIndex = entryIndex;
         }
-        public boolean hasEntry()
-        {
-            return visitable != null;
-        }
+
         @Override
         public boolean hasGlint(final ItemStack stack) {
             return false;
@@ -66,30 +73,21 @@ public record EntryPool() {
 
         @Override
         public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
-            if (world.isClient) {
-                if(!hasEntry())
-                {
-                    updateTranslation();
-                }
-                //minecraftClientInstance.setScreen(new StoryBookGUI(visitable,visitable.length));
-                //user.useBook();
+            if (!world.isClient) {
+                buf.clear();
+                buf.writeInt(entryIndex);
+                ServerPlayNetworking.send((ServerPlayerEntity) user, PacketHandler.OPEN_BOOK_ON_CLIENT,buf);
             }
             return super.use(world, user, hand);
         }
 
-        private void updateTranslation()
-        {
-            final StringVisitable[] langArray = MethodUtil.HelperMethods.testLocale(ENTRIES_EN_US.get(englishIndex),ENTRIES_FR_FR.get(frenchIndex));
-            if(langArray != null)
-            {
-                visitable = langArray;
-            }
-        }
+
     }
+
     public static final class JournalEntry1 extends BaseEntry {
 
         public JournalEntry1() {
-            super(new Item.Settings().maxCount(1),0,0);
+            super(new Item.Settings().maxCount(1),0);
         }
 
 
@@ -106,7 +104,7 @@ public record EntryPool() {
 
 
         public JournalEntry2() {
-            super(new Item.Settings().maxCount(1),1,0);
+            super(new Item.Settings().maxCount(1),1);
         }
 
         @Override

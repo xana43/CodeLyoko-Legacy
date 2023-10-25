@@ -1,7 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.RouterTE;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -22,8 +23,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -85,7 +84,7 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
             Block.createCuboidShape(8.25, 1, 5.5, 9.25, 2, 6.5),
             Block.createCuboidShape(8.25, 1, 3.5, 9.25, 2, 4.5)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
-    private static final List<BlockPos> connectedBlocks = new ArrayList<>();
+    private static final List<BlockPos> connectedBlocks = new ObjectArrayList<>();
 
     public Router(@NotNull FabricBlockSettings properties) {
         super(properties);
@@ -96,7 +95,6 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
 
         if (world.getBlockEntity(pos) instanceof final RouterTE routerTE) {
-
             switch (state.get(FACING)) {
                 case NORTH -> routerTE.connectToRouter(pos.offset(Direction.NORTH, 1));
                 case SOUTH -> routerTE.connectToRouter(pos.offset(Direction.SOUTH, 1));

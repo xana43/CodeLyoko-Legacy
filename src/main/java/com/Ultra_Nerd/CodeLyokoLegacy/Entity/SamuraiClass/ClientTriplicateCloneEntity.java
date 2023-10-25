@@ -40,13 +40,13 @@ public final class ClientTriplicateCloneEntity extends OtherClientPlayerEntity {
 
     @Override
     public boolean equals(final Object o) {
-        if(o instanceof final ClientTriplicateCloneEntity triplicateClone)
+        if(o instanceof final ClientTriplicateCloneEntity otherTriplicateClone)
         {
-            return this.getRotationClient() == triplicateClone.getRotationClient() &&
-                    this.bodyYaw == triplicateClone.bodyYaw && this.activeItemStack == triplicateClone.getActiveItem() &&
-                    this.isSneaking == triplicateClone.isSneaking() &&
-                    this.fallDistance == triplicateClone.fallDistance &&
-                    this.headYaw == triplicateClone.headYaw;
+            return this.getRotationClient() == otherTriplicateClone.getRotationClient() &&
+                    this.bodyYaw == otherTriplicateClone.bodyYaw && this.activeItemStack == otherTriplicateClone.getActiveItem() &&
+                    this.isSneaking == otherTriplicateClone.isSneaking() &&
+                    this.fallDistance == otherTriplicateClone.fallDistance &&
+                    this.headYaw == otherTriplicateClone.headYaw;
         }
         return super.equals(o);
     }

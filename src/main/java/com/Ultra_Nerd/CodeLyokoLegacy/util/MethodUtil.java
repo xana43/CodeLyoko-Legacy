@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.TranslatedLocale;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
@@ -12,7 +12,6 @@ import net.minecraft.advancement.AdvancementCriterion;
 import net.minecraft.advancement.AdvancementEntry;
 import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,7 +29,6 @@ import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -368,27 +366,12 @@ public record MethodUtil() {
                 }
 
             }
-            private  static final MinecraftClient client = MinecraftClient.getInstance();
-            public static <T> T testLocale(final T englishObject, final T frenchObject)
-            {
-
-                if(client != null && client.getLanguageManager() != null) {
-                    CodeLyokoMain.LOG.error("changing to:"+client.getLanguageManager().getLanguage());
-                    if (client.getLanguageManager().getLanguage().equals(TranslatedLocale.EN_US.toString())) {
-                        return englishObject;
-                    } else if (client.getLanguageManager().getLanguage().equals(TranslatedLocale.FR_FR.toString())) {
-                        return frenchObject;
-                    }
-                }
-                return null;
-            }
         }
 
 
         public record TextUtil() {
-            private static final List<StringVisitable> denotedList = new ArrayList<>();
             public static StringVisitable[] textArray(@NotNull final String textToDenote) {
-                denotedList.clear();
+                final List<StringVisitable> denotedList = new ObjectArrayList<>();
                 int pos = 0, end;
                 while ((end = textToDenote.indexOf('¶',pos)) >= 0)
                 {

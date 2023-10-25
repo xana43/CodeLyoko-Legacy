@@ -7,7 +7,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.PlaceBlockEvent;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.GameOptions;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.registry.tag.BlockTags;
@@ -18,7 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
@@ -127,9 +125,5 @@ public record MixinHooks() {
         }
     }
 
-    public static void replaceTitleScreen(final CallbackInfoReturnable<Runnable> cir, final GameOptions options,
-                                          final MinecraftClient client)
-    {
 
-    }
 }

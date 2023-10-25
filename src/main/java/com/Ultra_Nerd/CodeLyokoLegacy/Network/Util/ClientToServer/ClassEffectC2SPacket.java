@@ -31,9 +31,7 @@ public record ClassEffectC2SPacket(){
                switch (CardinalData.LyokoClass.getLyokoClass(player)) {
                    case 0 -> {
                    }
-                   case 1 -> {
-                       ClassEffects.SamuraiClassEffects.addClone(player);
-                   }
+                   case 1 -> ClassEffects.SamuraiClassEffects.addClone(player);
                }
            }
            //}

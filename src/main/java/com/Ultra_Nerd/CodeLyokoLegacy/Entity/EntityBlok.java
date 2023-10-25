@@ -36,7 +36,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 
 
-@SuppressWarnings("MethodMayBeStatic")
+
 public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
 
 
@@ -70,17 +70,18 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
 
     @Override
     public void shootAt(final LivingEntity target, final float pullProgress) {
-        final ArrowEntity abstractarrow = new EntityLaser(this.getWorld(), this, 20);
+        final ArrowEntity abstractArrow = new EntityLaser(this.getWorld(), this, 20);
 
         final double d0 = target.getX() - this.getX();
-        final double d1 = target.getBodyY(0.3333333333333333D) - abstractarrow.getY();
+        final double d1 = target.getBodyY(0.3333333333333333D) - abstractArrow.getY();
         final double d2 = target.getZ() - this.getZ();
         final double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        abstractarrow.setVelocity(d0, d1 + d3 * 0.2D, d2, 4F, (float) (14 - this.getWorld().getDifficulty().getId() << 2));
+        abstractArrow.setVelocity(d0, d1 + d3 * 0.2D, d2, 4F, (float) (14 - this.getWorld().getDifficulty().getId() << 2));
         //this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
-        this.getWorld().spawnEntity(abstractarrow);
+        this.getWorld().spawnEntity(abstractArrow);
     }
 
+    @SuppressWarnings("MethodMayBeStatic")
     private <E extends EntityBlok> @NotNull PlayState pred(AnimationState<E> event) {
         return PlayState.STOP;
     }
@@ -156,10 +157,7 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
         return 0;
     }
 
-    @Override
-    public void checkDespawn() {
-        super.checkDespawn();
-    }
+
 
 
 }

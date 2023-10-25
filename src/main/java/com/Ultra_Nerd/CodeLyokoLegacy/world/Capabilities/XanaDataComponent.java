@@ -2,11 +2,11 @@ package com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.Capabilities.XanaAttackTypes;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+import it.unimi.dsi.fastutil.longs.LongArrayList;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("MethodMayBeStatic")
@@ -21,7 +21,7 @@ public final class XanaDataComponent implements AutoSyncedComponent {
     public int getDangerLevel() {
         return dangerLevel;
     }
-    private static final List<Long> validAttackPositions = new ArrayList<>();
+    private static final List<Long> validAttackPositions = new LongArrayList();
     public void setDangerLevel(final int level) {
         dangerLevel = level;
     }
