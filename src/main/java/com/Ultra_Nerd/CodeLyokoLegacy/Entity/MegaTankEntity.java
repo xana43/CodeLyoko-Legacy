@@ -107,7 +107,7 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
 
     @Override
     protected @NotNull SoundEvent getDeathSound() {
-        return ModSounds.MEGATANKDIE;
+        return ModSounds.MEGATANK_DIE;
     }
 
     @Override
@@ -118,7 +118,7 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
 
     @Override
     public FallSounds getFallSounds() {
-        return new FallSounds(ModSounds.MEGATANKSMALLFALL, ModSounds.MEGATANKBIGFALL);
+        return new FallSounds(ModSounds.MEGATANKSMALLFALL, ModSounds.MEGATANK_BIG_FALL);
     }
 
     @Override
@@ -205,10 +205,10 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
         private final int maxIntervalTicks;
         private final float maxShootRange;
         private final float squaredMaxShootRange;
+        private int seenTargetTicks;
         @Nullable
         private LivingEntity target;
         private int updateCountdownTicks;
-        private int seenTargetTicks;
 
         public ProjectileStopThenAttackGoal(RangedAttackMob mob, double mobSpeed, int intervalTicks, float maxShootRange) {
             this(mob, mobSpeed, intervalTicks, intervalTicks, maxShootRange);

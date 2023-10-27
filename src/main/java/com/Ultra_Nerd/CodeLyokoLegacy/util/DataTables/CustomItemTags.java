@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
+import java.util.concurrent.CompletableFuture;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
@@ -11,8 +12,6 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-
-import java.util.concurrent.CompletableFuture;
 
 public final class CustomItemTags extends FabricTagProvider.ItemTagProvider {
 
@@ -60,7 +59,7 @@ public final class CustomItemTags extends FabricTagProvider.ItemTagProvider {
         }
         getOrCreateTagBuilder(ItemTags.CHERRY_LOGS).add(ModBlocks.DIGITAL_WOOD_MOUNTAIN.asItem());
         getOrCreateTagBuilder(ItemTags.JUNGLE_LOGS).add(ModBlocks.DIGITAL_WOOD_FOREST.asItem());
-        getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.LYOKO_THEME);
+        getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.LYOKO_THEME,ModItems.LYOKO_THEME_INSTRUMENTAL);
         getOrCreateTagBuilder(ItemTags.SAND).add(ModBlocks.SILICA_SAND.asItem());
         getOrCreateTagBuilder(ModTags.ItemTags.LYOKO_ITEM).add(ModItems.HOVERBOARD_SPAWN_ITEM,ModItems.OVERBOARD_SPAWN_ITEM);
         getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_BATTERIES).add(ModItems.URANIUM_BATTERY_STARTER,

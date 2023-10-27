@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.Client.ClientEvents;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.PlaceBlockEvent;
+import java.util.List;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
@@ -18,10 +19,8 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
-
 public record MixinHooks() {
-
+    private static final MinecraftClient mc = MinecraftClient.getInstance();
     public static void customSplashTexts(final List<String> splashtexts)
     {
         splashtexts.add(Text.translatable("splashscreen.entry1").getString());
@@ -33,7 +32,7 @@ public record MixinHooks() {
     public static void disableStatusEffectsRenderInLyoko(
             final CallbackInfo ci)
     {
-        final MinecraftClient mc = MinecraftClient.getInstance();
+
         if (mc != null) {
             if (mc.player != null) {
                 if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(mc.player)) {
@@ -88,7 +87,6 @@ public record MixinHooks() {
             }
 
             public static void customSwingSound() {
-                final MinecraftClient mc = MinecraftClient.getInstance();
                 if (mc != null) {
                     if (mc.player != null) {
                         if (mc.player.getEquippedStack(EquipmentSlot.MAINHAND)

@@ -10,6 +10,7 @@ public final class ReactorInputSlot extends Slot {
             final int y) {
         super(inventory, index, x, y);
     }
+    @Override
     public boolean canInsert(final ItemStack stack)
     {
         return ReactorScreenHandler.isFuel(stack);

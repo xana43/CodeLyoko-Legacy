@@ -37,6 +37,7 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
     }
 
 
+
     @Override
     protected void dropXp() {
 

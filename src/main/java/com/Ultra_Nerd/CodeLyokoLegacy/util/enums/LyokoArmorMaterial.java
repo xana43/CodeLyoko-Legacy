@@ -14,14 +14,14 @@ import org.jetbrains.annotations.Nullable;
 public enum LyokoArmorMaterial implements ArmorMaterial {
 
 
-    WARRIOR("william", 33, new byte[]{15, 19, 20, 15}, 420, ModSounds.LAZY_WARRIOR, 10F),
-    BLANKHELM("blank", 5, new byte[]{15, 19, 20, 15}, 0, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 20f),
-    FELINE("odd", 25, new byte[]{4, 7, 9, 4}, 420, ModSounds.LAZY_FELINE, 0F),
-    NINJA("yumi", 24, new byte[]{1, 4, 7, 2}, 420, ModSounds.LAZY_NINJA, 0F),
-    SAMURAI("ulrich", 30, new byte[]{3, 6, 8, 3}, 420, ModSounds.LAZY_SAMURAI, 10F),
-    GUARDIAN("aelita", 23, new byte[]{5, 8, 10, 5}, 420, ModSounds.LAZY_GUARDIAN, 10F),
-    ARCHER("jeremy", 15, new byte[]{2, 4, 5, 2}, 420, ModSounds.LAZY_ARCHER, 5),
-    LINKER("linker", 10, new byte[]{1, 3, 4, 1}, 9000, null, 4);
+    WARRIOR("william", 33, new byte[]{15, 19, 20, 15}, 420, ModSounds.LAZY_WARRIOR, 10F,0),
+    BLANK_HELM("blank", 5, new byte[]{15, 19, 20, 15}, 0, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 20f,0),
+    FELINE("odd", 25, new byte[]{4, 7, 9, 4}, 420, ModSounds.LAZY_FELINE, 0F,0),
+    NINJA("yumi", 24, new byte[]{1, 4, 7, 2}, 420, ModSounds.LAZY_NINJA, 0F,0),
+    SAMURAI("ulrich", 30, new byte[]{3, 6, 8, 3}, 420, ModSounds.LAZY_SAMURAI, 10F,0),
+    GUARDIAN("aelita", 23, new byte[]{5, 8, 10, 5}, 420, ModSounds.LAZY_GUARDIAN, 10F,0),
+    ARCHER("jeremy", 15, new byte[]{2, 4, 5, 2}, 420, ModSounds.LAZY_ARCHER, 5,0),
+    LINKER("linker", 10, new byte[]{1, 3, 4, 1}, 9000, null, 4,0);
     private static final byte[] MAX_DAMAGE_ARRAY = new byte[]{16, 16, 16, 16};
     private final String name;
     private final int maxDamageFactor;
@@ -29,16 +29,17 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
     private final int enchant;
     private final SoundEvent soundEvent;
     private final float toughness;
+    private final float knockbackResistance;
 
 
     LyokoArmorMaterial(final String nameIn, final int maxDamageFactor, final byte[] damageReductionIn, final int enchant, final SoundEvent soundsIn,
-            final float toughnessIn) {
+            final float toughnessIn,final float knockbackResistance) {
         this.name = nameIn;
         this.damageReduction = damageReductionIn;
         this.enchant = enchant;
         this.soundEvent = soundsIn;
         this.toughness = toughnessIn;
-
+        this.knockbackResistance = knockbackResistance;
         this.maxDamageFactor = maxDamageFactor;
     }
 
@@ -49,8 +50,8 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
     }
 
     @Override
-    public int getProtection(final @NotNull ArmorItem.Type p_40411_) {
-        return this.damageReduction[p_40411_.getEquipmentSlot().getEntitySlotId()];
+    public int getProtection(final @NotNull ArmorItem.Type equipmentSlot) {
+        return this.damageReduction[equipmentSlot.getEquipmentSlot().getEntitySlotId()];
     }
 
     @Override
@@ -83,6 +84,6 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
 
     @Override
     public float getKnockbackResistance() {
-        return 0;
+        return knockbackResistance;
     }
 }

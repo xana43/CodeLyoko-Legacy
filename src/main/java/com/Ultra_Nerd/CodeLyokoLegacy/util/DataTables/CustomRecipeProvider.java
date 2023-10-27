@@ -5,6 +5,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModRecipes;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.CustomRecipeBuilderProviders.CustomCookingRecipeJsonBuilder;
+import it.unimi.dsi.fastutil.objects.ObjectList;
+import java.util.List;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
@@ -14,12 +16,11 @@ import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
+import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.recipe.AbstractCookingRecipe;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.book.RecipeCategory;
-
-import java.util.List;
 
 public final class CustomRecipeProvider extends FabricRecipeProvider {
 
@@ -88,9 +89,9 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
                 ,ModBlocks.URANIUM_BLOCK_238);
         offerReversibleCompactingRecipes(exporter,RecipeCategory.MISC,ModItems.SOLID_QUANTUM,RecipeCategory.MISC,
                 ModBlocks.QUANTUM_BLOCK);
-        CustomRecipeUtil.offerReacting(exporter,List.of(ModItems.URANIUM_ISOTOPE235), ModItems.URANIUM_ISOTOPE238);
-        CustomRecipeUtil.offerReacting(exporter,List.of(ModBlocks.URANIUM_BLOCK_235), ModBlocks.URANIUM_BLOCK_238);
-
+        CustomRecipeUtil.offerReacting(exporter, ObjectList.of(ModItems.URANIUM_ISOTOPE235), ModItems.URANIUM_ISOTOPE238);
+        CustomRecipeUtil.offerReacting(exporter,ObjectList.of(ModBlocks.URANIUM_BLOCK_235), ModBlocks.URANIUM_BLOCK_238);
+        CustomRecipeUtil.offerLithographyArray(exporter,ObjectList.of(ModItems.SILICON_WAFER,Items.COPPER_INGOT,Items.GOLD_NUGGET),ModItems.CPU_DIE_ARM);
 
     }
 
@@ -98,11 +99,36 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
     {
 
         private static final StringBuilder recipePathBuilder = new StringBuilder();
+        private static void offerLithographyArray(final RecipeExporter recipeExporter,final List<ItemConvertible> inputs,final ItemConvertible output)
+        {
+            offerCustomCookingArray(recipeExporter,ModItems.SILICON_WAFER,ModRecipes.RecipeSerializers.LITHOGRAPHY_RECIPE_SERIALIZER,inputs,output,0,"lithography","_from_lithography");
+        }
+        private static void offerLithography(final RecipeExporter recipeExporter,final List<ItemConvertible> inputs,final ItemConvertible output)
+        {
+            offerCustomCooking(recipeExporter,ModRecipes.RecipeSerializers.LITHOGRAPHY_RECIPE_SERIALIZER,inputs,output,0,"lithography","_from_lithography");
+        }
         private static void offerReacting(final RecipeExporter recipeJsonProviderConsumer, final List<ItemConvertible> inputs, final ItemConvertible output)
         {
             offerCustomCooking(recipeJsonProviderConsumer, ModRecipes.RecipeSerializers.REACTOR_RECIPE_SERIALIZER,inputs, output, 0, "reacting","_from_reacting");
         }
+        private static void offerCustomCookingArray(final RecipeExporter exporter,final ItemConvertible hasItem, final RecipeSerializer<? extends AbstractCookingRecipe> serializer, final List<ItemConvertible> inputs, final ItemConvertible output, final float experience, final String group, final String method)
+        {
+            final String declaredGroup = CodeLyokoMain.codeLyokoPrefix(group).toString();
+            recipePathBuilder.setLength(0);
+            recipePathBuilder.append(getItemPath(output))
+                .append(method);
 
+      for (final ItemConvertible itemConvertible : inputs) {
+
+        recipePathBuilder
+            .append('_')
+            .append(getItemPath(itemConvertible));
+
+      }
+            final ItemConvertible[] convertibles = inputs.toArray(inputs.toArray(new ItemConvertible[0]));
+            CustomCookingRecipeJsonBuilder.create(Ingredient.ofItems(convertibles), RecipeCategory.MISC,output,experience,serializer).group(declaredGroup).criterion(hasItem(hasItem),conditionsFromPredicates(ItemPredicate.Builder.create().items(convertibles))).offerTo(exporter,recipePathBuilder.toString());
+
+        }
         private static void offerCustomCooking(final RecipeExporter exporter, final RecipeSerializer<? extends AbstractCookingRecipe> serializer, final List<ItemConvertible> inputs, final ItemConvertible output, final float experience, final String group, final String method)
         {
             final String declaredGroup = CodeLyokoMain.codeLyokoPrefix(group).toString();

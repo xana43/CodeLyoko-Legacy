@@ -206,5 +206,10 @@
       <option name="name" value="maven2" />
       <option name="url" value="https://maven.nucleoid.xyz" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="https://maven.shedaniel.me" />
+    </remote-repository>
   </component>
 </project>

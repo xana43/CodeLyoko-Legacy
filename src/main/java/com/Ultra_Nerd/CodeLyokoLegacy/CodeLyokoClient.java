@@ -15,8 +15,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.SuperCalculatorDataLinker;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoRingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ElectricitySystemScreens.RackChargerScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.SuperCalculatorNetworkScreens.DemarcationPointScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.PlayerProfileDebug;
@@ -264,6 +264,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 VehicleMaterializationTest::new);
         HandledScreens.register(ModScreenHandlers.RACK_CHARGER_HANDLER_SCREEN_TYPE, RackChargerScreen::new);
         HandledScreens.register(ModScreenHandlers.DEMARCATION_SCREEN_HANDLER_TYPE, DemarcationPointScreen::new);
+        HandledScreens.register(ModScreenHandlers.LITHOGRAPHY_SCREEN_HANDLER_TYPE,LithographyGUI::new);
     }
     private static void registerColorProviders()
     {

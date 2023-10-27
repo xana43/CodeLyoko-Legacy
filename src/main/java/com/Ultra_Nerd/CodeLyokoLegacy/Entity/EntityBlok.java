@@ -105,7 +105,7 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
     @Override
     protected @NotNull SoundEvent getHurtSound(final DamageSource damageSourceIn) {
         // TODO Auto-generated method stub
-        return ModSounds.BLOKHURT;
+        return ModSounds.BLOK_HURT;
     }
 
     @Override
@@ -116,7 +116,7 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
     @Override
     protected @NotNull SoundEvent getAmbientSound() {
         // TODO Auto-generated method stub
-        return ModSounds.BLOKAMBIENT;
+        return ModSounds.BLOK_AMBIENT;
     }
 
     @Override

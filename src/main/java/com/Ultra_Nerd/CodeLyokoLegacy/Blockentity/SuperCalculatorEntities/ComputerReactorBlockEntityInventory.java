@@ -35,7 +35,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class ComputerReactorTileEntityInventory extends EnergyStorageBlockEntityInventory implements LyokoInventoryBlock, NamedScreenHandlerFactory, RecipeInputProvider {
+public final class ComputerReactorBlockEntityInventory extends EnergyStorageBlockEntityInventory implements LyokoInventoryBlock, NamedScreenHandlerFactory, RecipeInputProvider {
     private int reactionTime;
 private int fuelMass;
 private int irradiationTime;
@@ -111,7 +111,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
 
     }
 
-    public ComputerReactorTileEntityInventory(final BlockPos pos, final BlockState state) {
+    public ComputerReactorBlockEntityInventory(final BlockPos pos, final BlockState state) {
         super(ModBlockEntities.COMPUTER_REACTOR_TILE_ENTITY, pos, state, 2, 400000, Long.valueOf(60), Long.valueOf(200));
         matchGetter = RecipeManager.createCachedMatchGetter(ModRecipes.RecipeTypes.REACTOR_RECIPE_TYPE);
     }
@@ -146,7 +146,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
         boolean isGottenItemStackEmpty = !itemStack.isEmpty();
         if(isReacting() || isCurrentItemStackEmpty && isGottenItemStackEmpty && wasteTank.amount < wasteTank.getCapacity())
         {
-            RecipeEntry recipe;
+            RecipeEntry<?> recipe;
             if(isCurrentItemStackEmpty)
             {
 
@@ -274,7 +274,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
         }else
         {
             final Item item = fuel.getItem();
-            return ModFuels.FUEL_MAP.getOrDefault(item, Integer.valueOf(0)).intValue();
+            return ModFuels.FUEL_MAP.getOrDefault(item, 0);
         }
     }
 
@@ -317,9 +317,9 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
 
 
 
-    private static int getCookTime(final World world,final ComputerReactorTileEntityInventory reactorTileEntityInventory)
+    private static int getCookTime(final World world,final ComputerReactorBlockEntityInventory reactorTileEntityInventory)
     {
-        return reactorTileEntityInventory.matchGetter.getFirstMatch(reactorTileEntityInventory, world).map(recipeEntry -> recipeEntry.value().getCookingTime()).orElse(Integer.valueOf(200)).intValue();
+        return reactorTileEntityInventory.matchGetter.getFirstMatch(reactorTileEntityInventory, world).map(recipeEntry -> recipeEntry.value().getCookingTime()).orElse(200);
     }
     public void setLastRecipe(final RecipeEntry<?> recipe)
     {

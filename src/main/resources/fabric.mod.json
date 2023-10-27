@@ -31,6 +31,9 @@
     "server":[
         "com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoServer"
     ],
+    "rei_client": [
+        "com.Ultra_Nerd.CodeLyokoLegacy.Compat.CodeLyokoREIClientPlugin"
+    ],
     "cardinal-components": [
                 "com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData"
             ]

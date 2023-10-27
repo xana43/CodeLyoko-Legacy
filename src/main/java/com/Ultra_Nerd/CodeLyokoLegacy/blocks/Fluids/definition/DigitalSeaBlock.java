@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MantaEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.Piranha;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDamageSources;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
@@ -13,7 +14,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
 
 public final class DigitalSeaBlock extends FluidBlock {
 
@@ -29,6 +29,10 @@ public final class DigitalSeaBlock extends FluidBlock {
             entity.damage(ModDamageSources.digitalOceanSource, Float.MAX_VALUE);
             if (entity instanceof ArrowEntity) {
                 entity.kill();
+            }
+            if(entity instanceof final ServerTriplicateCloneEntity triplicateClone)
+            {
+                triplicateClone.kill();
             }
         }
     }

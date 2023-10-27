@@ -3,15 +3,11 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
+import java.util.Optional;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Model;
+import net.minecraft.data.client.*;
 import net.minecraft.item.Item;
-
-import java.util.Optional;
-
 
 public final class ModelGenerator extends FabricModelProvider {
 
@@ -24,6 +20,7 @@ public final class ModelGenerator extends FabricModelProvider {
             loopBuilder.append("item/").append(parent);
             return new Model(Optional.of(CodeLyokoMain.codeLyokoPrefix(loopBuilder.toString())),Optional.empty());
         }
+        
         public static Model block(final String parent)
         {
             loopBuilder.setLength(0);
@@ -65,6 +62,7 @@ public final class ModelGenerator extends FabricModelProvider {
         {
             ModelMethods.registerDefaultBucketItem(itemModelGenerator,item);
         }
+        itemModelGenerator.register(ModItems.LYOKO_THEME_INSTRUMENTAL,Models.GENERATED);
 
     }
 }

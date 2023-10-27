@@ -27,10 +27,20 @@
     ]
   },
   "lyoko": {
-    "subtitle": "play.CodeLyokoTheme",
+    "subtitle": "play.codelyoko.theme",
     "sounds": [
       {
         "name": "codelyoko:records/lyoko",
+        "stream": true,
+        "preload": true
+      }
+    ]
+  },
+  "lyoko.instrumental": {
+    "subtitle": "player.codelyoko.instrumental.theme",
+    "sounds": [
+      {
+        "name": "codelyoko:records/lyoko_theme_instrumental",
         "stream": true,
         "preload": true
       }
@@ -268,11 +278,11 @@
       }
     ]
   },
-  "player.devertualization": {
-    "subtitle": "player devertualize",
+  "player.devirtualization": {
+    "subtitle": "player devirtualize",
     "sounds": [
       {
-        "name": "codelyoko:events/player_devertualize",
+        "name": "codelyoko:events/player_devirtualize",
         "stream": false,
         "preload": true
       }

@@ -7,8 +7,8 @@
     "DisableStatusEffectRenderer",
     "InventoryScreenDropDisable",
     "ItemDropMixin",
+    "LivingEntityLyokoMixin",
     "PlayerLyokoMixin",
-    "RetainXP",
     "StopInventoryDrop",
     "util.LyokoRarityMixin"
   ],

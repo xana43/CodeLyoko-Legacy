@@ -5,15 +5,14 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.SuperCalculator.DataPacketType;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.SyncedBlockEntity;
 import com.google.common.collect.Lists;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import java.util.List;
+import java.util.Map;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public final class CableBlockEntity extends SyncedBlockEntity {
     private static final List<BlockPos> NETWORK_DEFINITION = new ObjectArrayList<>();
@@ -35,7 +34,7 @@ public final class CableBlockEntity extends SyncedBlockEntity {
             }
         }
     }
-    private static final Map<BlockPos,DemarcationBlockEntity> DEMARCATION_BLOCK_ENTITY_CACHE = new HashMap<>();
+    private static final Map<BlockPos,DemarcationBlockEntity> DEMARCATION_BLOCK_ENTITY_CACHE = new Object2ObjectOpenHashMap<>();
 
     public void transferData(final int id, final DataPacketType<?> packet)
     {

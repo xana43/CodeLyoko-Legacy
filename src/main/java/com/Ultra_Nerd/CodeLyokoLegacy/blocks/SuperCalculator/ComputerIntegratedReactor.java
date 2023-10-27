@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ComputerReactorBlockEntityInventory;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ComputerReactorTileEntityInventory;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -37,7 +37,7 @@ public final class ComputerIntegratedReactor extends AbstractFurnaceBlock implem
     @Override
     protected void openScreen(final World world, final BlockPos pos, final PlayerEntity player) {
        final BlockEntity blockEntity = world.getBlockEntity(pos);
-       if(blockEntity instanceof ComputerReactorTileEntityInventory)
+       if(blockEntity instanceof ComputerReactorBlockEntityInventory)
        {
            player.openHandledScreen((NamedScreenHandlerFactory) blockEntity);
 
@@ -53,8 +53,8 @@ public final class ComputerIntegratedReactor extends AbstractFurnaceBlock implem
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
         return (world1, pos, state1, blockEntity) -> {
-            if (blockEntity instanceof final ComputerReactorTileEntityInventory computerReactorTileEntityInventory) {
-                computerReactorTileEntityInventory.tick();
+            if (blockEntity instanceof final ComputerReactorBlockEntityInventory computerReactorBlockEntityInventory) {
+                computerReactorBlockEntityInventory.tick();
             }
         };
     }
@@ -63,7 +63,7 @@ public final class ComputerIntegratedReactor extends AbstractFurnaceBlock implem
     public void onStateReplaced(final BlockState state, final World world, final BlockPos pos, final BlockState newState, final boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             final BlockEntity BE = world.getBlockEntity(pos);
-            if (BE instanceof final ComputerReactorTileEntityInventory reactorTile) {
+            if (BE instanceof final ComputerReactorBlockEntityInventory reactorTile) {
                 ItemScatterer.spawn(world, pos, reactorTile);
                 world.updateComparators(pos, this);
             }

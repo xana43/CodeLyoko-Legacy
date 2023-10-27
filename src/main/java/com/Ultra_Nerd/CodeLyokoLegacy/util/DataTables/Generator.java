@@ -9,7 +9,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
 
-
 public record Generator() implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(final FabricDataGenerator fabricDataGenerator) {
@@ -28,6 +27,7 @@ public record Generator() implements DataGeneratorEntrypoint {
         pack.addProvider(LanguageGenerators.FrenchProvider::new);
         pack.addProvider(ModelGenerator::new);
         pack.addProvider(CustomAdvancements::new);
+        pack.addProvider(LootTables.EntityLootTable::new);
     }
 
     @Override

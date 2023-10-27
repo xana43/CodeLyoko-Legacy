@@ -5,21 +5,25 @@ import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerProfile;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.level.LevelComponents;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 @SuppressWarnings("MethodMayBeStatic")
 public final class PlayerProfileStorage implements AutoSyncedComponent{
 
 
     //private PlayerEntity player;
-    private static final Map<UUID,NbtCompound> PLAYER_PROFILE_HASH_MAP = new HashMap<>();
+    private static final Map<UUID,NbtCompound> PLAYER_PROFILE_HASH_MAP = new Object2ObjectOpenHashMap<>();
 
     public void saveProfile(final PlayerEntity player)
     {
+
         //CodeLyokoMain.LOG.info(PLAYER_PROFILE_HASH_MAP.toString());
         PLAYER_PROFILE_HASH_MAP.computeIfAbsent(player.getUuid(),uuid -> {
             CodeLyokoMain.LOG.info("initial player save");
@@ -44,7 +48,7 @@ public final class PlayerProfileStorage implements AutoSyncedComponent{
     {
         profileCache.clear();
     }
-    private static final Map<UUID,PlayerProfile> profileCache = new HashMap<>();
+    private static final Map<UUID,PlayerProfile> profileCache = new Object2ObjectOpenHashMap<>();
     public PlayerProfile getPlayerProfile(final PlayerEntity player)
     {
         final UUID playerUUID = player.getUuid();

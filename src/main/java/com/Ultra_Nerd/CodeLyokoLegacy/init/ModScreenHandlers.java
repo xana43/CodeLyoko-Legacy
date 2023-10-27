@@ -1,52 +1,62 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ElectricitySystemHandlers.RackChargerHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.SuperCalculatorNetwork.DemarcationScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TestHandler.ProfileDebugScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TestHandler.VehicleMaterializeTestHandler;
-import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 
 public record ModScreenHandlers() {
 
 
-    public static final ScreenHandlerType<TowerInterfaceScreenHandler> TOWER_INTERFACE_SCREEN_HANDLER = new ExtendedScreenHandlerType<>(
-            (syncId, playerInventory,buf) -> new TowerInterfaceScreenHandler(syncId,playerInventory.player,buf));
-    public static final ScreenHandlerType<ComputerControlPanelScreenHandler> CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE = new ExtendedScreenHandlerType<>(
+    public static final ScreenHandlerType<ComputerCirculatorScreenHandler> COMPUTER_CIRCULATOR_SCREEN_HANDLER =
+            registerExtendedModScreenHandler("computer_circulator_screen_handler", (syncId, inventory, buf) -> new ComputerCirculatorScreenHandler(syncId,
+                    inventory.player, buf));
+    public static final ScreenHandlerType<ComputerInterfaceScreenHandler> COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE = registerExtendedModScreenHandler("computer_interface_screen_handler", (syncId, inventory, buf) -> new ComputerInterfaceScreenHandler(syncId,
+            inventory.player, inventory.player.getWorld().getLevelProperties(), buf));
+    public static final ScreenHandlerType<ComputerControlPanelScreenHandler> CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE = registerExtendedModScreenHandler("computer_controlpanel",
             (syncId, inventory, buf) -> new ComputerControlPanelScreenHandler(syncId, buf));
-    public static final ScreenHandlerType<ReactorScreenHandler> COMPUTER_REACTOR_SCREEN_HANDLER = new ScreenHandlerType<>(
-            ReactorScreenHandler::new, FeatureFlags.VANILLA_FEATURES);
-    public static final ScreenHandlerType<ComputerInterfaceScreenHandler> COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE =
-            new ExtendedScreenHandlerType<>((syncId, inventory, buf) -> new ComputerInterfaceScreenHandler(syncId,
-                    inventory.player,inventory.player.getWorld().getLevelProperties(),buf));
-
+    public static final ScreenHandlerType<ReactorScreenHandler> COMPUTER_REACTOR_SCREEN_HANDLER = registerModScreenHandler("computer_reactor_screen_handler",
+            ReactorScreenHandler::new);
+    public static final ScreenHandlerType<DemarcationScreenHandler> DEMARCATION_SCREEN_HANDLER_TYPE =
+            registerExtendedModScreenHandler("demarcation_screen_handler", (syncId, inventory, buf) -> new DemarcationScreenHandler(syncId, buf));
     //test screens
     public static final ScreenHandlerType<ProfileDebugScreenHandler> PROFILE_DEBUG_SCREEN_HANDLER_SCREEN_HANDLER_TYPE =
-            new ExtendedScreenHandlerType<>((syncId, inventory, buf) -> new ProfileDebugScreenHandler(syncId,
+            registerExtendedModScreenHandler("profiledebugger", (syncId, inventory, buf) -> new ProfileDebugScreenHandler(syncId,
                     inventory.player, inventory.player.getWorld().getLevelProperties()));
-    public static final ScreenHandlerType<VehicleMaterializeTestHandler> VEHICLE_MATERIALIZE_TEST_HANDLER_SCREEN_HANDLER_TYPE =
-            new ScreenHandlerType<>((syncId, playerInventory) -> new VehicleMaterializeTestHandler(syncId),
-                    FeatureFlags.VANILLA_FEATURES);
-    public static final ScreenHandlerType<ComputerCirculatorScreenHandler> COMPUTER_CIRCULATOR_SCREEN_HANDLER =
-            new ExtendedScreenHandlerType<>((syncId, inventory, buf) -> new ComputerCirculatorScreenHandler(syncId,
-                    inventory.player,buf));
     public static final ScreenHandlerType<RackChargerHandler> RACK_CHARGER_HANDLER_SCREEN_TYPE =
-            new ScreenHandlerType<>(RackChargerHandler::new,FeatureFlags.VANILLA_FEATURES);
+            registerModScreenHandler("rack_charger_screen_handler", RackChargerHandler::new);
+    public static final ScreenHandlerType<TowerInterfaceScreenHandler> TOWER_INTERFACE_SCREEN_HANDLER = registerExtendedModScreenHandler("tower_screen_handler",
+            (syncId, playerInventory, buf) -> new TowerInterfaceScreenHandler(syncId, playerInventory.player, buf));
+    public static final ScreenHandlerType<VehicleMaterializeTestHandler> VEHICLE_MATERIALIZE_TEST_HANDLER_SCREEN_HANDLER_TYPE =
+            registerModScreenHandler("vehicletest", (syncId, playerInventory) -> new VehicleMaterializeTestHandler(syncId));
+    public static final ScreenHandlerType<LithographyScreenHandler> LITHOGRAPHY_SCREEN_HANDLER_TYPE = registerModScreenHandler("lithography_screen_handler",
+            LithographyScreenHandler::new);
+    private static <T extends ScreenHandler> ScreenHandlerType<T> registerModScreenHandler(final String name, final ScreenHandlerType.Factory<T> factory) {
+        return Registry.register(Registries.SCREEN_HANDLER, CodeLyokoMain.codeLyokoPrefix(name),
+                new ScreenHandlerType<>(factory, FeatureFlags.VANILLA_FEATURES));
+    }
 
-    public static final ScreenHandlerType<DemarcationScreenHandler> DEMARCATION_SCREEN_HANDLER_TYPE =
-            new ExtendedScreenHandlerType<>((syncId, inventory, buf) -> new DemarcationScreenHandler(syncId,buf));
-    public static final ImmutableMap<String, ScreenHandlerType<?>> screenHandlerMap = ImmutableMap.<String, ScreenHandlerType<?>>builder()
-            .put("tower_screen_handler", TOWER_INTERFACE_SCREEN_HANDLER)
-            .put("computer_controlpanel", CONTROL_PANEL_SCREEN_HANDLER_SCREEN_HANDLER_TYPE)
-            .put("computer_reactor_screen_handler", COMPUTER_REACTOR_SCREEN_HANDLER)
-            .put("computer_interface_screen_handler",COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE)
-            .put("profiledebugger",PROFILE_DEBUG_SCREEN_HANDLER_SCREEN_HANDLER_TYPE)
-            .put("vehicletest",VEHICLE_MATERIALIZE_TEST_HANDLER_SCREEN_HANDLER_TYPE)
-            .put("computer_circulator_screen_handler",COMPUTER_CIRCULATOR_SCREEN_HANDLER)
-            .put("rack_charger_screen_handler",RACK_CHARGER_HANDLER_SCREEN_TYPE)
-            .put("demarcation_screen_handler",DEMARCATION_SCREEN_HANDLER_TYPE)
-            .build();
+    private static <T extends ScreenHandler> ExtendedScreenHandlerType<T> registerExtendedModScreenHandler(final String name, final ExtendedScreenHandlerType.ExtendedFactory<T> factory) {
+        return Registry.register(Registries.SCREEN_HANDLER, CodeLyokoMain.codeLyokoPrefix(name),
+                new ExtendedScreenHandlerType<>(factory));
+    }
+    public static void registerScreenHandlers() {
+    }
+
+
+
+
+
+
+
+
+
 }

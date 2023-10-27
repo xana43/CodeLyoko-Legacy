@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "codelyoko:item/lyoko_disc_instrumental"
+  }
+}

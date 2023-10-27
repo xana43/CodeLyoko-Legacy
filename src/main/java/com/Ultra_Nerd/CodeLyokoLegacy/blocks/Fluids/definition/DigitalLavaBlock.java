@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDamageSources;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -22,9 +23,14 @@ public final class DigitalLavaBlock extends FluidBlock {
         super.onEntityCollision(state, world, pos, entity);
         if (!world.isClient) {
             entity.setOnFireFromLava();
+
             entity.damage(ModDamageSources.digitalLavaSource, Float.MAX_VALUE);
             if (entity instanceof ArrowEntity) {
                 entity.kill();
+            }
+            if(entity instanceof final ServerTriplicateCloneEntity triplicateClone)
+            {
+                triplicateClone.kill();
             }
         }
     }

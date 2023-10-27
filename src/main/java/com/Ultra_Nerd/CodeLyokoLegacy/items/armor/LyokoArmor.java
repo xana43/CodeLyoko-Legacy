@@ -54,21 +54,21 @@ public abstract class LyokoArmor extends ArmorItem {
                 player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).setCount(0);
 
                 if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId())
-                        .isOf(ModItems.BLANKHELMET)) {
+                        .isOf(ModItems.BLANK_HELMET)) {
                     player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
                 }
             }
             if (player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).isOf(armorItem)) {
                 player.getInventory().getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).setCount(0);
                 if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId())
-                        .isOf(ModItems.BLANKHELMET)) {
+                        .isOf(ModItems.BLANK_HELMET)) {
                     player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
                 }
             }
             if (player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).isOf(armorItem)) {
                 player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId()).setCount(0);
                 if (player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId())
-                        .isOf(ModItems.BLANKHELMET)) {
+                        .isOf(ModItems.BLANK_HELMET)) {
                     player.getInventory().getArmorStack(EquipmentSlot.HEAD.getEntitySlotId()).setCount(0);
                 }
             }

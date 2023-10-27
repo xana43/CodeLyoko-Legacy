@@ -1,19 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @SuppressWarnings("MethodMayBeStatic")
 public final class PlayerScannerComponent implements AutoSyncedComponent {
 
 
-    private static final HashMap<UUID,BlockPos> POS_HASH_MAP = new HashMap<>();
+    private static final Map<UUID,BlockPos> POS_HASH_MAP = new Object2ObjectOpenHashMap<>();
 
 
 

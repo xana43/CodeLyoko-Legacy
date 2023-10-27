@@ -3,10 +3,12 @@ package com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.text.Text;
 
 public record ClassData() {
 
@@ -31,7 +33,11 @@ public record ClassData() {
                     if (clone != null) {
                         clone.setOwner(player.getGameProfile(),player.getServer());
                     }
-                    player.getWorld().spawnEntity(clone);
+                    if (!MethodUtil.DimensionCheck.playerInVanilla(player)) {
+                        player.getWorld().spawnEntity(clone);
+                    } else {
+                        player.sendMessage(Text.translatable("triplicate.cannot.spawn"));
+                    }
                 }
             }
         }

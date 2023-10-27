@@ -3,6 +3,9 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.CustomRecipeBuilderProvid
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFuels;
 import com.google.gson.JsonObject;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import java.util.Map;
+import java.util.Objects;
 import net.minecraft.advancement.*;
 import net.minecraft.advancement.criterion.RecipeUnlockedCriterion;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
@@ -20,10 +23,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
-
 public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
     private final RecipeCategory category;
     private final CookingRecipeCategory cookingRecipeCategory;
@@ -31,7 +30,7 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
     private final Item output;
     private final float experience;
     private final int cookingTime;
-    private final Map<String,AdvancementCriterion<?>> criteria = new LinkedHashMap<>();
+  private final Map<String, AdvancementCriterion<?>> criteria = new Object2ObjectLinkedOpenHashMap<>();
     private String group;
     private final RecipeSerializer<? extends AbstractCookingRecipe> serializer;
 
