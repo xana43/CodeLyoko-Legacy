@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperComputerNetwork;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.SuperCalculator.DataPacketType;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.SyncedBlockEntity;
@@ -47,7 +46,6 @@ public final class CableBlockEntity extends SyncedBlockEntity {
                 final DemarcationBlockEntity cachedDemarcationPoint = DEMARCATION_BLOCK_ENTITY_CACHE.get(demarcatePosition);
                 if(cachedDemarcationPoint != null && cachedDemarcationPoint.getId() == id)
                 {
-                    CodeLyokoMain.LOG.warn("");
                     cachedDemarcationPoint.testDataReceive(packet);
                     return;
                 }

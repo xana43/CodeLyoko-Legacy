@@ -11,7 +11,7 @@ import net.minecraft.client.util.SkinTextures;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
-public class TriplicateRenderer<T extends ServerTriplicateCloneEntity> extends EntityRenderer<T> {
+public final class TriplicateRenderer<T extends ServerTriplicateCloneEntity> extends EntityRenderer<T> {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     private final EntityRendererFactory.Context ctx;
     public TriplicateRenderer(final EntityRendererFactory.Context ctx) {

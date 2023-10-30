@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.google.common.collect.ImmutableMap;
+import java.util.concurrent.atomic.AtomicReference;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -11,8 +12,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
-
-import java.util.concurrent.atomic.AtomicReference;
 
 public record ModBiomes() {
 

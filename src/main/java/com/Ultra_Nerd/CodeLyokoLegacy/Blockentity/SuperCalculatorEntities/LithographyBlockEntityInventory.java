@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.LithographyScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
@@ -76,9 +75,9 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
     @Override
     protected void writeNbt(final NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putInt("ReactionTime", lithographyTime);
-        nbt.putInt("IrradiationTime", manufacturingTime);
-        nbt.putInt("IrradiationTimeTotal", manufacturingTimeTotal);
+        nbt.putInt("LithographyTime", lithographyTime);
+        nbt.putInt("ManufacturingTime", manufacturingTime);
+        nbt.putInt("ManufacturingTimeTotal", manufacturingTimeTotal);
         final NbtCompound nbtCompound = new NbtCompound();
         recipesUsed.forEach((identifier, integer) -> nbtCompound.putInt(identifier.toString(), integer));
         nbt.put("RecipesUsed",nbtCompound);
@@ -87,10 +86,10 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
     @Override
     public void readNbt(final NbtCompound nbt) {
         super.readNbt(nbt);
-        lithographyTime = nbt.getInt("ReactionTime");
-        manufacturingTime = nbt.getInt("IrradiationTime");
-        manufacturingTimeTotal = nbt.getInt("IrradiationTimeTotal");
-        fuelMass = getFuelTime(itemStacks.get(0));
+        lithographyTime = nbt.getInt("LithographyTime");
+        manufacturingTime = nbt.getInt("ManufacturingTime");
+        manufacturingTimeTotal = nbt.getInt("ManufacturingTimeTotal");
+        fuelMass = getFuelTime();
         final NbtCompound nbtCompound = nbt.getCompound("RecipesUsed");
         for (final String string : nbtCompound.getKeys()) {
             recipesUsed.put(new Identifier(string), nbtCompound.getInt(string));
@@ -130,11 +129,11 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
         boolean isGottenItemStackEmpty1 = !itemStack1.isEmpty();
         final ItemStack itemStack2 = getStack(1);
         boolean isCurrentItemStackEmpty2 = !getStack(1).isEmpty();
-        boolean isGottenItemStackEmpty2 = !itemStack1.isEmpty();
+        boolean isGottenItemStackEmpty2 = !itemStack2.isEmpty();
         final ItemStack itemStack3 = getStack(2);
         boolean isCurrentItemStackEmpty3 = !getStack(2).isEmpty();
-        boolean isGottenItemStackEmpty3 = !itemStack1.isEmpty();
-        if(isManufacturing() || isCurrentItemStackEmpty1 && isGottenItemStackEmpty1 && isCurrentItemStackEmpty2 && isGottenItemStackEmpty2 && isCurrentItemStackEmpty3 && isGottenItemStackEmpty3 && energyStorage.amount > 0)
+        boolean isGottenItemStackEmpty3 = !itemStack3.isEmpty();
+        if(isManufacturing() || isCurrentItemStackEmpty1 && isGottenItemStackEmpty1 && isCurrentItemStackEmpty2 && isGottenItemStackEmpty2 && isCurrentItemStackEmpty3 && isGottenItemStackEmpty3/*&& energyStorage.amount > 0*/)
         {
             RecipeEntry<?> recipe;
             if(isCurrentItemStackEmpty1 && isCurrentItemStackEmpty2 && isCurrentItemStackEmpty3)
@@ -144,25 +143,25 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
             else {
                 recipe = null;
             }
+
+
+
             final int maxCount = getMaxCountPerStack();
-
-
-
             if(!isManufacturing() && canAcceptRecipeOutput(world.getRegistryManager(),recipe,itemStacks,maxCount))
             {
-                    lithographyTime = getFuelTime(itemStack1);
+                    lithographyTime = getFuelTime();
                     fuelMass = lithographyTime;
                     if (isManufacturing()) {
                         manufacturing = true;
-                        if (isGottenItemStackEmpty1 && isGottenItemStackEmpty2 && isGottenItemStackEmpty3) {
-
+                        /*if (isGottenItemStackEmpty1 && isGottenItemStackEmpty2 && isGottenItemStackEmpty3) {
                             final Item item = itemStack1.getItem();
                             final Item item2 = itemStack2.getItem();
                             final Item item3 = itemStack3.getItem();
                             itemStack1.decrement(1);
                             itemStack2.decrement(1);
                             itemStack3.decrement(1);
-                            if (itemStack1.isEmpty()) {
+                            if (itemStack1.isEmpty() && itemStack2.isEmpty() && itemStack3.isEmpty()) {
+
                                 final Item remainderItem = item.getRecipeRemainder();
                                 final Item remainderItem2 = item2.getRecipeRemainder();
                                 final Item remainderItem3 = item3.getRecipeRemainder();
@@ -172,8 +171,9 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
                                 else {
                                     setStack(3,ItemStack.EMPTY);
                                  }
+
                             }
-                        }
+                        }*/
                     }
 
             }
@@ -239,13 +239,23 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
             return false;
         }
     }
+    private static boolean goldRequirement(final DefaultedList<ItemStack> slots)
+    {
+        final ItemStack[] inputItemSlots = {slots.get(0), slots.get(1),slots.get(2)};
 
+        if(inputItemSlots[0].isOf(Items.GOLD_NUGGET))
+        {
+            return inputItemSlots[0].getCount() >= 2;
+        } else if(inputItemSlots[1].isOf(Items.GOLD_NUGGET)) {
+            return inputItemSlots[1].getCount() >= 2;
+        } else if(inputItemSlots[2].isOf(Items.GOLD_NUGGET)){
+            return inputItemSlots[2].getCount() >= 2;
+        }
+        return true;
+    }
     private static boolean craftRecipe(final DynamicRegistryManager registryManager,final @Nullable RecipeEntry<?> recipe,
             final DefaultedList<ItemStack> slots,final int count) {
-        if (recipe != null && canAcceptRecipeOutput(registryManager, recipe, slots, count)) {
-            final ItemStack inputItemStack = slots.get(0);
-            final ItemStack inputItemStack2 = slots.get(1);
-            final ItemStack inputItemStack3 = slots.get(2);
+        if (recipe != null && canAcceptRecipeOutput(registryManager, recipe, slots, count) && goldRequirement(slots)) {
             final ItemStack itemStack2 = recipe.value().getResult(registryManager);
             final ItemStack itemStack3 = slots.get(3);
             if (itemStack3.isEmpty()) {
@@ -253,20 +263,24 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
             } else if (itemStack3.isOf(itemStack2.getItem())) {
                 itemStack3.increment(1);
             }
-
-
-            
-            inputItemStack.decrement(1);
-            inputItemStack2.decrement(1);
-            inputItemStack3.decrement(1);
+            final ItemStack[] inputItemSlots = {slots.get(0), slots.get(1),slots.get(2)};
+            for(final ItemStack stack : inputItemSlots)
+            {
+                if(stack.isOf(Items.GOLD_NUGGET))
+                {
+                    stack.decrement(2);
+                } else {
+                    stack.decrement(1);
+                }
+            }
             return true;
         } else {
             return false;
         }
     }
-    private static int getFuelTime(final ItemStack fuel)
+    private static int getFuelTime()
     {
-        return MethodUtil.TickConversion.secondsToTicks(60);
+        return MethodUtil.TickConversion.secondsToTicks(120);
     }
     
     @Override
@@ -311,8 +325,6 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
     {
         if(recipe != null)
         {
-            CodeLyokoMain.LOG.debug("setting last recipe");
-            CodeLyokoMain.LOG.info("setting last recipe");
             final Identifier identifier = recipe.id();
             this.recipesUsed.addTo(identifier,1);
         }

@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModRecipes;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModTags;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.CustomRecipeBuilderProviders.CustomCookingRecipeJsonBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import java.util.List;
@@ -43,14 +44,14 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
                 .pattern("hhh")
                 .offerTo(withConditions(exporter, NEVER_LOADED), CodeLyokoMain.codeLyokoPrefix("screwdriver"));
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS,ModBlocks.ANODE_PART).input('c',
-                        Items.COPPER_INGOT)
+                        ModTags.ItemTags.COMMON_COPPER_INGOTS)
                 .criterion("knows_anode", conditionsFromItem(ModBlocks.ANODE_PART))
                 .pattern("c c")
                 .pattern("c c")
                 .pattern("c c")
                 .offerTo(withConditions(exporter, NEVER_LOADED), CodeLyokoMain.codeLyokoPrefix("anode"));
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC,ModItems.INTEGRATED_HEAT_SPREADER, 20).input('i',
-                        Items.IRON_INGOT)
+                        ModTags.ItemTags.COMMON_IRON_INGOTS)
                 .input('p', Items.HEAVY_WEIGHTED_PRESSURE_PLATE)
                 .criterion("knows_ihs", conditionsFromItem(ModItems.INTEGRATED_HEAT_SPREADER))
                 .pattern("iii")
@@ -63,21 +64,21 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
                 .pattern("bsb")
                 .pattern("sss")
                 .offerTo(withConditions(exporter, NEVER_LOADED), CodeLyokoMain.codeLyokoPrefix("keycap"));
-        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS,ModBlocks.CATHODE_PART).input('c', Items.COPPER_INGOT)
-                .input('i', Items.IRON_INGOT).criterion("knows_cathode", conditionsFromItem(ModBlocks.CATHODE_PART))
+        ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS,ModBlocks.CATHODE_PART).input('c', ModTags.ItemTags.COMMON_COPPER_INGOTS)
+                .input('i', ModTags.ItemTags.COMMON_IRON_INGOTS).criterion("knows_cathode", conditionsFromItem(ModBlocks.CATHODE_PART))
                 .pattern("cic")
                 .pattern("cic")
                 .pattern("cic")
                 .offerTo(withConditions(exporter, NEVER_LOADED), CodeLyokoMain.codeLyokoPrefix("cathode"));
         ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC,ModItems.RAW_POLYCARBONATE).input(Items.CLAY_BALL).input(Items.BLACKSTONE)
-                .input(Items.AMETHYST_BLOCK).input(Items.GRANITE).input(Items.GRAVEL).input(Items.LAVA_BUCKET)
+                .input(Items.AMETHYST_BLOCK).input(Items.GRANITE).input(ModTags.ItemTags.COMMON_GRAVEL).input(Items.LAVA_BUCKET)
                 .input(Items.HONEY_BLOCK).criterion("knows_polycarbonate", conditionsFromItem(ModItems.SILICON_WAFER))
                 .offerTo(exporter, CodeLyokoMain.codeLyokoPrefix("polycarbonate"));
         offerBlasting(exporter, List.of(ModItems.RAW_SILICADUST),RecipeCategory.MISC, ModItems.SILICON_WAFER, 38, 50,
                 CodeLyokoMain.codeLyokoPrefix("refinement").toString());
         offerBlasting(exporter, List.of(ModItems.RAW_POLYCARBONATE),RecipeCategory.MISC, ModItems.MOLTEN_POLYCARBONATE_CONCENTRATE, 78, 88,
                 CodeLyokoMain.codeLyokoPrefix("refinement").toString());
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC,ModItems.KEY_SPRING).input('i', Items.IRON_INGOT)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC,ModItems.KEY_SPRING).input('i', ModTags.ItemTags.COMMON_IRON_INGOTS)
                 .criterion("knows_key_spring", conditionsFromItem(ModItems.KEY_SPRING))
                 .pattern("iii")
                 .pattern(" i ")
@@ -89,9 +90,18 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
                 ,ModBlocks.URANIUM_BLOCK_238);
         offerReversibleCompactingRecipes(exporter,RecipeCategory.MISC,ModItems.SOLID_QUANTUM,RecipeCategory.MISC,
                 ModBlocks.QUANTUM_BLOCK);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC,ModItems.URANIUM_BATTERY_STARTER,1).input('c',ModTags.ItemTags.URANIUM_235_INGOTS).input('t',ModTags.ItemTags.LEAD_INGOTS)
+                        .pattern("ttt")
+                        .pattern("tct")
+                        .pattern("ttt").criterion("has_uranium",conditionsFromItem(ModBlocks.URANINITE_ORE));
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC,ModItems.SILICON_WAFER).input('a',ModTags.ItemTags.COMMON_SILICON)
+                .pattern("aaa")
+                .pattern("aaa")
+                .pattern("aaa");
         CustomRecipeUtil.offerReacting(exporter, ObjectList.of(ModItems.URANIUM_ISOTOPE235), ModItems.URANIUM_ISOTOPE238);
         CustomRecipeUtil.offerReacting(exporter,ObjectList.of(ModBlocks.URANIUM_BLOCK_235), ModBlocks.URANIUM_BLOCK_238);
         CustomRecipeUtil.offerLithographyArray(exporter,ObjectList.of(ModItems.SILICON_WAFER,Items.COPPER_INGOT,Items.GOLD_NUGGET),ModItems.CPU_DIE_ARM);
+
 
     }
 
@@ -138,5 +148,6 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
                 CustomCookingRecipeJsonBuilder.create(Ingredient.ofItems(itemConvertible), RecipeCategory.MISC,output,experience,serializer).group(declaredGroup).criterion(hasItem(itemConvertible),conditionsFromItem(itemConvertible)).offerTo(exporter,recipePathBuilder.toString());
             }
         }
+        
     }
 }

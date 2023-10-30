@@ -22,11 +22,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.WorldProperties;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public record CardinalData() implements EntityComponentInitializer, LevelComponentInitializer {
 
@@ -46,9 +49,12 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         registry.registerForPlayers(MindHelmStress.MINDHELMSTRESS,player -> new MindHelmStressComponent(),RespawnCopyStrategy.NEVER_COPY);
         registry.registerForPlayers(HumanDNAAttribute.HUMAN_DNA_COMPONENT_KEY, HumanDNA::new, RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(CellularDamage.DEGENERATION_COMPONENT_KEY,CellularDegeneration::new, RespawnCopyStrategy.CHARACTER);
-        registry.registerForPlayers(DigitalEnergyComponent.DIGITAL_ENERGY_COMPONENT_KEY,(player -> new DigitalEnergy()));
-        registry.registerForPlayers(LyokoClass.ExtraClassData.SamuraiData.SAMURAI_CLASS_DATA_COMPONENT_KEY, ClassData.SamuraiClassData::new,RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(DigitalEnergyComponent.DIGITAL_ENERGY_COMPONENT_KEY,(DigitalEnergy::new));
         registry.registerForPlayers(MiscellaneousPlayerData.getMiscellaneousPlayerDataComponentComponentKey(),MiscellaneousPlayerDataComponent::new,RespawnCopyStrategy.ALWAYS_COPY);
+        //class capabilities
+        registry.registerForPlayers(LyokoClass.ExtraClassData.SamuraiData.SAMURAI_CLASS_DATA_COMPONENT_KEY, ClassCapabilities.SamuraiClassExtraCapabilities::new,RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(LyokoClass.ExtraClassData.NinjaData.NINJA_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY,ClassCapabilities.NinjaClassExtraCapabilities::new,RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(LyokoClass.ExtraClassData.GuardianData.GUARDIAN_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY,ClassCapabilities.GuardianClassExtraCapabilities::new,RespawnCopyStrategy.ALWAYS_COPY);
     }
     public record DigitalEnergyComponent()
     {
@@ -257,11 +263,11 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
             }
             public record SamuraiData()
             {
-                private static final ComponentKey<ClassData.SamuraiClassData> SAMURAI_CLASS_DATA_COMPONENT_KEY = ComponentRegistry.getOrCreate(
-                        recurseData("samurai_data"),ClassData.SamuraiClassData.class
+                private static final ComponentKey<ClassCapabilities.SamuraiClassExtraCapabilities> SAMURAI_CLASS_DATA_COMPONENT_KEY = ComponentRegistry.getOrCreate(
+                        recurseData("samurai_data"), ClassCapabilities.SamuraiClassExtraCapabilities.class
                 );
 
-                public static ComponentKey<ClassData.SamuraiClassData> getSamuraiClassDataComponentKey() {
+                public static ComponentKey<ClassCapabilities.SamuraiClassExtraCapabilities> getSamuraiClassDataComponentKey() {
                     return SAMURAI_CLASS_DATA_COMPONENT_KEY;
                 }
                 public static void addClone(final PlayerEntity player)
@@ -285,6 +291,44 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
                     SAMURAI_CLASS_DATA_COMPONENT_KEY.get(player).addMaxClones();
                     SAMURAI_CLASS_DATA_COMPONENT_KEY.sync(player);
                 }
+            }
+            public record NinjaData()
+            {
+                private static final ComponentKey<ClassCapabilities.NinjaClassExtraCapabilities> NINJA_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY = ComponentRegistry.getOrCreate(
+                        recurseData("ninja_data"), ClassCapabilities.NinjaClassExtraCapabilities.class
+                );
+                public static ComponentKey<ClassCapabilities.NinjaClassExtraCapabilities> getNinjaClassExtraCapabilitiesComponentKey()
+                {
+                    return NINJA_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY;
+                }
+                public static void pickTargetedBlock(final PlayerEntity player, final BlockHitResult result)
+                {
+                    NINJA_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY.get(player).pickTargetedBlock(result);
+                    NINJA_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY.sync(player);
+                }
+                public static void onDropped(final PlayerEntity player)
+                {
+                    NINJA_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY.get(player).onLetGoOfBlock();
+                    NINJA_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY.sync(player);
+                }
+                public static void pickTargetedEntity(final PlayerEntity player, final UUID result, final Vec3d lookingPosition)
+                {
+                    NINJA_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY.get(player).pickTargetedEntity(result,lookingPosition);
+                    NINJA_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY.sync(player);
+                }
+            }
+            public record GuardianData() {
+                private static final ComponentKey<ClassCapabilities.GuardianClassExtraCapabilities> GUARDIAN_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY = ComponentRegistry.getOrCreate(recurseData("guardian_data"),
+                        ClassCapabilities.GuardianClassExtraCapabilities.class);
+                public static ComponentKey<ClassCapabilities.GuardianClassExtraCapabilities> getGuardianClassExtraCapabilitiesComponentKey() {
+                    return GUARDIAN_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY;
+                }
+                public static void calculatePlacementLocation(final ServerPlayerEntity player,final BlockHitResult hitResult)
+                {
+                    GUARDIAN_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY.get(player).calculateWorldBlockPlacements(hitResult);
+                    GUARDIAN_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY.sync(player);
+                }
+
             }
         }
 

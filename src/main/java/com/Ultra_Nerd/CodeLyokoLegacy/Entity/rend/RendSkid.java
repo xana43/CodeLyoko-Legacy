@@ -18,11 +18,14 @@ import net.minecraft.util.math.RotationAxis;
 public final class RendSkid extends EntityRenderer<EntitySkid> {
     private static final Identifier TEXTURE = CodeLyokoMain.codeLyokoPrefix("textures/entity/skid/da4cdc01.png");
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    private static BakedModel SkidBlanirModel;
+    private static final BakedModel SkidBlanirModel;
 
+    static {
+        SkidBlanirModel = mc.getBakedModelManager().getModel(EntitySkid.getSkidLocation());
+    }
     public RendSkid(final EntityRendererFactory.Context ctx) {
         super(ctx);
-        SkidBlanirModel = mc.getBakedModelManager().getModel(EntitySkid.getSkidLocation());
+
     }
 
     @Override

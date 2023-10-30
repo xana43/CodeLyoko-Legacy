@@ -39,12 +39,19 @@ public record ModTags() {
                 CodeLyokoMain.codeLyokoPrefix("is_lyoko"));
     }
 
-    public record ItemTags()
-    {
+    public record ItemTags() {
         public static final TagKey<Item> URANIUM_BATTERIES = TagKey.of(RegistryKeys.ITEM,
                 CodeLyokoMain.codeLyokoPrefix("uranium_batteries"));
         public static final TagKey<Item> URANIUM_ORE_TAG = createCommonTag("raw_uranium_ores");
         public static final TagKey<Item> URANIUM_ORES_TAG = createCommonTag("uranium_ores");
+        public static final TagKey<Item> URANIUM_235_INGOTS = createCommonTag("uranium_235_ingots");
+        public static final TagKey<Item> URANIUM_238_INGOTS = createCommonTag("uranium_238_ingots");
+        public static final TagKey<Item> LEAD_INGOTS = createCommonTag("lead_ingots");
+        public static final TagKey<Item> COMMON_IRON_INGOTS = createCommonTag("iron_ingots");
+        public static final TagKey<Item> COMMON_COPPER_INGOTS = createCommonTag("copper_ingots");
+        public static final TagKey<Item> COMMON_GRAVEL = createCommonTag("gravel");
+        public static final TagKey<Item> COMMON_SILICON = createCommonTag("silicon");
+        public static final TagKey<Item> COMMON_SILICON_PLATES = createCommonTag("silicon_plates");
         private static TagKey<Item> createCommonTag(final String name)
         {
             return TagKey.of(Registries.ITEM.getKey(), new Identifier("c",name));

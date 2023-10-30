@@ -60,7 +60,8 @@ public final class DemarcationBlockEntity extends SyncedBlockEntity implements E
 
     public <T> void testDataReceive(final DataPacketType<T> dataPacket)
     {
-       CodeLyokoMain.LOG.error(String.valueOf(dataPacket.getEncapsulatedData().get(0)));
+
+       CodeLyokoMain.LOG.error(String.valueOf(dataPacket.encapsulatedData().get(0)));
     }
     private static final String UID_KEY = "uid",NAME_KEY = "name";
     @Override

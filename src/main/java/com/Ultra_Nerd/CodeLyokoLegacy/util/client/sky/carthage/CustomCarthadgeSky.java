@@ -29,7 +29,7 @@ public record CustomCarthadgeSky() implements DimensionRenderingRegistry.SkyRend
         matrixStack.push();
 
 
-        //originally in a for loop, but loop unrolling would REALLY be beneffical here because of the fact that the compiler won't know about how the matrix vertex works
+        //originally in a for loop, but loop unrolling would REALLY be beneficial here because the compiler won't know about how the matrix vertex works
         //only works for this renderer because it's just a simple cube
         final Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
         bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);

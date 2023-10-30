@@ -15,13 +15,14 @@ import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.SuperCalculatorDataLinker;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoRingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
+import com.Ultra_Nerd.CodeLyokoLegacy.screens.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ElectricitySystemScreens.RackChargerScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.SuperCalculatorNetworkScreens.DemarcationPointScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.PlayerProfileDebug;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.TestScreens.VehicleMaterializationTest;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.GeneralRendererUtils.RendererVariables;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.client.itemRenderers.ForceFieldEmitterRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.client.sky.carthage.CustomCarthadgeSky;
@@ -57,6 +58,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
@@ -65,15 +69,24 @@ import org.lwjgl.glfw.GLFW;
 @Environment(EnvType.CLIENT)
 public record CodeLyokoClient() implements ClientModInitializer {
 
-    private static final String keyCategory = "category." + CodeLyokoMain.MOD_ID + ".lyoko_controls";
+    private static String createKeyCategory(final String name)
+    {
+        return "category."+CodeLyokoMain.MOD_ID+'.'+name;
+    }
+
+    private static final String KEY_CATEGORY_MAIN = createKeyCategory("lyoko_controls");
+    private static final String KEY_CATEGORY_CREATIVE = createKeyCategory("creative_keys");
+
     //keybinds
     private static KeyBinding classScreenBinding;
-    private static KeyBinding classAbilityBinding1;
-    private static KeyBinding classAbilityBinding2;
+
     private static KeyBinding moveVehicleUp;
     private static KeyBinding moveVehicleDown;
+    private static KeyBinding classAbility;
     private static KeyBinding testClone;
     private static KeyBinding selectTransportHub;
+    private static KeyBinding testPsychic;
+    private static KeyBinding testGuardianBuild;
 
 
     private static void clientEvents() {
@@ -284,25 +297,30 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 , ModItems.STORY_BOOK, ModItems.STORY_BOOK2);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ((CustomColorBucket)stack.getItem()).getFluidColor(tintIndex),ModItems.LIQUID_HELIUM_BUCKET);
     }
+    private static String createKeyBindingTranslationKey(final String keyName)
+    {
+        return "key." + CodeLyokoMain.MOD_ID +'.' +keyName;
+    }
     private static void registerKeys()
     {
         classScreenBinding = KeyBindingHelper.registerKeyBinding(
-                new KeyBinding("key." + CodeLyokoMain.MOD_ID + ".class", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_ALT,
-                        keyCategory));
-        classAbilityBinding1 = KeyBindingHelper.registerKeyBinding(
-                new KeyBinding("key." + CodeLyokoMain.MOD_ID + ".class_ability1", InputUtil.Type.KEYSYM,
-                        GLFW.GLFW_KEY_V, keyCategory));
-        classAbilityBinding2 = KeyBindingHelper.registerKeyBinding(
-                new KeyBinding("key." + CodeLyokoMain.MOD_ID + ".class_ability2", InputUtil.Type.KEYSYM,
-                        GLFW.GLFW_KEY_B, keyCategory));
-        moveVehicleDown = KeyBindingHelper.registerKeyBinding(new KeyBinding("key."+CodeLyokoMain.MOD_ID+".vehicle.down",
-                InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_PAGE_DOWN,keyCategory));
-        moveVehicleUp = KeyBindingHelper.registerKeyBinding(new KeyBinding("key."+CodeLyokoMain.MOD_ID+".vehicle.up",
-                InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_PAGE_UP,keyCategory));
-        selectTransportHub = KeyBindingHelper.registerKeyBinding(new KeyBinding("key."+CodeLyokoMain.MOD_ID+".skidbladnir.selecthub",
-                InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_J,keyCategory));
-        testClone = KeyBindingHelper.registerKeyBinding(new KeyBinding("key."+CodeLyokoMain.MOD_ID+".test_clone",InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_GRAVE_ACCENT,keyCategory));
+                new KeyBinding(createKeyBindingTranslationKey("class"), InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_ALT,
+                        KEY_CATEGORY_MAIN));
+        moveVehicleDown = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("vehicle.down"),
+                InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_PAGE_DOWN, KEY_CATEGORY_MAIN));
+        moveVehicleUp = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("vehicle.up"),
+                InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_PAGE_UP, KEY_CATEGORY_MAIN));
+        selectTransportHub = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("skidbladnir.selecthub"),
+                InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_J, KEY_CATEGORY_MAIN));
+        classAbility = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("class_ability"),InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_G,KEY_CATEGORY_MAIN));
+        //test
+        testClone = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("test_clone"),InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_GRAVE_ACCENT, KEY_CATEGORY_CREATIVE));
+        testPsychic = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("test_psychic"),InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_APOSTROPHE, KEY_CATEGORY_CREATIVE));
+        testGuardianBuild = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("test_build"), InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_SEMICOLON, KEY_CATEGORY_CREATIVE));
     }
     private static final PacketByteBuf keyboardByteBuf = PacketByteBufs.create();
     @Override
@@ -347,31 +365,94 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
         //custom key response
 
-
+        WorldRenderEvents.LAST.register(context -> {
+            RendererVariables.setConsumerProvider(context.consumers());
+            RendererVariables.populateMatrixStack(context.matrixStack());
+        });
         //custom death screen
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
 
             if (client.player != null) {
-                if(testClone.wasPressed())
-                {
-                    //CardinalData.LyokoClass.ExtraClassData.SamuraiData.addClone(client.player);
-                    final PacketByteBuf buf = PacketByteBufs.create();
-                    buf.writeGameProfile(client.player.getGameProfile());
-                    ClientPlayNetworking.send(PacketHandler.TEST_TRIPILCATE_CLIENT_SPAWN,buf);
-                }
-                if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
-                    if (classAbilityBinding1.isPressed()) {
-                        CardinalData.DigitalEnergyComponent.setIsUsingEnergy(client.player, true);
-                        ClientPlayNetworking.send(PacketHandler.PRIMARY_CLASS_ABILITY, PacketByteBufs.empty());
+                if(client.player.getAbilities().creativeMode) {
+                    //testing buttons
+                    if (testClone.wasPressed()) {
+                        keyboardByteBuf.clear();
+                        keyboardByteBuf.writeGameProfile(client.player.getGameProfile());
+                        ClientPlayNetworking.send(PacketHandler.SPAWN_TRIPLICATE, keyboardByteBuf);
+                    }
+                    if (testPsychic.isPressed()) {
+                        final HitResult hitResult = client.crosshairTarget;
+                        final PacketByteBuf buf = PacketByteBufs.create();
+                        if (hitResult.getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.MISS) {
+                            buf.writeBlockHitResult((BlockHitResult) hitResult);
+                            ClientPlayNetworking.send(PacketHandler.RAY_CAST, buf);
+                        } else {
+                            final EntityHitResult entityHitResult = (EntityHitResult) hitResult;
+                            final Vec3d entityPosition = entityHitResult.getPos();
+                            buf.writeUuid(entityHitResult.getEntity().getUuid());
+                            buf.writeVec3d(entityPosition);
+                            ClientPlayNetworking.send(PacketHandler.RAY_CAST_ENTITY, buf);
+                        }
+                    } else if (!testPsychic.isPressed() && testPsychic.wasPressed()) {
+
+                        ClientPlayNetworking.send(PacketHandler.RAY_CAST_DROP, PacketByteBufs.empty());
 
                     }
-                    else if (classAbilityBinding2.isPressed()) {
-                        ClientPlayNetworking.send(PacketHandler.SECONDARY_CLASS_ABILITY, PacketByteBufs.empty());
+                    if (testGuardianBuild.wasPressed()) {
+                        final HitResult hitResult = client.crosshairTarget;
+                        final PacketByteBuf buf = PacketByteBufs.create();
+                        if (hitResult.getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.MISS) {
+                            buf.writeBlockHitResult((BlockHitResult) hitResult);
+                            ClientPlayNetworking.send(PacketHandler.BUILD_HOLOGRAM, buf);
+                        }
                     }
-                    else
+                } else {
+                    if(classAbility.isPressed())
                     {
-                        CardinalData.DigitalEnergyComponent.setIsUsingEnergy(client.player, false);
+                        switch (CardinalData.LyokoClass.getLyokoClass(client.player))
+                        {
+                            case 0 ->{}
+                            case 1 ->{
+                                keyboardByteBuf.clear();
+                                keyboardByteBuf.writeGameProfile(client.player.getGameProfile());
+                                ClientPlayNetworking.send(PacketHandler.SPAWN_TRIPLICATE, keyboardByteBuf);
+                            }
+                            case 2 ->{
+                                final HitResult hitResult = client.crosshairTarget;
+                                final PacketByteBuf buf = PacketByteBufs.create();
+                                if (hitResult.getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.MISS) {
+                                    buf.writeBlockHitResult((BlockHitResult) hitResult);
+                                    ClientPlayNetworking.send(PacketHandler.RAY_CAST, buf);
+                                } else {
+                                    final EntityHitResult entityHitResult = (EntityHitResult) hitResult;
+                                    final Vec3d entityPosition = entityHitResult.getPos();
+                                    buf.writeUuid(entityHitResult.getEntity().getUuid());
+                                    buf.writeVec3d(entityPosition);
+                                    ClientPlayNetworking.send(PacketHandler.RAY_CAST_ENTITY, buf);
+                                }
+                            }
+                            case 3 -> {
+                                final HitResult hitResult = client.crosshairTarget;
+                                final PacketByteBuf buf = PacketByteBufs.create();
+                                if (hitResult.getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.MISS) {
+                                    buf.writeBlockHitResult((BlockHitResult) hitResult);
+                                    ClientPlayNetworking.send(PacketHandler.BUILD_HOLOGRAM, buf);
+                                }
+                            }
+                        }
+                    } else if (!classAbility.isPressed() && classAbility.wasPressed()) {
+                        switch (CardinalData.LyokoClass.getLyokoClass(client.player))
+                        {
+                            case 0 ->{}
+                            case 1 ->{}
+                            case 2 ->{ClientPlayNetworking.send(PacketHandler.RAY_CAST_DROP, PacketByteBufs.empty());}
+                            case 3 ->{}
+                        }
                     }
+                }
+                //end of testing buttons
+                if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
+
                     if(moveVehicleUp.isPressed())
                     {
                         keyboardByteBuf.clear();
@@ -407,9 +488,9 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
                 if (MethodUtil.DimensionCheck.playerInVanilla(client.player) && client.player.getEquippedStack(
                         EquipmentSlot.CHEST).isOf(ModItems.LINKER)) {
-                    final ItemStack headStack = client.player.getEquippedStack(EquipmentSlot.CHEST);
-                    final SuperCalculatorDataLinker SuperCalculatorDataLinker = (SuperCalculatorDataLinker) headStack.getItem();
-                    final long storedEnergy = SuperCalculatorDataLinker.getStoredEnergy(headStack);
+                    final ItemStack linkerStack = client.player.getEquippedStack(EquipmentSlot.CHEST);
+                    final SuperCalculatorDataLinker SuperCalculatorDataLinker = (SuperCalculatorDataLinker) linkerStack.getItem();
+                    final long storedEnergy = SuperCalculatorDataLinker.getStoredEnergy(linkerStack);
                     if (classScreenBinding.isPressed() && (storedEnergy > 0 || client.player.isCreative())) {
                         client.setScreen(new ClassScreen());
                     }
@@ -418,10 +499,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 }
             }
         });
-
         BuiltinItemRendererRegistry.INSTANCE.register(ModItems.FORCE_FIELD_EMITTER, new ForceFieldEmitterRenderer());
-
-
         clientEvents();
         registerParticles();
     }

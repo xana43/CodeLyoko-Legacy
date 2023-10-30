@@ -9,9 +9,6 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtHelper;
-import net.minecraft.nbt.NbtList;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Arm;
@@ -135,23 +132,7 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
         }
     }
 
-    @Override
-    public void writeCustomDataToNbt(final NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
-        NbtHelper.putDataVersion(nbt);
-        if(inventory != null) {
-            nbt.put("Inventory", this.inventory.writeNbt(new NbtList()));
-        }
-    }
 
-    @Override
-    public void readCustomDataFromNbt(final NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-        final NbtList nbtList = nbt.getList("Inventory",10);
-        if(inventory != null) {
-            this.inventory.readNbt(nbtList);
-        }
-    }
 
     @Override
     public boolean isInSneakingPose() {

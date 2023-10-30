@@ -71,6 +71,8 @@
               "codelyoko:skid_nav_data",
               "codelyoko:digital_energy",
               "codelyoko:class_data.samurai_data",
+              "codelyoko:class_data.ninja_data",
+              "codelyoko:class_data.guardian_data",
               "codelyoko:misc_data"
           ]
     }

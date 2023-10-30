@@ -64,6 +64,9 @@ public final class CustomItemTags extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ModTags.ItemTags.LYOKO_ITEM).add(ModItems.HOVERBOARD_SPAWN_ITEM,ModItems.OVERBOARD_SPAWN_ITEM);
         getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_BATTERIES).add(ModItems.URANIUM_BATTERY_STARTER,
                 ModItems.URANIUM_BATTERY_NOVICE,ModItems.URANIUM_BATTERY_FINAL);
+        getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_235_INGOTS).add(ModItems.URANIUM_ISOTOPE235);
+        getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_238_INGOTS).add(ModItems.URANIUM_ISOTOPE238);
+        getOrCreateTagBuilder(ModTags.ItemTags.COMMON_SILICON_PLATES).add(ModItems.SILICON_WAFER);
 
     }
 

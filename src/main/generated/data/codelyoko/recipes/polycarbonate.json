@@ -15,7 +15,7 @@
       "item": "minecraft:granite"
     },
     {
-      "item": "minecraft:gravel"
+      "tag": "c:gravel"
     },
     {
       "item": "minecraft:lava_bucket"

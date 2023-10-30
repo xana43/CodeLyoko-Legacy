@@ -11,7 +11,7 @@
   "category": "misc",
   "key": {
     "i": {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:iron_ingots"
     },
     "p": {
       "item": "minecraft:heavy_weighted_pressure_plate"

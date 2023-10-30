@@ -1,8 +1,8 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Compat;
+package com.Ultra_Nerd.CodeLyokoLegacy.Compat.ReactorDisplay;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import java.util.LinkedList;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.util.List;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
@@ -37,8 +37,8 @@ public record CodeLyokoReactorCategory() implements DisplayCategory<BasicDisplay
 
     @Override
     public List<Widget> setupDisplay(final BasicDisplay display, final Rectangle bounds) {
-        final Point startPoint =new Point(bounds.getCenterX() - 87, bounds.getCenterY() - 35);
-    final List<Widget> widgets = new LinkedList<>();
+        final Point startPoint = new Point(bounds.getCenterX() - 87, bounds.getCenterY() - 35);
+        final List<Widget> widgets = new ObjectArrayList<>();
         widgets.add(Widgets.createTexturedWidget(TEXTURE, new Rectangle(startPoint.x,startPoint.y,175,82)));
         widgets.add(
         Widgets.createSlot(new Point(startPoint.x + 44, startPoint.y + 33))

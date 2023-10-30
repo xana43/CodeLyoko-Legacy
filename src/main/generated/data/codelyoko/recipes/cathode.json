@@ -11,10 +11,10 @@
   "category": "building",
   "key": {
     "c": {
-      "item": "minecraft:copper_ingot"
+      "tag": "c:copper_ingots"
     },
     "i": {
-      "item": "minecraft:iron_ingot"
+      "tag": "c:iron_ingots"
     }
   },
   "pattern": [
