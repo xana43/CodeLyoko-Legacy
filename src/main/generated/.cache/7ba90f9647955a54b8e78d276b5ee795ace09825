@@ -1,7 +1,10 @@
-// 1.20.2	2023-10-27T15:19:51.334230989	CodeLyokoLegacy/Model Definitions
+// 1.20.2	2023-11-02T22:20:52.820096477	CodeLyokoLegacy/Model Definitions
 c3a1f1bec7381ab13457e3910ccfed59addef7d4 assets/codelyoko/models/item/rack_charger.json
 91184b1f49e5a80586b01bb1f37580c87fc2f443 assets/codelyoko/blockstates/cable_block.json
 3f038a6d000200c15759211577e4944b8d28f829 assets/codelyoko/models/block/cable_block.json
+f8cc3f998f3b67168759a8e452557e150c86cc7e assets/codelyoko/blockstates/desert_sector_entrance.json
 81caf9ace340e9871a553e640a686729639c94ed assets/codelyoko/models/item/liquid_helium_bucket.json
 94918e8454f52693b304dfca04df9a5b3772eb3b assets/codelyoko/models/item/lyoko_disc_instrumental.json
+b5d752c2138e0ebb206370eb28b3f18c9d9fb45f assets/codelyoko/models/block/desert_sector_entrance.json
 ade0300a381edc9cabc298a94d707b3a290be89e assets/codelyoko/models/item/cable_block.json
+01ecc9b190e0430c11ebe2e3abbecb37c4fbcead assets/codelyoko/models/item/desert_sector_entrance.json

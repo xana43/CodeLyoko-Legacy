@@ -3,11 +3,15 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import java.util.Optional;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.data.client.*;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.Model;
+import net.minecraft.data.client.Models;
 import net.minecraft.item.Item;
+
+import java.util.Optional;
 
 public final class ModelGenerator extends FabricModelProvider {
 
@@ -53,6 +57,8 @@ public final class ModelGenerator extends FabricModelProvider {
     public void generateBlockStateModels(final BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerParentedItemModel(ModBlocks.RACK_CHARGER_BLOCK, CodeLyokoMain.codeLyokoPrefix("block/rack_charger"));
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CABLE_BLOCK);
+        //blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SECTOR_ENTRANCE_DESERT);
+        blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.SECTOR_ENTRANCE_DESERT);
     }
 
     private static void generateDefaultBuckets(final ItemModelGenerator itemModelGenerator)

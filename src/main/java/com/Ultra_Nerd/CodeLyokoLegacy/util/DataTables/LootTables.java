@@ -1,10 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Sector.SectorEntrance;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import java.util.function.BiConsumer;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
@@ -20,6 +20,8 @@ import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 
+import java.util.function.BiConsumer;
+
 public final class LootTables extends FabricBlockLootTableProvider {
 
 
@@ -32,14 +34,16 @@ public final class LootTables extends FabricBlockLootTableProvider {
         Registries.BLOCK.forEach(block -> {
             if(Registries.BLOCK.getId(block).getNamespace().equals(CodeLyokoMain.MOD_ID))
             {
-                if (block != ModBlocks.SILICA_SAND) {
-                    addDrop(block);
+                if(!(block instanceof SectorEntrance)) {
+                    if (block != ModBlocks.SILICA_SAND) {
+                        addDrop(block);
 
-                } else {
-                    addDrop(block, dropsWithSilkTouch(block, applyExplosionDecay(block,
-                            ItemEntry.builder(ModItems.RAW_SILICADUST)
-                                    .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(4.0F, 5.0F)))
-                                    .apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE)))));
+                    } else {
+                        addDrop(block, dropsWithSilkTouch(block, applyExplosionDecay(block,
+                                ItemEntry.builder(ModItems.RAW_SILICADUST)
+                                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(4.0F, 5.0F)))
+                                        .apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE)))));
+                    }
                 }
             }
         });

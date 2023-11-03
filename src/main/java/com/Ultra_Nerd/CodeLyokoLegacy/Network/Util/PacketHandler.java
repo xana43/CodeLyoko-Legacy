@@ -33,6 +33,7 @@ public record PacketHandler() {
     public static final Identifier RAY_CAST_DROP = CodeLyokoMain.codeLyokoPrefix("ray_cast_drop");
     public static final Identifier RAY_CAST_ENTITY = CodeLyokoMain.codeLyokoPrefix("ray_cast_entity");
     public static final Identifier BUILD_HOLOGRAM = CodeLyokoMain.codeLyokoPrefix("build_hologram");
+    public static final Identifier REPLIKA_ENTRY = CodeLyokoMain.codeLyokoPrefix("enter_replika");
     public static void commonChannelRegistry() {
 
 
@@ -57,6 +58,7 @@ public record PacketHandler() {
         ServerPlayNetworking.registerGlobalReceiver(RAY_CAST_DROP,NinjaRayCastC2SPacket::receive2);
         ServerPlayNetworking.registerGlobalReceiver(RAY_CAST_ENTITY,NinjaRayCastC2SPacket::receive3);
         ServerPlayNetworking.registerGlobalReceiver(BUILD_HOLOGRAM,TriggerServerBuildAreaCalculationC2SPacket::receive);
+        ServerPlayNetworking.registerGlobalReceiver(REPLIKA_ENTRY,FindValidDimensionPositionC2SPacket::receive);
     }
     @Environment(EnvType.CLIENT)
     public static void clientPacketRegistry() {

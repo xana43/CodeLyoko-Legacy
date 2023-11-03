@@ -12,23 +12,23 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public final class ScannerTileEntity extends MultiBlockController {
 
     private RegistryKey<World> destinationWorld = ModDimensions.carthage;
-    private int scanTimer = MethodUtil.TickConversion.secondsToTicks(9);
-
     private boolean inScanner;
-
-    public void setDestinationWorld(final RegistryKey<World> destinationWorld) {
-        this.destinationWorld = destinationWorld;
-    }
+    private int scanTimer = MethodUtil.TickConversion.secondsToTicks(9);
 
     public ScannerTileEntity(final BlockPos pos, final BlockState state) {
         super(ModBlockEntities.SCANNER_TILE_ENTITY, pos, state, BlockPatternRegistry.SCANNER.getThisBlockPattern(),
                 Scanner.SCANNER_PROPERTY);
         //destinationWorld = ModDimensions.carthage;
+    }
+
+    public void setDestinationWorld(final RegistryKey<World> destinationWorld) {
+        this.destinationWorld = destinationWorld;
     }
 
     public boolean isInScanner() {
@@ -51,13 +51,20 @@ public final class ScannerTileEntity extends MultiBlockController {
     public void virtualizePlayer() {
         if (this.world instanceof final ServerWorld serverWorld) {
             final MinecraftServer mcs = serverWorld.getServer();
-            final ServerWorld serverWorld1 = mcs.getWorld(destinationWorld);
+            final ServerWorld serverDestinationWorld = mcs.getWorld(this.destinationWorld);
             final ServerPlayerEntity player = (ServerPlayerEntity) serverWorld.getClosestPlayer(this.pos.getX(),
                     this.pos.getY(), this.pos.getZ(), 1, false);
-            if (serverWorld1 != null && player != null) {
+            if (serverDestinationWorld != null && player != null) {
                 serverWorld.getProfiler().push("portal");
                 if (scanTimer <= 0 && inScanner) {
-                    player.teleport(serverWorld1, 0, 140, 0, player.getYaw(), player.getPitch());
+                    if (this.destinationWorld == ModDimensions.carthage) {
+                        player.teleport(serverDestinationWorld, 0, 140, 0, player.getYaw(), player.getPitch());
+                    } else {
+                        final BlockPos validPosition = MethodUtil.HelperMethods.getValidPosition(serverDestinationWorld, player.getHeight(), Direction.UP, player.getSafeFallDistance());
+                        if (validPosition != null) {
+                            player.teleport(serverDestinationWorld, validPosition.getX(), validPosition.getY(), validPosition.getZ(), player.getYaw(), player.getPitch());
+                        }
+                    }
                 }
                 serverWorld.getProfiler().pop();
             }

@@ -1,4 +1,4 @@
-// 1.20.2	2023-10-27T15:19:51.332132936	CodeLyokoLegacy/Block Loot Tables
+// 1.20.2	2023-11-02T22:20:52.818005192	CodeLyokoLegacy/Block Loot Tables
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data/codelyoko/loot_tables/blocks/uranium_waste.json
 e18fe619b0dada058dd0aea9b68bf41e2f0442e7 data/codelyoko/loot_tables/blocks/computer_fluid_cooler.json
 7348549338e4820d685c9a45d031f3a12d672cb9 data/codelyoko/loot_tables/blocks/quantum_steel.json
@@ -18,8 +18,8 @@ a21614bc082c15812e11901225fc7905099398ac data/codelyoko/loot_tables/blocks/compu
 dc6bf391a9e1e61a61f2a042e31807b5ab69bf07 data/codelyoko/loot_tables/blocks/computer_tower_control_panel.json
 25f3453b99adaed1619bb3301ca0230b10cea1ff data/codelyoko/loot_tables/blocks/scanner_base.json
 b2bcc2cfac0f3d6377b6e29a75927e5cd23e9038 data/codelyoko/loot_tables/blocks/digital_grass.json
-a661ab142aed0def2f1f3834c98399454305a3b1 data/codelyoko/loot_tables/blocks/fluorite_block.json
 b0b030864b583f357ddf63d2e9ad48ba321ff553 data/codelyoko/loot_tables/blocks/metatyuyamunite_ore.json
+a661ab142aed0def2f1f3834c98399454305a3b1 data/codelyoko/loot_tables/blocks/fluorite_block.json
 6d5886b32155d9272519e04d67cc75b28b9e51a7 data/codelyoko/loot_tables/blocks/uranium_block_238.json
 8a7548c0b045d65aa336c9c5751eddffe0fde1eb data/codelyoko/loot_tables/blocks/gummite_ore.json
 6d571229ada689ae9915a6ec065d9d40adec5236 data/codelyoko/loot_tables/blocks/uranium_block_235.json
@@ -78,8 +78,8 @@ d91ce2c5eac523dcf4a9916403df8d061abf372c data/codelyoko/loot_tables/blocks/coffi
 3882fb038e64e6e34b24660664ed475ff0a66eae data/codelyoko/loot_tables/blocks/silica_sand.json
 59c493e9924ef077475bd4d4d72b6d5b556d2ee3 data/codelyoko/loot_tables/blocks/metaautunite_ore.json
 21cef6e0cc7f0e1d532818b2f0226f904bfe4cf0 data/codelyoko/loot_tables/blocks/computer_liquid_circulator.json
-1b36e8f09c781227743de670b5d16851d60691f4 data/codelyoko/loot_tables/blocks/saleeite_ore.json
 05cc9192adc168cc1a93bd22ae00ab918023558d data/codelyoko/loot_tables/blocks/scanner_top.json
+1b36e8f09c781227743de670b5d16851d60691f4 data/codelyoko/loot_tables/blocks/saleeite_ore.json
 ee1248e109d6cf2d5ef0d8d8c1304d2949e01e80 data/codelyoko/loot_tables/blocks/sklodowskite_ore.json
 1fd7f78844fe4e1cd24b5a0cecafa36e32f23549 data/codelyoko/loot_tables/blocks/electroplating_machine_frame.json
 7d4f360a4c7380848d33bab493f8ccb681a867d5 data/codelyoko/loot_tables/blocks/chiplet_advanced_block.json

@@ -6,6 +6,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.DigitalLavaBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.DigitalSeaBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.LiquidHelium;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.UraniumWaste;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Sector.SectorEntrance;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculatorNetwork.CableBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculatorNetwork.DemarcationPoint;
@@ -69,6 +70,7 @@ public record ModBlocks() {
     public static final Block DIGITAL_GRASS;
     public static final Block DIGITAL_DIRT;
     public static final Block DIGITAL_ROCK;
+
     public static final Block DIGITAL_WOOD_FOREST;
     public static final Block DIGITAL_WOOD_MOUNTAIN;
     public static final Block DIGITAL_LEAF_MOUNTAIN;
@@ -110,6 +112,7 @@ public record ModBlocks() {
     public static final Block SKLODOWSKITE_ORE;
     public static final Block SILICA_SAND;
     public static final Block SECTOR5_STEEL;
+    public static final Block SECTOR_ENTRANCE_DESERT;
     public static final Block ROUTER;
     public static final Block TOWER_WHITE;
     public static final Block TOWER_INTERFACE;
@@ -273,6 +276,7 @@ public record ModBlocks() {
            SILICA_SAND = registerModBlocks("silica_sand",new SandBlock(0xFFFFFF, FabricBlockSettings.copy(Blocks.SAND)));
            SECTOR5_STEEL = registerGenericBlock("sector5_steel",FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(-1,
                    Integer.MAX_VALUE));
+           SECTOR_ENTRANCE_DESERT = registerModBlocks("desert_sector_entrance",new SectorEntrance(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK), SectorEntrance.SELECTORS.DESERT));
            ROUTER = registerModBlocks("router",new Router(FabricBlockSettings.copyOf(Blocks.DRAGON_EGG)));
            TOWER_INTERFACE = registerModBlocks("tower_interface",new TowerInterface());
            TOWER_WHITE = registerGenericBlock("tower_white",FabricBlockSettings.copyOf(Blocks.BARRIER).strength(-1, Integer.MAX_VALUE).sounds(BlockSoundGroup.GLASS).luminance(250));

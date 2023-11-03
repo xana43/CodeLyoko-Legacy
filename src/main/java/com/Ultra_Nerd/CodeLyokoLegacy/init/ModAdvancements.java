@@ -30,7 +30,7 @@ public record ModAdvancements() {
                     ModCustomTrackedCriteria.USED_ITEM.create(ModCriteria.UseItem.Condition.create(ModItems.STORY_BOOK2)),"super_computer",
                     advancementConsumer);
             EnteredLyokoAdvancement = MethodUtil.AdvancementCreation.create(DiscoveredSuperCalculator,ModItems.BIT,
-                    Text.translatable("entered.lyoko"),Text.translatable("entered.lyoko.description"),
+                    Text.translatable("entered.lyoko"),Text.translatable("entered.lyoko.description"),null,
                     AdvancementFrame.GOAL,true,true,false,"entered_lyoko_advancement", ModCustomTrackedCriteria.ENTERED_LYOKO.create(ModCriteria.EnteredLyoko.Condition.create(
                             List.of(ModDimensions.volcanoWorld,
                                     ModDimensions.carthage,
@@ -84,7 +84,7 @@ public record ModAdvancements() {
                 @Nullable final AdvancementEntry rootAdvancement)
         {
         buildLithography = create(rootAdvancement,ModItems.INTEGRATED_HEAT_SPREADER,Text.translatable("build.litho"),
-                Text.translatable("build.litho.desc"),AdvancementFrame.TASK,true,true,false,
+                Text.translatable("build.litho.desc"),null,AdvancementFrame.TASK,true,true,false,
                 "build_lithography_machine",ModCustomTrackedCriteria.USED_ITEM.create(ModCriteria.UseItem.Condition.create(EntityPredicate.Builder.create(),
                         ItemPredicate.Builder.create().items(ModBlocks.UV_MACHINE))),"/lithography",advancementConsumer);
 
@@ -96,7 +96,7 @@ public record ModAdvancements() {
     public static void constructAdvancementTree(final Consumer<AdvancementEntry> advancementConsumer)
     {
         foundBaseSchematics = create(ModItems.CPU_DIE_ARM, Text.translatable("starter" +
-                        ".schematic"),Text.translatable("starter.schematic.description"),null,
+                        ".schematic"),Text.translatable("starter.schematic.description"), null,
                 AdvancementFrame.GOAL,true,true,false,"found_schematics",
                 UsingItemCriterion.Conditions.create(EntityPredicate.Builder.create(),
                         ItemPredicate.Builder.create().items(ModItems.STORY_BOOK)),"/root",

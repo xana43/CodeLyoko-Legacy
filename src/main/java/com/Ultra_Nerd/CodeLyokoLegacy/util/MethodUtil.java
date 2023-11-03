@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -10,6 +11,8 @@ import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementCriterion;
 import net.minecraft.advancement.AdvancementEntry;
 import net.minecraft.advancement.AdvancementFrame;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -19,8 +22,12 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,26 +46,32 @@ public record MethodUtil() {
     }
     public record AdvancementCreation()
     {
-        private static final StringBuilder buffer = new StringBuilder();
+
         private static final Identifier DEFAULT_BACKGROUND = new Identifier("textures/gui/advancements/backgrounds" +
                 "/adventure.png");
         public static AdvancementEntry create(final AdvancementEntry parent,
                                          final ItemConvertible itemConvertible,
                                          final Text name,
-                                         final Text description, final AdvancementFrame frameType,
+                                         final Text description,@Nullable final Identifier background, final AdvancementFrame frameType,
                                          final boolean showToast, final boolean announceToChat, final boolean hidden,
                                          final String criteriaName, final AdvancementCriterion<?> conditions, final String location,
                                          final Consumer<AdvancementEntry> advancementConsumer)
         {
+            if(parent != null) {
+                return Advancement.Builder.create()
+                        .parent(parent)
+                        .display(itemConvertible, name, description, background, frameType, showToast,
+                                announceToChat, hidden).criterion(criteriaName, conditions)
+                        .build(advancementConsumer, convertToPath(location));
+            }
             return Advancement.Builder.create()
-                    .parent(parent)
-                    .display(itemConvertible,name,description,null,frameType,showToast,
-                            announceToChat,hidden).criterion(criteriaName,conditions)
-                    .build(advancementConsumer,convertToPath(location));
+                    .display(itemConvertible, name, description, background, frameType, showToast,
+                            announceToChat, hidden).criterion(criteriaName, conditions)
+                    .build(advancementConsumer, convertToPath(location));
         }
         private static String convertToPath(final String location)
         {
-            buffer.setLength(0);
+            final StringBuilder buffer = new StringBuilder();
             buffer.append(CodeLyokoMain.MOD_ID);
             if(location.charAt(0) == '/')
             {
@@ -79,17 +92,11 @@ public record MethodUtil() {
                 final String criteriaName,final AdvancementCriterion<?> conditions,final String location,
                 final Consumer<AdvancementEntry> advancementConsumer)
         {
-            if(background == null || background.toString().isEmpty())
-            {
-                return Advancement.Builder.create()
-                        .display(itemConvertible,name,description,DEFAULT_BACKGROUND,frameType,showToast,
-                                announceToChat,hidden).criterion(criteriaName,conditions)
-                        .build(advancementConsumer, convertToPath(location));
-            }
-            return Advancement.Builder.create()
-                    .display(itemConvertible,name,description,background,frameType,showToast,
-                            announceToChat,hidden).criterion(criteriaName,conditions)
-                    .build(advancementConsumer, convertToPath(location));
+            final Identifier usableBackground =(background == null || background.toString().isEmpty()) ? DEFAULT_BACKGROUND : background;
+            return create(null,itemConvertible,name,description,usableBackground,frameType,showToast,announceToChat,hidden,criteriaName,conditions,
+                        location,advancementConsumer);
+
+
         }
     }
 
@@ -362,6 +369,63 @@ public record MethodUtil() {
                     }
                 }
 
+            }
+
+            public static BlockPos getValidPosition(final ServerWorld world, final float validAirHeight)
+            {
+                return getValidPosition(world,Math.round(validAirHeight));
+            }
+            public static BlockPos getValidPosition(final ServerWorld world, final float validAirHeight, final Direction direction,final int offset)
+            {
+                final BlockPos offsetPosition = getValidPosition(world,validAirHeight);
+                if(offsetPosition != null)
+                {
+                    return offsetPosition.offset(direction,offset);
+                }
+                return null;
+            }
+            public static BlockPos getValidPosition(final ServerWorld world, final int validAirHeight, final Direction direction,final int offset)
+            {
+                final BlockPos offsetPosition = getValidPosition(world,validAirHeight);
+                if(offsetPosition != null)
+                {
+                    return offsetPosition.offset(direction,offset);
+                }
+                return null;
+            }
+            private static BlockPos getValidPosition(final ServerWorld world, final int validAirHeight) {
+                final BlockState digitalLavaDefaultState = ModBlocks.DIGITAL_LAVA_BLOCK.getDefaultState();
+                final BlockState digitalOceanDefaultState = ModBlocks.DIGITAL_OCEAN_BLOCK.getDefaultState();
+                final Random worldRandom = world.getRandom();
+                for(int xPosition = 200; xPosition > -200; --xPosition) {
+                    for(int zPosition = 200; zPosition > -200; --zPosition) {
+                        for(int h = world.getHeight() >> 1; h > 0; --h) {
+                            final BlockPos checkedPosition = new BlockPos(xPosition + worldRandom.nextInt(800),h,zPosition + worldRandom.nextInt(800));
+                            final BlockState gottenBlock = world.getBlockState(checkedPosition);
+                            final BlockState groundState = world.getBlockState(checkedPosition.down());
+                            if(gottenBlock != digitalLavaDefaultState &&
+                                    gottenBlock != digitalOceanDefaultState &&
+                                    groundState!= Blocks.VOID_AIR.getDefaultState() &&
+                                    groundState != Blocks.AIR.getDefaultState()) {
+                                int blocksAbove = 0;
+                                for(int check = 1; check <= validAirHeight; ++check) {
+                                    final BlockState airPosition = world.getBlockState(checkedPosition.up(check));
+                                    if(airPosition == Blocks.AIR.getDefaultState() || airPosition == Blocks.VOID_AIR.getDefaultState()) {
+                                        blocksAbove++;
+                                    }
+                                }
+                                if(blocksAbove == validAirHeight) {
+                                    return checkedPosition;
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+                return null;
             }
         }
 
