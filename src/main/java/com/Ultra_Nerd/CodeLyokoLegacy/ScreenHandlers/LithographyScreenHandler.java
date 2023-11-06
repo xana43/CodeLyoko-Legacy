@@ -12,7 +12,9 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.*;
 import net.minecraft.recipe.book.RecipeBookCategory;
-import net.minecraft.screen.*;
+import net.minecraft.screen.AbstractRecipeScreenHandler;
+import net.minecraft.screen.ArrayPropertyDelegate;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
@@ -62,7 +64,7 @@ public final class LithographyScreenHandler extends AbstractRecipeScreenHandler<
         getSlot(0).setStackNoCallbacks(ItemStack.EMPTY);
         getSlot(1).setStackNoCallbacks(ItemStack.EMPTY);
         getSlot(2).setStackNoCallbacks(ItemStack.EMPTY);
-        getSlot(3).setStackNoCallbacks(ItemStack.EMPTY);
+        //getSlot(3).setStackNoCallbacks(ItemStack.EMPTY);
     }
 
     public static boolean isValidMaterial(final ItemStack stack)
@@ -128,26 +130,24 @@ public final class LithographyScreenHandler extends AbstractRecipeScreenHandler<
         if (slot2.hasStack()) {
             final ItemStack itemStack2 = slot2.getStack();
             itemStack = itemStack2.copy();
-            if (slot == 2) {
-                if (!this.insertItem(itemStack2, 3, 39, true)) {
+            if (slot == 3) {
+                if (!this.insertItem(itemStack2, 4, 39, true)) {
                     return ItemStack.EMPTY;
                 }
-
                 slot2.onQuickTransfer(itemStack2, itemStack);
-            } else if (slot != 4) {
+            } else if (slot != 0 && slot != 1 && slot != 2) {
                 if (isProcessable(itemStack2)) {
-                    if (!this.insertItem(itemStack2, 0, 3, false)) {
+                    if (!this.insertItem(itemStack2, 0, 2, false)) {
                         return ItemStack.EMPTY;
                     }
-                } 
-                else if (slot >= 3 && slot < 30) {
+                } else if (slot >= 4 && slot < 30) {
                     if (!this.insertItem(itemStack2, 30, 38, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (slot >= 30 && slot < 39 && !this.insertItem(itemStack2, 3, 30, false)) {
+                } else if (slot >= 30 && slot < 39 && !this.insertItem(itemStack2, 4, 30, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.insertItem(itemStack2, 3, 39, false)) {
+            } else if (!this.insertItem(itemStack2, 4, 39, false)) {
                 return ItemStack.EMPTY;
             }
 
