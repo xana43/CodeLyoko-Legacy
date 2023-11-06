@@ -54,7 +54,7 @@ public final class HornetEntity extends PhantomEntity implements GeoAnimatable, 
     }
 
     public static boolean isValidSpawn(final BiomeAccess biomeAccess, final BlockPos pos, final ServerWorldAccess worldAccess) {
-        return biomeAccess.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOME) && worldAccess.getBlockState(
+        return biomeAccess.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOMES) && worldAccess.getBlockState(
                 pos.offset(Direction.Axis.Y, -1)) == Blocks.AIR.getDefaultState();
     }
 

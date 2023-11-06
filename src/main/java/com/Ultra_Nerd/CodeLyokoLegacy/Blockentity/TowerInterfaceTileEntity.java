@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.TowerInterface;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.TowerWall;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -37,7 +38,7 @@ public final class TowerInterfaceTileEntity extends BlockEntity implements Named
     }
     public void calculateTowerActivation(final int stateToChangeTo)
     {
-        if(world.getBlockState(pos).<Boolean>get(TowerInterface.IS_GENERATED).booleanValue())
+        if(world.getBlockState(pos).<Boolean>get(TowerInterface.IS_GENERATED) && !world.isClient)
         {
             checkTowerState(stateToChangeTo);
 
@@ -76,8 +77,11 @@ private int controlState = 0;
                         if(world.getBlockState(checkedPosition).get(TowerWall.CURRENT_ACTIVATION_STATE) != null)
                         {
                             controlState = newState;
-                            world.setBlockState(checkedPosition,
-                                    world.getBlockState(checkedPosition).with(TowerWall.CURRENT_ACTIVATION_STATE, Integer.valueOf(newState)));
+                            if(world.getBlockState(checkedPosition).get(TowerWall.CURRENT_ACTIVATION_STATE) == 1 && world.getBlockState(checkedPosition).get(TowerWall.CURRENT_ACTIVATION_STATE) != newState)
+                            {
+                                CardinalData.XanaCalculator.setDangerLevel(world.getServer(),0,world.getLevelProperties());
+                            }
+                            world.setBlockState(checkedPosition, world.getBlockState(checkedPosition).with(TowerWall.CURRENT_ACTIVATION_STATE, newState));
                         }
                     }
                }

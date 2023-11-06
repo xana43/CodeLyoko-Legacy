@@ -6,11 +6,11 @@ import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 
-public final class MiscellaneousPlayerDataComponent implements PlayerComponent<MiscellaneousPlayerDataComponent>, AutoSyncedComponent {
+public final class MiscellaneousPlayerClassDataComponent implements PlayerComponent<MiscellaneousPlayerClassDataComponent>, AutoSyncedComponent {
     private final PlayerEntity player;
     private int[] hasSecondaryAbility = new int[]{0,0,0,0};
     private static final String SECONDARY_ABILITY_ARRAY_KEY = "has_secondary_ability";
-    public MiscellaneousPlayerDataComponent(final PlayerEntity player)
+    public MiscellaneousPlayerClassDataComponent(final PlayerEntity player)
     {
         this.player = player;
     }

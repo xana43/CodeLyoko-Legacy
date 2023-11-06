@@ -29,12 +29,12 @@ public final class TowerBase extends Structure {
                     StructurePool.REGISTRY_CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
                     Identifier.CODEC.optionalFieldOf("start_jigsaw_name")
                             .forGetter(structure -> structure.startJigsawName),
-                    Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> Integer.valueOf(structure.size)),
+                    Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.size),
                     HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
                     Heightmap.Type.CODEC.optionalFieldOf("project_start_to_heightmap")
                             .forGetter(structure -> structure.projectStartToHeightmap),
                     Codec.intRange(1, 128).fieldOf("max_distance_from_center")
-                            .forGetter(structure -> Integer.valueOf(structure.maxDistanceFromCenter))
+                            .forGetter(structure -> structure.maxDistanceFromCenter)
             ).apply(instance, TowerBase::new)).codec();
     private final RegistryEntry<StructurePool> startPool;
     private final Optional<Identifier> startJigsawName;
@@ -65,8 +65,6 @@ public final class TowerBase extends Structure {
                     .getColumnSample(pos.getX() + i, pos.getZ() + i, context.world(), context.noiseConfig());
 
         }
-
-
         return sample;
     }
 
@@ -91,7 +89,6 @@ public final class TowerBase extends Structure {
     public Optional<Structure.StructurePosition> getStructurePosition(final Structure.Context context) {
 
         BlockPos blockPos = context.chunkPos().getCenterAtY(0);
-        //int toplandY = context.chunkGenerator().getHeightOnGround(blockPos.getX(), blockPos.getZ(), Heightmap.Type.WORLD_SURFACE_WG,context.world());
         Optional<StructurePosition> pieceGen = Optional.empty();
         for (int i = context.world().getHeight() >> 1; i > 0; i--) {
 
@@ -125,9 +122,6 @@ public final class TowerBase extends Structure {
 
 
         }
-        //blockPos = blockPos.offset(Direction.Axis.Y,toplandY >> 2);
-
-
         return pieceGen;
     }
 

@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.MegaTank.move": {
+		"animation.mega_tank.move": {
 			"animation_length": 0.28,
 			"bones": {
 				"MegaTank_Shell_1": {
@@ -90,10 +90,10 @@
 				}
 			}
 		},
-		"animation.MegaTank.idle": {
+		"animation.mega_tank.idle": {
 			"loop": true
 		},
-		"animation.MegaTank.open": {
+		"animation.meta_tank.open": {
 			"loop": true,
 			"bones": {
 				"MegaTank_Shell_1": {

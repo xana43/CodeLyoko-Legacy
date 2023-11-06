@@ -226,8 +226,8 @@ public record ModBlocks() {
            DIGITAL_WOOD_MOUNTAIN = registerGenericBlock("digital_wood_mountain",FabricBlockSettings.copyOf(Blocks.JUNGLE_WOOD));
            DIGITAL_LEAF_MOUNTAIN = registerModBlocks("digital_leaf_mountain",new LeavesBlock(FabricBlockSettings.copyOf(Blocks.JUNGLE_LEAVES)));
            DIGITAL_ICE = registerModBlocks("digital_ice",new IceBlock(FabricBlockSettings.copyOf(Blocks.ICE).strength(-1, Integer.MAX_VALUE)));
-           DIGITAL_SAND = registerGenericBlock("digital_sand",
-                   FabricBlockSettings.create().mapColor(MapColor.PALE_YELLOW).strength(-1, Integer.MAX_VALUE));
+           DIGITAL_SAND = registerUnbreakableBlock("digital_sand",
+                   FabricBlockSettings.create().mapColor(MapColor.PALE_YELLOW));
            DIGITAL_DARKNESS = registerGenericBlock("digital_darkness",FabricBlockSettings.copyOf(Blocks.DRAGON_EGG).strength(-1,
                    Integer.MAX_VALUE));
            ELECTRIC_FLUORIDE_INFUSER = registerModBlocks("electric_fluoride_infuser",new ElectricFluorideInfuser());
@@ -274,12 +274,11 @@ public record ModBlocks() {
            SKLODOWSKITE_ORE = registerGenericBlock("sklodowskite_ore",
                    FabricBlockSettings.copyOf(Blocks.STONE).strength(4, 4).sounds(BlockSoundGroup.STONE));
            SILICA_SAND = registerModBlocks("silica_sand",new SandBlock(0xFFFFFF, FabricBlockSettings.copy(Blocks.SAND)));
-           SECTOR5_STEEL = registerGenericBlock("sector5_steel",FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).strength(-1,
-                   Integer.MAX_VALUE));
-           SECTOR_ENTRANCE_DESERT = registerModBlocks("desert_sector_entrance",new SectorEntrance(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK), SectorEntrance.SELECTORS.DESERT));
+           SECTOR5_STEEL = registerUnbreakableBlock("sector5_steel");
+           SECTOR_ENTRANCE_DESERT = registerModBlocks("desert_sector_entrance",new SectorEntrance(FabricBlockSettings.copyOf(Blocks.BEDROCK), SectorEntrance.SELECTORS.DESERT));
            ROUTER = registerModBlocks("router",new Router(FabricBlockSettings.copyOf(Blocks.DRAGON_EGG)));
            TOWER_INTERFACE = registerModBlocks("tower_interface",new TowerInterface());
-           TOWER_WHITE = registerGenericBlock("tower_white",FabricBlockSettings.copyOf(Blocks.BARRIER).strength(-1, Integer.MAX_VALUE).sounds(BlockSoundGroup.GLASS).luminance(250));
+           TOWER_WHITE = registerUnbreakableBlock("tower_white",FabricBlockSettings.copyOf(Blocks.BARRIER).sounds(BlockSoundGroup.GLASS).luminance(250));
            TOWER_BASE = registerModBlocks("tower_base",new TowerWall());
            TOWER_WALL = registerModBlocks("tower_wall",new TowerWall());
            TOWER_BLUE = registerGenericBlock("tower_blue",FabricBlockSettings.copyOf(Blocks.BARRIER).strength(-1,
@@ -323,7 +322,8 @@ public record ModBlocks() {
                 DigitalLavaBlock.class,
                 DigitalSeaBlock.class,
                 LiquidHelium.class,
-                UraniumWaste.class
+                UraniumWaste.class,
+                SectorEntrance.class
         };
         for(final Class<?> blackListedBlock : blacklistedBlocks)
         {
@@ -354,6 +354,17 @@ public record ModBlocks() {
         final Block block = new ExperienceDroppingBlock(settings);
         return registerModBlocks(name,block);
     }
+    public static Block registerUnbreakableBlock(final String name, final FabricBlockSettings settings)
+    {
+        final Block unbreakable = new Block(settings.strength(Blocks.BEDROCK.getHardness(),Blocks.BEDROCK.getBlastResistance()));
+        return registerModBlocks(name,unbreakable);
+    }
+    public static Block registerUnbreakableBlock(final String name)
+    {
+        final Block unbreakable = new Block(FabricBlockSettings.copyOf(Blocks.BEDROCK));
+        return registerModBlocks(name,unbreakable);
+    }
+
     private static Block registerGenericBlock(final String name)
     {
        final Block block = new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK));

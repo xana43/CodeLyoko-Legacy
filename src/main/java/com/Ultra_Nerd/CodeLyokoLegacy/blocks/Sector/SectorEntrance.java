@@ -6,6 +6,8 @@ import it.unimi.dsi.fastutil.objects.ObjectImmutableList;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
@@ -34,11 +36,15 @@ public final class SectorEntrance extends Block {
     private final int sectorSelector;
     private final PacketByteBuf SectorPacket = PacketByteBufs.create();
     public SectorEntrance(final Settings settings,final SELECTORS selectors) {
-        super(settings);
+        super(settings.nonOpaque().dropsNothing().solid().noBlockBreakParticles());
         sectorSelector = selectors.ordinal();
     }
 
 
+    @Override
+    public BlockRenderType getRenderType(final BlockState state) {
+        return BlockRenderType.INVISIBLE;
+    }
 
     @Override
     public void onEntityLand(final BlockView world, final Entity entity) {

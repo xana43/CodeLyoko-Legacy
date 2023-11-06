@@ -1,14 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.handlers;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.Capabilities.XanaAttackTypes;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldProperties;
 
 import java.util.Random;
@@ -20,6 +21,10 @@ public record XanaHandler() {
     private static WorldProperties properties;
     private static int ticksTillCalculation;
     private static MinecraftServer internalServer = null;
+    public static Random getRandom()
+    {
+        return random;
+    }
 
     public static void setProperties(final MinecraftServer server ,final WorldProperties wproperties) {
         properties = wproperties;
@@ -29,7 +34,8 @@ public record XanaHandler() {
 
     private static void calculateValidAttackPositions()
     {
-        final World world = internalServer.getOverworld();
+        final ServerWorld world = internalServer.getOverworld();
+
         final int radius = CardinalData.XanaCalculator.getRadius(properties);
         final BlockPos factoryPosition = CardinalData.XanaCalculator.getActiveFactoryPosition(properties);
         final XanaAttackTypes attackTypes = CardinalData.XanaCalculator.getAttackTypes(properties);
@@ -70,11 +76,21 @@ public record XanaHandler() {
     }
 
     public static boolean calculateAttackProbability() {
-        final int attackCallID = random.nextInt(0, 200);
+
+        final int attackCallID = random.nextInt(69, 70);
         ticksTillCalculation--;
         if (ticksTillCalculation <= 0) {
+            CodeLyokoMain.LOG.error("attack ID ="+attackCallID);
             if (attackCallID == 69) {
-                CardinalData.XanaCalculator.increaseDangerLevel(internalServer,properties,1);
+                if(CardinalData.XanaCalculator.getDangerLevel(properties) > 3)
+                {
+                    CodeLyokoMain.LOG.error("xana is attacking");
+                    CardinalData.XanaCalculator.spawnEntities(internalServer,properties,internalServer.getOverworld());
+                    CardinalData.XanaCalculator.activateTower(internalServer,properties);
+                } else {
+                    CodeLyokoMain.LOG.error("adding to danger level");
+                    CardinalData.XanaCalculator.increaseDangerLevel(internalServer, properties, 1);
+                }
                 return true;
             } else {
                 setTicksTillCalculation();

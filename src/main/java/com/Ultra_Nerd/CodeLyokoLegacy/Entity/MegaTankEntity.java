@@ -78,7 +78,7 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
     // abstract SoundEvent getStepSound();
 
     public static boolean canSpawn(@NotNull WorldAccess world, @NotNull SpawnReason reason, @NotNull BlockPos pos, @NotNull Random rand) {
-        return world.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOME);
+        return world.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOMES);
     }
 
     @Override
@@ -178,14 +178,14 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
 
         //CodeLyokoMain.LOG.info("attacking " + event.getAnimatable().isAttacking());
         if (event.isMoving() && !event.getAnimatable().isAttacking()) {
-            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.MegaTank.move"));
+            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.mega_tank.move"));
             //CodeLyokoMain.LOG.info("moving");
         } else if (event.getAnimatable().isAttacking()) {
 
-            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.MegaTank.open"));
+            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.mega_tank.open"));
             //CodeLyokoMain.LOG.info("attacking");
         } else {
-            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.MegaTank.idle"));
+            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.mega_tank.idle"));
             //CodeLyokoMain.LOG.info("not moving");
 
         }

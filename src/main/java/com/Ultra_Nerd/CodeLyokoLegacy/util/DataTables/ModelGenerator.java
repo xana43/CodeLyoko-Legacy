@@ -57,7 +57,6 @@ public final class ModelGenerator extends FabricModelProvider {
     public void generateBlockStateModels(final BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerParentedItemModel(ModBlocks.RACK_CHARGER_BLOCK, CodeLyokoMain.codeLyokoPrefix("block/rack_charger"));
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CABLE_BLOCK);
-        //blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SECTOR_ENTRANCE_DESERT);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.SECTOR_ENTRANCE_DESERT);
     }
 

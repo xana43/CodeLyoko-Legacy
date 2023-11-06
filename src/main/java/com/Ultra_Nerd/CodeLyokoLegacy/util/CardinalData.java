@@ -9,6 +9,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities.InventorySaveComponent;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities.PlayerProfileStorage;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities.PlayerScannerComponent;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities.XanaDataComponent;
+import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
@@ -25,6 +26,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldProperties;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,6 +43,8 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         registry.register(ReturnToScanner.RETURN_TO_SCANNER,worldProperties -> new PlayerScannerComponent());
         registry.register(PlayerSavedProfile.PLAYER_PROFILE_STORAGE_COMPONENT_KEY, worldProperties -> new PlayerProfileStorage());
         registry.register(SkidBladnirNavData.SKID_BLADNIR_DATA_COMPONENT_KEY,worldProperties -> new SkidBladnirData());
+        registry.register(MiscellaneousDataCollection.XanaRaidData.XANA_RAID_DATA_COMPONENT_KEY, MiscellaneousPlayerDataCollection.XanaRaidSpawnData::new);
+
     }
 
     @Override
@@ -50,11 +54,33 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         registry.registerForPlayers(HumanDNAAttribute.HUMAN_DNA_COMPONENT_KEY, HumanDNA::new, RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(CellularDamage.DEGENERATION_COMPONENT_KEY,CellularDegeneration::new, RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(DigitalEnergyComponent.DIGITAL_ENERGY_COMPONENT_KEY,(DigitalEnergy::new));
-        registry.registerForPlayers(MiscellaneousPlayerData.getMiscellaneousPlayerDataComponentComponentKey(),MiscellaneousPlayerDataComponent::new,RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(MiscellaneousPlayerData.getMiscellaneousPlayerDataComponentComponentKey(), MiscellaneousPlayerClassDataComponent::new,RespawnCopyStrategy.ALWAYS_COPY);
+
         //class capabilities
         registry.registerForPlayers(LyokoClass.ExtraClassData.SamuraiData.SAMURAI_CLASS_DATA_COMPONENT_KEY, ClassCapabilities.SamuraiClassExtraCapabilities::new,RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(LyokoClass.ExtraClassData.NinjaData.NINJA_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY,ClassCapabilities.NinjaClassExtraCapabilities::new,RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(LyokoClass.ExtraClassData.GuardianData.GUARDIAN_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY,ClassCapabilities.GuardianClassExtraCapabilities::new,RespawnCopyStrategy.ALWAYS_COPY);
+    }
+    public record MiscellaneousDataCollection()
+    {
+        public record XanaRaidData()
+        {
+            private static final ComponentKey<MiscellaneousPlayerDataCollection.XanaRaidSpawnData> XANA_RAID_DATA_COMPONENT_KEY = createComponentKey("xana_raid_data", MiscellaneousPlayerDataCollection.XanaRaidSpawnData.class);
+            public static ComponentKey<MiscellaneousPlayerDataCollection.XanaRaidSpawnData> getXanaRaidDataComponentKey()
+            {
+                return XANA_RAID_DATA_COMPONENT_KEY;
+            }
+
+            public static void calculateSuperCalculatorPositions(final ServerPlayerEntity player,final BlockPos pos){
+                XANA_RAID_DATA_COMPONENT_KEY.get(player.getWorld().getLevelProperties()).catalogSuperCalculatorPositions(pos,player.getServer());
+                LevelComponents.sync(XANA_RAID_DATA_COMPONENT_KEY, Objects.requireNonNull(player.getServer()));
+            }
+            public static void removeFromCalculatorPositions(final ServerPlayerEntity player,final BlockPos pos)
+            {
+                XANA_RAID_DATA_COMPONENT_KEY.get(player.getWorld().getLevelProperties()).removeFromCalculatorPositions(pos);
+                LevelComponents.sync(XANA_RAID_DATA_COMPONENT_KEY, Objects.requireNonNull(player.getServer()));
+            }
+        }
     }
     public record DigitalEnergyComponent()
     {
@@ -92,7 +118,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     public record SkidBladnirNavData()
     {
         private static final ComponentKey<SkidBladnirData> SKID_BLADNIR_DATA_COMPONENT_KEY =
-                ComponentRegistry.getOrCreate(CodeLyokoMain.codeLyokoPrefix("skid_nav_data"), SkidBladnirData.class);
+                createComponentKey("skid_nav_data", SkidBladnirData.class);
         public static ComponentKey<SkidBladnirData> getComponentKey()
         {
             return SKID_BLADNIR_DATA_COMPONENT_KEY;
@@ -122,7 +148,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     public record CellularDamage()
     {
         private static final ComponentKey<CellularDegeneration> DEGENERATION_COMPONENT_KEY =
-                ComponentRegistry.getOrCreate(CodeLyokoMain.codeLyokoPrefix("cellular_degeneration"),
+                createComponentKey("cellular_degeneration",
                         CellularDegeneration.class);
         public static ComponentKey<CellularDegeneration> getCellComponentKey()
         {
@@ -146,7 +172,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     public record PlayerSavedProfile()
     {
         private static final ComponentKey<PlayerProfileStorage> PLAYER_PROFILE_STORAGE_COMPONENT_KEY =
-        ComponentRegistry.getOrCreate(CodeLyokoMain.codeLyokoPrefix("player_profile"), PlayerProfileStorage.class);
+        createComponentKey("player_profile", PlayerProfileStorage.class);
         public static ComponentKey<?> getPlayerProfileComponentKey()
         {
             return PLAYER_PROFILE_STORAGE_COMPONENT_KEY;
@@ -179,7 +205,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     public record HumanDNAAttribute()
     {
         private static final ComponentKey<HumanDNA> HUMAN_DNA_COMPONENT_KEY =
-                ComponentRegistry.getOrCreate(CodeLyokoMain.codeLyokoPrefix("human_dna"), HumanDNA.class);
+                createComponentKey("human_dna", HumanDNA.class);
         public static ComponentKey<HumanDNA> getHumanDnaComponentKey()
         {
             return HUMAN_DNA_COMPONENT_KEY;
@@ -200,8 +226,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     }
     public record MindHelmStress()
     {
-        private static final ComponentKey<MindHelmStressComponent> MINDHELMSTRESS = ComponentRegistry.getOrCreate(
-                CodeLyokoMain.codeLyokoPrefix("mind_stress"),MindHelmStressComponent.class);
+        private static final ComponentKey<MindHelmStressComponent> MINDHELMSTRESS = createComponentKey("mind_stress",MindHelmStressComponent.class);
         public static ComponentKey<MindHelmStressComponent> getMindhelmStressKey()
         {
             return MINDHELMSTRESS;
@@ -223,9 +248,9 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     }
     public record MiscellaneousPlayerData()
     {
-        private static final ComponentKey<MiscellaneousPlayerDataComponent> MISCELLANEOUS_PLAYER_DATA_COMPONENT_COMPONENT_KEY =
-                ComponentRegistry.getOrCreate(CodeLyokoMain.codeLyokoPrefix("misc_data"), MiscellaneousPlayerDataComponent.class);
-        public static ComponentKey<MiscellaneousPlayerDataComponent> getMiscellaneousPlayerDataComponentComponentKey()
+        private static final ComponentKey<MiscellaneousPlayerClassDataComponent> MISCELLANEOUS_PLAYER_DATA_COMPONENT_COMPONENT_KEY =
+                createComponentKey("misc_data", MiscellaneousPlayerClassDataComponent.class);
+        public static ComponentKey<MiscellaneousPlayerClassDataComponent> getMiscellaneousPlayerDataComponentComponentKey()
         {
             return MISCELLANEOUS_PLAYER_DATA_COMPONENT_COMPONENT_KEY;
         }
@@ -240,8 +265,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         }
     }
     public record LyokoClass() {
-        private static final ComponentKey<PlayerClassComponent> LYOKOCLASS = ComponentRegistry.getOrCreate(
-                CodeLyokoMain.codeLyokoPrefix("lyoko_class"), PlayerClassComponent.class);
+        private static final ComponentKey<PlayerClassComponent> LYOKOCLASS = createComponentKey("lyoko_class", PlayerClassComponent.class);
         public static ComponentKey<PlayerClassComponent> getLyokoClassComponent()
         {
             return LYOKOCLASS;
@@ -335,8 +359,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     }
 
     public record XanaCalculator() {
-        private static final ComponentKey<XanaDataComponent> XANA_DATA = ComponentRegistry.getOrCreate(
-                CodeLyokoMain.codeLyokoPrefix("xana_data"), XanaDataComponent.class);
+        private static final ComponentKey<XanaDataComponent> XANA_DATA = createComponentKey("xana_data", XanaDataComponent.class);
 
         public static void setDangerLevel(final MinecraftServer server,final int dangerLevel, final WorldProperties worldProperties) {
             XANA_DATA.get(worldProperties).setDangerLevel(dangerLevel);
@@ -392,16 +415,25 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
             XANA_DATA.get(properties).addValidAttackPositions(validAttackPosition);
             LevelComponents.sync(XANA_DATA,server);
         }
+        public static void spawnEntities(final MinecraftServer server,final WorldProperties properties, final World world)
+        {
+            XANA_DATA.get(properties).spawnMobs(world);
+            LevelComponents.sync(XANA_DATA,server);
+        }
         public static void setAttackType(final MinecraftServer server,final WorldProperties properties,final XanaAttackTypes attackType)
         {
             XANA_DATA.get(properties).setAttackType(attackType);
             LevelComponents.sync(XANA_DATA,server);
         }
+        public static void activateTower(final MinecraftServer server,final WorldProperties properties)
+        {
+            XANA_DATA.get(properties).activateTower(server);
+            LevelComponents.sync(XANA_DATA,server);
+        }
     }
 
     public record LyokoInventorySave() {
-        private static final ComponentKey<InventorySaveComponent> LYOKO_INVENTORY_SAVE = ComponentRegistry.getOrCreate(
-                CodeLyokoMain.codeLyokoPrefix("temp_inventory"), InventorySaveComponent.class);
+        private static final ComponentKey<InventorySaveComponent> LYOKO_INVENTORY_SAVE = createComponentKey("temp_inventory", InventorySaveComponent.class);
 
         public static ComponentKey<InventorySaveComponent> getLyokoInventorySave()
         {
@@ -419,8 +451,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
     }
 
     public record ReturnToScanner() {
-        private static final ComponentKey<PlayerScannerComponent> RETURN_TO_SCANNER = ComponentRegistry.getOrCreate(
-                CodeLyokoMain.codeLyokoPrefix("scanner_position"), PlayerScannerComponent.class);
+        private static final ComponentKey<PlayerScannerComponent> RETURN_TO_SCANNER = createComponentKey("scanner_position", PlayerScannerComponent.class);
 
         public static ComponentKey<PlayerScannerComponent> getReturnToScanner()
         {
@@ -433,5 +464,9 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         public static void materializeAtScanner(final WorldProperties worldProperties,final PlayerEntity player) {
             RETURN_TO_SCANNER.get(worldProperties).setPosition(player);
         }
+    }
+    private static <T extends Component> ComponentKey<T> createComponentKey(final String name, final Class<T> classReference)
+    {
+        return ComponentRegistry.getOrCreate(CodeLyokoMain.codeLyokoPrefix(name),classReference);
     }
 }

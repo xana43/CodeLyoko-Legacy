@@ -11,22 +11,16 @@ public record ModDimensions() {
 
 
     //sector5
-    public static final RegistryKey<World> carthage = RegistryKey.of(RegistryKeys.WORLD,
-            RegistryKey.of(RegistryKeys.DIMENSION, CodeLyokoMain.codeLyokoPrefix("carthage")).getValue());
-    public static final RegistryKey<DimensionType> carthageType = RegistryKey.of(RegistryKeys.DIMENSION_TYPE,
-            CodeLyokoMain.codeLyokoPrefix("carthage_type"));
+    public static final RegistryKey<World> carthage = getDimensionRegistryKey("carthage");
+    public static final RegistryKey<DimensionType> carthageType = getDimensionType("carthage_type");
 
     //forest Sector
-    public static final RegistryKey<World> forestSectorWorld = RegistryKey.of(RegistryKeys.WORLD,
-            RegistryKey.of(RegistryKeys.DIMENSION, CodeLyokoMain.codeLyokoPrefix("forest")).getValue());
-    public static final RegistryKey<DimensionType> forestSectorType = RegistryKey.of(RegistryKeys.DIMENSION_TYPE,
-            CodeLyokoMain.codeLyokoPrefix("forestsector_type"));
+    public static final RegistryKey<World> forestSectorWorld = getDimensionRegistryKey("forest");
+    public static final RegistryKey<DimensionType> forestSectorType = getDimensionType("forestsector_type");
 
     //Desert Sector
-    public static final RegistryKey<World> desertSectorWorld = RegistryKey.of(RegistryKeys.WORLD,
-            RegistryKey.of(RegistryKeys.DIMENSION, CodeLyokoMain.codeLyokoPrefix("desert")).getValue());
-    public static final RegistryKey<DimensionType> desertSectorType = RegistryKey.of(RegistryKeys.DIMENSION_TYPE,
-            CodeLyokoMain.codeLyokoPrefix("desertsector_type"));
+    public static final RegistryKey<World> desertSectorWorld = getDimensionRegistryKey("desert");
+    public static final RegistryKey<DimensionType> desertSectorType = getDimensionType("desertsector_type");
 
     //Ice Sector
     public static final RegistryKey<World> iceSectorWorld = RegistryKey.of(RegistryKeys.WORLD,
@@ -59,4 +53,15 @@ public record ModDimensions() {
             CodeLyokoMain.codeLyokoPrefix("frontier_type"));
 
 
+    private static RegistryKey<DimensionType> getDimensionType(final String name)
+    {
+        return RegistryKey.of(RegistryKeys.DIMENSION_TYPE,
+                CodeLyokoMain.codeLyokoPrefix(name));
+    }
+
+    private static RegistryKey<World> getDimensionRegistryKey(final String name)
+    {
+       return RegistryKey.of(RegistryKeys.WORLD, RegistryKey.of(RegistryKeys.DIMENSION, CodeLyokoMain.codeLyokoPrefix(name)).getValue());
+    }
+    //public static void init() {}
 }

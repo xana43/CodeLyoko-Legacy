@@ -1,0 +1,44 @@
+package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ClientToServer;
+
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.TowerWall;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
+import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
+
+public record ScanForActiveXanaTowersC2SPacket() {
+
+
+    public static void receive(final MinecraftServer server, final ServerPlayerEntity player, final ServerPlayNetworkHandler handler, final PacketByteBuf buf, final PacketSender packetSender) {
+
+        server.execute(() -> {
+            final ServerWorld serverWorld = server.getWorld(ModDimensions.desertSectorWorld);
+            for(int x = -9000000; x < 9000000; ++x)
+            {
+                assert serverWorld != null;
+                for(int y = serverWorld.getHeight(); y > serverWorld.getBottomY(); --y)
+                {
+                    for(int z = -9000000; z < 9000000; ++z)
+                    {
+                        CodeLyokoMain.LOG.error("scanning");
+                        final BlockPos checkedPosition = new BlockPos(x,y,z);
+                        if(serverWorld.getBlockState(checkedPosition).isOf(ModBlocks.TOWER_WALL) || serverWorld.getBlockState(checkedPosition).isOf(ModBlocks.TOWER_BASE) || serverWorld.getBlockState(checkedPosition).isOf(ModBlocks.TOWER_WALL_CORNER)
+                        || serverWorld.getBlockState(checkedPosition).isOf(ModBlocks.TOWER_BASE_CORNER))
+                        {
+                            if(serverWorld.getBlockState(checkedPosition).get(TowerWall.CURRENT_ACTIVATION_STATE) == 1)
+                            {
+                                CodeLyokoMain.LOG.error("found a xana activated tower");
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+}

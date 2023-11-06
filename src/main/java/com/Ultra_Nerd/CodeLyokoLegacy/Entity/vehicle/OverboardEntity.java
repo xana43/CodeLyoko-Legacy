@@ -2,7 +2,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.world.World;
 
 public final class OverboardEntity extends LyokoVehicleEntity {
@@ -16,10 +15,7 @@ public final class OverboardEntity extends LyokoVehicleEntity {
 
     }
 
-    @Override
-    public boolean handleFallDamage(final float fallDistance, final float damageMultiplier, final DamageSource damageSource) {
-        return false;
-    }
+
 
     @Override
     protected void addPassenger(final Entity passenger) {

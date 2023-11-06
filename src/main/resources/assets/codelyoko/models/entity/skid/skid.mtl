@@ -9,7 +9,7 @@ Ks 0.900000 0.900000 0.900000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd cm:entity/skid/da4cdc01
+map_Kd codelyoko:entity/skid/da4cdc01
 
 newmtl material_75.000
 Ns 0.000000
@@ -19,4 +19,4 @@ Ks 0.900000 0.900000 0.900000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd cm:entity/skid/95adf18e
+map_Kd codelyoko:entity/skid/95adf18e

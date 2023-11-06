@@ -56,7 +56,7 @@ public final class EntitySkid extends LyokoVehicleEntity {
 
     @Override
     public void dismountVehicle() {
-        if(getWorld().getDimensionKey() != ModDimensions.digitalOceanType) {
+        if(getWorld().getRegistryKey() != ModDimensions.digitalOceanWorld) {
             super.dismountVehicle();
         }
     }

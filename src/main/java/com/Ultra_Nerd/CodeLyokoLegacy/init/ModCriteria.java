@@ -58,7 +58,7 @@ public record ModCriteria() {
             @Override
             public JsonObject toJson() {
                 final JsonObject obj = super.toJson();
-                obj.addProperty("previous_class_id", Integer.valueOf(previousClassId));
+                obj.addProperty("previous_class_id", previousClassId);
                 return obj;
             }
         }

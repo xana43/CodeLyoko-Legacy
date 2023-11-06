@@ -12,13 +12,14 @@ import net.minecraft.world.biome.Biome;
 
 public record ModTags() {
     public record Blocks() {
-        public static final TagKey<Block> LYOKO_BLOCKS = TagKey.of(Registries.BLOCK.getKey(),
-                CodeLyokoMain.codeLyokoPrefix("lyoko_blocks"));
+        public static final TagKey<Block> LYOKO_BLOCKS = createBlockTag("lyoko_blocks");
 
-        public static final TagKey<Block> COMPUTER_CIRCULATOR = TagKey.of(Registries.BLOCK.getKey(),
-                CodeLyokoMain.codeLyokoPrefix("circulation_blocks"));
+        public static final TagKey<Block> COMPUTER_CIRCULATOR = createBlockTag("circulation_blocks");
 
-
+        private static TagKey<Block> createBlockTag(final String name)
+        {
+            return TagKey.of(Registries.BLOCK.getKey(),CodeLyokoMain.codeLyokoPrefix(name));
+        }
         private static TagKey<Block> createCommonTag(final String name)
         {
             return TagKey.of(Registries.BLOCK.getKey(), new Identifier("c",name));
@@ -35,8 +36,12 @@ public record ModTags() {
 
     public record Biomes() {
 
-        public static final TagKey<Biome> LYOKO_BIOME = TagKey.of(RegistryKeys.BIOME,
-                CodeLyokoMain.codeLyokoPrefix("is_lyoko"));
+        public static final TagKey<Biome> LYOKO_BIOMES = createBiomesTag("is_lyoko");
+        private static TagKey<Biome> createBiomesTag(final String name)
+        {
+            return TagKey.of(RegistryKeys.BIOME,
+                    CodeLyokoMain.codeLyokoPrefix(name));
+        }
     }
 
     public record ItemTags() {

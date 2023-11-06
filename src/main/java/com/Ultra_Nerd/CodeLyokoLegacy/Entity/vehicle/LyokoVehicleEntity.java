@@ -32,7 +32,6 @@ public class LyokoVehicleEntity extends BoatEntity {
         }
     }
 
-
     @Override
     public void slowMovement(final BlockState state, final Vec3d multiplier) {
 

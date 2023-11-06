@@ -1,7 +1,7 @@
 plugins {
 	id 'fabric-loom' version '1.4-SNAPSHOT'
 	id 'maven-publish'
-	id 'com.github.johnrengelman.shadow' version '7.1.2'
+	//id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 
@@ -65,9 +65,9 @@ repositories {
 
 
 }
-shadowJar {
+//shadowJar {
 
-}
+//}
 dependencies {
     // To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -90,9 +90,6 @@ dependencies {
 
 	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${REI}"
 	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${REI}"
-
-	//patchuli
-	//modImplementation "vazkii.patchouli:Patchouli:${pathuli_version}"
 
 	include modApi("teamreborn:energy:${energy_api_version}") {
 		exclude(group: "net.fabricmc.fabric-api")

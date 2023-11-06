@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy;
 
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ComputerCoreTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
@@ -16,8 +17,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.PlaceBlockEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -60,6 +59,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
 import team.reborn.energy.api.EnergyStorage;
+
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public record CodeLyokoMain() implements ModInitializer {
 
@@ -132,6 +134,20 @@ public record CodeLyokoMain() implements ModInitializer {
                     }
                 }
             }
+        });
+        PlaceBlockEvent.EVENT.register((entity, world, pos) -> {
+            if(entity instanceof final ServerPlayerEntity playerEntity && !world.isClient() && world.getBlockEntity(pos) instanceof ComputerCoreTileEntity)
+            {
+                CardinalData.MiscellaneousDataCollection.XanaRaidData.calculateSuperCalculatorPositions(playerEntity,pos);
+            }
+            return ActionResult.PASS;
+        });
+        PlayerBlockBreakEvents.BEFORE.register((world, player, pos, state, blockEntity) -> {
+                if(!world.isClient() && world.getBlockEntity(pos) instanceof ComputerCoreTileEntity)
+                {
+                    CardinalData.MiscellaneousDataCollection.XanaRaidData.removeFromCalculatorPositions((ServerPlayerEntity) player,pos);
+                }
+            return true;
         });
     }
 
@@ -263,7 +279,6 @@ public record CodeLyokoMain() implements ModInitializer {
                 } else if (MethodUtil.DimensionCheck.worldIsNotVanilla(origin)) {
                     CardinalData.LyokoInventorySave.loadPlayerInventory(
                             player.server.getSaveProperties().getMainWorldProperties(), player);
-                    player.resetStat(Stats.CUSTOM.getOrCreateStat(ModStats.ENTERED_LYOKO_IDENTIFIER));
                 }
 
             }
@@ -397,6 +412,7 @@ public record CodeLyokoMain() implements ModInitializer {
         registerEnergyStorageBE();
         checkWorld();
         LootTableOverride.modifyLootTables();
+        //ModDimensions.init();
     }
 
 

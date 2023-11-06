@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.LyokoCoreBE;
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
@@ -26,7 +26,7 @@ public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements
     private static int y;
     private static float z;
     private static BakedModel LyokoModel;
-    public CoreOfLyoko{
+    public CoreOfLyoko {
         LyokoModel = mc.getBakedModelManager().getModel(
                 CoreOfLyoko.getLyokoCore());
     }

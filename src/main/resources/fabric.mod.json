@@ -73,7 +73,8 @@
               "codelyoko:class_data.samurai_data",
               "codelyoko:class_data.ninja_data",
               "codelyoko:class_data.guardian_data",
-              "codelyoko:misc_data"
+              "codelyoko:misc_data",
+              "codelyoko:xana_raid_data"
           ]
     }
 }

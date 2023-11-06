@@ -87,6 +87,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
     private static KeyBinding selectTransportHub;
     private static KeyBinding testPsychic;
     private static KeyBinding testGuardianBuild;
+    private static KeyBinding testTowerScan;
 
 
     private static void clientEvents() {
@@ -242,8 +243,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
     private static void registerModelLoaders()
     {
 
-        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(CoreOfLyoko.getLyokoCore()));
-        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(EntitySkid.getSkidLocation()));
+        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(CoreOfLyoko.getLyokoCore(),EntitySkid.getSkidLocation()));
+        //ModelLoadingPluginManager.registerPlugin(pluginContext -> pluginContext.addModels(CoreOfLyoko.getLyokoCore(), EntitySkid.getSkidLocation()));
 
     }
 
@@ -321,6 +322,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 GLFW.GLFW_KEY_APOSTROPHE, KEY_CATEGORY_CREATIVE));
         testGuardianBuild = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("test_build"), InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_SEMICOLON, KEY_CATEGORY_CREATIVE));
+        testTowerScan = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("test_tower"),InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_E,KEY_CATEGORY_MAIN));
     }
     private static final PacketByteBuf keyboardByteBuf = PacketByteBufs.create();
     @Override
@@ -329,10 +332,11 @@ public record CodeLyokoClient() implements ClientModInitializer {
         SpecialModelLoaderEvents.LOAD_SCOPE.register(location -> CodeLyokoMain.MOD_ID.equals(location.getNamespace()));
         //set key bindings
         registerKeys();
+        registerModelLoaders();
         registerBlockEntityRenderers();
 
         registerEntityRenderers();
-        registerModelLoaders();
+
         //receiveEntityPacket();
         FluidRenderRegistry();
         handledScreenRegistration();
@@ -374,6 +378,10 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
             if (client.player != null) {
                 if(client.player.getAbilities().creativeMode) {
+                    if(testTowerScan.isPressed())
+                    {
+                        ClientPlayNetworking.send(PacketHandler.TOWER_SCANNER,PacketByteBufs.empty());
+                    }
                     //testing buttons
                     if (testClone.wasPressed()) {
                         keyboardByteBuf.clear();
@@ -445,12 +453,13 @@ public record CodeLyokoClient() implements ClientModInitializer {
                         {
                             case 0 ->{}
                             case 1 ->{}
-                            case 2 ->{ClientPlayNetworking.send(PacketHandler.RAY_CAST_DROP, PacketByteBufs.empty());}
+                            case 2 -> ClientPlayNetworking.send(PacketHandler.RAY_CAST_DROP, PacketByteBufs.empty());
                             case 3 ->{}
                         }
                     }
                 }
                 //end of testing buttons
+                //toggle proctor movement of vehicles
                 if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
 
                     if(moveVehicleUp.isPressed())
@@ -463,7 +472,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
                         keyboardByteBuf.writeInt(0);
                         ClientPlayNetworking.send(PacketHandler.KEYBOARD_UPDATE,keyboardByteBuf);
                     }
-                    else {
+                    else if((moveVehicleUp.wasPressed() || moveVehicleDown.wasPressed()) && !moveVehicleUp.isPressed() && !moveVehicleDown.isPressed()){
                         keyboardByteBuf.clear();
                         keyboardByteBuf.writeInt(-1);
                         ClientPlayNetworking.send(PacketHandler.KEYBOARD_UPDATE,keyboardByteBuf);

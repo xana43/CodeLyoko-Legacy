@@ -64,7 +64,7 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
     }
 
     public static boolean canSpawn(final EntityType<EntityBlok> entityBlokEntityType, final ServerWorldAccess serverWorldAccess, final SpawnReason spawnReason, final BlockPos pos, final Random random) {
-        return serverWorldAccess.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOME) && serverWorldAccess.getBlockState(
+        return serverWorldAccess.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOMES) && serverWorldAccess.getBlockState(
                 pos.offset(Direction.Axis.Y, -1)).isIn(ModTags.Blocks.LYOKO_BLOCKS);
     }
 
