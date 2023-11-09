@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.client.gui.screen.ingame.BookScreen;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -18,13 +19,13 @@ public record ConstantUtil() {
     public static final Identifier[] RECIPE_IDENTIFIERS = {CodeLyokoMain.codeLyokoPrefix("anode")};
 
     public enum Styles {
-        GUNSHIP(Style.EMPTY.withFont(CodeLyokoMain.codeLyokoPrefix("gunship"))),
-        HUD(Style.EMPTY.withFont(CodeLyokoMain.codeLyokoPrefix("lyoko_hud_font")));
+        GUNSHIP("gunship"),
+        HUD("lyoko_hud_font");
 
         private final Style thisStyle;
 
-        Styles(final Style style) {
-            this.thisStyle = style;
+        Styles(final String styleName) {
+            this.thisStyle = Style.EMPTY.withFont(CodeLyokoMain.codeLyokoPrefix(styleName));
         }
 
         public Style getThisStyle() {
@@ -33,13 +34,16 @@ public record ConstantUtil() {
     }
 
     public record StoryEntry() {
-
+        public static void init(){
+            EntryListENUS.init();
+            EntryListFRFR.init();
+        }
         private static final String n = System.lineSeparator();
         private static final char page = '¶';
 
         private sealed interface EntryListing
         {
-            StringVisitable[] getEntries();
+            BookScreen.Contents getEntries();
         }
         private static StringVisitable[] textArray(@NotNull final String textToDenote) {
             final List<StringVisitable> denotedList = new ObjectArrayList<>();
@@ -76,16 +80,29 @@ public record ConstantUtil() {
                     "the digital space doesn't appear to exist within the same laws of physics that we do and as " +page+
                     "such, there are nodes that appear to originate from other universes entirely, which by all logic" +
                     " should be impossible. I must do more research.");
-            private final StringVisitable[] thisEntry;
-
+            private final BookScreen.Contents thisContents;
+            private static void init(){}
             EntryListENUS(final String thisEntry) {
-                this.thisEntry = textArray(thisEntry);
+                final StringVisitable[] thisEntryString = textArray(thisEntry);
+                this.thisContents = new BookScreen.Contents() {
+                    @Override
+                    public int getPageCount() {
+                        return thisEntryString.length;
+                    }
+
+                    @Override
+                    public StringVisitable getPageUnchecked(final int index) {
+                        return thisEntryString[index];
+                    }
+                };
             }
 
 
             @Override
-            public final StringVisitable[] getEntries() {
-                return thisEntry;
+            public final BookScreen.Contents getEntries() {
+
+
+                return thisContents;
             }
         }
         public enum EntryListFRFR implements EntryListing {
@@ -103,16 +120,27 @@ public record ConstantUtil() {
                     "Le cuivre, le fer, l'or, l'uranium, l'acier. Les ingrédients de base de tout ce qui concerne la technologie. Et bien, l'uranium est" +
                     n + "une partie des fonctionnalités du réacteur" + page + "ci-joint la recette d'un composant de base " +
                     "d'un ordinateur");
-            private final StringVisitable[] thisEntry;
+            private final BookScreen.Contents thisContents;
 
             EntryListFRFR(final String thisEntry) {
-                this.thisEntry = textArray(thisEntry);
+                final StringVisitable[] thisEntryString = textArray(thisEntry);
+                this.thisContents =  new BookScreen.Contents() {
+                    @Override
+                    public int getPageCount() {
+                        return thisEntryString.length;
+                    }
+
+                    @Override
+                    public StringVisitable getPageUnchecked(final int index) {
+                        return thisEntryString[index];
+                    }
+                };
             }
 
-
+            private static void init(){}
             @Override
-            public final StringVisitable[] getEntries() {
-                return thisEntry;
+            public BookScreen.Contents getEntries() {
+                return this.thisContents;
             }
         }
 

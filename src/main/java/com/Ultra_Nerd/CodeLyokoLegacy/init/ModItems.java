@@ -119,8 +119,11 @@ public record ModItems() {
     public static final Item RAW_POLYCARBONATE;
     public static final Item SOLID_QUANTUM;
     public static final Item SOLDER_BLOB;
+    //books
+    private static final FabricItemSettings DEFAULT_BOOK_SETTINGS = new FabricItemSettings().maxCount(1);
     public static final WrittenBookItem STORY_BOOK;
     public static final WrittenBookItem STORY_BOOK2;
+
     public static final Item SILICON_WAFER;
     public static final Item TRIURANIUM_OCTAOXIDE;
     public static final Item TRUSTY_SCREWDRIVER;
@@ -305,7 +308,7 @@ public record ModItems() {
         RAW_POLYCARBONATE = registerGenericItem("raw_polycarbonate");
         SOLID_QUANTUM = registerGenericItem("solid_quantum",BaseSettings().rarity(CustomLyokoRarity.FRANZ_HOPPER));
         SOLDER_BLOB = registerGenericItem("solder_blob");
-        STORY_BOOK = (WrittenBookItem) registerModItem("story_book",new EntryPool.JournalEntry1());
+        STORY_BOOK = (WrittenBookItem) registerModItem("story_book",new EntryPool.BaseEntry(DEFAULT_BOOK_SETTINGS,0));
         STORY_BOOK2 = (WrittenBookItem) registerModItem("story_book2",new EntryPool.JournalEntry2());
         SILICON_WAFER = registerModItem("silicon_wafer",new WaferText(BaseSettings().maxDamage(4)));
         TRIURANIUM_OCTAOXIDE = registerGenericItem("triuranium_octaoxide");

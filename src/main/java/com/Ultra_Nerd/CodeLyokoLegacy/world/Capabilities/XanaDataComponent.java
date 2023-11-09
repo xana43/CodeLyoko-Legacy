@@ -4,7 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.TowerInterfaceTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.ThreadUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.Capabilities.XanaAttackTypes;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
@@ -26,7 +26,7 @@ import java.util.Objects;
 
 @SuppressWarnings("MethodMayBeStatic")
 public final class XanaDataComponent implements AutoSyncedComponent {
-    private static final EntityType<?>[] entitiesToSpawn = {ModEntities.BLOK,ModEntities.HORNET_ENTITY_ENTITY_TYPE};
+    private static final EntityType<?>[] entitiesToSpawn = {};
     private int dangerLevel;
     private static final String DANGER_LEVEL_KEY = "xana_danger_level";
     private static final String FACTORY_POSITION_KEY = "active_factory_position";
@@ -40,8 +40,9 @@ public final class XanaDataComponent implements AutoSyncedComponent {
     }
     private static final ObjectArrayList<Entity> entityList = new ObjectArrayList<>();
     private static final List<Long> validAttackPositions = new LongArrayList();
+    private static int RADIUS = 10;
     public void setDangerLevel(final int level) {
-        if(level >= 0)
+        if(level <= 0)
         {
             towerPosition = BlockPos.ORIGIN;
             for(final Entity entity : entityList)
@@ -55,7 +56,7 @@ public final class XanaDataComponent implements AutoSyncedComponent {
     {
         XanaDataComponent.activeFactoryPosition = activeFactoryPosition;
     }
-    private static int RADIUS = 10;
+
 
     public void setRadius(final int radius)
     {
@@ -73,39 +74,42 @@ public final class XanaDataComponent implements AutoSyncedComponent {
     {
         return towerPosition != BlockPos.ORIGIN;
     }
-    private static final RegistryKey<World>[] worldsToActivate = new RegistryKey[]{ModDimensions.desertSectorWorld};
-    public void activateTower(final MinecraftServer server)
+    private static final ObjectArrayList<RegistryKey<World>> worldsToActivate = ObjectArrayList.of(ModDimensions.desertSectorWorld);
+    public synchronized void activateTower(final MinecraftServer server)
     {
-        final ServerWorld world = server.getWorld(worldsToActivate[XanaHandler.getRandom().nextInt(worldsToActivate.length-1)]);
-        for(int x = 0; x < XanaHandler.getRandom().nextInt(300); ++x)
-        {
-            for(int y = 0; y < world.getTopY(); ++y)
+        ThreadUtil.LARGE_TASK_THREAD_EXECUTOR.submit(() -> {
+            final ServerWorld world = server.getWorld(worldsToActivate.get(XanaHandler.getRandom().nextInt(worldsToActivate.size() - 1)));
+            for(int x = 0; x < XanaHandler.getRandom().nextInt(300); ++x)
             {
-                for(int z = 0; z < XanaHandler.getRandom().nextInt(300); ++z)
+                for(int y = 0; y < world.getTopY(); ++y)
                 {
-                    final BlockPos checkedPosition = new BlockPos(x,y,z);
-                    final BlockState checkedState = world.getBlockState(checkedPosition);
-                    if(checkedState.isOf(ModBlocks.TOWER_INTERFACE))
+                    for(int z = 0; z < XanaHandler.getRandom().nextInt(300); ++z)
                     {
-                        final TowerInterfaceTileEntity towerInterfaceTileEntity = (TowerInterfaceTileEntity) world.getBlockEntity(checkedPosition);
-                        towerInterfaceTileEntity.calculateTowerActivation(1);
-                        towerPosition = checkedPosition;
+                        final BlockPos checkedPosition = new BlockPos(x,y,z);
+                        final BlockState checkedState = world.getBlockState(checkedPosition);
+                        if(checkedState.isOf(ModBlocks.TOWER_INTERFACE))
+                        {
+                            final TowerInterfaceTileEntity towerInterfaceTileEntity = (TowerInterfaceTileEntity) world.getBlockEntity(checkedPosition);
+                            towerInterfaceTileEntity.calculateTowerActivation(1);
+                            towerPosition = checkedPosition;
+                        }
                     }
                 }
             }
-        }
+        });
+
     }
     public void spawnMobs(final World world)
     {
         int spawnIndex = 0;
-
+        attackType = XanaAttackTypes.values()[world.getRandom().nextInt(XanaAttackTypes.values().length)];
         for(final Long pos : validAttackPositions)
         {
             final BlockPos blockPos = BlockPos.fromLong(pos);
-            final Entity entity = entitiesToSpawn[0].create(world);
+            final Entity entity = entitiesToSpawn[spawnIndex].create(world);
             entityList.add(entity);
             Objects.requireNonNull(entity).setPos(blockPos.getX(),blockPos.getY(),blockPos.getZ());
-            CodeLyokoMain.LOG.error(String.valueOf(world.spawnEntity(entity)));
+            CodeLyokoMain.LOG.debug(String.valueOf(world.spawnEntity(entity)));
             spawnIndex++;
             if(spawnIndex > entitiesToSpawn.length - 1)
             {

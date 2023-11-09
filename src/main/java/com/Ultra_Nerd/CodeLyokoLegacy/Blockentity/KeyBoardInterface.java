@@ -12,4 +12,5 @@ public final class KeyBoardInterface extends MultiBlockController {
         super(ModBlockEntities.KEYBOARD_BLOCK_ENTITY, pos, state, BlockPatternRegistry.SCREEN_FRAME.getThisBlockPattern(),
                 ComputerKeyboard.IS_SCREEN_FORMED);
     }
+
 }

@@ -7,7 +7,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneE
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.items.EntryPool;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerProfile;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
@@ -398,9 +397,8 @@ public record CodeLyokoMain() implements ModInitializer {
     }
     @Override
     public void onInitialize() {
-
+        ConstantUtil.StoryEntry.init();
         GeckoLib.initialize();
-        EntryPool.init();
         PacketHandler.commonChannelRegistry();
         generalRegistration();
         registerFuels();
@@ -412,7 +410,6 @@ public record CodeLyokoMain() implements ModInitializer {
         registerEnergyStorageBE();
         checkWorld();
         LootTableOverride.modifyLootTables();
-        //ModDimensions.init();
     }
 
 

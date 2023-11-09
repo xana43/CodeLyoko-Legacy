@@ -26,8 +26,8 @@ public record XanaHandler() {
         return random;
     }
 
-    public static void setProperties(final MinecraftServer server ,final WorldProperties wproperties) {
-        properties = wproperties;
+    public static void setProperties(final MinecraftServer server ,final WorldProperties properties) {
+        XanaHandler.properties = properties;
         internalServer = server;
         calculateValidAttackPositions();
     }
@@ -35,7 +35,6 @@ public record XanaHandler() {
     private static void calculateValidAttackPositions()
     {
         final ServerWorld world = internalServer.getOverworld();
-
         final int radius = CardinalData.XanaCalculator.getRadius(properties);
         final BlockPos factoryPosition = CardinalData.XanaCalculator.getActiveFactoryPosition(properties);
         final XanaAttackTypes attackTypes = CardinalData.XanaCalculator.getAttackTypes(properties);
@@ -80,15 +79,17 @@ public record XanaHandler() {
         final int attackCallID = random.nextInt(69, 70);
         ticksTillCalculation--;
         if (ticksTillCalculation <= 0) {
-            CodeLyokoMain.LOG.error("attack ID ="+attackCallID);
+            CodeLyokoMain.LOG.debug("attack ID ="+attackCallID);
             if (attackCallID == 69) {
                 if(CardinalData.XanaCalculator.getDangerLevel(properties) > 3)
                 {
-                    CodeLyokoMain.LOG.error("xana is attacking");
-                    CardinalData.XanaCalculator.spawnEntities(internalServer,properties,internalServer.getOverworld());
+                    CodeLyokoMain.LOG.debug("xana is attacking");
                     CardinalData.XanaCalculator.activateTower(internalServer,properties);
+                    if(CardinalData.XanaCalculator.getHasTowerActive(internalServer,properties)) {
+                        CardinalData.XanaCalculator.spawnEntities(internalServer, properties, internalServer.getOverworld());
+                    }
                 } else {
-                    CodeLyokoMain.LOG.error("adding to danger level");
+                    CodeLyokoMain.LOG.debug("adding to danger level");
                     CardinalData.XanaCalculator.increaseDangerLevel(internalServer, properties, 1);
                 }
                 return true;

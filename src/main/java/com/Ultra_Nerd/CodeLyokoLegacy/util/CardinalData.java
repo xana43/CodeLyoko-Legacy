@@ -430,6 +430,10 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
             XANA_DATA.get(properties).activateTower(server);
             LevelComponents.sync(XANA_DATA,server);
         }
+        public static boolean getHasTowerActive(final MinecraftServer server,final WorldProperties properties)
+        {
+            return XANA_DATA.get(properties).hasActivatedTower();
+        }
     }
 
     public record LyokoInventorySave() {
