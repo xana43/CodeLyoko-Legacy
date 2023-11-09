@@ -34,14 +34,15 @@ public record ConstantUtil() {
     }
 
     public record StoryEntry() {
-        public static void init(){
+        public static void init() {
             EntryListENUS.init();
             EntryListFRFR.init();
         }
         private static final String n = System.lineSeparator();
         private static final char page = '¶';
 
-        private sealed interface EntryListing
+        @FunctionalInterface
+        private interface EntryListing
         {
             BookScreen.Contents getEntries();
         }

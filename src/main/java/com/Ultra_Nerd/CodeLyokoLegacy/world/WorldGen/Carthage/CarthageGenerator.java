@@ -38,8 +38,6 @@ public final class CarthageGenerator extends ChunkGenerator {
     public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCodecBuilder.create(
             carthageGeneratorInstance ->
                     carthageGeneratorInstance.group(
-                            //RegistryOps.getEntryCodec(RegistryKeys.STRUCTURE_SET).dependent
-                            // (CarthageGenerator::getStructRegistry),
                             BiomeSource.CODEC.fieldOf("biome_source")
                                     .forGetter(carthageGenerator -> carthageGenerator.biomeSource),
                             SETTINGS_CODEC.fieldOf("settings").forGetter(CarthageGenerator::getCarthageSettings)

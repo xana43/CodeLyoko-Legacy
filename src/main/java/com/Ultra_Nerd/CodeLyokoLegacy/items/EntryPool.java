@@ -38,7 +38,7 @@ public record EntryPool() {
 
         @Override
         public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
-            if (!world.isClient) {
+            if (!world.isClient()) {
                 buf.clear();
                 buf.writeInt(entryIndex);
                 ServerPlayNetworking.send((ServerPlayerEntity) user, PacketHandler.OPEN_BOOK_ON_CLIENT,buf);
@@ -62,11 +62,12 @@ public record EntryPool() {
 
         @Override
         public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
-            if(!world.isClient) {
+            if(!world.isClient()) {
 
                 ModCustomTrackedCriteria.USED_ITEM.trigger((ServerPlayerEntity) user, user.getStackInHand(hand));
+                user.unlockRecipes(new Identifier[]{ConstantUtil.RECIPE_IDENTIFIERS[0]});
             }
-            user.unlockRecipes(new Identifier[]{ConstantUtil.RECIPE_IDENTIFIERS[0]});
+
             return super.use(world, user, hand);
         }
     }

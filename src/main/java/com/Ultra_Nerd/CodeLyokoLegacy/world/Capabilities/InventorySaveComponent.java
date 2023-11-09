@@ -33,8 +33,7 @@ public final class InventorySaveComponent implements AutoSyncedComponent {
         if (queriedHashmapEntry != null) {
             player.getInventory().clear();
             player.getInventory().readNbt(queriedHashmapEntry);
-        }else
-        {
+        } else {
             CodeLyokoMain.LOG.error("player:"+player.getEntityName()+" not found in save");
         }
         LevelComponents.sync(CardinalData.LyokoInventorySave.getLyokoInventorySave(), Objects.requireNonNull(player.getServer()));

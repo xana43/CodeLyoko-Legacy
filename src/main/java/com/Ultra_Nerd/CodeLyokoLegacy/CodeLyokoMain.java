@@ -12,6 +12,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.LootTableOverride;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.ThreadUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.PlaceBlockEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
@@ -94,45 +95,50 @@ public record CodeLyokoMain() implements ModInitializer {
 
     private static void checkWorld() {
         PlaceBlockEvent.EVENT.register(((entity, world, pos) -> {
-            for (int x = -32; x < 32; ++x) {
-                for (int y = -32; y < 32; ++y) {
-                    for (int z = -32; z < 32; ++z) {
-                        final BlockPos checkedPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-                        if (world.getBlockEntity(
-                                checkedPos) instanceof final MultiBlockController multiBlockController && world.isChunkLoaded(
-                                ChunkSectionPos.getSectionCoord(checkedPos.getX()),
-                                ChunkSectionPos.getSectionCoord(checkedPos.getZ())) && !world.isClient()) {
-                            if (!multiBlockController.getCheckSuccessful()) {
-                                multiBlockController.check();
 
+                ThreadUtil.SMALL_TASK_THREAD_EXECUTOR.execute(() -> {
+                    for (int x = -32; x < 32; ++x) {
+                        for (int y = -32; y < 32; ++y) {
+                            for (int z = -32; z < 32; ++z) {
+                                final BlockPos checkedPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+                                if (world.getBlockEntity(
+                                        checkedPos) instanceof final MultiBlockController multiBlockController && world.isChunkLoaded(
+                                        ChunkSectionPos.getSectionCoord(checkedPos.getX()),
+                                        ChunkSectionPos.getSectionCoord(checkedPos.getZ())) && !world.isClient()) {
+                                    if (!multiBlockController.getCheckSuccessful()) {
+                                        multiBlockController.check();
+
+                                    }
+                                }
                             }
                         }
                     }
-                }
-            }
-
+                });
 
             return ActionResult.PASS;
         }));
 
 
         PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {
-            for (int x = -32; x < 32; ++x) {
-                for (int y = -32; y < 32; ++y) {
-                    for (int z = -32; z < 32; ++z) {
-                        final BlockPos checkedPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+            ThreadUtil.SMALL_TASK_THREAD_EXECUTOR.execute(() -> {
+                for (int x = -32; x < 32; ++x) {
+                    for (int y = -32; y < 32; ++y) {
+                        for (int z = -32; z < 32; ++z) {
+                            final BlockPos checkedPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
 
-                        if (world.getBlockEntity(
-                                checkedPos) instanceof final MultiBlockController multiBlockController && world.isChunkLoaded(
-                                ChunkSectionPos.getSectionCoord(checkedPos.getX()),
-                                ChunkSectionPos.getSectionCoord(checkedPos.getZ()))) {
-                            if (multiBlockController.getCheckSuccessful()) {
-                                multiBlockController.check();
+                            if (world.getBlockEntity(
+                                    checkedPos) instanceof final MultiBlockController multiBlockController && world.isChunkLoaded(
+                                    ChunkSectionPos.getSectionCoord(checkedPos.getX()),
+                                    ChunkSectionPos.getSectionCoord(checkedPos.getZ()))) {
+                                if (multiBlockController.getCheckSuccessful()) {
+                                    multiBlockController.check();
+                                }
                             }
                         }
                     }
                 }
-            }
+            });
+
         });
         PlaceBlockEvent.EVENT.register((entity, world, pos) -> {
             if(entity instanceof final ServerPlayerEntity playerEntity && !world.isClient() && world.getBlockEntity(pos) instanceof ComputerCoreTileEntity)
@@ -273,7 +279,6 @@ public record CodeLyokoMain() implements ModInitializer {
                                         player.getServer().getSaveProperties().getMainWorldProperties(), player)
                                 .incrementEntered();
                     }
-                    //CodeLyokoMain.LOG.debug("changed dimension");
                     ModCustomTrackedCriteria.ENTERED_LYOKO.trigger(player,destination);
                 } else if (MethodUtil.DimensionCheck.worldIsNotVanilla(origin)) {
                     CardinalData.LyokoInventorySave.loadPlayerInventory(

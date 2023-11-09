@@ -53,7 +53,7 @@ public record XanaHandler() {
             {
                 if(world.getBlockState(factoryPosition.offset(direction,i)) == Blocks.AIR.getDefaultState())
                 {
-                    for(int h = 0; h < maxEntityHeight; h++)
+                    for(int h = 0; h < maxEntityHeight; ++h)
                     {
                         if(world.getBlockState(factoryPosition.offset(direction,i+h)) == Blocks.AIR.getDefaultState())
                         {
@@ -76,7 +76,7 @@ public record XanaHandler() {
 
     public static boolean calculateAttackProbability() {
 
-        final int attackCallID = random.nextInt(69, 70);
+        final int attackCallID = random.nextInt(0, 70);
         ticksTillCalculation--;
         if (ticksTillCalculation <= 0) {
             CodeLyokoMain.LOG.debug("attack ID ="+attackCallID);

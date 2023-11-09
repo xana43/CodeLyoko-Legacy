@@ -28,7 +28,6 @@ public record PacketHandler() {
     public static final Identifier SYNC_SCANNER_PARTICLES = CodeLyokoMain.codeLyokoPrefix("scanner_particles");
     public static final Identifier OPEN_BOOK_ON_CLIENT = CodeLyokoMain.codeLyokoPrefix("open_book_on_client");
     public static final Identifier OPEN_LAPTOP_ON_CLIENT = CodeLyokoMain.codeLyokoPrefix("open_laptop_on_client");
-    public static final Identifier TEST = CodeLyokoMain.codeLyokoPrefix("test");
     public static final Identifier RAY_CAST = CodeLyokoMain.codeLyokoPrefix("ray_cast");
     public static final Identifier RAY_CAST_DROP = CodeLyokoMain.codeLyokoPrefix("ray_cast_drop");
     public static final Identifier RAY_CAST_ENTITY = CodeLyokoMain.codeLyokoPrefix("ray_cast_entity");
