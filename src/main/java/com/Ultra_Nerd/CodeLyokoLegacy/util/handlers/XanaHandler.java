@@ -5,7 +5,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.Capabilities.XanaAttackTypes;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -39,7 +39,7 @@ public record XanaHandler() {
         final BlockPos factoryPosition = CardinalData.XanaCalculator.getActiveFactoryPosition(properties);
         final XanaAttackTypes attackTypes = CardinalData.XanaCalculator.getAttackTypes(properties);
         int maxEntityHeight = 0;
-        for(final Entity entity : attackTypes.getAttackers())
+        for(final EntityType<?> entity : attackTypes.getAttackers())
         {
             final float retrievedEntityHeight = entity.getHeight();
             if(retrievedEntityHeight > maxEntityHeight)

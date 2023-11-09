@@ -47,33 +47,4 @@ public final class ArmorWarrior extends LyokoArmor {
         }
         return multimap;
     }
-    /*
-
-
-    @Override
-    public boolean isDamageable(ItemStack stack) {
-        return false;
-    }
-
-    @Override
-    public boolean isFoil(final @NotNull ItemStack pStack) {
-        return false;
-    }
-
-    @Override
-    public int getDefaultTooltipHideFlags(@NotNull final ItemStack stack) {
-        return ItemStack.TooltipPart.ENCHANTMENTS.getMask();
-    }
-
-    @Override
-    public void inventoryTick(final @NotNull ItemStack pStack, final @NotNull Level pLevel, final @NotNull Entity pEntity, final int pSlotId, final boolean pIsSelected) {
-        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
-        if(!pStack.isEnchanted())
-        {
-            pStack.enchant(Enchantments.BINDING_CURSE,Enchantments.BINDING_CURSE.getMaxLevel());
-        }
-    }
-
-
-*/
 }

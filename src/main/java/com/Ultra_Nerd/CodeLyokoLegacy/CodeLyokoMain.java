@@ -14,7 +14,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.LootTableOverride;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ThreadUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.PlaceBlockEvent;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.ServerEvents;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
 import net.fabricmc.api.ModInitializer;
@@ -94,7 +94,7 @@ public record CodeLyokoMain() implements ModInitializer {
 
 
     private static void checkWorld() {
-        PlaceBlockEvent.EVENT.register(((entity, world, pos) -> {
+        ServerEvents.PLACE_BLOCK_EVENT.register(((entity, world, pos) -> {
 
                 ThreadUtil.SMALL_TASK_THREAD_EXECUTOR.execute(() -> {
                     for (int x = -32; x < 32; ++x) {
@@ -140,7 +140,7 @@ public record CodeLyokoMain() implements ModInitializer {
             });
 
         });
-        PlaceBlockEvent.EVENT.register((entity, world, pos) -> {
+        ServerEvents.PLACE_BLOCK_EVENT.register((entity, world, pos) -> {
             if(entity instanceof final ServerPlayerEntity playerEntity && !world.isClient() && world.getBlockEntity(pos) instanceof ComputerCoreTileEntity)
             {
                 CardinalData.MiscellaneousDataCollection.XanaRaidData.calculateSuperCalculatorPositions(playerEntity,pos);

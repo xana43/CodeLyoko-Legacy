@@ -3,8 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.Client.ClientEvents;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.PlaceBlockEvent;
-import java.util.List;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.ServerEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
@@ -18,6 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
 
 public record MixinHooks() {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
@@ -48,7 +49,7 @@ public record MixinHooks() {
 
         public static void LyokoBlockPlacer(final World world, final BlockPos pos,@Nullable final LivingEntity placer, final CallbackInfo ci)
         {
-            final ActionResult result = PlaceBlockEvent.EVENT.invoker().onPlace(placer, world, pos);
+            final ActionResult result = ServerEvents.PLACE_BLOCK_EVENT.invoker().onPlace(placer, world, pos);
             if (result == ActionResult.FAIL) {
                 ci.cancel();
             }

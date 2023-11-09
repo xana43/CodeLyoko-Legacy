@@ -11,20 +11,20 @@ import java.util.Objects;
 
 public final class DefaultLyokoParticleType extends ParticleType<DefaultLyokoParticleType> implements ParticleEffect {
 
+    private static final ParticleEffect.Factory<DefaultLyokoParticleType> DEFAULT_LYOKO_PARTICLE_TYPE_FACTORY = new Factory<>() {
+        @Override
+        public DefaultLyokoParticleType read(final ParticleType<DefaultLyokoParticleType> type, final StringReader reader) {
+            return (DefaultLyokoParticleType) type;
+        }
 
+        @Override
+        public DefaultLyokoParticleType read(final ParticleType<DefaultLyokoParticleType> type, final PacketByteBuf buf) {
+            return (DefaultLyokoParticleType) type;
+        }
+    };
     public DefaultLyokoParticleType(final boolean alwaysShow) {
 
-        super(alwaysShow, new Factory<>() {
-            @Override
-            public DefaultLyokoParticleType read(final ParticleType<DefaultLyokoParticleType> type, final StringReader reader) {
-                return (DefaultLyokoParticleType) type;
-            }
-
-            @Override
-            public DefaultLyokoParticleType read(final ParticleType<DefaultLyokoParticleType> type, final PacketByteBuf buf) {
-                return (DefaultLyokoParticleType) type;
-            }
-        });
+        super(alwaysShow, DEFAULT_LYOKO_PARTICLE_TYPE_FACTORY);
     }
 
     @Override

@@ -7,8 +7,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public interface PlaceBlockEvent {
-    Event<PlaceBlockEvent> EVENT = EventFactory.createArrayBacked(PlaceBlockEvent.class,
+public record ServerEvents() {
+    public static final Event<PlaceBlockEvent> PLACE_BLOCK_EVENT = EventFactory.createArrayBacked(PlaceBlockEvent.class,
             (listeners) -> (entity, world, pos) -> {
                 for (final PlaceBlockEvent placeBlockEvent : listeners) {
                     final ActionResult result = placeBlockEvent.onPlace(entity, world, pos);
@@ -18,7 +18,8 @@ public interface PlaceBlockEvent {
                 }
                 return ActionResult.PASS;
             });
-
-
-    ActionResult onPlace(final Entity entity, final World world, final BlockPos pos);
+    @FunctionalInterface
+    public interface PlaceBlockEvent {
+        ActionResult onPlace(final Entity entity, final World world, final BlockPos pos);
+    }
 }

@@ -29,17 +29,17 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
     private final int enchant;
     private final SoundEvent soundEvent;
     private final float toughness;
-    private final float knockbackResistance;
+    private final float knockBackResistance;
 
 
     LyokoArmorMaterial(final String nameIn, final int maxDamageFactor, final byte[] damageReductionIn, final int enchant, final SoundEvent soundsIn,
-            final float toughnessIn,final float knockbackResistance) {
+            final float toughnessIn,final float knockBackResistance) {
         this.name = nameIn;
         this.damageReduction = damageReductionIn;
         this.enchant = enchant;
         this.soundEvent = soundsIn;
         this.toughness = toughnessIn;
-        this.knockbackResistance = knockbackResistance;
+        this.knockBackResistance = knockBackResistance;
         this.maxDamageFactor = maxDamageFactor;
     }
 
@@ -84,6 +84,6 @@ public enum LyokoArmorMaterial implements ArmorMaterial {
 
     @Override
     public float getKnockbackResistance() {
-        return knockbackResistance;
+        return knockBackResistance;
     }
 }

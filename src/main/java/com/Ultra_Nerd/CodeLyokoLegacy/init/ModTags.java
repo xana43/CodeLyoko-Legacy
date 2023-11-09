@@ -37,6 +37,7 @@ public record ModTags() {
     public record Biomes() {
 
         public static final TagKey<Biome> LYOKO_BIOMES = createBiomesTag("is_lyoko");
+        public static final TagKey<Biome> REPLIKA_BIOMES = createBiomesTag("is_replika");
         private static TagKey<Biome> createBiomesTag(final String name)
         {
             return TagKey.of(RegistryKeys.BIOME,

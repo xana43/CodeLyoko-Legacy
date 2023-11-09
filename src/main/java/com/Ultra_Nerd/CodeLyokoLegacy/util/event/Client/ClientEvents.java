@@ -7,7 +7,7 @@ public record ClientEvents() {
 
 
     public static final Event<ClientEvents.onLanguageChanged> ON_LANGUAGE_CHANGED_EVENT = EventFactory.createArrayBacked(onLanguageChanged.class,
-            (listener) -> () ->{
+            (listener) -> () -> {
 
                 for(final onLanguageChanged changed : listener)
                 {

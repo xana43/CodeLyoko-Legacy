@@ -23,9 +23,8 @@ public record FindValidDimensionPositionC2SPacket() {
             final ServerWorld serverWorld = server.getWorld(recievedRegistryKey);
             final BlockPos validPosition = MethodUtil.HelperMethods.getValidPosition(serverWorld, player.getHeight());
             if(validPosition != null && serverWorld != null) {
-                //serverWorld.getProfiler().push("portal");
                 player.teleport(serverWorld, validPosition.getX(), validPosition.getY(), validPosition.getZ(), player.getYaw(), player.getPitch());
-                //serverWorld.getProfiler().pop();
+
             }
 
         });

@@ -36,8 +36,6 @@ public record PacketHandler() {
     public static final Identifier TOWER_SCANNER = CodeLyokoMain.codeLyokoPrefix("scan_towers");
     public static void commonChannelRegistry() {
 
-
-        CodeLyokoMain.LOG.error("loading server receivers");
         ServerPlayNetworking.registerGlobalReceiver(ChannelID, AuxiliaryControlPanelActivationC2SPacket::receive);
         ServerPlayNetworking.registerGlobalReceiver(TowerChannelID, TowerActivationC2SPacket::receive);
         ServerPlayNetworking.registerGlobalReceiver(RENAME_BLOCK_ENTITY, ChangeNameC2SPacket::receive);
@@ -63,7 +61,6 @@ public record PacketHandler() {
     }
     @Environment(EnvType.CLIENT)
     public static void clientPacketRegistry() {
-        CodeLyokoMain.LOG.error("loading client receivers");
         ClientPlayNetworking.registerGlobalReceiver(BUILD_HOLOGRAM,RenderBuildAreaS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(OPEN_LAPTOP_ON_CLIENT,OpenLaptopScreenS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(OPEN_BOOK_ON_CLIENT, OpenBookS2CPacket::receive);

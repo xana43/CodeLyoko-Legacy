@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.enums.Capabilities;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.EntityType;
 
 import java.util.List;
 
@@ -9,9 +8,9 @@ public enum XanaAttackTypes {
     DUMMY("DUMMY");
 
     private final String name;
-    private final List<Entity> attackers;
+    private final List<EntityType<?>> attackers;
 
-    XanaAttackTypes(final String name, final HostileEntity... attacker)
+    XanaAttackTypes(final String name, final EntityType<?>... attacker)
     {
         this.name = name;
         this.attackers =  List.of(attacker);
@@ -19,7 +18,7 @@ public enum XanaAttackTypes {
 
 
 
-    public final List<Entity> getAttackers() {
+    public final List<EntityType<?>> getAttackers() {
         return attackers;
     }
 

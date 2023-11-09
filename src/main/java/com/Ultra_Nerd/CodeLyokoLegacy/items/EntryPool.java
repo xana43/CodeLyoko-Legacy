@@ -49,7 +49,7 @@ public record EntryPool() {
         @Override
         public void appendTooltip(final ItemStack stack, @Nullable final World world, final List<Text> tooltip, final TooltipContext context) {
             super.appendTooltip(stack, world, tooltip, context);
-            tooltip.add(Text.translatable("lyoko.story.entry"+entryIndex));
+            tooltip.add(Text.translatable("lyoko.story.entry"+(entryIndex+1)));
         }
     }
 
