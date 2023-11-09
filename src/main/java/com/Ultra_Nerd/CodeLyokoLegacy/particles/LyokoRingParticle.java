@@ -1,12 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.particles;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.client.ParticleUTIL.DefaultLyokoParticleType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -80,9 +80,9 @@ public final class LyokoRingParticle extends SpriteBillboardParticle {
     }
 
     @Environment(EnvType.CLIENT)
-    public record TestRingParticle(SpriteProvider provider) implements ParticleFactory<DefaultLyokoParticleType> {
+    public record TestRingParticle(SpriteProvider provider) implements ParticleFactory<DefaultParticleType> {
         @Override
-        public @NotNull Particle createParticle(final DefaultLyokoParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
+        public @NotNull Particle createParticle(final DefaultParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
             final LyokoRingParticle lyokoRingParticle = new LyokoRingParticle(world, x, y, z, velocityX, velocityY,
                     velocityZ, provider);
             lyokoRingParticle.setColor(1, 1, 0);

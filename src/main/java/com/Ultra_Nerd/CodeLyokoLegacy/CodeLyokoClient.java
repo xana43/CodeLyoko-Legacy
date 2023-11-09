@@ -124,7 +124,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
                     }
 
-                   // mc.inGameHud.render(matrixStack,tickDelta);
+
                 }
             }
             // }

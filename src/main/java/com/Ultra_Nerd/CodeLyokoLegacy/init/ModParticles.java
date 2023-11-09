@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.client.ParticleUTIL.DefaultLyokoParticleType;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleType;
 import net.minecraft.registry.Registries;
@@ -10,19 +11,21 @@ import static com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain.codeLyokoPrefix;
 
 public record ModParticles() {
 
-    public static final DefaultLyokoParticleType TOWER_PARTICLE = registerDefaultLyokoParticle("tower_particle",true);
-    public static final DefaultLyokoParticleType TOWER_PARTICLE_XANA = registerDefaultLyokoParticle("tower_particle_xana",false);
-    public static final DefaultLyokoParticleType TOWER_PARTICLE_JEREMY = registerDefaultLyokoParticle("tower_particle_jeremy",false);
-    public static final DefaultLyokoParticleType TOWER_PARTICLE_FRANZ = registerDefaultLyokoParticle("tower_particle_franz",false);
-    public static final DefaultLyokoParticleType RING_PARTICLE = registerDefaultLyokoParticle("ring_particle",false);
+    public static final DefaultParticleType TOWER_PARTICLE = registerSimpleParticle("tower_particle",true);
+    public static final DefaultParticleType TOWER_PARTICLE_XANA = registerSimpleParticle("tower_particle_xana",false);
+    public static final DefaultParticleType TOWER_PARTICLE_JEREMY = registerSimpleParticle("tower_particle_jeremy",false);
+    public static final DefaultParticleType TOWER_PARTICLE_FRANZ = registerSimpleParticle("tower_particle_franz",false);
+    public static final DefaultParticleType RING_PARTICLE = registerSimpleParticle("ring_particle",false);
     
 
-    private static<T extends ParticleEffect> ParticleType<T> registerDefaultLyokoParticle(final String name, final ParticleType<T> defaultLyokoParticleType) {
+    private static<T extends ParticleEffect> ParticleType<T> registerComplexParticle(final String name, final ParticleType<T> particleType) {
         return Registry.register(Registries.PARTICLE_TYPE, codeLyokoPrefix(name),
-                defaultLyokoParticleType);
+                particleType);
     }
-    private static DefaultLyokoParticleType registerDefaultLyokoParticle(final String name, final boolean alwaysShow) {
-        return (DefaultLyokoParticleType) registerDefaultLyokoParticle(name,new DefaultLyokoParticleType(alwaysShow));
+    private static net.minecraft.particle.DefaultParticleType registerSimpleParticle(final String name, final boolean alwaysSpawn) {
+        return Registry.register(Registries.PARTICLE_TYPE, codeLyokoPrefix(name),
+                FabricParticleTypes.simple(alwaysSpawn));
     }
+
     public static void registerParticles(){}
 }
