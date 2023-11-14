@@ -2,9 +2,9 @@ package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Sector.SectorEntrance;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;

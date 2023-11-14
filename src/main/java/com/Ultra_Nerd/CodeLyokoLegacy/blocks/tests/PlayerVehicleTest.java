@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlockEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;

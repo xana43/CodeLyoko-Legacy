@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -49,7 +49,7 @@ public abstract class LyokoArmor extends ArmorItem {
     }
 
     protected void onArmorTick(final PlayerEntity player, final World world, final Item armorItem) {
-        if (!MethodUtil.DimensionCheck.playerNotInVanillaWorld(player)) {
+        if (!MethodUtil.DimensionCheck.isPlayerInLyoko(player)) {
             if (player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).isOf(armorItem)) {
                 player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).setCount(0);
 

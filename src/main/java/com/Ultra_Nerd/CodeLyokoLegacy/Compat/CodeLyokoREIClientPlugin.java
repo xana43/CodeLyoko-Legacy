@@ -6,8 +6,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Compat.ReactorDisplay.CodeLyokoReactorCate
 import com.Ultra_Nerd.CodeLyokoLegacy.Compat.ReactorDisplay.CodeLyokoReactorDisplay;
 import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.LithographyRecipe;
 import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.ReactorRecipe;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModRecipes;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModRecipes;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.LithographyGUI;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ReactorGUI;
 import me.shedaniel.math.Rectangle;

@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModCustomTrackedCriteria;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModCustomTrackedCriteria;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;

@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.Entity;

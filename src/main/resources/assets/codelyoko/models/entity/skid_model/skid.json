@@ -1,0 +1,7 @@
+{
+    "model": "codelyoko:models/entity/skid_model/skid.obj",
+    "detectCullableFaces": true,
+    "diffuseLighting": true,
+    "flip-v": true,
+    "ambientToFullbright": false
+}

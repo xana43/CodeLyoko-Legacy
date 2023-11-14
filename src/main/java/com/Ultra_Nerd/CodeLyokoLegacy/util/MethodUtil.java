@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModDimensions;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
@@ -290,18 +290,11 @@ public record MethodUtil() {
 
         public record DimensionCheck() {
 
-            public static boolean playerNotInVanillaWorld(final @NotNull PlayerEntity player) {
-                return player.getWorld().getRegistryKey() == ModDimensions.forestSectorWorld || player.getWorld()
-                        .getRegistryKey() == ModDimensions.carthage || player.getWorld()
-                        .getRegistryKey() == ModDimensions.desertSectorWorld || player.getWorld()
-                        .getRegistryKey() == ModDimensions.iceSectorWorld
-                        || player.getWorld().getRegistryKey() == ModDimensions.mountainSectorWorld || player.getWorld()
-                        .getRegistryKey() == ModDimensions.volcanoWorld || player.getWorld()
-                        .getRegistryKey() == ModDimensions.digitalOceanWorld || player.getWorld()
-                        .getRegistryKey() == ModDimensions.frontierWorld;
+            public static boolean isPlayerInLyoko(final @NotNull PlayerEntity player) {
+                return isEntityInLyoko(player);
             }
 
-            public static boolean entityNotInVanillaWorld(final @NotNull Entity entity) {
+            public static boolean isEntityInLyoko(final @NotNull Entity entity) {
                 return entity.getWorld().getRegistryKey() == ModDimensions.forestSectorWorld || entity.getWorld()
                         .getRegistryKey() == ModDimensions.carthage || entity.getWorld()
                         .getRegistryKey() == ModDimensions.desertSectorWorld || entity.getWorld()
@@ -312,7 +305,7 @@ public record MethodUtil() {
                         .getRegistryKey() == ModDimensions.frontierWorld;
             }
 
-            public static boolean worldIsNotVanilla(final @NotNull World level) {
+            public static boolean isWorldLyoko(final @NotNull World level) {
                 return level.getRegistryKey() == ModDimensions.forestSectorWorld || level.getRegistryKey() == ModDimensions.carthage || level.getRegistryKey() == ModDimensions.desertSectorWorld || level.getRegistryKey() == ModDimensions.iceSectorWorld
                         || level.getRegistryKey() == ModDimensions.mountainSectorWorld || level.getRegistryKey() == ModDimensions.volcanoWorld || level.getRegistryKey() == ModDimensions.digitalOceanWorld || level.getRegistryKey() == ModDimensions.frontierWorld;
 

@@ -2,8 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ClientToServer;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.TowerWall;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ThreadUtil;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.network.PacketByteBuf;

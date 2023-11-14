@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Scanner;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.BlockPatternRegistry;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;

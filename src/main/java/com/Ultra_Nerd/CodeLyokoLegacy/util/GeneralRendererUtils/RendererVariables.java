@@ -1,19 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.GeneralRendererUtils;
 
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 
 public record RendererVariables() {
     private static MatrixStack matrixStack;
     private static VertexConsumerProvider consumerProvider;
-    public static void populateMatrixStack(final MatrixStack stack)
+    public static void consumeRenderSystems(final WorldRenderContext context)
     {
-        matrixStack = stack;
+        matrixStack = context.matrixStack();
+        consumerProvider = context.consumers();
     }
-    public static void setConsumerProvider(final VertexConsumerProvider consumerProvider)
-    {
-        RendererVariables.consumerProvider = consumerProvider;
-    }
+
     public static VertexConsumerProvider getConsumerProvider()
     {
         return consumerProvider;

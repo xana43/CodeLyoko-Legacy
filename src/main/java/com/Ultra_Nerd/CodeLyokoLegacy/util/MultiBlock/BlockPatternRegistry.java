@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.block.pattern.BlockPatternBuilder;
 import net.minecraft.block.pattern.CachedBlockPosition;

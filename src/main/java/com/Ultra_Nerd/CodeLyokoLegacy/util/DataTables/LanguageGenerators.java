@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
 import java.nio.file.Path;
 import java.util.Optional;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;

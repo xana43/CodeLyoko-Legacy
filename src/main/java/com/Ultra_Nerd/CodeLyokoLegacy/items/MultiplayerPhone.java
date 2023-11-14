@@ -31,7 +31,7 @@ public final class MultiplayerPhone extends Item {
 
                     if (playerEntity != user && playerEntity.getInventory().contains(new ItemStack(this))) {
                         playerEntity.sendMessage(
-                                Text.translatable("phone.receive").append("").append(user.getGameProfile().getName())
+                                Text.translatable("phone.consume").append("").append(user.getGameProfile().getName())
                                         .append("").append(Text.translatable("phone.receive2")), true);
                     }
 

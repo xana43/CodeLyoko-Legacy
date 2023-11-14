@@ -5,16 +5,15 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
-public final class SkidBladnirData implements AutoSyncedComponent {
+public record SkidBladnirData(BlockPos[] positions) implements AutoSyncedComponent {
 
-    private final BlockPos[] positions = new BlockPos[2];
-
-    private static final String HOME_KEY = "home_position";
-    private static final String DESTINATION_KEY = "destination_position";
     public SkidBladnirData()
     {
-
+        this(new BlockPos[2]);
     }
+    private static final String HOME_KEY = "home_position";
+    private static final String DESTINATION_KEY = "destination_position";
+
     public void setLyokoPosition(final BlockPos position)
     {
         positions[0] = position;

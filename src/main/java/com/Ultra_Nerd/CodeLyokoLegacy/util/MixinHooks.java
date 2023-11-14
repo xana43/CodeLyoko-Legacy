@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.Client.ClientEvents;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.ServerEvents;
 import net.minecraft.block.BlockState;
@@ -9,14 +9,17 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
@@ -36,7 +39,7 @@ public record MixinHooks() {
 
         if (mc != null) {
             if (mc.player != null) {
-                if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(mc.player)) {
+                if (MethodUtil.DimensionCheck.isPlayerInLyoko(mc.player)) {
                     ci.cancel();
 
                 }
@@ -46,7 +49,37 @@ public record MixinHooks() {
 
     public record PlayerEvents()
     {
+        public static void customDeathSoundInLyoko(final PlayerEntity thisPlayerEntity)
+        {
+            if (MethodUtil.DimensionCheck.isPlayerInLyoko(thisPlayerEntity)) {
+                final World currentWorld = thisPlayerEntity.getWorld();
+                final Vec3d currentPosition = thisPlayerEntity.getPos();
+                currentWorld.playSound(currentPosition.x,currentPosition.y,currentPosition.z, ModSounds.DEVIRTUALIZATION, thisPlayerEntity.getSoundCategory(),0.8F, 0.8F,true);
+            }
+        }
+        public static void cancelOnKeyPressed(final CallbackInfo ci)
+        {
+            if (mc.player != null) {
+                if (MethodUtil.DimensionCheck.isPlayerInLyoko(mc.player)) {
+                    if (mc.options.dropKey.isPressed()) {
 
+                        ci.cancel();
+
+                    }
+
+
+                }
+            }
+        }
+        public static void stopClickedOutOfInventoryBounds(final CallbackInfoReturnable<Boolean> cir)
+        {
+            if (mc.player != null) {
+                if (MethodUtil.DimensionCheck.isPlayerInLyoko(mc.player) && !mc.player.isCreative()) {
+                    cir.cancel();
+
+                }
+            }
+        }
         public static void LyokoBlockPlacer(final World world, final BlockPos pos,@Nullable final LivingEntity placer, final CallbackInfo ci)
         {
             final ActionResult result = ServerEvents.PLACE_BLOCK_EVENT.invoker().onPlace(placer, world, pos);
@@ -58,7 +91,7 @@ public record MixinHooks() {
         public static void cancelPlayerEvents(final MinecraftClient client,final CallbackInfo ci)
         {
             if (client.player != null) {
-                if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
+                if (MethodUtil.DimensionCheck.isPlayerInLyoko(client.player)) {
                     ci.cancel();
                 }
             }

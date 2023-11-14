@@ -1,6 +1,41 @@
 {
-  "parent": "builtin/entity",
-  "textures": {
-    "layer0": "codelyoko:item/force_field_emitter"
-  }
+  "parent": "special-model-loader:builtin/obj",
+  "model": "codelyoko:models/item/force_field_model.obj",
+  "display": {
+    "gui": {
+      "rotation": [ 30, 225, 0 ],
+      "translation": [ -4, 0, 0 ],
+      "scale":[ 0.3, 0.3, 0.3 ]
+    },
+    "ground": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 8, 3, 8] ,
+      "scale":[ 0.25, 0.25, 0.25 ]
+    },
+    "fixed": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 8, 0, 4 ],
+      "scale":[ 0.5, 0.5, 0.5 ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ 75, 45, 0 ],
+      "translation": [ 2, 2.5, 4 ],
+      "scale": [ 0.175, 0.175, 0.175 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, 45, 0 ],
+      "translation": [ 2, 0, 4 ],
+      "scale": [ 0.20, 0.20, 0.20 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 0, 225, 0 ],
+      "translation": [ 2, 0, 4 ],
+      "scale": [ 0.20, 0.20, 0.20 ]
+    }
+  },
+  "detectCullableFaces": true,
+  "diffuseLighting": true,
+  "flip-v": true,
+  "ambientocclusion": false,
+  "ambientToFullbright": true
 }

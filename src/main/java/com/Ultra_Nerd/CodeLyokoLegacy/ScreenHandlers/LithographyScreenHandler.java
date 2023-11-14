@@ -3,8 +3,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.LithographyBlockEntityInventory;
 import com.Ultra_Nerd.CodeLyokoLegacy.Slots.LithographyInputslot;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModRecipes;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModScreenHandlers;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModRecipes;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;

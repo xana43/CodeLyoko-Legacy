@@ -1,11 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MantaEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.Piranha;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.MantaEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.Piranha;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDamageSources;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFluids;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.EntitySkid;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModDamageSources;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModFluids;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

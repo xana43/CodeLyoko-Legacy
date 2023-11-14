@@ -2,12 +2,12 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ComputerCoreTileEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.MegaTankEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.MegaTankEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.vehicle.EntitySkid;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.EntitySkid;
+import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerProfile;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.LootTableOverride;
@@ -34,9 +34,6 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -45,10 +42,8 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkSectionPos;
@@ -59,9 +54,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
 import team.reborn.energy.api.EnergyStorage;
-
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public record CodeLyokoMain() implements ModInitializer {
 
@@ -267,9 +259,11 @@ public record CodeLyokoMain() implements ModInitializer {
             }
 
         });
+        ServerLivingEntityEvents.AFTER_DEATH.register(PlayerAfterDeathEvent::consume);
+        ServerTickEvents.END_WORLD_TICK.register(PlayerEnteredServerWorldEvent::consume);
         ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register((player, origin, destination) -> {
             if (player != null) {
-                if (MethodUtil.DimensionCheck.worldIsNotVanilla(destination)) {
+                if (MethodUtil.DimensionCheck.isWorldLyoko(destination)) {
                     CardinalData.LyokoInventorySave.savePlayerInventory(
                             player.server.getSaveProperties().getMainWorldProperties(), player);
 
@@ -280,7 +274,7 @@ public record CodeLyokoMain() implements ModInitializer {
                                 .incrementEntered();
                     }
                     ModCustomTrackedCriteria.ENTERED_LYOKO.trigger(player,destination);
-                } else if (MethodUtil.DimensionCheck.worldIsNotVanilla(origin)) {
+                } else if (MethodUtil.DimensionCheck.isWorldLyoko(origin)) {
                     CardinalData.LyokoInventorySave.loadPlayerInventory(
                             player.server.getSaveProperties().getMainWorldProperties(), player);
                 }
@@ -291,109 +285,32 @@ public record CodeLyokoMain() implements ModInitializer {
         XanaHandler.setTicksToNextCalculation(1);
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
 
-            if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(player) && !player.isCreative()) {
+            if (MethodUtil.DimensionCheck.isPlayerInLyoko(player) && !player.isCreative()) {
                 return ActionResult.FAIL;
             }
             return ActionResult.PASS;
 
         });
         //gives the player the first entry into the story
-        ServerEntityEvents.ENTITY_LOAD.register((entity,world) -> {
-            if(entity instanceof final ServerPlayerEntity player)
-            {
-            CardinalData.PlayerSavedProfile.saveProfile(world.getServer().getSaveProperties().getMainWorldProperties(),player);
-            final PlayerProfile updatedProfile =
-                    CardinalData.PlayerSavedProfile.getPlayerProfile(world.getServer().getSaveProperties().getMainWorldProperties(), player);
-            if(!updatedProfile.getFirstJoin()) {
-                //CodeLyokoMain.LOG.info("updating first join");
-                final PlayerInventory tmpInventory = player.getInventory();
-                if(tmpInventory.getEmptySlot() != -1) {
-                    tmpInventory.setStack(tmpInventory.getEmptySlot(), new ItemStack(ModItems.STORY_BOOK));
-                }
-                updatedProfile.setFirstJoin(true);
-                //CodeLyokoMain.LOG.info(String.valueOf(updatedProfile.getFirstJoin()));
-                CardinalData.PlayerSavedProfile.updateProfile(world.getServer().getSaveProperties().getMainWorldProperties(), updatedProfile);
-                }
-            }
-        });
+        ServerEntityEvents.ENTITY_LOAD.register(EntityLoadServerEvent::consume);
 
 
         //xana
-        final AtomicInteger tick = new AtomicInteger();
-        ServerTickEvents.START_WORLD_TICK.register(world -> world.getPlayers().forEach(serverPlayerEntity -> {
 
-            //tick the xana attack handler and heal player stress
-            tick.getAndIncrement();
-            if ((tick.get() >> 3) % 5 == 0) {
-                if (!serverPlayerEntity.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.MIND_HELMET)) {
-                    CardinalData.MindHelmStress.decreaseStress(serverPlayerEntity);
-                }
-                CardinalData.CellularDamage.regenerateHealth(serverPlayerEntity);
+        ServerTickEvents.START_WORLD_TICK.register(StartWorldTickServerWorldEvent::consume);
 
-                if (serverPlayerEntity.getStatHandler().getStat(Stats.CUSTOM, ModStats.ENTERED_LYOKO_IDENTIFIER) > 0) {
-                    if (XanaHandler.calculateAttackProbability()) {
-                        final int notifyPlayerRandom = new Random().nextInt(world.getPlayers().size());
-
-                        world.getPlayers().get(notifyPlayerRandom).sendMessage(Text.translatable("xana.attack.start")
-                                .getWithStyle(ConstantUtil.Styles.GUNSHIP.getThisStyle().withColor(Formatting.RED))
-                                .get(0), true);
-
-
-                    }
-                }
-            }
-            //carry out continuous operations dependant on the dimension
-            if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(serverPlayerEntity)) {
-                serverPlayerEntity.getHungerManager().setExhaustion(0);
-                serverPlayerEntity.getHungerManager().setSaturationLevel(5);
-                serverPlayerEntity.getAbilities().allowModifyWorld = serverPlayerEntity.isCreative();
-
-
-            } else {
-
-                serverPlayerEntity.getAbilities().allowModifyWorld = true;
-
-            }
-
-
-        }));
-        //stop items from being able to drop in lyoko
-        ServerEntityEvents.ENTITY_LOAD.register((entity, world) -> {
-            if (entity instanceof final ItemEntity itemEntity) {
-                if (MethodUtil.DimensionCheck.worldIsNotVanilla(world) && !itemEntity.getStack()
-                        .isIn(ModTags.ItemTags.LYOKO_ITEM)) {
-                    itemEntity.kill();
-                }
-            }
-
-
-        });
 
         //prevents the player from losing EXP
         ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
 
-            if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(oldPlayer)) {
+            if (MethodUtil.DimensionCheck.isPlayerInLyoko(oldPlayer)) {
                 newPlayer.experienceLevel = oldPlayer.experienceLevel;
                 CardinalData.CellularDamage.getCellComponentKey().get(newPlayer)
                         .copyFrom(CardinalData.CellularDamage.getCellComponentKey().get(oldPlayer));
             }
         });
         //regenerates the player's digital energy
-        ServerTickEvents.END_SERVER_TICK.register(world -> {
-            for (final ServerPlayerEntity player : world.getPlayerManager().getPlayerList()) {
-                if((world.getTicks() >> 3) % 5 == 0 && !CardinalData.DigitalEnergyComponent.isUsingEnergy(player)) {
-                    CardinalData.DigitalEnergyComponent.regenerateEnergy(player);
-                }
-            }
-
-        });
-        ServerLivingEntityEvents.AFTER_DEATH.register((entity, damageSource) -> {
-            if(entity instanceof final ServerTriplicateCloneEntity triplicateClone)
-            {
-                CardinalData.LyokoClass.ExtraClassData.SamuraiData.removeClone(triplicateClone.getOwner());
-                triplicateClone.getOwner().sendMessage(Text.translatable("triplicate.clone.died"));
-            }
-        });
+        ServerTickEvents.END_SERVER_TICK.register(RegeneratePlayerEnergyServerEvent::consume);
     }
 
     public static void registerFuels()

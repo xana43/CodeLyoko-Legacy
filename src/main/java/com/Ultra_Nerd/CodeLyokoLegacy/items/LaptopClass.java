@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModSounds;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;

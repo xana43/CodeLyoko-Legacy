@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBiomes;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModFeature;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModRecipes;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBiomes;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModFeature;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModRecipes;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.registry.RegistryBuilder;

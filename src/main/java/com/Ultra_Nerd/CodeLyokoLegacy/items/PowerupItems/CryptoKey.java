@@ -20,7 +20,7 @@ public final class CryptoKey extends Item {
     @Override
     public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
         if(!world.isClient) {
-            if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(user)) {
+            if (MethodUtil.DimensionCheck.isPlayerInLyoko(user)) {
                 final int classId = CardinalData.LyokoClass.getLyokoClass(user);
                 switch (classId) {
                     case 0 -> {

@@ -54,7 +54,7 @@ public abstract class HUD {
     @Inject(method = "renderStatusBars", at = @At(value = "HEAD"), cancellable = true)
     public void codelyoko$disableFood(final DrawContext matrices, final CallbackInfo ci) {
         if (client.player != null) {
-            if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(client.player)) {
+            if (MethodUtil.DimensionCheck.isPlayerInLyoko(client.player)) {
 
                 ci.cancel();
                 final PlayerEntity playerEntity = this.getCameraPlayer();

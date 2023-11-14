@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.Tools;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModSounds;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.client.MinecraftClient;

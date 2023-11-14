@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModDimensions;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.GeneralRendererUtils.RendererVariables;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;

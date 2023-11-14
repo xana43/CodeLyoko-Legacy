@@ -30,7 +30,7 @@ public final class LyokoSpawnItem extends Item {
 
     @Override
     public ActionResult useOnBlock(final ItemUsageContext context) {
-        if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(Objects.requireNonNull(context.getPlayer()))) {
+        if (MethodUtil.DimensionCheck.isPlayerInLyoko(Objects.requireNonNull(context.getPlayer()))) {
             final MinecraftClient client = MinecraftClient.getInstance();
             final HitResult hit = client.crosshairTarget;
             BlockPos hitPosition = BlockPos.ORIGIN;

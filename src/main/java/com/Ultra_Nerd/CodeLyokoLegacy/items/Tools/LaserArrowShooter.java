@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.Tools;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityLaser;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModSounds;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityLaser;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModSounds;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

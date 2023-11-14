@@ -8,9 +8,9 @@
     "InventoryScreenDropDisable",
     "ItemDropMixin",
     "LivingEntityLyokoMixin",
+    "LyokoRarityMixin",
     "PlayerLyokoMixin",
-    "StopInventoryDrop",
-    "util.LyokoRarityMixin"
+    "StopInventoryDrop"
   ],
   "client": [
     "AddedSplashTexts",

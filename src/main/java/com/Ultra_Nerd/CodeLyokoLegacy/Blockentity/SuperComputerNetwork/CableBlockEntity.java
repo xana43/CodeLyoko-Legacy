@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperComputerNetwork;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.SuperCalculator.DataPacketType;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.SyncedBlockEntity;
 import com.google.common.collect.Lists;

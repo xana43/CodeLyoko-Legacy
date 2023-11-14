@@ -101,8 +101,6 @@ public record ConstantUtil() {
 
             @Override
             public final BookScreen.Contents getEntries() {
-
-
                 return thisContents;
             }
         }

@@ -6,7 +6,7 @@ import net.minecraft.advancement.AdvancementEntry;
 
 import java.util.function.Consumer;
 
-import static com.Ultra_Nerd.CodeLyokoLegacy.init.ModAdvancements.constructAdvancementTree;
+import static com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModAdvancements.constructAdvancementTree;
 
 public final class CustomAdvancements extends FabricAdvancementProvider {
     public CustomAdvancements(final FabricDataOutput output) {

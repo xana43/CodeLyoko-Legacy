@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ElectricitySystemHandlers;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Slots.UpgradeSlot;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModScreenHandlers;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModScreenHandlers;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.MachineItems.ChargeUpgrade;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

@@ -23,18 +23,10 @@ public final class LyokoRingParticle extends SpriteBillboardParticle {
         this.provider = provider;
         this.velocityMultiplier = 2f;
         this.gravityStrength = 0;
-
-
         this.velocityY = 0;
-        //this.field_28787 = false;
         this.xw = x;
         this.zw = z;
-        //this.velocityX = MathHelper.cos((float) MathHelper.atan2(velx,velz));
-        //this.velocityZ =  MathHelper.sign(MathHelper.atan2(velx,velz));
-
-        //this.scale *= 0.75F;
         this.maxAge = 6;
-
         this.collidesWithWorld = true;
         this.setSpriteForAge(provider);
         if (this.isInvisible()) {
@@ -54,8 +46,6 @@ public final class LyokoRingParticle extends SpriteBillboardParticle {
         if (time == 360) {
             time = 0;
         }
-        //this.x = MathHelper.sin((float) Math.atan(this.angle));
-        //this.z = MathHelper.cos((float) Math.atan(this.angle));
         this.setSpriteForAge(this.provider);
         if (this.isInvisible()) {
             this.setAlpha(0);
@@ -80,7 +70,7 @@ public final class LyokoRingParticle extends SpriteBillboardParticle {
     }
 
     @Environment(EnvType.CLIENT)
-    public record TestRingParticle(SpriteProvider provider) implements ParticleFactory<DefaultParticleType> {
+    public record ScannerRingParticle(SpriteProvider provider) implements ParticleFactory<DefaultParticleType> {
         @Override
         public @NotNull Particle createParticle(final DefaultParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
             final LyokoRingParticle lyokoRingParticle = new LyokoRingParticle(world, x, y, z, velocityX, velocityY,

@@ -27,13 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public final class CustomLivingEntityInventory implements Inventory, Nameable {
-    public static final int ITEM_USAGE_COOLDOWN = 5;
-    public static final int MAIN_SIZE = 36;
-    private static final int HOTBAR_SIZE = 9;
-    public static final int OFF_HAND_SLOT = 40;
-    public static final int NOT_FOUND = -1;
-    public static final int[] ARMOR_SLOTS = new int[]{0, 1, 2, 3};
-    public static final int[] HELMET_SLOTS = new int[]{3};
+
     public final DefaultedList<ItemStack> main;
     public final DefaultedList<ItemStack> armor;
     public final DefaultedList<ItemStack> offHand;
@@ -54,9 +48,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
         return isValidHotbarIndex(this.selectedSlot) ? this.main.get(this.selectedSlot) : ItemStack.EMPTY;
     }
 
-    public static int getHotbarSize() {
-        return 9;
-    }
+
 
     private boolean canStackAddMore(ItemStack existingStack, ItemStack stack) {
         return !existingStack.isEmpty() && ItemStack.canCombine(existingStack, stack) && existingStack.isStackable() && existingStack.getCount() < existingStack.getMaxCount() && existingStack.getCount() < this.getMaxCountPerStack();
@@ -72,14 +64,6 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
         return -1;
     }
 
-
-
-    public void swapSlotWithHotbar(int slot) {
-        this.selectedSlot = this.getSwappableHotbarSlot();
-        ItemStack itemStack = this.main.get(this.selectedSlot);
-        this.main.set(this.selectedSlot, this.main.get(slot));
-        this.main.set(slot, itemStack);
-    }
 
     public static boolean isValidHotbarIndex(int slot) {
         return slot >= 0 && slot < 9;
@@ -105,29 +89,6 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
 
         return -1;
     }
-
-    public int getSwappableHotbarSlot() {
-        int i;
-        int j;
-        for(i = 0; i < 9; ++i) {
-            j = (this.selectedSlot + i) % 9;
-            if (this.main.get(j).isEmpty()) {
-                return j;
-            }
-        }
-
-        for(i = 0; i < 9; ++i) {
-            j = (this.selectedSlot + i) % 9;
-            if (!this.main.get(j).hasEnchantments()) {
-                return j;
-            }
-        }
-
-        return this.selectedSlot;
-    }
-
-
-
 
 
     private int addStack(ItemStack stack) {

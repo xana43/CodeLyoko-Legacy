@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
-import net.minecraft.client.MinecraftClient;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.MixinHooks;
 import net.minecraft.client.option.KeyBinding;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,18 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ItemDropMixin {
     @Inject(method = "onKeyPressed", at = @At("HEAD"), cancellable = true)
     private static void codelyoko$stopDrop(final CallbackInfo ci) {
-        final MinecraftClient mc = MinecraftClient.getInstance();
-        if (mc.player != null) {
-            if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(mc.player)) {
-                if (mc.options.dropKey.isPressed()) {
+        MixinHooks.PlayerEvents.cancelOnKeyPressed(ci);
 
-                    ci.cancel();
-
-                }
-
-
-            }
-        }
     }
 
 

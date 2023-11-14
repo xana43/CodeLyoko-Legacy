@@ -30,7 +30,7 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
     }
 
     public static DefaultAttributeContainer.Builder createPlayerAttributes() {
-        return LivingEntity.createLivingAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH,900000000).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.10000000149011612).add(EntityAttributes.GENERIC_ATTACK_SPEED).add(EntityAttributes.GENERIC_LUCK);
+        return LivingEntity.createLivingAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH,Double.MAX_VALUE).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.10000000149011612).add(EntityAttributes.GENERIC_ATTACK_SPEED).add(EntityAttributes.GENERIC_LUCK);
     }
 
 

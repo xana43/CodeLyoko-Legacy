@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class StopInventoryDrop {
     @Inject(method = "clickSlot", at = @At("HEAD"), cancellable = true)
     private void codelyoko$disableDropOnItem(final int syncId, final int slotId, final int button, final SlotActionType actionType, final PlayerEntity player, final CallbackInfo ci) {
-        if (MethodUtil.DimensionCheck.playerNotInVanillaWorld(player) && !player.isCreative()) {
+        if (MethodUtil.DimensionCheck.isPlayerInLyoko(player) && !player.isCreative()) {
             if (actionType == SlotActionType.THROW) {
                 ci.cancel();
             }

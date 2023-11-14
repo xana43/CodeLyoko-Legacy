@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperComputerNetwork;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.SuperCalculatorNetwork.DemarcationScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.SuperCalculator.DataPacketType;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.IdBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.RenameableBlockEntity;
