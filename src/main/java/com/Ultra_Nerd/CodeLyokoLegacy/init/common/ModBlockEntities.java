@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init.common;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.LaptopChargerBlockEntityInventory;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.RackChargerBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.UniversalEnergyStorageTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.CirculatorPipeBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerCirculatorBlockEntity;
@@ -39,6 +39,7 @@ public record ModBlockEntities() {
     public static final BlockEntityType<LaptopChargerBlockEntityInventory> LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY;
     public static final BlockEntityType<LyokoCoreBE> LYOKO_CORE;
     public static final BlockEntityType<LithographyBlockEntityInventory> LITHOGRAPHY_BLOCK_ENTITY_TYPE;
+    public static final BlockEntityType<LithographyBlockEntityInventoryT2> LITHOGRAPHY_BLOCK_ENTITY_TYPE_T2;
     public static final BlockEntityType<PlayerDataStorage> PLAYER_DATA_STORAGE_BLOCK_ENTITY_TYPE;
     public static final BlockEntityType<QuantumChipletTileEntity> QUANTUM_CHIPLET_TILE_ENTITY_BLOCK_ENTITY_TYPE;
     public static final BlockEntityType<RackChargerBlockEntity> RACK_CHARGER_BLOCK_ENTITY;
@@ -54,6 +55,7 @@ public record ModBlockEntities() {
         LYOKO_CORE = registerModBlockEntity("lyoko_core", FabricBlockEntityTypeBuilder.create(LyokoCoreBE::new,
                 ModBlocks.LYOKO_CORE));
         LITHOGRAPHY_BLOCK_ENTITY_TYPE = registerModBlockEntity("lithography_block_entity",FabricBlockEntityTypeBuilder.create(LithographyBlockEntityInventory::new,ModBlocks.LITHOGRAPHY_MACHINE));
+        LITHOGRAPHY_BLOCK_ENTITY_TYPE_T2 = registerModBlockEntity("lithography_block_entity_t2",FabricBlockEntityTypeBuilder.create(LithographyBlockEntityInventoryT2::new,ModBlocks.LITHOGRAPHY_MACHINET2));
         UNIVERSAL_ENERGY_STORAGE = registerModBlockEntity("universal_energy_block_entity", FabricBlockEntityTypeBuilder.create(
                 UniversalEnergyStorageTileEntity::new, ModBlocks.STORAGE));
         TOWER_INTERFACE_TILE_ENTITY = registerModBlockEntity("tower_interface_block_entity", FabricBlockEntityTypeBuilder.create(

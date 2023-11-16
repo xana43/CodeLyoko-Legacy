@@ -24,5 +24,6 @@ public record ModHandledScreensClientInitializer() {
         HandledScreens.register(ModScreenHandlers.RACK_CHARGER_HANDLER_SCREEN_TYPE, RackChargerScreen::new);
         HandledScreens.register(ModScreenHandlers.DEMARCATION_SCREEN_HANDLER_TYPE, DemarcationPointScreen::new);
         HandledScreens.register(ModScreenHandlers.LITHOGRAPHY_SCREEN_HANDLER_TYPE, LithographyGUI::new);
+        HandledScreens.register(ModScreenHandlers.LITHOGRAPHY_SCREEN_HANDLER_TYPE_T2,LithographyT2GUI::new);
     }
 }

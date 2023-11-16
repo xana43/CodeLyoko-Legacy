@@ -39,6 +39,7 @@ public record ModScreenHandlers() {
             registerModScreenHandler("vehicletest", (syncId, playerInventory) -> new VehicleMaterializeTestHandler(syncId));
     public static final ScreenHandlerType<LithographyScreenHandler> LITHOGRAPHY_SCREEN_HANDLER_TYPE = registerModScreenHandler("lithography_screen_handler",
             LithographyScreenHandler::new);
+    public static final ScreenHandlerType<LithographyScreenHandlerT2> LITHOGRAPHY_SCREEN_HANDLER_TYPE_T2 = registerModScreenHandler("lithography_screen_handler_t2",LithographyScreenHandlerT2::new);
     private static <T extends ScreenHandler> ScreenHandlerType<T> registerModScreenHandler(final String name, final ScreenHandlerType.Factory<T> factory) {
         return Registry.register(Registries.SCREEN_HANDLER, CodeLyokoMain.codeLyokoPrefix(name),
                 new ScreenHandlerType<>(factory, FeatureFlags.VANILLA_FEATURES));

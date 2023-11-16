@@ -257,7 +257,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
     }
     private static boolean craftRecipe(final DynamicRegistryManager registryManager,final @Nullable RecipeEntry<?> recipe,
             final DefaultedList<ItemStack> slots,final int count) {
-        if (recipe != null && canAcceptRecipeOutput(registryManager, recipe, slots, count) && goldRequirement(slots)) {
+        if (recipe != null && canAcceptRecipeOutput(registryManager, recipe, slots, count) /*&& goldRequirement(slots)*/) {
             final ItemStack itemStack2 = recipe.value().getResult(registryManager);
             final ItemStack itemStack3 = slots.get(3);
             if (itemStack3.isEmpty()) {

@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.LithographyScreenHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.LithographyScreenHandlerT2;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModRecipes;
@@ -100,13 +100,13 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
     }
 
     public LithographyBlockEntityInventoryT2(final BlockPos pos, final BlockState state) {
-        super(ModBlockEntities.LITHOGRAPHY_BLOCK_ENTITY_TYPE, pos, state, 5, 400000, 300L, 0L);
+        super(ModBlockEntities.LITHOGRAPHY_BLOCK_ENTITY_TYPE_T2, pos, state, 5, 400000, 300L, 0L);
         matchGetter = RecipeManager.createCachedMatchGetter(ModRecipes.RecipeTypes.LITHOGRAPHY_RECIPE_RECIPE_TYPE);
     }
 
     @Override
     public @NotNull ScreenHandler createMenu(final int syncId, final PlayerInventory inv, final PlayerEntity player) {
-    return new LithographyScreenHandler(syncId, inv, this, energyAmount);
+    return new LithographyScreenHandlerT2(syncId, inv, this, energyAmount);
     }
 
     private boolean isManufacturing()

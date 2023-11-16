@@ -14,6 +14,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Electricity.LaptopCharger;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Electricity.RackChargerBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Electricity.UniversalEnergyBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Lithography.LithographyMachine;
+import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Lithography.LithographyMachineT2;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.electroplate.ElectroplatingMachine;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.ElectricFluorideInfuser;
 import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.FluorideInfuser;
@@ -255,7 +256,7 @@ public record ModBlocks() {
                    FabricBlockSettings.copyOf(Blocks.DRAGON_EGG).dropsNothing().nonOpaque().strength(-1, -1)
                            .luminance(Blocks.GLOWSTONE.getDefaultState().getLuminance())));
            LITHOGRAPHY_MACHINE = registerModBlocks("lithography_machine",new LithographyMachine(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
-           LITHOGRAPHY_MACHINET2 = registerModBlocks("lithography_machine_t2", new LithographyMachine(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+           LITHOGRAPHY_MACHINET2 = registerModBlocks("lithography_machine_t2", new LithographyMachineT2(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
            MARABUNTA = registerModBlocks("marabunta",new Marabunta());
            METATYUYAMUNITE_ORE = registerExperienceDroppingOre("metatyuyamunite_ore");
            METATORBERNITE_ORE = registerExperienceDroppingOre("metatorbernite_ore",FabricBlockSettings.copyOf(METATYUYAMUNITE_ORE));
