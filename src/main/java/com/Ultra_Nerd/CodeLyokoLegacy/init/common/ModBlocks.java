@@ -94,6 +94,7 @@ public record ModBlocks() {
     public static final Block HOLOPROJECTOR;
     public static final Block LYOKO_CORE;
     public static final Block LITHOGRAPHY_MACHINE;
+    public static final Block LITHOGRAPHY_MACHINET2;
     public static final Block MARABUNTA;
     public static final Block METATYUYAMUNITE_ORE;
     public static final Block METATORBERNITE_ORE;
@@ -254,6 +255,7 @@ public record ModBlocks() {
                    FabricBlockSettings.copyOf(Blocks.DRAGON_EGG).dropsNothing().nonOpaque().strength(-1, -1)
                            .luminance(Blocks.GLOWSTONE.getDefaultState().getLuminance())));
            LITHOGRAPHY_MACHINE = registerModBlocks("lithography_machine",new LithographyMachine(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+           LITHOGRAPHY_MACHINET2 = registerModBlocks("lithography_machine_t2", new LithographyMachine(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
            MARABUNTA = registerModBlocks("marabunta",new Marabunta());
            METATYUYAMUNITE_ORE = registerExperienceDroppingOre("metatyuyamunite_ore");
            METATORBERNITE_ORE = registerExperienceDroppingOre("metatorbernite_ore",FabricBlockSettings.copyOf(METATYUYAMUNITE_ORE));
@@ -384,7 +386,6 @@ public record ModBlocks() {
     }
     public static void registerBlocks()
     {
-
     }
 
 }

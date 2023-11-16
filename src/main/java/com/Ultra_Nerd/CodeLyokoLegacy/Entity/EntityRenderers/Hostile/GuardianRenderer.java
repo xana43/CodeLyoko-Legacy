@@ -35,24 +35,6 @@ public final class GuardianRenderer<T extends LyokoGuardianEntity> extends Entit
         CommonRenderRoutines.renderTexturedSphere(tessellator,bufferbuilder,RADIUS - 1,latitude,longitude,matrices,GUARDIAN_TEXTURE,0,0,255,255,255,255,0,RADIUS / 2, 0);
         CommonRenderRoutines.renderTranslucentTexturedSphere(tessellator,bufferbuilder,RADIUS,latitude,longitude,matrices,GUARDIAN_OVERLAY,0,0,255,255,255,255,0,RADIUS / 2,0);
     }
-    /*
 
-
-    public GuardianRenderer(EntityRendererProvider.@NotNull Context rendManIn) {
-        super(rendManIn, new MathGuardianModel(), 1f);
-    }
-
-    @Override
-    protected void setupRotations(@Nonnull GuardianEntity entityLiving, @Nonnull PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
-        super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
-    }
-
-    @Nonnull
-    @Override
-    public ResourceLocation getTextureResource(@Nonnull GuardianEntity entity) {
-        return ;
-    }
-
- */
 
 }

@@ -1,0 +1,41 @@
+LODInfo[1] =
+{
+    LODInfo[0] =
+    {
+        DisplayFactor = 0
+        LODHysteresis = 0.02
+        LODMaterialMap[0] = {}
+        bEnableShadowCasting[0] = {}
+        BonesToRemove[0] = {}
+        BonesToPrioritize[0] = {}
+        SourceImportFilename = ""
+    }
+}
+Sockets[2] =
+{
+    Sockets[0] =
+    {
+        SocketName = BS_Beam
+        BoneName = Neck
+        RelativeLocation = { X=28.7641, Y=0, Z=0 }
+        RelativeRotation = { Yaw=0, Pitch=0, Roll=0 }
+        RelativeScale = { X=1, Y=1, Z=1 }
+    }
+    Sockets[1] =
+    {
+        SocketName = Lwrist_Attach
+        BoneName = L_Elbow
+        RelativeLocation = { X=24.2374, Y=0, Z=0 }
+        RelativeRotation = { Yaw=0, Pitch=0, Roll=0 }
+        RelativeScale = { X=1, Y=1, Z=1 }
+    }
+}
+bHasVertexColors = false
+EnableTwistBoneFixers = true
+EnableClavicleFixer = true
+Skeleton = None
+Materials[2] =
+{
+    Materials[0] = Material3'CH_EmperorMeningitus.MT_EmperorMeningitus_Body'
+    Materials[1] = Material3'CH_EmperorMeningitus.MT_EmperorMeningitus_Staff'
+}

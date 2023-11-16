@@ -7,7 +7,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModRecipes;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModTags;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.CustomRecipeBuilderProviders.CustomCookingRecipeJsonBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectList;
-import java.util.List;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ConditionJsonProvider;
@@ -22,6 +21,8 @@ import net.minecraft.recipe.AbstractCookingRecipe;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.book.RecipeCategory;
+
+import java.util.List;
 
 public final class CustomRecipeProvider extends FabricRecipeProvider {
 
@@ -98,10 +99,24 @@ public final class CustomRecipeProvider extends FabricRecipeProvider {
                 .pattern("aaa")
                 .pattern("aaa")
                 .pattern("aaa");
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC,ModBlocks.LITHOGRAPHY_MACHINE.asItem()).input('s',Items.IRON_BLOCK)
+                        .input('p',Items.GLASS).input('c',Items.REDSTONE_LAMP)
+                        .pattern("sps")
+                        .pattern("scs")
+                                .pattern("sss");
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC,ModBlocks.LITHOGRAPHY_MACHINE.asItem()).input('s',Items.COPPER_BLOCK)
+                .input('p',Items.LIGHT_BLUE_STAINED_GLASS).input('c',ModBlocks.LITHOGRAPHY_MACHINE.asItem())
+                .pattern("sps")
+                .pattern("scs")
+                .pattern("sss");
         CustomRecipeUtil.offerReacting(exporter, ObjectList.of(ModItems.URANIUM_ISOTOPE235), ModItems.URANIUM_ISOTOPE238);
         CustomRecipeUtil.offerReacting(exporter,ObjectList.of(ModBlocks.URANIUM_BLOCK_235), ModBlocks.URANIUM_BLOCK_238);
         CustomRecipeUtil.offerLithographyArray(exporter,ObjectList.of(ModItems.SILICON_WAFER,Items.COPPER_INGOT,Items.GOLD_NUGGET),ModItems.CPU_DIE_ARM);
-
+        CustomRecipeUtil.offerLithographyArray(exporter,ObjectList.of(ModItems.SILICON_WAFER,Items.GOLD_INGOT,ModItems.CPU_DIE_ARM),ModItems.CPU_DIE_RISC);
+        CustomRecipeUtil.offerLithographyArray(exporter,ObjectList.of(ModItems.SILICON_WAFER,Items.GOLD_INGOT,ModItems.CPU_DIE_RISC,Items.IRON_NUGGET),ModItems.CPU_DIE_x86);
+        CustomRecipeUtil.offerLithographyArray(exporter,ObjectList.of(ModItems.SILICON_WAFER,Items.GOLD_INGOT,ModItems.CPU_DIE_x86,Items.IRON_INGOT), ModItems.CPU_DIE_ASIC);
+        CustomRecipeUtil.offerLithographyArray(exporter,ObjectList.of(ModItems.URANIUM_SILICON_PLATE,Items.GOLD_BLOCK,ModItems.CPU_DIE_ASIC,ModItems.SILICON_WAFER,Items.DIAMOND),ModItems.CPU_DIE_QUANTUM);
+        offerSmelting(exporter,ObjectList.of(ModItems.RAW_SILICADUST),RecipeCategory.MISC,ModItems.SILICON_PLATE,4,4,CodeLyokoMain.codeLyokoPrefix("basic_refinement").toString());
 
     }
 

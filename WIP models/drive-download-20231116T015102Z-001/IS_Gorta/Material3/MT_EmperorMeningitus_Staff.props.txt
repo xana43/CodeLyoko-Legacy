@@ -1,0 +1,27 @@
+TwoSided = false
+bDisableDepthTest = false
+bIsMasked = false
+ReferencedTextures[2] =
+{
+    ReferencedTextures[0] = Texture2D'CH_EmperorMeningitus.TX_EmperorStaff_Norm'
+    ReferencedTextures[1] = Texture2D'CH_EmperorMeningitus.TX_EmperorStaff_Diff'
+}
+Expressions[2] =
+{
+    Expressions[0] = MaterialExpressionTextureSample'CH_EmperorMeningitus.MT_EmperorMeningitus_Staff.MaterialExpressionTextureSample_5'
+    Expressions[1] = MaterialExpressionTextureSample'CH_EmperorMeningitus.MT_EmperorMeningitus_Staff.MaterialExpressionTextureSample_6'
+}
+CachedExpressionData = 
+BlendMode = BLEND_Opaque (0)
+OpacityMaskClipValue = 0.333
+CollectedTextureParameters[0] = {}
+CollectedScalarParameters[0] = {}
+CollectedVectorParameters[0] = {}
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None
+TextureStreamingData[0] = {}

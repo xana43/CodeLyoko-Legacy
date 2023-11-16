@@ -292,8 +292,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
     }
     @Override
     public void onInitializeClient() {
-        PacketHandler.clientPacketRegistry();
         SpecialModelLoaderEvents.LOAD_SCOPE.register(location -> CodeLyokoMain.MOD_ID.equals(location.getNamespace()));
+        PacketHandler.clientPacketRegistry();
         registerModelLoaders();
         registerBlockEntityRenderers();
         registerEntityRenderers();

@@ -125,6 +125,7 @@ public record ModItems() {
     public static final WrittenBookItem STORY_BOOK2;
 
     public static final Item SILICON_WAFER;
+    public static final Item SILICON_PLATE;
     public static final Item TRIURANIUM_OCTAOXIDE;
     public static final Item TRUSTY_SCREWDRIVER;
     public static final Item TERABIT;
@@ -311,6 +312,7 @@ public record ModItems() {
         STORY_BOOK = (WrittenBookItem) registerModItem("story_book",new EntryPool.BaseEntry(DEFAULT_BOOK_SETTINGS,0));
         STORY_BOOK2 = (WrittenBookItem) registerModItem("story_book2",new EntryPool.JournalEntry2());
         SILICON_WAFER = registerModItem("silicon_wafer",new WaferText(BaseSettings().maxDamage(4)));
+        SILICON_PLATE = registerComputerItem("silicon_plate");
         TRIURANIUM_OCTAOXIDE = registerGenericItem("triuranium_octaoxide");
         TRUSTY_SCREWDRIVER = registerModItem("trusty_screwdriver",new TrustyScrewDriverItem(
                 new Item.Settings().maxCount(1)));
