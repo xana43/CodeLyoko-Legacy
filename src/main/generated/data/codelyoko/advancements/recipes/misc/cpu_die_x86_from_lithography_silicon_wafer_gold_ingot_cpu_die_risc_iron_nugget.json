@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_silicon_wafer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "codelyoko:silicon_wafer",
+              "minecraft:gold_ingot",
+              "codelyoko:cpu_die_risc",
+              "minecraft:iron_nugget"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cpu_die_x86_from_lithography_silicon_wafer_gold_ingot_cpu_die_risc_iron_nugget"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_silicon_wafer"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cpu_die_x86_from_lithography_silicon_wafer_gold_ingot_cpu_die_risc_iron_nugget"
+    ]
+  },
+  "sends_telemetry_event": false
+}

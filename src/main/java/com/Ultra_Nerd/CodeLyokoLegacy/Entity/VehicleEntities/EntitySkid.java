@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SeaPylon;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SeaPylon;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModDamageSources;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModDimensions;

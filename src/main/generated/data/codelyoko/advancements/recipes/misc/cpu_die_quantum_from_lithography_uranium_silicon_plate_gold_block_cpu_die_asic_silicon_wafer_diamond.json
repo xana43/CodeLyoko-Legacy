@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_silicon_wafer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "codelyoko:uranium_silicon_plate",
+              "minecraft:gold_block",
+              "codelyoko:cpu_die_asic",
+              "codelyoko:silicon_wafer",
+              "minecraft:diamond"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:cpu_die_quantum_from_lithography_uranium_silicon_plate_gold_block_cpu_die_asic_silicon_wafer_diamond"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_silicon_wafer"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:cpu_die_quantum_from_lithography_uranium_silicon_plate_gold_block_cpu_die_asic_silicon_wafer_diamond"
+    ]
+  },
+  "sends_telemetry_event": false
+}

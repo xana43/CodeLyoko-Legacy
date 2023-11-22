@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "codelyoko:eroded_iron_railing",
+    "codelyoko:tarnished_iron_railing",
+    "codelyoko:rusted_iron_railing",
+    "codelyoko:iron_railing",
+    "codelyoko:waxed_iron_railing"
+  ]
+}

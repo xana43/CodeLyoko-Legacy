@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.items.armor;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.ArmorTicker;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -12,9 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import static com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil.ArmorMethods.isArmorSlot;
-
-public abstract class LyokoArmor extends ArmorItem {
+public abstract class LyokoArmor extends ArmorItem implements ArmorTicker {
     public LyokoArmor(final ArmorMaterial material, final ArmorItem.Type slot, final Settings settings) {
         super(material, slot, settings);
 
@@ -43,12 +42,11 @@ public abstract class LyokoArmor extends ArmorItem {
             stack.addEnchantment(Enchantments.BINDING_CURSE, Enchantments.BINDING_CURSE.getMaxLevel());
             stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
         }
-        if (entity instanceof final PlayerEntity player && isArmorSlot(slot)) {
-            onArmorTick(player, world, stack.getItem());
-        }
+
     }
 
-    protected void onArmorTick(final PlayerEntity player, final World world, final Item armorItem) {
+    @Override
+    public void onArmorTick(final PlayerEntity player, final World world, final Item armorItem,final int slot) {
         if (!MethodUtil.DimensionCheck.isPlayerInLyoko(player)) {
             if (player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).isOf(armorItem)) {
                 player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId()).setCount(0);

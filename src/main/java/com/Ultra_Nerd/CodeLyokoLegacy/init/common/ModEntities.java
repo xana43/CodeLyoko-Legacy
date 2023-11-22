@@ -2,10 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.init.common;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.DecorationEntities.XanaSymbolEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.EntityBlok;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.HornetEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.LyokoGuardianEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.MegaTankEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityFan;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
@@ -21,6 +18,12 @@ import net.minecraft.world.Heightmap;
 
 public record ModEntities() {
     //entity type
+    public static final EntityType<KankrelatEntity> KANKRELAT = registerEntities("kankrelat",FabricEntityTypeBuilder.createMob()
+            .entityFactory(KankrelatEntity::new)
+            .spawnGroup(SpawnGroup.MONSTER)
+            .defaultAttributes(EntityBlok::createMonsterAttributes)
+            .dimensions(EntityDimensions.fixed(1,1))
+            .spawnRestriction(SpawnRestriction.Location.ON_GROUND,Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,EntityBlok::canMobSpawn));
     public static final EntityType<EntityBlok> BLOK = registerEntities("blok",FabricEntityTypeBuilder.createMob()
             .entityFactory(EntityBlok::new)
             .spawnGroup(SpawnGroup.MONSTER)

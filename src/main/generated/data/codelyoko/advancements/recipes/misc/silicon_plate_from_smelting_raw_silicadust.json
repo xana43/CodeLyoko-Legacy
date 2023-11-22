@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_silicadust": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "codelyoko:raw_silicadust"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:silicon_plate_from_smelting_raw_silicadust"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_silicadust"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:silicon_plate_from_smelting_raw_silicadust"
+    ]
+  },
+  "sends_telemetry_event": false
+}

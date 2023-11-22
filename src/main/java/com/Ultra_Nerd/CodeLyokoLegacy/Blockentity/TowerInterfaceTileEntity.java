@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TowerInterfaceScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.TowerInterface;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.TowerWall;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower.TowerInterface;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower.TowerWall;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;

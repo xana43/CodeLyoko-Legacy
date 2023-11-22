@@ -5,11 +5,9 @@ import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Model;
-import net.minecraft.data.client.Models;
+import net.minecraft.data.client.*;
 import net.minecraft.item.Item;
+import net.minecraft.state.property.Properties;
 
 import java.util.Optional;
 
@@ -58,6 +56,12 @@ public final class ModelGenerator extends FabricModelProvider {
         blockStateModelGenerator.registerParentedItemModel(ModBlocks.RACK_CHARGER_BLOCK, CodeLyokoMain.codeLyokoPrefix("block/rack_charger"));
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CABLE_BLOCK);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.SECTOR_ENTRANCE_DESERT);
+        blockStateModelGenerator.blockStateCollector.accept(MultipartBlockStateSupplier.create(ModBlocks.IRON_RAILING)
+                        .with(BlockStateVariant.create().put(VariantSettings.MODEL,CodeLyokoMain.codeLyokoPrefix("block/railing_post")))
+                .with(When.create().set(Properties.NORTH,true),BlockStateVariant.create().put(VariantSettings.UVLOCK,true).put(VariantSettings.MODEL,CodeLyokoMain.codeLyokoPrefix("block/railing_side")))
+                .with(When.create().set(Properties.EAST,true),BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90).put(VariantSettings.UVLOCK,true).put(VariantSettings.MODEL,CodeLyokoMain.codeLyokoPrefix("block/railing_side")))
+                .with(When.create().set(Properties.SOUTH,true),BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180).put(VariantSettings.UVLOCK,true).put(VariantSettings.MODEL,CodeLyokoMain.codeLyokoPrefix("block/railing_side")))
+                .with(When.create().set(Properties.WEST,true),BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270).put(VariantSettings.UVLOCK,true).put(VariantSettings.MODEL,CodeLyokoMain.codeLyokoPrefix("block/railing_side"))));
     }
 
     private static void generateDefaultBuckets(final ItemModelGenerator itemModelGenerator)

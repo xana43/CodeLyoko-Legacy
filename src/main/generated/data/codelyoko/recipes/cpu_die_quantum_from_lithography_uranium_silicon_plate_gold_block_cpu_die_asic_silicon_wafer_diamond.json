@@ -1,0 +1,25 @@
+{
+  "type": "codelyoko:lithography_recipe",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.0,
+  "group": "codelyoko:lithography",
+  "ingredient": [
+    {
+      "item": "codelyoko:uranium_silicon_plate"
+    },
+    {
+      "item": "minecraft:gold_block"
+    },
+    {
+      "item": "codelyoko:cpu_die_asic"
+    },
+    {
+      "item": "codelyoko:silicon_wafer"
+    },
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
+  "result": "codelyoko:cpu_die_quantum"
+}

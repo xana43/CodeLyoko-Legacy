@@ -6,10 +6,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.TestRenderers.ItemPro
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels.ModelHoverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels.ModelOverbike;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels.ModelOverboard;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Hostile.BlokRenderer;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Hostile.GuardianRenderer;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Hostile.HornetRenderer;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Hostile.MegaTankRenderer;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Hostile.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Misc.TriplicateRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Projectile.FanRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Projectile.LaserRenderer;
@@ -119,6 +116,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
     }
 
     private static void registerEntityRenderers() {
+        EntityRendererRegistry.register(ModEntities.KANKRELAT, KankrelatRenderder::new);
         EntityRendererRegistry.register(ModEntities.BLOK, BlokRenderer::new);
         EntityRendererRegistry.register(ModEntities.MEGATANK, MegaTankRenderer::new);
         EntityRendererRegistry.register(ModEntities.LASER_ENTITY_TYPE, LaserRenderer::new);

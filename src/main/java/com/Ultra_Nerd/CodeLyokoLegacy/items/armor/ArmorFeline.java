@@ -54,9 +54,11 @@ public final class ArmorFeline extends LyokoArmor {
 
     }
 
+
+
     @Override
-    protected void onArmorTick(final PlayerEntity player, final World world, final Item armorItem) {
-        super.onArmorTick(player,world,armorItem);
+    public void onArmorTick(final PlayerEntity player, final World world, final Item armorItem,final int slot) {
+        super.onArmorTick(player,world,armorItem,slot);
         if (player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId())
                 .getItem() == ModItems.ODD_BOOTS && player.getInventory()
                 .getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).getItem() == ModItems.ODD_LEGGINGS) {

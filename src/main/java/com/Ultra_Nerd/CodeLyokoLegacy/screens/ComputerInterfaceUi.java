@@ -178,7 +178,7 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
         forest.setCentered();
         desert.setPosition(sector_button_position, (int) (this.height / 2.4f));
         desert.setCentered();
-        ice.setPosition(sector_button_position,this.height >> 1);
+        ice.setPosition(sector_button_position,this.height / 2);
         ice.setCentered();
         mountain.setPosition(sector_button_position, (int) (this.height / 1.72f));
         mountain.setCentered();

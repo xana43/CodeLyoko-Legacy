@@ -1,10 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init.common;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.DigitalLAVA;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.DigitalOcean;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.LiquidHeliumFluid;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.UraniumWasteFluid;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.DigitalLAVA;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.DigitalOcean;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.LiquidHeliumFluid;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.UraniumWasteFluid;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.registry.Registries;

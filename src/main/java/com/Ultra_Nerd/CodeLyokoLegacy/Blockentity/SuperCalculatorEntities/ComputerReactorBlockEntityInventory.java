@@ -35,6 +35,8 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil.HelperMethods.outputFluidToAllSides;
+
 public final class ComputerReactorBlockEntityInventory extends EnergyStorageBlockEntityInventory implements LyokoInventoryBlock, NamedScreenHandlerFactory, RecipeInputProvider {
     private int reactionTime;
 private int fuelMass;
@@ -134,8 +136,10 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
     {
         return ModFuels.FUEL_MAP.containsKey(stack.getItem());
     }
+
     @Override
     public void tick() {
+        outputFluidToAllSides(world,pos,wasteTank);
         boolean reacting2 = false;
         if(isReacting())
         {

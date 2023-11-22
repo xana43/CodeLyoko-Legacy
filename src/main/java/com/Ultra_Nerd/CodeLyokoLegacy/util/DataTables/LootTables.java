@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Sector.SectorEntrance;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Sector.SectorEntrance;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;

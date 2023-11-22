@@ -26,6 +26,11 @@
     "codelyoko:covellite_ore",
     "codelyoko:saleeite_ore",
     "codelyoko:computer_core",
+    "codelyoko:eroded_iron_railing",
+    "codelyoko:tarnished_iron_railing",
+    "codelyoko:rusted_iron_railing",
+    "codelyoko:iron_railing",
+    "codelyoko:waxed_iron_railing",
     "codelyoko:chiplet_franz_block",
     "codelyoko:quantum_core"
   ]

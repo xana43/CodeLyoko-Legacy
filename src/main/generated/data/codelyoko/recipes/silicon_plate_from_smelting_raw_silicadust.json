@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 4,
+  "experience": 4.0,
+  "group": "codelyoko:basic_refinement",
+  "ingredient": {
+    "item": "codelyoko:raw_silicadust"
+  },
+  "result": "codelyoko:silicon_plate"
+}

@@ -7,31 +7,18 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.KankrelatEntity;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
 public final class ModelKankrelat extends DefaultedEntityGeoModel<KankrelatEntity> {
-    public ModelKankrelat(final Identifier assetSubpath) {
-        super(assetSubpath);
-    }
 
-    @Override
-    public Identifier getModelResource(final KankrelatEntity object) {
-        return null;
-    }
+    private static final Identifier TEXTURE = CodeLyokoMain.codeLyokoPrefix("textures/entity/kankrelattemplate.png");
 
-    @Override
-    public Identifier getTextureResource(final KankrelatEntity object) {
-        return null;
+    public ModelKankrelat() {
+        super(CodeLyokoMain.codeLyokoPrefix("kankrelat"));
+        withAltTexture(TEXTURE);
     }
 
 
-
-
-    @Override
-    public @NotNull Identifier getAnimationResource(KankrelatEntity animatable) {
-        return CodeLyokoMain.codeLyokoPrefix("animations/entity/kankrelat.json");
-    }
 
 
 

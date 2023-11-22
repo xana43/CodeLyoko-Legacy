@@ -3,12 +3,14 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Compat.LithographyMachineDisplay;
 import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.LithographyRecipe;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectLists;
-import java.util.List;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeEntry;
+
+import java.util.List;
 
 public final class CodeLyokoLithographyDisplay extends BasicDisplay {
     public CodeLyokoLithographyDisplay(final RecipeEntry<LithographyRecipe> recipeEntry)
@@ -20,7 +22,10 @@ public final class CodeLyokoLithographyDisplay extends BasicDisplay {
             return ObjectLists.emptyList();
         }
         final List<EntryIngredient> list = new ObjectArrayList<>();
-        list.add(EntryIngredients.ofIngredient(recipe.getIngredients().get(0)));
+        for(final Ingredient ingredient : recipe.getIngredients())
+        {
+            list.add(EntryIngredients.ofIngredient(ingredient));
+        }
         return list;
     }
     private static List<EntryIngredient> getOutputList(final LithographyRecipe recipe) {

@@ -48,10 +48,35 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.COFFINITE_ORE,
                 ModBlocks.COVELLITE_ORE,
                 ModBlocks.SALEEITE_ORE,
-                ModBlocks.COMPUTER_CORE
+                ModBlocks.COMPUTER_CORE,
         };
         for (final Block block : commonBlocksPICKIRON) {
             getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL).add(block);
+            getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(block);
+        }
+        //for fences
+        final Block[] commonFences = {
+                ModBlocks.ERODED_IRON_RAILING,
+                ModBlocks.TARNISHED_IRON_RAILING,
+                ModBlocks.RUSTED_IRON_RAILING,
+                ModBlocks.IRON_RAILING,
+                ModBlocks.WAXED_IRON_RAILING
+        };
+        for(final Block block : commonFences)
+        {
+            getOrCreateTagBuilder(BlockTags.FENCES).add(block);
+        }
+        //block that need stone tool
+        final Block[] commonBlocksPICKSTONE = {
+                ModBlocks.ERODED_IRON_RAILING,
+                ModBlocks.TARNISHED_IRON_RAILING,
+                ModBlocks.RUSTED_IRON_RAILING,
+                ModBlocks.IRON_RAILING,
+                ModBlocks.WAXED_IRON_RAILING
+        };
+        for(final Block block : commonBlocksPICKSTONE)
+        {
+            getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(block);
             getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(block);
         }
         //for diamond

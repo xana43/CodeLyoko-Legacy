@@ -4,7 +4,9 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModDimensions;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.advancement.Advancement;
@@ -42,6 +44,7 @@ public record MethodUtil() {
             return slot == EquipmentSlot.CHEST.getEntitySlotId() || slot == EquipmentSlot.LEGS.getEntitySlotId()
                     || slot == EquipmentSlot.FEET.getEntitySlotId() || slot == EquipmentSlot.HEAD.getEntitySlotId();
         }
+
 
     }
     public record AdvancementCreation()
@@ -329,7 +332,23 @@ public record MethodUtil() {
         }
         public record HelperMethods()
         {
+            public static void outputFluidToAllSides(final World world,final BlockPos pos, final SingleVariantStorage<FluidVariant> variantStorage)
+            {
+                for(final Direction dir : Direction.values())
+                {
 
+                    final Storage<FluidVariant> validStorageVariant = FluidStorage.SIDED.find(world,pos.offset(dir),dir);
+                    if(validStorageVariant != null)
+                    {
+                        try(final Transaction transaction = Transaction.openOuter())
+                        {
+                            final long extractedAmount = variantStorage.extract(variantStorage.variant,10,transaction);
+                            validStorageVariant.insert(variantStorage.variant,extractedAmount,transaction);
+                            transaction.commit();
+                        }
+                    }
+                }
+            }
             public static void tryUseEnergy(final ItemStack stack, final EnergyStorage storage)
             {
                 try(final Transaction transaction = Transaction.openOuter())

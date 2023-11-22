@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ClientToServer;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.ControlPanel;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculator.ControlPanel;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;

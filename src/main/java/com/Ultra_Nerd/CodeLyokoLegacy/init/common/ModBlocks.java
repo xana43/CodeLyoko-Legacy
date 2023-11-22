@@ -1,25 +1,26 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init.common;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Decoration.OxidizeableFenceBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.definition.DigitalLavaBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.definition.DigitalSeaBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.definition.LiquidHelium;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.definition.UraniumWaste;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.Electricity.LaptopCharger;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.Electricity.RackChargerBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.Electricity.UniversalEnergyBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.Lithography.LithographyMachine;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.Lithography.LithographyMachineT2;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.electroplate.ElectroplatingMachine;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.flouride.ElectricFluorideInfuser;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.flouride.FluorideInfuser;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Sector.SectorEntrance;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculator.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculatorNetwork.CableBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculatorNetwork.DemarcationPoint;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tests.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.DigitalLavaBlock;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.DigitalSeaBlock;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.LiquidHelium;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Fluids.definition.UraniumWaste;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.Sector.SectorEntrance;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculator.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculatorNetwork.CableBlock;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.SuperCalculatorNetwork.DemarcationPoint;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Electricity.LaptopCharger;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Electricity.RackChargerBlock;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Electricity.UniversalEnergyBlock;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Lithography.LithographyMachine;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.Lithography.LithographyMachineT2;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.electroplate.ElectroplatingMachine;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.ElectricFluorideInfuser;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.machine.flouride.FluorideInfuser;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tests.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.blocks.tower.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -85,6 +86,7 @@ public record ModBlocks() {
     public static final Block ELECTROPLATING_MACHINE_FRAME;
     public static final Block ELECTROPLATING_ANODE;
     public static final Block ELECTROPLATING_CATHODE;
+    public static final Block ERODED_IRON_RAILING;
 
     public static final Block FLUORIDE_INFUSER;
     public static final Block FLUORITE_BLOCK;
@@ -93,6 +95,7 @@ public record ModBlocks() {
     public static final Block FRONTIER_BLOCK;
     public static final Block GUMMITE_ORE;
     public static final Block HOLOPROJECTOR;
+    public static final Block IRON_RAILING;
     public static final Block LYOKO_CORE;
     public static final Block LITHOGRAPHY_MACHINE;
     public static final Block LITHOGRAPHY_MACHINET2;
@@ -106,6 +109,8 @@ public record ModBlocks() {
     public static final Block QUANTUM_CORE;
     public static final Block QUANTUM_STEEL_BLOCK;
     public static final Block RACK_CHARGER_BLOCK;
+    public static final Block ROUTER;
+    public static final Block RUSTED_IRON_RAILING;
     public static final Block SALEEITE_ORE;
     public static final Block SCANNER_BASE;
     public static final Block SCANNER_FRAME;
@@ -115,7 +120,7 @@ public record ModBlocks() {
     public static final Block SILICA_SAND;
     public static final Block SECTOR5_STEEL;
     public static final Block SECTOR_ENTRANCE_DESERT;
-    public static final Block ROUTER;
+    public static final Block TARNISHED_IRON_RAILING;
     public static final Block TOWER_WHITE;
     public static final Block TOWER_INTERFACE;
     public static final Block TOWER_BASE;
@@ -139,6 +144,7 @@ public record ModBlocks() {
 
     public static final Block UV_LIGHT;
     public static final Block VOLCANO_GROUND;
+    public static final Block WAXED_IRON_RAILING;
     public static final Block DIGITAL_OCEAN_BLOCK;
     public static final Block DIGITAL_LAVA_BLOCK;
     public static final Block URANIUM_WASTE_BLOCK;
@@ -242,6 +248,7 @@ public record ModBlocks() {
                    FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
            ELECTROPLATING_CATHODE = registerModBlocks("electroplating_cathode",new ElectroplatingRodImplements(
                    FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+           ERODED_IRON_RAILING = registerModBlocks("eroded_iron_railing",new OxidizeableFenceBlock(Oxidizable.OxidationLevel.EXPOSED,FabricBlockSettings.copyOf(Blocks.IRON_BARS).mapColor(MapColor.LIGHT_GRAY)));
            FLUORIDE_INFUSER = registerModBlocks("fluoride_infuser",new FluorideInfuser());
            FLUORITE_BLOCK = registerGenericBlock("fluorite_block",
                    FabricBlockSettings.create().mapColor(MapColor.PALE_YELLOW).strength(-1, 10)
@@ -252,6 +259,7 @@ public record ModBlocks() {
            FRONTIER_BLOCK = registerModBlocks("frontier_block",new FrontierBlock());
            GUMMITE_ORE = registerExperienceDroppingOre("gummite_ore", FabricBlockSettings.copyOf(Blocks.STONE).strength(3, 10).sounds(BlockSoundGroup.STONE));
            HOLOPROJECTOR = registerModBlocks("holoprojector",new HologramProjectorBlock());
+           IRON_RAILING = registerModBlocks("iron_railing",new OxidizeableFenceBlock(Oxidizable.OxidationLevel.UNAFFECTED,FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
            LYOKO_CORE = registerModBlocks("core_of_lyoko",new LyokoCore(
                    FabricBlockSettings.copyOf(Blocks.DRAGON_EGG).dropsNothing().nonOpaque().strength(-1, -1)
                            .luminance(Blocks.GLOWSTONE.getDefaultState().getLuminance())));
@@ -280,6 +288,8 @@ public record ModBlocks() {
            SECTOR5_STEEL = registerUnbreakableBlock("sector5_steel");
            SECTOR_ENTRANCE_DESERT = registerModBlocks("desert_sector_entrance",new SectorEntrance(FabricBlockSettings.copyOf(Blocks.BEDROCK), SectorEntrance.SELECTORS.DESERT));
            ROUTER = registerModBlocks("router",new Router(FabricBlockSettings.copyOf(Blocks.DRAGON_EGG)));
+           RUSTED_IRON_RAILING = registerModBlocks("rusted_iron_railing",new OxidizeableFenceBlock(Oxidizable.OxidationLevel.OXIDIZED,FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).mapColor(MapColor.DULL_RED)));
+           TARNISHED_IRON_RAILING = registerModBlocks("tarnished_iron_railing",new OxidizeableFenceBlock(Oxidizable.OxidationLevel.WEATHERED,FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).mapColor(MapColor.BRIGHT_RED)));
            TOWER_INTERFACE = registerModBlocks("tower_interface",new TowerInterface());
            TOWER_WHITE = registerUnbreakableBlock("tower_white",FabricBlockSettings.copyOf(Blocks.BARRIER).sounds(BlockSoundGroup.GLASS).luminance(250));
            TOWER_BASE = registerModBlocks("tower_base",new TowerWall());
@@ -305,6 +315,7 @@ public record ModBlocks() {
            URANOPHANE_ORE = registerGenericBlock("uranophane_ore",FabricBlockSettings.copyOf(Blocks.STONE).sounds(BlockSoundGroup.STONE).strength(4, 4));
            UV_MACHINE = registerGenericBlock("uv_machine",FabricBlockSettings.copyOf(Blocks.ANVIL));
            UV_LIGHT = registerGenericBlock("uv_light",FabricBlockSettings.copyOf(Blocks.GLOWSTONE));
+           WAXED_IRON_RAILING = registerModBlocks("waxed_iron_railing",new FenceBlock(FabricBlockSettings.copyOf(Blocks.IRON_BARS)));
            VOLCANO_GROUND = registerGenericBlock("volcano_ground",FabricBlockSettings.copyOf(Blocks.STONE));
            DIGITAL_OCEAN_BLOCK = registerModBlocks("digital_ocean",new DigitalSeaBlock());
            DIGITAL_LAVA_BLOCK = registerModBlocks("digital_lava",new DigitalLavaBlock());
@@ -357,12 +368,12 @@ public record ModBlocks() {
         final Block block = new ExperienceDroppingBlock(settings);
         return registerModBlocks(name,block);
     }
-    public static Block registerUnbreakableBlock(final String name, final FabricBlockSettings settings)
+    private static Block registerUnbreakableBlock(final String name, final FabricBlockSettings settings)
     {
         final Block unbreakable = new Block(settings.strength(Blocks.BEDROCK.getHardness(),Blocks.BEDROCK.getBlastResistance()));
         return registerModBlocks(name,unbreakable);
     }
-    public static Block registerUnbreakableBlock(final String name)
+    private static Block registerUnbreakableBlock(final String name)
     {
         final Block unbreakable = new Block(FabricBlockSettings.copyOf(Blocks.BEDROCK));
         return registerModBlocks(name,unbreakable);

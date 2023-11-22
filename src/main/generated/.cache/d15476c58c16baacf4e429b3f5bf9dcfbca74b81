@@ -1,6 +1,8 @@
-// 1.20.2	2023-11-02T22:20:52.819467665	CodeLyokoLegacy/Tags for minecraft:block
-8b78be8b4220c94f99c71835e3a745931c14bfd1 data/minecraft/tags/blocks/mineable/pickaxe.json
+// 1.20.2	2023-11-22T04:12:10.952232253	CodeLyokoLegacy/Tags for minecraft:block
+7ff79c8ac1d59990088b478dce4f51d9b0211d33 data/minecraft/tags/blocks/needs_stone_tool.json
+2aa2d0d45e259c06ab6487e94db79a42ab43e97e data/minecraft/tags/blocks/mineable/pickaxe.json
 bda055fd8bfd7f8e37bc9d5e4786cca1db4dcdac data/minecraft/tags/blocks/needs_diamond_tool.json
+7ff79c8ac1d59990088b478dce4f51d9b0211d33 data/minecraft/tags/blocks/fences.json
 da702aa0afcf65f7babf4fda796869d8c4351c68 data/c/tags/blocks/raw_uranium_ores.json
 da702aa0afcf65f7babf4fda796869d8c4351c68 data/c/tags/blocks/uranium_ores.json
 da702aa0afcf65f7babf4fda796869d8c4351c68 data/c/tags/blocks/ores.json

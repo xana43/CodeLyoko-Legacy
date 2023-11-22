@@ -44,8 +44,6 @@ public final class OverboardRenderer<T extends OverboardEntity> extends EntityRe
         matrixStackIn.scale(-2F, -2F, 2.0F);
         matrixStackIn.translate(0, -1.5f, 0);
         matrixStackIn.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(360 + entityYaw));
-        //assert MinecraftClient.getInstance().player != null;
-        //this.OverBoardModel.setAngles(entityIn, 0, 0, 0, 0, 0);
         final VertexConsumer vertexBuilder = bufferIn.getBuffer(
                 this.OverBoardModel.getLayer(this.getTexture(entityIn)));
         this.OverBoardModel.render(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.DEFAULT_UV, 1, 1, 1, 1);

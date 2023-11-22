@@ -33,11 +33,11 @@ public final class ArmorNinja extends LyokoArmor {
     }
 
     @Override
-    protected void onArmorTick(final PlayerEntity player, final World world, final Item armorItem) {
+    public void onArmorTick(final PlayerEntity player, final World world, final Item armorItem,final int slot) {
         if(player.fallDistance > player.getSafeFallDistance()) {
             player.fallDistance = player.fallDistance / 2;
         }
-        super.onArmorTick(player, world, armorItem);
+        super.onArmorTick(player, world, armorItem,slot);
     }
 
 
