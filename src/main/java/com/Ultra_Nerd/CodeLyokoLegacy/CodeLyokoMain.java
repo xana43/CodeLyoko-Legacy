@@ -12,11 +12,11 @@ import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.LootTableOverride;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.ThreadUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.ServerEvents;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -87,8 +87,6 @@ public record CodeLyokoMain() implements ModInitializer {
 
     private static void checkWorld() {
         ServerEvents.PLACE_BLOCK_EVENT.register(((entity, world, pos) -> {
-
-                ThreadUtil.SMALL_TASK_THREAD_EXECUTOR.execute(() -> {
                     for (int x = -32; x < 32; ++x) {
                         for (int y = -32; y < 32; ++y) {
                             for (int z = -32; z < 32; ++z) {
@@ -105,14 +103,12 @@ public record CodeLyokoMain() implements ModInitializer {
                             }
                         }
                     }
-                });
-
             return ActionResult.PASS;
         }));
 
 
         PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {
-            ThreadUtil.SMALL_TASK_THREAD_EXECUTOR.execute(() -> {
+
                 for (int x = -32; x < 32; ++x) {
                     for (int y = -32; y < 32; ++y) {
                         for (int z = -32; z < 32; ++z) {
@@ -129,7 +125,7 @@ public record CodeLyokoMain() implements ModInitializer {
                         }
                     }
                 }
-            });
+
 
         });
         ServerEvents.PLACE_BLOCK_EVENT.register((entity, world, pos) -> {
@@ -205,14 +201,13 @@ public record CodeLyokoMain() implements ModInitializer {
 
 
     private static void BiomesFeatureInject() {
+        CodeLyokoMain.LOG.error(ModBiomes.RegisteredBiomes.FOREST_SECTOR.getBiomesRegistryKey().toString());
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
                 RegistryKey.of(RegistryKeys.PLACED_FEATURE, codeLyokoPrefix("coffinite_ore_overworld")));
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(
-                RegistryKey.of(RegistryKeys.BIOME, ModBiomes.RegisteredBiomes.FOREST_SECTOR.getIdentifier())),
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(ModBiomes.RegisteredBiomes.FOREST_SECTOR.getBiomesRegistryKey()),
                 GenerationStep.Feature.VEGETAL_DECORATION,
                 RegistryKey.of(RegistryKeys.PLACED_FEATURE, codeLyokoPrefix("lyoko_forest_tree")));
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(
-                        RegistryKey.of(RegistryKeys.BIOME, ModBiomes.RegisteredBiomes.VOLCANO.getIdentifier())),
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(ModBiomes.RegisteredBiomes.VOLCANO.getBiomesRegistryKey()),
                 GenerationStep.Feature.TOP_LAYER_MODIFICATION, ModFeature.PlacedFeatures.LAVA_LAKE_VOLCANO_KEY);
     }
 
@@ -315,7 +310,9 @@ public record CodeLyokoMain() implements ModInitializer {
 
     public static void registerFuels()
     {
-        ModFuels.FUEL_MAP.forEach(FuelRegistry.INSTANCE::add);
+        Object2ObjectMaps.fastForEach(ModFuels.FUEL_MAP,itemConvertibleIntegerEntry -> {
+            FuelRegistry.INSTANCE.add(itemConvertibleIntegerEntry.getKey(),itemConvertibleIntegerEntry.getValue());
+        });
     }
     @Override
     public void onInitialize() {

@@ -10,13 +10,13 @@ public enum BlockPatternRegistry {
 
 
     SCANNER(BlockPatternBuilder.start().aisle(
-                    "010",
-                    "020",
-                    "030")
+                    "1",
+                    "2",
+                    "3")
             .where('1', CachedBlockPosition.matchesBlockState(state -> state.getBlock() == ModBlocks.SCANNER_TOP))
             .where('2', CachedBlockPosition.matchesBlockState(state -> state.getBlock() == ModBlocks.SCANNER_FRAME))
             .where('3', CachedBlockPosition.matchesBlockState(state -> state.getBlock() == ModBlocks.SCANNER_BASE))
-            .where('0', CachedBlockPosition.matchesBlockState(BlockStatePredicate.ANY)).build()),
+            .build()),
     SCREEN_FRAME(BlockPatternBuilder.start()
             .aisle(
                     "30003",

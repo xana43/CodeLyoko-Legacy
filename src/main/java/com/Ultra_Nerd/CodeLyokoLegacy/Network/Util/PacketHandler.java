@@ -51,7 +51,6 @@ public record PacketHandler() {
         ServerPlayNetworking.registerGlobalReceiver(PLAYER_QUERY_SERVER,(server, player, handler, buf,
                 responseSender) -> server.execute(() -> ServerPlayNetworking.send(player,PLAYER_QUERY,
                     PacketByteBufs.empty())));
-        ServerPlayNetworking.registerGlobalReceiver(SYNC_SCANNER_PARTICLES, SpawnScannerParticlesC2SPacket::receive);
         ServerPlayNetworking.registerGlobalReceiver(RAY_CAST,NinjaRayCastC2SPacket::receive);
         ServerPlayNetworking.registerGlobalReceiver(RAY_CAST_DROP,NinjaRayCastC2SPacket::receive2);
         ServerPlayNetworking.registerGlobalReceiver(RAY_CAST_ENTITY,NinjaRayCastC2SPacket::receive3);

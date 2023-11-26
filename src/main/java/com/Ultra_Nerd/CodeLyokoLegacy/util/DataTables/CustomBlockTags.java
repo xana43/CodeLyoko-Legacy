@@ -112,6 +112,8 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.DIGITAL_SEA_PYLON,
                 ModBlocks.DIGITAL_WOOD_FOREST,
                 ModBlocks.DIGITAL_WOOD_MOUNTAIN,
+                ModBlocks.DIGITAL_GRASS,
+                ModBlocks.VOLCANO_GROUND,
                 ModBlocks.TOWER_WALL,
                 ModBlocks.TOWER_WALL_CORNER,
                 ModBlocks.TOWER_WHITE,

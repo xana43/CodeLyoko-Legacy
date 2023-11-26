@@ -7,9 +7,7 @@
       "max_delay": 0,
       "min_delay": 0,
       "replace_current_music": true,
-      "sound": {
-        "sound_id": "codelyoko:digital_ocean"
-      }
+      "sound": "codelyoko:digital_ocean"
     },
     "sky_color": 2382,
     "water_color": 2382,

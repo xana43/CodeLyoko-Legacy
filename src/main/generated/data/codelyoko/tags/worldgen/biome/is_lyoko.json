@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "codelyoko:sector5",
+    "codelyoko:forest_sector",
+    "codelyoko:desert_sector",
+    "codelyoko:ice_sector",
+    "codelyoko:digital_ocean",
+    "codelyoko:mountain_sector"
+  ]
+}

@@ -4,6 +4,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.level.LevelComponents;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -11,14 +13,13 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
 @SuppressWarnings("MethodMayBeStatic")
 public final class InventorySaveComponent implements AutoSyncedComponent {
 
-    private static final Map<UUID, NbtList> PLAYER_INVENTORY_HASHMAP = new Object2ObjectOpenHashMap<>();
+    private static final Object2ObjectMap<UUID, NbtList> PLAYER_INVENTORY_HASHMAP = new Object2ObjectOpenHashMap<>();
 
     public void savePlayerInventory(final PlayerEntity player) {
         final NbtList playerStoredInventory = new NbtList();
@@ -46,6 +47,8 @@ public final class InventorySaveComponent implements AutoSyncedComponent {
 
     @Override
     public void writeToNbt(final @NotNull NbtCompound tag) {
-        PLAYER_INVENTORY_HASHMAP.forEach((uuid, nbtElements) -> tag.put(uuid.toString(), nbtElements));
+        Object2ObjectMaps.fastForEach(PLAYER_INVENTORY_HASHMAP,uuidNbtListEntry -> {
+            tag.put(uuidNbtListEntry.getKey().toString(),uuidNbtListEntry.getValue());
+        });
     }
 }

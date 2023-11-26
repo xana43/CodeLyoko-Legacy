@@ -9,6 +9,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.structure.Structure;
 
 public record ModTags() {
     public record Blocks() {
@@ -33,11 +34,19 @@ public record ModTags() {
         public static final TagKey<Block> COMMON_VISUAL_WATER_TAG = createCommonTag("visual/water");
         public static final TagKey<Block> COMMON_LAVA_TAG = createCommonTag("lava");
      }
+    public record StructureTags()
+    {
 
+        private static TagKey<Structure> createStructureTag(final String name)
+        {
+            return TagKey.of(RegistryKeys.STRUCTURE,CodeLyokoMain.codeLyokoPrefix(name));
+        }
+    }
     public record Biomes() {
 
         public static final TagKey<Biome> LYOKO_BIOMES = createBiomesTag("is_lyoko");
         public static final TagKey<Biome> REPLIKA_BIOMES = createBiomesTag("is_replika");
+        public static final TagKey<Biome> HAS_TOWER = createBiomesTag("has_structure/tower");
         private static TagKey<Biome> createBiomesTag(final String name)
         {
             return TagKey.of(RegistryKeys.BIOME,

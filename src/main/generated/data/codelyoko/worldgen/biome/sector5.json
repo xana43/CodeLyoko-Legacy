@@ -7,9 +7,7 @@
       "max_delay": 0,
       "min_delay": 0,
       "replace_current_music": true,
-      "sound": {
-        "sound_id": "codelyoko:sector5"
-      }
+      "sound": "codelyoko:sector5"
     },
     "sky_color": 2387,
     "water_color": 2387,

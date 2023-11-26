@@ -1,12 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.init.common;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
-import com.google.common.collect.ImmutableMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.item.ItemConvertible;
 
 public record ModFuels() {
-    public static final ImmutableMap<ItemConvertible, Integer> FUEL_MAP = ImmutableMap.<ItemConvertible, Integer>builder()
-            .put(ModItems.URANIUM_ISOTOPE235, MethodUtil.TickConversion.secondsToTicks(130))
-            .put(ModBlocks.URANIUM_BLOCK_235, MethodUtil.TickConversion.secondsToTicks(30))
-            .build();
+    public static final Object2ObjectMap<ItemConvertible, Integer> FUEL_MAP = Object2ObjectMaps.unmodifiable(new Object2ObjectOpenHashMap<>() {{
+            put(ModItems.URANIUM_ISOTOPE235, MethodUtil.TickConversion.secondsToTicks(130));
+                put(ModBlocks.URANIUM_BLOCK_235, MethodUtil.TickConversion.secondsToTicks(30));
+        }}
+    );
 }

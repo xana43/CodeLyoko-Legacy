@@ -1,20 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
 import java.util.UUID;
 
 @SuppressWarnings("MethodMayBeStatic")
 public final class PlayerScannerComponent implements AutoSyncedComponent {
 
 
-    private static final Map<UUID,BlockPos> POS_HASH_MAP = new Object2ObjectOpenHashMap<>();
+    private static final Object2ObjectMap<UUID,BlockPos> POS_HASH_MAP = new Object2ObjectOpenHashMap<>();
 
 
 
@@ -35,6 +36,8 @@ public final class PlayerScannerComponent implements AutoSyncedComponent {
 
     @Override
     public void writeToNbt(final @NotNull NbtCompound tag) {
-            POS_HASH_MAP.forEach((uuid, blockPos) -> tag.putLong(uuid.toString(),blockPos.asLong()));
+        Object2ObjectMaps.fastForEach(POS_HASH_MAP,uuidBlockPosEntry -> {
+            tag.putLong(uuidBlockPosEntry.getKey().toString(),uuidBlockPosEntry.getValue().asLong());
+        });
     }
 }

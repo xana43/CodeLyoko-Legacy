@@ -1,0 +1,6 @@
+ {
+    "parent":"codelyoko:block/railing_post",
+   "textures": {
+     "0": "codelyoko:block/eroded_railing_post"
+   }
+ }

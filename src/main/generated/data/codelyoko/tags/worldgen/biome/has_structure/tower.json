@@ -2,9 +2,9 @@
   "replace": false,
   "values": [
     "codelyoko:forest_sector",
-    "codelyoko:mountain_sector",
-    "codelyoko:ice_sector",
     "codelyoko:desert_sector",
+    "codelyoko:ice_sector",
+    "codelyoko:mountain_sector",
     "codelyoko:volcano_replika"
   ]
 }

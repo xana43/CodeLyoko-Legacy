@@ -3,6 +3,12 @@
   "downfall": 0.0,
   "effects": {
     "fog_color": 12759680,
+    "music": {
+      "max_delay": 0,
+      "min_delay": 0,
+      "replace_current_music": true,
+      "sound": "codelyoko:desertsector"
+    },
     "sky_color": 12759680,
     "water_color": 12759680,
     "water_fog_color": 12759680

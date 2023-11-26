@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModParticles;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
 import net.minecraft.block.Block;
@@ -29,14 +30,15 @@ public abstract class MultiBlockController extends SyncedBlockEntity implements 
     //TODO: get this working properly
     @Override
     public void check() {
-        if (world != null) {
+        if (world != null && !world.isClient) {
             if (currentPattern.searchAround(world, pos) != null) {
-                for (int x = -2; x < currentPattern.getWidth() - 1; ++x) {
+                for (int x = 0; x < currentPattern.getWidth(); ++x) {
                     for (int y = 0; y < currentPattern.getHeight(); ++y) {
                         for (int z = 0; z < currentPattern.getDepth(); ++z) {
                             final BlockPos posOffset = new BlockPos(this.pos.getX() + x, this.pos.getY() + y,
                                     this.pos.getZ() + z);
                             final BlockState checkedState = world.getBlockState(posOffset);
+                            CodeLyokoMain.LOG.error("checked blockstate is:" + checkedState);
                             if (checkedState.contains(this.thisProperty)) {
                                 world.setBlockState(posOffset, checkedState.with(this.thisProperty, Boolean.TRUE));
 

@@ -5,6 +5,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerProfile;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.level.LevelComponents;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -19,7 +21,7 @@ public final class PlayerProfileStorage implements AutoSyncedComponent{
 
 
     //private PlayerEntity player;
-    private static final Map<UUID,NbtCompound> PLAYER_PROFILE_HASH_MAP = new Object2ObjectOpenHashMap<>();
+    private static final Object2ObjectMap<UUID,NbtCompound> PLAYER_PROFILE_HASH_MAP = new Object2ObjectOpenHashMap<>();
 
     public void saveProfile(final PlayerEntity player)
     {
@@ -92,6 +94,8 @@ public final class PlayerProfileStorage implements AutoSyncedComponent{
 
     @Override
     public void writeToNbt(final @NotNull NbtCompound tag) {
-       PLAYER_PROFILE_HASH_MAP.forEach((uuid, playerProfile) -> tag.put(uuid.toString(), playerProfile));
+        Object2ObjectMaps.fastForEach(PLAYER_PROFILE_HASH_MAP,uuidNbtCompoundEntry -> {
+            tag.put(uuidNbtCompoundEntry.getKey().toString(),uuidNbtCompoundEntry.getValue());
+        });
     }
 }

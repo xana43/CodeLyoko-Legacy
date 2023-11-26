@@ -28,6 +28,7 @@ public record Generator() implements DataGeneratorEntrypoint {
         pack.addProvider(ModelGenerator::new);
         pack.addProvider(CustomAdvancements::new);
         pack.addProvider(LootTables.EntityLootTable::new);
+        pack.addProvider(CustomBiomeTagProvider::new);
     }
 
     @Override
