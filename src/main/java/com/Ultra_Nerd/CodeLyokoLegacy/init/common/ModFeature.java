@@ -35,15 +35,15 @@ public record ModFeature() {
     }
 
     public static final Object2ObjectMap<String, ObjectObjectImmutablePair<TreeFeatureConfig.Builder, PlacedFeature>> CONFIGURED_TREE_IMMUTABLE_MAP = Object2ObjectMaps.unmodifiable(
-            new Object2ObjectOpenHashMap<>(){
-                {
+            new Object2ObjectOpenHashMap<>(){{
                     put("lyoko_forest_tree", new ObjectObjectImmutablePair<>(ForestFeatures.FOREST_TREE_CONFIG, PlacedFeatures.FOREST_TREE_PLACED));
-                }}
-            );
+                }});
     public static final Object2ObjectMap<String, ObjectObjectImmutablePair<ConfiguredFeature<?, ?>, PlacedFeature>> ORE_IMMUTABLE_MAP =
             Object2ObjectMaps.unmodifiable( new Object2ObjectOpenHashMap<>(){{
-            put("coffinite_ore_overworld", new ObjectObjectImmutablePair<>(OreFeatures.OVERWORLD_COFFINITE_ORE_CONFIG,
-                    PlacedFeatures.OVERWORLD_COFFINITE_ORE_PLACED));
+            put("autunite_ore_overworld",new ObjectObjectImmutablePair<>(OreFeatures.OVERWORLD_AUTUNITE_ORE_CONFIG,PlacedFeatures.OVERWORLD_AUTUNITE_ORE_PLACED));
+            put("bornite_ore_overworld",new ObjectObjectImmutablePair<>(OreFeatures.OVERWORLD_BORNITE_ORE_CONFIG,PlacedFeatures.OVERWORLD_BORNITE_ORE_PLACED));
+            put("coffinite_ore_overworld", new ObjectObjectImmutablePair<>(OreFeatures.OVERWORLD_COFFINITE_ORE_CONFIG, PlacedFeatures.OVERWORLD_COFFINITE_ORE_PLACED));
+
             }});
     public static final Object2ObjectMap<String,ObjectObjectImmutablePair<ConfiguredFeature<?,?>,PlacedFeature>> MISC_IMMUTABLE_MAP =
             Object2ObjectMaps.unmodifiable( new Object2ObjectOpenHashMap<>(){{
@@ -65,13 +65,24 @@ public record ModFeature() {
     }
 
     private record OreFeatures() {
-
+        //autunite
+        private static final ConfiguredFeature<?, ?> OVERWORLD_AUTUNITE_ORE_CONFIG = new ConfiguredFeature<>(
+                Feature.ORE, new OreFeatureConfig(
+                new TagMatchRuleTest(BlockTags.STONE_ORE_REPLACEABLES),
+                ModBlocks.AUTUNITE_ORE.getDefaultState(),
+                4));
+        private static final ConfiguredFeature<?, ?> OVERWORLD_BORNITE_ORE_CONFIG = new ConfiguredFeature<>(
+                Feature.ORE, new OreFeatureConfig(
+                new TagMatchRuleTest(BlockTags.STONE_ORE_REPLACEABLES),
+                ModBlocks.BORNITE_ORE.getDefaultState(),
+                2));
         //coffinite
         private static final ConfiguredFeature<?, ?> OVERWORLD_COFFINITE_ORE_CONFIG = new ConfiguredFeature<>(
                 Feature.ORE, new OreFeatureConfig(
                 new TagMatchRuleTest(BlockTags.STONE_ORE_REPLACEABLES),
                 ModBlocks.COFFINITE_ORE.getDefaultState(),
                 8));
+
     }
     private record MiscFeatures()
     {
@@ -89,6 +100,21 @@ public record ModFeature() {
                 Arrays.asList(CountPlacementModifier.of(5), SquarePlacementModifier.of(),
                         net.minecraft.world.gen.feature.PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP)
         );
+        //ore placers
+        public static final PlacedFeature OVERWORLD_AUTUNITE_ORE_PLACED = new PlacedFeature(
+                RegistryEntry.of(OreFeatures.OVERWORLD_AUTUNITE_ORE_CONFIG),
+                Arrays.asList(
+                        CountPlacementModifier.of(5),
+                        SquarePlacementModifier.of(),
+                        HeightRangePlacementModifier.uniform(YOffset.getBottom(), YOffset.fixed(30))
+                ));
+        public static final PlacedFeature OVERWORLD_BORNITE_ORE_PLACED = new PlacedFeature(
+                RegistryEntry.of(OreFeatures.OVERWORLD_BORNITE_ORE_CONFIG),
+                Arrays.asList(
+                        CountPlacementModifier.of(2),
+                        SquarePlacementModifier.of(),
+                        HeightRangePlacementModifier.uniform(YOffset.getBottom(), YOffset.fixed(40))
+                ));
         public static final PlacedFeature OVERWORLD_COFFINITE_ORE_PLACED = new PlacedFeature(
                 RegistryEntry.of(OreFeatures.OVERWORLD_COFFINITE_ORE_CONFIG),
                 Arrays.asList(
@@ -96,6 +122,7 @@ public record ModFeature() {
                         SquarePlacementModifier.of(),
                         HeightRangePlacementModifier.uniform(YOffset.getBottom(), YOffset.fixed(40))
                 ));
+
         public static final PlacedFeature LAVA_LAKE_VOLCANO_PLACED = new PlacedFeature(
                 RegistryEntry.of(MiscFeatures.LAVA_LAKE_CONFIG
                 ), Arrays.asList(RarityFilterPlacementModifier.of(50),SquarePlacementModifier.of(),

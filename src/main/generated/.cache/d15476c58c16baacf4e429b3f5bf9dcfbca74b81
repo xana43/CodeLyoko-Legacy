@@ -1,10 +1,10 @@
-// 1.20.2	2023-11-26T07:47:53.798429256	CodeLyokoLegacy/Tags for minecraft:block
+// 1.20.2	2023-11-27T00:05:23.054832279	CodeLyokoLegacy/Tags for minecraft:block
 7ff79c8ac1d59990088b478dce4f51d9b0211d33 data/minecraft/tags/blocks/needs_stone_tool.json
-bda055fd8bfd7f8e37bc9d5e4786cca1db4dcdac data/minecraft/tags/blocks/needs_diamond_tool.json
 2aa2d0d45e259c06ab6487e94db79a42ab43e97e data/minecraft/tags/blocks/mineable/pickaxe.json
+bda055fd8bfd7f8e37bc9d5e4786cca1db4dcdac data/minecraft/tags/blocks/needs_diamond_tool.json
 7ff79c8ac1d59990088b478dce4f51d9b0211d33 data/minecraft/tags/blocks/fences.json
-da702aa0afcf65f7babf4fda796869d8c4351c68 data/c/tags/blocks/uranium_ores.json
 da702aa0afcf65f7babf4fda796869d8c4351c68 data/c/tags/blocks/raw_uranium_ores.json
+da702aa0afcf65f7babf4fda796869d8c4351c68 data/c/tags/blocks/uranium_ores.json
 da702aa0afcf65f7babf4fda796869d8c4351c68 data/c/tags/blocks/ores.json
 36b1de3c24b1f7f7c4c240bf4ba8e5ff2c8058b5 data/c/tags/blocks/lava.json
 154fa35f92daa4685656e57807e39d7244184861 data/minecraft/tags/blocks/ice.json

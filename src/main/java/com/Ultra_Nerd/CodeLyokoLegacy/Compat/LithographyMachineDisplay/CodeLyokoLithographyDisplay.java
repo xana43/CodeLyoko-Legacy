@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Compat.LithographyMachineDisplay;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.LithographyRecipe;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectLists;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
@@ -21,7 +22,7 @@ public final class CodeLyokoLithographyDisplay extends BasicDisplay {
         if(recipe == null) {
             return ObjectLists.emptyList();
         }
-        final List<EntryIngredient> list = new ObjectArrayList<>();
+        final ObjectList<EntryIngredient> list = new ObjectArrayList<>();
         for(final Ingredient ingredient : recipe.getIngredients())
         {
             list.add(EntryIngredients.ofIngredient(ingredient));

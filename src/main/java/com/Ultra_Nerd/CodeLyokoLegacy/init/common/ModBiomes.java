@@ -213,6 +213,7 @@ public record ModBiomes() {
 
              private static Identifier identifierBiomes(final Biome biome) {
                  final AtomicReference<Identifier> output = new AtomicReference<>();
+
                  Object2ObjectMaps.fastForEach(BIOMES_MAP,stringBiomeEntry -> {
                      if(biome == stringBiomeEntry.getValue())
                      {
