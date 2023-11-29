@@ -55,7 +55,7 @@ public final class ScannerTileEntity extends MultiBlockController {
             final ServerPlayerEntity player = (ServerPlayerEntity) serverWorld.getClosestPlayer(this.pos.getX(),
                     this.pos.getY(), this.pos.getZ(), 1, false);
             if (serverDestinationWorld != null && player != null) {
-                serverWorld.getProfiler().push("portal");
+                //serverWorld.getProfiler().push("portal");
                 if (scanTimer <= 0 && inScanner) {
                     if (this.destinationWorld == ModDimensions.carthage) {
                         player.teleport(serverDestinationWorld, 0, 140, 0, player.getYaw(), player.getPitch());
@@ -66,7 +66,7 @@ public final class ScannerTileEntity extends MultiBlockController {
                         }
                     }
                 }
-                serverWorld.getProfiler().pop();
+                //serverWorld.getProfiler().pop();
             }
 
 

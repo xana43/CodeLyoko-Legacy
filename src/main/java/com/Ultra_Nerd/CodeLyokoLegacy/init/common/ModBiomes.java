@@ -51,8 +51,7 @@ public record ModBiomes() {
             .build();
     private static final Biome VOLCANO = buildVolcano();
     private static final Biome SECTOR_5 = buildSector5();
-     public static final Object2ObjectMap<String,Biome> BIOMES_MAP = Object2ObjectMaps.unmodifiable(new Object2ObjectOpenHashMap<>()
-     {{
+     public static final Object2ObjectMap<String,Biome> BIOMES_MAP = Object2ObjectMaps.unmodifiable(new Object2ObjectOpenHashMap<>() {{
              put("sector5", SECTOR_5);
              put("forest_sector", FOREST_SECTOR);
              put("desert_sector", DESERT_SECTOR);
@@ -61,8 +60,7 @@ public record ModBiomes() {
              put("mountain_sector", MOUNTAIN_SECTOR);
              put("void_frontier", FRONTEIR);
              put("volcano_replika", VOLCANO);
-         }}
-     );
+     }});
 
          private static Biome buildForest() {
 
@@ -215,8 +213,7 @@ public record ModBiomes() {
                  final AtomicReference<Identifier> output = new AtomicReference<>();
 
                  Object2ObjectMaps.fastForEach(BIOMES_MAP,stringBiomeEntry -> {
-                     if(biome == stringBiomeEntry.getValue())
-                     {
+                     if(biome == stringBiomeEntry.getValue()) {
                          output.set(CodeLyokoMain.codeLyokoPrefix(stringBiomeEntry.getKey()));
                      }
                  });

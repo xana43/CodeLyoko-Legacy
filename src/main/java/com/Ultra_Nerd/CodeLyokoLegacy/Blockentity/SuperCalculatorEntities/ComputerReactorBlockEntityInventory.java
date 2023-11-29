@@ -46,7 +46,7 @@ private final Object2IntOpenHashMap<Identifier> recipesUsed = new Object2IntOpen
 private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecipe> matchGetter;
     private final SingleVariantStorage<FluidVariant> wasteTank =
             MethodUtil.FluidStorageCreation.createFluidStorage(this, ModFluids.STILL_URANIUM);
-
+    private final Storage<FluidVariant> extractionOfWasteTank = FilteringStorage.extractOnlyOf(wasteTank);
     private final PropertyDelegate energyAmount = new PropertyDelegate() {
         @Override
         public int get(final int index) {
@@ -63,10 +63,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
             };
 
         }
-        public Storage<FluidVariant> getWasteTank()
-        {
-            return FilteringStorage.extractOnlyOf(wasteTank);
-        }
+
         @Override
         public void set(final int index, final int value) {
             switch (index) {
@@ -85,7 +82,10 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
             return 8;
         }
     };
-
+    public Storage<FluidVariant> getWasteTank()
+    {
+        return extractionOfWasteTank;
+    }
     @Override
     protected void writeNbt(final NbtCompound nbt) {
         super.writeNbt(nbt);

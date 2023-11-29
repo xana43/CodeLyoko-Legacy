@@ -30,8 +30,7 @@ public record ModFeature() {
 
     public static void bootStrap(Registerable<ConfiguredFeature<?,?>> registerable)
     {
-
-        CONFIGURED_TREE_IMMUTABLE_MAP.forEach((s, configuredFeaturePlacedFeaturePair) -> ConfiguredFeatures.register(registerable,ConfiguredFeatures.of(s),Feature.TREE, configuredFeaturePlacedFeaturePair.left().build()));
+        Object2ObjectMaps.fastForEach(CONFIGURED_TREE_IMMUTABLE_MAP,stringObjectObjectImmutablePairEntry -> ConfiguredFeatures.register(registerable,ConfiguredFeatures.of(stringObjectObjectImmutablePairEntry.getKey()),Feature.TREE, stringObjectObjectImmutablePairEntry.getValue().left().build()));
     }
 
     public static final Object2ObjectMap<String, ObjectObjectImmutablePair<TreeFeatureConfig.Builder, PlacedFeature>> CONFIGURED_TREE_IMMUTABLE_MAP = Object2ObjectMaps.unmodifiable(

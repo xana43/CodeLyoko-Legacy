@@ -30,7 +30,7 @@ public record ModCriteria() {
         private static final Identifier ID = CodeLyokoMain.codeLyokoPrefix("class_change");
         @Override
         protected Condition conditionsFromJson(JsonObject obj, Optional<LootContextPredicate> playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
-            return new Condition(ID,playerPredicate,obj.get("previous_class_id").getAsInt());
+            return new Condition(playerPredicate,obj.get("previous_class_id").getAsInt());
         }
         public void trigger(final ServerPlayerEntity player)
         {
@@ -46,7 +46,7 @@ public record ModCriteria() {
         public static final class Condition extends AbstractCriterionConditions
         {
             private final int previousClassId;
-            public Condition(final Identifier id,final Optional<LootContextPredicate> entity,final int previousClassId) {
+            public Condition(final Optional<LootContextPredicate> entity,final int previousClassId) {
                 super(entity);
                 this.previousClassId = previousClassId;
 
