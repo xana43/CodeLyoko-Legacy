@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.LithographyScreenHandlerT2;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModRecipes;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModRecipes;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntityInventory;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.LyokoInventoryBlock;

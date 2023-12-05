@@ -34,7 +34,6 @@ public final class TowerEnter extends HorizontalFacingBlock {
     protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder.add(FACING));
     }
-
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         super.onEntityCollision(state, world, pos, entity);

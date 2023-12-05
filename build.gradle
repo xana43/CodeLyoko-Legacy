@@ -11,7 +11,7 @@ version = project.mod_version
 group = project.maven_group
 
 base {
-	archivesBaseName = project.archives_base_name
+	archivesName = project.archives_base_name
 }
 
 repositories {
@@ -135,7 +135,7 @@ java {
 
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}_${project.base.archivesName.get()}"}
 	}
 }
 

@@ -1,10 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModRecipes;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModRecipes;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModTags;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.CustomRecipeBuilderProviders.CustomCookingRecipeJsonBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;

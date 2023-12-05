@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.world.ModFeatures.structures.Tower;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModStructures;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModStructures;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModTags;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;

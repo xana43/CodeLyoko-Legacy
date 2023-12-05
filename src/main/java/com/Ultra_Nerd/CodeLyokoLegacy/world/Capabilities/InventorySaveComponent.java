@@ -47,8 +47,6 @@ public final class InventorySaveComponent implements AutoSyncedComponent {
 
     @Override
     public void writeToNbt(final @NotNull NbtCompound tag) {
-        Object2ObjectMaps.fastForEach(PLAYER_INVENTORY_HASHMAP,uuidNbtListEntry -> {
-            tag.put(uuidNbtListEntry.getKey().toString(),uuidNbtListEntry.getValue());
-        });
+        Object2ObjectMaps.fastForEach(PLAYER_INVENTORY_HASHMAP,uuidNbtListEntry -> tag.put(uuidNbtListEntry.getKey().toString(),uuidNbtListEntry.getValue()));
     }
 }

@@ -21,41 +21,51 @@ public record ConstantUtil() {
     public enum Styles {
         GUNSHIP("gunship"),
         HUD("lyoko_hud_font");
-
         private final Style thisStyle;
-
         Styles(final String styleName) {
             this.thisStyle = Style.EMPTY.withFont(CodeLyokoMain.codeLyokoPrefix(styleName));
         }
-
-        public Style getThisStyle() {
+        public final Style getThisStyle() {
             return thisStyle;
         }
     }
 
     public record StoryEntry() {
-        public static void init() {
-            EntryListENUS.init();
-            EntryListFRFR.init();
-        }
+
         private static final String n = System.lineSeparator();
         private static final char page = '¶';
 
         @FunctionalInterface
-        private interface EntryListing
-        {
+        private interface EntryListing {
             BookScreen.Contents getEntries();
         }
         private static StringVisitable[] textArray(@NotNull final String textToDenote) {
+            if(textToDenote.isEmpty()) {
+                return new StringVisitable[]{};
+            }
             final List<StringVisitable> denotedList = new ObjectArrayList<>();
             int pos = 0, end;
-            while ((end = textToDenote.indexOf('¶',pos)) >= 0)
+            while ((end = textToDenote.indexOf(page,pos)) >= 0)
             {
                 denotedList.add(Text.of(textToDenote.substring(pos,end)));
                 pos = end + 1;
             }
             denotedList.add(Text.of(textToDenote.substring(pos)));
             return denotedList.toArray(new StringVisitable[0]);
+        }
+        private static BookScreen.Contents createContents(final StringVisitable[] visitable) {
+            return new BookScreen.Contents() {
+                @Override
+                public int getPageCount() {
+                    return visitable.length;
+                }
+
+                @Override
+                public StringVisitable getPageUnchecked(final int index) {
+                    return visitable[index];
+                }
+            };
+
         }
         public enum EntryListENUS implements EntryListing {
             //english entries
@@ -82,20 +92,8 @@ public record ConstantUtil() {
                     "such, there are nodes that appear to originate from other universes entirely, which by all logic" +
                     " should be impossible. I must do more research.");
             private final BookScreen.Contents thisContents;
-            private static void init(){}
             EntryListENUS(final String thisEntry) {
-                final StringVisitable[] thisEntryString = textArray(thisEntry);
-                this.thisContents = new BookScreen.Contents() {
-                    @Override
-                    public int getPageCount() {
-                        return thisEntryString.length;
-                    }
-
-                    @Override
-                    public StringVisitable getPageUnchecked(final int index) {
-                        return thisEntryString[index];
-                    }
-                };
+                this.thisContents = createContents(textArray(thisEntry));
             }
 
 
@@ -122,23 +120,11 @@ public record ConstantUtil() {
             private final BookScreen.Contents thisContents;
 
             EntryListFRFR(final String thisEntry) {
-                final StringVisitable[] thisEntryString = textArray(thisEntry);
-                this.thisContents =  new BookScreen.Contents() {
-                    @Override
-                    public int getPageCount() {
-                        return thisEntryString.length;
-                    }
-
-                    @Override
-                    public StringVisitable getPageUnchecked(final int index) {
-                        return thisEntryString[index];
-                    }
-                };
+                this.thisContents = createContents(textArray(thisEntry));
             }
 
-            private static void init(){}
             @Override
-            public BookScreen.Contents getEntries() {
+            public final BookScreen.Contents getEntries() {
                 return this.thisContents;
             }
         }

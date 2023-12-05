@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.HookEvents;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModStats;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModStats;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
@@ -43,9 +43,9 @@ public record StartWorldTickServerWorldEvent() {
                 serverPlayerEntity.getHungerManager().setExhaustion(0);
                 serverPlayerEntity.getHungerManager().setSaturationLevel(5);
                 serverPlayerEntity.getAbilities().allowModifyWorld = serverPlayerEntity.isCreative();
+            } else {
+                serverPlayerEntity.getAbilities().allowModifyWorld = true;
             }
-            serverPlayerEntity.getAbilities().allowModifyWorld = !MethodUtil.DimensionCheck.isPlayerInLyoko(serverPlayerEntity);
-
 
         });
         tick++;

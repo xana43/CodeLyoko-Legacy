@@ -18,16 +18,16 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.ClientTickEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.HudRenderCallbackOverride;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.client.ModHandledScreensClientInitializer;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.client.ModHandledScreensClientInitializer;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.items.Tools.Buckets.CustomColorBucket;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoFloatingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.particles.LyokoRingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.GeneralRendererUtils.RendererVariables;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.client.itemRenderers.ForceFieldEmitterRenderer;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.client.sky.carthage.CustomCarthageSky;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.client.sky.ice.CustomIceSky;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.client.sky.volcano.CustomVolcanoSky;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.Client.itemRenderers.ForceFieldEmitterRenderer;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.Client.sky.carthage.CustomCarthageSky;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.Client.sky.ice.CustomIceSky;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.Client.sky.volcano.CustomVolcanoSky;
 import dev.felnull.specialmodelloader.api.event.SpecialModelLoaderEvents;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -132,8 +132,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ModelOverboard.LAYER_LOCATION, ModelOverboard::createBodyLayer);
         EntityModelLayerRegistry.registerModelLayer(ModelHoverboard.LAYER_LOCATION, ModelHoverboard::createLayer);
         EntityModelLayerRegistry.registerModelLayer(ModelOverbike.LAYER_LOCATION,ModelOverbike::getTexturedModelData);
-
-
     }
 
     private static void FluidRenderRegistry() {
@@ -149,25 +147,18 @@ public record CodeLyokoClient() implements ClientModInitializer {
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_URANIUM,ModFluids.FLOWING_URANIUM,
                 new SimpleFluidRenderHandler(CodeLyokoMain.codeLyokoPrefix("block/uranium_still"),
                         CodeLyokoMain.codeLyokoPrefix("block/uranium_flow")));
-
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.STILL_LIQUID_HELIUM,
                 ModFluids.FLOWING_LIQUID_HELIUM, ModFluids.STILL_DIGITAL_OCEAN, ModFluids.FLOWING_DIGITAL_OCEAN);
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getSolid(), ModFluids.FLOWING_DIGITAL_LAVA,
                 ModFluids.STILL_DIGITAL_LAVA);
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ModBlocks.FALSE_WATER,
                 ModBlocks.CHIPLET_FRANZ_BLOCK, ModBlocks.PROJECTOR_FOCUS,ModBlocks.LYOKO_CORE);
-        
-
     }
 
     private static void registerItemPredicates() {
-
-
-
         ModelPredicateProviderRegistry.register(ModItems.TEST_MULTIPLAYER_PHONE,
                 CodeLyokoMain.codeLyokoPrefix("message"),
                 (stack, world, entityin, integer) -> stack.hasEnchantments() ? 1 : 0);
-
         ModelPredicateProviderRegistry.register(ModItems.TEST_MULTIPLAYER_PHONE,
                 CodeLyokoMain.codeLyokoPrefix("charge"),
                 (stack, world, entityin, integer) -> switch (stack.getDamage()) {
@@ -175,8 +166,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
                     case 1 -> 0.2f;
                     default -> 0;
                 });
-
-
         ModelPredicateProviderRegistry.register(ModItems.JEREMY_LAPTOP, CodeLyokoMain.codeLyokoPrefix("state"),
                 (stack, world, entity, integer) -> switch (stack.getDamage()) {
                     case 0 -> 0.1f;
@@ -185,7 +174,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 });
         ModelPredicateProviderRegistry.register(ModItems.DIGITAL_SABER, CodeLyokoMain.codeLyokoPrefix("blocking"),
                 (stack, world, entity, seed) -> {
-
                     if (entity == null) {
                         return 0;
                     }
@@ -201,8 +189,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
                         return 0f;
                     }
                 });
-
-
         ModelPredicateProviderRegistry.register(ModItems.SILICON_WAFER, CodeLyokoMain.codeLyokoPrefix("quality"),
                 (stack, world, entity, integer) -> switch (stack.getDamage()) {
                     case 1 -> 0.25f;
@@ -211,19 +197,13 @@ public record CodeLyokoClient() implements ClientModInitializer {
                     case 4 -> 1;
                     default -> 0.0f;
                 });
-
-
     }
 
-    private static void registerModelLoaders()
-    {
-
+    private static void registerModelLoaders() {
         ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(CoreOfLyoko.getLyokoCore(),EntitySkid.getSkidLocation(),ForceFieldEmitterRenderer.getForceFieldLocation()));
-
     }
 
-    private static void registerBlockEntityRenderers()
-    {
+    private static void registerBlockEntityRenderers() {
         BlockEntityRendererFactories.register(ModBlockEntities.COMPUTER_FLUID_INTAKE_BLOCK_ENTITY,
                 ComputerIntakePumpRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.LYOKO_CORE, CoreOfLyoko::new);
@@ -235,39 +215,27 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 ComputerCirculatorRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.ITEM_PROJECTOR_TEST_BLOCK_ENTITY, ItemProjectorTestRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.RACK_CHARGER_BLOCK_ENTITY, RackChargerRenderer::new);
-
     }
 
-    private static void registerColorProviders()
-    {
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
-
-
-                {
-                    return switch (stack.getTranslationKey()) {
-                        case "item.codelyoko.story_book" -> 0x00008B;
-                        case "item.codelyoko.story_book2" -> ColorHelper.Argb.getArgb(255, 255, 0, 0);
-                        default -> 1;
-                    };
-
-                    //return 0x00008B;
-                }
-
-                , ModItems.STORY_BOOK, ModItems.STORY_BOOK2);
+    private static void registerColorProviders() {
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> switch (stack.getTranslationKey()) {
+            case "item.codelyoko.story_book" -> 0x00008B;
+            case "item.codelyoko.story_book2" -> ColorHelper.Argb.getArgb(255, 255, 0, 0);
+            default -> 1;
+        }, ModItems.STORY_BOOK, ModItems.STORY_BOOK2);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ((CustomColorBucket)stack.getItem()).getFluidColor(tintIndex),ModItems.LIQUID_HELIUM_BUCKET);
     }
-    private static String createKeyBindingTranslationKey(final String keyName)
-    {
+    private static String createKeyBindingTranslationKey(final String keyName) {
         return "key." + CodeLyokoMain.MOD_ID +'.' +keyName;
     }
 
     private static void registerDimensionalSkyEffects()
     {
         DimensionEffectsAccessor.getIdentifierMap().put(CodeLyokoMain.codeLyokoPrefix("codelyoko_effects_general"),
-                new DimensionEffects(Float.NaN, true, DimensionEffects.SkyType.NONE, true, false) {
+                new DimensionEffects(Float.NaN, true, DimensionEffects.SkyType.NORMAL, true, false) {
                     @Override
                     public Vec3d adjustFogColor(final Vec3d color, final float sunHeight) {
-                        return Vec3d.ZERO;
+                        return color;
                     }
 
                     @Override
@@ -284,8 +252,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.iceSectorWorld, new CustomIceSky());
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.volcanoWorld, new CustomVolcanoSky());
     }
-    private static void clientTickEventRegister()
-    {
+    private static void clientTickEventRegister() {
         ClientTickEvents.START_CLIENT_TICK.register(ClientTickEvent::consume);
     }
     @Override

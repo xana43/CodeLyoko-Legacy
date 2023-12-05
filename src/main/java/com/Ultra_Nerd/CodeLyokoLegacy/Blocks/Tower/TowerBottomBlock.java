@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.LyokoVehicleEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -26,7 +26,7 @@ public final class TowerBottomBlock extends Block {
     @Override
     public void onSteppedOn(final World world, final BlockPos pos, final BlockState state, final Entity entity) {
         super.onSteppedOn(world, pos, state, entity);
-        Iterable<BlockPos> blockList = BlockPos.iterate(pos.getX() - 7, pos.getY(), pos.getZ() - 7, pos.getX() + 7,
+        final Iterable<BlockPos> blockList = BlockPos.iterate(pos.getX() - 7, pos.getY(), pos.getZ() - 7, pos.getX() + 7,
                 pos.getY() + 32, pos.getZ() + 7);
         for (BlockPos blockPos : blockList) {
             if (world.getBlockState(blockPos).getBlock() == ModBlocks.TOWER_BLUE) {

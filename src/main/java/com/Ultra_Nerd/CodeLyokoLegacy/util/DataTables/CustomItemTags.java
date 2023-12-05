@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModTags;
 import java.util.concurrent.CompletableFuture;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;

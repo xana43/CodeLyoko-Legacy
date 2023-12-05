@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ServerToClient;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModParticles;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModParticles;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;

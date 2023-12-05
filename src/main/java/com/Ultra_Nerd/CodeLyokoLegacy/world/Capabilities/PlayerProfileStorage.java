@@ -64,8 +64,7 @@ public final class PlayerProfileStorage implements AutoSyncedComponent{
         return profileCache.get(playerUUID);
     }
 
-    private static PlayerProfile getProfileFromMap(final PlayerEntity player,final UUID uuid)
-    {
+    private static PlayerProfile getProfileFromMap(final PlayerEntity player,final UUID uuid) {
         final PlayerProfile profile = new PlayerProfile(player);
         final NbtCompound compound = PLAYER_PROFILE_HASH_MAP.get(uuid);
         if(compound != null) {
@@ -78,10 +77,8 @@ public final class PlayerProfileStorage implements AutoSyncedComponent{
         LevelComponents.sync(CardinalData.PlayerSavedProfile.getPlayerProfileComponentKey(), Objects.requireNonNull(player.getServer()));
         return profile;
     }
-    public void updatePlayerProfile(@NotNull final PlayerProfile newProfile)
-    {
-        if(newProfile.toTag().equals(PLAYER_PROFILE_HASH_MAP.get(newProfile.getPlayer().getUuid())))
-        {
+    public void updatePlayerProfile(@NotNull final PlayerProfile newProfile) {
+        if(newProfile.toTag().equals(PLAYER_PROFILE_HASH_MAP.get(newProfile.getPlayer().getUuid()))) {
             return;
         }
         PLAYER_PROFILE_HASH_MAP.replace(newProfile.getPlayer().getUuid(), newProfile.toTag());
@@ -94,8 +91,6 @@ public final class PlayerProfileStorage implements AutoSyncedComponent{
 
     @Override
     public void writeToNbt(final @NotNull NbtCompound tag) {
-        Object2ObjectMaps.fastForEach(PLAYER_PROFILE_HASH_MAP,uuidNbtCompoundEntry -> {
-            tag.put(uuidNbtCompoundEntry.getKey().toString(),uuidNbtCompoundEntry.getValue());
-        });
+        Object2ObjectMaps.fastForEach(PLAYER_PROFILE_HASH_MAP,uuidNbtCompoundEntry -> tag.put(uuidNbtCompoundEntry.getKey().toString(),uuidNbtCompoundEntry.getValue()));
     }
 }

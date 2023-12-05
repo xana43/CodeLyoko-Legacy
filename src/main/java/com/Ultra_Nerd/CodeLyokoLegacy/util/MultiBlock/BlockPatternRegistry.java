@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlocks;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.block.pattern.BlockPatternBuilder;
 import net.minecraft.block.pattern.CachedBlockPosition;
@@ -42,7 +42,7 @@ public enum BlockPatternRegistry {
         this.thisBlockPattern = pattern;
     }
 
-    public BlockPattern getThisBlockPattern() {
+    public final BlockPattern getThisBlockPattern() {
         return thisBlockPattern;
     }
 

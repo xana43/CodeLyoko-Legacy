@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.SuperCalculatorNetwork;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModScreenHandlers;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;

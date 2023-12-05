@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.HookEvents;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.items.armor.SuperCalculatorDataLinker;
+import com.Ultra_Nerd.CodeLyokoLegacy.items.Armor.SuperCalculatorDataLinker;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;

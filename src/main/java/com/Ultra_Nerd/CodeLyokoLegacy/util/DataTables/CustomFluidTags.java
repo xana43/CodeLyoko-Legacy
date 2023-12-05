@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModFluids;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModFluids;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.fluid.Fluid;

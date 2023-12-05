@@ -7,9 +7,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneE
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.LootTableOverride;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
@@ -201,7 +200,6 @@ public record CodeLyokoMain() implements ModInitializer {
 
 
     private static void BiomesFeatureInject() {
-        CodeLyokoMain.LOG.error(ModBiomes.RegisteredBiomes.FOREST_SECTOR.getBiomesRegistryKey().toString());
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES,
                 RegistryKey.of(RegistryKeys.PLACED_FEATURE, codeLyokoPrefix("coffinite_ore_overworld")));
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(ModBiomes.RegisteredBiomes.FOREST_SECTOR.getBiomesRegistryKey()),
@@ -308,15 +306,11 @@ public record CodeLyokoMain() implements ModInitializer {
         ServerTickEvents.END_SERVER_TICK.register(RegeneratePlayerEnergyServerEvent::consume);
     }
 
-    public static void registerFuels()
-    {
-        Object2ObjectMaps.fastForEach(ModFuels.FUEL_MAP,itemConvertibleIntegerEntry -> {
-            FuelRegistry.INSTANCE.add(itemConvertibleIntegerEntry.getKey(),itemConvertibleIntegerEntry.getValue());
-        });
+    public static void registerFuels() {
+        Object2ObjectMaps.fastForEach(ModFuels.FUEL_MAP,itemConvertibleIntegerEntry -> FuelRegistry.INSTANCE.add(itemConvertibleIntegerEntry.getKey(),itemConvertibleIntegerEntry.getValue()));
     }
     @Override
     public void onInitialize() {
-        ConstantUtil.StoryEntry.init();
         GeckoLib.initialize();
         PacketHandler.commonChannelRegistry();
         generalRegistration();

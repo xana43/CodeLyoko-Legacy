@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModSounds;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;

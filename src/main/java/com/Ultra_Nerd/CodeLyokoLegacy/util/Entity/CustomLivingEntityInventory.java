@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.Entity;
 
-import com.google.common.collect.ImmutableList;
+import it.unimi.dsi.fastutil.objects.ObjectList;
+import it.unimi.dsi.fastutil.objects.ObjectLists;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -40,7 +41,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
         this.main = DefaultedList.ofSize(36, ItemStack.EMPTY);
         this.armor = DefaultedList.ofSize(4, ItemStack.EMPTY);
         this.offHand = DefaultedList.ofSize(1, ItemStack.EMPTY);
-        this.combinedInventory = ImmutableList.of(this.main, this.armor, this.offHand);
+        this.combinedInventory = ObjectLists.unmodifiable(ObjectList.of(this.main, this.armor, this.offHand));
         this.entity = entity;
     }
 

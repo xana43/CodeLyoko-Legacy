@@ -4,7 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.Capabilities.SkidBladnirData;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.Capabilities.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerProfile;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.Capabilities.XanaAttackTypes;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.Enums.Capabilities.XanaAttackTypes;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities.InventorySaveComponent;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities.PlayerProfileStorage;
 import com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities.PlayerScannerComponent;

@@ -2,10 +2,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy.world.Capabilities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.TowerInterfaceTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoLegacy.util.Enums.Capabilities.XanaAttackTypes;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.ThreadUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.enums.Capabilities.XanaAttackTypes;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import it.unimi.dsi.fastutil.longs.LongArrayList;

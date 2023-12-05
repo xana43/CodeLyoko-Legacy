@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModParticles;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModParticles;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +20,7 @@ public final class TowerWallCorner extends TowerWall {
         final double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
         switch (stateIn.get(FACING)) {
             case NORTH -> {
-                switch (stateIn.<Integer>get(CURRENT_ACTIVATION_STATE).intValue()) {
+                switch (stateIn.<Integer>get(CURRENT_ACTIVATION_STATE)) {
                     case 0 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1))
                                 .isOf(Blocks.AIR)) {
@@ -64,7 +64,7 @@ public final class TowerWallCorner extends TowerWall {
                 }
             }
             case SOUTH -> {
-                switch (stateIn.<Integer>get(CURRENT_ACTIVATION_STATE).intValue()) {
+                switch (stateIn.<Integer>get(CURRENT_ACTIVATION_STATE)) {
                     case 0 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1))
                                 .isOf(Blocks.AIR)) {
@@ -108,7 +108,7 @@ public final class TowerWallCorner extends TowerWall {
                 }
             }
             case EAST -> {
-                switch (stateIn.<Integer>get(CURRENT_ACTIVATION_STATE).intValue()) {
+                switch (stateIn.<Integer>get(CURRENT_ACTIVATION_STATE)) {
                     case 0 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()))
                                 .isOf(Blocks.AIR)) {
@@ -152,7 +152,7 @@ public final class TowerWallCorner extends TowerWall {
                 }
             }
             case WEST -> {
-                switch (stateIn.<Integer>get(CURRENT_ACTIVATION_STATE).intValue()) {
+                switch (stateIn.<Integer>get(CURRENT_ACTIVATION_STATE)) {
                     case 0 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()))
                                 .isOf(Blocks.AIR)) {

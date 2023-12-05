@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.Fluid
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerCirculatorScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.NBT.NBTEntries;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.SyncedBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.TickingBlockEntity;

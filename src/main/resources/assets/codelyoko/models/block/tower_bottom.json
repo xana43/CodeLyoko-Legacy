@@ -3,7 +3,7 @@
   "textures": {
     "ext": "codelyoko:block/dark",
     "ext2": "codelyoko:block/tower_block",
-    "particle": "cm:block/tower_wall"
+    "particle": "codelyoko:block/tower_wall"
   },
   "display": {
     "gui": {

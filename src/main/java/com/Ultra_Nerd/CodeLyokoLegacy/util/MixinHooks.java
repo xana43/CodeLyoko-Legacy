@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModSounds;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.Client.ClientEvents;
 import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.ServerEvents;
 import net.minecraft.block.BlockState;

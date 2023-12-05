@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModParticles;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModParticles;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -58,7 +58,7 @@ public class TowerWall extends HorizontalFacingBlock {
         final double d2 = (double) pos.getZ() + 0.5D + (rand.nextDouble() - 0.5D);
         switch (state.get(FACING)) {
             case NORTH -> {
-                switch (state.<Integer>get(CURRENT_ACTIVATION_STATE).intValue()) {
+                switch (state.<Integer>get(CURRENT_ACTIVATION_STATE)) {
                     case 0 -> world.addParticle(ModParticles.TOWER_PARTICLE, d0, d1,
                             pos.getZ() + 1.25f, 0, 0, 0);
                     case 1 -> world.addParticle(ModParticles.TOWER_PARTICLE_XANA, d0, d1,
@@ -74,7 +74,7 @@ public class TowerWall extends HorizontalFacingBlock {
                 }
             }
             case SOUTH -> {
-                switch (state.<Integer>get(CURRENT_ACTIVATION_STATE).intValue()) {
+                switch (state.<Integer>get(CURRENT_ACTIVATION_STATE)) {
                     case 0 -> world.addParticle(ModParticles.TOWER_PARTICLE,
                             d0, d1, pos.getZ() - 0.25f, 0, 0, 0);
                     case 1 -> world.addParticle(ModParticles.TOWER_PARTICLE_XANA,
@@ -88,7 +88,7 @@ public class TowerWall extends HorizontalFacingBlock {
                 }
             }
             case EAST -> {
-                switch (state.<Integer>get(CURRENT_ACTIVATION_STATE).intValue()) {
+                switch (state.<Integer>get(CURRENT_ACTIVATION_STATE)) {
                     case 0 -> world.addParticle(ModParticles.TOWER_PARTICLE,
                             pos.getX() - 0.25f, d1, d2, 0, 0, 0);
                     case 1 -> world.addParticle(ModParticles.TOWER_PARTICLE_XANA,
@@ -102,7 +102,7 @@ public class TowerWall extends HorizontalFacingBlock {
                 }
             }
             case WEST -> {
-                switch (state.<Integer>get(CURRENT_ACTIVATION_STATE).intValue()) {
+                switch (state.<Integer>get(CURRENT_ACTIVATION_STATE)) {
                     case 0 -> world.addParticle(ModParticles.TOWER_PARTICLE,
                             pos.getX() + 1.25f, d1, d2, 0, 0, 0);
                     case 1 -> world.addParticle(ModParticles.TOWER_PARTICLE_XANA,

@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.definition;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModDamageSources;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModFluids;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModDamageSources;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModFluids;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

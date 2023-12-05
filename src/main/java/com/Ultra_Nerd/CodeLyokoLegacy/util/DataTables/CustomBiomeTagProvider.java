@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModBiomes;
-import com.Ultra_Nerd.CodeLyokoLegacy.init.common.ModTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBiomes;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.registry.RegistryKey;
@@ -38,19 +38,19 @@ public final class CustomBiomeTagProvider extends FabricTagProvider<Biome> {
 
     @Override
     protected void configure(final RegistryWrapper.WrapperLookup arg) {
-        for(final ModBiomes.RegisteredBiomes biome : ModBiomes.RegisteredBiomes.values())
+        for(final ModBiomes.RegisteredBiomes biomes : ModBiomes.RegisteredBiomes.values())
         {
-            if(biome != ModBiomes.RegisteredBiomes.VOLCANO && biome != ModBiomes.RegisteredBiomes.FRONTIER)
+            if(biomes != ModBiomes.RegisteredBiomes.VOLCANO && biomes != ModBiomes.RegisteredBiomes.FRONTIER)
             {
-                getOrCreateTagBuilder(ModTags.Biomes.LYOKO_BIOMES).add(biome.getBiomesValue());
+                getOrCreateTagBuilder(ModTags.Biomes.LYOKO_BIOMES).add(biomes.getBiomesValue());
             }
-            if (biome != ModBiomes.RegisteredBiomes.FRONTIER && biome != ModBiomes.RegisteredBiomes.DIGITAL_OCEAN && biome != ModBiomes.RegisteredBiomes.SECTOR5)
+            if (biomes != ModBiomes.RegisteredBiomes.FRONTIER && biomes != ModBiomes.RegisteredBiomes.DIGITAL_OCEAN && biomes != ModBiomes.RegisteredBiomes.SECTOR5)
             {
-                getOrCreateTagBuilder(ModTags.Biomes.HAS_TOWER).add(biome.getBiomesValue());
+                getOrCreateTagBuilder(ModTags.Biomes.HAS_TOWER).add(biomes.getBiomesValue());
             }
-            if( biome == ModBiomes.RegisteredBiomes.VOLCANO)
+            if( biomes == ModBiomes.RegisteredBiomes.VOLCANO)
             {
-                getOrCreateTagBuilder(ModTags.Biomes.REPLIKA_BIOMES).add(biome.getBiomesValue());
+                getOrCreateTagBuilder(ModTags.Biomes.REPLIKA_BIOMES).add(biomes.getBiomesValue());
             }
         }
     }

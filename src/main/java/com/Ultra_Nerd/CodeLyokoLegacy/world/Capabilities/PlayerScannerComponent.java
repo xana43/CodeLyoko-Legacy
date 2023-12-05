@@ -36,8 +36,6 @@ public final class PlayerScannerComponent implements AutoSyncedComponent {
 
     @Override
     public void writeToNbt(final @NotNull NbtCompound tag) {
-        Object2ObjectMaps.fastForEach(POS_HASH_MAP,uuidBlockPosEntry -> {
-            tag.putLong(uuidBlockPosEntry.getKey().toString(),uuidBlockPosEntry.getValue().asLong());
-        });
+        Object2ObjectMaps.fastForEach(POS_HASH_MAP,uuidBlockPosEntry -> tag.putLong(uuidBlockPosEntry.getKey().toString(),uuidBlockPosEntry.getValue().asLong()));
     }
 }
