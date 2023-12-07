@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.ElectricityRenderers;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.RackChargerBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.RackChargerEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
@@ -15,9 +15,9 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.RotationAxis;
 
 @Environment(EnvType.CLIENT)
-public record RackChargerRenderer(BlockEntityRendererFactory.Context context) implements BlockEntityRenderer<RackChargerBlockEntity> {
+public record RackChargerRenderer(BlockEntityRendererFactory.Context context) implements BlockEntityRenderer<RackChargerEntity> {
 
-    private void calculateOffsetForSlot(final int slot, final RackChargerBlockEntity entity, final MatrixStack matrices, final int light, final int overlay, final VertexConsumerProvider vertexConsumers)
+    private void calculateOffsetForSlot(final int slot, final RackChargerEntity entity, final MatrixStack matrices, final int light, final int overlay, final VertexConsumerProvider vertexConsumers)
     {
         final ItemStack gottenStack = entity.getStack(slot);
         if(!gottenStack.isEmpty()) {
@@ -46,7 +46,7 @@ public record RackChargerRenderer(BlockEntityRendererFactory.Context context) im
 
     }
     @Override
-    public void render(final RackChargerBlockEntity entity, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {
+    public void render(final RackChargerEntity entity, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {
         matrices.push();
         matrices.translate(0.5,0.5,0.5);
         matrices.scale(0.7f,0.7f,0.7f);

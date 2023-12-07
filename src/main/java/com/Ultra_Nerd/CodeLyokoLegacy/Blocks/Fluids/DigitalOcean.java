@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModFluids;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModFluids;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;

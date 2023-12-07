@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.NBT.NBTEntries;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.NBT.NBTEntries;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.EnergyStorageBlockEntity;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.FilteringStorage;

@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.HookEvents;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 

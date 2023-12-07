@@ -2,8 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ScannerTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;

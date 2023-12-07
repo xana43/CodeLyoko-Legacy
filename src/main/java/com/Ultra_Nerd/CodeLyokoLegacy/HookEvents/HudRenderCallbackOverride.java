@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.HookEvents;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerClassType;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Player.PlayerClassType;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;

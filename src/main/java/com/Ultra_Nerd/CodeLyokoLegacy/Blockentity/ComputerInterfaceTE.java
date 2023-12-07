@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.MasterEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.SyncedBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.SyncedBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.math.BlockPos;

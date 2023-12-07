@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MixinHooks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MixinHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.resource.SplashTextResourceSupplier;

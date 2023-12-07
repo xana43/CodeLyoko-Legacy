@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.HookEvents;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModStats;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModStats;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.network.ServerPlayerEntity;

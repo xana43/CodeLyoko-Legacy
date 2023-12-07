@@ -2,9 +2,9 @@ package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.LithographyBlockEntityInventory;
-import com.Ultra_Nerd.CodeLyokoLegacy.Slots.LithographyInputslot;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModRecipes;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModScreenHandlers;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModRecipes;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModScreenHandlers;
+import com.Ultra_Nerd.CodeLyokoLegacy.Slots.LithographyInputslotT2;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -42,7 +42,7 @@ public final class LithographyScreenHandler extends AbstractRecipeScreenHandler<
         //reactor inventory
         for(int i = 0; i < 3; ++i)
         {
-      this.addSlot(new LithographyInputslot(inventory, i, 44, 33 * i));
+      this.addSlot(new LithographyInputslotT2(inventory, i, 44, 33 * i));
         }
 
         this.addSlot(new FurnaceOutputSlot(playerInventory.player, inventory, 3, 110, 33));

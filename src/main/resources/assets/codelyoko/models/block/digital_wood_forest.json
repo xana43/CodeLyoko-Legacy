@@ -1,8 +1,0 @@
-{
-   "parent": "block/cube_all",
-   "textures": {
-    "particle":"codelyoko:block/digital_wood",
-       "all": "codelyoko:block/digital_wood"
-       
-   }
-}

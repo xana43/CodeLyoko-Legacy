@@ -1,12 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModRecipes;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.LithographyScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModRecipes;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntityInventory;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.LyokoInventoryBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.EnergyStorageBlockEntityInventory;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.LyokoInventory;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
@@ -32,7 +32,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class LithographyBlockEntityInventory extends EnergyStorageBlockEntityInventory implements LyokoInventoryBlock, NamedScreenHandlerFactory, RecipeInputProvider {
+public final class LithographyBlockEntityInventory extends EnergyStorageBlockEntityInventory implements LyokoInventory, NamedScreenHandlerFactory, RecipeInputProvider {
     private int lithographyTime;
 private int fuelMass;
 private int manufacturingTime;

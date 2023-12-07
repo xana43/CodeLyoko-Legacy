@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModParticles;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModParticles;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculatorNetwork;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperComputerNetwork.CableBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.SuperCalculatorDataPackets;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.SuperCalculatorDataPackets;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;

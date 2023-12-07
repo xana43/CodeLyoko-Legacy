@@ -1,11 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Scanner;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModDimensions;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MultiBlock.BlockPatternRegistry;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.BlockPatternRegistry;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.MultiBlockController;
 import net.minecraft.block.BlockState;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.MinecraftServer;

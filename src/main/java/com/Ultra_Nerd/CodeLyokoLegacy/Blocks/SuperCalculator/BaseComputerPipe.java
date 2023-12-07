@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculator;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;

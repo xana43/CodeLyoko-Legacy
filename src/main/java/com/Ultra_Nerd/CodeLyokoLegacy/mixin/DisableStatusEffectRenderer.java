@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MixinHooks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MixinHooks;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Compat.ReactorDisplay;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.util.List;
 import me.shedaniel.math.Point;

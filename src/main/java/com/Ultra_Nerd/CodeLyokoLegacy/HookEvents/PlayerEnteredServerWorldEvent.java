@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.HookEvents;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModStats;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModStats;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 

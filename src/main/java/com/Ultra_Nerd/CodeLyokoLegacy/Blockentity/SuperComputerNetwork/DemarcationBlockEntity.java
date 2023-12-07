@@ -2,11 +2,11 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperComputerNetwork;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.SuperCalculatorNetwork.DemarcationScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.SuperCalculator.DataPacketType;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.IdBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.RenameableBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.SyncedBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.SuperCalculator.DataPacketType;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.IdBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.RenameableBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.SyncedBlockEntity;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

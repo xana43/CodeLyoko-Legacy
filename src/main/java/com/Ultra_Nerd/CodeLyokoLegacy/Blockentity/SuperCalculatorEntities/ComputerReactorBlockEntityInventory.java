@@ -1,11 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ReactorScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntityInventory;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.LyokoInventoryBlock;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.EnergyStorageBlockEntityInventory;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
@@ -35,9 +34,9 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil.HelperMethods.outputFluidToAllSides;
+import static com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil.HelperMethods.outputFluidToAllSides;
 
-public final class ComputerReactorBlockEntityInventory extends EnergyStorageBlockEntityInventory implements LyokoInventoryBlock, NamedScreenHandlerFactory, RecipeInputProvider {
+public final class ComputerReactorBlockEntityInventory extends EnergyStorageBlockEntityInventory implements NamedScreenHandlerFactory, RecipeInputProvider {
     private int reactionTime;
 private int fuelMass;
 private int irradiationTime;

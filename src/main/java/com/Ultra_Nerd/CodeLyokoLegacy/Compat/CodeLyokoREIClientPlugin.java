@@ -6,10 +6,10 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Compat.ReactorDisplay.CodeLyokoReactorCate
 import com.Ultra_Nerd.CodeLyokoLegacy.Compat.ReactorDisplay.CodeLyokoReactorDisplay;
 import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.LithographyRecipe;
 import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.ReactorRecipe;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModRecipes;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.LithographyGUI;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ReactorGUI;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModRecipes;
+import com.Ultra_Nerd.CodeLyokoLegacy.Screens.LithographyGUI;
+import com.Ultra_Nerd.CodeLyokoLegacy.Screens.ReactorGUI;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;

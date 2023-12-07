@@ -2,10 +2,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SeaPylon;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModDamageSources;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModDimensions;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageSources;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDimensions;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModTags;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

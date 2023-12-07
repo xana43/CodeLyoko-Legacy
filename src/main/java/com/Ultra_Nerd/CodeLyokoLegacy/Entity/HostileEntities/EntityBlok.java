@@ -1,22 +1,24 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityLaser;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModSounds;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModSounds;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
+import net.minecraft.entity.ai.goal.WanderAroundGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -71,15 +73,14 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
 
     @Override
     public void shootAt(final LivingEntity target, final float pullProgress) {
-        final ArrowEntity abstractArrow = new EntityLaser(this.getWorld(), this, 20);
-
+        final EntityLaser laserProjectile = new EntityLaser(this.getWorld(), this, 20);
         final double d0 = target.getX() - this.getX();
-        final double d1 = target.getBodyY(0.3333333333333333D) - abstractArrow.getY();
+        final double d1 = target.getBodyY(0.3333333333333333D) - laserProjectile.getY();
         final double d2 = target.getZ() - this.getZ();
         final double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        abstractArrow.setVelocity(d0, d1 + d3 * 0.2D, d2, 4F, (float) (14 - this.getWorld().getDifficulty().getId() << 2));
-        //this.playSound(ModSounds.LASERARROW.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
-        this.getWorld().spawnEntity(abstractArrow);
+        laserProjectile.setVelocity(d0, d1 + d3 * 0.2D, d2, 4F, (float) (14 - this.getWorld().getDifficulty().getId() << 2));
+        this.playSound(ModSounds.LASERARROW, 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
+        this.getWorld().spawnEntity(laserProjectile);
     }
 
     @SuppressWarnings("MethodMayBeStatic")
@@ -104,9 +105,8 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
     }
 
     @Override
-    protected @NotNull SoundEvent getHurtSound(final DamageSource damageSourceIn) {
-        // TODO Auto-generated method stub
-        return ModSounds.BLOK_HURT;
+    protected SoundEvent getHurtSound(final DamageSource damageSourceIn) {
+        return null;
     }
 
     @Override
@@ -115,9 +115,8 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
     }
 
     @Override
-    protected @NotNull SoundEvent getAmbientSound() {
-        // TODO Auto-generated method stub
-        return ModSounds.BLOK_AMBIENT;
+    protected SoundEvent getAmbientSound() {
+        return null;
     }
 
     @Override
@@ -133,8 +132,6 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
 
     @Override
     protected void initGoals() {
-        //super.registerGoals();
-        this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(2, new ProjectileAttackGoal(this, 1, 10, 6));
         this.goalSelector.add(3, new WanderAroundGoal(this, 1D));
         this.goalSelector.add(4, new LookAroundGoal(this));

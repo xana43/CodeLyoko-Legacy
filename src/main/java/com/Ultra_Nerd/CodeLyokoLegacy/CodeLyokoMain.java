@@ -6,15 +6,16 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.MegaTankEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.LootTableOverride;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.event.server.ServerEvents;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.world.WorldGen.Carthage.CarthageGenerator;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.LootTableOverride;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.MultiBlockController;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.event.server.ServerEvents;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers.XanaHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.World.WorldGen.Carthage.CarthageGenerator;
+import eu.midnightdust.lib.config.MidnightConfig;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -53,6 +54,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib.GeckoLib;
 import team.reborn.energy.api.EnergyStorage;
+
+import java.util.Objects;
 
 public record CodeLyokoMain() implements ModInitializer {
 
@@ -261,7 +264,7 @@ public record CodeLyokoMain() implements ModInitializer {
                             player.server.getSaveProperties().getMainWorldProperties(), player);
 
                     player.incrementStat(ModStats.ENTERED_LYOKO_IDENTIFIER);
-                    if(CardinalData.PlayerSavedProfile.getPlayerProfile(player.getServer().getSaveProperties().getMainWorldProperties(), player) != null) {
+                    if(CardinalData.PlayerSavedProfile.getPlayerProfile(Objects.requireNonNull(player.getServer()).getSaveProperties().getMainWorldProperties(), player) != null) {
                         CardinalData.PlayerSavedProfile.getPlayerProfile(
                                         player.getServer().getSaveProperties().getMainWorldProperties(), player)
                                 .incrementEntered();
@@ -311,6 +314,7 @@ public record CodeLyokoMain() implements ModInitializer {
     }
     @Override
     public void onInitialize() {
+        MidnightConfig.init(MOD_ID, Configuration.class);
         GeckoLib.initialize();
         PacketHandler.commonChannelRegistry();
         generalRegistration();

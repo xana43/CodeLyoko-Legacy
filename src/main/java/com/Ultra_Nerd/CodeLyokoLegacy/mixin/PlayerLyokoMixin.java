@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MixinHooks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MixinHooks;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;

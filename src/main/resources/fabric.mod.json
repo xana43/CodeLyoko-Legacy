@@ -20,7 +20,7 @@
   "entrypoints": {
 
     "fabric-datagen": [
-        "com.Ultra_Nerd.CodeLyokoLegacy.util.DataTables.Generator"
+        "com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.Generator"
     ],
     "main": [
       "com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain"
@@ -35,7 +35,7 @@
         "com.Ultra_Nerd.CodeLyokoLegacy.Compat.CodeLyokoREIClientPlugin"
     ],
     "cardinal-components": [
-                "com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData"
+                "com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData"
             ]
   },
   "mixins": [

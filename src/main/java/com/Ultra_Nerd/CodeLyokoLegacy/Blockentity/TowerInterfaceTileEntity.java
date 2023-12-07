@@ -1,11 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TowerInterfaceScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower.TowerInterface;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower.TowerWall;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TowerInterfaceScreenHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -62,11 +62,11 @@ private int controlState = 0;
     {
        final BlockPos topBlockPosition = pos.offset(Direction.UP,11).offset(Direction.SOUTH,10).offset(Direction.WEST
                ,8);
-       for(int x = 0; x < 17; ++x)
+       for(int x = -1; x < 17; ++x)
        {
            for (int y = 0; y < 42; ++y)
            {
-               for (int z = 0; z < 17; ++z)
+               for (int z = -1; z < 17; ++z)
                {
                    final BlockPos checkedPosition = topBlockPosition.add(x,-y,-z);
                     if(world.getBlockState(checkedPosition).isOf(ModBlocks.TOWER_WALL) ||world.getBlockState(checkedPosition).isOf(ModBlocks.TOWER_BASE)||

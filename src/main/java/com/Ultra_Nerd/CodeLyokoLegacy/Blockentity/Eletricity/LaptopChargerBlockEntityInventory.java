@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.items.LaptopClass;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.EnergyStorageBlockEntityInventory;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.Items.LaptopClass;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.EnergyStorageBlockEntityInventory;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 
 public final class LaptopChargerBlockEntityInventory extends EnergyStorageBlockEntityInventory {
     public LaptopChargerBlockEntityInventory(final BlockPos pos, final BlockState state) {
-        super(ModBlockEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY, pos, state, 1, 9000, Long.valueOf(10L), Long.valueOf(10L));
+        super(ModBlockEntities.LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY, pos, state, 1, 9000, 10L, 10L);
     }
 
     public void setItem(final ItemStack item) {

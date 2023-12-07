@@ -1,9 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tests;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.ItemProjectorTestBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.ItemProjectorTestEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
@@ -26,7 +29,7 @@ public final class ItemProjectorTest extends Block implements BlockEntityProvide
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
         if(!world.isClient()) {
             final BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof ItemProjectorTestBlockEntity) {
+            if (blockEntity instanceof ItemProjectorTestEntity) {
                 player.openHandledScreen((NamedScreenHandlerFactory) blockEntity);
 
             }

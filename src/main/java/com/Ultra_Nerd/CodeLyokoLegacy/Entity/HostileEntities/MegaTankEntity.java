@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityLaser;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModSounds;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModSounds;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;

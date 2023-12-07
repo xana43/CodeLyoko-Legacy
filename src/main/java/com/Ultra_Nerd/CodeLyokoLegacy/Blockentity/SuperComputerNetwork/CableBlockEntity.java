@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperComputerNetwork;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.SuperCalculator.DataPacketType;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.SyncedBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.SuperCalculator.DataPacketType;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.SyncedBlockEntity;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;

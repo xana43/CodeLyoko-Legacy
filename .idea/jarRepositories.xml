@@ -211,5 +211,10 @@
       <option name="name" value="maven5" />
       <option name="url" value="https://maven.shedaniel.me" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven11" />
+      <option name="name" value="maven11" />
+      <option name="url" value="https://api.modrinth.com/maven" />
+    </remote-repository>
   </component>
 </project>

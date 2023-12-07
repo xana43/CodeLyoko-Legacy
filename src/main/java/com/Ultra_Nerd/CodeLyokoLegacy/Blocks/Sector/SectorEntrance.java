@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Sector;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.Enums.DimensionSelector;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.Enums.DimensionSelector;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;

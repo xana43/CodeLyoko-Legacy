@@ -2,7 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Hostile;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.LyokoGuardianEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.GeneralRendererUtils.CommonRenderRoutines;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.GeneralRendererUtils.CommonRenderRoutines;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.BufferBuilder;

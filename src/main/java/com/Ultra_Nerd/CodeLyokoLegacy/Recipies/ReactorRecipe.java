@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Recipies;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModRecipes;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModRecipes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.AbstractCookingRecipe;
 import net.minecraft.recipe.Ingredient;

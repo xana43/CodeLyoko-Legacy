@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ServerToClient;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.LapTopHeirarichy.MainLaptopScreen;
+import com.Ultra_Nerd.CodeLyokoLegacy.Screens.ClientScreens.LapTopHeirarichy.MainLaptopScreen;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;

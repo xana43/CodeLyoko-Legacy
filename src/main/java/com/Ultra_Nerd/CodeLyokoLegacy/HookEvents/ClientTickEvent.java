@@ -1,12 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.HookEvents;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.items.Armor.SuperCalculatorDataLinker;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.ClientScreens.ClassScreen;
-import com.Ultra_Nerd.CodeLyokoLegacy.screens.Devirtualized;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Items.Armor.SuperCalculatorDataLinker;
+import com.Ultra_Nerd.CodeLyokoLegacy.Screens.ClientScreens.ClassScreen;
+import com.Ultra_Nerd.CodeLyokoLegacy.Screens.Devirtualized;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;

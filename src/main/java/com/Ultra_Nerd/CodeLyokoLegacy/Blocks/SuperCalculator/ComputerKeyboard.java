@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculator;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.KeyBoardInterface;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.MultiBlockController;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.MultiBlockController;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;

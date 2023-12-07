@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ClientToServer;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;

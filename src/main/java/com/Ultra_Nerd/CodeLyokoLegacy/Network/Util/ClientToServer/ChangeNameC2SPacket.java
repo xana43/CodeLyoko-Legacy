@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ClientToServer;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.IdBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.blockentity.RenameableBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.IdBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.RenameableBlockEntity;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.network.PacketByteBuf;

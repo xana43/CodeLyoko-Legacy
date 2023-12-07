@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;

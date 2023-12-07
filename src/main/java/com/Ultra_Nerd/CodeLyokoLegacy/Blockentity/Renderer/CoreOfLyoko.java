@@ -23,13 +23,12 @@ public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements
     {
         return LyokoCore;
     }
-    private static int y;
-    private static float z;
+    private static float z,y;
     private static BakedModel LyokoModel;
     public CoreOfLyoko {
         LyokoModel = mc.getBakedModelManager().getModel(CoreOfLyoko.getLyokoCore());
     }
-    private static final int speed = 4;
+    private static final float ySpeed = 4,zSpeed = 0.1f;
     @Override
     public int getRenderDistance() {
         return mc.options.getViewDistance().getValue();
@@ -42,11 +41,10 @@ public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements
         matrices.push();
         matrices.translate(0.5, 0.5, 0.5);
         if(!mc.isPaused()) {
-            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(y += speed));
-            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) Math.toDegrees(Math.sin(z))));
-            z+= 0.1f;
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(y += ySpeed));
+            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) Math.toDegrees(Math.sin(z += zSpeed))));
         }
-        if (y == 360) {
+        if (y >= 360) {
             y = 0;
         }
 

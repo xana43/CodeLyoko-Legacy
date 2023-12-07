@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.definition;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModFluids;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModFluids;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

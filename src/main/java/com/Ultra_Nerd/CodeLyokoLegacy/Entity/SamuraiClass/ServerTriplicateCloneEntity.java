@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.Entity.CustomLivingEntityInventory;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.Entity.CustomLivingEntityInventory;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;

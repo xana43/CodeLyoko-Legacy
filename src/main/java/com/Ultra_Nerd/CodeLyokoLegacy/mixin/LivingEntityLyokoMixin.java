@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MixinHooks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MixinHooks;
 import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

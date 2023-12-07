@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.Electricity;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.RackChargerBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.RackChargerEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
@@ -72,7 +72,7 @@ public final class RackChargerBlock extends HorizontalFacingBlock implements Blo
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
         return (world1, pos, state1, blockEntity) -> {
-            if(blockEntity instanceof final RackChargerBlockEntity entity)
+            if(blockEntity instanceof final RackChargerEntity entity)
             {
                 entity.tick();
             }
@@ -83,7 +83,7 @@ public final class RackChargerBlock extends HorizontalFacingBlock implements Blo
     public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
         if(!world.isClient()) {
             final BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof RackChargerBlockEntity) {
+            if (blockEntity instanceof RackChargerEntity) {
                 player.openHandledScreen((NamedScreenHandlerFactory) blockEntity);
 
             }
@@ -94,7 +94,7 @@ public final class RackChargerBlock extends HorizontalFacingBlock implements Blo
     public void onStateReplaced(final BlockState state, final World world, final BlockPos pos, final BlockState newState, final boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             final BlockEntity BE = world.getBlockEntity(pos);
-            if (BE instanceof final RackChargerBlockEntity rackChargerBlockEntity) {
+            if (BE instanceof final RackChargerEntity rackChargerBlockEntity) {
                 ItemScatterer.spawn(world, pos, rackChargerBlockEntity);
                 world.updateComparators(pos, this);
             }

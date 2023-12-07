@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.mixin;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CustomLyokoRarity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.CustomLyokoRarity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;

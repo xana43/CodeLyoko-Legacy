@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.HologramProjectorTileEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.GeneralRendererUtils.CommonRenderRoutines;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.GeneralRendererUtils.CommonRenderRoutines;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.BufferBuilder;

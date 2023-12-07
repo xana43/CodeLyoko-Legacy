@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;

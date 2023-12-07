@@ -1,11 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.HookEvents;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModStats;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.ConstantUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.handlers.XanaHandler;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModStats;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers.XanaHandler;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;

@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TestHandler;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModScreenHandlers;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;

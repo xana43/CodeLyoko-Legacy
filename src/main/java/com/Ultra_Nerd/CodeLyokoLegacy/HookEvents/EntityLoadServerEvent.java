@@ -1,10 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.HookEvents;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModTags;
-import com.Ultra_Nerd.CodeLyokoLegacy.player.PlayerProfile;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.CardinalData;
-import com.Ultra_Nerd.CodeLyokoLegacy.util.MethodUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModTags;
+import com.Ultra_Nerd.CodeLyokoLegacy.Player.PlayerProfile;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerInventory;

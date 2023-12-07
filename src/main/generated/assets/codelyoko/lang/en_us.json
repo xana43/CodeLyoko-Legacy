@@ -101,6 +101,7 @@
   "block.codelyoko.uv_focus": "UV Focus Lens",
   "block.codelyoko.uv_light": "UV Light",
   "block.codelyoko.uv_machine": "UV Machine",
+  "codelyoko.midnightconfig.title": "Codelyoko Evolution Configuration (WIP)",
   "computer.item.tooltip": "Hold §e Shift §7For more details",
   "computer.item.tooltip.shift": "a part for a computer\nthere are a bunch of tiers\nthe color of the item indicates it's tier",
   "computer_reactor.energy.amount": "stored energy: %s",
@@ -285,5 +286,7 @@
   "phone.use.singleplayer": "cannot be used in single player",
   "reactor.energy.amount.gui": "Stored Energy:%dJ",
   "reactor.waste.amount.gui": "Stored Waste:%dL",
-  "tooltip.energy.mindhelm": "Stored Energy:%dJ"
+  "splashscreen.entry1": "X.A.N.A. Is watching",
+  "tooltip.energy.mindhelm": "Stored Energy:%dJ",
+  "xana.attack.start": "Xana has started an attack!"
 }

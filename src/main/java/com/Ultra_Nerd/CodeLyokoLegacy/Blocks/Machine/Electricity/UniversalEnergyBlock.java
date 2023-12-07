@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.Electricity;
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.UniversalEnergyStorageTileEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;

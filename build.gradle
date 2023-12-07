@@ -62,7 +62,9 @@ repositories {
 			url = "https://maven.felnull.dev"
 		}
 	}
-
+	maven {
+		url = "https://api.modrinth.com/maven"
+	}
 
 }
 //shadowJar {
@@ -97,7 +99,8 @@ dependencies {
 
 	modApi "dev.felnull:special-model-loader:${obj}"
 	include "dev.felnull:special-model-loader:${obj}"
-
+	modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
+	include "maven.modrinth:midnightlib:${project.midnightlib_version}"
 }
 sourceSets{
 	main {
