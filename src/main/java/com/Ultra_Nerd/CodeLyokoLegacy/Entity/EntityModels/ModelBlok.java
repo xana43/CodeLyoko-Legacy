@@ -5,11 +5,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.EntityBlok;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.BlokEntity;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
 
-public final class ModelBlok extends DefaultedEntityGeoModel<EntityBlok> {
+public final class ModelBlok extends DefaultedEntityGeoModel<BlokEntity> {
 
 
     public ModelBlok() {

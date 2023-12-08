@@ -11,7 +11,7 @@ import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
 public final class LyokoFloatingParticle extends SpriteBillboardParticle {
-
+    private final MinecraftClient minecraftClient = MinecraftClient.getInstance();
     private final SpriteProvider provider;
 
     private LyokoFloatingParticle(final ClientWorld clientWorld, final double d, final double e, final double f, final double velocityX, final double velocityY, final double velocityZ, final SpriteProvider provider) {
@@ -52,7 +52,6 @@ public final class LyokoFloatingParticle extends SpriteBillboardParticle {
 
 
     private boolean isInvisible() {
-        final MinecraftClient minecraftClient = MinecraftClient.getInstance();
         final ClientPlayerEntity clientPlayerEntity = minecraftClient.player;
         return clientPlayerEntity != null && clientPlayerEntity.getEyePos()
                 .squaredDistanceTo(this.x, this.y, this.z) <= 9.0 && minecraftClient.options.getPerspective()

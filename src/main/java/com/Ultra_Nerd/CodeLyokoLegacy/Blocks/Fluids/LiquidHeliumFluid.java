@@ -47,7 +47,7 @@ public abstract class LiquidHeliumFluid extends LyokoFluid {
 
         @Override
         public int getLevel(final FluidState state) {
-            return state.<Integer>get(LEVEL).intValue();
+            return state.<Integer>get(LEVEL);
         }
 
         @Override

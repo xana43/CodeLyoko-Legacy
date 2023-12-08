@@ -21,16 +21,16 @@ public record ModEntities() {
     public static final EntityType<KankrelatEntity> KANKRELAT = registerEntities("kankrelat",FabricEntityTypeBuilder.createMob()
             .entityFactory(KankrelatEntity::new)
             .spawnGroup(SpawnGroup.MONSTER)
-            .defaultAttributes(EntityBlok::createMonsterAttributes)
+            .defaultAttributes(BlokEntity::createMonsterAttributes)
             .dimensions(EntityDimensions.fixed(1,1))
-            .spawnRestriction(SpawnRestriction.Location.ON_GROUND,Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,EntityBlok::canMobSpawn));
-    public static final EntityType<EntityBlok> BLOK = registerEntities("blok",FabricEntityTypeBuilder.createMob()
-            .entityFactory(EntityBlok::new)
+            .spawnRestriction(SpawnRestriction.Location.ON_GROUND,Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, BlokEntity::canMobSpawn));
+    public static final EntityType<BlokEntity> BLOK = registerEntities("blok",FabricEntityTypeBuilder.createMob()
+            .entityFactory(BlokEntity::new)
             .spawnGroup(SpawnGroup.MONSTER)
-            .defaultAttributes(EntityBlok::createMonsterAttributes)
+            .defaultAttributes(BlokEntity::createMonsterAttributes)
             .dimensions(EntityDimensions.fixed(2, 2))
             .spawnRestriction(SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    EntityBlok::canSpawn)
+                    BlokEntity::canSpawn)
             .fireImmune());
     public static final EntityType<EntityLaser> LASER_ENTITY_TYPE = registerEntities("laser",FabricEntityTypeBuilder.create(
             SpawnGroup.MISC, EntityLaser::new));

@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 @Environment(EnvType.CLIENT)
 public final class LyokoRingParticle extends SpriteBillboardParticle {
 
-
+    private static final MinecraftClient minecraftClient = MinecraftClient.getInstance();
     private final SpriteProvider provider;
     private final double xw, zw;
     private float time = 0;
@@ -57,7 +57,6 @@ public final class LyokoRingParticle extends SpriteBillboardParticle {
 
 
     private boolean isInvisible() {
-        final MinecraftClient minecraftClient = MinecraftClient.getInstance();
         final ClientPlayerEntity clientPlayerEntity = minecraftClient.player;
         return clientPlayerEntity != null && clientPlayerEntity.getEyePos()
                 .squaredDistanceTo(this.x, this.y, this.z) <= 9.0 && minecraftClient.options.getPerspective()

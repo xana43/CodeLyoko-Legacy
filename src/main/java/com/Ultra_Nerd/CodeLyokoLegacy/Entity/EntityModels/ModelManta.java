@@ -11,8 +11,9 @@ import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
 public final class ModelManta extends DefaultedEntityGeoModel<MantaEntity> {
-    public ModelManta(final Identifier assetSubpath) {
-        super(assetSubpath);
+    public ModelManta() {
+        super(CodeLyokoMain.codeLyokoPrefix("manta"));
+        withAltTexture(CodeLyokoMain.codeLyokoPrefix("manta/mantatemplate"));
     }
 
 
@@ -25,15 +26,7 @@ public final class ModelManta extends DefaultedEntityGeoModel<MantaEntity> {
         return CodeLyokoMain.codeLyokoPrefix("animations/entity/manta.json");
     }
 
-    @Override
-    public Identifier getModelResource(MantaEntity object) {
-        return null;
-    }
 
-    @Override
-    public Identifier getTextureResource(MantaEntity object) {
-        return null;
-    }
 
 
 

@@ -19,27 +19,27 @@ public final class TriplicateRenderer<T extends ServerTriplicateCloneEntity> ext
         this.ctx = ctx;
     }
     private PlayerEntityRenderer entityRenderer;
-    private ClientTriplicateCloneEntity player;
+    private ClientTriplicateCloneEntity clientTriplicateCloneEntity;
     @Override
     public void render(final T entity, final float yaw, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light) {
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
 
-        assert mc.player != null;
-        if(entityRenderer == null) {
-            if (mc.player.getSkinTextures().model().getName().equals(SkinTextures.Model.WIDE.getName())) {
-                entityRenderer = new PlayerEntityRenderer(ctx, false);
-            } else {
-                entityRenderer = new PlayerEntityRenderer(ctx, true);
+        if(mc.player != null) {
+            if (entityRenderer == null) {
+                if (mc.player.getSkinTextures().model().getName().equals(SkinTextures.Model.WIDE.getName())) {
+                    entityRenderer = new PlayerEntityRenderer(ctx, false);
+                } else {
+                    entityRenderer = new PlayerEntityRenderer(ctx, true);
+                }
             }
-        }
-        if(player == null) {
-            player = new ClientTriplicateCloneEntity(mc.world, mc.getGameProfile());
+            if (clientTriplicateCloneEntity == null) {
+                clientTriplicateCloneEntity = new ClientTriplicateCloneEntity(mc.world, mc.getGameProfile());
 
+            }
+            clientTriplicateCloneEntity.setTriplicateClone(entity);
+            clientTriplicateCloneEntity.setEntityOwner(mc.player);
+            entityRenderer.render(clientTriplicateCloneEntity, entity.getBodyYaw(), tickDelta, matrices, vertexConsumers, light);
         }
-        player.setTriplicateClone(entity);
-        player.setEntityOwner(mc.player);
-        entityRenderer.render(player, entity.getBodyYaw(), tickDelta, matrices, vertexConsumers, light);
-
     }
 
     @Override

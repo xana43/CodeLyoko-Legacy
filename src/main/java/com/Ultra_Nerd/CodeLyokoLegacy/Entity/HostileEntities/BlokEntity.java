@@ -40,10 +40,10 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 
 
-public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
+public final class BlokEntity extends SkeletonEntity implements GeoAnimatable {
 
-
-    public EntityBlok(final EntityType<? extends EntityBlok> entityType, final World world) {
+    private final AnimationController<BlokEntity> blokcontroller = new AnimationController<>(this, "blokcontroller", 20, this::pred);
+    public BlokEntity(final EntityType<? extends BlokEntity> entityType, final World world) {
         super(entityType, world);
 
 
@@ -66,7 +66,7 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
 
     }
 
-    public static boolean canSpawn(final EntityType<EntityBlok> entityBlokEntityType, final ServerWorldAccess serverWorldAccess, final SpawnReason spawnReason, final BlockPos pos, final Random random) {
+    public static boolean canSpawn(final EntityType<BlokEntity> entityBlokEntityType, final ServerWorldAccess serverWorldAccess, final SpawnReason spawnReason, final BlockPos pos, final Random random) {
         return serverWorldAccess.getBiome(pos).isIn(ModTags.Biomes.LYOKO_BIOMES) && serverWorldAccess.getBlockState(
                 pos.offset(Direction.Axis.Y, -1)).isIn(ModTags.Blocks.LYOKO_BLOCKS);
     }
@@ -84,13 +84,14 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
     }
 
     @SuppressWarnings("MethodMayBeStatic")
-    private <E extends EntityBlok> @NotNull PlayState pred(AnimationState<E> event) {
+    private <E extends BlokEntity> @NotNull PlayState pred(AnimationState<E> event) {
         return PlayState.STOP;
     }
 
     @Override
     public void registerControllers(@NotNull AnimatableManager.ControllerRegistrar data) {
-        data.add(new AnimationController<>(this, "blokcontroller", 20, this::pred));
+
+        data.add(blokcontroller);
     }
 
     @Override
@@ -143,11 +144,11 @@ public final class EntityBlok extends SkeletonEntity implements GeoAnimatable {
         return true;
     }
 
-
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return GeckoLibUtil.createInstanceCache(this);
+        return cache;
     }
 
     @Override

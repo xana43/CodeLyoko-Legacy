@@ -1,5 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityLaser;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModSounds;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
@@ -105,7 +107,14 @@ public final class MantaEntity extends GuardianEntity implements GeoAnimatable, 
 
     @Override
     public void shootAt(final LivingEntity target, final float pullProgress) {
-
+        final EntityLaser laserProjectile = new EntityLaser(this.getWorld(), this, 20);
+        final double d0 = target.getX() - this.getX();
+        final double d1 = target.getBodyY(0.3333333333333333D) - laserProjectile.getY();
+        final double d2 = target.getZ() - this.getZ();
+        final double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+        laserProjectile.setVelocity(d0, d1 + d3 * 0.2D, d2, 4F, (float) (14 - this.getWorld().getDifficulty().getId() << 2));
+        this.playSound(ModSounds.LASERARROW, 1.0F, 1.0F / (this.getRandom().nextFloat() * 1.2f));
+        this.getWorld().spawnEntity(laserProjectile);
     }
 }
 
