@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Vehicle;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.EntitySkid;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.SkidbladnirEntity;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Frustum;
@@ -15,7 +15,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 
 
-public final class SkidbladnirRenderer extends EntityRenderer<EntitySkid> {
+public final class SkidbladnirRenderer extends EntityRenderer<SkidbladnirEntity> {
     private static final Identifier TEXTURE = CodeLyokoMain.codeLyokoPrefix("textures/entity/skid/da4cdc01.png");
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     private static BakedModel SkidBlanirModel;
@@ -24,16 +24,16 @@ public final class SkidbladnirRenderer extends EntityRenderer<EntitySkid> {
     public SkidbladnirRenderer(final EntityRendererFactory.Context ctx) {
         super(ctx);
         context = ctx;
-        SkidBlanirModel = mc.getBakedModelManager().getModel(EntitySkid.getSkidLocation());
+        SkidBlanirModel = mc.getBakedModelManager().getModel(SkidbladnirEntity.getSkidLocation());
     }
 
     @Override
-    public Identifier getTexture(final EntitySkid entity) {
+    public Identifier getTexture(final SkidbladnirEntity entity) {
         return TEXTURE;
     }
 
     @Override
-    public void render(final EntitySkid entity, final float yaw, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light) {
+    public void render(final SkidbladnirEntity entity, final float yaw, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light) {
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
         if(SkidBlanirModel != null) {
             matrices.push();
@@ -43,11 +43,12 @@ public final class SkidbladnirRenderer extends EntityRenderer<EntitySkid> {
                     light, 0);
             matrices.pop();
         }
+
     }
 
 
     @Override
-    public boolean shouldRender(EntitySkid pLivingEntity, Frustum pCamera, double pCamX, double pCamY, double pCamZ) {
+    public boolean shouldRender(SkidbladnirEntity pLivingEntity, Frustum pCamera, double pCamX, double pCamY, double pCamZ) {
         return true;
     }
 

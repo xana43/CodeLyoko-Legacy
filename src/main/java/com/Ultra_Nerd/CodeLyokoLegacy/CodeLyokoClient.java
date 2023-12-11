@@ -13,8 +13,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Projectile.LaserRen
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Vehicle.HoverboardRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Vehicle.OverbikeRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Vehicle.OverboardRenderer;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Vehicle.SkidbladnirRenderer;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.EntitySkid;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.SkidbladnirEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.ClientTickEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.HudRenderCallbackOverride;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Client.ModHandledScreensClientInitializer;
@@ -46,6 +45,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.render.entity.BoatEntityRenderer;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.Vec3d;
@@ -68,6 +68,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
     public static final KeyBinding moveVehicleUp;
     public static final KeyBinding moveVehicleDown;
+    public static final KeyBinding hover;
     public static final KeyBinding classAbility;
     public static final KeyBinding testClone;
     public static final KeyBinding selectTransportHub;
@@ -83,6 +84,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_PAGE_DOWN, KEY_CATEGORY_MAIN));
         moveVehicleUp = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("vehicle.up"),
                 InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_PAGE_UP, KEY_CATEGORY_MAIN));
+        hover = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("vehicle.hover"),InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_END,KEY_CATEGORY_MAIN));
         selectTransportHub = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("skidbladnir.selecthub"),
                 InputUtil.Type.KEYSYM,GLFW.GLFW_KEY_J, KEY_CATEGORY_MAIN));
         classAbility = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("class_ability"),InputUtil.Type.KEYSYM,
@@ -122,7 +124,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.LASER_ENTITY_TYPE, LaserRenderer::new);
         EntityRendererRegistry.register(ModEntities.HORNET_ENTITY_ENTITY_TYPE, HornetRenderer::new);
         EntityRendererRegistry.register(ModEntities.FAN_ENTITY_TYPE, FanRenderer::new);
-        EntityRendererRegistry.register(ModEntities.SKID_ENTITY_TYPE, SkidbladnirRenderer::new);
+        EntityRendererRegistry.register(ModEntities.SKID_ENTITY_TYPE, ctx -> new BoatEntityRenderer(ctx,false));
         EntityRendererRegistry.register(ModEntities.TRIPLICATE_ENTITY_TYPE, TriplicateRenderer::new);
         //for entity that need layer locations
         EntityRendererRegistry.register(ModEntities.OVERBOARD, OverboardRenderer::new);
@@ -200,7 +202,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
     }
 
     private static void registerModelLoaders() {
-        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(CoreOfLyoko.getLyokoCore(),EntitySkid.getSkidLocation(),ForceFieldEmitterRenderer.getForceFieldLocation()));
+        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(CoreOfLyoko.getLyokoCore(), SkidbladnirEntity.getSkidLocation(),ForceFieldEmitterRenderer.getForceFieldLocation()));
     }
 
     private static void registerBlockEntityRenderers() {

@@ -42,7 +42,9 @@ public record CoreOfLyoko(BlockEntityRendererFactory.Context context) implements
         matrices.translate(0.5, 0.5, 0.5);
         if(!mc.isPaused()) {
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(y += ySpeed));
-            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) Math.toDegrees(Math.sin(z += zSpeed))));
+            if(entity.getHealth() != LyokoCoreBE.getMaxHealth()) {
+                matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) Math.toDegrees(Math.sin(z += (entity.getHealth() / 100)))));
+            }
         }
         if (y >= 360) {
             y = 0;

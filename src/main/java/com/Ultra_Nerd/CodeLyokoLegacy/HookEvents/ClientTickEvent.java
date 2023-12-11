@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.HookEvents;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Items.Armor.SuperCalculatorDataLinker;
+import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Screens.ClientScreens.ClassScreen;
 import com.Ultra_Nerd.CodeLyokoLegacy.Screens.Devirtualized;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
@@ -43,7 +43,7 @@ public record ClientTickEvent() {
                 if (testPsychic.isPressed()) {
                     final HitResult hitResult = client.crosshairTarget;
                     final PacketByteBuf buf = PacketByteBufs.create();
-                    if (hitResult.getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.MISS) {
+                    if (Objects.requireNonNull(hitResult).getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.MISS) {
                         buf.writeBlockHitResult((BlockHitResult) hitResult);
                         ClientPlayNetworking.send(PacketHandler.RAY_CAST, buf);
                     } else {
@@ -61,7 +61,7 @@ public record ClientTickEvent() {
                 if (testGuardianBuild.wasPressed()) {
                     final HitResult hitResult = client.crosshairTarget;
                     final PacketByteBuf buf = PacketByteBufs.create();
-                    if (hitResult.getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.MISS) {
+                    if (Objects.requireNonNull(hitResult).getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.MISS) {
                         buf.writeBlockHitResult((BlockHitResult) hitResult);
                         ClientPlayNetworking.send(PacketHandler.BUILD_HOLOGRAM, buf);
                     }
@@ -80,7 +80,7 @@ public record ClientTickEvent() {
                         case 2 ->{
                             final HitResult hitResult = client.crosshairTarget;
                             final PacketByteBuf buf = PacketByteBufs.create();
-                            if (hitResult.getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.MISS) {
+                            if (Objects.requireNonNull(hitResult).getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.MISS) {
                                 buf.writeBlockHitResult((BlockHitResult) hitResult);
                                 ClientPlayNetworking.send(PacketHandler.RAY_CAST, buf);
                             } else {
@@ -94,7 +94,7 @@ public record ClientTickEvent() {
                         case 3 -> {
                             final HitResult hitResult = client.crosshairTarget;
                             final PacketByteBuf buf = PacketByteBufs.create();
-                            if (hitResult.getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.MISS) {
+                            if (Objects.requireNonNull(hitResult).getType() == HitResult.Type.BLOCK || hitResult.getType() == HitResult.Type.MISS) {
                                 buf.writeBlockHitResult((BlockHitResult) hitResult);
                                 ClientPlayNetworking.send(PacketHandler.BUILD_HOLOGRAM, buf);
                             }
@@ -128,6 +128,9 @@ public record ClientTickEvent() {
                     keyboardByteBuf.clear();
                     keyboardByteBuf.writeInt(-1);
                     ClientPlayNetworking.send(PacketHandler.KEYBOARD_UPDATE,keyboardByteBuf);
+                }
+                if(hover.wasPressed()) {
+                    ClientPlayNetworking.send(PacketHandler.VEHICLE_HOVER,PacketByteBufs.empty());
                 }
                 if(selectTransportHub.isPressed())
                 {

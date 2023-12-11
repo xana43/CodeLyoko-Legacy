@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.definition;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.MantaEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.Piranha;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.EntitySkid;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.SkidbladnirEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageSources;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModFluids;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -25,7 +25,7 @@ public final class DigitalSeaBlock extends FluidBlock {
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        if (!(entity instanceof EntitySkid) && !(entity instanceof Piranha) && !(entity instanceof MantaEntity) && !world.isClient) {
+        if (!(entity instanceof SkidbladnirEntity) && !(entity instanceof Piranha) && !(entity instanceof MantaEntity) && !world.isClient) {
             entity.damage(ModDamageSources.digitalOceanSource, Float.MAX_VALUE);
             if (entity instanceof ArrowEntity) {
                 entity.kill();

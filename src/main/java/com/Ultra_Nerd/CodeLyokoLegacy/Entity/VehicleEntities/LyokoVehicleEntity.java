@@ -8,21 +8,13 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.Item;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class LyokoVehicleEntity extends BoatEntity {
-    private boolean movingUp = false;
-    private boolean movingDown = false;
 
-    public void setMovingDown(final boolean movingDown) {
-        this.movingDown = movingDown;
-    }
-
-    public void setMovingUp(final boolean movingUp) {
-        this.movingUp = movingUp;
-    }
 
 
     public LyokoVehicleEntity(final EntityType<? extends BoatEntity> entityType, final World world) {
@@ -76,37 +68,37 @@ public class LyokoVehicleEntity extends BoatEntity {
         return null;
     }
 
+    @Override
+    protected void fall(final double heightDifference, final boolean onGround, final BlockState state, final BlockPos landedPosition) {
+
+    }
 
 
     @Override
     protected void addPassenger(final Entity passenger) {
-        passenger.setPose(EntityPose.STANDING);
         super.addPassenger(passenger);
+        passenger.setPose(EntityPose.STANDING);
     }
-
+    public void toggleHover() {
+        setNoGravity(!hasNoGravity());
+        setVelocity(getVelocity().x, 0, getVelocity().z);
+    }
     @Override
     public float getNearbySlipperiness() {
         return 0.90f;
     }
 
-    protected void movement() {
-
-        if (movingDown) {
-
-            this.addVelocity(getVelocity().x, getVelocity().y - 1, getVelocity().z);
-        }
-        else if (movingUp) {
-            this.addVelocity(getVelocity().x, getVelocity().y + 1, getVelocity().z);
-
-        }
-
+    public void moveUp() {
+        this.addVelocity(getVelocity().x, getVelocity().y + 1, getVelocity().z);
+    }
+    public void moveDown() {
+        this.addVelocity(getVelocity().x, getVelocity().y - 1, getVelocity().z);
     }
 
 
     @Override
     public void tick() {
         super.tick();
-        this.movement();
 
     }
 

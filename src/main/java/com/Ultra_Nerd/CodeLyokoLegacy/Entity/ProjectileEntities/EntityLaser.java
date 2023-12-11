@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -15,7 +16,7 @@ public final class EntityLaser extends ArrowEntity {
 
 
     private int lifetime;
-
+    private int calculatedDamage;
 
     public EntityLaser(final World world, final double x, final double y, final double z, final int lifetime) {
         super(world, x, y, z);
@@ -47,7 +48,15 @@ public final class EntityLaser extends ArrowEntity {
     protected float getDragInWater() {
         return 0;
     }
-
+    private void calculateHitDamage() {
+        final int velocityDamageScale = MathHelper.ceil(MathHelper.clamp(this.getVelocity().length() * this.getDamage(),0.0,2.147483647E9));
+        if(isCritical()) {
+            final long randomLong = this.random.nextInt(velocityDamageScale / 2 + 2);
+            calculatedDamage = (int) Math.min(randomLong +(long) velocityDamageScale,2147483647L);
+        } else {
+            calculatedDamage = velocityDamageScale;
+        }
+    }
     @Override
     public void tick() {
         super.tick();
@@ -79,6 +88,9 @@ public final class EntityLaser extends ArrowEntity {
         }
     }
 
+    public int getCalculatedDamage() {
+        return calculatedDamage;
+    }
 
     private void destroyAtTheEndOfLife() {
         lifetime--;
@@ -89,12 +101,9 @@ public final class EntityLaser extends ArrowEntity {
         }
     }
 
-
     @Override
     protected void onEntityHit(final EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
-        entityHitResult.getEntity().damage(entityHitResult.getEntity().getWorld().getDamageSources().arrow(this, this.getOwner()),
-                (float) this.getDamage());
         if (!getWorld().isClient) {
             this.kill();
         }
@@ -103,6 +112,7 @@ public final class EntityLaser extends ArrowEntity {
     @Override
     protected void onBlockHit(final BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
+        calculateHitDamage();
         if (!getWorld().isClient) {
             this.kill();
         }

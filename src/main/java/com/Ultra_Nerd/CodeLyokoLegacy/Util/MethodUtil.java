@@ -285,10 +285,15 @@ public record MethodUtil() {
             public static int tickToSeconds(final int ticks) {
                 return ticks / 20;
             }
+            public static long tickToSeconds(final long ticks){return ticks / 20;}
+            public static float tickToSeconds(final float ticks){return ticks / 20;}
+            public static double tickToSeconds(final double ticks){return ticks / 20;}
 
-            public static int secondsToTicks(final int seconds) {
-                return seconds * 20;
-            }
+
+            public static long secondsToTicks(final long seconds){return seconds * 20;}
+            public static double secondsToTicks(final double seconds){return seconds * 20;}
+            public static float secondsToTicks(final float seconds){return seconds * 20;}
+            public static int secondsToTicks(final int seconds) {return seconds * 20;}
         }
 
         public record DimensionCheck() {

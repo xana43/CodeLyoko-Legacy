@@ -22,6 +22,7 @@ public record PacketHandler() {
     public static final Identifier PLAYER_QUERY = CodeLyokoMain.codeLyokoPrefix("query_players");
     public static final Identifier PLAYER_QUERY_SERVER = CodeLyokoMain.codeLyokoPrefix("send_query_to_server");
     public static final Identifier KEYBOARD_UPDATE = CodeLyokoMain.codeLyokoPrefix("keyboard_update");
+    public static final Identifier VEHICLE_HOVER = CodeLyokoMain.codeLyokoPrefix("vehicle_hover");
     public static final Identifier SKID_BLADNIR_UPDATE = CodeLyokoMain.codeLyokoPrefix("skidbladnir_update");
     public static final Identifier RENAME_BLOCK_ENTITY = CodeLyokoMain.codeLyokoPrefix("rename_block_entity");
     public static final Identifier SPAWN_TRIPLICATE = CodeLyokoMain.codeLyokoPrefix("spawn_triplicate");
@@ -46,7 +47,7 @@ public record PacketHandler() {
                 (server, player, handler, buf, responseSender) -> server.execute(() -> CardinalData.PlayerSavedProfile.getPlayerProfile(
                         server.getSaveProperties().getMainWorldProperties(), player).refreshPlayerClass()));
         ServerPlayNetworking.registerGlobalReceiver(ClassScreenID, UpdatePlayerClassC2SPacket::receive);
-        ServerPlayNetworking.registerGlobalReceiver(KEYBOARD_UPDATE, CustomUpAndDownKeybindingC2SPacket::receive);
+        ServerPlayNetworking.registerGlobalReceiver(KEYBOARD_UPDATE, CustomVehicleKeybindingsC2SPacket::vehicleVerticalMovement);
         ServerPlayNetworking.registerGlobalReceiver(PLAYER_QUERY_SERVER,(server, player, handler, buf,
                 responseSender) -> server.execute(() -> ServerPlayNetworking.send(player,PLAYER_QUERY,
                     PacketByteBufs.empty())));
@@ -55,6 +56,7 @@ public record PacketHandler() {
         ServerPlayNetworking.registerGlobalReceiver(RAY_CAST_ENTITY,NinjaRayCastC2SPacket::receive3);
         ServerPlayNetworking.registerGlobalReceiver(BUILD_HOLOGRAM,TriggerServerBuildAreaCalculationC2SPacket::receive);
         ServerPlayNetworking.registerGlobalReceiver(TOWER_SCANNER,ScanForActiveXanaTowersC2SPacket::receive);
+        ServerPlayNetworking.registerGlobalReceiver(VEHICLE_HOVER,CustomVehicleKeybindingsC2SPacket::vehicleHover);
     }
     @Environment(EnvType.CLIENT)
     public static void clientPacketRegistry() {

@@ -6,10 +6,10 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityFan;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityLaser;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.EntitySkid;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.HoverboardEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.OverbikeEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.OverboardEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.SkidbladnirEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.*;
 import net.minecraft.registry.Registries;
@@ -65,8 +65,8 @@ public record ModEntities() {
     public static final EntityType<EntityFan> FAN_ENTITY_TYPE =
             registerEntities("fan",FabricEntityTypeBuilder.create(SpawnGroup.MISC, EntityFan::new));
 
-    public static final EntityType<EntitySkid> SKID_ENTITY_TYPE =
-            registerEntities("skidbladnir",FabricEntityTypeBuilder.create(SpawnGroup.MISC,EntitySkid::new));
+    public static final EntityType<SkidbladnirEntity> SKID_ENTITY_TYPE =
+            registerEntities("skidbladnir",FabricEntityTypeBuilder.create(SpawnGroup.MISC, SkidbladnirEntity::new));
     //decoration entities
     public static final EntityType<XanaSymbolEntity> XANA_SYMBOL_ENTITY_TYPE =
             registerEntities("xana_symbol",FabricEntityTypeBuilder.create(SpawnGroup.MISC,XanaSymbolEntity::new));

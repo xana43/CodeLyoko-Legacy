@@ -18,9 +18,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public final class EntitySkid extends LyokoVehicleEntity {
-    public EntitySkid(final EntityType<? extends BoatEntity> entityType, final World world) {
+public final class SkidbladnirEntity extends LyokoVehicleEntity {
+    public SkidbladnirEntity(final EntityType<? extends BoatEntity> entityType, final World world) {
         super(entityType, world);
+        this.setNoGravity(true);
     }
     private static final Identifier skidlocation = CodeLyokoMain.codeLyokoPrefix("entity" +
             "/skid_model/skid");

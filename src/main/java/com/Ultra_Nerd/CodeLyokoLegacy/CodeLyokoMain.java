@@ -4,7 +4,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ComputerCoreTileEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.MegaTankEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.EntitySkid;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.SkidbladnirEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
@@ -231,7 +231,7 @@ public record CodeLyokoMain() implements ModInitializer {
             }
         });
         ServerEntityWorldChangeEvents.AFTER_ENTITY_CHANGE_WORLD.register((originalEntity, newEntity, origin, destination) -> {
-            if(originalEntity instanceof EntitySkid && newEntity instanceof EntitySkid)
+            if(originalEntity instanceof SkidbladnirEntity && newEntity instanceof SkidbladnirEntity)
             {
                 if(destination.getRegistryKey().equals(ModDimensions.digitalOceanWorld))
                 {
