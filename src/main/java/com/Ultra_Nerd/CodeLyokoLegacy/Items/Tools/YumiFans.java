@@ -1,9 +1,27 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items.Tools;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.FanEntity;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.TridentItem;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+
 
 public final class YumiFans extends TridentItem {
     private static final float Velocity = 1f;
@@ -25,47 +43,40 @@ public final class YumiFans extends TridentItem {
     public boolean isDamageable() {
         return false;
     }
-/*
-    @Override
-    public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        Multimap<Attribute,AttributeModifier> multimap = HashMultimap.create();
 
+
+    @Override
+    public @NotNull Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
+        Multimap<EntityAttribute,EntityAttributeModifier> multimap = HashMultimap.create();
         if (slot == EquipmentSlot.MAINHAND) {
-            multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", FanDamage, AttributeModifier.Operation.ADDITION));
-            multimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier",  Velocity, AttributeModifier.Operation.ADDITION));
+            multimap.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", FanDamage, EntityAttributeModifier.Operation.ADDITION));
+            multimap.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier",  Velocity, EntityAttributeModifier.Operation.ADDITION));
         }
         return multimap;
     }
-    @Override
-    public boolean onDroppedByPlayer(final ItemStack item, final Player player) {
-        return false;
-    }
-    @Override
-    public int getDefaultTooltipHideFlags(@NotNull final ItemStack stack) {
-        return ItemStack.TooltipPart.ENCHANTMENTS.getMask();
-    }
+
+
 
     @Override
-    public boolean isFoil(final @NotNull ItemStack pStack) {
+    public boolean hasGlint(final ItemStack stack) {
         return false;
     }
 
     @Override
-    public void releaseUsing(@Nonnull ItemStack stack, @Nonnull Level worldIn, @Nonnull LivingEntity entityLiving, int timeLeft) {
-        super.releaseUsing(stack,worldIn,entityLiving,timeLeft);
-        if (entityLiving instanceof Player playerentity) {
-            int i = this.getUseDuration(stack) - timeLeft;
+    public void onStoppedUsing(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull LivingEntity entityLiving, int timeLeft) {
+        //super.onStoppedUsing(stack,worldIn,entityLiving,timeLeft);
+        if (entityLiving instanceof PlayerEntity playerentity) {
+            int i = this.getMaxUseTime(stack) - timeLeft;
             if (i >= 10) {
-
-                final EntityFan fan = new EntityFan(worldIn, playerentity, stack);
+                final FanEntity fan = new FanEntity(worldIn, playerentity, stack);
                 fan.setPos(playerentity.getX(), playerentity.getEyeY(), playerentity.getZ());
-                fan.shootFromRotation(fan, playerentity.getXRot(), playerentity.getYRot(), 0.0F, 1.25f,0.0F);
-                fan.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
-                worldIn.addFreshEntity(fan);
+                fan.setVelocity(playerentity, playerentity.getPitch(),playerentity.getYaw(), 0.0F, 1.25f,0.0F);
+                fan.pickupType = PersistentProjectileEntity.PickupPermission.ALLOWED;
+                worldIn.spawnEntity(fan);
 
-                worldIn.playSound(null, playerentity.blockPosition(), SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
-                if (!playerentity.isCreative()) {
-                    playerentity.getInventory().removeItem(stack);
+                worldIn.playSound(null, playerentity.getBlockPos(), SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                if (!playerentity.getAbilities().creativeMode) {
+                    playerentity.getInventory().removeOne(stack);
                 }
 
 
@@ -75,33 +86,30 @@ public final class YumiFans extends TridentItem {
 
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level worldIn, @NotNull Player playerIn, @NotNull InteractionHand handIn) {
-        final ItemStack heldItem = playerIn.getItemInHand(handIn);
-        if (playerIn.getInventory().getArmor(EquipmentSlot.CHEST.getIndex()).getItem() != ModItems.YUMI_CHESTPLATE.get() &&
-                playerIn.getInventory().getArmor(EquipmentSlot.LEGS.getIndex()).getItem() != ModItems.YUMI_LEGGINGS.get() &&
-                playerIn.getInventory().getArmor(EquipmentSlot.FEET.getIndex()).getItem() != ModItems.YUMI_BOOTS.get()) {
-            return InteractionResultHolder.fail(heldItem);
-        }
-        //boolean flag = !playerIn.findAmmo(itemstack).isEmpty();
+    public @NotNull TypedActionResult<ItemStack> use(@NotNull World worldIn, @NotNull PlayerEntity playerIn, @NotNull Hand handIn) {
+        final ItemStack heldItem = playerIn.getStackInHand(handIn);
+       // if(!playerIn.isCreative())
+        //{
+         //   if(CardinalData.LyokoClass.getLyokoClass(playerIn) != 2) {
+          //      return TypedActionResult.fail(heldItem);
+           // }
+        //}
 
-        InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(heldItem, worldIn, playerIn, handIn, true);
-        if (ret != null) {
-            return ret;
-        }
 
-        playerIn.setMainArm(HumanoidArm.RIGHT);
-        return InteractionResultHolder.success(heldItem);
+        playerIn.setCurrentHand(handIn);
+        return TypedActionResult.consume(heldItem);
     }
 
 
     @Override
-    public void inventoryTick(@NotNull ItemStack stack, @Nonnull Level worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
-        if (!stack.isEnchanted()) {
-            stack.enchant(Enchantments.LOYALTY, Enchantments.LOYALTY.getMaxLevel());
-            stack.enchant(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());
-            stack.getEnchantmentTags().clear();
+    public void inventoryTick(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
+        if (!stack.hasEnchantments()) {
+            stack.addEnchantment(Enchantments.LOYALTY, Enchantments.LOYALTY.getMaxLevel());
+            stack.addEnchantment(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());
+            stack.addEnchantment(Enchantments.IMPALING, Enchantments.IMPALING.getMaxLevel());
+            stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
         }
     }
 
- */
+
 }

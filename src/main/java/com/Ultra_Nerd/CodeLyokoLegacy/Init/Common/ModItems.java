@@ -26,7 +26,7 @@ public record ModItems() {
     public static final Item HOVERBOARD_SPAWN_ITEM;
     public static final Item OVERBOARD_SPAWN_ITEM;
 
-
+    public static final Item OVERBIKE_SPAWN_ITEM;
     //for items
     public static final Item APU_PACKAGE_ARM;
 
@@ -193,6 +193,7 @@ public record ModItems() {
         HOVERBOARD_SPAWN_ITEM = registerModItem("hoverboard_spawn_item",new LyokoSpawnItem(
                 BaseSettings().rarity(CustomLyokoRarity.FRANZ_NOVICE),ModEntities.HOVERBOARD));
         OVERBOARD_SPAWN_ITEM = registerModItem("overboard_spawn_item",new LyokoSpawnItem(BaseSettings().rarity(CustomLyokoRarity.FRANZ_NOVICE),ModEntities.OVERBOARD));
+        OVERBIKE_SPAWN_ITEM = registerModItem("overbike_spawn_item",new LyokoSpawnItem(BaseSettings().rarity(CustomLyokoRarity.FRANZ_NOVICE),ModEntities.OVERBIKE));
         //items
         APU_PACKAGE_ARM = registerComputerItem("apu_package_arm");
         APU_PACKAGE_x86 = registerComputerItem("apu_package_x86",BaseSettings().rarity(

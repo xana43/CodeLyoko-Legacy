@@ -3,8 +3,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Init.Common;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.DecorationEntities.XanaSymbolEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityFan;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityLaser;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.FanEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.LaserEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.HoverboardEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.OverbikeEntity;
@@ -32,8 +32,8 @@ public record ModEntities() {
             .spawnRestriction(SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                     BlokEntity::canSpawn)
             .fireImmune());
-    public static final EntityType<EntityLaser> LASER_ENTITY_TYPE = registerEntities("laser",FabricEntityTypeBuilder.create(
-            SpawnGroup.MISC, EntityLaser::new));
+    public static final EntityType<LaserEntity> LASER_ENTITY_TYPE = registerEntities("laser",FabricEntityTypeBuilder.create(
+            SpawnGroup.MISC, LaserEntity::new));
     public static final EntityType<MegaTankEntity> MEGATANK = registerEntities("megatank",FabricEntityTypeBuilder.create(SpawnGroup.MONSTER,
                     MegaTankEntity::new).dimensions(EntityDimensions.fixed(1, 1)).fireImmune());
     public static final EntityType<HornetEntity> HORNET_ENTITY_ENTITY_TYPE = registerEntities("hornet",FabricEntityTypeBuilder.createMob()
@@ -62,8 +62,8 @@ public record ModEntities() {
     public static final EntityType<HoverboardEntity> HOVERBOARD =
             registerEntities("hoverboard",FabricEntityTypeBuilder.create(SpawnGroup.MISC, HoverboardEntity::new).dimensions(EntityDimensions.fixed(1
                     , 1)));
-    public static final EntityType<EntityFan> FAN_ENTITY_TYPE =
-            registerEntities("fan",FabricEntityTypeBuilder.create(SpawnGroup.MISC, EntityFan::new));
+    public static final EntityType<FanEntity> FAN_ENTITY_TYPE =
+            registerEntities("fan",FabricEntityTypeBuilder.create(SpawnGroup.MISC, FanEntity::new));
 
     public static final EntityType<SkidbladnirEntity> SKID_ENTITY_TYPE =
             registerEntities("skidbladnir",FabricEntityTypeBuilder.create(SpawnGroup.MISC, SkidbladnirEntity::new));

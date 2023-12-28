@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityLaser;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.LaserEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModTags;
 import net.minecraft.block.BlockState;
@@ -160,7 +160,7 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
     @Override
     public void shootAt(final LivingEntity target, final float pullProgress) {
         //super.attack(target, pullProgress);
-        final EntityLaser abstractarrow = new EntityLaser(this.getWorld(), this, 20);
+        final LaserEntity abstractarrow = new LaserEntity(this.getWorld(), this, 20);
 
         final double d0 = target.getX() - this.getX();
         final double d1 = target.getBodyY(0.3333333333333333D) - abstractarrow.getY();

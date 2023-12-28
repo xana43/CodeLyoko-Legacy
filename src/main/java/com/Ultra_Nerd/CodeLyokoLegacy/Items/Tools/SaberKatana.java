@@ -27,17 +27,16 @@ public final class SaberKatana extends SwordItem {
         super(toolMaterial, attackDamage, attackSpeed, settings);
         this.attackSpeed = attackSpeed;
         this.attackDamage = attackDamage + toolMaterial.getAttackDamage();
-
-
     }
 
     @Override
     public UseAction getUseAction(final ItemStack stack) {
-
-
         return UseAction.BLOCK;
     }
-
+    @Override
+    public int getMaxUseTime(final ItemStack stack) {
+        return 72000;
+    }
 
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(final ItemStack stack, final EquipmentSlot slot) {
@@ -68,7 +67,6 @@ public final class SaberKatana extends SwordItem {
             if (!stack.hasEnchantments()) {
                 stack.addEnchantment(Enchantments.SWEEPING, Enchantments.SWEEPING.getMaxLevel());
                 stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
-
             }
         }
     }
@@ -77,9 +75,9 @@ public final class SaberKatana extends SwordItem {
 
     @Override
     public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
+        final ItemStack stack = user.getStackInHand(hand);
         user.setCurrentHand(hand);
-
-        return TypedActionResult.pass(user.getStackInHand(hand));
+        return TypedActionResult.consume(stack);
     }
 
     @Override

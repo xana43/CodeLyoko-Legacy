@@ -15,14 +15,16 @@ import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public final class EntityFan extends TridentEntity implements GeoAnimatable {
+public final class FanEntity extends TridentEntity implements GeoAnimatable {
     private final AnimatableInstanceCache manager = GeckoLibUtil.createInstanceCache(this);
+    private final AnimationController<?> controller = new AnimationController<>(this, "fancontroller", 20,
+            this::animationpred);
 
-    public EntityFan(final World world, final LivingEntity owner, final ItemStack stack) {
+    public FanEntity(final World world, final LivingEntity owner, final ItemStack stack) {
         super(world, owner, stack);
     }
 
-    public EntityFan(final EntityType<? extends TridentEntity> entityType, final World world) {
+    public FanEntity(final EntityType<? extends TridentEntity> entityType, final World world) {
         super(entityType, world);
     }
 
@@ -35,14 +37,13 @@ public final class EntityFan extends TridentEntity implements GeoAnimatable {
         super.tick();
     }
 
-    private <E extends EntityFan> @NotNull PlayState animationpred(AnimationState<E> event) {
+    private <E extends FanEntity> @NotNull PlayState animationpred(AnimationState<E> event) {
 
         controller.setAnimation(RawAnimation.begin().thenLoop("animation.fan.spin"));
         return PlayState.CONTINUE;
 
 
-    }    private final AnimationController<?> controller = new AnimationController<>(this, "fancontroller", 20,
-            this::animationpred);
+    }
 
     @Override
     public void registerControllers(final AnimatableManager.ControllerRegistrar controllerRegistrar) {

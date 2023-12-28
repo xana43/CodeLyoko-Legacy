@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items.Tools;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityLaser;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.LaserEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModSounds;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -40,7 +40,7 @@ public final class LaserArrowShooter extends BowItem {
             world.playSound(null, user.getBlockPos(), ModSounds.LASERARROW, SoundCategory.PLAYERS, 1f, 1f);
 
 
-            final EntityLaser las = new EntityLaser(world, user, 20);
+            final LaserEntity las = new LaserEntity(world, user, 20);
 
             //las.(10);
             las.setNoGravity(true);

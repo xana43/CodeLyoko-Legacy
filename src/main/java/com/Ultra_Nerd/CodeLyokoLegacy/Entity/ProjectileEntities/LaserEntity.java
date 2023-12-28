@@ -12,20 +12,20 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 
-public final class EntityLaser extends ArrowEntity {
+public final class LaserEntity extends ArrowEntity {
 
 
     private int lifetime;
     private int calculatedDamage;
 
-    public EntityLaser(final World world, final double x, final double y, final double z, final int lifetime) {
+    public LaserEntity(final World world, final double x, final double y, final double z, final int lifetime) {
         super(world, x, y, z);
         this.shake = 0;
         setLifetime(lifetime);
 
     }
 
-    public EntityLaser(final EntityType<? extends ArrowEntity> entityType, final World world) {
+    public LaserEntity(final EntityType<? extends ArrowEntity> entityType, final World world) {
         super(entityType, world);
         this.shake = 0;
 
@@ -38,7 +38,7 @@ public final class EntityLaser extends ArrowEntity {
      * @param owner    the entity that spawned this entity
      * @param lifetime the lifetime of the entity IN SECONDS (used to clean up when the entity is just floating in the air due to drag)
      */
-    public EntityLaser(final World world, final LivingEntity owner, final int lifetime) {
+    public LaserEntity(final World world, final LivingEntity owner, final int lifetime) {
         super(world, owner);
         this.shake = 0;
         this.setLifetime(lifetime);

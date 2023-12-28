@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items.Tools;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityLaser;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.LaserEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModSounds;
 import net.minecraft.entity.EquipmentSlot;
@@ -61,7 +61,7 @@ public final class ForceFieldEmitter extends BowItem {
             final float f = getPullProgress(i);
             if (!((double) f < 0.1D)) {
                 if (!world.isClient()) {
-                    final EntityLaser las = new EntityLaser(world, user, 20);
+                    final LaserEntity las = new LaserEntity(world, user, 20);
 
                     las.setDamage(40);
                     las.setPos(playerentity.getBlockPos().getX(), playerentity.getEyeY(),

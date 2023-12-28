@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityLaser;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.LaserEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModTags;
 import net.minecraft.block.BlockState;
@@ -196,7 +196,7 @@ public final class HornetEntity extends PhantomEntity implements GeoAnimatable, 
     @Override
     public void shootAt(@NotNull LivingEntity target, final float distanceFactor) {
 
-        final EntityLaser laser = new EntityLaser(this.getWorld(), this, 40);
+        final LaserEntity laser = new LaserEntity(this.getWorld(), this, 40);
         final double d0 = target.getX() - this.getX();
         final double d1 = target.getBodyY(0.3333333333333333D) - laser.getY();
         final double d2 = target.getZ() - this.getZ();

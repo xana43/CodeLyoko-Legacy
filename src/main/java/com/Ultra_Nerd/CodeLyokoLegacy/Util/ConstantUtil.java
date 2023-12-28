@@ -31,7 +31,6 @@ public record ConstantUtil() {
     }
 
     public record StoryEntry() {
-
         private static final String n = System.lineSeparator();
         private static final char page = '¶';
 

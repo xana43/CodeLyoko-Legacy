@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.LyokoCoreBE;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.EntityLaser;
+import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.LaserEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -49,7 +49,7 @@ public final class LyokoCore extends BlockWithEntity {
         super.onProjectileHit(world, state, hit, projectile);
         if(projectile instanceof final PersistentProjectileEntity persistentProjectileEntity) {
             if(world.getBlockEntity(hit.getBlockPos()) instanceof LyokoCoreBE lyokoCoreBE) {
-                if(persistentProjectileEntity instanceof EntityLaser laser)
+                if(persistentProjectileEntity instanceof LaserEntity laser)
                 {
                     lyokoCoreBE.damageHealth(laser.getCalculatedDamage());
                 } else {
