@@ -15,7 +15,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.MultiBlockController;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.event.server.ServerEvents;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.World.WorldGen.Carthage.CarthageGenerator;
-import eu.midnightdust.lib.config.MidnightConfig;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -52,7 +51,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import software.bernie.geckolib.GeckoLib;
 import team.reborn.energy.api.EnergyStorage;
 
 import java.util.Objects;
@@ -160,9 +158,8 @@ public record CodeLyokoMain() implements ModInitializer {
         ModFluids.registerModFluids();
 
         ModParticles.registerParticles();
-        Registry.register(Registries.CHUNK_GENERATOR, codeLyokoPrefix("carthage_chunkgen"),
-                CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
-        ModScreenHandlers.registerScreenHandlers();
+        Registry.register(Registries.CHUNK_GENERATOR, codeLyokoPrefix("carthage_chunkgen"), CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
+        //ModScreenHandlers.registerScreenHandlers();
         ModStructures.registerNewStructures();
 
 
@@ -269,7 +266,7 @@ public record CodeLyokoMain() implements ModInitializer {
                                         player.getServer().getSaveProperties().getMainWorldProperties(), player)
                                 .incrementEntered();
                     }
-                    ModCustomTrackedCriteria.ENTERED_LYOKO.trigger(player,destination);
+                    //ModCustomTrackedCriteria.ENTERED_LYOKO.trigger(player,destination);
                 } else if (MethodUtil.DimensionCheck.isWorldLyoko(origin)) {
                     CardinalData.LyokoInventorySave.loadPlayerInventory(
                             player.server.getSaveProperties().getMainWorldProperties(), player);
@@ -301,8 +298,7 @@ public record CodeLyokoMain() implements ModInitializer {
 
             if (MethodUtil.DimensionCheck.isPlayerInLyoko(oldPlayer)) {
                 newPlayer.experienceLevel = oldPlayer.experienceLevel;
-                CardinalData.CellularDamage.getCellComponentKey().get(newPlayer)
-                        .copyFrom(CardinalData.CellularDamage.getCellComponentKey().get(oldPlayer));
+                //CardinalData.CellularDamage.getCellComponentKey().get(newPlayer).copyFrom(CardinalData.CellularDamage.getCellComponentKey().get(oldPlayer));
             }
         });
         //regenerates the player's digital energy
@@ -314,9 +310,8 @@ public record CodeLyokoMain() implements ModInitializer {
     }
     @Override
     public void onInitialize() {
-        MidnightConfig.init(MOD_ID, Configuration.class);
-        GeckoLib.initialize();
-        PacketHandler.commonChannelRegistry();
+
+        PacketHandler.commonPayloadRegistry();
         generalRegistration();
         registerFuels();
         ModRecipes.RecipeTypes.init();

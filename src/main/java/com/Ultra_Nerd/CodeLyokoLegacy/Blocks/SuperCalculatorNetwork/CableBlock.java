@@ -9,7 +9,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -77,7 +76,7 @@ public final class CableBlock extends Block implements BlockEntityProvider {
     }
 
     @Override
-    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if(world.getBlockEntity(pos) instanceof final CableBlockEntity blockEntity && !world.isClient())
         {
             blockEntity.transferData(0, SuperCalculatorDataPackets.NumberTest);
@@ -86,20 +85,24 @@ public final class CableBlock extends Block implements BlockEntityProvider {
         return ActionResult.SUCCESS;
     }
 
+
+
     @Override
     public VoxelShape getOutlineShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         return mainShape;
     }
 
-
     @Override
-    public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
-        super.onBreak(world, pos, state, player);
+    public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
+        super.onBroken(world, pos, state);
         if(world.getBlockEntity(pos) instanceof final CableBlockEntity cableBlockEntity && !world.isClient())
         {
             cableBlockEntity.removeFromNetwork();
         }
+
     }
+
+
 
     @Override
     public void onStateReplaced(final BlockState state, final World world, final BlockPos pos, final BlockState newState, final boolean moved) {

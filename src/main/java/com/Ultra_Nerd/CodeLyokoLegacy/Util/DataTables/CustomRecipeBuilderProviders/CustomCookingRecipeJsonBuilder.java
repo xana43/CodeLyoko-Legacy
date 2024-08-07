@@ -2,15 +2,14 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables.CustomRecipeBuilderProvid
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModFuels;
-import com.google.gson.JsonObject;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import java.util.Map;
-import java.util.Objects;
-import net.minecraft.advancement.*;
+import net.minecraft.advancement.Advancement;
+import net.minecraft.advancement.AdvancementCriterion;
+import net.minecraft.advancement.AdvancementRequirements;
+import net.minecraft.advancement.AdvancementRewards;
 import net.minecraft.advancement.criterion.RecipeUnlockedCriterion;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
@@ -19,9 +18,11 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.book.CookingRecipeCategory;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
+import java.util.Objects;
 
 public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonBuilder {
     private final RecipeCategory category;
@@ -87,10 +88,10 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
         final Advancement.Builder builder = exporter.getAdvancementBuilder().criterion("has_the_recipe",RecipeUnlockedCriterion.create(recipeId)).rewards(AdvancementRewards.Builder.recipe(recipeId)).criteriaMerger(AdvancementRequirements.CriterionMerger.OR);
         Objects.requireNonNull(builder);
         this.criteria.forEach(builder::criterion);
-        exporter.accept(new CustomCookingRecipeJsonProvider(recipeId, this.group == null ? "" : this.group, this.cookingRecipeCategory, input, output, experience, cookingTime, builder.build(recipeId.withPrefixedPath("recipes/" + this.category.getName() + "/")), serializer));
+        //exporter.accept(new CustomCookingRecipeJsonProvider(recipeId, this.group == null ? "" : this.group, this.cookingRecipeCategory, input, output, experience, cookingTime, builder.build(recipeId.withPrefixedPath("recipes/" + this.category.getName() + "/")), serializer));
     }
 
-    private record CustomCookingRecipeJsonProvider(Identifier recipeId, String group
+  /*  private record CustomCookingRecipeJsonProvider(Identifier recipeId, String group
             , CookingRecipeCategory cookingRecipeCategory, Ingredient input, Item result,
                                                    float experience, int cookingTime,
                                                    AdvancementEntry advancementEntry
@@ -114,11 +115,12 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
             return recipeId;
         }
 
-        @Nullable
         @Override
-        public AdvancementEntry advancement() {
-            return this.advancementEntry;
+        public AdvancementEntry advancementEntry() {
+            return advancementEntry;
         }
+
+
 
         @Override
         public RecipeSerializer<? extends AbstractCookingRecipe> serializer() {
@@ -151,5 +153,5 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
            return result;
        }
 
-    }
+    }*/
 }

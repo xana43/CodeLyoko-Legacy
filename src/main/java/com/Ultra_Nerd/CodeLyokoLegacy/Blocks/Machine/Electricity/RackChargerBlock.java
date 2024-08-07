@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.Electricity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.RackChargerEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
@@ -14,7 +15,6 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -29,6 +29,11 @@ public final class RackChargerBlock extends HorizontalFacingBlock implements Blo
 
     public RackChargerBlock(final Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return null;
     }
 
     private static final VoxelShape VOXEL_SHAPE = makeShape();
@@ -80,7 +85,7 @@ public final class RackChargerBlock extends HorizontalFacingBlock implements Blo
     }
 
     @Override
-    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if(!world.isClient()) {
             final BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof RackChargerEntity) {
@@ -90,6 +95,8 @@ public final class RackChargerBlock extends HorizontalFacingBlock implements Blo
         }
         return ActionResult.SUCCESS;
     }
+
+
     @Override
     public void onStateReplaced(final BlockState state, final World world, final BlockPos pos, final BlockState newState, final boolean moved) {
         if (state.getBlock() != newState.getBlock()) {

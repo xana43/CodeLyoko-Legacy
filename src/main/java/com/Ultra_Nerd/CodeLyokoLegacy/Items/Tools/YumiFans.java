@@ -1,17 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items.Tools;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.FanEntity;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.TridentItem;
 import net.minecraft.sound.SoundCategory;
@@ -27,10 +23,11 @@ public final class YumiFans extends TridentItem {
     private static final float Velocity = 1f;
     private static final float FanDamage = 1f;
     private static final int thrownTime = 0;
+    private final AttributeModifiersComponent component;
 
-    public YumiFans(@NotNull Settings builder) {
+    public YumiFans(Item.Settings builder) {
         super(builder);
-
+        component = createAttributeModifiers();
 
     }
 
@@ -39,21 +36,9 @@ public final class YumiFans extends TridentItem {
         return UseAction.SPEAR;
     }
 
-    @Override
-    public boolean isDamageable() {
-        return false;
-    }
 
 
-    @Override
-    public @NotNull Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
-        Multimap<EntityAttribute,EntityAttributeModifier> multimap = HashMultimap.create();
-        if (slot == EquipmentSlot.MAINHAND) {
-            multimap.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", FanDamage, EntityAttributeModifier.Operation.ADDITION));
-            multimap.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier",  Velocity, EntityAttributeModifier.Operation.ADDITION));
-        }
-        return multimap;
-    }
+
 
 
 
@@ -107,7 +92,7 @@ public final class YumiFans extends TridentItem {
             stack.addEnchantment(Enchantments.LOYALTY, Enchantments.LOYALTY.getMaxLevel());
             stack.addEnchantment(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());
             stack.addEnchantment(Enchantments.IMPALING, Enchantments.IMPALING.getMaxLevel());
-            stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
+            //stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
         }
     }
 

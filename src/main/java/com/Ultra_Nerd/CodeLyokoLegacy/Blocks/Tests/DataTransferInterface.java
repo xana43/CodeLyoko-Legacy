@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tests;
 
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -13,6 +14,11 @@ import org.jetbrains.annotations.Nullable;
 public final class DataTransferInterface extends BlockWithEntity {
     public DataTransferInterface(final Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return null;
     }
 
     public DataTransferInterface() {

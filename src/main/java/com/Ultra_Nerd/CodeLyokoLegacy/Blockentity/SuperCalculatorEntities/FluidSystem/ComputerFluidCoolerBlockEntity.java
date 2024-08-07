@@ -13,17 +13,20 @@ import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.component.ComponentChanges;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
 public final class ComputerFluidCoolerBlockEntity extends EnergyStorageBlockEntity {
     private final SingleVariantStorage<FluidVariant> hot_tank = MethodUtil.FluidStorageCreation.createFluidStorage(this,Fluids.WATER);
     private final SingleVariantStorage<FluidVariant> cold_tank =
-            MethodUtil.FluidStorageCreation.createFluidStorage(this,FluidVariant.of(Fluids.WATER,
-                    NBTEntries.chilled));
+            MethodUtil.FluidStorageCreation.createFluidStorage(this,FluidVariant.of(Fluids.WATER, ComponentChanges.builder().add(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(NBTEntries.chilled)).build()));
     private double temperature = 27;
     private final Storage<FluidVariant> hot_outlet = FilteringStorage.insertOnlyOf(hot_tank);
     private final Storage<FluidVariant> cold_intake = FilteringStorage.extractOnlyOf(cold_tank);
@@ -53,23 +56,19 @@ public final class ComputerFluidCoolerBlockEntity extends EnergyStorageBlockEnti
     }
 
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
-        nbt.put("fluid_variant_hot",hot_tank.variant.toNbt());
-        nbt.put("fluid_variant_cold",cold_tank.variant.toNbt());
-        nbt.putLong("fluid_amount_hot",hot_tank.amount);
-        nbt.putLong("fluid_amount_cold",cold_tank.amount);
+    protected void writeNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
+        SingleVariantStorage.writeNbt(hot_tank,FluidVariant.CODEC,nbt,registryLookup);
+        SingleVariantStorage.writeNbt(cold_tank,FluidVariant.CODEC,nbt,registryLookup);
         nbt.putDouble("temperature",temperature);
 
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
-        hot_tank.variant = FluidVariant.fromNbt(nbt.getCompound("fluid_variant_hot"));
-        cold_tank.variant = FluidVariant.fromNbt(nbt.getCompound("fluid_variant_cold"));
-        hot_tank.amount = nbt.getLong("fluid_amount_hot");
-        cold_tank.amount = nbt.getLong("fluid_amount_cold");
+    public void readNbt(final NbtCompound nbt,RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
+        SingleVariantStorage.readNbt(hot_tank,FluidVariant.CODEC,FluidVariant::blank,nbt,registryLookup);
+        SingleVariantStorage.readNbt(cold_tank,FluidVariant.CODEC,FluidVariant::blank,nbt,registryLookup);
         temperature = nbt.getDouble("temperature");
     }
 
@@ -95,7 +94,7 @@ public final class ComputerFluidCoolerBlockEntity extends EnergyStorageBlockEnti
             try (final Transaction transaction = Transaction.openOuter()) {
                 final long hotWaterCooled = hot_tank.extract(FluidVariant.of(Fluids.WATER), FluidConstants.BLOCK,
                         transaction);
-                cold_tank.insert(FluidVariant.of(Fluids.WATER, NBTEntries.chilled), hotWaterCooled, transaction);
+                cold_tank.insert(FluidVariant.of(Fluids.WATER, ComponentChanges.builder().add(DataComponentTypes.CUSTOM_DATA,NbtComponent.of(NBTEntries.chilled)).build()), hotWaterCooled, transaction);
                 if (hotWaterCooled > 0) {
                     temperature += 100;
                 }

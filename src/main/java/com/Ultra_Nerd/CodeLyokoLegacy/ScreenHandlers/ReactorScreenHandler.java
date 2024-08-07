@@ -2,9 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ComputerReactorBlockEntityInventory;
-import com.Ultra_Nerd.CodeLyokoLegacy.Slots.ReactorInputSlot;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModRecipes;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModScreenHandlers;
+import com.Ultra_Nerd.CodeLyokoLegacy.Slots.ReactorInputSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -12,7 +11,10 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.*;
 import net.minecraft.recipe.book.RecipeBookCategory;
-import net.minecraft.screen.*;
+import net.minecraft.screen.AbstractRecipeScreenHandler;
+import net.minecraft.screen.ArrayPropertyDelegate;
+import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
@@ -28,7 +30,8 @@ public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inve
     }
 
     public ReactorScreenHandler(final int syncId, final PlayerInventory playerInventory, final Inventory inventory, final PropertyDelegate propertyDelegate) {
-        super(ModScreenHandlers.COMPUTER_REACTOR_SCREEN_HANDLER, syncId);
+        //super(ModScreenHandlers.COMPUTER_REACTOR_SCREEN_HANDLER, syncId);
+        super(ScreenHandlerType.ANVIL,syncId);
         this.recipeType = ModRecipes.RecipeTypes.REACTOR_RECIPE_TYPE;
         checkSize(inventory, 2);
         checkDataCount(propertyDelegate,8);

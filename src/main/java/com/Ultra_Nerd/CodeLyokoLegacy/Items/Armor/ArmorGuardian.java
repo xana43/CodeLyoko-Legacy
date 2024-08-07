@@ -5,18 +5,18 @@ import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.event.GameEvent;
-import org.jetbrains.annotations.NotNull;
 
 
 public final class ArmorGuardian extends LyokoArmor implements FabricElytraItem {
-    public ArmorGuardian(@NotNull ArmorMaterial materialIn, @NotNull ArmorItem.Type slot,
-                         @NotNull Settings builder) {
-        super(materialIn, slot, builder);
+
+
+    public ArmorGuardian(RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+        super(material, type, settings);
     }
 
     @Override
@@ -41,12 +41,13 @@ public final class ArmorGuardian extends LyokoArmor implements FabricElytraItem 
     }
     private static void lyokoElytraTick(final LivingEntity entity, final ItemStack stack)
     {
-        final int nextRoll = entity.getRoll() + 1;
+        final int nextRoll = entity.getRandom().nextInt();
         if (!entity.getWorld().isClient && nextRoll % 10 == 0) {
             if ((nextRoll / 10) % 2 == 0) {
                 if(entity.isFallFlying()) {
                     entity.setNoGravity(entity.forwardSpeed <= 0.5f);
-                    stack.damage(1, entity, p -> p.sendEquipmentBreakStatus(EquipmentSlot.CHEST));
+                    stack.damage(1,entity,EquipmentSlot.CHEST);
+
                 }
                 else
                 {
@@ -56,7 +57,7 @@ public final class ArmorGuardian extends LyokoArmor implements FabricElytraItem 
                         {
                         }
                     }
-                    stack.damage(-1,entity,p-> p.sendEquipmentBreakStatus(EquipmentSlot.CHEST));
+                    stack.damage(-1,entity,EquipmentSlot.CHEST);
                 }
             }
 

@@ -2,21 +2,17 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Screens;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ButtonTextures;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -91,15 +87,12 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
         //
         this.button = new TexturedButtonWidget(x, y, this.width / 3, this.height >> 3, LEGITBUTTONTEXTURES,
                 (press) -> {
-                    final PacketByteBuf buf = PacketByteBufs.create();
                     active = !active;
-                    buf.writeBlockPos(handler.getPos());
-                    buf.writeBoolean(active);
-                    ClientPlayNetworking.send(PacketHandler.ChannelID, buf);
+                    //ClientPlayNetworking.send( new ControlPanelPayload(handler.getPos(),active));
 
                 }) {
             @Override
-            public void renderButton(DrawContext stack, int p_renderButton_1_, int p_renderButton_2_,
+            public void renderWidget(DrawContext context, int mouseX, int mouseY,
                     float p_renderButton_3_) {
                 //super.renderButton(p_renderButton_1_, p_renderButton_2_, p_renderButton_3_);
                 final int i = getType().ordinal();//getYImage(hovered);
@@ -113,12 +106,12 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
                 if (i == 1) {
                     j = ColorHelper.Argb.getArgb(255, 0, 0, 255);
 
-                    stack.drawTexture(BUTTONTEXTURES,x, y, 0, 0, 104, 19, 1024, 512,512);
+                    context.drawTexture(BUTTONTEXTURES,x, y, 0, 0, 104, 19, 1024, 512,512);
                 } else {
-                    stack.drawTexture(BUTTONTEXTURES, x, y, 0, 19, 104, 19, 1024, 512,512);
+                    context.drawTexture(BUTTONTEXTURES, x, y, 0, 19, 104, 19, 1024, 512,512);
                 }
                 //drawTexture(stack,x, 38, 0, (46 + i) * 20, width >> 1, height);
-                stack.drawCenteredTextWithShadow(client.textRenderer,
+                context.drawCenteredTextWithShadow(client.textRenderer,
                         getMessage().copy().setStyle(ConstantUtil.Styles.HUD.getThisStyle()), x + (width + 55) >> 1,
                         y + (height + 32) >> 1, j | MathHelper.ceil(alpha * 255.0F) << 24);
 

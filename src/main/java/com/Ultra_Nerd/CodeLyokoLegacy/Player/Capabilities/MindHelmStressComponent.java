@@ -1,10 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Player.Capabilities;
 
-import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
-import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
-import net.minecraft.nbt.NbtCompound;
 
-public final class MindHelmStressComponent implements AutoSyncedComponent, PlayerComponent<MindHelmStressComponent> {
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
+
+public final class MindHelmStressComponent implements AutoSyncedComponent {
 
     private static final String stressKey = "stress_level";
     private int StressLevel = 0;
@@ -24,13 +25,16 @@ public final class MindHelmStressComponent implements AutoSyncedComponent, Playe
         return StressLevel;
     }
 
+
+
     @Override
-    public void readFromNbt(final NbtCompound tag) {
+    public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         StressLevel = tag.getInt(stressKey);
     }
 
     @Override
-    public void writeToNbt(final NbtCompound tag) {
+    public void writeToNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         tag.putInt(stressKey, StressLevel);
     }
+
 }

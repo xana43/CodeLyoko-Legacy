@@ -1,8 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.Electricity;
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.UniversalEnergyStorageTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -10,11 +11,11 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -22,6 +23,11 @@ public final class UniversalEnergyBlock extends BlockWithEntity {
 
     public UniversalEnergyBlock(final Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return null;
     }
 
     @Nullable
@@ -36,14 +42,15 @@ public final class UniversalEnergyBlock extends BlockWithEntity {
     }
 
     @Override
-    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
-
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         final BlockEntity be = world.getBlockEntity(pos);
         if (be instanceof final UniversalEnergyStorageTileEntity universalEnergyStorageTile && world.isClient()) {
             player.sendMessage(Text.of("Energy Amount: " + universalEnergyStorageTile.getCurrentAmount()), false);
         }
         return ActionResult.SUCCESS;
     }
+
+
 
     @Override
     public void randomDisplayTick(final BlockState state, final World world, final BlockPos pos, final Random random) {
@@ -62,16 +69,14 @@ public final class UniversalEnergyBlock extends BlockWithEntity {
     }
 
     @Override
-    public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
-
-
+    public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
         final BlockEntity be = world.getBlockEntity(pos);
         if (be instanceof final UniversalEnergyStorageTileEntity universalEnergyStorageTile) {
             universalEnergyStorageTile.setEnergyAmount(0);
         }
-
-        super.onBreak(world, pos, state, player);
-
+        super.onBroken(world, pos, state);
     }
+
+
 
 }

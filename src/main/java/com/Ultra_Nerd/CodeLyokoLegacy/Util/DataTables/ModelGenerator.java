@@ -27,9 +27,7 @@ public final class ModelGenerator extends FabricModelProvider {
         
         public static Model block(final String parent)
         {
-            loopBuilder.setLength(0);
-            loopBuilder.append("item/").append(parent);
-            return new Model(Optional.of(CodeLyokoMain.codeLyokoPrefix(loopBuilder.toString())),Optional.empty());
+            return item(parent);
         }
         public static void registerDefaultBucketItem(final ItemModelGenerator generator, final Item item)
         {

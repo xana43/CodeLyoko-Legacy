@@ -6,7 +6,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -69,9 +69,9 @@ public final class LyokoRingParticle extends SpriteBillboardParticle {
     }
 
     @Environment(EnvType.CLIENT)
-    public record ScannerRingParticle(SpriteProvider provider) implements ParticleFactory<DefaultParticleType> {
+    public record ScannerRingParticle(SpriteProvider provider) implements ParticleFactory<SimpleParticleType> {
         @Override
-        public @NotNull Particle createParticle(final DefaultParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
+        public @NotNull Particle createParticle(final SimpleParticleType parameters, final ClientWorld world, final double x, final double y, final double z, final double velocityX, final double velocityY, final double velocityZ) {
             final LyokoRingParticle lyokoRingParticle = new LyokoRingParticle(world, x, y, z, velocityX, velocityY,
                     velocityZ, provider);
             lyokoRingParticle.setColor(1, 1, 0);

@@ -20,10 +20,7 @@ public final class LaserArrowShooter extends BowItem {
         super(builder);
     }
 
-    @Override
-    public boolean isDamageable() {
-        return false;
-    }
+
 
     @Override
     public boolean hasGlint(final ItemStack stack) {

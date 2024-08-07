@@ -28,13 +28,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.GeoAnimatable;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
@@ -92,10 +88,7 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
         this.playSound(getStepSound(), MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.HOSTILE), 1);
     }
 
-    @Override
-    public boolean isUndead() {
-        return false;
-    }
+
 
     @Override
     public boolean isSprinting() {
@@ -140,6 +133,11 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
         } else {
             return ModSounds.MEGATANKHURT2;
         }
+    }
+
+    @Override
+    public boolean isConverting() {
+        return false;
     }
 
     @Override

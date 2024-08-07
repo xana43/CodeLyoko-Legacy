@@ -6,6 +6,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.SyncedBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.TickingBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 
 public final class LyokoCoreBE extends SyncedBlockEntity implements TickingBlockEntity {
@@ -46,14 +47,14 @@ public final class LyokoCoreBE extends SyncedBlockEntity implements TickingBlock
     }
     private static final String HEALTH_KEY = "health";
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
         health = nbt.getFloat(HEALTH_KEY);
     }
 
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
+    protected void writeNbt(final NbtCompound nbt,final  RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
         nbt.putFloat(HEALTH_KEY,health);
     }
 }

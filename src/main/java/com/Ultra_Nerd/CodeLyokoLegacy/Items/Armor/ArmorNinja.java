@@ -1,36 +1,33 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items.Armor;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.component.type.AttributeModifierSlot;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class ArmorNinja extends LyokoArmor {
     private static final float SPEED_MODIFIER = 0.4f;
-    public ArmorNinja(@NotNull ArmorMaterial materialIn, @NotNull ArmorItem.Type slot, @NotNull Settings builder) {
-        super(materialIn, slot, builder);
+
+    public ArmorNinja(RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+        super(material, type, settings);
     }
 
     @Override
-    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(final ItemStack stack, final EquipmentSlot slot) {
-        final Multimap<EntityAttribute,EntityAttributeModifier> modifierMultimap = HashMultimap.create();
-        if(slot == EquipmentSlot.FEET)
-        {
-            modifierMultimap.put(EntityAttributes.GENERIC_MOVEMENT_SPEED,new EntityAttributeModifier("speed_modifier",
-                    SPEED_MODIFIER,EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
-        }
-
-        return modifierMultimap;
+    public AttributeModifiersComponent getAttributeModifiers() {
+        final List<AttributeModifiersComponent.Entry> entries = new ArrayList<>();
+        entries.add(new AttributeModifiersComponent.Entry(EntityAttributes.GENERIC_MOVEMENT_SPEED,new EntityAttributeModifier("speed_modifier",SPEED_MODIFIER, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), AttributeModifierSlot.FEET));
+        return new AttributeModifiersComponent(entries,true);
     }
+
+
 
     @Override
     public void onArmorTick(final PlayerEntity player, final World world, final Item armorItem,final int slot) {

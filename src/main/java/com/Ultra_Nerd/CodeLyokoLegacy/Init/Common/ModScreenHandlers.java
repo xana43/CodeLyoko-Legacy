@@ -1,21 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Init.Common;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ElectricitySystemHandlers.RackChargerHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.SuperCalculatorNetwork.DemarcationScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TestHandler.ProfileDebugScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TestHandler.VehicleMaterializeTestHandler;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.resource.featuretoggle.FeatureFlags;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
-
 public record ModScreenHandlers() {
 
-
+/*
     public static final ScreenHandlerType<ComputerCirculatorScreenHandler> COMPUTER_CIRCULATOR_SCREEN_HANDLER =
             registerExtendedModScreenHandler("computer_circulator_screen_handler", (syncId, inventory, buf) -> new ComputerCirculatorScreenHandler(syncId,
                     inventory.player, buf));
@@ -46,8 +33,7 @@ public record ModScreenHandlers() {
     }
 
     private static <T extends ScreenHandler> ExtendedScreenHandlerType<T> registerExtendedModScreenHandler(final String name, final ExtendedScreenHandlerType.ExtendedFactory<T> factory) {
-        return Registry.register(Registries.SCREEN_HANDLER, CodeLyokoMain.codeLyokoPrefix(name),
-                new ExtendedScreenHandlerType<>(factory));
+        return Registry.register(Registries.SCREEN_HANDLER, CodeLyokoMain.codeLyokoPrefix(name),TOWER_INTERFACE_SCREEN_HANDLER);
     }
     public static void registerScreenHandlers() {
     }
@@ -56,7 +42,7 @@ public record ModScreenHandlers() {
 
 
 
-
+*/
 
 
 

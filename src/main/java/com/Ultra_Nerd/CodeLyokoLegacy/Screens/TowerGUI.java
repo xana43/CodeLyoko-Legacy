@@ -3,20 +3,18 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Screens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModSounds;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TowerInterfaceScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.payloads.TowerPayload;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
@@ -132,8 +130,7 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
 
     private void CheckField() {
         final String correctCode = "ACCEPTED";
-        final PacketByteBuf data = PacketByteBufs.create();
-        data.writeBlockPos(handler.getCurrentPosition());
+        int towerState = 0;
 
         assert client != null;
         if (checkLanguage(text,client,false)) {
@@ -149,25 +146,26 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
                 case "en_us" -> {
                     switch (this.text.getText().toLowerCase(Locale.US))
                     {
-                        case "lyoko" -> data.writeInt(0);
+                        case "lyoko" -> towerState = 0;
                     }
                 }
                 case "fr_fr" -> {
                     switch (this.text.getText().toLowerCase(Locale.FRANCE))
                     {
-                        case "lyoko" -> data.writeInt(0);
+                        case "lyoko" -> towerState = 0;
                     }
                 }
                 case "zh_cn" -> {
                     switch (this.text.getText().toLowerCase(Locale.CHINA))
                     {
-                        case "廖科" -> data.writeInt(0);
+                        case "廖科" -> towerState = 0;
                     }
                 }
             }
 
             this.text.setText(StringUtils.EMPTY);
-            ClientPlayNetworking.send(PacketHandler.TowerChannelID, data);
+
+            ClientPlayNetworking.send(new TowerPayload(handler.getCurrentPosition(),towerState));
             Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 2f);
         } else if (checkLanguage(text,client,true)) {
             I = 100;
@@ -175,8 +173,8 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
             this.Accepted.setText(correctCode);
             this.text.setText(StringUtils.EMPTY);
             this.text.setCursor(0,false);
-            data.writeInt(1);
-            ClientPlayNetworking.send(PacketHandler.TowerChannelID, data);
+            towerState = 1;
+            ClientPlayNetworking.send(new TowerPayload(handler.getCurrentPosition(),towerState));
             Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 0.9f);
         } else {
             this.text.setText(StringUtils.EMPTY);

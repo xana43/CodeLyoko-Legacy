@@ -20,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -86,8 +87,8 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
         return extractionOfWasteTank;
     }
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
+    protected void writeNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
         nbt.putInt("ReactionTime",reactionTime);
         nbt.putInt("IrradiationTime",irradiationTime);
         nbt.putInt("IrradiationTimeTotal",irradiationTimeTotal);
@@ -98,8 +99,8 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
         wasteTank.amount = nbt.getLong("WasteAmount");
         reactionTime = nbt.getInt("ReactionTime");
         irradiationTime = nbt.getInt("IrradiationTime");
@@ -259,7 +260,8 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
 
             if(itemStack.isIn(ModTags.ItemTags.URANIUM_BATTERIES))
             {
-                return itemStack.damage(10,Random.createLocal(),null);
+
+                itemStack.damage(10,Random.createLocal(),null,() -> {});
             }
             else {
                 itemStack.decrement(1);
@@ -291,7 +293,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
     @Override
     public void setStack(final int slot, final ItemStack stack) {
         final ItemStack itemStack = itemStacks.get(slot);
-        final boolean canSet = !stack.isEmpty() && ItemStack.canCombine(itemStack,stack);
+        final boolean canSet = !stack.isEmpty() && ItemStack.areItemsEqual(itemStack,stack);
         itemStacks.set(slot, stack);
         if(stack.getCount() > getMaxCountPerStack())
         {

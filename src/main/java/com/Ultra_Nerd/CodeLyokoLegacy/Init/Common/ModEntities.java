@@ -23,13 +23,13 @@ public record ModEntities() {
             .spawnGroup(SpawnGroup.MONSTER)
             .defaultAttributes(BlokEntity::createMonsterAttributes)
             .dimensions(EntityDimensions.fixed(1,1))
-            .spawnRestriction(SpawnRestriction.Location.ON_GROUND,Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, BlokEntity::canMobSpawn));
+            .spawnRestriction(SpawnLocationTypes.ON_GROUND,Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, BlokEntity::canMobSpawn));
     public static final EntityType<BlokEntity> BLOK = registerEntities("blok",FabricEntityTypeBuilder.createMob()
             .entityFactory(BlokEntity::new)
             .spawnGroup(SpawnGroup.MONSTER)
             .defaultAttributes(BlokEntity::createMonsterAttributes)
             .dimensions(EntityDimensions.fixed(2, 2))
-            .spawnRestriction(SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+            .spawnRestriction(SpawnLocationTypes.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                     BlokEntity::canSpawn)
             .fireImmune());
     public static final EntityType<LaserEntity> LASER_ENTITY_TYPE = registerEntities("laser",FabricEntityTypeBuilder.create(
@@ -41,7 +41,7 @@ public record ModEntities() {
             .spawnGroup(SpawnGroup.MONSTER)
             .defaultAttributes(HornetEntity::registerAttributes)
             .dimensions(EntityDimensions.fixed(1, 1))
-            .spawnRestriction(SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+            .spawnRestriction(SpawnLocationTypes.UNRESTRICTED, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                     (type, world, spawnReason, pos, random) -> HornetEntity.isValidSpawn(world.getBiomeAccess(), pos,
                             world)));
     public static final EntityType<OverboardEntity> OVERBOARD = registerEntities("overboard",FabricEntityTypeBuilder.create(
@@ -56,7 +56,7 @@ public record ModEntities() {
             .spawnGroup(SpawnGroup.MONSTER)
             .defaultAttributes(LyokoGuardianEntity::createGuardianAttributes)
             .dimensions(EntityDimensions.fixed(4,4))
-            .spawnRestriction(SpawnRestriction.Location.NO_RESTRICTIONS,Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,(type, world, spawnReason, pos, random) -> true)
+            .spawnRestriction(SpawnLocationTypes.UNRESTRICTED,Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,(type, world, spawnReason, pos, random) -> true)
             .fireImmune()
     );
     public static final EntityType<HoverboardEntity> HOVERBOARD =

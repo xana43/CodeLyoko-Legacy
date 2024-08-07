@@ -1,18 +1,17 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculator.ControlPanel;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -34,8 +33,8 @@ public final class ComputerControlPanelTileEntity extends BlockEntity implements
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.createNbt();
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+        return this.createNbt(registryLookup);
     }
 
     @Override
@@ -48,10 +47,15 @@ public final class ComputerControlPanelTileEntity extends BlockEntity implements
         return new ComputerControlPanelScreenHandler(syncId);
     }
 
-
+/*
     @Override
     public void writeScreenOpeningData(final ServerPlayerEntity player, final PacketByteBuf buf) {
         buf.writeBlockPos(pos);
         buf.writeBoolean(getCachedState().<Boolean>get(ControlPanel.ScreenOn));
+    }*/
+
+    @Override
+    public Object getScreenOpeningData(ServerPlayerEntity player) {
+        return null;
     }
 }

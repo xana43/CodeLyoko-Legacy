@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -209,6 +210,11 @@ public final class ScannerTop extends HorizontalFacingBlock {
 
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH)
                 .with(Scanner.SCANNER_PROPERTY, Boolean.FALSE));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return null;
     }
 
 

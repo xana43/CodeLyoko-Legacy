@@ -12,9 +12,11 @@ import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
@@ -57,16 +59,17 @@ public final class ComputerFluidIntakeBlockEntity extends SyncedBlockEntity impl
     }
 
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
-        nbt.put("fluid_type",internalTank.variant.toNbt());
+    protected void writeNbt(final NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
+        nbt.put("fluid_type",internalTank.variant.getComponents().get(DataComponentTypes.CUSTOM_DATA).get().copyNbt());
         nbt.putLong("amount",internalTank.amount);
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
-        internalTank.variant = FluidVariant.fromNbt(nbt.getCompound("fluid_type"));
+    public void readNbt(final NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
+        //nbt.getCompound("fluid_type")
+        internalTank.variant = FluidVariant.blank();
         internalTank.amount = nbt.getLong("amount");
     }
 }

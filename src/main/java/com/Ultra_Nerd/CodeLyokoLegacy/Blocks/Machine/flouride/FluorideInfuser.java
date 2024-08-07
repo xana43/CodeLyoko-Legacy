@@ -1,10 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.flouride;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalFacingBlock;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.BooleanProperty;
@@ -19,7 +16,7 @@ public class FluorideInfuser extends BlockWithEntity {
     public static final BooleanProperty INFUSING = BooleanProperty.of("infusing");
 
     public FluorideInfuser() {
-        super(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
+        super(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
 
                 .strength(6, 10)
                 .sounds(BlockSoundGroup.METAL)
@@ -34,6 +31,11 @@ public class FluorideInfuser extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
         return null;
     }
 /*

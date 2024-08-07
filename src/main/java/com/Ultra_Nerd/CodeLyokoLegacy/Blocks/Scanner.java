@@ -1,11 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ScannerTileEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -16,7 +15,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -28,6 +26,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -348,15 +347,18 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
         super.appendProperties(builder.add(SCANNER_PROPERTY).add(FACING));
     }
 
+
+
+
     @Override
-    public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
+    public void onBroken(final WorldAccess world, final BlockPos pos, final BlockState state) {
         if (world.getBlockEntity(pos) instanceof final ScannerTileEntity scannerTile) {
 
             scannerTile.invalidateEntity();
             time = 0;
 
         }
-        super.onBreak(world, pos, state, player);
+        super.onBroken(world, pos, state);
     }
 
     @Nullable
@@ -386,7 +388,7 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
                     {
                         for(final PlayerEntity player : world1.getPlayers())
                         {
-                            ServerPlayNetworking.send((ServerPlayerEntity) player, PacketHandler.SYNC_SCANNER_PARTICLES,buf);
+                            //ServerPlayNetworking.send((ServerPlayerEntity) player, PacketHandler.SYNC_SCANNER_PARTICLES,buf);
                         }
                     }
                 }
@@ -395,6 +397,10 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
     }
 
 
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return null;
+    }
 }
 
 

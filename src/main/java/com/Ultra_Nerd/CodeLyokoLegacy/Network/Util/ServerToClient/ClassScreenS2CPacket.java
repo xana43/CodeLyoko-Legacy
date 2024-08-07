@@ -1,17 +1,16 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.ServerToClient;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
-import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.network.PacketByteBuf;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.payloads.ClassScreenPayload;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
 public record ClassScreenS2CPacket() {
 
 
-    public static void receive(final MinecraftClient client, final ClientPlayNetworkHandler handler, final PacketByteBuf buf, final PacketSender responseSender)
+    public static void receive(final ClassScreenPayload handler, final ClientPlayNetworking.Context context)
     {
-        final int clientPlayerClass = buf.readInt();
-        client.execute(() -> CardinalData.LyokoClass.setLyokoClass(client.player, clientPlayerClass));
+        final int clientPlayerClass = handler.classInt();
+
+        context.client().execute(() -> CardinalData.LyokoClass.setLyokoClass(context.player(), clientPlayerClass));
     }
 }

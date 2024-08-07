@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.LithographyBlockEntityInventory;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModRecipes;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModScreenHandlers;
 import com.Ultra_Nerd.CodeLyokoLegacy.Slots.LithographyInputslotT2;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,6 +14,7 @@ import net.minecraft.recipe.book.RecipeBookCategory;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
@@ -30,7 +30,8 @@ public final class LithographyScreenHandler extends AbstractRecipeScreenHandler<
     }
 
     public LithographyScreenHandler(final int syncId, final PlayerInventory playerInventory, final Inventory inventory, final PropertyDelegate propertyDelegate) {
-        super(ModScreenHandlers.LITHOGRAPHY_SCREEN_HANDLER_TYPE, syncId);
+        //super(ModScreenHandlers.LITHOGRAPHY_SCREEN_HANDLER_TYPE, syncId);
+        super(ScreenHandlerType.ANVIL,syncId);
         this.recipeType = ModRecipes.RecipeTypes.LITHOGRAPHY_RECIPE_RECIPE_TYPE;
         checkSize(inventory, 4);
         checkDataCount(propertyDelegate,6);

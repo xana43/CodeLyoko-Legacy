@@ -2,10 +2,11 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Player;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
-import dev.onyxstudios.cca.api.v3.util.NbtSerializable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import org.jetbrains.annotations.NotNull;
+import org.ladysnake.cca.api.v3.util.NbtSerializable;
 
 import java.util.Objects;
 
@@ -56,13 +57,13 @@ public final class PlayerProfile implements NbtSerializable {
     }
 
     @Override
-    public void fromTag(final @NotNull NbtCompound tag) {
+    public void fromTag(final @NotNull NbtCompound tag,final RegistryWrapper.WrapperLookup registryLookup) {
         if(player != null) {
             //this.player.readNbt(tag);
-            this.DNA = tag.getString(player.getEntityName() + "-dna");
-            this.playerClassType = tag.getInt(player.getEntityName() + "-class");
-            this.timesEntered = tag.getInt(player.getEntityName() + "-entered");
-            this.firstJoin = tag.getBoolean(player.getEntityName() + "-joined");
+            this.DNA = tag.getString(player.getDisplayName() + "-dna");
+            this.playerClassType = tag.getInt(player.getDisplayName() + "-class");
+            this.timesEntered = tag.getInt(player.getDisplayName() + "-entered");
+            this.firstJoin = tag.getBoolean(player.getDisplayName() + "-joined");
         }
         else {
             CodeLyokoMain.LOG.warn("player is null, cannot assign values");
@@ -76,10 +77,10 @@ public final class PlayerProfile implements NbtSerializable {
     private NbtCompound toCommonTag(final @NotNull NbtCompound tag)
     {
         if(player != null) {
-            tag.putString(player.getEntityName() + "-dna", DNA);
-            tag.putInt(player.getEntityName() + "-class", playerClassType);
-            tag.putInt(player.getEntityName() + "-entered", timesEntered);
-            tag.putBoolean(player.getEntityName()+"-joined",firstJoin);
+            tag.putString(player.getDisplayName() + "-dna", DNA);
+            tag.putInt(player.getDisplayName() + "-class", playerClassType);
+            tag.putInt(player.getDisplayName() + "-entered", timesEntered);
+            tag.putBoolean(player.getDisplayName()+"-joined",firstJoin);
             return tag;
         }
         else {
@@ -87,7 +88,7 @@ public final class PlayerProfile implements NbtSerializable {
         }
     }
     @Override
-    public @NotNull NbtCompound toTag(final @NotNull NbtCompound tag) {
+    public @NotNull NbtCompound toTag(final @NotNull NbtCompound tag,final RegistryWrapper.WrapperLookup registryLookup) {
         return toCommonTag(tag);
     }
     public NbtCompound toTag()

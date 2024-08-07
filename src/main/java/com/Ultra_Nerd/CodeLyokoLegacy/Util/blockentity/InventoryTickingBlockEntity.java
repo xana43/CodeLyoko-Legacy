@@ -5,6 +5,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
@@ -26,15 +27,15 @@ public abstract class InventoryTickingBlockEntity extends SyncedBlockEntity impl
 
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
-        Inventories.readNbt(nbt, itemStacks);
+    public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
+        Inventories.readNbt(nbt, itemStacks,registryLookup);
     }
 
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        Inventories.writeNbt(nbt, itemStacks);
-        super.writeNbt(nbt);
+    protected void writeNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        Inventories.writeNbt(nbt, itemStacks,registryLookup);
+        super.writeNbt(nbt,registryLookup);
     }
 
     @Override

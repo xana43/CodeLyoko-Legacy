@@ -1,10 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.math.BlockPos;
 
 public final class ComputerCirculatorScreenHandler extends ScreenHandler {
@@ -12,7 +12,8 @@ public final class ComputerCirculatorScreenHandler extends ScreenHandler {
     private byte[] flowDirections;
     private BlockPos currentPosition;
     public ComputerCirculatorScreenHandler(final int syncId,final PlayerEntity player) {
-        super(ModScreenHandlers.COMPUTER_CIRCULATOR_SCREEN_HANDLER, syncId);
+        //super(ModScreenHandlers.COMPUTER_CIRCULATOR_SCREEN_HANDLER, syncId);
+        super(ScreenHandlerType.ANVIL,syncId);
         currentPosition = BlockPos.ORIGIN;
         flowDirections = new byte[]{};
         this.player = player;

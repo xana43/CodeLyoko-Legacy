@@ -1,12 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Screens.SuperCalculatorNetworkScreens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.SuperCalculatorNetwork.DemarcationScreenHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -115,7 +113,7 @@ public final class DemarcationPointScreen extends HandledScreen<DemarcationScree
                         buf.writeBlockPos(handler.getPos());
                         buf.writeString(nameWidget.getText());
                         buf.writeInt(-1);
-                        ClientPlayNetworking.send(PacketHandler.RENAME_BLOCK_ENTITY, buf);
+                        //ClientPlayNetworking.send(PacketHandler.RENAME_BLOCK_ENTITY, buf);
                     }
                 }
                 default -> {
@@ -133,7 +131,7 @@ public final class DemarcationPointScreen extends HandledScreen<DemarcationScree
                         buf.writeBlockPos(handler.getPos());
                         buf.writeString(StringUtils.EMPTY);
                         buf.writeInt(Integer.parseInt(idWidget.getText()));
-                        ClientPlayNetworking.send(PacketHandler.RENAME_BLOCK_ENTITY, buf);
+                        //ClientPlayNetworking.send(PacketHandler.RENAME_BLOCK_ENTITY, buf);
                     }
                 }
                 default -> {

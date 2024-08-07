@@ -2,11 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModParticles;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalFacingBlock;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.block.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
@@ -23,8 +20,7 @@ public class TowerWall extends HorizontalFacingBlock {
     public static final IntProperty CURRENT_ACTIVATION_STATE = IntProperty.of("activation", 0, 3);
 
     public TowerWall() {
-        super(FabricBlockSettings.copyOf(Blocks.BARRIER)
-                .strength(-1, Integer.MAX_VALUE)
+        super(AbstractBlock.Settings.copy(Blocks.BEDROCK)
                 .dropsNothing()
                 .sounds(BlockSoundGroup.GLASS)
                 .luminance(value -> 250)
@@ -123,4 +119,8 @@ public class TowerWall extends HorizontalFacingBlock {
     }
 
 
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return null;
+    }
 }

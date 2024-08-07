@@ -1,9 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ElectricitySystemHandlers;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Slots.UpgradeSlot;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModScreenHandlers;
 import com.Ultra_Nerd.CodeLyokoLegacy.Items.MachineItems.ChargeUpgrade;
+import com.Ultra_Nerd.CodeLyokoLegacy.Slots.UpgradeSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -12,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
 
 public final class RackChargerHandler extends ScreenHandler {
@@ -20,7 +20,8 @@ public final class RackChargerHandler extends ScreenHandler {
     private final PropertyDelegate propertyDelegate;
     @SuppressWarnings("ObjectAllocationInLoop")
     public RackChargerHandler(final int syncId, final PlayerInventory player, final Inventory inventory, final PropertyDelegate propertyDelegate) {
-        super(ModScreenHandlers.RACK_CHARGER_HANDLER_SCREEN_TYPE, syncId);
+        //super(ModScreenHandlers.RACK_CHARGER_HANDLER_SCREEN_TYPE, syncId);
+        super(ScreenHandlerType.ANVIL,syncId);
         checkSize(inventory,6);
         this.inventory = inventory;
         this.propertyDelegate = propertyDelegate;

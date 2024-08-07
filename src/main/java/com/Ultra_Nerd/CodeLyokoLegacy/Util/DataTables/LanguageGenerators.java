@@ -4,9 +4,11 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.registry.RegistryWrapper;
 
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 public record LanguageGenerators() {
     private static String generateMidnightKey(final String variable)
@@ -17,12 +19,13 @@ public record LanguageGenerators() {
     public static final class EnglishProvider extends FabricLanguageProvider
     {
 
-        public EnglishProvider(final FabricDataOutput dataOutput) {
-            super(dataOutput);
+
+        public EnglishProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+            super(dataOutput, registryLookup);
         }
 
         @Override
-        public void generateTranslations(final TranslationBuilder translationBuilder) {
+        public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup,final TranslationBuilder translationBuilder) {
 
             translationBuilder.add(ModBlocks.COMPUTER_LIQUID_INTAKE_PUMP,"Fluid Intake Pump");
             translationBuilder.add(ModBlocks.COMPUTER_LIQUID_PIPE,"Basic Fluid Pipe");
@@ -51,16 +54,18 @@ public record LanguageGenerators() {
                 throw new RuntimeException("failed to add existing language file", e);
             }
         }
+
+
     }
     public static final class FrenchProvider extends FabricLanguageProvider
     {
 
-        public FrenchProvider(final FabricDataOutput dataOutput) {
-            super(dataOutput, "fr_fr");
+        public FrenchProvider(final FabricDataOutput dataOutput,CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+            super(dataOutput, "fr_fr",registryLookup);
         }
 
         @Override
-        public void generateTranslations(final TranslationBuilder translationBuilder) {
+        public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup,final TranslationBuilder translationBuilder) {
             translationBuilder.add(ModItems.LYOKO_THEME_INSTRUMENTAL,"Générique de CodeLyoko (Remix d'Instrumental)");
             translationBuilder.add(ModItems.LYOKO_THEME_INSTRUMENTAL.getTranslationKey()+".desc","Un Monde Sans Danger (Remix d'Instrumental) - FractelLegend");
             try{

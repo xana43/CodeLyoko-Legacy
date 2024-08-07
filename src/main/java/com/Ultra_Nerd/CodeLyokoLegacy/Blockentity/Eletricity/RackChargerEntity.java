@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -57,14 +58,14 @@ public final class RackChargerEntity extends EnergyStorageBlockEntityInventory i
     }
 
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
+    protected void writeNbt(final NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
         nbt.putIntArray(TIER_ARRAY,tierArray);
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(final NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
         tierArray = nbt.getIntArray(TIER_ARRAY);
     }
     public void changeSlotTier(final int slot,final int tier)

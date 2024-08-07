@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -45,4 +46,8 @@ public final class SeaPylon extends HorizontalFacingBlock {
     }
 
 
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return null;
+    }
 }

@@ -3,6 +3,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Items.Armor;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ArmorTicker;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -11,17 +13,14 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.World;
 
 public abstract class LyokoArmor extends ArmorItem implements ArmorTicker {
-    public LyokoArmor(final ArmorMaterial material, final ArmorItem.Type slot, final Settings settings) {
-        super(material, slot, settings);
 
-    }
 
-    @Override
-    public boolean isDamageable() {
-        return false;
+    public LyokoArmor(RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+        super(material, type, settings);
     }
 
     @Override
@@ -40,7 +39,7 @@ public abstract class LyokoArmor extends ArmorItem implements ArmorTicker {
 
         if (!stack.hasEnchantments()) {
             stack.addEnchantment(Enchantments.BINDING_CURSE, Enchantments.BINDING_CURSE.getMaxLevel());
-            stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
+            stack.apply(DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT,itemEnchantmentsComponent -> itemEnchantmentsComponent.withShowInTooltip(false));
         }
 
     }

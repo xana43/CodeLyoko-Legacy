@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
@@ -23,14 +24,14 @@ public final class QuantumChipletTileEntity extends SyncedBlockEntity implements
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
-        Inventories.readNbt(nbt,inventory);
+    public void readNbt(final NbtCompound nbt,final  RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
+        Inventories.readNbt(nbt,inventory,registryLookup);
     }
 
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
-        Inventories.writeNbt(nbt,inventory);
+    protected void writeNbt(final NbtCompound nbt,final  RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
+        Inventories.writeNbt(nbt,inventory,registryLookup);
     }
 }

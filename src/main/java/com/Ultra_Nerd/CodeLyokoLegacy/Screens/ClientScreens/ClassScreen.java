@@ -1,20 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Screens.ClientScreens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.payloads.ClassScreenPayload;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ButtonTextures;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -160,9 +158,7 @@ public final class ClassScreen extends Screen {
             assert this.client != null;
             assert this.client.player != null;
             this.client.player.playSound(ModSounds.GUISOUND, 1, 6);
-            final PacketByteBuf buf = PacketByteBufs.create();
-            buf.writeInt(0);
-            ClientPlayNetworking.send(PacketHandler.ClassScreenID, buf);
+            ClientPlayNetworking.send(new ClassScreenPayload(0));
 
 
         }, Text.of("feline").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(colors)).get(0));
@@ -176,9 +172,8 @@ public final class ClassScreen extends Screen {
 
                     assert this.client != null;
                     Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 6);
-            final PacketByteBuf buf = PacketByteBufs.create();
-            buf.writeInt(1);
-            ClientPlayNetworking.send(PacketHandler.ClassScreenID, buf);
+
+            ClientPlayNetworking.send(new ClassScreenPayload(1));
             //ClassID =1;
             // classIndicatorString.replace(15,ClientCapabilitySync.getPlayerClassType().getClassName().length() + 17,ClientCapabilitySync.getPlayerClassType().getClassName());
         }, Text.of("samurai").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(2007)).get(0));
@@ -190,9 +185,7 @@ public final class ClassScreen extends Screen {
                 (input) -> {
             //CapabilityPlayerClassSync.Sync(PlayerClassType.Ninja);
             Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 6);
-            final PacketByteBuf buf = PacketByteBufs.create();
-            buf.writeInt(2);
-            ClientPlayNetworking.send(PacketHandler.ClassScreenID, buf);
+            ClientPlayNetworking.send(new ClassScreenPayload(2));
             //ClassID = 2;
         }, Text.of("ninja").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(5125)).get(0));
 
@@ -201,9 +194,8 @@ public final class ClassScreen extends Screen {
     private void setGuardian() {
         guardian = new TexturedButtonWidget((this.width >> 1) + 80, this.height >> 1, 30, 30, buttonTextures,
                 (input) -> {
-            final PacketByteBuf buf = PacketByteBufs.create();
-            buf.writeInt(3);
-            ClientPlayNetworking.send(PacketHandler.ClassScreenID, buf);
+                    Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 6);
+            ClientPlayNetworking.send(new ClassScreenPayload(3));
         },
                 Text.of("guardian").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
 
@@ -212,7 +204,9 @@ public final class ClassScreen extends Screen {
 
     private void setWarrior() {
         warrior = new TexturedButtonWidget((this.width >> 1) + 150, this.height >> 1, 30, 30, buttonTextures,
-                (input) -> CardinalData.LyokoClass.setLyokoClass(Objects.requireNonNull(this.client).player, 4),
+                (input) -> {
+                    Objects.requireNonNull(this.client.player).playSound(ModSounds.GUISOUND, 1, 6);
+            ClientPlayNetworking.send(new ClassScreenPayload(4));},
                 Text.of("warrior").getWithStyle(ConstantUtil.Styles.HUD.getThisStyle().withColor(0x1d5e18)).get(0));
 
     }

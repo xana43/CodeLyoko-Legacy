@@ -1,6 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -13,7 +13,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
@@ -139,11 +138,16 @@ public final class ScannerFrame extends HorizontalFacingBlock {
     private static final VoxelShape blockShape = Block.createCuboidShape(0, 0, 0, 16, 16, 16);
 
 
-    public ScannerFrame(@NotNull FabricBlockSettings properties) {
+    public ScannerFrame(Settings properties) {
         super(properties);
 
         this.setDefaultState(this.getDefaultState().with(Scanner.SCANNER_PROPERTY, Boolean.FALSE).with(FACING,
                 Direction.NORTH));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return null;
     }
 
 

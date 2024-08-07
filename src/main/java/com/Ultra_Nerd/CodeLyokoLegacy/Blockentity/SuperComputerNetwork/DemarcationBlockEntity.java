@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperComputerNetwork;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.SuperCalculatorNetwork.DemarcationScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.SuperCalculatorNetwork.DemarcationScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.SuperCalculator.DataPacketType;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.IdBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.RenameableBlockEntity;
@@ -12,7 +12,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -65,15 +65,15 @@ public final class DemarcationBlockEntity extends SyncedBlockEntity implements E
     }
     private static final String UID_KEY = "uid",NAME_KEY = "name";
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
+    protected void writeNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
         nbt.putInt(UID_KEY,uid);
         nbt.putString(NAME_KEY,name);
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
         uid = nbt.getInt(UID_KEY);
         name = nbt.getString(NAME_KEY);
     }
@@ -88,8 +88,13 @@ public final class DemarcationBlockEntity extends SyncedBlockEntity implements E
         return new DemarcationScreenHandler(syncId,idDelegate);
     }
 
-    @Override
+   /* @Override
     public void writeScreenOpeningData(final ServerPlayerEntity player, final PacketByteBuf buf) {
         buf.writeBlockPos(pos);
+    }*/
+
+    @Override
+    public Object getScreenOpeningData(ServerPlayerEntity player) {
+        return null;
     }
 }

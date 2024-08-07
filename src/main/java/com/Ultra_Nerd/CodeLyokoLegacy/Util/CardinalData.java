@@ -9,15 +9,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.World.Capabilities.InventorySaveComponent;
 import com.Ultra_Nerd.CodeLyokoLegacy.World.Capabilities.PlayerProfileStorage;
 import com.Ultra_Nerd.CodeLyokoLegacy.World.Capabilities.PlayerScannerComponent;
 import com.Ultra_Nerd.CodeLyokoLegacy.World.Capabilities.XanaDataComponent;
-import dev.onyxstudios.cca.api.v3.component.Component;
-import dev.onyxstudios.cca.api.v3.component.ComponentKey;
-import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
-import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
-import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
-import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
-import dev.onyxstudios.cca.api.v3.level.LevelComponentFactoryRegistry;
-import dev.onyxstudios.cca.api.v3.level.LevelComponentInitializer;
-import dev.onyxstudios.cca.api.v3.level.LevelComponents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
@@ -29,6 +20,15 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProperties;
 import org.jetbrains.annotations.NotNull;
+import org.ladysnake.cca.api.v3.component.Component;
+import org.ladysnake.cca.api.v3.component.ComponentKey;
+import org.ladysnake.cca.api.v3.component.ComponentRegistry;
+import org.ladysnake.cca.api.v3.entity.EntityComponentFactoryRegistry;
+import org.ladysnake.cca.api.v3.entity.EntityComponentInitializer;
+import org.ladysnake.cca.api.v3.entity.RespawnCopyStrategy;
+import org.ladysnake.cca.api.v3.level.LevelComponentFactoryRegistry;
+import org.ladysnake.cca.api.v3.level.LevelComponentInitializer;
+import org.ladysnake.cca.api.v3.level.LevelComponents;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -53,9 +53,8 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         registry.registerForPlayers(MindHelmStress.MINDHELMSTRESS,player -> new MindHelmStressComponent(),RespawnCopyStrategy.NEVER_COPY);
         registry.registerForPlayers(HumanDNAAttribute.HUMAN_DNA_COMPONENT_KEY, HumanDNA::new, RespawnCopyStrategy.CHARACTER);
         registry.registerForPlayers(CellularDamage.DEGENERATION_COMPONENT_KEY,CellularDegeneration::new, RespawnCopyStrategy.CHARACTER);
-        registry.registerForPlayers(DigitalEnergyComponent.DIGITAL_ENERGY_COMPONENT_KEY,(DigitalEnergy::new));
+        registry.registerForPlayers(DigitalEnergyComponent.DIGITAL_ENERGY_COMPONENT_KEY, DigitalEnergy::new,RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(MiscellaneousPlayerData.getMiscellaneousPlayerDataComponentComponentKey(), MiscellaneousPlayerClassDataComponent::new,RespawnCopyStrategy.ALWAYS_COPY);
-
         //class capabilities
         registry.registerForPlayers(LyokoClass.ExtraClassData.SamuraiData.SAMURAI_CLASS_DATA_COMPONENT_KEY, ClassCapabilities.SamuraiClassExtraCapabilities::new,RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(LyokoClass.ExtraClassData.NinjaData.NINJA_CLASS_EXTRA_CAPABILITIES_COMPONENT_KEY,ClassCapabilities.NinjaClassExtraCapabilities::new,RespawnCopyStrategy.ALWAYS_COPY);

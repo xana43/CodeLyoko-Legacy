@@ -1,17 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Compat.ReactorDisplay;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.ReactorRecipe;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectLists;
-import java.util.List;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
-import me.shedaniel.rei.api.common.util.EntryIngredients;
-import net.minecraft.recipe.RecipeEntry;
+
+import java.util.List;
 
 public final class CodeLyokoReactorDisplay extends BasicDisplay {
-    public CodeLyokoReactorDisplay(final RecipeEntry<ReactorRecipe> recipeEntry)
+    public CodeLyokoReactorDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+        super(inputs, outputs);
+    }
+
+    @Override
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return null;
+    }
+ /*   public CodeLyokoReactorDisplay(final RecipeEntry<ReactorRecipe> recipeEntry)
     {
         super(getInputList(recipeEntry.value()),getOutputList(recipeEntry.value()));
     }
@@ -34,5 +38,5 @@ public final class CodeLyokoReactorDisplay extends BasicDisplay {
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
         return CodeLyokoReactorCategory.REACTOR_DISPLAY_CATEGORY_IDENTIFIER;
-    }
+    }*/
 }

@@ -1,10 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.flouride;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalFacingBlock;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +13,7 @@ public final class ElectricFluorideInfuser extends BlockWithEntity {
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
     public ElectricFluorideInfuser() {
-        super(FabricBlockSettings.copy(Blocks.IRON_BLOCK)
+        super(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
 
 
         );
@@ -29,6 +26,11 @@ public final class ElectricFluorideInfuser extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
+        return null;
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
         return null;
     }
 

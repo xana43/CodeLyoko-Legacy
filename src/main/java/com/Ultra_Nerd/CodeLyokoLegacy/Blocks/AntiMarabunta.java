@@ -2,10 +2,11 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -15,10 +16,10 @@ import net.minecraft.world.BlockView;
 public final class AntiMarabunta extends Block {
     private static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
 
-
-    public AntiMarabunta() {
-        super(FabricBlockSettings.copyOf(Blocks.BARRIER).strength(6, 10).sounds(BlockSoundGroup.STONE).ticksRandomly());
+    public AntiMarabunta(Settings settings) {
+        super(settings);
     }
+
 
     @Override
     public void randomTick(final BlockState state, final ServerWorld worldIn, final BlockPos pos, final Random rand) {

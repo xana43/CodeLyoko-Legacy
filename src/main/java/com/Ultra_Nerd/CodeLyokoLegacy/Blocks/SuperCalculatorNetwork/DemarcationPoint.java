@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculatorNetwork;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -10,7 +11,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -19,6 +19,11 @@ import org.jetbrains.annotations.Nullable;
 public final class DemarcationPoint extends BlockWithEntity {
     public DemarcationPoint(final Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return null;
     }
 
     @Nullable
@@ -39,7 +44,7 @@ public final class DemarcationPoint extends BlockWithEntity {
     }
 
     @Override
-    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if(!world.isClient)
         {
             final NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
@@ -51,9 +56,5 @@ public final class DemarcationPoint extends BlockWithEntity {
         return ActionResult.SUCCESS;
     }
 
-    @Override
-    public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
-        super.onBreak(world, pos, state, player);
 
-    }
 }

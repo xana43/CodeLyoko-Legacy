@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Init.Common;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.advancement.AdvancementEntry;
 import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.advancement.criterion.UsingItemCriterion;
@@ -9,7 +8,6 @@ import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 import static com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil.AdvancementCreation.create;
@@ -23,7 +21,7 @@ public record ModAdvancements() {
         public static void bootstrap(final Consumer<AdvancementEntry> advancementConsumer,
                 @Nullable final AdvancementEntry rootAdvancement)
         {
-            DiscoveredSuperCalculator = MethodUtil.AdvancementCreation.create(ModItems.CPU_PACKAGE_QUANTUM,
+            /*DiscoveredSuperCalculator = MethodUtil.AdvancementCreation.create(ModItems.CPU_PACKAGE_QUANTUM,
                     Text.translatable("discovered.super_calculator"),Text.translatable("discovered.super_calculator" +
                             ".description"),null,
                     AdvancementFrame.GOAL,true,true,false,"discovered_super_calculator_advancement",
@@ -39,7 +37,7 @@ public record ModAdvancements() {
                                     ModDimensions.forestSectorWorld,
                                     ModDimensions.iceSectorWorld,
                                     ModDimensions.frontierWorld,
-                                    ModDimensions.mountainSectorWorld))),"/entered_lyoko",advancementConsumer);
+                                    ModDimensions.mountainSectorWorld))),"/entered_lyoko",advancementConsumer);*/
         }
 
 
@@ -83,10 +81,10 @@ public record ModAdvancements() {
         public static void bootstrap(final Consumer<AdvancementEntry> advancementConsumer,
                 @Nullable final AdvancementEntry rootAdvancement)
         {
-        buildLithography = create(rootAdvancement,ModItems.INTEGRATED_HEAT_SPREADER,Text.translatable("build.litho"),
+      /*  buildLithography = create(rootAdvancement,ModItems.INTEGRATED_HEAT_SPREADER,Text.translatable("build.litho"),
                 Text.translatable("build.litho.desc"),null,AdvancementFrame.TASK,true,true,false,
                 "build_lithography_machine",ModCustomTrackedCriteria.USED_ITEM.create(ModCriteria.UseItem.Condition.create(EntityPredicate.Builder.create(),
-                        ItemPredicate.Builder.create().items(ModBlocks.UV_MACHINE))),"/lithography",advancementConsumer);
+                        ItemPredicate.Builder.create().items(ModBlocks.UV_MACHINE))),"/lithography",advancementConsumer); */
 
         }
 

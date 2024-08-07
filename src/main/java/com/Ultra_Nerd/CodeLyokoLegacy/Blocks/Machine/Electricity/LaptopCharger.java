@@ -1,8 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.Electricity;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.LaptopChargerBlockEntityInventory;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
-import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Eletricity.LaptopChargerBlockEntityInventory;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -18,11 +19,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public final class LaptopCharger extends HorizontalFacingBlock implements BlockEntityProvider {
     public LaptopCharger(final Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return null;
     }
 
     @Nullable
@@ -43,10 +52,10 @@ public final class LaptopCharger extends HorizontalFacingBlock implements BlockE
     }
 
     @Override
-    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         final BlockEntity be = world.getBlockEntity(pos);
         world.updateListeners(pos, state, state, Block.NOTIFY_LISTENERS);
-
+        final Hand hand = player.getActiveHand();
         if (be instanceof final LaptopChargerBlockEntityInventory chargerBlockEntity) {
             chargerBlockEntity.update();
             final ItemStack laptop = player.getStackInHand(hand);
@@ -61,6 +70,8 @@ public final class LaptopCharger extends HorizontalFacingBlock implements BlockE
         }
         return ActionResult.CONSUME;
     }
+
+
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final World world, final BlockState state, final BlockEntityType<T> type) {
@@ -78,10 +89,12 @@ public final class LaptopCharger extends HorizontalFacingBlock implements BlockE
     }
 
     @Override
-    public void onBreak(final World world, final BlockPos pos, final BlockState state, final PlayerEntity player) {
-        super.onBreak(world, pos, state, player);
+    public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
+        super.onBroken(world, pos, state);
         if (world.getBlockEntity(pos) instanceof final LaptopChargerBlockEntityInventory chargerBlockEntity) {
-            chargerBlockEntity.getItems().forEach(itemStack -> Block.dropStack(world, pos, itemStack));
+            chargerBlockEntity.getItems().forEach(itemStack -> Block.dropStack(Objects.requireNonNull(chargerBlockEntity.getWorld()), pos, itemStack));
         }
     }
+
+
 }

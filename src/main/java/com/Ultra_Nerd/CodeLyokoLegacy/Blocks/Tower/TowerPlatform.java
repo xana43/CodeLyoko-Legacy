@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -15,8 +14,7 @@ import net.minecraft.world.World;
 public final class TowerPlatform extends Block {
 
     public TowerPlatform() {
-        super(FabricBlockSettings.copyOf(Blocks.BARRIER).strength(-1,
-                Integer.MAX_VALUE).sounds(BlockSoundGroup.GLASS).luminance(Blocks.createLightLevelFromLitBlockState(255)));
+        super(Settings.copy(Blocks.BEDROCK).sounds(BlockSoundGroup.GLASS).luminance(Blocks.createLightLevelFromLitBlockState(255)));
         this.setDefaultState(getDefaultState().with(RedstoneOreBlock.LIT,false));
     }
 

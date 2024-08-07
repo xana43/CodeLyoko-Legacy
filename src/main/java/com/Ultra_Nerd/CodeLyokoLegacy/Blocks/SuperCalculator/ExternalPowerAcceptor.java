@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculator;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -9,6 +10,11 @@ import org.jetbrains.annotations.Nullable;
 public final class ExternalPowerAcceptor extends BlockWithEntity {
     public ExternalPowerAcceptor(final Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return null;
     }
 
     @Nullable

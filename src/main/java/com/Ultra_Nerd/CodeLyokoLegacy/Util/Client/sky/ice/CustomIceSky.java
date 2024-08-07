@@ -20,22 +20,33 @@ public record CustomIceSky() implements DimensionRenderingRegistry.SkyRenderer {
 
     private static final Identifier sky1 = CodeLyokoMain.codeLyokoPrefix("textures/skies/ice/ice_sky.png");
 
-    private static final Tessellator tessellator = Tessellator.getInstance();
-    private static final BufferBuilder bufferBuilder = tessellator.getBuffer();
+    private static Tessellator tessellator;
+    private static BufferBuilder bufferBuilder;
 
     @Override
     public void render(WorldRenderContext context) {
         // mc.textureManager.bindTexture(texturelocation);
 
-
+        if(tessellator == null)
+        {
+            tessellator = Tessellator.getInstance();
+        }
+        if(bufferBuilder == null)
+        {
+            bufferBuilder = tessellator.getBuffer();
+        }
         RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
         RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
 
         final MatrixStack matrixStack = context.matrixStack();
-
+        if(matrixStack == null)
+        {
+            return;
+        }
+        matrixStack.push();
         for (int i = 0; i < 6; ++i) {
-            matrixStack.push();
-            final Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
+
+
             switch (i) {
 
                 case 1 -> {
@@ -65,17 +76,15 @@ public record CustomIceSky() implements DimensionRenderingRegistry.SkyRenderer {
                 default -> {
                 }
             }
-
-
-            bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-            bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();
-            bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 0.5F).color(40, 40, 40, 255).next();
-            bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 0.5F).color(40, 40, 40, 255).next();
-            bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255).next();
-            tessellator.draw();
-            matrixStack.pop();
         }
-
+        final Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
+        bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
+        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();
+        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 0.5F).color(40, 40, 40, 255).next();
+        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 0.5F).color(40, 40, 40, 255).next();
+        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255).next();
+        tessellator.draw();
+        matrixStack.pop();
     }
 
 

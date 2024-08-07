@@ -1,10 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldProperties;
 
@@ -18,7 +18,8 @@ public final class ComputerInterfaceScreenHandler extends ScreenHandler {
         this.worldProperties = worldProperties;
     }
     public ComputerInterfaceScreenHandler(final int syncId,final PlayerEntity player) {
-        super(ModScreenHandlers.COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE, syncId);
+        //super(ModScreenHandlers.COMPUTER_INTERFACE_SCREEN_SCREEN_HANDLER_TYPE, syncId);
+        super(ScreenHandlerType.ANVIL,syncId);
         pos = BlockPos.ORIGIN;
         this.player = player;
     }

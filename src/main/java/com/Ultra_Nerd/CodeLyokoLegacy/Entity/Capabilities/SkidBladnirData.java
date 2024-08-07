@@ -1,9 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.Capabilities;
 
-import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 public record SkidBladnirData(BlockPos[] positions) implements AutoSyncedComponent {
 
@@ -34,13 +36,13 @@ public record SkidBladnirData(BlockPos[] positions) implements AutoSyncedCompone
 
 
     @Override
-    public void readFromNbt(final NbtCompound tag) {
+    public void readFromNbt(final NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         positions[0] = BlockPos.fromLong(tag.getLong(HOME_KEY));
         positions[1] = BlockPos.fromLong(tag.getLong(DESTINATION_KEY));
     }
 
     @Override
-    public void writeToNbt(final @NotNull NbtCompound tag) {
+    public void writeToNbt(final @NotNull NbtCompound tag,RegistryWrapper.WrapperLookup registryLookup) {
         if(positions[0] != null && positions[1] != null && positions[0] != BlockPos.ORIGIN && positions[1] != BlockPos.ORIGIN) {
             tag.putLong(HOME_KEY, positions[0].asLong());
             tag.putLong(DESTINATION_KEY, positions[1].asLong());

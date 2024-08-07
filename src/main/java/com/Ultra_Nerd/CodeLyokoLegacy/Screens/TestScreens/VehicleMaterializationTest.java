@@ -1,14 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Screens.TestScreens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TestHandler.VehicleMaterializeTestHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.network.PlayerListEntry;
@@ -33,7 +30,7 @@ public final class VehicleMaterializationTest extends HandledScreen<VehicleMater
     protected void init() {
         super.init();
         x = (this.width - xSize) >> 1;
-        ClientPlayNetworking.send(PacketHandler.PLAYER_QUERY_SERVER, PacketByteBufs.empty());
+        //ClientPlayNetworking.send(PacketHandler.PLAYER_QUERY_SERVER, PacketByteBufs.empty());
         //players = client.world.getServer().getPlayerManager().getPlayerList();
     }
     private static List<PlayerListEntry> playerList = new ObjectArrayList<>();

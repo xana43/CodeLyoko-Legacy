@@ -15,8 +15,8 @@ public record LootTableOverride() {
     private static final Identifier JUNGLE_TEMPLE_ID = new Identifier("minecraft","chests/jungle_temple");
     public static void modifyLootTables()
     {
-       LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            if(JUNGLE_TEMPLE_ID.equals(id))
+       LootTableEvents.MODIFY.register((key,tableBuilder,source) -> {
+            if(JUNGLE_TEMPLE_ID.equals(key.getValue()))
             {
                 final LootPool.Builder poolBuilder = LootPool.builder().rolls(ConstantLootNumberProvider.create(1))
                         .conditionally(RandomChanceLootCondition.builder(1))

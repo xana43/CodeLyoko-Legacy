@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.MathHelper;
@@ -19,7 +20,7 @@ public final class LaserEntity extends ArrowEntity {
     private int calculatedDamage;
 
     public LaserEntity(final World world, final double x, final double y, final double z, final int lifetime) {
-        super(world, x, y, z);
+        super(world, x, y, z, ItemStack.EMPTY);
         this.shake = 0;
         setLifetime(lifetime);
 
@@ -39,7 +40,7 @@ public final class LaserEntity extends ArrowEntity {
      * @param lifetime the lifetime of the entity IN SECONDS (used to clean up when the entity is just floating in the air due to drag)
      */
     public LaserEntity(final World world, final LivingEntity owner, final int lifetime) {
-        super(world, owner);
+        super(world, owner,ItemStack.EMPTY);
         this.shake = 0;
         this.setLifetime(lifetime);
     }

@@ -8,6 +8,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
@@ -68,15 +69,15 @@ public final class CableBlockEntity extends SyncedBlockEntity {
     }
     private static final String NETWORK_CONNECTION_KEY = "network_connections";
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
+    protected void writeNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
         final List<Long> longs = Lists.transform(NETWORK_DEFINITION,CableBlockEntity::convertToLong);
         nbt.putLongArray(NETWORK_CONNECTION_KEY,longs);
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
         for(final long longs : nbt.getLongArray(NETWORK_CONNECTION_KEY))
         {
             NETWORK_DEFINITION.add(BlockPos.fromLong(longs));

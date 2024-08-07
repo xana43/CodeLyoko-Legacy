@@ -16,6 +16,9 @@ import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.component.ComponentChanges;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -270,7 +273,7 @@ public record MethodUtil() {
 
                 @Override
                 protected boolean canInsert(final FluidVariant variant) {
-                    return variant.equals(FluidVariant.of(allowedVariant, compound));
+                    return variant.equals(FluidVariant.of(allowedVariant, ComponentChanges.builder().add(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(compound)).build()));
                 }
 
                 @Override

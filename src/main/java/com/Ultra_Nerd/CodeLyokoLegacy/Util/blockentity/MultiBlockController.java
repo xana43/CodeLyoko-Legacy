@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 
@@ -43,7 +44,7 @@ public abstract class MultiBlockController extends SyncedBlockEntity implements 
                                 world.setBlockState(posOffset, checkedState.with(this.thisProperty, Boolean.TRUE));
 
                             }
-                            world.addParticle(ModParticles.TOWER_PARTICLE, true, posOffset.getX(), posOffset.getY(),
+                            world.addParticle(() -> ModParticles.TOWER_PARTICLE, true, posOffset.getX(), posOffset.getY(),
                                     posOffset.getZ(), 0, 0, 0);
                             this.checkSuccessful = true;
                         }
@@ -84,14 +85,14 @@ public abstract class MultiBlockController extends SyncedBlockEntity implements 
     }
 
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
+    protected void writeNbt(final NbtCompound nbt, final RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
         nbt.putBoolean(CHECK_KEY, checkSuccessful);
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
         checkSuccessful = nbt.getBoolean(CHECK_KEY);
     }
 }

@@ -12,6 +12,9 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.world.WorldProperties;
+
+import java.util.Objects;
+
 @Environment(EnvType.CLIENT)
 public final class PlayerProfileDebug extends HandledScreen<ProfileDebugScreenHandler> {
     private final PlayerEntity callingPlayer;
@@ -40,9 +43,9 @@ public final class PlayerProfileDebug extends HandledScreen<ProfileDebugScreenHa
     public void render(final DrawContext matrices, final int mouseX, final int mouseY, final float delta) {
         super.render(matrices, mouseX, mouseY, delta);
         profileText.render(matrices, mouseX, mouseY, delta);
-        profileText.renderButton(matrices, mouseX, mouseY, delta);
+        profileText.renderWidget(matrices, mouseX, mouseY, delta);
         matrices.drawCenteredTextWithShadow(textRenderer,
-                Text.of(CardinalData.PlayerSavedProfile.getPlayerProfile(worldProperties,callingPlayer).getPlayer().getEntityName()),
+                Text.of(Objects.requireNonNull(CardinalData.PlayerSavedProfile.getPlayerProfile(worldProperties, callingPlayer).getPlayer().getDisplayName())),
                 width>>1,height>>1, ColorHelper.Argb.getArgb(255,255,255,255));
         matrices.drawCenteredTextWithShadow(textRenderer,
                 Text.of("Class" + CardinalData.PlayerSavedProfile.getPlayerProfile(worldProperties,

@@ -12,7 +12,6 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -28,9 +27,8 @@ public final class LithographyMachine extends Block implements BlockEntityProvid
         return BlockRenderType.MODEL;
     }
 
-
     @Override
-    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if(world.isClient)
         {
             return ActionResult.SUCCESS;
@@ -39,6 +37,8 @@ public final class LithographyMachine extends Block implements BlockEntityProvid
             return ActionResult.CONSUME;
         }
     }
+
+
 
     private static void openScreen(final World world, final BlockPos pos, final PlayerEntity player) {
         final BlockEntity blockEntity = world.getBlockEntity(pos);

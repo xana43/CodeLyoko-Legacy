@@ -4,12 +4,14 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModStructures;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModTags;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
+import net.minecraft.structure.pool.alias.StructurePoolAliasLookup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -24,7 +26,7 @@ import java.util.Optional;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public final class TowerBase extends Structure {
-    public static final Codec<TowerBase> CODEC = RecordCodecBuilder.<TowerBase>mapCodec(instance ->
+    public static final MapCodec<TowerBase> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(TowerBase.configCodecBuilder(instance),
                     StructurePool.REGISTRY_CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
                     Identifier.CODEC.optionalFieldOf("start_jigsaw_name")
@@ -35,7 +37,7 @@ public final class TowerBase extends Structure {
                             .forGetter(structure -> structure.projectStartToHeightmap),
                     Codec.intRange(1, 128).fieldOf("max_distance_from_center")
                             .forGetter(structure -> structure.maxDistanceFromCenter)
-            ).apply(instance, TowerBase::new)).codec();
+            ).apply(instance, TowerBase::new));
     private final RegistryEntry<StructurePool> startPool;
     private final Optional<Identifier> startJigsawName;
     private final int size;
@@ -105,7 +107,7 @@ public final class TowerBase extends Structure {
             ) {
 
                 blockPos = blockPos.offset(Direction.UP, 1);
-                pieceGen = StructurePoolBasedGenerator.generate(
+              pieceGen = StructurePoolBasedGenerator.generate(
                         context,
                         this.startPool,
                         this.startJigsawName,
@@ -113,7 +115,8 @@ public final class TowerBase extends Structure {
                         blockPos,
                         false,
                         this.projectStartToHeightmap,
-                        this.maxDistanceFromCenter
+                        this.maxDistanceFromCenter,
+                      StructurePoolAliasLookup.EMPTY
                 );
                 break;
 

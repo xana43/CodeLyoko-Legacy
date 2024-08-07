@@ -1,8 +1,8 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerCirculatorScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerCirculatorScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.NBT.NBTEntries;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.SyncedBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.TickingBlockEntity;
@@ -13,11 +13,14 @@ import net.fabricmc.fabric.api.transfer.v1.storage.base.FilteringStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
+import net.minecraft.component.ComponentChanges;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -60,7 +63,7 @@ public final class ComputerCirculatorBlockEntity extends SyncedBlockEntity imple
                             {
                                 if(fluidStorage.extract(FluidVariant.of(Fluids.WATER), cardinalFlowSpeeds[index],
                                         transaction) == cardinalFlowSpeeds[index] && circulatorPipeBlock.getInput().insert(FluidVariant.of(Fluids.WATER,
-                                                NBTEntries.chilled),
+                                               ComponentChanges.builder().add(DataComponentTypes.CUSTOM_DATA,NbtComponent.of(NBTEntries.chilled)).build()),
                                         cardinalFlowSpeeds[index],transaction) == cardinalFlowSpeeds[index])
                                 {
                                     transaction.commit();
@@ -75,9 +78,9 @@ public final class ComputerCirculatorBlockEntity extends SyncedBlockEntity imple
 
 
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
-        nbt.put("fluid_type",fluidStorage.variant.toNbt());
+    protected void writeNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
+        nbt.put("fluid_type",fluidStorage.variant.getComponents().get(DataComponentTypes.CUSTOM_DATA).get().copyNbt());
         nbt.putLong("amount",fluidStorage.amount);
         nbt.putByteArray("flow_allowance",flowDirections);
         nbt.putLongArray("flow_speed",cardinalFlowSpeeds);
@@ -85,20 +88,20 @@ public final class ComputerCirculatorBlockEntity extends SyncedBlockEntity imple
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
-        fluidStorage.variant = FluidVariant.fromNbt(nbt.getCompound("fluid_type"));
+    public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
+        fluidStorage.variant = FluidVariant.of(Fluids.WATER, ComponentChanges.builder().add(DataComponentTypes.CUSTOM_DATA,NbtComponent.of(nbt.getCompound("fluid_type"))).build());
         fluidStorage.amount = nbt.getLong("amount");
         cardinalFlowSpeeds = nbt.getLongArray("flow_speed");
         flowDirections = nbt.getByteArray("flow_allowance");
     }
 
-    @Override
+ /*   @Override
     public void writeScreenOpeningData(final ServerPlayerEntity player, final PacketByteBuf buf) {
         buf.writeBlockPos(pos);
         buf.writeByteArray(flowDirections);
         buf.writeLongArray(cardinalFlowSpeeds);
-    }
+    }*/
 
     @Override
     public Text getDisplayName() {
@@ -113,5 +116,10 @@ public final class ComputerCirculatorBlockEntity extends SyncedBlockEntity imple
     @Override
     public void tick() {
 
+    }
+
+    @Override
+    public Object getScreenOpeningData(ServerPlayerEntity player) {
+        return null;
     }
 }

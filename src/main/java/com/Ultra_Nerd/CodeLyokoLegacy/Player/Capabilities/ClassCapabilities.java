@@ -7,8 +7,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.GeneralRendererUtils.RendererVariables;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
-import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
-import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -19,6 +17,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.BlockRotation;
@@ -27,12 +26,13 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 import java.util.UUID;
 
 public record ClassCapabilities() {
 
-    public static final class SamuraiClassExtraCapabilities implements AutoSyncedComponent, PlayerComponent<SamuraiClassExtraCapabilities>
+    public static final class SamuraiClassExtraCapabilities implements AutoSyncedComponent
     {
         private int maxClones = 3;
         private int currentAmountOfClones;
@@ -93,18 +93,18 @@ public record ClassCapabilities() {
 
 
         @Override
-        public void readFromNbt(final NbtCompound tag) {
+        public void readFromNbt(final NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
             maxClones = tag.getInt(SAMURAI_MAX_CLONES);
 
         }
 
         @Override
-        public void writeToNbt(final NbtCompound tag) {
+        public void writeToNbt(final NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
             tag.putInt(SAMURAI_MAX_CLONES,maxClones);
         }
     }
 
-    public static final class NinjaClassExtraCapabilities implements AutoSyncedComponent, PlayerComponent<NinjaClassExtraCapabilities>
+    public static final class NinjaClassExtraCapabilities implements AutoSyncedComponent
     {
         private final PlayerEntity player;
         private FallingBlockEntity fallingBlockVersion;
@@ -178,16 +178,16 @@ public record ClassCapabilities() {
         }
 
         @Override
-        public void readFromNbt(final NbtCompound tag) {
+        public void readFromNbt(final NbtCompound tag,final RegistryWrapper.WrapperLookup registryLookup) {
 
         }
 
         @Override
-        public void writeToNbt(final NbtCompound tag) {
+        public void writeToNbt(final NbtCompound tag, final RegistryWrapper.WrapperLookup registryLookup) {
 
         }
     }
-    public static final class GuardianClassExtraCapabilities implements AutoSyncedComponent, PlayerComponent<GuardianClassExtraCapabilities>
+    public static final class GuardianClassExtraCapabilities implements AutoSyncedComponent
     {
         private final PlayerEntity player;
         private int maxLength = 5;
@@ -281,13 +281,13 @@ public record ClassCapabilities() {
             return pos;
         }
         @Override
-        public void readFromNbt(final NbtCompound tag) {
+        public void readFromNbt(final NbtCompound tag,final RegistryWrapper.WrapperLookup registryLookup) {
                 maxLength = tag.getInt(BUILD_LENGTH_KEY);
                 maxWidth = tag.getInt(BUILD_WIDTH_KEY);
         }
 
         @Override
-        public void writeToNbt(final NbtCompound tag) {
+        public void writeToNbt(final NbtCompound tag,final RegistryWrapper.WrapperLookup registryLookup) {
                 tag.putInt(BUILD_LENGTH_KEY,maxLength);
                 tag.putInt(BUILD_WIDTH_KEY,maxWidth);
         }

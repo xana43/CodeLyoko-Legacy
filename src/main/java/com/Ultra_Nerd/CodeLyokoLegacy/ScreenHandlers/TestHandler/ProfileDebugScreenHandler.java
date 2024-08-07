@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TestHandler;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.world.WorldProperties;
 
 public final class ProfileDebugScreenHandler extends ScreenHandler {
@@ -11,7 +11,8 @@ public final class ProfileDebugScreenHandler extends ScreenHandler {
     private final PlayerEntity player;
     public ProfileDebugScreenHandler(final int syncId,
             final PlayerEntity player,final WorldProperties worldProperties) {
-        super(ModScreenHandlers.PROFILE_DEBUG_SCREEN_HANDLER_SCREEN_HANDLER_TYPE, syncId);
+        //super(ModScreenHandlers.PROFILE_DEBUG_SCREEN_HANDLER_SCREEN_HANDLER_TYPE, syncId);
+        super(ScreenHandlerType.ANVIL,syncId);
         this.player = player;
         this.worldProperties = worldProperties;
     }

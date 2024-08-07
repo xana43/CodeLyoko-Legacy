@@ -127,7 +127,7 @@ public record MixinHooks() {
                                 .getItem() == ModItems.DIGITAL_SABER && mc.options.attackKey.isPressed()) {
                             assert mc.crosshairTarget != null;
                             switch (mc.crosshairTarget.getType()) {
-                                case MISS -> mc.player.playSound(ModSounds.SWORDSLASH, SoundCategory.PLAYERS,
+                                case MISS -> mc.player.playSound(ModSounds.SWORDSLASH,
                                         mc.options.getSoundVolume(SoundCategory.PLAYERS), 1);
                                 case BLOCK -> {
                                     final BlockState targetedBlock =

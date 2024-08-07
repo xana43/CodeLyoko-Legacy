@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
@@ -29,15 +30,15 @@ public abstract class EnergyStorageBlockEntityInventory extends SidedInventoryTi
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
+    public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
 
-        super.readNbt(nbt);
+        super.readNbt(nbt,registryLookup);
         energyStorage.amount = nbt.getLong(energyKey);
     }
 
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
+    protected void writeNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
         nbt.putLong(energyKey, energyStorage.amount);
     }
 }

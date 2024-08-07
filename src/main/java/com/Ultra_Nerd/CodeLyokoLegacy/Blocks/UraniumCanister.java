@@ -10,7 +10,6 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -40,7 +39,7 @@ public final class UraniumCanister extends Block {
     }
 
     @Override
-    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (!player.isCreative()) {
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.HUNGER, 100, 2, false, false, false));
             player.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 255, 255, false, false, false));
@@ -48,6 +47,8 @@ public final class UraniumCanister extends Block {
         }
         return ActionResult.SUCCESS;
     }
+
+
 
 
 }

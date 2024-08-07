@@ -18,10 +18,6 @@ public final class LyokoSpawnItem extends Item {
         this.entity = entityType;
     }
 
-    @Override
-    public boolean isDamageable() {
-        return false;
-    }
 
 
     @Override

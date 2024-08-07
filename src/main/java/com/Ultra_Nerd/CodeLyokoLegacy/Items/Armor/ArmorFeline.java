@@ -1,24 +1,23 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items.Armor;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import net.minecraft.component.type.AttributeModifierSlot;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class ArmorFeline extends LyokoArmor /*implements GeoItem*/ {
 
@@ -28,25 +27,19 @@ public final class ArmorFeline extends LyokoArmor /*implements GeoItem*/ {
     private static final StatusEffectInstance JUMPEFFECT = new StatusEffectInstance(StatusEffects.JUMP_BOOST, 1, 3,
             true, false, false);
 
-
-    public ArmorFeline(@NotNull ArmorMaterial materialIn, @NotNull ArmorItem.Type slot, @NotNull Settings builder) {
-        super(materialIn, slot, builder);
-
-
+    public ArmorFeline(RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+        super(material, type, settings);
     }
+
 
     @Override
-    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(final ItemStack stack, final EquipmentSlot slot) {
-        Multimap<EntityAttribute, EntityAttributeModifier> multimap = HashMultimap.create();
-        if (slot == EquipmentSlot.FEET) {
-            multimap.put(EntityAttributes.GENERIC_MOVEMENT_SPEED,
-                    new EntityAttributeModifier(UUID.fromString("91AEAA56-376B-4498-935B-2F7F68070635"),
-                            "speed_modifier", movement_modifier, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
-        }
-
-
-        return multimap;
+    public AttributeModifiersComponent getAttributeModifiers() {
+        final List<AttributeModifiersComponent.Entry> entries = new ArrayList<>();
+        entries.add(new AttributeModifiersComponent.Entry(EntityAttributes.GENERIC_MOVEMENT_SPEED,new EntityAttributeModifier("speed_modifier",movement_modifier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), AttributeModifierSlot.FEET));
+       return new AttributeModifiersComponent(entries,true);
     }
+
+
 
     @Override
     public void inventoryTick(final ItemStack stack, final World pLevel, final Entity pEntity, final int pSlotId, final boolean pIsSelected) {

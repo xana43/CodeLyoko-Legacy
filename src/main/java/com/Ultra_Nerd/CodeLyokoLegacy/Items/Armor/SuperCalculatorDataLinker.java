@@ -1,32 +1,34 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items.Armor;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ArmorTicker;
-import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.item.TooltipType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
 import java.util.List;
 
 public final class SuperCalculatorDataLinker extends ArmorItem implements SimpleEnergyItem, ArmorTicker {
-    public SuperCalculatorDataLinker(final @NotNull ArmorMaterial materialIn, final @NotNull ArmorItem.Type slot,
-                                     final @NotNull Settings builder) {
-        super(materialIn, slot, builder);
+
+
+    public SuperCalculatorDataLinker(RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+        super(material, type, settings);
     }
 
     @Override
-    public void appendTooltip(final ItemStack stack, @Nullable final World world, final List<Text> tooltip, final TooltipContext context) {
-        super.appendTooltip(stack, world, tooltip, context);
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+        super.appendTooltip(stack, context, tooltip, type);
         tooltip.add(Text.translatable("tooltip.energy.linker", getStoredEnergy(stack)));
     }
+
+
 
     @Override
     public long getEnergyCapacity(final ItemStack stack) {

@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculator;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ComputerReactorBlockEntityInventory;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -33,6 +34,10 @@ public final class ComputerIntegratedReactor extends AbstractFurnaceBlock implem
     }
 
 
+    @Override
+    protected MapCodec<? extends AbstractFurnaceBlock> getCodec() {
+        return null;
+    }
 
     @Override
     protected void openScreen(final World world, final BlockPos pos, final PlayerEntity player) {

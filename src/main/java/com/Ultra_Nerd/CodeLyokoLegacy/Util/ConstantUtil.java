@@ -3,17 +3,29 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Util;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.gui.screen.ingame.BookScreen;
-import net.minecraft.text.StringVisitable;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public record ConstantUtil() {
 
+    public static final PacketCodec<PacketByteBuf, BlockHitResult> HIT_RESULT_PACKET_CODEC = new PacketCodec<>() {
+        @Override
+        public BlockHitResult decode(PacketByteBuf buf) {
+            return buf.readBlockHitResult();
+        }
 
+        @Override
+        public void encode(PacketByteBuf buf, BlockHitResult value) {
+            buf.writeBlockHitResult(value);
+        }
+    };
     public static final Identifier skytop = CodeLyokoMain.codeLyokoPrefix("textures/skies/volcano/dark.png");
     public static final int STRESS_THRESHOLD = 10;
     public static final Identifier[] RECIPE_IDENTIFIERS = {CodeLyokoMain.codeLyokoPrefix("anode")};
@@ -38,11 +50,11 @@ public record ConstantUtil() {
         private interface EntryListing {
             BookScreen.Contents getEntries();
         }
-        private static StringVisitable[] textArray(@NotNull final String textToDenote) {
+        private static List<Text> textArray(@NotNull final String textToDenote) {
             if(textToDenote.isEmpty()) {
-                return new StringVisitable[]{};
+                return List.of();
             }
-            final List<StringVisitable> denotedList = new ObjectArrayList<>();
+            final List<Text> denotedList = new ObjectArrayList<>();
             int pos = 0, end;
             while ((end = textToDenote.indexOf(page,pos)) >= 0)
             {
@@ -50,20 +62,10 @@ public record ConstantUtil() {
                 pos = end + 1;
             }
             denotedList.add(Text.of(textToDenote.substring(pos)));
-            return denotedList.toArray(new StringVisitable[0]);
+            return denotedList;
         }
-        private static BookScreen.Contents createContents(final StringVisitable[] visitable) {
-            return new BookScreen.Contents() {
-                @Override
-                public int getPageCount() {
-                    return visitable.length;
-                }
-
-                @Override
-                public StringVisitable getPageUnchecked(final int index) {
-                    return visitable[index];
-                }
-            };
+        private static BookScreen.Contents createContents(final List<Text> texts) {
+            return new BookScreen.Contents(texts);
 
         }
         public enum ENTRY_LIST_EN_US implements EntryListing {

@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 
 public final class ComputerCoreTileEntity extends EnergyStorageBlockEntity {
@@ -73,22 +74,24 @@ public final class ComputerCoreTileEntity extends EnergyStorageBlockEntity {
 
 
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
+    protected void writeNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
         nbt.putLong("chilled_amount",core_tank_chilled.amount);
         nbt.putLong("hot_amount",core_tank_hot.amount);
-        nbt.put("chilled_variant",core_tank_chilled.variant.toNbt());
-        nbt.put("hot_variant",core_tank_hot.variant.toNbt());
+        //nbt.put("chilled_variant",core_tank_chilled.variant.toNbt());
+        //nbt.put("hot_variant",core_tank_hot.variant.toNbt());
         nbt.putBoolean("is_powered_on",poweredOn);
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
         core_tank_chilled.amount = nbt.getLong("chilled_amount");
         core_tank_hot.amount = nbt.getLong("hot_amount");
-        core_tank_chilled.variant = FluidVariant.fromNbt(nbt.getCompound("chilled_variant"));
-        core_tank_hot.variant = FluidVariant.fromNbt(nbt.getCompound("hot_variant"));
+        core_tank_chilled.variant = FluidVariant.blank();
+        //core_tank_chilled.variant = FluidVariant.fromNbt(nbt.getCompound("chilled_variant"));
+        //core_tank_hot.variant = FluidVariant.fromNbt(nbt.getCompound("hot_variant"));
+        core_tank_hot.variant = FluidVariant.blank();
         poweredOn = nbt.getBoolean("is_powered_on");
     }
 }

@@ -1,13 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Player.Capabilities;
 
-import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
-import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public final class CellularDegeneration implements AutoSyncedComponent, PlayerComponent<CellularDegeneration> {
+public final class CellularDegeneration implements AutoSyncedComponent {
     private static final int maxCellHealth = 1024;
     private static final String CELL_HEALTH = "cell_health";
     private static final String HEALTHY = "is_healthy";
@@ -44,13 +45,13 @@ public final class CellularDegeneration implements AutoSyncedComponent, PlayerCo
     }
 
     @Override
-    public void readFromNbt(final NbtCompound tag) {
+    public void readFromNbt(final NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         healthy = tag.getBoolean(HEALTHY);
         cellHealth = tag.getInt(CELL_HEALTH);
     }
 
     @Override
-    public void writeToNbt(final NbtCompound tag) {
+    public void writeToNbt(final NbtCompound tag,RegistryWrapper.WrapperLookup registryLookup) {
         tag.putInt(CELL_HEALTH, cellHealth);
         tag.putBoolean(HEALTHY, healthy);
     }

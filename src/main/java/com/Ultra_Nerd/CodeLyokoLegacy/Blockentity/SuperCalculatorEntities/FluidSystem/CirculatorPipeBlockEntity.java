@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
@@ -41,17 +42,17 @@ public final class CirculatorPipeBlockEntity extends SyncedBlockEntity implement
 
 
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
-        nbt.put("fluid_type",fluidStorage.variant.toNbt());
-        nbt.putLong("amount",fluidStorage.amount);
+    protected void writeNbt(final NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
+        SingleVariantStorage.writeNbt(fluidStorage,FluidVariant.CODEC,nbt,registryLookup);
+
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
-        fluidStorage.variant = FluidVariant.fromNbt(nbt.getCompound("fluid_type"));
-        fluidStorage.amount = nbt.getLong("amount");
+    public void readNbt(final NbtCompound nbt,RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
+        SingleVariantStorage.readNbt(fluidStorage,FluidVariant.CODEC, FluidVariant::blank,nbt,registryLookup);
+
     }
 
     @Override

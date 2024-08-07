@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.LyokoCoreBE;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.LaserEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -24,6 +25,11 @@ public final class LyokoCore extends BlockWithEntity {
 
     public LyokoCore(final Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return null;
     }
 
     @Override

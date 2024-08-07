@@ -3,19 +3,17 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Util.Entity;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectLists;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Nameable;
@@ -52,7 +50,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
 
 
     private boolean canStackAddMore(ItemStack existingStack, ItemStack stack) {
-        return !existingStack.isEmpty() && ItemStack.canCombine(existingStack, stack) && existingStack.isStackable() && existingStack.getCount() < existingStack.getMaxCount() && existingStack.getCount() < this.getMaxCountPerStack();
+        return !existingStack.isEmpty() && ItemStack.areItemsEqual(existingStack, stack) && existingStack.isStackable() && existingStack.getCount() < existingStack.getMaxCount() && existingStack.getCount() < this.getMaxCountPerStack();
     }
 
     public int getEmptySlot() {
@@ -72,7 +70,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
 
     public int getSlotWithStack(ItemStack stack) {
         for(int i = 0; i < this.main.size(); ++i) {
-            if (!this.main.get(i).isEmpty() && ItemStack.canCombine(stack, this.main.get(i))) {
+            if (!this.main.get(i).isEmpty() && ItemStack.areItemsEqual(stack, this.main.get(i))) {
                 return i;
             }
         }
@@ -82,8 +80,8 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
 
     public int indexOf(ItemStack stack) {
         for(int i = 0; i < this.main.size(); ++i) {
-            ItemStack itemStack = this.main.get(i);
-            if (!this.main.get(i).isEmpty() && ItemStack.canCombine(stack, this.main.get(i)) && !this.main.get(i).isDamaged() && !itemStack.hasEnchantments() && !itemStack.hasCustomName()) {
+            ItemStack itemStack = (ItemStack)this.main.get(i);
+            if (!((ItemStack)this.main.get(i)).isEmpty() && ItemStack.areItemsAndComponentsEqual(stack, (ItemStack)this.main.get(i)) && !((ItemStack)this.main.get(i)).isDamaged() && !itemStack.hasEnchantments() && !itemStack.contains(DataComponentTypes.CUSTOM_NAME)) {
                 return i;
             }
         }
@@ -102,32 +100,21 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
     }
 
     private int addStack(int slot, ItemStack stack) {
-        Item item = stack.getItem();
         int i = stack.getCount();
         ItemStack itemStack = this.getStack(slot);
         if (itemStack.isEmpty()) {
-            itemStack = new ItemStack(item, 0);
-            if (stack.hasNbt()) {
-                itemStack.setNbt(stack.getNbt().copy());
-            }
-
+            itemStack = stack.copyWithCount(0);
             this.setStack(slot, itemStack);
         }
 
-        int j = Math.min(i, itemStack.getMaxCount() - itemStack.getCount());
-
-        if (j > this.getMaxCountPerStack() - itemStack.getCount()) {
-            j = this.getMaxCountPerStack() - itemStack.getCount();
-        }
-
-        if (j == 0) {
-            return i;
-        } else {
-            i -= j;
-            itemStack.increment(j);
+        int j = this.getMaxCount(itemStack) - itemStack.getCount();
+        int k = Math.min(i, j);
+        if (k != 0) {
+            i -= k;
+            itemStack.increment(k);
             itemStack.setBobbingAnimationTime(5);
-            return i;
         }
+        return i;
     }
 
     public int getOccupiedSlotWithRoomForStack(ItemStack stack) {
@@ -293,7 +280,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
             if (!this.main.get(i).isEmpty()) {
                 nbtCompound = new NbtCompound();
                 nbtCompound.putByte("Slot", (byte)i);
-                this.main.get(i).writeNbt(nbtCompound);
+                this.main.get(i).set(DataComponentTypes.CUSTOM_DATA,NbtComponent.of(nbtCompound));
                 nbtList.add(nbtCompound);
             }
         }
@@ -302,7 +289,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
             if (!this.armor.get(i).isEmpty()) {
                 nbtCompound = new NbtCompound();
                 nbtCompound.putByte("Slot", (byte)(i + 100));
-                this.armor.get(i).writeNbt(nbtCompound);
+                this.armor.get(i).set(DataComponentTypes.CUSTOM_DATA,NbtComponent.of(nbtCompound));
                 nbtList.add(nbtCompound);
             }
         }
@@ -311,7 +298,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
             if (!this.offHand.get(i).isEmpty()) {
                 nbtCompound = new NbtCompound();
                 nbtCompound.putByte("Slot", (byte)(i + 150));
-                this.offHand.get(i).writeNbt(nbtCompound);
+                this.offHand.get(i).set(DataComponentTypes.CUSTOM_DATA,NbtComponent.of(nbtCompound));
                 nbtList.add(nbtCompound);
             }
         }
@@ -327,15 +314,13 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
         for(int i = 0; i < nbtList.size(); ++i) {
             NbtCompound nbtCompound = nbtList.getCompound(i);
             int j = nbtCompound.getByte("Slot") & 255;
-            ItemStack itemStack = ItemStack.fromNbt(nbtCompound);
-            if (!itemStack.isEmpty()) {
-                if (j < this.main.size()) {
-                    this.main.set(j, itemStack);
-                } else if (j >= 100 && j < this.armor.size() + 100) {
-                    this.armor.set(j - 100, itemStack);
-                } else if (j >= 150 && j < this.offHand.size() + 150) {
-                    this.offHand.set(j - 150, itemStack);
-                }
+            ItemStack itemStack = ItemStack.fromNbt(this.entity.getRegistryManager(), nbtCompound).orElse(ItemStack.EMPTY);
+            if (j >= 0 && j < this.main.size()) {
+                this.main.set(j, itemStack);
+            } else if (j >= 100 && j < this.armor.size() + 100) {
+                this.armor.set(j - 100, itemStack);
+            } else if (j >= 150 && j < this.offHand.size() + 150) {
+                this.offHand.set(j - 150, itemStack);
             }
         }
 
@@ -403,24 +388,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
         return this.armor.get(slot);
     }
 
-    public void damageArmor(DamageSource damageSource, float amount, int[] slots) {
-        if (!(amount <= 0.0F)) {
-            amount /= 4.0F;
-            if (amount < 1.0F) {
-                amount = 1.0F;
-            }
 
-            //int var5 = slots.length;
-
-            for (int i : slots) {
-                ItemStack itemStack = this.armor.get(i);
-                if ((!damageSource.isIn(DamageTypeTags.IS_FIRE) || !itemStack.getItem().isFireproof()) && itemStack.getItem() instanceof ArmorItem) {
-                    itemStack.damage((int) amount, this.entity, (player) -> player.sendEquipmentBreakStatus(EquipmentSlot.fromTypeIndex(EquipmentSlot.Type.ARMOR, i)));
-                }
-            }
-
-        }
-    }
 
     public void dropAll() {
 
@@ -457,7 +425,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
         for (final DefaultedList<ItemStack> itemStacks : this.combinedInventory) {
 
             for (final ItemStack itemStack : itemStacks) {
-                if (!itemStack.isEmpty() && ItemStack.canCombine(itemStack, stack)) {
+                if (!itemStack.isEmpty() && ItemStack.areItemsAndComponentsEqual(itemStack, stack)) {
                     return true;
                 }
             }

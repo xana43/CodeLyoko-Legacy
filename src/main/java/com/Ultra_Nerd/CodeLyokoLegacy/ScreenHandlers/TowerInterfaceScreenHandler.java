@@ -1,10 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.math.BlockPos;
 
 public final class TowerInterfaceScreenHandler extends ScreenHandler {
@@ -16,7 +16,8 @@ public final class TowerInterfaceScreenHandler extends ScreenHandler {
         currentPosition = buf.readBlockPos();
     }
     public TowerInterfaceScreenHandler(final int syncId,final PlayerEntity player) {
-        super(ModScreenHandlers.TOWER_INTERFACE_SCREEN_HANDLER, syncId);
+        //super(ModScreenHandlers.TOWER_INTERFACE_SCREEN_HANDLER, syncId);
+        super(ScreenHandlerType.ANVIL,syncId);
         currentPosition = BlockPos.ORIGIN;
         this.player = player;
 

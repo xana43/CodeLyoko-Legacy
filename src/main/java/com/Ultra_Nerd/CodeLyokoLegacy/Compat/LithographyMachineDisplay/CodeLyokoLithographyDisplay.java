@@ -1,19 +1,21 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Compat.LithographyMachineDisplay;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.LithographyRecipe;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectList;
-import it.unimi.dsi.fastutil.objects.ObjectLists;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
-import me.shedaniel.rei.api.common.util.EntryIngredients;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeEntry;
 
 import java.util.List;
 
 public final class CodeLyokoLithographyDisplay extends BasicDisplay {
+    public CodeLyokoLithographyDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+        super(inputs, outputs);
+    }
+
+    @Override
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return null;
+    }
+    /*
     public CodeLyokoLithographyDisplay(final RecipeEntry<LithographyRecipe> recipeEntry)
     {
         super(getInputList(recipeEntry.value()),getOutputList(recipeEntry.value()));
@@ -40,5 +42,5 @@ public final class CodeLyokoLithographyDisplay extends BasicDisplay {
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
         return CodeLyokoLithographyCategory.LITHOGRAPHY_DISPLAY_CATEGORY_IDENTIFIER;
-    }
+    }*/
 }

@@ -1,12 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Player.Capabilities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
-import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldProperties;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 public record MiscellaneousPlayerDataCollection() {
 
@@ -40,7 +41,7 @@ public record MiscellaneousPlayerDataCollection() {
             return SUPER_CALCULATOR_LOCATIONS;
         }
         @Override
-        public void readFromNbt(final NbtCompound tag) {
+        public void readFromNbt(final NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
             SUPER_CALCULATOR_LOCATIONS.clear();
             for(final String tagKey : tag.getKeys())
             {
@@ -50,7 +51,7 @@ public record MiscellaneousPlayerDataCollection() {
         private static final String CALCULATOR_POSITIONS = "calculator_position0";
         private static final StringBuilder LOOP_STRING_BUILDER = new StringBuilder(CALCULATOR_POSITIONS);
         @Override
-        public void writeToNbt(final NbtCompound tag) {
+        public void writeToNbt(final NbtCompound tag,RegistryWrapper.WrapperLookup registryLookup) {
             int index = 0;
 
             for(final BlockPos pos : SUPER_CALCULATOR_LOCATIONS)

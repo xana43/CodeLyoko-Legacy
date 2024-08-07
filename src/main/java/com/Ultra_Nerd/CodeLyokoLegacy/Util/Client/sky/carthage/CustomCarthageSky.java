@@ -18,59 +18,53 @@ public record CustomCarthageSky() implements DimensionRenderingRegistry.SkyRende
 
     private static final Identifier TEXTURE_LOCATION = new Identifier(CodeLyokoMain.MOD_ID,
             "textures/skies/sector5/sector5sky.png");
-    private static final Tessellator tessellator = Tessellator.getInstance();
-    private static final BufferBuilder bufferBuilder = tessellator.getBuffer();
+    private static Tessellator tessellator;
+    private static BufferBuilder bufferBuilder;
 
     @Override
     public void render(final WorldRenderContext context) {
+        if(tessellator == null)
+        {
+            tessellator = Tessellator.getInstance();
+        }
+        if(bufferBuilder == null)
+        {
+            bufferBuilder = tessellator.getBuffer();
+        }
         RenderSystem.setShaderTexture(0, TEXTURE_LOCATION);
-        final MatrixStack matrixStack = context.matrixStack();
         RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
+        final MatrixStack matrixStack = context.matrixStack();
+        if(matrixStack == null)
+        {
+            return;
+        }
+        CodeLyokoMain.LOG.info("Rendering Sky");
         matrixStack.push();
-
-
-        //originally in a for loop, but loop unrolling would REALLY be beneficial here because the compiler won't know about how the matrix vertex works
-        //only works for this renderer because it's just a simple cube
-        final Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
         bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255).next();
+        buildBuffer(context.positionMatrix());
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90.0F));
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255).next();
+        buildBuffer(context.positionMatrix());
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0F));
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255).next();
+        buildBuffer(context.positionMatrix());
         matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90.0F));
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255).next();
+        buildBuffer(context.positionMatrix());
         matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-90.0F));
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255).next();
+        buildBuffer(context.positionMatrix());
         matrixStack.multiply(RotationAxis.NEGATIVE_Z.rotationDegrees(90.0F));
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255).next();
+        buildBuffer(context.positionMatrix());
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255).next();
+        buildBuffer(context.positionMatrix());
 
 
         tessellator.draw();
 
         matrixStack.pop();
+    }
+
+    private static void buildBuffer(Matrix4f matrix4f) {
+        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();
+        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 16.0F).color(40, 40, 40, 255).next();
+        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 16.0F).color(40, 40, 40, 255).next();
+        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255).next();
     }
 }

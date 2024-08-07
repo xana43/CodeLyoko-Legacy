@@ -1,18 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Compat.ReactorDisplay;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import java.util.List;
-import me.shedaniel.math.Point;
-import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
-import me.shedaniel.rei.api.client.gui.widgets.Widget;
-import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
-import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -32,9 +24,17 @@ public record CodeLyokoReactorCategory() implements DisplayCategory<BasicDisplay
 
     @Override
     public Renderer getIcon() {
-        return EntryStacks.of(ModBlocks.URANIUM_REACTOR.asItem().getDefaultStack());
+        return null;
     }
 
+    /*
+    @Override
+    public Renderer getIcon() {
+        //return EntryStacks.of(ModBlocks.URANIUM_REACTOR.asItem().getDefaultStack());
+    }
+
+     */
+    /*
     @Override
     public List<Widget> setupDisplay(final BasicDisplay display, final Rectangle bounds) {
         final Point startPoint = new Point(bounds.getCenterX() - 87, bounds.getCenterY() - 35);
@@ -47,7 +47,7 @@ public record CodeLyokoReactorCategory() implements DisplayCategory<BasicDisplay
                 Widgets.createSlot(new Point(startPoint.x + 110, startPoint.y + 33))
                         .markOutput().entries(display.getOutputEntries().get(0)));
         return widgets;
-    }
+    }*/
 
     @Override
     public int getDisplayHeight() {

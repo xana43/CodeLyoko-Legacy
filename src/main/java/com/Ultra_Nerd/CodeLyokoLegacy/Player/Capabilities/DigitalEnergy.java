@@ -1,13 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Player.Capabilities;
 
-import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
-import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public final class DigitalEnergy implements AutoSyncedComponent, PlayerComponent<DigitalEnergy> {
+public final class DigitalEnergy implements AutoSyncedComponent {
 
     private final PlayerEntity player;
     public DigitalEnergy(final PlayerEntity player)
@@ -51,12 +52,12 @@ public final class DigitalEnergy implements AutoSyncedComponent, PlayerComponent
     }
 
     @Override
-    public void readFromNbt(final NbtCompound tag) {
+    public void readFromNbt(final NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
         currentEnergy = tag.getInt(DIGITAL_ENERGY_KEY);
     }
 
     @Override
-    public void writeToNbt(final NbtCompound tag) {
+    public void writeToNbt(final NbtCompound tag,RegistryWrapper.WrapperLookup registryLookup) {
 
         tag.putInt(DIGITAL_ENERGY_KEY, currentEnergy);
     }

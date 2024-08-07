@@ -16,7 +16,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Vehicle.OverboardRe
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.SkidbladnirEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.ClientTickEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.HudRenderCallbackOverride;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.Client.ModHandledScreensClientInitializer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Items.Tools.Buckets.CustomColorBucket;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
@@ -27,7 +26,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.Client.sky.carthage.CustomCarthageSky
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.Client.sky.ice.CustomIceSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.Client.sky.volcano.CustomVolcanoSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.GeneralRendererUtils.RendererVariables;
-import dev.felnull.specialmodelloader.api.event.SpecialModelLoaderEvents;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -259,13 +257,12 @@ public record CodeLyokoClient() implements ClientModInitializer {
     }
     @Override
     public void onInitializeClient() {
-        SpecialModelLoaderEvents.LOAD_SCOPE.register(location -> CodeLyokoMain.MOD_ID.equals(location.getNamespace()));
-        PacketHandler.clientPacketRegistry();
+        PacketHandler.clientPayloadRegistry();
         registerModelLoaders();
         registerBlockEntityRenderers();
         registerEntityRenderers();
         FluidRenderRegistry();
-        ModHandledScreensClientInitializer.handledScreenRegistration();
+        //ModHandledScreensClientInitializer.handledScreenRegistration();
         registerColorProviders();
         registerItemPredicates();
         registerDimensionalSkyEffects();

@@ -1,12 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.SuperCalculatorNetwork;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.math.BlockPos;
 
 public final class DemarcationScreenHandler extends ScreenHandler {
@@ -20,7 +20,8 @@ public final class DemarcationScreenHandler extends ScreenHandler {
     }
     public DemarcationScreenHandler(final int syncId, final PropertyDelegate propertyDelegate)
     {
-        super(ModScreenHandlers.DEMARCATION_SCREEN_HANDLER_TYPE,syncId);
+        //super(ModScreenHandlers.DEMARCATION_SCREEN_HANDLER_TYPE,syncId);
+        super(ScreenHandlerType.ANVIL,syncId);
         pos = BlockPos.ORIGIN;
         this.delegate = propertyDelegate;
         this.addProperties(delegate);

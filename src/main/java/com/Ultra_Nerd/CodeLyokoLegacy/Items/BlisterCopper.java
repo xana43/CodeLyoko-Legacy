@@ -1,7 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
-import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.item.TooltipType;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -21,9 +23,10 @@ public final class BlisterCopper extends Item {
     }
 
 
+
     @Override
-    public void appendTooltip(final ItemStack stack, @org.jetbrains.annotations.Nullable final World world, final List<Text> tooltip, final TooltipContext context) {
-        super.appendTooltip(stack, world, tooltip, context);
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+        super.appendTooltip(stack, context, tooltip, type);
         tooltip.add(
                 Text.of("this form of copper is usable, but it oxidizes quickly back to cuprous oxide, use electroplating to keep it stable"));
     }
@@ -34,22 +37,17 @@ public final class BlisterCopper extends Item {
     }
 
 
-    @Override
-    public boolean isDamageable() {
-        return true;
-    }
-
 
     @Override
     public void inventoryTick(final ItemStack stack, final World worldIn, final Entity entityIn, int itemSlot,
             boolean isSelected) {
 
         if (!worldIn.isClient) {
-            NbtCompound timerTag = stack.getNbt();
+            NbtCompound timerTag = stack.get(DataComponentTypes.CUSTOM_DATA).getNbt();
             if (timerTag == null) {
                 timerTag = new NbtCompound();
                 timerTag.putInt(NBT_TAG_ACCESSOR, 500);
-                stack.setNbt(timerTag);
+                NbtComponent.set(DataComponentTypes.CUSTOM_DATA,stack,timerTag);
             }
             timerTag.putInt(NBT_TAG_ACCESSOR, timerTag.getInt(NBT_TAG_ACCESSOR) - 1);
             if (timerTag.getInt(NBT_TAG_ACCESSOR) <= 0) {

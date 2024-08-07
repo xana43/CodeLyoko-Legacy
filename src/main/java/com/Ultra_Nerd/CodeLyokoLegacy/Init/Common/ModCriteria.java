@@ -1,35 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Init.Common;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
-import com.google.gson.JsonObject;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.advancement.AdvancementCriterion;
-import net.minecraft.advancement.criterion.AbstractCriterion;
-import net.minecraft.advancement.criterion.AbstractCriterionConditions;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
-import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
-import net.minecraft.predicate.entity.EntityPredicate;
-import net.minecraft.predicate.entity.LootContextPredicate;
-import net.minecraft.predicate.item.ItemPredicate;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.world.World;
-
-import java.util.List;
-import java.util.Optional;
-
 public record ModCriteria() {
-    public static final class InvokeClassChange extends AbstractCriterion<InvokeClassChange.Condition>
+  /*  public static final class InvokeClassChange extends AbstractCriterion<InvokeClassChange.Condition>
     {
         private static final Identifier ID = CodeLyokoMain.codeLyokoPrefix("class_change");
         @Override
         protected Condition conditionsFromJson(JsonObject obj, Optional<LootContextPredicate> playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
+            CriterionConditions
             return new Condition(playerPredicate,obj.get("previous_class_id").getAsInt());
         }
         public void trigger(final ServerPlayerEntity player)
@@ -42,8 +19,23 @@ public record ModCriteria() {
         }
 
 
+        public static final class ClassCondition implements Conditions{
 
-        public static final class Condition extends AbstractCriterionConditions
+            public static final Codec<ClassCondition> CODEC = RecordCodecBuilder.create(classConditionInstance -> classConditionInstance.group(EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("player").forGetter(classCondition -> classCondition.player)).apply(classConditionInstance, ClassCondition::new));
+            private Optional<LootContextPredicate> player;
+            private int previousClassId;
+            public ClassCondition(Optional<LootContextPredicate> player) {
+                this.player = player;
+            }
+            public boolean test(ServerPlayerEntity player) {
+               return CardinalData.LyokoClass.getLyokoClass(player) != previousClassId;
+            }
+            @Override
+            public Optional<LootContextPredicate> player() {
+                return Optional.empty();
+            }
+        }
+        public static final class Condition extends Abs
         {
             private final int previousClassId;
             public Condition(final Optional<LootContextPredicate> entity,final int previousClassId) {
@@ -181,5 +173,5 @@ public record ModCriteria() {
                 return jsonObject;
             }
         }
-    }
+    }*/
 }

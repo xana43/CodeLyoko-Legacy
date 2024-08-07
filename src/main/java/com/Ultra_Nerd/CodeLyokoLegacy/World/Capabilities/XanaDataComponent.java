@@ -7,7 +7,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDimensions;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.Enums.Capabilities.XanaAttackTypes;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ThreadUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers.XanaHandler;
-import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import it.unimi.dsi.fastutil.longs.LongArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BlockState;
@@ -15,11 +14,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 import java.util.List;
 import java.util.Objects;
@@ -148,7 +149,7 @@ public final class XanaDataComponent implements AutoSyncedComponent {
         dangerLevel -= dangerLevelDecrease;
     }
     @Override
-    public void readFromNbt(final @NotNull NbtCompound tag) {
+    public void readFromNbt(final @NotNull NbtCompound tag,final RegistryWrapper.WrapperLookup wrapperLookup) {
         dangerLevel = tag.getInt(DANGER_LEVEL_KEY);
         activeFactoryPosition = BlockPos.fromLong(tag.getLong(FACTORY_POSITION_KEY));
         attackType = XanaAttackTypes.values()[tag.getInt(ATTACK_TYPE_KEY)];
@@ -157,7 +158,7 @@ public final class XanaDataComponent implements AutoSyncedComponent {
     }
 
     @Override
-    public void writeToNbt(final @NotNull NbtCompound tag) {
+    public void writeToNbt(final @NotNull NbtCompound tag,final RegistryWrapper.WrapperLookup wrapperLookup) {
         tag.putInt(DANGER_LEVEL_KEY, dangerLevel);
         if(attackType == null)
         {

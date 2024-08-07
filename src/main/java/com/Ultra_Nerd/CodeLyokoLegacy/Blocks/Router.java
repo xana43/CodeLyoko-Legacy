@@ -2,8 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.RouterTE;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.mojang.serialization.MapCodec;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,7 +11,6 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -86,14 +85,18 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
     private static final List<BlockPos> connectedBlocks = new ObjectArrayList<>();
 
-    public Router(@NotNull FabricBlockSettings properties) {
+    public Router(Settings properties) {
         super(properties);
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(ROUTER_ACTIVE, Boolean.FALSE));
     }
 
     @Override
-    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return null;
+    }
 
+    @Override
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (world.getBlockEntity(pos) instanceof final RouterTE routerTE) {
             switch (state.get(FACING)) {
                 case NORTH -> routerTE.connectToRouter(pos.offset(Direction.NORTH, 1));
@@ -106,6 +109,8 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
 
         return ActionResult.SUCCESS;
     }
+
+
 
     @Nullable
     @Override

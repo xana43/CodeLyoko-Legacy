@@ -2,9 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageSources;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDimensions;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.TransparentBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
@@ -18,8 +16,8 @@ public final class FrontierBlock extends TransparentBlock {
     private int DamageTime = 10000;
 
 
-    public FrontierBlock() {
-        super(FabricBlockSettings.copyOf(Blocks.BARRIER));
+    public FrontierBlock(final Settings settings) {
+        super(settings);
     }
 
     @Override

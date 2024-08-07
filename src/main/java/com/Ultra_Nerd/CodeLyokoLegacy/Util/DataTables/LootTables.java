@@ -18,15 +18,17 @@ import net.minecraft.loot.function.EnchantWithLevelsLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryWrapper;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public final class LootTables extends FabricBlockLootTableProvider {
 
 
-    public LootTables(final FabricDataOutput dataOutput) {
-        super(dataOutput);
+    public LootTables(final FabricDataOutput dataOutput,final CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        super(dataOutput,registryLookup);
     }
 
     @Override
@@ -52,16 +54,19 @@ public final class LootTables extends FabricBlockLootTableProvider {
     public static final class EntityLootTable extends SimpleFabricLootTableProvider
     {
 
-        public EntityLootTable(final FabricDataOutput output) {
-            super(output, LootContextTypes.ENTITY);
+        public EntityLootTable(final FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+            super(output,registryLookup, LootContextTypes.ENTITY);
         }
 
         @Override
-        public void accept(final BiConsumer<Identifier, LootTable.Builder> exporter) {
-            exporter.accept(ModEntities.BLOK.getLootTableId(), LootTable.builder()
+        public void accept(final RegistryWrapper.WrapperLookup registryLookup, final BiConsumer<RegistryKey<LootTable>, LootTable.Builder> consumer) {
+            consumer.accept(ModEntities.BLOK.getLootTableId(), LootTable.builder()
                             .pool(LootPool.builder().rolls(UniformLootNumberProvider.create(1,3))
                                     .with(ItemEntry.builder(ModItems.BIT).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1,4)))))
                     .apply(EnchantWithLevelsLootFunction.builder(UniformLootNumberProvider.create(20.0f,39.0f))));
         }
+
+
+
     }
 }

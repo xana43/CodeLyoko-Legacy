@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculator;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -132,6 +133,11 @@ public final class FranzChiplet extends BlockWithEntity {
         super(settings);
     }
 
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return null;
+    }
+
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {
@@ -147,10 +153,12 @@ public final class FranzChiplet extends BlockWithEntity {
     public BlockRenderType getRenderType(final BlockState state) {
         return BlockRenderType.MODEL;
     }
+
     @Override
-    public ActionResult onUse(final BlockState state, final World world, final BlockPos pos, final PlayerEntity player, final Hand hand, final BlockHitResult hit) {
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if(world.isClient) return ActionResult.SUCCESS;
         final Inventory entityInventory = (Inventory) world.getBlockEntity(pos);
+        final Hand hand = player.getActiveHand();
         if(!player.getStackInHand(hand).isEmpty())
         {
             if(entityInventory.getStack(0).isEmpty())
@@ -168,6 +176,8 @@ public final class FranzChiplet extends BlockWithEntity {
         }
         return ActionResult.SUCCESS;
     }
+
+
 
 
 

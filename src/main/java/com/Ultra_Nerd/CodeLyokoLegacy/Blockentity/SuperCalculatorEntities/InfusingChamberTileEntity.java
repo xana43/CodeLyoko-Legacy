@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.RecipeInputProvider;
 import net.minecraft.recipe.RecipeMatcher;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -76,8 +77,8 @@ public final class InfusingChamberTileEntity extends EnergyStorageBlockEntityInv
     }
     private static final String InfusingTime = "InfusingTime", CurrentInfusingTime = "CurrentInfusingTime", CurrentInfusingTimeTotal = "CurrentInfusingTimeTotal",RecipesUsed = "RecipesUsed";
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
+    protected void writeNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
         nbt.putInt(InfusingTime,infusingTime);
         nbt.putInt(CurrentInfusingTime,currentInfusingTime);
         nbt.putInt(CurrentInfusingTimeTotal,currentInfusingTimeTotal);
@@ -87,8 +88,8 @@ public final class InfusingChamberTileEntity extends EnergyStorageBlockEntityInv
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
         infusingTime = nbt.getInt(InfusingTime);
         currentInfusingTime = nbt.getInt(CurrentInfusingTime);
         currentInfusingTimeTotal = nbt.getInt(CurrentInfusingTimeTotal);

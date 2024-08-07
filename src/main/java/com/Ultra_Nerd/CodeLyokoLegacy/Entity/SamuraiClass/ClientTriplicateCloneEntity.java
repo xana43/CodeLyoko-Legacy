@@ -52,9 +52,11 @@ public final class ClientTriplicateCloneEntity extends OtherClientPlayerEntity {
     }
 
     @Override
-    public Iterable<ItemStack> getItemsEquipped() {
-        return owner.getItemsEquipped();
+    public Iterable<ItemStack> getEquippedItems() {
+        return owner.getEquippedItems();
     }
+
+
 
     @Override
     public Iterable<ItemStack> getHandItems() {
@@ -99,9 +101,11 @@ public final class ClientTriplicateCloneEntity extends OtherClientPlayerEntity {
     }
 
     @Override
-    public boolean isPartVisible(final PlayerModelPart modelPart) {
+    public boolean isPartVisible(PlayerModelPart modelPart) {
         return true;
     }
+
+
 
     @Override
     public boolean shouldRenderName() {

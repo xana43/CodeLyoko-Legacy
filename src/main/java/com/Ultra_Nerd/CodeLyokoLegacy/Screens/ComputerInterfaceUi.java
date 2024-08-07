@@ -2,11 +2,11 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Screens;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerInterfaceScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Player.PlayerProfile;
+import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerInterfaceScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.Client.GUI.LyokoButton;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -24,6 +24,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
+import org.joml.Matrix4fStack;
 import org.joml.Quaternionf;
 
 @Environment(EnvType.CLIENT)
@@ -63,8 +64,8 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
     private static void drawEntity(int x, int y, LivingEntity entity) {
         final float f = (float) Math.atan((float) 0 / 40.0F);
         final float g = (float) Math.atan((float) 0 / 40.0F);
-        final MatrixStack matrixStack = RenderSystem.getModelViewStack();
-        matrixStack.push();
+        final Matrix4fStack matrixStack = RenderSystem.getModelViewStack();
+        matrixStack.pushMatrix();
         matrixStack.translate((float) x, (float) y, 1050.0F);
         matrixStack.scale(1.0F, 1.0F, -1.0F);
         RenderSystem.applyModelViewMatrix();
@@ -99,7 +100,7 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
         entity.setPitch(j);
         entity.prevHeadYaw = k;
         entity.headYaw = l;
-        matrixStack.pop();
+        matrixStack.popMatrix();
         RenderSystem.applyModelViewMatrix();
         DiffuseLighting.disableGuiDepthLighting();
     }

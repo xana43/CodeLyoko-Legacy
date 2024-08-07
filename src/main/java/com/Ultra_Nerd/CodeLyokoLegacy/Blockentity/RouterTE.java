@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,8 +17,8 @@ public final class RouterTE extends BlockEntity {
     private static final String connectedBlocksKey = "connected_blocks";
     private BlockPos cableSystemMasterPosition = BlockPos.ORIGIN;
     @Override
-    protected void writeNbt(final NbtCompound nbt) {
-        super.writeNbt(nbt);
+    protected void writeNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(nbt,registryLookup);
         nbt.putLong(connectedBlocksKey,cableSystemMasterPosition.asLong());
     }
     public void connectToRouter(final BlockPos positionToAdd)
@@ -33,8 +34,8 @@ public final class RouterTE extends BlockEntity {
 
     }
     @Override
-    public void readNbt(final NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt,registryLookup);
         cableSystemMasterPosition = BlockPos.fromLong(nbt.getLong(connectedBlocksKey));
     }
 }

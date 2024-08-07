@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.World.WorldGen.Carthage;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.World.WorldGen.Common.CustomGenSettings;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -35,11 +36,11 @@ public final class CarthageGenerator extends ChunkGenerator {
                             Codec.FLOAT.fieldOf("verticalvariance").forGetter(CustomGenSettings::verticalVariance),
                             Codec.FLOAT.fieldOf("horizontalvariance").forGetter(CustomGenSettings::horizontalVariance))
                     .apply(settingsInstance, CustomGenSettings::new));
-    public static final Codec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCodecBuilder.create(
+    public static final MapCodec<CarthageGenerator> CARTHAGE_GENERATOR_CODEC = RecordCodecBuilder.mapCodec(
             carthageGeneratorInstance ->
                     carthageGeneratorInstance.group(
                             BiomeSource.CODEC.fieldOf("biome_source")
-                                    .forGetter(carthageGenerator -> carthageGenerator.biomeSource),
+                                    .forGetter(CarthageGenerator::getBiomeSource),
                             SETTINGS_CODEC.fieldOf("settings").forGetter(CarthageGenerator::getCarthageSettings)
 
                     ).apply(carthageGeneratorInstance, CarthageGenerator::new)
@@ -53,18 +54,17 @@ public final class CarthageGenerator extends ChunkGenerator {
         this.settings = settings;
     }
 
-
-
-
-
+    @Override
+    public BiomeSource getBiomeSource() {
+        return this.biomeSource;
+    }
 
     public CustomGenSettings getCarthageSettings() {
         return settings;
     }
 
-
     @Override
-    protected @NotNull Codec<? extends ChunkGenerator> getCodec() {
+    protected MapCodec<? extends ChunkGenerator> getCodec() {
         return CARTHAGE_GENERATOR_CODEC;
     }
 

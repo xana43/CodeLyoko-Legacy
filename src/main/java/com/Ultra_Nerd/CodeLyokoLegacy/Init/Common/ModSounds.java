@@ -21,12 +21,12 @@ public record ModSounds() {
     public static final SoundEvent HORNETFLY = registerSound("entity.hornet.fly");
     public static final RegistryEntry.Reference<SoundEvent> ICE = registerReference("icesector");
     public static final SoundEvent LASERARROW = registerSound("laser");
-    public static final SoundEvent LAZY_ARCHER = registerSound("armor_equip_archer");
-    public static final SoundEvent LAZY_FELINE = registerSound("armor_equip_feline");
-    public static final SoundEvent LAZY_GUARDIAN = registerSound("armor_equip_guardian");
-    public static final SoundEvent LAZY_NINJA = registerSound("armor_equip_ninja");
-    public static final SoundEvent LAZY_SAMURAI = registerSound("armor_equip_samurai");
-    public static final SoundEvent LAZY_WARRIOR = registerSound(
+    public static final RegistryEntry<SoundEvent> LAZY_ARCHER = registerReference("armor_equip_archer");
+    public static final RegistryEntry<SoundEvent> LAZY_FELINE = registerReference("armor_equip_feline");
+    public static final RegistryEntry<SoundEvent> LAZY_GUARDIAN = registerReference("armor_equip_guardian");
+    public static final RegistryEntry<SoundEvent> LAZY_NINJA = registerReference("armor_equip_ninja");
+    public static final RegistryEntry<SoundEvent> LAZY_SAMURAI = registerReference("armor_equip_samurai");
+    public static final RegistryEntry<SoundEvent> LAZY_WARRIOR = registerReference(
             "armor_equip_warrior");
     public static final SoundEvent LYOKO_THEME = registerSound("lyoko");
     public static final SoundEvent LYOKO_THEME_INSTRUMENTAL = registerSound("lyoko.instrumental");

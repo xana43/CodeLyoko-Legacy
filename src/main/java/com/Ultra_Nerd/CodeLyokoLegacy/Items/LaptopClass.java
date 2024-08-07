@@ -1,15 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModSounds;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
@@ -53,7 +50,7 @@ public final class LaptopClass extends Item implements SimpleEnergyItem{
                 if (!worldIn.isClient) {
                     buf.clear();
                     buf.writeBoolean(true);
-                    ServerPlayNetworking.send((ServerPlayerEntity) playerIn, PacketHandler.OPEN_LAPTOP_ON_CLIENT,buf);
+                    //ServerPlayNetworking.send((ServerPlayerEntity) playerIn, PacketHandler.OPEN_LAPTOP_ON_CLIENT,buf);
                 }
                 worldIn.playSound(playerIn, playerIn.getBlockPos(), ModSounds.OPENTOWERGUISOUND, SoundCategory.BLOCKS,
                         1, 1);
@@ -68,7 +65,7 @@ public final class LaptopClass extends Item implements SimpleEnergyItem{
             if(!worldIn.isClient) {
                 buf.clear();
                 buf.writeBoolean(false);
-                ServerPlayNetworking.send((ServerPlayerEntity) playerIn, PacketHandler.OPEN_LAPTOP_ON_CLIENT, buf);
+                //ServerPlayNetworking.send((ServerPlayerEntity) playerIn, PacketHandler.OPEN_LAPTOP_ON_CLIENT, buf);
             }
             item.setDamage(0);
             playerIn.sendMessage(Text.translatable("laptop.battery.dead"), false);
