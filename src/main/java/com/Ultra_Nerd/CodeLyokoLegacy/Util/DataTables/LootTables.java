@@ -8,12 +8,10 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.EnchantWithLevelsLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
@@ -43,13 +41,12 @@ public final class LootTables extends FabricBlockLootTableProvider {
                     } else {
                         addDrop(block, dropsWithSilkTouch(block, applyExplosionDecay(block,
                                 ItemEntry.builder(ModItems.RAW_SILICADUST)
-                                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(4.0F, 5.0F)))
-                                        .apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE)))));
+                                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(4.0F, 5.0F))))));
+                                        //.apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE)))));
                     }
                 }
             }
         });
-
     }
     public static final class EntityLootTable extends SimpleFabricLootTableProvider
     {
@@ -58,15 +55,14 @@ public final class LootTables extends FabricBlockLootTableProvider {
             super(output,registryLookup, LootContextTypes.ENTITY);
         }
 
+
+
         @Override
-        public void accept(final RegistryWrapper.WrapperLookup registryLookup, final BiConsumer<RegistryKey<LootTable>, LootTable.Builder> consumer) {
-            consumer.accept(ModEntities.BLOK.getLootTableId(), LootTable.builder()
-                            .pool(LootPool.builder().rolls(UniformLootNumberProvider.create(1,3))
-                                    .with(ItemEntry.builder(ModItems.BIT).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1,4)))))
-                    .apply(EnchantWithLevelsLootFunction.builder(UniformLootNumberProvider.create(20.0f,39.0f))));
+        public void accept(BiConsumer<RegistryKey<LootTable>, LootTable.Builder> lootTableBiConsumer) {
+            lootTableBiConsumer.accept(ModEntities.BLOK.getLootTableId(), LootTable.builder()
+                    .pool(LootPool.builder().rolls(UniformLootNumberProvider.create(1,3))
+                            .with(ItemEntry.builder(ModItems.BIT).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1,4)))))
+                    .apply(new EnchantWithLevelsLootFunction.Builder(UniformLootNumberProvider.create(20.0f,39.0f))));
         }
-
-
-
     }
 }

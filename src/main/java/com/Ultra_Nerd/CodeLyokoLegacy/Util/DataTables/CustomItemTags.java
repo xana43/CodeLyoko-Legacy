@@ -57,7 +57,6 @@ public final class CustomItemTags extends FabricTagProvider.ItemTagProvider {
         }
         getOrCreateTagBuilder(ItemTags.CHERRY_LOGS).add(ModBlocks.DIGITAL_WOOD_MOUNTAIN.asItem());
         getOrCreateTagBuilder(ItemTags.JUNGLE_LOGS).add(ModBlocks.DIGITAL_WOOD_FOREST.asItem());
-        getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(ModItems.LYOKO_THEME,ModItems.LYOKO_THEME_INSTRUMENTAL);
         getOrCreateTagBuilder(ItemTags.SAND).add(ModBlocks.SILICA_SAND.asItem());
         getOrCreateTagBuilder(ModTags.ItemTags.LYOKO_ITEM).add(ModItems.HOVERBOARD_SPAWN_ITEM,ModItems.OVERBOARD_SPAWN_ITEM);
         getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_BATTERIES).add(ModItems.URANIUM_BATTERY_STARTER,

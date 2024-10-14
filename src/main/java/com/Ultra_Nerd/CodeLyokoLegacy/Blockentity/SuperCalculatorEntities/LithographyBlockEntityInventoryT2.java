@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModRecipes;
+import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.LithographyRecipe;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.LithographyScreenHandlerT2;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.EnergyStorageBlockEntityInventory;
@@ -17,7 +18,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.*;
+import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.recipe.RecipeInputProvider;
+import net.minecraft.recipe.RecipeManager;
+import net.minecraft.recipe.RecipeMatcher;
+import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
@@ -39,7 +44,7 @@ private int fuelMass;
 private int manufacturingTime;
 private int manufacturingTimeTotal;
 private final Object2IntOpenHashMap<Identifier> recipesUsed = new Object2IntOpenHashMap<>();
-private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecipe> matchGetter;
+private final RecipeManager.MatchGetter<SingleStackRecipeInput, LithographyRecipe> matchGetter;
 
 
     private final PropertyDelegate energyAmount = new PropertyDelegate() {
@@ -95,7 +100,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
         fuelMass = getFuelTime();
         final NbtCompound nbtCompound = nbt.getCompound("RecipesUsed");
         for (final String string : nbtCompound.getKeys()) {
-            recipesUsed.put(new Identifier(string), nbtCompound.getInt(string));
+            recipesUsed.put(Identifier.of(string), nbtCompound.getInt(string));
         }
 
     }
@@ -144,7 +149,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
             RecipeEntry<?> recipe;
             if(isCurrentItemStackEmpty1 && isCurrentItemStackEmpty2 && isCurrentItemStackEmpty3 && isCurrentItemStackEmpty4)
             {
-                recipe = matchGetter.getFirstMatch(this,world).orElse(null);
+                recipe = matchGetter.getFirstMatch(new SingleStackRecipeInput(this.getStack(0)),world).orElse(null);
             }
             else {
                 recipe = null;
@@ -312,7 +317,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
 
     private static int getCookTime(final World world,final LithographyBlockEntityInventoryT2 reactorTileEntityInventory)
     {
-        return reactorTileEntityInventory.matchGetter.getFirstMatch(reactorTileEntityInventory, world).map(recipeEntry -> recipeEntry.value().getCookingTime()).orElse(200);
+        return reactorTileEntityInventory.matchGetter.getFirstMatch(new SingleStackRecipeInput(reactorTileEntityInventory.getStack(0)), world).map(recipeEntry -> recipeEntry.value().getCookingTime()).orElse(200);
     }
     public void setLastRecipe(final RecipeEntry<?> recipe)
     {

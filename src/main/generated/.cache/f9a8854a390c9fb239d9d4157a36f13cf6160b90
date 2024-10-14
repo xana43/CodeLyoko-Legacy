@@ -1,6 +1,6 @@
-// 1.20.6	2024-08-08T16:07:38.391957938	CodeLyokoLegacy/Tags for minecraft:fluid
-6fa6d225e79943edcff19ae9ba79a3a998fd66ac data/c/tags/fluids/visual/water.json
-6fa6d225e79943edcff19ae9ba79a3a998fd66ac data/minecraft/tags/fluids/water.json
-44c39e0f0ded99709734bb4f82d6b66dddc45375 data/minecraft/tags/fluids/lava.json
-6fa6d225e79943edcff19ae9ba79a3a998fd66ac data/c/tags/fluids/water.json
-44c39e0f0ded99709734bb4f82d6b66dddc45375 data/c/tags/fluids/lava.json
+// 1.21.1	2024-10-14T18:29:06.541364944	CodeLyokoLegacy/Tags for minecraft:fluid
+6fa6d225e79943edcff19ae9ba79a3a998fd66ac data/c/tags/fluid/visual/water.json
+6fa6d225e79943edcff19ae9ba79a3a998fd66ac data/minecraft/tags/fluid/water.json
+44c39e0f0ded99709734bb4f82d6b66dddc45375 data/c/tags/fluid/lava.json
+6fa6d225e79943edcff19ae9ba79a3a998fd66ac data/c/tags/fluid/water.json
+44c39e0f0ded99709734bb4f82d6b66dddc45375 data/minecraft/tags/fluid/lava.json

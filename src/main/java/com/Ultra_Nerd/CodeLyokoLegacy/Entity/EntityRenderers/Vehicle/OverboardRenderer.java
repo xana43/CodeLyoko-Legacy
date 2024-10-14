@@ -46,7 +46,7 @@ public final class OverboardRenderer<T extends OverboardEntity> extends EntityRe
         matrixStackIn.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(360 + entityYaw));
         final VertexConsumer vertexBuilder = bufferIn.getBuffer(
                 this.OverBoardModel.getLayer(this.getTexture(entityIn)));
-        this.OverBoardModel.render(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.DEFAULT_UV, 1, 1, 1, 1);
+        this.OverBoardModel.render(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.DEFAULT_UV, 1);
         matrixStackIn.pop();
     }
 

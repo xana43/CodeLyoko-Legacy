@@ -20,7 +20,7 @@ public final class LaserEntity extends ArrowEntity {
     private int calculatedDamage;
 
     public LaserEntity(final World world, final double x, final double y, final double z, final int lifetime) {
-        super(world, x, y, z, ItemStack.EMPTY);
+        super(world, x, y, z, ItemStack.EMPTY,ItemStack.EMPTY);
         this.shake = 0;
         setLifetime(lifetime);
 
@@ -40,7 +40,7 @@ public final class LaserEntity extends ArrowEntity {
      * @param lifetime the lifetime of the entity IN SECONDS (used to clean up when the entity is just floating in the air due to drag)
      */
     public LaserEntity(final World world, final LivingEntity owner, final int lifetime) {
-        super(world, owner,ItemStack.EMPTY);
+        super(world, owner,ItemStack.EMPTY,ItemStack.EMPTY);
         this.shake = 0;
         this.setLifetime(lifetime);
     }
@@ -70,11 +70,6 @@ public final class LaserEntity extends ArrowEntity {
     @Override
     public void slowMovement(final BlockState state, final Vec3d multiplier) {
 
-    }
-
-    @Override
-    public void setShotFromCrossbow(final boolean shotFromCrossbow) {
-        super.setShotFromCrossbow(true);
     }
 
     public void setLifetime(final int seconds) {

@@ -1,15 +1,14 @@
-// 1.20.6	2024-08-08T16:07:38.391436076	CodeLyokoLegacy/Tags for minecraft:item
-4cfb2791483ea0a79e3dd28fb43497d3685681b0 data/minecraft/tags/items/sand.json
-d9df3f96ecb8a797156bd3cff4238d1ab6e0ad88 data/c/tags/items/ores.json
-6e5225dcb4a534906b3fc818fd005b534ec0e7c2 data/c/tags/items/uranium_235_ingots.json
-bad56654515fbdfbe5090f9e3141b3415b59e416 data/c/tags/items/leaves.json
-60d5395b9d866b75057019b81050c2638a511261 data/minecraft/tags/items/cherry_logs.json
-3792e9fb574902745cafe754da07b62df20aaa33 data/c/tags/items/silicon_plates.json
-a851c3d2189b706bb09c15d06db3334cb454be9a data/minecraft/tags/items/music_discs.json
-bce73a2b8a6506fd7681b075bd7a9b22da824b82 data/codelyoko/tags/items/uranium_batteries.json
-d9df3f96ecb8a797156bd3cff4238d1ab6e0ad88 data/c/tags/items/raw_uranium_ores.json
-d9df3f96ecb8a797156bd3cff4238d1ab6e0ad88 data/c/tags/items/uranium_ores.json
-bad56654515fbdfbe5090f9e3141b3415b59e416 data/minecraft/tags/items/leaves.json
-c534a235c111629797e4e38a70c2e40ff0863d6f data/codelyoko/tags/items/lyoko_item.json
-f070a5800d7372b31073f3d3ae213691f5e0f6cf data/c/tags/items/uranium_238_ingots.json
-657cf59bf13364ddec71fd7a66f7ba0967bd12d0 data/minecraft/tags/items/jungle_logs.json
+// 1.21.1	2024-10-14T18:29:06.540851462	CodeLyokoLegacy/Tags for minecraft:item
+bce73a2b8a6506fd7681b075bd7a9b22da824b82 data/codelyoko/tags/item/uranium_batteries.json
+bad56654515fbdfbe5090f9e3141b3415b59e416 data/c/tags/item/leaves.json
+4cfb2791483ea0a79e3dd28fb43497d3685681b0 data/minecraft/tags/item/sand.json
+3792e9fb574902745cafe754da07b62df20aaa33 data/c/tags/item/silicon_plates.json
+d9df3f96ecb8a797156bd3cff4238d1ab6e0ad88 data/c/tags/item/raw_uranium_ores.json
+6e5225dcb4a534906b3fc818fd005b534ec0e7c2 data/c/tags/item/uranium_235_ingots.json
+d9df3f96ecb8a797156bd3cff4238d1ab6e0ad88 data/c/tags/item/uranium_ores.json
+657cf59bf13364ddec71fd7a66f7ba0967bd12d0 data/minecraft/tags/item/jungle_logs.json
+d9df3f96ecb8a797156bd3cff4238d1ab6e0ad88 data/c/tags/item/ores.json
+c534a235c111629797e4e38a70c2e40ff0863d6f data/codelyoko/tags/item/lyoko_item.json
+bad56654515fbdfbe5090f9e3141b3415b59e416 data/minecraft/tags/item/leaves.json
+f070a5800d7372b31073f3d3ae213691f5e0f6cf data/c/tags/item/uranium_238_ingots.json
+60d5395b9d866b75057019b81050c2638a511261 data/minecraft/tags/item/cherry_logs.json

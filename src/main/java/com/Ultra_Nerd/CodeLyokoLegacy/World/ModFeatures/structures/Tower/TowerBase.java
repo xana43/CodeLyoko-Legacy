@@ -9,6 +9,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.structure.StructureLiquidSettings;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.structure.pool.alias.StructurePoolAliasLookup;
@@ -19,6 +20,7 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.heightprovider.HeightProvider;
+import net.minecraft.world.gen.structure.DimensionPadding;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureType;
 
@@ -116,7 +118,9 @@ public final class TowerBase extends Structure {
                         false,
                         this.projectStartToHeightmap,
                         this.maxDistanceFromCenter,
-                      StructurePoolAliasLookup.EMPTY
+                      StructurePoolAliasLookup.EMPTY,
+                      DimensionPadding.NONE,
+                      StructureLiquidSettings.IGNORE_WATERLOGGING
                 );
                 break;
 

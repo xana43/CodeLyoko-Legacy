@@ -6,14 +6,13 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.SyncedBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.TickingBlockEntity;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.fluid.base.SingleFluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.FilteringStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
@@ -33,16 +32,18 @@ public final class ComputerFluidIntakeBlockEntity extends SyncedBlockEntity impl
     {
         return internalTank.amount;
     }
-    public Fluid getStoredFluidVariant()
+    public FluidVariant getStoredFluidVariant()
     {
-        return internalTank.variant.getFluid();
+        return internalTank.variant;
     }
-
-
-
+    public long getCapacity()
+    {
+        return internalTank.getCapacity();
+    }
     @Override
     public void tick() {
-            if(world.getFluidState(pos.offset(Direction.DOWN)).getBlockState().getBlock() == Fluids.WATER.getDefaultState().getBlockState().getBlock() && !world.isClient)
+        assert world != null;
+        if(world.getFluidState(pos.offset(Direction.DOWN)).getBlockState().getBlock() == Fluids.WATER.getDefaultState().getBlockState().getBlock() && !world.isClient)
             {
 
                 try(final Transaction transaction = Transaction.openOuter()) {
@@ -61,15 +62,15 @@ public final class ComputerFluidIntakeBlockEntity extends SyncedBlockEntity impl
     @Override
     protected void writeNbt(final NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.writeNbt(nbt,registryLookup);
-        nbt.put("fluid_type",internalTank.variant.getComponents().get(DataComponentTypes.CUSTOM_DATA).get().copyNbt());
-        nbt.putLong("amount",internalTank.amount);
+        final NbtCompound fluidInfo = new NbtCompound();
+        SingleFluidStorage.writeNbt(internalTank,FluidVariant.CODEC,fluidInfo,registryLookup);
+        nbt.put("fluid_info",fluidInfo);
     }
 
     @Override
     public void readNbt(final NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt,registryLookup);
-        //nbt.getCompound("fluid_type")
-        internalTank.variant = FluidVariant.blank();
-        internalTank.amount = nbt.getLong("amount");
+        final NbtCompound fluidInfo = nbt.getCompound("fluid_info");
+        SingleFluidStorage.readNbt(internalTank,FluidVariant.CODEC,() -> null,fluidInfo,registryLookup);
     }
 }

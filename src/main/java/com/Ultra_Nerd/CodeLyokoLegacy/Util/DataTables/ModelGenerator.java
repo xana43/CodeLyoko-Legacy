@@ -87,7 +87,7 @@ private static void generateFenceLikeModels(final BlockStateModelGenerator gener
     private static void generateItems(final ItemModelGenerator itemModelGenerator)
     {
         final Item[] ModelsGeneratedItems = {
-                ModItems.LYOKO_THEME_INSTRUMENTAL
+               // ModItems.LYOKO_THEME_INSTRUMENTAL
         };
         for (final Item item : ModelsGeneratedItems)
         {

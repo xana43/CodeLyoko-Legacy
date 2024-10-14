@@ -24,19 +24,12 @@ public record CustomVolcanoSky() implements DimensionRenderingRegistry.SkyRender
 
 
     private static Tessellator tessellator;
-    private static BufferBuilder bufferBuilder;
 
     @Override
     public void render(final WorldRenderContext ctx) {
-        if(tessellator == null)
-        {
-            tessellator = Tessellator.getInstance();
+        if(tessellator == null) {
+           tessellator = Tessellator.getInstance();
         }
-        if(bufferBuilder == null)
-        {
-            bufferBuilder = tessellator.getBuffer();
-        }
-        // mc.textureManager.bindTexture(texturelocation);
         RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
         RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
 
@@ -78,12 +71,12 @@ public record CustomVolcanoSky() implements DimensionRenderingRegistry.SkyRender
             }
         }
         final Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
-        bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0, 0).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0, 1).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -90.0F, 100.0F).texture(1, 1).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -90.0F, -100.0F).texture(1, 0).color(40, 40, 40, 255).next();
-        tessellator.draw();
+        final BufferBuilder bufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
+        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0, 0).color(40, 40, 40, 255);
+        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0, 1).color(40, 40, 40, 255);
+        bufferBuilder.vertex(matrix4f, 100.0F, -90.0F, 100.0F).texture(1, 1).color(40, 40, 40, 255);
+        bufferBuilder.vertex(matrix4f, 100.0F, -90.0F, -100.0F).texture(1, 0).color(40, 40, 40, 255);
+        bufferBuilder.end().close();
         matrixStack.pop();
 
     }

@@ -12,8 +12,8 @@ import net.minecraft.recipe.RecipeType;
 public record ModRecipes() {
 
 
-    private static final String REACTOR_RECIPE_ID = createStringId("reactor_recipe");
-    private static final String LITHOGRAPHY_RECIPE_ID = createStringId("lithography_recipe");
+    private static final String REACTOR_RECIPE_ID = "reactor_recipe";
+    private static final String LITHOGRAPHY_RECIPE_ID = "lithography_recipe";
     private static String createStringId(final String id)
     {
        return CodeLyokoMain.codeLyokoPrefix(id).toString();

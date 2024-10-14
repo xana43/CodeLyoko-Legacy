@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 
 public abstract class LiquidHeliumFluid extends LyokoFluid {
     @Override
@@ -46,6 +47,11 @@ public abstract class LiquidHeliumFluid extends LyokoFluid {
         }
 
         @Override
+        protected int getMaxFlowDistance(WorldView world) {
+            return 0;
+        }
+
+        @Override
         public int getLevel(final FluidState state) {
             return state.<Integer>get(LEVEL);
         }
@@ -60,6 +66,11 @@ public abstract class LiquidHeliumFluid extends LyokoFluid {
         @Override
         protected boolean isInfinite(final World world) {
             return true;
+        }
+
+        @Override
+        protected int getMaxFlowDistance(WorldView world) {
+            return 0;
         }
 
         @Override

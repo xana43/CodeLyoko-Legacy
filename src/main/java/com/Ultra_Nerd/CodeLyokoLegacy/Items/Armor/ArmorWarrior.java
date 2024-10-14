@@ -6,6 +6,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +25,9 @@ public final class ArmorWarrior extends LyokoArmor {
     public AttributeModifiersComponent getAttributeModifiers() {
        final List<AttributeModifiersComponent.Entry> entries = new ArrayList<>();
        entries.add(new AttributeModifiersComponent.Entry(
-               EntityAttributes.GENERIC_MOVEMENT_SPEED,new EntityAttributeModifier("speed_modifier",movement_modifier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), AttributeModifierSlot.FEET));
-       entries.add(new AttributeModifiersComponent.Entry(EntityAttributes.GENERIC_ATTACK_DAMAGE,new EntityAttributeModifier("attack_modifier",attack_modifier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),AttributeModifierSlot.CHEST));
-       entries.add(new AttributeModifiersComponent.Entry(EntityAttributes.GENERIC_ATTACK_SPEED,new EntityAttributeModifier("attack_speed",attack_speed, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),AttributeModifierSlot.CHEST));
+               EntityAttributes.GENERIC_MOVEMENT_SPEED,new EntityAttributeModifier(Identifier.of("speed_modifier"),movement_modifier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), AttributeModifierSlot.FEET));
+       entries.add(new AttributeModifiersComponent.Entry(EntityAttributes.GENERIC_ATTACK_DAMAGE,new EntityAttributeModifier(Identifier.of("attack_modifier"),attack_modifier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),AttributeModifierSlot.CHEST));
+       entries.add(new AttributeModifiersComponent.Entry(EntityAttributes.GENERIC_ATTACK_SPEED,new EntityAttributeModifier(Identifier.of("attack_speed"),attack_speed, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),AttributeModifierSlot.CHEST));
        return new AttributeModifiersComponent(entries,true);
     }
 

@@ -87,7 +87,7 @@ public final class ModelHoverboard<T extends HoverboardEntity> extends EntityMod
     }
 
     @Override
-    public void render(final MatrixStack matrices, final VertexConsumer vertices, final int light, final int overlay, final float red, final float green, final float blue, final float alpha) {
-        mainbody.render(matrices, vertices, light, overlay, red, green, blue, alpha);
+    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
+        mainbody.render(matrices, vertices, light, overlay, color);
     }
 }

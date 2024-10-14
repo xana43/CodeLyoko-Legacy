@@ -16,20 +16,14 @@ import org.joml.Matrix4f;
 public record CustomCarthageSky() implements DimensionRenderingRegistry.SkyRenderer/*implements ISkyRenderHandler*/ {
 
 
-    private static final Identifier TEXTURE_LOCATION = new Identifier(CodeLyokoMain.MOD_ID,
+    private static final Identifier TEXTURE_LOCATION = CodeLyokoMain.codeLyokoPrefix(
             "textures/skies/sector5/sector5sky.png");
     private static Tessellator tessellator;
-    private static BufferBuilder bufferBuilder;
 
     @Override
     public void render(final WorldRenderContext context) {
-        if(tessellator == null)
-        {
-            tessellator = Tessellator.getInstance();
-        }
-        if(bufferBuilder == null)
-        {
-            bufferBuilder = tessellator.getBuffer();
+        if(tessellator == null) {
+           tessellator = Tessellator.getInstance();
         }
         RenderSystem.setShaderTexture(0, TEXTURE_LOCATION);
         RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
@@ -39,32 +33,33 @@ public record CustomCarthageSky() implements DimensionRenderingRegistry.SkyRende
             return;
         }
         CodeLyokoMain.LOG.info("Rendering Sky");
+        final Matrix4f positionMatrix = context.positionMatrix();
         matrixStack.push();
-        bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-        buildBuffer(context.positionMatrix());
+        final BufferBuilder bufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
+        buildBuffer(bufferBuilder,positionMatrix);
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90.0F));
-        buildBuffer(context.positionMatrix());
+        buildBuffer(bufferBuilder,positionMatrix);
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0F));
-        buildBuffer(context.positionMatrix());
+        buildBuffer(bufferBuilder,positionMatrix);
         matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90.0F));
-        buildBuffer(context.positionMatrix());
+        buildBuffer(bufferBuilder,positionMatrix);
         matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-90.0F));
-        buildBuffer(context.positionMatrix());
+        buildBuffer(bufferBuilder,positionMatrix);
         matrixStack.multiply(RotationAxis.NEGATIVE_Z.rotationDegrees(90.0F));
-        buildBuffer(context.positionMatrix());
+        buildBuffer(bufferBuilder,positionMatrix);
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
-        buildBuffer(context.positionMatrix());
+        buildBuffer(bufferBuilder,positionMatrix);
 
 
-        tessellator.draw();
+        bufferBuilder.end().close();
 
         matrixStack.pop();
     }
 
-    private static void buildBuffer(Matrix4f matrix4f) {
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 16.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255).next();
+    private static void buildBuffer(final BufferBuilder bufferBuilder,final Matrix4f matrix4f) {
+        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255);
+        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 16.0F).color(40, 40, 40, 255);
+        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 16.0F).color(40, 40, 40, 255);
+        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255);
     }
 }

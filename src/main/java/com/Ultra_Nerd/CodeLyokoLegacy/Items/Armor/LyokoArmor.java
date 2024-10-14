@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.ArmorTicker;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ItemEnchantmentsComponent;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -13,6 +14,7 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.World;
 
@@ -38,7 +40,8 @@ public abstract class LyokoArmor extends ArmorItem implements ArmorTicker {
         super.inventoryTick(stack, world, entity, slot, selected);
 
         if (!stack.hasEnchantments()) {
-            stack.addEnchantment(Enchantments.BINDING_CURSE, Enchantments.BINDING_CURSE.getMaxLevel());
+            final RegistryEntry<Enchantment> bindingCurse = MethodUtil.HelperMethods.getRegistryEntry(world.getRegistryManager(), RegistryKeys.ENCHANTMENT,Enchantments.BINDING_CURSE);
+            stack.addEnchantment(bindingCurse, bindingCurse.value().getMaxLevel());
             stack.apply(DataComponentTypes.ENCHANTMENTS, ItemEnchantmentsComponent.DEFAULT,itemEnchantmentsComponent -> itemEnchantmentsComponent.withShowInTooltip(false));
         }
 

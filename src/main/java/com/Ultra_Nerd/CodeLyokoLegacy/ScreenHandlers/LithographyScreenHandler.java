@@ -11,6 +11,7 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.*;
 import net.minecraft.recipe.book.RecipeBookCategory;
+import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
@@ -19,7 +20,7 @@ import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
 
-public final class LithographyScreenHandler extends AbstractRecipeScreenHandler<Inventory> {
+public final class LithographyScreenHandler extends AbstractRecipeScreenHandler<SingleStackRecipeInput,AbstractCookingRecipe> {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
     private final RecipeType<? extends AbstractCookingRecipe> recipeType;
@@ -81,11 +82,15 @@ public final class LithographyScreenHandler extends AbstractRecipeScreenHandler<
         }
     }
 
-
     @Override
+    public boolean matches(final RecipeEntry<AbstractCookingRecipe> recipe) {
+        return recipe.value().matches(new SingleStackRecipeInput(inventory.getStack(0)),world);
+    }
+
+    /*@Override
     public boolean matches(final RecipeEntry<? extends Recipe<Inventory>> recipe) {
         return recipe.value().matches(inventory,world);
-    }
+    }*/
 
 
     @Override
@@ -169,7 +174,7 @@ public final class LithographyScreenHandler extends AbstractRecipeScreenHandler<
     }
     private boolean isProcessable(final ItemStack stack)
     {
-        return world.getRecipeManager().getFirstMatch(recipeType,new SimpleInventory(stack),world).isPresent();
+        return world.getRecipeManager().getFirstMatch(recipeType,new SingleStackRecipeInput(stack),world).isPresent();
     }
     public int getReactionProgress()
     {

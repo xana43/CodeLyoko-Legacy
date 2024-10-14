@@ -26,10 +26,6 @@ public abstract class LyokoFluid extends FlowableFluid {
         return false;
     }
 
-    @Override
-    protected int getFlowSpeed(final WorldView world) {
-        return 4;
-    }
 
     @Override
     protected int getLevelDecreasePerBlock(final WorldView world) {

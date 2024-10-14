@@ -1,5 +1,5 @@
 {
-  "type": "codelyoko:lithography_recipe",
+  "type": "minecraft:lithography_recipe",
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.0,
@@ -9,16 +9,13 @@
       "item": "codelyoko:silicon_wafer"
     },
     {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:copper_ingot"
     },
     {
-      "item": "codelyoko:cpu_die_x86"
-    },
-    {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:gold_nugget"
     }
   ],
   "result": {
-    "id": "codelyoko:cpu_die_asic"
+    "id": "codelyoko:cpu_die_arm"
   }
 }

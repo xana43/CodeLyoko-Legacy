@@ -1,5 +1,5 @@
 {
-  "type": "codelyoko:reactor_recipe",
+  "type": "minecraft:reactor_recipe",
   "category": "misc",
   "cookingtime": 2600,
   "experience": 0.0,

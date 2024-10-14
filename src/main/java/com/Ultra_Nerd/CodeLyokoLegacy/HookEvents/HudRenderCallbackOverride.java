@@ -7,12 +7,13 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.util.Identifier;
 
 public record HudRenderCallbackOverride() {
     private static final Identifier HUD_TEXTURE =CodeLyokoMain.codeLyokoPrefix("textures/gui/lyoko_health_bar.png");
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public static void consume(final DrawContext context,final float tickDelta)
+    public static void consume(final DrawContext context,final RenderTickCounter tickDelta)
     {
         //if(mc != null) {
         if (mc.player != null) {

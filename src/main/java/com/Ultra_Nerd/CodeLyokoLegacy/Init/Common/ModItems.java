@@ -185,8 +185,8 @@ public record ModItems() {
 
    
 
-    public static final MusicDiscItem LYOKO_THEME;
-    public static final MusicDiscItem LYOKO_THEME_INSTRUMENTAL;
+//    public static final MusicDiscItem LYOKO_THEME;
+ //   public static final MusicDiscItem LYOKO_THEME_INSTRUMENTAL;
     static {
         TEST_MULTIPLAYER_PHONE = registerModItem("test_multiplayer_phone",new MultiplayerPhone(BaseSettings()));
         //spawn items
@@ -279,7 +279,7 @@ public record ModItems() {
         KEY_SPRING = registerComputerItem("key_spring");
         LIQUID_HELIUM_BUCKET = (BucketItem) registerModItem("liquid_helium_bucket",new CustomColorBucket(ModFluids.STILL_LIQUID_HELIUM,
                 new Item.Settings().maxCount(1), ColorHelper.Argb.getArgb(3,255,255,255)));
-    LYOKO_THEME =
+    /*LYOKO_THEME =
         (MusicDiscItem)
             registerModItem(
                 "lyokodisc",
@@ -296,7 +296,7 @@ public record ModItems() {
                     (int) 3.2e23f,
                     ModSounds.LYOKO_THEME_INSTRUMENTAL,
                     new Item.Settings().maxCount(1),
-                    207));
+                    207));*/
         MEGABIT = registerComputerItem("megabit");
         MEGABYTE = registerComputerItem("megabyte");
         MOLTEN_POLYCARBONATE_CONCENTRATE = registerModItem("molten_polycarbonate_concentrate",new Polycarbonate(BaseSettings()));

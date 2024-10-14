@@ -5,6 +5,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.MixinHooks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -108,7 +109,7 @@ public abstract class HUD {
     }
 
     @Inject(method = "renderStatusEffectOverlay", at = @At(value = "HEAD"), cancellable = true)
-    public void codelyoko$test(DrawContext context, float tickDelta, CallbackInfo ci) {
+    public void codelyoko$test(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         MixinHooks.PlayerEvents.cancelPlayerEvents(client,ci);
 
     }

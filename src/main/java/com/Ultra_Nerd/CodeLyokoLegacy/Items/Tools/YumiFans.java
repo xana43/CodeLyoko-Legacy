@@ -1,7 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items.Tools;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities.FanEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
+import net.minecraft.component.EnchantmentEffectComponentTypes;
 import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -10,7 +14,11 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.TridentItem;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -51,15 +59,15 @@ public final class YumiFans extends TridentItem {
     public void onStoppedUsing(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull LivingEntity entityLiving, int timeLeft) {
         //super.onStoppedUsing(stack,worldIn,entityLiving,timeLeft);
         if (entityLiving instanceof PlayerEntity playerentity) {
-            int i = this.getMaxUseTime(stack) - timeLeft;
+            int i = this.getMaxUseTime(stack,entityLiving) - timeLeft;
             if (i >= 10) {
                 final FanEntity fan = new FanEntity(worldIn, playerentity, stack);
                 fan.setPos(playerentity.getX(), playerentity.getEyeY(), playerentity.getZ());
                 fan.setVelocity(playerentity, playerentity.getPitch(),playerentity.getYaw(), 0.0F, 1.25f,0.0F);
                 fan.pickupType = PersistentProjectileEntity.PickupPermission.ALLOWED;
                 worldIn.spawnEntity(fan);
-
-                worldIn.playSound(null, playerentity.getBlockPos(), SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                RegistryEntry<SoundEvent> registryEntry = EnchantmentHelper.getEffect(stack, EnchantmentEffectComponentTypes.TRIDENT_SOUND).orElse(SoundEvents.ITEM_TRIDENT_THROW);
+                worldIn.playSoundFromEntity(null, playerentity, registryEntry.value(), SoundCategory.PLAYERS, 1.0F, 1.0F);
                 if (!playerentity.getAbilities().creativeMode) {
                     playerentity.getInventory().removeOne(stack);
                 }
@@ -89,9 +97,13 @@ public final class YumiFans extends TridentItem {
     @Override
     public void inventoryTick(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
         if (!stack.hasEnchantments()) {
-            stack.addEnchantment(Enchantments.LOYALTY, Enchantments.LOYALTY.getMaxLevel());
-            stack.addEnchantment(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());
-            stack.addEnchantment(Enchantments.IMPALING, Enchantments.IMPALING.getMaxLevel());
+            final DynamicRegistryManager registryManager = worldIn.getRegistryManager();
+            final RegistryEntry<Enchantment> LOYALTY = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.LOYALTY);
+            final RegistryEntry<Enchantment> SHARPNESS = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.SHARPNESS);
+            final RegistryEntry<Enchantment> IMPALING = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.IMPALING);
+            stack.addEnchantment(LOYALTY, LOYALTY.value().getMaxLevel());
+            stack.addEnchantment(SHARPNESS, SHARPNESS.value().getMaxLevel());
+            stack.addEnchantment(IMPALING, IMPALING.value().getMaxLevel());
             //stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
         }
     }

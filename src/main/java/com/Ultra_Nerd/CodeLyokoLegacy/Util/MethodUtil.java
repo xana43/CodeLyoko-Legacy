@@ -26,7 +26,10 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -39,6 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public record MethodUtil() {
@@ -53,7 +57,7 @@ public record MethodUtil() {
     public record AdvancementCreation()
     {
 
-        private static final Identifier DEFAULT_BACKGROUND = new Identifier("textures/gui/advancements/backgrounds" +
+        private static final Identifier DEFAULT_BACKGROUND = Identifier.of("textures/gui/advancements/backgrounds" +
                 "/adventure.png");
         public static AdvancementEntry create(final AdvancementEntry parent,
                                          final ItemConvertible itemConvertible,
@@ -130,7 +134,6 @@ public record MethodUtil() {
                     blockEntity.markDirty();
                 }
             };
-
         }
         public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity,
                 final Fluid... allowedVariant) {
@@ -340,6 +343,13 @@ public record MethodUtil() {
         }
         public record HelperMethods()
         {
+            public static <T> RegistryEntry<T> getRegistryEntry(final DynamicRegistryManager registryManager,final RegistryKey<? extends Registry<? extends T>> registry,final RegistryKey<T> key) {
+                final Optional<RegistryEntry.Reference<T>> registryRef = registryManager.get(registry).getEntry(key);
+                if(registryRef.isPresent()) {
+                    return RegistryEntry.of(registryRef.get().value());
+                }
+                throw new IllegalStateException("registry item not found");
+            }
             public static void outputFluidToAllSides(final World world,final BlockPos pos, final SingleVariantStorage<FluidVariant> variantStorage)
             {
                 for(final Direction dir : Direction.values())

@@ -38,7 +38,7 @@ public final class OverbikeRenderer<T extends OverbikeEntity> extends EntityRend
         matrixStackIn.translate(0, -1.5f, 0);
         this.BikeModel.setAngles(entityIn, 0, 0, 0, 0, 0);
         VertexConsumer vertexBuilder = bufferIn.getBuffer(this.BikeModel.getLayer(this.getTexture(entityIn)));
-        this.BikeModel.render(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.DEFAULT_UV, 1, 1, 1, 1);
+        this.BikeModel.render(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.DEFAULT_UV, 1);
         matrixStackIn.pop();
     }
 

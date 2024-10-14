@@ -76,7 +76,7 @@ public record CodeLyokoMain() implements ModInitializer {
 
     @Contract("_ -> new")
     public static @NotNull Identifier codeLyokoPrefix(final String name) {
-        return new Identifier(MOD_ID, name);
+        return Identifier.of(MOD_ID, name);
     }
 
     private static void registerEnergyStorageBE() {

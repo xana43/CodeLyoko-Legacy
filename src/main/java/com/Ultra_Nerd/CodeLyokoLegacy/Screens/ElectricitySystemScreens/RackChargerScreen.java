@@ -30,6 +30,6 @@ public final class RackChargerScreen extends HandledScreen<RackChargerHandler> {
 
     @Override
     protected void drawBackground(final DrawContext context, final float delta, final int mouseX, final int mouseY) {
-        context.drawTexture(new Identifier("ded"),x,y,0,0,backgroundWidth,backgroundHeight);
+        context.drawTexture(Identifier.of("ded"),x,y,0,0,backgroundWidth,backgroundHeight);
     }
 }

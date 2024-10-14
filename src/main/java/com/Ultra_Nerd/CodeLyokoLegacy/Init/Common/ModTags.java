@@ -23,7 +23,7 @@ public record ModTags() {
         }
         private static TagKey<Block> createCommonTag(final String name)
         {
-            return TagKey.of(Registries.BLOCK.getKey(), new Identifier("c",name));
+            return TagKey.of(Registries.BLOCK.getKey(), Identifier.of("c",name));
         }
         public static final TagKey<Block> URANIUM_ORE_TAG = createCommonTag("raw_uranium_ores");
         public static final TagKey<Block> URANIUM_ORES_TAG = createCommonTag("uranium_ores");
@@ -71,7 +71,7 @@ public record ModTags() {
         public static final TagKey<Item> COMMON_LEAVES = createCommonTag("leaves");
         private static TagKey<Item> createCommonTag(final String name)
         {
-            return TagKey.of(Registries.ITEM.getKey(), new Identifier("c",name));
+            return TagKey.of(Registries.ITEM.getKey(), Identifier.of("c",name));
         }
         public static final TagKey<Item> LYOKO_ITEM = TagKey.of(RegistryKeys.ITEM,
                 CodeLyokoMain.codeLyokoPrefix("lyoko_item"));
@@ -85,7 +85,7 @@ public record ModTags() {
 
         private static TagKey<Fluid> createCommonTag(final String name)
         {
-            return TagKey.of(Registries.FLUID.getKey(), new Identifier("c",name));
+            return TagKey.of(Registries.FLUID.getKey(), Identifier.of("c",name));
         }
     }
 }

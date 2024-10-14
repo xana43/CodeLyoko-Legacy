@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.7.0-alpha.2'
+	id 'fabric-loom' version '1.8-SNAPSHOT'
 	id 'maven-publish'
 	//id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
@@ -18,7 +18,10 @@ repositories {
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
 	//gekolib
-
+	maven {
+		name = "FelNull Maven"
+		url = "https://maven.felnull.dev"
+	}
 	maven {
 		name = 'GeckoLib'
 		url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
@@ -33,10 +36,7 @@ repositories {
 	}
 
 	maven { url 'https://maven.nucleoid.xyz' } // You should have it
-
-	repositories {
-		maven { url "https://maven.shedaniel.me" }
-	}
+	maven { url "https://maven.shedaniel.me" }
 
 
 }
@@ -61,7 +61,8 @@ dependencies {
 	include "org.ladysnake.cardinal-components-api:cardinal-components-level:${cca_version}"
 	include "org.ladysnake.cardinal-components-api:cardinal-components-base:${cca_version}"
 	include "org.ladysnake.cardinal-components-api:cardinal-components-entity:${cca_version}"
-
+	modApi "dev.felnull:special-model-loader:${obj}"
+	include "dev.felnull:special-model-loader:${obj}"
 
 	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${REI}"
 	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${REI}"

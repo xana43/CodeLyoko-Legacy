@@ -159,7 +159,7 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
         {
             getOrCreateTagBuilder(ModTags.Blocks.URANIUM_ORE_TAG).add(block);
             getOrCreateTagBuilder(ModTags.Blocks.URANIUM_ORES_TAG).add(block);
-            getOrCreateTagBuilder(TagKey.of(Registries.BLOCK.getKey(), new Identifier("c","ores"))).add(block);
+            getOrCreateTagBuilder(TagKey.of(Registries.BLOCK.getKey(), Identifier.of("c","ores"))).add(block);
         }
         getOrCreateTagBuilder(ModTags.Blocks.URANIUM_235_BLOCKS).add(ModBlocks.URANIUM_BLOCK_235);
         getOrCreateTagBuilder(ModTags.Blocks.URANIUM_238_BLOCKS).add(ModBlocks.URANIUM_BLOCK_238);
@@ -169,7 +169,7 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
         for (final Block block : commonLeaves)
         {
             getOrCreateTagBuilder(BlockTags.LEAVES).add(block);
-            getOrCreateTagBuilder(TagKey.of(Registries.BLOCK.getKey(), new Identifier("c","leaves"))).add(block);
+            getOrCreateTagBuilder(TagKey.of(Registries.BLOCK.getKey(), Identifier.of("c","leaves"))).add(block);
         }
         getOrCreateTagBuilder(BlockTags.CHERRY_LOGS).add(ModBlocks.DIGITAL_WOOD_MOUNTAIN);
         getOrCreateTagBuilder(BlockTags.JUNGLE_LOGS).add(ModBlocks.DIGITAL_WOOD_FOREST);

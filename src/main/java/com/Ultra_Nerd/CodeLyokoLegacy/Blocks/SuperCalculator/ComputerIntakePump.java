@@ -27,7 +27,7 @@ public final class ComputerIntakePump extends Block implements BlockEntityProvid
 
     @Override
     public BlockRenderType getRenderType(final BlockState state) {
-        return BlockRenderType.MODEL;
+        return BlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 
     @Override

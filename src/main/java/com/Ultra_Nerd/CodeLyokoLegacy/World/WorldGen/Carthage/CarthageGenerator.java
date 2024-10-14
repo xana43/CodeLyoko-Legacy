@@ -25,7 +25,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
 
 public final class CarthageGenerator extends ChunkGenerator {
 
@@ -158,11 +157,11 @@ public final class CarthageGenerator extends ChunkGenerator {
         return 0;
     }
 
-
     @Override
-    public CompletableFuture<Chunk> populateNoise(final Executor executor, final Blender blender, final NoiseConfig noiseConfig, final StructureAccessor structureAccessor, final Chunk chunk) {
+    public CompletableFuture<Chunk> populateNoise(Blender blender, NoiseConfig noiseConfig, StructureAccessor structureAccessor, Chunk chunk) {
         return CompletableFuture.completedFuture(chunk);
     }
+
 
     @Override
     public int getSeaLevel() {

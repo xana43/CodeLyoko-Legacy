@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.ReactorRecipe;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ReactorScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.EnergyStorageBlockEntityInventory;
@@ -18,19 +19,23 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.*;
+import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.recipe.RecipeInputProvider;
+import net.minecraft.recipe.RecipeManager;
+import net.minecraft.recipe.RecipeMatcher;
+import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -43,7 +48,7 @@ private int fuelMass;
 private int irradiationTime;
 private int irradiationTimeTotal;
 private final Object2IntOpenHashMap<Identifier> recipesUsed = new Object2IntOpenHashMap<>();
-private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecipe> matchGetter;
+private final RecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> matchGetter;
     private final SingleVariantStorage<FluidVariant> wasteTank =
             MethodUtil.FluidStorageCreation.createFluidStorage(this, ModFluids.STILL_URANIUM);
     private final Storage<FluidVariant> extractionOfWasteTank = FilteringStorage.extractOnlyOf(wasteTank);
@@ -108,7 +113,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
         fuelMass = getFuelTime(itemStacks.getFirst());
         final NbtCompound nbtCompound = nbt.getCompound("RecipesUsed");
         for (final String string : nbtCompound.getKeys()) {
-            recipesUsed.put(new Identifier(string), nbtCompound.getInt(string));
+            recipesUsed.put(CodeLyokoMain.codeLyokoPrefix(string), nbtCompound.getInt(string));
         }
 
     }
@@ -154,7 +159,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
             if(isCurrentItemStackEmpty)
             {
 
-                recipe = matchGetter.getFirstMatch(this,world).orElse(null);
+                recipe = matchGetter.getFirstMatch(new SingleStackRecipeInput(this.getStack(0)),world).orElse(null);
             }
             else {
                 recipe = null;
@@ -245,7 +250,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
         }
     }
 
-    private static boolean craftRecipe(final DynamicRegistryManager registryManager,final @Nullable RecipeEntry<?> recipe,
+    private boolean craftRecipe(final DynamicRegistryManager registryManager,final @Nullable RecipeEntry<?> recipe,
             final DefaultedList<ItemStack> slots,final int count) {
         if (recipe != null && canAcceptRecipeOutput(registryManager, recipe, slots, count)) {
             final ItemStack itemStack = slots.get(0);
@@ -257,14 +262,14 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
                 itemStack3.increment(1);
             }
 
-
-            if(itemStack.isIn(ModTags.ItemTags.URANIUM_BATTERIES))
-            {
-
-                itemStack.damage(10,Random.createLocal(),null,() -> {});
-            }
-            else {
-                itemStack.decrement(1);
+            assert this.world != null;
+            if(!this.world.isClient) {
+                if (itemStack.isIn(ModTags.ItemTags.URANIUM_BATTERIES)) {
+                    itemStack.damage(10, (ServerWorld) this.world, null, item -> {
+                    });
+                } else {
+                    itemStack.decrement(1);
+                }
             }
             return true;
         } else {
@@ -324,7 +329,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
 
     private static int getCookTime(final World world,final ComputerReactorBlockEntityInventory reactorTileEntityInventory)
     {
-        return reactorTileEntityInventory.matchGetter.getFirstMatch(reactorTileEntityInventory, world).map(recipeEntry -> recipeEntry.value().getCookingTime()).orElse(200);
+        return reactorTileEntityInventory.matchGetter.getFirstMatch(new SingleStackRecipeInput(reactorTileEntityInventory.getStack(0)), world).map(recipeEntry -> recipeEntry.value().getCookingTime()).orElse(200);
     }
     public void setLastRecipe(final RecipeEntry<?> recipe)
     {

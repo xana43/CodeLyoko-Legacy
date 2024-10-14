@@ -12,6 +12,7 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.*;
 import net.minecraft.recipe.book.RecipeBookCategory;
+import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
@@ -19,11 +20,10 @@ import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.world.World;
 
-public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inventory> {
+public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<SingleStackRecipeInput, AbstractCookingRecipe> {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
     private final RecipeType<? extends AbstractCookingRecipe> recipeType;
-
     private final World world;
     public ReactorScreenHandler(final int syncId, final PlayerInventory playerInventory) {
         this(syncId, playerInventory, new SimpleInventory(2), new ArrayPropertyDelegate(8));
@@ -61,6 +61,10 @@ public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inve
         getSlot(1).setStackNoCallbacks(ItemStack.EMPTY);
     }
 
+    @Override
+    public boolean matches(final RecipeEntry<AbstractCookingRecipe> recipe) {
+        return recipe.value().matches(new SingleStackRecipeInput(inventory.getStack(0)), this.world);
+    }
 
 
     @Override
@@ -69,12 +73,6 @@ public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inve
         {
             recipeInputProvider.provideRecipeInputs(finder);
         }
-    }
-
-
-    @Override
-    public boolean matches(final RecipeEntry<? extends Recipe<Inventory>> recipe) {
-        return recipe.value().matches(inventory,world);
     }
 
 
@@ -167,7 +165,7 @@ public final class ReactorScreenHandler extends AbstractRecipeScreenHandler<Inve
     }
     private boolean isReactable(final ItemStack stack)
     {
-        return world.getRecipeManager().getFirstMatch(recipeType,new SimpleInventory(stack),world).isPresent();
+        return world.getRecipeManager().getFirstMatch(recipeType,new SingleStackRecipeInput(stack),world).isPresent();
     }
     public int getReactionProgress()
     {

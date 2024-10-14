@@ -1,13 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items.Armor;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ArmorTicker;
-import net.minecraft.client.item.TooltipType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;

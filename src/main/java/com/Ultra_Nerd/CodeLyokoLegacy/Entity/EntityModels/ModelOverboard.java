@@ -233,8 +233,8 @@ public final class ModelOverboard<T extends OverboardEntity> extends EntityModel
 
 
     @Override
-    public void render(MatrixStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        Mainbody.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+    public void render(MatrixStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, final int color) {
+        Mainbody.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
 
 
     }

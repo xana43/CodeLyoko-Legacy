@@ -1,68 +1,43 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerFluidIntakeBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.GeneralRendererUtils.CommonRenderRoutines;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.*;
+import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
+import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.RotationAxis;
-import org.joml.Matrix4f;
-
-import java.util.Objects;
+import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
 public record ComputerIntakePumpRenderer(BlockEntityRendererFactory.Context context) implements BlockEntityRenderer<ComputerFluidIntakeBlockEntity> {
-    private static final Tessellator tessellator = Tessellator.getInstance();
-    private static final BufferBuilder bufferbuilder = tessellator.getBuffer();
     @Override
     public void render(final ComputerFluidIntakeBlockEntity entity, final float tickDelta, final MatrixStack matrices,
             final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {
-        //RenderSystem.setShader(GameRenderer::getPositionColorLightmapProgram);
-        final int worldLight = WorldRenderer.getLightmapCoordinates(
-                Objects.requireNonNull(entity.getWorld()),entity.getPos().up());
 
-        for (int i = 0; i < 6; ++i) {
-            matrices.push();
-            switch (i)
-            {
-                case 1 -> {
-                    matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90));
-                    matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(0));
-                }
-                case 2 -> {
-                    matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90));
-                    matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180));
-                }
-                case 3 -> matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0F));
-                case 4 -> {
-
-                    matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-90.0F));
-                    matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90));
-                }
-                case 5 -> {
-
-                    matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90.0F));
-                    matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-90));
-                }
-
-            }
-
-            bufferbuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_LIGHT);
-            final Matrix4f matrix4f = matrices.peek().getPositionMatrix();
-            bufferbuilder.vertex(matrix4f, .5f, .5f, -.5f).color(3, 37,
-                    126, 255).light(worldLight).next();
-            bufferbuilder.vertex(matrix4f, -.5f, .5f, -.5f).color(3, 37,
-                    126, 255).light(worldLight).next();
-            bufferbuilder.vertex(matrix4f, -.5f, .5f, .5f).color(3, 37,
-                    126, 255).light(worldLight).next();
-            bufferbuilder.vertex(matrix4f, .5f, .5f, .5f).color(3, 37,
-                    126, 255).light(worldLight).next();
-
-            tessellator.draw();
-            matrices.pop();
+        final long fluidAmount = entity.getStoredFluid();
+        if (fluidAmount == 0L) {
+            return;
         }
+        final FluidVariant storedFluid = entity.getStoredFluidVariant();
+        final long capacity = entity.getCapacity();
+        float fillPercentage = (float) fluidAmount / capacity;
+        fillPercentage = MathHelper.clamp(fillPercentage, 0, 1);
+        final int fluidColor = FluidVariantRendering.getColor(storedFluid, entity.getWorld(), entity.getPos());
+        final Sprite fluidSprite = FluidVariantRendering.getSprites(storedFluid)[0];
+        final RenderLayer layer = RenderLayers.getFluidLayer(storedFluid.getFluid().getDefaultState());
+        final VertexConsumer vertexConsumer = vertexConsumers.getBuffer(layer);
+
+        CommonRenderRoutines.QuadRender.drawCalculatedSize(fluidSprite, 0, 16, 16, fillPercentage, vertexConsumer, matrices, fluidColor, light, overlay);
+
 
     }
-}
+    }
+

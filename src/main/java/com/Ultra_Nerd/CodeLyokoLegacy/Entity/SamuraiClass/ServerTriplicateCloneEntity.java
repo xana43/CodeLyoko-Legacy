@@ -35,10 +35,6 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
 
 
 
-    @Override
-    protected void dropXp() {
-
-    }
 
 
     public void setOwner(final GameProfile player,final MinecraftServer server)
@@ -101,7 +97,7 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
             } else if (slot == EquipmentSlot.OFFHAND) {
                 return this.inventory.offHand.get(0);
             } else {
-                return slot.getType() == EquipmentSlot.Type.ARMOR ? this.inventory.armor.get(slot.getEntitySlotId()) : ItemStack.EMPTY;
+                return slot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR ? this.inventory.armor.get(slot.getEntitySlotId()) : ItemStack.EMPTY;
             }
         }
         return ItemStack.EMPTY;
@@ -114,7 +110,7 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
                 this.onEquipStack(slot, this.inventory.main.set(this.inventory.selectedSlot, stack), stack);
             } else if (slot == EquipmentSlot.OFFHAND) {
                 this.onEquipStack(slot, this.inventory.offHand.set(0, stack), stack);
-            } else if (slot.getType() == EquipmentSlot.Type.ARMOR) {
+            } else if (slot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR) {
                 this.onEquipStack(slot, this.inventory.armor.set(slot.getEntitySlotId(), stack), stack);
             }
         }

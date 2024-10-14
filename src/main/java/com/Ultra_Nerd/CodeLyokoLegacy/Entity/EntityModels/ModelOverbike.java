@@ -619,9 +619,9 @@ public class ModelOverbike extends EntityModel<OverbikeEntity> {
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-        tire.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        seat.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, final int color) {
+        tire.render(matrices, vertexConsumer, light, overlay, color);
+        seat.render(matrices, vertexConsumer, light, overlay, color);
     }
 
     @Override

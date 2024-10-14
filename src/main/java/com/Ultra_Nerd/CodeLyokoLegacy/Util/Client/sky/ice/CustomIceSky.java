@@ -21,20 +21,13 @@ public record CustomIceSky() implements DimensionRenderingRegistry.SkyRenderer {
     private static final Identifier sky1 = CodeLyokoMain.codeLyokoPrefix("textures/skies/ice/ice_sky.png");
 
     private static Tessellator tessellator;
-    private static BufferBuilder bufferBuilder;
 
     @Override
     public void render(WorldRenderContext context) {
-        // mc.textureManager.bindTexture(texturelocation);
-
-        if(tessellator == null)
-        {
+        if(tessellator == null) {
             tessellator = Tessellator.getInstance();
         }
-        if(bufferBuilder == null)
-        {
-            bufferBuilder = tessellator.getBuffer();
-        }
+        // mc.textureManager.bindTexture(texturelocation);
         RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
         RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
 
@@ -78,12 +71,13 @@ public record CustomIceSky() implements DimensionRenderingRegistry.SkyRenderer {
             }
         }
         final Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
-        bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 0.5F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 0.5F).color(40, 40, 40, 255).next();
-        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255).next();
-        tessellator.draw();
+
+        final BufferBuilder bufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
+        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0.0F, 0.0F).color(40, 40, 40, 255);
+        bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, 100.0F).texture(0.0F, 0.5F).color(40, 40, 40, 255);
+        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, 100.0F).texture(16.0F, 0.5F).color(40, 40, 40, 255);
+        bufferBuilder.vertex(matrix4f, 100.0F, -100.0F, -100.0F).texture(16.0F, 0.0F).color(40, 40, 40, 255);
+        bufferBuilder.end().close();
         matrixStack.pop();
     }
 

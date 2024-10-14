@@ -1,7 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.RegistryWrapper;
@@ -29,8 +28,8 @@ public record LanguageGenerators() {
 
             translationBuilder.add(ModBlocks.COMPUTER_LIQUID_INTAKE_PUMP,"Fluid Intake Pump");
             translationBuilder.add(ModBlocks.COMPUTER_LIQUID_PIPE,"Basic Fluid Pipe");
-            translationBuilder.add(ModItems.LYOKO_THEME_INSTRUMENTAL,"CodeLyoko Theme song (Instrumental Remix)");
-            translationBuilder.add(ModItems.LYOKO_THEME_INSTRUMENTAL.getTranslationKey()+".desc","A World Without Danger (Instrumental Remix) - FractelLegend");
+//            translationBuilder.add(ModItems.LYOKO_THEME_INSTRUMENTAL,"CodeLyoko Theme song (Instrumental Remix)");
+  //          translationBuilder.add(ModItems.LYOKO_THEME_INSTRUMENTAL.getTranslationKey()+".desc","A World Without Danger (Instrumental Remix) - FractelLegend");
             //custom translation keys
             translationBuilder.add("discovered.super_calculator","And so it begins");
             translationBuilder.add("discovered.super_calculator.description","you'd found the schematics for an " +
@@ -66,8 +65,8 @@ public record LanguageGenerators() {
 
         @Override
         public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup,final TranslationBuilder translationBuilder) {
-            translationBuilder.add(ModItems.LYOKO_THEME_INSTRUMENTAL,"Générique de CodeLyoko (Remix d'Instrumental)");
-            translationBuilder.add(ModItems.LYOKO_THEME_INSTRUMENTAL.getTranslationKey()+".desc","Un Monde Sans Danger (Remix d'Instrumental) - FractelLegend");
+            //translationBuilder.add(ModItems.LYOKO_THEME_INSTRUMENTAL,"Générique de CodeLyoko (Remix d'Instrumental)");
+            //translationBuilder.add(ModItems.LYOKO_THEME_INSTRUMENTAL.getTranslationKey()+".desc","Un Monde Sans Danger (Remix d'Instrumental) - FractelLegend");
             try{
                 final Optional<Path> optionalPath = dataOutput.getModContainer().findPath("assets/codelyoko/lang/fr_fr.existing.json");
                 if(optionalPath.isPresent()) {

@@ -28,7 +28,6 @@ public final class ForceFieldEmitter extends BowItem {
         super(settings);
     }
 
-    @Override
     public int getMaxUseTime(final ItemStack stack) {
         return 72000;
     }

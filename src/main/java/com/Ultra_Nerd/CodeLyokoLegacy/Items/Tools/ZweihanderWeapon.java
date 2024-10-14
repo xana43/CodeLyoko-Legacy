@@ -1,13 +1,18 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items.Tools;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Hand;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
@@ -52,8 +57,11 @@ public final class ZweihanderWeapon extends SwordItem {
 
         }
         if (!stack.hasEnchantments()) {
-            stack.addEnchantment(Enchantments.SWEEPING_EDGE, Enchantments.SWEEPING_EDGE.getMaxLevel());
-            stack.addEnchantment(Enchantments.SHARPNESS, Enchantments.SHARPNESS.getMaxLevel());
+            final DynamicRegistryManager registryManager = worldIn.getRegistryManager();
+            final RegistryEntry<Enchantment> SWEEPING_EDGE = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.SWEEPING_EDGE);
+            final RegistryEntry<Enchantment> SHARPNESS = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.SHARPNESS);
+            stack.addEnchantment(SWEEPING_EDGE,SWEEPING_EDGE.value().getMaxLevel());
+            stack.addEnchantment(SHARPNESS, SHARPNESS.value().getMaxLevel());
             //stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
 
 

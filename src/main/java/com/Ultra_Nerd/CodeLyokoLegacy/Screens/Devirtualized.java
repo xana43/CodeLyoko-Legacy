@@ -85,7 +85,7 @@ public final class Devirtualized extends Screen {
         this.client.disconnect(new MessageScreen(Text.translatable("menu.savingLevel")));
         this.client.setScreen(new CustomMenuScreen(true));
     }
-    private static final Identifier DRAFT_REPORT_ICON_TEXTURE = new Identifier("icon/draft_report");
+    private static final Identifier DRAFT_REPORT_ICON_TEXTURE = Identifier.of("icon/draft_report");
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         context.fillGradient(0, 0, this.width, this.height, 1615855616, -1602211792);
         context.getMatrices().push();

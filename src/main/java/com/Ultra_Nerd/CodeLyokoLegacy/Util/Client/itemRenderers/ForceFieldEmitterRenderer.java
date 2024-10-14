@@ -39,7 +39,7 @@ public record ForceFieldEmitterRenderer(MinecraftClient mc) implements BuiltinIt
         if (stack.getItem() instanceof final ForceFieldEmitter forceFieldEmitter) {
 
             final float pull = ForceFieldEmitter.getPullProgress(
-                    stack.getMaxUseTime() - forceFieldEmitter.publicUseTicks);
+                    stack.getMaxUseTime(mc.player) - forceFieldEmitter.publicUseTicks);
 
             matrices.scale(pull, pull, pull);
 

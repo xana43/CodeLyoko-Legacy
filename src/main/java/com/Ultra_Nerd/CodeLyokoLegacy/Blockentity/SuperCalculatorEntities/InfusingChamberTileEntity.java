@@ -95,7 +95,7 @@ public final class InfusingChamberTileEntity extends EnergyStorageBlockEntityInv
         currentInfusingTimeTotal = nbt.getInt(CurrentInfusingTimeTotal);
         final NbtCompound compound = nbt.getCompound(RecipesUsed);
         for(final String string : compound.getKeys()) {
-            recipesUsed.put(new Identifier(string),compound.getInt(string));
+            recipesUsed.put(Identifier.of(string),compound.getInt(string));
 
         }
     }

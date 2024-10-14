@@ -11,8 +11,8 @@ import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.util.Identifier;
 
 public record LootTableOverride() {
-    private static final Identifier SUS_SAND_DESERT_ID = new Identifier("minecraft","archaeology/desert_pyramid");
-    private static final Identifier JUNGLE_TEMPLE_ID = new Identifier("minecraft","chests/jungle_temple");
+    private static final Identifier SUS_SAND_DESERT_ID = Identifier.of("minecraft","archaeology/desert_pyramid");
+    private static final Identifier JUNGLE_TEMPLE_ID = Identifier.of("minecraft","chests/jungle_temple");
     public static void modifyLootTables()
     {
        LootTableEvents.MODIFY.register((key,tableBuilder,source) -> {
