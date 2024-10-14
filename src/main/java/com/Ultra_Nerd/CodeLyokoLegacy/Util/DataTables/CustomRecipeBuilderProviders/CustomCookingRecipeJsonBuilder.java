@@ -33,16 +33,16 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
     private final int cookingTime;
   private final Map<String, AdvancementCriterion<?>> criteria = new Object2ObjectLinkedOpenHashMap<>();
     private String group;
-    private final RecipeSerializer<? extends AbstractCookingRecipe> serializer;
+    private final AbstractCookingRecipe.RecipeFactory<?> factory;
 
-    private CustomCookingRecipeJsonBuilder(final RecipeCategory category, final CookingRecipeCategory cookingRecipeCategory, final ItemConvertible output, final Ingredient input, final float experience, final int cookingTime, final RecipeSerializer<? extends AbstractCookingRecipe> serializer) {
+    private CustomCookingRecipeJsonBuilder(final RecipeCategory category, final CookingRecipeCategory cookingRecipeCategory, final ItemConvertible output, final Ingredient input, final float experience, final int cookingTime, AbstractCookingRecipe.RecipeFactory<?> factory) {
         this.category = category;
         this.cookingRecipeCategory = cookingRecipeCategory;
         this.output = output.asItem();
         this.input = input;
         this.experience = experience;
         this.cookingTime = cookingTime;
-        this.serializer = serializer;
+        this.factory = factory;
     }
 
     @Override
@@ -67,8 +67,8 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
         return 200;
     }
 
-    public static CustomCookingRecipeJsonBuilder create(final Ingredient input, final RecipeCategory category, final ItemConvertible output, final float experience, final RecipeSerializer<? extends AbstractCookingRecipe> serializer) {
-        return new CustomCookingRecipeJsonBuilder(category, CookingRecipeCategory.MISC, output, input, experience, getModFuelTime(input), serializer);
+    public static <T extends AbstractCookingRecipe> CustomCookingRecipeJsonBuilder create(final Ingredient input, final RecipeCategory category, final ItemConvertible output, final float experience, final RecipeSerializer<T> serializer,final AbstractCookingRecipe.RecipeFactory<?> factory) {
+        return new CustomCookingRecipeJsonBuilder(category, CookingRecipeCategory.MISC, output, input, experience, getModFuelTime(input), factory);
     }
 
     @Override
@@ -88,7 +88,8 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
         final Advancement.Builder builder = exporter.getAdvancementBuilder().criterion("has_the_recipe",RecipeUnlockedCriterion.create(recipeId)).rewards(AdvancementRewards.Builder.recipe(recipeId)).criteriaMerger(AdvancementRequirements.CriterionMerger.OR);
         Objects.requireNonNull(builder);
         this.criteria.forEach(builder::criterion);
-        //exporter.accept(new CustomCookingRecipeJsonProvider(recipeId, this.group == null ? "" : this.group, this.cookingRecipeCategory, input, output, experience, cookingTime, builder.build(recipeId.withPrefixedPath("recipes/" + this.category.getName() + "/")), serializer));
+        AbstractCookingRecipe abstractCookingRecipe = this.factory.create(Objects.requireNonNullElse(this.group,""),this.cookingRecipeCategory,input,new ItemStack(output),experience,cookingTime);
+        exporter.accept(recipeId,abstractCookingRecipe, builder.build(recipeId.withPrefixedPath("recipes/" + this.category.getName() + "/")));
     }
 
   /*  private record CustomCookingRecipeJsonProvider(Identifier recipeId, String group

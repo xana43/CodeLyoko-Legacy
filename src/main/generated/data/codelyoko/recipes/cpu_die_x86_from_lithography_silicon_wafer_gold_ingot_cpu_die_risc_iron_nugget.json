@@ -18,5 +18,7 @@
       "item": "minecraft:iron_nugget"
     }
   ],
-  "result": "codelyoko:cpu_die_x86"
+  "result": {
+    "id": "codelyoko:cpu_die_x86"
+  }
 }

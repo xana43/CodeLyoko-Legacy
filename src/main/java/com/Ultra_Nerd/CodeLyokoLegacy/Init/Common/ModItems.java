@@ -129,6 +129,7 @@ public record ModItems() {
     public static final Item TRUSTY_SCREWDRIVER;
     public static final Item TERABIT;
     public static final Item TERABYTE;
+    public static final Item TITANIUM_DIOXIDE;
     public static final Item TITANIUM_INGOT;
     public static final Item URANIUM_SILICATE;
     public static final Item URANIUM_SILICON_PLATE;
@@ -318,6 +319,7 @@ public record ModItems() {
                 new Item.Settings().maxCount(1)));
         TERABIT = registerGenericItem("terabit");
         TERABYTE = registerGenericItem("terabyte");
+        TITANIUM_DIOXIDE = registerComputerItem("titanium_dioxide");
         TITANIUM_INGOT = registerGenericItem("titanium_ingot");
         URANIUM_SILICATE = registerGenericItem("uranium_silicate");
         URANIUM_SILICON_PLATE = registerGenericItem("uranium_silicon_plate");

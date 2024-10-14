@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "codelyoko:silicon_wafer"
-            ]
+            "items": "codelyoko:silicon_wafer"
           }
         ]
       },
@@ -30,6 +28,5 @@
     "recipes": [
       "codelyoko:polycarbonate"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

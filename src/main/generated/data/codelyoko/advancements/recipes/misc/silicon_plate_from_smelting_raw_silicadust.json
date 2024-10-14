@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "codelyoko:raw_silicadust"
-            ]
+            "items": "codelyoko:raw_silicadust"
           }
         ]
       },
@@ -30,6 +28,5 @@
     "recipes": [
       "minecraft:silicon_plate_from_smelting_raw_silicadust"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

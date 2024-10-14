@@ -159,7 +159,7 @@ public record CodeLyokoMain() implements ModInitializer {
 
         ModParticles.registerParticles();
         Registry.register(Registries.CHUNK_GENERATOR, codeLyokoPrefix("carthage_chunkgen"), CarthageGenerator.CARTHAGE_GENERATOR_CODEC);
-        //ModScreenHandlers.registerScreenHandlers();
+        ModScreenHandlers.registerScreenHandlers();
         ModStructures.registerNewStructures();
 
 

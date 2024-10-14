@@ -33,6 +33,5 @@
     "recipes": [
       "minecraft:cpu_die_x86_from_lithography_silicon_wafer_gold_ingot_cpu_die_risc_iron_nugget"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

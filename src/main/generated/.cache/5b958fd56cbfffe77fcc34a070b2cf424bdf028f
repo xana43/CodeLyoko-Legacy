@@ -1,4 +1,4 @@
-// 1.20.2	2023-12-07T13:22:43.54593107	CodeLyokoLegacy/world provider
+// 1.20.6	2024-08-08T16:07:38.392025838	CodeLyokoLegacy/world provider
 57808db34668cf84e3fa34a8a43bd0c215da4654 data/codelyoko/worldgen/configured_feature/bornite_ore_overworld.json
 9618efcd93d5369ed99864ffaf43c5422bfc0964 data/codelyoko/worldgen/biome/forest_sector.json
 110d26a26e2fdfa908e87b07c553cb6a15b0d3fc data/codelyoko/worldgen/placed_feature/coffinite_ore_overworld.json
@@ -13,7 +13,7 @@ ba08982ac9676c4cf2af69f86310e63be99b5429 data/codelyoko/worldgen/configured_feat
 d90a44ce7f494819cb1145ecad4a124395f39ef2 data/codelyoko/worldgen/biome/desert_sector.json
 03d5a237e8ce44307cc5ce133b3333294c2dcc97 data/codelyoko/worldgen/biome/void_frontier.json
 76a48ee2afb3d739356d34803c74e0540a26163b data/codelyoko/worldgen/biome/volcano_replika.json
-588cfd32d375b470fc2bf96f048cc79e1c454986 data/codelyoko/worldgen/placed_feature/autunite_ore_overworld.json
 deb3dce69ccb06cd0ab52fc2e54d247f149b9eee data/codelyoko/worldgen/configured_feature/autunite_ore_overworld.json
+588cfd32d375b470fc2bf96f048cc79e1c454986 data/codelyoko/worldgen/placed_feature/autunite_ore_overworld.json
 914108b68dbfc1f1acbb97e27e325f15eb93e5cc data/codelyoko/worldgen/placed_feature/lyoko_forest_tree.json
 2d1ef328a28c1049056fa1f2d720a37313f86bca data/codelyoko/worldgen/biome/digital_ocean.json

@@ -19,9 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "codelyoko:cathodepart"
-            ]
+            "items": "codelyoko:cathodepart"
           }
         ]
       },
@@ -38,6 +36,5 @@
     "recipes": [
       "codelyoko:cathode"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

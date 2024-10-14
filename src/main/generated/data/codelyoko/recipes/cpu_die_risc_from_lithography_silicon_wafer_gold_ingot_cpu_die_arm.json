@@ -15,5 +15,7 @@
       "item": "codelyoko:cpu_die_arm"
     }
   ],
-  "result": "codelyoko:cpu_die_risc"
+  "result": {
+    "id": "codelyoko:cpu_die_risc"
+  }
 }

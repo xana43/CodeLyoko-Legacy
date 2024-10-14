@@ -12,7 +12,7 @@
     "###"
   ],
   "result": {
-    "item": "codelyoko:uranium_block_235"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "codelyoko:uranium_block_235"
+  }
 }

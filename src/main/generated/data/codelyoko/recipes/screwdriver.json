@@ -23,7 +23,7 @@
     "hhh"
   ],
   "result": {
-    "item": "codelyoko:trusty_screwdriver"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "codelyoko:trusty_screwdriver"
+  }
 }

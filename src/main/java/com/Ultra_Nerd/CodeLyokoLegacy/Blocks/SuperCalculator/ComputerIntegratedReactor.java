@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculator;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ComputerReactorBlockEntityInventory;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -11,7 +10,6 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -19,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 public final class ComputerIntegratedReactor extends AbstractFurnaceBlock implements BlockEntityProvider {
     public ComputerIntegratedReactor() {
-        super(FabricBlockSettings.copy(Blocks.IRON_BLOCK).strength(6, 10).sounds(BlockSoundGroup.METAL));
+        super(Settings.copy(Blocks.IRON_BLOCK));
     }
 
     @Nullable

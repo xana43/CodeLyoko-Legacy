@@ -19,9 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "codelyoko:trusty_screwdriver"
-            ]
+            "items": "codelyoko:trusty_screwdriver"
           }
         ]
       },
@@ -38,6 +36,5 @@
     "recipes": [
       "codelyoko:screwdriver"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

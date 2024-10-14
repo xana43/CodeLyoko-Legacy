@@ -20,7 +20,7 @@
     "i i"
   ],
   "result": {
-    "item": "codelyoko:key_spring"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "codelyoko:key_spring"
+  }
 }

@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "codelyoko:uranium_isotope238"
-            ]
+            "items": "codelyoko:uranium_isotope238"
           }
         ]
       },
@@ -30,6 +28,5 @@
     "recipes": [
       "minecraft:uranium_block_238"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

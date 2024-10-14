@@ -19,9 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "codelyoko:integrated_heat_spreader"
-            ]
+            "items": "codelyoko:integrated_heat_spreader"
           }
         ]
       },
@@ -38,6 +36,5 @@
     "recipes": [
       "codelyoko:ihs"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

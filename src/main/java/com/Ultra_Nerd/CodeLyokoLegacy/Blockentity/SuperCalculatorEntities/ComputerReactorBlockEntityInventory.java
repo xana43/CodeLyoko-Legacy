@@ -105,7 +105,7 @@ private final RecipeManager.MatchGetter<Inventory,? extends AbstractCookingRecip
         reactionTime = nbt.getInt("ReactionTime");
         irradiationTime = nbt.getInt("IrradiationTime");
         irradiationTimeTotal = nbt.getInt("IrradiationTimeTotal");
-        fuelMass = getFuelTime(itemStacks.get(0));
+        fuelMass = getFuelTime(itemStacks.getFirst());
         final NbtCompound nbtCompound = nbt.getCompound("RecipesUsed");
         for (final String string : nbtCompound.getKeys()) {
             recipesUsed.put(new Identifier(string), nbtCompound.getInt(string));

@@ -3,9 +3,7 @@
     "found_schematics": {
       "conditions": {
         "item": {
-          "items": [
-            "codelyoko:story_book"
-          ]
+          "items": "codelyoko:story_book"
         },
         "player": [
           {
@@ -19,17 +17,15 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
     "description": {
       "translate": "starter.schematic.description"
     },
     "frame": "goal",
-    "hidden": false,
     "icon": {
-      "item": "codelyoko:cpu_die_arm"
+      "count": 1,
+      "id": "codelyoko:cpu_die_arm"
     },
-    "show_toast": true,
     "title": {
       "translate": "starter.schematic"
     }

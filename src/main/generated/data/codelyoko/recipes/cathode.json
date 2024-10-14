@@ -23,7 +23,7 @@
     "cic"
   ],
   "result": {
-    "item": "codelyoko:cathodepart"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "codelyoko:cathodepart"
+  }
 }

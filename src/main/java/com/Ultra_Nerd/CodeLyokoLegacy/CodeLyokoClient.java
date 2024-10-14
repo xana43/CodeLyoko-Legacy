@@ -16,6 +16,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Vehicle.OverboardRe
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.SkidbladnirEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.ClientTickEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.HudRenderCallbackOverride;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Client.ModHandledScreensClientInitializer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Items.Tools.Buckets.CustomColorBucket;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
@@ -262,7 +263,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         registerBlockEntityRenderers();
         registerEntityRenderers();
         FluidRenderRegistry();
-        //ModHandledScreensClientInitializer.handledScreenRegistration();
+        ModHandledScreensClientInitializer.handledScreenRegistration();
         registerColorProviders();
         registerItemPredicates();
         registerDimensionalSkyEffects();

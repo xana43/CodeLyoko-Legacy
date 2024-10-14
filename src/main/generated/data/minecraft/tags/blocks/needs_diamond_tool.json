@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "values": [
     "codelyoko:chiplet_franz_block",
     "codelyoko:quantum_core"

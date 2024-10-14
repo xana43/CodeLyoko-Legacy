@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "codelyoko:solid_quantum"
-            ]
+            "items": "codelyoko:solid_quantum"
           }
         ]
       },
@@ -30,6 +28,5 @@
     "recipes": [
       "minecraft:quantum_block"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

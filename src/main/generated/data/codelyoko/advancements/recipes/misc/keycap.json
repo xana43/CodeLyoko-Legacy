@@ -19,9 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "codelyoko:key_cap"
-            ]
+            "items": "codelyoko:key_cap"
           }
         ]
       },
@@ -38,6 +36,5 @@
     "recipes": [
       "codelyoko:keycap"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -67,6 +67,7 @@ public record ModBlocks() {
     public static final Block COMPUTER_TOWER_CONTROL_PANEL;
     public static final Block CATHODE_PART;
     public static final Block COFFINITE_ORE;
+    public static final Block CASSERITE_ORE;
     public static final Block CARNOTITE_ORE;
     public static final Block DEMARCATION_POINT;
     public static final Block DATA_TRANSFER_INTERFACE;
@@ -111,6 +112,7 @@ public record ModBlocks() {
     public static final Block QUANTUM_CORE;
     public static final Block QUANTUM_STEEL_BLOCK;
     public static final Block RACK_CHARGER_BLOCK;
+    public static final Block RUTILE_ORE;
     public static final Block ROUTER;
     public static final Block RUSTED_IRON_RAILING;
     public static final Block SALEEITE_ORE;
@@ -220,6 +222,7 @@ public record ModBlocks() {
            COMPUTER_TOWER_CONTROL_PANEL = registerModBlocks("computer_tower_control_panel",new ControlPanel());
            CATHODE_PART = registerModBlocks("cathodepart",new ElectroplatingRodParts(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)));
            COFFINITE_ORE = registerExperienceDroppingOre("coffinite_ore",UniformIntProvider.create(0,1));
+           CASSERITE_ORE = registerExperienceDroppingOre("casserite_ore", AbstractBlock.Settings.copy(Blocks.COPPER_ORE),UniformIntProvider.create(0,1));
            CARNOTITE_ORE = registerExperienceDroppingOre("carnotite_ore",AbstractBlock.Settings.copy(Blocks.DIAMOND_ORE),UniformIntProvider.create(0,1));
            DEMARCATION_POINT = registerModBlocks("demarcation_point",new DemarcationPoint(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)));
            DATA_TRANSFER_INTERFACE = registerModBlocks("data_transfer_interface",new DataTransferInterface());
@@ -278,6 +281,7 @@ public record ModBlocks() {
            QUANTUM_STEEL_BLOCK = registerModBlocks("quantum_steel",new QuantumSteelBlock(
                    AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).strength(6, 20).sounds(BlockSoundGroup.METAL)));
            RACK_CHARGER_BLOCK = registerModBlocks("rack_charger",new RackChargerBlock(AbstractBlock.Settings.copy(Blocks.REDSTONE_BLOCK)));
+           RUTILE_ORE = registerExperienceDroppingOre("rutile_ore",UniformIntProvider.create(0,1));
            SALEEITE_ORE = registerExperienceDroppingOre("saleeite_ore",
                    AbstractBlock.Settings.copy(Blocks.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE),UniformIntProvider.create(0,1));
            SCANNER_BASE = registerModBlocks("scanner_base",new Scanner());

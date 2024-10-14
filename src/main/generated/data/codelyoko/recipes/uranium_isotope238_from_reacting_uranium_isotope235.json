@@ -7,5 +7,7 @@
   "ingredient": {
     "item": "codelyoko:uranium_isotope235"
   },
-  "result": "codelyoko:uranium_isotope238"
+  "result": {
+    "id": "codelyoko:uranium_isotope238"
+  }
 }

@@ -1,4 +1,4 @@
-// 1.20.2	2023-12-07T13:22:43.545441039	CodeLyokoLegacy/Tags for minecraft:worldgen/biome
-f386b8f37d0952820dbcd77534cff50726054922 data/codelyoko/tags/worldgen/biome/is_lyoko.json
-00bb0eb9e0e625ed6047625e71d4b049e13d282b data/codelyoko/tags/worldgen/biome/has_structure/tower.json
-b9ed585cb14d236999aec1c94d420b757970158f data/codelyoko/tags/worldgen/biome/is_replika.json
+// 1.20.6	2024-08-08T16:07:38.391544767	CodeLyokoLegacy/Tags for minecraft:worldgen/biome
+d787c4524eb29e1d1ec7e6e7477611fdae8d6f1e data/codelyoko/tags/worldgen/biome/is_lyoko.json
+ee4917b91cd1492b1075d490fc0b9dad6197f004 data/codelyoko/tags/worldgen/biome/has_structure/tower.json
+c4625daa825084edc6434896d09d9ec5eba816f6 data/codelyoko/tags/worldgen/biome/is_replika.json

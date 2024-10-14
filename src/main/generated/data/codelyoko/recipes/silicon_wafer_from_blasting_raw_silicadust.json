@@ -7,5 +7,7 @@
   "ingredient": {
     "item": "codelyoko:raw_silicadust"
   },
-  "result": "codelyoko:silicon_wafer"
+  "result": {
+    "id": "codelyoko:silicon_wafer"
+  }
 }

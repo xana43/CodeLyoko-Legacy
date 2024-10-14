@@ -19,9 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "codelyoko:key_spring"
-            ]
+            "items": "codelyoko:key_spring"
           }
         ]
       },
@@ -38,6 +36,5 @@
     "recipes": [
       "codelyoko:key_spring"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

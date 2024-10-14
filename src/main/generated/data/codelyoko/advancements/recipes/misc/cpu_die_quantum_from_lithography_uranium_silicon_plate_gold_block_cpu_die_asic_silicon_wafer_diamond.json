@@ -34,6 +34,5 @@
     "recipes": [
       "minecraft:cpu_die_quantum_from_lithography_uranium_silicon_plate_gold_block_cpu_die_asic_silicon_wafer_diamond"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -24,7 +24,6 @@
   ],
   "result": {
     "count": 20,
-    "item": "codelyoko:integrated_heat_spreader"
-  },
-  "show_notification": true
+    "id": "codelyoko:integrated_heat_spreader"
+  }
 }

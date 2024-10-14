@@ -20,7 +20,7 @@
     "c c"
   ],
   "result": {
-    "item": "codelyoko:anodepart"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "codelyoko:anodepart"
+  }
 }
