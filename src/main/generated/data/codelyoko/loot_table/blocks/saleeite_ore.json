@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:saleeite_ore"
+          "name": "minecraft:saleeite_ore"
         }
       ],
       "rolls": 1.0

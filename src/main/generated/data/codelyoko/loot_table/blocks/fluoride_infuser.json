@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:fluoride_infuser"
+          "name": "minecraft:fluoride_infuser"
         }
       ],
       "rolls": 1.0

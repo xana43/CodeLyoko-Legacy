@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:data_transfer_interface"
+          "name": "minecraft:data_transfer_interface"
         }
       ],
       "rolls": 1.0

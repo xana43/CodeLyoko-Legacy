@@ -42,30 +42,31 @@ public final class BlisterCopper extends Item {
     public void inventoryTick(final ItemStack stack, final World worldIn, final Entity entityIn, int itemSlot,
             boolean isSelected) {
 
-        if (!worldIn.isClient) {
-            NbtCompound timerTag = stack.get(DataComponentTypes.CUSTOM_DATA).getNbt();
-            if (timerTag == null) {
-                timerTag = new NbtCompound();
+        if (worldIn.isClient) {
+            return;
+        }
+        NbtCompound timerTag = stack.get(DataComponentTypes.CUSTOM_DATA).getNbt();
+        if (timerTag == null) {
+            timerTag = new NbtCompound();
+            timerTag.putInt(NBT_TAG_ACCESSOR, 500);
+            NbtComponent.set(DataComponentTypes.CUSTOM_DATA,stack,timerTag);
+        }
+        timerTag.putInt(NBT_TAG_ACCESSOR, timerTag.getInt(NBT_TAG_ACCESSOR) - 1);
+        if (timerTag.getInt(NBT_TAG_ACCESSOR) <= 0) {
+            if (stack.getDamage() != 60) {
+
+                stack.setDamage(stack.getDamage() + 1);
+
                 timerTag.putInt(NBT_TAG_ACCESSOR, 500);
-                NbtComponent.set(DataComponentTypes.CUSTOM_DATA,stack,timerTag);
             }
-            timerTag.putInt(NBT_TAG_ACCESSOR, timerTag.getInt(NBT_TAG_ACCESSOR) - 1);
-            if (timerTag.getInt(NBT_TAG_ACCESSOR) <= 0) {
-                if (stack.getDamage() != 60) {
+        }
+        if (stack.getDamage() == 60) {
 
-                    stack.setDamage(stack.getDamage() + 1);
-
-                    timerTag.putInt(NBT_TAG_ACCESSOR, 500);
-                }
+            if (entityIn instanceof final PlayerEntity playerEntity) {
+                playerEntity.getInventory().setStack(itemSlot, new ItemStack(ModItems.CUPROUS_OXIDE));
             }
-            if (stack.getDamage() == 60) {
-
-                if (entityIn instanceof final PlayerEntity playerEntity) {
-                    playerEntity.getInventory().setStack(itemSlot, new ItemStack(ModItems.CUPROUS_OXIDE));
-                }
 
 
-            }
         }
 
 

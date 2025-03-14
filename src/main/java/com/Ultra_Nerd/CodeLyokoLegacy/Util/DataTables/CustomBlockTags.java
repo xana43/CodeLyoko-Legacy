@@ -49,6 +49,8 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.COVELLITE_ORE,
                 ModBlocks.SALEEITE_ORE,
                 ModBlocks.COMPUTER_CORE,
+                ModBlocks.LAPTOP_BLOCK,
+                ModBlocks.LAPTOP_CHARGER
         };
         for (final Block block : commonBlocksPICKIRON) {
             getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL).add(block);

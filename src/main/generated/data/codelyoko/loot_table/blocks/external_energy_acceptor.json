@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:external_energy_acceptor"
+          "name": "minecraft:external_energy_acceptor"
         }
       ],
       "rolls": 1.0

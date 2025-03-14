@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:electroplating_anode"
+          "name": "minecraft:electroplating_anode"
         }
       ],
       "rolls": 1.0

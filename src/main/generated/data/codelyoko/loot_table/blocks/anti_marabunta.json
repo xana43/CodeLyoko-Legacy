@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:anti_marabunta"
+          "name": "minecraft:anti_marabunta"
         }
       ],
       "rolls": 1.0

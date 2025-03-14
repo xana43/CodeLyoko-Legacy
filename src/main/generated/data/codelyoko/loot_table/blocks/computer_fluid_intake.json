@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:computer_fluid_intake"
+          "name": "minecraft:computer_fluid_intake"
         }
       ],
       "rolls": 1.0

@@ -112,7 +112,11 @@ public record MethodUtil() {
 
     public record FluidStorageCreation() {
         public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity,
-                final Fluid allowedVariant) {
+                                                                            final Fluid allowedVariant){
+            return createFluidStorage(blockEntity,allowedVariant,FluidConstants.BUCKET);
+        }
+        public static SingleVariantStorage<FluidVariant> createFluidStorage(final BlockEntity blockEntity,
+                final Fluid allowedVariant,final long capacity) {
             return new SingleVariantStorage<>() {
                 @Override
                 protected FluidVariant getBlankVariant() {
@@ -121,7 +125,7 @@ public record MethodUtil() {
 
                 @Override
                 protected long getCapacity(final FluidVariant variant) {
-                    return FluidConstants.BUCKET;
+                    return capacity;
                 }
 
                 @Override
@@ -245,7 +249,7 @@ public record MethodUtil() {
 
                 @Override
                 protected long getCapacity(final FluidVariant variant) {
-                    return (amountOfBuckets * FluidConstants.BUCKET) / 81;
+                    return (amountOfBuckets * FluidConstants.BUCKET);
                 }
 
                 @Override

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:computer_screen"
+          "name": "minecraft:computer_screen"
         }
       ],
       "rolls": 1.0

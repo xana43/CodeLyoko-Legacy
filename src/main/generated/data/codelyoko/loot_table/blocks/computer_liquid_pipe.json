@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:computer_liquid_pipe"
+          "name": "minecraft:computer_liquid_pipe"
         }
       ],
       "rolls": 1.0

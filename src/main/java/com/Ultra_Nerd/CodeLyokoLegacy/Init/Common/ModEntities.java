@@ -10,6 +10,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.HoverboardEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.OverbikeEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.OverboardEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.SkidbladnirEntity;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityType;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.*;
 import net.minecraft.registry.Registries;
@@ -79,6 +80,10 @@ public record ModEntities() {
     public static void registerEntities()
     {
 
+    }
+    private static <T extends Entity> EntityType<T> registerEntities(final String name, final FabricEntityType.Builder<T> type)
+    {
+        return Registry.register(Registries.ENTITY_TYPE, CodeLyokoMain.codeLyokoPrefix(name), type.build());
     }
     private static <T extends Entity> EntityType<T> registerEntities(final String name, final FabricEntityTypeBuilder<T> type)
     {

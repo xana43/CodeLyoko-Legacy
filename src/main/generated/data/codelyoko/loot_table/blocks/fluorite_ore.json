@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:fluorite_ore"
+          "name": "minecraft:fluorite_ore"
         }
       ],
       "rolls": 1.0

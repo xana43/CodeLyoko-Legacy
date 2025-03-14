@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:chiplet_basic_block"
+          "name": "minecraft:chiplet_basic_block"
         }
       ],
       "rolls": 1.0

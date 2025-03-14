@@ -9,11 +9,20 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.RotationAxis;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Quaternionf;
 
 import java.util.List;
 
 public record ConstantUtil() {
+
+    public record RotationConstants()
+    {
+        public static final Quaternionf ROT_90_Y = RotationAxis.POSITIVE_Y.rotationDegrees(90);
+        public static final Quaternionf ROT_180_Y = RotationAxis.POSITIVE_Y.rotationDegrees(180);
+        public static final Quaternionf ROT_270_Y = RotationAxis.POSITIVE_Y.rotationDegrees(270);
+    }
 
     public static final PacketCodec<PacketByteBuf, BlockHitResult> HIT_RESULT_PACKET_CODEC = new PacketCodec<>() {
         @Override

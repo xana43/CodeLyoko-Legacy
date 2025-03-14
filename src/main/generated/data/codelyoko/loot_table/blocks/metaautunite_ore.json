@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:metaautunite_ore"
+          "name": "minecraft:metaautunite_ore"
         }
       ],
       "rolls": 1.0

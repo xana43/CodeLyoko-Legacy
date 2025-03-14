@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:digital_wood_forest"
+          "name": "minecraft:digital_wood_forest"
         }
       ],
       "rolls": 1.0

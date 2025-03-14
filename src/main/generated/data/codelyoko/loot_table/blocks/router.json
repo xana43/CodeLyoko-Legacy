@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:router"
+          "name": "minecraft:router"
         }
       ],
       "rolls": 1.0

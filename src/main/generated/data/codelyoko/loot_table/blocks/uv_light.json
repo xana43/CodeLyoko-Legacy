@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:uv_light"
+          "name": "minecraft:uv_light"
         }
       ],
       "rolls": 1.0

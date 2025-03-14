@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:gummite_ore"
+          "name": "minecraft:gummite_ore"
         }
       ],
       "rolls": 1.0

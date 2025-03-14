@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:computer_cooling_block"
+          "name": "minecraft:computer_cooling_block"
         }
       ],
       "rolls": 1.0

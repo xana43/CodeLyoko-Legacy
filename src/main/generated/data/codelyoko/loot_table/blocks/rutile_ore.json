@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:rutile_ore"
+          "name": "minecraft:rutile_ore"
         }
       ],
       "rolls": 1.0

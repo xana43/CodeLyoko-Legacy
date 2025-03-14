@@ -36,11 +36,12 @@ public final class CellularDegeneration implements AutoSyncedComponent {
         }
     }
     public void regenerateHealth() {
-        if (cellHealth < maxCellHealth) {
-            cellHealth++;
-            if (cellHealth > 100 && !healthy) {
-                healthy = true;
-            }
+        if (cellHealth >= maxCellHealth) {
+            return;
+        }
+        cellHealth++;
+        if (cellHealth > 100 && !healthy) {
+            healthy = true;
         }
     }
 

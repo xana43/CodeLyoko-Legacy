@@ -12,9 +12,10 @@ public record ServerEvents() {
             (listeners) -> (entity, world, pos) -> {
                 for (final PlaceBlockEvent placeBlockEvent : listeners) {
                     final ActionResult result = placeBlockEvent.onPlace(entity, world, pos);
-                    if (result != ActionResult.PASS) {
-                        return result;
+                    if (result == ActionResult.PASS) {
+                        continue;
                     }
+                    return result;
                 }
                 return ActionResult.PASS;
             });

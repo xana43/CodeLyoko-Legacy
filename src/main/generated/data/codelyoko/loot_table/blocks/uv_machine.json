@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:uv_machine"
+          "name": "minecraft:uv_machine"
         }
       ],
       "rolls": 1.0

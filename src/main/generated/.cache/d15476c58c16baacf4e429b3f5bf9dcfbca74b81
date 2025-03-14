@@ -1,12 +1,12 @@
-// 1.21.1	2024-10-14T18:29:06.541177053	CodeLyokoLegacy/Tags for minecraft:block
+// 1.21.1	2025-03-14T15:01:29.773332269	CodeLyokoLegacy/Tags for minecraft:block
 60d5395b9d866b75057019b81050c2638a511261 data/minecraft/tags/block/cherry_logs.json
 657cf59bf13364ddec71fd7a66f7ba0967bd12d0 data/minecraft/tags/block/jungle_logs.json
 27d7d64fb7e7d5f096cee4e6a951724f3458ec78 data/c/tags/block/visual/water.json
 e82a77e16d2c404cfd386774e654bd08c5871ba1 data/minecraft/tags/block/ice.json
 a3d144a66c5126d6cd39719cd53cb3f5fe1a81b5 data/codelyoko/tags/block/lyoko_blocks.json
-116048dfe22e25f618ed167101f4cca2b9e3b314 data/minecraft/tags/block/needs_iron_tool.json
+47e721ec2dc1f1bb8a93fe71c76b084f1b7d86ed data/minecraft/tags/block/needs_iron_tool.json
 e209370453981ca0a07a3a50550aa0a976ea3605 data/minecraft/tags/block/needs_diamond_tool.json
-cfe625dd9579e143397ac8019413fbc48105d3a4 data/minecraft/tags/block/mineable/pickaxe.json
+834ba3a7acc3af52314c603a883e9441c00c5b6d data/minecraft/tags/block/mineable/pickaxe.json
 d9df3f96ecb8a797156bd3cff4238d1ab6e0ad88 data/c/tags/block/uranium_ores.json
 4cfb2791483ea0a79e3dd28fb43497d3685681b0 data/minecraft/tags/block/sand.json
 d9df3f96ecb8a797156bd3cff4238d1ab6e0ad88 data/c/tags/block/ores.json

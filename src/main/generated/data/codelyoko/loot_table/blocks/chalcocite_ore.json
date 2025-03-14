@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:chalcocite_ore"
+          "name": "minecraft:chalcocite_ore"
         }
       ],
       "rolls": 1.0

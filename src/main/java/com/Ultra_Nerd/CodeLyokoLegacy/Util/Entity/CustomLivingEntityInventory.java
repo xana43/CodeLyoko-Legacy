@@ -55,9 +55,10 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
 
     public int getEmptySlot() {
         for(int i = 0; i < this.main.size(); ++i) {
-            if (this.main.get(i).isEmpty()) {
-                return i;
+            if (!this.main.get(i).isEmpty()) {
+                continue;
             }
+            return i;
         }
 
         return -1;
@@ -70,9 +71,10 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
 
     public int getSlotWithStack(ItemStack stack) {
         for(int i = 0; i < this.main.size(); ++i) {
-            if (!this.main.get(i).isEmpty() && ItemStack.areItemsEqual(stack, this.main.get(i))) {
-                return i;
+            if (this.main.get(i).isEmpty() || !ItemStack.areItemsEqual(stack, this.main.get(i))) {
+                continue;
             }
+            return i;
         }
 
         return -1;

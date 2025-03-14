@@ -21,27 +21,25 @@ public final class MultiplayerPhone extends Item {
     @Override
     public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
         final ItemStack thisStack = user.getStackInHand(hand);
-        if (user.getServer() != null) {
-            if (user.getServer().isSingleplayer()) {
-                user.sendMessage(Text.translatable("phone.use.singleplayer"), false);
-                return TypedActionResult.fail(thisStack);
-            } else if (!user.getServer().isSingleplayer()) {
-                user.sendMessage(Text.translatable("phone.use.multiplayer").formatted(Formatting.BLACK), true);
-                world.getPlayers().forEach(playerEntity -> {
-
-                    if (playerEntity != user && playerEntity.getInventory().contains(new ItemStack(this))) {
-                        playerEntity.sendMessage(
-                                Text.translatable("phone.consume").append("").append(user.getGameProfile().getName())
-                                        .append("").append(Text.translatable("phone.receive2")), true);
-                    }
-
-                });
-                return TypedActionResult.success(thisStack);
-            }
-
+        if (user.getServer() == null) {
+            return TypedActionResult.pass(thisStack);
+        }
+        if (user.getServer().isSingleplayer()) {
+            user.sendMessage(Text.translatable("phone.use.singleplayer"), false);
+            return TypedActionResult.fail(thisStack);
         }
 
-        return TypedActionResult.pass(thisStack);
+        user.sendMessage(Text.translatable("phone.use.multiplayer").formatted(Formatting.BLACK), true);
+        world.getPlayers().forEach(playerEntity -> {
+            if (playerEntity != user && playerEntity.getInventory().contains(new ItemStack(this))) {
+                playerEntity.sendMessage(
+                        Text.translatable("phone.consume").append("").append(user.getGameProfile().getName())
+                                .append("").append(Text.translatable("phone.receive2")), true);
+            }
+
+        });
+        return TypedActionResult.success(thisStack);
+
 
     }
 }

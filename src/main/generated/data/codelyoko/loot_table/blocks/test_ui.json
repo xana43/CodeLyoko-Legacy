@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:test_ui"
+          "name": "minecraft:test_ui"
         }
       ],
       "rolls": 1.0

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:digital_ice"
+          "name": "minecraft:digital_ice"
         }
       ],
       "rolls": 1.0

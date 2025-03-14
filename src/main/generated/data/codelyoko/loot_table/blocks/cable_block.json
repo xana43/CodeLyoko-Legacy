@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:cable_block"
+          "name": "minecraft:cable_block"
         }
       ],
       "rolls": 1.0

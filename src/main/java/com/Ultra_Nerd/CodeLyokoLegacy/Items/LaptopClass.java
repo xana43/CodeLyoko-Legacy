@@ -1,30 +1,44 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModSounds;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.util.GeckoLibUtil;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
 
 
-public final class LaptopClass extends Item implements SimpleEnergyItem{
-
+public final class LaptopClass extends Item implements SimpleEnergyItem, GeoItem {
+    private static final RawAnimation STARTUP_ANIMATION = RawAnimation.begin().thenPlay("animation.startup");
     private final long capacity,maxInput,maxOutput;
     public LaptopClass(@NotNull Settings properties,final long capacity,final long maxInput,final long maxOutput) {
         super(properties);
         this.capacity = capacity;
         this.maxInput = maxInput;
         this.maxOutput = maxOutput;
+        SingletonGeoAnimatable.registerSyncedAnimatable(this);
     }
 
     @Override
@@ -33,6 +47,7 @@ public final class LaptopClass extends Item implements SimpleEnergyItem{
         if (stack.getDamage() == 1) {
             tryUseEnergy(stack,1);
         }
+
         if (getStoredEnergy(stack) <= 0) {
             stack.setDamage(0);
         }
@@ -42,37 +57,42 @@ public final class LaptopClass extends Item implements SimpleEnergyItem{
 
     @Override
     public TypedActionResult<ItemStack> use(@NotNull World worldIn, final PlayerEntity playerIn, final Hand handIn) {
-        final PacketByteBuf buf = PacketByteBufs.create();
         final ItemStack item = playerIn.getStackInHand(handIn);
-        if (getStoredEnergy(item) > 0 || playerIn.isCreative() && !playerIn.isSneaking()) {
-            if (item.getItem() == this && item.getDamage() == 0) {
-                item.setDamage(1);
-                if (!worldIn.isClient) {
-                    buf.clear();
-                    buf.writeBoolean(true);
-                    //ServerPlayNetworking.send((ServerPlayerEntity) playerIn, PacketHandler.OPEN_LAPTOP_ON_CLIENT,buf);
-                }
-                worldIn.playSound(playerIn, playerIn.getBlockPos(), ModSounds.OPENTOWERGUISOUND, SoundCategory.BLOCKS,
-                        1, 1);
-            } else if (item.getItem() == this && item.getDamage() == 1) {
-                item.setDamage(0);
+        final long currentlyStoredEnergy = getStoredEnergy(item);
 
-
+        if(playerIn.isSneaking()) {
+            if(worldIn.isClient) {
+                playerIn.sendMessage(Text.of("energy is " + currentlyStoredEnergy), false);
             }
-        } else if (playerIn.isSneaking() && worldIn.isClient()) {
-            playerIn.sendMessage(Text.of("energy is " + getStoredEnergy(item)), false);
-        } else {
-            if(!worldIn.isClient) {
-                buf.clear();
-                buf.writeBoolean(false);
-                //ServerPlayNetworking.send((ServerPlayerEntity) playerIn, PacketHandler.OPEN_LAPTOP_ON_CLIENT, buf);
-            }
-            item.setDamage(0);
-            playerIn.sendMessage(Text.translatable("laptop.battery.dead"), false);
+            return super.use(worldIn, playerIn, handIn);
         }
+        if(currentlyStoredEnergy <= 0 && !playerIn.isCreative())
+        {
+            if(worldIn.isClient) {
+                playerIn.sendMessage(Text.translatable("laptop.battery.dead"), false);
+            }
+            return TypedActionResult.fail(item);
 
-
+        }
+        if(!worldIn.isClient) {
+            triggerAnim(playerIn,GeoItem.getOrAssignId(item,(ServerWorld) worldIn),startupAnimationController,startupAnimationString);
+        }
         return super.use(worldIn, playerIn, handIn);
+    }
+
+    @Override
+    public ActionResult useOnBlock(final ItemUsageContext context) {
+        final World world = context.getWorld();
+        final BlockPos retrievedBlockPosition = context.getBlockPos().up();
+        if(!world.canSetBlock(retrievedBlockPosition)) {
+            return ActionResult.FAIL;
+        }
+        final ItemPlacementContext placementContext = new ItemPlacementContext(context);
+        final BlockState blockStateToPlace = ModBlocks.LAPTOP_BLOCK.getPlacementState(placementContext);
+        world.setBlockState(retrievedBlockPosition, blockStateToPlace);
+        world.playSound(null,retrievedBlockPosition, SoundEvents.BLOCK_METAL_PLACE, SoundCategory.BLOCKS);
+        context.getStack().decrement(1);
+        return ActionResult.SUCCESS;
     }
 
     @Override
@@ -89,6 +109,16 @@ public final class LaptopClass extends Item implements SimpleEnergyItem{
     public long getEnergyMaxOutput(final ItemStack stack) {
         return maxOutput;
     }
-
-
+    private static final String startupAnimationString = "startup";
+    private static final String startupAnimationController = "active_controller";
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this,startupAnimationController,animationState -> PlayState.STOP)
+                .triggerableAnim(startupAnimationString, STARTUP_ANIMATION));
+    }
+    AnimatableInstanceCache thisInstanceCache = GeckoLibUtil.createInstanceCache(this);
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return thisInstanceCache;
+    }
 }

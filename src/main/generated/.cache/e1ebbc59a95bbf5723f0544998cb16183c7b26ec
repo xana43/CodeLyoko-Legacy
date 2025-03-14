@@ -1,14 +1,14 @@
-// 1.21.1	2024-10-14T18:29:06.540851462	CodeLyokoLegacy/Tags for minecraft:item
+// 1.21.1	2025-03-14T15:01:29.772762176	CodeLyokoLegacy/Tags for minecraft:item
 bce73a2b8a6506fd7681b075bd7a9b22da824b82 data/codelyoko/tags/item/uranium_batteries.json
-bad56654515fbdfbe5090f9e3141b3415b59e416 data/c/tags/item/leaves.json
-4cfb2791483ea0a79e3dd28fb43497d3685681b0 data/minecraft/tags/item/sand.json
+35218667baea1b7d7f71f81524d5e1faf371f3a0 data/c/tags/item/leaves.json
+0b68a26fcd7aaaa174f23ef80f4f70516347b382 data/minecraft/tags/item/sand.json
 3792e9fb574902745cafe754da07b62df20aaa33 data/c/tags/item/silicon_plates.json
-d9df3f96ecb8a797156bd3cff4238d1ab6e0ad88 data/c/tags/item/raw_uranium_ores.json
+662314d9a1bd2feb8d97449beb32d96a1aa0fcde data/c/tags/item/raw_uranium_ores.json
 6e5225dcb4a534906b3fc818fd005b534ec0e7c2 data/c/tags/item/uranium_235_ingots.json
-d9df3f96ecb8a797156bd3cff4238d1ab6e0ad88 data/c/tags/item/uranium_ores.json
-657cf59bf13364ddec71fd7a66f7ba0967bd12d0 data/minecraft/tags/item/jungle_logs.json
-d9df3f96ecb8a797156bd3cff4238d1ab6e0ad88 data/c/tags/item/ores.json
+662314d9a1bd2feb8d97449beb32d96a1aa0fcde data/c/tags/item/uranium_ores.json
+29c5462c6d5a5f05f81b54a44e69cbe9ab653f25 data/minecraft/tags/item/jungle_logs.json
+662314d9a1bd2feb8d97449beb32d96a1aa0fcde data/c/tags/item/ores.json
 c534a235c111629797e4e38a70c2e40ff0863d6f data/codelyoko/tags/item/lyoko_item.json
-bad56654515fbdfbe5090f9e3141b3415b59e416 data/minecraft/tags/item/leaves.json
+35218667baea1b7d7f71f81524d5e1faf371f3a0 data/minecraft/tags/item/leaves.json
 f070a5800d7372b31073f3d3ae213691f5e0f6cf data/c/tags/item/uranium_238_ingots.json
-60d5395b9d866b75057019b81050c2638a511261 data/minecraft/tags/item/cherry_logs.json
+e68c82705821cc1136407b12a78ea9757f897b2f data/minecraft/tags/item/cherry_logs.json

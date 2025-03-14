@@ -51,14 +51,14 @@ public record XanaHandler() {
         {
             for(final Direction direction : Direction.values())
             {
-                if(world.getBlockState(factoryPosition.offset(direction,i)) == Blocks.AIR.getDefaultState())
+                if (world.getBlockState(factoryPosition.offset(direction, i)) != Blocks.AIR.getDefaultState()) {
+                    continue;
+                }
+                for(int h = 0; h < maxEntityHeight; ++h)
                 {
-                    for(int h = 0; h < maxEntityHeight; ++h)
+                    if(world.getBlockState(factoryPosition.offset(direction,i+h)) == Blocks.AIR.getDefaultState())
                     {
-                        if(world.getBlockState(factoryPosition.offset(direction,i+h)) == Blocks.AIR.getDefaultState())
-                        {
-                            CardinalData.XanaCalculator.addValidAttackPosition(internalServer,properties,factoryPosition.offset(direction,i));
-                        }
+                        CardinalData.XanaCalculator.addValidAttackPosition(internalServer,properties,factoryPosition.offset(direction,i));
                     }
                 }
             }
@@ -78,27 +78,27 @@ public record XanaHandler() {
 
         final int attackCallID = random.nextInt(0, 70);
         ticksTillCalculation--;
-        if (ticksTillCalculation <= 0) {
-            CodeLyokoMain.LOG.debug("attack ID ="+attackCallID);
-            if (attackCallID == 69) {
-                if(CardinalData.XanaCalculator.getDangerLevel(properties) > 3)
-                {
-                    CodeLyokoMain.LOG.debug("xana is attacking");
-                    CardinalData.XanaCalculator.activateTower(internalServer,properties);
-                    if(CardinalData.XanaCalculator.getHasTowerActive(internalServer,properties)) {
-                        CardinalData.XanaCalculator.spawnEntities(internalServer, properties, internalServer.getOverworld());
-                    }
-                } else {
-                    CodeLyokoMain.LOG.debug("adding to danger level");
-                    CardinalData.XanaCalculator.increaseDangerLevel(internalServer, properties, 1);
-                }
-                return true;
-            } else {
-                setTicksTillCalculation();
-                return false;
-            }
+        if (ticksTillCalculation > 0) {
+            return false;
         }
-        return false;
+        CodeLyokoMain.LOG.debug("attack ID ="+attackCallID);
+        if (attackCallID == 69) {
+            if(CardinalData.XanaCalculator.getDangerLevel(properties) > 3)
+            {
+                CodeLyokoMain.LOG.debug("xana is attacking");
+                CardinalData.XanaCalculator.activateTower(internalServer,properties);
+                if(CardinalData.XanaCalculator.getHasTowerActive(internalServer,properties)) {
+                    CardinalData.XanaCalculator.spawnEntities(internalServer, properties, internalServer.getOverworld());
+                }
+            } else {
+                CodeLyokoMain.LOG.debug("adding to danger level");
+                CardinalData.XanaCalculator.increaseDangerLevel(internalServer, properties, 1);
+            }
+            return true;
+        } else {
+            setTicksTillCalculation();
+            return false;
+        }
     }
 
 }

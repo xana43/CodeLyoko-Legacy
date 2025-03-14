@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.GeneralRendererUtils;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gl.ShaderProgram;
 import net.minecraft.client.render.*;
@@ -9,11 +10,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 import org.joml.Math;
 import org.joml.Matrix4f;
+import org.joml.Quaternionf;
 
 import java.util.function.Supplier;
 
 public record CommonRenderRoutines() {
     public record QuadRender() {
+        private static final float MINIMUM_PIXEL = 1/16f;
         public enum RenderMode{
             ALL,
             NONE,
@@ -28,48 +31,47 @@ public record CommonRenderRoutines() {
             {
                 return;
             }
-            final float minY = 1f / 16f;
-            final float xStartPosition = pixelsIn / 16f;
-            final float xWidth = width / 16f;
-            final float maxY = ((fillPercentage * height) / 16f) + minY;
+            final float xStartPosition = pixelsIn * MINIMUM_PIXEL;
+            final float xWidth = width * MINIMUM_PIXEL;
+            final float maxY = ((fillPercentage * height) * MINIMUM_PIXEL) + MINIMUM_PIXEL;
             final float minU = fluidSprite.getFrameU(xStartPosition);
             final float maxU = fluidSprite.getFrameU(xWidth);
-            final float minV = fluidSprite.getFrameV(minY);
+            final float minV = fluidSprite.getFrameV(MINIMUM_PIXEL);
             final float maxV = fluidSprite.getFrameV(maxY);
             MatrixStack.Entry entry = matrix.peek();
-            //front face
-            drawFluidQuad(vertexConsumer, entry, xStartPosition, xStartPosition, xWidth, maxY, xStartPosition, minU, maxU, minV, maxV, color, light, overlay);
-            //back face
+            drawTexturedQuad(vertexConsumer, entry, xStartPosition, xStartPosition, xWidth, maxY, xStartPosition, minU, maxU, minV, maxV, color, light, overlay);
+            drawStandardFace(matrix,ConstantUtil.RotationConstants.ROT_180_Y,vertexConsumer, entry, xStartPosition, xStartPosition, xWidth, maxY, xStartPosition, minU, maxU, minV, maxV, color, light, overlay);
+            drawStandardFace(matrix,ConstantUtil.RotationConstants.ROT_90_Y,vertexConsumer, entry, xStartPosition, xStartPosition, xWidth, maxY, xStartPosition, minU, maxU, minV, maxV, color, light, overlay);
+            drawStandardFace(matrix,ConstantUtil.RotationConstants.ROT_270_Y,vertexConsumer, entry, xStartPosition, xStartPosition, xWidth, maxY, xStartPosition, minU, maxU, minV, maxV, color, light, overlay);
+            if(maxY < 1f)
+            {
+                matrix.push();
+                manipulateMatrix(matrix,RotationAxis.POSITIVE_X.rotationDegrees(90));
+                matrix.translate(0,0,1);
+                entry = matrix.peek();
+                drawTexturedQuad(vertexConsumer, entry, xStartPosition, -maxY, xWidth, 1, -maxY, minU, maxU, minV, maxV, color, light, overlay);
+                matrix.pop();
+            }
+        }
+        private static void drawStandardFace(final MatrixStack matrix,final Quaternionf rot,final VertexConsumer vertexConsumer, MatrixStack.Entry entry, final float minX, final float minZ, final float maxX, final float maxY, final float maxZ, final float minU,final float maxU ,final float minV, final float maxV, final int color, final int light, final int overlay)
+        {
             matrix.push();
-            matrix.translate(0.5f, 0.5f, 0.5f);
-            matrix.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180));
-            matrix.translate(-0.5f, -0.5f, -0.5f);
+            manipulateMatrix(matrix,rot);
             entry = matrix.peek();
-            drawFluidQuad(vertexConsumer, entry, xStartPosition, xStartPosition, xWidth, maxY, xStartPosition, minU, maxU, minV, maxV, color, light, overlay);
-            matrix.pop();
-
-            matrix.push();
-            matrix.translate(0.5f, 0.5f, 0.5f);
-            matrix.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90));
-            matrix.translate(-0.5f, -0.5f, -0.5f);
-            entry = matrix.peek();
-            drawFluidQuad(vertexConsumer, entry, xStartPosition, xStartPosition, xWidth, maxY, xStartPosition, minU, maxU, minV, maxV, color, light, overlay);
-            matrix.pop();
-
-            matrix.push();
-            matrix.translate(0.5f, 0.5f, 0.5f);
-            matrix.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(270));
-            matrix.translate(-0.5f, -0.5f, -0.5f);
-            entry = matrix.peek();
-            drawFluidQuad(vertexConsumer, entry, xStartPosition, xStartPosition, xWidth, maxY, xStartPosition, minU, maxU, minV, maxV, color, light, overlay);
+            drawTexturedQuad(vertexConsumer, entry, minX, minZ, maxX, maxY, maxZ, minU, maxU, minV, maxV, color, light, overlay);
             matrix.pop();
         }
-
-        private static void drawFluidQuad(final VertexConsumer vertexConsumer, final MatrixStack.Entry matrixEntry, final float minX, final float minZ, final float maxX, final float maxY, final float maxZ, final float minU, final float minV, final float maxU, final float maxV, final int color, final int light, final int overlay) {
-            vertexConsumer.vertex(matrixEntry, minX, (float) 0.0625, minZ).color(color).texture(minU, minV).light(light).overlay(overlay).normal(0, 1, 0);
-            vertexConsumer.vertex(matrixEntry, minX, maxY, minZ).color(color).texture(minU, maxV).light(light).overlay(overlay).normal(0, 1, 0);
-            vertexConsumer.vertex(matrixEntry, maxX, maxY, maxZ).color(color).texture(maxU, maxV).light(light).overlay(overlay).normal(0, 1, 0);
-            vertexConsumer.vertex(matrixEntry, maxX, (float) 0.0625, maxZ).color(color).texture(maxU, minV).light(light).overlay(overlay).normal(0, 1, 0);
+        private static void manipulateMatrix(final MatrixStack matrix, final Quaternionf rot)
+        {
+            matrix.translate(0.5f,0.5f,0.5f);
+            matrix.multiply(rot);
+            matrix.translate(-0.5f, -0.5f, -0.5f);
+        }
+        private static void drawTexturedQuad(final VertexConsumer vertexConsumer, final MatrixStack.Entry matrixEntry, final float minX, final float minZ, final float maxX, final float maxY, final float maxZ, final float minU, final float maxU , final float minV, final float maxV, final int color, final int light, final int overlay) {
+            vertexConsumer.vertex(matrixEntry, minX, MINIMUM_PIXEL, minZ).color(color).texture(minU, minV).light(light).overlay(overlay).normal(0, 1, 0).
+            vertex(matrixEntry, minX, maxY, minZ).color(color).texture(minU, maxV).light(light).overlay(overlay).normal(0, 1, 0).
+            vertex(matrixEntry, maxX, maxY, maxZ).color(color).texture(maxU, maxV).light(light).overlay(overlay).normal(0, 1, 0).
+            vertex(matrixEntry, maxX, MINIMUM_PIXEL, maxZ).color(color).texture(maxU, minV).light(light).overlay(overlay).normal(0, 1, 0);
         }
     }
     public static void renderTranslucentTexturedSphere(final Tessellator tessellator, final float RADIUS, final int latitude, final int longitude, final MatrixStack matrices, final Identifier texture,final float textureU, final float textureV, final int red, final int green, final int blue, final int alpha,final float matrixX, final float matrixY, final float matrixZ)

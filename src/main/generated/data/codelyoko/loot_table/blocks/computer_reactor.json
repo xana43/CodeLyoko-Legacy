@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:computer_reactor"
+          "name": "minecraft:computer_reactor"
         }
       ],
       "rolls": 1.0

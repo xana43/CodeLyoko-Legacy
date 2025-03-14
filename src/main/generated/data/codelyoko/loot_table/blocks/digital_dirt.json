@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:digital_dirt"
+          "name": "minecraft:digital_dirt"
         }
       ],
       "rolls": 1.0

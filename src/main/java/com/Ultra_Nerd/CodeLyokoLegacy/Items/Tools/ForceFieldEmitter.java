@@ -58,27 +58,28 @@ public final class ForceFieldEmitter extends BowItem {
 
 
             final float f = getPullProgress(i);
-            if (!((double) f < 0.1D)) {
-                if (!world.isClient()) {
-                    final LaserEntity las = new LaserEntity(world, user, 20);
-
-                    las.setDamage(40);
-                    las.setPos(playerentity.getBlockPos().getX(), playerentity.getEyeY(),
-                            playerentity.getBlockPos().getZ());
-                    las.setNoGravity(true);
-                    las.shake = 0;
-                    las.setVelocity(playerentity, playerentity.getPitch(), playerentity.getYaw(), 0.0F, f * 3.0F, 0.1F);
-                    if (f == 1.0F) {
-                        las.setCritical(true);
-                    }
-                    world.spawnEntity(las);
-                }
-
-                world.playSound(playerentity, playerentity.getBlockPos(), ModSounds.LASERARROW, SoundCategory.PLAYERS,
-                        1.0F, 1.0F / (new Random().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-
-                playerentity.incrementStat(Stats.USED.getOrCreateStat(this));
+            if ((double) f < 0.1D) {
+                return;
             }
+            if (!world.isClient()) {
+                final LaserEntity las = new LaserEntity(world, user, 20);
+
+                las.setDamage(40);
+                las.setPos(playerentity.getBlockPos().getX(), playerentity.getEyeY(),
+                        playerentity.getBlockPos().getZ());
+                las.setNoGravity(true);
+                las.shake = 0;
+                las.setVelocity(playerentity, playerentity.getPitch(), playerentity.getYaw(), 0.0F, f * 3.0F, 0.1F);
+                if (f == 1.0F) {
+                    las.setCritical(true);
+                }
+                world.spawnEntity(las);
+            }
+
+            world.playSound(playerentity, playerentity.getBlockPos(), ModSounds.LASERARROW, SoundCategory.PLAYERS,
+                    1.0F, 1.0F / (new Random().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+
+            playerentity.incrementStat(Stats.USED.getOrCreateStat(this));
 
         }
     }
@@ -98,10 +99,10 @@ public final class ForceFieldEmitter extends BowItem {
                 user.getInventory().armor.get(EquipmentSlot.FEET.getEntitySlotId())
                         .getItem() != ModItems.AELITA_BOOTS) {
             return TypedActionResult.fail(heldItem);
-        } else {
-            user.setCurrentHand(hand);
-            return TypedActionResult.consume(heldItem);
         }
+        user.setCurrentHand(hand);
+        return TypedActionResult.consume(heldItem);
+
         //boolean flag = !playerIn.findAmmo(itemstack).isEmpty();
 
         //TypedActionResult<ItemStack> ret = EventFactory.createArrayBacked(heldItem, world, user, hand, true);

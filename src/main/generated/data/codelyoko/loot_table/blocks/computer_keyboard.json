@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:computer_keyboard"
+          "name": "minecraft:computer_keyboard"
         }
       ],
       "rolls": 1.0

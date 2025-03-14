@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:computer_tower_control_panel"
+          "name": "minecraft:computer_tower_control_panel"
         }
       ],
       "rolls": 1.0

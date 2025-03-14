@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:uraninite_ore"
+          "name": "minecraft:uraninite_ore"
         }
       ],
       "rolls": 1.0

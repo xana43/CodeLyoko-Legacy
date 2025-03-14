@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:universal"
+          "name": "minecraft:universal"
         }
       ],
       "rolls": 1.0

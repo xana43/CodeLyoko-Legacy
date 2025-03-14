@@ -19,13 +19,13 @@ public final class ComputerItem extends Item {
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         super.appendTooltip(stack, context, tooltip, type);
         if (Screen.hasShiftDown()) {
-            tooltip.add(
-                    Text.translatable("computer.item.tooltip.shift"));
-        } else {
+            tooltip.add(Text.translatable("computer.item.tooltip.shift"));
+            return;
+        }
             tooltip.add(Text.translatable("computer.item.tooltip"));
 
 
-        }
+
     }
 
 

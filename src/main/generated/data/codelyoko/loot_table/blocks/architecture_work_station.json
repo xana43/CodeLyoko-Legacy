@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:architecture_work_station"
+          "name": "minecraft:architecture_work_station"
         }
       ],
       "rolls": 1.0

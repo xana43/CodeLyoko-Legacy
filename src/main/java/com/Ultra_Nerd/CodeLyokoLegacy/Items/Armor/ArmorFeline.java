@@ -55,16 +55,17 @@ public final class ArmorFeline extends LyokoArmor /*implements GeoItem*/ {
     public void onArmorTick(final PlayerEntity player, final World world, final Item armorItem,final int slot) {
         super.onArmorTick(player,world,armorItem,slot);
         if (player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId())
-                .getItem() == ModItems.ODD_BOOTS && player.getInventory()
-                .getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).getItem() == ModItems.ODD_LEGGINGS) {
-            if (!player.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
-
-                player.addStatusEffect(JUMPEFFECT);
-
-
-            }
-            player.fallDistance = 0;
+                .getItem() != ModItems.ODD_BOOTS || player.getInventory()
+                .getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).getItem() != ModItems.ODD_LEGGINGS) {
+            return;
         }
+        if (!player.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
+
+            player.addStatusEffect(JUMPEFFECT);
+
+
+        }
+        player.fallDistance = 0;
 
 
     }

@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.LaptopBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Sector.SectorEntrance;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
@@ -35,6 +36,10 @@ public final class LootTables extends FabricBlockLootTableProvider {
             if(Registries.BLOCK.getId(block).getNamespace().equals(CodeLyokoMain.MOD_ID))
             {
                 if(!(block instanceof SectorEntrance)) {
+                    if(block instanceof LaptopBlock)
+                    {
+                        addDrop(block,ModItems.JEREMY_LAPTOP);
+                    }
                     if (block != ModBlocks.SILICA_SAND) {
                         addDrop(block);
 

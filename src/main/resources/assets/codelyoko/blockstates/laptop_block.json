@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "codelyoko:block/laptop_block"
+    },
+    "facing=east": {
+      "model": "codelyoko:block/laptop_block",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "codelyoko:block/laptop_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "codelyoko:block/laptop_block",
+      "y": 270
+    }
+  }
+}

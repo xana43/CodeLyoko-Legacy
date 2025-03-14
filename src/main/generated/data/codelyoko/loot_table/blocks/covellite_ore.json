@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:covellite_ore"
+          "name": "minecraft:covellite_ore"
         }
       ],
       "rolls": 1.0

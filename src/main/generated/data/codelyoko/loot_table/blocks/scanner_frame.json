@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:scanner_frame"
+          "name": "minecraft:scanner_frame"
         }
       ],
       "rolls": 1.0

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:marabunta"
+          "name": "minecraft:marabunta"
         }
       ],
       "rolls": 1.0

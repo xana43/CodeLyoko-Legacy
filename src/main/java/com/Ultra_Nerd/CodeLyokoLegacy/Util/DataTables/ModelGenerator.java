@@ -46,6 +46,18 @@ public final class ModelGenerator extends FabricModelProvider {
                 generator.register(item,item(loopBuilder.toString()));
             }
         }
+        public static void registerCustomItemModel(final ItemModelGenerator generator, final Item item,final String model)
+        {
+            if(model.contains(".json"))
+            {
+                generator.register(item,item(model));
+            }
+            else {
+                loopBuilder.setLength(0);
+                loopBuilder.append(model).append(".json");
+                generator.register(item,item(loopBuilder.toString()));
+            }
+        }
     }
     public ModelGenerator(final FabricDataOutput output) {
         super(output);
@@ -56,13 +68,13 @@ public final class ModelGenerator extends FabricModelProvider {
         blockStateModelGenerator.registerParentedItemModel(ModBlocks.RACK_CHARGER_BLOCK, CodeLyokoMain.codeLyokoPrefix("block/rack_charger"));
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CABLE_BLOCK);
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.SECTOR_ENTRANCE_DESERT);
+        generateCustomBlockModels(blockStateModelGenerator);
         generateFenceLikeModels(blockStateModelGenerator,ModBlocks.IRON_RAILING,"block/railing_post","block/railing_side");
         generateFenceLikeModels(blockStateModelGenerator,ModBlocks.ERODED_IRON_RAILING,"block/eroded_railing_post","block/eroded_railing_side");
         generateFenceLikeModels(blockStateModelGenerator,ModBlocks.TARNISHED_IRON_RAILING,"block/tarnished_railing_post","block/tarnished_railing_side");
         generateFenceLikeModels(blockStateModelGenerator,ModBlocks.RUSTED_IRON_RAILING,"block/rusted_railing_post","block/rusted_railing_side");
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DIGITAL_WOOD_FOREST);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DIGITAL_WOOD_MOUNTAIN);
-
     }
 
 private static void generateFenceLikeModels(final BlockStateModelGenerator generator, final Block blockToGenerate,final String postModel, final String sideModel)
@@ -84,20 +96,17 @@ private static void generateFenceLikeModels(final BlockStateModelGenerator gener
             ModelMethods.registerDefaultBucketItem(itemModelGenerator,item);
         }
     }
-    private static void generateItems(final ItemModelGenerator itemModelGenerator)
+    private static void generateCustomItemModels(final ItemModelGenerator itemModelGenerator)
     {
-        final Item[] ModelsGeneratedItems = {
-               // ModItems.LYOKO_THEME_INSTRUMENTAL
-        };
-        for (final Item item : ModelsGeneratedItems)
-        {
-            itemModelGenerator.register(item,Models.GENERATED);
-        }
+        
+    }
+    private static void generateCustomBlockModels(final BlockStateModelGenerator blockStateModelGenerator){
+
     }
     @Override
     public void generateItemModels(final ItemModelGenerator itemModelGenerator) {
        generateDefaultBuckets(itemModelGenerator);
-       generateItems(itemModelGenerator);
+       generateCustomItemModels(itemModelGenerator);
 
     }
 }

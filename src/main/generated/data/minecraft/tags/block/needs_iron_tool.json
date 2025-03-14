@@ -24,6 +24,8 @@
     "codelyoko:coffinite_ore",
     "codelyoko:covellite_ore",
     "codelyoko:saleeite_ore",
-    "codelyoko:computer_core"
+    "codelyoko:computer_core",
+    "codelyoko:laptop_block",
+    "codelyoko:laptop_charger"
   ]
 }

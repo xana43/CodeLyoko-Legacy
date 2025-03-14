@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:bornite_ore"
+          "name": "minecraft:bornite_ore"
         }
       ],
       "rolls": 1.0

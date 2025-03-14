@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:central_control_unit"
+          "name": "minecraft:central_control_unit"
         }
       ],
       "rolls": 1.0

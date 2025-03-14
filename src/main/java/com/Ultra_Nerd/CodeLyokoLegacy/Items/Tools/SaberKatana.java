@@ -47,19 +47,20 @@ public final class SaberKatana extends SwordItem {
     @Override
     public void inventoryTick(final ItemStack stack, final World world, final Entity entity, final int slot, final boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
-        if(!world.isClient()) {
-            if (selected && !selectedOnce) {
-                entity.playSound(ModSounds.SWORDDRAW, 1, 1);
-                selectedOnce = true;
-            } else if (!selected) {
-                selectedOnce = false;
-            }
-            if (!stack.hasEnchantments()) {
-                final DynamicRegistryManager registryManager = world.getRegistryManager();
-                final RegistryEntry<Enchantment> SWEEPING_EDGE = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.SWEEPING_EDGE);
-                stack.addEnchantment(SWEEPING_EDGE, SWEEPING_EDGE.value().getMaxLevel());
-                //stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
-            }
+        if (world.isClient()) {
+            return;
+        }
+        if (selected && !selectedOnce) {
+            entity.playSound(ModSounds.SWORDDRAW, 1, 1);
+            selectedOnce = true;
+        } else if (!selected) {
+            selectedOnce = false;
+        }
+        if (!stack.hasEnchantments()) {
+            final DynamicRegistryManager registryManager = world.getRegistryManager();
+            final RegistryEntry<Enchantment> SWEEPING_EDGE = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.SWEEPING_EDGE);
+            stack.addEnchantment(SWEEPING_EDGE, SWEEPING_EDGE.value().getMaxLevel());
+            //stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
         }
     }
 

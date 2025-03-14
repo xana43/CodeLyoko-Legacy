@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:computer_core"
+          "name": "minecraft:computer_core"
         }
       ],
       "rolls": 1.0

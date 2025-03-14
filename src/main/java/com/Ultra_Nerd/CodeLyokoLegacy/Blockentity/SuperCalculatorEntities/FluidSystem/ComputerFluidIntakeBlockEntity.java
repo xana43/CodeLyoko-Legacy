@@ -1,5 +1,6 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.SyncedBlockEntity;
@@ -22,11 +23,12 @@ import net.minecraft.util.math.Direction;
 public final class ComputerFluidIntakeBlockEntity extends SyncedBlockEntity implements TickingBlockEntity{
 
     private final SingleVariantStorage<FluidVariant> internalTank =
-            MethodUtil.FluidStorageCreation.createFluidStorage(this, Fluids.WATER);
+            MethodUtil.FluidStorageCreation.createFluidStorage(this, Fluids.WATER,3);
     public final Storage<FluidVariant> output = FilteringStorage.extractOnlyOf(internalTank);
     public final Storage<FluidVariant> input = FilteringStorage.insertOnlyOf(internalTank);
     public ComputerFluidIntakeBlockEntity(final BlockPos pos, final BlockState state) {
         super(ModBlockEntities.COMPUTER_FLUID_INTAKE_BLOCK_ENTITY, pos, state);
+        CodeLyokoMain.LOG.info("pump capacity is {}",internalTank.getCapacity());
     }
     public long getStoredFluid()
     {

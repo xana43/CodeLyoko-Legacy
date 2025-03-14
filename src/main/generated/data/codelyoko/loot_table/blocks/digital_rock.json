@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:digital_rock"
+          "name": "minecraft:digital_rock"
         }
       ],
       "rolls": 1.0

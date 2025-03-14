@@ -58,16 +58,15 @@ public final class PlayerProfile implements NbtSerializable {
 
     @Override
     public void fromTag(final @NotNull NbtCompound tag,final RegistryWrapper.WrapperLookup registryLookup) {
-        if(player != null) {
+        if (player == null) {
+            CodeLyokoMain.LOG.warn("player is null, cannot assign values");
+            return;
+        }
             //this.player.readNbt(tag);
             this.DNA = tag.getString(player.getDisplayName() + "-dna");
             this.playerClassType = tag.getInt(player.getDisplayName() + "-class");
             this.timesEntered = tag.getInt(player.getDisplayName() + "-entered");
             this.firstJoin = tag.getBoolean(player.getDisplayName() + "-joined");
-        }
-        else {
-            CodeLyokoMain.LOG.warn("player is null, cannot assign values");
-        }
     }
     private NbtCompound toCommonTag()
     {

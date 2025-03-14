@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:quantum_block"
+          "name": "minecraft:quantum_block"
         }
       ],
       "rolls": 1.0

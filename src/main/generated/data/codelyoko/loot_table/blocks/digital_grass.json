@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "codelyoko:digital_grass"
+          "name": "minecraft:digital_grass"
         }
       ],
       "rolls": 1.0

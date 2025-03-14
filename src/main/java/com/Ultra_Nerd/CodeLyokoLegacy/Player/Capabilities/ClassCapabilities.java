@@ -63,10 +63,11 @@ public record ClassCapabilities() {
         }
         public void onRemoveClone()
         {
-            if(!player.getWorld().isClient) {
-                if (currentAmountOfClones > 0) {
-                    currentAmountOfClones--;
-                }
+            if (player.getWorld().isClient) {
+                return;
+            }
+            if (currentAmountOfClones > 0) {
+                currentAmountOfClones--;
             }
         }
 
@@ -133,47 +134,49 @@ public record ClassCapabilities() {
         }
         public void pickTargetedEntity(final UUID entityUUID,final Vec3d playerLookingPosition)
         {
-            if((CardinalData.LyokoClass.getLyokoClass(player) == 2 || player.getAbilities().creativeMode) && CardinalData.DigitalEnergyComponent.tryUseEnergy(player,5)) {
-                final Entity entity = ((ServerWorld) player.getWorld()).getEntity(entityUUID);
-                if (entity instanceof final LivingEntity livingEntity) {
+            if ((CardinalData.LyokoClass.getLyokoClass(player) != 2 && !player.getAbilities().creativeMode) || !CardinalData.DigitalEnergyComponent.tryUseEnergy(player, 5)) {
+                return;
+            }
+            final Entity entity = ((ServerWorld) player.getWorld()).getEntity(entityUUID);
+            if (entity instanceof final LivingEntity livingEntity) {
 
-                    livingEntity.setPos(playerLookingPosition.getX(), playerLookingPosition.getY(), playerLookingPosition.getZ());
-                    livingEntity.updatePosition(playerLookingPosition.getX(), playerLookingPosition.getY(), playerLookingPosition.getZ());
-                    livingEntity.setVelocity(0, 0.05, 0);
-                    livingEntity.updateTrackedPosition(playerLookingPosition.getX(), playerLookingPosition.getY(), playerLookingPosition.getZ());
-                }
-                if (entity instanceof final ProjectileEntity projectile) {
+                livingEntity.setPos(playerLookingPosition.getX(), playerLookingPosition.getY(), playerLookingPosition.getZ());
+                livingEntity.updatePosition(playerLookingPosition.getX(), playerLookingPosition.getY(), playerLookingPosition.getZ());
+                livingEntity.setVelocity(0, 0.05, 0);
+                livingEntity.updateTrackedPosition(playerLookingPosition.getX(), playerLookingPosition.getY(), playerLookingPosition.getZ());
+            }
+            if (entity instanceof final ProjectileEntity projectile) {
 
-                    projectile.setPos(playerLookingPosition.getX(), playerLookingPosition.getY(), playerLookingPosition.getZ());
-                    projectile.updatePosition(playerLookingPosition.getX(), playerLookingPosition.getY(), playerLookingPosition.getZ());
-                    if (!negatedProjectileVelocity) {
-                        projectile.setVelocity(projectile.getVelocity().negate());
-                        negatedProjectileVelocity = true;
-                    }
-                    projectile.updateTrackedPosition(playerLookingPosition.getX(), playerLookingPosition.getY(), playerLookingPosition.getZ());
-                } else {
-                    negatedProjectileVelocity = false;
+                projectile.setPos(playerLookingPosition.getX(), playerLookingPosition.getY(), playerLookingPosition.getZ());
+                projectile.updatePosition(playerLookingPosition.getX(), playerLookingPosition.getY(), playerLookingPosition.getZ());
+                if (!negatedProjectileVelocity) {
+                    projectile.setVelocity(projectile.getVelocity().negate());
+                    negatedProjectileVelocity = true;
                 }
+                projectile.updateTrackedPosition(playerLookingPosition.getX(), playerLookingPosition.getY(), playerLookingPosition.getZ());
+            } else {
+                negatedProjectileVelocity = false;
             }
         }
 
         public void pickTargetedBlock(final BlockHitResult resultant) {
-            if((CardinalData.LyokoClass.getLyokoClass(player) == 2 || player.getAbilities().creativeMode) && CardinalData.DigitalEnergyComponent.tryUseEnergy(player,2)) {
-                if (fallingBlockVersion == null) {
-                    final BlockState state = player.getWorld().getBlockState(resultant.getBlockPos());
-                    if (state != Blocks.AIR.getDefaultState()) {
-                        fallingBlockVersion = FallingBlockEntity.spawnFromBlock(player.getWorld(), resultant.getBlockPos(), state);
-                    }
+            if ((CardinalData.LyokoClass.getLyokoClass(player) != 2 && !player.getAbilities().creativeMode) || !CardinalData.DigitalEnergyComponent.tryUseEnergy(player, 2)) {
+                return;
+            }
+            if (fallingBlockVersion == null) {
+                final BlockState state = player.getWorld().getBlockState(resultant.getBlockPos());
+                if (state != Blocks.AIR.getDefaultState()) {
+                    fallingBlockVersion = FallingBlockEntity.spawnFromBlock(player.getWorld(), resultant.getBlockPos(), state);
                 }
-                if (fallingBlockVersion != null) {
-                    isHoldingBlock = true;
-                    fallingBlockVersion.setVelocity(Vec3d.ZERO);
-                    fallingBlockVersion.setNoGravity(true);
-                    fallingBlockVersion.setPos(resultant.getPos().getX(), resultant.getPos().getY(), resultant.getPos().getZ());
-                    fallingBlockVersion.updateTrackedPosition(resultant.getPos().getX(), resultant.getPos().getY(), resultant.getPos().getZ());
-                    fallingBlockVersion.setFallingBlockPos(resultant.getBlockPos());
+            }
+            if (fallingBlockVersion != null) {
+                isHoldingBlock = true;
+                fallingBlockVersion.setVelocity(Vec3d.ZERO);
+                fallingBlockVersion.setNoGravity(true);
+                fallingBlockVersion.setPos(resultant.getPos().getX(), resultant.getPos().getY(), resultant.getPos().getZ());
+                fallingBlockVersion.updateTrackedPosition(resultant.getPos().getX(), resultant.getPos().getY(), resultant.getPos().getZ());
+                fallingBlockVersion.setFallingBlockPos(resultant.getBlockPos());
 
-                }
             }
         }
 
@@ -224,42 +227,43 @@ public record ClassCapabilities() {
         }
 
         public void calculateWorldBlockPlacements(final BlockHitResult hitResult) {
-            if((CardinalData.LyokoClass.getLyokoClass(player) == 3 || player.getAbilities().creativeMode) && CardinalData.DigitalEnergyComponent.tryUseEnergy(player,3)) {
-                final BlockPos position = hitResult.getBlockPos();
-                final BlockBox blockBox = new BlockBox(position.getX() - maxWidth, position.getY() - 1, position.getZ() - maxLength, position.getX() + maxWidth, position.getY() + 1, position.getZ() + maxLength);
-                final BlockPos calculatePosition = getBlockPos(player, blockBox);
-                if (player.getWorld().getRegistryKey() == ModDimensions.desertSectorWorld) {
-                    final MatrixStack matrixReference = RendererVariables.getMatrixStack();
-                    final Block block = ModBlocks.DIGITAL_SAND;
-                    //matrixReference.push();
-                    switch (player.getHorizontalFacing()) {
-                        case WEST, EAST -> {
-                            for (int x = calculatePosition.getX() - maxLength; x < calculatePosition.getX() + maxLength; ++x) {
-                                for (int y = calculatePosition.getY() - 1; y < calculatePosition.getY() + 1; ++y) {
-                                    for (int z = calculatePosition.getZ() - maxWidth; z < calculatePosition.getZ() + maxWidth; ++z) {
+            if ((CardinalData.LyokoClass.getLyokoClass(player) != 3 && !player.getAbilities().creativeMode) || !CardinalData.DigitalEnergyComponent.tryUseEnergy(player, 3)) {
+                return;
+            }
+            final BlockPos position = hitResult.getBlockPos();
+            final BlockBox blockBox = new BlockBox(position.getX() - maxWidth, position.getY() - 1, position.getZ() - maxLength, position.getX() + maxWidth, position.getY() + 1, position.getZ() + maxLength);
+            final BlockPos calculatePosition = getBlockPos(player, blockBox);
+            if (player.getWorld().getRegistryKey() == ModDimensions.desertSectorWorld) {
+                final MatrixStack matrixReference = RendererVariables.getMatrixStack();
+                final Block block = ModBlocks.DIGITAL_SAND;
+                //matrixReference.push();
+                switch (player.getHorizontalFacing()) {
+                    case WEST, EAST -> {
+                        for (int x = calculatePosition.getX() - maxLength; x < calculatePosition.getX() + maxLength; ++x) {
+                            for (int y = calculatePosition.getY() - 1; y < calculatePosition.getY() + 1; ++y) {
+                                for (int z = calculatePosition.getZ() - maxWidth; z < calculatePosition.getZ() + maxWidth; ++z) {
 
-                                        player.getWorld().setBlockState(new BlockPos(x, y, z), block.getDefaultState());
-                                        //renderBuildingQuad(client,new BlockPos(x,y,z),block,matrixReference);
+                                    player.getWorld().setBlockState(new BlockPos(x, y, z), block.getDefaultState());
+                                    //renderBuildingQuad(client,new BlockPos(x,y,z),block,matrixReference);
 
 
-                                    }
-                                }
-                            }
-                        }
-                        case NORTH, SOUTH -> {
-                            for (int x = calculatePosition.getX() - maxWidth; x < calculatePosition.getX() + maxWidth; ++x) {
-                                for (int y = calculatePosition.getY() - 1; y < calculatePosition.getY() + 1; ++y) {
-                                    for (int z = calculatePosition.getZ() - maxLength; z < calculatePosition.getZ() + maxLength; ++z) {
-                                        player.getWorld().setBlockState(new BlockPos(x, y, z), block.getDefaultState());
-                                        //renderBuildingQuad(client,new BlockPos(x,y,z),block,matrixReference);
-
-                                    }
                                 }
                             }
                         }
                     }
-                    // matrixReference.pop();
+                    case NORTH, SOUTH -> {
+                        for (int x = calculatePosition.getX() - maxWidth; x < calculatePosition.getX() + maxWidth; ++x) {
+                            for (int y = calculatePosition.getY() - 1; y < calculatePosition.getY() + 1; ++y) {
+                                for (int z = calculatePosition.getZ() - maxLength; z < calculatePosition.getZ() + maxLength; ++z) {
+                                    player.getWorld().setBlockState(new BlockPos(x, y, z), block.getDefaultState());
+                                    //renderBuildingQuad(client,new BlockPos(x,y,z),block,matrixReference);
+
+                                }
+                            }
+                        }
+                    }
                 }
+                // matrixReference.pop();
             }
         }
         @NotNull

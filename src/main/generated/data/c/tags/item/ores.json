@@ -1,21 +1,21 @@
 {
   "values": [
-    "codelyoko:autunite_ore",
-    "codelyoko:bornite_ore",
-    "codelyoko:carnotite_ore",
-    "codelyoko:chalcocite_ore",
-    "codelyoko:chalcopyrite_ore",
-    "codelyoko:coffinite_ore",
-    "codelyoko:covellite_ore",
-    "codelyoko:gummite_ore",
-    "codelyoko:metaautunite_ore",
-    "codelyoko:metatorbernite_ore",
-    "codelyoko:metatyuyamunite_ore",
-    "codelyoko:saleeite_ore",
-    "codelyoko:sklodowskite_ore",
-    "codelyoko:torbernite_ore",
-    "codelyoko:tyuyamunite_ore",
-    "codelyoko:uraninite_ore",
-    "codelyoko:uranophane_ore"
+    "minecraft:autunite_ore",
+    "minecraft:bornite_ore",
+    "minecraft:carnotite_ore",
+    "minecraft:chalcocite_ore",
+    "minecraft:chalcopyrite_ore",
+    "minecraft:coffinite_ore",
+    "minecraft:covellite_ore",
+    "minecraft:gummite_ore",
+    "minecraft:metaautunite_ore",
+    "minecraft:metatorbernite_ore",
+    "minecraft:metatyuyamunite_ore",
+    "minecraft:saleeite_ore",
+    "minecraft:sklodowskite_ore",
+    "minecraft:torbernite_ore",
+    "minecraft:tyuyamunite_ore",
+    "minecraft:uraninite_ore",
+    "minecraft:uranophane_ore"
   ]
 }

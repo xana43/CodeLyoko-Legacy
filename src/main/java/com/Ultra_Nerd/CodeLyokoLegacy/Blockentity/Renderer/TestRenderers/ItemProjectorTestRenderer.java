@@ -9,6 +9,8 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 
+
+
 @Environment(EnvType.CLIENT)
 public record ItemProjectorTestRenderer(BlockEntityRendererFactory.Context context) implements BlockEntityRenderer<ItemProjectorTestEntity> {
 

@@ -96,16 +96,17 @@ public final class YumiFans extends TridentItem {
 
     @Override
     public void inventoryTick(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
-        if (!stack.hasEnchantments()) {
-            final DynamicRegistryManager registryManager = worldIn.getRegistryManager();
-            final RegistryEntry<Enchantment> LOYALTY = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.LOYALTY);
-            final RegistryEntry<Enchantment> SHARPNESS = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.SHARPNESS);
-            final RegistryEntry<Enchantment> IMPALING = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.IMPALING);
-            stack.addEnchantment(LOYALTY, LOYALTY.value().getMaxLevel());
-            stack.addEnchantment(SHARPNESS, SHARPNESS.value().getMaxLevel());
-            stack.addEnchantment(IMPALING, IMPALING.value().getMaxLevel());
-            //stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
+        if (stack.hasEnchantments()) {
+            return;
         }
+        final DynamicRegistryManager registryManager = worldIn.getRegistryManager();
+        final RegistryEntry<Enchantment> LOYALTY = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.LOYALTY);
+        final RegistryEntry<Enchantment> SHARPNESS = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.SHARPNESS);
+        final RegistryEntry<Enchantment> IMPALING = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.IMPALING);
+        stack.addEnchantment(LOYALTY, LOYALTY.value().getMaxLevel());
+        stack.addEnchantment(SHARPNESS, SHARPNESS.value().getMaxLevel());
+        stack.addEnchantment(IMPALING, IMPALING.value().getMaxLevel());
+        //stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
     }
 
 
