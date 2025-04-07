@@ -44,14 +44,14 @@ public final class DemarcationPoint extends BlockWithEntity {
     }
 
     @Override
-    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if(!world.isClient)
+    protected ActionResult onUse(final BlockState state,final World world,final BlockPos pos,final PlayerEntity player,final BlockHitResult hit) {
+        if (world.isClient) {
+            return ActionResult.CONSUME;
+        }
+        final NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+        if(screenHandlerFactory != null)
         {
-            final NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-            if(screenHandlerFactory != null)
-            {
-                player.openHandledScreen(screenHandlerFactory);
-            }
+            player.openHandledScreen(screenHandlerFactory);
         }
         return ActionResult.SUCCESS;
     }

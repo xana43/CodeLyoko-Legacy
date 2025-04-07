@@ -7,11 +7,11 @@ import net.minecraft.server.world.ServerWorld;
 
 public record PlayerEnteredServerWorldEvent() {
     public static void consume(final ServerWorld world) {
-        if(!MethodUtil.DimensionCheck.worldIsVanilla(world)) {
-            for(final ServerPlayerEntity player : world.getPlayers()) {
-                player.incrementStat(ModStats.TIME_SPENT_IN_LYOKO_IDENTIFIER);
-            }
-
+        if(MethodUtil.DimensionCheck.worldIsVanilla(world)) {
+            return;
+        }
+        for(final ServerPlayerEntity player : world.getPlayers()) {
+            player.incrementStat(ModStats.TIME_SPENT_IN_LYOKO_IDENTIFIER);
         }
     }
 }

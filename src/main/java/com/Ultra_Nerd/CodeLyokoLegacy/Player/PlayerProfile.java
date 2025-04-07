@@ -16,93 +16,89 @@ public final class PlayerProfile implements NbtSerializable {
     private String DNA;
     private int timesEntered = 0;
     private boolean firstJoin;
-    public PlayerProfile(final PlayerEntity player)
-    {
+
+    public PlayerProfile(final PlayerEntity player) {
+        super();
         this.player = player;
     }
 
-    public int getPlayerClassType()
-    {
+    public int getPlayerClassType() {
         return playerClassType;
     }
 
-    public void refreshPlayerClass()
-    {
-      playerClassType = CardinalData.LyokoClass.getLyokoClass(player);
+    public void refreshPlayerClass() {
+        playerClassType = CardinalData.LyokoClass.getLyokoClass(player);
 
     }
-    public void setFirstJoin(final boolean firstJoin)
-    {
+
+    public boolean getFirstJoin() {
+        return firstJoin;
+    }
+
+    public void setFirstJoin(final boolean firstJoin) {
         this.firstJoin = firstJoin;
     }
-    public boolean getFirstJoin()
-    {
-        return this.firstJoin;
-    }
-    public void incrementEntered()
-    {
+
+    public void incrementEntered() {
         timesEntered++;
     }
-    public void loadDNA()
-    {
+
+    public void loadDNA() {
         DNA = CardinalData.HumanDNAAttribute.getDna(player);
     }
-    public PlayerEntity getPlayer()
-    {
+
+    public PlayerEntity getPlayer() {
         return player;
     }
-    public String getDNA()
-    {
+
+    public String getDNA() {
         return DNA;
     }
 
     @Override
-    public void fromTag(final @NotNull NbtCompound tag,final RegistryWrapper.WrapperLookup registryLookup) {
+    public void fromTag(final @NotNull NbtCompound tag, final RegistryWrapper.WrapperLookup registryLookup) {
         if (player == null) {
             CodeLyokoMain.LOG.warn("player is null, cannot assign values");
             return;
         }
-            //this.player.readNbt(tag);
-            this.DNA = tag.getString(player.getDisplayName() + "-dna");
-            this.playerClassType = tag.getInt(player.getDisplayName() + "-class");
-            this.timesEntered = tag.getInt(player.getDisplayName() + "-entered");
-            this.firstJoin = tag.getBoolean(player.getDisplayName() + "-joined");
+        //this.player.readNbt(tag);
+        DNA = tag.getString(player.getUuid() + "-dna");
+        playerClassType = tag.getInt(player.getUuid() + "-class");
+        timesEntered = tag.getInt(player.getUuid() + "-entered");
+        firstJoin = tag.getBoolean(player.getUuid() + "-joined");
     }
-    private NbtCompound toCommonTag()
-    {
+
+    private NbtCompound toCommonTag() {
         final NbtCompound compound = new NbtCompound();
         return toCommonTag(compound);
     }
-    private NbtCompound toCommonTag(final @NotNull NbtCompound tag)
-    {
-        if(player != null) {
-            tag.putString(player.getDisplayName() + "-dna", DNA);
-            tag.putInt(player.getDisplayName() + "-class", playerClassType);
-            tag.putInt(player.getDisplayName() + "-entered", timesEntered);
-            tag.putBoolean(player.getDisplayName()+"-joined",firstJoin);
+
+    private NbtCompound toCommonTag(final @NotNull NbtCompound tag) {
+        if (player != null) {
+            tag.putString(player.getUuid() + "-dna", DNA);
+            tag.putInt(player.getUuid() + "-class", playerClassType);
+            tag.putInt(player.getUuid() + "-entered", timesEntered);
+            tag.putBoolean(player.getUuid() + "-joined", firstJoin);
             return tag;
-        }
-        else {
+        } else {
             throw new NullPointerException("player is null, cannot write values");
         }
     }
+
     @Override
-    public @NotNull NbtCompound toTag(final @NotNull NbtCompound tag,final RegistryWrapper.WrapperLookup registryLookup) {
+    public @NotNull NbtCompound toTag(final @NotNull NbtCompound tag, final RegistryWrapper.WrapperLookup registryLookup) {
         return toCommonTag(tag);
     }
-    public NbtCompound toTag()
-    {
+
+    public NbtCompound toTag() {
         return toCommonTag();
     }
 
     @Override
     public boolean equals(final Object obj) {
-        if(obj instanceof final PlayerProfile otherPlayerProfile)
-        {
-            return Objects.equals(this.DNA, otherPlayerProfile.DNA) && this.player == otherPlayerProfile.player && this.playerClassType == otherPlayerProfile.playerClassType && this.timesEntered == otherPlayerProfile.timesEntered && this.firstJoin == otherPlayerProfile.firstJoin;
-        }
-        else
-        {
+        if (obj instanceof final PlayerProfile otherPlayerProfile) {
+            return Objects.equals(DNA, otherPlayerProfile.DNA) && player == otherPlayerProfile.player && playerClassType == otherPlayerProfile.playerClassType && timesEntered == otherPlayerProfile.timesEntered && firstJoin == otherPlayerProfile.firstJoin;
+        } else {
             return super.equals(obj);
         }
     }

@@ -1,9 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperComputerNetwork;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.CableNetworkConnectedBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculatorNetwork.CableBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.SuperCalculatorNetwork.DemarcationScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.SuperCalculator.DataPacketType;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.IdBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.RenameableBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.SyncedBlockEntity;
@@ -18,10 +18,12 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 
-public final class DemarcationBlockEntity extends SyncedBlockEntity implements ExtendedScreenHandlerFactory, RenameableBlockEntity, IdBlockEntity {
+public final class DemarcationBlockEntity extends SyncedBlockEntity implements CableNetworkConnectedBlockEntity, ExtendedScreenHandlerFactory, RenameableBlockEntity, IdBlockEntity {
     private int uid;
+    private boolean connected;
     private final PropertyDelegate idDelegate = new PropertyDelegate() {
         @Override
         public int get(final int index) {
@@ -57,18 +59,14 @@ public final class DemarcationBlockEntity extends SyncedBlockEntity implements E
     public int getId() {
         return uid;
     }
-
-    public <T> void testDataReceive(final DataPacketType<T> dataPacket)
-    {
-
-       CodeLyokoMain.LOG.error(String.valueOf(dataPacket.encapsulatedData().get(0)));
-    }
-    private static final String UID_KEY = "uid",NAME_KEY = "name";
+    private static final String UID_KEY = "uid",NAME_KEY = "name",connectedPositionKey = "connected_position",isConnectedKey = "is_connected";
     @Override
     protected void writeNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
         super.writeNbt(nbt,registryLookup);
         nbt.putInt(UID_KEY,uid);
         nbt.putString(NAME_KEY,name);
+        nbt.putLong(connectedPositionKey,connectedPosition.asLong());
+        nbt.putBoolean(isConnectedKey,connected);
     }
 
     @Override
@@ -76,6 +74,8 @@ public final class DemarcationBlockEntity extends SyncedBlockEntity implements E
         super.readNbt(nbt,registryLookup);
         uid = nbt.getInt(UID_KEY);
         name = nbt.getString(NAME_KEY);
+        connected = nbt.getBoolean(isConnectedKey);
+        connectedPosition = BlockPos.fromLong(nbt.getLong(connectedPositionKey));
     }
 
     @Override
@@ -96,5 +96,35 @@ public final class DemarcationBlockEntity extends SyncedBlockEntity implements E
     @Override
     public Object getScreenOpeningData(ServerPlayerEntity player) {
         return null;
+    }
+
+    @Override
+    public boolean isConnected() {
+        return connected;
+    }
+
+    @Override
+    public BlockPos getConnectedPos() {
+        return connectedPosition;
+    }
+    private BlockPos connectedPosition = BlockPos.ORIGIN;
+    @Override
+    public void tryConnect() {
+        assert world != null;
+        if(world.isClient){
+            return;
+        }
+        for(final Direction direction : Direction.values() ) {
+            if(world.getBlockState(pos.offset(direction)).getBlock() instanceof CableBlock){
+                connectedPosition = pos.offset(direction);
+                return;
+            }
+        }
+        connected = !connectedPosition.equals(BlockPos.ORIGIN);
+    }
+
+    @Override
+    public void tryDisconnect() {
+
     }
 }

@@ -21,78 +21,80 @@ public abstract class MultiBlockController extends SyncedBlockEntity implements 
     public MultiBlockController(final BlockEntityType<?> type, final BlockPos pos, final BlockState state, final BlockPattern pattern, final BooleanProperty stateProperty) {
         super(type, pos, state);
         currentPattern = pattern;
-        this.thisProperty = stateProperty;
+        thisProperty = stateProperty;
     }
 
     public boolean getCheckSuccessful() {
-        return this.checkSuccessful;
+        return checkSuccessful;
     }
 
     //TODO: get this working properly
     @Override
     public void check() {
-        if (world != null && !world.isClient) {
-            if (currentPattern.searchAround(world, pos) != null) {
-                for (int x = 0; x < currentPattern.getWidth(); ++x) {
-                    for (int y = 0; y < currentPattern.getHeight(); ++y) {
-                        for (int z = 0; z < currentPattern.getDepth(); ++z) {
-                            final BlockPos posOffset = new BlockPos(this.pos.getX() + x, this.pos.getY() + y,
-                                    this.pos.getZ() + z);
-                            final BlockState checkedState = world.getBlockState(posOffset);
-                            CodeLyokoMain.LOG.error("checked blockstate is:" + checkedState);
-                            if (checkedState.contains(this.thisProperty)) {
-                                world.setBlockState(posOffset, checkedState.with(this.thisProperty, Boolean.TRUE));
+        assert world != null;
+        if (world.isClient()) {
+            return;
+        }
+        if (currentPattern.searchAround(world, pos) != null) {
+            for (int x = 0; x < currentPattern.getWidth(); ++x) {
+                for (int y = 0; y < currentPattern.getHeight(); ++y) {
+                    for (int z = 0; z < currentPattern.getDepth(); ++z) {
+                        final BlockPos posOffset = new BlockPos(pos.getX() + x, pos.getY() + y,
+                                pos.getZ() + z);
+                        final BlockState checkedState = world.getBlockState(posOffset);
+                        CodeLyokoMain.LOG.error("checked blockstate is:{}", checkedState);
+                        if (checkedState.contains(thisProperty)) {
+                            world.setBlockState(posOffset, checkedState.with(thisProperty, Boolean.TRUE));
 
-                            }
-                            world.addParticle(() -> ModParticles.TOWER_PARTICLE, true, posOffset.getX(), posOffset.getY(),
-                                    posOffset.getZ(), 0, 0, 0);
-                            this.checkSuccessful = true;
                         }
+                        world.addParticle(() -> ModParticles.TOWER_PARTICLE, true, posOffset.getX(), posOffset.getY(),
+                                posOffset.getZ(), 0, 0, 0);
+                        checkSuccessful = true;
                     }
                 }
-
-            } else {
-
-                invalidateEntity();
             }
-            world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_LISTENERS);
 
+        } else {
+
+            invalidateEntity();
         }
-    }
+        world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_LISTENERS);
 
+
+    }
 
 
     @Override
     public void invalidateEntity() {
-        if (world != null) {
-            //if (currentPattern.searchAround(world, pos) != null) {
-            for (int x = -currentPattern.getWidth(); x < currentPattern.getWidth(); ++x) {
-                for (int y = -currentPattern.getHeight(); y < currentPattern.getHeight(); ++y) {
-                    for (int z = -currentPattern.getDepth(); z < currentPattern.getDepth(); ++z) {
-                        final BlockPos posOffset = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-                        final BlockState checkedState = world.getBlockState(posOffset);
-                        if (checkedState.contains(thisProperty)) {
-                            world.setBlockState(posOffset, checkedState.with(thisProperty, Boolean.FALSE));
+        assert world != null;
+        //if (currentPattern.searchAround(world, pos) != null) {
+        for (int x = -currentPattern.getWidth(); x < currentPattern.getWidth(); ++x) {
+            for (int y = -currentPattern.getHeight(); y < currentPattern.getHeight(); ++y) {
+                for (int z = -currentPattern.getDepth(); z < currentPattern.getDepth(); ++z) {
+                    final BlockPos posOffset = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+                    final BlockState checkedState = world.getBlockState(posOffset);
+                    if (checkedState.contains(thisProperty)) {
+                        world.setBlockState(posOffset, checkedState.with(thisProperty, Boolean.FALSE));
 
-                        }
-                        checkSuccessful = false;
                     }
+                    checkSuccessful = false;
                 }
-                //}
-
             }
+            //}
+
         }
+
     }
 
     @Override
     protected void writeNbt(final NbtCompound nbt, final RegistryWrapper.WrapperLookup registryLookup) {
-        super.writeNbt(nbt,registryLookup);
+        super.writeNbt(nbt, registryLookup);
         nbt.putBoolean(CHECK_KEY, checkSuccessful);
     }
 
     @Override
-    public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
-        super.readNbt(nbt,registryLookup);
+    public void readNbt(final NbtCompound nbt, final RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(nbt, registryLookup);
         checkSuccessful = nbt.getBoolean(CHECK_KEY);
     }
 }

@@ -26,6 +26,7 @@ public final class HumanDNA implements AutoSyncedComponent{
 
 
     public HumanDNA(final PlayerEntity player) {
+        super();
         this.player = player;
     }
 

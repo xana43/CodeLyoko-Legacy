@@ -67,6 +67,7 @@ public final class ModelGenerator extends FabricModelProvider {
     public void generateBlockStateModels(final BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerParentedItemModel(ModBlocks.RACK_CHARGER_BLOCK, CodeLyokoMain.codeLyokoPrefix("block/rack_charger"));
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CABLE_BLOCK);
+        blockStateModelGenerator.registerParentedItemModel(ModBlocks.CABLE_BLOCK, CodeLyokoMain.codeLyokoPrefix("block/cable_block"));
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.SECTOR_ENTRANCE_DESERT);
         generateCustomBlockModels(blockStateModelGenerator);
         generateFenceLikeModels(blockStateModelGenerator,ModBlocks.IRON_RAILING,"block/railing_post","block/railing_side");

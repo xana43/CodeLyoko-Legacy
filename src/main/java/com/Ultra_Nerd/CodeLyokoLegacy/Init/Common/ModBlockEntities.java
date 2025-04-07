@@ -9,7 +9,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidS
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerCirculatorBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerFluidCoolerBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerFluidIntakeBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperComputerNetwork.CableBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperComputerNetwork.DemarcationBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.ComputerInterfaceTestTE;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.ItemProjectorTestEntity;
@@ -22,7 +21,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
 public record ModBlockEntities() {
-    public static final BlockEntityType<CableBlockEntity> CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE;
     public static final BlockEntityType<CirculatorPipeBlockEntity> CIRCULATOR_PIPE_BLOCK_ENTITY_TYPE;
     public static final BlockEntityType<ComputerCirculatorBlockEntity> COMPUTER_CIRCULATOR_BLOCK_ENTITY_TYPE;
     public static final BlockEntityType<ComputerControlPanelTileEntity> COMPUTER_CONTROL_PANEL;
@@ -36,6 +34,7 @@ public record ModBlockEntities() {
     public static final BlockEntityType<ItemProjectorTestEntity> ITEM_PROJECTOR_TEST_BLOCK_ENTITY;
     public static final BlockEntityType<KeyBoardInterface> KEYBOARD_BLOCK_ENTITY;
     public static final BlockEntityType<LaptopChargerBlockEntityInventory> LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY;
+    public static final BlockEntityType<LaptopBlockEntity> LAPTOP_BLOCK_ENTITY;
     public static final BlockEntityType<LyokoCoreBE> LYOKO_CORE;
     public static final BlockEntityType<LithographyBlockEntityInventory> LITHOGRAPHY_BLOCK_ENTITY_TYPE;
     public static final BlockEntityType<LithographyBlockEntityInventoryT2> LITHOGRAPHY_BLOCK_ENTITY_TYPE_T2;
@@ -51,6 +50,7 @@ public record ModBlockEntities() {
     public static final BlockEntityType<VehicleBE> VEHICLE_BE_BLOCK_ENTITY_TYPE;
 
     static {
+        LAPTOP_BLOCK_ENTITY = registerModBlockEntity("laptop_block_entity",BlockEntityType.Builder.create(LaptopBlockEntity::new,ModBlocks.LAPTOP_BLOCK));
         LYOKO_CORE = registerModBlockEntity("lyoko_core", BlockEntityType.Builder.create(LyokoCoreBE::new,
                 ModBlocks.LYOKO_CORE));
         LITHOGRAPHY_BLOCK_ENTITY_TYPE = registerModBlockEntity("lithography_block_entity",BlockEntityType.Builder.create(LithographyBlockEntityInventory::new,ModBlocks.LITHOGRAPHY_MACHINE));
@@ -67,7 +67,6 @@ public record ModBlockEntities() {
                 ComputerReactorBlockEntityInventory::new, ModBlocks.URANIUM_REACTOR));
         LAPTOP_CHARGER_BLOCK_ENTITY_BLOCK_ENTITY = registerModBlockEntity("laptop_charger_block_entity", BlockEntityType.Builder.create(LaptopChargerBlockEntityInventory::new, ModBlocks.LAPTOP_CHARGER));
         ROUTER_BLOCK_ENTITY_TYPE = registerModBlockEntity("router_block_entity", BlockEntityType.Builder.create(RouterTE::new, ModBlocks.ROUTER));
-        CABLE_TILE_ENTITY_BLOCK_ENTITY_TYPE = registerModBlockEntity("cable_block_entity",BlockEntityType.Builder.create(CableBlockEntity::new, ModBlocks.CABLE_BLOCK));
         COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE = registerModBlockEntity("computer_core_block_entity", BlockEntityType.Builder.create(ComputerCoreTileEntity::new, ModBlocks.COMPUTER_CORE));
         KEYBOARD_BLOCK_ENTITY = registerModBlockEntity("keyboard_block_entity", BlockEntityType.Builder.create(KeyBoardInterface::new, ModBlocks.COMPUTER_KEYBOARD));
         COMPUTER_INTERFACE_TEST_TE_BLOCK_ENTITY_TYPE = registerModBlockEntity("test_ui_block_entity", BlockEntityType.Builder.create(ComputerInterfaceTestTE::new, ModBlocks.TESTUI));

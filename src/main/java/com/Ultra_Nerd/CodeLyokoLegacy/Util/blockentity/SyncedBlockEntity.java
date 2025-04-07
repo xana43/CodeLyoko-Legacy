@@ -21,32 +21,33 @@ public abstract class SyncedBlockEntity extends BlockEntity {
 
     @Override
     public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
-        return this.createNbt(registryLookup);
+        return createNbt(registryLookup);
     }
 
     @Override
     public @NotNull Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return  BlockEntityUpdateS2CPacket.create(this);
+        return BlockEntityUpdateS2CPacket.create(this);
     }
 
     @Override
     public void markDirty() {
         super.markDirty();
-        if(world != null && !world.isClient())
-        {
-            for (final ServerPlayerEntity serverPlayerEntity : PlayerLookup.tracking(this))
-            {
-                serverPlayerEntity.networkHandler.sendPacket(this.toUpdatePacket());
-            }
-            final BlockState state = world.getBlockState(pos);
-            world.updateListeners(pos,state,state, Block.NOTIFY_ALL);
+        assert world != null;
+        if (world.isClient()) {
+            return;
         }
+        for (final ServerPlayerEntity serverPlayerEntity : PlayerLookup.tracking(this)) {
+            serverPlayerEntity.networkHandler.sendPacket(toUpdatePacket());
+        }
+        final BlockState state = world.getBlockState(pos);
+        world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
+
     }
 
     public void update() {
-        this.markDirty();
-        if (this.world != null) {
-            this.world.setBlockState(this.pos, getCachedState());
+        markDirty();
+        if (world != null) {
+            world.setBlockState(pos, getCachedState());
         }
     }
 }

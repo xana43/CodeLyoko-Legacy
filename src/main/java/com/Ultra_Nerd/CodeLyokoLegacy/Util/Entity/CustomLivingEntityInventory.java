@@ -36,6 +36,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
     private int changeCount;
 
     public CustomLivingEntityInventory(final LivingEntity entity) {
+        super();
         this.main = DefaultedList.ofSize(36, ItemStack.EMPTY);
         this.armor = DefaultedList.ofSize(4, ItemStack.EMPTY);
         this.offHand = DefaultedList.ofSize(1, ItemStack.EMPTY);
@@ -202,7 +203,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
         List<ItemStack> list = null;
 
         DefaultedList defaultedList;
-        for(Iterator var4 = this.combinedInventory.iterator(); var4.hasNext(); slot -= defaultedList.size()) {
+        for(final Iterator var4 = this.combinedInventory.iterator(); var4.hasNext(); slot -= defaultedList.size()) {
             defaultedList = (DefaultedList)var4.next();
             if (slot < defaultedList.size()) {
                 list = defaultedList;
@@ -214,7 +215,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
     }
 
     public void removeOne(ItemStack stack) {
-        Iterator var2 = this.combinedInventory.iterator();
+        Iterator<DefaultedList<ItemStack>> var2 = this.combinedInventory.iterator();
 
         while(true) {
             while(var2.hasNext()) {

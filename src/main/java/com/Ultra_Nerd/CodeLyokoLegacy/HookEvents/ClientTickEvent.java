@@ -28,7 +28,10 @@ public record ClientTickEvent() {
     private static final PacketByteBuf keyboardByteBuf = PacketByteBufs.create();
     public static void consume(final MinecraftClient client)
     {
-        if (client.player != null) {
+        if (client.player == null)
+        {
+            return;
+        }
             if(client.player.getAbilities().creativeMode) {
                 if(testTowerScan.isPressed())
                 {
@@ -156,6 +159,6 @@ public record ClientTickEvent() {
             } else if (classScreenBinding.isPressed()) {
                 client.player.sendMessage(Text.translatable("lyoko.link.unavailable"));
             }
-        }
+
     }
 }

@@ -216,6 +216,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 ComputerCirculatorRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.ITEM_PROJECTOR_TEST_BLOCK_ENTITY, ItemProjectorTestRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.RACK_CHARGER_BLOCK_ENTITY, RackChargerRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.LAPTOP_BLOCK_ENTITY,LaptopBlockEntityRenderer::new);
     }
 
     private static void registerColorProviders() {

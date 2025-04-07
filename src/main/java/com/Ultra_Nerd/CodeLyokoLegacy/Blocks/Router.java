@@ -122,20 +122,20 @@ public final class Router extends HorizontalFacingBlock implements BlockEntityPr
     public VoxelShape getOutlineShape(@NotNull BlockState state, BlockView worldIn, BlockPos pos,
             ShapeContext context) {
         return switch (state.get(FACING)) {
-            case SOUTH -> N;
+            case SOUTH -> S;
             case EAST -> W;
             case WEST -> E;
-            default -> S;
+            default -> N;
         };
     }
 
     @Override
     public VoxelShape getCollisionShape(final BlockState state, final BlockView world, final BlockPos pos, final ShapeContext context) {
         return switch (state.get(FACING)) {
-            case SOUTH -> N;
+            case SOUTH -> S;
             case EAST -> W;
             case WEST -> E;
-            default -> S;
+            default -> N;
         };
     }
 

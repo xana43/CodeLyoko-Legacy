@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ComputerCoreTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculatorNetwork.CableBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.MegaTankEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.SkidbladnirEntity;
@@ -218,8 +219,11 @@ public record CodeLyokoMain() implements ModInitializer {
     private static void SetupFunctions() {
 
 
-        //sets the properties for the xana handler to calculate on
-        ServerWorldEvents.LOAD.register((server, world) -> XanaHandler.setProperties(server,world.getLevelProperties()));
+        //on world loaded
+        ServerWorldEvents.LOAD.register((server, world) -> {
+            XanaHandler.setProperties(server,world.getLevelProperties());
+            CableBlock.CableNetworkWorldState.getFromServer(server);
+        });
         //saves and loads the inventory for both respawn and joining
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
             if (MethodUtil.DimensionCheck.playerInVanilla(newPlayer)) {
@@ -303,6 +307,10 @@ public record CodeLyokoMain() implements ModInitializer {
         });
         //regenerates the player's digital energy
         ServerTickEvents.END_SERVER_TICK.register(RegeneratePlayerEnergyServerEvent::consume);
+
+
+
+
     }
 
     public static void registerFuels() {

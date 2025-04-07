@@ -2,8 +2,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.ProjectileEntities;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.hit.BlockHitResult;
@@ -17,7 +19,6 @@ public final class LaserEntity extends ArrowEntity {
 
 
     private int lifetime;
-    private int calculatedDamage;
 
     public LaserEntity(final World world, final double x, final double y, final double z, final int lifetime) {
         super(world, x, y, z, ItemStack.EMPTY,ItemStack.EMPTY);
@@ -49,14 +50,14 @@ public final class LaserEntity extends ArrowEntity {
     protected float getDragInWater() {
         return 0;
     }
-    private void calculateHitDamage() {
+    private int calculateHitDamage() {
         final int velocityDamageScale = MathHelper.ceil(MathHelper.clamp(this.getVelocity().length() * this.getDamage(),0.0,2.147483647E9));
         if(isCritical()) {
             final long randomLong = this.random.nextInt(velocityDamageScale / 2 + 2);
-            calculatedDamage = (int) Math.min(randomLong +(long) velocityDamageScale,2147483647L);
-        } else {
-            calculatedDamage = velocityDamageScale;
+            return (int) Math.min(randomLong +(long) velocityDamageScale,2147483647L);
         }
+        return velocityDamageScale;
+
     }
     @Override
     public void tick() {
@@ -84,10 +85,6 @@ public final class LaserEntity extends ArrowEntity {
         }
     }
 
-    public int getCalculatedDamage() {
-        return calculatedDamage;
-    }
-
     private void destroyAtTheEndOfLife() {
         lifetime--;
         if (lifetime <= 0) {
@@ -99,7 +96,15 @@ public final class LaserEntity extends ArrowEntity {
 
     @Override
     protected void onEntityHit(final EntityHitResult entityHitResult) {
-        super.onEntityHit(entityHitResult);
+        final Entity ownerEntity = getOwner();
+        final Entity entityHit = entityHitResult.getEntity();
+        if(ownerEntity instanceof final LivingEntity livingEntity) {
+            livingEntity.onAttacking(entityHit);
+        }
+        final DamageSource laserArrowDamageSource = this.getDamageSources().arrow(this, ownerEntity != null ? ownerEntity : this);
+        if(entityHit.damage( laserArrowDamageSource,calculateHitDamage())){
+
+        }
         if (!getWorld().isClient) {
             this.kill();
         }
@@ -108,7 +113,7 @@ public final class LaserEntity extends ArrowEntity {
     @Override
     protected void onBlockHit(final BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
-        calculateHitDamage();
+
         if (!getWorld().isClient) {
             this.kill();
         }

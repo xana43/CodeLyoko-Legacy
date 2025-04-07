@@ -34,7 +34,7 @@ public record ForceFieldEmitterRenderer(MinecraftClient mc) implements BuiltinIt
         if(ForceFieldModel == null)
         {
             ForceFieldModel = mc.getBakedModelManager().getModel(ForceFieldLocation);
-            CodeLyokoMain.LOG.error("loaded:"+ForceFieldModel);
+            CodeLyokoMain.LOG.error("loaded:{}", ForceFieldModel);
         }
         if (stack.getItem() instanceof final ForceFieldEmitter forceFieldEmitter) {
 

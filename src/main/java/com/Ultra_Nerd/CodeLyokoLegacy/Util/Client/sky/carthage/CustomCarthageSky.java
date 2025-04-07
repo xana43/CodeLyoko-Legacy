@@ -32,7 +32,6 @@ public record CustomCarthageSky() implements DimensionRenderingRegistry.SkyRende
         {
             return;
         }
-        CodeLyokoMain.LOG.info("Rendering Sky");
         final Matrix4f positionMatrix = context.positionMatrix();
         matrixStack.push();
         final BufferBuilder bufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);

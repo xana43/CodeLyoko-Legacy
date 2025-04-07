@@ -1,55 +1,104 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.LaptopBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.function.BooleanBiFunction;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.stream.Stream;
 
 /**
  * @author Ultra_Nerd
  * @desc <br/>
  * @since 2025-03-14
  */
-public final class LaptopBlock extends HorizontalFacingBlock {
+public final class LaptopBlock extends HorizontalFacingBlock implements BlockEntityProvider {
 
     public LaptopBlock() {
         super(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
     }
 
     @Override
-    protected boolean isCullingShapeFullCube(BlockState state, BlockView world, BlockPos pos) {
+    protected boolean isCullingShapeFullCube(final BlockState state,final BlockView world,final BlockPos pos) {
         return false;
     }
 
     @Override
-    protected VoxelShape getCullingShape(BlockState state, BlockView world, BlockPos pos) {
+    protected VoxelShape getCullingShape(final BlockState state,final BlockView world,final BlockPos pos) {
         return VoxelShapes.empty();
     }
 
     @Override
-    public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
+    public @Nullable BlockState getPlacementState(final ItemPlacementContext ctx) {
         return getDefaultState().with(FACING,ctx.getHorizontalPlayerFacing());
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void appendProperties(final StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder.add(FACING));
     }
 
+    @Override
+    protected BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.ENTITYBLOCK_ANIMATED;
+    }
+    private static final String controllerName = "base_controller";
 
+    private static void changeLaptopState(final World world, final BlockPos pos) {
+
+        final LaptopBlockEntity laptopEntity = (LaptopBlockEntity) world.getBlockEntity(pos);
+        assert laptopEntity != null;
+        if(laptopEntity.isLaptopOpen())
+        {
+            laptopEntity.closeLaptop();
+        }
+        else{
+            laptopEntity.openLaptop();
+        }
+    }
+    @Override
+    protected ActionResult onUse(final BlockState state,final World world,final BlockPos pos,final PlayerEntity player,final BlockHitResult hit) {
+
+
+        if(player.isSneaking()){
+            final ItemEntity itemEntity = new ItemEntity(world,pos.getX(),pos.getY(), pos.getZ(), new ItemStack(ModItems.JEREMY_LAPTOP));
+            world.spawnEntity(itemEntity);
+            world.removeBlock(pos, false);
+            return ActionResult.SUCCESS;
+        }
+        changeLaptopState(world, pos);
+        return super.onUse(state, world, pos, player, hit);
+    }
 
     @Override
     protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
         return null;
     }
+
+    @Override
+    public @Nullable BlockEntity createBlockEntity(final BlockPos pos,final BlockState state) {
+        return ModBlockEntities.LAPTOP_BLOCK_ENTITY.instantiate(pos, state);
+    }
+
     private record LaptopVoxelShape() {
         private static final VoxelShape ShapeNorth =
-                VoxelShapes.union(
+                Stream.of(
                         VoxelShapes.cuboid(0.925265625, 0.22794375, 0.903203125, 0.972140625, 0.84825625, 0.937578125),
                         VoxelShapes.cuboid(0.040671875, 0.84825625, 0.903203125, 0.97215625, 0.87950625, 0.937578125),
                         VoxelShapes.cuboid(0.04088875, 0.24825625, 0.903203125, 0.97213875, 0.26388125, 0.937578125),
@@ -782,7 +831,7 @@ public final class LaptopBlock extends HorizontalFacingBlock {
                         VoxelShapes.cuboid(0.297140625, 0.539610625, 0.926640625, 0.300265625, 0.700548125, 0.926640625),
                         VoxelShapes.cuboid(0.150265625, 0.539610625, 0.926640625, 0.153390625, 0.700548125, 0.926640625),
                         VoxelShapes.cuboid(0.040671875, 0.22794375, 0.903203125, 0.087546875, 0.84825625, 0.937578125)
-                );
+                ).reduce((v1,v2) -> VoxelShapes.combineAndSimplify(v1,v2, BooleanBiFunction.OR)).get();
     }
 
 }

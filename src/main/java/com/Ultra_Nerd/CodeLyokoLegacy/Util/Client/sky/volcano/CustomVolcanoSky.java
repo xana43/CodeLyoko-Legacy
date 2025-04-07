@@ -39,37 +39,23 @@ public record CustomVolcanoSky() implements DimensionRenderingRegistry.SkyRender
             return;
         }
         matrixStack.push();
-        for (int i = 0; i < 6; ++i) {
-            switch (i) {
-                case 1 -> {
-                    RenderSystem.setShaderTexture(0, sky1);
-                    matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
-                    matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(0));
-                }
-                case 2 -> {
-                    RenderSystem.setShaderTexture(0, sky2);
-                    matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90.0F));
-                    matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180));
-                }
-                case 3 -> {
-                    RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
-                    matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0F));
-                    matrixStack.translate(0, 50, 0);
-                }
-                case 4 -> {
-                    RenderSystem.setShaderTexture(0, sky2);
-                    matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90.0F));
-                    matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-90));
-                }
-                case 5 -> {
-                    RenderSystem.setShaderTexture(0, sky1);
-                    matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-90.0F));
-                    matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90));
-                }
-                default -> {
-                }
-            }
-        }
+
+        RenderSystem.setShaderTexture(0, sky1);
+        matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(0));
+        RenderSystem.setShaderTexture(0, sky2);
+        matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90.0F));
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180));
+        RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
+        matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0F));
+        matrixStack.translate(0, 50, 0);
+        RenderSystem.setShaderTexture(0, sky2);
+        matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90.0F));
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-90));
+        RenderSystem.setShaderTexture(0, sky1);
+        matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-90.0F));
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90));
+
         final Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
         final BufferBuilder bufferBuilder = tessellator.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR);
         bufferBuilder.vertex(matrix4f, -100.0F, -100.0F, -100.0F).texture(0, 0).color(40, 40, 40, 255);
