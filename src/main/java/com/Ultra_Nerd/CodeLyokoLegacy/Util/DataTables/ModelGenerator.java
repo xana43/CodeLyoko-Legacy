@@ -3,6 +3,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
+import com.google.common.collect.ImmutableMap;
+import dev.felnull.specialmodelloader.api.data.SpecialModelDataGenHelper;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
@@ -69,6 +71,7 @@ public final class ModelGenerator extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CABLE_BLOCK);
         blockStateModelGenerator.registerParentedItemModel(ModBlocks.CABLE_BLOCK, CodeLyokoMain.codeLyokoPrefix("block/cable_block"));
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.SECTOR_ENTRANCE_DESERT);
+        generateObjBlockStateModels(blockStateModelGenerator,ModBlocks.TEST_SC_INTERFACE,"models/block/interface_sc");
         generateCustomBlockModels(blockStateModelGenerator);
         generateFenceLikeModels(blockStateModelGenerator,ModBlocks.IRON_RAILING,"block/railing_post","block/railing_side");
         generateFenceLikeModels(blockStateModelGenerator,ModBlocks.ERODED_IRON_RAILING,"block/eroded_railing_post","block/eroded_railing_side");
@@ -78,6 +81,29 @@ public final class ModelGenerator extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DIGITAL_WOOD_MOUNTAIN);
     }
 
+
+    private static void generateObjBlockStateModels(final BlockStateModelGenerator blockStateModelGenerator, final Block block, final String model){
+        Identifier parsedModel;
+        if(model.contains(".obj"))
+        {
+            parsedModel = CodeLyokoMain.codeLyokoPrefix(model);
+        }
+        else{
+            parsedModel = CodeLyokoMain.codeLyokoPrefix(model+".obj");
+        }
+        SpecialModelDataGenHelper.generateObjModel(
+                block,
+                parsedModel,
+                false,
+                true,
+                null,
+                ImmutableMap.of(),
+                null,
+                blockStateModelGenerator.modelCollector);
+        blockStateModelGenerator.blockStateCollector.accept(
+            BlockStateModelGenerator.createSingletonBlockState(block, ModelIds.getBlockModelId(block))
+        );
+    }
 private static void generateFenceLikeModels(final BlockStateModelGenerator generator, final Block blockToGenerate,final String postModel, final String sideModel)
 {
     final Identifier postIdentifier = CodeLyokoMain.codeLyokoPrefix(postModel);
@@ -104,10 +130,30 @@ private static void generateFenceLikeModels(final BlockStateModelGenerator gener
     private static void generateCustomBlockModels(final BlockStateModelGenerator blockStateModelGenerator){
 
     }
+    private static void generateObjItemModel(final ItemModelGenerator itemModelGenerator,final Item item, final String model)
+    {
+        Identifier parsedModel;
+        if(model.contains(".obj"))
+        {
+            parsedModel = CodeLyokoMain.codeLyokoPrefix(model);
+        }
+        else{
+            parsedModel = CodeLyokoMain.codeLyokoPrefix(model+".obj");
+        }
+        SpecialModelDataGenHelper.generateObjModel(item,
+                parsedModel,
+                false,
+                true,
+                null,
+                ImmutableMap.of(),
+                null,
+                itemModelGenerator.writer
+                );
+    }
     @Override
     public void generateItemModels(final ItemModelGenerator itemModelGenerator) {
        generateDefaultBuckets(itemModelGenerator);
        generateCustomItemModels(itemModelGenerator);
-
+       generateObjItemModel(itemModelGenerator,ModBlocks.TEST_SC_INTERFACE.asItem(),"models/block/interface_sc");
     }
 }

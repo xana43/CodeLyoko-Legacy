@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.ElectricityRenderers.RackChargerRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.TestRenderers.ItemProjectorTestRenderer;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.TestRenderers.TestAnimationRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels.ModelHoverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels.ModelOverbike;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels.ModelOverboard;
@@ -13,7 +14,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Projectile.LaserRen
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Vehicle.HoverboardRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Vehicle.OverbikeRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Vehicle.OverboardRenderer;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.SkidbladnirEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.ClientTickEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.HudRenderCallbackOverride;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Client.ModHandledScreensClientInitializer;
@@ -22,18 +22,17 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Items.Tools.Buckets.CustomColorBucket;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Particles.LyokoFloatingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.Particles.LyokoRingParticle;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.Client.itemRenderers.ForceFieldEmitterRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.Client.sky.carthage.CustomCarthageSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.Client.sky.ice.CustomIceSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.Client.sky.volcano.CustomVolcanoSky;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.GeneralRendererUtils.RendererVariables;
+import dev.felnull.specialmodelloader.api.event.SpecialModelLoaderEvents;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
@@ -201,7 +200,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
     }
 
     private static void registerModelLoaders() {
-        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(CoreOfLyoko.getLyokoCore(), SkidbladnirEntity.getSkidLocation(),ForceFieldEmitterRenderer.getForceFieldLocation()));
+        SpecialModelLoaderEvents.LOAD_SCOPE.register(() -> (resourceManager, identifier) -> CodeLyokoMain.MOD_ID.equals(identifier.getNamespace()));
     }
 
     private static void registerBlockEntityRenderers() {
@@ -217,6 +216,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         BlockEntityRendererFactories.register(ModBlockEntities.ITEM_PROJECTOR_TEST_BLOCK_ENTITY, ItemProjectorTestRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.RACK_CHARGER_BLOCK_ENTITY, RackChargerRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.LAPTOP_BLOCK_ENTITY,LaptopBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.TEST_ANIMATION_BLOCK_ENTITY_TYPE, TestAnimationRenderer::new);
     }
 
     private static void registerColorProviders() {

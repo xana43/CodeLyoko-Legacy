@@ -1,0 +1,19 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.model.looped": {
+			"animation_length": 0.0417,
+			"bones": {
+				"main": {
+					"position": {
+						"vector": [7, 72.4, 42]
+					},
+					"scale": {
+						"vector": [10, 10, 10]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

@@ -58,7 +58,6 @@ public final class LaptopBlock extends HorizontalFacingBlock implements BlockEnt
     protected BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.ENTITYBLOCK_ANIMATED;
     }
-    private static final String controllerName = "base_controller";
 
     private static void changeLaptopState(final World world, final BlockPos pos) {
 

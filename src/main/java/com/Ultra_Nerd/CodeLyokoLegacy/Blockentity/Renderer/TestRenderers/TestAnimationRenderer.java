@@ -1,7 +1,9 @@
-package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer;
+package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.TestRenderers;
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.LaptopBlockEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.TestAnimationBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Direction;
@@ -12,13 +14,13 @@ import software.bernie.geckolib.renderer.GeoBlockRenderer;
 /**
  * @author Ultra_Nerd
  * @desc <br/>
- * @since 2025-04-07
+ * @since 2025-05-12
  */
-public final class LaptopBlockEntityRenderer extends GeoBlockRenderer<LaptopBlockEntity> {
-    public LaptopBlockEntityRenderer(final BlockEntityRendererFactory.Context context) {
-        super(new DefaultedBlockGeoModel<>(CodeLyokoMain.codeLyokoPrefix("jeremy_laptop")));
+@Environment(EnvType.CLIENT)
+public class TestAnimationRenderer extends GeoBlockRenderer<TestAnimationBlockEntity> {
+    public TestAnimationRenderer(final BlockEntityRendererFactory.Context context) {
+        super(new DefaultedBlockGeoModel<>(CodeLyokoMain.codeLyokoPrefix("interface_sc_block")));
     }
-
     @Override
     protected void rotateBlock(Direction facing, MatrixStack poseStack) {
         switch (facing) {

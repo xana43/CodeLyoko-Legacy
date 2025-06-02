@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-19T21:57:21.907090259	CodeLyokoLegacy/Block Loot Tables
+// 1.21.1	2025-06-01T23:32:56.014146524	CodeLyokoLegacy/Block Loot Tables
 14d841092a3efb110f0b564fc8abeb14915bb2f0 data/codelyoko/loot_table/blocks/saleeite_ore.json
 64b16be755eec0a37309d2f85fbf0c31274cc89d data/codelyoko/loot_table/blocks/bornite_ore.json
 7cb24c1db3b8667feca2dfb20102320a2864b1d8 data/codelyoko/loot_table/blocks/uranium_canister.json
@@ -37,8 +37,8 @@ cf02db1688cef7cd1531d5b07d5293a63c4b8608 data/codelyoko/loot_table/blocks/metato
 d5184d2875d5943a608cdb62a2cca609ca7076ee data/codelyoko/loot_table/blocks/scanner_frame.json
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data/codelyoko/loot_table/blocks/laptop_block.json
 e0550f813e3a4f7d1e647630a6552dfb8841515f data/codelyoko/loot_table/blocks/volcano_ground.json
-aac8c370de5de5dd522baaed98007539682a047a data/codelyoko/loot_table/blocks/covellite_ore.json
 d016c0076d9db6e76af8802213d0989f06457f37 data/codelyoko/loot_table/blocks/tower_bottom.json
+aac8c370de5de5dd522baaed98007539682a047a data/codelyoko/loot_table/blocks/covellite_ore.json
 74e7383b3ac9951add8d1749afecd288a5d3be95 data/codelyoko/loot_table/blocks/rusted_iron_railing.json
 c75145477f9c7e776e497de230f6ce02a2d1d208 data/codelyoko/loot_table/blocks/carnotite_ore.json
 836cfe958c3aedfaa2f3f351706b71359ca305e1 data/codelyoko/loot_table/blocks/computer_liquid_pipe.json
@@ -71,8 +71,9 @@ d81e9036177814fb28987720b1f3841eee01e5cb data/codelyoko/loot_table/blocks/marabu
 0ada566d259d634f65cc932e038dd361ae7d4d73 data/codelyoko/loot_table/blocks/chiplet_franz_block.json
 a3ed052a7dd909fc1921178050c777c583210c8e data/codelyoko/loot_table/blocks/digital_dirt.json
 0bfec4f31986e42230ea9fcf1af549f4aa6fb902 data/codelyoko/loot_table/blocks/central_control_unit.json
-b214e07b48a178c490b3cb4e48ed59c48c9fe6c3 data/codelyoko/loot_table/blocks/digital_sea_pylon.json
 597cfd55b1a5ebc6d4383f5799fd50ac3eaba3b8 data/codelyoko/loot_table/blocks/iron_railing.json
+b214e07b48a178c490b3cb4e48ed59c48c9fe6c3 data/codelyoko/loot_table/blocks/digital_sea_pylon.json
+fb5ba09ba4fb1fde328ed7c462aadc453b183ecf data/codelyoko/loot_table/blocks/interface_sc.json
 3d85b4f9a0c99b5d9799e43d5f2d8f679edfaa70 data/codelyoko/loot_table/blocks/computer_liquid_circulator.json
 73bf286df60c5f7844de62e2abe1a2b1e6ca089d data/codelyoko/loot_table/blocks/silica_sand.json
 2e3755fd248e7afa348dbab827ebf6c1953b9dde data/codelyoko/loot_table/blocks/projector_focus.json

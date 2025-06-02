@@ -35,7 +35,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.ColorCode;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 public record ModBlocks() {
@@ -157,10 +156,12 @@ public record ModBlocks() {
     public static final Block LIQUID_HELIUM_BLOCK;
     public static final Block LAPTOP_CHARGER;
     public static final Block TESTUI;
+    public static final Block TEST_SC_INTERFACE;
     public static final Block TEST_PROFILE;
     public static final Block TEST_SPHERE;
     public static final Block TEST_VEHICLE_INTERFACE;
     public static final Block TEST_ITEM_PROJECTOR;
+    public static final Block TEST_ANIMATION_BLOCK;
 
     static {
            ARCHITECTURE_WORK_STATION = registerModBlocks("architecture_work_station", new ArchitectureWorkstation(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)));
@@ -336,7 +337,8 @@ public record ModBlocks() {
            TEST_SPHERE = registerModBlocks("test_sphere",new TestSphereRenderer(AbstractBlock.Settings.copy(Blocks.BEDROCK)));
            TEST_VEHICLE_INTERFACE = registerModBlocks("test_vehicle_materialization",new PlayerVehicleTest(AbstractBlock.Settings.copy(Blocks.BEDROCK)));
            TEST_ITEM_PROJECTOR = registerModBlocks("test_item_projector",new ItemProjectorTest());
-
+           TEST_ANIMATION_BLOCK = registerModBlocks("test_animation_block",new TestAnimation());
+           TEST_SC_INTERFACE = registerGenericBlock("interface_sc");
     }
     private static RegistryKey<Block> getKeyOfBlock(final String name)
     {
@@ -396,8 +398,7 @@ public record ModBlocks() {
     }
     private static Block registerModBlocks(final String name,final Block block,final boolean shouldRegisterItem)
     {
-        final Identifier id = CodeLyokoMain.codeLyokoPrefix(name);
-        final Block registeredBlock = Registry.register(Registries.BLOCK,id,block);
+        final Block registeredBlock = Registry.register(Registries.BLOCK,CodeLyokoMain.codeLyokoPrefix(name),block);
         if(shouldRegisterItem) {
             final BlockItem blockItem = new BlockItem(registeredBlock,new Item.Settings());
             Registry.register(Registries.ITEM,name,blockItem);
