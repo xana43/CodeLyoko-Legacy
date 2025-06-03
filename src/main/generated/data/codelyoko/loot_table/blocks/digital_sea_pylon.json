@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:digital_sea_pylon"
+          "name": "codelyoko:digital_sea_pylon"
         }
       ],
       "rolls": 1.0

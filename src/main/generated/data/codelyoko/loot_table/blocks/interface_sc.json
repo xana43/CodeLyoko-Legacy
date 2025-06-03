@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:interface_sc"
+          "name": "codelyoko:interface_sc"
         }
       ],
       "rolls": 1.0

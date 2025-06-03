@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "minecraft:quantum_block"
+            "items": "codelyoko:quantum_block"
           }
         ]
       },

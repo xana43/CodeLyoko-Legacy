@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:chiplet_franz_block"
+          "name": "codelyoko:chiplet_franz_block"
         }
       ],
       "rolls": 1.0

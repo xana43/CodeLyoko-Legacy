@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.ElectricityRenderers.RackChargerRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.TestRenderers.ItemProjectorTestRenderer;
-import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.Renderer.TestRenderers.TestAnimationRenderer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels.ModelHoverboard;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels.ModelOverbike;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels.ModelOverboard;
@@ -216,7 +215,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
         BlockEntityRendererFactories.register(ModBlockEntities.ITEM_PROJECTOR_TEST_BLOCK_ENTITY, ItemProjectorTestRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.RACK_CHARGER_BLOCK_ENTITY, RackChargerRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.LAPTOP_BLOCK_ENTITY,LaptopBlockEntityRenderer::new);
-        BlockEntityRendererFactories.register(ModBlockEntities.TEST_ANIMATION_BLOCK_ENTITY_TYPE, TestAnimationRenderer::new);
     }
 
     private static void registerColorProviders() {

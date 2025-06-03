@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:projector_focus"
+          "name": "codelyoko:projector_focus"
         }
       ],
       "rolls": 1.0

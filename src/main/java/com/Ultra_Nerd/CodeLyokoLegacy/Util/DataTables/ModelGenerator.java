@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 
@@ -71,7 +72,7 @@ public final class ModelGenerator extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CABLE_BLOCK);
         blockStateModelGenerator.registerParentedItemModel(ModBlocks.CABLE_BLOCK, CodeLyokoMain.codeLyokoPrefix("block/cable_block"));
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.SECTOR_ENTRANCE_DESERT);
-        generateObjBlockStateModels(blockStateModelGenerator,ModBlocks.TEST_SC_INTERFACE,"models/block/interface_sc");
+        generateObjBlockStateModels(blockStateModelGenerator,ModBlocks.SUPERCOMPUTER_INTERFACE,"models/block/interface_sc");
         generateCustomBlockModels(blockStateModelGenerator);
         generateFenceLikeModels(blockStateModelGenerator,ModBlocks.IRON_RAILING,"block/railing_post","block/railing_side");
         generateFenceLikeModels(blockStateModelGenerator,ModBlocks.ERODED_IRON_RAILING,"block/eroded_railing_post","block/eroded_railing_side");
@@ -132,6 +133,10 @@ private static void generateFenceLikeModels(final BlockStateModelGenerator gener
     }
     private static void generateObjItemModel(final ItemModelGenerator itemModelGenerator,final Item item, final String model)
     {
+        if(Items.AIR.equals(item))
+        {
+            return;
+        }
         Identifier parsedModel;
         if(model.contains(".obj"))
         {
@@ -154,6 +159,6 @@ private static void generateFenceLikeModels(final BlockStateModelGenerator gener
     public void generateItemModels(final ItemModelGenerator itemModelGenerator) {
        generateDefaultBuckets(itemModelGenerator);
        generateCustomItemModels(itemModelGenerator);
-       generateObjItemModel(itemModelGenerator,ModBlocks.TEST_SC_INTERFACE.asItem(),"models/block/interface_sc");
+       generateObjItemModel(itemModelGenerator,ModBlocks.SUPERCOMPUTER_INTERFACE.asItem(),"models/block/interface_sc");
     }
 }

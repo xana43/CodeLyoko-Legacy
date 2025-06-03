@@ -8,6 +8,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Items.Tools.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Items.Tools.Buckets.CustomColorBucket;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.Enums.LyokoArmorMaterial;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.Enums.LyokoTiers;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
@@ -187,7 +189,27 @@ public record ModItems() {
 
 //    public static final MusicDiscItem LYOKO_THEME;
  //   public static final MusicDiscItem LYOKO_THEME_INSTRUMENTAL;
+
+    private static final ObjectList<Item> ITEM_GROUP;
+    private static final ObjectList<Item> ARMOR_GROUP;
+    private static final ObjectList<Item> WEAPONS_GROUP;
+    private static final RegistryKey<ItemGroup> LYOKO_ITEMS_GROUP = RegistryKey.of(Registries.ITEM_GROUP.getKey(),
+            CodeLyokoMain.codeLyokoPrefix("lyoko_item"));
+
+    private static final RegistryKey<ItemGroup> LYOKO_ARMOR_GROUP = RegistryKey.of(Registries.ITEM_GROUP.getKey(),
+            CodeLyokoMain.codeLyokoPrefix("lyoko_armor"));
+
+    private static final RegistryKey<ItemGroup> LYOKO_WEAPON_GROUP = RegistryKey.of(Registries.ITEM_GROUP.getKey(),
+            CodeLyokoMain.codeLyokoPrefix("lyoko_weapons"));
     static {
+        //item collector
+        ITEM_GROUP = new ObjectArrayList<>();
+        //armor collector
+        ARMOR_GROUP = new ObjectArrayList<>();
+        //weapon collector
+        WEAPONS_GROUP = new ObjectArrayList<>();
+
+
         TEST_MULTIPLAYER_PHONE = registerModItem("test_multiplayer_phone",new MultiplayerPhone(BaseSettings()));
         //spawn items
         HOVERBOARD_SPAWN_ITEM = registerModItem("hoverboard_spawn_item",new LyokoSpawnItem(
@@ -381,30 +403,13 @@ public record ModItems() {
         YUMI_LEGGINGS = registerArmor("yumi_leggings",new ArmorNinja(LyokoArmorMaterial.NINJA.getMaterialRegistryEntry(), ArmorItem.Type.LEGGINGS,
                 ArmorGroup));
         YUMI_BOOTS = registerArmor("yumi_boots",new ArmorNinja(LyokoArmorMaterial.NINJA.getMaterialRegistryEntry(), ArmorItem.Type.BOOTS, ArmorGroup));
+        registerCollectedData();
     }
 
-
-   
 
     private static Item.Settings BaseSettings() {
         return new Item.Settings();
 
-    }
-    private static void addToItemGroup(final Item item)
-    {
-        ItemGroupEvents.modifyEntriesEvent(RegistryKey.of(Registries.ITEM_GROUP.getKey(),
-                CodeLyokoMain.codeLyokoPrefix("lyoko_item"))).register(entries -> entries.add(item));
-    }
-    private static void addToArmorGroup(final Item item)
-    {
-        ItemGroupEvents.modifyEntriesEvent(RegistryKey.of(Registries.ITEM_GROUP.getKey(),
-                CodeLyokoMain.codeLyokoPrefix("lyoko_armor"))).register(entries -> entries.add(item));
-    }
-    private static void addToWeaponGroup(final Item item)
-    {
-
-        ItemGroupEvents.modifyEntriesEvent(RegistryKey.of(Registries.ITEM_GROUP.getKey(),
-                CodeLyokoMain.codeLyokoPrefix("lyoko_weapons"))).register(entries -> entries.add(item));
     }
     private static Item registerComputerItem(final String name, final Item.Settings settings)
     {
@@ -424,19 +429,17 @@ public record ModItems() {
     }
     private static Item registerModItem(final String name,final Item item)
     {
-        final Item registeredItem = Items.register(CodeLyokoMain.codeLyokoPrefix(name),item);
-        addToItemGroup(registeredItem);
-        return registeredItem;
+        return registerModItem(name,item,ItemGroupTypes.ITEM);
     }
     private static Item registerModItem(final String name,final Item item,final ItemGroupTypes itemGroupTypes)
     {
-        final Item registeredItem = Items.register(CodeLyokoMain.codeLyokoPrefix(name),item);
         switch (itemGroupTypes)
         {
-            case ARMOR -> addToArmorGroup(item);
-            case WEAPON -> addToWeaponGroup(item);
+            case ARMOR -> ARMOR_GROUP.add(item);
+            case WEAPON -> WEAPONS_GROUP.add(item);
+            case ITEM -> ITEM_GROUP.add(item);
         }
-        return registeredItem;
+        return Items.register(CodeLyokoMain.codeLyokoPrefix(name),item);
     }
     private static <T extends Item> T registerWeapon(final String name, final Item item)
     {
@@ -448,18 +451,37 @@ public record ModItems() {
     }
     private static ArmorItem registerGenericArmorItem(final String name,final RegistryEntry<ArmorMaterial> material, final ArmorItem.Type armorType,final Item.Settings itemSettings)
     {
-        final ArmorItem armorItem = new ArmorItem(material,armorType,itemSettings);
-        return registerArmor(name,armorItem);
+        return registerArmor(name,new ArmorItem(material,armorType,itemSettings));
     }
     private static ArmorItem registerGenericArmorItem(final String name,final RegistryEntry<ArmorMaterial> material, final ArmorItem.Type armorType)
     {
-        final ArmorItem armorItem = new ArmorItem(material,armorType,ArmorGroup);
-        return registerArmor(name,armorItem);
+        return registerArmor(name,new ArmorItem(material,armorType,ArmorGroup));
     }
     private enum ItemGroupTypes
     {
         ARMOR,
-        WEAPON
+        WEAPON,
+        ITEM
+    }
+    private static void registerCollectedData(){
+        ItemGroupEvents.modifyEntriesEvent(LYOKO_ITEMS_GROUP).register(entries -> {
+            for(final Item ITEM : ITEM_GROUP)
+            {
+                entries.add(ITEM);
+            }
+        });
+        ItemGroupEvents.modifyEntriesEvent(LYOKO_ARMOR_GROUP).register(entries -> {
+            for(final Item ARMOR : ARMOR_GROUP)
+            {
+                entries.add(ARMOR);
+            }
+        });
+        ItemGroupEvents.modifyEntriesEvent(LYOKO_WEAPON_GROUP).register(entries -> {
+            for(final Item WEAPON : WEAPONS_GROUP)
+            {
+                entries.add(WEAPON);
+            }
+        });
     }
     public static void registerItems()
     {}

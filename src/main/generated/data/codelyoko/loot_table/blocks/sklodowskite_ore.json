@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:sklodowskite_ore"
+          "name": "codelyoko:sklodowskite_ore"
         }
       ],
       "rolls": 1.0

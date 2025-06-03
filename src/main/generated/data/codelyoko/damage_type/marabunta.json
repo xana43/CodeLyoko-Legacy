@@ -1,0 +1,6 @@
+{
+  "effects": "thorns",
+  "exhaustion": 4.0,
+  "message_id": "codelyoko:marabunta",
+  "scaling": "always"
+}

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:digital_darkness"
+          "name": "codelyoko:digital_darkness"
         }
       ],
       "rolls": 1.0

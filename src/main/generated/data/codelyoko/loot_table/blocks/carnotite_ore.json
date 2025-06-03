@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:carnotite_ore"
+          "name": "codelyoko:carnotite_ore"
         }
       ],
       "rolls": 1.0

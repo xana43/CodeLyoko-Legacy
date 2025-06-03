@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:uranium_canister"
+          "name": "codelyoko:uranium_canister"
         }
       ],
       "rolls": 1.0

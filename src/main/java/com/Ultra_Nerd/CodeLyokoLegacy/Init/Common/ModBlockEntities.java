@@ -10,7 +10,10 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidS
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerFluidCoolerBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.FluidSystem.ComputerFluidIntakeBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperComputerNetwork.DemarcationBlockEntity;
-import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.ComputerInterfaceTestTE;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.ItemProjectorTestEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.PlayerDataStorage;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.test.VehicleBE;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -46,7 +49,7 @@ public record ModBlockEntities() {
     public static final BlockEntityType<UniversalEnergyStorageTileEntity> UNIVERSAL_ENERGY_STORAGE;
     public static final BlockEntityType<VehicleBE> VEHICLE_BE_BLOCK_ENTITY_TYPE;
 
-    public static final BlockEntityType<TestAnimationBlockEntity> TEST_ANIMATION_BLOCK_ENTITY_TYPE;
+
 
     static {
         LAPTOP_BLOCK_ENTITY = registerModBlockEntity("laptop_block_entity",BlockEntityType.Builder.create(LaptopBlockEntity::new,ModBlocks.LAPTOP_BLOCK));
@@ -84,7 +87,6 @@ public record ModBlockEntities() {
         QUANTUM_CHIPLET_TILE_ENTITY_BLOCK_ENTITY_TYPE = registerModBlockEntity("quantum_chiplet_block_entity",BlockEntityType.Builder.create(QuantumChipletTileEntity::new,
                 ModBlocks.CHIPLET_FRANZ_BLOCK));
         TEST_PROJECTOR_TILE_ENTITY_BLOCK_ENTITY_TYPE = registerModBlockEntity("test_hologram_projector",BlockEntityType.Builder.create(HologramProjectorTileEntity::new, ModBlocks.TEST_SPHERE));
-        TEST_ANIMATION_BLOCK_ENTITY_TYPE = registerModBlockEntity("test_animation_block_entity", BlockEntityType.Builder.create(TestAnimationBlockEntity::new,ModBlocks.TEST_ANIMATION_BLOCK));
         DEMARCATION_BLOCK_ENTITY_TYPE = registerModBlockEntity("demarcation_block_entity",BlockEntityType.Builder.create(DemarcationBlockEntity::new,
                 ModBlocks.DEMARCATION_POINT));
     }

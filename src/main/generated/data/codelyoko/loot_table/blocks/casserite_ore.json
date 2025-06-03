@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:casserite_ore"
+          "name": "codelyoko:casserite_ore"
         }
       ],
       "rolls": 1.0

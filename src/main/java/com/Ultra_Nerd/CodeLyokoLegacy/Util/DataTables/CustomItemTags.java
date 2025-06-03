@@ -42,9 +42,9 @@ public final class CustomItemTags extends FabricTagProvider.ItemTagProvider {
         };
         for (final Block block: commonUraniumOres)
         {
-            getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_ORE_TAG).add(block.asItem());
-            getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_ORES_TAG).add(block.asItem());
-            getOrCreateTagBuilder(ModTags.ItemTags.COMMON_ORES).add(block.asItem());
+            getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_ORE_TAG).add(block.asItem()).setReplace(false);
+            getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_ORES_TAG).add(block.asItem()).setReplace(false);
+            getOrCreateTagBuilder(ModTags.ItemTags.COMMON_ORES).add(block.asItem()).setReplace(false);
         }
 
         final Block[] commonLeaves = {
@@ -53,17 +53,17 @@ public final class CustomItemTags extends FabricTagProvider.ItemTagProvider {
         for (final Block block : commonLeaves)
         {
             getOrCreateTagBuilder(ItemTags.LEAVES).add(block.asItem());
-            getOrCreateTagBuilder(ModTags.ItemTags.COMMON_LEAVES).add(block.asItem());
+            getOrCreateTagBuilder(ModTags.ItemTags.COMMON_LEAVES).add(block.asItem()).setReplace(false);
         }
-        getOrCreateTagBuilder(ItemTags.CHERRY_LOGS).add(ModBlocks.DIGITAL_WOOD_MOUNTAIN.asItem());
-        getOrCreateTagBuilder(ItemTags.JUNGLE_LOGS).add(ModBlocks.DIGITAL_WOOD_FOREST.asItem());
-        getOrCreateTagBuilder(ItemTags.SAND).add(ModBlocks.SILICA_SAND.asItem());
-        getOrCreateTagBuilder(ModTags.ItemTags.LYOKO_ITEM).add(ModItems.HOVERBOARD_SPAWN_ITEM,ModItems.OVERBOARD_SPAWN_ITEM);
+        getOrCreateTagBuilder(ItemTags.CHERRY_LOGS).add(ModBlocks.DIGITAL_WOOD_MOUNTAIN.asItem()).setReplace(false);
+        getOrCreateTagBuilder(ItemTags.JUNGLE_LOGS).add(ModBlocks.DIGITAL_WOOD_FOREST.asItem()).setReplace(false);
+        getOrCreateTagBuilder(ItemTags.SAND).add(ModBlocks.SILICA_SAND.asItem()).setReplace(false);
+        getOrCreateTagBuilder(ModTags.ItemTags.LYOKO_ITEM).add(ModItems.HOVERBOARD_SPAWN_ITEM,ModItems.OVERBOARD_SPAWN_ITEM).setReplace(false);
         getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_BATTERIES).add(ModItems.URANIUM_BATTERY_STARTER,
-                ModItems.URANIUM_BATTERY_NOVICE,ModItems.URANIUM_BATTERY_FINAL);
-        getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_235_INGOTS).add(ModItems.URANIUM_ISOTOPE235);
-        getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_238_INGOTS).add(ModItems.URANIUM_ISOTOPE238);
-        getOrCreateTagBuilder(ModTags.ItemTags.COMMON_SILICON_PLATES).add(ModItems.SILICON_WAFER);
+                ModItems.URANIUM_BATTERY_NOVICE,ModItems.URANIUM_BATTERY_FINAL).setReplace(false);
+        getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_235_INGOTS).add(ModItems.URANIUM_ISOTOPE235).setReplace(false);
+        getOrCreateTagBuilder(ModTags.ItemTags.URANIUM_238_INGOTS).add(ModItems.URANIUM_ISOTOPE238).setReplace(false);
+        getOrCreateTagBuilder(ModTags.ItemTags.COMMON_SILICON_PLATES).add(ModItems.SILICON_WAFER).setReplace(false);
 
     }
 

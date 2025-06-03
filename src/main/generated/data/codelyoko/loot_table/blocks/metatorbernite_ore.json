@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:metatorbernite_ore"
+          "name": "codelyoko:metatorbernite_ore"
         }
       ],
       "rolls": 1.0

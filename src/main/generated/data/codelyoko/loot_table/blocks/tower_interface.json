@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:tower_interface"
+          "name": "codelyoko:tower_interface"
         }
       ],
       "rolls": 1.0

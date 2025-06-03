@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:electroplating_machine_frame"
+          "name": "codelyoko:electroplating_machine_frame"
         }
       ],
       "rolls": 1.0

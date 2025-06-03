@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:volcano_ground"
+          "name": "codelyoko:volcano_ground"
         }
       ],
       "rolls": 1.0

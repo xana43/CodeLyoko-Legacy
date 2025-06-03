@@ -1,54 +1,20 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Init.Common;
 
-import net.minecraft.entity.damage.*;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageType;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.world.World;
+
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 public record ModDamageSources() {
-    //actual sources
-    public  static final  DamageSource digitalOceanSource = createDamageSource("digital_ocean",DamageScaling.NEVER,0,
-            DamageEffects.DROWNING,
-            DeathMessageType.DEFAULT);
-    public static final DamageSource marabuntaDamageSource = createDamageSource("marabunta",DamageScaling.ALWAYS,4,
-            DamageEffects.THORNS,
-            DeathMessageType.DEFAULT);
-    public static final DamageSource digitalLavaSource = createDamageSource("digital_lava",DamageScaling.NEVER,0,
-            DamageEffects.BURNING,
-            DeathMessageType.DEFAULT);
-    public static final DamageSource frontierDamageSource = createDamageSource("frontier",DamageScaling.ALWAYS,0,
-            DamageEffects.HURT,DeathMessageType.DEFAULT);
+    private static final ConcurrentHashMap<RegistryKey<DamageType>,DamageSource> DAMAGE_SOURCE_CACHE = new ConcurrentHashMap<>(8);
 
-
-
-
-
-
-
-
-
-//creation methods
-
-    private static  DamageSource createDamageSource(final String messageId,final DamageScaling scaling,
-            final float exhaustion,final DamageEffects damageEffects, final DeathMessageType deathMessageType)
-    {
-        return new DamageSource(RegistryEntry.of(new DamageType("codelyoko:"+messageId,scaling,exhaustion,damageEffects,
-                deathMessageType)));
+    public static DamageSource of(final World world,final RegistryKey<DamageType> key) {
+        Objects.requireNonNull(world, "world is null");
+        Objects.requireNonNull(key, "key is null");
+        return DAMAGE_SOURCE_CACHE.computeIfAbsent(key,damageTypeRegistryKey -> new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(damageTypeRegistryKey)));
     }
-    private static  DamageSource createDamageSource(final String messageId,final DamageScaling scaling,
-            final float exhaustion)
-    {
-        return new DamageSource(RegistryEntry.of(new DamageType("codelyoko:"+messageId,scaling,exhaustion,DamageEffects.HURT,
-                DeathMessageType.DEFAULT)));
-    }
-    private static  DamageSource createDamageSource(final String messageId,
-            final float exhaustion,final DamageEffects damageEffects, final DeathMessageType deathMessageType)
-    {
-        return new DamageSource(RegistryEntry.of(new DamageType("codelyoko:"+messageId,DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER,exhaustion,damageEffects,
-                deathMessageType)));
-    }
-    private static  DamageSource createDamageSource(final String messageId,
-            final float exhaustion)
-    {
-        return new DamageSource(RegistryEntry.of(new DamageType("codelyoko:"+messageId,DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER,exhaustion)));
-    }
-
 }

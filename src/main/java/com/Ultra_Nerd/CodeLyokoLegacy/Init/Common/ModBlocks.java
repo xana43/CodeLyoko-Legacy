@@ -20,8 +20,11 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculatorNetwork.CableBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculatorNetwork.DemarcationPoint;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tests.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower.*;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Util.BlockWithExtraProperties;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.Enums.DimensionSelector;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
@@ -35,6 +38,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.ColorCode;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 public record ModBlocks() {
@@ -156,14 +160,18 @@ public record ModBlocks() {
     public static final Block LIQUID_HELIUM_BLOCK;
     public static final Block LAPTOP_CHARGER;
     public static final Block TESTUI;
-    public static final Block TEST_SC_INTERFACE;
+    public static final Block SUPERCOMPUTER_INTERFACE;
     public static final Block TEST_PROFILE;
     public static final Block TEST_SPHERE;
     public static final Block TEST_VEHICLE_INTERFACE;
     public static final Block TEST_ITEM_PROJECTOR;
-    public static final Block TEST_ANIMATION_BLOCK;
-
+    private static final ObjectList<Item> LYOKO_BLOCK_ITEMS;
+    private static final RegistryKey<ItemGroup> LYOKO_BLOCKS_GROUP = RegistryKey.of(Registries.ITEM_GROUP.getKey(), CodeLyokoMain.codeLyokoPrefix("lyoko_blocks"));
     static {
+            //block Items collector
+           LYOKO_BLOCK_ITEMS = new ObjectArrayList<>();
+
+
            ARCHITECTURE_WORK_STATION = registerModBlocks("architecture_work_station", new ArchitectureWorkstation(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)));
            ANTI_MARABUNTA = registerModBlocks("anti_marabunta",new AntiMarabunta(AbstractBlock.Settings.create().strength(6, 10).sounds(BlockSoundGroup.STONE).ticksRandomly()));
            ANODE_PART = registerModBlocks("anodepart",new ElectroplatingRodParts(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)));
@@ -337,8 +345,15 @@ public record ModBlocks() {
            TEST_SPHERE = registerModBlocks("test_sphere",new TestSphereRenderer(AbstractBlock.Settings.copy(Blocks.BEDROCK)));
            TEST_VEHICLE_INTERFACE = registerModBlocks("test_vehicle_materialization",new PlayerVehicleTest(AbstractBlock.Settings.copy(Blocks.BEDROCK)));
            TEST_ITEM_PROJECTOR = registerModBlocks("test_item_projector",new ItemProjectorTest());
-           TEST_ANIMATION_BLOCK = registerModBlocks("test_animation_block",new TestAnimation());
-           TEST_SC_INTERFACE = registerGenericBlock("interface_sc");
+           SUPERCOMPUTER_INTERFACE = registerModBlocks("interface_sc",new BlockWithExtraProperties(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK),false,false));
+
+            //final register
+            ItemGroupEvents.modifyEntriesEvent(LYOKO_BLOCKS_GROUP).register(fabricItemGroupEntries -> {
+                for(final Item item : LYOKO_BLOCK_ITEMS)
+                {
+                    fabricItemGroupEntries.add(item);
+                }
+            });
     }
     private static RegistryKey<Block> getKeyOfBlock(final String name)
     {
@@ -358,15 +373,8 @@ public record ModBlocks() {
         final Block block = new ExperienceDroppingBlock(intProvider,settings);
         return registerModBlocks(name,block);
     }
-    private static Block registerUnbreakableBlock(final String name, final AbstractBlock.Settings settings)
-    {
-        return registerUnbreakableBlock(name,settings,true);
-    }
-    private static Block registerUnbreakableBlock(final String name, final AbstractBlock.Settings settings,final boolean shouldRegisterItem)
-    {
-        final Block unbreakable = new Block(settings.strength(Blocks.BEDROCK.getHardness(),Blocks.BEDROCK.getBlastResistance()));
-        return registerModBlocks(name,unbreakable,shouldRegisterItem);
-    }
+
+
     private static Block registerUnbreakableBlock(final String name)
     {
         return registerUnbreakableBlock(name,true);
@@ -376,16 +384,22 @@ public record ModBlocks() {
         final Block unbreakable = new Block(AbstractBlock.Settings.copy(Blocks.BEDROCK));
         return registerModBlocks(name,unbreakable,shouldRegisterItem);
     }
-
+    private static Block registerUnbreakableBlock(final String name, final AbstractBlock.Settings settings)
+    {
+        return registerUnbreakableBlock(name,settings,true);
+    }
+    private static Block registerUnbreakableBlock(final String name, final AbstractBlock.Settings settings,final boolean shouldRegisterItem)
+    {
+        final Block unbreakable = new Block(settings.strength(Blocks.BEDROCK.getHardness(),Blocks.BEDROCK.getBlastResistance()));
+        return registerModBlocks(name,unbreakable,shouldRegisterItem);
+    }
     private static Block registerGenericBlock(final String name)
     {
-       final Block block = new Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
-       return registerModBlocks(name,block);
+       return registerGenericBlock(name,AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
     }
     private static Block registerGenericBlock(final String name,final AbstractBlock.Settings fabricBlockSettings)
     {
-        final Block block = new Block(fabricBlockSettings);
-        return registerModBlocks(name,block);
+        return registerGenericBlock(name,fabricBlockSettings,true);
     }
     private static Block registerGenericBlock(final String name,final AbstractBlock.Settings fabricBlockSettings,final boolean shouldRegisterItem)
     {
@@ -396,14 +410,16 @@ public record ModBlocks() {
     {
         return registerModBlocks(name,block,true);
     }
+
+
     private static Block registerModBlocks(final String name,final Block block,final boolean shouldRegisterItem)
     {
-        final Block registeredBlock = Registry.register(Registries.BLOCK,CodeLyokoMain.codeLyokoPrefix(name),block);
+        final Identifier id = CodeLyokoMain.codeLyokoPrefix(name);
+        final Block registeredBlock = Registry.register(Registries.BLOCK,id,block);
         if(shouldRegisterItem) {
             final BlockItem blockItem = new BlockItem(registeredBlock,new Item.Settings());
-            Registry.register(Registries.ITEM,name,blockItem);
-            final RegistryKey<ItemGroup> registryKey = RegistryKey.of(Registries.ITEM_GROUP.getKey(), CodeLyokoMain.codeLyokoPrefix("lyoko_blocks"));
-            ItemGroupEvents.modifyEntriesEvent(registryKey).register(entries -> entries.add(blockItem));
+            Registry.register(Registries.ITEM,id,blockItem);
+            LYOKO_BLOCK_ITEMS.add(blockItem);
         }
         return registeredBlock;
     }

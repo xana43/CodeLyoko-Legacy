@@ -53,8 +53,8 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
                 ModBlocks.LAPTOP_CHARGER
         };
         for (final Block block : commonBlocksPICKIRON) {
-            getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL).add(block);
-            getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(block);
+            getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL).add(block).setReplace(false);
+            getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(block).setReplace(false);
         }
         //for fences
         final Block[] commonFences = {
@@ -66,7 +66,7 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
         };
         for(final Block block : commonFences)
         {
-            getOrCreateTagBuilder(BlockTags.FENCES).add(block);
+            getOrCreateTagBuilder(BlockTags.FENCES).add(block).setReplace(false);
         }
         //block that need stone tool
         final Block[] commonBlocksPICKSTONE = {
@@ -78,8 +78,8 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
         };
         for(final Block block : commonBlocksPICKSTONE)
         {
-            getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(block);
-            getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(block);
+            getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(block).setReplace(false);
+            getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(block).setReplace(false);
         }
         //for diamond
         final Block[] commonBlocksPICKDIAMOND =
@@ -88,8 +88,8 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
                         ModBlocks.QUANTUM_CORE,
                 };
         for (final Block block : commonBlocksPICKDIAMOND) {
-            getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL).add(block);
-            getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(block);
+            getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL).add(block).setReplace(false);
+            getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(block).setReplace(false);
         }
         //for sand based blocks
         final Block[] commonBlocksSAND ={
@@ -97,8 +97,8 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
         };
         for(final Block block : commonBlocksSAND)
         {
-            getOrCreateTagBuilder(BlockTags.SAND).add(block);
-            getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(block);
+            getOrCreateTagBuilder(BlockTags.SAND).add(block).setReplace(false);
+            getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(block).setReplace(false);
         }
         //for all lyoko blocks
         final Block[] commonBlocksLYOKO ={
@@ -128,14 +128,14 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
         };
         for(final Block block: commonBlocksLYOKO)
         {
-            getOrCreateTagBuilder(ModTags.Blocks.LYOKO_BLOCKS).add(block);
+            getOrCreateTagBuilder(ModTags.Blocks.LYOKO_BLOCKS).add(block).setReplace(false);
         }
         getOrCreateTagBuilder(BlockTags.ICE).add(
                 ModBlocks.DIGITAL_ICE
-        );
+        ).setReplace(false);
         getOrCreateTagBuilder(BlockTags.CRYSTAL_SOUND_BLOCKS).add(
           ModBlocks.TOWER_INTERFACE
-        );
+        ).setReplace(false);
 
         //for uranium related blocks
         final Block[] commonUraniumOres = {
@@ -159,29 +159,29 @@ public final class CustomBlockTags extends FabricTagProvider.BlockTagProvider {
         };
         for (final Block block: commonUraniumOres)
         {
-            getOrCreateTagBuilder(ModTags.Blocks.URANIUM_ORE_TAG).add(block);
-            getOrCreateTagBuilder(ModTags.Blocks.URANIUM_ORES_TAG).add(block);
-            getOrCreateTagBuilder(TagKey.of(Registries.BLOCK.getKey(), Identifier.of("c","ores"))).add(block);
+            getOrCreateTagBuilder(ModTags.Blocks.URANIUM_ORE_TAG).add(block).setReplace(false);
+            getOrCreateTagBuilder(ModTags.Blocks.URANIUM_ORES_TAG).add(block).setReplace(false);
+            getOrCreateTagBuilder(TagKey.of(Registries.BLOCK.getKey(), Identifier.of("c","ores"))).add(block).setReplace(false);
         }
-        getOrCreateTagBuilder(ModTags.Blocks.URANIUM_235_BLOCKS).add(ModBlocks.URANIUM_BLOCK_235);
-        getOrCreateTagBuilder(ModTags.Blocks.URANIUM_238_BLOCKS).add(ModBlocks.URANIUM_BLOCK_238);
+        getOrCreateTagBuilder(ModTags.Blocks.URANIUM_235_BLOCKS).add(ModBlocks.URANIUM_BLOCK_235).setReplace(false);
+        getOrCreateTagBuilder(ModTags.Blocks.URANIUM_238_BLOCKS).add(ModBlocks.URANIUM_BLOCK_238).setReplace(false);
         final Block[] commonLeaves = {
           ModBlocks.DIGITAL_LEAF_MOUNTAIN
         };
         for (final Block block : commonLeaves)
         {
-            getOrCreateTagBuilder(BlockTags.LEAVES).add(block);
-            getOrCreateTagBuilder(TagKey.of(Registries.BLOCK.getKey(), Identifier.of("c","leaves"))).add(block);
+            getOrCreateTagBuilder(BlockTags.LEAVES).add(block).setReplace(false);
+            getOrCreateTagBuilder(TagKey.of(Registries.BLOCK.getKey(), Identifier.of("c","leaves"))).add(block).setReplace(false);
         }
-        getOrCreateTagBuilder(BlockTags.CHERRY_LOGS).add(ModBlocks.DIGITAL_WOOD_MOUNTAIN);
-        getOrCreateTagBuilder(BlockTags.JUNGLE_LOGS).add(ModBlocks.DIGITAL_WOOD_FOREST);
+        getOrCreateTagBuilder(BlockTags.CHERRY_LOGS).add(ModBlocks.DIGITAL_WOOD_MOUNTAIN).setReplace(false);
+        getOrCreateTagBuilder(BlockTags.JUNGLE_LOGS).add(ModBlocks.DIGITAL_WOOD_FOREST).setReplace(false);
         //for fluid blocks
-        getOrCreateTagBuilder(ModTags.Blocks.COMMON_LAVA_TAG).add(ModBlocks.DIGITAL_LAVA_BLOCK);
-        getOrCreateTagBuilder(ModTags.Blocks.COMMON_LAVA_TAG).add(ModBlocks.URANIUM_WASTE_BLOCK);
-        getOrCreateTagBuilder(ModTags.Blocks.COMMON_WATER_TAG).add(ModBlocks.LIQUID_HELIUM_BLOCK);
-        getOrCreateTagBuilder(ModTags.Blocks.COMMON_VISUAL_WATER_TAG).add(ModBlocks.LIQUID_HELIUM_BLOCK);
-        getOrCreateTagBuilder(ModTags.Blocks.COMMON_WATER_TAG).add(ModBlocks.DIGITAL_OCEAN_BLOCK);
-        getOrCreateTagBuilder(ModTags.Blocks.COMMON_VISUAL_WATER_TAG).add(ModBlocks.DIGITAL_OCEAN_BLOCK);
+        getOrCreateTagBuilder(ModTags.Blocks.COMMON_LAVA_TAG).add(ModBlocks.DIGITAL_LAVA_BLOCK).setReplace(false);
+        getOrCreateTagBuilder(ModTags.Blocks.COMMON_LAVA_TAG).add(ModBlocks.URANIUM_WASTE_BLOCK).setReplace(false);
+        getOrCreateTagBuilder(ModTags.Blocks.COMMON_WATER_TAG).add(ModBlocks.LIQUID_HELIUM_BLOCK).setReplace(false);
+        getOrCreateTagBuilder(ModTags.Blocks.COMMON_VISUAL_WATER_TAG).add(ModBlocks.LIQUID_HELIUM_BLOCK).setReplace(false);
+        getOrCreateTagBuilder(ModTags.Blocks.COMMON_WATER_TAG).add(ModBlocks.DIGITAL_OCEAN_BLOCK).setReplace(false);
+        getOrCreateTagBuilder(ModTags.Blocks.COMMON_VISUAL_WATER_TAG).add(ModBlocks.DIGITAL_OCEAN_BLOCK).setReplace(false);
 
 
     }

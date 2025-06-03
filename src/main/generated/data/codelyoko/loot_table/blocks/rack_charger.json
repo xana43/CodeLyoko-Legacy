@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:rack_charger"
+          "name": "codelyoko:rack_charger"
         }
       ],
       "rolls": 1.0

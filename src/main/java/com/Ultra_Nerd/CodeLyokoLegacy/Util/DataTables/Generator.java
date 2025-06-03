@@ -2,6 +2,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Util.DataTables;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBiomes;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageTypes;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModFeature;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModRecipes;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -29,11 +30,14 @@ public record Generator() implements DataGeneratorEntrypoint {
         pack.addProvider(CustomAdvancements::new);
         pack.addProvider(LootTables.EntityLootTable::new);
         pack.addProvider(CustomBiomeTagProvider::new);
+        pack.addProvider(DamageTypeProvider::new);
+        pack.addProvider(DamageTypeTagProvider::new);
     }
 
     @Override
     public void buildRegistry(final RegistryBuilder registryBuilder) {
         registryBuilder.addRegistry(RegistryKeys.BIOME, ModBiomes::bootStrap);
         registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModFeature::bootStrap);
+        registryBuilder.addRegistry(RegistryKeys.DAMAGE_TYPE, ModDamageTypes::bootstrap);
     }
 }

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:lithography_machine_t2"
+          "name": "codelyoko:lithography_machine_t2"
         }
       ],
       "rolls": 1.0

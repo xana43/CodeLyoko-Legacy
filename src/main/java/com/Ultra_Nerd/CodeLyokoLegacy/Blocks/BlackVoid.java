@@ -1,6 +1,5 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -17,8 +16,8 @@ public final class BlackVoid extends Block {
 
 
     public BlackVoid() {
-        super(FabricBlockSettings.copyOf(Blocks.STRUCTURE_VOID).strength(-1, -1).dropsNothing().nonOpaque()
-                .luminance(10));
+        super(Settings.copy(Blocks.STRUCTURE_VOID).strength(-1, -1).dropsNothing().nonOpaque()
+                .luminance(value -> 10));
     }
 
     @Override

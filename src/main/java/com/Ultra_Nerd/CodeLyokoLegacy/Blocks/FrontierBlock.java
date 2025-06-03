@@ -1,6 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageSources;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageTypes;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDimensions;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TransparentBlock;
@@ -34,7 +35,7 @@ public final class FrontierBlock extends TransparentBlock {
         super.scheduledTick(state, world, pos, random);
         if (DamageTime <= 0) {
             final Iterable<Entity> serverEntities = world.iterateEntities();
-            final DamageSource source = ModDamageSources.frontierDamageSource;
+            final DamageSource source = ModDamageSources.of(world, ModDamageTypes.FRONTIER_DAMAGE);
             for (final Entity entity : serverEntities) {
                 if (entity instanceof final ItemEntity itemEntity) {
                     itemEntity.remove(Entity.RemovalReason.KILLED);

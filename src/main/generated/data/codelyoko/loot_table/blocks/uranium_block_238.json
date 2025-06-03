@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:uranium_block_238"
+          "name": "codelyoko:uranium_block_238"
         }
       ],
       "rolls": 1.0

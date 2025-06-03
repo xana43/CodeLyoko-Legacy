@@ -26,7 +26,7 @@
                   }
                 }
               ],
-              "name": "minecraft:silica_sand"
+              "name": "codelyoko:silica_sand"
             },
             {
               "type": "minecraft:item",

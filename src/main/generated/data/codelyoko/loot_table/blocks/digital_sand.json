@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:digital_sand"
+          "name": "codelyoko:digital_sand"
         }
       ],
       "rolls": 1.0

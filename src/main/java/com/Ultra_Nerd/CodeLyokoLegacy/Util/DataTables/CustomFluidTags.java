@@ -31,14 +31,14 @@ public final class CustomFluidTags extends FabricTagProvider.FluidTagProvider {
         };
         for (final Fluid fluid : waterFluids)
         {
-            getOrCreateTagBuilder(ModTags.FluidTags.COMMON_VISUAL_WATER_TAG).add(fluid);
-            getOrCreateTagBuilder(ModTags.FluidTags.COMMON_WATER_TAG).add(fluid);
-            getOrCreateTagBuilder(FluidTags.WATER).add(fluid);
+            getOrCreateTagBuilder(ModTags.FluidTags.COMMON_VISUAL_WATER_TAG).add(fluid).setReplace(false);
+            getOrCreateTagBuilder(ModTags.FluidTags.COMMON_WATER_TAG).add(fluid).setReplace(false);
+            getOrCreateTagBuilder(FluidTags.WATER).add(fluid).setReplace(false);
         }
         for(final Fluid fluid : lavaFluids)
         {
-            getOrCreateTagBuilder(ModTags.FluidTags.COMMON_LAVA_TAG).add(fluid);
-            getOrCreateTagBuilder(FluidTags.LAVA).add(fluid);
+            getOrCreateTagBuilder(ModTags.FluidTags.COMMON_LAVA_TAG).add(fluid).setReplace(false);
+            getOrCreateTagBuilder(FluidTags.LAVA).add(fluid).setReplace(false);
         }
     }
 }

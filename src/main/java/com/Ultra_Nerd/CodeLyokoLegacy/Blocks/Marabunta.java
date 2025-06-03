@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageSources;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageTypes;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -61,7 +62,7 @@ public final class Marabunta extends SoulSandBlock {
     @Override
     public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
-        entity.damage(ModDamageSources.marabuntaDamageSource, Random.create().nextInt(10));
+        entity.damage(ModDamageSources.of(world, ModDamageTypes.MARABUNTA_DAMAGE), Random.create().nextInt(10));
     }
 
 

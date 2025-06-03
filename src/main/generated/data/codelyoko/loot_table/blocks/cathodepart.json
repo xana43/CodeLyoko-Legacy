@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:cathodepart"
+          "name": "codelyoko:cathodepart"
         }
       ],
       "rolls": 1.0

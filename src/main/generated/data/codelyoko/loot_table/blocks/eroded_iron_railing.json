@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:eroded_iron_railing"
+          "name": "codelyoko:eroded_iron_railing"
         }
       ],
       "rolls": 1.0

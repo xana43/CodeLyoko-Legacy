@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:torbernite_ore"
+          "name": "codelyoko:torbernite_ore"
         }
       ],
       "rolls": 1.0

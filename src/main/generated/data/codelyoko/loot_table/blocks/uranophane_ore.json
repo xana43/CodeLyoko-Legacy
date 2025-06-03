@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:uranophane_ore"
+          "name": "codelyoko:uranophane_ore"
         }
       ],
       "rolls": 1.0

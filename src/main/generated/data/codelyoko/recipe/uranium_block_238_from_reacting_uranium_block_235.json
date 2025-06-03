@@ -5,9 +5,9 @@
   "experience": 0.0,
   "group": "codelyoko:reacting",
   "ingredient": {
-    "item": "minecraft:uranium_block_235"
+    "item": "codelyoko:uranium_block_235"
   },
   "result": {
-    "id": "minecraft:uranium_block_238"
+    "id": "codelyoko:uranium_block_238"
   }
 }

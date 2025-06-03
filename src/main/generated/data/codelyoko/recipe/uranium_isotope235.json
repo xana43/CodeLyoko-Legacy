@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "minecraft:uranium_block_235"
+      "item": "codelyoko:uranium_block_235"
     }
   ],
   "result": {
