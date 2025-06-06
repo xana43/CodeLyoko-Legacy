@@ -23,8 +23,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Util.BlockWithExtraProperties;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.Enums.DimensionSelector;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectList;
+import it.unimi.dsi.fastutil.objects.*;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
@@ -165,11 +164,10 @@ public record ModBlocks() {
     public static final Block TEST_SPHERE;
     public static final Block TEST_VEHICLE_INTERFACE;
     public static final Block TEST_ITEM_PROJECTOR;
-    private static final ObjectList<Item> LYOKO_BLOCK_ITEMS;
-    private static final RegistryKey<ItemGroup> LYOKO_BLOCKS_GROUP = RegistryKey.of(Registries.ITEM_GROUP.getKey(), CodeLyokoMain.codeLyokoPrefix("lyoko_blocks"));
+    private static final Object2BooleanMap<ObjectObjectImmutablePair<Identifier,Block>> LYOKO_BLOCK_SHOULD_HAVE_ITEM_MAP;
     static {
             //block Items collector
-           LYOKO_BLOCK_ITEMS = new ObjectArrayList<>();
+           LYOKO_BLOCK_SHOULD_HAVE_ITEM_MAP = new Object2BooleanOpenHashMap<>(64);
 
 
            ARCHITECTURE_WORK_STATION = registerModBlocks("architecture_work_station", new ArchitectureWorkstation(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)));
@@ -272,7 +270,7 @@ public record ModBlocks() {
            FLUORITE_ORE = registerExperienceDroppingOre("fluorite_ore",
                    AbstractBlock.Settings.copy(Blocks.STONE).strength(6, 10).sounds(BlockSoundGroup.STONE),UniformIntProvider.create(0,1));
            FALSE_WATER = registerGenericBlock("false_water",AbstractBlock.Settings.copy(Blocks.WATER).noCollision());
-           FRONTIER_BLOCK = registerModBlocks("frontier_block",new FrontierBlock(AbstractBlock.Settings.copy(Blocks.BEDROCK)));
+           FRONTIER_BLOCK = registerModBlocks("frontier_block",new FrontierBlock(AbstractBlock.Settings.copy(Blocks.BEDROCK)),false);
            GUMMITE_ORE = registerExperienceDroppingOre("gummite_ore", AbstractBlock.Settings.copy(Blocks.STONE).strength(3, 10).sounds(BlockSoundGroup.STONE),UniformIntProvider.create(0,1));
            HOLOPROJECTOR = registerModBlocks("holoprojector",new HologramProjectorBlock());
            IRON_RAILING = registerModBlocks("iron_railing",new OxidizeableFenceBlock(Oxidizable.OxidationLevel.UNAFFECTED,AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)));
@@ -346,14 +344,6 @@ public record ModBlocks() {
            TEST_VEHICLE_INTERFACE = registerModBlocks("test_vehicle_materialization",new PlayerVehicleTest(AbstractBlock.Settings.copy(Blocks.BEDROCK)));
            TEST_ITEM_PROJECTOR = registerModBlocks("test_item_projector",new ItemProjectorTest());
            SUPERCOMPUTER_INTERFACE = registerModBlocks("interface_sc",new BlockWithExtraProperties(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK),false,false));
-
-            //final register
-            ItemGroupEvents.modifyEntriesEvent(LYOKO_BLOCKS_GROUP).register(fabricItemGroupEntries -> {
-                for(final Item item : LYOKO_BLOCK_ITEMS)
-                {
-                    fabricItemGroupEntries.add(item);
-                }
-            });
     }
     private static RegistryKey<Block> getKeyOfBlock(final String name)
     {
@@ -414,17 +404,23 @@ public record ModBlocks() {
 
     private static Block registerModBlocks(final String name,final Block block,final boolean shouldRegisterItem)
     {
-        final Identifier id = CodeLyokoMain.codeLyokoPrefix(name);
-        final Block registeredBlock = Registry.register(Registries.BLOCK,id,block);
-        if(shouldRegisterItem) {
-            final BlockItem blockItem = new BlockItem(registeredBlock,new Item.Settings());
-            Registry.register(Registries.ITEM,id,blockItem);
-            LYOKO_BLOCK_ITEMS.add(blockItem);
-        }
-        return registeredBlock;
+        LYOKO_BLOCK_SHOULD_HAVE_ITEM_MAP.put(ObjectObjectImmutablePair.of(CodeLyokoMain.codeLyokoPrefix(name),block),shouldRegisterItem);
+        return block;
     }
     public static void registerBlocks()
     {
+        final ObjectList<Item> groupItems = new ObjectArrayList<>();
+        //final register
+        LYOKO_BLOCK_SHOULD_HAVE_ITEM_MAP.forEach((identifierBlockObjectObjectImmutablePair, shouldHaveItem) -> {
+            final Identifier parsedId = identifierBlockObjectObjectImmutablePair.key();
+            final Block registeredBlock = Registry.register(Registries.BLOCK,parsedId,identifierBlockObjectObjectImmutablePair.value());
+            if(shouldHaveItem) {
+                groupItems.add(Registry.register(Registries.ITEM,parsedId,new BlockItem(registeredBlock,new Item.Settings())));
+            }
+        });
+        LYOKO_BLOCK_SHOULD_HAVE_ITEM_MAP.clear();
+        final RegistryKey<ItemGroup> LYOKO_BLOCKS_GROUP = RegistryKey.of(Registries.ITEM_GROUP.getKey(), CodeLyokoMain.codeLyokoPrefix("lyoko_blocks"));
+        ItemGroupEvents.modifyEntriesEvent(LYOKO_BLOCKS_GROUP).register(entries -> groupItems.forEach(entries::add));
     }
 
 }

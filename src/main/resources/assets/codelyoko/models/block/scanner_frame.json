@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "scanner",
+	"parent": "codelyoko:scanner",
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "codelyoko:block/scanner_base"

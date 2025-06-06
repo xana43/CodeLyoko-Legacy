@@ -68,6 +68,7 @@ public final class ModelGenerator extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(final BlockStateModelGenerator blockStateModelGenerator) {
+
         blockStateModelGenerator.registerParentedItemModel(ModBlocks.RACK_CHARGER_BLOCK, CodeLyokoMain.codeLyokoPrefix("block/rack_charger"));
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CABLE_BLOCK);
         blockStateModelGenerator.registerParentedItemModel(ModBlocks.CABLE_BLOCK, CodeLyokoMain.codeLyokoPrefix("block/cable_block"));
@@ -80,9 +81,21 @@ public final class ModelGenerator extends FabricModelProvider {
         generateFenceLikeModels(blockStateModelGenerator,ModBlocks.RUSTED_IRON_RAILING,"block/rusted_railing_post","block/rusted_railing_side");
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DIGITAL_WOOD_FOREST);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DIGITAL_WOOD_MOUNTAIN);
+        registerFluidStateModels(blockStateModelGenerator, ModBlocks.DIGITAL_OCEAN_BLOCK);
+        registerFluidStateModels(blockStateModelGenerator, ModBlocks.DIGITAL_LAVA_BLOCK);
     }
 
+    private static void registerFluidStateModels(final BlockStateModelGenerator generator, final Block fluidBlock)
+    {
+        final Identifier modelId = ModelIds.getBlockModelId(fluidBlock);
+        generator.blockStateCollector.accept(
+                VariantsBlockStateSupplier.create(fluidBlock).coordinate(
+                        BlockStateVariantMap.create(Properties.LEVEL_15)
+                                .register(level -> BlockStateVariant.create().put(VariantSettings.MODEL,modelId))
 
+                )
+        );
+    }
     private static void generateObjBlockStateModels(final BlockStateModelGenerator blockStateModelGenerator, final Block block, final String model){
         Identifier parsedModel;
         if(model.contains(".obj"))

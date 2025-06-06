@@ -23,9 +23,8 @@ public class DamageTypeProvider extends FabricDynamicRegistryProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup, Entries entries) {
         final RegistryWrapper.Impl<DamageType> damageTypesImpl = wrapperLookup.getWrapperOrThrow(RegistryKeys.DAMAGE_TYPE);
-        Object2ObjectMaps.fastForEach(ModDamageTypes.DAMAGE_TYPE_MAP,registryKeyDamageTypeEntry -> {
-            entries.add(registryKeyDamageTypeEntry.getKey(),damageTypesImpl.getOrThrow(registryKeyDamageTypeEntry.getKey()).value());
-        });
+        Object2ObjectMaps.fastForEach(ModDamageTypes.DAMAGE_TYPE_MAP,registryKeyDamageTypeEntry -> entries.add(registryKeyDamageTypeEntry.getKey(),damageTypesImpl.getOrThrow(registryKeyDamageTypeEntry.getKey()).value()));
+        ModDamageTypes.DAMAGE_TYPE_MAP.clear();
     }
 
     @Override

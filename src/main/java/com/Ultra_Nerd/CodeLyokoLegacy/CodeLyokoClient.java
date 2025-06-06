@@ -94,7 +94,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         testGuardianBuild = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("test_build"), InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_SEMICOLON, KEY_CATEGORY_CREATIVE));
         testTowerScan = KeyBindingHelper.registerKeyBinding(new KeyBinding(createKeyBindingTranslationKey("test_tower"),InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_E,KEY_CATEGORY_MAIN));
+                GLFW.GLFW_KEY_E,KEY_CATEGORY_CREATIVE));
     }
     private static void clientEvents() {
         WorldRenderEvents.LAST.register(RendererVariables::consumeRenderSystems);
@@ -135,10 +135,10 @@ public record CodeLyokoClient() implements ClientModInitializer {
 
     private static void FluidRenderRegistry() {
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_DIGITAL_OCEAN, ModFluids.FLOWING_DIGITAL_OCEAN,
-                new SimpleFluidRenderHandler(CodeLyokoMain.codeLyokoPrefix("block/digital_flowing"),
+                new SimpleFluidRenderHandler(CodeLyokoMain.codeLyokoPrefix("block/digital_still"),
                         CodeLyokoMain.codeLyokoPrefix("block/digital_flowing")));
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_DIGITAL_LAVA, ModFluids.FLOWING_DIGITAL_LAVA,
-                new SimpleFluidRenderHandler(CodeLyokoMain.codeLyokoPrefix("block/digital_flowing_lava"),
+                new SimpleFluidRenderHandler(CodeLyokoMain.codeLyokoPrefix("block/digital_still_lava"),
                         CodeLyokoMain.codeLyokoPrefix("block/digital_flowing_lava")));
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_LIQUID_HELIUM, ModFluids.FLOWING_LIQUID_HELIUM,
                 new SimpleFluidRenderHandler(CodeLyokoMain.codeLyokoPrefix("block/liquid_helium_still"),

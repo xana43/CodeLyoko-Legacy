@@ -33,7 +33,7 @@ public abstract class DigitalOcean extends LyokoFluid {
     }
 
 
-    public static class Flowing extends DigitalOcean {
+    public static final class Flowing extends DigitalOcean {
         @Override
         protected void appendProperties(final StateManager.Builder<Fluid, FluidState> builder) {
             super.appendProperties(builder.add(LEVEL));
@@ -60,7 +60,7 @@ public abstract class DigitalOcean extends LyokoFluid {
         }
     }
 
-    public static class Still extends DigitalOcean {
+    public static final class Still extends DigitalOcean {
         @Override
         protected boolean isInfinite(final World world) {
             return true;

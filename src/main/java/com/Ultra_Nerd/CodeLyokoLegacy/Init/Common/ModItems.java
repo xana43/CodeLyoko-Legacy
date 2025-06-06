@@ -464,24 +464,12 @@ public record ModItems() {
         ITEM
     }
     private static void registerCollectedData(){
-        ItemGroupEvents.modifyEntriesEvent(LYOKO_ITEMS_GROUP).register(entries -> {
-            for(final Item ITEM : ITEM_GROUP)
-            {
-                entries.add(ITEM);
-            }
-        });
-        ItemGroupEvents.modifyEntriesEvent(LYOKO_ARMOR_GROUP).register(entries -> {
-            for(final Item ARMOR : ARMOR_GROUP)
-            {
-                entries.add(ARMOR);
-            }
-        });
-        ItemGroupEvents.modifyEntriesEvent(LYOKO_WEAPON_GROUP).register(entries -> {
-            for(final Item WEAPON : WEAPONS_GROUP)
-            {
-                entries.add(WEAPON);
-            }
-        });
+        ItemGroupEvents.modifyEntriesEvent(LYOKO_ITEMS_GROUP).register(entries -> ITEM_GROUP.forEach(entries::add));
+        ItemGroupEvents.modifyEntriesEvent(LYOKO_ARMOR_GROUP).register(entries -> ARMOR_GROUP.forEach(entries::add));
+        ItemGroupEvents.modifyEntriesEvent(LYOKO_WEAPON_GROUP).register(entries -> WEAPONS_GROUP.forEach(entries::add));
+        ITEM_GROUP.clear();
+        ARMOR_GROUP.clear();
+        WEAPONS_GROUP.clear();
     }
     public static void registerItems()
     {}

@@ -6,8 +6,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
@@ -25,6 +30,29 @@ public abstract class UraniumWasteFluid extends LyokoFluid {
     @Override
     public Item getBucketItem() {
         return null;
+    }
+
+    @Override
+    protected void randomDisplayTick(World world, BlockPos pos, FluidState state, Random random) {
+        super.randomDisplayTick(world, pos, state, random);
+        if(random.nextInt(100) == 0)
+        {
+            double d = (double)pos.getX() + random.nextDouble();
+            double e = (double)pos.getY() + 1.0;
+            double f = (double)pos.getZ() + random.nextDouble();
+            world.addParticle(ParticleTypes.SOUL, d, e, f, 0.0, 0.0, 0.0);
+            world.playSound(d, e, f, SoundEvents.PARTICLE_SOUL_ESCAPE.value(), SoundCategory.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+            d = (double)pos.getX() + random.nextDouble();
+            e = (double)pos.getY() + 1.0;
+            f = (double)pos.getZ() + random.nextDouble();
+            world.addParticle(ParticleTypes.LAVA, d, e, f, 0.0, 0.0, 0.0);
+            world.playSound(d, e, f, SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+            d = (double)pos.getX() + random.nextDouble();
+            e = (double)pos.getY() + 1.0;
+            f = (double)pos.getZ() + random.nextDouble();
+            world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, d, e, f, 0.0, 0.0, 0.0);
+            world.playSound(d, e, f, SoundEvents.AMBIENT_SOUL_SAND_VALLEY_ADDITIONS.value(), SoundCategory.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+        }
     }
 
     @Override

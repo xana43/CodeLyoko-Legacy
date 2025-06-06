@@ -30,9 +30,7 @@ public record ModDamageTypes() {
        FRONTIER_DAMAGE = registerDamageType("frontier",DamageScaling.ALWAYS,0);
     }
     public static void bootstrap(final Registerable<DamageType> registerable) {
-        Object2ObjectMaps.fastForEach(DAMAGE_TYPE_MAP,registryKeyDamageTypeEntry -> {
-            registerable.register(registryKeyDamageTypeEntry.getKey(), registryKeyDamageTypeEntry.getValue());
-        });
+        Object2ObjectMaps.fastForEach(DAMAGE_TYPE_MAP,registryKeyDamageTypeEntry -> registerable.register(registryKeyDamageTypeEntry.getKey(), registryKeyDamageTypeEntry.getValue()));
     }
     private static RegistryKey<DamageType> registerDamageType(final String name, final float exhaustion,final DamageEffects effects) {
         return registerDamageType(name,DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER,exhaustion,effects);
@@ -49,9 +47,8 @@ public record ModDamageTypes() {
         return registerDamageType(name, scaling, exhaustion, effects, DeathMessageType.DEFAULT);
     }
     private static RegistryKey<DamageType> registerDamageType(final String name, final DamageScaling scaling, final float exhaustion, final DamageEffects effects, final DeathMessageType deathMessageType) {
-        RegistryKey<DamageType> damageTypeRegistryKey = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, CodeLyokoMain.codeLyokoPrefix(name));
-        DamageType newDamageType = new DamageType("codelyoko:"+name, scaling, exhaustion, effects, deathMessageType);
-        DAMAGE_TYPE_MAP.put(damageTypeRegistryKey,newDamageType);
+        final RegistryKey<DamageType> damageTypeRegistryKey = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, CodeLyokoMain.codeLyokoPrefix(name));
+        DAMAGE_TYPE_MAP.put(damageTypeRegistryKey,new DamageType("codelyoko:"+name, scaling, exhaustion, effects, deathMessageType));
         return damageTypeRegistryKey;
     }
 }

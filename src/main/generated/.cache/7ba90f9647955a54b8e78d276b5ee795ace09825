@@ -1,11 +1,13 @@
-// 1.21.1	2025-06-02T20:03:48.280344949	CodeLyokoLegacy/Model Definitions
+// 1.21.1	2025-06-02T21:40:26.151246531	CodeLyokoLegacy/Model Definitions
 b892117f3abf8dddebfb4dc908bdc85288087eb7 assets/codelyoko/models/block/digital_wood_forest.json
 78dbe46f17d521efb389477bd9f0ab0b88eb13ca assets/codelyoko/models/item/digital_wood_forest.json
 bc8e7b854d853649072c2ffc1ea6c3af411528ab assets/codelyoko/blockstates/interface_sc.json
 3197991e68c51d1e9ffbe4238f36b0716abba521 assets/codelyoko/blockstates/iron_railing.json
+4f539ee084da83cc94617fb405cfc9a2212bb280 assets/codelyoko/blockstates/digital_lava.json
 9d6d65b438f24c68f2e09126e1cffd87db58dacc assets/codelyoko/blockstates/digital_wood_mountain.json
 91184b1f49e5a80586b01bb1f37580c87fc2f443 assets/codelyoko/blockstates/cable_block.json
 b5d752c2138e0ebb206370eb28b3f18c9d9fb45f assets/codelyoko/models/block/desert_sector_entrance.json
+4662d0b7724a93784d85ec326474633fdef1bec3 assets/codelyoko/blockstates/digital_ocean.json
 ce8260565b3e530a9830193ff95c72036bbe64d6 assets/codelyoko/models/block/interface_sc.json
 5802960288bec2cdf3d4e2d6124f8c3e18661983 assets/codelyoko/models/block/digital_wood_mountain.json
 a7ac1c9223a7079a3978e433d88b83101bce8f88 assets/codelyoko/blockstates/eroded_iron_railing.json

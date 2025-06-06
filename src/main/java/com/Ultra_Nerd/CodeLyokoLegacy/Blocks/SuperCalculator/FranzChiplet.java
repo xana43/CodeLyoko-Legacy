@@ -4,6 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.util.ActionResult;
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Stream;
 
 public final class FranzChiplet extends BlockWithEntity {
-    private final static VoxelShape shape = Stream.of(
+    private static final VoxelShape shape = Stream.of(
             Block.createCuboidShape(4, 4, 0, 5, 5, 1),
             Block.createCuboidShape(0, 0, 0, 4, 16, 2),
             Block.createCuboidShape(0, 0, 14, 4, 16, 16),
@@ -156,8 +157,13 @@ public final class FranzChiplet extends BlockWithEntity {
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if(world.isClient) return ActionResult.SUCCESS;
+        if(world.isClient()) {
+            return ActionResult.SUCCESS;
+        };
         final Inventory entityInventory = (Inventory) world.getBlockEntity(pos);
+        if(entityInventory == null) {
+            return ActionResult.FAIL;
+        };
         final Hand hand = player.getActiveHand();
         if(!player.getStackInHand(hand).isEmpty())
         {
@@ -177,8 +183,15 @@ public final class FranzChiplet extends BlockWithEntity {
         return ActionResult.SUCCESS;
     }
 
-
-
-
-
+    @Override
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        if(!world.isClient())
+        {
+            final Inventory entityInventory = (Inventory) world.getBlockEntity(pos);
+            if(entityInventory != null) {
+                world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), entityInventory.getStack(0)));
+            }
+        }
+        return super.onBreak(world, pos, state, player);
+    }
 }

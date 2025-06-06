@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=1": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=10": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=11": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=12": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=13": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=14": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=15": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=2": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=3": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=4": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=5": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=6": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=7": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=8": {
+      "model": "codelyoko:block/digital_ocean"
+    },
+    "level=9": {
+      "model": "codelyoko:block/digital_ocean"
+    }
+  }
+}
