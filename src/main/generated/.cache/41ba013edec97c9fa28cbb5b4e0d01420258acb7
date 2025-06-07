@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-02T21:40:26.150454638	CodeLyokoLegacy/Tags for minecraft:damage_type
+// 1.21.1	2025-06-07T14:42:54.675695712	CodeLyokoLegacy/Tags for minecraft:damage_type
 eb402d6ea9206f2c8afb0dc60a86938d52ba0f60 data/minecraft/tags/damage_type/is_drowning.json
 786a38c2e24036bdd06988a44afb69d9a72944e7 data/minecraft/tags/damage_type/bypasses_enchantments.json
 1913309662734ba2e04a35ea2878f70c719f007f data/minecraft/tags/damage_type/is_fire.json

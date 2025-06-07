@@ -23,9 +23,12 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower.*;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Util.BlockWithExtraProperties;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.Enums.DimensionSelector;
+import com.google.common.collect.ImmutableMap;
+import dev.felnull.specialmodelloader.api.data.SpecialModelDataGenHelper;
 import it.unimi.dsi.fastutil.objects.*;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.*;
+import net.minecraft.data.client.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -36,6 +39,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ColorCode;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
@@ -344,6 +348,65 @@ public record ModBlocks() {
            TEST_VEHICLE_INTERFACE = registerModBlocks("test_vehicle_materialization",new PlayerVehicleTest(AbstractBlock.Settings.copy(Blocks.BEDROCK)));
            TEST_ITEM_PROJECTOR = registerModBlocks("test_item_projector",new ItemProjectorTest());
            SUPERCOMPUTER_INTERFACE = registerModBlocks("interface_sc",new BlockWithExtraProperties(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK),false,false));
+    }
+    public record BlockStateProvider(){
+
+
+
+        public static void generateBlockStateModels(final BlockStateModelGenerator blockStateModelGenerator) {
+            CodeLyokoMain.LOG.info("Generating block state models");
+            blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CABLE_BLOCK);
+            blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DIGITAL_WOOD_FOREST);
+            blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.DIGITAL_WOOD_MOUNTAIN);
+            blockStateModelGenerator.registerParentedItemModel(ModBlocks.RACK_CHARGER_BLOCK, CodeLyokoMain.codeLyokoPrefix("block/rack_charger"));
+            blockStateModelGenerator.registerParentedItemModel(ModBlocks.CABLE_BLOCK, CodeLyokoMain.codeLyokoPrefix("block/cable_block"));
+            blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.SECTOR_ENTRANCE_DESERT);
+            generateCustomBlockModels(blockStateModelGenerator);
+            generateFenceLikeModels(blockStateModelGenerator,ModBlocks.IRON_RAILING,"block/railing_post","block/railing_side");
+            generateFenceLikeModels(blockStateModelGenerator,ModBlocks.ERODED_IRON_RAILING,"block/eroded_railing_post","block/eroded_railing_side");
+            generateFenceLikeModels(blockStateModelGenerator,ModBlocks.TARNISHED_IRON_RAILING,"block/tarnished_railing_post","block/tarnished_railing_side");
+            generateFenceLikeModels(blockStateModelGenerator,ModBlocks.RUSTED_IRON_RAILING,"block/rusted_railing_post","block/rusted_railing_side");
+            generateObjBlockStateModels(blockStateModelGenerator,ModBlocks.SUPERCOMPUTER_INTERFACE,"models/block/interface_sc");
+        }
+        private static void generateFenceLikeModels(final BlockStateModelGenerator generator, final Block blockToGenerate,final String postModel, final String sideModel)
+        {
+            final Identifier postIdentifier = CodeLyokoMain.codeLyokoPrefix(postModel);
+            final Identifier sideIdentifier = CodeLyokoMain.codeLyokoPrefix(sideModel);
+            generator.blockStateCollector.accept(MultipartBlockStateSupplier.create(blockToGenerate)
+                    .with(BlockStateVariant.create().put(VariantSettings.MODEL,postIdentifier))
+                    .with(When.create().set(Properties.NORTH,true),BlockStateVariant.create().put(VariantSettings.UVLOCK,true).put(VariantSettings.MODEL,sideIdentifier))
+                    .with(When.create().set(Properties.EAST,true),BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90).put(VariantSettings.UVLOCK,true).put(VariantSettings.MODEL,sideIdentifier))
+                    .with(When.create().set(Properties.SOUTH,true),BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180).put(VariantSettings.UVLOCK,true).put(VariantSettings.MODEL,sideIdentifier))
+                    .with(When.create().set(Properties.WEST,true),BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270).put(VariantSettings.UVLOCK,true).put(VariantSettings.MODEL,sideIdentifier)));
+        }
+        private static void generateCustomBlockModels(final BlockStateModelGenerator blockStateModelGenerator){
+
+        }
+        public static void generateItemModels(final ItemModelGenerator itemModelGenerator) {
+
+        }
+        private static void generateObjBlockStateModels(final BlockStateModelGenerator blockStateModelGenerator, final Block block, final String model){
+            Identifier parsedModel;
+            if(model.contains(".obj"))
+            {
+                parsedModel = CodeLyokoMain.codeLyokoPrefix(model);
+            }
+            else{
+                parsedModel = CodeLyokoMain.codeLyokoPrefix(model+".obj");
+            }
+            SpecialModelDataGenHelper.generateObjModel(
+                    block,
+                    parsedModel,
+                    false,
+                    true,
+                    null,
+                    ImmutableMap.of(),
+                    null,
+                    blockStateModelGenerator.modelCollector);
+            blockStateModelGenerator.blockStateCollector.accept(
+                    BlockStateModelGenerator.createSingletonBlockState(block, ModelIds.getBlockModelId(block))
+            );
+        }
     }
     private static RegistryKey<Block> getKeyOfBlock(final String name)
     {

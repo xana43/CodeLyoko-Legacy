@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=1": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=10": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=11": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=12": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=13": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=14": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=15": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=2": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=3": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=4": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=5": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=6": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=7": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=8": {
+      "model": "codelyoko:block/liquid_helium"
+    },
+    "level=9": {
+      "model": "codelyoko:block/liquid_helium"
+    }
+  }
+}

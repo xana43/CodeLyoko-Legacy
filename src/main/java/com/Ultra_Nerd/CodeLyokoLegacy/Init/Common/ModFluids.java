@@ -5,10 +5,14 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.DigitalOcean;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.LiquidHeliumFluid;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.UraniumWasteFluid;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import net.minecraft.block.Block;
+import net.minecraft.data.client.*;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.Identifier;
 
 import java.util.function.Supplier;
 
@@ -54,6 +58,26 @@ public record ModFluids() {
                 register(baseName,stillSupplier.get()),
                 register("flowing_" + baseName,flowingSupplier.get())
         );
+    }
+    public record BlockStateProvider() {
+
+        public static void  generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+            registerFluidStateModels(blockStateModelGenerator, ModBlocks.DIGITAL_OCEAN_BLOCK);
+            registerFluidStateModels(blockStateModelGenerator, ModBlocks.DIGITAL_LAVA_BLOCK);
+            registerFluidStateModels(blockStateModelGenerator, ModBlocks.LIQUID_HELIUM_BLOCK);
+            registerFluidStateModels(blockStateModelGenerator, ModBlocks.URANIUM_WASTE_BLOCK);
+        }
+        private static void registerFluidStateModels(final BlockStateModelGenerator generator, final Block fluidBlock) {
+            final Identifier modelId = ModelIds.getBlockModelId(fluidBlock);
+            generator.blockStateCollector.accept(
+                    VariantsBlockStateSupplier.create(fluidBlock).coordinate(
+                            BlockStateVariantMap.create(Properties.LEVEL_15)
+                                    .register(level -> BlockStateVariant.create().put(VariantSettings.MODEL, modelId))
+
+                    )
+            );
+        }
+
     }
     private static <T extends Fluid> T register(final String name,final T value)
     {

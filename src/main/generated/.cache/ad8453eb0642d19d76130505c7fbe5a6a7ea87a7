@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-02T21:40:26.14836809	CodeLyokoLegacy/Block Loot Tables
+// 1.21.1	2025-06-07T14:42:54.673772406	CodeLyokoLegacy/Block Loot Tables
 1b36e8f09c781227743de670b5d16851d60691f4 data/codelyoko/loot_table/blocks/saleeite_ore.json
 c551c510dc450bfc2bb80fe5915b95f57f70e088 data/codelyoko/loot_table/blocks/bornite_ore.json
 3be4edd3eb16bf2e91fef622b7266b64e0a69b17 data/codelyoko/loot_table/blocks/uranium_canister.json
@@ -32,8 +32,8 @@ ab3b7763580c538c2d960ccdd6ba1d689d3f5290 data/codelyoko/loot_table/blocks/comput
 8a7548c0b045d65aa336c9c5751eddffe0fde1eb data/codelyoko/loot_table/blocks/gummite_ore.json
 a661ab142aed0def2f1f3834c98399454305a3b1 data/codelyoko/loot_table/blocks/fluorite_block.json
 a21614bc082c15812e11901225fc7905099398ac data/codelyoko/loot_table/blocks/computer_screen_connector.json
-96e839b61a5faeec4826b68dcb526306667db75e data/codelyoko/loot_table/blocks/metatorbernite_ore.json
 e18fe619b0dada058dd0aea9b68bf41e2f0442e7 data/codelyoko/loot_table/blocks/computer_fluid_cooler.json
+96e839b61a5faeec4826b68dcb526306667db75e data/codelyoko/loot_table/blocks/metatorbernite_ore.json
 f5f08a5a93229edc9014e3d5f9c9918cc43939a3 data/codelyoko/loot_table/blocks/scanner_frame.json
 2b2a4bde1a1c86393b28fa3ff9b81ef1ddeed22d data/codelyoko/loot_table/blocks/laptop_block.json
 010ab76513f2c50ee097f14b15e3178a2a8944c3 data/codelyoko/loot_table/blocks/volcano_ground.json
@@ -69,8 +69,8 @@ d89167705493131fa67675af81e0b0ee66f45dc0 data/codelyoko/loot_table/blocks/tower_
 914e167d30a35435a4a379377fd7b3711f49a984 data/codelyoko/loot_table/blocks/casserite_ore.json
 aec4ffc8ae374c15c33e4b5d98b63840fe2b28e3 data/codelyoko/loot_table/blocks/marabunta.json
 a06f3ff86c6a47c503f39f7e8bf68521f41a34dd data/codelyoko/loot_table/blocks/chiplet_franz_block.json
-8114434706626eeff84a4583d5d262ff97144fda data/codelyoko/loot_table/blocks/central_control_unit.json
 45fde9300e78cc1d9df0df6e5bb53dcf448bd971 data/codelyoko/loot_table/blocks/digital_dirt.json
+8114434706626eeff84a4583d5d262ff97144fda data/codelyoko/loot_table/blocks/central_control_unit.json
 db83f5759deecace7d4c69f1218f27522f6e934d data/codelyoko/loot_table/blocks/iron_railing.json
 94bf8a61cc512aed561ed0af7cf1a5772ef8a98b data/codelyoko/loot_table/blocks/digital_sea_pylon.json
 97abfa23a18067c56d5c9d0fb9980907ee7be927 data/codelyoko/loot_table/blocks/interface_sc.json

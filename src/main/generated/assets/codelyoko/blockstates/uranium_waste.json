@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "level=0": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=1": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=10": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=11": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=12": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=13": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=14": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=15": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=2": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=3": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=4": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=5": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=6": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=7": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=8": {
+      "model": "codelyoko:block/uranium_waste"
+    },
+    "level=9": {
+      "model": "codelyoko:block/uranium_waste"
+    }
+  }
+}

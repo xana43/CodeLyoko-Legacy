@@ -1,11 +1,12 @@
-// 1.21.1	2025-06-02T21:40:26.151246531	CodeLyokoLegacy/Model Definitions
+// 1.21.1	2025-06-07T14:42:54.676541365	CodeLyokoLegacy/Model Definitions
 b892117f3abf8dddebfb4dc908bdc85288087eb7 assets/codelyoko/models/block/digital_wood_forest.json
 78dbe46f17d521efb389477bd9f0ab0b88eb13ca assets/codelyoko/models/item/digital_wood_forest.json
 bc8e7b854d853649072c2ffc1ea6c3af411528ab assets/codelyoko/blockstates/interface_sc.json
-3197991e68c51d1e9ffbe4238f36b0716abba521 assets/codelyoko/blockstates/iron_railing.json
 4f539ee084da83cc94617fb405cfc9a2212bb280 assets/codelyoko/blockstates/digital_lava.json
+3197991e68c51d1e9ffbe4238f36b0716abba521 assets/codelyoko/blockstates/iron_railing.json
 9d6d65b438f24c68f2e09126e1cffd87db58dacc assets/codelyoko/blockstates/digital_wood_mountain.json
 91184b1f49e5a80586b01bb1f37580c87fc2f443 assets/codelyoko/blockstates/cable_block.json
+fe7353ac9bc3e436e2d1920ea2174d5b444d6214 assets/codelyoko/blockstates/liquid_helium.json
 b5d752c2138e0ebb206370eb28b3f18c9d9fb45f assets/codelyoko/models/block/desert_sector_entrance.json
 4662d0b7724a93784d85ec326474633fdef1bec3 assets/codelyoko/blockstates/digital_ocean.json
 ce8260565b3e530a9830193ff95c72036bbe64d6 assets/codelyoko/models/block/interface_sc.json
@@ -23,5 +24,6 @@ c3a1f1bec7381ab13457e3910ccfed59addef7d4 assets/codelyoko/models/item/rack_charg
 3f038a6d000200c15759211577e4944b8d28f829 assets/codelyoko/models/block/cable_block.json
 81caf9ace340e9871a553e640a686729639c94ed assets/codelyoko/models/item/liquid_helium_bucket.json
 34ce253a395d5735b97eb5dfca0bc4060a99539f assets/codelyoko/models/item/digital_wood_mountain.json
+7a948dc288e3fdb8a352c8f5fa4582da15110d57 assets/codelyoko/blockstates/uranium_waste.json
 ade0300a381edc9cabc298a94d707b3a290be89e assets/codelyoko/models/item/cable_block.json
 3ab88d001b387d98d68dcfc1ac8539430f68e9d7 assets/codelyoko/models/item/rusted_iron_railing.json
