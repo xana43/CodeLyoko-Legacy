@@ -2,10 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.RedstoneOreBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -13,8 +11,8 @@ import net.minecraft.world.World;
 
 public final class TowerPlatform extends Block {
 
-    public TowerPlatform() {
-        super(Settings.copy(Blocks.BEDROCK).sounds(BlockSoundGroup.GLASS).luminance(Blocks.createLightLevelFromLitBlockState(255)));
+    public TowerPlatform(final Settings settings) {
+        super(settings);
         this.setDefaultState(getDefaultState().with(RedstoneOreBlock.LIT,false));
     }
 

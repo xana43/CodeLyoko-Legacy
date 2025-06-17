@@ -31,7 +31,11 @@ import net.minecraft.world.biome.source.BiomeAccess;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
+import software.bernie.geckolib.animatable.processing.AnimationTest;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 
@@ -40,7 +44,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 public final class HornetEntity extends PhantomEntity implements GeoAnimatable, RangedAttackMob {
 
 
-    private final AnimationController<?> controller = new AnimationController<>(this, "hornet_controller", 0,
+    private final AnimationController<?> controller = new AnimationController<>("hornet_controller", 0,
             this::attackPredicate);
 
     public HornetEntity(@NotNull EntityType<? extends PhantomEntity> hornetEntityEntityType, @NotNull World world) {
@@ -55,13 +59,13 @@ public final class HornetEntity extends PhantomEntity implements GeoAnimatable, 
     }
 
     public static DefaultAttributeContainer.Builder registerAttributes() {
-        return HostileEntity.createMobAttributes().add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 10D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10D)
-                .add(EntityAttributes.GENERIC_ARMOR, 10D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20D)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.10);
+        return HostileEntity.createMobAttributes().add(EntityAttributes.KNOCKBACK_RESISTANCE, 1D)
+                .add(EntityAttributes.MAX_HEALTH, 10D)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.2D)
+                .add(EntityAttributes.ATTACK_DAMAGE, 10D)
+                .add(EntityAttributes.ARMOR, 10D)
+                .add(EntityAttributes.FOLLOW_RANGE, 20D)
+                .add(EntityAttributes.FLYING_SPEED, 0.10);
     }
 
 
@@ -78,7 +82,7 @@ public final class HornetEntity extends PhantomEntity implements GeoAnimatable, 
     }
 
     @Override
-    public boolean handleFallDamage(final float fallDistance, final float damageMultiplier, final DamageSource damageSource) {
+    public boolean handleFallDamage(double fallDistance, float damagePerDistance, DamageSource damageSource) {
         return false;
     }
 
@@ -168,25 +172,26 @@ public final class HornetEntity extends PhantomEntity implements GeoAnimatable, 
         return 0;
     }
 
-    private <E extends HornetEntity> PlayState movePredicate(AnimationState<E> event) {
+    private <E extends GeoAnimatable> PlayState movePredicate(AnimationTest<E> event) {
 
         controllerMove.setAnimation(RawAnimation.begin().thenLoop("animation.hornet.fly"));
 
         return PlayState.CONTINUE;
     }
 
-    private <E extends HornetEntity> @NotNull PlayState attackPredicate(@NotNull AnimationState<E> event) {
+    private <E extends GeoAnimatable> @NotNull PlayState attackPredicate(@NotNull AnimationTest<E> event) {
 
+        if(event.animatable() instanceof HornetEntity hornetEntity) {
+            if (hornetEntity.isAttacking()) {
 
-        if (event.getAnimatable().isAttacking()) {
+                event.controller().setAnimation(RawAnimation.begin().thenLoop("animation.hornet.attack"));
 
-            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.hornet.attack"));
-
+            }
         }
         return PlayState.CONTINUE;
 
 
-    }    private final AnimationController<?> controllerMove = new AnimationController<>(this, "hornet_move_controller", 0,
+    }    private final AnimationController<?> controllerMove = new AnimationController<>("hornet_move_controller", 0,
             this::movePredicate);
 
     @Override

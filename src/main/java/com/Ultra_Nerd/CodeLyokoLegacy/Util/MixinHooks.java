@@ -54,7 +54,7 @@ public record MixinHooks() {
             if (MethodUtil.DimensionCheck.isPlayerInLyoko(thisPlayerEntity)) {
                 final World currentWorld = thisPlayerEntity.getWorld();
                 final Vec3d currentPosition = thisPlayerEntity.getPos();
-                currentWorld.playSound(currentPosition.x,currentPosition.y,currentPosition.z, ModSounds.DEVIRTUALIZATION, thisPlayerEntity.getSoundCategory(),0.8F, 0.8F,true);
+                currentWorld.playSoundClient(currentPosition.x,currentPosition.y,currentPosition.z, ModSounds.DEVIRTUALIZATION, thisPlayerEntity.getSoundCategory(),0.8F, 0.8F,true);
             }
         }
         public static void cancelOnKeyPressed(final CallbackInfo ci)

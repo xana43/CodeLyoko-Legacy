@@ -1,12 +1,14 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.Client.sky.carthage;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
@@ -25,8 +27,8 @@ public record CustomCarthageSky() implements DimensionRenderingRegistry.SkyRende
         if(tessellator == null) {
            tessellator = Tessellator.getInstance();
         }
-        RenderSystem.setShaderTexture(0, TEXTURE_LOCATION);
-        RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
+       // RenderSystem.setShaderTexture(0, TEXTURE_LOCATION);
+        //RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
         final MatrixStack matrixStack = context.matrixStack();
         if(matrixStack == null)
         {

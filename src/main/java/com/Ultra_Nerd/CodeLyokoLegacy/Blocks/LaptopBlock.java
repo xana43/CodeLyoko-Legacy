@@ -30,17 +30,17 @@ import java.util.stream.Stream;
  */
 public final class LaptopBlock extends HorizontalFacingBlock implements BlockEntityProvider {
 
-    public LaptopBlock() {
-        super(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
+    public LaptopBlock(final Settings settings) {
+        super(settings);
     }
 
     @Override
-    protected boolean isCullingShapeFullCube(final BlockState state,final BlockView world,final BlockPos pos) {
+    protected boolean isShapeFullCube(BlockState state, BlockView world, BlockPos pos) {
         return false;
     }
 
     @Override
-    protected VoxelShape getCullingShape(final BlockState state,final BlockView world,final BlockPos pos) {
+    protected VoxelShape getCullingShape(BlockState state) {
         return VoxelShapes.empty();
     }
 
@@ -56,7 +56,7 @@ public final class LaptopBlock extends HorizontalFacingBlock implements BlockEnt
 
     @Override
     protected BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.ENTITYBLOCK_ANIMATED;
+        return BlockRenderType.INVISIBLE;
     }
 
     private static void changeLaptopState(final World world, final BlockPos pos) {

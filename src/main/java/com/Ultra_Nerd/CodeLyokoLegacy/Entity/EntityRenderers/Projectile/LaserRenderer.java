@@ -3,7 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Projectile;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import net.minecraft.client.render.entity.ArrowEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.client.render.entity.state.ArrowEntityRenderState;
 import net.minecraft.util.Identifier;
 
 public final class LaserRenderer extends ArrowEntityRenderer {
@@ -12,9 +12,8 @@ public final class LaserRenderer extends ArrowEntityRenderer {
         super(context);
     }
 
-
     @Override
-    public Identifier getTexture(final ArrowEntity arrowEntity) {
+    protected Identifier getTexture(ArrowEntityRenderState arrowEntityRenderState) {
         return CodeLyokoMain.codeLyokoPrefix("textures/entity/laserarrow.png");
     }
 }

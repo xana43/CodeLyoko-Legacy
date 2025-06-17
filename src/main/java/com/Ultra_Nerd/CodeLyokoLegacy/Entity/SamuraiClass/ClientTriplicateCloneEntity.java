@@ -52,20 +52,18 @@ public final class ClientTriplicateCloneEntity extends OtherClientPlayerEntity {
     }
 
     @Override
-    public Iterable<ItemStack> getEquippedItems() {
-        return owner.getEquippedItems();
-    }
-
-
-
-    @Override
-    public Iterable<ItemStack> getHandItems() {
-        return owner.getHandItems();
+    public ItemStack getEquippedStack(EquipmentSlot slot) {
+        return owner.getEquippedStack(slot);
     }
 
     @Override
-    public Iterable<ItemStack> getArmorItems() {
-        return owner.getArmorItems();
+    public ItemStack getMainHandStack() {
+        return owner.getMainHandStack();
+    }
+
+    @Override
+    public ItemStack getOffHandStack() {
+        return owner.getOffHandStack();
     }
     public void update()
     {
@@ -77,15 +75,16 @@ public final class ClientTriplicateCloneEntity extends OtherClientPlayerEntity {
             this.copyPositionAndRotation(triplicateClone);
             this.getInventory().clone(owner.getInventory());
             refreshPositionAndAngles(triplicateClone.getBlockPos(),0,0);
-            this.prevCapeX = this.capeX = getX() + 0.5;
-            this.prevCapeY = this.capeY = getY();
-            this.prevCapeZ = this.capeZ = getZ() + 0.5;
+
+            this.lastCapeX = this.capeX = getX() + 0.5;
+            this.lastCapeY = this.capeY = getY();
+            this.lastCapeZ = this.capeZ = getZ() + 0.5;
             this.setWorld(triplicateClone.getWorld());
             this.copyFrom(triplicateClone);
             this.setSneaking(triplicateClone.isSneaking());
             this.setSprinting(false);
             this.setBodyYaw(triplicateClone.getBodyYaw());
-            this.prevBodyYaw =triplicateClone.prevBodyYaw;
+            this.lastBodyYaw =triplicateClone.lastBodyYaw;
             this.activeItemStack = triplicateClone.getActiveItem();
             for(final EquipmentSlot slot : EquipmentSlot.values())
             {
@@ -95,7 +94,7 @@ public final class ClientTriplicateCloneEntity extends OtherClientPlayerEntity {
             this.fallDistance = owner.fallDistance;
             this.setCustomName(owner.getCustomName());
             this.setHeadYaw(triplicateClone.getHeadYaw());
-            this.prevHeadYaw = triplicateClone.prevHeadYaw;
+            this.lastHeadYaw = triplicateClone.lastHeadYaw;
             isSneaking = triplicateClone.isSneaking();
         }
     }

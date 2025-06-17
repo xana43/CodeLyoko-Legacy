@@ -4,9 +4,7 @@
   "cookingtime": 4,
   "experience": 4.0,
   "group": "codelyoko:basic_refinement",
-  "ingredient": {
-    "item": "codelyoko:raw_silicadust"
-  },
+  "ingredient": "codelyoko:raw_silicadust",
   "result": {
     "id": "codelyoko:silicon_plate"
   }

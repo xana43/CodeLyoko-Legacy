@@ -29,7 +29,7 @@ public final class MindHelmStressComponent implements AutoSyncedComponent {
 
     @Override
     public void readFromNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        StressLevel = tag.getInt(stressKey);
+        StressLevel = tag.getInt(stressKey).orElse(0);
     }
 
     @Override

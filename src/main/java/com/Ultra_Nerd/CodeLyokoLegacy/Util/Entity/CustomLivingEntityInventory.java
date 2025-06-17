@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.objects.ObjectLists;
 import net.minecraft.block.BlockState;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.NbtComponent;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Nameable;
 import net.minecraft.util.collection.DefaultedList;
@@ -22,7 +24,6 @@ import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import net.minecraft.util.crash.CrashReportSection;
 
-import java.util.Iterator;
 import java.util.List;
 
 public final class CustomLivingEntityInventory implements Inventory, Nameable {
@@ -142,7 +143,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
 
             for (int i = 0; i < itemStacks.size(); ++i) {
                 if (!itemStacks.get(i).isEmpty()) {
-                    itemStacks.get(i).inventoryTick(this.entity.getWorld(), this.entity, i, this.selectedSlot == i);
+                    itemStacks.get(i).inventoryTick(this.entity.getWorld(), this.entity, EquipmentSlot.values()[i]);
                 }
             }
         }
@@ -203,7 +204,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
         List<ItemStack> list = null;
 
         DefaultedList defaultedList;
-        for(final Iterator var4 = this.combinedInventory.iterator(); var4.hasNext(); slot -= defaultedList.size()) {
+        for(final java.util.Iterator<DefaultedList<ItemStack>> var4 = this.combinedInventory.iterator(); var4.hasNext(); slot -= defaultedList.size()) {
             defaultedList = (DefaultedList)var4.next();
             if (slot < defaultedList.size()) {
                 list = defaultedList;
@@ -215,7 +216,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
     }
 
     public void removeOne(ItemStack stack) {
-        Iterator<DefaultedList<ItemStack>> var2 = this.combinedInventory.iterator();
+        java.util.Iterator<DefaultedList<ItemStack>> var2 = this.combinedInventory.iterator();
 
         while(true) {
             while(var2.hasNext()) {
@@ -237,7 +238,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
         DefaultedList<ItemStack> defaultedList = null;
 
         DefaultedList defaultedList2;
-        for(Iterator var3 = this.combinedInventory.iterator(); var3.hasNext(); slot -= defaultedList2.size()) {
+        for(java.util.Iterator<DefaultedList<ItemStack>> var3 = this.combinedInventory.iterator(); var3.hasNext(); slot -= defaultedList2.size()) {
             defaultedList2 = (DefaultedList)var3.next();
             if (slot < defaultedList2.size()) {
                 defaultedList = defaultedList2;
@@ -258,7 +259,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
         DefaultedList<ItemStack> defaultedList = null;
 
         DefaultedList defaultedList2;
-        for(Iterator var4 = this.combinedInventory.iterator(); var4.hasNext(); slot -= defaultedList2.size()) {
+        for(java.util.Iterator<DefaultedList<ItemStack>> var4 = this.combinedInventory.iterator(); var4.hasNext(); slot -= defaultedList2.size()) {
             defaultedList2 = (DefaultedList)var4.next();
             if (slot < defaultedList2.size()) {
                 defaultedList = defaultedList2;
@@ -315,8 +316,8 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
         this.offHand.clear();
 
         for(int i = 0; i < nbtList.size(); ++i) {
-            NbtCompound nbtCompound = nbtList.getCompound(i);
-            int j = nbtCompound.getByte("Slot") & 255;
+            NbtCompound nbtCompound = nbtList.getCompound(i).orElse(new NbtCompound());
+            int j = nbtCompound.getByte("Slot").orElse((byte) 0) & 255;
             ItemStack itemStack = ItemStack.fromNbt(this.entity.getRegistryManager(), nbtCompound).orElse(ItemStack.EMPTY);
             if (j >= 0 && j < this.main.size()) {
                 this.main.set(j, itemStack);
@@ -334,16 +335,16 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
     }
 
     public boolean isEmpty() {
-        Iterator var1 = this.main.iterator();
+        Iterator var1 = (Iterator) this.main.iterator();
 
         ItemStack itemStack;
         do {
             if (!var1.hasNext()) {
-                var1 = this.armor.iterator();
+                var1 = (Iterator) this.armor.iterator();
 
                 do {
                     if (!var1.hasNext()) {
-                        var1 = this.offHand.iterator();
+                        var1 = (Iterator) this.offHand.iterator();
 
                         do {
                             if (!var1.hasNext()) {
@@ -372,7 +373,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
         List<ItemStack> list = null;
 
         DefaultedList defaultedList;
-        for(Iterator var3 = this.combinedInventory.iterator(); var3.hasNext(); slot -= defaultedList.size()) {
+        for(java.util.Iterator<DefaultedList<ItemStack>> var3 = this.combinedInventory.iterator(); var3.hasNext(); slot -= defaultedList.size()) {
             defaultedList = (DefaultedList)var3.next();
             if (slot < defaultedList.size()) {
                 list = defaultedList;
@@ -393,14 +394,14 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
 
 
 
-    public void dropAll() {
+    public void dropAll(final ServerWorld serverWorld) {
 
         for (final DefaultedList<ItemStack> itemStacks : this.combinedInventory) {
 
             for (int i = 0; i < ((List<ItemStack>) itemStacks).size(); ++i) {
                 ItemStack itemStack = ((List<ItemStack>) itemStacks).get(i);
                 if (!itemStack.isEmpty()) {
-                    this.entity.dropStack(itemStack);
+                    this.entity.dropStack(serverWorld,itemStack);
                     ((List<ItemStack>) itemStacks).set(i, ItemStack.EMPTY);
                 }
             }
@@ -456,7 +457,7 @@ public final class CustomLivingEntityInventory implements Inventory, Nameable {
             this.setStack(i, other.getStack(i));
         }
 
-        this.selectedSlot = other.selectedSlot;
+        this.selectedSlot = other.getSelectedSlot();
     }
 
     public void clear() {

@@ -19,22 +19,22 @@ public record SpawnScannerParticlesS2CPacket() {
             if(world != null) {
                 switch (client.options.getParticles().getValue()) {
                     case ALL -> {
-                        for (int i = 0; i < 200; i++) {
-                            world.addParticle(ModParticles.RING_PARTICLE, pos.getX(), pos.getY() + offset,
+                        for (int i = 0; i < 200; ++i) {
+                            world.addParticleClient(ModParticles.RING_PARTICLE, pos.getX(), pos.getY() + offset,
                                     pos.getZ() + 0.5f, 0, 0, 0);
 
                         }
                     }
                     case DECREASED -> {
-                        for (byte i = 0; i < 100; i++) {
-                            world.addParticle(ModParticles.RING_PARTICLE, pos.getX(), pos.getY() + offset,
+                        for (byte i = 0; i < 100; ++i) {
+                            world.addParticleClient(ModParticles.RING_PARTICLE, pos.getX(), pos.getY() + offset,
                                     pos.getZ() + 0.5f, 0, 0, 0);
                         }
 
                     }
                     case MINIMAL -> {
-                        for (byte i = 0; i < 50; i++) {
-                            world.addParticle(ModParticles.RING_PARTICLE, pos.getX(), pos.getY() + offset,
+                        for (byte i = 0; i < 50; ++i) {
+                            world.addParticleClient(ModParticles.RING_PARTICLE, pos.getX(), pos.getY() + offset,
                                     pos.getZ() + 0.5f, 0, 0, 0);
                         }
                     }

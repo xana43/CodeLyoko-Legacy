@@ -15,7 +15,6 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.Blender;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -68,9 +67,11 @@ public final class CarthageGenerator extends ChunkGenerator {
     }
 
     @Override
-    public void carve(final ChunkRegion chunkRegion, final long seed, final NoiseConfig noiseConfig, final BiomeAccess world, final StructureAccessor structureAccessor, final Chunk chunk, final GenerationStep.Carver carverStep) {
+    public void carve(ChunkRegion chunkRegion, long seed, NoiseConfig noiseConfig, BiomeAccess biomeAccess, StructureAccessor structureAccessor, Chunk chunk) {
 
     }
+
+
 
 
     @Override
@@ -90,7 +91,7 @@ public final class CarthageGenerator extends ChunkGenerator {
 
         for (x = 0; x < 16; x++) {
             for (z = 0; z < 16; z++) {
-                chunk.setBlockState(pos.set(x, 0, z), bedrock, false);
+                chunk.setBlockState(pos.set(x, 0, z), bedrock);
             }
         }
         for (x = 0; x < 16; x++) {
@@ -107,41 +108,41 @@ public final class CarthageGenerator extends ChunkGenerator {
                 createSphere(chunk, stone, pos, x, z, heightSpawn, innerHeightSpawn);
                 for (int h = 0; h < heightSpawn; h++) {
                     if ((realZ == -1 || realZ == 0 || realZ == 1) && realX > 11) {
-                        chunk.setBlockState(pos.set(realX, h + 128, realZ), Blocks.AIR.getDefaultState(), false);
+                        chunk.setBlockState(pos.set(realX, h + 128, realZ), Blocks.AIR.getDefaultState());
                         //chunk.setBlockState(pos.setPos(x, 127 - h, z), Blocks.AIR.getDefaultState(), false);
                     }
                 }
 
                 final double disc = Math.pow(realX, 2) + Math.pow(realZ, 2);
                 if (disc <= Math.pow(23, 2)) {
-                    chunk.setBlockState(pos.set(realX, 127, realZ), blue, false);
+                    chunk.setBlockState(pos.set(realX, 127, realZ), blue);
                 }
                 if ((realX >= -23 && realX <= -12) || (realX >= 12 && realX <= 23)) {
                     if (realZ == 0) {
-                        chunk.setBlockState(pos.set(realX, 127, realZ), white, false);
+                        chunk.setBlockState(pos.set(realX, 127, realZ), white);
 
                     } else if (realZ == -1) {
-                        chunk.setBlockState(pos.set(realX, 127, realZ), white, false);
+                        chunk.setBlockState(pos.set(realX, 127, realZ), white);
 
                     } else if (realZ == 1) {
-                        chunk.setBlockState(pos.set(realX, 127, realZ), white, false);
+                        chunk.setBlockState(pos.set(realX, 127, realZ), white);
                     }
                 }
 
                 if (disc <= Math.pow(12, 2)) {
-                    chunk.setBlockState(pos.set(realX, 127, realZ), white, false);
+                    chunk.setBlockState(pos.set(realX, 127, realZ), white);
                 }
                 if (disc <= Math.pow(10, 2)) {
-                    chunk.setBlockState(pos.set(realX, 127, realZ), blue, false);
+                    chunk.setBlockState(pos.set(realX, 127, realZ), blue);
                 }
                 if (disc <= Math.pow(7, 2)) {
-                    chunk.setBlockState(pos.set(realX, 127, realZ), white, false);
+                    chunk.setBlockState(pos.set(realX, 127, realZ), white);
                 }
                 if (disc <= Math.pow(4, 2)) {
-                    chunk.setBlockState(pos.set(realX, 127, realZ), blue, false);
+                    chunk.setBlockState(pos.set(realX, 127, realZ), blue);
                 }
                 if (disc <= Math.pow(1, 2)) {
-                    chunk.setBlockState(pos.set(realX, 127, realZ), white, false);
+                    chunk.setBlockState(pos.set(realX, 127, realZ), white);
                 }
             }
         }
@@ -171,12 +172,12 @@ public final class CarthageGenerator extends ChunkGenerator {
 
     private static void createSphere(@NotNull Chunk chunk, @NotNull BlockState stone, BlockPos.@NotNull Mutable pos, int x, int z, int height, int innerHeight) {
         for (int h = 0; h < height; h++) {
-            chunk.setBlockState(pos.set(x, h + 128, z), stone, false);
-            chunk.setBlockState(pos.set(x, 127 - h, z), stone, false);
+            chunk.setBlockState(pos.set(x, h + 128, z), stone);
+            chunk.setBlockState(pos.set(x, 127 - h, z), stone);
         }
         for (int y = 0; y < innerHeight; y++) {
-            chunk.setBlockState(pos.set(x, y + 128, z), Blocks.AIR.getDefaultState(), false);
-            chunk.setBlockState(pos.set(x, 127 - y, z), Blocks.AIR.getDefaultState(), false);
+            chunk.setBlockState(pos.set(x, y + 128, z), Blocks.AIR.getDefaultState());
+            chunk.setBlockState(pos.set(x, 127 - y, z), Blocks.AIR.getDefaultState());
         }
     }
 
@@ -208,9 +209,10 @@ public final class CarthageGenerator extends ChunkGenerator {
     }
 
     @Override
-    public void getDebugHudText(final List<String> text, final NoiseConfig noiseConfig, final BlockPos pos) {
+    public void appendDebugHudText(List<String> text, NoiseConfig noiseConfig, BlockPos pos) {
 
     }
+
 
 
     @Override

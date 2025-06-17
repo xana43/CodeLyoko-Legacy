@@ -33,7 +33,7 @@ public abstract class EnergyStorageBlockEntityInventory extends SidedInventoryTi
     public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
 
         super.readNbt(nbt,registryLookup);
-        energyStorage.amount = nbt.getLong(energyKey);
+        energyStorage.amount = nbt.getLong(energyKey).orElse(0L);
     }
 
     @Override

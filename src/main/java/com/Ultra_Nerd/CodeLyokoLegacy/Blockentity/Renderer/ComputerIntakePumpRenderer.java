@@ -14,13 +14,14 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 
 @Environment(EnvType.CLIENT)
 public record ComputerIntakePumpRenderer(BlockEntityRendererFactory.Context context) implements BlockEntityRenderer<ComputerFluidIntakeBlockEntity> {
-    @Override
-    public void render(final ComputerFluidIntakeBlockEntity entity, final float tickDelta, final MatrixStack matrices,
-            final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {
 
+
+    @Override
+    public void render(ComputerFluidIntakeBlockEntity entity, float tickProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, Vec3d cameraPos) {
         final long fluidAmount = entity.getStoredFluid();
         if (fluidAmount == 0L) {
             return;
@@ -35,7 +36,6 @@ public record ComputerIntakePumpRenderer(BlockEntityRendererFactory.Context cont
 
         CommonRenderRoutines.QuadRender.drawCalculatedSize(FluidVariantRendering.getSprites(storedFluid)[0], 0, 16, 16, fillPercentage, vertexConsumer, matrices, fluidColor, light, overlay);
 
-
     }
-    }
+}
 

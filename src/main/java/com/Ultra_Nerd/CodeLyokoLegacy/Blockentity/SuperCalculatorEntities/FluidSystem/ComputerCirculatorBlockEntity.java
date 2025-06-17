@@ -2,8 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.Fluid
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModComponents;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerCirculatorScreenHandler;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.NBT.NBTEntries;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.SyncedBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.TickingBlockEntity;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
@@ -63,7 +63,7 @@ public final class ComputerCirculatorBlockEntity extends SyncedBlockEntity imple
                             {
                                 if(fluidStorage.extract(FluidVariant.of(Fluids.WATER), cardinalFlowSpeeds[index],
                                         transaction) == cardinalFlowSpeeds[index] && circulatorPipeBlock.getInput().insert(FluidVariant.of(Fluids.WATER,
-                                               ComponentChanges.builder().add(DataComponentTypes.CUSTOM_DATA,NbtComponent.of(NBTEntries.chilled)).build()),
+                                               ComponentChanges.builder().add(ModComponents.CHILLED,false).build()),
                                         cardinalFlowSpeeds[index],transaction) == cardinalFlowSpeeds[index])
                                 {
                                     transaction.commit();
@@ -90,10 +90,11 @@ public final class ComputerCirculatorBlockEntity extends SyncedBlockEntity imple
     @Override
     public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt, registryLookup);
-        fluidStorage.variant = FluidVariant.of(Fluids.WATER, ComponentChanges.builder().add(DataComponentTypes.CUSTOM_DATA,NbtComponent.of(nbt.getCompound("fluid_type"))).build());
-        fluidStorage.amount = nbt.getLong("amount");
-        cardinalFlowSpeeds = nbt.getLongArray("flow_speed");
-        flowDirections = nbt.getByteArray("flow_allowance");
+        fluidStorage.variant = FluidVariant.of(Fluids.WATER, ComponentChanges.builder().add(DataComponentTypes.CUSTOM_DATA,NbtComponent.of(nbt.getCompound("fluid_type").orElse(null))).build());
+
+        fluidStorage.amount = nbt.getLong("amount").orElse(null);
+        cardinalFlowSpeeds = nbt.getLongArray("flow_speed").orElse(new long[]{1,1,1,1,1});
+        flowDirections = nbt.getByteArray("flow_allowance").orElse(new byte[]{0,0,1,0,0,1});
     }
 
  /*   @Override

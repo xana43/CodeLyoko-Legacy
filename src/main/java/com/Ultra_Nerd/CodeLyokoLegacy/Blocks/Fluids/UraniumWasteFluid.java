@@ -7,6 +7,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -40,18 +41,18 @@ public abstract class UraniumWasteFluid extends LyokoFluid {
             double d = (double)pos.getX() + random.nextDouble();
             double e = (double)pos.getY() + 1.0;
             double f = (double)pos.getZ() + random.nextDouble();
-            world.addParticle(ParticleTypes.SOUL, d, e, f, 0.0, 0.0, 0.0);
-            world.playSound(d, e, f, SoundEvents.PARTICLE_SOUL_ESCAPE.value(), SoundCategory.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+            world.addParticleClient(ParticleTypes.SOUL, d, e, f, 0.0, 0.0, 0.0);
+            world.playSoundClient(d, e, f, SoundEvents.PARTICLE_SOUL_ESCAPE.value(), SoundCategory.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
             d = (double)pos.getX() + random.nextDouble();
             e = (double)pos.getY() + 1.0;
             f = (double)pos.getZ() + random.nextDouble();
-            world.addParticle(ParticleTypes.LAVA, d, e, f, 0.0, 0.0, 0.0);
-            world.playSound(d, e, f, SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+            world.addParticleClient(ParticleTypes.LAVA, d, e, f, 0.0, 0.0, 0.0);
+            world.playSoundClient(d, e, f, SoundEvents.BLOCK_LAVA_POP, SoundCategory.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
             d = (double)pos.getX() + random.nextDouble();
             e = (double)pos.getY() + 1.0;
             f = (double)pos.getZ() + random.nextDouble();
-            world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, d, e, f, 0.0, 0.0, 0.0);
-            world.playSound(d, e, f, SoundEvents.AMBIENT_SOUL_SAND_VALLEY_ADDITIONS.value(), SoundCategory.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+            world.addParticleClient(ParticleTypes.SOUL_FIRE_FLAME, d, e, f, 0.0, 0.0, 0.0);
+            world.playSoundClient(d, e, f, SoundEvents.AMBIENT_SOUL_SAND_VALLEY_ADDITIONS.value(), SoundCategory.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
         }
     }
 
@@ -68,7 +69,7 @@ public abstract class UraniumWasteFluid extends LyokoFluid {
         }
 
         @Override
-        protected boolean isInfinite(final World world) {
+        protected boolean isInfinite(final ServerWorld world) {
             return false;
         }
 
@@ -90,12 +91,12 @@ public abstract class UraniumWasteFluid extends LyokoFluid {
 
     public static class Still extends UraniumWasteFluid {
         @Override
-        protected boolean isInfinite(final World world) {
+        protected boolean isInfinite(final ServerWorld world) {
             return true;
         }
 
         @Override
-        protected int getMaxFlowDistance(WorldView world) {
+        protected int getMaxFlowDistance(final WorldView world) {
             return 0;
         }
 

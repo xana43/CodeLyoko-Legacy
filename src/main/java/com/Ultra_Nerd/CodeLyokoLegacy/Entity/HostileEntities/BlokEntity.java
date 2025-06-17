@@ -31,9 +31,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
+import software.bernie.geckolib.animatable.processing.AnimationTest;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
@@ -42,7 +42,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public final class BlokEntity extends SkeletonEntity implements GeoAnimatable {
 
-    private final AnimationController<BlokEntity> blokcontroller = new AnimationController<>(this, "blokcontroller", 20, this::pred);
+    private final AnimationController<BlokEntity> blokcontroller = new AnimationController<>("blokcontroller", 20,this::pred);
     public BlokEntity(final EntityType<? extends BlokEntity> entityType, final World world) {
         super(entityType, world);
 
@@ -56,13 +56,13 @@ public final class BlokEntity extends SkeletonEntity implements GeoAnimatable {
 
     public static DefaultAttributeContainer.Builder createMonsterAttributes() {
         return AbstractSkeletonEntity.createAbstractSkeletonAttributes()
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 10D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 90D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10D)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 4D)
-                .add(EntityAttributes.GENERIC_ARMOR, 10D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20D);
+                .add(EntityAttributes.KNOCKBACK_RESISTANCE, 10D)
+                .add(EntityAttributes.MAX_HEALTH, 90D)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.5D)
+                .add(EntityAttributes.ATTACK_DAMAGE, 10D)
+                .add(EntityAttributes.ATTACK_SPEED, 4D)
+                .add(EntityAttributes.ARMOR, 10D)
+                .add(EntityAttributes.FOLLOW_RANGE, 20D);
 
     }
 
@@ -84,7 +84,7 @@ public final class BlokEntity extends SkeletonEntity implements GeoAnimatable {
     }
 
     @SuppressWarnings("MethodMayBeStatic")
-    private <E extends BlokEntity> @NotNull PlayState pred(AnimationState<E> event) {
+    private <E extends BlokEntity> @NotNull PlayState pred(final AnimationTest<E> event) {
         return PlayState.STOP;
     }
 

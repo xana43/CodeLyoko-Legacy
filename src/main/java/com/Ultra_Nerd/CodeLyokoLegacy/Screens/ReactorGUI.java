@@ -7,6 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -46,13 +47,13 @@ public final class ReactorGUI extends HandledScreen<ReactorScreenHandler> {
     }
     @Override
     protected void drawBackground(final DrawContext context, final float delta, final int mouseX, final int mouseY) {
-        context.drawTexture(background,x,y,0,0,backgroundWidth,backgroundHeight);
+        context.drawTexture(RenderLayer::getGuiTextured,background,x,y,0,0,backgroundWidth,backgroundHeight,0,0);
         final int l = getReactionProcessScaled();
-        context.drawTexture(background,x + 74,y+33,176,14,l+1,16);
+        context.drawTexture(RenderLayer::getGuiTextured,background,x + 74,y+33,176,14,l+1,16,0,0);
         final int k = getEnergyStoredScaled();
-        context.drawTexture(background,x + 152,y+7,176,32,16,76-k);
+        context.drawTexture(RenderLayer::getGuiTextured,background,x + 152,y+7,176,32,16,76-k,0,0);
         final int z = getWasteStoredScaled();
-        context.drawTexture(background,x +8,y+7,176,32,16,76-z);
+        context.drawTexture(RenderLayer::getGuiTextured,background,x +8,y+7,176,32,16,76-z,0,0);
     }
     private int getEnergyStoredScaled()
     {

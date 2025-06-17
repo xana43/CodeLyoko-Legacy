@@ -2,15 +2,18 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.SyncedBlockEntity;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
@@ -20,7 +23,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
  * @desc <br/>
  * @since 2025-04-07
  */
-public final class LaptopBlockEntity extends SyncedBlockEntity implements GeoBlockEntity {
+public final class LaptopBlockEntity extends SyncedBlockEntity implements GeoBlockEntity, SingletonGeoAnimatable {
     private static final RawAnimation openAnimation = RawAnimation.begin().thenPlay("animation.open").thenPlay("animation.startup");
     private static final RawAnimation closeAnimation = RawAnimation.begin().thenPlayAndHold("animation.close");
     private final AnimatableInstanceCache animatableInstanceCache = GeckoLibUtil.createInstanceCache(this);
@@ -72,10 +75,10 @@ public final class LaptopBlockEntity extends SyncedBlockEntity implements GeoBlo
     @Override
     protected void readNbt(final NbtCompound nbt, final RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt, registryLookup);
-        laptopOpen = nbt.getBoolean(isOpen);
-        mainController.tryTriggerAnimation(nbt.getBoolean(isOpen)? "open" : "close");
+        laptopOpen = nbt.getBoolean(isOpen).orElse(false);
+        mainController.tryTriggerAnimation(nbt.getBoolean(isOpen).orElse(false)? "open" : "close");
     }
-    private final AnimationController<LaptopBlockEntity> mainController = new AnimationController<>(this, animationState -> PlayState.STOP).triggerableAnim("open", openAnimation).triggerableAnim("close", closeAnimation);
+    private final AnimationController<GeoAnimatable> mainController = new AnimationController<>(10, animationState -> PlayState.STOP).triggerableAnim("open", openAnimation).triggerableAnim("close", closeAnimation);
     @Override
     public void registerControllers(final AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(mainController);
@@ -83,5 +86,10 @@ public final class LaptopBlockEntity extends SyncedBlockEntity implements GeoBlo
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return animatableInstanceCache;
+    }
+
+    @Override
+    public <A> @Nullable A getAttached(AttachmentType<A> type) {
+        return super.getAttached(type);
     }
 }

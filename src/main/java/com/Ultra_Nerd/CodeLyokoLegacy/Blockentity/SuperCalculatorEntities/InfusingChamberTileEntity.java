@@ -8,8 +8,8 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.recipe.RecipeInputProvider;
-import net.minecraft.recipe.RecipeMatcher;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
@@ -61,11 +61,6 @@ public final class InfusingChamberTileEntity extends EnergyStorageBlockEntityInv
     }
 
     @Override
-    public void provideRecipeInputs(final RecipeMatcher finder) {
-
-    }
-
-    @Override
     public Text getDisplayName() {
         return null;
     }
@@ -90,14 +85,19 @@ public final class InfusingChamberTileEntity extends EnergyStorageBlockEntityInv
     @Override
     public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt,registryLookup);
-        infusingTime = nbt.getInt(InfusingTime);
-        currentInfusingTime = nbt.getInt(CurrentInfusingTime);
-        currentInfusingTimeTotal = nbt.getInt(CurrentInfusingTimeTotal);
-        final NbtCompound compound = nbt.getCompound(RecipesUsed);
+        infusingTime = nbt.getInt(InfusingTime).orElse(0);
+        currentInfusingTime = nbt.getInt(CurrentInfusingTime).orElse(0);
+        currentInfusingTimeTotal = nbt.getInt(CurrentInfusingTimeTotal).orElse(0);
+        final NbtCompound compound = nbt.getCompound(RecipesUsed).orElse(new NbtCompound());
         for(final String string : compound.getKeys()) {
-            recipesUsed.put(Identifier.of(string),compound.getInt(string));
+            recipesUsed.put(Identifier.of(string),compound.getInt(string).orElse(0));
 
         }
+    }
+
+    @Override
+    public void provideRecipeInputs(RecipeFinder finder) {
+
     }
     /*
     public @NotNull ItemStackHandler handler = new ItemStackHandler(4);

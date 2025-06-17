@@ -768,7 +768,7 @@ public final class CoolingBlock extends Block {
     }
 
     @Override
-    public VoxelShape getCullingShape(final BlockState state, final BlockView world, final BlockPos pos) {
+    protected VoxelShape getCullingShape(BlockState state) {
         return shape;
     }
 }

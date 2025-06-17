@@ -49,7 +49,7 @@ public final class LyokoCoreBE extends SyncedBlockEntity implements TickingBlock
     @Override
     public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt,registryLookup);
-        health = nbt.getFloat(HEALTH_KEY);
+        health = nbt.getFloat(HEALTH_KEY).orElse(500f);
     }
 
     @Override

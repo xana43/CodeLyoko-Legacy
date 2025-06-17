@@ -3,7 +3,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculator;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
@@ -12,7 +11,6 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
@@ -241,13 +239,8 @@ public final class ControlPanel extends HorizontalFacingBlock implements BlockEn
                     16.561340986027552)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
-    public ControlPanel() {
-        super(FabricBlockSettings.copy(Blocks.IRON_BLOCK)
-
-                .strength(10, 10)
-                .sounds(BlockSoundGroup.METAL)
-
-        );
+    public ControlPanel(final Settings settings) {
+        super(settings);
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(ScreenOn, Boolean.FALSE));
 
 

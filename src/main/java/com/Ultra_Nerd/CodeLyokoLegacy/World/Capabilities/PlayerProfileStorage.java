@@ -87,7 +87,7 @@ public final class PlayerProfileStorage implements AutoSyncedComponent {
     }
     @Override
     public void readFromNbt(final NbtCompound tag,final RegistryWrapper.WrapperLookup wrapperLookup) {
-        tag.getKeys().forEach(tagKey -> PLAYER_PROFILE_HASH_MAP.put(UUID.fromString(tagKey),tag.getCompound(tagKey)));
+        tag.getKeys().forEach(tagKey -> PLAYER_PROFILE_HASH_MAP.put(UUID.fromString(tagKey),tag.getCompound(tagKey).orElse(new NbtCompound())));
     }
 
     @Override

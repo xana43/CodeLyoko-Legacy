@@ -13,6 +13,7 @@ import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.MessageScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.ClickEvent.Action;
 import net.minecraft.text.Style;
@@ -104,10 +105,9 @@ public final class Devirtualized extends Screen {
                 context.drawHoverEvent(this.textRenderer, style, mouseX, mouseY);
             }
         }
-
         super.render(context, mouseX, mouseY, delta);
         if (this.titleScreenButton != null && this.client.getAbuseReportContext().hasDraft()) {
-            context.drawTexture(DRAFT_REPORT_ICON_TEXTURE, this.titleScreenButton.getX() + this.titleScreenButton.getWidth() - 17, this.titleScreenButton.getY() + 3, 182, 24, 15, 15);
+            context.drawGuiTexture(RenderLayer::getGuiTextured, DRAFT_REPORT_ICON_TEXTURE, this.titleScreenButton.getX() + this.titleScreenButton.getWidth() - 17, this.titleScreenButton.getY() + 3, 15, 15);
         }
 
     }

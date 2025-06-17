@@ -12,15 +12,15 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
+import software.bernie.geckolib.animatable.processing.AnimationTest;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public final class LyokoCreeperEntity extends SpiderEntity implements RangedAttackMob, GeoAnimatable {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-    private final AnimationController<LyokoCreeperEntity> creeperController = new AnimationController<>(this, "creeper_controller", 20, this::pred);
+    private final AnimationController<LyokoCreeperEntity> creeperController = new AnimationController<>("creeper_controller", 20, this::pred);
     public LyokoCreeperEntity(final EntityType<? extends SpiderEntity> entityType, final World world) {
         super(entityType, world);
     }
@@ -53,7 +53,7 @@ public final class LyokoCreeperEntity extends SpiderEntity implements RangedAtta
     public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(creeperController);
     }
-    private <E extends LyokoCreeperEntity> @NotNull PlayState pred(AnimationState<E> event) {
+    private <E extends GeoAnimatable> @NotNull PlayState pred(AnimationTest<E> event) {
         return PlayState.STOP;
     }
     @Override

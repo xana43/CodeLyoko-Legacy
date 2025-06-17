@@ -6,7 +6,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TowerInterfaceScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.payloads.TowerPayload;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -14,6 +13,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.sound.SoundCategory;
@@ -265,8 +265,8 @@ public final class TowerGUI extends HandledScreen<TowerInterfaceScreenHandler> {
 
     @Override
     protected void drawBackground(final DrawContext matrices, final float delta, final int mouseX, final int mouseY) {
-        RenderSystem.setShaderTexture(0, TEXTURES);
-        matrices.drawTexture(TEXTURES,(this.width - 200) >> 1, (this.height - 141) >> 1, 0, 0, 200, 141);
+        //RenderSystem.setShaderTexture(0, TEXTURES);
+        matrices.drawTexture(RenderLayer::getGuiTextured, TEXTURES,(this.width - 200) >> 1, (this.height - 141) >> 1, 0, 0, 200, 141,0,0);
     }
 
 

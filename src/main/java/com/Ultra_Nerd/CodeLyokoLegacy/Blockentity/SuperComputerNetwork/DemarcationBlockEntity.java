@@ -72,10 +72,10 @@ public final class DemarcationBlockEntity extends SyncedBlockEntity implements C
     @Override
     public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt,registryLookup);
-        uid = nbt.getInt(UID_KEY);
-        name = nbt.getString(NAME_KEY);
-        connected = nbt.getBoolean(isConnectedKey);
-        connectedPosition = BlockPos.fromLong(nbt.getLong(connectedPositionKey));
+        uid = nbt.getInt(UID_KEY).orElse(0);
+        name = nbt.getString(NAME_KEY).orElse("");
+        connected = nbt.getBoolean(isConnectedKey).orElse(false);
+        connectedPosition = BlockPos.fromLong(nbt.getLong(connectedPositionKey).orElse(0L));
     }
 
     @Override

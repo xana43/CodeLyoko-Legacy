@@ -7,7 +7,6 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.RegistryWrapper;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +42,7 @@ public final class InventorySaveComponent implements AutoSyncedComponent {
 
     @Override
     public void readFromNbt(final @NotNull NbtCompound tag, final RegistryWrapper.WrapperLookup wrapperLookup) {
-        tag.getKeys().forEach(key -> PLAYER_INVENTORY_HASHMAP.put(UUID.fromString(key),tag.getList(key,NbtElement.COMPOUND_TYPE)));
+        tag.getKeys().forEach(key -> PLAYER_INVENTORY_HASHMAP.put(UUID.fromString(key),tag.getList(key).orElse(new NbtList())));
     }
 
     @Override

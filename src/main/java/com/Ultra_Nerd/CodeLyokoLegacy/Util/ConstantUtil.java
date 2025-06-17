@@ -9,6 +9,7 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.Position;
 import net.minecraft.util.math.RotationAxis;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
@@ -17,6 +18,24 @@ import java.util.List;
 
 public record ConstantUtil() {
 
+    public record MatrixOffsets(){
+        public static final Position centerPosition = new Position() {
+            @Override
+            public double getX() {
+                return 0.5D;
+            }
+
+            @Override
+            public double getY() {
+                return 0.5D;
+            }
+
+            @Override
+            public double getZ() {
+                return 0.5D;
+            }
+        };
+    }
     public record RotationConstants()
     {
         public static final Quaternionf ROT_90_Y = RotationAxis.POSITIVE_Y.rotationDegrees(90);
@@ -26,12 +45,12 @@ public record ConstantUtil() {
 
     public static final PacketCodec<PacketByteBuf, BlockHitResult> HIT_RESULT_PACKET_CODEC = new PacketCodec<>() {
         @Override
-        public BlockHitResult decode(PacketByteBuf buf) {
+        public BlockHitResult decode(final PacketByteBuf buf) {
             return buf.readBlockHitResult();
         }
 
         @Override
-        public void encode(PacketByteBuf buf, BlockHitResult value) {
+        public void encode(final PacketByteBuf buf,final BlockHitResult value) {
             buf.writeBlockHitResult(value);
         }
     };

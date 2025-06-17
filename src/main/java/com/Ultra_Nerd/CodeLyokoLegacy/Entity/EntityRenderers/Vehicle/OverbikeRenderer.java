@@ -8,15 +8,16 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.state.EntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 
-public final class OverbikeRenderer<T extends OverbikeEntity> extends EntityRenderer<T> {
+public final class OverbikeRenderer<T extends EntityRenderState> extends EntityRenderer<OverbikeEntity,T> {
 
 
-    @Override
+    //@Override
     public Identifier getTexture(final T entity) {
         return OVERBIKE_TEXTURE;
     }
@@ -29,14 +30,20 @@ public final class OverbikeRenderer<T extends OverbikeEntity> extends EntityRend
         BikeModel = new ModelOverbike(renderManager.getPart(ModelOverbike.LAYER_LOCATION));
 
     }
-    private static final Identifier OVERBIKE_TEXTURE = CodeLyokoMain.codeLyokoPrefix("textures/entity/overbike/overbiketexture.png");
+
     @Override
+    public T createRenderState() {
+        return null;
+    }
+
+    private static final Identifier OVERBIKE_TEXTURE = CodeLyokoMain.codeLyokoPrefix("textures/entity/overbike/overbiketexture.png");
+    //@Override
     public void render(final T entityIn, final float entityYaw, final float partialTicks, final MatrixStack matrixStackIn, final VertexConsumerProvider bufferIn, int packedLightIn) {
-        super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+        //super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.push();
         matrixStackIn.scale(-.5F, -.5F, .5F);
         matrixStackIn.translate(0, -1.5f, 0);
-        this.BikeModel.setAngles(entityIn, 0, 0, 0, 0, 0);
+        //this.BikeModel.setAngles(entityIn, 0, 0, 0, 0, 0);
         VertexConsumer vertexBuilder = bufferIn.getBuffer(this.BikeModel.getLayer(this.getTexture(entityIn)));
         this.BikeModel.render(matrixStackIn, vertexBuilder, packedLightIn, OverlayTexture.DEFAULT_UV, 1);
         matrixStackIn.pop();

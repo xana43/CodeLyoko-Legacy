@@ -40,7 +40,7 @@ public final class FrontierBlock extends TransparentBlock {
                 if (entity instanceof final ItemEntity itemEntity) {
                     itemEntity.remove(Entity.RemovalReason.KILLED);
                 }
-                entity.damage(source, random.nextInt(20));
+                entity.damage(world,source, random.nextInt(20));
             }
             DamageTime = 10000;
         }

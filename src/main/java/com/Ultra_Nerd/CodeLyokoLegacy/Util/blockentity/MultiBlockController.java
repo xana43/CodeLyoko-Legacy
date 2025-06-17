@@ -47,7 +47,7 @@ public abstract class MultiBlockController extends SyncedBlockEntity implements 
                             world.setBlockState(posOffset, checkedState.with(thisProperty, Boolean.TRUE));
 
                         }
-                        world.addParticle(() -> ModParticles.TOWER_PARTICLE, true, posOffset.getX(), posOffset.getY(),
+                        world.addImportantParticleClient(() -> ModParticles.TOWER_PARTICLE, true, posOffset.getX(), posOffset.getY(),
                                 posOffset.getZ(), 0, 0, 0);
                         checkSuccessful = true;
                     }
@@ -95,6 +95,6 @@ public abstract class MultiBlockController extends SyncedBlockEntity implements 
     @Override
     public void readNbt(final NbtCompound nbt, final RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt, registryLookup);
-        checkSuccessful = nbt.getBoolean(CHECK_KEY);
+        checkSuccessful = nbt.getBoolean(CHECK_KEY).orElse(false);
     }
 }

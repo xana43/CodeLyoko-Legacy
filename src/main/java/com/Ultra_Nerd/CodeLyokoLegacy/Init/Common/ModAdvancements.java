@@ -5,6 +5,7 @@ import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.advancement.criterion.UsingItemCriterion;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
+import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
@@ -97,7 +98,7 @@ public record ModAdvancements() {
                         ".schematic"),Text.translatable("starter.schematic.description"), null,
                 AdvancementFrame.GOAL,true,true,false,"found_schematics",
                 UsingItemCriterion.Conditions.create(EntityPredicate.Builder.create(),
-                        ItemPredicate.Builder.create().items(ModItems.STORY_BOOK)),"/root",
+                        ItemPredicate.Builder.create().items(Registries.createEntryLookup(Registries.ITEM),ModItems.STORY_BOOK)),"/root",
                 advancementConsumer);
         TierOneAdvancements.bootstrap(advancementConsumer, foundBaseSchematics);
         LyokoTierAdvancement.bootstrap(advancementConsumer,null);

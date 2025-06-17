@@ -4,13 +4,12 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageSources;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageTypes;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoulSandBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCollisionHandler;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -20,13 +19,8 @@ import net.minecraft.world.World;
 public final class Marabunta extends SoulSandBlock {
 
 
-    public Marabunta() {
-        super(FabricBlockSettings.copyOf(Blocks.DRAGON_EGG)
-                .strength(6, 10)
-                .sounds(BlockSoundGroup.STONE).ticksRandomly()
-
-
-        );
+    public Marabunta(final Settings settings) {
+        super(settings);
     }
 
     @Override
@@ -60,10 +54,12 @@ public final class Marabunta extends SoulSandBlock {
      */
 
     @Override
-    public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
-        entity.damage(ModDamageSources.of(world, ModDamageTypes.MARABUNTA_DAMAGE), Random.create().nextInt(10));
+    protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
+        super.onEntityCollision(state, world, pos, entity, handler);
+        entity.damage((ServerWorld) world,ModDamageSources.of(world, ModDamageTypes.MARABUNTA_DAMAGE), Random.create().nextInt(10));
     }
+
+
 
 
     @Override

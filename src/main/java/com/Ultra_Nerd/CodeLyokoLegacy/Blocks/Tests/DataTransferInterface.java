@@ -1,13 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tests;
 
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,12 +18,6 @@ public final class DataTransferInterface extends BlockWithEntity {
         return null;
     }
 
-    public DataTransferInterface() {
-        super(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
-
-                .strength(-1, -1)
-                .sounds(BlockSoundGroup.METAL));
-    }
 
     @Nullable
     @Override

@@ -45,7 +45,7 @@ public record MiscellaneousPlayerDataCollection() {
             SUPER_CALCULATOR_LOCATIONS.clear();
             for(final String tagKey : tag.getKeys())
             {
-                SUPER_CALCULATOR_LOCATIONS.add(BlockPos.fromLong(tag.getLong(tagKey)));
+                SUPER_CALCULATOR_LOCATIONS.add(BlockPos.fromLong(tag.getLong(tagKey).orElse(0L)));
             }
         }
         private static final String CALCULATOR_POSITIONS = "calculator_position0";

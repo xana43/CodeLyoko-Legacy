@@ -8,11 +8,14 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.Vec3d;
+
+import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
 public record RackChargerRenderer(BlockEntityRendererFactory.Context context) implements BlockEntityRenderer<RackChargerEntity> {
@@ -29,7 +32,7 @@ public record RackChargerRenderer(BlockEntityRendererFactory.Context context) im
             } else if (gottenStack.isOf(ModItems.LINKER)) {
 
             }
-            switch (entity.getWorld().getBlockState(entity.getPos()).get(Properties.HORIZONTAL_FACING)) {
+            switch (Objects.requireNonNull(entity.getWorld()).getBlockState(entity.getPos()).get(Properties.HORIZONTAL_FACING)) {
                 case NORTH -> {
                 }
                 case SOUTH -> {
@@ -41,16 +44,17 @@ public record RackChargerRenderer(BlockEntityRendererFactory.Context context) im
                 default -> {
                 }
             }
-            context.getItemRenderer().renderItem(gottenStack, ModelTransformationMode.FIXED, light, overlay, matrices, vertexConsumers, entity.getWorld(), 0);
+            context.getItemRenderer().renderItem(gottenStack, ItemDisplayContext.FIXED, light, overlay, matrices, vertexConsumers, entity.getWorld(), 0);
         }
 
     }
     @Override
-    public void render(final RackChargerEntity entity, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {
+    public void render(final RackChargerEntity entity, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light, final int overlay,final Vec3d cameraPos) {
         matrices.push();
         matrices.translate(0.5,0.5,0.5);
         matrices.scale(0.7f,0.7f,0.7f);
         matrices.translate(-.7f, 0.4f, 0.07f);
+        assert entity.getWorld() != null;
         if(entity.getWorld().getBlockState(entity.getPos()) != Blocks.AIR.getDefaultState()) {
             switch (entity.getWorld().getBlockState(entity.getPos()).get(Properties.HORIZONTAL_FACING)) {
                 case NORTH -> {

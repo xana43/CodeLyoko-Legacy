@@ -9,6 +9,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.Vec3d;
 
 @Environment(EnvType.CLIENT)
 public record HologramRenderer(
@@ -18,7 +19,7 @@ public record HologramRenderer(
     private static final Tessellator tessellator = Tessellator.getInstance();
 
     @Override
-    public void render(final HologramProjectorTileEntity entity, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {
+    public void render(HologramProjectorTileEntity entity, float tickProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, Vec3d cameraPos) {
         CommonRenderRoutines.renderColoredSphere(tessellator,RADIUS,latitude,longitude,matrices);
     }
 }

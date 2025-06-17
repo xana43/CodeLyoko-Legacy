@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -58,15 +59,15 @@ public final class UniversalEnergyBlock extends BlockWithEntity {
     }
 
     @Override
-    public void onStateReplaced(final BlockState state, final World world, final BlockPos pos, final BlockState newState, final boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
             final BlockEntity be = world.getBlockEntity(pos);
             if (be instanceof UniversalEnergyStorageTileEntity universalEnergyStorageTile) {
                 universalEnergyStorageTile.setEnergyAmount(0);
             }
-        }
-        super.onStateReplaced(state, world, pos, newState, moved);
+
+        super.onStateReplaced(state, world, pos, moved);
     }
+
 
     @Override
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {

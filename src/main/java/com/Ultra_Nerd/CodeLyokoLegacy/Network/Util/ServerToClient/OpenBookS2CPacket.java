@@ -28,7 +28,7 @@ public record OpenBookS2CPacket() {
             case "fr_fr" -> ConstantUtil.StoryEntry.ENTRY_LIST_FR_FR.values()[entryIndex].getEntries();
             case "zh_cn" -> ConstantUtil.StoryEntry.ENTRY_LIST_ZH_CN.values()[entryIndex].getEntries();
             default -> {
-                player.sendMessage(Text.literal("no translation present for this language"));
+                player.sendMessage(Text.literal("no translation present for this language"),false);
                 throw new IllegalArgumentException("no translation present for language:"+locale);
             }
         };

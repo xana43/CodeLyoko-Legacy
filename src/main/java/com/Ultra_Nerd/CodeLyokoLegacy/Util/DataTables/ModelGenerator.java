@@ -6,11 +6,11 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModFluids;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
 import com.google.common.collect.ImmutableMap;
 import dev.felnull.specialmodelloader.api.data.SpecialModelDataGenHelper;
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Model;
+import net.minecraft.client.data.BlockStateModelGenerator;
+import net.minecraft.client.data.ItemModelGenerator;
+import net.minecraft.client.data.Model;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
@@ -109,7 +109,7 @@ public final class ModelGenerator extends FabricModelProvider {
                 null,
                 ImmutableMap.of(),
                 null,
-                itemModelGenerator.writer
+                itemModelGenerator.modelCollector
                 );
     }
     @Override

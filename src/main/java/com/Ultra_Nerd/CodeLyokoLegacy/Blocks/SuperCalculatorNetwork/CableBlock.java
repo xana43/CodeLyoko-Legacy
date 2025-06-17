@@ -2,6 +2,9 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculatorNetwork;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.CableNetworkConnectedBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
+import com.google.common.collect.Lists;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -13,16 +16,19 @@ import net.minecraft.datafixer.DataFixTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Uuids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.PersistentState;
+import net.minecraft.world.PersistentStateType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.block.WireOrientation;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -36,20 +42,43 @@ public final class CableBlock extends FenceBlock {
         private final Object2ObjectMap<UUID, ObjectOpenHashSet<BlockPos>> NETWORKS = new Object2ObjectOpenHashMap<>();
         private static final String CABLE_NETWORK = "cable_network";
         private static final String NETWORK = "network";
-        @Override
+        private static final Codec<ObjectOpenHashSet<BlockPos>> SET_CODEC = Codec.list(BlockPos.CODEC).xmap(blockPos -> {
+            final ObjectOpenHashSet<BlockPos> set = new ObjectOpenHashSet<>();
+            set.addAll(blockPos);
+            return set;
+        }, Lists::newArrayList);
+        private static final Codec<CableNetworkWorldState> CODEC = RecordCodecBuilder.create(
+                stateInstance -> {
+                    stateInstance.group(
+                            Codec.unboundedMap(BlockPos.CODEC,Uuids.CODEC).optionalFieldOf("cable_networks",Map.of()).forGetter(cableNetworkWorldState -> cableNetworkWorldState.CABLE_NETWORKS),
+                            Codec.unboundedMap(Uuids.CODEC, SET_CODEC).optionalFieldOf("network",Map.of()).forGetter(cableNetworkWorldState -> cableNetworkWorldState.NETWORKS)
+                    );
+                    return null;
+                }
+        );
+
+         public CableNetworkWorldState() {
+             super();
+             markDirty();
+         }
+        private CableNetworkWorldState(final Object2ObjectMap<BlockPos, UUID> cableNetwork,final  Object2ObjectMap<UUID, ObjectOpenHashSet<BlockPos>> networks) {
+            super();
+            CABLE_NETWORKS.putAll(cableNetwork);
+            NETWORKS.putAll(networks);
+        }
         public NbtCompound writeNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
             final NbtList cableList = new NbtList();
             CABLE_NETWORKS.forEach((pos, uuid) -> {
                 final NbtCompound cable = new NbtCompound();
                 cable.putLong("position",pos.asLong());
-                cable.putUuid("uuid",uuid);
+                cable.put("uuid", Uuids.CODEC,uuid);
                 cableList.add(cable);
             });
             nbt.put(CABLE_NETWORK, cableList);
             final NbtList networkList = new NbtList();
             NETWORKS.forEach((uuid, set) -> {
                 final NbtCompound network = new NbtCompound();
-                network.putUuid("uuid",uuid);
+                network.put("uuid",Uuids.CODEC,uuid);
                 final NbtList networkPositions = new NbtList();
                 set.forEach(networkPosition -> {
                     final NbtCompound networkPositionTag = new NbtCompound();
@@ -64,24 +93,30 @@ public final class CableBlock extends FenceBlock {
             return nbt;
         }
 
-        public static CableNetworkWorldState createFromNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
-            final CableNetworkWorldState state = new CableNetworkWorldState();
-            final NbtList cableList = nbt.getList(CABLE_NETWORK, NbtElement.COMPOUND_TYPE);
+        public static CableNetworkWorldState createFromNbt(final NbtCompound nbt) {
+            final CableNetworkWorldState state = CODEC.parse(NbtOps.INSTANCE,nbt).resultOrPartial().orElse(new CableNetworkWorldState());
+            /*final NbtList cableList = nbt.getList(CABLE_NETWORK).orElse(new NbtList());
             for(final NbtElement cable : cableList){
                 final NbtCompound cableTag = (NbtCompound) cable;
-                state.CABLE_NETWORKS.put(BlockPos.fromLong(cableTag.getLong("position")),cableTag.getUuid("uuid"));
+                state.CABLE_NETWORKS.put(BlockPos.fromLong(cableTag.getLong("position").orElse(0L)),cableTag.get("uuid",Uuids.CODEC).orElse(UUID.randomUUID()));
             }
-            final NbtList networkList = nbt.getList(NETWORK, NbtElement.COMPOUND_TYPE);
+            final NbtList networkList = nbt.getList(NETWORK).orElse(new NbtList());
             for(final NbtElement network : networkList){
+
                 final NbtCompound networkTag = (NbtCompound) network;
+                final Optional<UUID> uuidOptional = networkTag.get("uuid",Uuids.CODEC);
+                if(uuidOptional.isEmpty()){
+                    continue;
+                }
                 final ObjectOpenHashSet<BlockPos> positions = new ObjectOpenHashSet<>();
-                final NbtList positionList = networkTag.getList("positions", NbtElement.COMPOUND_TYPE);
+                final NbtList positionList = networkTag.getList("positions").orElse(new NbtList());
                 for(final NbtElement position : positionList){
                     final NbtCompound positionTag = (NbtCompound) position;
-                    positions.add(BlockPos.fromLong(positionTag.getLong("position")));
+                    positions.add(BlockPos.fromLong(positionTag.getLong("position").orElse(0L)));
                 }
-                state.NETWORKS.put(networkTag.getUuid("uuid"),positions);
-            }
+
+                state.NETWORKS.put(uuidOptional.get(),positions);
+            }*/
             CodeLyokoMain.LOG.debug("loaded cable states {} {}", state.CABLE_NETWORKS, state.NETWORKS);
             return state;
         }
@@ -91,7 +126,8 @@ public final class CableBlock extends FenceBlock {
         public Object2ObjectMap<UUID, ObjectOpenHashSet<BlockPos>> getNetworks(){
             return NETWORKS;
         }
-        private static final Type<CableNetworkWorldState> type = new Type<>(CableNetworkWorldState::new,CableNetworkWorldState::createFromNbt, DataFixTypes.LEVEL);
+        private static final PersistentStateType<CableNetworkWorldState> type = new PersistentStateType<>("cable_network_state",
+                CableNetworkWorldState::new,CODEC, DataFixTypes.LEVEL);
         public static void getFromServer(final MinecraftServer server){
             final ServerWorld world = server.getWorld(World.OVERWORLD);
             assert world != null;
@@ -99,7 +135,7 @@ public final class CableBlock extends FenceBlock {
         }
         private static CableNetworkWorldState getFromServerWorld(final ServerWorld world){
             assert world != null;
-            final CableNetworkWorldState state = world.getPersistentStateManager().getOrCreate(type,CodeLyokoMain.MOD_ID);
+            final CableNetworkWorldState state = world.getPersistentStateManager().getOrCreate(type);
             state.markDirty();
             return state;
         }
@@ -247,19 +283,18 @@ public final class CableBlock extends FenceBlock {
 
     }
 
-
     @Override
-    public void onStateReplaced(final BlockState state, final World world, final BlockPos pos, final BlockState newState, final boolean moved) {
-        super.onStateReplaced(state, world, pos, newState, moved);
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+        super.onStateReplaced(state, world, pos, moved);
         if(world.isClient()){
             return;
         }
-        removeFromNetwork(pos,(ServerWorld) world);
+        removeFromNetwork(pos,world);
     }
 
     @Override
-    public void neighborUpdate(final BlockState state, final World world, final BlockPos pos, final Block sourceBlock, final BlockPos sourcePos, final boolean notify) {
-        super.neighborUpdate(state, world, pos, sourceBlock, sourcePos, notify);
+    protected void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {
+        super.neighborUpdate(state, world, pos, sourceBlock, wireOrientation, notify);
         if(world.isClient()){
             return;
         }

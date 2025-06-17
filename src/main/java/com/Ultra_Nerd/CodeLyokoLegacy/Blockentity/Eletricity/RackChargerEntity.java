@@ -66,7 +66,7 @@ public final class RackChargerEntity extends EnergyStorageBlockEntityInventory i
     @Override
     public void readNbt(final NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt,registryLookup);
-        tierArray = nbt.getIntArray(TIER_ARRAY);
+        tierArray = nbt.getIntArray(TIER_ARRAY).orElse(new int[0]);
     }
     public void changeSlotTier(final int slot,final int tier)
     {
@@ -87,33 +87,15 @@ public final class RackChargerEntity extends EnergyStorageBlockEntityInventory i
                         {
                             case 0 ->{
                                 final long extractedEnergy = energyStorage.extract(energyItem.getEnergyMaxInput(stack) / 4,transaction);
-                                long energyToInsert = energyItem.getStoredEnergy(stack) + extractedEnergy;
-                                if(energyToInsert >=0 && energyToInsert <= energyItem.getEnergyCapacity(stack)) {
-                                    energyItem.setStoredEnergy(stack, energyToInsert);
-                                } else if (energyToInsert > energyItem.getEnergyCapacity(stack)) {
-                                    energyToInsert = energyItem.getEnergyCapacity(stack);
-                                    energyItem.setStoredEnergy(stack,energyToInsert);
-                                }
+                                calculateExtractedEnergy(stack, energyItem, extractedEnergy);
                             }
                             case 1 ->{
                                 final long extractedEnergy = energyStorage.extract(energyItem.getEnergyMaxInput(stack) / 2,transaction);
-                                long energyToInsert = energyItem.getStoredEnergy(stack) + extractedEnergy;
-                                if(energyToInsert >=0 && energyToInsert <= energyItem.getEnergyCapacity(stack)) {
-                                    energyItem.setStoredEnergy(stack, energyToInsert);
-                                } else if (energyToInsert > energyItem.getEnergyCapacity(stack)) {
-                                    energyToInsert = energyItem.getEnergyCapacity(stack);
-                                    energyItem.setStoredEnergy(stack,energyToInsert);
-                                }
+                                calculateExtractedEnergy(stack, energyItem, extractedEnergy);
                             }
                             case 2 ->{
                                 final long extractedEnergy = energyStorage.extract(energyItem.getEnergyMaxInput(stack),transaction);
-                                long energyToInsert = energyItem.getStoredEnergy(stack) + extractedEnergy;
-                                if(energyToInsert >=0 && energyToInsert <= energyItem.getEnergyCapacity(stack)) {
-                                    energyItem.setStoredEnergy(stack, energyToInsert);
-                                } else if (energyToInsert > energyItem.getEnergyCapacity(stack)) {
-                                    energyToInsert = energyItem.getEnergyCapacity(stack);
-                                    energyItem.setStoredEnergy(stack,energyToInsert);
-                                }
+                                calculateExtractedEnergy(stack, energyItem, extractedEnergy);
                             }
                         }
 
@@ -122,6 +104,16 @@ public final class RackChargerEntity extends EnergyStorageBlockEntityInventory i
 
                 }
             }
+        }
+    }
+
+    private void calculateExtractedEnergy(ItemStack stack, SimpleEnergyItem energyItem, long extractedEnergy) {
+        long energyToInsert = energyItem.getStoredEnergy(stack) + extractedEnergy;
+        if(energyToInsert >=0 && energyToInsert <= energyItem.getEnergyCapacity(stack)) {
+            energyItem.setStoredEnergy(stack, energyToInsert);
+        } else if (energyToInsert > energyItem.getEnergyCapacity(stack)) {
+            energyToInsert = energyItem.getEnergyCapacity(stack);
+            energyItem.setStoredEnergy(stack,energyToInsert);
         }
     }
 

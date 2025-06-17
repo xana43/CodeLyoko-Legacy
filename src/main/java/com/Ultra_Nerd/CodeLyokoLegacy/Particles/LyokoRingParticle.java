@@ -65,7 +65,7 @@ public final class LyokoRingParticle extends SpriteBillboardParticle {
 
     @Override
     public ParticleTextureSheet getType() {
-        return ParticleTextureSheet.PARTICLE_SHEET_LIT;
+        return ParticleTextureSheet.PARTICLE_SHEET_OPAQUE;
     }
 
     @Environment(EnvType.CLIENT)

@@ -26,7 +26,7 @@ public final class WorldProvider extends FabricDynamicRegistryProvider {
 
     @Override
     protected void configure(final RegistryWrapper.WrapperLookup registries, final Entries entries) {
-        final RegistryWrapper.Impl<Biome> biomeRegistry = registries.getWrapperOrThrow(RegistryKeys.BIOME);
+        final RegistryWrapper.Impl<Biome> biomeRegistry = registries.getOrThrow(RegistryKeys.BIOME);
         Object2ObjectMaps.fastForEach(ModBiomes.BIOMES_MAP,stringBiomeEntry -> {
             final RegistryKey<Biome> biomeRegistryKey = RegistryKey.of(RegistryKeys.BIOME,
                     CodeLyokoMain.codeLyokoPrefix(stringBiomeEntry.getKey()));

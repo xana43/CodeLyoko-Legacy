@@ -6,54 +6,55 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.NbtComponent;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.base.SimpleEnergyItem;
 
 import java.security.SecureRandom;
-import java.util.List;
+import java.util.function.Consumer;
 
 
-public final class MindHelm extends ArmorItem implements SimpleEnergyItem {
+public final class MindHelm extends Item implements SimpleEnergyItem {
     private static final int initialTimer = MethodUtil.TickConversion.secondsToTicks(60);
     private static final String stressTimer = "stress_timer";
     private static final SecureRandom random = new SecureRandom();
 
-    public MindHelm(RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
-        super(material, type, settings);
+    public MindHelm(final ArmorMaterial material, final EquipmentType type, final Settings settings) {
+        super(settings.armor(material,type));
     }
 
-
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        super.appendTooltip(stack, context, tooltip, type); tooltip.add(Text.translatable("tooltip.energy.mindhelm", getStoredEnergy(stack)));
-
+    public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+        textConsumer.accept(Text.translatable("tooltip.energy.mindhelm", getStoredEnergy(stack)));
     }
 
-
-
     @Override
-    public void inventoryTick(final ItemStack stack, final World world, final Entity entity, final int slot, final boolean selected) {
-        super.inventoryTick(stack, world, entity, slot, selected);
-        if (!world.isClient()) {
+    public void inventoryTick(ItemStack stack, ServerWorld world, Entity entity, @Nullable EquipmentSlot slot) {
+        super.inventoryTick(stack, world, entity, slot);
+        if (world.isClient()) {
+            return;
+        }
             NbtCompound Timer = stack.get(DataComponentTypes.CUSTOM_DATA).getNbt();
             if (Timer == null) {
                 Timer = new NbtCompound();
                 Timer.putInt(stressTimer, initialTimer);
                 NbtComponent.set(DataComponentTypes.CUSTOM_DATA,stack,Timer);
             }
-            Timer.putInt(stressTimer, Timer.getInt(stressTimer) - 1);
-            if (Timer.getInt(stressTimer) <= 0 && entity instanceof PlayerEntity player) {
-                if (slot == EquipmentSlot.HEAD.getEntitySlotId()) {
+            Timer.putInt(stressTimer, Timer.getInt(stressTimer).orElse(1) - 1);
+            if (Timer.getInt(stressTimer).orElse(0) <= 0 && entity instanceof PlayerEntity player) {
+                if (slot == EquipmentSlot.HEAD) {
                     CodeLyokoMain.LOG.debug("cause stress damage");
                     CardinalData.MindHelmStress.increaseStress(1, player);
                     final int information = random.nextInt(0, 420);
@@ -63,13 +64,13 @@ public final class MindHelm extends ArmorItem implements SimpleEnergyItem {
                     }
                     final int stress = CardinalData.MindHelmStress.getStressLevel(player);
                     if (stress >= ConstantUtil.STRESS_THRESHOLD && !player.isCreative()) {
-                        entity.damage(entity.getWorld().getDamageSources().magic(),
+                        entity.damage(world,entity.getWorld().getDamageSources().magic(),
                                 random.nextInt(stress >> 1, stress));
                     }
                 }
                 Timer.putInt(stressTimer, initialTimer);
             }
-        }
+
     }
     @Override
     public long getEnergyCapacity(final ItemStack stack) {

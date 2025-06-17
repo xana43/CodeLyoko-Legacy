@@ -15,6 +15,7 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.DiffuseLighting;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
@@ -68,7 +69,7 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
         matrixStack.pushMatrix();
         matrixStack.translate((float) x, (float) y, 1050.0F);
         matrixStack.scale(1.0F, 1.0F, -1.0F);
-        RenderSystem.applyModelViewMatrix();
+        //RenderSystem.matrix;
         final MatrixStack matrixStack2 = new MatrixStack();
         matrixStack2.translate(0.0F, 0.0F, 1000.0F);
         matrixStack2.scale((float) 30, (float) 30, (float) 30);
@@ -79,29 +80,32 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
         final float h = entity.bodyYaw;
         final float i = entity.getYaw();
         final float j = entity.getPitch();
-        final float k = entity.prevHeadYaw;
+        final float k = entity.lastHeadYaw;
         final float l = entity.headYaw;
         entity.bodyYaw = 180.0F + f * 20.0F;
         entity.setYaw(180.0F + f * 40.0F);
         entity.setPitch(-g * 20.0F);
         entity.headYaw = entity.getYaw();
-        DiffuseLighting.method_34742();
+        DiffuseLighting.enableGuiShaderLighting();
         final EntityRenderDispatcher entityRenderDispatcher = MinecraftClient.getInstance().getEntityRenderDispatcher();
         quaternionf2.conjugate();
         entityRenderDispatcher.setRenderShadows(false);
         VertexConsumerProvider.Immediate immediate = MinecraftClient.getInstance().getBufferBuilders()
                 .getEntityVertexConsumers();
-        RenderSystem.runAsFancy(
+
+        /*RenderSystem.runAsFancy(
                 () -> entityRenderDispatcher.render(entity, 0.0, 0.0, 0.0, 0.0F, 1.0F, matrixStack2, immediate,
                         15728880));
+
+         */
         immediate.draw();
         entity.bodyYaw = h;
         entity.setYaw(i);
         entity.setPitch(j);
-        entity.prevHeadYaw = k;
+        entity.lastHeadYaw = k;
         entity.headYaw = l;
         matrixStack.popMatrix();
-        RenderSystem.applyModelViewMatrix();
+        //RenderSystem.applyModelViewMatrix();
         DiffuseLighting.disableGuiDepthLighting();
     }
 
@@ -118,14 +122,14 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
     private void renderSectorImages(final DrawContext matrixStack) {
         if (carthage.isHovered()) {
             //RenderSystem.setShaderTexture(0, PREVIEW_CARTHAGE);
-            matrixStack.drawTexture(PREVIEW_CARTHAGE, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
+            matrixStack.drawTexture(identifier -> RenderLayer.getGuiTextured(PREVIEW_CARTHAGE),PREVIEW_CARTHAGE, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
                     96,
                     118, 96);
 
         }
         else if (forest.isHovered()) {
             //RenderSystem.setShaderTexture(0, PREVIEW_FOREST);
-            matrixStack.drawTexture(PREVIEW_FOREST, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
+            matrixStack.drawTexture(identifier -> RenderLayer.getGuiTextured(PREVIEW_FOREST),PREVIEW_FOREST, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
                     96,
                     118, 96);
 
@@ -133,7 +137,7 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
         else if(desert.isHovered())
         {
            //RenderSystem.setShaderTexture(0,PREVIEW_DESERT);
-            matrixStack.drawTexture(PREVIEW_DESERT, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
+            matrixStack.drawTexture(identifier -> RenderLayer.getGuiTextured(PREVIEW_DESERT),PREVIEW_DESERT, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
                     96,
                     118, 96);
 
@@ -141,7 +145,7 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
         else if(ice.isHovered())
         {
             //RenderSystem.setShaderTexture(0,PREVIEW_ICE);
-            matrixStack.drawTexture(PREVIEW_ICE, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
+            matrixStack.drawTexture(identifier -> RenderLayer.getGuiTextured(PREVIEW_ICE),PREVIEW_ICE, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
                 96,
                 118, 96);
 
@@ -150,7 +154,7 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
         else if(mountain.isHovered())
         {
             //RenderSystem.setShaderTexture(0,PREVIEW_MOUNTAIN);
-            matrixStack.drawTexture(PREVIEW_MOUNTAIN, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
+            matrixStack.drawTexture(identifier -> RenderLayer.getGuiTextured(PREVIEW_MOUNTAIN),PREVIEW_MOUNTAIN, (int) (this.width / 2.579f), (int) (this.height / 3.2f), 0, 0, 118,
                     96,
                     118, 96);
 
@@ -195,8 +199,8 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
     @Override
     public void renderBackground(final DrawContext matrices,final int mouseX, final int mouseY, final float delta) {
         //super.renderBackground(matrices);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        matrices.drawTexture(TEXTURE, 0, 0, 0, 0, 1280, 720, this.width, this.height);
+        //RenderSystem.setShaderTexture(0, TEXTURE);
+        matrices.drawTexture(identifier -> RenderLayer.getGuiTextured(TEXTURE),TEXTURE, 0, 0, 0, 0, 1280, 720, this.width, this.height);
         //matrices.push();
         //matrices.scale(0.4f, 0.4f, 0.4f);
         final PlayerProfile playerProfile = CardinalData.PlayerSavedProfile.getPlayerProfile(
@@ -218,18 +222,18 @@ public final class ComputerInterfaceUi extends HandledScreen<ComputerInterfaceSc
                 .getWithStyle(ConstantUtil.Styles.HUD.getThisStyle()).get(0);
         matrixStack.drawCenteredTextWithShadow(textRenderer,
                 Text.translatable("lyoko.dna.indicator").setStyle(ConstantUtil.Styles.HUD.getThisStyle()),
-                (int) (this.width / 3.5f), (int) (this.height / 1.08f), ColorHelper.Argb.getArgb(255, 255, 255, 255));
+                (int) (this.width / 3.5f), (int) (this.height / 1.08f), ColorHelper.getArgb(255, 255, 255, 255));
         matrixStack.drawCenteredTextWithShadow(textRenderer, DNASnip, (int) (this.width / 3.5f),
                 this.height,
-                ColorHelper.Argb.getArgb(255, 255, 255, 255));
+                ColorHelper.getArgb(255, 255, 255, 255));
         matrixStack.drawCenteredTextWithShadow( textRenderer, DNASnipHelix2, (int) (this.width / 3.5f),
-                (int) (this.height * 1.06f), ColorHelper.Argb.getArgb(255, 255, 255, 255));
+                (int) (this.height * 1.06f), ColorHelper.getArgb(255, 255, 255, 255));
     }
     private void drawPlayerClasses(final PlayerProfile playerProfile, final DrawContext matrixStack,
             final TextRenderer textRenderer) {
         final int classWidth = (int)(this.width / 3.5f);
         final int classHeight = (int)(this.height/1.2f);
-        final int color = ColorHelper.Argb.getArgb(255, 255, 255, 255);
+        final int color = ColorHelper.getArgb(255, 255, 255, 255);
         final MutableText prependClass = Text.translatable("lyoko.screen.class").append(":");
         switch (playerProfile.getPlayerClassType()) {
             case 0 -> matrixStack.drawCenteredTextWithShadow( textRenderer,

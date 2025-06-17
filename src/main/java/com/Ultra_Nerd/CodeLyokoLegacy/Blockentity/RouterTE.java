@@ -36,6 +36,6 @@ public final class RouterTE extends BlockEntity {
     @Override
     public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt,registryLookup);
-        cableSystemMasterPosition = BlockPos.fromLong(nbt.getLong(connectedBlocksKey));
+        cableSystemMasterPosition = BlockPos.fromLong(nbt.getLong(connectedBlocksKey).orElse(0L));
     }
 }

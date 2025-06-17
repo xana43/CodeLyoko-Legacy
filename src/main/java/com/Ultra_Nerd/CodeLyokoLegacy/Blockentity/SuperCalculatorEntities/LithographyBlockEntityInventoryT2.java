@@ -18,16 +18,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.RecipeInputProvider;
-import net.minecraft.recipe.RecipeManager;
-import net.minecraft.recipe.RecipeMatcher;
+import net.minecraft.recipe.*;
 import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
@@ -44,7 +42,7 @@ private int fuelMass;
 private int manufacturingTime;
 private int manufacturingTimeTotal;
 private final Object2IntOpenHashMap<Identifier> recipesUsed = new Object2IntOpenHashMap<>();
-private final RecipeManager.MatchGetter<SingleStackRecipeInput, LithographyRecipe> matchGetter;
+private final ServerRecipeManager.MatchGetter<SingleStackRecipeInput, LithographyRecipe> matchGetter;
 
 
     private final PropertyDelegate energyAmount = new PropertyDelegate() {
@@ -94,20 +92,20 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, LithographyRecip
     @Override
     public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt,registryLookup);
-        lithographyTime = nbt.getInt("LithographyTime");
-        manufacturingTime = nbt.getInt("ManufacturingTime");
-        manufacturingTimeTotal = nbt.getInt("ManufacturingTimeTotal");
+        lithographyTime = nbt.getInt("LithographyTime").orElse(0);
+        manufacturingTime = nbt.getInt("ManufacturingTime").orElse(0);
+        manufacturingTimeTotal = nbt.getInt("ManufacturingTimeTotal").orElse(0);
         fuelMass = getFuelTime();
-        final NbtCompound nbtCompound = nbt.getCompound("RecipesUsed");
+        final NbtCompound nbtCompound = nbt.getCompound("RecipesUsed").orElse(new NbtCompound());
         for (final String string : nbtCompound.getKeys()) {
-            recipesUsed.put(Identifier.of(string), nbtCompound.getInt(string));
+            recipesUsed.put(Identifier.of(string), nbtCompound.getInt(string).orElse(0));
         }
 
     }
 
     public LithographyBlockEntityInventoryT2(final BlockPos pos, final BlockState state) {
         super(ModBlockEntities.LITHOGRAPHY_BLOCK_ENTITY_TYPE_T2, pos, state, 5, 400000, 300L, 0L);
-        matchGetter = RecipeManager.createCachedMatchGetter(ModRecipes.RecipeTypes.LITHOGRAPHY_RECIPE_RECIPE_TYPE);
+        matchGetter = ServerRecipeManager.createCachedMatchGetter(ModRecipes.RecipeTypes.LITHOGRAPHY_RECIPE_RECIPE_TYPE);
     }
 
     @Override
@@ -133,12 +131,15 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, LithographyRecip
             --lithographyTime;
         }
         final ItemStack itemStack1 = getStack(0);
+        final SingleStackRecipeInput input1 = new SingleStackRecipeInput(itemStack1);
         boolean isCurrentItemStackEmpty1 = !getStack(0).isEmpty();
         boolean isGottenItemStackEmpty1 = !itemStack1.isEmpty();
         final ItemStack itemStack2 = getStack(1);
+        final SingleStackRecipeInput input2 = new SingleStackRecipeInput(itemStack2);
         boolean isCurrentItemStackEmpty2 = !getStack(1).isEmpty();
         boolean isGottenItemStackEmpty2 = !itemStack2.isEmpty();
         final ItemStack itemStack3 = getStack(2);
+        final SingleStackRecipeInput input3 = new SingleStackRecipeInput(itemStack3);
         boolean isCurrentItemStackEmpty3 = !getStack(2).isEmpty();
         boolean isGottenItemStackEmpty3 = !itemStack3.isEmpty();
         final ItemStack itemStack4 = getStack(3);
@@ -149,7 +150,7 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, LithographyRecip
             RecipeEntry<?> recipe;
             if(isCurrentItemStackEmpty1 && isCurrentItemStackEmpty2 && isCurrentItemStackEmpty3 && isCurrentItemStackEmpty4)
             {
-                recipe = matchGetter.getFirstMatch(new SingleStackRecipeInput(this.getStack(0)),world).orElse(null);
+                recipe = matchGetter.getFirstMatch(new SingleStackRecipeInput(this.getStack(0)), (ServerWorld) world).orElse(null);
             }
             else {
                 recipe = null;
@@ -158,7 +159,7 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, LithographyRecip
 
 
             final int maxCount = getMaxCountPerStack();
-            if(!isManufacturing() && canAcceptRecipeOutput(world.getRegistryManager(),recipe,itemStacks,maxCount))
+            if(!isManufacturing() && canAcceptRecipeOutput(world.getRegistryManager(),recipe,input1,itemStacks,maxCount))
             {
                     lithographyTime = getFuelTime();
                     fuelMass = lithographyTime;
@@ -188,7 +189,7 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, LithographyRecip
                     }
 
             }
-            if(isManufacturing() && canAcceptRecipeOutput(world.getRegistryManager(),recipe,itemStacks,maxCount))
+            if(isManufacturing() && canAcceptRecipeOutput(world.getRegistryManager(),recipe,input1,itemStacks,maxCount))
             {
                 ++manufacturingTime;
                 try(final Transaction transaction = Transaction.openOuter()) {
@@ -201,7 +202,7 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, LithographyRecip
                 {
                     manufacturingTime = 0;
                     manufacturingTimeTotal = getCookTime(world,this);
-                    if(craftRecipe(world.getRegistryManager(),recipe,itemStacks,maxCount))
+                    if(craftRecipe(world.getRegistryManager(),recipe,input1,itemStacks,maxCount))
                     {
                         setLastRecipe(recipe);
                     }
@@ -229,9 +230,9 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, LithographyRecip
     }
 
     private static boolean canAcceptRecipeOutput(final DynamicRegistryManager registryManager,
-            final @Nullable RecipeEntry<?> recipe,final DefaultedList<ItemStack> slots,final int count) {
+            final @Nullable RecipeEntry<?> recipe,final SingleStackRecipeInput input,final DefaultedList<ItemStack> slots,final int count) {
         if (!slots.get(0).isEmpty() && !slots.get(1).isEmpty() && !slots.get(2).isEmpty()  && !slots.get(3).isEmpty()&& recipe != null) {
-            final ItemStack itemStack = recipe.value().getResult(registryManager);
+            final ItemStack itemStack = ((AbstractCookingRecipe)recipe.value()).craft(input,registryManager);
             if (itemStack.isEmpty()) {
                 return false;
             } else {
@@ -252,9 +253,9 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, LithographyRecip
     }
 
     private static boolean craftRecipe(final DynamicRegistryManager registryManager,final @Nullable RecipeEntry<?> recipe,
-            final DefaultedList<ItemStack> slots,final int count) {
-        if (recipe != null && canAcceptRecipeOutput(registryManager, recipe, slots, count)) {
-            final ItemStack itemStack2 = recipe.value().getResult(registryManager);
+            final SingleStackRecipeInput input, final DefaultedList<ItemStack> slots,final int count) {
+        if (recipe != null && canAcceptRecipeOutput(registryManager, recipe,input, slots, count)) {
+            final ItemStack itemStack2 = ((AbstractCookingRecipe)recipe.value()).craft(input,registryManager);
             final ItemStack itemStack3 = slots.get(4);
             if (itemStack3.isEmpty()) {
                 slots.set(4, itemStack2.copy());
@@ -317,22 +318,22 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, LithographyRecip
 
     private static int getCookTime(final World world,final LithographyBlockEntityInventoryT2 reactorTileEntityInventory)
     {
-        return reactorTileEntityInventory.matchGetter.getFirstMatch(new SingleStackRecipeInput(reactorTileEntityInventory.getStack(0)), world).map(recipeEntry -> recipeEntry.value().getCookingTime()).orElse(200);
+        return reactorTileEntityInventory.matchGetter.getFirstMatch(new SingleStackRecipeInput(reactorTileEntityInventory.getStack(0)), (ServerWorld) world).map(recipeEntry -> recipeEntry.value().getCookingTime()).orElse(200);
     }
     public void setLastRecipe(final RecipeEntry<?> recipe)
     {
         if(recipe != null)
         {
-            final Identifier identifier = recipe.id();
+            final Identifier identifier = recipe.id().getValue();
             this.recipesUsed.addTo(identifier,1);
         }
     }
-    @Override
-    public void provideRecipeInputs(final RecipeMatcher finder) {
 
+
+    @Override
+    public void provideRecipeInputs(final RecipeFinder finder) {
         for (final ItemStack itemStack : itemStacks) {
             finder.addInput(itemStack);
         }
-
     }
 }

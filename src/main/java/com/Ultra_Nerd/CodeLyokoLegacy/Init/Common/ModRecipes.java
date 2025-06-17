@@ -4,7 +4,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.LithographyRecipe;
 import com.Ultra_Nerd.CodeLyokoLegacy.Recipies.ReactorRecipe;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
-import net.minecraft.recipe.CookingRecipeSerializer;
+import net.minecraft.recipe.AbstractCookingRecipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 
@@ -38,9 +38,9 @@ public record ModRecipes() {
 
             REACTOR_RECIPE_SERIALIZER =
                     RecipeSerializer.register(REACTOR_RECIPE_ID,
-                            new CookingRecipeSerializer<>(ReactorRecipe::new,
+                            new AbstractCookingRecipe.Serializer<>(ReactorRecipe::new,
                                     MethodUtil.TickConversion.secondsToTicks(120)));
-            LITHOGRAPHY_RECIPE_SERIALIZER = RecipeSerializer.register(LITHOGRAPHY_RECIPE_ID,new CookingRecipeSerializer<>(LithographyRecipe::new,MethodUtil.TickConversion.secondsToTicks(60)));
+            LITHOGRAPHY_RECIPE_SERIALIZER = RecipeSerializer.register(LITHOGRAPHY_RECIPE_ID,new AbstractCookingRecipe.Serializer<>(LithographyRecipe::new,MethodUtil.TickConversion.secondsToTicks(60)));
 
         }
         public static void init()

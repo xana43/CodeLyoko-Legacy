@@ -1,14 +1,20 @@
 {
-  "carvers": {},
+  "carvers": [],
   "downfall": 0.0,
   "effects": {
     "fog_color": 2382,
-    "music": {
-      "max_delay": 0,
-      "min_delay": 0,
-      "replace_current_music": true,
-      "sound": "codelyoko:digital_ocean"
-    },
+    "music": [
+      {
+        "data": {
+          "max_delay": 0,
+          "min_delay": 0,
+          "replace_current_music": true,
+          "sound": "codelyoko:digital_ocean"
+        },
+        "weight": 1
+      }
+    ],
+    "music_volume": 1.0,
     "sky_color": 2382,
     "water_color": 2382,
     "water_fog_color": 2382

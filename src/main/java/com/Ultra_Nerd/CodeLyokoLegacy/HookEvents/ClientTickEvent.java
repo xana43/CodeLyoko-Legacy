@@ -157,7 +157,7 @@ public record ClientTickEvent() {
                     client.setScreen(new ClassScreen());
                 }
             } else if (classScreenBinding.isPressed()) {
-                client.player.sendMessage(Text.translatable("lyoko.link.unavailable"));
+                client.player.sendMessage(Text.translatable("lyoko.link.unavailable"),false);
             }
 
     }

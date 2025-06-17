@@ -12,6 +12,10 @@ import net.minecraft.world.World;
 public final class TowerWallCorner extends TowerWall {
 
 
+    public TowerWallCorner(Settings settings) {
+        super(settings);
+    }
+
     @Override
     public void randomDisplayTick(final BlockState stateIn, final World worldIn, final BlockPos pos, final Random rand) {
         super.randomDisplayTick(stateIn, worldIn, pos, rand);
@@ -24,36 +28,36 @@ public final class TowerWallCorner extends TowerWall {
                     case 0 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE, d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE, d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE, pos.getX() - 0.25f, d1, d2, 0, -1, 0);
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE, pos.getX() - 0.25f, d1, d2, 0, -1, 0);
                         }
                     }
                     case 1 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_XANA, d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_XANA, d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_XANA, pos.getX() - 0.25f, d1, d2, 0, -1, 0);
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_XANA, pos.getX() - 0.25f, d1, d2, 0, -1, 0);
                         }
                     }
                     case 2 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_FRANZ, d0, d1, pos.getZ() + 1.25f, 0, -1,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_FRANZ, d0, d1, pos.getZ() + 1.25f, 0, -1,
                                     0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_FRANZ, pos.getX() - 0.25f, d1, d2, 0, -1,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_FRANZ, pos.getX() - 0.25f, d1, d2, 0, -1,
                                     0);
                         }
                     }
                     case 3 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_JEREMY, d0, d1, pos.getZ() + 1.25f, 0,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_JEREMY, d0, d1, pos.getZ() + 1.25f, 0,
                                     -1, 0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_JEREMY, pos.getX() - 0.25f, d1, d2, 0,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_JEREMY, pos.getX() - 0.25f, d1, d2, 0,
                                     -1, 0);
                         }
                     }
@@ -68,36 +72,36 @@ public final class TowerWallCorner extends TowerWall {
                     case 0 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE, d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE, d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE, pos.getX() + 1.25f, d1, d2, 0, -1, 0);
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE, pos.getX() + 1.25f, d1, d2, 0, -1, 0);
                         }
                     }
                     case 1 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_XANA, d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_XANA, d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_XANA, pos.getX() + 1.25f, d1, d2, 0, -1, 0);
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_XANA, pos.getX() + 1.25f, d1, d2, 0, -1, 0);
                         }
                     }
                     case 2 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_FRANZ, d0, d1, pos.getZ() - 0.25f, 0, -1,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_FRANZ, d0, d1, pos.getZ() - 0.25f, 0, -1,
                                     0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_FRANZ, pos.getX() + 1.25f, d1, d2, 0, -1,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_FRANZ, pos.getX() + 1.25f, d1, d2, 0, -1,
                                     0);
                         }
                     }
                     case 3 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_JEREMY, d0, d1, pos.getZ() - 0.25f, 0,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_JEREMY, d0, d1, pos.getZ() - 0.25f, 0,
                                     -1, 0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_JEREMY, pos.getX() + 1.25f, d1, d2, 0,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_JEREMY, pos.getX() + 1.25f, d1, d2, 0,
                                     -1, 0);
                         }
                     }
@@ -112,36 +116,36 @@ public final class TowerWallCorner extends TowerWall {
                     case 0 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE, pos.getX() - 0.25f, d1, d2, 0, -1, 0);
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE, pos.getX() - 0.25f, d1, d2, 0, -1, 0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE, d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE, d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
                         }
                     }
                     case 1 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_XANA, pos.getX() - 0.25f, d1, d2, 0, -1, 0);
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_XANA, pos.getX() - 0.25f, d1, d2, 0, -1, 0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_XANA, d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_XANA, d0, d1, pos.getZ() - 0.25f, 0, -1, 0);
                         }
                     }
                     case 2 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_FRANZ, pos.getX() - 0.25f, d1, d2, 0, -1,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_FRANZ, pos.getX() - 0.25f, d1, d2, 0, -1,
                                     0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_FRANZ, d0, d1, pos.getZ() - 0.25f, 0, -1,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_FRANZ, d0, d1, pos.getZ() - 0.25f, 0, -1,
                                     0);
                         }
                     }
                     case 3 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_JEREMY, pos.getX() - 0.25f, d1, d2, 0, -1,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_JEREMY, pos.getX() - 0.25f, d1, d2, 0, -1,
                                     0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_JEREMY, d0, d1, pos.getZ() - 0.25f, 0, -1,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_JEREMY, d0, d1, pos.getZ() - 0.25f, 0, -1,
                                     0);
                         }
                     }
@@ -156,40 +160,40 @@ public final class TowerWallCorner extends TowerWall {
                     case 0 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE,
                                     pos.getX() + 1.25f, d1, d2, 0, -1, 0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE,
                                     d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
                         }
                     }
                     case 1 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_XANA,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_XANA,
                                     pos.getX() + 1.25f, d1, d2, 0, -1, 0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_XANA,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_XANA,
                                     d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
                         }
                     }
                     case 2 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_FRANZ,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_FRANZ,
                                     pos.getX() + 1.25f, d1, d2, 0, -1, 0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_FRANZ,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_FRANZ,
                                     d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
                         }
                     }
                     case 3 -> {
                         if (worldIn.getBlockState(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()))
                                 .isOf(Blocks.AIR)) {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_JEREMY,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_JEREMY,
                                     pos.getX() + 1.25f, d1, d2, 0, -1, 0);
                         } else {
-                            worldIn.addParticle(ModParticles.TOWER_PARTICLE_JEREMY,
+                            worldIn.addParticleClient(ModParticles.TOWER_PARTICLE_JEREMY,
                                     d0, d1, pos.getZ() + 1.25f, 0, -1, 0);
                         }
                     }

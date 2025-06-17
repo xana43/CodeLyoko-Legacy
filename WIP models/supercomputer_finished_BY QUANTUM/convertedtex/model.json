@@ -1,0 +1,403 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"scoverlayclose": {
+			"animation_length": 2,
+			"bones": {
+				"3": {
+					"position": {
+						"0.0": {
+							"vector": [-45, 0, -45]
+						},
+						"1.9583": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"4": {
+					"position": {
+						"0.0": {
+							"vector": [45, 0, -45]
+						},
+						"1.9583": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"5": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 45]
+						},
+						"1.9583": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"TOP": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0833": {
+							"vector": [0, -98, 0]
+						}
+					}
+				},
+				"DOWN": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.375": {
+							"vector": [0, -22.5, 0]
+						}
+					}
+				}
+			}
+		},
+		"scoverlayopen": {
+			"animation_length": 2.7917,
+			"bones": {
+				"3": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0833": {
+							"vector": [-45, 0, -45]
+						}
+					}
+				},
+				"4": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0833": {
+							"vector": [45, 0, -45]
+						}
+					}
+				},
+				"5": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0833": {
+							"vector": [0, 0, 45]
+						}
+					}
+				},
+				"TOP": {
+					"position": {
+						"1.5833": {
+							"vector": [0, -98, 0]
+						},
+						"2.75": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"DOWN": {
+					"position": {
+						"1.5833": {
+							"vector": [0, -22.5, 0]
+						},
+						"2.6667": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		},
+		"scoverlay_lever_open": {
+			"animation_length": 0.5417,
+			"bones": {
+				"Overlay_Lever_TOP": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.375": {
+							"vector": [0, 4.2, 0]
+						}
+					}
+				},
+				"Overlay_Lever_Down": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.375": {
+							"vector": [0, -5, 0]
+						}
+					}
+				},
+				"Lever": {
+					"rotation": {
+						"0.375": {
+							"vector": [0, 0, 0]
+						},
+						"0.4167": {
+							"vector": [28.75, 0, 0]
+						},
+						"0.4583": {
+							"vector": [57.5, 0, 0]
+						}
+					},
+					"position": {
+						"0.375": {
+							"vector": [0, 0, 0]
+						},
+						"0.4167": {
+							"vector": [0, -0.25, -0.75]
+						},
+						"0.4583": {
+							"vector": [0, -0.9, -1.5]
+						}
+					}
+				}
+			}
+		},
+		"sc_lever_open": {
+			"animation_length": 0.2083,
+			"bones": {
+				"Overlay_Lever_Down": {
+					"position": {
+						"vector": [0, -5, 0]
+					}
+				},
+				"Overlay_Lever_TOP": {
+					"position": {
+						"vector": [0, 4.2, 0]
+					}
+				},
+				"Lever": {
+					"rotation": {
+						"0.0": {
+							"vector": [57.5, 0, 0]
+						},
+						"0.0417": {
+							"vector": [95, 0, 0]
+						},
+						"0.0833": {
+							"vector": [120, 0, 0]
+						},
+						"0.125": {
+							"vector": [95, 0, 0]
+						},
+						"0.1667": {
+							"vector": [57.5, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, -0.9, -1.5]
+						},
+						"0.0417": {
+							"vector": [0, -2.45, -1.5]
+						},
+						"0.0833": {
+							"vector": [0, -3.2, -1.5]
+						},
+						"0.125": {
+							"vector": [0, -2.45, -1.5]
+						},
+						"0.1667": {
+							"vector": [0, -0.9, -1.5]
+						}
+					}
+				}
+			}
+		},
+		"scoverlay_lever_close": {
+			"animation_length": 0.4167,
+			"bones": {
+				"Overlay_Lever_Down": {
+					"position": {
+						"0.0": {
+							"vector": [0, -5, 0]
+						},
+						"0.375": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"Overlay_Lever_TOP": {
+					"position": {
+						"0.0": {
+							"vector": [0, 4.2, 0]
+						},
+						"0.375": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"Lever": {
+					"rotation": {
+						"0.0": {
+							"vector": [57.5, 0, 0]
+						},
+						"0.0417": {
+							"vector": [28.75, 0, 0]
+						},
+						"0.0833": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, -0.9, -1.5]
+						},
+						"0.0417": {
+							"vector": [0, -0.25, -0.75]
+						},
+						"0.0833": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		},
+		"scoverlay_battery_open": {
+			"animation_length": 0.2917,
+			"bones": {
+				"Right_Side | Left_Overlay": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [0, -9, 0]
+						}
+					}
+				},
+				"Right Side | Right Overlay": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [0, 5, 0]
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.25": {
+							"vector": [1, 0.05, 1]
+						}
+					}
+				}
+			}
+		},
+		"scoverlay_battery_close": {
+			"animation_length": 0.2917,
+			"bones": {
+				"Right_Side | Left_Overlay": {
+					"position": {
+						"0.0": {
+							"vector": [0, -9, 0]
+						},
+						"0.25": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"Right Side | Right Overlay": {
+					"position": {
+						"0.0": {
+							"vector": [0, 5, 0]
+						},
+						"0.25": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 0.05, 1]
+						},
+						"0.25": {
+							"vector": [1, 1, 1]
+						}
+					}
+				}
+			}
+		},
+		"scoverlay_neuron_headset_open": {
+			"animation_length": 0.2083,
+			"bones": {
+				"Left Side | Right Overlay": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.2083": {
+							"vector": [0, 3, 0]
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.2083": {
+							"vector": [1, 0.05, 1]
+						}
+					}
+				},
+				"Left Side | Left Overlay": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.2083": {
+							"vector": [0, -9, 0]
+						}
+					},
+					"scale": {
+						"vector": [1, 1, 1]
+					}
+				}
+			}
+		},
+		"scoverlay_neuron_headset_close": {
+			"animation_length": 0.2917,
+			"bones": {
+				"Left Side | Right Overlay": {
+					"position": {
+						"0.0": {
+							"vector": [0, 3, 0]
+						},
+						"0.2083": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 0.05, 1]
+						},
+						"0.2083": {
+							"vector": [1, 1, 1]
+						}
+					}
+				},
+				"Left Side | Left Overlay": {
+					"position": {
+						"0.0": {
+							"vector": [0, -9, 0]
+						},
+						"0.2083": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"scale": {
+						"vector": [1, 1, 1]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

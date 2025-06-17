@@ -5,7 +5,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModSounds;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.payloads.ClassScreenPayload;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -13,6 +12,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ButtonTextures;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -27,7 +27,7 @@ public final class ClassScreen extends Screen {
     private static final Identifier textures = CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_pot.png");
     private static final ButtonTextures buttonTextures = new ButtonTextures(CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_po1t.png"),CodeLyokoMain.codeLyokoPrefix("textures/gui/laptopguibase_pot2.png"));
     private static final int xSize = 1024, ySize = 1024;
-    private static final int colors = ColorHelper.Argb.getArgb(1, 255, 0, 255);
+    private static final int colors = ColorHelper.getArgb(1, 255, 0, 255);
     private static int x;
     private TexturedButtonWidget feline, samurai, ninja, guardian, warrior;
     private int IndicatorColor = 0;
@@ -126,7 +126,7 @@ public final class ClassScreen extends Screen {
             case 1 -> IndicatorColor = 2007;
             case 2 -> IndicatorColor = 5125;
             case 3 -> IndicatorColor = 0x1d5e18;
-            case 4 -> IndicatorColor = ColorHelper.Argb.getArgb(255, 10, 10, 10);
+            case 4 -> IndicatorColor = ColorHelper.getArgb(255, 10, 10, 10);
             default -> {
             }
         }
@@ -215,8 +215,8 @@ public final class ClassScreen extends Screen {
     @Override
     public void renderBackground(@NotNull DrawContext pPoseStack,final int mouseX, final int mouseY, final float delta) {
         // super.renderBackground(pPoseStack);
-        RenderSystem.setShaderTexture(0, textures);
-        pPoseStack.drawTexture(textures, x, 0, 0, 0, xSize, ySize);
+        //RenderSystem.setShaderTexture(0, textures);
+        pPoseStack.drawTexture(identifier -> RenderLayer.getGuiTextured(textures),textures, x, 0, 0, 0, xSize, ySize,0,0,0);
     }
 
 

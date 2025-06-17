@@ -28,7 +28,7 @@ public final class LyokoCore extends BlockWithEntity {
 
     @Override
     public BlockRenderType getRenderType(final BlockState state) {
-        return BlockRenderType.ENTITYBLOCK_ANIMATED;
+        return BlockRenderType.INVISIBLE;
     }
 
     @Override

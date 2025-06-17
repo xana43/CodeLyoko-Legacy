@@ -53,7 +53,7 @@ public final class DigitalEnergy implements AutoSyncedComponent {
 
     @Override
     public void readFromNbt(final NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        currentEnergy = tag.getInt(DIGITAL_ENERGY_KEY);
+        currentEnergy = tag.getInt(DIGITAL_ENERGY_KEY).orElse(MAX_ENERGY);
     }
 
     @Override

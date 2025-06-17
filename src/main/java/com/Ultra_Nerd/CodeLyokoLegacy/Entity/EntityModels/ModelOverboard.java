@@ -4,14 +4,12 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels;// Made with Blockben
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.OverboardEntity;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.render.entity.state.EntityRenderState;
 
-public final class ModelOverboard<T extends OverboardEntity> extends EntityModel<T> {
+public final class ModelOverboard<T extends EntityRenderState> extends EntityModel<T> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(
             CodeLyokoMain.codeLyokoPrefix("overboard"), "main");
@@ -19,6 +17,7 @@ public final class ModelOverboard<T extends OverboardEntity> extends EntityModel
     private final ModelPart Mainbody;
 
     public ModelOverboard(final ModelPart root) {
+        super(root);
         this.Mainbody = root.getChild("Mainbody");
 
 
@@ -232,16 +231,13 @@ public final class ModelOverboard<T extends OverboardEntity> extends EntityModel
     }
 
 
-    @Override
-    public void render(MatrixStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, final int color) {
-        Mainbody.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+//    @Override
+   // public void render(MatrixStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, final int color) {
+     //   Mainbody.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
 
 
-    }
+    //}
 
 
-    @Override
-    public void setAngles(final T entity, final float limbAngle, final float limbDistance, final float animationProgress, final float headYaw, final float headPitch) {
 
-    }
 }

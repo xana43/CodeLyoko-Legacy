@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "codelyoko:quantum_block"
-    }
+    "codelyoko:quantum_block"
   ],
   "result": {
     "count": 9,

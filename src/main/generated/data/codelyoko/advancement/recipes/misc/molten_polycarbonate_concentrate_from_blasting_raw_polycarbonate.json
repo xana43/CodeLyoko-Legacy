@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:molten_polycarbonate_concentrate_from_blasting_raw_polycarbonate"
+        "recipe": "codelyoko:molten_polycarbonate_concentrate_from_blasting_raw_polycarbonate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:molten_polycarbonate_concentrate_from_blasting_raw_polycarbonate"
+      "codelyoko:molten_polycarbonate_concentrate_from_blasting_raw_polycarbonate"
     ]
   }
 }

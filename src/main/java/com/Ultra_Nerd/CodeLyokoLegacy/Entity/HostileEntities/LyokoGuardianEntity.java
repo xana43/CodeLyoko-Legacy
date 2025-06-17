@@ -25,8 +25,8 @@ public final class LyokoGuardianEntity extends FlyingEntity implements RangedAtt
     public static DefaultAttributeContainer.Builder createGuardianAttributes()
     {
 
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE,6).add(EntityAttributes.GENERIC_MOVEMENT_SPEED,0.5D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE,16).add(EntityAttributes.GENERIC_MAX_HEALTH,30);
+        return HostileEntity.createHostileAttributes().add(EntityAttributes.ATTACK_DAMAGE,6).add(EntityAttributes.MOVEMENT_SPEED,0.5D)
+                .add(EntityAttributes.FOLLOW_RANGE,16).add(EntityAttributes.MAX_HEALTH,30);
     }
 
     @Override

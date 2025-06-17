@@ -2,8 +2,8 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.Fluid
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
+import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModComponents;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.NBT.NBTEntries;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.EnergyStorageBlockEntity;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -14,8 +14,6 @@ import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.component.ComponentChanges;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.NbtComponent;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
@@ -26,7 +24,7 @@ import net.minecraft.util.math.Direction;
 public final class ComputerFluidCoolerBlockEntity extends EnergyStorageBlockEntity {
     private final SingleVariantStorage<FluidVariant> hot_tank = MethodUtil.FluidStorageCreation.createFluidStorage(this,Fluids.WATER);
     private final SingleVariantStorage<FluidVariant> cold_tank =
-            MethodUtil.FluidStorageCreation.createFluidStorage(this,FluidVariant.of(Fluids.WATER, ComponentChanges.builder().add(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(NBTEntries.chilled)).build()));
+            MethodUtil.FluidStorageCreation.createFluidStorage(this,FluidVariant.of(Fluids.WATER, ComponentChanges.builder().add(ModComponents.CHILLED,true).build()));
     private double temperature = 27;
     private final Storage<FluidVariant> hot_outlet = FilteringStorage.insertOnlyOf(hot_tank);
     private final Storage<FluidVariant> cold_intake = FilteringStorage.extractOnlyOf(cold_tank);
@@ -69,7 +67,7 @@ public final class ComputerFluidCoolerBlockEntity extends EnergyStorageBlockEnti
         super.readNbt(nbt,registryLookup);
         SingleVariantStorage.readNbt(hot_tank,FluidVariant.CODEC,FluidVariant::blank,nbt,registryLookup);
         SingleVariantStorage.readNbt(cold_tank,FluidVariant.CODEC,FluidVariant::blank,nbt,registryLookup);
-        temperature = nbt.getDouble("temperature");
+        temperature = nbt.getDouble("temperature").orElse(27.0);
     }
 
     @Override
@@ -81,9 +79,9 @@ public final class ComputerFluidCoolerBlockEntity extends EnergyStorageBlockEnti
                 }
             }
             if (temperature > 100 && temperature < 1000) {
-                world.addParticle(ParticleTypes.SMOKE, pos.getX(), pos.getY() + 0.7, pos.getZ(), 0, 0, 0);
+                world.addParticleClient(ParticleTypes.SMOKE, pos.getX(), pos.getY() + 0.7, pos.getZ(), 0, 0, 0);
             } else if (temperature > 1000 && temperature < 3000) {
-                world.addParticle(ParticleTypes.LARGE_SMOKE, pos.getX(), pos.getY() + 0.7, pos.getZ(), 0, 0, 0);
+                world.addParticleClient(ParticleTypes.LARGE_SMOKE, pos.getX(), pos.getY() + 0.7, pos.getZ(), 0, 0, 0);
             } else if (temperature > 3000) {
                 for (final Direction dir : Direction.values()) {
                     if (world.getBlockState(pos.offset(dir)).getBlock() == Blocks.AIR) {
@@ -94,7 +92,7 @@ public final class ComputerFluidCoolerBlockEntity extends EnergyStorageBlockEnti
             try (final Transaction transaction = Transaction.openOuter()) {
                 final long hotWaterCooled = hot_tank.extract(FluidVariant.of(Fluids.WATER), FluidConstants.BLOCK,
                         transaction);
-                cold_tank.insert(FluidVariant.of(Fluids.WATER, ComponentChanges.builder().add(DataComponentTypes.CUSTOM_DATA,NbtComponent.of(NBTEntries.chilled)).build()), hotWaterCooled, transaction);
+                cold_tank.insert(FluidVariant.of(Fluids.WATER, ComponentChanges.builder().add(ModComponents.CHILLED,true).build()), hotWaterCooled, transaction);
                 if (hotWaterCooled > 0) {
                     temperature += 100;
                 }

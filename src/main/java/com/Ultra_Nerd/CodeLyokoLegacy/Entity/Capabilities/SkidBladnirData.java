@@ -37,8 +37,8 @@ public record SkidBladnirData(BlockPos[] positions) implements AutoSyncedCompone
 
     @Override
     public void readFromNbt(final NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        positions[0] = BlockPos.fromLong(tag.getLong(HOME_KEY));
-        positions[1] = BlockPos.fromLong(tag.getLong(DESTINATION_KEY));
+        positions[0] = BlockPos.fromLong(tag.getLong(HOME_KEY).orElse(0L));
+        positions[1] = BlockPos.fromLong(tag.getLong(DESTINATION_KEY).orElse(0L));
     }
 
     @Override

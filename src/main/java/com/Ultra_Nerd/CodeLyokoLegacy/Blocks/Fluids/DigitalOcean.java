@@ -6,9 +6,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 
 public abstract class DigitalOcean extends LyokoFluid {
@@ -40,8 +40,8 @@ public abstract class DigitalOcean extends LyokoFluid {
         }
 
         @Override
-        protected boolean isInfinite(final World world) {
-            return true;
+        protected boolean isInfinite(final ServerWorld world) {
+            return false;
         }
 
         @Override
@@ -62,12 +62,12 @@ public abstract class DigitalOcean extends LyokoFluid {
 
     public static final class Still extends DigitalOcean {
         @Override
-        protected boolean isInfinite(final World world) {
+        protected boolean isInfinite(final ServerWorld world) {
             return true;
         }
 
         @Override
-        protected int getMaxFlowDistance(WorldView world) {
+        protected int getMaxFlowDistance(final WorldView world) {
             return 0;
         }
 

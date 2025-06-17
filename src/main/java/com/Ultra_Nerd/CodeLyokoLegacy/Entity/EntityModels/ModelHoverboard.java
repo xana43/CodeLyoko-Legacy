@@ -5,16 +5,14 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.HoverboardEntity;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.render.entity.state.EntityRenderState;
 import org.jetbrains.annotations.NotNull;
 
 
-public final class ModelHoverboard<T extends HoverboardEntity> extends EntityModel<T> {
+public final class ModelHoverboard<T extends EntityRenderState> extends EntityModel<T> {
 
     public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(CodeLyokoMain.codeLyokoPrefix("hoverboard"),
             "main");
@@ -23,6 +21,7 @@ public final class ModelHoverboard<T extends HoverboardEntity> extends EntityMod
 
     public ModelHoverboard(@NotNull ModelPart root)
     {
+        super(root);
         this.mainbody = root.getChild("mainbody");
     }
 
@@ -70,7 +69,7 @@ public final class ModelHoverboard<T extends HoverboardEntity> extends EntityMod
                 .uv(0, 9).cuboid(8.0F, 8.0F, -21.1855F, 3.0F, 2.0F, 6.0F, new Dilation(0.0F))
                 .uv(38, 38).cuboid(-6.0F, 7.0F, -21.1855F, 1.0F, 1.0F, 6.0F, new Dilation(0.0F))
                 .uv(14, 38).cuboid(9.0F, 7.0F, -21.1855F, 1.0F, 1.0F, 6.0F, new Dilation(0.0F)),
-                ModelTransform.pivot(-1.993F, -9.5192F, 5.8574F));
+                ModelTransform.origin(-1.993F, -9.5192F, 5.8574F));
 
         return TexturedModelData.of(meshDefinition, 64, 64);
     }
@@ -81,13 +80,10 @@ public final class ModelHoverboard<T extends HoverboardEntity> extends EntityMod
 
 
 
-    @Override
-    public void setAngles(final T entity, final float limbAngle, final float limbDistance, final float animationProgress, final float headYaw, final float headPitch) {
 
-    }
 
-    @Override
+    /*@Override
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
         mainbody.render(matrices, vertices, light, overlay, color);
-    }
+    }*/
 }

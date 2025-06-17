@@ -10,17 +10,17 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.*;
-import net.minecraft.recipe.book.RecipeBookCategory;
-import net.minecraft.recipe.input.SingleStackRecipeInput;
+import net.minecraft.recipe.book.RecipeBookType;
 import net.minecraft.screen.AbstractRecipeScreenHandler;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
-public final class LithographyScreenHandler extends AbstractRecipeScreenHandler<SingleStackRecipeInput,AbstractCookingRecipe> {
+public final class LithographyScreenHandler extends AbstractRecipeScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
     private final RecipeType<? extends AbstractCookingRecipe> recipeType;
@@ -60,7 +60,7 @@ public final class LithographyScreenHandler extends AbstractRecipeScreenHandler<
         }
         addProperties(propertyDelegate);
     }
-    @Override
+    //@Override
     public void clearCraftingSlots()
     {
         getSlot(0).setStackNoCallbacks(ItemStack.EMPTY);
@@ -74,18 +74,12 @@ public final class LithographyScreenHandler extends AbstractRecipeScreenHandler<
         return LithographyBlockEntityInventory.slotValidInput(stack.getItem());
     }
 
-    @Override
-    public void populateRecipeFinder(final RecipeMatcher finder) {
-        if(inventory instanceof final RecipeInputProvider recipeInputProvider)
-        {
-            recipeInputProvider.provideRecipeInputs(finder);
-        }
-    }
 
-    @Override
-    public boolean matches(final RecipeEntry<AbstractCookingRecipe> recipe) {
-        return recipe.value().matches(new SingleStackRecipeInput(inventory.getStack(0)),world);
-    }
+
+  //  @Override
+   // public boolean matches(final RecipeEntry<AbstractCookingRecipe> recipe) {
+  //      return recipe.value().matches(new SingleStackRecipeInput(inventory.getStack(0)),world);
+   // }
 
     /*@Override
     public boolean matches(final RecipeEntry<? extends Recipe<Inventory>> recipe) {
@@ -93,33 +87,46 @@ public final class LithographyScreenHandler extends AbstractRecipeScreenHandler<
     }*/
 
 
-    @Override
+    //@Override
     public int getCraftingResultSlotIndex()
     {
         return 1;
     }
-    @Override
+   // @Override
     public int getCraftingWidth()
     {
         return 1;
     }
-    @Override
+   // @Override
     public int getCraftingHeight()
     {
         return 1;
     }
-    @Override
+   // @Override
     public int getCraftingSlotCount()
     {
         return 2;
     }
 
     @Override
-    public RecipeBookCategory getCategory() {
+    public PostFillAction fillInputSlots(boolean craftAll, boolean creative, RecipeEntry<?> recipe, ServerWorld world, PlayerInventory inventory) {
         return null;
     }
 
     @Override
+    public void populateRecipeFinder(RecipeFinder finder) {
+        if(inventory instanceof final RecipeInputProvider recipeInputProvider)
+        {
+            recipeInputProvider.provideRecipeInputs(finder);
+        }
+    }
+
+    @Override
+    public RecipeBookType getCategory() {
+        return null;
+    }
+
+   // @Override
     public boolean canInsertIntoSlot(final int index) {
         return index != 3;
     }
@@ -174,7 +181,8 @@ public final class LithographyScreenHandler extends AbstractRecipeScreenHandler<
     }
     private boolean isProcessable(final ItemStack stack)
     {
-        return world.getRecipeManager().getFirstMatch(recipeType,new SingleStackRecipeInput(stack),world).isPresent();
+       // return world.getRecipeManager().getFirstMatch(recipeType,new SingleStackRecipeInput(stack),world).isPresent();
+        return false;
     }
     public int getReactionProgress()
     {

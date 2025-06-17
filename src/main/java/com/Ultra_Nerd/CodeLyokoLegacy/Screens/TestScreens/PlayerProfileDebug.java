@@ -46,10 +46,10 @@ public final class PlayerProfileDebug extends HandledScreen<ProfileDebugScreenHa
         profileText.renderWidget(matrices, mouseX, mouseY, delta);
         matrices.drawCenteredTextWithShadow(textRenderer,
                 Text.of(Objects.requireNonNull(CardinalData.PlayerSavedProfile.getPlayerProfile(worldProperties, callingPlayer).getPlayer().getDisplayName())),
-                width>>1,height>>1, ColorHelper.Argb.getArgb(255,255,255,255));
+                width>>1,height>>1, ColorHelper.getArgb(255,255,255,255));
         matrices.drawCenteredTextWithShadow(textRenderer,
                 Text.of("Class" + CardinalData.PlayerSavedProfile.getPlayerProfile(worldProperties,
-                        callingPlayer).getPlayerClassType()),width >> 1, height >> 2, ColorHelper.Argb.getArgb(255,
+                        callingPlayer).getPlayerClassType()),width >> 1, height >> 2, ColorHelper.getArgb(255,
                         255,255,255));
 
 

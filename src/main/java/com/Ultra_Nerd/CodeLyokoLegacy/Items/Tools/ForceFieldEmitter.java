@@ -8,11 +8,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.consume.UseAction;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -49,7 +49,7 @@ public final class ForceFieldEmitter extends BowItem {
     }
 
     @Override
-    public void onStoppedUsing(final ItemStack stack, final World world, final LivingEntity user, final int remainingUseTicks) {
+    public boolean onStoppedUsing(final ItemStack stack, final World world, final LivingEntity user, final int remainingUseTicks) {
         if (user instanceof final PlayerEntity playerentity) {
 
             final int i = this.getMaxUseTime(stack) - remainingUseTicks;
@@ -59,7 +59,7 @@ public final class ForceFieldEmitter extends BowItem {
 
             final float f = getPullProgress(i);
             if ((double) f < 0.1D) {
-                return;
+                return false;
             }
             if (!world.isClient()) {
                 final LaserEntity las = new LaserEntity(world, user, 20);
@@ -82,6 +82,7 @@ public final class ForceFieldEmitter extends BowItem {
             playerentity.incrementStat(Stats.USED.getOrCreateStat(this));
 
         }
+        return false;
     }
 
     @Override
@@ -90,18 +91,17 @@ public final class ForceFieldEmitter extends BowItem {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
-        final ItemStack heldItem = user.getStackInHand(hand);
-        if (user.getInventory().armor.get(EquipmentSlot.CHEST.getEntitySlotId())
+    public ActionResult use(final World world, final PlayerEntity user, final Hand hand) {
+        if (user.getEquippedStack(EquipmentSlot.CHEST)
                 .getItem() != ModItems.AELITA_CHESTPLATE &&
-                user.getInventory().armor.get(EquipmentSlot.LEGS.getEntitySlotId())
+                user.getEquippedStack(EquipmentSlot.LEGS)
                         .getItem() != ModItems.AELITA_LEGGINGS &&
-                user.getInventory().armor.get(EquipmentSlot.FEET.getEntitySlotId())
+                user.getEquippedStack(EquipmentSlot.FEET)
                         .getItem() != ModItems.AELITA_BOOTS) {
-            return TypedActionResult.fail(heldItem);
+            return ActionResult.FAIL;
         }
         user.setCurrentHand(hand);
-        return TypedActionResult.consume(heldItem);
+        return ActionResult.CONSUME;
 
         //boolean flag = !playerIn.findAmmo(itemstack).isEmpty();
 

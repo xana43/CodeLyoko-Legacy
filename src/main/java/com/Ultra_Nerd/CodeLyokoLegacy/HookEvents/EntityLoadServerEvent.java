@@ -35,7 +35,7 @@ public record EntityLoadServerEvent() {
         if (entity instanceof final ItemEntity itemEntity) {
             if (MethodUtil.DimensionCheck.isWorldLyoko(world) && !itemEntity.getStack()
                     .isIn(ModTags.ItemTags.LYOKO_ITEM)) {
-                itemEntity.kill();
+                itemEntity.kill(world);
             }
         }
     }

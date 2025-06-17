@@ -88,7 +88,7 @@ public abstract class HUD {
                     int k = context.getScaledWindowWidth() / 2 - 91;
                     int m = context.getScaledWindowWidth() / 2 + 91;
                     int n = context.getScaledWindowHeight() - 39;
-                    float f = Math.max((float)playerEntity.getAttributeValue(EntityAttributes.GENERIC_MAX_HEALTH), (float)Math.max(j, i));
+                    float f = Math.max((float)playerEntity.getAttributeValue(EntityAttributes.MAX_HEALTH), (float)Math.max(j, i));
                     int o = MathHelper.ceil(playerEntity.getAbsorptionAmount());
                     int p = MathHelper.ceil((f + (float)o) / 2.0F / 10.0F);
                     int q = Math.max(10 - (p - 2), 3);
@@ -98,10 +98,8 @@ public abstract class HUD {
                         s = this.ticks % MathHelper.ceil(f + 5.0F);
                     }
 
-                    this.client.getProfiler().push("armor");
                     renderArmor(context, playerEntity, n, p, q, k);
 
-                    this.client.getProfiler().pop();
                 }
 
             }

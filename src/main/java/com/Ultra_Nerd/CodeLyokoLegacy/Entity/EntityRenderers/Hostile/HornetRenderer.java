@@ -3,10 +3,12 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Hostile;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels.ModelHornet;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.HornetEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.state.EntityRenderState;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
 
-public final class HornetRenderer extends GeoEntityRenderer<HornetEntity> {
+public final class HornetRenderer<R extends EntityRenderState & GeoRenderState> extends GeoEntityRenderer<HornetEntity,R> {
     public HornetRenderer(final EntityRendererFactory.Context ctx) {
         super(ctx, new ModelHornet());
     }

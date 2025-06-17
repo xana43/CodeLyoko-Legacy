@@ -2,13 +2,13 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Screens.TestScreens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.TestHandler.VehicleMaterializeTestHandler;
-import com.mojang.blaze3d.systems.RenderSystem;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.network.PlayerListEntry;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
@@ -66,7 +66,7 @@ public final class VehicleMaterializationTest extends HandledScreen<VehicleMater
     @Override
     public void renderBackground(final DrawContext matrices,final int mouseX, final int mouseY, final float delta) {
         super.renderBackground(matrices, mouseX, mouseY, delta);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        matrices.drawTexture(TEXTURE, x, 0, 0, 0, xSize, ySize);
+        //RenderSystem.setShaderTexture(0, TEXTURE);
+        matrices.drawTexture(RenderLayer::getGuiTextured,TEXTURE, x, 0, 0, 0, xSize, ySize,0,0);
     }
 }

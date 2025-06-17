@@ -25,7 +25,7 @@ public abstract class PlayerLyokoMixin {
         worldMix = world;
     }
 
-    @Inject(method = "getXpToDrop", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getExperienceToDrop", at = @At("HEAD"), cancellable = true)
     private void codelyoko$dropNoXpInLyoko(final CallbackInfoReturnable<Integer> cir) {
 
             if (MethodUtil.DimensionCheck.isWorldLyoko(worldMix)) {
@@ -33,7 +33,7 @@ public abstract class PlayerLyokoMixin {
             }
     }
 
-    @Inject(method = "shouldAlwaysDropXp", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "shouldAlwaysDropExperience", at = @At("HEAD"), cancellable = true)
     private void codelyoko$whileInLyokoStopXpDrop(final CallbackInfoReturnable<Boolean> cir) {
                 if (MethodUtil.DimensionCheck.isWorldLyoko(worldMix)) {
                     cir.setReturnValue(Boolean.FALSE);

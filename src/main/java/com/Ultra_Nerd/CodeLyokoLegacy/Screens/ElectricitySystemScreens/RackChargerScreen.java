@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -30,6 +31,6 @@ public final class RackChargerScreen extends HandledScreen<RackChargerHandler> {
 
     @Override
     protected void drawBackground(final DrawContext context, final float delta, final int mouseX, final int mouseY) {
-        context.drawTexture(Identifier.of("ded"),x,y,0,0,backgroundWidth,backgroundHeight);
+        context.drawTexture(RenderLayer::getGuiTextured,Identifier.of("ded"),x,y,0,0,backgroundWidth,backgroundHeight,0,0);
     }
 }

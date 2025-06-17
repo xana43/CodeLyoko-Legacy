@@ -5,7 +5,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.MultiBlockController;
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -14,7 +13,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -575,12 +573,9 @@ public final class ComputerKeyboard extends HorizontalFacingBlock implements Blo
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
 
-    public ComputerKeyboard() {
-        super(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
-
-                .strength(1, 10)
-                .sounds(BlockSoundGroup.METAL)
-
+    public ComputerKeyboard(final Settings settings) {
+        super(
+settings
         );
 
         this.setDefaultState(this.getDefaultState().with(IS_SCREEN_FORMED, Boolean.FALSE));

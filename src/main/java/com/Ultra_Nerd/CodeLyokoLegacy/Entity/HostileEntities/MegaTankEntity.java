@@ -30,7 +30,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
+import software.bernie.geckolib.animatable.processing.AnimationTest;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.EnumSet;
@@ -40,7 +44,7 @@ import java.util.Random;
 public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatable {
 
 
-    private final AnimationController<?> tank = new AnimationController<>(this, "movecontroller", 0,
+    private final AnimationController<?> tank = new AnimationController<>("movecontroller", 0,
             this::animationPred);
 
 
@@ -61,12 +65,12 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
     public static DefaultAttributeContainer.@NotNull Builder registerAttributes() {
         // TODO Auto-generated method stub
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 200D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5D)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 10D)
-                .add(EntityAttributes.GENERIC_ARMOR, 20D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20D);
+                .add(EntityAttributes.KNOCKBACK_RESISTANCE, 1D)
+                .add(EntityAttributes.MAX_HEALTH, 200D)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.5D)
+                .add(EntityAttributes.ATTACK_SPEED, 10D)
+                .add(EntityAttributes.ARMOR, 20D)
+                .add(EntityAttributes.FOLLOW_RANGE, 20D);
 
 
     }
@@ -172,23 +176,25 @@ public final class MegaTankEntity extends SkeletonEntity implements GeoAnimatabl
         }
     }
 
-    private <E extends MegaTankEntity> PlayState animationPred(@NotNull AnimationState<E> event) {
+    private <E extends GeoAnimatable> PlayState animationPred(@NotNull AnimationTest<E> event) {
 
 
         //CodeLyokoMain.LOG.info("attacking " + event.getAnimatable().isAttacking());
-        if (event.isMoving() && !event.getAnimatable().isAttacking()) {
-            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.mega_tank.move"));
-            //CodeLyokoMain.LOG.info("moving");
-        } else if (event.getAnimatable().isAttacking()) {
+        if(event.animatable() instanceof MegaTankEntity megaTankEntity) {
+            if (event.isMoving() && !megaTankEntity.isAttacking()) {
+                event.controller().setAnimation(RawAnimation.begin().thenLoop("animation.mega_tank.move"));
+                //CodeLyokoMain.LOG.info("moving");
+            } else if (megaTankEntity.isAttacking()) {
 
-            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.mega_tank.open"));
-            //CodeLyokoMain.LOG.info("attacking");
-        } else {
-            event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.mega_tank.idle"));
-            //CodeLyokoMain.LOG.info("not moving");
+                event.controller().setAnimation(RawAnimation.begin().thenLoop("animation.mega_tank.open"));
+                //CodeLyokoMain.LOG.info("attacking");
+            } else {
+                event.controller().setAnimation(RawAnimation.begin().thenLoop("animation.mega_tank.idle"));
+                //CodeLyokoMain.LOG.info("not moving");
+
+            }
 
         }
-
     return PlayState.CONTINUE;
 
     }

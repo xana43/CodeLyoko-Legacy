@@ -20,8 +20,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public record ModBiomes() {
 
 
-    private static final SpawnSettings.Builder biomesSpawns = new SpawnSettings.Builder().spawn(SpawnGroup.MONSTER,
-            new SpawnSettings.SpawnEntry(ModEntities.BLOK, 10, 2, 4));
+    private static final SpawnSettings.Builder biomesSpawns = new SpawnSettings.Builder().spawn(SpawnGroup.MONSTER,2,
+            new SpawnSettings.SpawnEntry(ModEntities.BLOK, 10, 2));
     /*Forest Sector*/
     // private static final SurfaceBuilder FOREST_CARVER = new SurfaceBuilder(null,ModBlocks.BORNITE_ORE.getDefaultState(), 0,0,null);
     private static final Biome FOREST_SECTOR = buildForest();

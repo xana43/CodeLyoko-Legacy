@@ -72,7 +72,7 @@ public final class ComputerFluidIntakeBlockEntity extends SyncedBlockEntity impl
     @Override
     public void readNbt(final NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt,registryLookup);
-        final NbtCompound fluidInfo = nbt.getCompound("fluid_info");
+        final NbtCompound fluidInfo = nbt.getCompound("fluid_info").orElse(new NbtCompound());
         SingleFluidStorage.readNbt(internalTank,FluidVariant.CODEC,() -> null,fluidInfo,registryLookup);
     }
 }

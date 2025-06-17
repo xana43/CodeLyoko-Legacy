@@ -2,10 +2,11 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
@@ -16,12 +17,8 @@ public final class HologramProjectorBlock extends BlockWithEntity {
     public static final @NotNull BooleanProperty VALID = BooleanProperty.of("valid");
 
 
-    public HologramProjectorBlock() {
-        super(FabricBlockSettings.copy(Blocks.IRON_BLOCK)
-                .strength(6, 10)
-                .sounds(BlockSoundGroup.METAL)
-
-        );
+    public HologramProjectorBlock(final Settings settings) {
+        super(settings);
         this.setDefaultState(this.getDefaultState().with(VALID, Boolean.TRUE));
     }
 
@@ -32,7 +29,7 @@ public final class HologramProjectorBlock extends BlockWithEntity {
 
     @Override
     public BlockRenderType getRenderType(final BlockState state) {
-        return BlockRenderType.ENTITYBLOCK_ANIMATED;
+        return BlockRenderType.INVISIBLE;
     }
 
     @Override

@@ -1,6 +1,6 @@
 {
   "parent": "special-model-loader:builtin/obj",
   "ambientocclusion": true,
-  "flip_v": false,
+  "flip_v": true,
   "model": "codelyoko:models/block/interface_sc.obj"
 }

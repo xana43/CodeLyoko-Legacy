@@ -1,12 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items;
 
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public final class ComputerItem extends Item {
 
@@ -16,16 +17,13 @@ public final class ComputerItem extends Item {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        super.appendTooltip(stack, context, tooltip, type);
+    public void appendTooltip(final ItemStack stack,final TooltipContext context,final TooltipDisplayComponent displayComponent,final Consumer<Text> textConsumer,final TooltipType type) {
+        super.appendTooltip(stack, context, displayComponent, textConsumer, type);
         if (Screen.hasShiftDown()) {
-            tooltip.add(Text.translatable("computer.item.tooltip.shift"));
+            textConsumer.accept(Text.translatable("computer.item.tooltip.shift"));
             return;
         }
-            tooltip.add(Text.translatable("computer.item.tooltip"));
-
-
-
+        textConsumer.accept(Text.translatable("computer.item.tooltip"));
     }
 
 

@@ -4,6 +4,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Player.Capabilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.server.world.ServerWorld;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -31,7 +32,8 @@ public final class CellularDegeneration implements AutoSyncedComponent {
         }
         if(cellHealth < 50)
         {
-            player.damage(player.getWorld().getDamageSources().magic(), ThreadLocalRandom.current()
+            final ServerWorld world = (ServerWorld) player.getWorld();
+            player.damage(world,world.getDamageSources().magic(), ThreadLocalRandom.current()
                     .nextFloat(4,8));
         }
     }
@@ -47,8 +49,8 @@ public final class CellularDegeneration implements AutoSyncedComponent {
 
     @Override
     public void readFromNbt(final NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-        healthy = tag.getBoolean(HEALTHY);
-        cellHealth = tag.getInt(CELL_HEALTH);
+        healthy = tag.getBoolean(HEALTHY).orElse(false);
+        cellHealth = tag.getInt(CELL_HEALTH).orElse(1024);
     }
 
     @Override

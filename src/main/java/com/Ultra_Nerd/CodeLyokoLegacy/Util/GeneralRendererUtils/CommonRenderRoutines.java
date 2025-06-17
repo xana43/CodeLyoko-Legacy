@@ -1,9 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.GeneralRendererUtils;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.gl.ShaderProgram;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
@@ -76,25 +79,25 @@ public record CommonRenderRoutines() {
     }
     public static void renderTranslucentTexturedSphere(final Tessellator tessellator, final float RADIUS, final int latitude, final int longitude, final MatrixStack matrices, final Identifier texture,final float textureU, final float textureV, final int red, final int green, final int blue, final int alpha,final float matrixX, final float matrixY, final float matrixZ)
     {
-        renderTexturedSphere(tessellator,RADIUS,latitude,longitude,matrices,texture,textureU,GameRenderer::getRenderTypeEntityAlphaProgram,textureV,red,green,blue,alpha,matrixX,matrixY,matrixZ);
+        renderTexturedSphere(tessellator,RADIUS,latitude,longitude,matrices,texture,textureU,/*GameRenderer::getRenderTypeEntityAlphaProgram*/null,textureV,red,green,blue,alpha,matrixX,matrixY,matrixZ);
     }
     public static void renderTranslucentTexturedSphere(final Tessellator tessellator, final float RADIUS, final int latitude, final int longitude, final MatrixStack matrices, final Identifier texture)
     {
-        renderTexturedSphere(tessellator,RADIUS,latitude,longitude,matrices,texture,0,GameRenderer::getRenderTypeEntityAlphaProgram,0,255,255,255,255,-.5f,-.5f,-1);
+        renderTexturedSphere(tessellator,RADIUS,latitude,longitude,matrices,texture,0,/*GameRenderer::getRenderTypeEntityAlphaProgram*/null,0,255,255,255,255,-.5f,-.5f,-1);
     }
     public static void renderTexturedSphere(final Tessellator tessellator, final float RADIUS, final int latitude, final int longitude, final MatrixStack matrices, final Identifier texture,final float textureU, final float textureV, final int red, final int green ,final int blue ,final int alpha,final float matrixX, final float matrixY, final float matrixZ)
     {
-        renderTexturedSphere(tessellator,RADIUS,latitude,longitude,matrices,texture,textureU,GameRenderer::getPositionTexColorProgram,textureV,red,green,blue,alpha,matrixX,matrixY,matrixZ);
+        renderTexturedSphere(tessellator,RADIUS,latitude,longitude,matrices,texture,textureU,/*GameRenderer::getPositionTexColorProgram*/null,textureV,red,green,blue,alpha,matrixX,matrixY,matrixZ);
     }
     public static void renderTexturedSphere(final Tessellator tessellator, final float RADIUS, final int latitude, final int longitude, final MatrixStack matrices, final Identifier texture)
     {
-        renderTexturedSphere(tessellator,RADIUS,latitude,longitude,matrices,texture,0,GameRenderer::getPositionTexColorProgram,0,255,255,255,255,-.5f,-.5f,-1);
+        renderTexturedSphere(tessellator,RADIUS,latitude,longitude,matrices,texture,0,/*GameRenderer::getPositionTexColorProgram*/null,0,255,255,255,255,-.5f,-.5f,-1);
     }
     public static void renderTexturedSphere(final Tessellator tessellator, final float RADIUS, final int latitude, final int longitude, final MatrixStack matrices, final Identifier texture,
                                             final float textureU, final Supplier<ShaderProgram> shaderProgramSupplier, final float textureV, final int red, final int green, final int blue, final int alpha, final float matrixX, final float matrixY, final float matrixZ)
     {
-        RenderSystem.setShaderTexture(0,texture);
-        RenderSystem.setShader(shaderProgramSupplier);
+     //   RenderSystem.setShaderTexture(0,texture);
+     //   RenderSystem.setShader(shaderProgramSupplier);
         for (int i = 0; i <= latitude; i++) {
             final double latitude0 = Math.PI * (-0.5 + (double) (i - 1) / latitude);
             final double zCoord0 = Math.sin(latitude0);
@@ -126,7 +129,7 @@ public record CommonRenderRoutines() {
     }
     public static void renderColoredSphere(final Tessellator tessellator, final float RADIUS, final int latitude, final int longitude, final MatrixStack matrices,final int red, final int green,final int blue, final int alpha)
     {
-        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+        //RenderSystem.setShader(GameRenderer::getPositionColorProgram);
         for (int i = 0; i <= latitude; i++) {
             final double latitude0 = Math.PI * (-0.5 + (double) (i - 1) / latitude);
             final double zCoord0 = Math.sin(latitude0);

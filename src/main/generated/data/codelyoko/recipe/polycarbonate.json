@@ -2,27 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:clay_ball"
-    },
-    {
-      "item": "minecraft:blackstone"
-    },
-    {
-      "item": "minecraft:amethyst_block"
-    },
-    {
-      "item": "minecraft:granite"
-    },
-    {
-      "tag": "c:gravel"
-    },
-    {
-      "item": "minecraft:lava_bucket"
-    },
-    {
-      "item": "minecraft:honey_block"
-    }
+    "minecraft:clay_ball",
+    "minecraft:blackstone",
+    "minecraft:amethyst_block",
+    "minecraft:granite",
+    "#c:gravel",
+    "minecraft:lava_bucket",
+    "minecraft:honey_block"
   ],
   "result": {
     "count": 1,

@@ -1,12 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Screens.ClientScreens.LapTopHeirarichy;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
@@ -53,8 +53,7 @@ public final class MainLaptopScreen extends Screen {
     @Override
     public void renderBackground(@NotNull DrawContext pPoseStack,final int mouseX, final int mouseY, final float delta) {
         // super.renderBackground(pPoseStack);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        pPoseStack.drawTexture(TEXTURE,x, 0, 0, 0, xSize, ySize);
+        pPoseStack.drawTexture(identifier -> RenderLayer.getGuiTextured(TEXTURE),TEXTURE,x, 0, 0, 0, xSize, ySize,0,0,0);
     }
 
     @Override

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "codelyoko:block/interface_sc"
+      "model": "codelyoko:models/block/interface_sc.obj"
     }
   }
 }

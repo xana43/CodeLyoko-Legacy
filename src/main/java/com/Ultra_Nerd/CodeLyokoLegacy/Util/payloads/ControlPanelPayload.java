@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 
 public record ControlPanelPayload(BlockPos pos,boolean active) implements CustomPayload {
     public static final CustomPayload.Id<ControlPanelPayload> ID = new CustomPayload.Id<>(PacketHandler.ChannelID);
-    public static final PacketCodec<RegistryByteBuf,ControlPanelPayload> CODEC = PacketCodec.tuple(BlockPos.PACKET_CODEC,ControlPanelPayload::pos,PacketCodecs.BOOL,ControlPanelPayload::active,ControlPanelPayload::new);
+    public static final PacketCodec<RegistryByteBuf,ControlPanelPayload> CODEC = PacketCodec.tuple(BlockPos.PACKET_CODEC,ControlPanelPayload::pos,PacketCodecs.BOOLEAN,ControlPanelPayload::active,ControlPanelPayload::new);
     @Override
     public Id<? extends CustomPayload> getId() {
         return ID;

@@ -1,12 +1,12 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.Enums;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 
-public enum LyokoTiers implements ToolMaterial {
+public enum LyokoTiers {
 
     LYOKO_FELINE(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 4000, 900, 8),
     LyokoGuardian(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 4000, 40, 30),
@@ -16,52 +16,22 @@ public enum LyokoTiers implements ToolMaterial {
     LyokoWarrior(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 8000, 0, 60),
     LyokoArcher(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 4000, 9200, 8);
 
-    private final int MaxUses;
-    private final TagKey<Block> harvest;
-    private final float attackDamage, efficiency;
+    private final ToolMaterial material;
 
 
     LyokoTiers(final TagKey<Block> harvest,final int MaxUses,final float efficiency,final float attackDamage) {
-        this.harvest = harvest;
-        this.MaxUses = MaxUses;
-        this.efficiency = efficiency;
-        this.attackDamage = attackDamage;
-
-
+        this(harvest,MaxUses,efficiency,attackDamage,Integer.MAX_VALUE);
     }
-
-
-    @Override
-    public int getDurability() {
-        return this.MaxUses;
+    LyokoTiers(final TagKey<Block> harvest,final int MaxUses,final float efficiency,final float attackDamage,final int enchantability) {
+        this(harvest, MaxUses, efficiency, attackDamage,enchantability,null);
     }
-
-    @Override
-    public float getMiningSpeedMultiplier() {
-        return this.efficiency;
+    LyokoTiers(final TagKey<Block> harvest,final int MaxUses,final float efficiency,final float attackDamage,final int enchantability,final TagKey<Item> repairItem) {
+        material = createMaterial(harvest,MaxUses,efficiency,attackDamage,enchantability,repairItem);
     }
-
-    @Override
-    public float getAttackDamage() {
-        return this.attackDamage;
+    public ToolMaterial getMaterial() {
+        return material;
     }
-
-    @Override
-    public TagKey<Block> getInverseTag() {
-        return harvest;
-    }
-
-
-
-
-    @Override
-    public int getEnchantability() {
-        return Integer.MAX_VALUE;
-    }
-
-
-    @Override
-    public Ingredient getRepairIngredient() {
-        return Ingredient.EMPTY;
+    private static ToolMaterial createMaterial(final TagKey<Block> harvest, final int durability, final float speed, final float attackDamage, final int enchantability, final TagKey<Item> repairMaterial) {
+        return new ToolMaterial(harvest,durability,speed,attackDamage,enchantability,repairMaterial);
     }
 }

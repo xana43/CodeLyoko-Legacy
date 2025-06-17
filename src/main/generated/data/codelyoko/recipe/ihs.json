@@ -10,12 +10,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "i": {
-      "tag": "c:iron_ingots"
-    },
-    "p": {
-      "item": "minecraft:heavy_weighted_pressure_plate"
-    }
+    "i": "#c:iron_ingots",
+    "p": "minecraft:heavy_weighted_pressure_plate"
   },
   "pattern": [
     "iii",

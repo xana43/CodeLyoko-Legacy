@@ -13,6 +13,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ItemScatterer;
@@ -54,13 +55,13 @@ public final class RackChargerBlock extends HorizontalFacingBlock implements Blo
     }
 
     @Override
-    public boolean isCullingShapeFullCube(final BlockState state, final BlockView world, final BlockPos pos) {
-        return false;
+    protected VoxelShape getCullingShape(final BlockState state) {
+        return VOXEL_SHAPE;
     }
 
     @Override
-    public VoxelShape getCullingShape(final BlockState state, final BlockView world, final BlockPos pos) {
-        return VOXEL_SHAPE;
+    protected boolean isShapeFullCube(final BlockState state,final BlockView world,final BlockPos pos) {
+        return false;
     }
 
     @Override
@@ -98,16 +99,16 @@ public final class RackChargerBlock extends HorizontalFacingBlock implements Blo
 
 
     @Override
-    public void onStateReplaced(final BlockState state, final World world, final BlockPos pos, final BlockState newState, final boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
             final BlockEntity BE = world.getBlockEntity(pos);
             if (BE instanceof final RackChargerEntity rackChargerBlockEntity) {
                 ItemScatterer.spawn(world, pos, rackChargerBlockEntity);
                 world.updateComparators(pos, this);
             }
-            super.onStateReplaced(state, world, pos, newState, moved);
-        }
+            super.onStateReplaced(state, world, pos, moved);
+
     }
+
     @Nullable
     @Override
     public NamedScreenHandlerFactory createScreenHandlerFactory(final BlockState state, final World world, final BlockPos pos) {

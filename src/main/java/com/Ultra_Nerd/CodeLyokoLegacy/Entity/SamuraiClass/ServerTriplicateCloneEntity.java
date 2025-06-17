@@ -11,6 +11,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Arm;
 import net.minecraft.world.World;
 
@@ -30,7 +31,7 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
     }
 
     public static DefaultAttributeContainer.Builder createPlayerAttributes() {
-        return LivingEntity.createLivingAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH,Double.MAX_VALUE).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.10000000149011612).add(EntityAttributes.GENERIC_ATTACK_SPEED).add(EntityAttributes.GENERIC_LUCK);
+        return LivingEntity.createLivingAttributes().add(EntityAttributes.MAX_HEALTH,Double.MAX_VALUE).add(EntityAttributes.ATTACK_DAMAGE, 1.0).add(EntityAttributes.MOVEMENT_SPEED, 0.10000000149011612).add(EntityAttributes.ATTACK_SPEED).add(EntityAttributes.LUCK);
     }
 
 
@@ -84,9 +85,16 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
         return this.mainArm;
     }
 
-    @Override
+    /*@Override
     public Iterable<ItemStack> getArmorItems() {
         return this.inventory.armor;
+    }
+
+     */
+
+    @Override
+    public int getArmor() {
+        return inventory.armor.size();
     }
 
     @Override
@@ -105,7 +113,7 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
     @Override
     public void equipStack(final EquipmentSlot slot, final ItemStack stack) {
         if(inventory != null) {
-            processEquippedStack(stack);
+            //processEquippedStack(stack);
             if (slot == EquipmentSlot.MAINHAND) {
                 this.onEquipStack(slot, this.inventory.main.set(this.inventory.selectedSlot, stack), stack);
             } else if (slot == EquipmentSlot.OFFHAND) {
@@ -117,11 +125,11 @@ public class ServerTriplicateCloneEntity extends LivingEntity {
     }
 
     @Override
-    protected void applyDamage(final DamageSource source, final float amount) {
-        super.applyDamage(source, amount);
+    protected void applyDamage(ServerWorld world, DamageSource source, float amount) {
+        super.applyDamage(world, source, amount);
         if(!getWorld().isClient) {
             if (timesAttacked > 1) {
-                kill();
+                kill(world);
             } else {
                 timesAttacked++;
             }

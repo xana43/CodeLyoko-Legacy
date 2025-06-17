@@ -25,7 +25,7 @@ public final class LyokoSpawnItem extends Item {
         if (MethodUtil.DimensionCheck.isPlayerInLyoko(Objects.requireNonNull(context.getPlayer()))) {
             if (!context.getWorld().isClient()) {
                 entity.spawnFromItemStack((ServerWorld) context.getWorld(), context.getStack(),
-                        context.getPlayer(), context.getBlockPos(), SpawnReason.SPAWN_EGG, true, false);
+                        context.getPlayer(), context.getBlockPos(), SpawnReason.SPAWN_ITEM_USE, true, false);
             }
         }
         return super.useOnBlock(context);

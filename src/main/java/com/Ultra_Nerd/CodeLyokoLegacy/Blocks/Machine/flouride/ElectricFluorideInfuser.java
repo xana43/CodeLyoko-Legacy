@@ -1,22 +1,22 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Machine.flouride;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.*;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
 public final class ElectricFluorideInfuser extends BlockWithEntity {
 
 
-    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalFacingBlock.FACING;
 
-    public ElectricFluorideInfuser() {
-        super(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)
-
-
-        );
+    public ElectricFluorideInfuser(final Settings settings) {
+        super(settings);
 
         //this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(INFUSING, false));
 

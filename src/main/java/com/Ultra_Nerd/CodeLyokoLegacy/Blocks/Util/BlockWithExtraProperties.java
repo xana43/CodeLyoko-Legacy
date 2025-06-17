@@ -30,15 +30,14 @@ public class BlockWithExtraProperties extends Block {
     }
 
 
-
     @Override
-    protected VoxelShape getCullingShape(BlockState state, BlockView world, BlockPos pos) {
-        return fullCube ? super.getCullingShape(state, world, pos):VoxelShapes.empty() ;
+    protected VoxelShape getCullingShape(final BlockState state) {
+        return fullCube ? super.getCullingShape(state):VoxelShapes.empty();
     }
 
     @Override
-    protected boolean isCullingShapeFullCube(BlockState state, BlockView world, BlockPos pos) {
-        return fullCube;
+    protected boolean isTransparent(BlockState state) {
+        return transparent;
     }
 
     @Override
@@ -46,8 +45,4 @@ public class BlockWithExtraProperties extends Block {
         return shapeFullCube;
     }
 
-    @Override
-    protected boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
-        return transparent;
-    }
 }

@@ -8,16 +8,19 @@ import net.minecraft.advancement.AdvancementCriterion;
 import net.minecraft.advancement.AdvancementRequirements;
 import net.minecraft.advancement.AdvancementRewards;
 import net.minecraft.advancement.criterion.RecipeUnlockedCriterion;
-import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.recipe.RecipeExporter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.AbstractCookingRecipe;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.book.CookingRecipeCategory;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
@@ -58,9 +61,18 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
     }
 
     private static int getModFuelTime(final Ingredient ingredient) {
-        for (final ItemStack stack : ingredient.getMatchingStacks()) {
-            if (ModFuels.FUEL_MAP.containsKey(stack.getItem())) {
-                return ModFuels.FUEL_MAP.get(stack.getItem());
+
+        final var customIngredient = ingredient.getCustomIngredient();
+        if(customIngredient != null) {
+
+
+            final var ingredientMatches = customIngredient.getMatchingItems().toList();
+            for (final RegistryEntry<Item> item : ingredientMatches) {
+                final Item itemToCheck = item.value();
+                if (!ModFuels.FUEL_MAP.containsKey(itemToCheck)) {
+                    continue;
+                }
+                return ModFuels.FUEL_MAP.get(itemToCheck);
             }
         }
         CodeLyokoMain.LOG.warn("no fuel time found falling back");
@@ -76,6 +88,7 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
         return this.output;
     }
 
+
     private void validate(final Identifier recipeId) {
         if (this.criteria.isEmpty()) {
             throw new IllegalArgumentException("No way of obtaining recipe " + recipeId);
@@ -83,13 +96,13 @@ public final class CustomCookingRecipeJsonBuilder implements CraftingRecipeJsonB
     }
 
     @Override
-    public void offerTo(final RecipeExporter exporter, final Identifier recipeId) {
-        this.validate(recipeId);
+    public void offerTo(final RecipeExporter exporter, final RegistryKey<Recipe<?>> recipeId) {
+        this.validate(recipeId.getValue());
         final Advancement.Builder builder = exporter.getAdvancementBuilder().criterion("has_the_recipe",RecipeUnlockedCriterion.create(recipeId)).rewards(AdvancementRewards.Builder.recipe(recipeId)).criteriaMerger(AdvancementRequirements.CriterionMerger.OR);
         Objects.requireNonNull(builder);
         this.criteria.forEach(builder::criterion);
         AbstractCookingRecipe abstractCookingRecipe = this.factory.create(Objects.requireNonNullElse(this.group,""),this.cookingRecipeCategory,input,new ItemStack(output),experience,cookingTime);
-        exporter.accept(recipeId,abstractCookingRecipe, builder.build(recipeId.withPrefixedPath("recipes/" + this.category.getName() + "/")));
+        exporter.accept(recipeId,abstractCookingRecipe, builder.build(recipeId.getValue().withPrefixedPath("recipes/" + this.category.getName() + "/")));
     }
 
   /*  private record CustomCookingRecipeJsonProvider(Identifier recipeId, String group

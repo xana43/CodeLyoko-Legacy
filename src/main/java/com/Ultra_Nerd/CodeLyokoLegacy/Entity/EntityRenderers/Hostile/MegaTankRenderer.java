@@ -4,10 +4,12 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityRenderers.Hostile;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels.ModelMegaTank;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.MegaTankEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.state.EntityRenderState;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
 
-public final class MegaTankRenderer extends GeoEntityRenderer<MegaTankEntity>/*extends GeoEntityRenderer<MegaTankEntity>*/ {
+public final class MegaTankRenderer<R extends EntityRenderState & GeoRenderState> extends GeoEntityRenderer<MegaTankEntity,R>/*extends GeoEntityRenderer<MegaTankEntity>*/ {
     public MegaTankRenderer(final EntityRendererFactory.Context ctx) {
         super(ctx, new ModelMegaTank());
     }/*

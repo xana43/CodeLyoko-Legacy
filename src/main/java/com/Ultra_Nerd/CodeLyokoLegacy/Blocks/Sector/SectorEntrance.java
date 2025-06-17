@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCollisionHandler;
 import net.minecraft.network.packet.s2c.play.PositionFlag;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -29,25 +30,34 @@ public final class SectorEntrance extends Block {
 
     private void teleportToDimension(final World world,final Entity entity)
     {
-        if(!world.isClient()) {
-            final ServerWorld serverWorld = Objects.requireNonNull(world.getServer()).getWorld(sectorSelector.getWorldRegistryKey());
-            float validAirHeight = 0;
-            validAirHeight += entity.getHeight();
-            if(!entity.getPassengerList().isEmpty())
-            {
-                for(final Entity passengerEntity : entity.getPassengerList())
-                {
-                    validAirHeight += passengerEntity.getHeight();
-                }
-            }
-            final BlockPos validPosition = MethodUtil.HelperMethods.getValidPosition(serverWorld, validAirHeight);
-            entity.teleport(serverWorld, validPosition.getX(), validPosition.getY(), validPosition.getZ(), PositionFlag.VALUES, entity.getYaw(), entity.getPitch());
+        if(world.isClient()) {
+        return;
         }
+        final ServerWorld serverWorld = Objects.requireNonNull(world.getServer()).getWorld(sectorSelector.getWorldRegistryKey());
+        float validAirHeight = 0;
+        validAirHeight += entity.getHeight();
+        if(!entity.getPassengerList().isEmpty())
+        {
+            for(final Entity passengerEntity : entity.getPassengerList())
+            {
+                float highestHeight = 0;
+                if(passengerEntity.getHeight() > highestHeight)
+                {
+                    highestHeight = passengerEntity.getHeight();
+                    continue;
+                }
+                validAirHeight += highestHeight;
+                break;
+            }
+        }
+            final BlockPos validPosition = MethodUtil.HelperMethods.getValidPosition(serverWorld, validAirHeight);
+            entity.teleport(serverWorld, validPosition.getX(), validPosition.getY(), validPosition.getZ(), PositionFlag.VALUES, entity.getYaw(), entity.getPitch(),true);
+
     }
 
     @Override
-    public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
+    protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
+        super.onEntityCollision(state, world, pos, entity, handler);
         teleportToDimension(world,entity);
     }
 
@@ -58,7 +68,7 @@ public final class SectorEntrance extends Block {
     }
 
     @Override
-    public void onLandedUpon(final World world, final BlockState state, final BlockPos pos, final Entity entity, final float fallDistance) {
+    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
         super.onLandedUpon(world, state, pos, entity, fallDistance);
         teleportToDimension(world,entity);
     }

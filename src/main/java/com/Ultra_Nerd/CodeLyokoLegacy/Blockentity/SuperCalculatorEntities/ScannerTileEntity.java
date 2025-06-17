@@ -15,6 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
+import java.util.Set;
+
 public final class ScannerTileEntity extends MultiBlockController {
 
     private RegistryKey<World> destinationWorld = ModDimensions.carthage;
@@ -58,11 +60,11 @@ public final class ScannerTileEntity extends MultiBlockController {
                 //serverWorld.getProfiler().push("portal");
                 if (scanTimer <= 0 && inScanner) {
                     if (this.destinationWorld == ModDimensions.carthage) {
-                        player.teleport(serverDestinationWorld, 0, 140, 0, player.getYaw(), player.getPitch());
+                        player.teleport(serverDestinationWorld, 0, 140, 0, Set.of(),player.getYaw(), player.getPitch(),true);
                     } else {
                         final BlockPos validPosition = MethodUtil.HelperMethods.getValidPosition(serverDestinationWorld, player.getHeight(), Direction.UP, player.getSafeFallDistance());
                         if (validPosition != null) {
-                            player.teleport(serverDestinationWorld, validPosition.getX(), validPosition.getY(), validPosition.getZ(), player.getYaw(), player.getPitch());
+                            player.teleport(serverDestinationWorld, validPosition.getX(), validPosition.getY(), validPosition.getZ(),Set.of(), player.getYaw(), player.getPitch(),true);
                         }
                     }
                 }

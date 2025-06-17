@@ -8,6 +8,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.MathHelper;
@@ -51,7 +52,7 @@ public final class LaserEntity extends ArrowEntity {
         return 0;
     }
     private int calculateHitDamage() {
-        final int velocityDamageScale = MathHelper.ceil(MathHelper.clamp(this.getVelocity().length() * this.getDamage(),0.0,2.147483647E9));
+        final int velocityDamageScale = MathHelper.ceil(MathHelper.clamp(this.getVelocity().length() * getVelocityMultiplier(),0.0,2.147483647E9));
         if(isCritical()) {
             final long randomLong = this.random.nextInt(velocityDamageScale / 2 + 2);
             return (int) Math.min(randomLong +(long) velocityDamageScale,2147483647L);
@@ -89,7 +90,7 @@ public final class LaserEntity extends ArrowEntity {
         lifetime--;
         if (lifetime <= 0) {
             if (!getWorld().isClient) {
-                this.kill();
+                this.kill((ServerWorld) getWorld());
             }
         }
     }
@@ -102,11 +103,11 @@ public final class LaserEntity extends ArrowEntity {
             livingEntity.onAttacking(entityHit);
         }
         final DamageSource laserArrowDamageSource = this.getDamageSources().arrow(this, ownerEntity != null ? ownerEntity : this);
-        if(entityHit.damage( laserArrowDamageSource,calculateHitDamage())){
+        if(entityHit.damage((ServerWorld) getWorld(),laserArrowDamageSource,calculateHitDamage())){
 
         }
         if (!getWorld().isClient) {
-            this.kill();
+            this.kill((ServerWorld)  getWorld());
         }
     }
 
@@ -115,7 +116,7 @@ public final class LaserEntity extends ArrowEntity {
         super.onBlockHit(blockHitResult);
 
         if (!getWorld().isClient) {
-            this.kill();
+            this.kill((ServerWorld) getWorld());
         }
     }
 

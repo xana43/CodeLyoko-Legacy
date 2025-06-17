@@ -13,12 +13,14 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Supplier;
+
 public class LyokoVehicleEntity extends BoatEntity {
 
 
 
-    public LyokoVehicleEntity(final EntityType<? extends BoatEntity> entityType, final World world) {
-        super(entityType, world);
+    public LyokoVehicleEntity(final EntityType<? extends BoatEntity> entityType, final World world, final Supplier<Item> itemSupplier) {
+        super(entityType, world,itemSupplier);
         if (!MethodUtil.DimensionCheck.isEntityInLyoko(this)) {
             this.remove(RemovalReason.DISCARDED);
         }
@@ -29,23 +31,21 @@ public class LyokoVehicleEntity extends BoatEntity {
 
     }
 
-    @Nullable
     @Override
-    protected SoundEvent getPaddleSoundEvent() {
+    protected @Nullable SoundEvent getPaddleSound() {
         return null;
     }
 
-
     @Override
-    public float interpolatePaddlePhase(final int paddle, final float tickDelta) {
+    public float lerpPaddlePhase(int paddle, float tickProgress) {
         return 0;
     }
 
-
     @Override
-    public void setPaddleMovings(final boolean leftMoving, final boolean rightMoving) {
-        super.setPaddleMovings(false, false);
+    public void setPaddlesMoving(boolean left, boolean right) {
+        super.setPaddlesMoving(false, false);
     }
+
 
 
 
@@ -62,11 +62,6 @@ public class LyokoVehicleEntity extends BoatEntity {
     }
 
 
-
-    @Override
-    public Item asItem() {
-        return null;
-    }
 
     @Override
     protected void fall(final double heightDifference, final boolean onGround, final BlockState state, final BlockPos landedPosition) {

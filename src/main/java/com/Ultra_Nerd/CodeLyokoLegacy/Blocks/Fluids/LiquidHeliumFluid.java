@@ -8,6 +8,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -39,21 +40,21 @@ public abstract class LiquidHeliumFluid extends LyokoFluid {
         super.randomDisplayTick(world, pos, state, random);
         if (!state.isStill() && !(Boolean)state.get(FALLING)) {
             if (random.nextInt(64) == 0) {
-                world.playSound((double)pos.getX() + (double)0.5F, (double)pos.getY() + (double)0.5F, (double)pos.getZ() + (double)0.5F, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F, false);
+                world.playSoundClient((double)pos.getX() + (double)0.5F, (double)pos.getY() + (double)0.5F, (double)pos.getZ() + (double)0.5F, SoundEvents.BLOCK_WATER_AMBIENT, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, random.nextFloat() + 0.5F, false);
             }
             if(random.nextInt(1000) == 0)
             {
-                world.playSound((double)pos.getX() + (double)0.5F, (double)pos.getY() + (double)0.5F, (double)pos.getZ() + (double)0.5F, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, 1.9F + random.nextFloat() * 0.7F, false);
+                world.playSoundClient((double)pos.getX() + (double)0.5F, (double)pos.getY() + (double)0.5F, (double)pos.getZ() + (double)0.5F, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.BLOCKS, random.nextFloat() * 0.25F + 0.75F, 1.9F + random.nextFloat() * 0.7F, false);
             }
             if(random.nextInt(100) == 0)
             {
                 double x = (double)pos.getX() + random.nextDouble();
                 double y = (double)pos.getY() + 1.0;
                 double z = (double)pos.getZ() + random.nextDouble();
-                world.addParticle(ParticleTypes.SNOWFLAKE, x, y, z, 0.0D, 0.0D, 0.0D);
+                world.addParticleClient(ParticleTypes.SNOWFLAKE, x, y, z, 0.0D, 0.0D, 0.0D);
             }
         } else if (random.nextInt(10) == 0) {
-            world.addParticle(ParticleTypes.UNDERWATER, (double)pos.getX() + random.nextDouble(), (double)pos.getY() + random.nextDouble(), (double)pos.getZ() + random.nextDouble(), 0.0, 0.0, 0.0);
+            world.addParticleClient(ParticleTypes.UNDERWATER, (double)pos.getX() + random.nextDouble(), (double)pos.getY() + random.nextDouble(), (double)pos.getZ() + random.nextDouble(), 0.0, 0.0, 0.0);
         }
     }
 
@@ -70,7 +71,7 @@ public abstract class LiquidHeliumFluid extends LyokoFluid {
         }
 
         @Override
-        protected boolean isInfinite(final World world) {
+        protected boolean isInfinite(final ServerWorld world) {
             return false;
         }
 
@@ -92,7 +93,7 @@ public abstract class LiquidHeliumFluid extends LyokoFluid {
 
     public static final class Still extends LiquidHeliumFluid {
         @Override
-        protected boolean isInfinite(final World world) {
+        protected boolean isInfinite(final ServerWorld world) {
             return true;
         }
 

@@ -40,11 +40,12 @@ public final class UraniumCanister extends Block {
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if (!player.isCreative()) {
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.HUNGER, 100, 2, false, false, false));
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 255, 255, false, false, false));
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 1, false, true, false));
+        if (player.isCreative()) {
+        return ActionResult.SUCCESS;
         }
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.HUNGER, 100, 2, false, false, false));
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 255, 255, false, false, false));
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 1, false, true, false));
         return ActionResult.SUCCESS;
     }
 

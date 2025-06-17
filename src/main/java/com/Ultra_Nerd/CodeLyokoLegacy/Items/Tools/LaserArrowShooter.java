@@ -7,8 +7,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,9 +31,10 @@ public final class LaserArrowShooter extends BowItem {
 
 
     @Override
-    public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
-        final ItemStack item = user.getStackInHand(hand);
-        if (!world.isClient()) {
+    public ActionResult use(final World world, final PlayerEntity user, final Hand hand) {
+        if (world.isClient()) {
+        return ActionResult.FAIL;
+        }
             world.playSound(null, user.getBlockPos(), ModSounds.LASERARROW, SoundCategory.PLAYERS, 1f, 1f);
 
 
@@ -45,8 +46,8 @@ public final class LaserArrowShooter extends BowItem {
             las.setPos(user.getX(), user.getEyeY(), user.getZ());
             las.setVelocity(user, user.getPitch(), user.getYaw(), 0, 11.44f, 0);
             world.spawnEntity(las);
-        }
-        return TypedActionResult.success(item);
+
+        return ActionResult.SUCCESS;
 
     }
 

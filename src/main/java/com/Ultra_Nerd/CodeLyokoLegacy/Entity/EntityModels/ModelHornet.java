@@ -8,7 +8,9 @@ import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.HornetEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
+import software.bernie.geckolib.renderer.base.GeoRenderState;
 
 public final class ModelHornet extends DefaultedEntityGeoModel<HornetEntity> {
     public ModelHornet() {
@@ -17,12 +19,9 @@ public final class ModelHornet extends DefaultedEntityGeoModel<HornetEntity> {
     }
 
 
-
-
-
     @Override
-    public RenderLayer getRenderType(final HornetEntity animatable, final Identifier texture) {
-        return RenderLayer.getEntityTranslucent(getTextureResource(animatable));
+    public @Nullable RenderLayer getRenderType(final GeoRenderState renderState,final Identifier texture) {
+        return RenderLayer.getEntityTranslucent(getTextureResource(renderState));
     }
 
 

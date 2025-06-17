@@ -33,7 +33,7 @@ public final class PlayerScannerComponent implements AutoSyncedComponent {
 
     @Override
     public void readFromNbt(final @NotNull NbtCompound tag,final RegistryWrapper.WrapperLookup wrapperLookup) {
-            tag.getKeys().forEach(key -> POS_HASH_MAP.put(UUID.fromString(key),BlockPos.fromLong(tag.getLong(key))));
+            tag.getKeys().forEach(key -> POS_HASH_MAP.put(UUID.fromString(key),BlockPos.fromLong(tag.getLong(key).orElse(0L))));
     }
 
     @Override

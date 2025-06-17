@@ -6,7 +6,11 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
+import software.bernie.geckolib.animatable.processing.AnimationTest;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public final class KankrelatEntity extends HostileEntity implements GeoAnimatable {
@@ -17,7 +21,7 @@ public final class KankrelatEntity extends HostileEntity implements GeoAnimatabl
         super(entityType, world);
     }
 
-    private <E extends KankrelatEntity> @NotNull PlayState animationPred(@NotNull AnimationState<E> event) {
+    private <E extends GeoAnimatable> @NotNull PlayState animationPred(@NotNull AnimationTest<E> event) {
         if (event.isMoving()) {
             controller.setAnimation(RawAnimation.begin().thenLoop("animation.ModelKankrelat.walk"));
             return PlayState.CONTINUE;
@@ -40,7 +44,7 @@ public final class KankrelatEntity extends HostileEntity implements GeoAnimatabl
     public double getTick(final Object o) {
         return 0;
     }
-    private final AnimationController<?> controller = new AnimationController<>(this, "kankrelatcontroller", 20,
+    private final AnimationController<?> controller = new AnimationController<>("kankrelatcontroller", 20,
             this::animationPred);
 
 

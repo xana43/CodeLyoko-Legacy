@@ -1,24 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Util.Client.itemRenderers;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Items.Tools.ForceFieldEmitter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public record ForceFieldEmitterRenderer(MinecraftClient mc) implements BuiltinItemRendererRegistry.DynamicItemRenderer {
+public record ForceFieldEmitterRenderer(MinecraftClient mc) /*implements BuiltinItemRendererRegistry.DynamicItemRenderer*/ {
     private static final Identifier ForceFieldLocation = CodeLyokoMain.codeLyokoPrefix("item/force_field_emitter");
-    private static BakedModel ForceFieldModel;
+    //private static BakedModel ForceFieldModel;
     public ForceFieldEmitterRenderer()
     {
         this(MinecraftClient.getInstance());
@@ -28,7 +19,7 @@ public record ForceFieldEmitterRenderer(MinecraftClient mc) implements BuiltinIt
     {
         return ForceFieldLocation;
     }
-    @Override
+    /*@Override
     public void render(final ItemStack stack, final ModelTransformationMode mode, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light, final int overlay) {
         matrices.push();
         if(ForceFieldModel == null)
@@ -53,5 +44,5 @@ public record ForceFieldEmitterRenderer(MinecraftClient mc) implements BuiltinIt
             }
         }
         matrices.pop();
-    }
+    }*/
 }

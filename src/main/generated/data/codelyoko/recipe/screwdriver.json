@@ -10,12 +10,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "h": {
-      "item": "minecraft:cobweb"
-    },
-    "i": {
-      "item": "minecraft:iron_ingot"
-    }
+    "h": "minecraft:cobweb",
+    "i": "minecraft:iron_ingot"
   },
   "pattern": [
     " i ",

@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import net.minecraft.state.property.Property;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -33,8 +33,8 @@ public record AdditionalStateProperties() {
         }
 
         @Override
-        public Collection<Float> getValues() {
-            return this.values;
+        public List<Float> getValues() {
+            return this.values.asList();
         }
 
 
@@ -71,6 +71,11 @@ public record AdditionalStateProperties() {
             }
         }
 
+        @Override
+        public int ordinal(Float value) {
+            return 0;
+        }
+
 
         @Override
         public String name(final Float value) {
@@ -103,8 +108,8 @@ public record AdditionalStateProperties() {
         }
 
         @Override
-        public Collection<Double> getValues() {
-            return this.values;
+        public List<Double> getValues() {
+            return this.values.asList();
         }
 
 
@@ -139,6 +144,11 @@ public record AdditionalStateProperties() {
             {
                 return Optional.empty();
             }
+        }
+
+        @Override
+        public int ordinal(Double value) {
+            return 0;
         }
 
 

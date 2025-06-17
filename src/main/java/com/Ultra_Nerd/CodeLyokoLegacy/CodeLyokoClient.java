@@ -17,7 +17,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.ClientTickEvent;
 import com.Ultra_Nerd.CodeLyokoLegacy.HookEvents.HudRenderCallbackOverride;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Client.ModHandledScreensClientInitializer;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.*;
-import com.Ultra_Nerd.CodeLyokoLegacy.Items.Tools.Buckets.CustomColorBucket;
 import com.Ultra_Nerd.CodeLyokoLegacy.Network.Util.PacketHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Particles.LyokoFloatingParticle;
 import com.Ultra_Nerd.CodeLyokoLegacy.Particles.LyokoRingParticle;
@@ -37,16 +36,14 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.fabricmc.fabric.mixin.client.rendering.DimensionEffectsAccessor;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.DimensionEffects;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.BoatEntityRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.Vec3d;
-import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
@@ -121,7 +118,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.LASER_ENTITY_TYPE, LaserRenderer::new);
         EntityRendererRegistry.register(ModEntities.HORNET_ENTITY_ENTITY_TYPE, HornetRenderer::new);
         EntityRendererRegistry.register(ModEntities.FAN_ENTITY_TYPE, FanRenderer::new);
-        EntityRendererRegistry.register(ModEntities.SKID_ENTITY_TYPE, ctx -> new BoatEntityRenderer(ctx,false));
+        EntityRendererRegistry.register(ModEntities.SKID_ENTITY_TYPE, ctx -> new BoatEntityRenderer(ctx, EntityModelLayers.OAK_BOAT));
         EntityRendererRegistry.register(ModEntities.TRIPLICATE_ENTITY_TYPE, TriplicateRenderer::new);
         //for entity that need layer locations
         EntityRendererRegistry.register(ModEntities.OVERBOARD, OverboardRenderer::new);
@@ -155,6 +152,7 @@ public record CodeLyokoClient() implements ClientModInitializer {
     }
 
     private static void registerItemPredicates() {
+        /*
         ModelPredicateProviderRegistry.register(ModItems.TEST_MULTIPLAYER_PHONE,
                 CodeLyokoMain.codeLyokoPrefix("message"),
                 (stack, world, entityin, integer) -> stack.hasEnchantments() ? 1 : 0);
@@ -196,6 +194,8 @@ public record CodeLyokoClient() implements ClientModInitializer {
                     case 4 -> 1;
                     default -> 0.0f;
                 });
+
+         */
     }
 
     private static void registerModelLoaders() {
@@ -214,17 +214,19 @@ public record CodeLyokoClient() implements ClientModInitializer {
                 ComputerCirculatorRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.ITEM_PROJECTOR_TEST_BLOCK_ENTITY, ItemProjectorTestRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntities.RACK_CHARGER_BLOCK_ENTITY, RackChargerRenderer::new);
-        BlockEntityRendererFactories.register(ModBlockEntities.LAPTOP_BLOCK_ENTITY,LaptopBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.LAPTOP_BLOCK_ENTITY, LaptopBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntities.SUPERCOMPUTER_CORE_BLOCK_ENTITY_TYPE, SuperComputerBlockEntityRenderer::new);
     }
-
     private static void registerColorProviders() {
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> switch (stack.getTranslationKey()) {
+        /*ColorProviderRegistry.ITEM.register((stack, tintIndex) -> switch (stack.getTranslationKey()) {
             case "item.codelyoko.story_book" -> 0x00008B;
-            case "item.codelyoko.story_book2" -> ColorHelper.Argb.getArgb(255, 255, 0, 0);
+            case "item.codelyoko.story_book2" -> ColorHelper.getArgb(255, 255, 0, 0);
             default -> 1;
         }, ModItems.STORY_BOOK, ModItems.STORY_BOOK2);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ((CustomColorBucket)stack.getItem()).getFluidColor(tintIndex),ModItems.LIQUID_HELIUM_BUCKET);
+    */
     }
+
     private static String createKeyBindingTranslationKey(final String keyName) {
         return "key." + CodeLyokoMain.MOD_ID +'.' +keyName;
     }
@@ -241,11 +243,6 @@ public record CodeLyokoClient() implements ClientModInitializer {
                     @Override
                     public boolean useThickFog(final int camX, final int camY) {
                         return false;
-                    }
-
-                    @Override
-                    public float @Nullable [] getFogColorOverride(final float skyAngle, final float tickDelta) {
-                        return null;
                     }
                 });
         DimensionRenderingRegistry.registerSkyRenderer(ModDimensions.carthage, new CustomCarthageSky());

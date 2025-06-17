@@ -48,13 +48,13 @@ public record ModSounds() {
     private static SoundEvent registerSound(final String name)
     {
         final SoundEvent registeredSoundEvent = SoundEvent.of(CodeLyokoMain.codeLyokoPrefix(name));
-        return Registry.register(Registries.SOUND_EVENT, registeredSoundEvent.getId(), registeredSoundEvent);
+        return Registry.register(Registries.SOUND_EVENT, registeredSoundEvent.id(), registeredSoundEvent);
     }
 
     private static SoundEvent registerSound(final String name,final float distanceToTravel)
     {
         final SoundEvent registeredSoundEvent = SoundEvent.of(CodeLyokoMain.codeLyokoPrefix(name),distanceToTravel);
-        return Registry.register(Registries.SOUND_EVENT, registeredSoundEvent.getId(), registeredSoundEvent);
+        return Registry.register(Registries.SOUND_EVENT, registeredSoundEvent.id(), registeredSoundEvent);
     }
     private static RegistryEntry.Reference<SoundEvent> registerReference(final String name)
     {

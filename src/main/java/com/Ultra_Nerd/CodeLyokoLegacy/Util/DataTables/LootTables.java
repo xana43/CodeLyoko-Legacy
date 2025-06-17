@@ -8,6 +8,7 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider;
+import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextTypes;
@@ -35,13 +36,14 @@ public final class LootTables extends FabricBlockLootTableProvider {
             if(Registries.BLOCK.getId(block).getNamespace().equals(CodeLyokoMain.MOD_ID))
             {
                 if(!(block instanceof SectorEntrance)) {
-                    if (block != ModBlocks.SILICA_SAND) {
+                    CodeLyokoMain.LOG.info("attempting to generate loot table for {}",block.getName());
+                    if (block != ModBlocks.SILICA_SAND && block.getLootTableKey().isPresent() && block.asItem() != Items.AIR) {
                         addDrop(block);
 
                     } else if (block == ModBlocks.LAPTOP_BLOCK) {
 
                         addDrop(block,drops(ModItems.JEREMY_LAPTOP));
-                    } else{
+                    } else if (block == ModBlocks.SILICA_SAND) {
                         addDrop(block, dropsWithSilkTouch(block, applyExplosionDecay(block,
                                 ItemEntry.builder(ModItems.RAW_SILICADUST)
                                         .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(4.0F, 5.0F))))));
@@ -63,7 +65,7 @@ public final class LootTables extends FabricBlockLootTableProvider {
 
         @Override
         public void accept(BiConsumer<RegistryKey<LootTable>, LootTable.Builder> lootTableBiConsumer) {
-            lootTableBiConsumer.accept(ModEntities.BLOK.getLootTableId(), LootTable.builder()
+            lootTableBiConsumer.accept(ModEntities.BLOK.getLootTableKey().orElseThrow(), LootTable.builder()
                     .pool(LootPool.builder().rolls(UniformLootNumberProvider.create(1,3))
                             .with(ItemEntry.builder(ModItems.BIT).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1,4)))))
                     .apply(new EnchantWithLevelsLootFunction.Builder(UniformLootNumberProvider.create(20.0f,39.0f))));

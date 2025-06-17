@@ -4,9 +4,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,14 +19,14 @@ public final class MultiplayerPhone extends Item {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
+    public ActionResult use(final World world, final PlayerEntity user, final Hand hand) {
         final ItemStack thisStack = user.getStackInHand(hand);
         if (user.getServer() == null) {
-            return TypedActionResult.pass(thisStack);
+            return ActionResult.PASS;
         }
         if (user.getServer().isSingleplayer()) {
             user.sendMessage(Text.translatable("phone.use.singleplayer"), false);
-            return TypedActionResult.fail(thisStack);
+            return ActionResult.FAIL;
         }
 
         user.sendMessage(Text.translatable("phone.use.multiplayer").formatted(Formatting.BLACK), true);
@@ -38,7 +38,7 @@ public final class MultiplayerPhone extends Item {
             }
 
         });
-        return TypedActionResult.success(thisStack);
+        return ActionResult.SUCCESS;
 
 
     }

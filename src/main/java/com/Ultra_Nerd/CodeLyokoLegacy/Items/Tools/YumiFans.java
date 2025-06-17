@@ -8,23 +8,26 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.TridentItem;
+import net.minecraft.item.consume.UseAction;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public final class YumiFans extends TridentItem {
@@ -56,7 +59,7 @@ public final class YumiFans extends TridentItem {
     }
 
     @Override
-    public void onStoppedUsing(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull LivingEntity entityLiving, int timeLeft) {
+    public boolean onStoppedUsing(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull LivingEntity entityLiving, int timeLeft) {
         //super.onStoppedUsing(stack,worldIn,entityLiving,timeLeft);
         if (entityLiving instanceof PlayerEntity playerentity) {
             int i = this.getMaxUseTime(stack,entityLiving) - timeLeft;
@@ -75,12 +78,13 @@ public final class YumiFans extends TridentItem {
 
             }
         }
+        return false;
     }
 
 
     @Override
-    public @NotNull TypedActionResult<ItemStack> use(@NotNull World worldIn, @NotNull PlayerEntity playerIn, @NotNull Hand handIn) {
-        final ItemStack heldItem = playerIn.getStackInHand(handIn);
+    public ActionResult use(@NotNull World worldIn, @NotNull PlayerEntity playerIn, @NotNull Hand handIn) {
+
        // if(!playerIn.isCreative())
         //{
          //   if(CardinalData.LyokoClass.getLyokoClass(playerIn) != 2) {
@@ -90,23 +94,22 @@ public final class YumiFans extends TridentItem {
 
 
         playerIn.setCurrentHand(handIn);
-        return TypedActionResult.consume(heldItem);
+        return ActionResult.CONSUME;
     }
 
-
     @Override
-    public void inventoryTick(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, ServerWorld world, Entity entity, @Nullable EquipmentSlot slot) {
+        super.inventoryTick(stack, world, entity, slot);
         if (stack.hasEnchantments()) {
             return;
         }
-        final DynamicRegistryManager registryManager = worldIn.getRegistryManager();
+        final DynamicRegistryManager registryManager = world.getRegistryManager();
         final RegistryEntry<Enchantment> LOYALTY = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.LOYALTY);
         final RegistryEntry<Enchantment> SHARPNESS = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.SHARPNESS);
         final RegistryEntry<Enchantment> IMPALING = MethodUtil.HelperMethods.getRegistryEntry(registryManager, RegistryKeys.ENCHANTMENT,Enchantments.IMPALING);
         stack.addEnchantment(LOYALTY, LOYALTY.value().getMaxLevel());
         stack.addEnchantment(SHARPNESS, SHARPNESS.value().getMaxLevel());
         stack.addEnchantment(IMPALING, IMPALING.value().getMaxLevel());
-        //stack.addHideFlag(ItemStack.TooltipSection.ENCHANTMENTS);
     }
 
 

@@ -18,7 +18,6 @@ public record StartWorldTickServerWorldEvent() {
     public static void consume(final ServerWorld world) {
 
         world.getPlayers().parallelStream().forEach(serverPlayerEntity -> {
-
             //tick the xana attack handler and heal player stress
             if ((tick >> 3) % 5 == 0) {
                 if (!serverPlayerEntity.getEquippedStack(EquipmentSlot.HEAD).isOf(ModItems.MIND_HELMET)) {
@@ -40,7 +39,7 @@ public record StartWorldTickServerWorldEvent() {
             }
             //carry out continuous operations dependant on the dimension
             if (MethodUtil.DimensionCheck.isPlayerInLyoko(serverPlayerEntity)) {
-                serverPlayerEntity.getHungerManager().setExhaustion(0);
+                serverPlayerEntity.getHungerManager().setFoodLevel(10);
                 serverPlayerEntity.getHungerManager().setSaturationLevel(5);
                 serverPlayerEntity.getAbilities().allowModifyWorld = serverPlayerEntity.isCreative();
             } else {

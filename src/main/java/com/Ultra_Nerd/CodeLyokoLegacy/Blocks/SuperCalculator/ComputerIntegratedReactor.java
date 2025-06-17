@@ -3,21 +3,25 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculator;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ComputerReactorBlockEntityInventory;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractFurnaceBlock;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public final class ComputerIntegratedReactor extends AbstractFurnaceBlock implements BlockEntityProvider {
-    public ComputerIntegratedReactor() {
-        super(Settings.copy(Blocks.IRON_BLOCK));
+    public ComputerIntegratedReactor(final Settings settings) {
+        super(settings);
     }
 
     @Nullable
@@ -63,16 +67,16 @@ public final class ComputerIntegratedReactor extends AbstractFurnaceBlock implem
     }
 
     @Override
-    public void onStateReplaced(final BlockState state, final World world, final BlockPos pos, final BlockState newState, final boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
-            final BlockEntity BE = world.getBlockEntity(pos);
-            if (BE instanceof final ComputerReactorBlockEntityInventory reactorTile) {
-                ItemScatterer.spawn(world, pos, reactorTile);
-                world.updateComparators(pos, this);
-            }
-            super.onStateReplaced(state, world, pos, newState, moved);
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+        super.onStateReplaced(state, world, pos, moved);
+        final BlockEntity BE = world.getBlockEntity(pos);
+        if (BE instanceof final ComputerReactorBlockEntityInventory reactorTile) {
+            ItemScatterer.spawn(world, pos, reactorTile);
+            world.updateComparators(pos, this);
         }
     }
+
+
 
     @Override
     public boolean hasComparatorOutput(final BlockState state) {

@@ -4,9 +4,8 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.CardinalData;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MethodUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 import java.security.SecureRandom;
@@ -18,7 +17,7 @@ public final class CryptoKey extends Item {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(final World world, final PlayerEntity user, final Hand hand) {
+    public ActionResult use(final World world, final PlayerEntity user, final Hand hand) {
         if(!world.isClient) {
             if (MethodUtil.DimensionCheck.isPlayerInLyoko(user)) {
                 final int classId = CardinalData.LyokoClass.getLyokoClass(user);
@@ -32,9 +31,9 @@ public final class CryptoKey extends Item {
                     }
                     default -> throw new IllegalArgumentException("unexpected class id:" + classId);
                 }
-                return TypedActionResult.consume(user.getStackInHand(hand));
+                return ActionResult.CONSUME;
             }
         }
-        return TypedActionResult.success(user.getStackInHand(hand));
+        return ActionResult.SUCCESS;
     }
 }

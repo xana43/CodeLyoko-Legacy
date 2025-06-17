@@ -3,9 +3,10 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Tower;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModParticles;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.math.BlockPos;
@@ -19,13 +20,8 @@ public class TowerWall extends HorizontalFacingBlock {
 
     public static final IntProperty CURRENT_ACTIVATION_STATE = IntProperty.of("activation", 0, 3);
 
-    public TowerWall() {
-        super(AbstractBlock.Settings.copy(Blocks.BEDROCK)
-                .dropsNothing()
-                .sounds(BlockSoundGroup.GLASS)
-                .luminance(value -> 250)
-
-        );
+    public TowerWall(final Settings settings) {
+        super(settings);
         this.setDefaultState(this.getDefaultState().with(CURRENT_ACTIVATION_STATE, Integer.valueOf(0)));
     }
 
@@ -55,13 +51,13 @@ public class TowerWall extends HorizontalFacingBlock {
         switch (state.get(FACING)) {
             case NORTH -> {
                 switch (state.<Integer>get(CURRENT_ACTIVATION_STATE)) {
-                    case 0 -> world.addParticle(ModParticles.TOWER_PARTICLE, d0, d1,
+                    case 0 -> world.addParticleClient(ModParticles.TOWER_PARTICLE, d0, d1,
                             pos.getZ() + 1.25f, 0, 0, 0);
-                    case 1 -> world.addParticle(ModParticles.TOWER_PARTICLE_XANA, d0, d1,
+                    case 1 -> world.addParticleClient(ModParticles.TOWER_PARTICLE_XANA, d0, d1,
                             pos.getZ() + 1.25f, 0, 0, 0);
-                    case 2 -> world.addParticle(ModParticles.TOWER_PARTICLE_FRANZ, d0, d1,
+                    case 2 -> world.addParticleClient(ModParticles.TOWER_PARTICLE_FRANZ, d0, d1,
                             pos.getZ() + 1.25f, 0, 0, 0);
-                    case 3 -> world.addParticle(ModParticles.TOWER_PARTICLE_JEREMY, d0, d1,
+                    case 3 -> world.addParticleClient(ModParticles.TOWER_PARTICLE_JEREMY, d0, d1,
                             pos.getZ() + 1.25f, 0, 0, 0);
                     default -> {
                         CodeLyokoMain.LOG.error("case is:" + state.get(CURRENT_ACTIVATION_STATE));
@@ -71,13 +67,13 @@ public class TowerWall extends HorizontalFacingBlock {
             }
             case SOUTH -> {
                 switch (state.<Integer>get(CURRENT_ACTIVATION_STATE)) {
-                    case 0 -> world.addParticle(ModParticles.TOWER_PARTICLE,
+                    case 0 -> world.addParticleClient(ModParticles.TOWER_PARTICLE,
                             d0, d1, pos.getZ() - 0.25f, 0, 0, 0);
-                    case 1 -> world.addParticle(ModParticles.TOWER_PARTICLE_XANA,
+                    case 1 -> world.addParticleClient(ModParticles.TOWER_PARTICLE_XANA,
                             d0, d1, pos.getZ() - 0.25f, 0, 0, 0);
-                    case 2 -> world.addParticle(ModParticles.TOWER_PARTICLE_FRANZ,
+                    case 2 -> world.addParticleClient(ModParticles.TOWER_PARTICLE_FRANZ,
                             d0, d1, pos.getZ() - 0.25f, 0, 0, 0);
-                    case 3 -> world.addParticle(ModParticles.TOWER_PARTICLE_JEREMY,
+                    case 3 -> world.addParticleClient(ModParticles.TOWER_PARTICLE_JEREMY,
                             d0, d1, pos.getZ() - 0.25f, 0, 0, 0);
                     default -> { CodeLyokoMain.LOG.error("case is:" + state.get(CURRENT_ACTIVATION_STATE));
                         throw new UnsupportedOperationException("tower activation states doesn't exist");}
@@ -85,13 +81,13 @@ public class TowerWall extends HorizontalFacingBlock {
             }
             case EAST -> {
                 switch (state.<Integer>get(CURRENT_ACTIVATION_STATE)) {
-                    case 0 -> world.addParticle(ModParticles.TOWER_PARTICLE,
+                    case 0 -> world.addParticleClient(ModParticles.TOWER_PARTICLE,
                             pos.getX() - 0.25f, d1, d2, 0, 0, 0);
-                    case 1 -> world.addParticle(ModParticles.TOWER_PARTICLE_XANA,
+                    case 1 -> world.addParticleClient(ModParticles.TOWER_PARTICLE_XANA,
                             pos.getX() - 0.25f, d1, d2, 0, 0, 0);
-                    case 2 -> world.addParticle(ModParticles.TOWER_PARTICLE_FRANZ,
+                    case 2 -> world.addParticleClient(ModParticles.TOWER_PARTICLE_FRANZ,
                             pos.getX() - 0.25f, d1, d2, 0, 0, 0);
-                    case 3 -> world.addParticle(ModParticles.TOWER_PARTICLE_JEREMY,
+                    case 3 -> world.addParticleClient(ModParticles.TOWER_PARTICLE_JEREMY,
                             pos.getX() - 0.25f, d1, d2, 0, 0, 0);
                     default -> { CodeLyokoMain.LOG.error("case is:" + state.get(CURRENT_ACTIVATION_STATE));
                         throw new UnsupportedOperationException("tower activation states doesn't exist");}
@@ -99,13 +95,13 @@ public class TowerWall extends HorizontalFacingBlock {
             }
             case WEST -> {
                 switch (state.<Integer>get(CURRENT_ACTIVATION_STATE)) {
-                    case 0 -> world.addParticle(ModParticles.TOWER_PARTICLE,
+                    case 0 -> world.addParticleClient(ModParticles.TOWER_PARTICLE,
                             pos.getX() + 1.25f, d1, d2, 0, 0, 0);
-                    case 1 -> world.addParticle(ModParticles.TOWER_PARTICLE_XANA,
+                    case 1 -> world.addParticleClient(ModParticles.TOWER_PARTICLE_XANA,
                             pos.getX() + 1.25f, d1, d2, 0, 0, 0);
-                    case 2 -> world.addParticle(ModParticles.TOWER_PARTICLE_FRANZ,
+                    case 2 -> world.addParticleClient(ModParticles.TOWER_PARTICLE_FRANZ,
                             pos.getX() + 1.25f, d1, d2, 0, 0, 0);
-                    case 3 -> world.addParticle(ModParticles.TOWER_PARTICLE_JEREMY,
+                    case 3 -> world.addParticleClient(ModParticles.TOWER_PARTICLE_JEREMY,
                             pos.getX() + 1.25f, d1, d2, 0, 0, 0);
                     default -> { CodeLyokoMain.LOG.error("case is:" + state.get(CURRENT_ACTIVATION_STATE));
                         throw new UnsupportedOperationException("tower activation states doesn't exist");}

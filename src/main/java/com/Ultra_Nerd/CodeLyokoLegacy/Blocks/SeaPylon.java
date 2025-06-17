@@ -1,13 +1,10 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import org.jetbrains.annotations.Nullable;
@@ -19,16 +16,8 @@ public final class SeaPylon extends HorizontalFacingBlock {
     public static final BooleanProperty SELECTED_END = BooleanProperty.of("selected_as_teleport_endpoint");
 
 
-    public SeaPylon() {
-        super(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
-
-                .strength(-1, Integer.MAX_VALUE)
-                .sounds(BlockSoundGroup.GLASS)
-                .nonOpaque()
-                .luminance(10)
-
-
-        );
+    public SeaPylon(final Settings settings) {
+        super(settings);
 
     }
 

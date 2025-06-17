@@ -1,17 +1,15 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Entity.EntityModels;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Entity.VehicleEntities.OverbikeEntity;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.render.entity.state.EntityRenderState;
 
 // Made with Blockbench 4.8.3
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
-public class ModelOverbike extends EntityModel<OverbikeEntity> {
+public class ModelOverbike<T extends EntityRenderState> extends EntityModel<T> {
     private final ModelPart tire;
     public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(CodeLyokoMain.codeLyokoPrefix("overbike"),
             "main");
@@ -20,13 +18,14 @@ public class ModelOverbike extends EntityModel<OverbikeEntity> {
     //private final ModelPart part1;
     private final ModelPart seat;
     public ModelOverbike(ModelPart root) {
+        super(root);
         this.tire = root.getChild("tire");
         this.seat = root.getChild("seat");
     }
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData tire = modelPartData.addChild("tire", ModelPartBuilder.create(), ModelTransform.pivot(1.0F, 23.0F, -2.0F));
+        ModelPartData tire = modelPartData.addChild("tire", ModelPartBuilder.create(), ModelTransform.origin(1.0F, 23.0F, -2.0F));
 
         ModelPartData mid = tire.addChild("mid", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -1.0F, 6.0F, 4.0F, 1.0F, 1.0F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(-5.0F, -1.0F, 5.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F))
@@ -51,7 +50,7 @@ public class ModelOverbike extends EntityModel<OverbikeEntity> {
                 .uv(12, 28).cuboid(3.0F, -1.0F, 0.0F, 1.0F, 1.0F, 3.0F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(2.0F, -1.0F, 3.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(1.0F, -1.0F, 4.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F))
-                .uv(0, 0).cuboid(0.0F, -1.0F, 5.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(1.0F, -14.0F, 11.0F));
+                .uv(0, 0).cuboid(0.0F, -1.0F, 5.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.origin(1.0F, -14.0F, 11.0F));
 
         ModelPartData part2 = tire.addChild("part2", ModelPartBuilder.create().uv(0, 0).cuboid(0.0F, -1.0F, 5.0F, 1.0F, 1.0F, 3.0F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(-2.0F, 0.0F, -2.0F, 2.0F, 1.0F, 8.0F, new Dilation(0.0F))
@@ -579,7 +578,7 @@ public class ModelOverbike extends EntityModel<OverbikeEntity> {
                 .uv(0, 0).cuboid(-2.0F, -1.0F, -5.0F, 2.0F, 1.0F, 3.0F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(-2.0F, -1.0F, 6.0F, 2.0F, 1.0F, 3.0F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(-3.0F, -1.0F, -4.0F, 1.0F, 1.0F, 3.0F, new Dilation(0.0F))
-                .uv(0, 0).cuboid(-3.0F, -1.0F, 5.0F, 1.0F, 1.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+                .uv(0, 0).cuboid(-3.0F, -1.0F, 5.0F, 1.0F, 1.0F, 3.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, 0.0F, 0.0F));
 
         ModelPartData seat = modelPartData.addChild("seat", ModelPartBuilder.create().uv(17, 53).cuboid(-6.0F, -21.2559F, -3.0F, 13.0F, 1.0F, 6.0F, new Dilation(0.0F))
                 .uv(17, 53).cuboid(7.0F, -21.2559F, -3.0F, 1.0F, 1.0F, 6.0F, new Dilation(0.0F))
@@ -614,11 +613,11 @@ public class ModelOverbike extends EntityModel<OverbikeEntity> {
                 .uv(13, 71).cuboid(-6.0F, -16.2559F, -18.0F, 13.0F, 1.0F, 1.0F, new Dilation(0.0F))
                 .uv(17, 53).cuboid(-6.0F, -15.2559F, -18.0F, 13.0F, 1.0F, 1.0F, new Dilation(0.0F))
                 .uv(12, 72).cuboid(-6.0F, -14.2559F, -18.0F, 13.0F, 1.0F, 1.0F, new Dilation(0.0F))
-                .uv(17, 53).cuboid(-6.0F, -24.2559F, -7.0F, 13.0F, 4.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 12.0F, 1.0F));
+                .uv(17, 53).cuboid(-6.0F, -24.2559F, -7.0F, 13.0F, 4.0F, 1.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, 12.0F, 1.0F));
         return TexturedModelData.of(modelData, 128, 128);
     }
 
-    @Override
+  /*  @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, final int color) {
         tire.render(matrices, vertexConsumer, light, overlay, color);
         seat.render(matrices, vertexConsumer, light, overlay, color);
@@ -627,5 +626,5 @@ public class ModelOverbike extends EntityModel<OverbikeEntity> {
     @Override
     public void setAngles(final OverbikeEntity entity, final float limbAngle, final float limbDistance, final float animationProgress, final float headYaw, final float headPitch) {
 
-    }
+    }*/
 }

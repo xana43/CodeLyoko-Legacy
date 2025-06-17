@@ -8,8 +8,6 @@ import net.minecraft.registry.RegistryWrapper;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
-import static com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModAdvancements.constructAdvancementTree;
-
 public final class CustomAdvancements extends FabricAdvancementProvider {
     public CustomAdvancements(final FabricDataOutput output,final CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
         super(output,registryLookup);
@@ -26,7 +24,7 @@ public final class CustomAdvancements extends FabricAdvancementProvider {
     {
         @Override
         public void accept(final Consumer<AdvancementEntry> advancementConsumer) {
-            constructAdvancementTree(advancementConsumer);
+            //constructAdvancementTree(advancementConsumer);
         }
 
     }

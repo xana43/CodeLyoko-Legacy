@@ -19,10 +19,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.RecipeInputProvider;
-import net.minecraft.recipe.RecipeManager;
-import net.minecraft.recipe.RecipeMatcher;
+import net.minecraft.recipe.*;
 import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryWrapper;
@@ -36,7 +33,6 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,7 +44,7 @@ private int fuelMass;
 private int irradiationTime;
 private int irradiationTimeTotal;
 private final Object2IntOpenHashMap<Identifier> recipesUsed = new Object2IntOpenHashMap<>();
-private final RecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> matchGetter;
+private final ServerRecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> matchGetter;
     private final SingleVariantStorage<FluidVariant> wasteTank =
             MethodUtil.FluidStorageCreation.createFluidStorage(this, ModFluids.STILL_URANIUM);
     private final Storage<FluidVariant> extractionOfWasteTank = FilteringStorage.extractOnlyOf(wasteTank);
@@ -106,21 +102,21 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> m
     @Override
     public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt,registryLookup);
-        wasteTank.amount = nbt.getLong("WasteAmount");
-        reactionTime = nbt.getInt("ReactionTime");
-        irradiationTime = nbt.getInt("IrradiationTime");
-        irradiationTimeTotal = nbt.getInt("IrradiationTimeTotal");
+        wasteTank.amount = nbt.getLong("WasteAmount").orElse(0L);
+        reactionTime = nbt.getInt("ReactionTime").orElse(0);
+        irradiationTime = nbt.getInt("IrradiationTime").orElse(0);
+        irradiationTimeTotal = nbt.getInt("IrradiationTimeTotal").orElse(0);
         fuelMass = getFuelTime(itemStacks.getFirst());
-        final NbtCompound nbtCompound = nbt.getCompound("RecipesUsed");
+        final NbtCompound nbtCompound = nbt.getCompound("RecipesUsed").orElse(new NbtCompound());
         for (final String string : nbtCompound.getKeys()) {
-            recipesUsed.put(CodeLyokoMain.codeLyokoPrefix(string), nbtCompound.getInt(string));
+            recipesUsed.put(CodeLyokoMain.codeLyokoPrefix(string), nbtCompound.getInt(string).orElse(0));
         }
 
     }
 
     public ComputerReactorBlockEntityInventory(final BlockPos pos, final BlockState state) {
         super(ModBlockEntities.COMPUTER_REACTOR_TILE_ENTITY, pos, state, 2, 400000, Long.valueOf(60), Long.valueOf(200));
-        matchGetter = RecipeManager.createCachedMatchGetter(ModRecipes.RecipeTypes.REACTOR_RECIPE_TYPE);
+        matchGetter = ServerRecipeManager.createCachedMatchGetter(ModRecipes.RecipeTypes.REACTOR_RECIPE_TYPE);
     }
 
     @Override
@@ -151,6 +147,7 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> m
             --reactionTime;
         }
         final ItemStack itemStack = getStack(0);
+        final SingleStackRecipeInput input = new SingleStackRecipeInput(itemStack);
         boolean isCurrentItemStackEmpty = !getStack(0).isEmpty();
         boolean isGottenItemStackEmpty = !itemStack.isEmpty();
         if(isReacting() || isCurrentItemStackEmpty && isGottenItemStackEmpty && wasteTank.amount < wasteTank.getCapacity())
@@ -159,7 +156,7 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> m
             if(isCurrentItemStackEmpty)
             {
 
-                recipe = matchGetter.getFirstMatch(new SingleStackRecipeInput(this.getStack(0)),world).orElse(null);
+                recipe = matchGetter.getFirstMatch(new SingleStackRecipeInput(this.getStack(0)), (ServerWorld) world).orElse(null);
             }
             else {
                 recipe = null;
@@ -167,8 +164,7 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> m
             final int maxCount = getMaxCountPerStack();
 
 
-
-            if(!isReacting() && canAcceptRecipeOutput(world.getRegistryManager(),recipe,itemStacks,maxCount))
+            if(!isReacting() && canAcceptRecipeOutput(world.getRegistryManager(),recipe,input,itemStacks,maxCount))
             {
                     reactionTime = getFuelTime(itemStack);
                     fuelMass = reactionTime;
@@ -179,14 +175,14 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> m
                             final Item item = itemStack.getItem();
                             itemStack.decrement(1);
                             if (itemStack.isEmpty()) {
-                                final Item item2 = item.getRecipeRemainder();
+                                final Item item2 = item.getRecipeRemainder().getItem();
                                 setStack(1, item2 == null ? ItemStack.EMPTY : new ItemStack(item2));
                             }
                         }
                     }
 
             }
-            if(isReacting() && canAcceptRecipeOutput(world.getRegistryManager(),recipe,itemStacks,maxCount))
+            if(isReacting() && canAcceptRecipeOutput(world.getRegistryManager(),recipe,input,itemStacks,maxCount))
             {
                 ++irradiationTime;
                 try(final Transaction transaction = Transaction.openOuter()) {
@@ -202,8 +198,8 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> m
                 if(irradiationTime == irradiationTimeTotal)
                 {
                     irradiationTime = 0;
-                    irradiationTimeTotal = getCookTime(world,this);
-                    if(craftRecipe(world.getRegistryManager(),recipe,itemStacks,maxCount))
+                    irradiationTimeTotal = getCookTime((ServerWorld) world,this);
+                    if(craftRecipe(world.getRegistryManager(),recipe,input,itemStacks,maxCount))
                     {
                         setLastRecipe(recipe);
                     }
@@ -228,9 +224,9 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> m
     }
 
     private static boolean canAcceptRecipeOutput(final DynamicRegistryManager registryManager,
-            final @Nullable RecipeEntry<?> recipe,final DefaultedList<ItemStack> slots,final int count) {
+            final @Nullable RecipeEntry<?> recipe,final SingleStackRecipeInput input,final DefaultedList<ItemStack> slots,final int count) {
         if (!slots.get(0).isEmpty() && recipe != null) {
-            final ItemStack itemStack = recipe.value().getResult(registryManager);
+            final ItemStack itemStack = ((AbstractCookingRecipe)recipe.value()).craft(input,registryManager);
             if (itemStack.isEmpty() || (itemStack.isIn(ModTags.ItemTags.URANIUM_BATTERIES) && itemStack.getDamage() == itemStack.getMaxDamage())) {
                 return false;
             } else {
@@ -251,10 +247,10 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> m
     }
 
     private boolean craftRecipe(final DynamicRegistryManager registryManager,final @Nullable RecipeEntry<?> recipe,
-            final DefaultedList<ItemStack> slots,final int count) {
-        if (recipe != null && canAcceptRecipeOutput(registryManager, recipe, slots, count)) {
+                                final SingleStackRecipeInput input,final DefaultedList<ItemStack> slots,final int count) {
+        if (recipe != null && canAcceptRecipeOutput(registryManager, recipe,input, slots, count)) {
             final ItemStack itemStack = slots.get(0);
-            final ItemStack itemStack2 = recipe.value().getResult(registryManager);
+            final ItemStack itemStack2 = ((AbstractCookingRecipe)recipe.value()).craft(input,registryManager);
             final ItemStack itemStack3 = slots.get(1);
             if (itemStack3.isEmpty()) {
                 slots.set(1, itemStack2.copy());
@@ -306,7 +302,7 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> m
         }
         if(slot == 0 && !canSet)
         {
-            irradiationTimeTotal = getCookTime(world,this);
+            irradiationTimeTotal = getCookTime((ServerWorld) world,this);
             irradiationTime = 0;
             markDirty();
         }
@@ -327,7 +323,7 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> m
 
 
 
-    private static int getCookTime(final World world,final ComputerReactorBlockEntityInventory reactorTileEntityInventory)
+    private static int getCookTime(final ServerWorld world,final ComputerReactorBlockEntityInventory reactorTileEntityInventory)
     {
         return reactorTileEntityInventory.matchGetter.getFirstMatch(new SingleStackRecipeInput(reactorTileEntityInventory.getStack(0)), world).map(recipeEntry -> recipeEntry.value().getCookingTime()).orElse(200);
     }
@@ -337,16 +333,15 @@ private final RecipeManager.MatchGetter<SingleStackRecipeInput, ReactorRecipe> m
         {
             CodeLyokoMain.LOG.debug("setting last recipe");
             CodeLyokoMain.LOG.info("setting last recipe");
-            final Identifier identifier = recipe.id();
+            final Identifier identifier = recipe.id().getValue();
             this.recipesUsed.addTo(identifier,1);
         }
     }
-    @Override
-    public void provideRecipeInputs(final RecipeMatcher finder) {
 
+    @Override
+    public void provideRecipeInputs(RecipeFinder finder) {
         for (final ItemStack itemStack : itemStacks) {
             finder.addInput(itemStack);
         }
-
     }
 }

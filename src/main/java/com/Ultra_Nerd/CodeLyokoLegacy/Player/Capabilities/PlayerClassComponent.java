@@ -21,7 +21,7 @@ public final class PlayerClassComponent implements AutoSyncedComponent {
 
     @Override
     public void readFromNbt(final @NotNull NbtCompound tag,final RegistryWrapper.WrapperLookup registryLookup) {
-        classID = tag.getInt("player_class");
+        classID = tag.getInt("player_class").orElse(0);
     }
 
     @Override

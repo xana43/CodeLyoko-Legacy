@@ -62,10 +62,10 @@ public final class PlayerProfile implements NbtSerializable {
             return;
         }
         //this.player.readNbt(tag);
-        DNA = tag.getString(player.getUuid() + "-dna");
-        playerClassType = tag.getInt(player.getUuid() + "-class");
-        timesEntered = tag.getInt(player.getUuid() + "-entered");
-        firstJoin = tag.getBoolean(player.getUuid() + "-joined");
+        DNA = tag.getString(player.getUuid() + "-dna").orElse("");
+        playerClassType = tag.getInt(player.getUuid() + "-class").orElse(0);
+        timesEntered = tag.getInt(player.getUuid() + "-entered").orElse(0);
+        firstJoin = tag.getBoolean(player.getUuid() + "-joined").orElse(false);
     }
 
     private NbtCompound toCommonTag() {

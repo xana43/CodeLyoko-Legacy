@@ -10,16 +10,16 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
+import software.bernie.geckolib.animatable.processing.AnimationTest;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 @SuppressWarnings("MethodMayBeStatic")
 public final class MantaEntity extends GuardianEntity implements GeoAnimatable, RangedAttackMob {
     private final AnimatableInstanceCache manager = GeckoLibUtil.createInstanceCache(this);
-    private final AnimationController<?> controller = new AnimationController<>(this, "mantamovecontroller", 20,
+    private final AnimationController<?> controller = new AnimationController<>("mantamovecontroller", 20,
             this::animationPred);
 
     public MantaEntity(final EntityType<? extends GuardianEntity> entityType, final World world) {
@@ -101,7 +101,7 @@ public final class MantaEntity extends GuardianEntity implements GeoAnimatable, 
         data.add(controller);
     }
 
-    private <E extends MantaEntity> @NotNull PlayState animationPred(AnimationState<E> event) {
+    private <E extends GeoAnimatable> @NotNull PlayState animationPred(AnimationTest<E> event) {
         return PlayState.STOP;
     }
 

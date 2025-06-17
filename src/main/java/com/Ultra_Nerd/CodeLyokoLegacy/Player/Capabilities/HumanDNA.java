@@ -71,13 +71,13 @@ public final class HumanDNA implements AutoSyncedComponent{
 
     @Override
     public void readFromNbt(final NbtCompound tag,final RegistryWrapper.WrapperLookup registryLookup) {
-        final String DNAsurrogate = tag.getString(DNA_KEY);
+        final String DNAsurrogate = tag.getString(DNA_KEY).orElse("");
         if (Objects.equals(DNAsurrogate, "")) {
             createDNA();
         } else {
             DNA = DNAsurrogate;
         }
-        hasDNA = tag.getBoolean(HAS_DNA);
+        hasDNA = tag.getBoolean(HAS_DNA).orElse(true);
     }
 
     @Override

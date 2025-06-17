@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:uranium_isotope238"
+        "recipe": "codelyoko:uranium_isotope238"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:uranium_isotope238"
+      "codelyoko:uranium_isotope238"
     ]
   }
 }

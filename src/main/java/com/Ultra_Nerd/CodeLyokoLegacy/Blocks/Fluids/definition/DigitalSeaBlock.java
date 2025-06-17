@@ -7,27 +7,29 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageSources;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageTypes;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModFluids;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCollisionHandler;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public final class DigitalSeaBlock extends FluidBlock {
 
 
-    public DigitalSeaBlock() {
-        super(ModFluids.STILL_DIGITAL_OCEAN, Settings.copy(Blocks.WATER));
+    public DigitalSeaBlock(final Settings settings) {
+        super(ModFluids.STILL_DIGITAL_OCEAN, settings);
     }
 
     @Override
-    public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
+    protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
+        super.onEntityCollision(state, world, pos, entity, handler);
         if(world.isClient())
         {
             return;
         }
+        final ServerWorld worldServer = (ServerWorld) world;
         if(entity instanceof SkidbladnirEntity)
         {
             return;
@@ -41,16 +43,9 @@ public final class DigitalSeaBlock extends FluidBlock {
             return;
         }
         if(entity instanceof PlayerEntity) {
-            entity.damage(ModDamageSources.of(world, ModDamageTypes.DIGITAL_OCEAN), Float.MAX_VALUE);
+            entity.damage(worldServer,ModDamageSources.of(world, ModDamageTypes.DIGITAL_OCEAN), Float.MAX_VALUE);
             return;
         }
-        entity.kill();
-
-
-
+        entity.kill(worldServer);
     }
-
-
-
-
 }

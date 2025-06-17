@@ -1,8 +1,8 @@
-// 1.21.1	2025-06-07T14:42:54.675695712	CodeLyokoLegacy/Tags for minecraft:damage_type
-eb402d6ea9206f2c8afb0dc60a86938d52ba0f60 data/minecraft/tags/damage_type/is_drowning.json
-786a38c2e24036bdd06988a44afb69d9a72944e7 data/minecraft/tags/damage_type/bypasses_enchantments.json
-1913309662734ba2e04a35ea2878f70c719f007f data/minecraft/tags/damage_type/is_fire.json
+// 1.21.5	-999999999-01-01T00:00:00	CodeLyokoLegacy/Tags for minecraft:damage_type
 786a38c2e24036bdd06988a44afb69d9a72944e7 data/minecraft/tags/damage_type/bypasses_armor.json
 786a38c2e24036bdd06988a44afb69d9a72944e7 data/minecraft/tags/damage_type/bypasses_effects.json
-786a38c2e24036bdd06988a44afb69d9a72944e7 data/minecraft/tags/damage_type/bypasses_shield.json
+786a38c2e24036bdd06988a44afb69d9a72944e7 data/minecraft/tags/damage_type/bypasses_enchantments.json
 786a38c2e24036bdd06988a44afb69d9a72944e7 data/minecraft/tags/damage_type/bypasses_resistance.json
+786a38c2e24036bdd06988a44afb69d9a72944e7 data/minecraft/tags/damage_type/bypasses_shield.json
+eb402d6ea9206f2c8afb0dc60a86938d52ba0f60 data/minecraft/tags/damage_type/is_drowning.json
+1913309662734ba2e04a35ea2878f70c719f007f data/minecraft/tags/damage_type/is_fire.json

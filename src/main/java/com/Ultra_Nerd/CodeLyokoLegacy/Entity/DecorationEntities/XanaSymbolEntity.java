@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.decoration.AbstractDecorationEntity;
 import net.minecraft.entity.decoration.ItemFrameEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
@@ -28,10 +29,7 @@ public final class XanaSymbolEntity extends AbstractDecorationEntity {
         return null;
     }
 
-    @Override
-    public void onBreak(@Nullable Entity entity) {
 
-    }
 
     @Override
     public void onPlace() {
@@ -40,6 +38,11 @@ public final class XanaSymbolEntity extends AbstractDecorationEntity {
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
+
+    }
+
+    @Override
+    public void onBreak(ServerWorld world, @Nullable Entity breaker) {
 
     }
 }

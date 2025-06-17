@@ -6,7 +6,11 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.LiquidHeliumFluid;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.Fluids.UraniumWasteFluid;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import net.minecraft.block.Block;
-import net.minecraft.data.client.*;
+import net.minecraft.client.data.BlockStateModelGenerator;
+import net.minecraft.client.data.BlockStateVariantMap;
+import net.minecraft.client.data.ModelIds;
+import net.minecraft.client.data.VariantsBlockModelDefinitionCreator;
+import net.minecraft.client.render.model.json.ModelVariantOperator;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.registry.Registries;
@@ -70,11 +74,10 @@ public record ModFluids() {
         private static void registerFluidStateModels(final BlockStateModelGenerator generator, final Block fluidBlock) {
             final Identifier modelId = ModelIds.getBlockModelId(fluidBlock);
             generator.blockStateCollector.accept(
-                    VariantsBlockStateSupplier.create(fluidBlock).coordinate(
-                            BlockStateVariantMap.create(Properties.LEVEL_15)
-                                    .register(level -> BlockStateVariant.create().put(VariantSettings.MODEL, modelId))
-
-                    )
+                    VariantsBlockModelDefinitionCreator.of(fluidBlock,BlockStateModelGenerator.createWeightedVariant(modelId))
+                            .apply(BlockStateModelGenerator.NO_OP).coordinate(BlockStateVariantMap.operations(Properties.LEVEL_15).generate(integer -> {
+                                return ModelVariantOperator.MODEL.withValue(modelId);
+                            }))
             );
         }
 

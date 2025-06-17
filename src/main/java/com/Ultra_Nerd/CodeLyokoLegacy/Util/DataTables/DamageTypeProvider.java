@@ -15,14 +15,14 @@ import java.util.concurrent.CompletableFuture;
  * @desc <br/>
  * @since 2025-06-02
  */
-public class DamageTypeProvider extends FabricDynamicRegistryProvider {
-    public DamageTypeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+public final class DamageTypeProvider extends FabricDynamicRegistryProvider {
+    public DamageTypeProvider(final FabricDataOutput output,final CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup, Entries entries) {
-        final RegistryWrapper.Impl<DamageType> damageTypesImpl = wrapperLookup.getWrapperOrThrow(RegistryKeys.DAMAGE_TYPE);
+    protected void configure(final RegistryWrapper.WrapperLookup wrapperLookup,final Entries entries) {
+        final RegistryWrapper.Impl<DamageType> damageTypesImpl = wrapperLookup.getOrThrow(RegistryKeys.DAMAGE_TYPE);
         Object2ObjectMaps.fastForEach(ModDamageTypes.DAMAGE_TYPE_MAP,registryKeyDamageTypeEntry -> entries.add(registryKeyDamageTypeEntry.getKey(),damageTypesImpl.getOrThrow(registryKeyDamageTypeEntry.getKey()).value()));
         ModDamageTypes.DAMAGE_TYPE_MAP.clear();
     }

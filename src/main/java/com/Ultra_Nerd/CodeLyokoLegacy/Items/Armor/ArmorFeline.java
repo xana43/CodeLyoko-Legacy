@@ -1,24 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items.Armor;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
-import net.minecraft.component.type.AttributeModifierSlot;
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public final class ArmorFeline extends LyokoArmor /*implements GeoItem*/ {
 
@@ -28,35 +17,23 @@ public final class ArmorFeline extends LyokoArmor /*implements GeoItem*/ {
     private static final StatusEffectInstance JUMPEFFECT = new StatusEffectInstance(StatusEffects.JUMP_BOOST, 1, 3,
             true, false, false);
 
-    public ArmorFeline(RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+    public ArmorFeline(net.minecraft.item.equipment.ArmorMaterial material, EquipmentType type, Settings settings) {
         super(material, type, settings);
     }
 
-
-    @Override
+    /*@Override
     public AttributeModifiersComponent getAttributeModifiers() {
         final List<AttributeModifiersComponent.Entry> entries = new ArrayList<>();
         entries.add(new AttributeModifiersComponent.Entry(EntityAttributes.GENERIC_MOVEMENT_SPEED,new EntityAttributeModifier(Identifier.of("speed_modifier"),movement_modifier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), AttributeModifierSlot.FEET));
        return new AttributeModifiersComponent(entries,true);
-    }
-
-
-
-    @Override
-    public void inventoryTick(final ItemStack stack, final World pLevel, final Entity pEntity, final int pSlotId, final boolean pIsSelected) {
-        super.inventoryTick(stack, pLevel, pEntity, pSlotId, pIsSelected);
-
-
-    }
-
+    }*/
 
 
     @Override
-    public void onArmorTick(final PlayerEntity player, final World world, final Item armorItem,final int slot) {
-        super.onArmorTick(player,world,armorItem,slot);
-        if (player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId())
-                .getItem() != ModItems.ODD_BOOTS || player.getInventory()
-                .getArmorStack(EquipmentSlot.LEGS.getEntitySlotId()).getItem() != ModItems.ODD_LEGGINGS) {
+    public void onArmorTick(PlayerEntity player, World world, Item armorItem, EquipmentSlot slot) {
+        super.onArmorTick(player, world, armorItem, slot);
+        if (player.getEquippedStack(EquipmentSlot.FEET)
+                .getItem() != ModItems.ODD_BOOTS || player.getEquippedStack(EquipmentSlot.LEGS).getItem() != ModItems.ODD_LEGGINGS) {
             return;
         }
         if (!player.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
@@ -66,8 +43,6 @@ public final class ArmorFeline extends LyokoArmor /*implements GeoItem*/ {
 
         }
         player.fallDistance = 0;
-
-
     }
 
 /*

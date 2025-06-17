@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "codelyoko:solid_quantum"
-    }
+    "#": "codelyoko:solid_quantum"
   },
   "pattern": [
     "###",

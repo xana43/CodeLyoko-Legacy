@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @SuppressWarnings("MethodMayBeStatic")
 @Mixin(InventoryScreen.class)
 public abstract class InventoryScreenDropDisable {
-    @Inject(method = "isClickOutsideBounds", at = @At(value = "HEAD"))
+    @Inject(method = "mouseReleased", at = @At(value = "HEAD"))
     private void codelyoko$disableDrop(final CallbackInfoReturnable<Boolean> cir) {
         MixinHooks.PlayerEvents.stopClickedOutOfInventoryBounds(cir);
     }

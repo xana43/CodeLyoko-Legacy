@@ -5,7 +5,6 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlockEntities;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.MultiBlock.MasterEntity;
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -15,7 +14,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -284,20 +282,15 @@ public final class Scanner extends HorizontalFacingBlock implements BlockEntityP
     private float time;
 
 
-    public Scanner() {
-        super(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
-
-                .strength(10, 10).sounds(BlockSoundGroup.METAL)
-
-
-        );
+    public Scanner(final Settings settings) {
+        super(settings);
 
         this.setDefaultState(this.getDefaultState().with(SCANNER_PROPERTY, Boolean.FALSE)
                 .with(FACING, Direction.NORTH));
     }
 
     @Override
-    public VoxelShape getCullingShape(final BlockState state, final BlockView world, final BlockPos pos) {
+    protected VoxelShape getCullingShape(BlockState state) {
         return switch (state.get(FACING)) {
             case SOUTH -> shapeS;
             case EAST -> shapeE;

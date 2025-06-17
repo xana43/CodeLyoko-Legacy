@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +21,7 @@ import net.minecraft.world.World;
 
 public final class SkidbladnirEntity extends LyokoVehicleEntity {
     public SkidbladnirEntity(final EntityType<? extends BoatEntity> entityType, final World world) {
-        super(entityType, world);
+        super(entityType, world,null);
         this.setNoGravity(true);
     }
     private static final Identifier skidlocation = CodeLyokoMain.codeLyokoPrefix("entity" +
@@ -36,9 +37,15 @@ public final class SkidbladnirEntity extends LyokoVehicleEntity {
     }
 
     @Override
-    public boolean isInvulnerableTo(final DamageSource damageSource) {
-        return damageSource.isOf(ModDamageTypes.DIGITAL_LAVA) || damageSource.isOf(ModDamageTypes.DIGITAL_OCEAN);
+    public boolean damage(ServerWorld world, DamageSource source, float amount) {
+        if(source.isOf(ModDamageTypes.DIGITAL_LAVA) || source.isOf(ModDamageTypes.DIGITAL_OCEAN))
+        {
+            return false;
+        }
+        return super.damage(world, source, amount);
     }
+
+
 
     @Override
     public boolean isSubmergedInWater() {

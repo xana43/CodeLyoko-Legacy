@@ -65,7 +65,7 @@ public abstract class EnergyStorageBlockEntity extends SyncedBlockEntity impleme
     public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt,registryLookup);
         if(energyStorage != null) {
-            energyStorage.amount = nbt.getLong(ENERGY_AMOUNT_KEY);
+            energyStorage.amount = nbt.getLong(ENERGY_AMOUNT_KEY).orElse(0L);
         }
     }
 }

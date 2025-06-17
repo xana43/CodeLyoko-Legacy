@@ -11,6 +11,7 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
@@ -65,16 +66,17 @@ public final class LithographyMachine extends Block implements BlockEntityProvid
     }
 
     @Override
-    public void onStateReplaced(final BlockState state, final World world, final BlockPos pos, final BlockState newState, final boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
-            final BlockEntity BE = world.getBlockEntity(pos);
-            if (BE instanceof final LithographyBlockEntityInventory lithographyTile) {
-                ItemScatterer.spawn(world, pos, lithographyTile);
-                world.updateComparators(pos, this);
-            }
-            super.onStateReplaced(state, world, pos, newState, moved);
+    protected void onStateReplaced(final BlockState state,final ServerWorld world,final BlockPos pos,final boolean moved) {
+        super.onStateReplaced(state, world, pos, moved);
+        final BlockEntity BE = world.getBlockEntity(pos);
+        if (BE instanceof final LithographyBlockEntityInventory lithographyTile) {
+            ItemScatterer.spawn(world, pos, lithographyTile);
+            world.updateComparators(pos, this);
         }
+        super.onStateReplaced(state, world, pos, moved);
     }
+
+
     @Nullable
     @Override
     public BlockEntity createBlockEntity(final BlockPos pos, final BlockState state) {

@@ -4,9 +4,7 @@
   "cookingtime": 88,
   "experience": 78.0,
   "group": "codelyoko:refinement",
-  "ingredient": {
-    "item": "codelyoko:raw_polycarbonate"
-  },
+  "ingredient": "codelyoko:raw_polycarbonate",
   "result": {
     "id": "codelyoko:molten_polycarbonate_concentrate"
   }

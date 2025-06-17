@@ -4,20 +4,14 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.BoatEntity;
-import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 public final class OverboardEntity extends LyokoVehicleEntity {
 
 
     public OverboardEntity(final EntityType<? extends BoatEntity> entityType, final World world) {
-        super(entityType, world);
+        super(entityType, world,() -> ModItems.OVERBOARD_SPAWN_ITEM);
         setNoGravity(true);
-    }
-
-    @Override
-    public Item asItem() {
-        return ModItems.OVERBOARD_SPAWN_ITEM;
     }
 
     @Override

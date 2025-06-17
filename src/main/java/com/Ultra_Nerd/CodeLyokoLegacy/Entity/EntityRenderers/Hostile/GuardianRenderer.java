@@ -9,11 +9,12 @@ import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.state.EntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public final class GuardianRenderer<T extends LyokoGuardianEntity> extends EntityRenderer<T> {
+public final class GuardianRenderer<T extends EntityRenderState> extends EntityRenderer<LyokoGuardianEntity,T> {
     private static final Identifier GUARDIAN_TEXTURE = CodeLyokoMain.codeLyokoPrefix("textures/entity/guardian/guardian.png"), GUARDIAN_OVERLAY = CodeLyokoMain.codeLyokoPrefix("textures/entity/guardian/guardianoverlay.png") ;
     private static final float RADIUS = 6f;
     private static final int latitude = 200, longitude = 200;
@@ -23,13 +24,18 @@ public final class GuardianRenderer<T extends LyokoGuardianEntity> extends Entit
     }
 
     @Override
+    public T createRenderState() {
+        return null;
+    }
+
+    //@Override
     public Identifier getTexture(final T entity) {
         return GUARDIAN_TEXTURE;
     }
 
-    @Override
+    //@Override
     public void render(final T entity, final float yaw, final float tickDelta, final MatrixStack matrices, final VertexConsumerProvider vertexConsumers, final int light) {
-        super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
+      //  super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
 
         CommonRenderRoutines.renderTexturedSphere(tessellator,RADIUS - 1,latitude,longitude,matrices,GUARDIAN_TEXTURE,0,0,255,255,255,255,0,RADIUS / 2, 0);
         CommonRenderRoutines.renderTranslucentTexturedSphere(tessellator,RADIUS,latitude,longitude,matrices,GUARDIAN_OVERLAY,0,0,255,255,255,255,0,RADIUS / 2,0);

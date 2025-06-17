@@ -1,12 +1,9 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.function.BooleanBiFunction;
@@ -50,12 +47,8 @@ public final class ProjectorFocusblock extends Block {
             Block.createCuboidShape(0, 0, 4, 1, 16, 12)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get();
 
-    public ProjectorFocusblock() {
-        super(FabricBlockSettings.copyOf(Blocks.GLASS)
-                .strength(6, 10)
-                .sounds(BlockSoundGroup.GLASS)
-                .nonOpaque()
-        );
+    public ProjectorFocusblock(final Settings settings) {
+        super(settings);
         this.setDefaultState(this.getDefaultState().with(VALIDFOCUS, Boolean.FALSE));
     }
 

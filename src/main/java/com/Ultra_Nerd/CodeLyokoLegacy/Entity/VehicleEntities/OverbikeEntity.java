@@ -8,6 +8,6 @@ public final class OverbikeEntity extends LyokoVehicleEntity {
 
 
     public OverbikeEntity(final EntityType<? extends BoatEntity> entityType, final World world) {
-        super(entityType, world);
+        super(entityType, world,null);
     }
 }

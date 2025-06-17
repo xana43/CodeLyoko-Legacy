@@ -12,17 +12,18 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
-import java.util.List;
 import java.util.Objects;
 
 @SuppressWarnings("MethodMayBeStatic")
@@ -40,15 +41,15 @@ public final class XanaDataComponent implements AutoSyncedComponent {
         return dangerLevel;
     }
     private static final ObjectArrayList<Entity> entityList = new ObjectArrayList<>();
-    private static final List<Long> validAttackPositions = new LongArrayList();
+    private static final LongArrayList validAttackPositions = new LongArrayList();
     private static int RADIUS = 10;
-    public void setDangerLevel(final int level) {
+    public void setDangerLevel(final ServerWorld world,final int level) {
         if(level <= 0)
         {
             towerPosition = BlockPos.ORIGIN;
             for(final Entity entity : entityList)
             {
-                entity.kill();
+                entity.kill(world);
             }
         }
         dangerLevel = level;
@@ -82,7 +83,7 @@ public final class XanaDataComponent implements AutoSyncedComponent {
             final ServerWorld world = server.getWorld(worldsToActivate.get(XanaHandler.getRandom().nextInt(worldsToActivate.size() - 1)));
             for(int x = 0; x < XanaHandler.getRandom().nextInt(300); ++x)
             {
-                for(int y = 0; y < world.getTopY(); ++y)
+                for(int y = 0; y < world.getTopY(Heightmap.Type.WORLD_SURFACE,BlockPos.ORIGIN); ++y)
                 {
                     for(int z = 0; z < XanaHandler.getRandom().nextInt(300); ++z)
                     {
@@ -100,14 +101,14 @@ public final class XanaDataComponent implements AutoSyncedComponent {
         });
 
     }
-    public void spawnMobs(final World world)
+    public void spawnMobs(final ServerWorld world)
     {
         int spawnIndex = 0;
         attackType = XanaAttackTypes.values()[world.getRandom().nextInt(XanaAttackTypes.values().length)];
         for(final Long pos : validAttackPositions)
         {
             final BlockPos blockPos = BlockPos.fromLong(pos);
-            final Entity entity = entitiesToSpawn[spawnIndex].create(world);
+            final Entity entity = entitiesToSpawn[spawnIndex].create(world, SpawnReason.EVENT);
             entityList.add(entity);
             Objects.requireNonNull(entity).setPos(blockPos.getX(),blockPos.getY(),blockPos.getZ());
             CodeLyokoMain.LOG.debug(String.valueOf(world.spawnEntity(entity)));
@@ -150,11 +151,11 @@ public final class XanaDataComponent implements AutoSyncedComponent {
     }
     @Override
     public void readFromNbt(final @NotNull NbtCompound tag,final RegistryWrapper.WrapperLookup wrapperLookup) {
-        dangerLevel = tag.getInt(DANGER_LEVEL_KEY);
-        activeFactoryPosition = BlockPos.fromLong(tag.getLong(FACTORY_POSITION_KEY));
-        attackType = XanaAttackTypes.values()[tag.getInt(ATTACK_TYPE_KEY)];
-        towerPosition = BlockPos.fromLong(tag.getLong(TOWER_POSITION));
-        for(final long longValue : tag.getLongArray(ATTACK_POSITION_KEY)) {XanaDataComponent.validAttackPositions.add(longValue);}
+        dangerLevel = tag.getInt(DANGER_LEVEL_KEY).orElse(0);
+        activeFactoryPosition = BlockPos.fromLong(tag.getLong(FACTORY_POSITION_KEY).orElse(0L));
+        attackType = XanaAttackTypes.values()[tag.getInt(ATTACK_TYPE_KEY).orElse(0)];
+        towerPosition = BlockPos.fromLong(tag.getLong(TOWER_POSITION).orElse(0L));
+        for(final long longValue : tag.getLongArray(ATTACK_POSITION_KEY).orElse(new long[]{})) {XanaDataComponent.validAttackPositions.add(longValue);}
     }
 
     @Override
@@ -167,6 +168,6 @@ public final class XanaDataComponent implements AutoSyncedComponent {
         tag.putLong(TOWER_POSITION,towerPosition.asLong());
         tag.putInt(ATTACK_TYPE_KEY,attackType.ordinal());
         tag.putLong(FACTORY_POSITION_KEY,activeFactoryPosition.asLong());
-        tag.putLongArray(ATTACK_POSITION_KEY,XanaDataComponent.validAttackPositions);
+        tag.putLongArray(ATTACK_POSITION_KEY,XanaDataComponent.validAttackPositions.elements());
     }
 }

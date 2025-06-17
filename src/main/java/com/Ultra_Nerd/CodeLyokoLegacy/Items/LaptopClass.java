@@ -3,6 +3,7 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Items;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
@@ -14,15 +15,15 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
@@ -42,8 +43,8 @@ public final class LaptopClass extends Item implements SimpleEnergyItem, GeoItem
     }
 
     @Override
-    public void inventoryTick(final ItemStack stack, final World world, final Entity entity, final int slot, final boolean selected) {
-        super.inventoryTick(stack, world, entity, slot, selected);
+    public void inventoryTick(ItemStack stack, ServerWorld world, Entity entity, @Nullable EquipmentSlot slot) {
+        super.inventoryTick(stack, world, entity, slot);
         if (stack.getDamage() == 1) {
             tryUseEnergy(stack,1);
         }
@@ -51,12 +52,13 @@ public final class LaptopClass extends Item implements SimpleEnergyItem, GeoItem
         if (getStoredEnergy(stack) <= 0) {
             stack.setDamage(0);
         }
-
     }
 
 
+
+
     @Override
-    public TypedActionResult<ItemStack> use(@NotNull World worldIn, final PlayerEntity playerIn, final Hand handIn) {
+    public ActionResult use(@NotNull World worldIn, final PlayerEntity playerIn, final Hand handIn) {
         final ItemStack item = playerIn.getStackInHand(handIn);
         final long currentlyStoredEnergy = getStoredEnergy(item);
 
@@ -71,7 +73,7 @@ public final class LaptopClass extends Item implements SimpleEnergyItem, GeoItem
             if(worldIn.isClient) {
                 playerIn.sendMessage(Text.translatable("laptop.battery.dead"), false);
             }
-            return TypedActionResult.fail(item);
+            return ActionResult.FAIL;
 
         }
         if(!worldIn.isClient) {
@@ -84,9 +86,9 @@ public final class LaptopClass extends Item implements SimpleEnergyItem, GeoItem
     public ActionResult useOnBlock(final ItemUsageContext context) {
         final World world = context.getWorld();
         final BlockPos retrievedBlockPosition = context.getBlockPos().up();
-        if(!world.canSetBlock(retrievedBlockPosition)) {
-            return ActionResult.FAIL;
-        }
+       // if(!world.canSetBlock(retrievedBlockPosition)) {
+        //    return ActionResult.FAIL;
+        //}
         final ItemPlacementContext placementContext = new ItemPlacementContext(context);
         final BlockState blockStateToPlace = ModBlocks.LAPTOP_BLOCK.getPlacementState(placementContext);
         world.setBlockState(retrievedBlockPosition, blockStateToPlace);
@@ -111,12 +113,14 @@ public final class LaptopClass extends Item implements SimpleEnergyItem, GeoItem
     }
     private static final String startupAnimationString = "startup";
     private static final String startupAnimationController = "active_controller";
+    AnimatableInstanceCache thisInstanceCache = GeckoLibUtil.createInstanceCache(this);
+
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this,startupAnimationController,animationState -> PlayState.STOP)
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(startupAnimationController, animationState -> PlayState.STOP)
                 .triggerableAnim(startupAnimationString, STARTUP_ANIMATION));
     }
-    AnimatableInstanceCache thisInstanceCache = GeckoLibUtil.createInstanceCache(this);
+
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return thisInstanceCache;

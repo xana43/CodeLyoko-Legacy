@@ -31,7 +31,7 @@ public final class MiscellaneousPlayerClassDataComponent implements AutoSyncedCo
 
     @Override
     public void readFromNbt(final NbtCompound tag,final RegistryWrapper.WrapperLookup registryLookup) {
-        hasSecondaryAbility = tag.getIntArray(SECONDARY_ABILITY_ARRAY_KEY);
+        hasSecondaryAbility = tag.getIntArray(SECONDARY_ABILITY_ARRAY_KEY).orElse(new int[]{0,0,0,0});
     }
 
     @Override

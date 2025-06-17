@@ -12,11 +12,16 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.math.ColorHelper;
+
+import java.util.function.Function;
 
 public record ModItems() {
 
@@ -148,44 +153,44 @@ public record ModItems() {
     //weapons
     private static final Item.Settings WEAPONS = new Item.Settings();
     public static final BowItem ARCHER_BOW;
-    public static final SwordItem DIGITAL_SABER;
+    public static final Item DIGITAL_SABER;
     public static final BowItem FORCE_FIELD_EMITTER;
     public static final BowItem LASER_ARROW_SHOOTER;
-    public static final SwordItem QUANTUM_SABER;
+    public static final Item QUANTUM_SABER;
     public static final TridentItem YUMI_TRADITIONAL_FANS;
-    public static final SwordItem ZWEIHANDER;
+    public static final Item ZWEIHANDER;
     
     
 
     //armor
     private static final Item.Settings ArmorGroup = new Item.Settings().maxCount(1);
-    public static final ArmorItem AELITA_CHESTPLATE;
-    public static final ArmorItem AELITA_LEGGINGS;
-    public static final ArmorItem AELITA_BOOTS;
-    public static final ArmorItem BLANK_HELMET;
-    public static final ArmorItem JEREMY_CHESTPLATE;
-    public static final ArmorItem JEREMY_LEGGINGS;
-    public static final ArmorItem JEREMY_BOOTS;
-    public static final ArmorItem LINKER;
-    public static final ArmorItem MIND_HELMET;
-    public static final ArmorItem ODD_CHESTPLATE;
-    public static final ArmorItem ODD_LEGGINGS;
-    public static final ArmorItem ODD_BOOTS;
-    public static final ArmorItem ULRICH_HEADBAND;
-    public static final ArmorItem ULRICH_CHESTPLATE;
-    public static final ArmorItem ULRICH_LEGGINGS;
-    public static final ArmorItem ULRICH_BOOTS;
-    
-    public static final ArmorItem WILLIAM_CHESTPLATE;
-    public static final ArmorItem WILLIAM_LEGGINGS;
-    public static final ArmorItem WILLIAM_BOOTS;
-    public static final ArmorItem YUMI_CHESTPLATE;
-    public static final ArmorItem YUMI_LEGGINGS;
-    public static final ArmorItem YUMI_BOOTS;
+    public static final Item AELITA_CHESTPLATE;
+    public static final Item AELITA_LEGGINGS;
+    public static final Item AELITA_BOOTS;
+    public static final Item BLANK_HELMET;
+    public static final Item JEREMY_CHESTPLATE;
+    public static final Item JEREMY_LEGGINGS;
+    public static final Item JEREMY_BOOTS;
+    public static final Item LINKER;
+    public static final Item MIND_HELMET;
+    public static final Item ODD_CHESTPLATE;
+    public static final Item ODD_LEGGINGS;
+    public static final Item ODD_BOOTS;
+    public static final Item ULRICH_HEADBAND;
+    public static final Item ULRICH_CHESTPLATE;
+    public static final Item ULRICH_LEGGINGS;
+    public static final Item ULRICH_BOOTS;
 
-    
+    public static final Item WILLIAM_CHESTPLATE;
+    public static final Item WILLIAM_LEGGINGS;
+    public static final Item WILLIAM_BOOTS;
+    public static final Item YUMI_CHESTPLATE;
+    public static final Item YUMI_LEGGINGS;
+    public static final Item YUMI_BOOTS;
 
-   
+
+
+
 
 //    public static final MusicDiscItem LYOKO_THEME;
  //   public static final MusicDiscItem LYOKO_THEME_INSTRUMENTAL;
@@ -210,12 +215,11 @@ public record ModItems() {
         WEAPONS_GROUP = new ObjectArrayList<>();
 
 
-        TEST_MULTIPLAYER_PHONE = registerModItem("test_multiplayer_phone",new MultiplayerPhone(BaseSettings()));
+        TEST_MULTIPLAYER_PHONE = registerModItem("test_multiplayer_phone",MultiplayerPhone::new,BaseSettings());
         //spawn items
-        HOVERBOARD_SPAWN_ITEM = registerModItem("hoverboard_spawn_item",new LyokoSpawnItem(
-                BaseSettings().rarity(Rarity.EPIC),ModEntities.HOVERBOARD));
-        OVERBOARD_SPAWN_ITEM = registerModItem("overboard_spawn_item",new LyokoSpawnItem(BaseSettings().rarity(Rarity.EPIC),ModEntities.OVERBOARD));
-        OVERBIKE_SPAWN_ITEM = registerModItem("overbike_spawn_item",new LyokoSpawnItem(BaseSettings().rarity(Rarity.EPIC),ModEntities.OVERBIKE));
+        HOVERBOARD_SPAWN_ITEM = registerModItem("hoverboard_spawn_item",settings -> new LyokoSpawnItem(settings,ModEntities.HOVERBOARD), BaseSettings().rarity(Rarity.EPIC));
+        OVERBOARD_SPAWN_ITEM = registerModItem("overboard_spawn_item",settings->new LyokoSpawnItem(settings,ModEntities.OVERBOARD),BaseSettings().rarity(Rarity.EPIC));
+        OVERBIKE_SPAWN_ITEM = registerModItem("overbike_spawn_item",settings->new LyokoSpawnItem(settings,ModEntities.OVERBIKE),BaseSettings().rarity(Rarity.EPIC));
         //items
         APU_PACKAGE_ARM = registerComputerItem("apu_package_arm");
         APU_PACKAGE_x86 = registerComputerItem("apu_package_x86",BaseSettings().rarity(
@@ -230,7 +234,7 @@ public record ModItems() {
         APU_DIE_ASIC = registerComputerItem("apu_die_asic",BaseSettings().rarity(
                 Rarity.RARE));
         BORNITE_ITEM = registerGenericItem("bornite_item",BaseSettings().maxDamage(4));
-        BLISTER_COPPER = registerModItem("blister_copper",new BlisterCopper(BaseSettings().maxDamage(60)));
+        BLISTER_COPPER = registerModItem("blister_copper",BlisterCopper::new,BaseSettings().maxDamage(60));
         CHALCOPYRITE_ITEM = registerGenericItem("chalcopyrite_item",BaseSettings().maxDamage(5));
         CHALCOCITE_ITEM = registerGenericItem("chalcocite_item",BaseSettings().maxDamage(7));
         COVELLITE_ITEM = registerGenericItem("covellite_item",BaseSettings().maxDamage(6));
@@ -295,12 +299,11 @@ public record ModItems() {
         GPU_PACKAGE_ASIC = registerComputerItem("gpu_package_asic",BaseSettings().rarity(Rarity.EPIC));
         GPU_PACKAGE_QUANTUM = registerComputerItem("gpu_package_quantum",BaseSettings().rarity(Rarity.EPIC));
         INTEGRATED_HEAT_SPREADER = registerComputerItem("integrated_heat_spreader");
-        JEREMY_LAPTOP = registerModItem("jeremys_laptop",new LaptopClass(
-                new Item.Settings().maxCount(1),90000,100,0));
+        JEREMY_LAPTOP = registerModItem("jeremys_laptop",settings -> new LaptopClass(settings,90000,100,0),BaseSettings().maxCount(1));
         KEY_CAP = registerComputerItem("key_cap");
         KEY_SPRING = registerComputerItem("key_spring");
-        LIQUID_HELIUM_BUCKET = (BucketItem) registerModItem("liquid_helium_bucket",new CustomColorBucket(ModFluids.STILL_LIQUID_HELIUM,
-                new Item.Settings().maxCount(1), ColorHelper.Argb.getArgb(3,255,255,255)));
+        LIQUID_HELIUM_BUCKET = (BucketItem) registerModItem("liquid_helium_bucket",settings -> new CustomColorBucket(ModFluids.STILL_LIQUID_HELIUM,
+                settings, ColorHelper.getArgb(3,255,255,255)),BaseSettings().maxCount(1));
     /*LYOKO_THEME =
         (MusicDiscItem)
             registerModItem(
@@ -321,7 +324,7 @@ public record ModItems() {
                     207));*/
         MEGABIT = registerComputerItem("megabit");
         MEGABYTE = registerComputerItem("megabyte");
-        MOLTEN_POLYCARBONATE_CONCENTRATE = registerModItem("molten_polycarbonate_concentrate",new Polycarbonate(BaseSettings()));
+        MOLTEN_POLYCARBONATE_CONCENTRATE = registerModItem("molten_polycarbonate_concentrate",Polycarbonate::new,BaseSettings());
         PETABIT = registerGenericItem("petabit");
         PETABYTE = registerGenericItem("petabyte");
         POLYCARBONATE_CRYSTALLINE_DYE = registerGenericItem("polycarbonate_crystalline_dye");
@@ -332,13 +335,12 @@ public record ModItems() {
         RAW_POLYCARBONATE = registerGenericItem("raw_polycarbonate");
         SOLID_QUANTUM = registerGenericItem("solid_quantum",BaseSettings().rarity(Rarity.EPIC));
         SOLDER_BLOB = registerGenericItem("solder_blob");
-        STORY_BOOK = (WrittenBookItem) registerModItem("story_book",new EntryPool.BaseEntry(DEFAULT_BOOK_SETTINGS,0));
-        STORY_BOOK2 = (WrittenBookItem) registerModItem("story_book2",new EntryPool.JournalEntry2());
-        SILICON_WAFER = registerModItem("silicon_wafer",new WaferText(BaseSettings().maxDamage(4)));
+        STORY_BOOK = (WrittenBookItem) registerModItem("story_book",settings -> new EntryPool.BaseEntry(settings,0),DEFAULT_BOOK_SETTINGS);
+        STORY_BOOK2 = (WrittenBookItem) registerModItem("story_book2",EntryPool.JournalEntry2::new,DEFAULT_BOOK_SETTINGS);
+        SILICON_WAFER = registerModItem("silicon_wafer",WaferText::new,BaseSettings().maxDamage(4));
         SILICON_PLATE = registerComputerItem("silicon_plate");
         TRIURANIUM_OCTAOXIDE = registerGenericItem("triuranium_octaoxide");
-        TRUSTY_SCREWDRIVER = registerModItem("trusty_screwdriver",new TrustyScrewDriverItem(
-                new Item.Settings().maxCount(1)));
+        TRUSTY_SCREWDRIVER = registerModItem("trusty_screwdriver",TrustyScrewDriverItem::new,BaseSettings().maxCount(1));
         TERABIT = registerGenericItem("terabit");
         TERABYTE = registerGenericItem("terabyte");
         TITANIUM_DIOXIDE = registerComputerItem("titanium_dioxide");
@@ -352,57 +354,56 @@ public record ModItems() {
         URANIUM_BATTERY_STARTER = registerGenericItem("uranium_battery_starter",BaseSettings().rarity(Rarity.EPIC));
         URANIUM_BATTERY_NOVICE = registerGenericItem("uranium_battery_novice",BaseSettings().rarity(Rarity.EPIC));
         URANIUM_BATTERY_FINAL = registerGenericItem("uranium_battery_final",BaseSettings().rarity(Rarity.EPIC));
-        XANA_SYMBOL = registerModItem("xana_symbol_item",new DecorationItem(ModEntities.XANA_SYMBOL_ENTITY_TYPE,
-                BaseSettings().rarity(Rarity.EPIC).maxCount(1)));
+        XANA_SYMBOL = registerModItem("xana_symbol_item",settings -> new DecorationItem(ModEntities.XANA_SYMBOL_ENTITY_TYPE,settings),BaseSettings().rarity(Rarity.EPIC).maxCount(1));
         //weapons
-        ARCHER_BOW = registerWeapon("archer_bow",new ArcherClassBow(WEAPONS));
-        DIGITAL_SABER = registerWeapon("digital_saber",new SaberKatana(LyokoTiers.LyokoSamurai, 25, -0.9f, WEAPONS));
-        LASER_ARROW_SHOOTER = registerWeapon("laser_arrow_shooter",new LaserArrowShooter(WEAPONS));
-        QUANTUM_SABER = registerWeapon("quantum_saber",new SwordItem(LyokoTiers.LyokoTool,WEAPONS.rarity(Rarity.EPIC)));
-        YUMI_TRADITIONAL_FANS = registerWeapon("yumi_traditional_fans",new YumiFans(WEAPONS));
-        FORCE_FIELD_EMITTER = registerWeapon("force_field_emitter",new ForceFieldEmitter(WEAPONS.rarity(Rarity.EPIC)));
-        ZWEIHANDER = registerWeapon("zweihander",new ZweihanderWeapon(LyokoTiers.LyokoWarrior, 60, -3f, WEAPONS));
+        ARCHER_BOW = registerWeapon("archer_bow",ArcherClassBow::new,WEAPONS);
+        DIGITAL_SABER = registerWeapon("digital_saber",settings -> new SaberKatana(LyokoTiers.LyokoSamurai.getMaterial(), 25, -0.9f,settings),WEAPONS);
+        LASER_ARROW_SHOOTER = registerWeapon("laser_arrow_shooter",LaserArrowShooter::new,WEAPONS);
+        QUANTUM_SABER = registerWeapon("quantum_saber",Item::new,WEAPONS.rarity(Rarity.EPIC).sword(LyokoTiers.LyokoTool.getMaterial(),5,5));
+        YUMI_TRADITIONAL_FANS = registerWeapon("yumi_traditional_fans",YumiFans::new,WEAPONS);
+        FORCE_FIELD_EMITTER = registerWeapon("force_field_emitter",ForceFieldEmitter::new,WEAPONS.rarity(Rarity.EPIC));
+        ZWEIHANDER = registerWeapon("zweihander",settings -> new ZweihanderWeapon(LyokoTiers.LyokoWarrior.getMaterial(), 60, -3f, settings),WEAPONS);
        //armor
-        AELITA_CHESTPLATE = registerArmor("aelita_chestplate",new ArmorGuardian(LyokoArmorMaterial.GUARDIAN.getMaterialRegistryEntry(),
-                ArmorItem.Type.CHESTPLATE, ArmorGroup));
-        AELITA_LEGGINGS = registerGenericArmorItem("aelita_leggings",LyokoArmorMaterial.GUARDIAN.getMaterialRegistryEntry(), ArmorItem.Type.LEGGINGS);
-        AELITA_BOOTS = registerGenericArmorItem("aelita_boots",LyokoArmorMaterial.GUARDIAN.getMaterialRegistryEntry(), ArmorItem.Type.BOOTS);
-        BLANK_HELMET = registerGenericArmorItem("blank_helmet",LyokoArmorMaterial.BLANK_HELM.getMaterialRegistryEntry(), ArmorItem.Type.HELMET);
-        JEREMY_CHESTPLATE = registerArmor("jeremy_chestplate",new ArmorArcher(LyokoArmorMaterial.ARCHER.getMaterialRegistryEntry(),
-                ArmorItem.Type.CHESTPLATE,
-                ArmorGroup));
-        JEREMY_LEGGINGS = registerArmor("jeremy_leggings",new ArmorArcher(LyokoArmorMaterial.ARCHER.getMaterialRegistryEntry(), ArmorItem.Type.LEGGINGS,
-                ArmorGroup));
-        JEREMY_BOOTS = registerArmor("jeremy_boots",new ArmorArcher(LyokoArmorMaterial.ARCHER.getMaterialRegistryEntry(), ArmorItem.Type.BOOTS,
-                ArmorGroup));
-        LINKER = registerArmor("linker",new SuperCalculatorDataLinker(LyokoArmorMaterial.LINKER.getMaterialRegistryEntry(), ArmorItem.Type.CHESTPLATE,
-                ArmorGroup.rarity(Rarity.EPIC)));
-        MIND_HELMET = registerArmor("mind_helmet",new MindHelm(LyokoArmorMaterial.BLANK_HELM.getMaterialRegistryEntry(), ArmorItem.Type.HELMET,
-                ArmorGroup.rarity(Rarity.EPIC)));
-        ODD_CHESTPLATE = registerArmor("odd_chestplate",new ArmorFeline(LyokoArmorMaterial.FELINE.getMaterialRegistryEntry(), ArmorItem.Type.CHESTPLATE,
-                ArmorGroup));
-        ODD_LEGGINGS = registerArmor("odd_leggings",new ArmorFeline(LyokoArmorMaterial.FELINE.getMaterialRegistryEntry(), ArmorItem.Type.LEGGINGS,
-                ArmorGroup));
-        ODD_BOOTS = registerArmor("odd_boots",new ArmorFeline(LyokoArmorMaterial.FELINE.getMaterialRegistryEntry(), ArmorItem.Type.BOOTS,
-                ArmorGroup));
-        ULRICH_HEADBAND = registerGenericArmorItem("ulrich_headband",LyokoArmorMaterial.SAMURAI.getMaterialRegistryEntry(), ArmorItem.Type.HELMET);
-        ULRICH_CHESTPLATE = registerGenericArmorItem("ulrich_chestplate",LyokoArmorMaterial.SAMURAI.getMaterialRegistryEntry(),
-                ArmorItem.Type.CHESTPLATE);
-        ULRICH_LEGGINGS = registerGenericArmorItem("ulrich_leggings",LyokoArmorMaterial.SAMURAI.getMaterialRegistryEntry(), ArmorItem.Type.LEGGINGS);
-        ULRICH_BOOTS = registerGenericArmorItem("ulrich_boots",LyokoArmorMaterial.SAMURAI.getMaterialRegistryEntry(), ArmorItem.Type.BOOTS);
-        WILLIAM_CHESTPLATE = registerArmor("william_chestplate",new ArmorWarrior(LyokoArmorMaterial.WARRIOR.getMaterialRegistryEntry(),
-                ArmorItem.Type.CHESTPLATE,
-                ArmorGroup));
-        WILLIAM_LEGGINGS = registerArmor("william_leggings",new ArmorWarrior(LyokoArmorMaterial.WARRIOR.getMaterialRegistryEntry(),
-                ArmorItem.Type.LEGGINGS,
-                ArmorGroup));
-        WILLIAM_BOOTS = registerArmor("william_boots",new ArmorWarrior(LyokoArmorMaterial.WARRIOR.getMaterialRegistryEntry(), ArmorItem.Type.BOOTS,
-                ArmorGroup));
-        YUMI_CHESTPLATE = registerArmor("yumi_chestplate",new ArmorNinja(LyokoArmorMaterial.NINJA.getMaterialRegistryEntry(), ArmorItem.Type.CHESTPLATE,
-                ArmorGroup));
-        YUMI_LEGGINGS = registerArmor("yumi_leggings",new ArmorNinja(LyokoArmorMaterial.NINJA.getMaterialRegistryEntry(), ArmorItem.Type.LEGGINGS,
-                ArmorGroup));
-        YUMI_BOOTS = registerArmor("yumi_boots",new ArmorNinja(LyokoArmorMaterial.NINJA.getMaterialRegistryEntry(), ArmorItem.Type.BOOTS, ArmorGroup));
+        AELITA_CHESTPLATE = registerArmor("aelita_chestplate",settings -> new ArmorGuardian(LyokoArmorMaterial.GUARDIAN.getMaterial(),
+                EquipmentType.CHESTPLATE, settings),ArmorGroup);
+        AELITA_LEGGINGS = registerGenericArmorItem("aelita_leggings",LyokoArmorMaterial.GUARDIAN.getMaterial(), EquipmentType.LEGGINGS);
+        AELITA_BOOTS = registerGenericArmorItem("aelita_boots",LyokoArmorMaterial.GUARDIAN.getMaterial(), EquipmentType.BOOTS);
+        BLANK_HELMET = registerGenericArmorItem("blank_helmet",LyokoArmorMaterial.BLANK_HELM.getMaterial(), EquipmentType.HELMET);
+        JEREMY_CHESTPLATE = registerArmor("jeremy_chestplate",settings -> new ArmorArcher(LyokoArmorMaterial.ARCHER.getMaterial(),
+                EquipmentType.CHESTPLATE
+                ,settings),ArmorGroup);
+        JEREMY_LEGGINGS = registerArmor("jeremy_leggings",settings -> new ArmorArcher(LyokoArmorMaterial.ARCHER.getMaterial(), EquipmentType.LEGGINGS,
+                settings),ArmorGroup);
+        JEREMY_BOOTS = registerArmor("jeremy_boots",settings -> new ArmorArcher(LyokoArmorMaterial.ARCHER.getMaterial(), EquipmentType.BOOTS,
+                settings),ArmorGroup);
+        LINKER = registerArmor("linker",settings -> new SuperCalculatorDataLinker(LyokoArmorMaterial.LINKER.getMaterial(), EquipmentType.CHESTPLATE,
+                settings),ArmorGroup.rarity(Rarity.EPIC));
+        MIND_HELMET = registerArmor("mind_helmet",settings -> new MindHelm(LyokoArmorMaterial.BLANK_HELM.getMaterial(), EquipmentType.HELMET,
+                settings),ArmorGroup.rarity(Rarity.EPIC));
+        ODD_CHESTPLATE = registerArmor("odd_chestplate",settings -> new ArmorFeline(LyokoArmorMaterial.FELINE.getMaterial(), EquipmentType.CHESTPLATE,
+                settings),ArmorGroup);
+        ODD_LEGGINGS = registerArmor("odd_leggings",settings -> new ArmorFeline(LyokoArmorMaterial.FELINE.getMaterial(), EquipmentType.LEGGINGS,
+                settings),ArmorGroup);
+        ODD_BOOTS = registerArmor("odd_boots",settings -> new ArmorFeline(LyokoArmorMaterial.FELINE.getMaterial(), EquipmentType.BOOTS,
+                settings),ArmorGroup);
+        ULRICH_HEADBAND = registerGenericArmorItem("ulrich_headband",LyokoArmorMaterial.SAMURAI.getMaterial(), EquipmentType.HELMET);
+        ULRICH_CHESTPLATE = registerGenericArmorItem("ulrich_chestplate",LyokoArmorMaterial.SAMURAI.getMaterial(),
+                EquipmentType.CHESTPLATE);
+        ULRICH_LEGGINGS = registerGenericArmorItem("ulrich_leggings",LyokoArmorMaterial.SAMURAI.getMaterial(), EquipmentType.LEGGINGS);
+        ULRICH_BOOTS = registerGenericArmorItem("ulrich_boots",LyokoArmorMaterial.SAMURAI.getMaterial(), EquipmentType.BOOTS);
+        WILLIAM_CHESTPLATE = registerArmor("william_chestplate",settings -> new ArmorWarrior(LyokoArmorMaterial.WARRIOR.getMaterial(),
+                EquipmentType.CHESTPLATE,
+                settings),ArmorGroup);
+        WILLIAM_LEGGINGS = registerArmor("william_leggings",settings -> new ArmorWarrior(LyokoArmorMaterial.WARRIOR.getMaterial(),
+                EquipmentType.LEGGINGS,
+                settings),ArmorGroup);
+        WILLIAM_BOOTS = registerArmor("william_boots",settings -> new ArmorWarrior(LyokoArmorMaterial.WARRIOR.getMaterial(), EquipmentType.BOOTS,
+                settings),ArmorGroup);
+        YUMI_CHESTPLATE = registerArmor("yumi_chestplate",settings -> new ArmorNinja(LyokoArmorMaterial.NINJA.getMaterial(), EquipmentType.CHESTPLATE,
+                settings),ArmorGroup);
+        YUMI_LEGGINGS = registerArmor("yumi_leggings",settings -> new ArmorNinja(LyokoArmorMaterial.NINJA.getMaterial(), EquipmentType.LEGGINGS,
+                settings),ArmorGroup);
+        YUMI_BOOTS = registerArmor("yumi_boots",settings -> new ArmorNinja(LyokoArmorMaterial.NINJA.getMaterial(), EquipmentType.BOOTS,settings), ArmorGroup);
         registerCollectedData();
     }
 
@@ -413,49 +414,51 @@ public record ModItems() {
     }
     private static Item registerComputerItem(final String name, final Item.Settings settings)
     {
-        return registerModItem(name,new ComputerItem(settings));
+        return registerModItem(name,ComputerItem::new,settings);
     }
     private static Item registerComputerItem(final String name)
     {
-        return registerModItem(name,new ComputerItem(BaseSettings()));
+        return registerModItem(name,ComputerItem::new,BaseSettings());
     }
     private static Item registerGenericItem(final String name,final Item.Settings settings)
     {
-        return registerModItem(name,new Item(settings));
+        return registerModItem(name,Item::new,settings);
     }
     private static Item registerGenericItem(final String name)
     {
-        return registerModItem(name,new Item(BaseSettings()));
+        return registerModItem(name,Item::new,BaseSettings());
     }
-    private static Item registerModItem(final String name,final Item item)
+    private static Item registerModItem(final String name,final Function<Item.Settings,Item> itemFactory,final Item.Settings settings)
     {
-        return registerModItem(name,item,ItemGroupTypes.ITEM);
+        return registerModItem(name,itemFactory,settings,ItemGroupTypes.ITEM);
     }
-    private static Item registerModItem(final String name,final Item item,final ItemGroupTypes itemGroupTypes)
+    private static Item registerModItem(final String name, final Function<Item.Settings,Item> itemFactory,final Item.Settings settings, final ItemGroupTypes itemGroupTypes)
     {
+        final RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM,CodeLyokoMain.codeLyokoPrefix(name));
+        final Item registeredItem = Registry.register(Registries.ITEM,itemKey,itemFactory.apply(settings.registryKey(itemKey)));
         switch (itemGroupTypes)
         {
-            case ARMOR -> ARMOR_GROUP.add(item);
-            case WEAPON -> WEAPONS_GROUP.add(item);
-            case ITEM -> ITEM_GROUP.add(item);
+            case ARMOR -> ARMOR_GROUP.add(registeredItem);
+            case WEAPON -> WEAPONS_GROUP.add(registeredItem);
+            case ITEM -> ITEM_GROUP.add(registeredItem);
         }
-        return Items.register(CodeLyokoMain.codeLyokoPrefix(name),item);
+        return registeredItem;
     }
-    private static <T extends Item> T registerWeapon(final String name, final Item item)
+    private static <T extends Item> T registerWeapon(final String name, final Function<Item.Settings,Item> itemFactory,final Item.Settings settings)
     {
-        return (T) registerModItem(name,item,ItemGroupTypes.WEAPON);
+        return (T) registerModItem(name,itemFactory,settings,ItemGroupTypes.WEAPON);
     }
-    private static ArmorItem registerArmor(final String name, final Item item)
+    private static Item registerArmor(final String name, final Function<Item.Settings,Item> itemFactory,final Item.Settings settings)
     {
-        return (ArmorItem) registerModItem(name, item, ItemGroupTypes.ARMOR);
+        return registerModItem(name, itemFactory,settings, ItemGroupTypes.ARMOR);
     }
-    private static ArmorItem registerGenericArmorItem(final String name,final RegistryEntry<ArmorMaterial> material, final ArmorItem.Type armorType,final Item.Settings itemSettings)
+    private static Item registerGenericArmorItem(final String name, final ArmorMaterial material, final EquipmentType armorType, final Item.Settings itemSettings)
     {
-        return registerArmor(name,new ArmorItem(material,armorType,itemSettings));
+        return registerArmor(name,Item::new,itemSettings.armor(material,armorType));
     }
-    private static ArmorItem registerGenericArmorItem(final String name,final RegistryEntry<ArmorMaterial> material, final ArmorItem.Type armorType)
+    private static Item registerGenericArmorItem(final String name,final ArmorMaterial material, final EquipmentType armorType)
     {
-        return registerArmor(name,new ArmorItem(material,armorType,ArmorGroup));
+        return registerArmor(name,Item::new,ArmorGroup.armor(material,armorType));
     }
     private enum ItemGroupTypes
     {

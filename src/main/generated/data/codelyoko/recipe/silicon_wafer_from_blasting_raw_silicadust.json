@@ -4,9 +4,7 @@
   "cookingtime": 50,
   "experience": 38.0,
   "group": "codelyoko:refinement",
-  "ingredient": {
-    "item": "codelyoko:raw_silicadust"
-  },
+  "ingredient": "codelyoko:raw_silicadust",
   "result": {
     "id": "codelyoko:silicon_wafer"
   }

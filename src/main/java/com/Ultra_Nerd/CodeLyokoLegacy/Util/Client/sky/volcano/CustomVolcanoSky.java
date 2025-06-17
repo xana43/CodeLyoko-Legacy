@@ -2,13 +2,14 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Util.Client.sky.volcano;
 
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
-import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
@@ -30,8 +31,8 @@ public record CustomVolcanoSky() implements DimensionRenderingRegistry.SkyRender
         if(tessellator == null) {
            tessellator = Tessellator.getInstance();
         }
-        RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
-        RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
+        //RenderSystem.setShader(GameRenderer::getPositionTexColorProgram);
+        //RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
 
         final MatrixStack matrixStack = ctx.matrixStack();
         if(matrixStack == null)
@@ -40,19 +41,19 @@ public record CustomVolcanoSky() implements DimensionRenderingRegistry.SkyRender
         }
         matrixStack.push();
 
-        RenderSystem.setShaderTexture(0, sky1);
+        //RenderSystem.setShaderTexture(0, sky1);
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0F));
         matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(0));
-        RenderSystem.setShaderTexture(0, sky2);
+        //RenderSystem.setShaderTexture(0, sky2);
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-90.0F));
         matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(180));
-        RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
+        //RenderSystem.setShaderTexture(0, ConstantUtil.skytop);
         matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180.0F));
         matrixStack.translate(0, 50, 0);
-        RenderSystem.setShaderTexture(0, sky2);
+        //RenderSystem.setShaderTexture(0, sky2);
         matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90.0F));
         matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-90));
-        RenderSystem.setShaderTexture(0, sky1);
+        //RenderSystem.setShaderTexture(0, sky1);
         matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-90.0F));
         matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90));
 

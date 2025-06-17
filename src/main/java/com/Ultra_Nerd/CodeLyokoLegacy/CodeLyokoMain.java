@@ -1,7 +1,7 @@
 package com.Ultra_Nerd.CodeLyokoLegacy;
 
 
-import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.ComputerCoreTileEntity;
+import com.Ultra_Nerd.CodeLyokoLegacy.Blockentity.SuperCalculatorEntities.SuperComputerCoreBlockEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Blocks.SuperCalculatorNetwork.CableBlock;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.HostileEntities.MegaTankEntity;
 import com.Ultra_Nerd.CodeLyokoLegacy.Entity.SamuraiClass.ServerTriplicateCloneEntity;
@@ -16,10 +16,12 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Util.blockentity.MultiBlockController;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.event.server.ServerEvents;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.handlers.XanaHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.World.WorldGen.Carthage.CarthageGenerator;
+import dev.architectury.registry.fuel.FuelRegistry;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
@@ -31,9 +33,10 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -130,14 +133,14 @@ public record CodeLyokoMain() implements ModInitializer {
 
         });
         ServerEvents.PLACE_BLOCK_EVENT.register((entity, world, pos) -> {
-            if(entity instanceof final ServerPlayerEntity playerEntity && !world.isClient() && world.getBlockEntity(pos) instanceof ComputerCoreTileEntity)
+            if(entity instanceof final ServerPlayerEntity playerEntity && !world.isClient() && world.getBlockEntity(pos) instanceof SuperComputerCoreBlockEntity)
             {
                 CardinalData.MiscellaneousDataCollection.XanaRaidData.calculateSuperCalculatorPositions(playerEntity,pos);
             }
             return ActionResult.PASS;
         });
         PlayerBlockBreakEvents.BEFORE.register((world, player, pos, state, blockEntity) -> {
-                if(!world.isClient() && world.getBlockEntity(pos) instanceof ComputerCoreTileEntity)
+                if(!world.isClient() && world.getBlockEntity(pos) instanceof SuperComputerCoreBlockEntity)
                 {
                     CardinalData.MiscellaneousDataCollection.XanaRaidData.removeFromCalculatorPositions((ServerPlayerEntity) player,pos);
                 }
@@ -170,7 +173,7 @@ public record CodeLyokoMain() implements ModInitializer {
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyStorage(),
                 ModBlockEntities.COMPUTER_REACTOR_TILE_ENTITY);
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyStorage(),
-                ModBlockEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE);
+                ModBlockEntities.SUPERCOMPUTER_CORE_BLOCK_ENTITY_TYPE);
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getEnergyStorage(),
                 ModBlockEntities.RACK_CHARGER_BLOCK_ENTITY);
         FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) ->switch (direction){
@@ -195,7 +198,7 @@ public record CodeLyokoMain() implements ModInitializer {
         FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> switch (direction){
             case UP, EAST, SOUTH -> blockEntity.chilled_intake;
             case DOWN, WEST, NORTH -> blockEntity.hot_outlet;
-        },ModBlockEntities.COMPUTER_CORE_TILE_ENTITY_BLOCK_ENTITY_TYPE);
+        },ModBlockEntities.SUPERCOMPUTER_CORE_BLOCK_ENTITY_TYPE);
 
     }
 
@@ -308,13 +311,21 @@ public record CodeLyokoMain() implements ModInitializer {
         //regenerates the player's digital energy
         ServerTickEvents.END_SERVER_TICK.register(RegeneratePlayerEnergyServerEvent::consume);
 
+        EntityElytraEvents.CUSTOM.register((entity, tickElytra) -> {
+            if(entity instanceof final PlayerEntity player && player.getEquippedStack(EquipmentSlot.CHEST).isOf(ModItems.AELITA_CHESTPLATE))
+            {
+                entity.setNoGravity(true);
+                return true;
+            }
+            return false;
+        });
 
 
 
     }
 
     public static void registerFuels() {
-        Object2ObjectMaps.fastForEach(ModFuels.FUEL_MAP,itemConvertibleIntegerEntry -> FuelRegistry.INSTANCE.add(itemConvertibleIntegerEntry.getKey(),itemConvertibleIntegerEntry.getValue()));
+        Object2ObjectMaps.fastForEach(ModFuels.FUEL_MAP,itemConvertibleIntegerEntry -> FuelRegistry.register(itemConvertibleIntegerEntry.getValue(),itemConvertibleIntegerEntry.getKey()));
     }
     @Override
     public void onInitialize() {
@@ -324,6 +335,7 @@ public record CodeLyokoMain() implements ModInitializer {
         registerFuels();
         ModRecipes.RecipeTypes.init();
         ModRecipes.RecipeSerializers.init();
+        ModComponents.initializeComponents();
         ModCustomTrackedCriteria.init();
         SetupFunctions();
         registerDefaultAttributes();

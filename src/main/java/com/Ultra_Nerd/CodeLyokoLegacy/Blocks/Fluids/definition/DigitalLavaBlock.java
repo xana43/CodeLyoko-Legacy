@@ -4,33 +4,33 @@ import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageSources;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModDamageTypes;
 import com.Ultra_Nerd.CodeLyokoLegacy.Init.Common.ModFluids;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCollisionHandler;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public final class DigitalLavaBlock extends FluidBlock {
-    public DigitalLavaBlock() {
-        super(ModFluids.STILL_DIGITAL_LAVA, Settings.copy(Blocks.LAVA));
+    public DigitalLavaBlock(final Settings settings) {
+        super(ModFluids.STILL_DIGITAL_LAVA, settings);
     }
 
     @Override
-    public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
+    protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
+        super.onEntityCollision(state, world, pos, entity, handler);
         if (world.isClient()) {
             return;
         }
         entity.setOnFireFromLava();
 
         if(entity instanceof PlayerEntity) {
-            entity.damage(ModDamageSources.of(world, ModDamageTypes.DIGITAL_LAVA), Float.MAX_VALUE);
+            entity.damage((ServerWorld) world,ModDamageSources.of(world, ModDamageTypes.DIGITAL_LAVA), Float.MAX_VALUE);
             return;
         }
-        entity.kill();
-
+        entity.kill((ServerWorld) world);
     }
 
     @Override

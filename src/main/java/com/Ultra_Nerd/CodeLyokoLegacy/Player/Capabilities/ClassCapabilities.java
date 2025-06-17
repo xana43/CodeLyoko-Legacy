@@ -14,6 +14,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -49,14 +50,14 @@ public record ClassCapabilities() {
             if(!player.getWorld().isClient && (CardinalData.LyokoClass.getLyokoClass(player) == 1 || player.getAbilities().creativeMode) && CardinalData.DigitalEnergyComponent.tryUseEnergy(player,4)) {
                 if (currentAmountOfClones <= maxClones - 1) {
                     currentAmountOfClones++;
-                    final ServerTriplicateCloneEntity clone = ModEntities.TRIPLICATE_ENTITY_TYPE.create(player.getWorld());
+                    final ServerTriplicateCloneEntity clone = ModEntities.TRIPLICATE_ENTITY_TYPE.create(player.getWorld(), SpawnReason.EVENT);
                     if (clone != null) {
                         clone.setOwner(player.getGameProfile(),player.getServer());
                     }
                     if (!MethodUtil.DimensionCheck.playerInVanilla(player)) {
                         player.getWorld().spawnEntity(clone);
                     } else {
-                        player.sendMessage(Text.translatable("triplicate.cannot.spawn"));
+                        player.sendMessage(Text.translatable("triplicate.cannot.spawn"),false);
                     }
                 }
             }
@@ -95,7 +96,7 @@ public record ClassCapabilities() {
 
         @Override
         public void readFromNbt(final NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
-            maxClones = tag.getInt(SAMURAI_MAX_CLONES);
+            maxClones = tag.getInt(SAMURAI_MAX_CLONES).orElse(3);
 
         }
 
@@ -286,8 +287,8 @@ public record ClassCapabilities() {
         }
         @Override
         public void readFromNbt(final NbtCompound tag,final RegistryWrapper.WrapperLookup registryLookup) {
-                maxLength = tag.getInt(BUILD_LENGTH_KEY);
-                maxWidth = tag.getInt(BUILD_WIDTH_KEY);
+                maxLength = tag.getInt(BUILD_LENGTH_KEY).orElse(1024);
+                maxWidth = tag.getInt(BUILD_WIDTH_KEY).orElse(256);
         }
 
         @Override

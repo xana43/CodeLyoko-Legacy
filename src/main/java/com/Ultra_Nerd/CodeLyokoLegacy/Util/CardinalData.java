@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -361,7 +362,7 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         private static final ComponentKey<XanaDataComponent> XANA_DATA = createComponentKey("xana_data", XanaDataComponent.class);
 
         public static void setDangerLevel(final MinecraftServer server,final int dangerLevel, final WorldProperties worldProperties) {
-            XANA_DATA.get(worldProperties).setDangerLevel(dangerLevel);
+            XANA_DATA.get(worldProperties).setDangerLevel(server.getOverworld(),dangerLevel);
             LevelComponents.sync(XANA_DATA,server);
         }
         public static void setCheckRadius(final MinecraftServer server,final WorldProperties properties, final int radius)
@@ -416,7 +417,10 @@ public record CardinalData() implements EntityComponentInitializer, LevelCompone
         }
         public static void spawnEntities(final MinecraftServer server,final WorldProperties properties, final World world)
         {
-            XANA_DATA.get(properties).spawnMobs(world);
+            if(world.isClient())
+            {return;
+            }
+            XANA_DATA.get(properties).spawnMobs((ServerWorld) world);
             LevelComponents.sync(XANA_DATA,server);
         }
         public static void setAttackType(final MinecraftServer server,final WorldProperties properties,final XanaAttackTypes attackType)

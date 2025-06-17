@@ -10,9 +10,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "c": {
-      "tag": "c:copper_ingots"
-    }
+    "c": "#c:copper_ingots"
   },
   "pattern": [
     "c c",

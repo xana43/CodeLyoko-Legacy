@@ -4,7 +4,6 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Screens;
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.ComputerControlPanelScreenHandler;
 import com.Ultra_Nerd.CodeLyokoLegacy.Util.ConstantUtil;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
@@ -12,6 +11,7 @@ import net.minecraft.client.gui.screen.ButtonTextures;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -98,17 +98,17 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
                 final int i = getType().ordinal();//getYImage(hovered);
 
 
-                RenderSystem.setShaderTexture(0, BUTTONTEXTURES);
+               // RenderSystem.setShaderTexture(0, BUTTONTEXTURES);
                 int j = 0;
                 if (this.getMessage().getStyle().getColor() != null) {
                     j = this.getMessage().getStyle().getColor().getRgb();
                 }
                 if (i == 1) {
-                    j = ColorHelper.Argb.getArgb(255, 0, 0, 255);
+                    j = ColorHelper.getArgb(255, 0, 0, 255);
 
-                    context.drawTexture(BUTTONTEXTURES,x, y, 0, 0, 104, 19, 1024, 512,512);
+                    context.drawTexture(identifier -> RenderLayer.getGuiTextured(BUTTONTEXTURES),BUTTONTEXTURES,x, y, 0, 0, 104, 19, 1024, 512,512);
                 } else {
-                    context.drawTexture(BUTTONTEXTURES, x, y, 0, 19, 104, 19, 1024, 512,512);
+                    context.drawTexture(identifier -> RenderLayer.getGuiTextured(BUTTONTEXTURES),BUTTONTEXTURES, x, y, 0, 19, 104, 19, 1024, 512,512);
                 }
                 //drawTexture(stack,x, 38, 0, (46 + i) * 20, width >> 1, height);
                 context.drawCenteredTextWithShadow(client.textRenderer,
@@ -164,10 +164,10 @@ public final class ComputerControlPanelUI extends HandledScreen<ComputerControlP
 
     @Override
     protected void drawBackground(final DrawContext matrices, final float delta, final int mouseX, final int mouseY) {
-        RenderSystem.setShaderTexture(0, TEXTURES);
-        matrices.drawTexture(TEXTURES, x, y, 0, 0, size, size >> 1);
+        //RenderSystem.setShaderTexture(0, TEXTURES);
+        matrices.drawTexture(identifier -> RenderLayer.getGuiTextured(TEXTURES),TEXTURES, x, y, 0, 0, size, size >> 1,0,0);
         if (active) {
-            matrices.drawTexture(TEXTURES, x, y + 19, 0, 144, size, (size >> 1) - 35);
+            matrices.drawTexture(identifier -> RenderLayer.getGuiTextured(TEXTURES),TEXTURES, x, y + 19, 0, 144, size, (size >> 1) - 35,0,0);
         }
     }
 

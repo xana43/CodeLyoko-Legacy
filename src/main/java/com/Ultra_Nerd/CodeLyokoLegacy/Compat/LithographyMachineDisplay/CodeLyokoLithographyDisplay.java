@@ -1,8 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Compat.LithographyMachineDisplay;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.display.Display;
+import me.shedaniel.rei.api.common.display.DisplaySerializer;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -13,6 +16,11 @@ public final class CodeLyokoLithographyDisplay extends BasicDisplay {
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
+        return null;
+    }
+
+    @Override
+    public @Nullable DisplaySerializer<? extends Display> getSerializer() {
         return null;
     }
     /*

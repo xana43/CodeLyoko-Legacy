@@ -47,9 +47,9 @@ import java.util.function.Consumer;
 
 public record MethodUtil() {
     public record ArmorMethods() {
-        public static boolean isArmorSlot(final int slot) {
-            return slot == EquipmentSlot.CHEST.getEntitySlotId() || slot == EquipmentSlot.LEGS.getEntitySlotId()
-                    || slot == EquipmentSlot.FEET.getEntitySlotId() || slot == EquipmentSlot.HEAD.getEntitySlotId();
+        public static boolean isArmorSlot(final EquipmentSlot slot) {
+            return slot == EquipmentSlot.CHEST || slot == EquipmentSlot.LEGS
+                    || slot == EquipmentSlot.FEET || slot == EquipmentSlot.HEAD;
         }
 
 
@@ -348,7 +348,7 @@ public record MethodUtil() {
         public record HelperMethods()
         {
             public static <T> RegistryEntry<T> getRegistryEntry(final DynamicRegistryManager registryManager,final RegistryKey<? extends Registry<? extends T>> registry,final RegistryKey<T> key) {
-                final Optional<RegistryEntry.Reference<T>> registryRef = registryManager.get(registry).getEntry(key);
+                final Optional<RegistryEntry.Reference<T>> registryRef = registryManager.getOptionalEntry(key);
                 if(registryRef.isPresent()) {
                     return RegistryEntry.of(registryRef.get().value());
                 }

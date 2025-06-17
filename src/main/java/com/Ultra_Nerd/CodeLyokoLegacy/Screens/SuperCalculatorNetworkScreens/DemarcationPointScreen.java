@@ -2,14 +2,13 @@ package com.Ultra_Nerd.CodeLyokoLegacy.Screens.SuperCalculatorNetworkScreens;
 
 import com.Ultra_Nerd.CodeLyokoLegacy.CodeLyokoMain;
 import com.Ultra_Nerd.CodeLyokoLegacy.ScreenHandlers.SuperCalculatorNetwork.DemarcationScreenHandler;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
@@ -155,9 +154,9 @@ public final class DemarcationPointScreen extends HandledScreen<DemarcationScree
 
     @Override
     protected void drawBackground(final DrawContext context, final float delta, final int mouseX, final int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
-        RenderSystem.setShaderColor(1,1,1,1);
-        RenderSystem.setShaderTexture(0,TEXTURE);
-        context.drawTexture(TEXTURE,x,y,0,0,backgroundWidth,backgroundHeight);
+        //RenderSystem.setShader(GameRenderer::getPositionTexProgram);
+        //RenderSystem.setShaderColor(1,1,1,1);
+        //RenderSystem.setShaderTexture(0,TEXTURE);
+        context.drawTexture(RenderLayer::getGuiTextured,TEXTURE,x,y,0,0,backgroundWidth,backgroundHeight,0,0);
     }
 }

@@ -1,8 +1,13 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Blocks;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCollisionHandler;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -15,9 +20,8 @@ public final class BlackVoid extends Block {
     private static final VoxelShape collisionShape = Block.createCuboidShape(0, 0, 0, 16, 2, 16);
 
 
-    public BlackVoid() {
-        super(Settings.copy(Blocks.STRUCTURE_VOID).strength(-1, -1).dropsNothing().nonOpaque()
-                .luminance(value -> 10));
+    public BlackVoid(final Settings settings) {
+        super(settings);
     }
 
     @Override
@@ -35,14 +39,16 @@ public final class BlackVoid extends Block {
     @Override
     public void onEntityLand(final BlockView world, final Entity entity) {
         super.onEntityLand(world, entity);
-        entity.damage(entity.getWorld().getDamageSources().outOfWorld(), Float.MAX_VALUE);
+        entity.damage((ServerWorld) world,entity.getWorld().getDamageSources().outOfWorld(), Float.MAX_VALUE);
     }
 
     @Override
-    public void onLandedUpon(final World world, final BlockState state, final BlockPos pos, final Entity entity, final float fallDistance) {
+    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
         super.onLandedUpon(world, state, pos, entity, fallDistance);
-        entity.damage(entity.getWorld().getDamageSources().outOfWorld(), Float.MAX_VALUE);
+        entity.damage((ServerWorld) world,entity.getWorld().getDamageSources().outOfWorld(), Float.MAX_VALUE);
     }
+
+
 
     @Override
     public void onProjectileHit(final World world, final BlockState state, final BlockHitResult hit, final ProjectileEntity projectile) {
@@ -53,7 +59,7 @@ public final class BlackVoid extends Block {
     @Override
     public void onSteppedOn(final World world, final BlockPos pos, final BlockState state, final Entity entity) {
         super.onSteppedOn(world, pos, state, entity);
-        entity.damage(entity.getWorld().getDamageSources().outOfWorld(), Float.MAX_VALUE);
+        entity.damage((ServerWorld) world,entity.getWorld().getDamageSources().outOfWorld(), Float.MAX_VALUE);
     }
 
     @Override
@@ -62,10 +68,8 @@ public final class BlackVoid extends Block {
     }
 
     @Override
-    public void onEntityCollision(final BlockState state, final World world, final BlockPos pos, final Entity entity) {
-        super.onEntityCollision(state, world, pos, entity);
-        entity.damage(entity.getWorld().getDamageSources().outOfWorld(), Float.MAX_VALUE);
+    protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
+        super.onEntityCollision(state, world, pos, entity, handler);
+        entity.damage((ServerWorld) world,entity.getWorld().getDamageSources().outOfWorld(), Float.MAX_VALUE);
     }
-
-
 }

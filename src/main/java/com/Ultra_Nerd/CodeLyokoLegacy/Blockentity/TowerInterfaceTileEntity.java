@@ -98,7 +98,7 @@ private int controlState = 0;
     @Override
     public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt,registryLookup);
-        controlState = nbt.getInt(stateKey);
+        controlState = nbt.getInt(stateKey).orElse(0);
     }
 
    /* @Override

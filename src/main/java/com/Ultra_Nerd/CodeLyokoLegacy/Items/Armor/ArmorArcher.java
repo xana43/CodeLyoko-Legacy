@@ -1,12 +1,11 @@
 package com.Ultra_Nerd.CodeLyokoLegacy.Items.Armor;
 
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.item.equipment.EquipmentType;
 
 public final class ArmorArcher extends LyokoArmor {
 
 
-    public ArmorArcher(RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
+    public ArmorArcher(net.minecraft.item.equipment.ArmorMaterial material, EquipmentType type, Settings settings) {
         super(material, type, settings);
     }
 }

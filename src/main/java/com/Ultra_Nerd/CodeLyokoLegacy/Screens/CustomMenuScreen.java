@@ -5,6 +5,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.CubeMapRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +37,7 @@ public final class CustomMenuScreen extends TitleScreen {
     @Override
     public void render(@NotNull DrawContext pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         customRenderer.draw(MinecraftClient.getInstance(),1,rotation,1);
-        pPoseStack.drawTexture(customMenuTitle,width / 2 - 79,30,0,0,256,32);
+        pPoseStack.drawTexture(identifier -> RenderLayer.getGuiTextured(customMenuTitle),customMenuTitle,width / 2 - 79,30,0,0,256,32,0,0);
         rotation+= 0.05f;
         if(rotation > 360)
         {

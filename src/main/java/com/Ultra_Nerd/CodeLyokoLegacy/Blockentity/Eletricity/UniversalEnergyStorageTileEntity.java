@@ -89,7 +89,7 @@ public final class UniversalEnergyStorageTileEntity extends BlockEntity {
     @Override
     public void readNbt(final NbtCompound nbt,final RegistryWrapper.WrapperLookup registryLookup) {
         super.readNbt(nbt,registryLookup);
-        energyStorageImplementation.amount = nbt.getLong(NBT_KEY);
+        energyStorageImplementation.amount = nbt.getLong(NBT_KEY).orElse(0L);
     }
 
     @Override

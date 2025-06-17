@@ -15,6 +15,6 @@ public record ModDamageSources() {
     public static DamageSource of(final World world,final RegistryKey<DamageType> key) {
         Objects.requireNonNull(world, "world is null");
         Objects.requireNonNull(key, "key is null");
-        return DAMAGE_SOURCE_CACHE.computeIfAbsent(key,damageTypeRegistryKey -> new DamageSource(world.getRegistryManager().get(RegistryKeys.DAMAGE_TYPE).entryOf(damageTypeRegistryKey)));
+        return DAMAGE_SOURCE_CACHE.computeIfAbsent(key,damageTypeRegistryKey -> new DamageSource(world.getRegistryManager().getEntryOrThrow(RegistryKeys.DAMAGE_TYPE).value().getOrThrow(key)));
     }
 }
